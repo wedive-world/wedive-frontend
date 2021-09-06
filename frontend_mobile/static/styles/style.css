@@ -136,20 +136,20 @@ body {
 
 /* Generating Color Pack*/
 .color-highlight {
-  color: #4A89DC !important;
+  color: #1d397c !important;
 }
 
 .bg-highlight {
-  background-color: #4A89DC !important;
+  background-color: #1d397c !important;
   color: #FFF !important;
 }
 
 .border-highlight {
-  border-color: #4A89DC !important;
+  border-color: #1d397c !important;
 }
 
 .gradient-highlight {
-  background-image: linear-gradient(to bottom, #5D9CEC, #4A89DC) !important;
+  background-image: linear-gradient(to bottom, #5D9CEC, #1d397c) !important;
   color: #FFF;
 }
 
@@ -173,16 +173,16 @@ body {
 }
 
 .color-highlight-dark {
-  color: #4A89DC !important;
+  color: #1d397c !important;
 }
 
 .color-icon-highlight {
-  stroke: #4A89DC !important;
+  stroke: #1d397c !important;
   fill: !important;
 }
 
 .bg-highlight-dark {
-  background-color: #4A89DC !important;
+  background-color: #1d397c !important;
   color: #FFF !important;
 }
 
@@ -191,15 +191,15 @@ body {
 }
 
 .border-highlight-dark {
-  border-color: #4A89DC !important;
+  border-color: #1d397c !important;
 }
 
 .focus-highlight:focus {
-  border-color: #4A89DC !important;
+  border-color: #1d397c !important;
 }
 
 .gradient-highlight {
-  background-image: linear-gradient(to bottom, #5D9CEC, #4A89DC);
+  background-image: linear-gradient(to bottom, #5D9CEC, #1d397c);
 }
 
 .color-green-light {
@@ -516,16 +516,16 @@ body {
 }
 
 .color-blue-dark {
-  color: #4A89DC !important;
+  color: #1d397c !important;
 }
 
 .color-icon-blue {
-  stroke: #4A89DC !important;
+  stroke: #1d397c !important;
   fill: rgba(74, 137, 220, 0.3) !important;
 }
 
 .bg-blue-dark {
-  background-color: #4A89DC !important;
+  background-color: #1d397c !important;
   color: #FFF !important;
 }
 
@@ -534,15 +534,15 @@ body {
 }
 
 .border-blue-dark {
-  border-color: #4A89DC !important;
+  border-color: #1d397c !important;
 }
 
 .focus-blue:focus {
-  border-color: #4A89DC !important;
+  border-color: #1d397c !important;
 }
 
 .gradient-blue {
-  background-image: linear-gradient(to bottom, #5D9CEC, #4A89DC);
+  background-image: linear-gradient(to bottom, #5D9CEC, #1d397c);
 }
 
 .color-teal-light {
@@ -1155,37 +1155,37 @@ body {
 .footer-bar-5 strong,
 .footer-bar-4 strong,
 .splide__pagination__page.is-active {
-  background-color: #4A89DC !important;
+  background-color: #1d397c !important;
 }
 
 .footer-bar-1 .active-nav i,
 .footer-bar-1 .active-nav span,
 .footer-bar-3 .active-nav i {
-  color: #4A89DC !important;
+  color: #1d397c !important;
 }
 
 .footer-bar-6 .circle-nav strong, .footer-bar-6 .active-nav em {
-  background-image: linear-gradient(to bottom, #5D9CEC, #4A89DC) !important;
+  background-image: linear-gradient(to bottom, #5D9CEC, #1d397c) !important;
 }
 
 .form-floating-over > .form-control:focus ~ label {
-  color: #4A89DC;
+  color: #1d397c;
 }
 
 .form-floating-over > .form-control:not(:placeholder-shown) ~ label {
-  color: #4A89DC;
+  color: #1d397c;
 }
 
 .form-floating-over > .form-select ~ label {
-  color: #4A89DC;
+  color: #1d397c;
 }
 
 .color-highlight {
-  color: #4A89DC;
+  color: #1d397c;
 }
 
 .bg-highlight {
-  background-color: #4A89DC;
+  background-color: #1d397c;
   color: #FFF !important;
 }
 
@@ -2042,7 +2042,7 @@ body {
 }
 
 .menu-list .active-nav i {
-  color: #4A89DC !important;
+  color: #1d397c !important;
 }
 
 .menu-content {
@@ -6443,7 +6443,7 @@ input[type=number] {
 
 .interest-check input:checked ~ label {
   color: #FFF !important;
-  background-color: #4A89DC !important;
+  background-color: #1d397c !important;
 }
 
 .interest-check input:checked ~ .fa:last-child,

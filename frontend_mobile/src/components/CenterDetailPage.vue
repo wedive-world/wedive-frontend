@@ -25,18 +25,25 @@
     
     
     <div class="card card-style" style="margin-top:-60px; z-index:1">
-        <div class="text-center" style="text-align:center;padding:30px 10px;">
-            <p class="font-20" style="color:black;width:100%;font-weight: bold;margin:0;">버블탱크 스쿠버다이빙</p>
+        <div class="text-center" style="padding:30px 10px;">
+            <p class="font-20 font-600" style="color:black;width:100%;margin:0;">버블탱크 스쿠버다이빙</p>
+            <p style="margin:0;">제주 남부에 위치한 PADI 5star 다이빙센터</p>
             <div class="star-area" style="margin-top: 16px;">
-                <img src="/static/images/star_full.png" width="24"/>
-                <img src="/static/images/star_full.png" width="24"/>
-                <img src="/static/images/star_full.png" width="24"/>
-                <img src="/static/images/star_half.png" width="24"/>
-                <img src="/static/images/star_none.png" width="24"/>
+                <i class="fa fa-star font-20 color-yellow-dark scale-box"></i>
+                <i class="fa fa-star font-20 color-yellow-dark scale-box"></i>
+                <i class="fa fa-star font-20 color-yellow-dark scale-box"></i>
+                <i class="fa fa-star-half-alt font-20 color-yellow-dark scale-box"></i>
+                <i class="far fa-star font-20 color-yellow-dark scale-box"></i>
                 <span class="font-20" style="margin-left: 10px;color:black;vertical-align:bottom;">3.8</span>
             </div>
-            <div style="margin-top:20px;">최근리뷰 32 | <a href="#" class="chip chip-s bg-gray-light">
-                <strong class="color-black font-400">PADI공식</strong></a>
+            <div class="evaluation d-flex">
+                <span class="training font-12"">교육 3.9</span>
+                <span class="service font-12">서비스 4.2</span>
+                <span class="equiptment font-12">장비 3.4</span>
+                <span class="info" style="margin-bottom:3px;margin-top:3px;"><i class="icon_question font-12">별점 안내</i></span>
+            </div>
+            <div style="margin-top:8px;">최근리뷰 32&nbsp;&nbsp;<font style="color:lightgray">|</font>&nbsp;&nbsp;<img src="/static/images/logo_padi.svg" width="48" />&nbsp;&nbsp;<font style="color:lightgray">|</font>&nbsp;&nbsp;￦￦
+            <!--<span class="badge font-10 bg-fade-gray-dark">PADI 공식</span>-->
             </div>
             <div style="margin-top:26px;" class="row mb-0 text-center">
                 <div class="col-4 pd-0" style="border-right: 1px solid lightgray;">
@@ -52,7 +59,6 @@
                     <span class="font-14 bold">공유</span>
                 </div>
             </div>
-            <div>한국어</div>
         </div>
     </div>
     
@@ -71,78 +77,78 @@
                     <div class="align-self-center">
                         <img src="/static/images/diving_openwater.jpg" class="rounded-sm me-3" width="40">
                     </div>
-                    <div class="align-self-center">
-                        <p class="color-highlight font-11 mb-n2">PADI</p>
-                        <h2 class="font-15 line-height-s mt-1 mb-1">오픈워터 코스</h2>
+                    <div class="text-start align-self-center">
+                        <h2 class="font-15 line-height-s mt-1 mb-n1">오픈워터 코스</h2>
+                        <p class="color-highlight font-11">자격증/렌탈/숙박/중식</p>
                     </div>
                     <div class="ms-auto ps-3 align-self-center text-end">
-                        <p class="color-highlight font-10 mb-n2">3일</p>
-                        <h2 class="font-15 mb-0">￦550,000</h2>
+                        <h2 class="font-15 mb-n1">￦550,000</h2>
+                        <p class="color-highlight font-10">3일 전일</p>
                     </div>
                 </div>
                 <div class="d-flex mb-3">
                     <div class="align-self-center">
                         <img src="/static/images/diving_advanced.jpg" class="rounded-sm me-3" width="40">
                     </div>
-                    <div class="align-self-center">
-                        <p class="color-highlight font-11 mb-n2">PADI</p>
-                        <h2 class="font-15 line-height-s mt-1 mb-1">어드벤스드 코스</h2>
+                    <div class="text-start align-self-center">
+                        <h2 class="font-15 line-height-s mt-1 mb-n1">어드벤스드 코스</h2>
+                        <p class="color-highlight font-11">자격증/렌탈/숙박/중식</p>
                     </div>
                     <div class="ms-auto ps-3 align-self-center text-end">
-                        <p class="color-highlight font-10 mb-n2">2일</p>
-                        <h2 class="font-15 mb-0">￦500,000</h2>
+                        <h2 class="font-15 mb-n1">￦500,000</h2>
+                        <p class="color-highlight font-10">2일 전일</p>
                     </div>
                 </div>
                 <div class="d-flex mb-3">
                     <div class="align-self-center">
                         <img src="/static/images/diving_advanced.jpg" class="rounded-sm me-3" width="40">
                     </div>
-                    <div class="align-self-center">
-                        <p class="color-highlight font-11 mb-n2">PADI</p>
-                        <h2 class="font-15 line-height-s mt-1 mb-1">오픈워터+어드벤스드</h2>
+                    <div class="text-start align-self-center">
+                        <h2 class="font-15 line-height-s mt-1 mb-n1">오픈워터+어드벤스드</h2>
+                        <p class="color-highlight font-11">자격증/렌탈/숙박/중식</p>
                     </div>
                     <div class="ms-auto ps-3 align-self-center text-end">
-                        <p class="color-highlight font-10 mb-n2">5일</p>
-                        <h2 class="font-15 mb-0">￦950,000</h2>
+                        <h2 class="font-15 mb-n1">￦950,000</h2>
+                        <p class="color-highlight font-10">5일 전일</p>
                     </div>
                 </div>
                 <div class="d-flex mb-3">
                     <div class="align-self-center">
                         <img src="/static/images/diving_specialtea.jpg" class="rounded-sm me-3" width="40">
                     </div>
-                    <div class="align-self-center">
-                        <p class="color-highlight font-11 mb-n2">PADI</p>
-                        <h2 class="font-15 line-height-s mt-1 mb-1">스페셜티 코스</h2>
+                    <div class="text-start align-self-center">
+                        <h2 class="font-15 line-height-s mt-1 mb-n1">스페셜티 코스</h2>
+                        <p class="color-highlight font-11">자격증/렌탈/숙박/중식</p>
                     </div>
                     <div class="ms-auto ps-3 align-self-center text-end">
-                        <p class="color-highlight font-10 mb-n2">2일</p>
-                        <h2 class="font-15 mb-0">￦300,000</h2>
+                        <h2 class="font-15 mb-n1">￦300,000</h2>
+                        <p class="color-highlight font-10">2일 전일</p>
                     </div>
                 </div>
                 <div class="d-flex mb-3">
                     <div class="align-self-center">
                         <img src="/static/images/diving_rescue.jpg" class="rounded-sm me-3" width="40">
                     </div>
-                    <div class="align-self-center">
-                        <p class="color-highlight font-11 mb-n2">PADI</p>
-                        <h2 class="font-15 line-height-s mt-1 mb-1">레스큐+응급처치</h2>
+                    <div class="text-start align-self-center">
+                        <h2 class="font-15 line-height-s mt-1 mb-n1">레스큐+응급처치</h2>
+                        <p class="color-highlight font-11">자격증/렌탈/숙박/중식</p>
                     </div>
                     <div class="ms-auto ps-3 align-self-center text-end">
-                        <p class="color-highlight font-10 mb-n2">3일</p>
-                        <h2 class="font-15 mb-0">￦650,000</h2>
+                        <h2 class="font-15 mb-n1">￦650,000</h2>
+                        <p class="color-highlight font-10">3일 전일</p>
                     </div>
                 </div>
                 <div class="d-flex mb-3">
                     <div class="align-self-center">
                         <img src="/static/images/diving_master.jpg" class="rounded-sm me-3" width="40">
                     </div>
-                    <div class="align-self-center">
-                        <p class="color-highlight font-11 mb-n2">PADI</p>
-                        <h2 class="font-15 line-height-s mt-1 mb-1">다이브마스터</h2>
+                    <div class="text-start align-self-center">
+                        <h2 class="font-15 line-height-s mt-1 mb-n1">다이브마스터</h2>
+                        <p class="color-highlight font-11">자격증/렌탈/숙박/중식</p>
                     </div>
                     <div class="ms-auto ps-3 align-self-center text-end">
-                        <p class="color-highlight font-10 mb-n2">5일</p>
-                        <h2 class="font-15 mb-0">￦1,350,000</h2>
+                        <h2 class="font-15 mb-n1">￦1,350,000</h2>
+                        <p class="color-highlight font-10">5일 전일</p>
                     </div>
                 </div>
             </div>
@@ -151,65 +157,65 @@
                     <div class="align-self-center">
                         <img src="/static/images/diving_island.jpg" class="rounded-sm me-3" width="70">
                     </div>
-                    <div class="align-self-center">
-                        <p class="color-highlight font-11 mb-n2">Steaks</p>
-                        <h2 class="font-15 line-height-s mt-1 mb-1">섬 다이빙</h2>
+                    <div class="text-start align-self-center">
+                        <h2 class="font-15 line-height-s mt-1 mb-n1">섬 다이빙</h2>
+                        <p class="color-highlight font-11">가이드/탱크/간식</p>
                     </div>
                     <div class="ms-auto ps-3 align-self-center text-end">
-                        <p class="color-highlight font-10 mb-n2">per serving</p>
-                        <h2 class="font-15 mb-0">￦50,000</h2>
+                        <h2 class="font-15 mb-n1">￦50,000</h2>
+                        <p class="color-highlight font-10">1세션</p>
                     </div>
                 </div>
                 <div class="d-flex mb-3">
                     <div class="align-self-center">
                         <img src="/static/images/diving_boat.jpg" class="rounded-sm me-3" width="70">
                     </div>
-                    <div class="align-self-center">
-                        <p class="color-highlight font-11 mb-n2">Chicken</p>
-                        <h2 class="font-15 line-height-s mt-1 mb-1">보트 다이빙</h2>
+                    <div class="text-start align-self-center">
+                        <h2 class="font-15 line-height-s mt-1 mb-n1">보트 다이빙</h2>
+                        <p class="color-highlight font-11">가이드/탱크/간식</p>
                     </div>
                     <div class="ms-auto ps-3 align-self-center text-end">
-                        <p class="color-highlight font-10 mb-n2">per serving</p>
-                        <h2 class="font-15 mb-0">￦70,000</h2>
+                        <h2 class="font-15 mb-n1">￦70,000</h2>
+                        <p class="color-highlight font-10">1세션</p>
                     </div>
                 </div>
                 <div class="d-flex mb-3">
                     <div class="align-self-center">
                         <img src="/static/images/diving_beach1.jpg" class="rounded-sm me-3" width="70">
                     </div>
-                    <div class="align-self-center">
-                        <p class="color-highlight font-11 mb-n2">Vegan</p>
-                        <h2 class="font-15 line-height-s mt-1 mb-1">비치 다이빙</h2>
+                    <div class="text-start align-self-center">
+                        <h2 class="font-15 line-height-s mt-1 mb-n1">비치 다이빙</h2>
+                        <p class="color-highlight font-11">가이드/탱크/간식</p>
                     </div>
                     <div class="ms-auto ps-3 align-self-center text-end">
-                        <p class="color-highlight font-10 mb-n2">per serving</p>
-                        <h2 class="font-15 mb-0">￦40,000</h2>
+                        <h2 class="font-15 mb-n1">￦40,000</h2>
+                        <p class="color-highlight font-10">1세션</p>
                     </div>
                 </div>
                 <div class="d-flex mb-3">
                     <div class="align-self-center">
                         <img src="/static/images/diving_yacht.jpg" class="rounded-sm me-3" width="70">
                     </div>
-                    <div class="align-self-center">
-                        <p class="color-highlight font-11 mb-n2">Steaks</p>
-                        <h2 class="font-15 line-height-s mt-1 mb-1">요트 다이빙</h2>
+                    <div class="text-start align-self-center">
+                        <h2 class="font-15 line-height-s mt-1 mb-n1">요트 다이빙</h2>
+                        <p class="color-highlight font-11">가이드/탱크/간식</p>
                     </div>
                     <div class="ms-auto ps-3 align-self-center text-end">
-                        <p class="color-highlight font-10 mb-n2">per serving</p>
-                        <h2 class="font-15 mb-0">￦80,000</h2>
+                        <h2 class="font-15 mb-n1">￦80,000</h2>
+                        <p class="color-highlight font-10">1세션</p>
                     </div>
                 </div>
                 <div class="d-flex mb-3">
                     <div class="align-self-center">
                         <img src="/static/images/diving_night.jpg" class="rounded-sm me-3" width="70">
                     </div>
-                    <div class="align-self-center">
-                        <p class="color-highlight font-11 mb-n2">Chicken</p>
-                        <h2 class="font-15 line-height-s mt-1 mb-1">나이트 다이빙</h2>
+                    <div class="text-start align-self-center">
+                        <h2 class="font-15 line-height-s mt-1 mb-n1">나이트 다이빙</h2>
+                        <p class="color-highlight font-11">가이드/탱크/간식</p>
                     </div>
                     <div class="ms-auto ps-3 align-self-center text-end">
-                        <p class="color-highlight font-10 mb-n2">per serving</p>
-                        <h2 class="font-15 mb-0">￦60,000</h2>
+                        <h2 class="font-15 mb-n1">￦60,000</h2>
+                        <p class="color-highlight font-10">1세션</p>
                     </div>
                 </div>
             </div>
@@ -218,26 +224,26 @@
                     <div class="align-self-center">
                         <img src="/static/images/diving_beach.jpg" class="rounded-sm me-3" width="70">
                     </div>
-                    <div class="align-self-center">
-                        <p class="color-highlight font-11 mb-n2">Fruit</p>
-                        <h2 class="font-15 line-height-s mt-1 mb-1">비치 체험 다이빙</h2>
+                    <div class="text-start align-self-center">
+                        <h2 class="font-15 line-height-s mt-1 mb-n1">비치 체험 다이빙</h2>
+                        <p class="color-highlight font-11">렌탈/입장/사진</p>
                     </div>
                     <div class="ms-auto ps-3 align-self-center text-end">
-                        <p class="color-highlight font-10 mb-n2">per serving</p>
-                        <h2 class="font-15 mb-0">￦100,000</h2>
+                        <h2 class="font-15 mb-n1">￦100,000</h2>
+                        <p class="color-highlight font-10">반일 오전</p>
                     </div>
                 </div>
                 <div class="d-flex mb-3">
                     <div class="align-self-center">
                         <img src="/static/images/diving_boat.jpg" class="rounded-sm me-3" width="70">
                     </div>
-                    <div class="align-self-center">
-                        <p class="color-highlight font-11 mb-n2">교육,렌탈,보트,입장료,사진촬영</p>
-                        <h2 class="font-15 line-height-s mt-1 mb-1">보트 체험 다이빙</h2>
+                    <div class="text-start align-self-center">
+                        <h2 class="font-15 line-height-s mt-1 mb-n1">보트 체험 다이빙</h2>
+                        <p class="color-highlight font-11">렌탈/보트/사진</p>
                     </div>
                     <div class="ms-auto ps-3 align-self-center text-end">
-                        <p class="color-highlight font-10 mb-n2"></p>
-                        <h2 class="font-15 mb-0">￦130,000</h2>
+                        <h2 class="font-15 mb-n1">￦130,000</h2>
+                        <p class="color-highlight font-10">반일 오전</p>
                     </div>
                 </div>
             </div>
@@ -287,11 +293,20 @@
                 제주 서귀포시 부두로 41 버블탱크
             </p>
         </div>
-        <div id="map" class="responsive-iframe add-iframe">
-        <!--<div class="responsive-iframe add-iframe">
+        <GmapMap
+  :center="{lat:10, lng:10}"
+  :zoom="7"
+  map-type-id="terrain"
+  style="width: 100%; height: 300px"
+>
+
+</GmapMap>
+        
+        <!--<div id="map" class="responsive-iframe add-iframe">
+        <div class="responsive-iframe add-iframe">
             <iframe class="location-map" src='https://www.google.com/maps/embed/v1/view?key=AIzaSyAM3nxDVrkjyKwdIZp8QOplmBKLRVI5S_Y&callback=initMap&center=33.241479140498704,126.56481848122681&zoom=16&maptype=roadmap'></iframe>
-        -->
-        </div>
+        
+        </div>-->
         <a href="https://maps.google.com" class="location-button btn btn-full btn-m bg-red-dark rounded-0 text-uppercase shadow-l font-900 disabled">View on Google Maps</a>
     </div>
     
@@ -382,27 +397,31 @@
 export default {
   name: 'HelloWorld',
   mounted() {
-    let recaptchaScript = document.createElement('script')
-    recaptchaScript.setAttribute('src', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDpoSnMQnPjYItyVPg6rIM_yr8pytLQD6s&callback=initMap&libraries=&v=weekly')
-    document.head.appendChild(recaptchaScript);
-
-    this.map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 33.241479140498704, lng: 126.56481848122681},
-        zoom: this.zoom
-    });
-
+    //let recaptchaScript = document.createElement('script')
+    //recaptchaScript.setAttribute('src', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDpoSnMQnPjYItyVPg6rIM_yr8pytLQD6s&callback=initMap&libraries=&v=weekly')
+    //document.head.appendChild(recaptchaScript)
   },
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      markers: [{
+        position: {
+            lat: 10.0,
+            lng: 10.0
+            }
+        }, {
+        position: {
+            lat: 11.0,
+            lng: 11.0
+            }
+        }]
     }
+  }, method: {
+      clickMarker: function() {
+          console.log("clickMarker");
+      }
   }
-  methods: {
-    var marker = new google.maps.Marker({
-        position: { lat: 33.241479140498704, lng: 126.56481848122681 },
-        map: this.map
-    });
-  }
+
+  
 }
 
 
@@ -423,5 +442,29 @@ li {
 }
 a {
   color: #42b983;
+}
+.evaluation {
+    margin: 6px 6px 0px 6px; 
+    background-color: rgba(196,187,171,.2);
+    justify-content: space-around;
+    border-radius: 5px;
+    padding: 8px 8px 8px 0;
+}
+
+.evaluation>span.info {
+    padding-left: 11px;
+    border-left: 1px solid #c4bbab;
+}
+.evaluation>span .icon_question {
+    display: inline-block;
+    position: relative;
+    top: 1px;
+    display: block;
+    width: 18px;
+    height: 18px;
+    background-size: 18px 18px;
+    background-repeat: no-repeat;
+    background-image: url(/static/images/question.png);
+    text-indent: -9999px;
 }
 </style>
