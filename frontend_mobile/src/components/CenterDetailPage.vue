@@ -299,7 +299,14 @@
   map-type-id="terrain"
   style="width: 100%; height: 300px"
 >
-
+  <GmapMarker
+    :key="index"
+    v-for="(m, index) in markers"
+    :position="m.position"
+    :clickable="true"
+    :draggable="true"
+    @click="center=m.position"
+  />
 </GmapMap>
         
         <!--<div id="map" class="responsive-iframe add-iframe">
@@ -403,17 +410,14 @@ export default {
   },
   data () {
     return {
-      markers: [{
-        position: {
-            lat: 10.0,
-            lng: 10.0
-            }
-        }, {
-        position: {
-            lat: 11.0,
-            lng: 11.0
-            }
-        }]
+      markers: [
+        { position: { lat: 37, lng: 126.98 } },
+        { position: { lat: 37, lng: 126.99 } },
+        { position: { lat: 37, lng: 127.00 } },
+        { position: { lat: 37, lng: 127.01 } },
+        { position: { lat: 37, lng: 127.02 } }
+      ]
+
     }
   }, method: {
       clickMarker: function() {
@@ -443,6 +447,8 @@ li {
 a {
   color: #42b983;
 }
+
+
 .evaluation {
     margin: 6px 6px 0px 6px; 
     background-color: rgba(196,187,171,.2);
