@@ -5,7 +5,7 @@
       <div id="page">
           
           <div class="header header-auto-show header-fixed header-logo-center">
-              <a href="index.html" class="header-title"><img src="/static/images/logo-dark_38.png" height="38" /></a>
+              <a href="index.html" class="header-title"><img src="/static/images/logo-dark.svg" height="38" /></a>
               <a href="#" data-menu="menu-main" class="header-icon header-icon-1"><i class="fas fa-bars"></i></a>
               <a href="#" data-toggle-theme class="header-icon header-icon-4 show-on-theme-dark"><i class="fas fa-sun"></i></a>
               <a href="#" data-toggle-theme class="header-icon header-icon-4 show-on-theme-light"><i class="fas fa-moon"></i></a>
@@ -22,7 +22,7 @@
           </div>
               
           <div class="page-title page-title-fixed">
-          <img src="/static/images/logo-dark_38.png" style="padding-top: 3px;margin-left: 15px;margin-right: auto;"/>
+          <img src="/static/images/logo-dark.svg" style="padding-top: 3px;margin-left: 15px;margin-right: auto;" height="41"/>
               <a href="#" class="page-title-icon shadow-xl bg-theme color-theme" data-menu="menu-share"><i class="fa fa-share-alt"></i></a>
               <a href="#" class="page-title-icon shadow-xl bg-theme color-theme show-on-theme-light" data-toggle-theme><i class="fa fa-moon"></i></a>
               <a href="#" class="page-title-icon shadow-xl bg-theme color-theme show-on-theme-dark" data-toggle-theme><i class="fa fa-lightbulb color-yellow-dark"></i></a>

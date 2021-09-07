@@ -1484,8 +1484,8 @@ body {
 .page-title {
   display: flex;
   transition: all 300ms ease;
-  margin-top: 23px;
-  margin-bottom: 30px;
+  margin-top: 9px;
+  margin-bottom: 8px;
 }
 .page-title h1 {
   margin-right: auto;
@@ -1516,8 +1516,8 @@ body {
 }
 
 .page-title-clear {
-  height: calc(90px + (constant(safe-area-inset-top))*0.8) !important;
-  height: calc(90px + (env(safe-area-inset-top))*0.8) !important;
+  height: calc(58px + (constant(safe-area-inset-top))*0.8) !important;
+  height: calc(58px + (env(safe-area-inset-top))*0.8) !important;
 }
 
 .page-title-icon {
