@@ -287,9 +287,9 @@
     
     
     <div class="card card-style">
-        <div class="content">
-            <h4 class="pt-2">주소</h4>
-            <p class="mb-3">
+        <div class="content mb-0 mt-10">
+            <h4 class="text-start pt-2 mb-0">주소</h4>
+            <p class="text-start mb-3 mb-0">
                 제주 서귀포시 부두로 41 버블탱크
             </p>
         </div>
