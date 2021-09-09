@@ -1,20 +1,20 @@
 <template>
   <div class="">
-    <div class="splide single-slider cover-slider slider-no-arrows slider-has-dots" id="cover-slider-1" data-card-height="350">
+    <div class="splide single-slider cover-slider slider-no-arrows slider-has-dots" id="cover-slider-1" data-card-height="250">
         <div class="splide__track">
             <div class="splide__list">
                 <div class="splide__slide">
-                    <div data-card-height="350" class="card rounded-0 mb-0" style="background-image:url(/static/images/pictures/bubble1.jpg)">
+                    <div data-card-height="250" class="card rounded-0 mb-0" style="background-image:url(/static/images/pictures/bubble1.jpg)">
                         
                     </div>         
                 </div>
                 <div class="splide__slide">
-                    <div data-card-height="350" class="card rounded-0 mb-0" style="background-image:url(/static/images/pictures/bubble2.jpg)">
+                    <div data-card-height="250" class="card rounded-0 mb-0" style="background-image:url(/static/images/pictures/bubble2.jpg)">
                         
                     </div>
                 </div>
                 <div class="splide__slide">
-                    <div data-card-height="350" class="card rounded-0 mb-0" style="background-image:url(/static/images/pictures/bubble3.jpg)">
+                    <div data-card-height="250" class="card rounded-0 mb-0" style="background-image:url(/static/images/pictures/bubble3.jpg)">
                         
                     </div>   
                 </div>
