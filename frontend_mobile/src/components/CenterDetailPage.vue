@@ -293,7 +293,7 @@
                 제주 서귀포시 부두로 41 버블탱크
             </p>
         </div>
-        <div id="map" style="height: 200px;"></div>
+        <div id="map" style="height: 300px;"></div>
         
         
         <!--<div id="map" class="responsive-iframe add-iframe">
@@ -400,7 +400,10 @@ export default {
     script.onload = () => {
         this.map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 33.24134444312815, lng: 126.56484940647604},
-            zoom: 12
+            zoom: 13,
+            mapTypeControl: false,
+            streetViewControl: false,
+            zoomControl: false
         });
         var marker_shop = new google.maps.Marker({
             map: this.map,
@@ -411,7 +414,7 @@ export default {
         var marker_point = new google.maps.Marker({
             map: this.map,
             position: {lat: 33.22900114645303, lng: 126.56260977136935},
-            icon: new google.maps.MarkerImage('/static/images/pin_marker2.svg',null, null, null, new google.maps.Size(30,30)),
+            icon: new google.maps.MarkerImage('/static/images/pin_marker2.svg',null, null, null, new google.maps.Size(40,40)),
         });
         
         
