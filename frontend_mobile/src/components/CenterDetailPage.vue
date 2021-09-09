@@ -402,12 +402,18 @@ export default {
             center: {lat: 33.24134444312815, lng: 126.56484940647604},
             zoom: 12
         });
-        var marker = new google.maps.Marker({
+        var marker_shop = new google.maps.Marker({
             map: this.map,
             position: {lat: 33.24134444312815, lng: 126.56484940647604},
             label: {text: '버블탱크 스쿠버다이빙', color: 'white', className: 'marker-position'},
             icon: new google.maps.MarkerImage('/static/images/pin_marker.svg',null, null, null, new google.maps.Size(50,50)),
         });
+        var marker_point = new google.maps.Marker({
+            map: this.map,
+            position: {lat: 33.22900114645303, lng: 126.56260977136935},
+            icon: new google.maps.MarkerImage('/static/images/pin_marker2.svg',null, null, null, new google.maps.Size(30,30)),
+        });
+        
         
     };
   },
