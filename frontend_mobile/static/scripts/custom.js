@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     'use strict'
 
     //Global Variables
-    let isPWA = true;  // Enables or disables the service worker and PWA
+    let isPWA = false;  // Enables or disables the service worker and PWA
     let isAJAX = true; // AJAX transitions. Requires local server or server
     var pwaName = "Appkit"; //Local Storage Names for PWA
     var pwaRemind = 1; //Days to re-remind to add to home
@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //Setting Service Worker Locations scope = folder | location = service worker js location
     var pwaScope = "/";
     var pwaLocation = "/_service-worker.js";
+    //var pwaLocation = "_service-worker.js";
 
     //Place all your custom Javascript functions and plugin calls below this line
     function init_template(){
@@ -335,6 +336,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const menuActive = document.querySelectorAll('[data-menu-active]')[0];
             if(menuActive){
                 var selectedMenu = menuActive.getAttribute('data-menu-active');
+                //console.log(selectedMenu)
                 document.querySelectorAll('#'+selectedMenu)[0].classList.add('active-nav');
             }
         }
@@ -1448,7 +1450,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Externally loading Javascript files for better performance.
 
         var plugIdent, plugClass, plugMain, plugCall;
-        var plugLoc = "plugins/"
+        var plugLoc = "/static/plugins/"
 
         let plugins = [
           {

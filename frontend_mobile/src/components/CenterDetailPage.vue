@@ -293,28 +293,15 @@
                 제주 서귀포시 부두로 41 버블탱크
             </p>
         </div>
-        <GmapMap
-  :center="{lat:10, lng:10}"
-  :zoom="7"
-  map-type-id="terrain"
-  style="width: 100%; height: 300px"
->
-  <GmapMarker
-    :key="index"
-    v-for="(m, index) in markers"
-    :position="m.position"
-    :clickable="true"
-    :draggable="true"
-    @click="center=m.position"
-  />
-</GmapMap>
+        <div id="map" style="height: 200px;"></div>
+        
         
         <!--<div id="map" class="responsive-iframe add-iframe">
         <div class="responsive-iframe add-iframe">
             <iframe class="location-map" src='https://www.google.com/maps/embed/v1/view?key=AIzaSyAM3nxDVrkjyKwdIZp8QOplmBKLRVI5S_Y&callback=initMap&center=33.241479140498704,126.56481848122681&zoom=16&maptype=roadmap'></iframe>
         
         </div>-->
-        <a href="https://maps.google.com" class="location-button btn btn-full btn-m bg-red-dark rounded-0 text-uppercase shadow-l font-900 disabled">View on Google Maps</a>
+        
     </div>
     
     
@@ -399,30 +386,49 @@
     <div data-menu-load="/static/menu-footer.html"></div>
   </div>
 </template>
-
 <script>
+
 export default {
   name: 'HelloWorld',
   mounted() {
-    //let recaptchaScript = document.createElement('script')
-    //recaptchaScript.setAttribute('src', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDpoSnMQnPjYItyVPg6rIM_yr8pytLQD6s&callback=initMap&libraries=&v=weekly')
-    //document.head.appendChild(recaptchaScript)
+  },
+  created() {
+    console.log("ccc");
+    let script = document.createElement('script');
+    script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCWu8Fw-h-f1t8Sp3I7R3l_Ukr24HunXQM';
+    document.body.appendChild(script);
+    script.onload = () => {
+        this.map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 33.24134444312815, lng: 126.56484940647604},
+            zoom: 12
+        });
+        var marker = new google.maps.Marker({
+            map: this.map,
+            position: {lat: 33.24134444312815, lng: 126.56484940647604},
+            label: {text: '버블탱크 스쿠버다이빙', color: 'white', className: 'marker-position'},
+            icon: new google.maps.MarkerImage('/static/images/pin_marker.svg',null, null, null, new google.maps.Size(50,50)),
+        });
+        
+    };
   },
   data () {
     return {
-      markers: [
-        { position: { lat: 37, lng: 126.98 } },
-        { position: { lat: 37, lng: 126.99 } },
-        { position: { lat: 37, lng: 127.00 } },
-        { position: { lat: 37, lng: 127.01 } },
-        { position: { lat: 37, lng: 127.02 } }
-      ]
+        map: null,
+        center: {
+            lat: 37.500131499999995,
+            lng: 127.032425799999998
+        },
+        markers: [
+            { position: { lat: 37, lng: 126.98 } },
+            { position: { lat: 37, lng: 126.99 } },
+            { position: { lat: 37, lng: 127.00 } },
+            { position: { lat: 37, lng: 127.01 } },
+            { position: { lat: 37, lng: 127.02 } }
+        ]
 
     }
   }, method: {
-      clickMarker: function() {
-          console.log("clickMarker");
-      }
+      
   }
 
   
@@ -473,4 +479,7 @@ a {
     background-image: url(/static/images/question.png);
     text-indent: -9999px;
 }
+
+
+
 </style>
