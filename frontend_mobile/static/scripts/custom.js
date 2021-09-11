@@ -501,7 +501,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     elem.style.filter = 'invert(0%)';
                 });
                 document.querySelectorAll('.color-highlight').forEach((elem, index)=> {
-                    elem.style.color = '#1d397c';
+                    elem.style.color = '#1f1f1f';
                 });
                 document.querySelectorAll('.tab-controls a').forEach((elem, index)=> {
                     elem.style.color = 'white';
