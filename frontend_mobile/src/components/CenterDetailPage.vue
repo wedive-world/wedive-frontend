@@ -741,7 +741,7 @@ a {color: inherit;text-decoration: none;}
 .ico_equipt8 {width: 60px;height: 63px;background-position: -56px -60px;}
 .ico_equipt9 {width: 60px;height: 63px;background-position: -112px -60px;}
 .ico_equipt10 {width: 60px;height: 63px;background-position: -168px -60px;}
-.ico_equipt11 {width: 60px;height: 63px;background-position: -224px -60px;}
+.ico_equipt11 {width: 60px;height: 63px;background-position: -222px -60px;}
 .ico_equipt12 {width: 60px;height: 63px;background-position: -280px -60px;}
 
 .ico_equipt13 {width: 60px;height: 63px;background-position: 0px -120px;}
