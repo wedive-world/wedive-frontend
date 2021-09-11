@@ -58,10 +58,12 @@
                         <img class="ext-img" src="/static/images/ico_heart.png" width="26" />
                         <span class="font-14 bold">찜 25</span>
                     </div>
-                    <div class="col-4 pd-0">
+                    
+                    <div class="col-4 pd-0" data-menu="menu-share">
                         <img class="ext-img" src="/static/images/ico_share.png" width="26" />
                         <span class="font-14 bold">공유</span>
                     </div>
+                    
                 </div>
             </div>
         </div>
@@ -633,9 +635,47 @@
     <!-- All Menus, Action Sheets, Modals, Notifications, Toasts, Snackbars get Placed outside the <div class="page-content"> -->
 
     <!-- Menu Share -->
+    <div id="menu-share" class="menu menu-box-bottom rounded-m">
+        <div class="menu-title mt-n1">
+            <h2 class="pt-3 pb-3">공유</h2>
+            <a href="#" class="close-menu"><i class="fa fa-times"></i></a>
+        </div>
+        <div class="content mb-0 text-start">
+            <div class="divider mb-0"></div>
+            <div class="list-group list-custom-small list-icon-0">
+                <a href="auto_generated" class="shareToFacebook external-link">
+                    <i class="font-18 fab fa-facebook-square color-facebook"></i>
+                    <span class="font-13">Facebook</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                <a href="auto_generated" class="shareToTwitter external-link">
+                    <i class="font-18 fab fa-twitter-square color-twitter"></i>
+                    <span class="font-13">Twitter</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                <a href="auto_generated" class="shareToLinkedIn external-link">
+                    <i class="font-18 fab fa-linkedin color-linkedin"></i>
+                    <span class="font-13">LinkedIn</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>        
+                <a href="auto_generated" class="shareToWhatsApp external-link">
+                    <i class="font-18 fab fa-whatsapp-square color-whatsapp"></i>
+                    <span class="font-13">WhatsApp</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>   
+                <a href="auto_generated" class="shareToMail external-link border-0">
+                    <i class="font-18 fa fa-envelope-square color-mail"></i>
+                    <span class="font-13">Email</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+        
+    <!-- Direction Share -->
     <div id="menu-direction" class="menu menu-box-bottom rounded-m">
         <div class="menu-title mt-n1">
-            <h2 class="pt-3 pb-3 light-border-bottom">오시는 길</h2>
+            <h2 class="pt-3 pb-3">오시는 길</h2>
             <a href="#" class="close-menu"><i class="fa fa-times"></i></a>
         </div>
         <div class="content mb-0 text-start">

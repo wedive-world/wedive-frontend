@@ -9,7 +9,6 @@
               <a href="#" data-menu="menu-main" class="header-icon header-icon-1"><i class="fas fa-bars"></i></a>
               <a href="#" data-toggle-theme class="header-icon header-icon-4 show-on-theme-dark"><i class="fas fa-sun"></i></a>
               <a href="#" data-toggle-theme class="header-icon header-icon-4 show-on-theme-light"><i class="fas fa-moon"></i></a>
-              <a href="#" data-menu="menu-share" class="header-icon header-icon-3"><i class="fas fa-share-alt"></i></a>
           </div>
 
           
@@ -23,9 +22,8 @@
               
           <div class="page-title page-title-fixed">
           <img class="logo-image" src="/static/images/logo-dark.svg" style="padding-top: 3px;margin-left: 15px;margin-right: auto;" height="41"/>
-              <a href="#" class="page-title-icon shadow-xl bg-theme color-theme" data-menu="menu-share"><i class="fa fa-share-alt"></i></a>
               <a href="#" class="page-title-icon shadow-xl bg-theme color-theme show-on-theme-light" data-toggle-theme><i class="fa fa-moon"></i></a>
-              <a href="#" class="page-title-icon shadow-xl bg-theme color-theme show-on-theme-dark" data-toggle-theme><i class="fa fa-lightbulb color-yellow-dark"></i></a>
+              <a href="#" class="page-title-icon shadow-xl bg-theme color-theme show-on-theme-dark" data-toggle-theme><i class="fa fa-sun"></i></a>
               <a href="#" class="page-title-icon shadow-xl bg-theme color-theme" data-menu="menu-main"><i class="fa fa-bars"></i></a>
           </div>
           <div class="page-title-clear"></div>
@@ -34,41 +32,7 @@
           
           <router-view/>
           
-          <!-- Menu Share -->
-          <div id="menu-share" class="menu menu-box-bottom rounded-m">
-              <div class="menu-title mt-n1"><h1>Share the Love</h1><p class="color-highlight">Just Tap the Social Icon. We'll add the Link</p><a href="#" class="close-menu"><i class="fa fa-times"></i></a></div>
-              <div class="content mb-0">
-                  <div class="divider mb-0"></div>
-                  <div class="list-group list-custom-small list-icon-0">
-                      <a href="auto_generated" class="shareToFacebook external-link">
-                          <i class="font-18 fab fa-facebook-square color-facebook"></i>
-                          <span class="font-13">Facebook</span>
-                          <i class="fa fa-angle-right"></i>
-                      </a>
-                      <a href="auto_generated" class="shareToTwitter external-link">
-                          <i class="font-18 fab fa-twitter-square color-twitter"></i>
-                          <span class="font-13">Twitter</span>
-                          <i class="fa fa-angle-right"></i>
-                      </a>
-                      <a href="auto_generated" class="shareToLinkedIn external-link">
-                          <i class="font-18 fab fa-linkedin color-linkedin"></i>
-                          <span class="font-13">LinkedIn</span>
-                          <i class="fa fa-angle-right"></i>
-                      </a>        
-                      <a href="auto_generated" class="shareToWhatsApp external-link">
-                          <i class="font-18 fab fa-whatsapp-square color-whatsapp"></i>
-                          <span class="font-13">WhatsApp</span>
-                          <i class="fa fa-angle-right"></i>
-                      </a>   
-                      <a href="auto_generated" class="shareToMail external-link border-0">
-                          <i class="font-18 fa fa-envelope-square color-mail"></i>
-                          <span class="font-13">Email</span>
-                          <i class="fa fa-angle-right"></i>
-                      </a>
-                  </div>
-              </div>
-          </div>
-
+          
           <!-- Be sure this is on your main visiting page, for example, the index.html page-->
           <!-- Install Prompt for Android -->
           <div id="menu-install-pwa-android" class="menu menu-box-bottom rounded-m">
