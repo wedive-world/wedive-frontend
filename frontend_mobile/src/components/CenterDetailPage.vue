@@ -707,7 +707,7 @@ a {color: inherit;text-decoration: none;}
 .evaluation>span.info {padding-left: 11px;border-left: 1px solid #c4bbab;}
 .evaluation>span .icon_question {display: inline-block;position: relative;top: 1px;display: block;width: 18px;height: 18px;background-size: 18px 18px;background-repeat: no-repeat;background-image: url(/static/images/question.png);text-indent: -9999px;}
 
-.span_feature {width:66px;opacity: 62%;}
+.span_feature {width:66px;color: #727272;}
 .ico_feature {width: 66px;display: inline-block}
 .ico_feature1 {width: 44px;height: 40px;background-position: 0px 0px;}
 .ico_feature2 {width: 44px;height: 40px;background-position: -45px 0px;}
