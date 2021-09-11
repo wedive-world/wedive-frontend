@@ -319,20 +319,20 @@
                 <div data-bs-parent="#tab-group-2" class="collapse text-start px-2 show" id="tab-info">
                     <div class=" line-height-l pb-3 mt-2 light-border-bottom">
                         <strong class="small-title">시설 정보</strong>
-                        <div class="text-start">
-                            <div class="ico_feature">
+                        <div class="row text-start">
+                            <div class="ico_feature col-3">
                                 <i class="ico_feature6 icon-service"></i>
                                 <p class="span_feature text-center">주차</p>
                             </div>
-                            <div class="ico_feature">
+                            <div class="ico_feature col-3">
                                 <i class="ico_feature16 icon-service"></i>
                                 <p class="span_feature text-center">WIFI</p>
                             </div>
-                            <div class="ico_feature">
+                            <div class="ico_feature col-3">
                                 <i class="ico_feature15 icon-service"></i>
                                 <p class="span_feature text-center">반려동물</p>
                             </div>
-                            <div class="ico_feature">
+                            <div class="ico_feature col-3">
                                 <i class="ico_feature8 icon-service"></i>
                                 <p class="span_feature text-center">남녀화장실</p>
                             </div>
@@ -402,94 +402,94 @@
                     </div>
                 </div>
                 <div data-bs-parent="#tab-group-2" class="collapse px-2" id="tab-eqpt">
-                    <div class="mt-3 text-start">
-                        <div class="ico_equipt">
+                    <div class="mt-3 text-start row">
+                        <div class="ico_equipt col-3">
                             <i class="ico_equipt1 icon-equiptment"></i>
                             <p class="span_feature text-center">마스크</p>
                         </div>
-                        <div class="ico_equipt">
+                        <div class="ico_equipt col-3">
                             <i class="ico_equipt2 icon-equiptment"></i>
                             <p class="span_feature text-center">레귤레이터</p>
                         </div>
-                        <div class="ico_equipt">
+                        <div class="ico_equipt col-3">
                             <i class="ico_equipt3 icon-equiptment"></i>
                             <p class="span_feature text-center">모르겠음</p>
                         </div>
-                        <div class="ico_equipt">
+                        <div class="ico_equipt col-3">
                             <i class="ico_equipt4 icon-equiptment"></i>
                             <p class="span_feature text-center">다이버 워치</p>
                         </div>
-                        <div class="ico_equipt">
+                        <div class="ico_equipt col-3">
                             <i class="ico_equipt5 icon-equiptment"></i>
                             <p class="span_feature text-center">나침반</p>
                         </div>
-                        <div class="ico_equipt">
+                        <div class="ico_equipt col-3">
                             <i class="ico_equipt6 icon-equiptment"></i>
                             <p class="span_feature text-center">수중 스쿠터</p>
                         </div>
 
-                        <div class="ico_equipt">
+                        <div class="ico_equipt col-3">
                             <i class="ico_equipt7 icon-equiptment"></i>
                             <p class="span_feature text-center">산소탱크</p>
                         </div>
-                        <div class="ico_equipt">
+                        <div class="ico_equipt col-3">
                             <i class="ico_equipt8 icon-equiptment"></i>
                             <p class="span_feature text-center">핀</p>
                         </div>
-                        <div class="ico_equipt">
+                        <div class="ico_equipt col-3">
                             <i class="ico_equipt9 icon-equiptment"></i>
                             <p class="span_feature text-center">구명조끼</p>
                         </div>
-                        <div class="ico_equipt">
+                        <div class="ico_equipt col-3">
                             <i class="ico_equipt10 icon-equiptment"></i>
                             <p class="span_feature text-center">나이프</p>
                         </div>
-                        <div class="ico_equipt">
+                        <div class="ico_equipt col-3">
                             <i class="ico_equipt11 icon-equiptment"></i>
                             <p class="span_feature text-center">스노쿨링</p>
                         </div>
-                        <div class="ico_equipt">
+                        <div class="ico_equipt col-3">
                             <i class="ico_equipt12 icon-equiptment"></i>
                             <p class="span_feature text-center">부츠</p>
                         </div>
 
-                        <div class="ico_equipt">
+                        <div class="ico_equipt col-3">
                             <i class="ico_equipt13 icon-equiptment"></i>
                             <p class="span_feature text-center">잠수복 상의</p>
                         </div>
-                        <div class="ico_equipt">
+                        <div class="ico_equipt col-3">
                             <i class="ico_equipt14 icon-equiptment"></i>
                             <p class="span_feature text-center">잠수복 하의</p>
                         </div>
-                        <div class="ico_equipt">
+                        <div class="ico_equipt col-3">
                             <i class="ico_equipt15 icon-equiptment"></i>
                             <p class="span_feature text-center">라이트</p>
                         </div>
-                        <div class="ico_equipt">
+                        <div class="ico_equipt col-3">
                             <i class="ico_equipt16 icon-equiptment"></i>
                             <p class="span_feature text-center">모름</p>
                         </div>
-                        <div class="ico_equipt">
+                        <div class="ico_equipt col-3">
                             <i class="ico_equipt17 icon-equiptment"></i>
                             <p class="span_feature text-center">카메라</p>
                         </div>
-                        <div class="ico_equipt">
+                        <div class="ico_equipt col-3">
                             <i class="ico_equipt19 icon-equiptment"></i>
                             <p class="span_feature text-center">수심계</p>
                         </div>
-                        <div class="ico_equipt">
+                        <div class="ico_equipt col-3">
                             <i class="ico_equipt20 icon-equiptment"></i>
                             <p class="span_feature text-center">게이지</p>
                         </div>
-                        <div class="ico_equipt">
+                        <div class="ico_equipt col-3">
                             <i class="ico_equipt21 icon-equiptment"></i>
                             <p class="span_feature text-center">잠수복</p>
                         </div>
-                        <div class="ico_equipt">
+                        <div class="ico_equipt col-3">
                             <i class="ico_equipt22 icon-equiptment"></i>
                             <p class="span_feature text-center">모름</p>
                         </div>
-                        <div class="ico_equipt">
+                        <div class="ico_equipt col-3">
                             <i class="ico_equipt23 icon-equiptment"></i>
                             <p class="span_feature text-center">유아장비</p>
                         </div>
@@ -685,12 +685,13 @@ export default {
             map: this.map,
             position: {lat: 33.24134444312815, lng: 126.56484940647604},
             label: {text: '버블탱크 스쿠버다이빙', color: 'white', className: 'marker-position'},
-            icon: new google.maps.MarkerImage('/static/images/pin_marker.svg',null, null, null, new google.maps.Size(50,50)),
+            icon: new google.maps.MarkerImage('/static/images/ico_pin1.png',null, null, null, new google.maps.Size(38,43)),
         });
         var marker_point = new google.maps.Marker({
             map: this.map,
             position: {lat: 33.22900114645303, lng: 126.56260977136935},
-            icon: new google.maps.MarkerImage('/static/images/pin_marker2.svg',null, null, null, new google.maps.Size(40,40)),
+            label: {text: '포인트1', color: 'white', className: 'marker-position2'},
+            icon: new google.maps.MarkerImage('/static/images/ico_pin2.png',null, null, null, new google.maps.Size(38,43)),
         });
         
         
@@ -699,18 +700,6 @@ export default {
   data () {
     return {
         map: null,
-        center: {
-            lat: 37.500131499999995,
-            lng: 127.032425799999998
-        },
-        markers: [
-            { position: { lat: 37, lng: 126.98 } },
-            { position: { lat: 37, lng: 126.99 } },
-            { position: { lat: 37, lng: 127.00 } },
-            { position: { lat: 37, lng: 127.01 } },
-            { position: { lat: 37, lng: 127.02 } }
-        ]
-
     }
   }, method: {
       
@@ -732,7 +721,7 @@ a {color: inherit;text-decoration: none;}
 .evaluation>span .icon_question {display: inline-block;position: relative;top: 1px;display: block;width: 18px;height: 18px;background-size: 18px 18px;background-repeat: no-repeat;background-image: url(/static/images/question.png);text-indent: -9999px;}
 
 .span_feature {width:66px;color: #727272;}
-.ico_feature {width: 66px;display: inline-block}
+.ico_feature {}
 .ico_feature1 {width: 44px;height: 40px;background-position: 0px 0px;}
 .ico_feature2 {width: 44px;height: 40px;background-position: -45px 0px;}
 .ico_feature3 {width: 44px;height: 40px;background-position: -90px 0px;}
@@ -754,7 +743,7 @@ a {color: inherit;text-decoration: none;}
 
 .icon-service {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/wedive_service.png);background-repeat: no-repeat;-webkit-background-size: 270px 118px;background-size: 270px 118px;}
 
-.ico_equipt {width: 66px;display: inline-block}
+.ico_equipt {}
 .ico_equipt1 {width: 60px;height: 63px;background-position: 0px 0px;}
 .ico_equipt2 {width: 60px;height: 63px;background-position: -56px 0px;}
 .ico_equipt3 {width: 60px;height: 63px;background-position: -112px 0px;}
@@ -768,18 +757,18 @@ a {color: inherit;text-decoration: none;}
 .ico_equipt11 {width: 60px;height: 63px;background-position: -222px -60px;}
 .ico_equipt12 {width: 60px;height: 63px;background-position: -280px -60px;}
 
-.ico_equipt13 {width: 60px;height: 63px;background-position: 0px -120px;}
-.ico_equipt14 {width: 60px;height: 63px;background-position: -56px -120px;}
-.ico_equipt15 {width: 60px;height: 63px;background-position: -112px -120px;}
-.ico_equipt16 {width: 60px;height: 63px;background-position: -168px -120px;}
-.ico_equipt17 {width: 60px;height: 63px;background-position: -224px -120px;}
-.ico_equipt18 {width: 60px;height: 63px;background-position: -280px -120px;}
-.ico_equipt19 {width: 60px;height: 63px;background-position: 0px -180px;}
-.ico_equipt20 {width: 60px;height: 63px;background-position: -56px -180px;}
-.ico_equipt21 {width: 60px;height: 63px;background-position: -112px -180px;}
-.ico_equipt22 {width: 60px;height: 63px;background-position: -168px -180px;}
-.ico_equipt23 {width: 60px;height: 63px;background-position: -224px -180px;}
-.ico_equipt24 {width: 60px;height: 63px;background-position: -280px -180px;}
+.ico_equipt13 {width: 60px;height: 63px;background-position: 0px -118px;}
+.ico_equipt14 {width: 60px;height: 63px;background-position: -56px -118px;}
+.ico_equipt15 {width: 60px;height: 63px;background-position: -112px -118px;}
+.ico_equipt16 {width: 60px;height: 63px;background-position: -168px -118px;}
+.ico_equipt17 {width: 60px;height: 63px;background-position: -224px -118px;}
+.ico_equipt18 {width: 60px;height: 63px;background-position: -280px -118px;}
+.ico_equipt19 {width: 60px;height: 63px;background-position: 0px -176px;}
+.ico_equipt20 {width: 60px;height: 63px;background-position: -56px -176px;}
+.ico_equipt21 {width: 60px;height: 63px;background-position: -112px -176px;}
+.ico_equipt22 {width: 60px;height: 63px;background-position: -168px -176px;}
+.ico_equipt23 {width: 60px;height: 63px;background-position: -224px -176px;}
+.ico_equipt24 {width: 60px;height: 63px;background-position: -280px -176px;}
 .icon-equiptment {overflow: hidden;display: block;margin-left: 3px;background-image: url(/static/images/wedive_equiptment.png);background-repeat: no-repeat;-webkit-background-size: 335px 240px;background-size: 335px 240px;}
 
 .wedive-ul {width: 100%;list-style:none;display: inline-block;margin-bottom: 0;padding-left: 5px !important;padding-right: 5px !important;}
