@@ -322,19 +322,19 @@
                         <div>
                             <div class="ico_feature">
                                 <i class="ico_feature6 icon-service"></i>
-                                <div class="span_feature text-center">주차</div>
+                                <p class="span_feature text-center">주차</p>
                             </div>
                             <div class="ico_feature">
                                 <i class="ico_feature16 icon-service"></i>
-                                <div class="span_feature text-center">WIFI</div>
+                                <p class="span_feature text-center">WIFI</p>
                             </div>
                             <div class="ico_feature">
                                 <i class="ico_feature15 icon-service"></i>
-                                <div class="span_feature text-center">반려동물</div>
+                                <p class="span_feature text-center">반려동물</p>
                             </div>
                             <div class="ico_feature">
                                 <i class="ico_feature8 icon-service"></i>
-                                <div class="span_feature text-center">남녀화장실</div>
+                                <p class="span_feature text-center">남녀화장실</p>
                             </div>
                         </div>
                     </div>
@@ -405,69 +405,69 @@
                     <div class="mt-3">
                         <div class="ico_equipt">
                             <i class="ico_equipt1 icon-equiptment"></i>
-                            <div class="span_feature text-center">장비1</div>
+                            <p class="span_feature text-center">마스크</p>
                         </div>
                         <div class="ico_equipt">
                             <i class="ico_equipt2 icon-equiptment"></i>
-                            <div class="span_feature text-center">장비2</div>
+                            <p class="span_feature text-center">레귤레이터</p>
                         </div>
                         <div class="ico_equipt">
                             <i class="ico_equipt3 icon-equiptment"></i>
-                            <div class="span_feature text-center">장비3</div>
+                            <p class="span_feature text-center">모르겠음</p>
                         </div>
                         <div class="ico_equipt">
                             <i class="ico_equipt4 icon-equiptment"></i>
-                            <div class="span_feature text-center">장비4</div>
+                            <p class="span_feature text-center">수심계</p>
                         </div>
                         <div class="ico_equipt">
                             <i class="ico_equipt5 icon-equiptment"></i>
-                            <div class="span_feature text-center">장비4</div>
+                            <p class="span_feature text-center">나침반</p>
                         </div>
                         <div class="ico_equipt">
                             <i class="ico_equipt6 icon-equiptment"></i>
-                            <div class="span_feature text-center">장비4</div>
+                            <p class="span_feature text-center">수중 스쿠터</p>
                         </div>
 
                         <div class="ico_equipt">
                             <i class="ico_equipt7 icon-equiptment"></i>
-                            <div class="span_feature text-center">장비1</div>
+                            <p class="span_feature text-center">산소탱크</p>
                         </div>
                         <div class="ico_equipt">
                             <i class="ico_equipt8 icon-equiptment"></i>
-                            <div class="span_feature text-center">장비2</div>
+                            <p class="span_feature text-center">핀</p>
                         </div>
                         <div class="ico_equipt">
                             <i class="ico_equipt9 icon-equiptment"></i>
-                            <div class="span_feature text-center">장비3</div>
+                            <p class="span_feature text-center">구명조끼</p>
                         </div>
                         <div class="ico_equipt">
                             <i class="ico_equipt10 icon-equiptment"></i>
-                            <div class="span_feature text-center">장비4</div>
+                            <p class="span_feature text-center">나이프</p>
                         </div>
                         <div class="ico_equipt">
                             <i class="ico_equipt11 icon-equiptment"></i>
-                            <div class="span_feature text-center">장비4</div>
+                            <p class="span_feature text-center">스노쿨링</p>
                         </div>
                         <div class="ico_equipt">
                             <i class="ico_equipt12 icon-equiptment"></i>
-                            <div class="span_feature text-center">장비4</div>
+                            <p class="span_feature text-center">부츠</p>
                         </div>
 
                         <div class="ico_equipt">
                             <i class="ico_equipt13 icon-equiptment"></i>
-                            <div class="span_feature text-center">장비1</div>
+                            <p class="span_feature text-center">잠수복</p>
                         </div>
                         <div class="ico_equipt">
                             <i class="ico_equipt14 icon-equiptment"></i>
-                            <div class="span_feature text-center">장비2</div>
+                            <p class="span_feature text-center">잠수복</p>
                         </div>
                         <div class="ico_equipt">
                             <i class="ico_equipt15 icon-equiptment"></i>
-                            <div class="span_feature text-center">장비3</div>
+                            <p class="span_feature text-center">라이트</p>
                         </div>
                         <div class="ico_equipt">
                             <i class="ico_equipt16 icon-equiptment"></i>
-                            <div class="span_feature text-center">장비4</div>
+                            <p class="span_feature text-center">모름</p>
                         </div>
                         
                     </div>
