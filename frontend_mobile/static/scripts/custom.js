@@ -482,6 +482,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.querySelectorAll('.color-highlight').forEach((elem, index)=> {
                     elem.style.color = '#4879f0';
                 });
+                document.querySelectorAll('.tab-controls a').forEach((elem, index)=> {
+                    elem.style.color = '#1f1f1f';
+                });
                 for(let i = 0; i < toggleDark.length; i++){toggleDark[i].checked="checked"};
                 localStorage.setItem(pwaName+'-Theme', 'dark-mode');
             }
@@ -499,6 +502,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
                 document.querySelectorAll('.color-highlight').forEach((elem, index)=> {
                     elem.style.color = '#1d397c';
+                });
+                document.querySelectorAll('.tab-controls a').forEach((elem, index)=> {
+                    elem.style.color = 'white';
                 });
                 for(let i = 0; i < toggleDark.length; i++){toggleDark[i].checked=false};
                 localStorage.setItem(pwaName+'-Theme', 'light-mode');

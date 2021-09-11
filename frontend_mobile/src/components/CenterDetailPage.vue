@@ -260,8 +260,8 @@
                 
                 <ul class="gallery-filter-controls">
                     <li class="color-highlight gallery-filter-all" data-filter="all">전체보기</li>
-                    <li data-filter="2">다이빙</li>
-                    <li data-filter="1">교육</li>
+                    <li data-filter="1">다이빙</li>
+                    <li data-filter="2">교육</li>
                     <li data-filter="3">센터</li>
                 </ul>
             </div>
@@ -707,7 +707,7 @@ a {color: inherit;text-decoration: none;}
 .evaluation>span.info {padding-left: 11px;border-left: 1px solid #c4bbab;}
 .evaluation>span .icon_question {display: inline-block;position: relative;top: 1px;display: block;width: 18px;height: 18px;background-size: 18px 18px;background-repeat: no-repeat;background-image: url(/static/images/question.png);text-indent: -9999px;}
 
-.span_feature {width:66px;opacity: 62%;}
+.span_feature {width:66px;opacity: 62%; color: #2c3e50}
 .theme-dark .span_feature {color: white;}
 .ico_feature {width: 66px;display: inline-block}
 .ico_feature1 {width: 44px;height: 40px;background-position: 0px 0px;}
