@@ -319,7 +319,7 @@
                 <div data-bs-parent="#tab-group-2" class="collapse text-start px-2 show" id="tab-info">
                     <div class=" line-height-l pb-3 mt-2 light-border-bottom">
                         <strong class="small-title">시설 정보</strong>
-                        <div>
+                        <div class="text-start">
                             <div class="ico_feature">
                                 <i class="ico_feature6 icon-service"></i>
                                 <p class="span_feature text-center">주차</p>
@@ -402,7 +402,7 @@
                     </div>
                 </div>
                 <div data-bs-parent="#tab-group-2" class="collapse px-2" id="tab-eqpt">
-                    <div class="mt-3">
+                    <div class="mt-3 text-start">
                         <div class="ico_equipt">
                             <i class="ico_equipt1 icon-equiptment"></i>
                             <p class="span_feature text-center">마스크</p>
@@ -417,7 +417,7 @@
                         </div>
                         <div class="ico_equipt">
                             <i class="ico_equipt4 icon-equiptment"></i>
-                            <p class="span_feature text-center">수심계</p>
+                            <p class="span_feature text-center">다이버 워치</p>
                         </div>
                         <div class="ico_equipt">
                             <i class="ico_equipt5 icon-equiptment"></i>
@@ -455,11 +455,11 @@
 
                         <div class="ico_equipt">
                             <i class="ico_equipt13 icon-equiptment"></i>
-                            <p class="span_feature text-center">잠수복</p>
+                            <p class="span_feature text-center">잠수복 상의</p>
                         </div>
                         <div class="ico_equipt">
                             <i class="ico_equipt14 icon-equiptment"></i>
-                            <p class="span_feature text-center">잠수복</p>
+                            <p class="span_feature text-center">잠수복 하의</p>
                         </div>
                         <div class="ico_equipt">
                             <i class="ico_equipt15 icon-equiptment"></i>
@@ -468,6 +468,30 @@
                         <div class="ico_equipt">
                             <i class="ico_equipt16 icon-equiptment"></i>
                             <p class="span_feature text-center">모름</p>
+                        </div>
+                        <div class="ico_equipt">
+                            <i class="ico_equipt17 icon-equiptment"></i>
+                            <p class="span_feature text-center">카메라</p>
+                        </div>
+                        <div class="ico_equipt">
+                            <i class="ico_equipt19 icon-equiptment"></i>
+                            <p class="span_feature text-center">수심계</p>
+                        </div>
+                        <div class="ico_equipt">
+                            <i class="ico_equipt20 icon-equiptment"></i>
+                            <p class="span_feature text-center">게이지</p>
+                        </div>
+                        <div class="ico_equipt">
+                            <i class="ico_equipt21 icon-equiptment"></i>
+                            <p class="span_feature text-center">잠수복</p>
+                        </div>
+                        <div class="ico_equipt">
+                            <i class="ico_equipt22 icon-equiptment"></i>
+                            <p class="span_feature text-center">모름</p>
+                        </div>
+                        <div class="ico_equipt">
+                            <i class="ico_equipt23 icon-equiptment"></i>
+                            <p class="span_feature text-center">유아장비</p>
                         </div>
                         
                     </div>
@@ -750,6 +774,12 @@ a {color: inherit;text-decoration: none;}
 .ico_equipt16 {width: 60px;height: 63px;background-position: -168px -120px;}
 .ico_equipt17 {width: 60px;height: 63px;background-position: -224px -120px;}
 .ico_equipt18 {width: 60px;height: 63px;background-position: -280px -120px;}
+.ico_equipt19 {width: 60px;height: 63px;background-position: 0px -180px;}
+.ico_equipt20 {width: 60px;height: 63px;background-position: -56px -180px;}
+.ico_equipt21 {width: 60px;height: 63px;background-position: -112px -180px;}
+.ico_equipt22 {width: 60px;height: 63px;background-position: -168px -180px;}
+.ico_equipt23 {width: 60px;height: 63px;background-position: -224px -180px;}
+.ico_equipt24 {width: 60px;height: 63px;background-position: -280px -180px;}
 .icon-equiptment {overflow: hidden;display: block;margin-left: 3px;background-image: url(/static/images/wedive_equiptment.png);background-repeat: no-repeat;-webkit-background-size: 335px 240px;background-size: 335px 240px;}
 
 .wedive-ul {width: 100%;list-style:none;display: inline-block;margin-bottom: 0;padding-left: 5px !important;padding-right: 5px !important;}
