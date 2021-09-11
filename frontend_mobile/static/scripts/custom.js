@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //Global Variables
     let isPWA = false;  // Enables or disables the service worker and PWA
     let isAJAX = true; // AJAX transitions. Requires local server or server
-    var pwaName = "Appkit"; //Local Storage Names for PWA
+    var pwaName = "wedive"; //Local Storage Names for PWA
     var pwaRemind = 1; //Days to re-remind to add to home
     var pwaNoCache = false; //Requires server and HTTPS/SSL. Will clear cache with each visit
 
@@ -21,6 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //Place all your custom Javascript functions and plugin calls below this line
     function init_template(){
+        if (localStorage.hasOwnProperty('wedive-Theme') == false)
+            localStorage['wedive-Theme']= "light-mode";
         //Caching Global Variables
         var i, e, el; //https://www.w3schools.com/js/js_performance.asp
 
@@ -330,13 +332,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 }));
             }
         }
+        activateMenus();
         menuFunction();
 
         function activateMenus(){
             const menuActive = document.querySelectorAll('[data-menu-active]')[0];
             if(menuActive){
                 var selectedMenu = menuActive.getAttribute('data-menu-active');
-                //console.log(selectedMenu)
                 document.querySelectorAll('#'+selectedMenu)[0].classList.add('active-nav');
             }
         }
@@ -468,12 +470,36 @@ document.addEventListener('DOMContentLoaded', () => {
             function activateDarkMode(){
                 document.body.classList.add('theme-dark');
                 document.body.classList.remove('theme-light', 'detect-theme');
+                document.querySelectorAll('.logo-image').forEach((elem, index)=> {
+                    elem.setAttribute("src", "/static/images/logo-light.svg");
+                });
+                document.querySelectorAll('.footer-bar-6 a img').forEach((elem, index)=> {
+                    elem.style.filter = 'invert(100%)';
+                });
+                document.querySelectorAll('.ext-img').forEach((elem, index)=> {
+                    elem.style.filter = 'invert(100%)';
+                });
+                document.querySelectorAll('.color-highlight').forEach((elem, index)=> {
+                    elem.style.color = '#4879f0';
+                });
                 for(let i = 0; i < toggleDark.length; i++){toggleDark[i].checked="checked"};
                 localStorage.setItem(pwaName+'-Theme', 'dark-mode');
             }
             function activateLightMode(){
                 document.body.classList.add('theme-light');
                 document.body.classList.remove('theme-dark','detect-theme');
+                document.querySelectorAll('.logo-image').forEach((elem, index)=> {
+                    elem.setAttribute("src", "/static/images/logo-dark.svg");
+                });
+                document.querySelectorAll('.footer-bar-6 a img').forEach((elem, index)=> {
+                    elem.style.filter = 'invert(0%)';
+                });
+                document.querySelectorAll('.ext-img').forEach((elem, index)=> {
+                    elem.style.filter = 'invert(0%)';
+                });
+                document.querySelectorAll('.color-highlight').forEach((elem, index)=> {
+                    elem.style.color = '#1d397c';
+                });
                 for(let i = 0; i < toggleDark.length; i++){toggleDark[i].checked=false};
                 localStorage.setItem(pwaName+'-Theme', 'light-mode');
             }
@@ -1224,9 +1250,9 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(data => {
                 setTimeout(function(){
                     if(dataMenuLoad[dataMenuLoad.length-1] === e){
+                        activateMenus();
                         menuFunction();
                         checkDarkMode();
-                        activateMenus();
                         shareLinks();
                         highlightColors();
                         selectHighlight();

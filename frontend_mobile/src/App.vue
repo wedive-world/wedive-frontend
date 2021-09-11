@@ -5,7 +5,7 @@
       <div id="page">
           
           <div class="header header-auto-show header-fixed header-logo-center">
-              <a href="index.html" class="header-title"><img src="/static/images/logo-dark.svg" height="38" /></a>
+              <a href="index.html" class="header-title"><img class="logo-image" src="/static/images/logo-dark.svg" height="38" /></a>
               <a href="#" data-menu="menu-main" class="header-icon header-icon-1"><i class="fas fa-bars"></i></a>
               <a href="#" data-toggle-theme class="header-icon header-icon-4 show-on-theme-dark"><i class="fas fa-sun"></i></a>
               <a href="#" data-toggle-theme class="header-icon header-icon-4 show-on-theme-light"><i class="fas fa-moon"></i></a>
@@ -16,13 +16,13 @@
           <div id="footer-bar" class="footer-bar-6">
               <a href="index-components.html"><img src="/static/images/menu1.png" height="22" style="margin-bottom:5px;opacity: 65%;" /><span>버디찾기</span></a>
               <a href="index-pages.html"><img src="/static/images/menu2.png" height="22" style="margin-bottom:5px;opacity: 65%;" /><span>강의찾기</span></a>
-              <a href="index.html" class="circle-nav active-nav"><i class="fa fa-home"></i><span>Home</span></a>
+              <a href="index.html" class="circle-nav" id="nav-welcome"><i class="fa fa-home"></i><span>Home</span></a>
               <a href="index-projects.html"><img src="/static/images/menu3.png" height="22" style="margin-bottom:5px;opacity: 65%;" /><span>센터찾기</span></a>
               <a href="#" data-menu="menu-main"><img src="/static/images/menu4.png" height="22" style="margin-bottom:5px;opacity: 65%;" /><span>채팅</span></a>
           </div>
               
           <div class="page-title page-title-fixed">
-          <img src="/static/images/logo-dark.svg" style="padding-top: 3px;margin-left: 15px;margin-right: auto;" height="41"/>
+          <img class="logo-image" src="/static/images/logo-dark.svg" style="padding-top: 3px;margin-left: 15px;margin-right: auto;" height="41"/>
               <a href="#" class="page-title-icon shadow-xl bg-theme color-theme" data-menu="menu-share"><i class="fa fa-share-alt"></i></a>
               <a href="#" class="page-title-icon shadow-xl bg-theme color-theme show-on-theme-light" data-toggle-theme><i class="fa fa-moon"></i></a>
               <a href="#" class="page-title-icon shadow-xl bg-theme color-theme show-on-theme-dark" data-toggle-theme><i class="fa fa-lightbulb color-yellow-dark"></i></a>
@@ -31,21 +31,11 @@
           <div class="page-title-clear"></div>
 
           <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-welcome" data-menu-load=""></div>    
-          <div id="menu-share" class="menu menu-box-bottom rounded-m"  data-menu-load="" data-menu-height="370"> </div> 
-          <div id="menu-colors" class="menu menu-box-bottom rounded-m" data-menu-load="" data-menu-height="480"></div>
-
           
-          <div class="page-content">
-
-              <router-view/>
-
-              
-          </div>
-          <!-- End of Page Content--> 
-          <!-- All Menus, Action Sheets, Modals, Notifications, Toasts, Snackbars get Placed outside the <div class="page-content"> -->
-
+          <router-view/>
+          
           <!-- Menu Share -->
-          <div id="menu-share" class="menu menu-box-bottom menu-box-detached">
+          <div id="menu-share" class="menu menu-box-bottom rounded-m">
               <div class="menu-title mt-n1"><h1>Share the Love</h1><p class="color-highlight">Just Tap the Social Icon. We'll add the Link</p><a href="#" class="close-menu"><i class="fa fa-times"></i></a></div>
               <div class="content mb-0">
                   <div class="divider mb-0"></div>
