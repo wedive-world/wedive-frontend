@@ -17,7 +17,8 @@
                     <div class="" style="padding-right: 80px;">
                         <h4>버블탱크 스쿠버다이빙</h4>
                         <p class="pb-0 mb-0 line-height-m ellipsis color-secondary">제주 남부에 위치한 PADI 5star 다이빙센터</p>
-                        <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i> 3.8
+                        <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
+                            &nbsp;<span>3.8</span>
                             &nbsp;<font class="color-gray-light">|</font>&nbsp;
                             <img data-v-d37bf336="" src="/static/images/logo_padi.svg" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
                             &nbsp;<font class="color-gray-light">|</font>&nbsp;
@@ -41,6 +42,42 @@
 export default {
   name: 'HelloWorld',
   mounted() {
+    try {
+        var doc = this.document;
+        // If there's a hash, or addEventListener is undefined, stop here
+        if( !location.hash && this.addEventListener ){
+            
+            //scroll to 1
+            this.scrollTo( 0, 1 );
+            var scrollTop = 1,
+                getScrollTop = function(){
+                    return this.pageYOffset || doc.compatMode === "CSS1Compat" && doc.documentElement.scrollTop || doc.body.scrollTop || 0;
+                },
+            
+                //reset to 0 on bodyready, if needed
+                bodycheck = setInterval(function(){
+                    if( doc.body ){
+                        clearInterval( bodycheck );
+                        scrollTop = getScrollTop();
+                        this.scrollTo( 0, scrollTop === 1 ? 0 : 1 );
+                    }	
+                }, 15 );
+            
+            this.addEventListener( "load", function(){
+                setTimeout(function(){
+                    //at load, if user hasn't scrolled more than 20 or so...
+                    if( getScrollTop() < 20 ){
+                        //reset to hide addr bar at onload
+                        this.scrollTo( 0, scrollTop === 1 ? 0 : 1 );
+                    }
+                }, 0);
+            }, false );
+        }
+    } catch(e) {
+        console.log(e);
+    }
+    
+
     document.getElementById("page-back").classList.remove("hide");
     document.getElementById("footer-bar").classList.add("hide");
 
@@ -83,6 +120,15 @@ export default {
         
         
     };
+    $(window).on('resize touchmove', function () {
+        const actualHeight = window.innerHeight;
+        const elementHeight = document.getElementById('control-height').clientHeight;
+        const barHeight = elementHeight - actualHeight;
+
+        $("#map").css("height", "calc(100vh - 58px - "+barHeight+"px)");
+    });
+    
+
   },
   created() {
     
