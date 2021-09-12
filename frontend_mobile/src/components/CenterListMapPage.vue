@@ -1,8 +1,8 @@
 <template>
-  <div class="">
+  <div class="" style="height: 100%;">
     <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-center" data-menu-load=""></div>    
-    <div class="page-content pb-0">
-        <div id="map" style="height: calc(100vh - 58px);"></div>
+    <div class="page-content pb-0" style="height: 100%;">
+        <div id="map" style="height: 100%;position: inherit !important;"></div>
 
         <div class="map-filter">
             <a href="" class="btn btn-sm rounded-0 bg-secondary" style="padding: 5px 10px !important;margin-right: -2px;border-radius: 20px 0px 0px 20px !important;border: 1px solid #00827c;">스쿠버다이빙</a>
@@ -42,42 +42,6 @@
 export default {
   name: 'HelloWorld',
   mounted() {
-    try {
-        var doc = this.document;
-        // If there's a hash, or addEventListener is undefined, stop here
-        if( !location.hash && this.addEventListener ){
-            
-            //scroll to 1
-            this.scrollTo( 0, 1 );
-            var scrollTop = 1,
-                getScrollTop = function(){
-                    return this.pageYOffset || doc.compatMode === "CSS1Compat" && doc.documentElement.scrollTop || doc.body.scrollTop || 0;
-                },
-            
-                //reset to 0 on bodyready, if needed
-                bodycheck = setInterval(function(){
-                    if( doc.body ){
-                        clearInterval( bodycheck );
-                        scrollTop = getScrollTop();
-                        this.scrollTo( 0, scrollTop === 1 ? 0 : 1 );
-                    }	
-                }, 15 );
-            
-            this.addEventListener( "load", function(){
-                setTimeout(function(){
-                    //at load, if user hasn't scrolled more than 20 or so...
-                    if( getScrollTop() < 20 ){
-                        //reset to hide addr bar at onload
-                        this.scrollTo( 0, scrollTop === 1 ? 0 : 1 );
-                    }
-                }, 0);
-            }, false );
-        }
-    } catch(e) {
-        console.log(e);
-    }
-    
-
     document.getElementById("page-back").classList.remove("hide");
     document.getElementById("footer-bar").classList.add("hide");
 
@@ -120,14 +84,17 @@ export default {
         
         
     };
-    $(window).on('resize touchmove', function () {
-        const actualHeight = window.innerHeight;
-        const elementHeight = document.getElementById('control-height').clientHeight;
-        const barHeight = elementHeight - actualHeight;
-
-        $("#map").css("height", "calc(100vh - 58px - "+barHeight+"px)");
-    });
-    
+    $(".page-title-wrapper").css("background-color", "#eef2f1");
+    $(".page-title-wrapper").css("height", "58px");
+    $(".page-title-wrapper").css("width", "100%");
+    $(".page-title-wrapper").css("z-index", "980");
+    $(".page-title-wrapper").css("position", "absolute");
+    $(".page-title-fixed").css("position", "absolute");
+    $(".page-title-fixed").css("z-index", "990");
+    $(".page-title-clear").addClass("hide");
+    var body = document.body, html = document.documentElement;
+    var height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+    document.getElementById('map').style.height = height + 'px';
 
   },
   created() {

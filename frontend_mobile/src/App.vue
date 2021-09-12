@@ -19,7 +19,9 @@
               <a href="index-projects.html" id="nav-center"><img src="/static/images/menu3.png" height="22" style="margin-bottom:5px;opacity: 65%;" /><span>센터찾기</span></a>
               <a href="#" data-menu="menu-main"><img src="/static/images/menu4.png" height="22" style="margin-bottom:5px;opacity: 65%;" /><span>채팅</span></a>
           </div>
-              
+        
+          <div class="page-title-wrapper">
+          </div>
           <div class="page-title page-title-fixed ps-3">
             <i class="fas fa-arrow-left font-24 me-2 pt-2 hide" style="opacity: 0.6;" id="page-back"></i>
             <img class="logo-image mt-n2" style="margin-right: auto;" src="/static/images/logo-dark.svg" height="46"/>
