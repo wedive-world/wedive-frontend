@@ -13,23 +13,22 @@
 
           
           <div id="footer-bar" class="footer-bar-6">
-              <a href="index-components.html"><img src="/static/images/menu1.png" height="22" style="margin-bottom:5px;opacity: 65%;" /><span>버디찾기</span></a>
-              <a href="index-pages.html"><img src="/static/images/menu2.png" height="22" style="margin-bottom:5px;opacity: 65%;" /><span>강의찾기</span></a>
+              <a href="index-components.html" id="nav-buddy"><img src="/static/images/menu1.png" height="22" style="margin-bottom:5px;opacity: 65%;" /><span>버디찾기</span></a>
+              <a href="index-pages.html" id="nav-training"><img src="/static/images/menu2.png" height="22" style="margin-bottom:5px;opacity: 65%;" /><span>강의찾기</span></a>
               <a href="index.html" class="circle-nav" id="nav-welcome"><i class="fa fa-home"></i><span>Home</span></a>
-              <a href="index-projects.html"><img src="/static/images/menu3.png" height="22" style="margin-bottom:5px;opacity: 65%;" /><span>센터찾기</span></a>
+              <a href="index-projects.html" id="nav-center"><img src="/static/images/menu3.png" height="22" style="margin-bottom:5px;opacity: 65%;" /><span>센터찾기</span></a>
               <a href="#" data-menu="menu-main"><img src="/static/images/menu4.png" height="22" style="margin-bottom:5px;opacity: 65%;" /><span>채팅</span></a>
           </div>
               
-          <div class="page-title page-title-fixed">
-          <img class="logo-image" src="/static/images/logo-dark.svg" style="padding-top: 3px;margin-left: 15px;margin-right: auto;" height="41"/>
-              <a href="#" class="page-title-icon shadow-xl bg-theme color-theme show-on-theme-light" data-toggle-theme><i class="fa fa-moon"></i></a>
-              <a href="#" class="page-title-icon shadow-xl bg-theme color-theme show-on-theme-dark" data-toggle-theme><i class="fa fa-sun"></i></a>
-              <a href="#" class="page-title-icon shadow-xl bg-theme color-theme" data-menu="menu-main"><i class="fa fa-bars"></i></a>
+          <div class="page-title page-title-fixed ps-3">
+            <i class="fas fa-arrow-left font-24 me-2 pt-2 hide" style="opacity: 0.6;" id="page-back"></i>
+            <img class="logo-image mt-n2" style="margin-right: auto;" src="/static/images/logo-dark.svg" height="46"/>
+            <a href="#" class="page-title-icon shadow-xl bg-theme color-theme show-on-theme-light" data-toggle-theme><i class="fa fa-moon"></i></a>
+            <a href="#" class="page-title-icon shadow-xl bg-theme color-theme show-on-theme-dark" data-toggle-theme><i class="fa fa-sun"></i></a>
+            <a href="#" class="page-title-icon shadow-xl bg-theme color-theme" data-menu="menu-main"><i class="fa fa-bars"></i></a>
           </div>
           <div class="page-title-clear"></div>
 
-          <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-welcome" data-menu-load=""></div>    
-          
           <router-view/>
           
           

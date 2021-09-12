@@ -1,5 +1,6 @@
 <template>
   <div class="">
+    <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-center" data-menu-load=""></div>    
     <div class="page-content">
         <div class="splide single-slider cover-slider slider-no-arrows slider-has-dots" id="cover-slider-1" data-card-height="250">
             <div class="splide__track">
@@ -708,8 +709,6 @@
 export default {
   name: 'HelloWorld',
   mounted() {
-  },
-  created() {
     let script = document.createElement('script');
     script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCWu8Fw-h-f1t8Sp3I7R3l_Ukr24HunXQM';
     document.body.appendChild(script);
@@ -737,6 +736,9 @@ export default {
         
     };
   },
+  created() {
+    
+  },
   data () {
     return {
         map: null,
@@ -753,8 +755,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-a {color: inherit;text-decoration: none;}
 .light-border-bottom {border-bottom: 1px solid #dee2e6;}
 .evaluation {margin: 6px 6px 0px 6px; background-color: rgba(196,187,171,.2);justify-content: space-around;border-radius: 5px;padding: 8px 8px 8px 0;}
 .evaluation>span.info {padding-left: 11px;border-left: 1px solid #c4bbab;}

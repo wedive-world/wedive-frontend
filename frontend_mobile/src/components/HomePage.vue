@@ -1,5 +1,6 @@
 <template>
-  <div class="hello">
+  <div class="">
+    <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-home" data-menu-load=""></div>
     <div class="splide double-slider visible-slider slider-no-dots" id="double-slider-1">
       <div class="splide__track">
           <div class="splide__list">
