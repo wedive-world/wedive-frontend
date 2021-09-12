@@ -4,33 +4,34 @@
     <div class="page-content pb-0" style="height: 100%;">
         <div id="map" style="height: 100%;position: inherit !important;"></div>
 
-        <div class="map-filter">
-            <a href="" class="btn btn-sm rounded-0 bg-secondary" style="padding: 5px 10px !important;margin-right: -2px;border-radius: 20px 0px 0px 20px !important;border: 1px solid #00827c;">스쿠버다이빙</a>
-            <a href="" class="btn btn-sm rounded-0 bg-teal-light" style="padding: 5px 10px !important;margin-left: -3px;border-radius: 0px 20px 20px 0px !important;border: 1px solid #00827c;">프리다이빙</a>
+        
+        <div class="map-filter text-center">
+            <a id="btn-filter1" class="btn btn-sm rounded-0 bg-highlight">스쿠버다이빙</a>
+            <a id="btn-filter2" class="btn btn-sm rounded-0 bg-highlight-light">프리다이빙</a>
         </div>
         <div class="map-box hide">
-            <div class="bx">
-                <div class="justify-content-center mb-0 text-start">
-                    <div class="" style="float: right;position: relative;width: 75px; height:75px;">
-                        <img id="map_box_shop_img" src="/static/images/shop1/shop/test3.jpg" class="rounded-s mx-auto" width="75" height="75" style="object-fit: cover;">
-                    </div>
-                    <div class="" style="padding-right: 80px;">
-                        <h4 id="map_box_shop_name"></h4>
-                        <p id="map_box_shop_desc" class="pb-0 mb-0 line-height-m ellipsis color-secondary"></p>
-                        <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
-                            &nbsp;<span id="map_box_shop_star"></span>
-                            &nbsp;<font class="color-gray-light">|</font>&nbsp;
-                            <img id="map_box_shop_fed" data-v-d37bf336="" src="/static/images/logo_padi.svg" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
-                            &nbsp;<font class="color-gray-light">|</font>&nbsp;
-                            <span id="map_box_shop_price"></span>
-                        </p>
-
-                        <p data-v-6152c010="" class="pb-0 mb-0 mt-n1" style="color: #999;">
-                            <i class="fas fa-quote-left color-gray-light me-2"></i><span id="map_box_shop_eval"></span><i class="fas fa-quote-right color-gray-light ms-2"></i>
-                        </p>
+            <a href="/center">
+                <div class="bx">
+                    <div class="justify-content-center mb-0 text-start">
+                        <div class="" style="float: left;position: relative;width: 95px; height:95px;">
+                            <img id="map_box_shop_img" src="" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;">
+                        </div>
+                        
+                        <div class="" style="padding-left: 110px;">
+                            <h4 id="map_box_shop_name"></h4>
+                            <p id="map_box_shop_desc" class="pb-0 mb-0 line-height-m ellipsis"></p>
+                            <p id="map_box_shop_feature" class="pb-0 mb-0 mt-n1 ellipsis color-gray-light-mid"></p>
+                            <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
+                                &nbsp;<span id="map_box_shop_star"></span>
+                                &nbsp;<font class="color-gray-light">|</font>&nbsp;
+                                <img id="map_box_shop_fed" src="/static/images/logo_padi.svg" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
+                                &nbsp;<font class="color-gray-light">|</font>&nbsp;
+                                <span id="map_box_shop_price"></span>
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
 
@@ -49,26 +50,110 @@ export default {
     script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCWu8Fw-h-f1t8Sp3I7R3l_Ukr24HunXQM';
     document.body.appendChild(script);
     script.onload = () => {
+        const night_style = [
+            { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
+            { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
+            { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
+            {
+                featureType: "administrative.locality",
+                elementType: "labels.text.fill",
+                stylers: [{ color: "#d59563" }],
+            },
+            {
+                featureType: "poi",
+                elementType: "labels.text.fill",
+                stylers: [{ color: "#d59563" }],
+            },
+            {
+                featureType: "poi.park",
+                elementType: "geometry",
+                stylers: [{ color: "#263c3f" }],
+            },
+            {
+                featureType: "poi.park",
+                elementType: "labels.text.fill",
+                stylers: [{ color: "#6b9a76" }],
+            },
+            {
+                featureType: "road",
+                elementType: "geometry",
+                stylers: [{ color: "#38414e" }],
+            },
+            {
+                featureType: "road",
+                elementType: "geometry.stroke",
+                stylers: [{ color: "#212a37" }],
+            },
+            {
+                featureType: "road",
+                elementType: "labels.text.fill",
+                stylers: [{ color: "#9ca5b3" }],
+            },
+            {
+                featureType: "road.highway",
+                elementType: "geometry",
+                stylers: [{ color: "#746855" }],
+            },
+            {
+                featureType: "road.highway",
+                elementType: "geometry.stroke",
+                stylers: [{ color: "#1f2835" }],
+            },
+            {
+                featureType: "road.highway",
+                elementType: "labels.text.fill",
+                stylers: [{ color: "#f3d19c" }],
+            },
+            {
+                featureType: "transit",
+                elementType: "geometry",
+                stylers: [{ color: "#2f3948" }],
+            },
+            {
+                featureType: "transit.station",
+                elementType: "labels.text.fill",
+                stylers: [{ color: "#d59563" }],
+            },
+            {
+                featureType: "water",
+                elementType: "geometry",
+                stylers: [{ color: "#17263c" }],
+            },
+            {
+                featureType: "water",
+                elementType: "labels.text.fill",
+                stylers: [{ color: "#515c6d" }],
+            },
+            {
+                featureType: "water",
+                elementType: "labels.text.stroke",
+                stylers: [{ color: "#17263c" }],
+            },
+            ];
+
+        const map_style = (localStorage['wedive-Theme'] == 'light-mode') ? [] : night_style;
+
         this.map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 33.24134444312815, lng: 126.56484940647604},
             zoom: 16,
             mapTypeControl: false,
             streetViewControl: false,
             fullscreenControl: false,
-            zoomControl: false
+            zoomControl: false,
+            styles: map_style
         });
 
         var center_list = [
-            {title: "버블탱크 스쿠버다이빙", desc: "제주 남부에 위치한 PADI 5star 다이빙센터", star: 3.8, price_index: 2, evaluation: "서비스가 훌륭함", img: '/static/images/shop1/diving/test1.jpg', position: {lat: 33.24134444312815, lng: 126.56484940647604}},
-            {title: "다이브 투게더리조트", desc: "한줄설명1", star: 4.8, price_index: 2, evaluation: "교육이 훌륭함", img: '/static/images/shop1/diving/test2.jpg', position: {lat: 33.241633952501715, lng: 126.56456092676112}},
-            {title: "태평양 다이빙스쿨", desc: "블라블라", star: 3.1, price_index: 3, evaluation: "사진을 잘찍음", img: '/static/images/shop1/diving/test3.jpg', position: {lat: 33.24030993345755, lng: 126.56472966827262}},
-            {title: "쿨다이브", desc: "뭐라적지", star: 2.8, price_index: 2, evaluation: "장비가 평가좋음", img: '/static/images/shop1/diving/test4.jpg', position: {lat: 33.241266401158086, lng: 126.56278906254684}},
-            {title: "스플래시 리조트", desc: "이곳에 설명이", star: 4.2, price_index: 4, evaluation: "숙소가 훌륭함", img: '/static/images/shop1/diving/test5.jpg', position: {lat: 33.24245948959435, lng: 126.5633415608148}},
-            {title: "제주 블루샤크다이빙", desc: "ㅁㄴㅇㄹㄴㄷㅁㅈㄷㄻㄴㄷㄹㄷㅁㄴㄻㄴㄷㄻㄴㄷㄻㄴㄷㄹ", star: 3.9, price_index: 2, evaluation: "잘생긴 강사", img: '/static/images/shop1/diving/test6.jpg', position: {lat: 33.24380026488202, lng: 126.56288927674295}},
-            {title: "잠수타기 다이브클럽", desc: "ㅁㄷㄴㄻㄴㄷㄻㄴㄷㄻㄴㄷㄻㄴㄷㄻㄴㄹㄷㅁㄷㄴㄻㄷㄴㄻㄴㄻㄴㄷㄹㄷㅁㄴㄹ", star: 4.1, price_index: 2, evaluation: "서비스가 훌륭함", img: '/static/images/shop1/diving/test7.jpg', position: {lat: 33.24194725508795, lng: 126.5616725869943}},
-            {title: "홀리데이 다이빙 코리아", desc: "히히", star: 4.2, price_index: 3, evaluation: "저렴한 가격", img: '/static/images/shop1/diving/test8.jpg', position: {lat: 33.24088391439924, lng: 126.5628795809329}},
-            {title: "천지연40", desc: "헬로", star: 4.3, price_index: 2, evaluation: "인스타 감성사진", img: '/static/images/shop1/diving/test9.jpg', position: {lat: 33.242485636047576, lng: 126.5623109526933}},
-            {title: "언더더씨 스쿠버다이빙", desc: "방가워", star: 4.7, price_index: 2, evaluation: "분위기가 훌륭함", img: '/static/images/shop1/diving/test10.jpg', position: {lat: 33.244246055136834, lng: 126.5671937429616}}
+            {title: "버블탱크 스쿠버다이빙", desc: "제주 남부에 위치한 PADI 5star 다이빙센터", star: 3.8, price_index: 2, feature: "덕다이빙, 케이브, 난파선, 드리프트", img: '/static/images/shop1/diving/test1.jpg', position: {lat: 33.24134444312815, lng: 126.56484940647604}},
+            {title: "다이브 투게더리조트", desc: "한줄설명1", star: 4.8, price_index: 2, feature: "덕다이빙, 케이브", img: '/static/images/shop1/diving/test2.jpg', position: {lat: 33.241633952501715, lng: 126.56456092676112}},
+            {title: "태평양 다이빙스쿨", desc: "블라블라", star: 3.1, price_index: 3, feature: "난파선, 드리프트", img: '/static/images/shop1/diving/test3.jpg', position: {lat: 33.24030993345755, lng: 126.56472966827262}},
+            {title: "쿨다이브", desc: "뭐라적지", star: 2.8, price_index: 2, feature: "드리프트", img: '/static/images/shop1/diving/test4.jpg', position: {lat: 33.241266401158086, lng: 126.56278906254684}},
+            {title: "스플래시 리조트", desc: "이곳에 설명이", star: 4.2, price_index: 4, feature: "난파선, 드리프트", img: '/static/images/shop1/diving/test5.jpg', position: {lat: 33.24245948959435, lng: 126.5633415608148}},
+            {title: "제주 블루샤크다이빙", desc: "ㅁㄴㅇㄹㄴㄷㅁㅈㄷㄻㄴㄷㄹㄷㅁㄴㄻㄴㄷㄻㄴㄷㄻㄴㄷㄹ", star: 3.9, price_index: 2, feature: "난파선", img: '/static/images/shop1/diving/test6.jpg', position: {lat: 33.24380026488202, lng: 126.56288927674295}},
+            {title: "잠수타기 다이브클럽", desc: "ㅁㄷㄴㄻㄴㄷㄻㄴㄷㄻㄴㄷㄻㄴㄷㄻㄴㄹㄷㅁㄷㄴㄻㄷㄴㄻㄴㄻㄴㄷㄹㄷㅁㄴㄹ", star: 4.1, price_index: 2, feature: "난파선, 드리프트", img: '/static/images/shop1/diving/test7.jpg', position: {lat: 33.24194725508795, lng: 126.5616725869943}},
+            {title: "홀리데이 다이빙 코리아", desc: "히히", star: 4.2, price_index: 3, feature: "덕다이빙, 케이브, 난파선, 드리프트", img: '/static/images/shop1/diving/test8.jpg', position: {lat: 33.24088391439924, lng: 126.5628795809329}},
+            {title: "천지연40", desc: "헬로", star: 4.3, price_index: 2, feature: "난파선, 드리프트", img: '/static/images/shop1/diving/test9.jpg', position: {lat: 33.242485636047576, lng: 126.5623109526933}},
+            {title: "언더더씨 스쿠버다이빙", desc: "방가워", star: 4.7, price_index: 2, feature: "덕다이빙, 케이브", img: '/static/images/shop1/diving/test10.jpg', position: {lat: 33.244246055136834, lng: 126.5671937429616}}
         ];
 
 
@@ -79,7 +164,7 @@ export default {
             const desc = center_list[i].desc;
             const star = center_list[i].star;
             const price_index = center_list[i].price_index;
-            const evaluation = center_list[i].evaluation;
+            const feature = center_list[i].feature;
             const img = center_list[i].img;
 
             const marker_shop = new google.maps.Marker({
@@ -104,7 +189,7 @@ export default {
                 //map_box_shop_fed
                 
                 $("#map_box_shop_price").text("￦".repeat(price_index));
-                $("#map_box_shop_eval").text(evaluation);
+                $("#map_box_shop_feature").text(feature);
                 $("#map_box_shop_img").attr("src", img);
                 
                 
@@ -145,7 +230,7 @@ export default {
         map: null,
         marker_list: [],
     }
-  }, method: {
+  }, methods: {
       
   }
 
@@ -159,6 +244,11 @@ export default {
 <style scoped>
 .map-filter {position: absolute;right: 0;bottom: 30px;left: 0;}
 .map-box {position: absolute;right: 0;bottom: 21px;left: 0;border: 1px solid rgba(0,0,0,.1);margin: 5px 5px 4px;}
-.bx {background-color: rgba(255,255,255,.95);padding: 15px 14px;min-height: 105px;}
-.ellipsis{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.bx {background-color: rgba(255,255,255);padding: 15px 14px;min-height: 105px;}
+#btn-filter1 {padding: 5px 10px !important;margin-right: -2px;border-radius: 20px 0px 0px 20px !important;border: 1px solid #091a42;}
+#btn-filter1:before {clear: both;content: "";display: inline-block;margin-right: 6px;width: 14px;height: 14px;background-size: 14px 14px;background-repeat: no-repeat;background-image: url(/static/images/icon_scubadiving.png);text-indent: -9999px;vertical-align: middle;}
+#btn-filter2 {padding: 5px 10px !important;margin-left: -3px;border-radius: 0px 20px 20px 0px !important;border: 1px solid #091a42;}
+#btn-filter2:before {clear: both;content: "";display: inline-block;margin-right: 6px;width: 14px;height: 14px;background-size: 14px 14px;background-repeat: no-repeat;background-image: url(/static/images/icon_freediving.png);text-indent: -9999px;vertical-align: middle;}
+
+
 </style>

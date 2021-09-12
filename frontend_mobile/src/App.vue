@@ -1,30 +1,31 @@
 <template>
-  <div id="app">
+  <div>
     <div id="preloader"><div class="spinner-border color-highlight" role="status"></div></div>
     
       <div id="page">
           
           <div class="header header-auto-show header-fixed header-logo-center">
-              <a href="index.html" class="header-title"><img class="logo-image" src="/static/images/logo-dark.svg" height="38" /></a>
+              <a class="header-title" v-on:click="goHome()"><img class="logo-image" src="/static/images/logo-dark.svg" height="38" /></a>
               <a href="#" data-menu="menu-main" class="header-icon header-icon-1"><i class="fas fa-bars"></i></a>
               <a href="#" data-toggle-theme class="header-icon header-icon-4 show-on-theme-dark"><i class="fas fa-sun"></i></a>
               <a href="#" data-toggle-theme class="header-icon header-icon-4 show-on-theme-light"><i class="fas fa-moon"></i></a>
           </div>
 
           
-          <div id="footer-bar" class="footer-bar-6">
-              <a href="index-components.html" id="nav-buddy"><img src="/static/images/menu1.png" height="22" style="margin-bottom:5px;opacity: 65%;" /><span>버디찾기</span></a>
-              <a href="index-pages.html" id="nav-training"><img src="/static/images/menu2.png" height="22" style="margin-bottom:5px;opacity: 65%;" /><span>강의찾기</span></a>
-              <a href="index.html" class="circle-nav" id="nav-welcome"><i class="fa fa-home"></i><span>Home</span></a>
-              <a href="index-projects.html" id="nav-center"><img src="/static/images/menu3.png" height="22" style="margin-bottom:5px;opacity: 65%;" /><span>센터찾기</span></a>
-              <a href="#" data-menu="menu-main"><img src="/static/images/menu4.png" height="22" style="margin-bottom:5px;opacity: 65%;" /><span>채팅</span></a>
+          <div id="footer-bar" class="footer-bar">
+            <a href="/" id="nav-home"><div class="menu-ico menu-ico0"></div><span>홈</span></a>
+            <a href="#" id="nav-buddy"><div class="menu-ico menu-ico1"></div><span>버디찾기</span></a>
+            <a href="#" id="nav-training"><div class="menu-ico menu-ico2"></div><span>강의찾기</span></a>
+            <a href="/center_list" id="nav-center"><div class="menu-ico menu-ico3"></div><span>센터찾기</span></a>
+            <a href="#" id="nav-chat"><div class="menu-ico menu-ico4"></div><span>채팅</span></a>
           </div>
         
+
           <div class="page-title-wrapper">
           </div>
           <div class="page-title page-title-fixed ps-3">
-            <i class="fas fa-arrow-left font-24 me-2 pt-2 hide" style="opacity: 0.6;" id="page-back"></i>
-            <img class="logo-image mt-n2" style="margin-right: auto;" src="/static/images/logo-dark.svg" height="46"/>
+            <i class="fas fa-arrow-left font-24 me-2 pt-2 hide" style="opacity: 0.6;" id="page-back" v-on:click="goBack()"></i>
+            <img v-on:click="goHome()" class="logo-image mt-n2" style="margin-right: auto;" src="/static/images/logo-dark.svg" height="46"/>
             <a href="#" class="page-title-icon shadow-xl bg-theme color-theme show-on-theme-light" data-toggle-theme><i class="fa fa-moon"></i></a>
             <a href="#" class="page-title-icon shadow-xl bg-theme color-theme show-on-theme-dark" data-toggle-theme><i class="fa fa-sun"></i></a>
             <a href="#" class="page-title-icon shadow-xl bg-theme color-theme" data-menu="menu-main"><i class="fa fa-bars"></i></a>
@@ -62,13 +63,21 @@
           
       </div>
 
-    
+    <div class="menu-hider"></div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  methods: {
+      goHack: function() {
+          window.history.back();
+      },
+      goHome: function() {
+          window.location.href="/";
+      }
+  }
 }
 </script>
 
@@ -80,4 +89,17 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+.footer-bar > a{color: #a8a8b1;flex: 1 1 0px !important;}
+.footer-bar .active-nav span {color: #1d397c !important;font-weight:600 !important;}
+.menu-ico {height:22px;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;margin-bottom:5px;}
+#nav-home > .menu-ico {background: url('/static/images/menu0_off.png');}
+#nav-buddy > .menu-ico {background: url('/static/images/menu1_off.png');}
+#nav-training > .menu-ico {background: url('/static/images/menu2_off.png');}
+#nav-center > .menu-ico {background: url('/static/images/menu3_off.png');}
+#nav-chat  .menu-ico {background: url('/static/images/menu4_off.png');}
+.active-nav > .menu-ico0 {background: url('/static/images/menu0_on.png') !important;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;}
+.active-nav > .menu-ico1 {background: url('/static/images/menu1_on.png') !important;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;}
+.active-nav > .menu-ico2 {background: url('/static/images/menu2_on.png') !important;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;}
+.active-nav > .menu-ico3 {background: url('/static/images/menu3_on.png') !important;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;}
+.active-nav > .menu-ico4 {background: url('/static/images/menu4_on.png') !important;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;}
 </style>

@@ -51,9 +51,12 @@
                 <!--<span class="badge font-10 bg-fade-gray-dark">PADI 공식</span>-->
                 </div>
                 <div style="margin-top:26px;" class="row mb-0 text-center">
+                    
                     <div class="col-4 pd-0" style="border-right: 1px solid lightgray;">
+                    <button href="#" v-on:click="call()">
                         <img class="ext-img" src="/static/images/ico_call.png" width="26" />
                         <span class="font-14 bold">전화</span>
+                    </button>
                     </div>
                     <div class="col-4 pd-0" style="border-right: 1px solid lightgray;">
                         <img class="ext-img" src="/static/images/ico_heart.png" width="26" />
@@ -507,7 +510,7 @@
             <div class="content mb-0 mt-10">
                 <h4 class="text-start pt-2 mb-0">주소</h4>
                 <p class="text-start mb-3 mb-0">
-                    <i class="far fa-copy color-blue2-dark"></i> 제주 서귀포시 부두로 41 버블탱크<br/>
+                    <a href="#" data-menu="menu-copy"><i class="far fa-copy color-blue2-dark"></i> 제주 서귀포시 부두로 41 버블탱크</a><br/>
                     <a href="#" data-menu="menu-direction"><i class="fas fa-route color-blue2-dark"></i> 공항-샵 이동방법 안내</a>
                 </p>
             </div>
@@ -638,7 +641,7 @@
     <!-- Menu Share -->
     <div id="menu-share" class="menu menu-box-bottom rounded-m">
         <div class="menu-title mt-n1">
-            <h2 class="pt-3 pb-3">공유</h2>
+            <h2 class="pt-3 pb-3 text-center">공유</h2>
             <a href="#" class="close-menu"><i class="fa fa-times"></i></a>
         </div>
         <div class="content mb-0 text-start">
@@ -672,11 +675,19 @@
             </div>
         </div>
     </div>
+
+    <!-- Added to Bookmarks Menu-->
+    <div id="menu-copy" class="menu menu-box-modal rounded-m" data-menu-hide="800" data-menu-width="250" data-menu-height="170">
+        <h1 class="text-center mt-3 pt-2">
+            <i class="fa fa-check-circle color-green-dark fa-3x"></i>
+        </h1>
+        <h3 class="text-center pt-2">Copied to clipboard</h3>
+    </div> 
         
     <!-- Direction Share -->
     <div id="menu-direction" class="menu menu-box-bottom rounded-m">
         <div class="menu-title mt-n1">
-            <h2 class="pt-3 pb-3">오시는 길</h2>
+            <h2 class="pt-3 pb-3 text-center">오시는 길</h2>
             <a href="#" class="close-menu"><i class="fa fa-times"></i></a>
         </div>
         <div class="content mb-0 text-start">
@@ -713,12 +724,96 @@ export default {
     script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCWu8Fw-h-f1t8Sp3I7R3l_Ukr24HunXQM';
     document.body.appendChild(script);
     script.onload = () => {
+        const night_style = [
+            { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
+            { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
+            { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
+            {
+                featureType: "administrative.locality",
+                elementType: "labels.text.fill",
+                stylers: [{ color: "#d59563" }],
+            },
+            {
+                featureType: "poi",
+                elementType: "labels.text.fill",
+                stylers: [{ color: "#d59563" }],
+            },
+            {
+                featureType: "poi.park",
+                elementType: "geometry",
+                stylers: [{ color: "#263c3f" }],
+            },
+            {
+                featureType: "poi.park",
+                elementType: "labels.text.fill",
+                stylers: [{ color: "#6b9a76" }],
+            },
+            {
+                featureType: "road",
+                elementType: "geometry",
+                stylers: [{ color: "#38414e" }],
+            },
+            {
+                featureType: "road",
+                elementType: "geometry.stroke",
+                stylers: [{ color: "#212a37" }],
+            },
+            {
+                featureType: "road",
+                elementType: "labels.text.fill",
+                stylers: [{ color: "#9ca5b3" }],
+            },
+            {
+                featureType: "road.highway",
+                elementType: "geometry",
+                stylers: [{ color: "#746855" }],
+            },
+            {
+                featureType: "road.highway",
+                elementType: "geometry.stroke",
+                stylers: [{ color: "#1f2835" }],
+            },
+            {
+                featureType: "road.highway",
+                elementType: "labels.text.fill",
+                stylers: [{ color: "#f3d19c" }],
+            },
+            {
+                featureType: "transit",
+                elementType: "geometry",
+                stylers: [{ color: "#2f3948" }],
+            },
+            {
+                featureType: "transit.station",
+                elementType: "labels.text.fill",
+                stylers: [{ color: "#d59563" }],
+            },
+            {
+                featureType: "water",
+                elementType: "geometry",
+                stylers: [{ color: "#17263c" }],
+            },
+            {
+                featureType: "water",
+                elementType: "labels.text.fill",
+                stylers: [{ color: "#515c6d" }],
+            },
+            {
+                featureType: "water",
+                elementType: "labels.text.stroke",
+                stylers: [{ color: "#17263c" }],
+            },
+            ];
+
+        const map_style = (localStorage['wedive-Theme'] == 'light-mode') ? [] : night_style;
+
         this.map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 33.24134444312815, lng: 126.56484940647604},
             zoom: 13,
             mapTypeControl: false,
             streetViewControl: false,
-            zoomControl: false
+            zoomControl: false,
+            styles: map_style
         });
         var marker_shop = new google.maps.Marker({
             map: this.map,
@@ -743,7 +838,10 @@ export default {
     return {
         map: null,
     }
-  }, method: {
+  }, methods: {
+      call: function() {
+          console.log("call");
+      }
       
   }
 

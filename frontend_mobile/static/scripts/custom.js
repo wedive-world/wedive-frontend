@@ -27,10 +27,11 @@ document.addEventListener('DOMContentLoaded', () => {
         var i, e, el; //https://www.w3schools.com/js/js_performance.asp
 
         //Attaching Menu Hider
-        var menuHider = document.getElementsByClassName('menu-hider');
-        if(!menuHider.length){document.body.innerHTML += '<div class="menu-hider"></div>';}
-        if(menuHider[0].classList.contains('menu-active')){menuHider[0].classList.remove('menu-active');}
-
+//removed by jjangs 21-09-12
+//        var menuHider = document.getElementsByClassName('menu-hider');
+//        if(!menuHider.length){document.body.innerHTML += '<div class="menu-hider"></div>';}
+//        if(menuHider[0].classList.contains('menu-active')){menuHider[0].classList.remove('menu-active');}
+        
         //Demo function for programtic creation of Menu
         //menu('menu-settings', 'show', 250);
 
@@ -485,6 +486,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.querySelectorAll('.tab-controls a').forEach((elem, index)=> {
                     elem.style.color = '#1f1f1f';
                 });
+                document.querySelectorAll('.bx').forEach((elem, index)=> {
+                    elem.style.backgroundColor = 'black';
+                });
+                document.querySelectorAll('.page-title-wrapper').forEach((elem, index)=> {
+                    elem.style.backgroundColor = 'black';
+                });
                 for(let i = 0; i < toggleDark.length; i++){toggleDark[i].checked="checked"};
                 localStorage.setItem(pwaName+'-Theme', 'dark-mode');
             }
@@ -505,6 +512,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
                 document.querySelectorAll('.tab-controls a').forEach((elem, index)=> {
                     elem.style.color = '#1f1f1f';
+                });
+                document.querySelectorAll('.bx').forEach((elem, index)=> {
+                    elem.style.backgroundColor = 'white';
+                });
+                document.querySelectorAll('.page-title-wrapper').forEach((elem, index)=> {
+                    elem.style.backgroundColor = '#eef2f1';
                 });
                 for(let i = 0; i < toggleDark.length; i++){toggleDark[i].checked=false};
                 localStorage.setItem(pwaName+'-Theme', 'light-mode');
@@ -1463,7 +1476,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             checkPWA.setAttribute('class','isPWA');
         }
-
+        
         //End of isPWA
         if(pwaNoCache === true){
             caches.delete('workbox-runtime').then(function() {});

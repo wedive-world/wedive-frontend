@@ -155,7 +155,7 @@ body {
 }
 
 .bg-highlight-light {
-  background-color: #5D9CEC !important;
+  background-color: #a8a8b1 !important;
   color: #FFF !important;
 }
 
@@ -834,6 +834,10 @@ body {
 
 .gradient-brown {
   background-image: linear-gradient(to bottom, #BAA286, #AA8E69);
+}
+
+.color-gray-light-mid {
+  color: #b4bcc8 !important;
 }
 
 .color-gray-light {
@@ -1937,6 +1941,7 @@ body {
   opacity: 1 !important;
   transition: all 300ms ease;
   pointer-events: all !important;
+  margin-bottom: 20px;
 }
 
 /*Menu Update*/
@@ -2164,7 +2169,7 @@ body {
 }
 
 .rounded-m {
-  border-radius: 20px !important;
+  border-radius: 20px 20px 0px 0px !important;
 }
 
 .rounded-l {
@@ -4808,13 +4813,14 @@ input[type=number] {
   font-weight: 600;
   font-size: 13px;
   border-bottom: solid 1px rgba(0, 0, 0, 0.05);
+  height: 44px;
 }
 .list-custom-small a i:first-child {
   margin-left: 0px;
   width: 30px;
   height: 30px;
   line-height: 30px;
-  margin-top: 10px;
+  margin-top: 6px;
   text-align: center;
   float: left;
   margin-right: 10px;
@@ -4822,7 +4828,7 @@ input[type=number] {
 .list-custom-small a i:last-child {
   float: right;
   font-size: 10px;
-  opacity: 0.5;
+  opacity: 1;
 }
 .list-custom-small img {
   width: 30px;
@@ -4830,7 +4836,7 @@ input[type=number] {
   margin-right: 10px;
 }
 .list-custom-small i {
-  line-height: 50px;
+  line-height: 44px;
 }
 .list-custom-small .custom-control {
   z-index: 10;
@@ -5004,7 +5010,7 @@ input[type=number] {
   opacity: 0;
 }
 
-.check-visited .visited-link i:last-child::after {
+.check-visited .active i:last-child::after {
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   position: absolute;
@@ -5013,11 +5019,11 @@ input[type=number] {
   margin-top: 0.5px;
   content: "";
   opacity: 1;
-  color: #A0D468;
+  color: #1d397c;
 }
 
 .list-custom-small {
-  line-height: 50px;
+  line-height: 44px;
 }
 
 .theme-light .list-custom-small .highlight-active span {
