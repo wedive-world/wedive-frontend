@@ -49,7 +49,7 @@
     </div>
     
     <!-- Menu Share -->
-    <div id="menu-filter" class="menu menu-box-bottom" style="height:100vh;">
+    <div id="menu-filter" class="menu menu-box-bottom" style="height:100%;">
         <div class="menu-title mt-n1">
             <h2 class="pt-3 pb-3 text-center">필터를 선택하세요</h2>
             <a href="#" class="close-menu"><i class="fa fa-times"></i></a>
