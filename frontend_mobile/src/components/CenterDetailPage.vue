@@ -313,6 +313,31 @@
             </div>
         </div>
 
+
+        <div class="card card-style p-2">
+            <div class="content mb-2">
+                <div class="text-center">
+                    <i class="ico ico-wedive-w -circle color-primary scale-box fa-4x"></i>
+                </div>
+                <h4 class="text-center pt-2 mb-0">wedive's comment</h4>
+                <div class="justify-content-center mb-2 mt-3 text-start">
+                    <div class="color-gray-light-mid" style="float: left;position: relative;width: 20px;">01</div>
+                    <div class="mb-2" style="padding-left: 30px;">
+                        대한민국에서 가장 수중환경이 뛰어난 제주 남부 다이빙 사이트 근처에 있습니다.
+                    </div>
+                    <div class="color-gray-light-mid" style="float: left;position: relative;width: 20px;">02</div>
+                    <div class="mb-2" style="padding-left: 30px;">
+                        세계에서 가장 큰 다이빙 단체인 PADI 5 Star 다이브 센터 입니다.
+                    </div>
+                    <div class="color-gray-light-mid" style="float: left;position: relative;width: 20px;">03</div>
+                    <div class="mb-2" style="padding-left: 30px;">
+                        교육, 장비대여, 숙박까지 모두 진행하며, 가격대비 장비의 수준과 직원들의 친절함으로 사용자 평가가 좋습니다.
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
         
         <div class="card card-style bg-theme pb-0">
             <div class="content" id="tab-group-2">
@@ -914,5 +939,25 @@ export default {
 .small-title {color: #ababab;font-weight: 400;font-size: 10px;}
 .review-text {overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;display: -webkit-box;-webkit-line-clamp: 5;-webkit-box-orient: vertical;}
 .text-show-all{position: absolute;top: 26px;right: 20px;color: #727272 !important;font-size:13px;}
+.ico-wedive-w {-webkit-font-smoothing: antialiased;
+    display: grid;
+    margin-left: calc(50% - 20px);
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+    background-color: #1d397c;
+    padding:8px;
+    border-radius:20px;
+    width:40px;
+    height:40px;}
+.ico-wedive-w:before {content: "";
+        background-image: url('/static/images/ico_wedive_w.png');
+        background-size:32px 32px;
+        width:32px;
+        height:32px;
+        display:inline-block;
+        background-position-x: -3px;
+}
 
 </style>

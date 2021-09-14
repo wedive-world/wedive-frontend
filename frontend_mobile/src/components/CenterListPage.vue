@@ -1,11 +1,22 @@
 <template>
   <div class="">
     <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-center" data-menu-load=""></div>    
-    <div class="page-content text-start" style="padding-bottom: 65px;">
-        
+    <div class="page-content text-start transform-none" style="padding-bottom: 65px;">
+        <div class="wedive-action text-center" style="z-index: 99;">
+            <button data-menu="menu-filter" class="action-filter"><span>필터</span></button>
+            <a href="/center_map" class="action-map"><span>지도</span></a>
+        </div>
         <div class="card card-style ms-0 me-0 rounded-0 mb-0">
-            
-            <div class="content">
+            <div class="p-3">
+                <div class="search-box search-dark shadow-xl border-0 bg-theme rounded-sm bottom-0">
+                    <i class="fa fa-search"></i>
+                    <input type="text" class="border-0" placeholder="어디가 가고싶으신가요?" data-search>
+                </div>   
+            </div>
+            <div class="content mt-0">
+                <div class="color-highlight font-12 mb-2">
+                    <i class="fas fa-location-arrow"></i> 제주도 근처의 다이빙 센터 입니다.
+                </div>
                 <div v-for="center in center_list">
                     <div class="map-box">
                         <a href="/center">
@@ -41,29 +52,77 @@
             
         </div>
     
-        <div class="wedive-action text-center">
-            <button data-menu="menu-filter" class="action-filter"><span>필터</span></button>
-            <a href="/center_map" class="action-map"><span>지도</span></a>
-        </div>
-        
     </div>
     
     <!-- Menu Share -->
-    <div id="menu-filter" class="menu menu-box-bottom" style="height:100%;">
+    <div id="menu-filter" class="menu menu-box-bottom" style="height:100%;border-radius: 0px !important;">
         <div class="menu-title mt-n1">
             <h2 class="pt-3 pb-3 text-center">필터를 선택하세요</h2>
             <a href="#" class="close-menu"><i class="fa fa-times"></i></a>
         </div>
         <div class="content m-0 text-start">
             <div class="card card-style ms-0 me-0 rounded-0 mb-0">
-                <div class="content" id="tab-group-2">
+                <div class="content" id="tab-center-filter">
                     <div class="tab-controls tabs-small tabs-rounded" data-highlight="bg-blue-dark">
-                        <a href="#" data-active data-bs-toggle="collapse" data-bs-target="#tab-level">레벨</a>
+                        <a href="#" data-active data-bs-toggle="collapse" data-bs-target="#tab-general">기본</a>
+                        <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-level">레벨</a>
                         <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-env">환경</a>
                         <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-time">시간</a>
                     </div>
                     <div class="clearfix mb-3"></div>
-                    <div data-bs-parent="#tab-group-2" class="collapse ps-2 pe-2 show" id="tab-level">
+                    <div data-bs-parent="#tab-center-filter" class="collapse ps-2 pe-2 show" id="tab-general">
+                        <div class="list-group list-custom-small list-icon-0 check-visited">
+                            <div class="form-check icon-check">
+                                <label for="filter_type" class="color-highlight">다이빙 종류</label>
+                                <div class="form-check icon-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="check_scuba">
+                                    <label class="form-check-label" for="check_scuba">스쿠버 다이빙</label>
+                                    <i class="icon-check-1 far fa-circle color-gray-dark font-16"></i>
+                                    <i class="icon-check-2 far fa-check-circle font-16 color-highlight"></i>
+                                </div>
+                                <div class="form-check icon-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="check_free">
+                                    <label class="form-check-label" for="check_free">프리 다이빙</label>
+                                    <i class="icon-check-1 far fa-circle color-gray-dark font-16"></i>
+                                    <i class="icon-check-2 far fa-check-circle font-16 color-highlight"></i>
+                                </div>
+                            </div>
+                            <div class="input-style has-borders no-icon mb-4">
+                                <label for="filter_star" class="color-highlight">평점</label>
+                                <select id="filter_star">
+                                    <option value="0" disabled selected>전체</option>
+                                    <option value="5"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i><i class="fa fa-star font-13 color-yellow-dark scale-box"></i><i class="fa fa-star font-13 color-yellow-dark scale-box"></i><i class="fa fa-star font-13 color-yellow-dark scale-box"></i><i class="fa fa-star font-13 color-yellow-dark scale-box"></i></option>
+                                    <option value="4"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i><i class="fa fa-star font-13 color-yellow-dark scale-box"></i><i class="fa fa-star font-13 color-yellow-dark scale-box"></i><i class="fa fa-star font-13 color-yellow-dark scale-box"></i></option>
+                                    <option value="3"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i><i class="fa fa-star font-13 color-yellow-dark scale-box"></i><i class="fa fa-star font-13 color-yellow-dark scale-box"></i></option>
+                                    <option value="2"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i><i class="fa fa-star font-13 color-yellow-dark scale-box"></i></option>
+                                    <option value="1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i></option>
+                                </select>
+                            </div>
+                            <div class="input-style has-borders no-icon mb-4">
+                                <label for="filter_fish" class="color-highlight">물고기</label>
+                                <select id="filter_fish">
+                                    <option value="0" disabled selected>전체</option>
+                                    <option value="5"><i class="fas fa-fish font-13 color-yellow-dark scale-box"></i><i class="fas fa-fish font-13 color-yellow-dark scale-box"></i><i class="fas fa-fish font-13 color-yellow-dark scale-box"></i><i class="fas fa-fish font-13 color-yellow-dark scale-box"></i><i class="fas fa-fish font-13 color-yellow-dark scale-box"></i></option>
+                                    <option value="4"><i class="fas fa-fish font-13 color-yellow-dark scale-box"></i><i class="fas fa-fish font-13 color-yellow-dark scale-box"></i><i class="fas fa-fish font-13 color-yellow-dark scale-box"></i><i class="fas fa-fish font-13 color-yellow-dark scale-box"></i></option>
+                                    <option value="3"><i class="fas fa-fish font-13 color-yellow-dark scale-box"></i><i class="fas fa-fish font-13 color-yellow-dark scale-box"></i><i class="fas fa-fish font-13 color-yellow-dark scale-box"></i></option>
+                                    <option value="2"><i class="fas fa-fish font-13 color-yellow-dark scale-box"></i><i class="fas fa-fish font-13 color-yellow-dark scale-box"></i></option>
+                                    <option value="1"><i class="fas fa-fish font-13 color-yellow-dark scale-box"></i></option>
+                                </select>
+                            </div>
+                            <div class="input-style has-borders no-icon mb-4">
+                                <label for="filter_sight" class="color-highlight">시야</label>
+                                <select id="filter_sight">
+                                    <option value="0" disabled selected>전체</option>
+                                    <option value="5"><i class="far fa-eye font-13 color-gray scale-box"></i><i class="far fa-eye font-13 color-gray scale-box"></i><i class="far fa-eye font-13 color-gray scale-box"></i><i class="far fa-eye font-13 color-gray scale-box"></i><i class="far fa-eye font-13 color-gray scale-box"></i></option>
+                                    <option value="4"><i class="far fa-eye font-13 color-gray scale-box"></i><i class="far fa-eye font-13 color-gray scale-box"></i><i class="far fa-eye font-13 color-gray scale-box"></i><i class="far fa-eye font-13 color-gray scale-box"></i></option>
+                                    <option value="3"><i class="far fa-eye font-13 color-gray scale-box"></i><i class="far fa-eye font-13 color-gray scale-box"></i><i class="far fa-eye font-13 color-gray scale-box"></i></option>
+                                    <option value="2"><i class="far fa-eye font-13 color-gray scale-box"></i><i class="far fa-eye font-13 color-gray scale-box"></i></option>
+                                    <option value="1"><i class="far fa-eye font-13 color-gray scale-box"></i></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-bs-parent="#tab-center-filter" class="collapse ps-2 pe-2" id="tab-level">
                         <div class="list-group list-custom-small list-icon-0 check-visited">
                             <a href="" v-on:click="selectFilter($event, '교육자')"><i class="fa fa-utensils font-14 rounded-sm bg-green-light"></i><span>교육자</span><i class="fa fa-angle-right"></i></a>
                             <a href="" v-on:click="selectFilter($event, '초급자')"><i class="fa fa-square font-14 rounded-sm bg-blue-light"></i><span>초급자</span><i class="fa fa-angle-right"></i></a>
@@ -73,7 +132,7 @@
                             <a href="" v-on:click="selectFilter($event, '특수기술')"><i class="fa fa-shopping-bag rounded-sm bg-green-dark"></i><span>특수기술</span><i class="fa fa-angle-right"></i></a>
                         </div>
                     </div>
-                    <div data-bs-parent="#tab-group-2" class="collapse ps-2 pe-2" id="tab-env">
+                    <div data-bs-parent="#tab-center-filter" class="collapse ps-2 pe-2" id="tab-env">
                         <div class="list-group list-custom-small list-icon-0 check-visited">
                             <a href="" v-on:click="selectFilter($event, '케이브 포인트')"><i class="fa fa-shopping-cart rounded-sm bg-brown-dark"></i><span>케이브 포인트</span><i class="fa fa-angle-right"></i></a>
                             <a href="" v-on:click="selectFilter($event, '난파선 포인트')"><i class="fa fa-heart rounded-sm bg-red-dark"></i><span>난파선 포인트</span><i class="fa fa-angle-right"></i></a>
@@ -85,7 +144,7 @@
                             <a href="" v-on:click="selectFilter($event, '드리프트 포인트')"><i class="fa fa-utensils font-14 rounded-sm bg-green-light"></i><span>드리프트 포인트</span><i class="fa fa-angle-right"></i></a>
                         </div>
                     </div>
-                    <div data-bs-parent="#tab-group-2" class="collapse ps-2 pe-2" id="tab-time">
+                    <div data-bs-parent="#tab-center-filter" class="collapse ps-2 pe-2" id="tab-time">
                         <div class="list-group list-custom-small list-icon-0 check-visited">
                             <a href="" v-on:click="selectFilter($event, '야간 다이빙')"><i class="fa fa-square font-14 rounded-sm bg-blue-light"></i><span>야간 다이빙</span><i class="fa fa-angle-right"></i></a>
                             <a href="" v-on:click="selectFilter($event, '조류 다이빙')"><i class="fa fa-minus font-14 rounded-sm bg-red-light"></i><span>조류 다이빙</span><i class="fa fa-angle-right"></i></a>
@@ -172,4 +231,5 @@ export default {
 .action-map {position: relative;float: right;width: 74px;height: 35px;font-size: 14px;color: #d1d2d3;line-height: 35px;}
 .action-map:before {clear: both;content: "";display: inline-block;margin-right: 6px;width: 14px;height: 14px;background-size: 14px 14px;background-repeat: no-repeat;background-image: url(/static/images/icon_map.png);text-indent: -9999px;vertical-align: middle;}
 #filter_list {white-space: nowrap;overflow-x: scroll;height: 32px;}
+.transform-none {transform: inherit !important;};
 </style>
