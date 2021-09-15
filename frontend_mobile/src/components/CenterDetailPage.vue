@@ -240,10 +240,10 @@
                         </div>
                         <div class="ms-auto ps-3 align-self-center text-end">
                             <h2 class="font-15 mb-n1">￦100,000</h2>
-                            <p class="color-highlight font-10">반일 오전</p>
+                            <p class="color-highlight font-10">오전 반일</p>
                         </div>
                     </div>
-                    <div class="d-flex mb-3">
+                    <div class="d-flex mb-3" v-on:click="goCourse()">
                         <div class="align-self-center">
                             <img src="/static/images/diving_boat.jpg" class="rounded-sm me-3" width="70">
                         </div>
@@ -253,7 +253,7 @@
                         </div>
                         <div class="ms-auto ps-3 align-self-center text-end">
                             <h2 class="font-15 mb-n1">￦130,000</h2>
-                            <p class="color-highlight font-10">반일 오전</p>
+                            <p class="color-highlight font-10">오전 반일</p>
                         </div>
                     </div>
                 </div>
@@ -585,7 +585,122 @@
             </div>
         </div>
 
-        <div class="card card-style">
+
+        <div class="splide single-slider slider-no-arrows slider-has-dots pb-4 mb-4" id="single-slider-1">
+            <div class="splide__track">
+                <div class="splide__list">
+                    <div class="splide__slide">
+                        <div class="card card-style mb-3 min-h-230">
+                            <div class="content text-start">
+                                <div class="d-flex">
+                                    <div class="flex-grow-1">
+                                        <div class="float-start">
+                                            <h1 class="fa-2x font-900 me-2 mb-0">5.00</h1>
+                                            <p class="font-10 mb-0 mt-n2 opacity-40 text-end">보트 체험 다이빙</p>
+                                        </div>
+                                        <span>
+                                            <i class="fa fa-star color-yellow-dark"></i>
+                                            <i class="fa fa-star color-yellow-dark"></i>
+                                            <i class="fa fa-star color-yellow-dark"></i>
+                                            <i class="fa fa-star color-yellow-dark"></i>
+                                            <i class="fa fa-star color-yellow-dark"></i>
+                                        </span>
+                                        
+                                    </div>
+                                    <div>
+                                        <h6 class="text-end">김성진</h6>
+                                        <p class="font-10 mb-0 mt-n2 opacity-40 text-end">2021.08.30</p>
+                                    </div>
+                                </div>
+                                <p class="review-text mt-3">
+                                    <img src="https://search.pstatic.net/common/?autoRotate=true&amp;quality=95&amp;type=f87_87&amp;src=https%3A%2F%2Fmyplace-phinf.pstatic.net%2F20210827_62%2F16300643312513fe1S_JPEG%2Fupload_07fc7f5449b8fecbeca86e655f0afce3.jpg" class="review_img" alt="방문자리뷰">
+                                    제주도에서 스쿠버 다이빙 할 때 항상 방문하는 버블탱크 입니다.<br/>
+                                    예약할 때 문의 드리면 친절하게 답변해 주십니다.<br/>
+                                    다이빙 할 때도 신경 많이 써 주시고<br/>
+                                    불편한 점 말씀 드리면 신속하게 해결해 주세요<br/>
+                                    렌탈 장비 관리 철저하게 하셔서<br/>
+                                    믿고 이용할 수 있어요!!
+                                </p>
+                            </div>
+                        </div>     
+                    </div>
+                    <div class="splide__slide">
+                        <div class="card card-style mb-3 min-h-230">
+                            <div class="content text-start">
+                                <div class="d-flex">
+                                    <div class="flex-grow-1">
+                                        <div class="float-start">
+                                            <h1 class="fa-2x font-900 me-2 mb-0">4.98</h1>
+                                            <p class="font-10 mb-0 mt-n2 opacity-40 text-end">어드벤스드 코스</p>
+                                        </div>
+                                        <span>
+                                            <i class="fa fa-star color-yellow-dark"></i>
+                                            <i class="fa fa-star color-yellow-dark"></i>
+                                            <i class="fa fa-star color-yellow-dark"></i>
+                                            <i class="fa fa-star color-yellow-dark"></i>
+                                            <i class="fa fa-star color-yellow-dark"></i>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <h6 class="text-end">조관우</h6>
+                                        <p class="font-10 mb-0 mt-n2 opacity-40 text-end">2021.08.27</p>
+                                    </div>
+                                </div>
+                                <p class="review-text mt-3">
+                                    태풍이 올라와서 취소되진 않을까 걱정을 많이 했는데 잘챙겨주셔서 오픈워터 딸수 있었습니다ㅎㅎ<br/>
+                                    맑은날이 아니라 아쉬웠지만 어드밴스드 딸때는 날씨요정이 함께 해주기를 기대합니다...ㅎㅎ<br/>
+                                    잡아주신 숙소도 버블탱크 바로 앞에 있어서 넘 좋았어요.<br/>
+                                    깔끔하고 호텔사장님도 엄청 친절하셨어요ㅋ<br/>
+                                    그리고 버블탱크 샤워실에 스킨로션에 샴푸,린스,바디워시,클렌징폼, 머리끈까지 구비되어 있었습니다.<br/>
+                                    세심함에 치였슴당💕
+                                </p>
+                            </div>
+                        </div>   
+                    </div>
+                    <div class="splide__slide">
+                        <div class="card card-style mb-3 min-h-230">
+                            <div class="content text-start">
+                                <div class="d-flex">
+                                    <div class="flex-grow-1">
+                                        <div class="float-start">
+                                            <h1 class="fa-2x font-900 me-2 mb-0">4.5</h1>
+                                            <p class="font-10 mb-0 mt-n2 opacity-40 text-end">섬 다이빙</p>
+                                        </div>
+                                        <span>
+                                            <i class="fa fa-star color-yellow-dark"></i>
+                                            <i class="fa fa-star color-yellow-dark"></i>
+                                            <i class="fa fa-star color-yellow-dark"></i>
+                                            <i class="fa fa-star color-yellow-dark"></i>
+                                            <i class="fa fa-star color-yellow-dark"></i>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <h6 class="text-end">조윤구</h6>
+                                        <p class="font-10 mb-0 mt-n2 opacity-40 text-end">2021.08.20</p>
+                                    </div>
+                                </div>
+                                <p class="review-text mt-3">
+                                    <img src="https://search.pstatic.net/common/?autoRotate=true&amp;quality=95&amp;type=f87_87&amp;src=https%3A%2F%2Fmyplace-phinf.pstatic.net%2F20210824_287%2F1629760530492Jfami_JPEG%2Fupload_b0549f411c1a65e230ea73a17359faae.jpeg" class="review_img" alt="방문자리뷰">
+                                    강의듣는 내내 사진,동영상 많이찍어주셔서  좋았어요 !!  시설도깔끔하고  강사분들도 재밌고 친절해서 좋았습니다~  앞으로 제주도오면 많이 애용할듯! 자주자주 방문하겠습니다. 다음에 또 가면 잘알려주세요~
+                                </p>
+                            </div>
+                        </div>   
+                    </div>
+                    <div class="splide__slide">
+                        <div class="card card-style mb-3 min-h-230">
+                            <div class="content">
+                                <h1 class="text-center"><i class="fas fa-comments fa-2x color-highlight mt-4"></i></h1>
+                                <h1 class="text-center pt-3 font-20 mb-n1">13개 리뷰</h1>
+                                <p class="text-center color-highlight font-600">더보기 <i class="fas fa-chevron-right"></i></p>
+                                
+                            </div>
+                        </div>    
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--<div class="card card-style">
             <div class="content text-start mb-0">
                 <h4 class="pt-2 mb-0">리뷰</h4>
                 <span class="text-show-all">전체 보기 <i class="fas fa-chevron-right"></i></span>
@@ -651,7 +766,7 @@
                 <a href="#" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0"><i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;리뷰 쓰기</a>
             </div>
         </div>
-
+        -->
         
 
         
@@ -866,8 +981,10 @@ export default {
   }, methods: {
       call: function() {
           console.log("call");
+      },
+      goCourse: function() {
+          location.href='/course';
       }
-      
   }
 
   
@@ -946,18 +1063,16 @@ export default {
     font-variant: normal;
     text-rendering: auto;
     line-height: 1;
-    background-color: #1d397c;
-    padding:8px;
-    border-radius:20px;
+    
     width:40px;
     height:40px;}
 .ico-wedive-w:before {content: "";
-        background-image: url('/static/images/ico_wedive_w.png');
-        background-size:32px 32px;
-        width:32px;
-        height:32px;
+        background-image: url('/static/images/ico_wedive_d.png');
+        background-size:40px 40px;
+        width:40px;
+        height:40px;
         display:inline-block;
-        background-position-x: -3px;
 }
-
+.min-h-230 {min-height: 230px;}
+.review_img {float: left;width: 88px; height:88px;margin-right:10px;margin-bottom:2px;border-radius:10px;}
 </style>

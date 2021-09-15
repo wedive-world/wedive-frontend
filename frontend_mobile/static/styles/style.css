@@ -849,6 +849,11 @@ body {
   color: #FFF !important;
 }
 
+.bg-gray-light-mid {
+  background-color: #b4bcc8 !important;
+  color: #FFF !important;
+}
+
 .bg-fade-gray-dark {
   background-color: rgba(170, 178, 189, 0.7) !important;
   color: #FFF !important;
@@ -857,6 +862,10 @@ body {
 .bg-fade-gray-light {
   background-color: rgba(170, 178, 189, 0.3) !important;
   color: #FFF !important;
+}
+
+.color-gray {
+  color: gray !important;
 }
 
 .color-gray-dark {
@@ -1229,10 +1238,11 @@ body {
   position: absolute;
   height: 50px;
   line-height: 49px;
-  font-size: 14px;
-  color: #000;
+  font-size: 16px;
+  color: #1f1f1f;
   font-weight: 600;
   z-index: 1;
+  padding-top: 2px;
   font-family: "Inter", sans-serif;
 }
 .header .header-logo {
