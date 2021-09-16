@@ -10,4 +10,12 @@ services:
     ports: 
       - "3000:3000"
 
-      #test
+    environment:
+      - API_PATH=http://api:4000
+    networks: 
+      - wedive-api_default
+      - default
+
+networks:
+  wedive-api_default:
+    external: true
