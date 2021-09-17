@@ -243,7 +243,7 @@
                             <p class="color-highlight font-10">오전 반일</p>
                         </div>
                     </div>
-                    <div class="d-flex mb-3" v-on:click="goCourse()">
+                    <div class="d-flex mb-3 cursor-pointer" v-on:click="goCourse()">
                         <div class="align-self-center">
                             <img src="/static/images/diving_boat.jpg" class="rounded-sm me-3" width="70">
                         </div>

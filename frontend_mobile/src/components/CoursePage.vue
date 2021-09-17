@@ -21,17 +21,36 @@
             <div class="content mt-3">
                 <div class="mt-2 mb-3">
                     <div class="align-self-center text-center">
-                        <h1 class="font-24 mb-0 font-600">보트 체험 다이빙</h1>
+                        <h1 class="font-20 mb-0 font-600">보트 체험 다이빙</h1>
                         <div class="mt-n1">
                             <span class="chip chip-s bg-gray-light-mid text-center" style="padding-left: 16px;margin: 0px 4px 0px 0px;">오전 반일</span>
-                        <span class="font-22 color-highlight font-600">130,000원</span></div>
+                        <span class="font-19 color-highlight font-900">130,000원</span></div>
                         <p class="mt-3"><span class="text-urgent">※ 당일 비행기 탑승이 제한됩니다.</span></p>
                     </div>
                 </div>
+
+
+                <div class="list-custom-small">
+                    <a data-bs-toggle="collapse" class="no-effect" href="#whatis">
+                        <i class="fa fa-question-circle font-14 color-highlight me-1"></i>
+                        <span class="font-14">체험 다이빙이란?</span>
+                        <i class="fa fa-angle-down"></i>
+                    </a>        
+                </div>
+                <div class="collapse" id="whatis">
+                    <div class="list-group ps-3 txt_box">
+                        &nbsp;라이센스가 없어도 수영을 못해도 남녀노소 누구나 스쿠버다이빙을 즐기실 수 있는 체험 프로그램입니다. 사전교육과 더불어 전문강사와 1:1로 진행하기 때문에 안전하게 다이빙을 체험할 수 있습니다.
+                    </div>
+                </div>
+                
+                
                 
                 <div class="divider"></div>
                 <div class="ms-2 me-2">
-                    <h6 class="font-15 font-400 mb-2 color-gray"><i class="fa fa-check-circle color-green-dark icon-20"></i>포함 사항</h6>
+                    <h6>
+                        <i class="fas fa-box-open font-14 color-highlight me-1"></i>
+                        <span class="font-14">포함 사항</span>
+                    </h6>
                     <div class="row text-start">
                         <div class="ico_feature col-3">
                             <i class="ico_feature4 icon-course"></i>
@@ -111,32 +130,37 @@
                 <div class="content my-n1">
                     <div class="gallery-views gallery-view-2">
                         <a data-gallery="gallery-1" href="/static/images/shop1/diving/test1.jpg" title="Vynil and Typerwritter">
-                            <img src="images/empty.png" data-src="/static/images/shop1/diving/test1.jpg" class="rounded-m preload-img shadow-l img-fluid" alt="img">
+                            <div style="background-image: url(/static/images/shop1/diving/test1.jpg);" class="rounded-m preload-img shadow-l img-fluid square-img" ></div>
                             <div class="caption">
                             </div>
                         </a>
                         <a data-gallery="gallery-1" href="/static/images/shop1/diving/test2.jpg" title="Fruit Cookie Pie">
-                            <img src="images/empty.png" data-src="/static/images/shop1/diving/test2.jpg" class="rounded-m preload-img shadow-l img-fluid" alt="img">
+                            <div style="background-image: url(/static/images/shop1/diving/test2.jpg);" class="rounded-m preload-img shadow-l img-fluid square-img" ></div>
                             <div class="caption">
                             </div>
                         </a>		
                         <a data-gallery="gallery-1" href="/static/images/shop1/diving/test3.jpg" title="Plain Cookies and Flour">
-                            <img src="images/empty.png" data-src="/static/images/shop1/diving/test3.jpg" class="rounded-m preload-img shadow-l img-fluid" alt="img">
+                            <div style="background-image: url(/static/images/shop1/diving/test3.jpg);" class="rounded-m preload-img shadow-l img-fluid square-img" ></div>
                             <div class="caption">
                             </div>
                         </a>	
                         <a data-gallery="gallery-1" href="/static/images/shop1/diving/test4.jpg" title="Pots and Stuff">
-                            <img src="images/empty.png" data-src="/static/images/shop1/diving/test5.jpg" class="rounded-m preload-img shadow-l img-fluid" alt="img">
+                            <div style="background-image: url(/static/images/shop1/diving/test4.jpg);" class="rounded-m preload-img shadow-l img-fluid square-img" ></div>
+                            <div class="caption">
+                            </div>
+                        </a>
+                        <a data-gallery="gallery-1" href="/static/images/shop1/diving/test5.jpg" title="Pots and Stuff">
+                            <div style="background-image: url(/static/images/shop1/diving/test5.jpg);" class="rounded-m preload-img shadow-l img-fluid square-img" ></div>
                             <div class="caption">
                             </div>
                         </a>
                         <a data-gallery="gallery-1" href="/static/images/shop1/diving/test6.jpg" title="Delicious Strawberries">
-                            <img src="images/empty.png" data-src="/static/images/shop1/diving/test6.jpg" class="rounded-m preload-img shadow-l img-fluid" alt="img">
+                            <div style="background-image: url(/static/images/shop1/diving/test6.jpg);" class="rounded-m preload-img shadow-l img-fluid square-img" ></div>
                             <div class="caption">
                             </div>
                         </a>
                         <a data-gallery="gallery-1" href="/static/images/shop1/diving/test7.jpg" title="A Beautiful Camera">
-                            <img src="images/empty.png" data-src="/static/images/shop1/diving/test7.jpg" class="rounded-m preload-img shadow-l img-fluid" alt="img">
+                            <div style="background-image: url(/static/images/shop1/diving/test7.jpg);" class="rounded-m preload-img shadow-l img-fluid square-img" ></div>
                             <div class="caption">
                             </div>
                         </a>			
@@ -328,17 +352,20 @@ export default {
 .ico_feature7 {width: 44px;height: 40px;background-position: 0px -40px;}
 .ico_feature8 {width: 44px;height: 40px;background-position: -45px -40px;}
 .ico_feature9 {width: 44px;height: 40px;background-position: -90px -40px;}
-.ico_feature10 {width: 44px;height: 40px;background-position: -135px -38px;}
+.ico_feature10 {width: 44px;height: 40px;background-position: -135px -40px;}
 .ico_feature11 {width: 44px;height: 40px;background-position: -180px -40px;}
 .ico_feature12 {width: 44px;height: 40px;background-position: -225px -40px;}
-.ico_feature13 {width: 44px;height: 40px;background-position: 0px -76px;}
-.ico_feature14 {width: 44px;height: 40px;background-position: -45px -76px;}
-.ico_feature15 {width: 44px;height: 40px;background-position: -90px -76px;}
-.ico_feature16 {width: 44px;height: 40px;background-position: -135px -76px;}
-.ico_feature17 {width: 44px;height: 40px;background-position: -180px -76px;}
-.ico_feature18 {width: 44px;height: 40px;background-position: -225px -76px;}
+.ico_feature13 {width: 44px;height: 40px;background-position: 0px -78px;}
+.ico_feature14 {width: 44px;height: 40px;background-position: -45px -78px;}
+.ico_feature15 {width: 44px;height: 40px;background-position: -90px -78px;}
+.ico_feature16 {width: 44px;height: 40px;background-position: -135px -78px;}
+.ico_feature17 {width: 44px;height: 40px;background-position: -180px -78px;}
+.ico_feature18 {width: 44px;height: 40px;background-position: -225px -78px;}
 
-.icon-course {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/wedive_course.png);background-repeat: no-repeat;-webkit-background-size: 270px 118px;background-size: 270px 118px;}
+.icon-course {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/wedive_course2.png);background-repeat: no-repeat;-webkit-background-size: 270px 118px;background-size: 270px 118px;}
 .span_feature {width:66px;color: #727272;}
 .text-urgent {color:#de5246; background-color: #ffebe9;padding: 2px 8px;border-radius:2px;}
+
+.square-img {width: 100%;height: 0px;padding: 50% 0;background-size: 100% 100%;background-clip: border-box;box-sizing:border-box;}
+.txt_box {background: #f4f4f4; border-radius: .5rem;padding: 14px 20px !important;}
 </style>
