@@ -4,7 +4,7 @@ body {
   font-size: 13px;
   font-family: "Roboto", sans-serif !important;
   line-height: 24px !important;
-  color: #727272 !important;
+  color: #000 !important;
   background-color: #eef2f1;
 }
 
@@ -47,7 +47,7 @@ a {
 }
 
 p {
-  color: #727272;
+  color: #000;
   margin-bottom: 30px;
   padding-bottom: 0px;
 }
@@ -6279,12 +6279,11 @@ input[type=number] {
 
 .timeline-body {
   position: relative;
-  margin-top: 200px;
-  padding-top: 5px;
   z-index: 2;
-  background-color: #f0f0f0;
+  background-color: #f4f4f4;
   padding-bottom: 10px;
   box-shadow: none !important;
+  border-radius: .5rem
 }
 
 .timeline-header {
@@ -6336,14 +6335,14 @@ input[type=number] {
   top: 0px;
   z-index: 0;
   bottom: 0px;
-  left: 43px;
+  left: 36px;
   width: 1px;
 }
 
 .timeline-item-content, .timeline-item-content-full {
   border: solid 1px rgba(0, 0, 0, 0.1);
   background-color: #FFF;
-  margin: 0px 15px 30px 90px;
+  margin: 0px 15px 30px 70px;
   padding: 20px 15px;
 }
 
@@ -6364,7 +6363,7 @@ input[type=number] {
   position: absolute;
   width: 45px;
   height: 45px;
-  left: 21px;
+  left: 15px;
   line-height: 45px;
   border-radius: 45px;
   top: 25px;

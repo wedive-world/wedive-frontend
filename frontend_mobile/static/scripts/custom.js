@@ -2,7 +2,11 @@
 setTimeout(function(){
     var preloader = document.getElementById('preloader')
     if(preloader){preloader.classList.add('preloader-hide');}
-},150);
+},500);
+setTimeout(function(){
+    var preloader = document.getElementById('preloader')
+    if(preloader){preloader.classList.add('preloader-hide');}
+},1000);
 
 document.addEventListener('DOMContentLoaded', () => {
     'use strict'

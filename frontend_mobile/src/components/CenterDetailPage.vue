@@ -1000,7 +1000,7 @@ export default {
 .evaluation>span.info {padding-left: 11px;border-left: 1px solid #c4bbab;}
 .evaluation>span .icon_question {display: inline-block;position: relative;top: 1px;display: block;width: 18px;height: 18px;background-size: 18px 18px;background-repeat: no-repeat;background-image: url(/static/images/question.png);text-indent: -9999px;}
 
-.span_feature {width:66px;color: #727272;}
+.span_feature {width:66px;}
 .ico_feature {}
 .ico_feature1 {width: 44px;height: 40px;background-position: 0px 0px;}
 .ico_feature2 {width: 44px;height: 40px;background-position: -45px 0px;}
@@ -1021,7 +1021,7 @@ export default {
 .ico_feature17 {width: 44px;height: 40px;background-position: -180px -72px;}
 .ico_feature18 {width: 44px;height: 40px;background-position: -225px -72px;}
 
-.icon-service {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/wedive_service.png);background-repeat: no-repeat;-webkit-background-size: 270px 118px;background-size: 270px 118px;}
+.icon-service {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/wedive_service2.png);background-repeat: no-repeat;-webkit-background-size: 270px 118px;background-size: 270px 118px;}
 
 .ico_equipt {}
 .ico_equipt1 {width: 60px;height: 63px;background-position: 0px 0px;}
@@ -1049,7 +1049,7 @@ export default {
 .ico_equipt22 {width: 60px;height: 63px;background-position: -168px -176px;}
 .ico_equipt23 {width: 60px;height: 63px;background-position: -224px -176px;}
 .ico_equipt24 {width: 60px;height: 63px;background-position: -280px -176px;}
-.icon-equiptment {overflow: hidden;display: block;margin-left: 3px;background-image: url(/static/images/wedive_equiptment.png);background-repeat: no-repeat;-webkit-background-size: 335px 240px;background-size: 335px 240px;}
+.icon-equiptment {overflow: hidden;display: block;margin-left: 3px;background-image: url(/static/images/wedive_equiptment2.png);background-repeat: no-repeat;-webkit-background-size: 335px 240px;background-size: 335px 240px;}
 
 .wedive-ul {width: 100%;list-style:none;display: inline-block;margin-bottom: 0;padding-left: 5px !important;padding-right: 5px !important;}
 .wedive-ul > li {float: left;width: 50%;}
