@@ -45,7 +45,7 @@
                 
                 
                 
-                <div class="divider mb-1"></div>
+                <div class="divider mb-1 mt-2"></div>
 
                 <div class="list-custom-small">
                     <a data-bs-toggle="collapse" class="no-effect" href="#includes">
@@ -82,7 +82,7 @@
 
 
 
-                <div class="divider mb-1"></div>
+                <div class="divider mb-1 mt-2"></div>
 
                 <div class="list-custom-small">
                     <a data-bs-toggle="collapse" class="no-effect" href="#course_info">
@@ -156,7 +156,7 @@
                 
 
 
-                <div class="divider mb-1"></div>
+                <div class="divider mb-1 mt-2"></div>
 
 
 
@@ -172,12 +172,12 @@
                 <div class="collapse show" id="warn_notice">
                     <div class="list-group ps-3 txt_box">
                         · 시작 전 12시간 이내의 음주를 자제해주세요.<br/>
-                        · 심혈관 질환 및 건강 이상자는 안전사으이 이유로 신청이 불가합니다.<br/>
-                        · 코스 진행 후 18시간 이후 비행기 탑승이 가능합니다..<br/>
+                        · 심혈관 질환 및 건강 이상자는 안전상의 이유로 신청이 불가합니다.<br/>
+                        · 코스 진행 완료 18시간 이후 비행기 탑승이 가능합니다.<br/>
                     </div>
                 </div>
                 
-                <div class="divider mb-1"></div>
+                <div class="divider mb-1 mt-2"></div>
                 
 
                 
@@ -185,13 +185,13 @@
             <div class="content">
                 <div class="gallery-view-controls">
                     <div class="divider mb-0"></div>
-                    <a href="#" class="gallery-view-1"><i class="fa fa-th"></i></a>
-                    <a href="#" class="color-highlight gallery-view-2"><i class="fa fa-th-large"></i></a>
+                    <a href="#" class="color-highlight gallery-view-1"><i class="fa fa-th"></i></a>
+                    <a href="#" class="gallery-view-2"><i class="fa fa-th-large"></i></a>
                     <a href="#" class="gallery-view-3"><i class="fa fa-bars"></i></a>
                     <div class="clearfix"></div>
                 </div>
                 <div class="my-n1">
-                    <div class="gallery-views gallery-view-2">
+                    <div class="gallery-views gallery-view-1">
                         <a data-gallery="gallery-1" href="/static/images/shop1/diving/test1.jpg" title="Vynil and Typerwritter">
                             <div style="background-image: url(/static/images/shop1/diving/test1.jpg);" class="rounded-m preload-img shadow-l img-fluid square-img" ></div>
                             <div class="caption"></div>
@@ -226,6 +226,7 @@
 
             <div class="content">
 
+                <a href="#" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-2">예약하기</a>
                 
 
             </div>

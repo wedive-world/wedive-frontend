@@ -1191,7 +1191,7 @@ body {
 }
 
 .color-highlight {
-  color: #1d397c;
+  color: #1d397c !important;
 }
 
 .bg-highlight {
