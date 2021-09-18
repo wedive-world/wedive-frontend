@@ -10,13 +10,12 @@
     </div>
 
     <div class="page-content pb-0" style="height: 100%;">
-        <div id="map" style="height: 100%;position: inherit !important;"></div>
-
-        
         <div class="map-filter text-center">
             <a id="btn-filter1" class="btn btn-sm rounded-0 bg-highlight">스쿠버다이빙</a>
             <a id="btn-filter2" class="btn btn-sm rounded-0 bg-highlight-light">프리다이빙</a>
         </div>
+        <div id="map" style="height: 100%;position: inherit !important;"></div>
+        
         <div class="map-box hide">
             <a href="/center">
                 <div class="bx">
@@ -250,7 +249,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.map-filter {position: absolute;right: 0;bottom: 30px;left: 0;}
+.map-filter {position: absolute;right: 0;bottom: 30px;left: 0;z-index:999;}
 .map-box {position: absolute;right: 0;bottom: 21px;left: 0;border: 1px solid rgba(0,0,0,.1);margin: 5px 5px 4px;}
 .bx {background-color: rgba(255,255,255);padding: 15px 14px;min-height: 105px;}
 #btn-filter1 {padding: 5px 10px !important;margin-right: -2px;border-radius: 20px 0px 0px 20px !important;border: 1px solid #091a42;}
