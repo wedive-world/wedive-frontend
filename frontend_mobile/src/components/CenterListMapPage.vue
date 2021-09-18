@@ -1,7 +1,7 @@
 <template>
-  <div class="" style="height: 100%;">
+  <div class="" style="height: 100%; !important">
     <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-center" data-menu-load=""></div>
-    <div class="header header-fixed header-logo-center">
+    <div class="header header-fixed header-logo-center hide">
         <a href="" class="header-title color">지도</a>
         <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
         <a href="#" data-menu="menu-main" class="header-icon header-icon-4"><i class="fas fa-bars"></i></a>
@@ -9,12 +9,12 @@
         <a href="#" data-toggle-theme class="header-icon header-icon-3 show-on-theme-light"><i class="fas fa-moon"></i></a>
     </div>
 
-    <div class="page-content pb-0" style="height: 100%;">
-        <div class="map-filter text-center">
-            <a id="btn-filter1" class="btn btn-sm rounded-0 bg-highlight">스쿠버다이빙</a>
-            <a id="btn-filter2" class="btn btn-sm rounded-0 bg-highlight-light">프리다이빙</a>
-        </div>
-        <div id="map" style="height: 100%;position: inherit !important;"></div>
+    <div class="map-filter text-center">
+        <a id="btn-filter1" class="btn btn-sm rounded-0 bg-highlight">스쿠버다이빙</a>
+        <a id="btn-filter2" class="btn btn-sm rounded-0 bg-highlight-light">프리다이빙</a>
+    </div>
+    <div class="page-content pb-0" style="height: 100% !important;">
+        <div id="map" style="height: 100% !important;position: inherit !important;"></div>
         
         <div class="map-box hide">
             <a href="/center">
