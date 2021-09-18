@@ -6,19 +6,9 @@
             <div class="splide__track">
                 <div class="splide__list">
                     <div class="splide__slide">
-                        <div data-card-height="250" class="card rounded-0 mb-0" style="background-image:url(/static/bubble1.jpg)">
+                        <div data-card-height="250" class="card rounded-0 mb-0" style="background-image:url(/static/images/point/ko/jeju_munisland_01.jpg)">
                             
                         </div>         
-                    </div>
-                    <div class="splide__slide">
-                        <div data-card-height="250" class="card rounded-0 mb-0" style="background-image:url(/static/bubble2.jpg)">
-                            
-                        </div>
-                    </div>
-                    <div class="splide__slide">
-                        <div data-card-height="250" class="card rounded-0 mb-0" style="background-image:url(/static/bubble3.jpg)">
-                            
-                        </div>   
                     </div>
                 </div>
             </div>
@@ -43,7 +33,7 @@
                     <span class="font-14 ms-2">3.3</span>
                 </div>
                 <div class="star-area mt-1">
-                    <span class="font-14 me-2 color-gray">조류</span>
+                    <span class="font-14 me-2 color-gray">유속</span>
                     <i class="fas fa-water font-20 color-aqua-dark scale-box"></i>
                     <i class="fas fa-water font-20 color-aqua-dark scale-box"></i>
                     <i class="fas fa-water font-20 color-aqua-dark scale-box"></i>
@@ -423,20 +413,20 @@ export default {
 
 .span_feature {width:66px;}
 .ico_feature {}
-.ico_feature1 {width: 44px;height: 40px;background-position: 0px -10px;}
-.ico_feature2 {width: 44px;height: 40px;background-position: -45px -10px;}
-.ico_feature3 {width: 44px;height: 40px;background-position: -90px -10px;}
-.ico_feature4 {width: 44px;height: 40px;background-position: -135px -10px;}
-.ico_feature5 {width: 44px;height: 40px;background-position: -180px -10px;}
-.ico_feature6 {width: 44px;height: 40px;background-position: -225px -10px;}
-.ico_feature7 {width: 44px;height: 40px;background-position: 0px -38px;}
-.ico_feature8 {width: 44px;height: 40px;background-position: -45px -38px;}
-.ico_feature9 {width: 44px;height: 40px;background-position: -90px -38px;}
-.ico_feature10 {width: 44px;height: 40px;background-position: -135px -38px;}
-.ico_feature11 {width: 44px;height: 40px;background-position: -180px -38px;}
-.ico_feature12 {width: 44px;height: 40px;background-position: -225px -38px;}
+.ico_feature1 {width: 44px;height: 40px;background-position: 0px -3px;}
+.ico_feature2 {width: 44px;height: 40px;background-position: -45px -3px;}
+.ico_feature3 {width: 44px;height: 40px;background-position: -90px -3px;}
+.ico_feature4 {width: 44px;height: 40px;background-position: -135px -3px;}
+.ico_feature5 {width: 44px;height: 40px;background-position: -180px -3px;}
+.ico_feature6 {width: 44px;height: 40px;background-position: -225px -3px;}
+.ico_feature7 {width: 44px;height: 40px;background-position: 0px -368px;}
+.ico_feature8 {width: 44px;height: 40px;background-position: -45px -36px;}
+.ico_feature9 {width: 44px;height: 40px;background-position: -90px -36px;}
+.ico_feature10 {width: 44px;height: 40px;background-position: -135px -36px;}
+.ico_feature11 {width: 44px;height: 40px;background-position: -180px -36px;}
+.ico_feature12 {width: 44px;height: 40px;background-position: -225px -36px;}
 
-.icon-point {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/wedive_point.png);background-repeat: no-repeat;-webkit-background-size: 270px 118px;background-size: 270px 118px;}
+.icon-point {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/wedive_point.png);background-repeat: no-repeat;-webkit-background-size: 270px 90px;background-size: 270px 90px;}
 
 .wedive-ul {width: 100%;list-style:none;display: inline-block;margin-bottom: 0;padding-left: 5px !important;padding-right: 5px !important;}
 .wedive-ul > li {float: left;width: 50%;}
