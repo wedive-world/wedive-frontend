@@ -1,6 +1,14 @@
 <template>
   <div class="" style="height: 100%;">
-    <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-center" data-menu-load=""></div>    
+    <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-center" data-menu-load=""></div>
+    <div class="header header-fixed header-logo-center">
+        <a href="" class="header-title color">지도</a>
+        <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
+        <a href="#" data-menu="menu-main" class="header-icon header-icon-4"><i class="fas fa-bars"></i></a>
+        <a href="#" data-toggle-theme class="header-icon header-icon-3 show-on-theme-dark"><i class="fas fa-sun"></i></a>
+        <a href="#" data-toggle-theme class="header-icon header-icon-3 show-on-theme-light"><i class="fas fa-moon"></i></a>
+    </div>
+
     <div class="page-content pb-0" style="height: 100%;">
         <div id="map" style="height: 100%;position: inherit !important;"></div>
 
@@ -209,13 +217,13 @@ export default {
         
         
     };
-    $(".page-title-wrapper").css("background-color", "#eef2f1");
-    $(".page-title-wrapper").css("height", "58px");
-    $(".page-title-wrapper").css("width", "100%");
-    $(".page-title-wrapper").css("z-index", "980");
-    $(".page-title-wrapper").css("position", "absolute");
-    $(".page-title-fixed").css("position", "absolute");
-    $(".page-title-fixed").css("z-index", "990");
+    //$(".page-title-wrapper").css("background-color", "#eef2f1");
+    //$(".page-title-wrapper").css("height", "58px");
+    //$(".page-title-wrapper").css("width", "100%");
+    //$(".page-title-wrapper").css("z-index", "980");
+    //$(".page-title-wrapper").css("position", "absolute");
+    //$(".page-title-fixed").css("position", "absolute");
+    //$(".page-title-fixed").css("z-index", "990");
     $(".page-title-clear").addClass("hide");
     var body = document.body, html = document.documentElement;
     var height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
