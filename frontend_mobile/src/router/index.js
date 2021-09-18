@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HomePage from '@/components/HomePage'
+import BuddyCreatePage from '@/components/BuddyCreatePage'
 import CenterDetailPage from '@/components/CenterDetailPage'
 import CenterListPage from '@/components/CenterListPage'
 import CenterListMapPage from '@/components/CenterListMapPage'
@@ -15,6 +16,11 @@ export default new Router({
       path: '/',
       name: 'HomePage',
       component: HomePage
+    },
+    {
+      path: '/buddy_create',
+      name: 'BuddyCreatePage',
+      component: BuddyCreatePage
     },
     {
       path: '/center',

@@ -1,0 +1,264 @@
+<template>
+  <div class="">
+    <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-center" data-menu-load=""></div>    
+    <div class="header header-fixed header-logo-center">
+        <a href="" class="header-title color">다이브 이벤트 만들기</a>
+        <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
+        <a href="#" data-menu="menu-main" class="header-icon header-icon-4"><i class="fas fa-bars"></i></a>
+        <a href="#" data-toggle-theme class="header-icon header-icon-3 show-on-theme-dark"><i class="fas fa-sun"></i></a>
+        <a href="#" data-toggle-theme class="header-icon header-icon-3 show-on-theme-light"><i class="fas fa-moon"></i></a>
+    </div>
+    
+    <div class="card card-clear" data-card-height="80"></div>
+
+    <div class="page-content pb-3"> 
+        
+        <!-- card in this page format must have the class card-full to avoid seeing behind it-->
+        <div class="card card-full pb-1">
+            <div class="content mt-1">
+                <h4 class="pt-3 mb-2">일정 정보</h4>
+                <div class="row mb-2">
+                    <div class="col-3">
+                        <i class="far fa-calendar-alt"></i> 일정
+                    </div>
+                    <div class="col-9">
+                        <a href="#" data-menu="menu-schedule" class="btn btn-3d btn-m btn-full mb-3 rounded-xl text-uppercase font-900 shadow-s border-gray-dark bg-gray-light"><i class="fas fa-plus"></i></a>
+                    </div>
+                </div>
+
+
+                <h4 class="pt-3 mb-2">참여 정보</h4>
+                <div class="row mb-2">
+                    <div class="col-3">
+                        <i class="fas fa-user"></i> 모집인원
+                    </div>
+                    <div class="col-9">
+                      <div class="input-style has-borders no-icon validate-field mb-0">
+                        <input type="number" class="form-control validate-text" id="form_price" placeholder="모집인원을 입력하세요.">
+                        <label for="form_price" class="color-highlight">모집인원</label>
+                        <i class="fa fa-times disabled invalid color-red-dark"></i>
+                        <i class="fa fa-check disabled valid color-green-dark"></i>
+                        <em>(필요 시 입력))</em>
+                      </div>
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col-3">
+                        <i class="far fa-money-bill-alt"></i> 참가비
+                    </div>
+                    <div class="col-9">
+                      <div class="input-style has-borders no-icon validate-field mb-0">
+                        <input type="number" class="form-control validate-text" id="form_price" placeholder="참가 회비를 입력하세요.">
+                        <label for="form_price" class="color-highlight">참가비</label>
+                        <i class="fa fa-times disabled invalid color-red-dark"></i>
+                        <i class="fa fa-check disabled valid color-green-dark"></i>
+                        <em>(필요 시 입력))</em>
+                      </div>
+                    </div>
+                </div>
+
+
+                <div class="row mb-2">
+                    <div class="col-3">
+                        <i class="far fa-sticky-note"></i> 메모
+                    </div>
+                      <div class="col-9">
+                        <div class="input-style has-borders no-icon mb-0">
+                          <textarea id="form7" placeholder="이곳에 메모를 작성해보세요."></textarea>
+                          <label for="form7" class="color-highlight">메모</label>
+                      </div>
+                    </div>
+                </div>
+
+                
+            </div>
+            
+                
+            
+        </div>
+    </div>
+    <!-- Page content ends here-->
+        
+    
+    <!-- Menu Schedule -->
+    <div id="menu-schedule" 
+         class="menu menu-box-modal rounded-m" 
+         data-menu-height="350" 
+         data-menu-width="350">
+        <div class="menu-title">
+            <h1 class="font-14">일정 추가</h1>
+            <a href="#" class="close-menu"><i class="fa fa-times-circle"></i></a>
+        </div>
+        <div class="divider divider-margins mt-3 mb-0"></div>
+        <div class="content">
+            <div class="row mb-1">
+                <div class="input-style has-borders no-icon col-6">
+                    <input type="date" value="2021-09-20" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_start" placeholder="Phone">
+                    <label for="form_start" class="color-highlight">시작일</label>
+                    <i class="fa fa-check disabled valid me-4 pe-3 font-12 color-green-dark"></i>
+                    <i class="fa fa-check disabled invalid me-4 pe-3 font-12 color-red-dark"></i>
+                </div>
+                <div class="input-style has-borders no-icon col-6">
+                    <input type="date" value="2021-09-20" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_end" placeholder="Phone">
+                    <label for="form_end" class="color-highlight">종료일</label>
+                    <i class="fa fa-check disabled valid me-4 pe-3 font-12 color-green-dark"></i>
+                    <i class="fa fa-check disabled invalid me-4 pe-3 font-12 color-red-dark"></i>
+                </div>
+            </div>
+
+            
+            <vue-typeahead-bootstrap
+                class="wedive-search search-dark shadow-xl border-0 bg-theme rounded-sm bottom-0 mb-4"
+                v-model="query"
+                :data="users"
+                :serializer="item => item.name_ko"
+                :screen-reader-text-serializer="item => `${item.name_ko}`"
+                highlightClass="special-highlight-class"
+                @hit="selecteduser = $event"
+                :minMatchingChars="2"
+                placeholder="Search Github Users"
+                inputClass="special-input-class"
+                :disabledValues="(selecteduser ? [selecteduser.name_ko] : [])"
+                @input="lookupUser2"
+                >
+                <template slot="suggestion" slot-scope="{ data, htmlText }">
+                    <div class="d-flex align-items-center">
+                    <img
+                        class="rounded-s me-2"
+                        :src="data.img_url"
+                        style="width: 40px; height: 40px;" />
+                    
+                    
+                    
+                    <span v-if="data.type == 'region'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-marked-alt\'></i> 장소</span><br/>' + htmlText"></span>
+                    <span v-else-if="data.type == 'point'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-pin\'></i> 다이빙 포인트</span><br/>' + htmlText"></span>
+                    <span v-else-if="data.type == 'center'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-store\'></i> 다이빙 센터</span><br/>' + htmlText"></span>
+                    </div>
+                </template>
+            </vue-typeahead-bootstrap>
+            
+            
+        </div>
+        <div class="divider divider-margins mt-1 mb-1"></div>
+        <div class="content">
+          <a href="#" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-2">입력</a>
+        </div>
+    </div>
+
+
+    <div id="snackbar-confirm" class="snackbar-toast color-white bg-green-dark" data-bs-delay="3000" data-bs-autohide="true"><i class="fa fa-check me-3"></i>예약이 완료되었습니다.</div>
+
+
+  </div>
+</template>
+<script>
+import VueTypeaheadBootstrap from 'vue-typeahead-bootstrap';
+import {debounce} from 'lodash';
+
+export default {
+  name: 'HelloWorld',
+  mounted() {
+    $(".page-title").hide();
+    $(".page-title-clear").hide();
+  },
+  components: {
+    VueTypeaheadBootstrap
+  },
+  created() {
+    
+  },
+  data () {
+    return {
+        query: '',
+        selecteduser: null,
+        users: []
+    }
+  }, methods: {
+      lookupUser: debounce(function(){
+        // in practice this action should be debounced
+        fetch(`https://api.github.com/search/users?q=${this.query}`)
+          .then(response => {
+            return response.json();
+          })
+          .then(data => {
+            this.users = data.items;
+          })
+      }, 500),
+      lookupUser2: debounce(function(){
+          console.log("aa");
+        this.users = [
+            {"id": "region_ko_jeju", "type": "region", "name_ko": "제주도", name_en: "Jeju island", "img_url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0c/bf/d2/56/photo1jpg.jpg?w=100&h=100&s=1"},
+            {"id": "region_ko_wooljin", "type": "region", "name_ko": "울진", name_en: "Wooljin", "img_url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/01/5a/31/a0/sunrise-peak-seongsan.jpg?w=100&h=100&s=1"},
+            {"id": "center_ko_jeju_bubbletank", "type": "center", "name_ko": "버블탱크 스쿠버다이빙", name_en: "Bubble tank", "img_url": "/static/bubble2.jpg"},
+            {"id": "point_ko_jeju_munisland", "type": "point", "name_ko": "문섬", name_en: "Mun island", "img_url": "https://api.cdn.visitjeju.net/photomng/imgpath/201907/31/07c1996d-4374-4e77-b353-300d01783718.jpg"},
+        ];
+      }, 500),
+      reserve_next: function() {
+          setTimeout(function() {
+            const activeMenu = document.querySelectorAll('.menu-active');
+            for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
+          },100);
+
+          setTimeout(function() {
+            var menuData = 'menu-reserve2';
+            document.getElementById(menuData).classList.add('menu-active');
+            document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
+          },200);
+      },
+      reserve_finish: function() {
+          setTimeout(function() {
+            const activeMenu = document.querySelectorAll('.menu-active');
+            for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
+          },100);
+      },
+      goPoint: function() {
+          location.href = '/point';
+      }
+  }
+
+  
+}
+
+
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+
+.ico_feature {}
+.ico_feature1 {width: 44px;height: 40px;background-position: 0px 0px;}
+.ico_feature2 {width: 44px;height: 40px;background-position: -45px 0px;}
+.ico_feature3 {width: 44px;height: 40px;background-position: -90px 0px;}
+.ico_feature4 {width: 44px;height: 40px;background-position: -135px 0px;}
+.ico_feature5 {width: 44px;height: 40px;background-position: -180px 0px;}
+.ico_feature6 {width: 44px;height: 40px;background-position: -225px 0px;}
+.ico_feature7 {width: 44px;height: 40px;background-position: 0px -40px;}
+.ico_feature8 {width: 44px;height: 40px;background-position: -45px -40px;}
+.ico_feature9 {width: 44px;height: 40px;background-position: -90px -40px;}
+.ico_feature10 {width: 44px;height: 40px;background-position: -135px -40px;}
+.ico_feature11 {width: 44px;height: 40px;background-position: -180px -40px;}
+.ico_feature12 {width: 44px;height: 40px;background-position: -225px -40px;}
+.ico_feature13 {width: 44px;height: 40px;background-position: 0px -78px;}
+.ico_feature14 {width: 44px;height: 40px;background-position: -45px -78px;}
+.ico_feature15 {width: 44px;height: 40px;background-position: -90px -78px;}
+.ico_feature16 {width: 44px;height: 40px;background-position: -135px -78px;}
+.ico_feature17 {width: 44px;height: 40px;background-position: -180px -78px;}
+.ico_feature18 {width: 44px;height: 40px;background-position: -225px -78px;}
+
+.icon-course {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/wedive_course2.png);background-repeat: no-repeat;-webkit-background-size: 270px 118px;background-size: 270px 118px;}
+.span_feature {width:66px;}
+.text-urgent {color:#de5246; background-color: #ffebe9;padding: 2px 8px;border-radius:2px;}
+
+.square-img {width: 100%;height: 0px;padding: 50% 0;background-size: 100% 100%;background-clip: border-box;box-sizing:border-box;}
+.txt_box {background: #f4f4f4; border-radius: .5rem;padding: 14px 20px;}
+
+
+
+.timeline-item .timeline-icon {top: -10px !important;}
+.timeline-item-content, .timeline-item-content-full {border: none !important;background-color: transparent!important;padding: 0 !important;}
+.icon-check i{top: -8px;}
+.btn-wedive-next {width: 30%;float: right;margin-top: 10px;border-radius: 20px !important;margin-right: 10px;}
+.point-text {overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;}
+
+</style>

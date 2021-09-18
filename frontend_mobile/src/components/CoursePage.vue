@@ -513,7 +513,7 @@
             </a>
             
 
-            <a href="#" v-on:click="reserve_next()" data-menu="menu-reserve"class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-2 btn-wedive-next" >다음</a>
+            <a href="#" v-on:click="reserve_next()" data-menu="menu-reserve" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-2 btn-wedive-next" >다음</a>
 
             
         </div>

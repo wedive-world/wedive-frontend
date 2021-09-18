@@ -4522,7 +4522,7 @@ button:active {
 
 .input-style {
   position: relative;
-  margin-bottom: 15px !important;
+  margin-bottom: 5px !important;
 }
 
 .input-style input,
@@ -4731,7 +4731,7 @@ input[type=number] {
   padding-top: 12px !important;
   height: 55px !important;
   transform: translateY(7px) translateX(0px) !important;
-  margin-bottom: 30px !important;
+  margin-bottom: 0px !important;
 }
 
 .device-is-android .input-style input[type=date] ~ label.color-highlight {
