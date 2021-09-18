@@ -840,6 +840,10 @@ body {
   color: #b4bcc8 !important;
 }
 
+.color-gray-light-mid2 {
+  color: #969fac !important;
+}
+
 .color-gray-light {
   color: #e2e5ea !important;
 }
@@ -5031,7 +5035,7 @@ input[type=number] {
   right: 13px;
   font-size: 16px;
   margin-top: 0.5px;
-  content: "";
+  content: "\f058";
   opacity: 1;
   color: #1d397c;
 }
@@ -6434,15 +6438,15 @@ input[type=number] {
   pointer-events: none;
   position: absolute;
   left: 30px;
-  top: 0px;
+  top: -4px;
   height: 40px;
   line-height: 40px;
 }
 
 .interest-check {
   margin-left: -20px;
-  margin-right: 10px;
-  margin-bottom: 35px;
+  margin-right: 4px;
+  margin-bottom: 20px;
   height: 22px;
   cursor: pointer;
   position: relative;
@@ -6455,7 +6459,7 @@ input[type=number] {
   font-weight: 500;
   font-size: 13px;
   font-family: "Inter", sans-serif;
-  padding: 8px 15px 8px 40px;
+  padding: 4px 12px 4px 36px;
 }
 
 .interest-check input:checked ~ .fa {

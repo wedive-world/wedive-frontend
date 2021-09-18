@@ -104,7 +104,7 @@
                             <div class="timeline-item mt-4">
                                 <i class="fas fa-store bg-blue-dark shadow-l timeline-icon"></i>
                                 <div class="timeline-item-content rounded-sm">
-                                    <h5 class="font-300 mb-3">
+                                    <h5 class="font-300 mb-3 font-13">
                                         센터 도착 후 슈트착용 후 항으로 이동
                                     </h5>
                                     <img data-src="/static/images/diving_exp1.jpg" alt="img" src="/static/images/diving_exp1.jpg" class="preload-img rounded-s img-fluid">
@@ -114,7 +114,7 @@
                             <div class="timeline-item">
                                 <i class="fas fa-ship bg-yellow-dark shadow-l timeline-icon"></i>
                                 <div class="timeline-item-content rounded-sm">
-                                    <h5 class="font-300">
+                                    <h5 class="font-300 font-13">
                                         항에서 배를 타고 섬으로 이동
                                     </h5>
                                     <img data-src="/static/images/diving_exp2.jpg" alt="img" src="/static/images/diving_exp2.jpg" class="preload-img rounded-s img-fluid">
@@ -124,7 +124,7 @@
                             <div class="timeline-item">
                                 <i class="fas fa-graduation-cap bg-green-dark shadow-l timeline-icon"></i>
                                 <div class="timeline-item-content rounded-sm">
-                                    <h5 class="font-300">
+                                    <h5 class="font-300 font-13">
                                         사전 교육 진행
                                     </h5>
                                     <img data-src="/static/images/diving_exp3.jpg" alt="img" src="/static/images/diving_exp3.jpg" class="preload-img rounded-s img-fluid">
@@ -134,7 +134,7 @@
                             <div class="timeline-item">
                                 <i class="fas fa-swimmer bg-pinterest shadow-l timeline-icon"></i>
                                 <div class="timeline-item-content rounded-sm">
-                                    <h5 class="font-300">
+                                    <h5 class="font-300 font-13">
                                         장비 착용 후 수면에서 스쿠버교육
                                     </h5>
                                     <img data-src="/static/images/diving_exp4.jpg" alt="img" src="/static/images/diving_exp4.jpg" class="preload-img rounded-s img-fluid">
@@ -144,7 +144,7 @@
                             <div class="timeline-item">
                                 <i class="fas fa-fish bg-twitter shadow-l timeline-icon"></i>
                                 <div class="timeline-item-content rounded-sm">
-                                    <h5 class="font-300">
+                                    <h5 class="font-300 font-13">
                                         다이빙 체험
                                     </h5>
                                     <img data-src="/static/images/diving_exp5.jpg" alt="img" src="/static/images/diving_exp5.jpg" class="preload-img rounded-s img-fluid">
@@ -167,8 +167,164 @@
                     </a>        
                 </div>
                 <div class="collapse show" id="dive_point">
-                    <div class="txt_box">
-                        
+                    <div class="point_area mb-2">
+                        <div class="ms-2 me-2 cursor-pointer position-relative" v-on:click="goPoint()">
+                            <h5 class="font-700 font-13 color-secondary"><i class="fas fa-map-pin me-1"></i> 문섬 포인트</h5>
+                            <span class="color-gray-light-mid font-13 mb-0 text-more">더 보기<i class="fas fa-chevron-right ms-2"></i></span>
+                            <p class="opacity-40 mb-0 point-text">서귀포 하면 가장 먼저 떠오르는 다이빙 포인트! 물때에 따라 다른 방향으로 흘러가는 조류 다이빙, 다양한 연산호와 물고기들이 어우러진 곳이다. 서귀포항에서 배를 타고 5분 정도면 다다를 수 있을정도로 가까운 섬이며, 도지정 문화재 기념물로 보호되고 있다.</p>
+                        </div>
+                        <div class="splide double-slider slider-no-arrows slider-no-dots ps-2" id="point-slider-1">
+                            <div class="splide__track">
+                                <div class="splide__list">
+                                    <div class="splide__slide">
+                                        <div class="card m-2 card-style">
+                                            <img src="/static/images/point/ko/jeju_munisland_01.jpg" class="img-fluid">
+                                            <div class="p-2 bg-theme rounded-sm">
+                                                <h4 class="font-13 line-height-s font-400 mb-0">문섬 바다 속 풍경</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="splide__slide">
+                                        <div class="card m-2 card-style">
+                                            <img src="/static/images/point/ko/jeju_munisland_02.jpg" class="img-fluid">
+                                            <div class="p-2 bg-theme rounded-sm">
+                                                <h4 class="font-13 line-height-s font-400 mb-0">연산호 주변 범돔 무리</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="splide__slide">
+                                        <div class="card m-2 card-style">
+                                            <img src="/static/images/point/ko/jeju_munisland_03.jpg" class="img-fluid">
+                                            <div class="p-2 bg-theme rounded-sm">
+                                                <h4 class="font-13 line-height-s font-400 mb-0">적벽 형태의 포인트</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="splide__slide">
+                                        <div class="card m-2 card-style">
+                                            <img src="/static/images/point/ko/jeju_munisland_04.jpg" class="img-fluid">
+                                            <div class="p-2 bg-theme rounded-sm">
+                                                <h4 class="font-13 line-height-s font-400 mb-0">형형색색의 연산호</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="splide__slide">
+                                        <div class="card m-2 card-style">
+                                            <img src="/static/images/point/ko/jeju_munisland_05.jpg" class="img-fluid">
+                                            <div class="p-2 bg-theme rounded-sm">
+                                                <h4 class="font-13 line-height-s font-400 mb-0">다양한 수중생물</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="splide__slide">
+                                        <div class="card m-2 card-style">
+                                            <img src="/static/images/point/ko/jeju_munisland_06.jpg" class="img-fluid">
+                                            <div class="p-2 bg-theme rounded-sm">
+                                                <h4 class="font-13 line-height-s font-400 mb-0">문섬, 새끼섬</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="point_area mb-2">
+                        <div class="ms-2 me-2 cursor-pointer position-relative" v-on:click="goPoint()">
+                            <h5 class="font-700 font-13 color-secondary"><i class="fas fa-map-pin me-1"></i> 범섬 포인트</h5>
+                            <span class="color-gray-light-mid font-13 mb-0 text-more">더 보기<i class="fas fa-chevron-right ms-2"></i></span>
+                            <p class="opacity-40 mb-0 point-text">서귀포항에서 남서쪽으로 5㎞해상에 위치한 범섬은 멀리서 바라보면 큰 호랑이가 웅크리고 앉은 모습과 같아 붙여진 이름이다. 섬주변에는 기복이 심한 암초가 깔려 있어참돔, 돌돔, 감성돔, 벵어돔, 자바리 등을 많이 볼수 있으며, 6월부터 7월까지는 감성돔, 뱅어돔, 참돔이겨울철에는 자바리, 참돔, 돌돔 등을 다양한 어종을 만날 수 있다.</p>
+                        </div>
+                        <div class="splide double-slider slider-no-arrows slider-no-dots ps-2" id="point-slider-2">
+                            <div class="splide__track">
+                                <div class="splide__list">
+                                    <div class="splide__slide">
+                                        <div class="card m-2 card-style">
+                                            <img src="/static/images/point/ko/jeju_bumisland_01.jpg" class="img-fluid">
+                                            <div class="p-2 bg-theme rounded-sm">
+                                                <h4 class="font-13 line-height-s font-400 mb-0">범섬 전경</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="splide__slide">
+                                        <div class="card m-2 card-style">
+                                            <img src="/static/images/point/ko/jeju_bumisland_02.jpg" class="img-fluid">
+                                            <div class="p-2 bg-theme rounded-sm">
+                                                <h4 class="font-13 line-height-s font-400 mb-0">범섬 바다 속 풍경</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="splide__slide">
+                                        <div class="card m-2 card-style">
+                                            <img src="/static/images/point/ko/jeju_bumisland_03.jpg" class="img-fluid">
+                                            <div class="p-2 bg-theme rounded-sm">
+                                                <h4 class="font-13 line-height-s font-400 mb-0">범섬 내부 산호</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="splide__slide">
+                                        <div class="card m-2 card-style">
+                                            <img src="/static/images/point/ko/jeju_bumisland_04.jpg" class="img-fluid">
+                                            <div class="p-2 bg-theme rounded-sm">
+                                                <h4 class="font-13 line-height-s font-400 mb-0">범섬 포인트 물고기</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="point_area mb-2">
+                        <div class="ms-2 me-2 cursor-pointer position-relative" v-on:click="goPoint()">
+                            <h5 class="font-700 font-13 color-secondary"><i class="fas fa-map-pin me-1"></i> 서건도 포인트</h5>
+                            <span class="color-gray-light-mid font-13 mb-0 text-more">더 보기<i class="fas fa-chevron-right ms-2"></i></span>
+                            <p class="opacity-40 mb-0 point-text">조수간만의 차에 의해 한달에 10차례에 걸쳐 앞바다가 갈라지는 제주판 '모세의 기적', 서귀포시 서건도(일명 써근섬)로 알려진 유명한 섬이다. 바닷물이 갈라지면 서귀포 해안에서 걸어서 들어갈수 있는 섬으로도 유명, 해안에서 섬까지 걸어가는 동안 조개와 낙지 등을 잡는 재미로 체험관광객들의 발길이 잦다.</p>
+                        </div>
+                        <div class="splide double-slider slider-no-arrows slider-no-dots ps-2" id="point-slider-3">
+                            <div class="splide__track">
+                                <div class="splide__list">
+                                    <div class="splide__slide">
+                                        <div class="card m-2 card-style">
+                                            <img src="/static/images/point/ko/jeju_seogunisland_01.jpg" class="img-fluid">
+                                            <div class="p-2 bg-theme rounded-sm">
+                                                <h4 class="font-13 line-height-s font-400 mb-0">서건도 전경</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="splide__slide">
+                                        <div class="card m-2 card-style">
+                                            <img src="/static/images/point/ko/jeju_seogunisland_02.jpg" class="img-fluid">
+                                            <div class="p-2 bg-theme rounded-sm">
+                                                <h4 class="font-13 line-height-s font-400 mb-0">서건도 내부 연산호</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="splide__slide">
+                                        <div class="card m-2 card-style">
+                                            <img src="/static/images/point/ko/jeju_seogunisland_03.jpg" class="img-fluid">
+                                            <div class="p-2 bg-theme rounded-sm">
+                                                <h4 class="font-13 line-height-s font-400 mb-0">서건도 내부 물고기</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="splide__slide">
+                                        <div class="card m-2 card-style">
+                                            <img src="/static/images/point/ko/jeju_seogunisland_04.jpg" class="img-fluid">
+                                            <div class="p-2 bg-theme rounded-sm">
+                                                <h4 class="font-13 line-height-s font-400 mb-0">내부 바위군</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="splide__slide">
+                                        <div class="card m-2 card-style">
+                                            <img src="/static/images/point/ko/jeju_seogunisland_05.jpg" class="img-fluid">
+                                            <div class="p-2 bg-theme rounded-sm">
+                                                <h4 class="font-13 line-height-s font-400 mb-0">내부 기암괴석</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -194,7 +350,7 @@
 
                 
             </div>
-            <div class="content">
+            <div class="content hide">
                 <div class="gallery-view-controls">
                     <div class="divider mb-0"></div>
                     <a href="#" class="color-highlight gallery-view-1"><i class="fa fa-th"></i></a>
@@ -420,7 +576,9 @@ export default {
             document.getElementById(menuData).classList.add('menu-active');
             document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
           },200);
-        
+      },
+      goPoint: function() {
+          location.href = '/point';
       }
   }
 
@@ -465,4 +623,7 @@ export default {
 .timeline-item .timeline-icon {top: -10px !important;}
 .timeline-item-content, .timeline-item-content-full {border: none !important;background-color: transparent!important;padding: 0 !important;}
 .icon-check i{top: -8px;}
-.btn-wedive-next {width: 30%;float: right;margin-top: 10px;border-radius: 20px !important;margin-right: 10px;}</style>
+.btn-wedive-next {width: 30%;float: right;margin-top: 10px;border-radius: 20px !important;margin-right: 10px;}
+.point-text {overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;}
+
+</style>

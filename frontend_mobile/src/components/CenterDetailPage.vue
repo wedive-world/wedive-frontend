@@ -31,14 +31,14 @@
         <div class="card card-style" style="margin-top:-60px; z-index:1">
             <div class="text-center" style="padding:30px 10px;">
                 <h2 class="font-20 font-700 mb-0">버블탱크 스쿠버다이빙</h2>
-                <p style="margin:0;">제주 남부에 위치한 PADI 5star 다이빙센터</p>
-                <div class="star-area" style="margin-top: 16px;">
+                <p class="color-gray m-0">제주 남부에 위치한 PADI 5star 다이빙센터</p>
+                <div class="star-area mt-3">
                     <i class="fa fa-star font-20 color-yellow-dark scale-box"></i>
                     <i class="fa fa-star font-20 color-yellow-dark scale-box"></i>
                     <i class="fa fa-star font-20 color-yellow-dark scale-box"></i>
                     <i class="fa fa-star-half-alt font-20 color-yellow-dark scale-box"></i>
                     <i class="far fa-star font-20 color-yellow-dark scale-box"></i>
-                    <span class="font-20" style="margin-left: 10px;color:black;vertical-align:bottom;">3.8</span>
+                    <span class="font-20 ms-2">3.8</span>
                 </div>
                 <div class="evaluation d-flex">
                     <span class="view font-12"">경치 4.1</span>

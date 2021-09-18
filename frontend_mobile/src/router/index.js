@@ -5,6 +5,7 @@ import CenterDetailPage from '@/components/CenterDetailPage'
 import CenterListPage from '@/components/CenterListPage'
 import CenterListMapPage from '@/components/CenterListMapPage'
 import CoursePage from '@/components/CoursePage'
+import PointDetailPage from '@/components/PointDetailPage'
 
 Vue.use(Router)
 
@@ -34,7 +35,13 @@ export default new Router({
       path: '/course',
       name: 'CoursePage',
       component: CoursePage
+    },
+    {
+      path: '/point',
+      name: 'PointDetailPage',
+      component: PointDetailPage
     }
+    
   ],
   mode: 'history'
 })
