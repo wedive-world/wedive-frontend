@@ -103,39 +103,38 @@
                     <div class="gallery-views gallery-view-2">
                         <a data-gallery="gallery-1" href="/static/images/point/ko/jeju_munisland_01.jpg" title="문섬 바다 속 풍경">
                             <img src="images/empty.png" data-src="/static/images/point/ko/jeju_munisland_01.jpg" class="rounded-m preload-img shadow-l img-fluid" alt="img">
-                            <div class="caption">
-                                <p class="color-highlight font-600 mb-n1">문섬 바다 속 풍경</p>
+                            <div class="caption pt-0 mb-2 ms-3">
+                                <p class="color-gray-light-mid font-600 mb-n1">문섬 바다 속 풍경</p>
                             </div>
                         </a>
                         <a data-gallery="gallery-1" href="/static/images/point/ko/jeju_munisland_02.jpg" title="연산호 주변 범돔 무리">
                             <img src="images/empty.png" data-src="/static/images/point/ko/jeju_munisland_02.jpg" class="rounded-m preload-img shadow-l img-fluid" alt="img">
-                            <div class="caption">
-                                <p class="color-highlight font-600 mb-n1">연산호 주변 범돔 무리</p>
+                            <div class="caption pt-0 mb-2 ms-3">
+                                <p class="color-gray-light-mid font-600 mb-n1">연산호 주변 범돔 무리</p>
                             </div>
                         </a>		
                         <a data-gallery="gallery-1" href="/static/images/point/ko/jeju_munisland_03.jpg" title="적벽 형태의 포인트">
                             <img src="images/empty.png" data-src="/static/images/point/ko/jeju_munisland_03.jpg" class="rounded-m preload-img shadow-l img-fluid" alt="img">
-                            <div class="caption">
-                                <p class="color-highlight font-600 mb-n1">The best Wireless</p>
-                                <h1 class="color-theme">적벽 형태의 포인트</h1>
+                            <div class="caption pt-0 mb-2 ms-3">
+                                <p class="color-gray-light-mid font-600 mb-n1">적벽 형태의 포인트</p>
                             </div>
                         </a>	
                         <a data-gallery="gallery-1" href="/static/images/point/ko/jeju_munisland_04.jpg" title="형형색색의 연산호">
                             <img src="images/empty.png" data-src="/static/images/point/ko/jeju_munisland_04.jpg" class="rounded-m preload-img shadow-l img-fluid" alt="img">
-                            <div class="caption">
-                                <p class="color-highlight font-600 mb-n1">형형색색의 연산호</p>
+                            <div class="caption pt-0 mb-2 ms-3">
+                                <p class="color-gray-light-mid font-600 mb-n1">형형색색의 연산호</p>
                             </div>
                         </a>
                         <a data-gallery="gallery-1" href="/static/images/point/ko/jeju_munisland_05.jpg" title="다양한 수중생물">
                             <img src="images/empty.png" data-src="/static/images/point/ko/jeju_munisland_05.jpg" class="rounded-m preload-img shadow-l img-fluid" alt="img">
-                            <div class="caption">
-                                <p class="color-highlight font-600 mb-n1">다양한 수중생물</p>
+                            <div class="caption pt-0 mb-2 ms-3">
+                                <p class="color-gray-light-mid font-600 mb-n1">다양한 수중생물</p>
                             </div>
                         </a>
                         <a data-gallery="gallery-1" href="/static/images/point/ko/jeju_munisland_06.jpg" title="문섬, 새끼섬">
                             <img src="images/empty.png" data-src="/static/images/point/ko/jeju_munisland_06.jpg" class="rounded-m preload-img shadow-l img-fluid" alt="img">
-                            <div class="caption mb-4">
-                                <p class="color-highlight font-600 mb-n1">문섬, 새끼섬</p>
+                            <div class="caption pt-0 mb-2 ms-3 mb-4">
+                                <p class="color-gray-light-mid font-600 mb-n1">문섬, 새끼섬</p>
                             </div>
                         </a>			
                     </div>
