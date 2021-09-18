@@ -613,7 +613,9 @@
                                     </div>
                                 </div>
                                 <p class="review-text mt-3">
-                                    <img src="https://search.pstatic.net/common/?autoRotate=true&amp;quality=95&amp;type=f87_87&amp;src=https%3A%2F%2Fmyplace-phinf.pstatic.net%2F20210827_62%2F16300643312513fe1S_JPEG%2Fupload_07fc7f5449b8fecbeca86e655f0afce3.jpg" class="review_img" alt="방문자리뷰">
+                                    <a href="https://myplace-phinf.pstatic.net/20210827_62/16300643312513fe1S_JPEG/upload_07fc7f5449b8fecbeca86e655f0afce3.jpg" data-gallery="gallery-99" class="filtr-item" title="" data-category="99">
+                                        <img src="/static/images/empty.png" data-src="https://search.pstatic.net/common/?autoRotate=true&amp;quality=95&amp;type=f87_87&amp;src=https%3A%2F%2Fmyplace-phinf.pstatic.net%2F20210827_62%2F16300643312513fe1S_JPEG%2Fupload_07fc7f5449b8fecbeca86e655f0afce3.jpg" class="preload-img rounded-s shadow-m review_img" alt="방문자리뷰">
+                                    </a>
                                     제주도에서 스쿠버 다이빙 할 때 항상 방문하는 버블탱크 입니다.<br/>
                                     예약할 때 문의 드리면 친절하게 답변해 주십니다.<br/>
                                     다이빙 할 때도 신경 많이 써 주시고<br/>
@@ -680,7 +682,9 @@
                                     </div>
                                 </div>
                                 <p class="review-text mt-3">
-                                    <img src="https://search.pstatic.net/common/?autoRotate=true&amp;quality=95&amp;type=f87_87&amp;src=https%3A%2F%2Fmyplace-phinf.pstatic.net%2F20210824_287%2F1629760530492Jfami_JPEG%2Fupload_b0549f411c1a65e230ea73a17359faae.jpeg" class="review_img" alt="방문자리뷰">
+                                    <a href="https://myplace-phinf.pstatic.net/20210824_287/1629760530492Jfami_JPEG/upload_b0549f411c1a65e230ea73a17359faae.jpeg" data-gallery="gallery-99" class="filtr-item" title="" data-category="99">
+                                        <img src="/static/images/empty.png" data-src="https://search.pstatic.net/common/?autoRotate=true&amp;quality=95&amp;type=f87_87&amp;src=https%3A%2F%2Fmyplace-phinf.pstatic.net%2F20210824_287%2F1629760530492Jfami_JPEG%2Fupload_b0549f411c1a65e230ea73a17359faae.jpeg" class="preload-img rounded-s shadow-m review_img" alt="방문자리뷰">
+                                    </a>
                                     강의듣는 내내 사진,동영상 많이찍어주셔서  좋았어요 !!  시설도깔끔하고  강사분들도 재밌고 친절해서 좋았습니다~  앞으로 제주도오면 많이 애용할듯! 자주자주 방문하겠습니다. 다음에 또 가면 잘알려주세요~
                                 </p>
                             </div>

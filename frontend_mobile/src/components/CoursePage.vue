@@ -425,7 +425,7 @@
                                 <i class="icon-check-2 fa fa-check-circle font-20 color-highlight"></i>
                             </div>
                         </div>
-                        <div class="ms-5">
+                        <div class="ms-4">
                             <h4 class="font-13 mb-n1 font-400">숙박 연계 호텔 1인실 (1인 기준)</h4>
                         </div>
                         <div class="ms-auto">
@@ -444,7 +444,7 @@
                                 <i class="icon-check-2 fa fa-check-circle font-20 color-highlight"></i>
                             </div>
                         </div>
-                        <div class="ms-5">
+                        <div class="ms-4">
                             <h4 class="font-13 mb-n1 font-400">숙박 연계 호텔 다인실 (1인 기준)</h4>
                         </div>
                         <div class="ms-auto">
@@ -464,7 +464,7 @@
                                 <i class="icon-check-2 fa fa-check-circle font-20 color-highlight"></i>
                             </div>
                         </div>
-                        <div class="ms-5">
+                        <div class="ms-4">
                             <h4 class="font-13 mb-n1 font-400">풀세트 (부력조절기, 호흡기, 스킨세트)</h4>
                         </div>
                         <div class="ms-auto">
@@ -483,8 +483,8 @@
                                 <i class="icon-check-2 fa fa-check-circle font-20 color-highlight"></i>
                             </div>
                         </div>
-                        <div class="ms-5">
-                            <h4 class="font-13 mb-n1 font-400">스쿠버세트 (부력조절기, 호흡기))</h4>
+                        <div class="ms-4">
+                            <h4 class="font-13 mb-n1 font-400">스쿠버세트 (부력조절기, 호흡기)</h4>
                         </div>
                         <div class="ms-auto">
                             <h3 class="font-15 mb-n1">￦30,000</h3>
@@ -502,8 +502,8 @@
                                 <i class="icon-check-2 fa fa-check-circle font-20 color-highlight"></i>
                             </div>
                         </div>
-                        <div class="ms-5">
-                            <h4 class="font-13 mb-n1 font-400">스킨세트 (슈트, 마스크, 핀, 부츠, 후드))</h4>
+                        <div class="ms-4">
+                            <h4 class="font-13 mb-n1 font-400">스킨세트 (슈트, 마스크, 핀, 부츠, 후드)</h4>
                         </div>
                         <div class="ms-auto">
                             <h3 class="font-15 mb-n1">￦20,000</h3>
@@ -527,9 +527,9 @@
             <h2 class="pt-3 pb-3 text-center">예약</h2>
             <a href="#" class="close-menu"><i class="fa fa-times"></i></a>
         </div>
-        <div class="content mb-0 text-start">
-            <div class="row mb-0 me-2 ms-2 txt_box">
-                <div class="col-6 text-start">
+        <div class="content mt-0 pb-3 text-start">
+            <div class="row mb-0 me-1 ms-1 pe-2 ps-2 txt_box">
+                <div class="col-8 text-start">
                     <h5 class="font-13 font-400">보트체험다이빙<br/>풀세트 (부력조절기, 호흡기, 스킨세트)</h5>
 
                     <div class="mx-auto">
@@ -541,10 +541,15 @@
                         <div class="clearfix"></div>
                     </div>
                 </div>
-                <p class="col-6 mb-2 text-end font-900">￦160,000</p>
+                <p class="col-4 mb-2 text-end font-900">￦160,000</p>
             </div>
+            <a href="#" v-on:click="reserve_finish()" data-toast="snackbar-confirm" data-menu="menu-reserve"class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-2" >예약하기</a>
+            
         </div>
     </div>
+
+
+    <div id="snackbar-confirm" class="snackbar-toast color-white bg-green-dark" data-bs-delay="3000" data-bs-autohide="true"><i class="fa fa-check me-3"></i>예약이 완료되었습니다.</div>
 
 
   </div>
@@ -576,6 +581,12 @@ export default {
             document.getElementById(menuData).classList.add('menu-active');
             document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
           },200);
+      },
+      reserve_finish: function() {
+          setTimeout(function() {
+            const activeMenu = document.querySelectorAll('.menu-active');
+            for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
+          },100);
       },
       goPoint: function() {
           location.href = '/point';
