@@ -346,6 +346,7 @@
 </template>
 <script>
 
+
 export default {
   name: 'HelloWorld',
   mounted() {
@@ -482,7 +483,6 @@ export default {
                 $(".wedive-action").css("bottom", "160px");
                 $(".map-box").removeClass("hide");
                 for (var j=0; j<this.marker_list.length; j++) {
-                    console.log("/" + j + "/");
                     var _icon = this.marker_list[j].getIcon();
                     if (_icon.size.width != 38) {
                         this.marker_list[j].setIcon(new google.maps.MarkerImage('/static/images/ico_pin2.png', null, null, null, new google.maps.Size(38,43)));
@@ -500,8 +500,12 @@ export default {
                 
                 
                 marker_shop.setIcon(new google.maps.MarkerImage('/static/images/ico_pin_big1.png', null, null, null, new google.maps.Size(58,66)));
-                this.map.setCenter(marker_shop.getPosition());
-                this.map.setZoom(18);
+                if (this.map.getZoom() == 18) {
+                    this.map.panTo(marker_shop.getPosition());
+                } else {
+                    this.map.setZoom(18);
+                    this.map.setCenter(marker_shop.getPosition());
+                }
             });
             this.marker_list.push(marker_shop);
         }
