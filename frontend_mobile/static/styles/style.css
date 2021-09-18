@@ -2,7 +2,7 @@
 /*Typography Settings*/
 body {
   font-size: 13px;
-  font-family: "Noto Sans Korean", sans-serif !important;
+  font-family: "Roboto", sans-serif !important;
   line-height: 24px !important;
   color: #000 !important;
   background-color: #eef2f1;
@@ -11,7 +11,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   color: #1f1f1f;
-  font-family: "Noto Sans Korean", sans-serif !important;
+  font-family: "Inter", sans-serif !important;
   margin-bottom: 5px;
   letter-spacing: -0.8px;
 }
@@ -1210,11 +1210,11 @@ body {
 
 /*--Header---*/
 .header-title span {
-  font-family: "Noto Sans Korean", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .footer-title span {
-  font-family: "Noto Sans Korean", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .header-logo {
@@ -1247,7 +1247,7 @@ body {
   font-weight: 600;
   z-index: 1;
   padding-top: 2px;
-  font-family: "Noto Sans Korean", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 .header .header-logo {
   background-repeat: no-repeat;
@@ -1588,7 +1588,7 @@ body {
   font-weight: 500;
   margin-top: -6px;
   opacity: 0.7;
-  font-family: "Noto Sans Korean", sans-serif !important;
+  font-family: "Roboto", sans-serif !important;
 }
 #footer-bar a i {
   font-size: 18px;
@@ -2015,7 +2015,7 @@ body {
   color: #7e8793;
   font-size: 13px;
   font-weight: 500;
-  font-family: "Noto Sans Korean", sans-serif;
+  font-family: "Inter", sans-serif;
   line-height: 48px;
   display: block;
 }
@@ -2076,7 +2076,7 @@ body {
   color: #7e8793;
   font-size: 13px;
   font-weight: 500;
-  font-family: "Noto Sans Korean", sans-serif;
+  font-family: "Inter", sans-serif;
   line-height: 50px;
   display: block;
 }
@@ -2114,7 +2114,7 @@ body {
 }
 
 .list-menu {
-  font-family: "Noto Sans Korean", sans-serif;
+  font-family: "Inter", sans-serif;
   margin: 0px 25px 0px 10px;
 }
 
@@ -2712,7 +2712,7 @@ img.mx-auto {
 
 /*Buttons*/
 .btn {
-  font-family: "Noto Sans Korean", sans-serif;
+  font-family: "Inter", sans-serif;
   transition: all 300ms ease;
   color: #FFF;
 }
@@ -4876,7 +4876,7 @@ input[type=number] {
 .list-custom-large a {
   line-height: 70px;
   color: #1f1f1f;
-  font-family: "Noto Sans Korean", sans-serif;
+  font-family: "Inter", sans-serif;
   font-weight: 600;
   font-size: 13px;
   border-bottom: solid 1px rgba(0, 0, 0, 0.05);
@@ -5496,7 +5496,7 @@ input[type=number] {
 }
 
 .tab-controls a {
-  font-family: "Noto Sans Korean", sans-serif;
+  font-family: "Inter", sans-serif;
   color: #1f1f1f;
   background-color: #FFF;
   width: 100%;
@@ -5644,7 +5644,7 @@ input[type=number] {
   font-size: 28px;
   text-align: center;
   font-weight: 900;
-  font-family: "Noto Sans Korean", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 .footer .footer-logo {
   position: relative;
@@ -6458,7 +6458,7 @@ input[type=number] {
   cursor: pointer;
   font-weight: 500;
   font-size: 13px;
-  font-family: "Noto Sans Korean", sans-serif;
+  font-family: "Inter", sans-serif;
   padding: 4px 12px 4px 36px;
 }
 
