@@ -82,11 +82,11 @@
         </div>
 
         <div class="card card-style">
-            <div class="content">
-                <div class="responsive-iframe" style="-border-radius: 20px;-moz-border-radius: 20px;border-radius: 20px;">
-                    <iframe src='https://www.youtube.com/embed/zPw8-RbqP2M' frameborder='0' allowfullscreen></iframe>
+            <div class="content" style="margin: 15px;">
+                <h4 class="text-start mb-2 font-14">YouTube 소개</h4>
+                <div class="responsive-iframe" style="-border-radius: 16px;-moz-border-radius: 16px;border-radius: 16px;">
+                    <iframe src='https://www.youtube.com/embed/L1sVcQSqDAo' frameborder='0' allowfullscreen></iframe>
                 </div>
-                <h4 class="text-start pt-2 mb-2 font-14">YouTube 안내</h4>
             </div>
         </div>
 
