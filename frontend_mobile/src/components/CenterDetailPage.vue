@@ -779,7 +779,7 @@
     <!-- All Menus, Action Sheets, Modals, Notifications, Toasts, Snackbars get Placed outside the <div class="page-content"> -->
 
     <!-- Menu Share -->
-    <div id="menu-share" class="menu menu-box-bottom rounded-m">
+    <div id="menu-share" class="menu menu-box-bottom rounded-half">
         <div class="menu-title mt-n1">
             <h2 class="pt-3 pb-3 text-center">공유</h2>
             <a href="#" class="close-menu"><i class="fa fa-times"></i></a>
@@ -825,7 +825,7 @@
     </div> 
         
     <!-- Direction Share -->
-    <div id="menu-direction" class="menu menu-box-bottom rounded-m">
+    <div id="menu-direction" class="menu menu-box-bottom rounded-half">
         <div class="menu-title mt-n1">
             <h2 class="pt-3 pb-3 text-center">오시는 길</h2>
             <a href="#" class="close-menu"><i class="fa fa-times"></i></a>

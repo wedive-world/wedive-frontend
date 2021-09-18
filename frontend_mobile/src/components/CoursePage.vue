@@ -86,7 +86,7 @@
 
                 <div class="list-custom-small">
                     <a data-bs-toggle="collapse" class="no-effect" href="#course_info">
-                        <i class="fas fa-box-open font-14 color-highlight me-1"></i>
+                        <i class="fas fa-atlas font-14 color-highlight me-1"></i>
                         <span class="font-14">코스 정보</span>
                         <i class="fa fa-angle-down"></i>
                     </a>        
@@ -159,8 +159,20 @@
                 <div class="divider mb-1 mt-2"></div>
 
 
+                <div class="list-custom-small">
+                    <a data-bs-toggle="collapse" class="no-effect" href="#dive_point">
+                        <i class="fas fa-map-marked-alt font-14 color-highlight me-1"></i>
+                        <span class="font-14">다이브 포인트</span>
+                        <i class="fa fa-angle-down"></i>
+                    </a>        
+                </div>
+                <div class="collapse show" id="dive_point">
+                    <div class="txt_box">
+                        
+                    </div>
+                </div>
 
-
+                
 
                 <div class="list-custom-small">
                     <a data-bs-toggle="collapse" class="no-effect" href="#warn_notice">
@@ -226,7 +238,7 @@
 
             <div class="content">
 
-                <a href="#" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-2">예약하기</a>
+                <a href="#" data-menu="menu-reserve"class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-2">예약하기</a>
                 
 
             </div>
@@ -237,7 +249,148 @@
     <!-- Page content ends here-->
         
     
-    
+    <!-- Menu Reserve -->
+    <div id="menu-reserve" class="menu menu-box-bottom rounded-half">
+        <div class="menu-title mt-n1">
+            <h2 class="pt-3 pb-3 text-center">예약</h2>
+            <a href="#" class="close-menu"><i class="fa fa-times"></i></a>
+        </div>
+        <div class="content mb-0 text-start">
+            
+            
+
+            <a href="#" class="card card-style check-card mb-2">
+                <div class="content">
+                    <div class="d-flex mt-n2">
+                        <div class="ms-1">
+                            <div class="form-check icon-check mt-2">
+                                <input class="form-check-input" type="checkbox" value="" id="check1">
+                                <i class="icon-check-1 fa fa-circle color-gray-dark font-20"></i>
+                                <i class="icon-check-2 fa fa-check-circle font-20 color-highlight"></i>
+                            </div>
+                        </div>
+                        <div class="ms-5">
+                            <h4 class="font-13 mb-n1 font-400">숙박 연계 호텔 1인실 (1인 기준)</h4>
+                        </div>
+                        <div class="ms-auto">
+                            <h3 class="font-15 mb-n1">￦25,000<!--<sup class="opacity-30">.99</sup>--></h3>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="#" class="card card-style check-card mb-2">
+                <div class="content">
+                    <div class="d-flex mt-n2">
+                        <div class="ms-1">
+                            <div class="form-check icon-check mt-2">
+                                <input class="form-check-input" type="checkbox" value="" id="check1">
+                                <i class="icon-check-1 fa fa-circle color-gray-dark font-20"></i>
+                                <i class="icon-check-2 fa fa-check-circle font-20 color-highlight"></i>
+                            </div>
+                        </div>
+                        <div class="ms-5">
+                            <h4 class="font-13 mb-n1 font-400">숙박 연계 호텔 다인실 (1인 기준)</h4>
+                        </div>
+                        <div class="ms-auto">
+                            <h3 class="font-15 mb-n1">￦20,000</h3>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            
+            <a href="#" class="card card-style check-card mb-2">
+                <div class="content">
+                    <div class="d-flex mt-n2">
+                        <div class="ms-1">
+                            <div class="form-check icon-check mt-2">
+                                <input class="form-check-input" type="checkbox" value="" id="check2">
+                                <i class="icon-check-1 fa fa-circle color-gray-dark font-20"></i>
+                                <i class="icon-check-2 fa fa-check-circle font-20 color-highlight"></i>
+                            </div>
+                        </div>
+                        <div class="ms-5">
+                            <h4 class="font-13 mb-n1 font-400">풀세트 (부력조절기, 호흡기, 스킨세트)</h4>
+                        </div>
+                        <div class="ms-auto">
+                            <h3 class="font-15 mb-n1">￦30,000</h3>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="#" class="card card-style check-card mb-2">
+                <div class="content">
+                    <div class="d-flex mt-n2">
+                        <div class="ms-1">
+                            <div class="form-check icon-check mt-2">
+                                <input class="form-check-input" type="checkbox" value="" id="check2">
+                                <i class="icon-check-1 fa fa-circle color-gray-dark font-20"></i>
+                                <i class="icon-check-2 fa fa-check-circle font-20 color-highlight"></i>
+                            </div>
+                        </div>
+                        <div class="ms-5">
+                            <h4 class="font-13 mb-n1 font-400">스쿠버세트 (부력조절기, 호흡기))</h4>
+                        </div>
+                        <div class="ms-auto">
+                            <h3 class="font-15 mb-n1">￦30,000</h3>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="#" class="card card-style check-card mb-2">
+                <div class="content">
+                    <div class="d-flex mt-n2">
+                        <div class="ms-1">
+                            <div class="form-check icon-check mt-2">
+                                <input class="form-check-input" type="checkbox" value="" id="check2">
+                                <i class="icon-check-1 fa fa-circle color-gray-dark font-20"></i>
+                                <i class="icon-check-2 fa fa-check-circle font-20 color-highlight"></i>
+                            </div>
+                        </div>
+                        <div class="ms-5">
+                            <h4 class="font-13 mb-n1 font-400">스킨세트 (슈트, 마스크, 핀, 부츠, 후드))</h4>
+                        </div>
+                        <div class="ms-auto">
+                            <h3 class="font-15 mb-n1">￦20,000</h3>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            
+
+            <a href="#" v-on:click="reserve_next()" data-menu="menu-reserve"class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-2 btn-wedive-next" >다음</a>
+
+            
+        </div>
+    </div>
+
+
+
+    <!-- Menu Reserve2 -->
+    <div id="menu-reserve2" class="menu menu-box-bottom rounded-half">
+        <div class="menu-title mt-n1">
+            <h2 class="pt-3 pb-3 text-center">예약</h2>
+            <a href="#" class="close-menu"><i class="fa fa-times"></i></a>
+        </div>
+        <div class="content mb-0 text-start">
+            <div class="row mb-0 me-2 ms-2 txt_box">
+                <div class="col-6 text-start">
+                    <h5 class="font-13 font-400">보트체험다이빙<br/>풀세트 (부력조절기, 호흡기, 스킨세트)</h5>
+
+                    <div class="mx-auto">
+                        <div class="stepper rounded-s float-start">
+                            <a href="#" class="stepper-sub"><i class="fa fa-minus color-theme opacity-40"></i></a>
+                            <input type="number" min="1" max="99" value="1">
+                            <a href="#" class="stepper-add"><i class="fa fa-plus color-theme opacity-40"></i></a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <p class="col-6 mb-2 text-end font-900">￦160,000</p>
+            </div>
+        </div>
+    </div>
+
+
   </div>
 </template>
 <script>
@@ -256,7 +409,19 @@ export default {
         
     }
   }, methods: {
-      
+      reserve_next: function() {
+          setTimeout(function() {
+            const activeMenu = document.querySelectorAll('.menu-active');
+            for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
+          },100);
+
+          setTimeout(function() {
+            var menuData = 'menu-reserve2';
+            document.getElementById(menuData).classList.add('menu-active');
+            document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
+          },200);
+        
+      }
   }
 
   
@@ -299,4 +464,5 @@ export default {
 
 .timeline-item .timeline-icon {top: -10px !important;}
 .timeline-item-content, .timeline-item-content-full {border: none !important;background-color: transparent!important;padding: 0 !important;}
-</style>
+.icon-check i{top: -8px;}
+.btn-wedive-next {width: 30%;float: right;margin-top: 10px;border-radius: 20px !important;margin-right: 10px;}</style>

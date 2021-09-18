@@ -2178,6 +2178,10 @@ body {
   border-radius: 12px !important;
 }
 
+.rounded-half {
+  border-radius: 20px 20px 0px 0px !important;
+}
+
 .rounded-m {
   border-radius: 20px !important;
 }

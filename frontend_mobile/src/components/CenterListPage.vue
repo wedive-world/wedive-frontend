@@ -11,7 +11,55 @@
                 <div class="search-box search-dark shadow-xl border-0 bg-theme rounded-sm bottom-0">
                     <i class="fa fa-search"></i>
                     <input type="text" class="border-0" placeholder="어디가 가고싶으신가요?" data-search>
-                </div>   
+                </div>
+
+                <div class="search-results disabled-search-list">
+                    <div>
+                        <a href="#" data-filter-item data-filter-name="all run sport event marathon fastest">
+                            <div class="d-flex mt-4">
+                                <div class="align-self-center">
+                                    <h2 class="font-15 line-height-s mt-1">Marathon Fastest <br> Runner Event </h2>
+                                    <p class="mb-1 font-11 mt-1 line-height-s">
+                                        12k+  Attending
+                                    </p>
+                                </div>
+                                <div class="ms-auto ps-3 align-self-center text-center">
+                                    <span class="btn btn-xxs gradient-blue text-uppercase font-600 rounded-xs">Details</span>
+                                    <span class="color-highlight font-10 d-block">15 min away</span>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" data-filter-item data-filter-name="all neon night party music festival">
+                            <div class="d-flex mt-4">
+                                <div class="align-self-center">
+                                    <h2 class="font-15 line-height-s mt-1">Neon Nights <br> Music Festival </h2>
+                                    <p class="mb-1 font-11 mt-1 line-height-s">
+                                        3.5k+ Attending
+                                    </p>
+                                </div>
+                                <div class="ms-auto ps-3 align-self-center text-center">
+                                    <span class="btn btn-xxs gradient-blue text-uppercase font-600 rounded-xs">Details</span>
+                                    <span class="color-highlight font-10 d-block">2 hrs away</span>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" data-filter-item data-filter-name="all sing party karaoke night event">
+                            <div class="d-flex mt-4">
+                                <div class="align-self-center">
+                                    <h2 class="font-15 line-height-s mt-1">Sing For Us <br> Karaoke Nights </h2>
+                                    <p class="mb-1 font-11 mt-1 line-height-s">
+                                    3.5k+ Attending
+                                    </p>
+                                </div>
+                                <div class="ms-auto ps-3 align-self-center text-center">
+                                    <span class="btn btn-xxs gradient-blue text-uppercase font-600 rounded-xs">Details</span>
+                                    <span class="color-highlight font-10 d-block">3 hrs away</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                
             </div>
             <div class="content mt-0">
                 <div class="color-highlight font-12 mb-2">
