@@ -48,7 +48,7 @@
                             <img src="/static/images/point/ko/jeju_bumisland_01.jpg" class="rounded-sm me-3" width="68">
                         </div>
                         <div class="text-start align-self-center">
-                            <h2 class="font-15 line-height-s mt-2 mb-0">09.22(수) ~ 09.25(토))</h2>
+                            <h2 class="font-15 line-height-s mt-2 mb-0">09.22(수) ~ 09.25(토)</h2>
                             <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> 서귀포포인트 (제주 사이트)</p>
                             <p class="color-secondary font-13 mb-0 ellipsis">&nbsp;</p>
                         </div>
@@ -62,7 +62,7 @@
                             <img src="/static/images/point/ko/jeju_munisland_06.jpg" class="rounded-sm me-3" width="68">
                         </div>
                         <div class="text-start align-self-center">
-                            <h2 class="font-15 line-height-s mt-2 mb-0">09.20(월) ~ 09.25(토))</h2>
+                            <h2 class="font-15 line-height-s mt-2 mb-0">09.20(월) ~ 09.25(토)</h2>
                             <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> 문섬포인트 (제주 사이트)</p>
                             <p class="color-secondary font-13 mb-0 ellipsis">#펀다이빙&nbsp;&nbsp;#본인케어</p>
                         </div>
@@ -75,7 +75,7 @@
             <div class="content mb-0 mt-3">
                 <h4 class="text-start pt-1 mb-2">얼마 남지 않은<br/>다이빙 D-7</h4>
                 <p class="mb-0 color-gray">53개의 다이빙 이벤트</p>
-                <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>                
+                <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
                 <img class="float-right mt-n5" src="/static/images/3d/hourglass.png" width="200"/>
             </div>
         </div>
@@ -104,7 +104,7 @@
                             <img src="/static/images/point/ko/jeju_bumisland_01.jpg" class="rounded-sm me-3" width="68">
                         </div>
                         <div class="text-start align-self-center">
-                            <h2 class="font-15 line-height-s mt-2 mb-0">09.22(수) ~ 09.25(토))</h2>
+                            <h2 class="font-15 line-height-s mt-2 mb-0">09.22(수) ~ 09.25(토)</h2>
                             <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> 서귀포포인트 (제주 사이트)</p>
                             <p class="color-secondary font-13 mb-0 ellipsis">&nbsp;</p>
                         </div>
@@ -120,6 +120,8 @@
                 <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
                 
                 <div class="light-border-bottom mt-3">
+                    <span class="chip chip-s bg-fade-magenta-light05 color-magenta-dark-more text-center font-600 wedive-chip">1자리 남음</span>
+                    <span class="chip chip-s bg-fade-mint-light05 color-green-dark-more text-center font-600 wedive-chip"><i class="far fa-user"></i> 5명 참여중</span>
                     <div class="d-flex mb-3">
                         <div class="align-self-center">
                             <img src="/static/images/point/ko/kangwon_yangyang_01.jpg" class="rounded-sm me-3" width="68">
@@ -132,12 +134,14 @@
                     </div>
                 </div>
                 <div class="light-border-bottom mt-3">
+                    <span class="chip chip-s bg-fade-magenta-light05 color-magenta-dark-more text-center font-600 wedive-chip">1자리 남음</span>
+                    <span class="chip chip-s bg-fade-mint-light05 color-green-dark-more text-center font-600 wedive-chip"><i class="far fa-user"></i> 5명 참여중</span>
                     <div class="d-flex mb-3">
                         <div class="align-self-center">
                             <img src="/static/images/point/ko/jeju_bumisland_01.jpg" class="rounded-sm me-3" width="68">
                         </div>
                         <div class="text-start align-self-center">
-                            <h2 class="font-15 line-height-s mt-2 mb-0">09.22(수) ~ 09.25(토))</h2>
+                            <h2 class="font-15 line-height-s mt-2 mb-0">09.22(수) ~ 09.25(토)</h2>
                             <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> 서귀포포인트 (제주 사이트)</p>
                             <p class="color-secondary font-13 mb-0 ellipsis">&nbsp;</p>
                         </div>
@@ -162,6 +166,8 @@
                 <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
                 
                 <div class="light-border-bottom mt-3">
+                    <span class="chip chip-s bg-fade-magenta-light05 color-magenta-dark-more text-center font-600 wedive-chip">1자리 남음</span>
+                    <span class="chip chip-s bg-fade-mint-light05 color-green-dark-more text-center font-600 wedive-chip"><i class="far fa-user"></i> 5명 참여중</span>
                     <div class="d-flex mb-3">
                         <div class="align-self-center">
                             <img src="/static/images/point/ko/kangwon_yangyang_01.jpg" class="rounded-sm me-3" width="68">
@@ -174,12 +180,14 @@
                     </div>
                 </div>
                 <div class="light-border-bottom mt-3">
+                    <span class="chip chip-s bg-fade-magenta-light05 color-magenta-dark-more text-center font-600 wedive-chip">1자리 남음</span>
+                    <span class="chip chip-s bg-fade-mint-light05 color-green-dark-more text-center font-600 wedive-chip"><i class="far fa-user"></i> 5명 참여중</span>
                     <div class="d-flex mb-3">
                         <div class="align-self-center">
                             <img src="/static/images/point/ko/jeju_bumisland_01.jpg" class="rounded-sm me-3" width="68">
                         </div>
                         <div class="text-start align-self-center">
-                            <h2 class="font-15 line-height-s mt-2 mb-0">09.22(수) ~ 09.25(토))</h2>
+                            <h2 class="font-15 line-height-s mt-2 mb-0">09.22(수) ~ 09.25(토)</h2>
                             <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> 서귀포포인트 (제주 사이트)</p>
                             <p class="color-secondary font-13 mb-0 ellipsis">&nbsp;</p>
                         </div>
@@ -192,43 +200,50 @@
 
         <div class="card card-style" style="background: #3295aa;">
             <div class="content mb-0 mt-3">
-                <h4 class="color-white text-start pt-2 mb-1 font-600">제주 지역 다이빙</h4>
-                <p class="color-white mb-0">63개의 다이빙 이벤트</p>
+                <h4 class="color-white text-start pt-2 mb-0 font-600">제주 지역 다이빙</h4>
+                <p class="color-white mb-1">63개의 다이빙 이벤트</p>
+                <p class="color-white mb-0 opacity-60 ls-n1">#떠나요&nbsp;&nbsp;#제주도&nbsp;&nbsp;#낭만 바다</p>
+                <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
                 <img class="float-right" src="/static/images/3d/jeju.jpg" width="260" />
             </div>
         </div>
 
         <div class="card card-style" style="background: #e8b8db;">
             <div class="content mb-0 mt-3">
-                <h4 class="text-start pt-2 mb-1 font-600"><i class="fas fa-camera me-2"></i>수중 촬영 다이빙</h4>
-                <p class="mb-0">13개의 다이빙 이벤트</p>
+                <h4 class="text-start pt-2 mb-0 font-600"><i class="fas fa-camera me-2"></i>수중 촬영 다이빙</h4>
+                <p class="mb-1">13개의 다이빙 이벤트</p>
+                <p class="mb-0 opacity-60 ls-n1">#인스타 사진&nbsp;&nbsp;#인생 한컷</p>
+                <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
                 <img class=" mt-n4 float-right" src="/static/images/3d/action-camera.png" width="220" style="margin-right: -20px;"/>
             </div>
         </div>
 
         <div class="card card-style" style="background: #dbaa47;">
             <div class="content mb-0 mt-3">
-                <h4 class="color-white text-start pt-1 mb-2">다이빙 후 맥주한잔<br/>뒷풀이 포함 이벤트</h4>
-                <p class="mb-0 color-gray-light">39개의 다이빙 이벤트</p>
-                <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>                
+                <h4 class="color-white text-start pt-1 mb-0">다이빙 후 맥주한잔<br/>뒷풀이 포함 이벤트</h4>
+                <p class="mb-1 color-gray-light">39개의 다이빙 이벤트</p>
+                <p class="color-white mb-0 opacity-60 ls-n1">#맥주인생&nbsp;&nbsp;#좋은사람</p>
+                <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
                 <img class=" mt-n4 mb-2 float-right" src="/static/images/3d/beer.png" width="200"/>
             </div>
         </div>
 
         <div class="card card-style" style="background: #99dfe3;">
             <div class="content mb-0 mt-3">
-                <h4 class="text-start pt-1 mb-1">해외투어</h4>
-                <p class="mb-0 color-gray">3개의 다이빙 이벤트</p>
-                <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>                
+                <h4 class="text-start pt-1 mb-0">해외투어</h4>
+                <p class="mb-1">3개의 다이빙 이벤트</p>
+                <p class="mb-0 opacity-60 ls-n1">#세계 10대 포인트&nbsp;&nbsp;#나도 글로벌</p>
+                <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
                 <img class="mt-n4 mb-n3 float-right" src="/static/images/3d/air-plane.png" width="200"/>
             </div>
         </div>
 
         <div class="card card-style" style="background: #e9ad9b;">
             <div class="content mb-0 mt-3">
-                <h4 class="text-start pt-1 mb-1">초보자 참여 가능</h4>
-                <p class="mb-0 color-gray">12개의 다이빙 이벤트</p>
-                <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>                
+                <h4 class="text-start pt-1 mb-0">초보자 참여 가능</h4>
+                <p class="mb-1">12개의 다이빙 이벤트</p>
+                <p class="mb-0 opacity-60 ls-n1">#걱정마요&nbsp;&nbsp;#누구나 시작은&nbsp;&nbsp;#함께 해요</p>
+                <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
                 <img class="mt-n5 float-right" src="/static/images/3d/lifebuoy.png" width="200"/>
             </div>
         </div>
@@ -299,4 +314,5 @@ export default {
 .light-border-bottom {border-bottom: 1px solid #dee2e6;}
 .wedive-txt-all {position: absolute;top: 20px;right: 16px;}
 .border-08 {border: 1px solid rgba(0, 0, 0, 0.08) !important;}
+.ls-n1 {letter-spacing: -1px;}
 </style>

@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import HomePage from '@/components/HomePage'
 import RecommendPage from '@/components/RecommendPage'
 import BuddyCreatePage from '@/components/BuddyCreatePage'
-import BuddyListPage from '@/components/BuddyListPage'
+import BuddyHomePage from '@/components/BuddyHomePage'
 import UserProfilePage from '@/components/UserProfilePage'
 import CenterDetailPage from '@/components/CenterDetailPage'
 import CenterListPage from '@/components/CenterListPage'
@@ -31,9 +31,9 @@ export default new Router({
       component: BuddyCreatePage
     },
     {
-      path: '/buddy_list',
-      name: 'BuddyListPage',
-      component: BuddyListPage
+      path: '/buddy_home',
+      name: 'BuddyHomePage',
+      component: BuddyHomePage
     },
     {
       path: '/user',
