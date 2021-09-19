@@ -304,8 +304,8 @@
 
             <div class="mb-0 mt-3">
               <div class="input-style has-borders no-icon validate-field mb-0">
-                <input type="text" class="form-control validate-text" id="form_price" placeholder="(옵션) 출발지를 입력하세요.">
-                <label for="form_price" class="color-highlight">출발지</label>
+                <input type="text" class="form-control validate-text" id="form_departure" placeholder="(옵션) 출발지를 입력하세요.">
+                <label for="form_departure" class="color-highlight">출발지</label>
                 <i class="fa fa-times disabled invalid color-red-dark"></i>
                 <i class="fa fa-check disabled valid color-green-dark"></i>
                 <em>(필요 시 입력))</em>
