@@ -2,7 +2,7 @@
   <div class="">
     <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-center" data-menu-load=""></div>    
     <div class="header header-fixed header-logo-center">
-        <a href="" class="header-title color">다이브 이벤트 만들기</a>
+        <a href="" class="header-title color ellipsis">다이브 이벤트 만들기</a>
         <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
         <a href="#" data-menu="menu-main" class="header-icon header-icon-4"><i class="fas fa-bars"></i></a>
         <a href="#" data-toggle-theme class="header-icon header-icon-3 show-on-theme-dark"><i class="fas fa-sun"></i></a>
@@ -14,68 +14,328 @@
     <div class="page-content pb-3"> 
         
         <!-- card in this page format must have the class card-full to avoid seeing behind it-->
-        <div class="card card-full pb-1">
-            <div class="content mt-1">
-                <h4 class="pt-3 mb-2">일정 정보</h4>
-                <div class="row mb-2">
-                    <div class="col-3">
-                        <i class="far fa-calendar-alt"></i> 일정
-                    </div>
-                    <div class="col-9">
-                        <a href="#" data-menu="menu-schedule" class="btn btn-3d btn-m btn-full mb-3 rounded-xl text-uppercase font-900 shadow-s border-gray-dark bg-gray-light"><i class="fas fa-plus"></i></a>
-                    </div>
-                </div>
+        <div class="card card-full pb-0 mb-3 border-bottom">
+          <div class="content mt-1">
+            <h4 class="pt-3 mb-2">일정 정보</h4>
+            <a id="delete_schedule" class="color-highlight font-12 hide" style="margin-top: -30px;padding-bottom: 10px;float:right;">일정 삭제</a>
+            <div class="text-center p-3 bg-fade-gray-light rounded-s mb-3" id="div_empty">
+              <img class="mt-2" src="/static/images/empty_ill.png" style="width: 60%;"/>
+              <p class="color-gray-light-mid">아직 일정이 없습니다.</p>
+            </div>
+            <div class="p-3 rounded-s mb-4 mt-3 hide" id="div_schedule1" style="border: 1px solid rgba(0, 0, 0, 0.08) !important;">
+              <label class="wedive-label color-secondary">일정 1</label>
+              <div class="input-style has-borders no-icon mt-2">
+                <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_start" placeholder="Phone">
+                <label for="form_start" class="color-highlight">시작일</label>
+                <i class="fa fa-check disabled valid me-4 pe-3 font-12 color-green-dark"></i>
+                <i class="fa fa-check disabled invalid me-4 pe-3 font-12 color-red-dark"></i>
+              </div>
+              <div class="input-style has-borders no-icon mt-3">
+                <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_end" placeholder="Phone">
+                <label for="form_end" class="color-highlight">종료일</label>
+                <i class="fa fa-check disabled valid me-4 pe-3 font-12 color-green-dark"></i>
+                <i class="fa fa-check disabled invalid me-4 pe-3 font-12 color-red-dark"></i>
+              </div>
+
+              <div class="mt-3">
+                <vue-typeahead-bootstrap
+                    class="form-control wedive-search"
+                    style="border-radius: 10px !important;border-color: rgba(0, 0, 0, 0.08) !important;"
+                    v-model="query"
+                    :data="users"
+                    :serializer="item => item.name_ko"
+                    :screen-reader-text-serializer="item => `${item.name_ko}`"
+                    highlightClass="special-highlight-class"
+                    @hit="selecteduser = $event"
+                    :minMatchingChars="2"
+                    placeholder="지역명, 다이빙 포인트, 센터명"
+                    inputClass="special-input-class"
+                    :disabledValues="(selecteduser ? [selecteduser.name_ko] : [])"
+                    @input="lookupUser2"
+                    >
+                    <template slot="suggestion" slot-scope="{ data, htmlText }">
+                        <div class="d-flex align-items-center">
+                        <img
+                            class="rounded-s me-2"
+                            :src="data.img_url"
+                            style="width: 40px; height: 40px;" />
+                        
+                        
+                        
+                        <span v-if="data.type == 'region'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-marked-alt\'></i> 장소</span><br/>' + htmlText"></span>
+                        <span v-else-if="data.type == 'point'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-pin\'></i> 다이빙 포인트</span><br/>' + htmlText"></span>
+                        <span v-else-if="data.type == 'center'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-store\'></i> 다이빙 센터</span><br/>' + htmlText"></span>
+                        </div>
+                    </template>
+                </vue-typeahead-bootstrap>
+              </div>
+            </div>
+            <div class="p-3 rounded-s mb-4 hide" id="div_schedule2" style="border: 1px solid rgba(0, 0, 0, 0.08) !important;">
+              <label class="wedive-label color-secondary">일정 2</label>
+              <div class="input-style has-borders no-icon mt-2">
+                <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_start" placeholder="Phone">
+                <label for="form_start" class="color-highlight">시작일</label>
+                <i class="fa fa-check disabled valid me-4 pe-3 font-12 color-green-dark"></i>
+                <i class="fa fa-check disabled invalid me-4 pe-3 font-12 color-red-dark"></i>
+              </div>
+              <div class="input-style has-borders no-icon mt-3">
+                <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_end" placeholder="Phone">
+                <label for="form_end" class="color-highlight">종료일</label>
+                <i class="fa fa-check disabled valid me-4 pe-3 font-12 color-green-dark"></i>
+                <i class="fa fa-check disabled invalid me-4 pe-3 font-12 color-red-dark"></i>
+              </div>
+
+              <div class="mt-3">
+                <vue-typeahead-bootstrap
+                    class="form-control wedive-search"
+                    style="border-radius: 10px !important;border-color: rgba(0, 0, 0, 0.08) !important;"
+                    v-model="query"
+                    :data="users"
+                    :serializer="item => item.name_ko"
+                    :screen-reader-text-serializer="item => `${item.name_ko}`"
+                    highlightClass="special-highlight-class"
+                    @hit="selecteduser = $event"
+                    :minMatchingChars="2"
+                    placeholder="지역명, 다이빙 포인트, 센터명"
+                    inputClass="special-input-class"
+                    :disabledValues="(selecteduser ? [selecteduser.name_ko] : [])"
+                    @input="lookupUser2"
+                    >
+                    <template slot="suggestion" slot-scope="{ data, htmlText }">
+                        <div class="d-flex align-items-center">
+                        <img
+                            class="rounded-s me-2"
+                            :src="data.img_url"
+                            style="width: 40px; height: 40px;" />
+                        
+                        
+                        
+                        <span v-if="data.type == 'region'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-marked-alt\'></i> 장소</span><br/>' + htmlText"></span>
+                        <span v-else-if="data.type == 'point'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-pin\'></i> 다이빙 포인트</span><br/>' + htmlText"></span>
+                        <span v-else-if="data.type == 'center'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-store\'></i> 다이빙 센터</span><br/>' + htmlText"></span>
+                        </div>
+                    </template>
+                </vue-typeahead-bootstrap>
+              </div>
+            </div>
+            <div class="p-3 rounded-s mb-4 hide" id="div_schedule3" style="border: 1px solid rgba(0, 0, 0, 0.08) !important;">
+              <label class="wedive-label color-secondary">일정 3</label>
+              <div class="input-style has-borders no-icon mt-2">
+                <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_start" placeholder="Phone">
+                <label for="form_start" class="color-highlight">시작일</label>
+                <i class="fa fa-check disabled valid me-4 pe-3 font-12 color-green-dark"></i>
+                <i class="fa fa-check disabled invalid me-4 pe-3 font-12 color-red-dark"></i>
+              </div>
+              <div class="input-style has-borders no-icon mt-3">
+                <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_end" placeholder="Phone">
+                <label for="form_end" class="color-highlight">종료일</label>
+                <i class="fa fa-check disabled valid me-4 pe-3 font-12 color-green-dark"></i>
+                <i class="fa fa-check disabled invalid me-4 pe-3 font-12 color-red-dark"></i>
+              </div>
+
+              <div class="mt-3">
+                <vue-typeahead-bootstrap
+                    class="form-control wedive-search"
+                    style="border-radius: 10px !important;border-color: rgba(0, 0, 0, 0.08) !important;"
+                    v-model="query"
+                    :data="users"
+                    :serializer="item => item.name_ko"
+                    :screen-reader-text-serializer="item => `${item.name_ko}`"
+                    highlightClass="special-highlight-class"
+                    @hit="selecteduser = $event"
+                    :minMatchingChars="2"
+                    placeholder="지역명, 다이빙 포인트, 센터명"
+                    inputClass="special-input-class"
+                    :disabledValues="(selecteduser ? [selecteduser.name_ko] : [])"
+                    @input="lookupUser2"
+                    >
+                    <template slot="suggestion" slot-scope="{ data, htmlText }">
+                        <div class="d-flex align-items-center">
+                        <img
+                            class="rounded-s me-2"
+                            :src="data.img_url"
+                            style="width: 40px; height: 40px;" />
+                        
+                        
+                        
+                        <span v-if="data.type == 'region'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-marked-alt\'></i> 장소</span><br/>' + htmlText"></span>
+                        <span v-else-if="data.type == 'point'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-pin\'></i> 다이빙 포인트</span><br/>' + htmlText"></span>
+                        <span v-else-if="data.type == 'center'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-store\'></i> 다이빙 센터</span><br/>' + htmlText"></span>
+                        </div>
+                    </template>
+                </vue-typeahead-bootstrap>
+              </div>
+            </div>
+            <div class="p-3 rounded-s mb-4 hide" id="div_schedule4" style="border: 1px solid rgba(0, 0, 0, 0.08) !important;">
+              <label class="wedive-label color-secondary">일정 4</label>
+              <div class="input-style has-borders no-icon mt-2">
+                <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_start" placeholder="Phone">
+                <label for="form_start" class="color-highlight">시작일</label>
+                <i class="fa fa-check disabled valid me-4 pe-3 font-12 color-green-dark"></i>
+                <i class="fa fa-check disabled invalid me-4 pe-3 font-12 color-red-dark"></i>
+              </div>
+              <div class="input-style has-borders no-icon mt-3">
+                <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_end" placeholder="Phone">
+                <label for="form_end" class="color-highlight">종료일</label>
+                <i class="fa fa-check disabled valid me-4 pe-3 font-12 color-green-dark"></i>
+                <i class="fa fa-check disabled invalid me-4 pe-3 font-12 color-red-dark"></i>
+              </div>
+
+              <div class="mt-3">
+                <vue-typeahead-bootstrap
+                    class="form-control wedive-search"
+                    style="border-radius: 10px !important;border-color: rgba(0, 0, 0, 0.08) !important;"
+                    v-model="query"
+                    :data="users"
+                    :serializer="item => item.name_ko"
+                    :screen-reader-text-serializer="item => `${item.name_ko}`"
+                    highlightClass="special-highlight-class"
+                    @hit="selecteduser = $event"
+                    :minMatchingChars="2"
+                    placeholder="지역명, 다이빙 포인트, 센터명"
+                    inputClass="special-input-class"
+                    :disabledValues="(selecteduser ? [selecteduser.name_ko] : [])"
+                    @input="lookupUser2"
+                    >
+                    <template slot="suggestion" slot-scope="{ data, htmlText }">
+                        <div class="d-flex align-items-center">
+                        <img
+                            class="rounded-s me-2"
+                            :src="data.img_url"
+                            style="width: 40px; height: 40px;" />
+                        
+                        
+                        
+                        <span v-if="data.type == 'region'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-marked-alt\'></i> 장소</span><br/>' + htmlText"></span>
+                        <span v-else-if="data.type == 'point'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-pin\'></i> 다이빙 포인트</span><br/>' + htmlText"></span>
+                        <span v-else-if="data.type == 'center'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-store\'></i> 다이빙 센터</span><br/>' + htmlText"></span>
+                        </div>
+                    </template>
+                </vue-typeahead-bootstrap>
+              </div>
+            </div>
+            <div class="p-3 rounded-s hide" id="div_schedule5" style="border: 1px solid rgba(0, 0, 0, 0.08) !important;">
+              <label class="wedive-label color-secondary">일정 5</label>
+              <div class="input-style has-borders no-icon mt-2">
+                <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_start" placeholder="Phone">
+                <label for="form_start" class="color-highlight">시작일</label>
+                <i class="fa fa-check disabled valid me-4 pe-3 font-12 color-green-dark"></i>
+                <i class="fa fa-check disabled invalid me-4 pe-3 font-12 color-red-dark"></i>
+              </div>
+              <div class="input-style has-borders no-icon mt-3">
+                <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_end" placeholder="Phone">
+                <label for="form_end" class="color-highlight">종료일</label>
+                <i class="fa fa-check disabled valid me-4 pe-3 font-12 color-green-dark"></i>
+                <i class="fa fa-check disabled invalid me-4 pe-3 font-12 color-red-dark"></i>
+              </div>
+
+              <div class="mt-3">
+                <vue-typeahead-bootstrap
+                    class="form-control wedive-search"
+                    style="border-radius: 10px !important;border-color: rgba(0, 0, 0, 0.08) !important;"
+                    v-model="query"
+                    :data="users"
+                    :serializer="item => item.name_ko"
+                    :screen-reader-text-serializer="item => `${item.name_ko}`"
+                    highlightClass="special-highlight-class"
+                    @hit="selecteduser = $event"
+                    :minMatchingChars="2"
+                    placeholder="지역명, 다이빙 포인트, 센터명"
+                    inputClass="special-input-class"
+                    :disabledValues="(selecteduser ? [selecteduser.name_ko] : [])"
+                    @input="lookupUser2"
+                    >
+                    <template slot="suggestion" slot-scope="{ data, htmlText }">
+                        <div class="d-flex align-items-center">
+                        <img
+                            class="rounded-s me-2"
+                            :src="data.img_url"
+                            style="width: 40px; height: 40px;" />
+                        
+                        
+                        
+                        <span v-if="data.type == 'region'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-marked-alt\'></i> 장소</span><br/>' + htmlText"></span>
+                        <span v-else-if="data.type == 'point'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-pin\'></i> 다이빙 포인트</span><br/>' + htmlText"></span>
+                        <span v-else-if="data.type == 'center'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-store\'></i> 다이빙 센터</span><br/>' + htmlText"></span>
+                        </div>
+                    </template>
+                </vue-typeahead-bootstrap>
+              </div>
+            </div>
+            <div class="">
+              <a href="#" v-on:click="addSchedule()" class="btn btn-full mb-1 pt-3 pb-3 font-14 font-500 color-highlight"><i class="fas fa-plus"></i> 일정 추가하기</a>
+            </div>
 
 
-                <h4 class="pt-3 mb-2">참여 정보</h4>
-                <div class="row mb-2">
-                    <div class="col-3">
-                        <i class="fas fa-user"></i> 모집인원
-                    </div>
-                    <div class="col-9">
-                      <div class="input-style has-borders no-icon validate-field mb-0">
-                        <input type="number" class="form-control validate-text" id="form_price" placeholder="모집인원을 입력하세요.">
-                        <label for="form_price" class="color-highlight">모집인원</label>
-                        <i class="fa fa-times disabled invalid color-red-dark"></i>
-                        <i class="fa fa-check disabled valid color-green-dark"></i>
-                        <em>(필요 시 입력))</em>
-                      </div>
-                    </div>
-                </div>
-
-                <div class="row mb-2">
-                    <div class="col-3">
-                        <i class="far fa-money-bill-alt"></i> 참가비
-                    </div>
-                    <div class="col-9">
-                      <div class="input-style has-borders no-icon validate-field mb-0">
-                        <input type="number" class="form-control validate-text" id="form_price" placeholder="참가 회비를 입력하세요.">
-                        <label for="form_price" class="color-highlight">참가비</label>
-                        <i class="fa fa-times disabled invalid color-red-dark"></i>
-                        <i class="fa fa-check disabled valid color-green-dark"></i>
-                        <em>(필요 시 입력))</em>
-                      </div>
-                    </div>
-                </div>
 
 
-                <div class="row mb-2">
-                    <div class="col-3">
-                        <i class="far fa-sticky-note"></i> 메모
-                    </div>
-                      <div class="col-9">
-                        <div class="input-style has-borders no-icon mb-0">
-                          <textarea id="form7" placeholder="이곳에 메모를 작성해보세요."></textarea>
-                          <label for="form7" class="color-highlight">메모</label>
-                      </div>
-                    </div>
-                </div>
+            <h4 class="pt-2 mb-2">참여 정보</h4>
+            <div class="mb-0 mt-3">
+              <div class="input-style has-borders no-icon validate-field mb-0">
+                <input type="number" class="form-control validate-text" id="form_price" placeholder="모집인원을 입력하세요.">
+                <label for="form_price" class="color-highlight">모집인원</label>
+                <i class="fa fa-times disabled invalid color-red-dark"></i>
+                <i class="fa fa-check disabled valid color-green-dark"></i>
+                <em>(필요 시 입력))</em>
+              </div>
+            </div>
 
-                
+            <div class="mb-0 mt-3">
+              <div class="input-style has-borders no-icon validate-field mb-0">
+                <input type="number" class="form-control validate-text" id="form_price" placeholder="참가 회비를 입력하세요.">
+                <label for="form_price" class="color-highlight">참가비</label>
+                <i class="fa fa-times disabled invalid color-red-dark"></i>
+                <i class="fa fa-check disabled valid color-green-dark"></i>
+                <em>(필요 시 입력))</em>
+              </div>
+            </div>
+
+
+            <div class="mb-0 mt-3">
+              <div class="input-style has-borders no-icon mb-0">
+                <textarea id="form7" placeholder="이곳에 메모를 작성해보세요."></textarea>
+                <label for="form7" class="color-highlight">메모</label>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+
+
+        <div class="card card-full pb-0 mb-3 border-bottom">
+          <div class="content mt-1">
+            <h4 class="pt-2 mb-2">선호 사항</h4>
+            <div class="mb-0 mt-3">
+              <div class="input-style has-borders no-icon validate-field mb-0">
+                <input type="number" class="form-control validate-text" id="form_price" placeholder="모집인원을 입력하세요.">
+                <label for="form_price" class="color-highlight">모집인원</label>
+                <i class="fa fa-times disabled invalid color-red-dark"></i>
+                <i class="fa fa-check disabled valid color-green-dark"></i>
+                <em>(필요 시 입력))</em>
+              </div>
+            </div>
+
+            <div class="mb-0 mt-3">
+              <div class="input-style has-borders no-icon validate-field mb-0">
+                <input type="number" class="form-control validate-text" id="form_price" placeholder="참가 회비를 입력하세요.">
+                <label for="form_price" class="color-highlight">참가비</label>
+                <i class="fa fa-times disabled invalid color-red-dark"></i>
+                <i class="fa fa-check disabled valid color-green-dark"></i>
+                <em>(필요 시 입력))</em>
+              </div>
+            </div>
+
+
+            <div class="mb-0 mt-3">
+              <div class="input-style has-borders no-icon mb-0">
+                <textarea id="form7" placeholder="이곳에 메모를 작성해보세요."></textarea>
+                <label for="form7" class="color-highlight">메모</label>
+              </div>
             </div>
             
-                
-            
+          </div>
         </div>
     </div>
     <!-- Page content ends here-->
@@ -147,7 +407,7 @@
     </div>
 
 
-    <div id="snackbar-confirm" class="snackbar-toast color-white bg-green-dark" data-bs-delay="3000" data-bs-autohide="true"><i class="fa fa-check me-3"></i>예약이 완료되었습니다.</div>
+    <div id="snackbar-maxerror" class="snackbar-toast color-white bg-red-dark" data-bs-delay="3000" data-bs-autohide="true"><i class="fa fa-times me-3"></i>최대 5개 까지의 일정만 추가할 수 있습니다.</div>
 
 
   </div>
@@ -155,6 +415,7 @@
 <script>
 import VueTypeaheadBootstrap from 'vue-typeahead-bootstrap';
 import {debounce} from 'lodash';
+var schedule_cnt = 0;
 
 export default {
   name: 'HelloWorld',
@@ -190,10 +451,26 @@ export default {
         this.users = [
             {"id": "region_ko_jeju", "type": "region", "name_ko": "제주도", name_en: "Jeju island", "img_url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0c/bf/d2/56/photo1jpg.jpg?w=100&h=100&s=1"},
             {"id": "region_ko_wooljin", "type": "region", "name_ko": "울진", name_en: "Wooljin", "img_url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/01/5a/31/a0/sunrise-peak-seongsan.jpg?w=100&h=100&s=1"},
-            {"id": "center_ko_jeju_bubbletank", "type": "center", "name_ko": "버블탱크 스쿠버다이빙", name_en: "Bubble tank", "img_url": "/static/bubble2.jpg"},
-            {"id": "point_ko_jeju_munisland", "type": "point", "name_ko": "문섬", name_en: "Mun island", "img_url": "https://api.cdn.visitjeju.net/photomng/imgpath/201907/31/07c1996d-4374-4e77-b353-300d01783718.jpg"},
+            {"id": "center_ko_jeju_bubbletank", "type": "center", "name_ko": "제주 버블탱크 스쿠버다이빙", name_en: "Bubble tank", "img_url": "/static/bubble2.jpg"},
+            {"id": "point_ko_jeju_munisland", "type": "point", "name_ko": "제주도 문섬", name_en: "Mun island", "img_url": "https://api.cdn.visitjeju.net/photomng/imgpath/201907/31/07c1996d-4374-4e77-b353-300d01783718.jpg"},
         ];
       }, 500),
+      addSchedule: function() {
+        if (schedule_cnt == 0) {
+          $("#div_empty").fadeOut(100);;
+          $("#delete_schedule").removeClass("hide");
+        }
+        if (schedule_cnt < 5) {
+          console.log("div_schedule" + (schedule_cnt+1));
+          $("#div_schedule" + (schedule_cnt+1)).removeClass("hide");
+        } else {
+          var toastData = 'snackbar-maxerror';
+          var notificationToast = document.getElementById(toastData);
+          var notificationToast = new bootstrap.Toast(notificationToast);
+          notificationToast.show();
+        }
+        schedule_cnt += 1;
+      },
       reserve_next: function() {
           setTimeout(function() {
             const activeMenu = document.querySelectorAll('.menu-active');
@@ -261,4 +538,6 @@ export default {
 .btn-wedive-next {width: 30%;float: right;margin-top: 10px;border-radius: 20px !important;margin-right: 10px;}
 .point-text {overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;}
 
+.border-bottom {border-bottom: 1px solid #d1d2d3 !important;}
+.wedive-label {left: 34px !important;transform: translateX(-14px) !important;position: absolute;padding: 0px 8px !important;height: 23px;margin-top: -27px;font-size: 12px;transition: all 250ms ease;background-color: #FFF;}
 </style>
