@@ -223,7 +223,7 @@ body {
 }
 
 .color-green-dark-more {
-  color: #187f49 !important;
+  color: #289e61 !important;
 }
 
 .color-icon-green {
@@ -512,7 +512,7 @@ body {
 }
 
 .bg-blue-light05 {
-  background-color: rgba(32, 123, 241, 0.4) !important;
+  background-color: rgba(32, 123, 241, 0.15) !important;
 }
 
 .bg-fade-blue-light {
@@ -619,7 +619,7 @@ body {
 }
 
 .bg-fade-mint-light05 {
-  background-color: rgba(55, 188, 155, 0.4) !important;
+  background-color: rgba(55, 188, 155, 0.2) !important;
 }
 
 .color-mint-dark {
@@ -769,12 +769,16 @@ body {
   color: #FFF !important;
 }
 
+.bg-fade-magenta-light05 {
+  background-color: rgba(150, 109, 255, 0.1) !important;
+}
+
 .color-magenta-dark {
   color: #967ADC !important;
 }
 
 .color-magenta-dark-more {
-  color: #5a249d !important;
+  color: #854ace !important;
 }
 
 .color-icon-magenta {

@@ -26,11 +26,11 @@
             <div class="p-3 rounded-s mb-4 mt-3 row hide" id="div_schedule1" style="border: 1px solid rgba(0, 0, 0, 0.08) !important;">
               <a href="#" class="schedule-close" v-on:click="closeSchedule(1)"><i class="wedive_icoset wedive_icoset_close"></i></a>
               <label class="wedive-label color-secondary">일정 1</label>
-              <div class="input-style has-borders no-icon mt-2 col-6 pe-3 after-tilde">
+              <div class="input-style input-style-always-active has-borders no-icon mt-2 col-6 pe-3 after-tilde">
                 <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_start" placeholder="시작일">
                 <label for="form_start" class="color-highlight">시작일</label>
               </div>
-              <div class="input-style has-borders no-icon mt-2 col-6 ps-3">
+              <div class="input-style input-style-always-active has-borders no-icon mt-2 col-6 ps-3">
                 <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_end" placeholder="종료일">
                 <label for="form_end" class="color-highlight">종료일</label>
               </div>
@@ -72,11 +72,11 @@
             <div class="p-3 rounded-s mb-4 row hide" id="div_schedule2" style="border: 1px solid rgba(0, 0, 0, 0.08) !important;">
               <a href="#" class="schedule-close" v-on:click="closeSchedule(1)"><i class="wedive_icoset wedive_icoset_close"></i></a>
               <label class="wedive-label color-secondary">일정 2</label>
-              <div class="input-style has-borders no-icon mt-2 col-6 pe-3 after-tilde">
+              <div class="input-style input-style-always-active has-borders no-icon mt-2 col-6 pe-3 after-tilde">
                 <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_start" placeholder="시작일">
                 <label for="form_start" class="color-highlight">시작일</label>
               </div>
-              <div class="input-style has-borders no-icon mt-2 col-6 ps-3">
+              <div class="input-style input-style-always-active has-borders no-icon mt-2 col-6 ps-3">
                 <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_end" placeholder="종료일">
                 <label for="form_end" class="color-highlight">종료일</label>
               </div>
@@ -117,11 +117,11 @@
             <div class="p-3 rounded-s mb-4 row hide" id="div_schedule3" style="border: 1px solid rgba(0, 0, 0, 0.08) !important;">
               <a href="#" class="schedule-close" v-on:click="closeSchedule(1)"><i class="wedive_icoset wedive_icoset_close"></i></a>
               <label class="wedive-label color-secondary">일정 3</label>
-              <div class="input-style has-borders no-icon mt-2 col-6 pe-3 after-tilde">
+              <div class="input-style input-style-always-active has-borders no-icon mt-2 col-6 pe-3 after-tilde">
                 <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_start" placeholder="시작일">
                 <label for="form_start" class="color-highlight">시작일</label>
               </div>
-              <div class="input-style has-borders no-icon mt-2 col-6 ps-3">
+              <div class="input-style input-style-always-active has-borders no-icon mt-2 col-6 ps-3">
                 <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_end" placeholder="종료일">
                 <label for="form_end" class="color-highlight">종료일</label>
               </div>
@@ -162,11 +162,11 @@
             <div class="p-3 rounded-s mb-4 row hide" id="div_schedule4" style="border: 1px solid rgba(0, 0, 0, 0.08) !important;">
               <a href="#" class="schedule-close" v-on:click="closeSchedule(1)"><i class="wedive_icoset wedive_icoset_close"></i></a>
               <label class="wedive-label color-secondary">일정 4</label>
-              <div class="input-style has-borders no-icon mt-2 col-6 pe-3 after-tilde">
+              <div class="input-style input-style-always-active has-borders no-icon mt-2 col-6 pe-3 after-tilde">
                 <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_start" placeholder="시작일">
                 <label for="form_start" class="color-highlight">시작일</label>
               </div>
-              <div class="input-style has-borders no-icon mt-2 col-6 ps-3">
+              <div class="input-style input-style-always-active has-borders no-icon mt-2 col-6 ps-3">
                 <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_end" placeholder="종료일">
                 <label for="form_end" class="color-highlight">종료일</label>
               </div>
@@ -207,11 +207,11 @@
             <div class="p-3 rounded-s row hide" id="div_schedule5" style="border: 1px solid rgba(0, 0, 0, 0.08) !important;">
               <a href="#" class="schedule-close" v-on:click="closeSchedule(1)"><i class="wedive_icoset wedive_icoset_close"></i></a>
               <label class="wedive-label color-secondary">일정 5</label>
-              <div class="input-style has-borders no-icon mt-2 col-6 pe-3 after-tilde">
+              <div class="input-style input-style-always-active has-borders no-icon mt-2 col-6 pe-3 after-tilde">
                 <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_start" placeholder="시작일">
                 <label for="form_start" class="color-highlight">시작일</label>
               </div>
-              <div class="input-style has-borders no-icon mt-2 col-6 ps-3">
+              <div class="input-style input-style-always-active has-borders no-icon mt-2 col-6 ps-3">
                 <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_end" placeholder="종료일">
                 <label for="form_end" class="color-highlight">종료일</label>
               </div>
@@ -258,7 +258,7 @@
 
             <h4 class="pt-2 mb-2">참여 정보</h4>
             <!--<div class="mb-0 mt-3">
-              <div class="input-style has-borders no-icon validate-field mb-0">
+              <div class="input-style input-style-always-active has-borders no-icon validate-field mb-0">
                 <input type="number" class="form-control validate-text" id="form_price" placeholder="모집인원을 입력하세요.">
                 <label for="form_price" class="color-highlight">모집인원</label>
                 <i class="fa fa-times disabled invalid color-red-dark"></i>
@@ -293,7 +293,7 @@
             </div>
 
             <div class="mb-0 mt-3">
-              <div class="input-style has-borders no-icon validate-field mb-0">
+              <div class="input-style input-style-always-active has-borders no-icon validate-field mb-0">
                 <input type="number" class="form-control validate-text" id="form_price" placeholder="(옵션) 참가비를 입력하세요.">
                 <label for="form_price" class="color-highlight">참가비</label>
                 <i class="fa fa-times disabled invalid color-red-dark"></i>
@@ -303,7 +303,7 @@
             </div>
 
             <div class="mb-0 mt-3">
-              <div class="input-style has-borders no-icon validate-field mb-0">
+              <div class="input-style input-style-always-active has-borders no-icon validate-field mb-0">
                 <input type="name" class="form-control validate-name" id="form_departure" placeholder="(옵션) 출발지를 입력하세요.">
                 <label for="form_departure" class="color-highlight">출발지</label>
                 <i class="fa fa-times disabled invalid color-red-dark"></i>
@@ -519,13 +519,13 @@
         <div class="divider divider-margins mt-3 mb-0"></div>
         <div class="content">
             <div class="row mb-1">
-                <div class="input-style has-borders no-icon col-6">
+                <div class="input-style input-style-always-active has-borders no-icon col-6">
                     <input type="date" value="2021-09-20" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_start" placeholder="Phone">
                     <label for="form_start" class="color-highlight">시작일</label>
                     <i class="fa fa-check disabled valid me-4 pe-3 font-12 color-green-dark"></i>
                     <i class="fa fa-check disabled invalid me-4 pe-3 font-12 color-red-dark"></i>
                 </div>
-                <div class="input-style has-borders no-icon col-6">
+                <div class="input-style input-style-always-active has-borders no-icon col-6">
                     <input type="date" value="2021-09-20" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_end" placeholder="Phone">
                     <label for="form_end" class="color-highlight">종료일</label>
                     <i class="fa fa-check disabled valid me-4 pe-3 font-12 color-green-dark"></i>

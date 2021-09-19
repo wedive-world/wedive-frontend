@@ -4,6 +4,7 @@ import HomePage from '@/components/HomePage'
 import RecommendPage from '@/components/RecommendPage'
 import BuddyCreatePage from '@/components/BuddyCreatePage'
 import BuddyListPage from '@/components/BuddyListPage'
+import UserProfilePage from '@/components/UserProfilePage'
 import CenterDetailPage from '@/components/CenterDetailPage'
 import CenterListPage from '@/components/CenterListPage'
 import CenterListMapPage from '@/components/CenterListMapPage'
@@ -33,6 +34,11 @@ export default new Router({
       path: '/buddy_list',
       name: 'BuddyListPage',
       component: BuddyListPage
+    },
+    {
+      path: '/user',
+      name: 'UserProfilePage',
+      component: UserProfilePage
     },
     {
       path: '/center',

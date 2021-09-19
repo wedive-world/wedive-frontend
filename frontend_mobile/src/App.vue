@@ -14,7 +14,7 @@
           
           <div id="footer-bar" class="footer-bar">
             <a href="/" id="nav-home"><div class="menu-ico menu-ico0"></div><span>홈</span></a>
-            <a href="#" id="nav-buddy"><div class="menu-ico menu-ico1"></div><span>버디찾기</span></a>
+            <a href="/buddy_list" id="nav-buddy"><div class="menu-ico menu-ico1"></div><span>버디찾기</span></a>
             <a href="/center_list" id="nav-center"><div class="menu-ico menu-ico2"></div><span>센터찾기</span></a>
             <a href="" id="nav-shopping"><div class="menu-ico menu-ico3"></div><span>쇼핑</span></a>
             <a href="#" id="nav-chat"><div class="menu-ico menu-ico4"></div><span>채팅</span></a>
