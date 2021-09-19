@@ -3,6 +3,19 @@
     <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-buddy" data-menu-load=""></div>    
     <div class="page-content">
         
+        <div class="card card-style" style="background: white;height:158px;">
+            <div class="content mb-0 mt-3">
+                <img class="float-right" src="/static/images/3d/search.png" width="100" style="position: absolute;z-index: 11;right: 30px;top:4px;"/>
+                <h4 class="text-start pt-5 mb-1 font-15">원하는 다이빙을 빠르게 검색</h4>
+
+                <div class="search-box search-dark border-08 bg-theme rounded-sm" style="position: absolute;width: calc(100% - 30px);z-index: 99;">
+                    <i class="fa fa-search" style="padding: 0px 15px 0px 15px;"></i>
+                    <input type="text" class="border-0" placeholder="328개의 다이빙이 기다리고 있습니다." data-search>
+                </div>
+                
+            </div>
+        </div>
+
         <div class="card card-style">
             <div class="content mb-0 mt-3">
                 <h4 class="text-start pt-2 mb-0">따끈따끈 신규 다이빙</h4>
@@ -19,7 +32,7 @@
                         <div class="text-start align-self-center">
                             <h2 class="font-15 line-height-s mt-2 mb-0">09.25(토) ~ 09.26(일)</h2>
                             <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> 양양포인트 (강원 사이트)</p>
-                            <p class="color-secondary font-13 mb-0 ellipsis">#카풀가능 #센터확정 #개별숙박</p>
+                            <p class="color-secondary font-13 mb-0 ellipsis">#카풀가능&nbsp;&nbsp;#센터확정&nbsp;&nbsp;#개별숙박</p>
                         </div>
                     </div>
                 </div>
@@ -47,7 +60,7 @@
                         <div class="text-start align-self-center">
                             <h2 class="font-15 line-height-s mt-2 mb-0">09.20(월) ~ 09.25(토))</h2>
                             <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> 문섬포인트 (제주 사이트)</p>
-                            <p class="color-secondary font-13 mb-0 ellipsis">#펀다이빙 #본인케어</p>
+                            <p class="color-secondary font-13 mb-0 ellipsis">#펀다이빙&nbsp;&nbsp;#본인케어</p>
                         </div>
                     </div>
                 </div>
@@ -77,7 +90,7 @@
                         <div class="text-start align-self-center">
                             <h2 class="font-15 line-height-s mt-2 mb-0">09.25(토) ~ 09.26(일)</h2>
                             <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> 양양포인트 (강원 사이트)</p>
-                            <p class="color-secondary font-13 mb-0 ellipsis">#카풀가능 #센터확정 #개별숙박</p>
+                            <p class="color-secondary font-13 mb-0 ellipsis">#카풀가능&nbsp;&nbsp;#센터확정&nbsp;&nbsp;#개별숙박</p>
                         </div>
                     </div>
                 </div>
@@ -110,7 +123,7 @@
                         <div class="text-start align-self-center">
                             <h2 class="font-15 line-height-s mt-2 mb-0">09.25(토) ~ 09.26(일)</h2>
                             <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> 양양포인트 (강원 사이트)</p>
-                            <p class="color-secondary font-13 mb-0 ellipsis">#카풀가능 #센터확정 #개별숙박</p>
+                            <p class="color-secondary font-13 mb-0 ellipsis">#카풀가능&nbsp;&nbsp;#센터확정&nbsp;&nbsp;#개별숙박</p>
                         </div>
                     </div>
                 </div>
@@ -152,7 +165,7 @@
                         <div class="text-start align-self-center">
                             <h2 class="font-15 line-height-s mt-2 mb-0">09.25(토) ~ 09.26(일)</h2>
                             <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> 양양포인트 (강원 사이트)</p>
-                            <p class="color-secondary font-13 mb-0 ellipsis">#카풀가능 #센터확정 #개별숙박</p>
+                            <p class="color-secondary font-13 mb-0 ellipsis">#카풀가능&nbsp;&nbsp;#센터확정&nbsp;&nbsp;#개별숙박</p>
                         </div>
                     </div>
                 </div>
@@ -186,6 +199,33 @@
                 <h4 class="text-start pt-2 mb-1 font-600"><i class="fas fa-camera me-2"></i>수중 촬영 다이빙</h4>
                 <p class="mb-0">13개의 다이빙 이벤트</p>
                 <img class="float-right" src="/static/images/3d/action-camera.png" width="220" style="margin-right: -20px;"/>
+            </div>
+        </div>
+
+        <div class="card card-style" style="background: #dbaa47;">
+            <div class="content mb-0 mt-3">
+                <h4 class="color-white text-start pt-1 mb-2">다이빙 후 맥주한잔<br/>뒷풀이 포함 이벤트</h4>
+                <p class="mb-0 color-gray-light">39개의 다이빙 이벤트</p>
+                <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>                
+                <img class="float-right" src="/static/images/3d/beer.png" width="200"/>
+            </div>
+        </div>
+
+        <div class="card card-style" style="background: #99dfe3;">
+            <div class="content mb-0 mt-3">
+                <h4 class="text-start pt-1 mb-1">해외투어</h4>
+                <p class="mb-0 color-gray">3개의 다이빙 이벤트</p>
+                <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>                
+                <img class="float-right" src="/static/images/3d/air-plane.png" width="200"/>
+            </div>
+        </div>
+
+        <div class="card card-style" style="background: #e9ad9b;">
+            <div class="content mb-0 mt-3">
+                <h4 class="text-start pt-1 mb-1">초보자 참여 가능</h4>
+                <p class="mb-0 color-gray">12개의 다이빙 이벤트</p>
+                <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>                
+                <img class="float-right" src="/static/images/3d/lifebuoy.png" width="200"/>
             </div>
         </div>
         
@@ -254,4 +294,5 @@ export default {
 .wedive-chip i {width: auto;line-height: inherit;margin-right: 3px;}
 .light-border-bottom {border-bottom: 1px solid #dee2e6;}
 .wedive-txt-all {position: absolute;top: 20px;right: 16px;}
+.border-08 {border: 1px solid rgba(0, 0, 0, 0.08) !important;}
 </style>
