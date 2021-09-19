@@ -251,7 +251,8 @@
 
         
         <div data-menu-load="/static/menu-footer.html"></div>
-        <a href="/buddy_create" id="btn_new" class="btn btn-m mb-3 rounded-xl font-900 shadow-s bg-dark-dark" style="position: fixed;width: 48px;height: 48px;bottom: 70px;right:40px;"><i class="fas fa-plus font-16 ms-n1"></i></a></div>
+        <a href="/buddy_create" id="btn_new" class="btn btn-m mb-3 rounded-xl font-900 shadow-s bg-dark-dark" style="position: fixed;width: 48px;height: 48px;bottom: 70px;right:40px;"><i class="fas fa-plus font-16 ms-n1"></i></a>
+    </div>
     
 
 
