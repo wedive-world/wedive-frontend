@@ -304,6 +304,38 @@
           <div class="content mt-1">
             <h4 class="pt-3 mb-2">다이빙 정보</h4>
             <div class="mt-2">
+                <div class="mt-3 mb-1">
+                    <label for="form5" class="color-highlight" style="margin-left: 14px;">자주가는 장소</label>
+                    <vue-typeahead-bootstrap
+                        class="form-control wedive-search"
+                        style="border-radius: 10px !important;border-color: rgba(0, 0, 0, 0.08) !important;"
+                        v-model="query"
+                        :data="users"
+                        :serializer="item => item.name_ko"
+                        :screen-reader-text-serializer="item => `${item.name_ko}`"
+                        highlightClass="special-highlight-class"
+                        @hit="selecteduser = $event"
+                        :minMatchingChars="2"
+                        placeholder="지역명, 다이빙 포인트, 센터명"
+                        inputClass="special-input-class"
+                        :disabledValues="(selecteduser ? [selecteduser.name_ko] : [])"
+                        @input="lookupUser2"
+                        >
+                        <template slot="suggestion" slot-scope="{ data, htmlText }">
+                            <div class="d-flex align-items-center">
+                            <img
+                                class="rounded-s me-2"
+                                :src="data.img_url"
+                                style="width: 40px; height: 40px;" />
+                            
+                            <span v-if="data.type == 'region'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-marked-alt\'></i> 장소</span><br/>' + htmlText"></span>
+                            <span v-else-if="data.type == 'point'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-pin\'></i> 다이빙 포인트</span><br/>' + htmlText"></span>
+                            <span v-else-if="data.type == 'center'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-store\'></i> 다이빙 센터</span><br/>' + htmlText"></span>
+                            </div>
+                        </template>
+                    </vue-typeahead-bootstrap>
+                </div>
+                
                 <div class="input-style input-style-always-active has-borders no-icon mb-4 bg-white">
                     <label for="form5" class="color-highlight">라이센스</label>
                     <select id="form5">
@@ -401,37 +433,7 @@
                     <em></em>
                 </div>
 
-                <div class="input-style has-borders no-icon input-style-always-active validate-field mb-4">
-                    <label for="form5" class="color-highlight">자주가는 장소</label>
-                    <vue-typeahead-bootstrap
-                        class="form-control wedive-search"
-                        style="border-radius: 10px !important;border-color: rgba(0, 0, 0, 0.08) !important;"
-                        v-model="query"
-                        :data="users"
-                        :serializer="item => item.name_ko"
-                        :screen-reader-text-serializer="item => `${item.name_ko}`"
-                        highlightClass="special-highlight-class"
-                        @hit="selecteduser = $event"
-                        :minMatchingChars="2"
-                        placeholder="지역명, 다이빙 포인트, 센터명"
-                        inputClass="special-input-class"
-                        :disabledValues="(selecteduser ? [selecteduser.name_ko] : [])"
-                        @input="lookupUser2"
-                        >
-                        <template slot="suggestion" slot-scope="{ data, htmlText }">
-                            <div class="d-flex align-items-center">
-                            <img
-                                class="rounded-s me-2"
-                                :src="data.img_url"
-                                style="width: 40px; height: 40px;" />
-                            
-                            <span v-if="data.type == 'region'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-marked-alt\'></i> 장소</span><br/>' + htmlText"></span>
-                            <span v-else-if="data.type == 'point'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-pin\'></i> 다이빙 포인트</span><br/>' + htmlText"></span>
-                            <span v-else-if="data.type == 'center'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-store\'></i> 다이빙 센터</span><br/>' + htmlText"></span>
-                            </div>
-                        </template>
-                    </vue-typeahead-bootstrap>
-                </div>
+                
                 
                 
 
@@ -580,4 +582,5 @@ export default {
 <style scoped>
 .border-08 {border: 1px solid rgba(0, 0, 0, 0.08) !important;}
 .border-bottom {border-bottom: 1px solid #d1d2d3 !important;}
+.input-style.has-borders.input-style-always-active label {background-color: transparent !important;}
 </style>
