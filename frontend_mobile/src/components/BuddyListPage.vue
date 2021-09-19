@@ -3,10 +3,14 @@
     <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-buddy" data-menu-load=""></div>    
     <div class="page-content">
         
+        <div class="content">
+        <h4 class="text-start pt-2 mb-0 font-18 font-900">짱스님,<br/>어떤 다이빙을 찾으시나요?</h4>
+        </div>
+
         <div class="card card-style" style="background: white;height:158px;">
             <div class="content mb-0 mt-3">
-                <img class="float-right" src="/static/images/3d/search.png" width="100" style="position: absolute;z-index: 11;right: 30px;top:4px;"/>
-                <h4 class="text-start pt-5 mb-1 font-15">원하는 다이빙을 빠르게 검색</h4>
+                <img class="float-right" src="/static/images/3d/search.png" width="80" style="position: absolute;z-index: 11;right: 30px;top:10px;"/>
+                <h4 class="text-start mb-1 font-15" style="padding-top:36px;">원하는 다이빙을 빠르게 검색</h4>
 
                 <div class="search-box search-dark border-08 bg-theme rounded-sm" style="position: absolute;width: calc(100% - 30px);z-index: 99;">
                     <i class="fa fa-search" style="padding: 0px 15px 0px 15px;"></i>
@@ -72,7 +76,7 @@
                 <h4 class="text-start pt-1 mb-2">얼마 남지 않은<br/>다이빙 D-7</h4>
                 <p class="mb-0 color-gray">53개의 다이빙 이벤트</p>
                 <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>                
-                <img class="float-right" src="/static/images/3d/hourglass.png" width="200"/>
+                <img class="float-right mt-n5" src="/static/images/3d/hourglass.png" width="200"/>
             </div>
         </div>
 
@@ -147,7 +151,7 @@
                 <h4 class="text-start pt-2 mb-1 font-600 color-white"><i class="fas fa-map-marker-alt me-2"></i>내 주변 다이빙</h4>
                 <p class="color-white mb-0">7개의 다이빙 이벤트</p>
                 <a class="color-white font-12 wedive-txt-all">모두보기</a>
-                <img class="" src="/static/images/3d/male-holding-magnifying.png" width="300"/>
+                <img class="mt-n3" src="/static/images/3d/male-holding-magnifying.png" width="300"/>
             </div>
         </div>
 
@@ -198,7 +202,7 @@
             <div class="content mb-0 mt-3">
                 <h4 class="text-start pt-2 mb-1 font-600"><i class="fas fa-camera me-2"></i>수중 촬영 다이빙</h4>
                 <p class="mb-0">13개의 다이빙 이벤트</p>
-                <img class="float-right" src="/static/images/3d/action-camera.png" width="220" style="margin-right: -20px;"/>
+                <img class=" mt-n4 float-right" src="/static/images/3d/action-camera.png" width="220" style="margin-right: -20px;"/>
             </div>
         </div>
 
@@ -207,7 +211,7 @@
                 <h4 class="color-white text-start pt-1 mb-2">다이빙 후 맥주한잔<br/>뒷풀이 포함 이벤트</h4>
                 <p class="mb-0 color-gray-light">39개의 다이빙 이벤트</p>
                 <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>                
-                <img class="float-right" src="/static/images/3d/beer.png" width="200"/>
+                <img class=" mt-n4 mb-2 float-right" src="/static/images/3d/beer.png" width="200"/>
             </div>
         </div>
 
@@ -216,7 +220,7 @@
                 <h4 class="text-start pt-1 mb-1">해외투어</h4>
                 <p class="mb-0 color-gray">3개의 다이빙 이벤트</p>
                 <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>                
-                <img class="float-right" src="/static/images/3d/air-plane.png" width="200"/>
+                <img class="mt-n4 mb-n3 float-right" src="/static/images/3d/air-plane.png" width="200"/>
             </div>
         </div>
 
@@ -225,7 +229,7 @@
                 <h4 class="text-start pt-1 mb-1">초보자 참여 가능</h4>
                 <p class="mb-0 color-gray">12개의 다이빙 이벤트</p>
                 <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>                
-                <img class="float-right" src="/static/images/3d/lifebuoy.png" width="200"/>
+                <img class="mt-n5 float-right" src="/static/images/3d/lifebuoy.png" width="200"/>
             </div>
         </div>
         
