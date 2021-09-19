@@ -786,7 +786,7 @@
     <div id="menu-share" class="menu menu-box-bottom rounded-half">
         <div class="menu-title mt-n1">
             <h2 class="pt-3 pb-3 text-center">공유</h2>
-            <a href="#" class="close-menu"><i class="fa fa-times"></i></a>
+            <a href="#" class="close-menu"><i class="wedive_icoset wedive_icoset_close"></i></a>
         </div>
         <div class="content mb-0 text-start">
             <div class="divider mb-0"></div>
@@ -832,7 +832,7 @@
     <div id="menu-direction" class="menu menu-box-bottom rounded-half">
         <div class="menu-title mt-n1">
             <h2 class="pt-3 pb-3 text-center">오시는 길</h2>
-            <a href="#" class="close-menu"><i class="fa fa-times"></i></a>
+            <a href="#" class="close-menu"><i class="wedive_icoset wedive_icoset_close"></i></a>
         </div>
         <div class="content mb-0 text-start">
             <p class="color-highlight font-600 mb-1">1 ~ 2인 이동 방법</p>

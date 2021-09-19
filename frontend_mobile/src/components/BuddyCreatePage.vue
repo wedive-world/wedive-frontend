@@ -17,25 +17,24 @@
         <div class="card card-full pb-0 mb-3 border-bottom">
           <div class="content mt-1">
             <h4 class="pt-3 mb-2">일정 정보</h4>
-            <a id="delete_schedule" class="color-highlight font-12 hide" style="margin-top: -30px;padding-bottom: 10px;float:right;">일정 삭제</a>
+            <!--<a id="delete_schedule" class="color-highlight font-12 hide" style="margin-top: -30px;padding-bottom: 10px;float:right;">일정 삭제</a>-->
             <div class="text-center p-3 bg-fade-gray-light rounded-s mb-3" id="div_empty">
               <img class="mt-2" src="/static/images/empty_ill.png" style="width: 60%;"/>
               <p class="color-gray-light-mid">아직 일정이 없습니다.</p>
             </div>
-            <div class="p-3 rounded-s mb-4 mt-3 hide" id="div_schedule1" style="border: 1px solid rgba(0, 0, 0, 0.08) !important;">
+            
+            <div class="p-3 rounded-s mb-4 mt-3 row hide" id="div_schedule1" style="border: 1px solid rgba(0, 0, 0, 0.08) !important;">
+              <a href="#" class="schedule-close" v-on:click="closeSchedule(1)"><i class="wedive_icoset wedive_icoset_close"></i></a>
               <label class="wedive-label color-secondary">일정 1</label>
-              <div class="input-style has-borders no-icon mt-2">
-                <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_start" placeholder="Phone">
+              <div class="input-style has-borders no-icon mt-2 col-6 pe-3 after-tilde">
+                <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_start" placeholder="시작일">
                 <label for="form_start" class="color-highlight">시작일</label>
-                <i class="fa fa-check disabled valid me-4 pe-3 font-12 color-green-dark"></i>
-                <i class="fa fa-check disabled invalid me-4 pe-3 font-12 color-red-dark"></i>
               </div>
-              <div class="input-style has-borders no-icon mt-3">
-                <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_end" placeholder="Phone">
+              <div class="input-style has-borders no-icon mt-2 col-6 ps-3">
+                <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_end" placeholder="종료일">
                 <label for="form_end" class="color-highlight">종료일</label>
-                <i class="fa fa-check disabled valid me-4 pe-3 font-12 color-green-dark"></i>
-                <i class="fa fa-check disabled invalid me-4 pe-3 font-12 color-red-dark"></i>
               </div>
+              
 
               <div class="mt-3">
                 <vue-typeahead-bootstrap
@@ -70,19 +69,16 @@
                 </vue-typeahead-bootstrap>
               </div>
             </div>
-            <div class="p-3 rounded-s mb-4 hide" id="div_schedule2" style="border: 1px solid rgba(0, 0, 0, 0.08) !important;">
+            <div class="p-3 rounded-s mb-4 row hide" id="div_schedule2" style="border: 1px solid rgba(0, 0, 0, 0.08) !important;">
+              <a href="#" class="schedule-close" v-on:click="closeSchedule(1)"><i class="wedive_icoset wedive_icoset_close"></i></a>
               <label class="wedive-label color-secondary">일정 2</label>
-              <div class="input-style has-borders no-icon mt-2">
-                <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_start" placeholder="Phone">
+              <div class="input-style has-borders no-icon mt-2 col-6 pe-3 after-tilde">
+                <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_start" placeholder="시작일">
                 <label for="form_start" class="color-highlight">시작일</label>
-                <i class="fa fa-check disabled valid me-4 pe-3 font-12 color-green-dark"></i>
-                <i class="fa fa-check disabled invalid me-4 pe-3 font-12 color-red-dark"></i>
               </div>
-              <div class="input-style has-borders no-icon mt-3">
-                <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_end" placeholder="Phone">
+              <div class="input-style has-borders no-icon mt-2 col-6 ps-3">
+                <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_end" placeholder="종료일">
                 <label for="form_end" class="color-highlight">종료일</label>
-                <i class="fa fa-check disabled valid me-4 pe-3 font-12 color-green-dark"></i>
-                <i class="fa fa-check disabled invalid me-4 pe-3 font-12 color-red-dark"></i>
               </div>
 
               <div class="mt-3">
@@ -118,19 +114,16 @@
                 </vue-typeahead-bootstrap>
               </div>
             </div>
-            <div class="p-3 rounded-s mb-4 hide" id="div_schedule3" style="border: 1px solid rgba(0, 0, 0, 0.08) !important;">
+            <div class="p-3 rounded-s mb-4 row hide" id="div_schedule3" style="border: 1px solid rgba(0, 0, 0, 0.08) !important;">
+              <a href="#" class="schedule-close" v-on:click="closeSchedule(1)"><i class="wedive_icoset wedive_icoset_close"></i></a>
               <label class="wedive-label color-secondary">일정 3</label>
-              <div class="input-style has-borders no-icon mt-2">
-                <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_start" placeholder="Phone">
+              <div class="input-style has-borders no-icon mt-2 col-6 pe-3 after-tilde">
+                <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_start" placeholder="시작일">
                 <label for="form_start" class="color-highlight">시작일</label>
-                <i class="fa fa-check disabled valid me-4 pe-3 font-12 color-green-dark"></i>
-                <i class="fa fa-check disabled invalid me-4 pe-3 font-12 color-red-dark"></i>
               </div>
-              <div class="input-style has-borders no-icon mt-3">
-                <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_end" placeholder="Phone">
+              <div class="input-style has-borders no-icon mt-2 col-6 ps-3">
+                <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_end" placeholder="종료일">
                 <label for="form_end" class="color-highlight">종료일</label>
-                <i class="fa fa-check disabled valid me-4 pe-3 font-12 color-green-dark"></i>
-                <i class="fa fa-check disabled invalid me-4 pe-3 font-12 color-red-dark"></i>
               </div>
 
               <div class="mt-3">
@@ -166,19 +159,16 @@
                 </vue-typeahead-bootstrap>
               </div>
             </div>
-            <div class="p-3 rounded-s mb-4 hide" id="div_schedule4" style="border: 1px solid rgba(0, 0, 0, 0.08) !important;">
+            <div class="p-3 rounded-s mb-4 row hide" id="div_schedule4" style="border: 1px solid rgba(0, 0, 0, 0.08) !important;">
+              <a href="#" class="schedule-close" v-on:click="closeSchedule(1)"><i class="wedive_icoset wedive_icoset_close"></i></a>
               <label class="wedive-label color-secondary">일정 4</label>
-              <div class="input-style has-borders no-icon mt-2">
-                <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_start" placeholder="Phone">
+              <div class="input-style has-borders no-icon mt-2 col-6 pe-3 after-tilde">
+                <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_start" placeholder="시작일">
                 <label for="form_start" class="color-highlight">시작일</label>
-                <i class="fa fa-check disabled valid me-4 pe-3 font-12 color-green-dark"></i>
-                <i class="fa fa-check disabled invalid me-4 pe-3 font-12 color-red-dark"></i>
               </div>
-              <div class="input-style has-borders no-icon mt-3">
-                <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_end" placeholder="Phone">
+              <div class="input-style has-borders no-icon mt-2 col-6 ps-3">
+                <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_end" placeholder="종료일">
                 <label for="form_end" class="color-highlight">종료일</label>
-                <i class="fa fa-check disabled valid me-4 pe-3 font-12 color-green-dark"></i>
-                <i class="fa fa-check disabled invalid me-4 pe-3 font-12 color-red-dark"></i>
               </div>
 
               <div class="mt-3">
@@ -214,19 +204,16 @@
                 </vue-typeahead-bootstrap>
               </div>
             </div>
-            <div class="p-3 rounded-s hide" id="div_schedule5" style="border: 1px solid rgba(0, 0, 0, 0.08) !important;">
+            <div class="p-3 rounded-s row hide" id="div_schedule5" style="border: 1px solid rgba(0, 0, 0, 0.08) !important;">
+              <a href="#" class="schedule-close" v-on:click="closeSchedule(1)"><i class="wedive_icoset wedive_icoset_close"></i></a>
               <label class="wedive-label color-secondary">일정 5</label>
-              <div class="input-style has-borders no-icon mt-2">
-                <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_start" placeholder="Phone">
+              <div class="input-style has-borders no-icon mt-2 col-6 pe-3 after-tilde">
+                <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_start" placeholder="시작일">
                 <label for="form_start" class="color-highlight">시작일</label>
-                <i class="fa fa-check disabled valid me-4 pe-3 font-12 color-green-dark"></i>
-                <i class="fa fa-check disabled invalid me-4 pe-3 font-12 color-red-dark"></i>
               </div>
-              <div class="input-style has-borders no-icon mt-3">
-                <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_end" placeholder="Phone">
+              <div class="input-style has-borders no-icon mt-2 col-6 ps-3">
+                <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_end" placeholder="종료일">
                 <label for="form_end" class="color-highlight">종료일</label>
-                <i class="fa fa-check disabled valid me-4 pe-3 font-12 color-green-dark"></i>
-                <i class="fa fa-check disabled invalid me-4 pe-3 font-12 color-red-dark"></i>
               </div>
 
               <div class="mt-3">
@@ -315,6 +302,16 @@
               </div>
             </div>
 
+            <div class="mb-0 mt-3">
+              <div class="input-style has-borders no-icon validate-field mb-0">
+                <input type="text" class="form-control validate-text" id="form_price" placeholder="(옵션) 출발지를 입력하세요.">
+                <label for="form_price" class="color-highlight">출발지</label>
+                <i class="fa fa-times disabled invalid color-red-dark"></i>
+                <i class="fa fa-check disabled valid color-green-dark"></i>
+                <em>(필요 시 입력))</em>
+              </div>
+            </div>
+
 
             <div class="mb-0 mt-3">
               <div class="input-style has-borders no-icon mb-0">
@@ -358,6 +355,36 @@
                   <label class="form-check-label rounded-xl border-08" for="check_gender4">커플</label>
                   <i class="fa fa-check-circle color-white font-18"></i>
                   <i class="fas fa-user-friends font-17 color-red-light"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-0 mt-3">
+            <div>나이</div>
+              <div>
+                <div class="form-check interest-check">
+                  <input class="form-check-input" type="checkbox" value="" id="check_age1">
+                  <label class="form-check-label rounded-xl border-08" for="check_age1">무관</label>
+                  <i class="fa fa-check-circle color-white font-18"></i>
+                  <i class="fas fa-user font-16 color-gray-dark"></i>
+                </div>
+                <div class="form-check interest-check">
+                  <input class="form-check-input" type="checkbox" value="" id="check_age2">
+                  <label class="form-check-label rounded-xl border-08" for="check_age2">20대</label>
+                  <i class="fa fa-check-circle color-white font-18"></i>
+                  <i class="fas fa-child font-17 color-secondary"></i>
+                </div>
+                <div class="form-check interest-check">
+                  <input class="form-check-input" type="checkbox" value="" id="check_age3">
+                  <label class="form-check-label rounded-xl border-08" for="check_age3">30대</label>
+                  <i class="fa fa-check-circle color-white font-18"></i>
+                  <i class="fas fa-hand-rock font-17 color-grass-dark"></i>
+                </div>
+                <div class="form-check interest-check">
+                  <input class="form-check-input" type="checkbox" value="" id="check_age4">
+                  <label class="form-check-label rounded-xl border-08" for="check_age4">40대 이상</label>
+                  <i class="fa fa-check-circle color-white font-18"></i>
+                  <i class="fas fa-hat-cowboy-side font-17 color-brown-light"></i>
                 </div>
               </div>
             </div>
@@ -454,7 +481,7 @@
                 </div>
                 <div class="form-check interest-check">
                   <input class="form-check-input" type="checkbox" value="" id="check_env2">
-                  <label class="form-check-label rounded-xl border-08" for="check_env2">카풀 제공</label>
+                  <label class="form-check-label rounded-xl border-08" for="check_env2">카풀 가능</label>
                   <i class="fa fa-check-circle color-white font-18"></i>
                   <i class="fas fa-car font-17 color-magenta-dark"></i>
                 </div>
@@ -486,7 +513,7 @@
          data-menu-width="350">
         <div class="menu-title">
             <h1 class="font-14">일정 추가</h1>
-            <a href="#" class="close-menu"><i class="fa fa-times-circle"></i></a>
+            <a href="#" class="close-menu"><i class="wedive_icoset wedive_icoset_close"></i></a>
         </div>
         <div class="divider divider-margins mt-3 mb-0"></div>
         <div class="content">
@@ -553,7 +580,7 @@
 <script>
 import VueTypeaheadBootstrap from 'vue-typeahead-bootstrap';
 import {debounce} from 'lodash';
-var schedule_cnt = 0;
+var schedule_status = [0, 0, 0, 0, 0];
 
 export default {
   name: 'HelloWorld',
@@ -585,7 +612,6 @@ export default {
           })
       }, 500),
       lookupUser2: debounce(function(){
-          console.log("aa");
         this.users = [
             {"id": "region_ko_jeju", "type": "region", "name_ko": "제주도", name_en: "Jeju island", "img_url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0c/bf/d2/56/photo1jpg.jpg?w=100&h=100&s=1"},
             {"id": "region_ko_wooljin", "type": "region", "name_ko": "울진", name_en: "Wooljin", "img_url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/01/5a/31/a0/sunrise-peak-seongsan.jpg?w=100&h=100&s=1"},
@@ -593,21 +619,33 @@ export default {
             {"id": "point_ko_jeju_munisland", "type": "point", "name_ko": "제주도 문섬", name_en: "Mun island", "img_url": "https://api.cdn.visitjeju.net/photomng/imgpath/201907/31/07c1996d-4374-4e77-b353-300d01783718.jpg"},
         ];
       }, 500),
+      closeSchedule: function(el_idx) {
+        $("#div_schedule" + el_idx).addClass("hide");
+        schedule_status[(el_idx-1)] = 0;
+        if (schedule_status.includes(1) == false) {
+          $("#div_empty").fadeIn(100);;
+        }
+      },
       addSchedule: function() {
-        if (schedule_cnt == 0) {
+        if (schedule_status.includes(1) == false) {
           $("#div_empty").fadeOut(100);;
           $("#delete_schedule").removeClass("hide");
         }
-        if (schedule_cnt < 5) {
-          console.log("div_schedule" + (schedule_cnt+1));
-          $("#div_schedule" + (schedule_cnt+1)).removeClass("hide");
-        } else {
+        if (schedule_status.includes(0) == false) {
           var toastData = 'snackbar-maxerror';
           var notificationToast = document.getElementById(toastData);
           var notificationToast = new bootstrap.Toast(notificationToast);
           notificationToast.show();
+        } else{
+          for (var i=1; i<(schedule_status.length+1); i++) {
+            if (schedule_status[i-1] == 0) {
+              $("#div_schedule" + i).removeClass("hide");
+              schedule_status[i-1] = 1;
+              break;
+            }
+          }
+          
         }
-        schedule_cnt += 1;
       },
       reserve_next: function() {
           setTimeout(function() {
@@ -679,5 +717,7 @@ export default {
 .border-bottom {border-bottom: 1px solid #d1d2d3 !important;}
 .border-08 {border: 1px solid rgba(0, 0, 0, 0.08) !important;}
 .pl-10px {padding-left: 10px !important;}
-.wedive-label {left: 34px !important;transform: translateX(-14px) !important;position: absolute;padding: 0px 8px !important;height: 23px;margin-top: -27px;font-size: 12px;transition: all 250ms ease;background-color: #FFF;}
+.wedive-label {left: 34px !important;transform: translateX(-14px) !important;position: absolute;padding: 0px 8px !important;height: 23px;margin-top: -27px;font-size: 12px;transition: all 250ms ease;background-color: #FFF;width: auto;}
+.after-tilde:after {content: '~';position: absolute;right: -5px;top: 12px;color: gray;}
+.schedule-close {text-align: right;position: absolute;right: 6px;}
 </style>

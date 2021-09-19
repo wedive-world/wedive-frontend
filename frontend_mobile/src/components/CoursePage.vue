@@ -409,7 +409,7 @@
     <div id="menu-reserve" class="menu menu-box-bottom rounded-half">
         <div class="menu-title mt-n1">
             <h2 class="pt-3 pb-3 text-center">예약</h2>
-            <a href="#" class="close-menu"><i class="fa fa-times"></i></a>
+            <a href="#" class="close-menu"><i class="wedive_icoset wedive_icoset_close"></i></a>
         </div>
         <div class="content mb-0 text-start">
             
@@ -525,7 +525,7 @@
     <div id="menu-reserve2" class="menu menu-box-bottom rounded-half">
         <div class="menu-title mt-n1">
             <h2 class="pt-3 pb-3 text-center">예약</h2>
-            <a href="#" class="close-menu"><i class="fa fa-times"></i></a>
+            <a href="#" class="close-menu"><i class="wedive_icoset wedive_icoset_close"></i></a>
         </div>
         <div class="content mt-0 pb-3 text-start">
             <div class="row mb-0 me-1 ms-1 pe-2 ps-2 txt_box">

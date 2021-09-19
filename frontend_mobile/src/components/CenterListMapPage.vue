@@ -46,7 +46,7 @@
     <div id="menu-filter" class="menu menu-box-bottom" style="height:100%;border-radius: 0px !important;">
         <div class="menu-title mt-n1">
             <h2 class="pt-3 pb-3 text-center">필터를 선택하세요</h2>
-            <a href="#" class="close-menu"><i class="fa fa-times"></i></a>
+            <a href="#" class="close-menu"><i class="wedive_icoset wedive_icoset_close"></i></a>
         </div>
         <div class="content m-0 text-start">
             <div class="card card-style ms-0 me-0 rounded-0 mb-0">
