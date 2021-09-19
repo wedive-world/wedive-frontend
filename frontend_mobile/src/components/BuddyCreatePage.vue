@@ -304,7 +304,7 @@
 
             <div class="mb-0 mt-3">
               <div class="input-style has-borders no-icon validate-field mb-0">
-                <input type="text" class="form-control validate-text" id="form_departure" placeholder="(옵션) 출발지를 입력하세요.">
+                <input type="text" class="form-control validate-name" id="form_departure" placeholder="(옵션) 출발지를 입력하세요.">
                 <label for="form_departure" class="color-highlight">출발지</label>
                 <i class="fa fa-times disabled invalid color-red-dark"></i>
                 <i class="fa fa-check disabled valid color-green-dark"></i>
@@ -329,6 +329,7 @@
         <div class="card card-full pb-0 mb-3 border-bottom">
           <div class="content mt-1">
             <h4 class="pt-2 mb-2">선호 사항</h4>
+            <a class="color-highlight font-12 hide" style="margin-top: -30px;padding-bottom: 10px;float:right;">초기화</a>
             <div class="mb-0 mt-3">
               <div>성별</div>
               <div>
@@ -419,7 +420,7 @@
                 </div>
                 <div class="form-check interest-check">
                   <input class="form-check-input" type="checkbox" value="" id="check_diving9">
-                  <label class="form-check-label rounded-xl border-08" for="check_diving4">강사보험</label>
+                  <label class="form-check-label rounded-xl border-08" for="check_diving9">강사보험</label>
                   <i class="fa fa-check-circle color-white font-18"></i>
                   <i class="fas fa-file-contract font-17 color-yellow-light"></i>
                 </div>
@@ -629,7 +630,7 @@ export default {
       addSchedule: function() {
         if (schedule_status.includes(1) == false) {
           $("#div_empty").fadeOut(100);;
-          $("#delete_schedule").removeClass("hide");
+          //$("#delete_schedule").removeClass("hide");
         }
         if (schedule_status.includes(0) == false) {
           var toastData = 'snackbar-maxerror';
@@ -718,6 +719,6 @@ export default {
 .border-08 {border: 1px solid rgba(0, 0, 0, 0.08) !important;}
 .pl-10px {padding-left: 10px !important;}
 .wedive-label {left: 34px !important;transform: translateX(-14px) !important;position: absolute;padding: 0px 8px !important;height: 23px;margin-top: -27px;font-size: 12px;transition: all 250ms ease;background-color: #FFF;width: auto;}
-.after-tilde:after {content: '~';position: absolute;right: -5px;top: 12px;color: gray;}
+.after-tilde:after {content: '~';position: absolute;right: -5px;top: 12px;color: gray;margin-top: -4px;}
 .schedule-close {text-align: right;position: absolute;right: 6px;}
 </style>
