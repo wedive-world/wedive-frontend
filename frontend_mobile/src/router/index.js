@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HomePage from '@/components/HomePage'
+import RecommendPage from '@/components/RecommendPage'
 import BuddyCreatePage from '@/components/BuddyCreatePage'
 import CenterDetailPage from '@/components/CenterDetailPage'
 import CenterListPage from '@/components/CenterListPage'
@@ -16,6 +17,11 @@ export default new Router({
       path: '/',
       name: 'HomePage',
       component: HomePage
+    },
+    {
+      path: '/recommend',
+      name: 'RecommendPage',
+      component: RecommendPage
     },
     {
       path: '/buddy_create',

@@ -386,6 +386,12 @@
                 </div>
                 <div class="form-check interest-check">
                   <input class="form-check-input" type="checkbox" value="" id="check_diving4">
+                  <label class="form-check-label rounded-xl border-08" for="check_diving4">강사포함</label>
+                  <i class="fa fa-check-circle color-white font-18"></i>
+                  <i class="fas fa-chalkboard-teacher font-17 color-gray-dark"></i>
+                </div>
+                <div class="form-check interest-check">
+                  <input class="form-check-input" type="checkbox" value="" id="check_diving9">
                   <label class="form-check-label rounded-xl border-08" for="check_diving4">강사보험</label>
                   <i class="fa fa-check-circle color-white font-18"></i>
                   <i class="fas fa-file-contract font-17 color-yellow-light"></i>
