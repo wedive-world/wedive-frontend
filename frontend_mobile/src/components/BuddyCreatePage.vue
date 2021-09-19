@@ -304,7 +304,7 @@
 
             <div class="mb-0 mt-3">
               <div class="input-style has-borders no-icon validate-field mb-0">
-                <input type="text" class="form-control validate-name" id="form_departure" placeholder="(옵션) 출발지를 입력하세요.">
+                <input type="name" class="form-control validate-name" id="form_departure" placeholder="(옵션) 출발지를 입력하세요.">
                 <label for="form_departure" class="color-highlight">출발지</label>
                 <i class="fa fa-times disabled invalid color-red-dark"></i>
                 <i class="fa fa-check disabled valid color-green-dark"></i>
@@ -364,25 +364,25 @@
             <div>나이</div>
               <div>
                 <div class="form-check interest-check">
-                  <input class="form-check-input" type="checkbox" value="" id="check_age1">
+                  <input class="form-check-input" type="radio" value="" name="check_age" id="check_age1">
                   <label class="form-check-label rounded-xl border-08" for="check_age1">무관</label>
                   <i class="fa fa-check-circle color-white font-18"></i>
                   <i class="fas fa-user font-16 color-gray-dark"></i>
                 </div>
                 <div class="form-check interest-check">
-                  <input class="form-check-input" type="checkbox" value="" id="check_age2">
+                  <input class="form-check-input" type="radio" value="" name="check_age" id="check_age2">
                   <label class="form-check-label rounded-xl border-08" for="check_age2">20대</label>
                   <i class="fa fa-check-circle color-white font-18"></i>
                   <i class="fas fa-child font-17 color-secondary"></i>
                 </div>
                 <div class="form-check interest-check">
-                  <input class="form-check-input" type="checkbox" value="" id="check_age3">
+                  <input class="form-check-input" type="radio" value="" name="check_age" id="check_age3">
                   <label class="form-check-label rounded-xl border-08" for="check_age3">30대</label>
                   <i class="fa fa-check-circle color-white font-18"></i>
                   <i class="fas fa-hand-rock font-17 color-grass-dark"></i>
                 </div>
                 <div class="form-check interest-check">
-                  <input class="form-check-input" type="checkbox" value="" id="check_age4">
+                  <input class="form-check-input" type="radio" value="" name="check_age" id="check_age4">
                   <label class="form-check-label rounded-xl border-08" for="check_age4">40대 이상</label>
                   <i class="fa fa-check-circle color-white font-18"></i>
                   <i class="fas fa-hat-cowboy-side font-17 color-brown-light"></i>
@@ -476,19 +476,19 @@
               <div>
                 <div class="form-check interest-check">
                   <input class="form-check-input" type="checkbox" value="" id="check_env1">
-                  <label class="form-check-label rounded-xl border-08" for="check_env1">개별숙식</label>
+                  <label class="form-check-label rounded-xl border-08" for="check_env1">개별숙박</label>
                   <i class="fa fa-check-circle color-white font-18"></i>
                   <i class="fas fa-bed font-16 color-brown-dark"></i>
                 </div>
                 <div class="form-check interest-check">
                   <input class="form-check-input" type="checkbox" value="" id="check_env2">
-                  <label class="form-check-label rounded-xl border-08" for="check_env2">카풀 가능</label>
+                  <label class="form-check-label rounded-xl border-08" for="check_env2">카풀가능</label>
                   <i class="fa fa-check-circle color-white font-18"></i>
                   <i class="fas fa-car font-17 color-magenta-dark"></i>
                 </div>
                 <div class="form-check interest-check">
                   <input class="form-check-input" type="checkbox" value="" id="check_env3">
-                  <label class="form-check-label rounded-xl border-08" for="check_env3">센터 확정</label>
+                  <label class="form-check-label rounded-xl border-08" for="check_env3">센터확정</label>
                   <i class="fa fa-check-circle color-white font-18"></i>
                   <i class="fas fa-store font-17 color-blue-light"></i>
                 </div>

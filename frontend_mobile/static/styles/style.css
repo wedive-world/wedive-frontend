@@ -222,6 +222,10 @@ body {
   color: #8CC152 !important;
 }
 
+.color-green-dark-more {
+  color: #187f49 !important;
+}
+
 .color-icon-green {
   stroke: #8CC152 !important;
   fill: rgba(140, 193, 82, 0.3) !important;
@@ -507,6 +511,10 @@ body {
   color: #FFF !important;
 }
 
+.bg-blue-light05 {
+  background-color: rgba(32, 123, 241, 0.4) !important;
+}
+
 .bg-fade-blue-light {
   background-color: rgba(74, 137, 220, 0.3) !important;
   color: #FFF !important;
@@ -608,6 +616,10 @@ body {
 .bg-fade-mint-light {
   background-color: rgba(55, 188, 155, 0.3) !important;
   color: #FFF !important;
+}
+
+.bg-fade-mint-light05 {
+  background-color: rgba(55, 188, 155, 0.4) !important;
 }
 
 .color-mint-dark {
@@ -759,6 +771,10 @@ body {
 
 .color-magenta-dark {
   color: #967ADC !important;
+}
+
+.color-magenta-dark-more {
+  color: #5a249d !important;
 }
 
 .color-icon-magenta {

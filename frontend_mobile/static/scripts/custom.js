@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 validateField.forEach(el => el.addEventListener('keyup', e => {
                     var getAttribute = el.getAttribute('type');
                     switch(getAttribute){
-                        case 'name': nameValidator.test(el.value) ? valid(el) : invalid(el); break;
+                        case 'name': valid(el); break;
                         case 'number': numberValidator.test(el.value) ? valid(el) : invalid(el); break;
                         case 'email': mailValidator.test(el.value) ? valid(el) : invalid(el); break;
                         case 'text': textValidator.test(el.value) ? valid(el) : invalid(el); break;
