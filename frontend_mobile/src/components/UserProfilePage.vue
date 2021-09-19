@@ -44,7 +44,7 @@
                     <i class="fa fa-check disabled valid color-green-dark"></i>
                     <em>(required)</em>
                 </div>
-                <div class="input-style input-style-always-active has-borders no-icon mb-4">
+                <div class="input-style input-style-always-active has-borders no-icon mb-4 bg-white">
                     <label for="form5" class="color-highlight">성별</label>
                     <select id="form5">
                         <option value="default" disabled selected>선택하세요</option>
@@ -56,7 +56,7 @@
                     <i class="fa fa-check disabled invalid color-red-dark"></i>
                     <em></em>
                 </div>
-                <div class="input-style input-style-always-active has-borders no-icon mb-4">
+                <div class="input-style input-style-always-active has-borders no-icon mb-4 bg-white">
                     <label for="form5" class="color-highlight">직업</label>
                     <select id="form5">
                         <option value="default" disabled selected>선택하세요</option>
@@ -96,7 +96,7 @@
                     <i class="fa fa-check disabled invalid color-red-dark"></i>
                     <em></em>
                 </div>
-                <div class="input-style input-style-always-active has-borders no-icon mb-4">
+                <div class="input-style input-style-always-active has-borders no-icon mb-4 bg-white">
                     <label for="form5" class="color-highlight">거주지</label>
                     <select id="form5">
                         <option value="default" disabled selected>선택하세요</option>
@@ -304,7 +304,7 @@
           <div class="content mt-1">
             <h4 class="pt-3 mb-2">다이빙 정보</h4>
             <div class="mt-2">
-                <div class="input-style input-style-always-active has-borders no-icon mb-4">
+                <div class="input-style input-style-always-active has-borders no-icon mb-4 bg-white">
                     <label for="form5" class="color-highlight">라이센스</label>
                     <select id="form5">
                         <option value="default" disabled selected>선택하세요</option>
@@ -354,7 +354,7 @@
                     <em></em>
                 </div>
 
-                <div class="input-style input-style-always-active has-borders no-icon mb-4">
+                <div class="input-style input-style-always-active has-borders no-icon mb-4 bg-white">
                     <label for="form5" class="color-highlight">레벨</label>
                     <select id="form5">
                         <option value="default" disabled selected>선택하세요</option>
@@ -377,7 +377,7 @@
                     <em></em>
                 </div>
 
-                <div class="input-style input-style-always-active has-borders no-icon mb-4">
+                <div class="input-style input-style-always-active has-borders no-icon mb-4 bg-white">
                     <label for="form5" class="color-highlight">다이빙 로그</label>
                     <select id="form5">
                         <option value="default" disabled selected>선택하세요</option>
