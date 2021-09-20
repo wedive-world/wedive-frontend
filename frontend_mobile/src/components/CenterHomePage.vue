@@ -310,49 +310,14 @@ export default {
 .border-08 {border: 1px solid rgba(0, 0, 0, 0.08) !important;}
 .ls-n1 {letter-spacing: -1px;}
 
-@keyframes motion-updown {
-	0% {margin-top: 0px;}
-	20% {margin-top: 10px;}
-	40% {margin-top: 0px;}
-	60% {margin-top: 10px;}
-	80% {margin-top: 0px;}
-	100% {margin-top: 0px;}
-}
-@keyframes motion-leftright {
-	0% {margin-right: 0px;}
-	20% {margin-right: 25px;}
-	40% {margin-right: 0px;}
-	60% {margin-right: 25px;}
-	80% {margin-right: 0px;}
-	100% {margin-right: 0px;}
-}
--webkit-@keyframes motion-leftright {
-	0% {margin-right: 0px;}
-	20% {margin-right: 25px;}
-	40% {margin-right: 0px;}
-	60% {margin-right: 25px;}
-	80% {margin-right: 0px;}
-	100% {margin-right: 0px;}
-}
-@keyframes motion-endtoend {
-	0% {left: -100px; opacity: .5;}
-    50% {left: 40%; opacity: .5;}
-	100% {left: 100%; opacity: 0;}
-}
--webkit-@keyframes motion-endtoend {
-	0% {left: -100px; opacity: .5;}
-    50% {left: 40%; opacity: .5;}
-	100% {left: 100%; opacity: 0;}
-}
-.movebox {animation: motion-leftright 3s linear 0s infinite alternate; margin-top: 0;
-	-webkit-animation: motion-leftright 3s linear 0s infinite alternate; margin-top: 0;
-}
-.movebox2 {position:absolute;white-space: nowrap;left:-100px;padding-top:5px;opacity:.5;
-    animation: motion-endtoend 20s linear infinite;
-	-webkit-animation: motion-endtoend 20s linear infinite;
-}
-.movebox3 {position:absolute;white-space: nowrap;left:-100px;padding-top:50px;opacity:.5;
-    animation: motion-endtoend 30s linear infinite;
-	-webkit-animation: motion-endtoend 30s linear infinite;
-}
+@keyframes motion-updown {0% {margin-top: 0px;}20% {margin-top: 10px;}40% {margin-top: 0px;}60% {margin-top: 10px;}80% {margin-top: 0px;}100% {margin-top: 0px;}}
+-webkit-@keyframes motion-updown {0% {margin-top: 0px;}20% {margin-top: 10px;}40% {margin-top: 0px;}60% {margin-top: 10px;}80% {margin-top: 0px;}100% {margin-top: 0px;}}
+@keyframes motion-leftright {0% {margin-right: 0px;}20% {margin-right: 25px;}40% {margin-right: 0px;}60% {margin-right: 25px;}80% {margin-right: 0px;}100% {margin-right: 0px;}}
+-webkit-@keyframes motion-leftright {0% {margin-right: 0px;}20% {margin-right: 25px;}40% {margin-right: 0px;}60% {margin-right: 25px;}80% {margin-right: 0px;}100% {margin-right: 0px;}}
+@keyframes motion-endtoend {0% {left: -100px; opacity: .5;}50% {left: 40%; opacity: .5;}100% {left: 100%; opacity: 0;}}
+-webkit-@keyframes motion-endtoend {0% {left: -100px; opacity: .5;}50% {left: 40%; opacity: .5;}100% {left: 100%; opacity: 0;}}
+
+.movebox {animation: motion-leftright 3s linear 0s infinite alternate; margin-top: 0;-webkit-animation: motion-leftright 3s linear 0s infinite alternate; margin-top: 0;}
+.movebox2 {position:absolute;white-space: nowrap;left:-100px;padding-top:5px;opacity:.5;animation: motion-endtoend 20s linear infinite;-webkit-animation: motion-endtoend 20s linear infinite;}
+.movebox3 {position:absolute;white-space: nowrap;left:-100px;padding-top:50px;opacity:.5;animation: motion-endtoend 30s linear infinite;-webkit-animation: motion-endtoend 30s linear infinite;}
 </style>

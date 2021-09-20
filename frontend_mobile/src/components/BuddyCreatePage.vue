@@ -70,7 +70,7 @@
               </div>
             </div>
             <div class="p-3 rounded-s mb-4 row hide" id="div_schedule2" style="border: 1px solid rgba(0, 0, 0, 0.08) !important;">
-              <a href="#" class="schedule-close" v-on:click="closeSchedule(1)"><i class="wedive_icoset wedive_icoset_close"></i></a>
+              <a href="#" class="schedule-close" v-on:click="closeSchedule(2)"><i class="wedive_icoset wedive_icoset_close"></i></a>
               <label class="wedive-label color-secondary">일정 2</label>
               <div class="input-style input-style-always-active has-borders no-icon mt-2 col-6 pe-3 after-tilde">
                 <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_start" placeholder="시작일">
@@ -115,7 +115,7 @@
               </div>
             </div>
             <div class="p-3 rounded-s mb-4 row hide" id="div_schedule3" style="border: 1px solid rgba(0, 0, 0, 0.08) !important;">
-              <a href="#" class="schedule-close" v-on:click="closeSchedule(1)"><i class="wedive_icoset wedive_icoset_close"></i></a>
+              <a href="#" class="schedule-close" v-on:click="closeSchedule(3)"><i class="wedive_icoset wedive_icoset_close"></i></a>
               <label class="wedive-label color-secondary">일정 3</label>
               <div class="input-style input-style-always-active has-borders no-icon mt-2 col-6 pe-3 after-tilde">
                 <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_start" placeholder="시작일">
@@ -160,7 +160,7 @@
               </div>
             </div>
             <div class="p-3 rounded-s mb-4 row hide" id="div_schedule4" style="border: 1px solid rgba(0, 0, 0, 0.08) !important;">
-              <a href="#" class="schedule-close" v-on:click="closeSchedule(1)"><i class="wedive_icoset wedive_icoset_close"></i></a>
+              <a href="#" class="schedule-close" v-on:click="closeSchedule(4)"><i class="wedive_icoset wedive_icoset_close"></i></a>
               <label class="wedive-label color-secondary">일정 4</label>
               <div class="input-style input-style-always-active has-borders no-icon mt-2 col-6 pe-3 after-tilde">
                 <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_start" placeholder="시작일">
@@ -205,7 +205,7 @@
               </div>
             </div>
             <div class="p-3 rounded-s row hide" id="div_schedule5" style="border: 1px solid rgba(0, 0, 0, 0.08) !important;">
-              <a href="#" class="schedule-close" v-on:click="closeSchedule(1)"><i class="wedive_icoset wedive_icoset_close"></i></a>
+              <a href="#" class="schedule-close" v-on:click="closeSchedule(5)"><i class="wedive_icoset wedive_icoset_close"></i></a>
               <label class="wedive-label color-secondary">일정 5</label>
               <div class="input-style input-style-always-active has-borders no-icon mt-2 col-6 pe-3 after-tilde">
                 <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_start" placeholder="시작일">

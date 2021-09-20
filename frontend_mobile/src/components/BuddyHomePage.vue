@@ -228,13 +228,13 @@
             </div>
         </div>
 
-        <div class="card card-style" style="background: #99dfe3;">
+        <div class="card card-style" style="background: #99dfe3;height:270px;">
             <div class="content mb-0 mt-3">
                 <h4 class="text-start pt-1 mb-0">해외투어</h4>
                 <p class="mb-1">3개의 다이빙 이벤트</p>
                 <p class="mb-0 opacity-60 ls-n1">#세계 10대 포인트&nbsp;&nbsp;#나도 글로벌</p>
                 <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
-                <img class="mt-n4 mb-n3 float-right" src="/static/images/3d/air-plane.png" width="200"/>
+                <img class="mb-n3 float-right movebox" src="/static/images/3d/air-plane.png" width="200"/>
             </div>
         </div>
 
@@ -316,4 +316,10 @@ export default {
 .wedive-txt-all {position: absolute;top: 20px;right: 16px;}
 .border-08 {border: 1px solid rgba(0, 0, 0, 0.08) !important;}
 .ls-n1 {letter-spacing: -1px;}
+
+@keyframes motion-updown {0% {margin-top: -20px;}20% {margin-top: 0px;}40% {margin-top: -20px;}60% {margin-top: 0px;}80% {margin-top: 0px;}100% {margin-top: 0px;}}
+-webkit-@keyframes motion-updown {0% {margin-top: -20px;}20% {margin-top: 0px;}40% {margin-top: -20px;}60% {margin-top: 0px;}80% {margin-top: 0px;}100% {margin-top: 0px;}}
+
+.movebox {animation: motion-updown 3s linear 0s infinite alternate; margin-top: 0;-webkit-animation: motion-updown 3s linear 0s infinite alternate; margin-top: 0;}
+
 </style>
