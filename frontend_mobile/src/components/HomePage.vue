@@ -23,7 +23,7 @@
         
         <div v-on:click="goStatic()" class="card card-style" style="background: #ffae58;">
             <div class="content mb-0 mt-3 text-center">
-                <img class="movebox" src="/static/images/3d/academic-cap.png" width="200" style="margin-top:-26px;margin-bottom:-20px;"/>
+                <img class="movebox" src="/static/images/3d/academic-cap2.png" width="200" style="margin-top:-26px;margin-bottom:-20px;"/>
                 <h4 class="color-white pt-1 mb-1">다이빙이 처음이신가요?</h4>
                 <p class="color-white mb-3 opacity-50">걱정마세요. 초보자용 가이드를 알려드릴께요.</p>
             </div>
