@@ -21,7 +21,7 @@
         </div>
 
         
-        <div class="card card-style" style="background: #ffae58;">
+        <div v-on:click="goStatic()" class="card card-style" style="background: #ffae58;">
             <div class="content mb-0 mt-3 text-center">
                 <img class="movebox" src="/static/images/3d/academic-cap.png" width="200" style="margin-top:-26px;margin-bottom:-20px;"/>
                 <h4 class="color-white pt-1 mb-1">다이빙이 처음이신가요?</h4>
@@ -64,7 +64,9 @@ export default {
         
     }
   }, methods: {
-    
+    goStatic: function() {
+        location.href='/static'
+    }
   }
 
   
