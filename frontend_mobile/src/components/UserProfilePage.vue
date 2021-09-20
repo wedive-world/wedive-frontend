@@ -5,8 +5,6 @@
         <a href="" class="header-title color ellipsis">프로필 등록</a>
         <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
         <a href="#" data-menu="menu-main" class="header-icon header-icon-4"><i class="fas fa-bars"></i></a>
-        <a href="#" data-toggle-theme class="header-icon header-icon-3 show-on-theme-dark"><i class="fas fa-sun"></i></a>
-        <a href="#" data-toggle-theme class="header-icon header-icon-3 show-on-theme-light"><i class="fas fa-moon"></i></a>
     </div>
     
     <div class="card card-clear" data-card-height="80"></div>
@@ -284,7 +282,6 @@
                     <label id="scuba_label" class="color-highlight wediev-label hide">자주가는 수영장</label>
                     <vue-typeahead-bootstrap
                         class="wedive-search2 border-bottom"
-                        style="border-radius: 10px !important;border-color: rgba(0, 0, 0, 0.08) !important;"
                         v-model="query"
                         :data="users"
                         :serializer="item => item.name_ko"
