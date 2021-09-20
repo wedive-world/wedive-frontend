@@ -4070,7 +4070,7 @@ button {
   -webkit-transform: translateX(26px) !important;
 }
 .ios-input:checked ~ .custom-control-label::before {
-  background-color: #8CC152 !important;
+  background-color: #1d397c !important;
 }
 
 .ios-switch-icon label::before {
@@ -4543,7 +4543,7 @@ button:active {
 
 .input-style {
   position: relative;
-  margin-bottom: 5px !important;
+  margin-bottom: 5px;
 }
 
 .input-style input,
