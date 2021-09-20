@@ -375,7 +375,7 @@
                         <option value="강사">강사</option>
                         <option value="없음">없음</option>
                     </select>
-                    <span><i class="fa fa-chevron-down"></i></span>
+                    <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
                     <i class="fa fa-check disabled valid color-green-dark"></i>
                     <i class="fa fa-check disabled invalid color-red-dark"></i>
                     <em></em>
@@ -396,7 +396,7 @@
                         <option value="NLM">NLM</option>
                         <option value="없음">없음</option>
                     </select>
-                    <span><i class="fa fa-chevron-down"></i></span>
+                    <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
                     <i class="fa fa-check disabled valid color-green-dark"></i>
                     <i class="fa fa-check disabled invalid color-red-dark"></i>
                     <em></em>
@@ -532,7 +532,7 @@
                         <option value="강사">강사</option>
                         <option value="없음">없음</option>
                     </select>
-                    <span><i class="fa fa-chevron-down"></i></span>
+                    <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
                     <i class="fa fa-check disabled valid color-green-dark"></i>
                     <i class="fa fa-check disabled invalid color-red-dark"></i>
                     <em></em>
@@ -552,7 +552,7 @@
                         <option value="301">300~</option>
                         <option value="없음">없음</option>
                     </select>
-                    <span><i class="fa fa-chevron-down"></i></span>
+                    <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
                     <i class="fa fa-check disabled valid color-green-dark"></i>
                     <i class="fa fa-check disabled invalid color-red-dark"></i>
                     <em></em>
@@ -751,5 +751,6 @@ export default {
 .border-bottom {border-bottom: 1px solid #d1d2d3 !important;}
 .input-style.has-borders.input-style-always-active label {background-color: transparent !important;}
 select:invalid {color: #6c757d;}
+select {background: white; background-color: white;}
 .wediev-label {font-size: 12px;transition: all 250ms ease;position:absolute;left:14px;z-index:99;margin-top: -16px;}
 </style>
