@@ -11,6 +11,7 @@ import CenterListPage from '@/components/CenterListPage'
 import CenterListMapPage from '@/components/CenterListMapPage'
 import CoursePage from '@/components/CoursePage'
 import PointDetailPage from '@/components/PointDetailPage'
+import StaticPage from '@/components/StaticPage'
 
 Vue.use(Router)
 
@@ -70,8 +71,12 @@ export default new Router({
       path: '/point',
       name: 'PointDetailPage',
       component: PointDetailPage
+    },
+    {
+      path: '/static',
+      name: 'StaticPage',
+      component: StaticPage
     }
-    
   ],
   mode: 'history'
 })
