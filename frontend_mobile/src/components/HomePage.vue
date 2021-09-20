@@ -10,7 +10,7 @@
         <div class="card card-style" style="background: white;height:134px;">
             <div class="content mb-0 mt-1">
                 <h4 class="text-start mb-1 font-15" style="padding-top:36px;">어디로 가고싶으신가요?</h4>
-                <img class="float-right" src="/static/images/3d/male-listening-music-wedive.png" width="160" style="position: absolute;z-index: 11;right: -28px; bottom:0px;"/>
+                <img class="float-right" src="/static/images/3d/male-listening-music.png" width="160" style="position: absolute;z-index: 11;right: -32px; bottom:0px;"/>
 
                 <div class="search-box search-dark border-08 bg-theme rounded-sm" style="position: absolute;width: calc(70%);z-index: 9;">
                     <i class="fa fa-search" style="padding: 0px 15px 0px 15px;"></i>
@@ -23,9 +23,19 @@
         
         <div v-on:click="goStatic()" class="card card-style" style="background: #ffae58;">
             <div class="content mb-0 mt-3 text-center">
-                <img class="movebox" src="/static/images/3d/academic-cap2.png" width="200" style="margin-top:-26px;margin-bottom:-20px;"/>
+                <img src="/static/images/3d/academic-cap2.png" width="200" style="margin-top:-26px;margin-bottom:-20px;"/>
                 <h4 class="color-white pt-1 mb-1">다이빙이 처음이신가요?</h4>
                 <p class="color-white mb-3 opacity-50">걱정마세요. 초보자용 가이드를 알려드릴께요.</p>
+            </div>
+        </div>
+
+
+        <div v-on:click="goStatic()" class="card card-style" style="background: #f1c95f;">
+            <div class="content mb-0 mt-3 text-center">
+                <img src="/static/images/3d/wedive_choice.png" width="200"/>
+                <h4 class="pt-1 mb-0">가을, 떠나기 좋은 다이빙 포인트</h4>
+                <p class="mb-3 opacity-50">위다이브 선정 가을 여행지 TOP 10을 만나보세요.</p>
+                <img src="/static/images/3d/people.png" width="260"/>
             </div>
         </div>
 
