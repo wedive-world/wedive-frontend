@@ -66,6 +66,8 @@
                 <p class="color-white mb-0 color-gray">1,387개 센터</p>
                 <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
                 <img class="float-right mt-n3 movebox" src="/static/images/3d/boat.png" width="200"/>
+                <img class="movebox2" src="/static/images/3d/cloud.png" width="100"/>
+                <img class="movebox3" src="/static/images/3d/cloud.png" width="70"/>
             </div>
         </div>
 
@@ -332,7 +334,25 @@ export default {
 	80% {margin-right: 0px;}
 	100% {margin-right: 0px;}
 }
+@keyframes motion-endtoend {
+	0% {left: -100px; opacity: .5;}
+    50% {left: 40%; opacity: .5;}
+	100% {left: 100%; opacity: 0;}
+}
+-webkit-@keyframes motion-endtoend {
+	0% {left: -100px; opacity: .5;}
+    50% {left: 40%; opacity: .5;}
+	100% {left: 100%; opacity: 0;}
+}
 .movebox {animation: motion-leftright 3s linear 0s infinite alternate; margin-top: 0;
 	-webkit-animation: motion-leftright 3s linear 0s infinite alternate; margin-top: 0;
+}
+.movebox2 {position:absolute;white-space: nowrap;left:-100px;padding-top:5px;opacity:.5;
+    animation: motion-endtoend 20s linear infinite;
+	-webkit-animation: motion-endtoend 20s linear infinite;
+}
+.movebox3 {position:absolute;white-space: nowrap;left:-100px;padding-top:50px;opacity:.5;
+    animation: motion-endtoend 30s linear infinite;
+	-webkit-animation: motion-endtoend 30s linear infinite;
 }
 </style>
