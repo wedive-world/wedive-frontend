@@ -172,6 +172,10 @@
 <script>
 export default {
   name: 'HelloWorld',
+  mounted() {
+    var preloader = document.getElementById('preloader')
+    if(preloader){preloader.classList.add('preloader-hide');}
+  },
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'

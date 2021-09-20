@@ -3,10 +3,6 @@ setTimeout(function(){
     var preloader = document.getElementById('preloader')
     if(preloader){preloader.classList.add('preloader-hide');}
 },500);
-setTimeout(function(){
-    var preloader = document.getElementById('preloader')
-    if(preloader){preloader.classList.add('preloader-hide');}
-},1000);
 
 document.addEventListener('DOMContentLoaded', () => {
     'use strict'

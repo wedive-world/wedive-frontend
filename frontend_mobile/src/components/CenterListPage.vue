@@ -426,6 +426,8 @@ export default {
       }
   },
   mounted() {
+    var preloader = document.getElementById('preloader')
+    if(preloader){preloader.classList.add('preloader-hide');}
   },
   created() {
     

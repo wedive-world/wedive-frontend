@@ -266,6 +266,9 @@
 export default {
   name: 'HelloWorld',
   mounted() {
+    var preloader = document.getElementById('preloader')
+    if(preloader){preloader.classList.add('preloader-hide');}
+    
     this.btn_new_html = $("#btn_new").html();
   },
   created() {
