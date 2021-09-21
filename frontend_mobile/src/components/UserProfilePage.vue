@@ -611,8 +611,16 @@
             <div class="mt-2 collapse" id="collapse-3">
                 <div class="input-style no-borders has-icon validate-field mb-3">
                     <i class="fas fa-phone-alt color-gray"></i>
-                    <input type="tel" class="form-control validate-text" id="form4a" placeholder="전화번호">
-                    <label for="form4aa" class="color-highlight">전화번호</label>
+                    <input type="tel" class="form-control validate-text" id="form31" placeholder="전화번호">
+                    <label for="form31" class="color-highlight">전화번호</label>
+                    <i class="fa fa-times disabled invalid color-red-dark"></i>
+                    <i class="fa fa-check disabled valid color-green-dark"></i>
+                    <em>(required)</em>
+                </div>
+                <div class="input-style no-borders has-icon validate-field mb-3">
+                    <i class="fa fa-at color-gray"></i>
+                    <input type="email" class="form-control validate-text" id="form32" placeholder="이메일">
+                    <label for="form32" class="color-highlight">이메일</label>
                     <i class="fa fa-times disabled invalid color-red-dark"></i>
                     <i class="fa fa-check disabled valid color-green-dark"></i>
                     <em>(required)</em>
