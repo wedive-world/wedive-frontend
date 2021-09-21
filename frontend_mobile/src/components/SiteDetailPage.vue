@@ -740,8 +740,8 @@ export default {
 .wedive-desc {font-family: 'Noto Sans Korean' !important;font-weight:200;margin-bottom:16px;line-height: 1.6}
 .min-h-190 {min-height: 190px;}
 .point_desc {font-family: 'Noto Sans Korean' !important;font-weight:200;overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;display: -webkit-box;-webkit-line-clamp: 5;-webkit-box-orient: vertical;}
-.square-rect {position: relative;}
-.square-rect:after {content: "";display: inline-grid;padding-bottom: 100%;}
+.square-rect {position: relative;padding:0;}
+.square-rect:after {content: "";display: block;padding-bottom: 100%;}
 .square-rect > img {position: absolute;width: 100%;height: 100%;left: 0;padding:4px;object-fit: cover;}
 .wedive-txt-all {position: absolute;top: 20px;right: 16px;}
 .review_img {float: left;width: 88px; height:88px;margin-right:10px;margin-bottom:2px;border-radius:10px;object-fit: cover !important;}
