@@ -41,7 +41,6 @@
                     <i class="fa fa-check disabled valid color-green-dark"></i>
                     <em>(required)</em>
                 </div>
-
                 <div class="input-style no-borders has-icon validate-field mb-3">
                     <i class="fa fa-user color-gray"></i>
                     <input type="name" class="form-control validate-name" id="form2" placeholder="이름">
@@ -610,6 +609,14 @@
                 </div>
             </div>
             <div class="mt-2 collapse" id="collapse-3">
+                <div class="input-style no-borders has-icon validate-field mb-3">
+                    <i class="fas fa-phone-alt color-gray"></i>
+                    <input type="tel" class="form-control validate-text" id="form4a" placeholder="전화번호">
+                    <label for="form4aa" class="color-highlight">전화번호</label>
+                    <i class="fa fa-times disabled invalid color-red-dark"></i>
+                    <i class="fa fa-check disabled valid color-green-dark"></i>
+                    <em>(required)</em>
+                </div>
                 
                 <div style="border: 1px solid #abb7ba;width: 150px;height:150px;display: inline-block;background: white;position: relative;">
                     <input type="file" id="file-upload" class="upload-file text-center" accept="image/*" style="height: 150px;">
@@ -762,5 +769,5 @@ export default {
 select:invalid {color: #6c757d;}
 select {background: white; background-color: white;}
 .wediev-label {font-size: 12px;transition: all 250ms ease;position:absolute;left:14px;z-index:99;margin-top: -16px;}
-.wedive-deep:before {content: '▼ 첫 수심: 18m';position: absolute;margin-top: -20px;margin-left: 14%;color:#b4bcc8;}
+.wedive-deep:before {content: '▼ 첫 수심 18m';position: absolute;margin-top: -20px;margin-left: 14%;color:#b4bcc8;}
 </style>
