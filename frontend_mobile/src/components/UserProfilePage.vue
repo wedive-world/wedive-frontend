@@ -275,364 +275,372 @@
           </div>
         </div>
 
-
-
         <div class="card card-full pb-0 mb-3 border-bottom">
           <div class="content mt-1">
-            <div class="d-flex">
-                <h4 class="pt-3 mb-2">스쿠버다이빙 정보</h4>
-                <div class="ms-auto me-3 pe-2">
-                    <div class="custom-control ios-switch small-switch">
-                        <input type="checkbox" class="ios-input no-effect" id="toggle-id-1" data-bs-toggle="collapse" href="#collapse-1">
-                        <label class="custom-control-label" for="toggle-id-1"></label>
+                <div class="d-flex no-effect" 
+                     data-trigger-switch="toggle-id-1" 
+                     data-bs-toggle="collapse" 
+                     href="#collapse1" 
+                     role="button" 
+                     aria-expanded="false" 
+                     aria-controls="collapse1">
+                    <div class="pt-1">
+                        <h4 class="pt-3 mb-2">스쿠버다이빙 정보</h4>
+                    </div>
+                    <div class="ms-auto me-4 pe-2">
+                        <div class="custom-control ios-switch">
+                            <input type="checkbox" class="ios-input" id="toggle-id-1">
+                            <label class="custom-control-label" for="toggle-id-1"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="collapse" id="collapse1">
+                    <div class="input-style no-borders has-icon validate-field mb-3"">
+                        <i class="fas fa-address-card color-gray"></i>
+                        <label for="form11" class="color-highlight">라이센스</label>
+                        <select id="form11" required>
+                            <option value="" selected disabled>라이센스</option>
+                            <option value="PADI">PADI</option>
+                            <option value="NAUI">NAUI</option>
+                            <option value="BSAC">BSAC</option>
+                            <option value="CMAS">CMAS</option>
+                            <option value="SSI">SSI</option>
+                            <option value="NDL">NDL</option>
+                            <option value="SDI/TDI">SDI/TDI</option>
+                            <option value="IANTD">IANTD</option>
+                            <option value="KUDA">KUDA</option>
+                            <option value="NASE">NASE</option>
+                            <option value="YMCA">YMCA</option>
+                            <option value="AIDA">AIDA</option>
+                            <option value="AA">AA</option>
+                            <option value="Molchanovs">Molchanovs</option>
+                            <option value="RAID">RAID</option>
+                            <option value="UTA">UTA</option>
+                            <option value="SNSI">SNSI</option>
+                            <option value="AFIA">AFIA</option>
+                            <option value="KF">KF</option>
+                            <option value="UTR">UTR</option>
+                            <option value="PSAI">PSAI</option>
+                            <option value="PSS">PSS</option>
+                            <option value="NASDS">NASDS</option>
+                            <option value="IDEA – WDA">IDEA – WDA</option>
+                            <option value="IDA">IDA</option>
+                            <option value="IDDA ">IDDA</option>
+                            <option value="IAC ">IAC</option>
+                            <option value="ACUC">ACUC</option>
+                            <option value="VIT">VIT</option>
+                            <option value="PDIC International">PDIC International</option>
+                            <option value="RSTC">RSTC</option>
+                            <option value="DDI">DDI</option>
+                            <option value="IAHD">IAHD</option>
+                            <option value="MDEA">MDEA</option>
+                            <option value="ANDI">ANDI</option>
+                            <option value="GUE">GUE</option>
+                            <option value="PSAI">PSAI</option>
+                            <option value="SEI">SEI</option>
+                            <option value="없음">없음</option>
+                        </select>
+                        <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
+                        <i class="fa fa-check disabled valid color-green-dark"></i>
+                        <i class="fa fa-check disabled invalid color-red-dark"></i>
+                        <em></em>
+                    </div>
+
+                    <div class="input-style no-borders has-icon validate-field mb-3"">
+                        <i class="fas fa-layer-group color-gray"></i>
+                        <label for="form22" class="color-highlight">레벨</label>
+                        <select id="form22" required>
+                            <option value="" selected disabled>레벨</option>
+                            <option value="오픈워터">오픈워터</option>
+                            <option value="어드밴스드">어드밴스드</option>
+                            <option value="레스큐">레스큐</option>
+                            <option value="마스터">마스터</option>
+                            <option value="강사">강사</option>
+                            <option value="없음">없음</option>
+                        </select>
+                        <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
+                        <i class="fa fa-check disabled valid color-green-dark"></i>
+                        <i class="fa fa-check disabled invalid color-red-dark"></i>
+                        <em></em>
+                    </div>
+
+                    <div class="input-style no-borders has-icon validate-field mb-3"">
+                        <i class="fas fa-clipboard-check color-gray"></i>
+                        <label for="form23" class="color-highlight">다이빙 로그</label>
+                        <select id="form23" required>
+                            <option value="" selected disabled>다이빙 로그</option>
+                            <option value="10">~10</option>
+                            <option value="30">~30</option>
+                            <option value="50">~50</option>
+                            <option value="100">~100</option>
+                            <option value="200">~200</option>
+                            <option value="300">~300</option>
+                            <option value="301">300~</option>
+                            <option value="없음">없음</option>
+                        </select>
+                        <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
+                        <i class="fa fa-check disabled valid color-green-dark"></i>
+                        <i class="fa fa-check disabled invalid color-red-dark"></i>
+                        <em></em>
+                    </div>
+
+                    <div class="mb-0 mt-5">
+                        <label class="wediev-label pb-1 color-highlight" style="margin-top:-26px;">스쿠버 선호사항</label>
+                        <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_scuba1">
+                        <label class="form-check-label rounded-xl border-08" for="check_scuba1">체크다이빙</label>
+                        <i class="fas fa-check-square color-white font-18"></i>
+                        <i class="fas fa-check-square font-16 color-highlight"></i>
+                        </div>
+                        <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_scuba2">
+                        <label class="form-check-label rounded-xl border-08" for="check_scuba2">먹다이빙</label>
+                        <i class="fab fa-get-pocket color-white font-18"></i>
+                        <i class="fab fa-get-pocket font-17 color-highlight"></i>
+                        </div>
+                        <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_scuba3">
+                        <label class="form-check-label rounded-xl border-08" for="check_scuba3">리브어보드</label>
+                        <i class="fas fa-ship color-white font-18"></i>
+                        <i class="fas fa-ship font-17 color-highlight"></i>
+                        </div>
+                        <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_scuba4">
+                        <label class="form-check-label rounded-xl border-08" for="check_scuba4">테크니컬다이빙</label>
+                        <i class="fas fa-drafting-compass color-white font-18"></i>
+                        <i class="fas fa-drafting-compass font-17 color-highlight"></i>
+                        </div>
+                    </div>
+                    <div class="mb-0 mt-4">
+                        <label class="wediev-label pb-1 color-highlight" style="margin-top:-26px;">선호 포인트</label>
+                        <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_scuba6">
+                        <label class="form-check-label rounded-xl border-08" for="check_scuba6">마크로포인트</label>
+                        <i class="fas fa-search-minus color-white font-18"></i>
+                        <i class="fas fa-search-minus font-17 color-highlight"></i>
+                        </div>
+                        <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_scuba7">
+                        <label class="form-check-label rounded-xl border-08" for="check_scuba7">대물포인트</label>
+                        <i class="fas fa-search-plus color-white font-18"></i>
+                        <i class="fas fa-search-plus font-17 color-highlight"></i>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="mt-2 collapse" id="collapse-1">
-                <div class="input-style no-borders has-icon validate-field mb-3"">
-                    <i class="fas fa-address-card color-gray"></i>
-                    <label for="form11" class="color-highlight">라이센스</label>
-                    <select id="form11" required>
-                        <option value="" selected disabled>라이센스</option>
-                        <option value="PADI">PADI</option>
-                        <option value="NAUI">NAUI</option>
-                        <option value="BSAC">BSAC</option>
-                        <option value="CMAS">CMAS</option>
-                        <option value="SSI">SSI</option>
-                        <option value="NDL">NDL</option>
-                        <option value="SDI/TDI">SDI/TDI</option>
-                        <option value="IANTD">IANTD</option>
-                        <option value="KUDA">KUDA</option>
-                        <option value="NASE">NASE</option>
-                        <option value="YMCA">YMCA</option>
-                        <option value="AIDA">AIDA</option>
-                        <option value="AA">AA</option>
-                        <option value="Molchanovs">Molchanovs</option>
-                        <option value="RAID">RAID</option>
-                        <option value="UTA">UTA</option>
-                        <option value="SNSI">SNSI</option>
-                        <option value="AFIA">AFIA</option>
-                        <option value="KF">KF</option>
-                        <option value="UTR">UTR</option>
-                        <option value="PSAI">PSAI</option>
-                        <option value="PSS">PSS</option>
-                        <option value="NASDS">NASDS</option>
-                        <option value="IDEA – WDA">IDEA – WDA</option>
-                        <option value="IDA">IDA</option>
-                        <option value="IDDA ">IDDA</option>
-                        <option value="IAC ">IAC</option>
-                        <option value="ACUC">ACUC</option>
-                        <option value="VIT">VIT</option>
-                        <option value="PDIC International">PDIC International</option>
-                        <option value="RSTC">RSTC</option>
-                        <option value="DDI">DDI</option>
-                        <option value="IAHD">IAHD</option>
-                        <option value="MDEA">MDEA</option>
-                        <option value="ANDI">ANDI</option>
-                        <option value="GUE">GUE</option>
-                        <option value="PSAI">PSAI</option>
-                        <option value="SEI">SEI</option>
-                        <option value="없음">없음</option>
-                    </select>
-                    <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
-                    <i class="fa fa-check disabled valid color-green-dark"></i>
-                    <i class="fa fa-check disabled invalid color-red-dark"></i>
-                    <em></em>
-                </div>
-
-                <div class="input-style no-borders has-icon validate-field mb-3"">
-                    <i class="fas fa-layer-group color-gray"></i>
-                    <label for="form22" class="color-highlight">레벨</label>
-                    <select id="form22" required>
-                        <option value="" selected disabled>레벨</option>
-                        <option value="오픈워터">오픈워터</option>
-                        <option value="어드밴스드">어드밴스드</option>
-                        <option value="레스큐">레스큐</option>
-                        <option value="마스터">마스터</option>
-                        <option value="강사">강사</option>
-                        <option value="없음">없음</option>
-                    </select>
-                    <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
-                    <i class="fa fa-check disabled valid color-green-dark"></i>
-                    <i class="fa fa-check disabled invalid color-red-dark"></i>
-                    <em></em>
-                </div>
-
-                <div class="input-style no-borders has-icon validate-field mb-3"">
-                    <i class="fas fa-clipboard-check color-gray"></i>
-                    <label for="form23" class="color-highlight">다이빙 로그</label>
-                    <select id="form23" required>
-                        <option value="" selected disabled>다이빙 로그</option>
-                        <option value="10">~10</option>
-                        <option value="30">~30</option>
-                        <option value="50">~50</option>
-                        <option value="100">~100</option>
-                        <option value="200">~200</option>
-                        <option value="300">~300</option>
-                        <option value="301">300~</option>
-                        <option value="없음">없음</option>
-                    </select>
-                    <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
-                    <i class="fa fa-check disabled valid color-green-dark"></i>
-                    <i class="fa fa-check disabled invalid color-red-dark"></i>
-                    <em></em>
-                </div>
-
-                <div class="mb-0 mt-5">
-                    <label class="wediev-label pb-1 color-highlight" style="margin-top:-26px;">스쿠버 선호사항</label>
-                    <div class="form-check interest-check">
-                    <input class="form-check-input" type="checkbox" value="" id="check_scuba1">
-                    <label class="form-check-label rounded-xl border-08" for="check_scuba1">체크다이빙</label>
-                    <i class="fas fa-check-square color-white font-18"></i>
-                    <i class="fas fa-check-square font-16 color-highlight"></i>
-                    </div>
-                    <div class="form-check interest-check">
-                    <input class="form-check-input" type="checkbox" value="" id="check_scuba2">
-                    <label class="form-check-label rounded-xl border-08" for="check_scuba2">먹다이빙</label>
-                    <i class="fab fa-get-pocket color-white font-18"></i>
-                    <i class="fab fa-get-pocket font-17 color-highlight"></i>
-                    </div>
-                    <div class="form-check interest-check">
-                    <input class="form-check-input" type="checkbox" value="" id="check_scuba3">
-                    <label class="form-check-label rounded-xl border-08" for="check_scuba3">리브어보드</label>
-                    <i class="fas fa-ship color-white font-18"></i>
-                    <i class="fas fa-ship font-17 color-highlight"></i>
-                    </div>
-                    <div class="form-check interest-check">
-                    <input class="form-check-input" type="checkbox" value="" id="check_scuba4">
-                    <label class="form-check-label rounded-xl border-08" for="check_scuba4">테크니컬다이빙</label>
-                    <i class="fas fa-drafting-compass color-white font-18"></i>
-                    <i class="fas fa-drafting-compass font-17 color-highlight"></i>
-                    </div>
-                </div>
-                <div class="mb-0 mt-4">
-                    <label class="wediev-label pb-1 color-highlight" style="margin-top:-26px;">선호 포인트</label>
-                    <div class="form-check interest-check">
-                    <input class="form-check-input" type="checkbox" value="" id="check_scuba6">
-                    <label class="form-check-label rounded-xl border-08" for="check_scuba6">마크로포인트</label>
-                    <i class="fas fa-search-minus color-white font-18"></i>
-                    <i class="fas fa-search-minus font-17 color-highlight"></i>
-                    </div>
-                    <div class="form-check interest-check">
-                    <input class="form-check-input" type="checkbox" value="" id="check_scuba7">
-                    <label class="form-check-label rounded-xl border-08" for="check_scuba7">대물포인트</label>
-                    <i class="fas fa-search-plus color-white font-18"></i>
-                    <i class="fas fa-search-plus font-17 color-highlight"></i>
-                    </div>
-                </div>
-                
-                
-
-            </div>
-
-          </div>
         </div>
 
 
 
-        <div class="card card-full pb-0 mb-3 border-bottom">
-          <div class="content mt-1">
-            <div class="d-flex">
-                <h4 class="pt-3 mb-2">프리다이빙 정보</h4>
-                <div class="ms-auto me-3 pe-2">
-                    <div class="custom-control ios-switch small-switch">
-                        <input type="checkbox" class="ios-input no-effect" id="toggle-id-2" data-bs-toggle="collapse" href="#collapse-2">
-                        <label class="custom-control-label" for="toggle-id-2"></label>
-                    </div>
-                </div>
-            </div>
-            <div class="mt-2 collapse" id="collapse-2">
-                <div class="mt-3 mb-3">
-                    <label id="scuba_label" class="color-highlight wediev-label hide">자주가는 수영장</label>
-                    <vue-typeahead-bootstrap
-                        class="wedive-search2 border-bottom"
-                        v-model="query"
-                        :data="users"
-                        :serializer="item => item.name_ko"
-                        :screen-reader-text-serializer="item => `${item.name_ko}`"
-                        highlightClass="special-highlight-class"
-                        @hit="selecteduser = $event;show_scuba_label();"
-                        :minMatchingChars="2"
-                        placeholder="자주가는 수영장"
-                        inputClass="special-input-class"
-                        :disabledValues="(selecteduser ? [selecteduser.name_ko] : [])"
-                        @input="lookupUser2"
-                        >
-                        <template slot="suggestion" slot-scope="{ data, htmlText }">
-                            <div class="d-flex align-items-center">
-                            <img
-                                class="rounded-s me-2"
-                                :src="data.img_url"
-                                style="width: 40px; height: 40px;" />
-                            
-                            <span v-if="data.type == 'region'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-marked-alt\'></i> 장소</span><br/>' + htmlText"></span>
-                            <span v-else-if="data.type == 'point'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-pin\'></i> 다이빙 포인트</span><br/>' + htmlText"></span>
-                            <span v-else-if="data.type == 'center'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-store\'></i> 다이빙 센터</span><br/>' + htmlText"></span>
-                            </div>
-                        </template>
-                    </vue-typeahead-bootstrap>
-                </div>
-                
-                <div class="input-style no-borders has-icon validate-field mb-3"">
-                    <i class="fas fa-address-card color-gray"></i>
-                    <label for="form21" class="color-highlight">라이센스</label>
-                    <select id="form21" required>
-                        <option value="" selected disabled>라이센스</option>
-                        <option value="PADI">PADI</option>
-                        <option value="NAUI">NAUI</option>
-                        <option value="BSAC">BSAC</option>
-                        <option value="CMAS">CMAS</option>
-                        <option value="SSI">SSI</option>
-                        <option value="NDL">NDL</option>
-                        <option value="SDI/TDI">SDI/TDI</option>
-                        <option value="IANTD">IANTD</option>
-                        <option value="KUDA">KUDA</option>
-                        <option value="NASE">NASE</option>
-                        <option value="YMCA">YMCA</option>
-                        <option value="AIDA">AIDA</option>
-                        <option value="AA">AA</option>
-                        <option value="Molchanovs">Molchanovs</option>
-                        <option value="RAID">RAID</option>
-                        <option value="UTA">UTA</option>
-                        <option value="SNSI">SNSI</option>
-                        <option value="AFIA">AFIA</option>
-                        <option value="KF">KF</option>
-                        <option value="UTR">UTR</option>
-                        <option value="PSAI">PSAI</option>
-                        <option value="PSS">PSS</option>
-                        <option value="NASDS">NASDS</option>
-                        <option value="IDEA – WDA">IDEA – WDA</option>
-                        <option value="IDA">IDA</option>
-                        <option value="IDDA ">IDDA</option>
-                        <option value="IAC ">IAC</option>
-                        <option value="ACUC">ACUC</option>
-                        <option value="VIT">VIT</option>
-                        <option value="PDIC International">PDIC International</option>
-                        <option value="RSTC">RSTC</option>
-                        <option value="DDI">DDI</option>
-                        <option value="IAHD">IAHD</option>
-                        <option value="MDEA">MDEA</option>
-                        <option value="ANDI">ANDI</option>
-                        <option value="GUE">GUE</option>
-                        <option value="PSAI">PSAI</option>
-                        <option value="SEI">SEI</option>
-                        <option value="없음">없음</option>
-                    </select>
-                    <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
-                    <i class="fa fa-check disabled valid color-green-dark"></i>
-                    <i class="fa fa-check disabled invalid color-red-dark"></i>
-                    <em></em>
-                </div>
 
-                <div class="input-style no-borders has-icon validate-field mb-3"">
-                    <i class="fas fa-layer-group color-gray"></i>
-                    <label for="form12" class="color-highlight">레벨</label>
-                    <select id="form12" required>
-                        <option value="" selected disabled>레벨</option>
-                        <option value="레벨1">레벨1</option>
-                        <option value="레벨2">레벨2</option>
-                        <option value="레벨3">레벨3</option>
-                        <option value="레벨4">레벨4</option>
-                        <option value="강사">강사</option>
-                        <option value="없음">없음</option>
-                    </select>
-                    <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
-                    <i class="fa fa-check disabled valid color-green-dark"></i>
-                    <i class="fa fa-check disabled invalid color-red-dark"></i>
-                    <em></em>
-                </div>
-
-                <div class="input-style no-borders has-icon validate-field mb-3"">
-                    <i class="fas fa-record-vinyl color-gray"></i>
-                    <label for="form13" class="color-highlight">Personal Best</label>
-                    <select id="form13" required>
-                        <option value="" selected disabled>Personal Best</option>
-                        <option value="STA">STA</option>
-                        <option value="DYN">DYN</option>
-                        <option value="DNF">DNF</option>
-                        <option value="CWT">CWT</option>
-                        <option value="VWT">VWT</option>
-                        <option value="FIM">FIM</option>
-                        <option value="CNF">CNF</option>
-                        <option value="NLM">NLM</option>
-                        <option value="없음">없음</option>
-                    </select>
-                    <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
-                    <i class="fa fa-check disabled valid color-green-dark"></i>
-                    <i class="fa fa-check disabled invalid color-red-dark"></i>
-                    <em></em>
-                </div>
-
-                <div class="mb-0 mt-5">
-                    <label class="wediev-label pb-1 color-highlight" style="margin-top:-26px;">프리 선호사항</label>
-                    <div class="form-check interest-check">
-                    <input class="form-check-input" type="checkbox" value="" id="check_free1">
-                    <label class="form-check-label rounded-xl border-08" for="check_free1">트레이닝</label>
-                    <i class="fas fa-graduation-cap color-white font-18"></i>
-                    <i class="fas fa-graduation-cap font-16 color-highlight"></i>
-                    </div>
-                    <div class="form-check interest-check">
-                    <input class="form-check-input" type="checkbox" value="" id="check_free2">
-                    <label class="form-check-label rounded-xl border-08" for="check_free2">스피어 피싱</label>
-                    <i class="fas fa-fish color-white font-18"></i>
-                    <i class="fas fa-fish font-17 color-highlight"></i>
-                    </div>
-                    <div class="form-check interest-check">
-                    <input class="form-check-input" type="checkbox" value="" id="check_free3">
-                    <label class="form-check-label rounded-xl border-08" for="check_free3">해루질</label>
-                    <i class="fab fa-get-pocket color-white font-18"></i>
-                    <i class="fab fa-get-pocket font-17 color-highlight"></i>
-                    </div>
-                </div>
-                
-            </div>
-
-          </div>
-        </div>
 
 
         <div class="card card-full pb-0 mb-3 border-bottom">
           <div class="content mt-1">
-            <div class="d-flex">
-                <div>
-                    <h4 class="pt-3 mb-0">위다이브 강사</h4>
-                    <p class="mb-2 color-gray-light-mid"><i class="wedive_icoset wedive_icoset_info me-1"></i>위다이브에서 강좌개설을 원합니다.</p>
+                <div class="d-flex no-effect" 
+                     data-trigger-switch="toggle-id-2" 
+                     data-bs-toggle="collapse" 
+                     href="#collapse2"
+                     role="button" 
+                     aria-expanded="false" 
+                     aria-controls="collapse2">
+                    <div class="pt-1">
+                        <h4 class="pt-3 mb-2">프리다이빙 정보</h4>
+                    </div>
+                    <div class="ms-auto me-4 pe-2">
+                        <div class="custom-control ios-switch">
+                            <input type="checkbox" class="ios-input" id="toggle-id-2">
+                            <label class="custom-control-label" for="toggle-id-2"></label>
+                        </div>
+                    </div>
                 </div>
-                <div class="ms-auto me-3 pe-2">
-                    <div class="custom-control ios-switch small-switch">
-                        <input type="checkbox" class="ios-input no-effect" id="toggle-id-3" data-bs-toggle="collapse" href="#collapse-3">
-                        <label class="custom-control-label" for="toggle-id-3"></label>
+                <div class="collapse" id="collapse2">
+                    <div class="mt-3 mb-3">
+                        <label id="scuba_label" class="color-highlight wediev-label hide">자주가는 수영장</label>
+                        <vue-typeahead-bootstrap
+                            class="wedive-search2 border-bottom"
+                            v-model="query"
+                            :data="users"
+                            :serializer="item => item.name_ko"
+                            :screen-reader-text-serializer="item => `${item.name_ko}`"
+                            highlightClass="special-highlight-class"
+                            @hit="selecteduser = $event;show_scuba_label();"
+                            :minMatchingChars="2"
+                            placeholder="자주가는 수영장"
+                            inputClass="special-input-class"
+                            :disabledValues="(selecteduser ? [selecteduser.name_ko] : [])"
+                            @input="lookupUser2"
+                            >
+                            <template slot="suggestion" slot-scope="{ data, htmlText }">
+                                <div class="d-flex align-items-center">
+                                <img
+                                    class="rounded-s me-2"
+                                    :src="data.img_url"
+                                    style="width: 40px; height: 40px;" />
+                                
+                                <span v-if="data.type == 'region'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-marked-alt\'></i> 장소</span><br/>' + htmlText"></span>
+                                <span v-else-if="data.type == 'point'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-pin\'></i> 다이빙 포인트</span><br/>' + htmlText"></span>
+                                <span v-else-if="data.type == 'center'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-store\'></i> 다이빙 센터</span><br/>' + htmlText"></span>
+                                </div>
+                            </template>
+                        </vue-typeahead-bootstrap>
+                    </div>
+                    
+                    <div class="input-style no-borders has-icon validate-field mb-3"">
+                        <i class="fas fa-address-card color-gray"></i>
+                        <label for="form21" class="color-highlight">라이센스</label>
+                        <select id="form21" required>
+                            <option value="" selected disabled>라이센스</option>
+                            <option value="PADI">PADI</option>
+                            <option value="NAUI">NAUI</option>
+                            <option value="BSAC">BSAC</option>
+                            <option value="CMAS">CMAS</option>
+                            <option value="SSI">SSI</option>
+                            <option value="NDL">NDL</option>
+                            <option value="SDI/TDI">SDI/TDI</option>
+                            <option value="IANTD">IANTD</option>
+                            <option value="KUDA">KUDA</option>
+                            <option value="NASE">NASE</option>
+                            <option value="YMCA">YMCA</option>
+                            <option value="AIDA">AIDA</option>
+                            <option value="AA">AA</option>
+                            <option value="Molchanovs">Molchanovs</option>
+                            <option value="RAID">RAID</option>
+                            <option value="UTA">UTA</option>
+                            <option value="SNSI">SNSI</option>
+                            <option value="AFIA">AFIA</option>
+                            <option value="KF">KF</option>
+                            <option value="UTR">UTR</option>
+                            <option value="PSAI">PSAI</option>
+                            <option value="PSS">PSS</option>
+                            <option value="NASDS">NASDS</option>
+                            <option value="IDEA – WDA">IDEA – WDA</option>
+                            <option value="IDA">IDA</option>
+                            <option value="IDDA ">IDDA</option>
+                            <option value="IAC ">IAC</option>
+                            <option value="ACUC">ACUC</option>
+                            <option value="VIT">VIT</option>
+                            <option value="PDIC International">PDIC International</option>
+                            <option value="RSTC">RSTC</option>
+                            <option value="DDI">DDI</option>
+                            <option value="IAHD">IAHD</option>
+                            <option value="MDEA">MDEA</option>
+                            <option value="ANDI">ANDI</option>
+                            <option value="GUE">GUE</option>
+                            <option value="PSAI">PSAI</option>
+                            <option value="SEI">SEI</option>
+                            <option value="없음">없음</option>
+                        </select>
+                        <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
+                        <i class="fa fa-check disabled valid color-green-dark"></i>
+                        <i class="fa fa-check disabled invalid color-red-dark"></i>
+                        <em></em>
+                    </div>
+
+                    <div class="input-style no-borders has-icon validate-field mb-3"">
+                        <i class="fas fa-layer-group color-gray"></i>
+                        <label for="form12" class="color-highlight">레벨</label>
+                        <select id="form12" required>
+                            <option value="" selected disabled>레벨</option>
+                            <option value="레벨1">레벨1</option>
+                            <option value="레벨2">레벨2</option>
+                            <option value="레벨3">레벨3</option>
+                            <option value="레벨4">레벨4</option>
+                            <option value="강사">강사</option>
+                            <option value="없음">없음</option>
+                        </select>
+                        <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
+                        <i class="fa fa-check disabled valid color-green-dark"></i>
+                        <i class="fa fa-check disabled invalid color-red-dark"></i>
+                        <em></em>
+                    </div>
+
+                    <div class="mb-0 mt-5">
+                        <label class="wediev-label pb-1 color-highlight" style="margin-top:-26px;">Personal Best</label>
+                        
+                        <div id="div_personal_best" style="display: inline-block;">
+                        </div>
+
+                        <a href="#" data-menu="menu-personal-best" class="btn btn-xs mb-0 rounded-xl text-uppercase font-900 shadow-s bg-dark-dark"><i class="fas fa-plus""></i></a>
+                    </div>
+
+                    <div class="mb-0 mt-5">
+                        <label class="wediev-label pb-1 color-highlight" style="margin-top:-26px;">프리 선호사항</label>
+                        <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_free1">
+                        <label class="form-check-label rounded-xl border-08" for="check_free1">트레이닝</label>
+                        <i class="fas fa-graduation-cap color-white font-18"></i>
+                        <i class="fas fa-graduation-cap font-16 color-highlight"></i>
+                        </div>
+                        <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_free2">
+                        <label class="form-check-label rounded-xl border-08" for="check_free2">스피어 피싱</label>
+                        <i class="fas fa-fish color-white font-18"></i>
+                        <i class="fas fa-fish font-17 color-highlight"></i>
+                        </div>
+                        <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_free3">
+                        <label class="form-check-label rounded-xl border-08" for="check_free3">해루질</label>
+                        <i class="fab fa-get-pocket color-white font-18"></i>
+                        <i class="fab fa-get-pocket font-17 color-highlight"></i>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="mt-2 collapse" id="collapse-3">
-                <div class="input-style no-borders has-icon validate-field mb-3">
-                    <i class="fas fa-phone-alt color-gray"></i>
-                    <input type="tel" class="form-control validate-text" id="form31" placeholder="전화번호">
-                    <label for="form31" class="color-highlight">전화번호</label>
-                    <i class="fa fa-times disabled invalid color-red-dark"></i>
-                    <i class="fa fa-check disabled valid color-green-dark"></i>
-                    <em>(required)</em>
-                </div>
-                <div class="input-style no-borders has-icon validate-field mb-3">
-                    <i class="fa fa-at color-gray"></i>
-                    <input type="email" class="form-control validate-text" id="form32" placeholder="이메일">
-                    <label for="form32" class="color-highlight">이메일</label>
-                    <i class="fa fa-times disabled invalid color-red-dark"></i>
-                    <i class="fa fa-check disabled valid color-green-dark"></i>
-                    <em>(required)</em>
-                </div>
-                
-                <div style="border: 1px solid #abb7ba;width: 150px;height:150px;display: inline-block;background: white;position: relative;">
-                    <input type="file" id="file-upload" class="upload-file text-center" accept="image/*" style="height: 150px;">
-                    <p class="upload-file-text" style="color: #abb7ba;position:absolute;left:40px;top:80px;"><i class="fas fa-plus"></i><br/>자격증 업로드</p></input>
-                </div>
-                
-                
-            </div>
-
-          </div>
         </div>
+
+
+
+        
+
+
+
+
+        <div class="card card-full pb-0 mb-3 border-bottom">
+          <div class="content mt-1">
+                <div class="d-flex no-effect" 
+                     data-trigger-switch="toggle-id-3"
+                     data-bs-toggle="collapse" 
+                     href="#collapse3"
+                     role="button" 
+                     aria-expanded="false" 
+                     aria-controls="collapse3">
+                    <div class="pt-1">
+                        <h4 class="pt-3 mb-0">위다이브 강사</h4>
+                    </div>
+                    <div class="ms-auto me-4 pe-2">
+                        <div class="custom-control ios-switch">
+                            <input type="checkbox" class="ios-input" id="toggle-id-3">
+                            <label class="custom-control-label" for="toggle-id-3"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="collapse" id="collapse3">
+                    <div class="input-style no-borders has-icon validate-field mb-3">
+                        <i class="fas fa-phone-alt color-gray"></i>
+                        <input type="tel" class="form-control validate-text" id="form31" placeholder="전화번호">
+                        <label for="form31" class="color-highlight">전화번호</label>
+                        <i class="fa fa-times disabled invalid color-red-dark"></i>
+                        <i class="fa fa-check disabled valid color-green-dark"></i>
+                        <em>(required)</em>
+                    </div>
+                    <div class="input-style no-borders has-icon validate-field mb-3">
+                        <i class="fa fa-at color-gray"></i>
+                        <input type="email" class="form-control validate-text" id="form32" placeholder="이메일">
+                        <label for="form32" class="color-highlight">이메일</label>
+                        <i class="fa fa-times disabled invalid color-red-dark"></i>
+                        <i class="fa fa-check disabled valid color-green-dark"></i>
+                        <em>(required)</em>
+                    </div>
+                    
+                    <div style="border: 1px solid #abb7ba;width: 150px;height:150px;display: inline-block;background: white;position: relative;">
+                        <input type="file" id="file-upload" class="upload-file text-center" accept="image/*" style="height: 150px;">
+                        <p class="upload-file-text" style="color: #abb7ba;position:absolute;left:40px;top:80px;"><i class="fas fa-plus"></i><br/>자격증 업로드</p></input>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
 
         <div class="card card-full pb-0 mb-3 border-bottom">
@@ -694,11 +702,55 @@
         
     </div>
     <!-- Page content ends here-->
-        
     
+    <!-- Menu : Personal Best -->
+    <div id="menu-personal-best" 
+         class="menu menu-box-modal rounded-m bg-theme" 
+         data-menu-width="350"
+         data-menu-height="300">
+        <div class="menu-title p-2">
+            <h1 class="font-600 font-18">Personal Best 추가</h1>
+            <a href="#" class="close-menu"><i class="wedive_icoset wedive_icoset_close"></i></a>
+        </div>
+        
+        <div class="content">
+            
+            <div class="input-style no-borders has-icon validate-field mb-3"">
+                <i class="fas fa-record-vinyl color-gray"></i>
+                <label for="form_pb" class="color-highlight">Personal Best</label>
+                <select id="form_pb" required>
+                    <option value="" selected disabled>Personal Best</option>
+                    <option value="STA">STA (숨참기)</option>
+                    <option value="DYN">DYN (핀잠영)</option>
+                    <option value="DNF">DNF (맨발 잠영)</option>
+                    <option value="CWT">CWT (고정 웨이트)</option>
+                    <option value="VWT">VWT (가변 웨이트)</option>
+                    <option value="FIM">FIM (프리 이머전)</option>
+                    <option value="CNF">CNF (맨발 잠수)</option>
+                    <option value="NLT">NLT (무제한 잠수)</option>
+                </select>
+                <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
+                <i class="fa fa-check disabled valid color-green-dark"></i>
+                <i class="fa fa-check disabled invalid color-red-dark"></i>
+                <em></em>
+            </div>
 
 
-    <div id="snackbar-maxerror" class="snackbar-toast color-white bg-red-dark" data-bs-delay="3000" data-bs-autohide="true"><i class="fa fa-times me-3"></i>최대 5개 까지의 일정만 추가할 수 있습니다.</div>
+            <div class="input-style no-borders has-icon validate-field mb-3"">
+                <i class="fas fa-clipboard color-gray"></i>
+                <input type="number" class="form-control validate-number" id="form_record" placeholder="기록">
+                <label for="form_record" class="color-highlight">기록</label>
+                <i class="fa fa-times disabled invalid color-red-dark"></i>
+                <i class="fa fa-check disabled valid color-green-dark"></i>
+                <em id="em_pb_record">(단위, 미터)</em>
+            </div>
+            
+            <a href="#" v-on:click="addPersonalBest()" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0">추가하기</a>
+        </div>
+    </div>
+
+
+    <div id="snackbar-inputerror" class="snackbar-toast color-white bg-red-dark" data-bs-delay="3000" data-bs-autohide="true"><i class="fa fa-times me-3"></i>모든 항목을 입력해주세요.</div>
 
 
   </div>
@@ -721,7 +773,16 @@ export default {
         $("#toggle-id-1").click();
         $("#toggle-id-2").click();
         $(".wedive-search2 > .input-group").prepend('<i class="fas fa-swimming-pool wedive-search2-icon color-gray"></i>');
-    }, 500)
+
+        $('#form_pb').on('change', function() {
+            var val = $('#form_pb').val();
+            if (val == 'STA') {
+                $("#em_pb_record").text("(단위, 분)");
+            } else {
+                $("#em_pb_record").text("(단위, 미터)")
+            }
+        });
+    }, 500);
   },
   components: {
     VueTypeaheadBootstrap
@@ -756,8 +817,26 @@ export default {
             {"id": "center_ko_jeju_bubbletank", "type": "center", "name_ko": "제주 버블탱크 스쿠버다이빙", name_en: "Bubble tank", "img_url": "/static/bubble2.jpg"},
             {"id": "point_ko_jeju_munisland", "type": "point", "name_ko": "제주도 문섬", name_en: "Mun island", "img_url": "https://api.cdn.visitjeju.net/photomng/imgpath/201907/31/07c1996d-4374-4e77-b353-300d01783718.jpg"},
         ];
-      }, 500)
-      
+      }, 500),
+      addPersonalBest: function() {
+            var record_type = $('#form_pb').val();
+            var record_val = $("#form_record").val();
+
+            if (record_type == null || record_val == '') {
+                var toastData = 'snackbar-inputerror';
+                var notificationToast = document.getElementById(toastData);
+                var notificationToast = new bootstrap.Toast(notificationToast);
+                notificationToast.show();
+            } else {
+                $('#form_pb').val('');
+                $("#form_record").val('');
+                
+                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08 wedive-label">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-16 color-highlight"></i></div>');
+                const activeMenu = document.querySelectorAll('.menu-active');
+                for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
+                for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+0+"px)"}
+            }
+      }
   }
 
   
