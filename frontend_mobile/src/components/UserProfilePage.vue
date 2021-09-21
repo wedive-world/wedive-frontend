@@ -289,37 +289,6 @@
                 </div>
             </div>
             <div class="mt-2 collapse" id="collapse-1">
-                <div class="mt-3 mb-3">
-                    <label id="scuba_label" class="color-highlight wediev-label hide">자주가는 수영장</label>
-                    <vue-typeahead-bootstrap
-                        class="wedive-search2 border-bottom"
-                        v-model="query"
-                        :data="users"
-                        :serializer="item => item.name_ko"
-                        :screen-reader-text-serializer="item => `${item.name_ko}`"
-                        highlightClass="special-highlight-class"
-                        @hit="selecteduser = $event;show_scuba_label();"
-                        :minMatchingChars="2"
-                        placeholder="자주가는 수영장"
-                        inputClass="special-input-class"
-                        :disabledValues="(selecteduser ? [selecteduser.name_ko] : [])"
-                        @input="lookupUser2"
-                        >
-                        <template slot="suggestion" slot-scope="{ data, htmlText }">
-                            <div class="d-flex align-items-center">
-                            <img
-                                class="rounded-s me-2"
-                                :src="data.img_url"
-                                style="width: 40px; height: 40px;" />
-                            
-                            <span v-if="data.type == 'region'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-marked-alt\'></i> 장소</span><br/>' + htmlText"></span>
-                            <span v-else-if="data.type == 'point'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-pin\'></i> 다이빙 포인트</span><br/>' + htmlText"></span>
-                            <span v-else-if="data.type == 'center'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-store\'></i> 다이빙 센터</span><br/>' + htmlText"></span>
-                            </div>
-                        </template>
-                    </vue-typeahead-bootstrap>
-                </div>
-                
                 <div class="input-style no-borders has-icon validate-field mb-3"">
                     <i class="fas fa-address-card color-gray"></i>
                     <label for="form11" class="color-highlight">라이센스</label>
@@ -473,7 +442,36 @@
                 </div>
             </div>
             <div class="mt-2 collapse" id="collapse-2">
-                
+                <div class="mt-3 mb-3">
+                    <label id="scuba_label" class="color-highlight wediev-label hide">자주가는 수영장</label>
+                    <vue-typeahead-bootstrap
+                        class="wedive-search2 border-bottom"
+                        v-model="query"
+                        :data="users"
+                        :serializer="item => item.name_ko"
+                        :screen-reader-text-serializer="item => `${item.name_ko}`"
+                        highlightClass="special-highlight-class"
+                        @hit="selecteduser = $event;show_scuba_label();"
+                        :minMatchingChars="2"
+                        placeholder="자주가는 수영장"
+                        inputClass="special-input-class"
+                        :disabledValues="(selecteduser ? [selecteduser.name_ko] : [])"
+                        @input="lookupUser2"
+                        >
+                        <template slot="suggestion" slot-scope="{ data, htmlText }">
+                            <div class="d-flex align-items-center">
+                            <img
+                                class="rounded-s me-2"
+                                :src="data.img_url"
+                                style="width: 40px; height: 40px;" />
+                            
+                            <span v-if="data.type == 'region'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-marked-alt\'></i> 장소</span><br/>' + htmlText"></span>
+                            <span v-else-if="data.type == 'point'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-pin\'></i> 다이빙 포인트</span><br/>' + htmlText"></span>
+                            <span v-else-if="data.type == 'center'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-store\'></i> 다이빙 센터</span><br/>' + htmlText"></span>
+                            </div>
+                        </template>
+                    </vue-typeahead-bootstrap>
+                </div>
                 
                 <div class="input-style no-borders has-icon validate-field mb-3"">
                     <i class="fas fa-address-card color-gray"></i>
