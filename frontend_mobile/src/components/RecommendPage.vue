@@ -8,8 +8,8 @@
         <div class="card card-full pb-0 mb-5 border-bottom">
           <div class="content mt-1">
             <h4 class="pt-3 mb-0">어서오세요! 관심 다이빙을 3개 이상 고르면<br/> 취향에 맞는 버디를 추천해드려요</h4>
-            <a id="delete_schedule" v-on:click="goHome()" class="color-highlight font-12" style="margin-top: -26px;padding-bottom: 10px;float:right;">건너뛰기</a>
             <p class="color-secondary mb-3">많이 고를수록 추천이 정확해져요</p>
+            <a id="delete_schedule" v-on:click="goHome()" class="color-highlight font-12" style="margin-top: -43px;padding-bottom: 10px;float:right;">건너뛰기</a>
             
             
             
