@@ -373,13 +373,13 @@
 
                 <div class="input-style no-borders has-icon validate-field mb-3"">
                     <i class="fas fa-layer-group color-gray"></i>
-                    <label for="form12" class="color-highlight">레벨</label>
-                    <select id="form12" required>
+                    <label for="form22" class="color-highlight">레벨</label>
+                    <select id="form22" required>
                         <option value="" selected disabled>레벨</option>
-                        <option value="레벨1">레벨1</option>
-                        <option value="레벨2">레벨2</option>
-                        <option value="레벨3">레벨3</option>
-                        <option value="레벨4">레벨4</option>
+                        <option value="오픈워터">오픈워터</option>
+                        <option value="어드밴스드">어드밴스드</option>
+                        <option value="레스큐">레스큐</option>
+                        <option value="마스터">마스터</option>
                         <option value="강사">강사</option>
                         <option value="없음">없음</option>
                     </select>
@@ -390,18 +390,17 @@
                 </div>
 
                 <div class="input-style no-borders has-icon validate-field mb-3"">
-                    <i class="fas fa-record-vinyl color-gray"></i>
-                    <label for="form13" class="color-highlight">Personal Best</label>
-                    <select id="form13" required>
-                        <option value="" selected disabled>Personal Best</option>
-                        <option value="STA">STA</option>
-                        <option value="DYN">DYN</option>
-                        <option value="DNF">DNF</option>
-                        <option value="CWT">CWT</option>
-                        <option value="VWT">VWT</option>
-                        <option value="FIM">FIM</option>
-                        <option value="CNF">CNF</option>
-                        <option value="NLM">NLM</option>
+                    <i class="fas fa-clipboard-check color-gray"></i>
+                    <label for="form23" class="color-highlight">다이빙 로그</label>
+                    <select id="form23" required>
+                        <option value="" selected disabled>다이빙 로그</option>
+                        <option value="10">~10</option>
+                        <option value="30">~30</option>
+                        <option value="50">~50</option>
+                        <option value="100">~100</option>
+                        <option value="200">~200</option>
+                        <option value="300">~300</option>
+                        <option value="301">300~</option>
                         <option value="없음">없음</option>
                     </select>
                     <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
@@ -529,14 +528,13 @@
 
                 <div class="input-style no-borders has-icon validate-field mb-3"">
                     <i class="fas fa-layer-group color-gray"></i>
-                    <label for="form22" class="color-highlight">레벨</label>
-                    <select id="form22" required>
+                    <label for="form12" class="color-highlight">레벨</label>
+                    <select id="form12" required>
                         <option value="" selected disabled>레벨</option>
-                        <option value="오픈워터">오픈워터</option>
-                        <option value="어드밴스드">어드밴스드</option>
-                        <option value="레스큐">레스큐</option>
-                        <option value="마스터">마스터</option>
-                        <option value="스페셜티">스페셜티</option>
+                        <option value="레벨1">레벨1</option>
+                        <option value="레벨2">레벨2</option>
+                        <option value="레벨3">레벨3</option>
+                        <option value="레벨4">레벨4</option>
                         <option value="강사">강사</option>
                         <option value="없음">없음</option>
                     </select>
@@ -547,17 +545,18 @@
                 </div>
 
                 <div class="input-style no-borders has-icon validate-field mb-3"">
-                    <i class="fas fa-clipboard-check color-gray"></i>
-                    <label for="form23" class="color-highlight">다이빙 로그</label>
-                    <select id="form23" required>
-                        <option value="" selected disabled>다이빙 로그</option>
-                        <option value="10">~10</option>
-                        <option value="30">~30</option>
-                        <option value="50">~50</option>
-                        <option value="100">~100</option>
-                        <option value="200">~200</option>
-                        <option value="300">~300</option>
-                        <option value="301">300~</option>
+                    <i class="fas fa-record-vinyl color-gray"></i>
+                    <label for="form13" class="color-highlight">Personal Best</label>
+                    <select id="form13" required>
+                        <option value="" selected disabled>Personal Best</option>
+                        <option value="STA">STA</option>
+                        <option value="DYN">DYN</option>
+                        <option value="DNF">DNF</option>
+                        <option value="CWT">CWT</option>
+                        <option value="VWT">VWT</option>
+                        <option value="FIM">FIM</option>
+                        <option value="CNF">CNF</option>
+                        <option value="NLM">NLM</option>
                         <option value="없음">없음</option>
                     </select>
                     <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
