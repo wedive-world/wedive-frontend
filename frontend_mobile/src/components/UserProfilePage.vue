@@ -19,7 +19,19 @@
         <!-- card in this page format must have the class card-full to avoid seeing behind it-->
         <div class="card card-full pb-0 mb-3 border-bottom">
           <div class="content mt-1">
-            <h4 class="pt-3 mb-3">기본정보</h4>
+            <h4 class="pt-3 mb-0">매너수심 <span class="mb-2 color-gray-light-mid font-13 ms-2 font-400"><i class="wedive_icoset wedive_icoset_info me-1"></i>활동을 많이 할 수록 깊어져요.</span></h4>
+            <div class="mt-4 mb-1">
+                <div class="progress rounded-l wedive-deep" style="height:28px">
+                    <div class="progress-bar bg-highlight text-start ps-3 color-white" 
+                         role="progressbar" style="width: 18%" 
+                         aria-valuenow="10" aria-valuemin="0" 
+                         aria-valuemax="100">
+                         18미터
+                    </div>
+                </div>
+            </div>
+
+            <h4 class="pt-4 mb-3">기본정보</h4>
             <div class="mt-2">
                 <div class="input-style no-borders has-icon validate-field mb-3">
                     <i class="fas fa-id-card-alt color-gray"></i>
@@ -750,4 +762,5 @@ export default {
 select:invalid {color: #6c757d;}
 select {background: white; background-color: white;}
 .wediev-label {font-size: 12px;transition: all 250ms ease;position:absolute;left:14px;z-index:99;margin-top: -16px;}
+.wedive-deep:before {content: '▼ 첫 수심: 18m';position: absolute;margin-top: -20px;margin-left: 14%;color:#b4bcc8;}
 </style>
