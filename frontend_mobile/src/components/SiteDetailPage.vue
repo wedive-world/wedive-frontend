@@ -1,0 +1,430 @@
+<template>
+  <div class="">
+    <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-center" data-menu-load=""></div>    
+    <div class="page-content">
+        <div class="splide single-slider cover-slider slider-no-arrows slider-has-dots" id="cover-slider-1" data-card-height="250">
+            <div class="splide__track">
+                <div class="splide__list">
+                    <div class="splide__slide">
+                        <div data-card-height="250" class="card rounded-0 mb-0" style="background-image:url(https://lh3.googleusercontent.com/proxy/wyPKhs0S2G5K6nfjbFeN54fiQDMCvw-cxRvS76lbyQZ_FX0bqT29HH14FBYQTQmNHH7jEpg9YsW4_M6a-9eT5jdl8zLh_iXFHIMrr1Jlls_QOm9go6UXmS1dExrTkg)">
+                            
+                        </div>         
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+    
+        
+        
+        <div class="card card-style" style="margin-top:-60px; z-index:1">
+            <div class="text-center" style="padding:30px 10px;">
+                <h2 class="font-20 font-700 mb-0">양양 다이빙 사이트</h2>
+                <h2 class="wedive-score">3.4</h2>
+                <span class="wedive-score-desc">일반적</span>
+                <p class="color-gray m-0"><i class="fas fa-map-marked-alt" ></i> 대한민국, 강원도</p>
+                
+
+                <div class="evaluation d-flex pt-3">
+                    <div>
+                        <div class="star-area">
+                            <span class="font-14 me-2 color-gray">환경</span>
+                            <i class="fas fa-fish font-20 color-orange-light scale-box"></i>
+                            <i class="fas fa-fish font-20 color-orange-light scale-box"></i>
+                            <i class="fas fa-fish font-20 color-orange-light scale-box"></i>
+                            <i class="fas fa-fish font-20 color-gray-light scale-box"></i>
+                            <i class="fas fa-fish font-20 color-gray-light scale-box"></i>
+                            <span class="font-14 ms-2">3.3</span>
+                        </div>
+                        <div class="star-area mt-1">
+                            <span class="font-14 me-2 color-gray">유속</span>
+                            <i class="fas fa-water font-20 color-aqua-dark scale-box"></i>
+                            <i class="fas fa-water font-20 color-aqua-dark scale-box"></i>
+                            <i class="fas fa-water font-20 color-aqua-dark scale-box"></i>
+                            <i class="fas fa-water font-20 color-aqua-dark scale-box"></i>
+                            <i class="fas fa-water font-20 color-gray-light scale-box"></i>
+                            <span class="font-14 ms-2">3.8</span>
+                        </div>
+                        <div class="star-area mt-1">
+                            <span class="font-14 me-2 color-gray">시야</span>
+                            <i class="fas fa-eye font-20 color-green-dark scale-box"></i>
+                            <i class="fas fa-eye font-20 color-green-dark scale-box"></i>
+                            <i class="fas fa-eye font-20 color-green-dark scale-box"></i>
+                            <i class="fas fa-eye font-20 color-gray-light scale-box"></i>
+                            <i class="fas fa-eye font-20 color-gray-light scale-box"></i>
+                            <span class="font-14 ms-2">3.3</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div>일반적</div>
+                        <div class="mt-1">일반적</div>
+                        <div class="mt-1">5-15m</div>
+                    </div>
+                </div>
+
+
+                <p class="color-gray mt-2 mb-0">동해 유일의 야간 다이빙 사이트 입니다.</p>
+                
+
+            </div>
+        </div>
+        
+
+
+        <div class="card card-style p-2">
+            <div class="content mb-2">
+                <div class="text-center">
+                    <i class="ico ico-wedive-w -circle color-primary scale-box fa-4x"></i>
+                </div>
+                <h4 class="text-center pt-2 mb-2">where is here?</h4>
+                <div class="row text-start mb-0 txt_box2">
+                    <div class="ico_feature col-3">
+                        <i class="ico_feature2 icon-point"></i>
+                        <p class="span_feature text-center">난파선</p>
+                    </div>
+                    <div class="ico_feature col-3">
+                        <i class="ico_feature5 icon-point"></i>
+                        <p class="span_feature text-center">월다이빙</p>
+                    </div>
+                </div>
+                <div class="justify-content-center mb-2 mt-3 text-start">
+                    <div class="mb-2">
+                        <p class="wedive-title">방문시기</p>
+                        <p class="wedive-desc">일반적으로 일년 내내 다이빙이 가능하지만 가장 좋은 시기는 여름~가을 동안인 6월에서 10월입니다.</p>
+                        <p class="wedive-title">수온</p>
+                        <p class="wedive-desc">1~5월 평균 섭씨 10도, 11~12월은 15도 안팎입니다. 성수기인 6~10월에는 평균 20도까지 올라갑니다.</p>
+                        <p class="wedive-title">수심</p>
+                        <p class="wedive-desc">가까운 바다는 12~18m, 먼 바다는 20~32m정도 입니다.</p>
+                        <p class="wedive-title">해류</p>
+                        <p class="wedive-desc">6~10월 간헐적으로 청물(일본 쓰시마 섬에서 갈라진 쿠로시오 난류)가 유입되어 시야가 15m까지 좋아집니다.</p>
+                        <p class="wedive-title">시야</p>
+                        <p class="wedive-desc">평소에는 5m정도이지만, 청물이 들어오는 경우 10m~15m로 일반적인 편입니다.</p>
+                        <p class="wedive-title">다이빙 하이라이트</p>
+                        <p class="wedive-desc">쥐놀래미와 도다리, 황어, 전복, 문어, 복어, 쥐치 등을 만날 수 있습니다.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="card card-style">
+            <div class="content" style="margin: 15px;">
+                <h4 class="text-start mb-2 font-14">YouTube 소개</h4>
+                <div class="responsive-iframe" style="-border-radius: 16px;-moz-border-radius: 16px;border-radius: 16px;">
+                    <iframe src='https://www.youtube.com/embed/84myx_Td1vE' frameborder='0' allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="card card-style">
+            <div class="content">
+                <div class="gallery-view-controls">
+                    <div class="divider mb-0"></div>
+                    <a href="#" class="gallery-view-1"><i class="fa fa-th"></i></a>
+                    <a href="#" class="color-highlight gallery-view-2"><i class="fa fa-th-large"></i></a>
+                    <a href="#" class="gallery-view-3"><i class="fa fa-bars"></i></a>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="content my-n1">
+                    <div class="gallery-views gallery-view-2">
+                        <a data-gallery="gallery-1" href="/static/images/point/ko/jeju_munisland_01.jpg" title="문섬 바다 속 풍경">
+                            <img src="images/empty.png" data-src="/static/images/point/ko/jeju_munisland_01.jpg" class="rounded-m preload-img shadow-l img-fluid" alt="img">
+                            <div class="caption pt-0 mb-2 ms-3">
+                                <p class="color-gray-light-mid font-600 mb-n1">문섬 바다 속 풍경</p>
+                            </div>
+                        </a>
+                        <a data-gallery="gallery-1" href="/static/images/point/ko/jeju_munisland_02.jpg" title="연산호 주변 범돔 무리">
+                            <img src="images/empty.png" data-src="/static/images/point/ko/jeju_munisland_02.jpg" class="rounded-m preload-img shadow-l img-fluid" alt="img">
+                            <div class="caption pt-0 mb-2 ms-3">
+                                <p class="color-gray-light-mid font-600 mb-n1">연산호 주변 범돔 무리</p>
+                            </div>
+                        </a>		
+                        <a data-gallery="gallery-1" href="/static/images/point/ko/jeju_munisland_03.jpg" title="적벽 형태의 포인트">
+                            <img src="images/empty.png" data-src="/static/images/point/ko/jeju_munisland_03.jpg" class="rounded-m preload-img shadow-l img-fluid" alt="img">
+                            <div class="caption pt-0 mb-2 ms-3">
+                                <p class="color-gray-light-mid font-600 mb-n1">적벽 형태의 포인트</p>
+                            </div>
+                        </a>	
+                        <a data-gallery="gallery-1" href="/static/images/point/ko/jeju_munisland_04.jpg" title="형형색색의 연산호">
+                            <img src="images/empty.png" data-src="/static/images/point/ko/jeju_munisland_04.jpg" class="rounded-m preload-img shadow-l img-fluid" alt="img">
+                            <div class="caption pt-0 mb-2 ms-3">
+                                <p class="color-gray-light-mid font-600 mb-n1">형형색색의 연산호</p>
+                            </div>
+                        </a>
+                        <a data-gallery="gallery-1" href="/static/images/point/ko/jeju_munisland_05.jpg" title="다양한 수중생물">
+                            <img src="images/empty.png" data-src="/static/images/point/ko/jeju_munisland_05.jpg" class="rounded-m preload-img shadow-l img-fluid" alt="img">
+                            <div class="caption pt-0 mb-2 ms-3">
+                                <p class="color-gray-light-mid font-600 mb-n1">다양한 수중생물</p>
+                            </div>
+                        </a>
+                        <a data-gallery="gallery-1" href="/static/images/point/ko/jeju_munisland_06.jpg" title="문섬, 새끼섬">
+                            <img src="images/empty.png" data-src="/static/images/point/ko/jeju_munisland_06.jpg" class="rounded-m preload-img shadow-l img-fluid" alt="img">
+                            <div class="caption pt-0 mb-2 ms-3 mb-4">
+                                <p class="color-gray-light-mid font-600 mb-n1">문섬, 새끼섬</p>
+                            </div>
+                        </a>			
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+
+        <div class="card card-style">
+            <div class="content mb-0 mt-10">
+                <h4 class="text-start pt-2 mb-3">위치</h4>
+            </div>
+            <div id="map" style="height: 300px;"></div>
+        </div>
+
+        <div class="card card-style">
+            <div class="content mb-2">
+                <h4 class="text-start pt-2 mb-0">스쿠버 지수</h4>
+                <table class="table table-borderless text-center rounded-sm shadow-l mt-3" style="overflow: hidden;">
+                    <thead>
+                        <tr class="bg-blue-dark">
+                            <th scope="col" class="color-white font-12">날짜</th>
+                            <th scope="col" class="color-white font-12">파고</th>
+                            <th scope="col" class="color-white font-12">유속</th>
+                            <th scope="col" class="color-white font-12">수온</th>
+                            <th scope="col" class="color-white font-12">스쿠버</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th class="font-12" scope="row">09/11</th>
+                            <td class="font-12">0.1~0.3</td>
+                            <td class="font-12">0.4~1.0</td>
+                            <td class="font-12">22~23</td>
+                            <td class="color-blue-dark font-12">보통</td>
+                        </tr>
+                        <tr>
+                            <th class="font-12" scope="row">09/12</th>
+                            <td class="font-12">0.2~0.3</td>
+                            <td class="font-12">0.4~0.8</td>
+                            <td class="font-12">23~24</td>
+                            <td class="color-green-dark font-12">좋음</td>
+                        </tr>
+                        <tr>
+                            <th class="font-12" scope="row">09/13</th>
+                            <td class="color-red-dark font-12">0.7~0.9</td>
+                            <td class="color-red-dark font-12">0.6~1.2</td>
+                            <td class="font-12">24</td>
+                            <td class="color-red-dark font-12">나쁨</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="text-end">
+                    <img class="me-1 mb-1" height="20" src="/static/images/kaoh_logo.svg" />
+                </div>
+            </div>
+        </div>
+
+
+        
+        <div data-menu-load="/static/menu-footer.html"></div>
+
+    </div>
+
+
+    <!-- End of Page Content--> 
+    
+    
+  </div>
+</template>
+<script>
+
+export default {
+  name: 'HelloWorld',
+  mounted() {
+    var preloader = document.getElementById('preloader')
+    if(preloader){preloader.classList.add('preloader-hide');}
+    
+    let script = document.createElement('script');
+    script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCWu8Fw-h-f1t8Sp3I7R3l_Ukr24HunXQM';
+    document.body.appendChild(script);
+    script.onload = () => {
+        const night_style = [
+            { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
+            { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
+            { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
+            {
+                featureType: "administrative.locality",
+                elementType: "labels.text.fill",
+                stylers: [{ color: "#d59563" }],
+            },
+            {
+                featureType: "poi",
+                elementType: "labels.text.fill",
+                stylers: [{ color: "#d59563" }],
+            },
+            {
+                featureType: "poi.park",
+                elementType: "geometry",
+                stylers: [{ color: "#263c3f" }],
+            },
+            {
+                featureType: "poi.park",
+                elementType: "labels.text.fill",
+                stylers: [{ color: "#6b9a76" }],
+            },
+            {
+                featureType: "road",
+                elementType: "geometry",
+                stylers: [{ color: "#38414e" }],
+            },
+            {
+                featureType: "road",
+                elementType: "geometry.stroke",
+                stylers: [{ color: "#212a37" }],
+            },
+            {
+                featureType: "road",
+                elementType: "labels.text.fill",
+                stylers: [{ color: "#9ca5b3" }],
+            },
+            {
+                featureType: "road.highway",
+                elementType: "geometry",
+                stylers: [{ color: "#746855" }],
+            },
+            {
+                featureType: "road.highway",
+                elementType: "geometry.stroke",
+                stylers: [{ color: "#1f2835" }],
+            },
+            {
+                featureType: "road.highway",
+                elementType: "labels.text.fill",
+                stylers: [{ color: "#f3d19c" }],
+            },
+            {
+                featureType: "transit",
+                elementType: "geometry",
+                stylers: [{ color: "#2f3948" }],
+            },
+            {
+                featureType: "transit.station",
+                elementType: "labels.text.fill",
+                stylers: [{ color: "#d59563" }],
+            },
+            {
+                featureType: "water",
+                elementType: "geometry",
+                stylers: [{ color: "#17263c" }],
+            },
+            {
+                featureType: "water",
+                elementType: "labels.text.fill",
+                stylers: [{ color: "#515c6d" }],
+            },
+            {
+                featureType: "water",
+                elementType: "labels.text.stroke",
+                stylers: [{ color: "#17263c" }],
+            },
+            ];
+
+        const map_style = (localStorage['wedive-Theme'] == 'light-mode') ? [] : night_style;
+
+        this.map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 33.226771248454575, lng: 126.56573069418906},
+            zoom: 13,
+            mapTypeControl: false,
+            streetViewControl: false,
+            zoomControl: false,
+            styles: map_style
+        });
+        var marker_shop = new google.maps.Marker({
+            map: this.map,
+            position: {lat: 33.226771248454575, lng: 126.56573069418906},
+            label: {text: '문섬 포인트', color: 'white', className: 'marker-position'},
+            icon: new google.maps.MarkerImage('/static/images/ico_pin1.png',null, null, null, new google.maps.Size(38,43)),
+        });
+        
+    };
+  },
+  created() {
+    
+  },
+  data () {
+    return {
+        map: null,
+    }
+  }, methods: {
+      call: function() {
+          console.log("call");
+      },
+      goCourse: function() {
+          location.href='/course';
+      }
+  }
+
+  
+}
+
+
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+.light-border-bottom {border-bottom: 1px solid #dee2e6;}
+.evaluation {margin: 6px 6px 0px 6px; background-color: rgba(196,187,171,.2);justify-content: space-around;border-radius: 5px;padding: 8px 8px 8px 0;}
+.evaluation>span.info {padding-left: 11px;border-left: 1px solid #c4bbab;}
+.evaluation>span .icon_question {display: inline-block;position: relative;top: 1px;display: block;width: 18px;height: 18px;background-size: 18px 18px;background-repeat: no-repeat;background-image: url(/static/images/question.png);text-indent: -9999px;}
+
+.span_feature {width:66px;}
+.ico_feature {}
+.ico_feature1 {width: 44px;height: 40px;background-position: 0px -3px;}
+.ico_feature2 {width: 44px;height: 40px;background-position: -45px -3px;}
+.ico_feature3 {width: 44px;height: 40px;background-position: -90px -3px;}
+.ico_feature4 {width: 44px;height: 40px;background-position: -135px -3px;}
+.ico_feature5 {width: 44px;height: 40px;background-position: -180px -3px;}
+.ico_feature6 {width: 44px;height: 40px;background-position: -225px -3px;}
+.ico_feature7 {width: 44px;height: 40px;background-position: 0px -368px;}
+.ico_feature8 {width: 44px;height: 40px;background-position: -45px -36px;}
+.ico_feature9 {width: 44px;height: 40px;background-position: -90px -36px;}
+.ico_feature10 {width: 44px;height: 40px;background-position: -135px -36px;}
+.ico_feature11 {width: 44px;height: 40px;background-position: -180px -36px;}
+.ico_feature12 {width: 44px;height: 40px;background-position: -225px -36px;}
+
+.icon-point {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/wedive_point.png);background-repeat: no-repeat;-webkit-background-size: 270px 90px;background-size: 270px 90px;}
+
+.wedive-ul {width: 100%;list-style:none;display: inline-block;margin-bottom: 0;padding-left: 5px !important;padding-right: 5px !important;}
+.wedive-ul > li {float: left;width: 50%;}
+.small-title {color: #ababab;font-weight: 400;font-size: 10px;}
+.review-text {overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;display: -webkit-box;-webkit-line-clamp: 5;-webkit-box-orient: vertical;}
+.text-show-all{position: absolute;top: 26px;right: 20px;color: #727272 !important;font-size:13px;}
+.ico-wedive-w {-webkit-font-smoothing: antialiased;
+    display: grid;
+    margin-left: calc(50% - 20px);
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+    
+    width:40px;
+    height:40px;}
+.ico-wedive-w:before {content: "";
+        background-image: url('/static/images/ico_wedive_d.png');
+        background-size:40px 40px;
+        width:40px;
+        height:40px;
+        display:inline-block;
+}
+.min-h-230 {min-height: 230px;}
+.review_img {float: left;width: 88px; height:88px;margin-right:10px;margin-bottom:2px;border-radius:10px;}
+.txt_box2 {background: #f4f4f4; border-radius: .5rem;padding: 6px 0px 8px 0px;}
+
+
+
+
+
+
+
+.wedive-score {position: absolute;right: 10px; top: 10px;background: #1d397c; border-radius: 10px 10px 10px 0px; padding: 4px 8px; color: white;}
+.wedive-score-desc {position: absolute;right: 4px; top: 40px;color: #1d397c; width:56px;}
+.wedive-title {font-family: 'Noto Sans Korean' !important;font-weight:700;margin-bottom:0px;}
+.wedive-desc {font-family: 'Noto Sans Korean' !important;font-weight:200;margin-bottom:16px;line-height: 1.6}
+</style>
