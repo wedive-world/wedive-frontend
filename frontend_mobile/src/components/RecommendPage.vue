@@ -28,7 +28,9 @@
                         <div class="exp"><span class="color-white">프리다이빙</span></div>
                     </div>
                 </div>
-                
+            
+            </div>
+            <div class="row me-0 ms-0 p-0 mb-0">
 
                 <div class="col-4 p-1">
                     <div style="background: url(https://www.blueplanet-diving.com/media/Downlad/15003278_10154764471953060_790964399007394572_o.jpg)" class="rounded-m wedive-photo-select p-0" v-on:click="select_recommed($event, 'domestic')">
