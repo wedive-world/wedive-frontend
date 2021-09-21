@@ -1081,5 +1081,5 @@ export default {
         display:inline-block;
 }
 .min-h-230 {min-height: 230px;}
-.review_img {float: left;width: 88px; height:88px;margin-right:10px;margin-bottom:2px;border-radius:10px;}
+.review_img {float: left;width: 88px; height:88px;margin-right:10px;margin-bottom:2px;border-radius:10px;object-fit: cover !important;}
 </style>

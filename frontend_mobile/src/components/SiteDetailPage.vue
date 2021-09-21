@@ -64,7 +64,7 @@
                 </div>
 
 
-                <p class="color-gray mt-2 mb-0">동해 유일의 야간 다이빙 사이트 입니다.</p>
+                <p class="color-gray mt-3 mb-0 text-start me-2 ms-2">겨울에는 동해의 보물 섬유세닐말미잘을 볼 수 있고, 여름에는 태풍처럼 지나가는 볼락 무리를 볼 수 있는 사이트 입니다. 특히 분단국가 특성상 허가가 쉽지 않은 동해에서 야간 다이빙을 할 수 있는 유일한 사이트 입니다.</p>
                 
 
             </div>
@@ -89,7 +89,7 @@
                     </div>
                 </div>
                 <div class="justify-content-center mb-2 mt-3 text-start">
-                    <div class="splide single-slider slider-no-arrows slider-has-dots pb-0 mb-0" id="single-slider-1">
+                    <div class="splide single-slider slider-no-arrows slider-has-dots pb-0 mb-0" id="single-slider-info">
                         <div class="splide__track">
                             <div class="splide__list">
                                 <div class="splide__slide">
@@ -182,43 +182,49 @@
 
         <div class="card card-style">
             <div class="content" style="margin: 15px;">
+                <h4 class="text-start pt-2 mb-2">양양 인기 포인트</h4>
+                <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
                 <div v-for="(point,index) in point_list" v-if="index<3">
                     <div class="map-box">
-                        <a href="/point">
-                            <div class="bx">
-                                <div class="justify-content-center mb-0 text-start">
-                                    <h4> {{point.title}} </h4>
-                                    <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
-                                        <span> {{point.star}} </span>
-                                    </p>
-                                    <div class="row text-center row-cols-3 mb-0">
-                                        <a class="col mb-4" data-gallery="gallery-1" v-bind:href="point.img1" title="">
-                                            <img src="/static/images/empty.png" v-bind:data-src="point.img1" class="preload-img img-fluid rounded-xs" alt="Point image">
-                                        </a>
-                                        <a class="col mb-4" data-gallery="gallery-1" v-bind:href="point.img2" title="">
-                                            <img src="/static/images/empty.png" v-bind:data-src="point.img2" class="preload-img img-fluid rounded-xs" alt="Point image">
-                                        </a>
-                                        <a class="col mb-4" data-gallery="gallery-1" v-bind:href="point.img3" title="">
-                                            <img src="/static/images/empty.png" v-bind:data-src="point.img3" class="preload-img img-fluid rounded-xs" alt="Point image">
-                                        </a>
+                        
+                        <div class="bx">
+                            <div class="justify-content-center mb-0 text-start">
+                                <a href="/point">
+                                    <div style="position: relative;">
+                                        <h4 class="font-14 font-600 color-highlight"> {{point.title}} </h4>
+                                        <span class="color-gray-light-mid font-12 mb-0 text-more me-1">상세보기<i class="fas fa-chevron-right ms-2"></i></span>
                                     </div>
-                                    <p class="pb-0 mb-0 line-height-m point_desc"> {{point.desc}} </p>
-                                    <p class="pb-0 mb-0 mt-n1 ellipsis color-gray-light-mid">
-                                        {{point.feature}}
-                                    </p>
+                                </a>
+                                <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
+                                    <span> {{point.star}} </span>
+                                </p>
+
+                                <div class="row text-center row-cols-3 mb-1" style="padding-left:10px;padding-right:10px;">
+                                    <a class="col ps-1 pe-1 square-rect" v-bind:data-gallery="'gallery-'+index" v-bind:href="point.img1" title="">
+                                        <img src="/static/images/empty.png" v-bind:data-src="point.img1" class="preload-img img-fluid rounded-s" alt="Point image">
+                                    </a>
+                                    <a class="col ps-1 pe-1 square-rect" v-bind:data-gallery="'gallery-'+index" v-bind:href="point.img2" title="">
+                                        <img src="/static/images/empty.png" v-bind:data-src="point.img2" class="preload-img img-fluid rounded-s" alt="Point image">
+                                    </a>
+                                    <a class="col ps-1 pe-1 square-rect" v-bind:data-gallery="'gallery-'+index" v-bind:href="point.img3" title="">
+                                        <img src="/static/images/empty.png" v-bind:data-src="point.img3" class="preload-img img-fluid rounded-s" alt="Point image">
+                                    </a>
                                 </div>
+                                <p class="pb-0 mb-0 line-height-m point_desc"> {{point.desc}} </p>
+                                <p class="pb-0 mb-0 mt-n1 ellipsis color-gray-light-mid">
+                                    {{point.feature}}
+                                </p>
                             </div>
-                        </a>
+                        </div>
                     </div>
                     <div class="divider mt-3 mb-3"></div>
                 </div>
             </div>
         </div>
 
-        <h4 class="text-start mb-2 font-14 ms-3 me-3">양양 인기 </h4>
         
 
-        <h4 class="text-start mb-2 font-14 ms-3 me-3">양양 여행을 즐기는 방법</h4>
+        <!--<h4 class="text-start mb-2 font-14 ms-3 me-3">양양 여행을 즐기는 방법</h4>
         <div class="splide double-slider slider-no-arrows slider-no-dots visible-slider" id="double-slider-1">
             <div class="splide__track">
                 <div class="splide__list">
@@ -274,7 +280,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
 
         <div class="card card-style">
             <div class="content" style="margin: 15px;">
@@ -282,59 +288,124 @@
                 <div class="responsive-iframe" style="-border-radius: 16px;-moz-border-radius: 16px;border-radius: 16px;">
                     <iframe src='https://www.youtube.com/embed/84myx_Td1vE' frameborder='0' allowfullscreen></iframe>
                 </div>
+
+                <div class="responsive-iframe mt-3" style="-border-radius: 16px;-moz-border-radius: 16px;border-radius: 16px;">
+                    <iframe src='https://www.youtube.com/embed/ET0Xj8y_6uw' frameborder='0' allowfullscreen></iframe>
+                </div>
+
+                <div class="responsive-iframe mt-3" style="-border-radius: 16px;-moz-border-radius: 16px;border-radius: 16px;">
+                    <iframe src='https://www.youtube.com/embed/xuHHshrOXoE' frameborder='0' allowfullscreen></iframe>
+                </div>
             </div>
         </div>
+        
 
-        <div class="card card-style">
-            <div class="content">
-                <div class="gallery-view-controls">
-                    <div class="divider mb-0"></div>
-                    <a href="#" class="gallery-view-1"><i class="fa fa-th"></i></a>
-                    <a href="#" class="color-highlight gallery-view-2"><i class="fa fa-th-large"></i></a>
-                    <a href="#" class="gallery-view-3"><i class="fa fa-bars"></i></a>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="content my-n1">
-                    <div class="gallery-views gallery-view-2">
-                        <a data-gallery="gallery-1" href="/static/images/point/ko/jeju_munisland_01.jpg" title="문섬 바다 속 풍경">
-                            <img src="images/empty.png" data-src="/static/images/point/ko/jeju_munisland_01.jpg" class="rounded-m preload-img shadow-l img-fluid" alt="img">
-                            <div class="caption pt-0 mb-2 ms-3">
-                                <p class="color-gray-light-mid font-600 mb-n1">문섬 바다 속 풍경</p>
+
+        <div class="splide single-slider slider-no-arrows slider-has-dots pb-4 mb-4" id="single-slider-1">
+            <div class="splide__track">
+                <div class="splide__list">
+                    <div class="splide__slide">
+                        <div class="card card-style mb-3 min-h-230">
+                            <div class="content text-start">
+                                <div class="d-flex">
+                                    <div class="flex-grow-1">
+                                        <div class="float-start">
+                                            <h1 class="fa-2x font-900 me-2 mb-0">5.00</h1>
+                                            <p class="font-10 mb-0 mt-n2 opacity-40 text-end"></p>
+                                        </div>
+                                        <span>
+                                            <i class="fa fa-star color-yellow-dark"></i>
+                                            <i class="fa fa-star color-yellow-dark"></i>
+                                            <i class="fa fa-star color-yellow-dark"></i>
+                                            <i class="fa fa-star color-yellow-dark"></i>
+                                            <i class="fa fa-star color-yellow-dark"></i>
+                                        </span>
+                                        
+                                    </div>
+                                    <div>
+                                        <h6 class="text-end">김성진</h6>
+                                        <p class="font-10 mb-0 mt-n2 opacity-40 text-end">2021.08.30</p>
+                                    </div>
+                                </div>
+                                <p class="review-text mt-3">
+                                    <a href="https://t1.daumcdn.net/cfile/tistory/224C493F542D088905" data-gallery="gallery-99" class="filtr-item" title="" data-category="99">
+                                        <img src="/static/images/empty.png" data-src="https://t1.daumcdn.net/cfile/tistory/224C493F542D088905" class="preload-img rounded-s shadow-m review_img" alt="방문자리뷰">
+                                    </a>
+                                    나이트다이빙을 해보면 본인이 체질인지 여부를 바로 알 수 있다. 입수 후 어두운 바다가 눈앞에 펼쳐지지만 이내 모든게 밝아진다. 나이트다이빙 특유의 분위기가 가득하다. 마치 낯선 행성을 탐험하는 기분이랄까, 이국적으로 몽환적인 분위기에 한껏 취하게 된다. 함께 간 모든 사람들이 너무나도 좋아해서 힘들게 기획한만큼 보람있는 다이빙 이었다.
+                                </p>
                             </div>
-                        </a>
-                        <a data-gallery="gallery-1" href="/static/images/point/ko/jeju_munisland_02.jpg" title="연산호 주변 범돔 무리">
-                            <img src="images/empty.png" data-src="/static/images/point/ko/jeju_munisland_02.jpg" class="rounded-m preload-img shadow-l img-fluid" alt="img">
-                            <div class="caption pt-0 mb-2 ms-3">
-                                <p class="color-gray-light-mid font-600 mb-n1">연산호 주변 범돔 무리</p>
+                        </div>     
+                    </div>
+                    <div class="splide__slide">
+                        <div class="card card-style mb-3 min-h-230">
+                            <div class="content text-start">
+                                <div class="d-flex">
+                                    <div class="flex-grow-1">
+                                        <div class="float-start">
+                                            <h1 class="fa-2x font-900 me-2 mb-0">4.98</h1>
+                                            <p class="font-10 mb-0 mt-n2 opacity-40 text-end"></p>
+                                        </div>
+                                        <span>
+                                            <i class="fa fa-star color-yellow-dark"></i>
+                                            <i class="fa fa-star color-yellow-dark"></i>
+                                            <i class="fa fa-star color-yellow-dark"></i>
+                                            <i class="fa fa-star color-yellow-dark"></i>
+                                            <i class="fa fa-star color-yellow-dark"></i>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <h6 class="text-end">조관우</h6>
+                                        <p class="font-10 mb-0 mt-n2 opacity-40 text-end">2021.08.27</p>
+                                    </div>
+                                </div>
+                                <p class="review-text mt-3">
+                                    남애 스쿠버 리조트의 젊은 스태프들은 항상 기운이 넘치고 시원시원하고 친절하다. 고객들이 원하는 바를 하나하나 세심히 맞춰주기 위해 노력하는 스태프들 덕에 편안히 다이빙을 즐길 수 있다. 작은 동물에도 애정을 쏟고 살뜰히 보살피는 마음씀씀이가 리조트 곳곳에 베어 리조트를 찾는 다이버들의 마음도 편안하게 해준다. 편안한 마음으로 신나게 기운차게 다이빙을 다이빙을 즐길 수 있는 곳, 남애 스쿠버 리조트이다.
+                                </p>
                             </div>
-                        </a>		
-                        <a data-gallery="gallery-1" href="/static/images/point/ko/jeju_munisland_03.jpg" title="적벽 형태의 포인트">
-                            <img src="images/empty.png" data-src="/static/images/point/ko/jeju_munisland_03.jpg" class="rounded-m preload-img shadow-l img-fluid" alt="img">
-                            <div class="caption pt-0 mb-2 ms-3">
-                                <p class="color-gray-light-mid font-600 mb-n1">적벽 형태의 포인트</p>
+                        </div>   
+                    </div>
+                    <div class="splide__slide">
+                        <div class="card card-style mb-3 min-h-230">
+                            <div class="content text-start">
+                                <div class="d-flex">
+                                    <div class="flex-grow-1">
+                                        <div class="float-start">
+                                            <h1 class="fa-2x font-900 me-2 mb-0">4.5</h1>
+                                            <p class="font-10 mb-0 mt-n2 opacity-40 text-end">섬 다이빙</p>
+                                        </div>
+                                        <span>
+                                            <i class="fa fa-star color-yellow-dark"></i>
+                                            <i class="fa fa-star color-yellow-dark"></i>
+                                            <i class="fa fa-star color-yellow-dark"></i>
+                                            <i class="fa fa-star color-yellow-dark"></i>
+                                            <i class="fa fa-star color-yellow-dark"></i>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <h6 class="text-end">조윤구</h6>
+                                        <p class="font-10 mb-0 mt-n2 opacity-40 text-end">2021.08.20</p>
+                                    </div>
+                                </div>
+                                <p class="review-text mt-3">
+                                    <a href="http://www.uwmagazine.co.kr/news/photo/202008/895_2811_2553.jpg" data-gallery="gallery-99" class="filtr-item" title="" data-category="99">
+                                        <img src="/static/images/empty.png" data-src="http://www.uwmagazine.co.kr/news/photo/202008/895_2811_2553.jpg" class="preload-img rounded-s shadow-m review_img" alt="방문자리뷰">
+                                    </a>
+                                    파고는 0.5미터 이상이였습니다. 해안 근처는 잔잔해 보였는데 5분정도 배타고 나가니 파고도 높아지고 조류도 제법 강했습니다.  무엇보다 시야가 너무 별로였습니다. 부유물들이 겨울바다 답지않게 너무 심했습니다. 영상을 보시면 아시겠지만 부유물덕에 입수해서 내려가는 속도가 느껴질만큼 많았습니다.
+                                </p>
                             </div>
-                        </a>	
-                        <a data-gallery="gallery-1" href="/static/images/point/ko/jeju_munisland_04.jpg" title="형형색색의 연산호">
-                            <img src="images/empty.png" data-src="/static/images/point/ko/jeju_munisland_04.jpg" class="rounded-m preload-img shadow-l img-fluid" alt="img">
-                            <div class="caption pt-0 mb-2 ms-3">
-                                <p class="color-gray-light-mid font-600 mb-n1">형형색색의 연산호</p>
+                        </div>   
+                    </div>
+                    <div class="splide__slide">
+                        <div class="card card-style mb-3 min-h-230">
+                            <div class="content">
+                                <h1 class="text-center"><i class="fas fa-comments fa-2x color-highlight mt-4"></i></h1>
+                                <h1 class="text-center pt-3 font-20 mb-n1">5개 리뷰</h1>
+                                <p class="text-center color-highlight font-600">더보기 <i class="fas fa-chevron-right"></i></p>
+                                
                             </div>
-                        </a>
-                        <a data-gallery="gallery-1" href="/static/images/point/ko/jeju_munisland_05.jpg" title="다양한 수중생물">
-                            <img src="images/empty.png" data-src="/static/images/point/ko/jeju_munisland_05.jpg" class="rounded-m preload-img shadow-l img-fluid" alt="img">
-                            <div class="caption pt-0 mb-2 ms-3">
-                                <p class="color-gray-light-mid font-600 mb-n1">다양한 수중생물</p>
-                            </div>
-                        </a>
-                        <a data-gallery="gallery-1" href="/static/images/point/ko/jeju_munisland_06.jpg" title="문섬, 새끼섬">
-                            <img src="images/empty.png" data-src="/static/images/point/ko/jeju_munisland_06.jpg" class="rounded-m preload-img shadow-l img-fluid" alt="img">
-                            <div class="caption pt-0 mb-2 ms-3 mb-4">
-                                <p class="color-gray-light-mid font-600 mb-n1">문섬, 새끼섬</p>
-                            </div>
-                        </a>			
+                        </div>    
                     </div>
                 </div>
-                
             </div>
         </div>
 
@@ -520,9 +591,9 @@ export default {
     return {
         map: null,
         point_list : [
-            {title: "말미잘동산 포인트", desc: "동해의 명물 섬유세닐말미잘이 유난히 많은 포인트로, 모래 지형 위에 커다란 암반과 크고 작은 바위들이 형성되어 있는 포인트 입니다. 섬유세닐말미잘은 낮은 수온에서 펴기 때문에 6월 이전에 방문한다면 이 포인트의 아름다움을 제대로 느낄 수 있습니다.", star: 4.3, img1: 'https://divingholic.com/wp-content/uploads/2019/02/maxresdefault-1.jpg', img2: 'https://diverz.net/data/diving/point/202102/1614156788_8f436f8c0dc8a574611b_thumb_760_504.jpg?1632225416', img3: 'https://divingholic.com/wp-content/uploads/2019/02/2%EC%9B%94%EC%9D%B8%EA%B5%AC%ED%95%B4%EB%B3%80%EB%94%A5.jpg', position: {lat: 33.24134444312815, lng: 126.56484940647604}},
-            {title: "다이브 투게더리조트", desc: "한줄설명1", star: 4.8, price_index: 2, feature: "덕다이빙, 케이브", img: '/static/images/shop1/diving/test2.jpg', position: {lat: 33.241633952501715, lng: 126.56456092676112}},
-            {title: "태평양 다이빙스쿨", desc: "블라블라", star: 3.1, price_index: 3, feature: "난파선, 드리프트", img: '/static/images/shop1/diving/test3.jpg', position: {lat: 33.24030993345755, lng: 126.56472966827262}},
+            {title: "말미잘동산 포인트", desc: "동해의 명물 섬유세닐말미잘이 유난히 많은 포인트로, 모래 지형 위에 커다란 암반과 크고 작은 바위들이 형성되어 있는 포인트 입니다. 섬유세닐말미잘은 낮은 수온에서 펴기 때문에 6월 이전에 방문한다면 이 포인트의 아름다움을 제대로 느낄 수 있습니다.", star: 4.6, img1: 'https://divingholic.com/wp-content/uploads/2019/02/maxresdefault-1.jpg', img2: 'https://diverz.net/data/diving/point/202102/1614156788_8f436f8c0dc8a574611b_thumb_760_504.jpg?1632225416', img3: 'https://divingholic.com/wp-content/uploads/2019/02/2%EC%9B%94%EC%9D%B8%EA%B5%AC%ED%95%B4%EB%B3%80%EB%94%A5.jpg', position: {lat: 33.24134444312815, lng: 126.56484940647604}},
+            {title: "철재삼동 포인트", desc: "여름철 동해의 상징은 볼락이라고 할 수 있습니다. 그중에서도 수많은 볼락이 태풍처럼 있다고 해서 볼락태풍이라는 별명을 가진 포인트가 철재삼동 포인트 입니다. 초여름에서 초가을까지 3달정도되는 기간에 20m전후 수심, 11~15도의 수온 삼박자가 맞아떨어지면 거대한 볼락 떼를 만날 수 있습니다.", star: 4.3, img1: 'http://scubanet.kr/upload/article/e712beef88c36b892ec0e3d6ab92d187.jpg', img2: 'http://scubanet.kr/upload/article/91c09b84507c563bf3323767953de6d5.jpg', img3: 'http://scubanet.kr/upload/article/e288f7afc761a52885882c7af9c37c11.jpg', position: {lat: 33.241633952501715, lng: 126.56456092676112}},
+            {title: "하우스리프 포인트", desc: "동해바다는 모래바닥에 재미없는 곳이라고 생각하시나요? 하우스리프 포인트는 1~2명의 다이버가 통과할 수 있는 박원 삼각 뿔 어초와 식빵 어초, W 어초, M어초, 평상어초가 있으며, 자연암반과 어우러져 물고기도 많고 다양한 종류의 어초와 고착생물을 보는 재미가 쏠쏠한 포인트 입니다.", star: 4.2, img1: 'https://mblogthumb-phinf.pstatic.net/MjAyMTAyMjhfMTc2/MDAxNjE0NDM5MjY0MTA4.Dvww0i9ome-JXsfbIqP5gUYnYeS36oigWKEvvUqEwxYg.aOp7kUN1gyRNeCpjWPLRy6Hjr6aGwRjgRqTNSdL7I9Ig.JPEG.kkim6413/DSC09346.jpg?type=w2', img2: 'http://scuba.bstorm.co.kr/news/upload/1538620054598.jpg', img3: 'https://scontent-ssn1-1.xx.fbcdn.net/v/t1.6435-9/119986115_3399297676831773_7124015472540446593_n.jpg?_nc_cat=110&ccb=1-5&_nc_sid=36a2c1&_nc_ohc=9PpWujpZIuUAX-_l2-m&_nc_ht=scontent-ssn1-1.xx&oh=00126d2626deaf2884430eaf567a50db&oe=616EA074', position: {lat: 33.24030993345755, lng: 126.56472966827262}},
             {title: "쿨다이브", desc: "뭐라적지", star: 2.8, price_index: 2, feature: "드리프트", img: '/static/images/shop1/diving/test4.jpg', position: {lat: 33.241266401158086, lng: 126.56278906254684}},
             {title: "스플래시 리조트", desc: "이곳에 설명이", star: 4.2, price_index: 4, feature: "난파선, 드리프트", img: '/static/images/shop1/diving/test5.jpg', position: {lat: 33.24245948959435, lng: 126.5633415608148}},
             {title: "제주 블루샤크다이빙", desc: "ㅁㄴㅇㄹㄴㄷㅁㅈㄷㄻㄴㄷㄹㄷㅁㄴㄻㄴㄷㄻㄴㄷㄻㄴㄷㄹ", star: 3.9, price_index: 2, feature: "난파선", img: '/static/images/shop1/diving/test6.jpg', position: {lat: 33.24380026488202, lng: 126.56288927674295}},
@@ -608,5 +679,10 @@ export default {
 .wedive-title {font-family: 'Noto Sans Korean' !important;font-weight:700;margin-bottom:0px;}
 .wedive-desc {font-family: 'Noto Sans Korean' !important;font-weight:200;margin-bottom:16px;line-height: 1.6}
 .min-h-190 {min-height: 190px;}
-.point_desc {.review-text {overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;display: -webkit-box;-webkit-line-clamp: 8;-webkit-box-orient: vertical;}}
+.point_desc {font-family: 'Noto Sans Korean' !important;font-weight:200;overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;display: -webkit-box;-webkit-line-clamp: 5;-webkit-box-orient: vertical;}
+.square-rect {position: relative;}
+.square-rect:after {content: "";display: block;padding-bottom: 100%;}
+.square-rect > img {position: absolute;width: 100%;height: 100%;left: 0;padding:4px;object-fit: cover;}
+.wedive-txt-all {position: absolute;top: 20px;right: 16px;}
+.review_img {float: left;width: 88px; height:88px;margin-right:10px;margin-bottom:2px;border-radius:10px;object-fit: cover !important;}
 </style>
