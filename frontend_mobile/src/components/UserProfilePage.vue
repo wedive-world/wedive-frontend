@@ -638,6 +638,12 @@
                     <i class="fas fa-camera-retro font-17 color-highlight"></i>
                     </div>
                     <div class="form-check interest-check">
+                    <input class="form-check-input" type="checkbox" value="" id="check_general6">
+                    <label class="form-check-label rounded-xl border-08" for="check_general6">수중정화</label>
+                    <i class="fas fa-broom color-white font-18"></i>
+                    <i class="fas fa-broom font-17 color-highlight"></i>
+                    </div>
+                    <div class="form-check interest-check">
                     <input class="form-check-input" type="checkbox" value="" id="check_general4">
                     <label class="form-check-label rounded-xl border-08" for="check_general4">뒷풀이</label>
                     <i class="fas fa-beer color-white font-18"></i>
@@ -648,12 +654,6 @@
                     <label class="form-check-label rounded-xl border-08" for="check_general5">동호회</label>
                     <i class="fas fa-users color-white font-18"></i>
                     <i class="fas fa-users font-17 color-highlight"></i>
-                    </div>
-                    <div class="form-check interest-check">
-                    <input class="form-check-input" type="checkbox" value="" id="check_general6">
-                    <label class="form-check-label rounded-xl border-08" for="check_general6">수중정화</label>
-                    <i class="fas fa-broom color-white font-18"></i>
-                    <i class="fas fa-broom font-17 color-highlight"></i>
                     </div>
                 </div>
 
@@ -745,7 +745,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .border-08 {border: 1px solid rgba(0, 0, 0, 0.08) !important;}
-.border-bottom {border-bottom: 1px solid #d1d2d3 !important;}
+.border-bottom {border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;}
 .input-style.has-borders.input-style-always-active label {background-color: transparent !important;}
 select:invalid {color: #6c757d;}
 select {background: white; background-color: white;}
