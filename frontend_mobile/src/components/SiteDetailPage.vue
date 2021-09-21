@@ -6,7 +6,7 @@
             <div class="splide__track">
                 <div class="splide__list">
                     <div class="splide__slide">
-                        <div data-card-height="250" class="card rounded-0 mb-0" style="background-image:url(https://lh3.googleusercontent.com/proxy/wyPKhs0S2G5K6nfjbFeN54fiQDMCvw-cxRvS76lbyQZ_FX0bqT29HH14FBYQTQmNHH7jEpg9YsW4_M6a-9eT5jdl8zLh_iXFHIMrr1Jlls_QOm9go6UXmS1dExrTkg)">
+                        <div data-card-height="250" class="card rounded-0 mb-0" style="background-image:url(https://static.wixstatic.com/media/d49a86_c8daa727864349c498f1d93236500ea3~mv2.jpg)">
                             
                         </div>         
                     </div>
@@ -89,7 +89,79 @@
                     </div>
                 </div>
                 <div class="justify-content-center mb-2 mt-3 text-start">
-                    <div class="mb-2">
+                    <div class="splide single-slider slider-no-arrows slider-has-dots pb-0 mb-0" id="single-slider-1">
+                        <div class="splide__track">
+                            <div class="splide__list">
+                                <div class="splide__slide">
+                                    <div class="min-h-190">
+                                        <div class="content text-start mt-2">
+                                            <h1 class="text-center mb-0"><i class="fas fa-calendar-alt font-30 color-highlight"></i></h1>
+                                            <h1 class="text-center color-highlight font-16 mb-0">방문시기</h1>
+                                            <p class="text-start font-400">
+                                                일반적으로 일년 내내 다이빙이 가능하지만 가장 좋은 시기는 여름~가을 동안인 6월에서 10월입니다.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="splide__slide">
+                                    <div class="min-h-190">
+                                        <div class="content text-start mt-2">
+                                            <h1 class="text-center mb-0"><i class="fas fa-temperature-high font-30 color-highlight"></i></h1>
+                                            <h1 class="text-center color-highlight font-16 mb-0">수온</h1>
+                                            <p class="text-start font-400">
+                                                1~5월 평균 섭씨 10도, 11~12월은 15도 안팎입니다. 성수기인 6~10월에는 평균 20도까지 올라갑니다.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="splide__slide">
+                                    <div class="min-h-190">
+                                        <div class="content text-start mt-2">
+                                            <h1 class="text-center mb-0"><i class="fas fa-level-down-alt font-30 color-highlight"></i></h1>
+                                            <h1 class="text-center color-highlight font-16 mb-0">수심</h1>
+                                            <p class="text-start font-400">
+                                                가까운 바다는 12~18m, 먼 바다는 20~32m정도 입니다.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="splide__slide">
+                                    <div class="min-h-190">
+                                        <div class="content text-start mt-2">
+                                            <h1 class="text-center mb-0"><i class="fas fa-water font-30 color-highlight"></i></h1>
+                                            <h1 class="text-center color-highlight font-16 mb-0">해류</h1>
+                                            <p class="text-start font-400">
+                                                6~10월 간헐적으로 청물(일본 쓰시마 섬에서 갈라진 쿠로시오 난류)가 유입되어 시야가 15m까지 좋아집니다.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="splide__slide">
+                                    <div class="min-h-190">
+                                        <div class="content text-start mt-2">
+                                            <h1 class="text-center mb-0"><i class="fas fa-eye font-30 color-highlight"></i></h1>
+                                            <h1 class="text-center color-highlight font-16 mb-0">시야</h1>
+                                            <p class="text-start font-400">
+                                                평소에는 5m정도이지만, 청물이 들어오는 경우 10m~15m로 일반적인 편입니다.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="splide__slide">
+                                    <div class="min-h-190">
+                                        <div class="content text-start mt-2">
+                                            <h1 class="text-center mb-0"><i class="fas fa-highlighter font-30 color-highlight"></i></h1>
+                                            <h1 class="text-center color-highlight font-16 mb-0">다이빙 하이라이트</h1>
+                                            <p class="text-start font-400">
+                                                쥐놀래미와 도다리, 황어, 전복, 문어, 복어, 쥐치 등을 만날 수 있습니다.
+                                            </p>
+                                        </div>
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-2 hide">
                         <p class="wedive-title">방문시기</p>
                         <p class="wedive-desc">일반적으로 일년 내내 다이빙이 가능하지만 가장 좋은 시기는 여름~가을 동안인 6월에서 10월입니다.</p>
                         <p class="wedive-title">수온</p>
@@ -105,6 +177,102 @@
                     </div>
                 </div>
                 
+            </div>
+        </div>
+
+        <div class="card card-style">
+            <div class="content" style="margin: 15px;">
+                <div v-for="(point,index) in point_list" v-if="index<3">
+                    <div class="map-box">
+                        <a href="/point">
+                            <div class="bx">
+                                <div class="justify-content-center mb-0 text-start">
+                                    <h4> {{point.title}} </h4>
+                                    <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
+                                        <span> {{point.star}} </span>
+                                    </p>
+                                    <div class="row text-center row-cols-3 mb-0">
+                                        <a class="col mb-4" data-gallery="gallery-1" v-bind:href="point.img1" title="">
+                                            <img src="/static/images/empty.png" v-bind:data-src="point.img1" class="preload-img img-fluid rounded-xs" alt="Point image">
+                                        </a>
+                                        <a class="col mb-4" data-gallery="gallery-1" v-bind:href="point.img2" title="">
+                                            <img src="/static/images/empty.png" v-bind:data-src="point.img2" class="preload-img img-fluid rounded-xs" alt="Point image">
+                                        </a>
+                                        <a class="col mb-4" data-gallery="gallery-1" v-bind:href="point.img3" title="">
+                                            <img src="/static/images/empty.png" v-bind:data-src="point.img3" class="preload-img img-fluid rounded-xs" alt="Point image">
+                                        </a>
+                                    </div>
+                                    <p class="pb-0 mb-0 line-height-m point_desc"> {{point.desc}} </p>
+                                    <p class="pb-0 mb-0 mt-n1 ellipsis color-gray-light-mid">
+                                        {{point.feature}}
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="divider mt-3 mb-3"></div>
+                </div>
+            </div>
+        </div>
+
+        <h4 class="text-start mb-2 font-14 ms-3 me-3">양양 인기 </h4>
+        
+
+        <h4 class="text-start mb-2 font-14 ms-3 me-3">양양 여행을 즐기는 방법</h4>
+        <div class="splide double-slider slider-no-arrows slider-no-dots visible-slider" id="double-slider-1">
+            <div class="splide__track">
+                <div class="splide__list">
+                    <div class="splide__slide">
+                        <a href="#">
+                            <div data-card-height="170" class="card ms-3 rounded-m shadow-l bg-1">
+                                <div class="card-bottom">
+                                    <h4 class="color-white font-15 mb-3 ms-3">인스타 갬성 뿜뿜<br/>사진이 잘나오는 포인트</h4>
+                                </div>
+                                <div class="card-overlay bg-gradient"></div>
+                            </div>
+                        </a>     
+                    </div>
+                    <div class="splide__slide">
+                        <a href="#">
+                            <div data-card-height="170" class="card ms-3 rounded-m shadow-l bg-3">
+                                <div class="card-bottom">
+                                    <h4 class="color-white font-15 mb-3 ms-3">General <br> Updates</h4>
+                                </div>
+                                <div class="card-overlay bg-gradient"></div>
+                            </div>
+                        </a>     
+                    </div>
+                    <div class="splide__slide">
+                        <a href="#">
+                            <div data-card-height="170" class="card ms-3 rounded-m shadow-l bg-6">
+                                <div class="card-bottom">
+                                    <h4 class="color-white font-15 mb-3 ms-3">PWA <br> Releases</h4>
+                                </div>
+                                <div class="card-overlay bg-gradient"></div>
+                            </div>
+                        </a>     
+                    </div>
+                    <div class="splide__slide">
+                        <a href="#">
+                            <div data-card-height="170" class="card ms-3 rounded-m shadow-l bg-16">
+                                <div class="card-bottom">
+                                    <h4 class="color-white font-15 mb-3 ms-3">Bootstrap <br>Compatiblity</h4>
+                                </div>
+                                <div class="card-overlay bg-gradient"></div>
+                            </div>
+                        </a>     
+                    </div>
+                    <div class="splide__slide">
+                        <a href="#">
+                            <div data-card-height="170" class="card ms-3 rounded-m shadow-l bg-17">
+                                <div class="card-bottom">
+                                    <h4 class="color-white font-15 mb-3 ms-3">Random <br> Tasklist</h4>
+                                </div>
+                                <div class="card-overlay bg-gradient"></div>
+                            </div>
+                        </a>     
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -351,6 +519,18 @@ export default {
   data () {
     return {
         map: null,
+        point_list : [
+            {title: "말미잘동산 포인트", desc: "동해의 명물 섬유세닐말미잘이 유난히 많은 포인트로, 모래 지형 위에 커다란 암반과 크고 작은 바위들이 형성되어 있는 포인트 입니다. 섬유세닐말미잘은 낮은 수온에서 펴기 때문에 6월 이전에 방문한다면 이 포인트의 아름다움을 제대로 느낄 수 있습니다.", star: 4.3, img1: 'https://divingholic.com/wp-content/uploads/2019/02/maxresdefault-1.jpg', img2: 'https://diverz.net/data/diving/point/202102/1614156788_8f436f8c0dc8a574611b_thumb_760_504.jpg?1632225416', img3: 'https://divingholic.com/wp-content/uploads/2019/02/2%EC%9B%94%EC%9D%B8%EA%B5%AC%ED%95%B4%EB%B3%80%EB%94%A5.jpg', position: {lat: 33.24134444312815, lng: 126.56484940647604}},
+            {title: "다이브 투게더리조트", desc: "한줄설명1", star: 4.8, price_index: 2, feature: "덕다이빙, 케이브", img: '/static/images/shop1/diving/test2.jpg', position: {lat: 33.241633952501715, lng: 126.56456092676112}},
+            {title: "태평양 다이빙스쿨", desc: "블라블라", star: 3.1, price_index: 3, feature: "난파선, 드리프트", img: '/static/images/shop1/diving/test3.jpg', position: {lat: 33.24030993345755, lng: 126.56472966827262}},
+            {title: "쿨다이브", desc: "뭐라적지", star: 2.8, price_index: 2, feature: "드리프트", img: '/static/images/shop1/diving/test4.jpg', position: {lat: 33.241266401158086, lng: 126.56278906254684}},
+            {title: "스플래시 리조트", desc: "이곳에 설명이", star: 4.2, price_index: 4, feature: "난파선, 드리프트", img: '/static/images/shop1/diving/test5.jpg', position: {lat: 33.24245948959435, lng: 126.5633415608148}},
+            {title: "제주 블루샤크다이빙", desc: "ㅁㄴㅇㄹㄴㄷㅁㅈㄷㄻㄴㄷㄹㄷㅁㄴㄻㄴㄷㄻㄴㄷㄻㄴㄷㄹ", star: 3.9, price_index: 2, feature: "난파선", img: '/static/images/shop1/diving/test6.jpg', position: {lat: 33.24380026488202, lng: 126.56288927674295}},
+            {title: "잠수타기 다이브클럽", desc: "ㅁㄷㄴㄻㄴㄷㄻㄴㄷㄻㄴㄷㄻㄴㄷㄻㄴㄹㄷㅁㄷㄴㄻㄷㄴㄻㄴㄻㄴㄷㄹㄷㅁㄴㄹ", star: 4.1, price_index: 2, feature: "난파선, 드리프트", img: '/static/images/shop1/diving/test7.jpg', position: {lat: 33.24194725508795, lng: 126.5616725869943}},
+            {title: "홀리데이 다이빙 코리아", desc: "히히", star: 4.2, price_index: 3, feature: "덕다이빙, 케이브, 난파선, 드리프트", img: '/static/images/shop1/diving/test8.jpg', position: {lat: 33.24088391439924, lng: 126.5628795809329}},
+            {title: "천지연40", desc: "헬로", star: 4.3, price_index: 2, feature: "난파선, 드리프트", img: '/static/images/shop1/diving/test9.jpg', position: {lat: 33.242485636047576, lng: 126.5623109526933}},
+            {title: "언더더씨 스쿠버다이빙", desc: "방가워", star: 4.7, price_index: 2, feature: "덕다이빙, 케이브", img: '/static/images/shop1/diving/test10.jpg', position: {lat: 33.244246055136834, lng: 126.5671937429616}}
+        ],
     }
   }, methods: {
       call: function() {
@@ -427,4 +607,6 @@ export default {
 .wedive-score-desc {position: absolute;right: 4px; top: 40px;color: #1d397c; width:56px;}
 .wedive-title {font-family: 'Noto Sans Korean' !important;font-weight:700;margin-bottom:0px;}
 .wedive-desc {font-family: 'Noto Sans Korean' !important;font-weight:200;margin-bottom:16px;line-height: 1.6}
+.min-h-190 {min-height: 190px;}
+.point_desc {.review-text {overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;display: -webkit-box;-webkit-line-clamp: 8;-webkit-box-orient: vertical;}}
 </style>
