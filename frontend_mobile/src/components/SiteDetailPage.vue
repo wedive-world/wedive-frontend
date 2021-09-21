@@ -282,6 +282,45 @@
             </div>
         </div>-->
 
+
+        <div class="card card-style">
+            <div class="content mb-0 mt-3">
+                <h4 class="text-start pt-2 mb-0">인기 다이빙 센터</h4>
+                <p class="mb-3 color-gray-light-mid">양양 사이트의 28개의 센터 준비됨</p>
+                <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
+                
+                <div v-for="(center,index) in center_list" v-if="index<3">
+                    <div class="map-box">
+                        <a href="/center">
+                            <div class="bx">
+                                <div class="justify-content-center mb-0 text-start">
+                                    <div class="" style="float: left;position: relative;width: 95px; height:95px;">
+                                        <img v-bind:src="center.img" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;">
+                                    </div>
+                                    <div class="" style="padding-left: 110px;">
+                                        <h4> {{center.title}} </h4>
+                                        <p class="pb-0 mb-0 line-height-m ellipsis"> {{center.desc}} </p>
+                                        <p class="pb-0 mb-0 mt-n1 ellipsis color-gray-light-mid">
+                                            {{center.feature}}
+                                        </p>
+                                        <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
+                                            <span> {{center.star}} </span>
+                                            &nbsp;<font class="color-gray-light">|</font>&nbsp;
+                                            <img src="/static/images/logo_padi.svg" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
+                                            &nbsp;<font class="color-gray-light">|</font>&nbsp;
+                                            <span v-for="i in center.price_index">￦</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="divider mt-3 mb-3"></div>
+                </div>
+                
+            </div>
+        </div>
+
         <div class="card card-style">
             <div class="content" style="margin: 15px;">
                 <h4 class="text-start mb-2 font-14">YouTube 소개</h4>
@@ -300,6 +339,57 @@
         </div>
         
 
+
+        
+        <div class="card card-style">
+            <div class="content mb-0 mt-10">
+                <h4 class="text-start pt-2 mb-3">주요 포인트</h4>
+            </div>
+            <div id="map" style="height: 300px;"></div>
+        </div>
+
+        <div class="card card-style">
+            <div class="content mb-2">
+                <h4 class="text-start pt-2 mb-0">스쿠버 지수</h4>
+                <table class="table table-borderless text-center rounded-sm shadow-l mt-3" style="overflow: hidden;">
+                    <thead>
+                        <tr class="bg-blue-dark">
+                            <th scope="col" class="color-white font-12">날짜</th>
+                            <th scope="col" class="color-white font-12">파고</th>
+                            <th scope="col" class="color-white font-12">유속</th>
+                            <th scope="col" class="color-white font-12">수온</th>
+                            <th scope="col" class="color-white font-12">스쿠버</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th class="font-12" scope="row">09/11</th>
+                            <td class="font-12">0.1~0.3</td>
+                            <td class="font-12">0.4~1.0</td>
+                            <td class="font-12">22~23</td>
+                            <td class="color-blue-dark font-12">보통</td>
+                        </tr>
+                        <tr>
+                            <th class="font-12" scope="row">09/12</th>
+                            <td class="font-12">0.2~0.3</td>
+                            <td class="font-12">0.4~0.8</td>
+                            <td class="font-12">23~24</td>
+                            <td class="color-green-dark font-12">좋음</td>
+                        </tr>
+                        <tr>
+                            <th class="font-12" scope="row">09/13</th>
+                            <td class="color-red-dark font-12">0.7~0.9</td>
+                            <td class="color-red-dark font-12">0.6~1.2</td>
+                            <td class="font-12">24</td>
+                            <td class="color-red-dark font-12">나쁨</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="text-end">
+                    <img class="me-1 mb-1" height="20" src="/static/images/kaoh_logo.svg" />
+                </div>
+            </div>
+        </div>
 
         <div class="splide single-slider slider-no-arrows slider-has-dots pb-4 mb-4" id="single-slider-1">
             <div class="splide__track">
@@ -405,57 +495,6 @@
                             </div>
                         </div>    
                     </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="card card-style">
-            <div class="content mb-0 mt-10">
-                <h4 class="text-start pt-2 mb-3">위치</h4>
-            </div>
-            <div id="map" style="height: 300px;"></div>
-        </div>
-
-        <div class="card card-style">
-            <div class="content mb-2">
-                <h4 class="text-start pt-2 mb-0">스쿠버 지수</h4>
-                <table class="table table-borderless text-center rounded-sm shadow-l mt-3" style="overflow: hidden;">
-                    <thead>
-                        <tr class="bg-blue-dark">
-                            <th scope="col" class="color-white font-12">날짜</th>
-                            <th scope="col" class="color-white font-12">파고</th>
-                            <th scope="col" class="color-white font-12">유속</th>
-                            <th scope="col" class="color-white font-12">수온</th>
-                            <th scope="col" class="color-white font-12">스쿠버</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th class="font-12" scope="row">09/11</th>
-                            <td class="font-12">0.1~0.3</td>
-                            <td class="font-12">0.4~1.0</td>
-                            <td class="font-12">22~23</td>
-                            <td class="color-blue-dark font-12">보통</td>
-                        </tr>
-                        <tr>
-                            <th class="font-12" scope="row">09/12</th>
-                            <td class="font-12">0.2~0.3</td>
-                            <td class="font-12">0.4~0.8</td>
-                            <td class="font-12">23~24</td>
-                            <td class="color-green-dark font-12">좋음</td>
-                        </tr>
-                        <tr>
-                            <th class="font-12" scope="row">09/13</th>
-                            <td class="color-red-dark font-12">0.7~0.9</td>
-                            <td class="color-red-dark font-12">0.6~1.2</td>
-                            <td class="font-12">24</td>
-                            <td class="color-red-dark font-12">나쁨</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="text-end">
-                    <img class="me-1 mb-1" height="20" src="/static/images/kaoh_logo.svg" />
                 </div>
             </div>
         </div>
@@ -568,19 +607,27 @@ export default {
         const map_style = (localStorage['wedive-Theme'] == 'light-mode') ? [] : night_style;
 
         this.map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: 33.226771248454575, lng: 126.56573069418906},
-            zoom: 13,
+            center: this.point_list[0].position,
+            zoom: 12,
             mapTypeControl: false,
             streetViewControl: false,
             zoomControl: false,
             styles: map_style
         });
-        var marker_shop = new google.maps.Marker({
-            map: this.map,
-            position: {lat: 33.226771248454575, lng: 126.56573069418906},
-            label: {text: '문섬 포인트', color: 'white', className: 'marker-position'},
-            icon: new google.maps.MarkerImage('/static/images/ico_pin1.png',null, null, null, new google.maps.Size(38,43)),
-        });
+        for (var i=0; i<this.point_list.length; i++) {
+            var _title = this.point_list[i].title;
+            var _type = this.point_list[i].type;
+            var _position = this.point_list[i].position;
+            var _img = (_type == 'sf') ? '/static/images/ico_pin2_o8.png' : (_type == 'df') ? '/static/images/ico_pin3_o8.png' : (_type == 'so') ? '/static/images/ico_pin2_o.png' : '/static/images/ico_pin3_o.png';
+            var _marker_class = (_type == 'sf') ? 'marker-position2' : (_type == 'df') ? 'marker-position3' : (_type == 'so') ? 'marker-position2-o' : 'marker-position3-o';
+
+            var marker_shop = new google.maps.Marker({
+                map: this.map,
+                position: _position,
+                label: {text: _title, color: 'white', className: _marker_class},
+                icon: new google.maps.MarkerImage(_img, null, null, null, new google.maps.Size(38,43)),
+            });
+        }
         
     };
   },
@@ -591,9 +638,22 @@ export default {
     return {
         map: null,
         point_list : [
-            {title: "말미잘동산 포인트", desc: "동해의 명물 섬유세닐말미잘이 유난히 많은 포인트로, 모래 지형 위에 커다란 암반과 크고 작은 바위들이 형성되어 있는 포인트 입니다. 섬유세닐말미잘은 낮은 수온에서 펴기 때문에 6월 이전에 방문한다면 이 포인트의 아름다움을 제대로 느낄 수 있습니다.", star: 4.6, img1: 'https://divingholic.com/wp-content/uploads/2019/02/maxresdefault-1.jpg', img2: 'https://diverz.net/data/diving/point/202102/1614156788_8f436f8c0dc8a574611b_thumb_760_504.jpg?1632225416', img3: 'https://divingholic.com/wp-content/uploads/2019/02/2%EC%9B%94%EC%9D%B8%EA%B5%AC%ED%95%B4%EB%B3%80%EB%94%A5.jpg', position: {lat: 33.24134444312815, lng: 126.56484940647604}},
-            {title: "철재삼동 포인트", desc: "여름철 동해의 상징은 볼락이라고 할 수 있습니다. 그중에서도 수많은 볼락이 태풍처럼 있다고 해서 볼락태풍이라는 별명을 가진 포인트가 철재삼동 포인트 입니다. 초여름에서 초가을까지 3달정도되는 기간에 20m전후 수심, 11~15도의 수온 삼박자가 맞아떨어지면 거대한 볼락 떼를 만날 수 있습니다.", star: 4.3, img1: '/static/images/point/ko/yangyang_chuljesamdong_01.jpg', img2: '/static/images/point/ko/yangyang_chuljesamdong_02.jpg', img3: '/static/images/point/ko/yangyang_chuljesamdong_03.jpg', position: {lat: 33.241633952501715, lng: 126.56456092676112}},
-            {title: "하우스리프 포인트", desc: "동해바다는 모래바닥에 재미없는 곳이라고 생각하시나요? 하우스리프 포인트는 1~2명의 다이버가 통과할 수 있는 박원 삼각 뿔 어초와 식빵 어초, W 어초, M어초, 평상어초가 있으며, 자연암반과 어우러져 물고기도 많고 다양한 종류의 어초와 고착생물을 보는 재미가 쏠쏠한 포인트 입니다.", star: 4.2, img1: 'https://mblogthumb-phinf.pstatic.net/MjAyMTAyMjhfMTc2/MDAxNjE0NDM5MjY0MTA4.Dvww0i9ome-JXsfbIqP5gUYnYeS36oigWKEvvUqEwxYg.aOp7kUN1gyRNeCpjWPLRy6Hjr6aGwRjgRqTNSdL7I9Ig.JPEG.kkim6413/DSC09346.jpg?type=w2', img2: '/static/images/point/ko/yangyang_houseleaf_02.jpg', img3: 'https://scontent-ssn1-1.xx.fbcdn.net/v/t1.6435-9/119986115_3399297676831773_7124015472540446593_n.jpg?_nc_cat=110&ccb=1-5&_nc_sid=36a2c1&_nc_ohc=9PpWujpZIuUAX-_l2-m&_nc_ht=scontent-ssn1-1.xx&oh=00126d2626deaf2884430eaf567a50db&oe=616EA074', position: {lat: 33.24030993345755, lng: 126.56472966827262}},
+            {title: "말미잘동산", type: 'df', desc: "동해의 명물 섬유세닐말미잘이 유난히 많은 포인트로, 모래 지형 위에 커다란 암반과 크고 작은 바위들이 형성되어 있는 포인트 입니다. 섬유세닐말미잘은 낮은 수온에서 펴기 때문에 6월 이전에 방문한다면 이 포인트의 아름다움을 제대로 느낄 수 있습니다.", star: 4.6, img1: 'https://divingholic.com/wp-content/uploads/2019/02/maxresdefault-1.jpg', img2: 'https://diverz.net/data/diving/point/202102/1614156788_8f436f8c0dc8a574611b_thumb_760_504.jpg?1632225416', img3: 'https://divingholic.com/wp-content/uploads/2019/02/2%EC%9B%94%EC%9D%B8%EA%B5%AC%ED%95%B4%EB%B3%80%EB%94%A5.jpg', position: {lat: 37.9668859063654, lng: 128.79946317636166}},
+            {title: "철재삼동", type: 'df', desc: "여름철 동해의 상징은 볼락이라고 할 수 있습니다. 그중에서도 수많은 볼락이 태풍처럼 있다고 해서 볼락태풍이라는 별명을 가진 포인트가 철재삼동 포인트 입니다. 초여름에서 초가을까지 3달정도되는 기간에 20m전후 수심, 11~15도의 수온 삼박자가 맞아떨어지면 거대한 볼락 떼를 만날 수 있습니다.", star: 4.3, img1: '/static/images/point/ko/yangyang_chuljesamdong_01.jpg', img2: '/static/images/point/ko/yangyang_chuljesamdong_02.jpg', img3: '/static/images/point/ko/yangyang_chuljesamdong_03.jpg', position: {lat: 37.947207012548716, lng: 128.81497292286326}},
+            {title: "하우스리프", type: 'sf', desc: "동해바다는 모래바닥에 재미없는 곳이라고 생각하시나요? 하우스리프 포인트는 1~2명의 다이버가 통과할 수 있는 박원 삼각 뿔 어초와 식빵 어초, W 어초, M어초, 평상어초가 있으며, 자연암반과 어우러져 물고기도 많고 다양한 종류의 어초와 고착생물을 보는 재미가 쏠쏠한 포인트 입니다.", star: 4.2, img1: 'https://mblogthumb-phinf.pstatic.net/MjAyMTAyMjhfMTc2/MDAxNjE0NDM5MjY0MTA4.Dvww0i9ome-JXsfbIqP5gUYnYeS36oigWKEvvUqEwxYg.aOp7kUN1gyRNeCpjWPLRy6Hjr6aGwRjgRqTNSdL7I9Ig.JPEG.kkim6413/DSC09346.jpg?type=w2', img2: '/static/images/point/ko/yangyang_houseleaf_02.jpg', img3: 'https://scontent-ssn1-1.xx.fbcdn.net/v/t1.6435-9/119986115_3399297676831773_7124015472540446593_n.jpg?_nc_cat=110&ccb=1-5&_nc_sid=36a2c1&_nc_ohc=9PpWujpZIuUAX-_l2-m&_nc_ht=scontent-ssn1-1.xx&oh=00126d2626deaf2884430eaf567a50db&oe=616EA074', position: {lat: 37.94825610969583, lng: 128.7946310508101}},
+            {title: "오대산", type: 'sf', desc: "", star: 4.3, img1: '', img2: '', img3: '', position: {lat: 37.942265902352936, lng: 128.81437210807638}},
+            {title: "용궁1", type: 'df', desc: "", star: 4.3, img1: '', img2: '', img3: '', position: {lat: 37.966694517671925, lng: 128.80091977131866}},
+            {title: "용궁2", type: 'df', desc: "", star: 4.3, img1: '', img2: '', img3: '', position: {lat: 37.98870094701705, lng: 128.80553232201584}},
+            {title: "대목1", type: 'sf', desc: "", star: 4.3, img1: '', img2: '', img3: '', position: {lat: 37.99262313926249, lng: 128.77955637861592}},
+            {title: "정글1", type: 'df', desc: "", star: 4.3, img1: '', img2: '', img3: '', position: {lat: 37.965163390164456, lng: 128.8213121007167}},
+            {title: "정글2", type: 'df', desc: "", star: 4.3, img1: '', img2: '', img3: '', position: {lat: 37.97587456645468, lng: 128.80344144106112}},
+            {title: "웰빙", type: 'sf', desc: "", star: 4.3, img1: '', img2: '', img3: '', position: {lat: 38.00150165886583, lng: 128.7445432664312}},
+            {title: "리멤버", type: 'sf', desc: "", star: 4.3, img1: '', img2: '', img3: '', position: {lat: 38.0118827612431, lng: 128.74771900182654}},
+        ],
+        center_list : [
+            {title: "버블탱크 스쿠버다이빙", desc: "제주 남부에 위치한 PADI 5star 다이빙센터", star: 3.8, price_index: 2, feature: "덕다이빙, 케이브, 난파선, 드리프트", img: '/static/images/shop1/diving/test1.jpg', position: {lat: 33.24134444312815, lng: 126.56484940647604}},
+            {title: "다이브 투게더리조트", desc: "한줄설명1", star: 4.8, price_index: 2, feature: "덕다이빙, 케이브", img: '/static/images/shop1/diving/test2.jpg', position: {lat: 33.241633952501715, lng: 126.56456092676112}},
+            {title: "태평양 다이빙스쿨", desc: "블라블라", star: 3.1, price_index: 3, feature: "난파선, 드리프트", img: '/static/images/shop1/diving/test3.jpg', position: {lat: 33.24030993345755, lng: 126.56472966827262}},
             {title: "쿨다이브", desc: "뭐라적지", star: 2.8, price_index: 2, feature: "드리프트", img: '/static/images/shop1/diving/test4.jpg', position: {lat: 33.241266401158086, lng: 126.56278906254684}},
             {title: "스플래시 리조트", desc: "이곳에 설명이", star: 4.2, price_index: 4, feature: "난파선, 드리프트", img: '/static/images/shop1/diving/test5.jpg', position: {lat: 33.24245948959435, lng: 126.5633415608148}},
             {title: "제주 블루샤크다이빙", desc: "ㅁㄴㅇㄹㄴㄷㅁㅈㄷㄻㄴㄷㄹㄷㅁㄴㄻㄴㄷㄻㄴㄷㄻㄴㄷㄹ", star: 3.9, price_index: 2, feature: "난파선", img: '/static/images/shop1/diving/test6.jpg', position: {lat: 33.24380026488202, lng: 126.56288927674295}},
