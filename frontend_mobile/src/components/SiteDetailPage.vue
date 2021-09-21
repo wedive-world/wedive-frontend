@@ -200,13 +200,13 @@
                                 </p>
 
                                 <div class="row text-center row-cols-3 mb-1" style="padding-left:10px;padding-right:10px;">
-                                    <a class="col ps-1 pe-1 square-rect" v-bind:data-gallery="'gallery-'+index" v-bind:href="point.img1" title="">
+                                    <a class="col square-rect" v-bind:data-gallery="'gallery-'+index" v-bind:href="point.img1" title="">
                                         <img src="/static/images/empty.png" v-bind:data-src="point.img1" class="preload-img img-fluid rounded-s" alt="Point image">
                                     </a>
-                                    <a class="col ps-1 pe-1 square-rect" v-bind:data-gallery="'gallery-'+index" v-bind:href="point.img2" title="">
+                                    <a class="col square-rect" v-bind:data-gallery="'gallery-'+index" v-bind:href="point.img2" title="">
                                         <img src="/static/images/empty.png" v-bind:data-src="point.img2" class="preload-img img-fluid rounded-s" alt="Point image">
                                     </a>
-                                    <a class="col ps-1 pe-1 square-rect" v-bind:data-gallery="'gallery-'+index" v-bind:href="point.img3" title="">
+                                    <a class="col square-rect" v-bind:data-gallery="'gallery-'+index" v-bind:href="point.img3" title="">
                                         <img src="/static/images/empty.png" v-bind:data-src="point.img3" class="preload-img img-fluid rounded-s" alt="Point image">
                                     </a>
                                 </div>
@@ -638,9 +638,9 @@ export default {
     return {
         map: null,
         point_list : [
-            {title: "말미잘동산", type: 'df', desc: "동해의 명물 섬유세닐말미잘이 유난히 많은 포인트로, 모래 지형 위에 커다란 암반과 크고 작은 바위들이 형성되어 있는 포인트 입니다. 섬유세닐말미잘은 낮은 수온에서 펴기 때문에 6월 이전에 방문한다면 이 포인트의 아름다움을 제대로 느낄 수 있습니다.", star: 4.6, img1: 'https://divingholic.com/wp-content/uploads/2019/02/maxresdefault-1.jpg', img2: 'https://diverz.net/data/diving/point/202102/1614156788_8f436f8c0dc8a574611b_thumb_760_504.jpg?1632225416', img3: 'https://divingholic.com/wp-content/uploads/2019/02/2%EC%9B%94%EC%9D%B8%EA%B5%AC%ED%95%B4%EB%B3%80%EB%94%A5.jpg', position: {lat: 37.9668859063654, lng: 128.79946317636166}},
+            {title: "말미잘동산", type: 'df', desc: "동해의 명물 섬유세닐말미잘이 유난히 많은 포인트로, 모래 지형 위에 커다란 암반과 크고 작은 바위들이 형성되어 있는 포인트 입니다. 섬유세닐말미잘은 낮은 수온에서 펴기 때문에 6월 이전에 방문한다면 이 포인트의 아름다움을 제대로 느낄 수 있습니다.", star: 4.6, img1: 'https://divingholic.com/wp-content/uploads/2019/02/maxresdefault-1.jpg', img2: 'https://diverz.net/data/diving/point/202102/1614156788_8f436f8c0dc8a574611b_thumb_760_504.jpg', img3: 'https://divingholic.com/wp-content/uploads/2019/02/2%EC%9B%94%EC%9D%B8%EA%B5%AC%ED%95%B4%EB%B3%80%EB%94%A5.jpg', position: {lat: 37.9668859063654, lng: 128.79946317636166}},
             {title: "철재삼동", type: 'df', desc: "여름철 동해의 상징은 볼락이라고 할 수 있습니다. 그중에서도 수많은 볼락이 태풍처럼 있다고 해서 볼락태풍이라는 별명을 가진 포인트가 철재삼동 포인트 입니다. 초여름에서 초가을까지 3달정도되는 기간에 20m전후 수심, 11~15도의 수온 삼박자가 맞아떨어지면 거대한 볼락 떼를 만날 수 있습니다.", star: 4.3, img1: '/static/images/point/ko/yangyang_chuljesamdong_01.jpg', img2: '/static/images/point/ko/yangyang_chuljesamdong_02.jpg', img3: '/static/images/point/ko/yangyang_chuljesamdong_03.jpg', position: {lat: 37.947207012548716, lng: 128.81497292286326}},
-            {title: "하우스리프", type: 'sf', desc: "동해바다는 모래바닥에 재미없는 곳이라고 생각하시나요? 하우스리프 포인트는 1~2명의 다이버가 통과할 수 있는 박원 삼각 뿔 어초와 식빵 어초, W 어초, M어초, 평상어초가 있으며, 자연암반과 어우러져 물고기도 많고 다양한 종류의 어초와 고착생물을 보는 재미가 쏠쏠한 포인트 입니다.", star: 4.2, img1: 'https://mblogthumb-phinf.pstatic.net/MjAyMTAyMjhfMTc2/MDAxNjE0NDM5MjY0MTA4.Dvww0i9ome-JXsfbIqP5gUYnYeS36oigWKEvvUqEwxYg.aOp7kUN1gyRNeCpjWPLRy6Hjr6aGwRjgRqTNSdL7I9Ig.JPEG.kkim6413/DSC09346.jpg?type=w2', img2: '/static/images/point/ko/yangyang_houseleaf_02.jpg', img3: 'https://scontent-ssn1-1.xx.fbcdn.net/v/t1.6435-9/119986115_3399297676831773_7124015472540446593_n.jpg?_nc_cat=110&ccb=1-5&_nc_sid=36a2c1&_nc_ohc=9PpWujpZIuUAX-_l2-m&_nc_ht=scontent-ssn1-1.xx&oh=00126d2626deaf2884430eaf567a50db&oe=616EA074', position: {lat: 37.94825610969583, lng: 128.7946310508101}},
+            {title: "하우스리프", type: 'sf', desc: "동해바다는 모래바닥에 재미없는 곳이라고 생각하시나요? 하우스리프 포인트는 1~2명의 다이버가 통과할 수 있는 박원 삼각 뿔 어초와 식빵 어초, W 어초, M어초, 평상어초가 있으며, 자연암반과 어우러져 물고기도 많고 다양한 종류의 어초와 고착생물을 보는 재미가 쏠쏠한 포인트 입니다.", star: 4.2, img1: 'https://mblogthumb-phinf.pstatic.net/MjAyMTAyMjhfMTc2/MDAxNjE0NDM5MjY0MTA4.Dvww0i9ome-JXsfbIqP5gUYnYeS36oigWKEvvUqEwxYg.aOp7kUN1gyRNeCpjWPLRy6Hjr6aGwRjgRqTNSdL7I9Ig.JPEG.kkim6413/DSC09346.jpg?type=w2', img2: '/static/images/point/ko/yangyang_houseleaf_02.jpg', img3: '/static/images/point/ko/yangyang_houseleaf_03.jpg', position: {lat: 37.94825610969583, lng: 128.7946310508101}},
             {title: "오대산", type: 'sf', desc: "", star: 4.3, img1: '', img2: '', img3: '', position: {lat: 37.942265902352936, lng: 128.81437210807638}},
             {title: "용궁1", type: 'df', desc: "", star: 4.3, img1: '', img2: '', img3: '', position: {lat: 37.966694517671925, lng: 128.80091977131866}},
             {title: "용궁2", type: 'df', desc: "", star: 4.3, img1: '', img2: '', img3: '', position: {lat: 37.98870094701705, lng: 128.80553232201584}},
@@ -741,7 +741,7 @@ export default {
 .min-h-190 {min-height: 190px;}
 .point_desc {font-family: 'Noto Sans Korean' !important;font-weight:200;overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;display: -webkit-box;-webkit-line-clamp: 5;-webkit-box-orient: vertical;}
 .square-rect {position: relative;}
-.square-rect:after {content: "";display: block;padding-bottom: 100%;}
+.square-rect:after {content: "";display: inline-grid;padding-bottom: 100%;}
 .square-rect > img {position: absolute;width: 100%;height: 100%;left: 0;padding:4px;object-fit: cover;}
 .wedive-txt-all {position: absolute;top: 20px;right: 16px;}
 .review_img {float: left;width: 88px; height:88px;margin-right:10px;margin-bottom:2px;border-radius:10px;object-fit: cover !important;}
