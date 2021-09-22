@@ -15,7 +15,7 @@
           <div id="footer-bar" class="footer-bar">
             <a href="/" id="nav-home"><div class="menu-ico menu-ico0"></div><span>홈</span></a>
             <a href="/buddy_home" id="nav-buddy"><div class="menu-ico menu-ico1"></div><span>버디찾기</span></a>
-            <a href="/center_home" id="nav-center"><div class="menu-ico menu-ico2"></div><span>센터찾기</span></a>
+            <a href="/center_home" id="nav-site"><div class="menu-ico menu-ico2"></div><span>사이트찾기</span></a>
             <a href="" id="nav-shopping"><div class="menu-ico menu-ico3"></div><span>쇼핑</span></a>
             <a href="#" id="nav-chat"><div class="menu-ico menu-ico4"></div><span>채팅</span></a>
           </div>
@@ -94,7 +94,7 @@ export default {
 .menu-ico {height:22px;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;margin-bottom:5px;}
 #nav-home > .menu-ico {background: url('/static/images/menu0_off.png');}
 #nav-buddy > .menu-ico {background: url('/static/images/menu1_off.png');}
-#nav-center > .menu-ico {background: url('/static/images/menu2_off.png');}
+#nav-site > .menu-ico {background: url('/static/images/menu2_off.png');}
 #nav-shopping > .menu-ico {background: url('/static/images/menu3_off.png');}
 #nav-chat  .menu-ico {background: url('/static/images/menu4_off.png');}
 #nav-training > .menu-ico {background: url('/static/images/menu5_off.png');}

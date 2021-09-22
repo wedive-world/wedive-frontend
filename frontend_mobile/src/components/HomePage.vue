@@ -19,7 +19,7 @@
                             highlightClass="special-highlight-class"
                             @hit="selecteduser = $event;show_scuba_label();"
                             :minMatchingChars="2"
-                            placeholder="어디로 가고싶은신가요?"
+                            placeholder="짱스님, 어디로 가고싶은신가요?"
                             inputClass="special-input-class"
                             :disabledValues="(selecteduser ? [selecteduser.name_ko] : [])"
                             @input="lookupUser2"
@@ -103,7 +103,6 @@ export default {
     
     $(".page-title").hide();
     $(".page-title-clear").hide();
-    $(".header-fixed").hide();
   },
   components: {
     VueTypeaheadBootstrap
