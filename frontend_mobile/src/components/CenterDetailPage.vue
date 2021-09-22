@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-center" data-menu-load=""></div>    
+    <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-site" data-menu-load=""></div>    
     <div class="page-content">
         <div class="splide single-slider cover-slider slider-no-arrows slider-has-dots" id="cover-slider-1" data-card-height="250">
             <div class="splide__track">
@@ -586,121 +586,133 @@
         </div>
 
 
-        <div class="splide single-slider slider-no-arrows slider-has-dots pb-4 mb-4" id="single-slider-1">
-            <div class="splide__track">
-                <div class="splide__list">
-                    <div class="splide__slide">
-                        <div class="card card-style mb-3 min-h-230">
-                            <div class="content text-start">
-                                <div class="d-flex">
-                                    <div class="flex-grow-1">
-                                        <div class="float-start">
-                                            <h1 class="fa-2x font-900 me-2 mb-0">5.00</h1>
-                                            <p class="font-10 mb-0 mt-n2 opacity-40 text-end">보트 체험 다이빙</p>
+
+        <div class="card card-style">
+            <div class="mb-0 mt-10">
+            <h4 class="text-start pt-4 mb-0 pe-3 ps-3">리뷰</h4>
+            <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
+            <div class="divider mt-3 mb-0 ms-3 me-3"></div>
+                <div class="splide single-slider slider-no-arrows slider-has-dots pb-4 mb-0" id="single-slider-1">
+                    <div class="splide__track">
+                        <div class="splide__list">
+                            <div class="splide__slide">
+                                <div class="min-h-230 p-4">
+                                        <div class="d-flex">
+                                            <div class="flex-grow-1">
+                                                <div class="float-start">
+                                                    <h1 class="fa-2x font-900 me-2 mb-0">5.00</h1>
+                                                    <p class="font-10 mb-0 mt-n2 opacity-40 text-end">보트 체험 다이빙</p>
+                                                </div>
+                                                <span>
+                                                    <i class="fa fa-star color-yellow-dark"></i>
+                                                    <i class="fa fa-star color-yellow-dark"></i>
+                                                    <i class="fa fa-star color-yellow-dark"></i>
+                                                    <i class="fa fa-star color-yellow-dark"></i>
+                                                    <i class="fa fa-star color-yellow-dark"></i>
+                                                </span>
+                                                
+                                            </div>
+                                            <div>
+                                                <h6 class="text-end">김성진</h6>
+                                                <p class="font-10 mb-0 mt-n2 opacity-40 text-end">2021.08.30</p>
+                                            </div>
                                         </div>
-                                        <span>
-                                            <i class="fa fa-star color-yellow-dark"></i>
-                                            <i class="fa fa-star color-yellow-dark"></i>
-                                            <i class="fa fa-star color-yellow-dark"></i>
-                                            <i class="fa fa-star color-yellow-dark"></i>
-                                            <i class="fa fa-star color-yellow-dark"></i>
-                                        </span>
-                                        
-                                    </div>
-                                    <div>
-                                        <h6 class="text-end">김성진</h6>
-                                        <p class="font-10 mb-0 mt-n2 opacity-40 text-end">2021.08.30</p>
-                                    </div>
-                                </div>
-                                <p class="review-text mt-3">
-                                    <a href="https://myplace-phinf.pstatic.net/20210827_62/16300643312513fe1S_JPEG/upload_07fc7f5449b8fecbeca86e655f0afce3.jpg" data-gallery="gallery-99" class="filtr-item" title="" data-category="99">
-                                        <img src="/static/images/empty.png" data-src="https://search.pstatic.net/common/?autoRotate=true&amp;quality=95&amp;type=f87_87&amp;src=https%3A%2F%2Fmyplace-phinf.pstatic.net%2F20210827_62%2F16300643312513fe1S_JPEG%2Fupload_07fc7f5449b8fecbeca86e655f0afce3.jpg" class="preload-img rounded-s shadow-m review_img" alt="방문자리뷰">
-                                    </a>
-                                    제주도에서 스쿠버 다이빙 할 때 항상 방문하는 버블탱크 입니다.<br/>
-                                    예약할 때 문의 드리면 친절하게 답변해 주십니다.<br/>
-                                    다이빙 할 때도 신경 많이 써 주시고<br/>
-                                    불편한 점 말씀 드리면 신속하게 해결해 주세요<br/>
-                                    렌탈 장비 관리 철저하게 하셔서<br/>
-                                    믿고 이용할 수 있어요!!
-                                </p>
+                                        <p class="review-text mt-2 mb-1">
+                                            <a href="https://myplace-phinf.pstatic.net/20210827_62/16300643312513fe1S_JPEG/upload_07fc7f5449b8fecbeca86e655f0afce3.jpg" data-gallery="gallery-99" class="filtr-item" title="" data-category="99">
+                                                <img src="/static/images/empty.png" data-src="https://search.pstatic.net/common/?autoRotate=true&amp;quality=95&amp;type=f87_87&amp;src=https%3A%2F%2Fmyplace-phinf.pstatic.net%2F20210827_62%2F16300643312513fe1S_JPEG%2Fupload_07fc7f5449b8fecbeca86e655f0afce3.jpg" class="preload-img rounded-s shadow-m review_img" alt="방문자리뷰">
+                                            </a>
+                                            제주도에서 스쿠버 다이빙 할 때 항상 방문하는 버블탱크 입니다.<br/>
+                                            예약할 때 문의 드리면 친절하게 답변해 주십니다.<br/>
+                                            다이빙 할 때도 신경 많이 써 주시고<br/>
+                                            불편한 점 말씀 드리면 신속하게 해결해 주세요<br/>
+                                            렌탈 장비 관리 철저하게 하셔서<br/>
+                                            믿고 이용할 수 있어요!!
+                                        </p>
+                                </div>     
                             </div>
-                        </div>     
-                    </div>
-                    <div class="splide__slide">
-                        <div class="card card-style mb-3 min-h-230">
-                            <div class="content text-start">
-                                <div class="d-flex">
-                                    <div class="flex-grow-1">
-                                        <div class="float-start">
-                                            <h1 class="fa-2x font-900 me-2 mb-0">4.98</h1>
-                                            <p class="font-10 mb-0 mt-n2 opacity-40 text-end">어드벤스드 코스</p>
+                            <div class="splide__slide">
+                                <div class="min-h-230 p-4">
+                                        <div class="d-flex">
+                                            <div class="flex-grow-1">
+                                                <div class="float-start">
+                                                    <h1 class="fa-2x font-900 me-2 mb-0">4.98</h1>
+                                                    <p class="font-10 mb-0 mt-n2 opacity-40 text-end">어드벤스드 코스</p>
+                                                </div>
+                                                <span>
+                                                    <i class="fa fa-star color-yellow-dark"></i>
+                                                    <i class="fa fa-star color-yellow-dark"></i>
+                                                    <i class="fa fa-star color-yellow-dark"></i>
+                                                    <i class="fa fa-star color-yellow-dark"></i>
+                                                    <i class="fa fa-star color-yellow-dark"></i>
+                                                </span>
+                                            </div>
+                                            <div>
+                                                <h6 class="text-end">조관우</h6>
+                                                <p class="font-10 mb-0 mt-n2 opacity-40 text-end">2021.08.27</p>
+                                            </div>
                                         </div>
-                                        <span>
-                                            <i class="fa fa-star color-yellow-dark"></i>
-                                            <i class="fa fa-star color-yellow-dark"></i>
-                                            <i class="fa fa-star color-yellow-dark"></i>
-                                            <i class="fa fa-star color-yellow-dark"></i>
-                                            <i class="fa fa-star color-yellow-dark"></i>
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <h6 class="text-end">조관우</h6>
-                                        <p class="font-10 mb-0 mt-n2 opacity-40 text-end">2021.08.27</p>
-                                    </div>
-                                </div>
-                                <p class="review-text mt-3">
-                                    태풍이 올라와서 취소되진 않을까 걱정을 많이 했는데 잘챙겨주셔서 오픈워터 딸수 있었습니다ㅎㅎ<br/>
-                                    맑은날이 아니라 아쉬웠지만 어드밴스드 딸때는 날씨요정이 함께 해주기를 기대합니다...ㅎㅎ<br/>
-                                    잡아주신 숙소도 버블탱크 바로 앞에 있어서 넘 좋았어요.<br/>
-                                    깔끔하고 호텔사장님도 엄청 친절하셨어요ㅋ<br/>
-                                    그리고 버블탱크 샤워실에 스킨로션에 샴푸,린스,바디워시,클렌징폼, 머리끈까지 구비되어 있었습니다.<br/>
-                                    세심함에 치였슴당💕
-                                </p>
+                                        <p class="review-text mt-2 mb-1">
+                                            태풍이 올라와서 취소되진 않을까 걱정을 많이 했는데 잘챙겨주셔서 오픈워터 딸수 있었습니다ㅎㅎ<br/>
+                                            맑은날이 아니라 아쉬웠지만 어드밴스드 딸때는 날씨요정이 함께 해주기를 기대합니다...ㅎㅎ<br/>
+                                            잡아주신 숙소도 버블탱크 바로 앞에 있어서 넘 좋았어요.<br/>
+                                            깔끔하고 호텔사장님도 엄청 친절하셨어요ㅋ<br/>
+                                            그리고 버블탱크 샤워실에 스킨로션에 샴푸,린스,바디워시,클렌징폼, 머리끈까지 구비되어 있었습니다.<br/>
+                                            세심함에 치였슴당💕
+                                        </p>
+                                </div>   
                             </div>
-                        </div>   
-                    </div>
-                    <div class="splide__slide">
-                        <div class="card card-style mb-3 min-h-230">
-                            <div class="content text-start">
-                                <div class="d-flex">
-                                    <div class="flex-grow-1">
-                                        <div class="float-start">
-                                            <h1 class="fa-2x font-900 me-2 mb-0">4.5</h1>
-                                            <p class="font-10 mb-0 mt-n2 opacity-40 text-end">섬 다이빙</p>
+                            <div class="splide__slide">
+                                <div class="min-h-230 p-4">
+                                        <div class="d-flex">
+                                            <div class="flex-grow-1">
+                                                <div class="float-start">
+                                                    <h1 class="fa-2x font-900 me-2 mb-0">4.5</h1>
+                                                    <p class="font-10 mb-0 mt-n2 opacity-40 text-end">섬 다이빙</p>
+                                                </div>
+                                                <span>
+                                                    <i class="fa fa-star color-yellow-dark"></i>
+                                                    <i class="fa fa-star color-yellow-dark"></i>
+                                                    <i class="fa fa-star color-yellow-dark"></i>
+                                                    <i class="fa fa-star color-yellow-dark"></i>
+                                                    <i class="fa fa-star color-yellow-dark"></i>
+                                                </span>
+                                            </div>
+                                            <div>
+                                                <h6 class="text-end">조윤구</h6>
+                                                <p class="font-10 mb-0 mt-n2 opacity-40 text-end">2021.08.20</p>
+                                            </div>
                                         </div>
-                                        <span>
-                                            <i class="fa fa-star color-yellow-dark"></i>
-                                            <i class="fa fa-star color-yellow-dark"></i>
-                                            <i class="fa fa-star color-yellow-dark"></i>
-                                            <i class="fa fa-star color-yellow-dark"></i>
-                                            <i class="fa fa-star color-yellow-dark"></i>
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <h6 class="text-end">조윤구</h6>
-                                        <p class="font-10 mb-0 mt-n2 opacity-40 text-end">2021.08.20</p>
-                                    </div>
-                                </div>
-                                <p class="review-text mt-3">
-                                    <a href="https://myplace-phinf.pstatic.net/20210824_287/1629760530492Jfami_JPEG/upload_b0549f411c1a65e230ea73a17359faae.jpeg" data-gallery="gallery-99" class="filtr-item" title="" data-category="99">
-                                        <img src="/static/images/empty.png" data-src="https://search.pstatic.net/common/?autoRotate=true&amp;quality=95&amp;type=f87_87&amp;src=https%3A%2F%2Fmyplace-phinf.pstatic.net%2F20210824_287%2F1629760530492Jfami_JPEG%2Fupload_b0549f411c1a65e230ea73a17359faae.jpeg" class="preload-img rounded-s shadow-m review_img" alt="방문자리뷰">
-                                    </a>
-                                    강의듣는 내내 사진,동영상 많이찍어주셔서  좋았어요 !!  시설도깔끔하고  강사분들도 재밌고 친절해서 좋았습니다~  앞으로 제주도오면 많이 애용할듯! 자주자주 방문하겠습니다. 다음에 또 가면 잘알려주세요~
-                                </p>
+                                        <p class="review-text mt-2 mb-1">
+                                            <a href="https://myplace-phinf.pstatic.net/20210824_287/1629760530492Jfami_JPEG/upload_b0549f411c1a65e230ea73a17359faae.jpeg" data-gallery="gallery-99" class="filtr-item" title="" data-category="99">
+                                                <img src="/static/images/empty.png" data-src="https://search.pstatic.net/common/?autoRotate=true&amp;quality=95&amp;type=f87_87&amp;src=https%3A%2F%2Fmyplace-phinf.pstatic.net%2F20210824_287%2F1629760530492Jfami_JPEG%2Fupload_b0549f411c1a65e230ea73a17359faae.jpeg" class="preload-img rounded-s shadow-m review_img" alt="방문자리뷰">
+                                            </a>
+                                            강의듣는 내내 사진,동영상 많이찍어주셔서  좋았어요 !!  시설도깔끔하고  강사분들도 재밌고 친절해서 좋았습니다~  앞으로 제주도오면 많이 애용할듯! 자주자주 방문하겠습니다. 다음에 또 가면 잘알려주세요~
+                                        </p>
+                                </div>   
                             </div>
-                        </div>   
-                    </div>
-                    <div class="splide__slide">
-                        <div class="card card-style mb-3 min-h-230">
-                            <div class="content">
-                                <h1 class="text-center"><i class="fas fa-comments fa-2x color-highlight mt-4"></i></h1>
-                                <h1 class="text-center pt-3 font-20 mb-n1">13개 리뷰</h1>
-                                <p class="text-center color-highlight font-600">더보기 <i class="fas fa-chevron-right"></i></p>
-                                
+                            <div class="splide__slide">
+                                <div class="min-h-230 p-4">
+                                        <h1 class="text-center"><i class="fas fa-comments fa-2x color-highlight mt-4"></i></h1>
+                                        <h1 class="text-center pt-3 font-20 mb-n1">13개 리뷰</h1>
+                                        <p class="text-center color-highlight font-600">더보기 <i class="fas fa-chevron-right"></i></p>
+                                </div>    
                             </div>
-                        </div>    
+                        </div>
                     </div>
                 </div>
+            </div>
+            <div class="divider mt-4 mb-2 ms-3 me-3"></div>
+            <div class="star-area mt-4 text-center">
+                <i class="fa fa-star font-20 color-gray-light"></i>
+                <i class="fa fa-star font-20 color-gray-light"></i>
+                <i class="fa fa-star font-20 color-gray-light"></i>
+                <i class="fa fa-star font-20 color-gray-light"></i>
+                <i class="fa fa-star font-20 color-gray-light"></i>
+            </div>
+            <div class="text-center color-gray mt-2 mb-3">이 다이빙 센터는 어떠셨나요?</div>
+            <div class="me-4 ms-4 mb-5" style="background: rgba(58, 58, 58, 0.03);padding: 10px 20px;">
+                <p class="mb-0" style="color: rgba(58, 58, 58, 0.6)">리뷰를 남기고 다른 다이버들에게 도움이 되어보세요.</p>
+                <p class="mb-0 color-highlight">지금 리뷰남기기 <i class="fas fa-chevron-right ms-1"></i></p>
             </div>
         </div>
 
@@ -1080,6 +1092,7 @@ export default {
         height:40px;
         display:inline-block;
 }
-.min-h-230 {min-height: 230px;}
+.min-h-230 {min-height: 210px;}
 .review_img {float: left;width: 88px; height:88px;margin-right:10px;margin-bottom:2px;border-radius:10px;object-fit: cover !important;}
+.wedive-txt-all {position: absolute;top: 20px;right: 16px;}
 </style>

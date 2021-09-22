@@ -340,7 +340,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const menuActive = document.querySelectorAll('[data-menu-active]')[0];
             if(menuActive){
                 var selectedMenu = menuActive.getAttribute('data-menu-active');
-                document.querySelectorAll('#'+selectedMenu)[0].classList.add('active-nav');
+                try {
+                    document.querySelectorAll('#'+selectedMenu)[0].classList.add('active-nav');
+                } catch(e) {}
             }
         }
 
@@ -1028,7 +1030,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if(searchField.length){
             var searchResults = document.querySelectorAll('.search-results')
             var searchNoResults = document.querySelectorAll('.search-no-results');
-            var searchTotal = document.querySelectorAll(".search-results div")[0].childElementCount;
+            var searchTotal = (document.querySelectorAll(".search-results div")[0] != null) ? document.querySelectorAll(".search-results div")[0].childElementCount : null;
             var searchTrending = document.querySelectorAll('.search-trending');
             function searchFunction(){
                 var searchStr = searchField[0].value;

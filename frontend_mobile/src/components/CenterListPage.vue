@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-center" data-menu-load=""></div>    
+    <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-site" data-menu-load=""></div>    
     <div class="page-content text-start transform-none" style="padding-bottom: 65px;">
         <div class="wedive-action text-center" style="z-index: 99;">
             <button data-menu="menu-filter" class="action-filter"><span>필터</span></button>

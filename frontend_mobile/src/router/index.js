@@ -10,6 +10,7 @@ import CenterDetailPage from '@/components/CenterDetailPage'
 import CenterListPage from '@/components/CenterListPage'
 import CenterListMapPage from '@/components/CenterListMapPage'
 import CoursePage from '@/components/CoursePage'
+import SiteHomePage from '@/components/SiteHomePage'
 import SiteDetailPage from '@/components/SiteDetailPage'
 import PointDetailPage from '@/components/PointDetailPage'
 import StaticPage from '@/components/StaticPage'
@@ -67,6 +68,11 @@ export default new Router({
       path: '/course',
       name: 'CoursePage',
       component: CoursePage
+    },
+    {
+      path: '/site_home',
+      name: 'SiteHomePage',
+      component: SiteHomePage
     },
     {
       path: '/site',
