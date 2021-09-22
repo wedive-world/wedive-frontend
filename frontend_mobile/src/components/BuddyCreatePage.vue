@@ -34,7 +34,7 @@
                       <div class="ms-2" style="display: inline-block; vertical-align: top;">
                         <a href="#" class="schedule-close" v-on:click="closeSchedule(1)"><i class="wedive_icoset wedive_icoset_close_s"></i></a>
                         <p class="mb-0 font-16 font-600">성산 사이트 (제주)</p>
-                        <p class="mb-0 font-14 font-400 color-gray">20.09.20(화) ~ 20.09.21(수)</p>
+                        <p class="mb-0 font-14 font-400 color-gray">21.09.20(화) ~ 21.09.21(수)</p>
                       </div>
                   </div>
               </div>
@@ -46,7 +46,7 @@
                       <div class="ms-2" style="display: inline-block; vertical-align: top;">
                         <a href="#" class="schedule-close" v-on:click="closeSchedule(2)"><i class="wedive_icoset wedive_icoset_close_s"></i></a>
                         <p class="mb-0 font-16 font-600">문섬 사이트 (제주)</p>
-                        <p class="mb-0 font-14 font-400 color-gray">20.09.22(목) ~ 20.09.23(금)</p>
+                        <p class="mb-0 font-14 font-400 color-gray">21.09.22(목) ~ 21.09.23(금)</p>
                       </div>
                   </div>
               </div>
@@ -58,7 +58,7 @@
                       <div class="ms-2" style="display: inline-block; vertical-align: top;">
                         <a href="#" class="schedule-close" v-on:click="closeSchedule(3)"><i class="wedive_icoset wedive_icoset_close_s"></i></a>
                         <p class="mb-0 font-16 font-600">우도 사이트 (제주)</p>
-                        <p class="mb-0 font-14 font-400 color-gray">20.09.24(토) ~ 20.09.24(토)</p>
+                        <p class="mb-0 font-14 font-400 color-gray">21.09.24(토) ~ 21.09.24(토)</p>
                       </div>
                   </div>
               </div>
@@ -391,7 +391,7 @@
                      aria-expanded="false" 
                      aria-controls="collapse3">
                     <div class="pt-1">
-                        <h4 class="pt-3 mb-0">할인(무료) 초청 하시겠습니까? <span class="mb-2 color-gray-light-mid font-13 ms-2 font-400"><i class="wedive_icoset wedive_icoset_info me-1"></i>특정 대상 할인</span></h4>
+                        <h4 class="pt-3 mb-0">할인(무료) 초청 하시겠습니까?</h4>
                     </div>
                     <div class="ms-auto me-4 pe-2">
                         <div class="custom-control ios-switch">
@@ -943,4 +943,7 @@ export default {
 .after-tilde:after {content: '~';position: absolute;right: -5px;top: 16px;color: gray;margin-top: -4px;}
 .schedule-close {text-align: right;position: absolute;right: 16px;}
 .wedive-timeline-image {width: 70px;height:70px;object-fit: cover;}
+.timeline-item .timeline-icon {width: 35px !important;height: 35px !important;left:10px !important;}
+.timeline-deco {left: 28px !important;}
+.timeline-item-content, .timeline-item-content-full{margin: 0px 15px 30px 56px !important;}
 </style>
