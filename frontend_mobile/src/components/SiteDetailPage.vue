@@ -343,7 +343,8 @@
         
         <div class="card card-style">
             <div class="content mb-0 mt-10">
-                <h4 class="text-start pt-2 mb-3">주요 포인트</h4>
+                <h4 class="text-start pt-2 mb-3">인기 포인트</h4>
+                <span class="wedive-txt-all color-gray mt-2"><img src="/static/images/ico_pin2.png" width="19"/> 얕은수심&nbsp;&nbsp;<img src="/static/images/ico_pin3.png" width="19"/> 깊은수심</span>
             </div>
             <div id="map" style="height: 300px;"></div>
         </div>
