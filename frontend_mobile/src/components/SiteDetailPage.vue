@@ -80,12 +80,40 @@
                 <h4 class="text-center pt-2 mb-2">where is here?</h4>
                 <div class="row text-start mb-0 txt_box2">
                     <div class="ico_feature col-3">
+                        <i class="ico_feature1 icon-point"></i>
+                        <p class="span_feature text-center">동굴</p>
+                    </div>
+                    <div class="ico_feature col-3">
                         <i class="ico_feature2 icon-point"></i>
                         <p class="span_feature text-center">난파선</p>
                     </div>
                     <div class="ico_feature col-3">
+                        <i class="ico_feature3 icon-point"></i>
+                        <p class="span_feature text-center">마크로</p>
+                    </div>
+                    <div class="ico_feature col-3">
+                        <i class="ico_feature4 icon-point"></i>
+                        <p class="span_feature text-center">대물</p>
+                    </div>
+                    <div class="ico_feature col-3">
                         <i class="ico_feature5 icon-point"></i>
                         <p class="span_feature text-center">월다이빙</p>
+                    </div>
+                    <div class="ico_feature col-3">
+                        <i class="ico_feature6 icon-point"></i>
+                        <p class="span_feature text-center">딥다이빙</p>
+                    </div>
+                    <div class="ico_feature col-3">
+                        <i class="ico_feature8 icon-point"></i>
+                        <p class="span_feature text-center">드리프트</p>
+                    </div>
+                    <div class="ico_feature col-3">
+                        <i class="ico_feature9 icon-point"></i>
+                        <p class="span_feature text-center">리브어보드</p>
+                    </div>
+                    <div class="ico_feature col-3">
+                        <i class="ico_feature10 icon-point"></i>
+                        <p class="span_feature text-center">구조물</p>
                     </div>
                 </div>
                 <div class="justify-content-center mb-2 mt-3 text-start">
@@ -693,12 +721,12 @@ export default {
 .ico_feature4 {width: 44px;height: 40px;background-position: -135px -3px;}
 .ico_feature5 {width: 44px;height: 40px;background-position: -180px -3px;}
 .ico_feature6 {width: 44px;height: 40px;background-position: -225px -3px;}
-.ico_feature7 {width: 44px;height: 40px;background-position: 0px -368px;}
-.ico_feature8 {width: 44px;height: 40px;background-position: -45px -36px;}
-.ico_feature9 {width: 44px;height: 40px;background-position: -90px -36px;}
-.ico_feature10 {width: 44px;height: 40px;background-position: -135px -36px;}
-.ico_feature11 {width: 44px;height: 40px;background-position: -180px -36px;}
-.ico_feature12 {width: 44px;height: 40px;background-position: -225px -36px;}
+.ico_feature7 {width: 44px;height: 40px;background-position: 0px -40px;}
+.ico_feature8 {width: 44px;height: 40px;background-position: -45px -42px;}
+.ico_feature9 {width: 44px;height: 40px;background-position: -90px -40px;}
+.ico_feature10 {width: 44px;height: 40px;background-position: -135px -42px;}
+.ico_feature11 {width: 44px;height: 40px;background-position: -180px -40px;}
+.ico_feature12 {width: 44px;height: 40px;background-position: -225px -40px;}
 
 .icon-point {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/wedive_point.png);background-repeat: no-repeat;-webkit-background-size: 270px 90px;background-size: 270px 90px;}
 

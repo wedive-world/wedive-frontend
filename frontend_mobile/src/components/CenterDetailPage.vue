@@ -711,7 +711,7 @@
             </div>
             <div class="text-center color-gray mt-2 mb-3">이 다이빙 센터는 어떠셨나요?</div>
             <div class="me-4 ms-4 mb-5" style="background: rgba(58, 58, 58, 0.03);padding: 10px 20px;">
-                <p class="mb-0" style="color: rgba(58, 58, 58, 0.6)">리뷰를 남기고 다른 다이버들에게 도움이 되어보세요.</p>
+                <p class="mb-0" style="color: rgba(58, 58, 58, 0.6)">다른 다이버들에게 도움이 되어보세요.</p>
                 <p class="mb-0 color-highlight">지금 리뷰남기기 <i class="fas fa-chevron-right ms-1"></i></p>
             </div>
         </div>
