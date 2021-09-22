@@ -447,27 +447,39 @@
                       <div>
                         <div class="form-check interest-check">
                           <input class="form-check-input" type="radio" value="" name="check_money" id="check_money1">
-                          <label class="form-check-label rounded-xl border-08" for="check_discount1">센터 이용료 무료 (1/N부담)</label>
+                          <label class="form-check-label rounded-xl border-08" for="check_money1">일부 이용료 할인 (1/N부담)</label>
+                          <i class="fab fa-slideshare color-white font-18"></i>
+                          <i class="fab fa-slideshare font-17 color-secondary"></i>
+                        </div>
+                        <div class="form-check interest-check">
+                          <input class="form-check-input" type="radio" value="" name="check_money" id="check_money2">
+                          <label class="form-check-label rounded-xl border-08" for="check_money2">일부 이용료 할인 (개설자 부담)</label>
+                          <i class="fab fa-slideshare color-white font-18"></i>
+                          <i class="fab fa-slideshare font-17 color-secondary"></i>
+                        </div>
+                        <div class="form-check interest-check">
+                          <input class="form-check-input" type="radio" value="" name="check_money" id="check_money3">
+                          <label class="form-check-label rounded-xl border-08" for="check_money3">식사+숙박 무료 (1/N부담)</label>
                           <i class="fas fa-money-check-alt color-white font-18"></i>
                           <i class="fas fa-money-check-alt font-16 color-secondary"></i>
                         </div>
                         <div class="form-check interest-check">
-                          <input class="form-check-input" type="radio" value="" name="check_money" id="check_money2">
-                          <label class="form-check-label rounded-xl border-08" for="check_money2">센터 이용료 무료 (개설자 부담)</label>
+                          <input class="form-check-input" type="radio" value="" name="check_money" id="check_money4">
+                          <label class="form-check-label rounded-xl border-08" for="check_money4">식사+숙박 무료 (개설자 부담)</label>
                           <i class="fas fa-money-check-alt color-white font-18"></i>
                           <i class="fas fa-money-check-alt font-17 color-secondary"></i>
                         </div>
                         <div class="form-check interest-check">
-                          <input class="form-check-input" type="radio" value="" name="check_money" id="check_money3">
-                          <label class="form-check-label rounded-xl border-08" for="check_money3">일부 이용료 할인 (1/N부담)</label>
-                          <i class="fab fa-slideshare color-white font-18"></i>
-                          <i class="fab fa-slideshare font-17 color-secondary"></i>
+                          <input class="form-check-input" type="radio" value="" name="check_money" id="check_money5">
+                          <label class="form-check-label rounded-xl border-08" for="check_money5">식사 무료 (1/N부담)</label>
+                          <i class="fas fa-utensils color-white font-18"></i>
+                          <i class="fas fa-utensils font-16 color-secondary"></i>
                         </div>
                         <div class="form-check interest-check">
-                          <input class="form-check-input" type="radio" value="" name="check_money" id="check_money4">
-                          <label class="form-check-label rounded-xl border-08" for="check_money">일부 이용료 할인 (개설자 부담)</label>
-                          <i class="fab fa-slideshare color-white font-18"></i>
-                          <i class="fab fa-slideshare font-17 color-secondary"></i>
+                          <input class="form-check-input" type="radio" value="" name="check_money" id="check_money6">
+                          <label class="form-check-label rounded-xl border-08" for="check_money6">식사 무료 (개설자 부담)</label>
+                          <i class="fas fa-utensils color-white font-18"></i>
+                          <i class="fas fa-utensils font-17 color-secondary"></i>
                         </div>
                       </div>
                     </div>
@@ -487,25 +499,25 @@
               <div>성별</div>
               <div>
                 <div class="form-check interest-check">
-                  <input class="form-check-input" type="radio" value="" name="check_gender" id="check_gender1">
+                  <input class="form-check-input" type="checkbox" value="" id="check_gender1">
                   <label class="form-check-label rounded-xl border-08" for="check_gender1">무관</label>
                   <i class="fas fa-user color-white font-18"></i>
                   <i class="fas fa-user font-16 color-highlight"></i>
                 </div>
                 <div class="form-check interest-check">
-                  <input class="form-check-input" type="radio" value="" name="check_gender" id="check_gender2">
+                  <input class="form-check-input" type="checkbox" value="" id="check_gender2">
                   <label class="form-check-label rounded-xl border-08" for="check_gender2">남자</label>
                   <i class="fas fa-male color-white font-18"></i>
                   <i class="fas fa-male font-17 color-highlight"></i>
                 </div>
                 <div class="form-check interest-check">
-                  <input class="form-check-input" type="radio" value="" name="check_gender" id="check_gender3">
+                  <input class="form-check-input" type="checkbox" value="" id="check_gender3">
                   <label class="form-check-label rounded-xl border-08" for="check_gender3">여자</label>
                   <i class="fas fa-female color-white font-18"></i>
                   <i class="fas fa-female font-17 color-highlight"></i>
                 </div>
                 <div class="form-check interest-check">
-                  <input class="form-check-input" type="radio" value="" name="check_gender" id="check_gender4">
+                  <input class="form-check-input" type="checkbox" value="" id="check_gender4">
                   <label class="form-check-label rounded-xl border-08" for="check_gender4">커플</label>
                   <i class="fas fa-user-friends color-white font-18"></i>
                   <i class="fas fa-user-friends font-17 color-highlight"></i>
@@ -517,26 +529,32 @@
             <div>나이</div>
               <div>
                 <div class="form-check interest-check">
-                  <input class="form-check-input" type="radio" value="" name="check_age" id="check_age1">
+                  <input class="form-check-input" type="checkbox" value="" id="check_age1">
                   <label class="form-check-label rounded-xl border-08" for="check_age1">무관</label>
                   <i class="fas fa-user color-white font-18"></i>
                   <i class="fas fa-user font-16 color-highlight"></i>
                 </div>
                 <div class="form-check interest-check">
-                  <input class="form-check-input" type="radio" value="" name="check_age" id="check_age2">
+                  <input class="form-check-input" type="checkbox" value="" id="check_age2">
                   <label class="form-check-label rounded-xl border-08" for="check_age2">20대</label>
                   <i class="fas fa-child color-white font-18"></i>
                   <i class="fas fa-child font-17 color-highlight"></i>
                 </div>
                 <div class="form-check interest-check">
-                  <input class="form-check-input" type="radio" value="" name="check_age" id="check_age3">
+                  <input class="form-check-input" type="checkbox" value="" id="check_age3">
                   <label class="form-check-label rounded-xl border-08" for="check_age3">30대</label>
                   <i class="fas fa-hand-rock color-white font-18"></i>
                   <i class="fas fa-hand-rock font-17 color-highlight"></i>
                 </div>
                 <div class="form-check interest-check">
-                  <input class="form-check-input" type="radio" value="" name="check_age" id="check_age4">
-                  <label class="form-check-label rounded-xl border-08" for="check_age4">40대 이상</label>
+                  <input class="form-check-input" type="checkbox" value="" id="check_age4">
+                  <label class="form-check-label rounded-xl border-08" for="check_age4">40대</label>
+                  <i class="fas fa-hat-cowboy-side color-white font-18"></i>
+                  <i class="fas fa-hat-cowboy-side font-17 color-highlight"></i>
+                </div>
+                <div class="form-check interest-check">
+                  <input class="form-check-input" type="checkbox" value="" id="check_age5">
+                  <label class="form-check-label rounded-xl border-08" for="check_age5">50대 이상</label>
                   <i class="fas fa-hat-cowboy-side color-white font-18"></i>
                   <i class="fas fa-hat-cowboy-side font-17 color-highlight"></i>
                 </div>
@@ -641,13 +659,19 @@
                 </div>
                 <div class="form-check interest-check">
                   <input class="form-check-input" type="checkbox" value="" id="check_env2">
-                  <label class="form-check-label rounded-xl border-08" for="check_env2">카풀가능</label>
+                  <label class="form-check-label rounded-xl border-08" for="check_env2">성별 별도숙박</label>
+                  <i class="fas fa-restroom color-white font-18"></i>
+                  <i class="fas fa-restroom font-16 color-highlight"></i>
+                </div>
+                <div class="form-check interest-check">
+                  <input class="form-check-input" type="checkbox" value="" id="check_env3">
+                  <label class="form-check-label rounded-xl border-08" for="check_env3">카풀가능</label>
                   <i class="fas fa-car color-white font-18"></i>
                   <i class="fas fa-car font-17 color-highlight"></i>
                 </div>
                 <div class="form-check interest-check">
-                  <input class="form-check-input" type="checkbox" value="" id="check_env3">
-                  <label class="form-check-label rounded-xl border-08" for="check_env3">센터확정</label>
+                  <input class="form-check-input" type="checkbox" value="" id="check_env4">
+                  <label class="form-check-label rounded-xl border-08" for="check_env4">센터확정</label>
                   <i class="fas fa-store color-white font-18"></i>
                   <i class="fas fa-store font-17 color-highlight"></i>
                 </div>
@@ -750,11 +774,11 @@
               
             <div class="input-style validate-field col-6 pe-3 ps-0 after-tilde">
               <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_start" placeholder="시작일" style="height: 32px !important;border-width: 1px;padding-top: 0 !important;padding-left: 10px;border-radius: 4px;">
-              <label for="form_start" class="color-highlight" style="left:14px !important;">시작일</label>
+              <label for="form_start" class="color-highlight" style="left:14px !important;background-color: transparent;">시작일</label>
             </div>
             <div class="input-style validate-field col-6 ps-3 pe-0">
               <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_end" placeholder="종료일" style="height: 32px !important;border-width: 1px;padding-top: 0 !important;padding-left: 10px;border-radius: 4px;">
-              <label for="form_end" class="color-highlight" style="left:34px !important;">종료일</label>
+              <label for="form_end" class="color-highlight" style="left:34px !important;background-color: transparent;">종료일</label>
             </div>
             
 
