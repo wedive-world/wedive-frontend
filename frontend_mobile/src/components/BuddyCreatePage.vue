@@ -18,19 +18,61 @@
           <div class="content mt-1">
             <h4 class="pt-3 mb-2">일정 정보</h4>
             <!--<a id="delete_schedule" class="color-highlight font-12 hide" style="margin-top: -30px;padding-bottom: 10px;float:right;">일정 삭제</a>-->
-            <div class="text-center p-3 bg-fade-gray-light rounded-s mb-3" id="div_empty">
-              <img class="mt-2" src="/static/images/empty_ill.png" style="width: 60%;"/>
+            <div class="text-center p-3 border-08 rounded-s mb-3" id="div_empty">
+              <i class="far fa-folder-open font-40 color-gray-light-mid"></i>
+              
               <p class="color-gray-light-mid">아직 일정이 없습니다.</p>
             </div>
+
+            <div class="timeline-body pt-2">
+            <div class="timeline-deco"></div>
+              <div class="drag-line"></div>
+              <div class="timeline-item mt-4">
+                  <i class="bg-highlight shadow-l timeline-icon font-900">1</i>
+                  <div class="timeline-item-content rounded-sm">
+                      <img data-src="http://www.gogofp.com/wp-content/uploads/fish_layout/20163/16093016281124091_577x330.png" alt="img" src="http://www.gogofp.com/wp-content/uploads/fish_layout/20163/16093016281124091_577x330.png" class="preload-img rounded-s img-fluid wedive-timeline-image">
+                      <div class="ms-2" style="display: inline-block; vertical-align: top;">
+                        <a href="#" class="schedule-close" v-on:click="closeSchedule(1)"><i class="wedive_icoset wedive_icoset_close_s"></i></a>
+                        <p class="mb-0 font-16 font-600">성산 사이트 (제주)</p>
+                        <p class="mb-0 font-14 font-400 color-gray">20.09.20(화) ~ 20.09.21(수)</p>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="timeline-item">
+                  <i class="bg-highlight shadow-l timeline-icon font-900">2</i>
+                  <div class="timeline-item-content rounded-sm">
+                      <img data-src="/static/images/point/ko/jeju_bumisland_01.jpg" alt="img" src="/static/images/point/ko/jeju_bumisland_01.jpg" class="preload-img rounded-s img-fluid wedive-timeline-image">
+                      <div class="ms-2" style="display: inline-block; vertical-align: top;">
+                        <a href="#" class="schedule-close" v-on:click="closeSchedule(2)"><i class="wedive_icoset wedive_icoset_close_s"></i></a>
+                        <p class="mb-0 font-16 font-600">문섬 사이트 (제주)</p>
+                        <p class="mb-0 font-14 font-400 color-gray">20.09.22(목) ~ 20.09.23(금)</p>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="timeline-item">
+                  <i class="bg-highlight shadow-l timeline-icon font-900">3</i>
+                  <div class="timeline-item-content rounded-sm">
+                      <img data-src="http://ojsfile.ohmynews.com/STD_IMG_FILE/2015/0428/IE001824971_STD.jpg" alt="img" src="http://ojsfile.ohmynews.com/STD_IMG_FILE/2015/0428/IE001824971_STD.jpg" class="preload-img rounded-s img-fluid wedive-timeline-image">
+                      <div class="ms-2" style="display: inline-block; vertical-align: top;">
+                        <a href="#" class="schedule-close" v-on:click="closeSchedule(3)"><i class="wedive_icoset wedive_icoset_close_s"></i></a>
+                        <p class="mb-0 font-16 font-600">우도 사이트 (제주)</p>
+                        <p class="mb-0 font-14 font-400 color-gray">20.09.24(토) ~ 20.09.24(토)</p>
+                      </div>
+                  </div>
+              </div>
+
+          </div>
             
             <div class="p-3 rounded-s mb-4 mt-3 row hide" id="div_schedule1" style="border: 1px solid rgba(0, 0, 0, 0.08) !important;">
-              <a href="#" class="schedule-close" v-on:click="closeSchedule(1)"><i class="wedive_icoset wedive_icoset_close"></i></a>
+              <a href="#" class="schedule-close" v-on:click="closeSchedule(1)"><i class="wedive_icoset wedive_icoset_close_s"></i></a>
               <label class="wedive-label color-secondary">일정 1</label>
-              <div class="input-style input-style-always-active has-borders no-icon mt-2 col-6 pe-3 after-tilde">
+              <div class="input-style no-borders has-icon validate-field mb-3 col-6 pe-3 after-tilde">
                 <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_start" placeholder="시작일">
                 <label for="form_start" class="color-highlight">시작일</label>
               </div>
-              <div class="input-style input-style-always-active has-borders no-icon mt-2 col-6 ps-3">
+              <div class="input-style no-borders has-icon validate-field mb-3 col-6 ps-3">
                 <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_end" placeholder="종료일">
                 <label for="form_end" class="color-highlight">종료일</label>
               </div>
@@ -38,8 +80,7 @@
 
               <div class="mt-3">
                 <vue-typeahead-bootstrap
-                    class="form-control wedive-search"
-                    style="border-radius: 10px !important;border-color: rgba(0, 0, 0, 0.08) !important;"
+                    class="wedive-search border-bottom"
                     v-model="query"
                     :data="users"
                     :serializer="item => item.name_ko"
@@ -70,7 +111,7 @@
               </div>
             </div>
             <div class="p-3 rounded-s mb-4 row hide" id="div_schedule2" style="border: 1px solid rgba(0, 0, 0, 0.08) !important;">
-              <a href="#" class="schedule-close" v-on:click="closeSchedule(2)"><i class="wedive_icoset wedive_icoset_close"></i></a>
+              <a href="#" class="schedule-close" v-on:click="closeSchedule(2)"><i class="wedive_icoset wedive_icoset_close_s"></i></a>
               <label class="wedive-label color-secondary">일정 2</label>
               <div class="input-style input-style-always-active has-borders no-icon mt-2 col-6 pe-3 after-tilde">
                 <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_start" placeholder="시작일">
@@ -115,7 +156,7 @@
               </div>
             </div>
             <div class="p-3 rounded-s mb-4 row hide" id="div_schedule3" style="border: 1px solid rgba(0, 0, 0, 0.08) !important;">
-              <a href="#" class="schedule-close" v-on:click="closeSchedule(3)"><i class="wedive_icoset wedive_icoset_close"></i></a>
+              <a href="#" class="schedule-close" v-on:click="closeSchedule(3)"><i class="wedive_icoset wedive_icoset_close_s"></i></a>
               <label class="wedive-label color-secondary">일정 3</label>
               <div class="input-style input-style-always-active has-borders no-icon mt-2 col-6 pe-3 after-tilde">
                 <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_start" placeholder="시작일">
@@ -160,7 +201,7 @@
               </div>
             </div>
             <div class="p-3 rounded-s mb-4 row hide" id="div_schedule4" style="border: 1px solid rgba(0, 0, 0, 0.08) !important;">
-              <a href="#" class="schedule-close" v-on:click="closeSchedule(4)"><i class="wedive_icoset wedive_icoset_close"></i></a>
+              <a href="#" class="schedule-close" v-on:click="closeSchedule(4)"><i class="wedive_icoset wedive_icoset_close_s"></i></a>
               <label class="wedive-label color-secondary">일정 4</label>
               <div class="input-style input-style-always-active has-borders no-icon mt-2 col-6 pe-3 after-tilde">
                 <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_start" placeholder="시작일">
@@ -205,7 +246,7 @@
               </div>
             </div>
             <div class="p-3 rounded-s row hide" id="div_schedule5" style="border: 1px solid rgba(0, 0, 0, 0.08) !important;">
-              <a href="#" class="schedule-close" v-on:click="closeSchedule(5)"><i class="wedive_icoset wedive_icoset_close"></i></a>
+              <a href="#" class="schedule-close" v-on:click="closeSchedule(5)"><i class="wedive_icoset wedive_icoset_close_s"></i></a>
               <label class="wedive-label color-secondary">일정 5</label>
               <div class="input-style input-style-always-active has-borders no-icon mt-2 col-6 pe-3 after-tilde">
                 <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_start" placeholder="시작일">
@@ -250,11 +291,13 @@
               </div>
             </div>
             <div class="">
-              <a href="#" v-on:click="addSchedule()" class="btn btn-full mb-1 pt-3 pb-3 font-14 font-500 color-highlight"><i class="fas fa-plus"></i> 일정 추가하기</a>
+              <a href="#" data-menu="menu-add-schedule" class="btn btn-full mb-1 pt-3 pb-3 font-14 font-500 color-highlight"><i class="fas fa-plus"></i> 일정 추가하기</a>
             </div>
 
-
-
+          </div>
+        </div>
+        <div class="card card-full pb-0 mb-3 border-bottom">
+          <div class="content mt-1">
 
             <h4 class="pt-2 mb-2">참여 정보</h4>
             <!--<div class="mb-0 mt-3">
@@ -268,8 +311,8 @@
             </div>-->
 
             <div class="row mb-2">
-              <div class="col-6">
-                <div>모집 인원</div>
+              <div class="col-4">
+                <div class="color-highlight font-12">모집 인원</div>
                 <div class="mx-auto">
                   <div class="stepper rounded-s float-start">
                     <a href="#" class="stepper-sub"><i class="fa fa-minus color-theme opacity-40"></i></a>
@@ -279,12 +322,23 @@
                   <div class="clearfix"></div>
                 </div>
               </div>
-              <div class="col-6">
-                <div>현재 인원</div>
+              <div class="col-4">
+                <div class="color-secondary font-12">현재 남자</div>
                 <div class="mx-auto">
                   <div class="stepper rounded-s float-start">
                     <a href="#" class="stepper-sub"><i class="fa fa-minus color-theme opacity-40"></i></a>
-                    <input type="number" min="1" max="99" value="0">
+                    <input type="number" min="0" max="99" value="0">
+                    <a href="#" class="stepper-add"><i class="fa fa-plus color-theme opacity-40"></i></a>
+                  </div>
+                  <div class="clearfix"></div>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="color-secondary font-12">현재 여자</div>
+                <div class="mx-auto">
+                  <div class="stepper rounded-s float-start">
+                    <a href="#" class="stepper-sub"><i class="fa fa-minus color-theme opacity-40"></i></a>
+                    <input type="number" min="0" max="99" value="0">
                     <a href="#" class="stepper-add"><i class="fa fa-plus color-theme opacity-40"></i></a>
                   </div>
                   <div class="clearfix"></div>
@@ -293,7 +347,8 @@
             </div>
 
             <div class="mb-0 mt-3">
-              <div class="input-style input-style-always-active has-borders no-icon validate-field mb-0">
+              <div class="input-style no-borders has-icon validate-field mb-3">
+                <i class="fas fa-coins color-gray"></i>
                 <input type="number" class="form-control validate-text" id="form_price" placeholder="(옵션) 참가비를 입력하세요.">
                 <label for="form_price" class="color-highlight">참가비</label>
                 <i class="fa fa-times disabled invalid color-red-dark"></i>
@@ -303,7 +358,8 @@
             </div>
 
             <div class="mb-0 mt-3">
-              <div class="input-style input-style-always-active has-borders no-icon validate-field mb-0">
+              <div class="input-style no-borders has-icon validate-field mb-3">
+                <i class="fas fa-car color-gray"></i>
                 <input type="name" class="form-control validate-name" id="form_departure" placeholder="(옵션) 출발지를 입력하세요.">
                 <label for="form_departure" class="color-highlight">출발지</label>
                 <i class="fa fa-times disabled invalid color-red-dark"></i>
@@ -314,7 +370,8 @@
 
 
             <div class="mb-0 mt-3">
-              <div class="input-style has-borders no-icon mb-0">
+              <div class="input-style no-borders has-icon validate-field mb-3">
+                <i class="fas fa-pen-alt color-gray"></i>
                 <textarea id="form7" placeholder="이곳에 메모를 작성해보세요."></textarea>
                 <label for="form7" class="color-highlight">메모</label>
               </div>
@@ -324,11 +381,107 @@
         </div>
 
 
+        <div class="card card-full pb-0 mb-3 border-bottom">
+          <div class="content mt-1">
+                <div class="d-flex no-effect" 
+                     data-trigger-switch="toggle-id-3"
+                     data-bs-toggle="collapse" 
+                     href="#collapse3"
+                     role="button" 
+                     aria-expanded="false" 
+                     aria-controls="collapse3">
+                    <div class="pt-1">
+                        <h4 class="pt-3 mb-0">할인(무료) 초청 하시겠습니까? <span class="mb-2 color-gray-light-mid font-13 ms-2 font-400"><i class="wedive_icoset wedive_icoset_info me-1"></i>특정 대상 할인</span></h4>
+                    </div>
+                    <div class="ms-auto me-4 pe-2">
+                        <div class="custom-control ios-switch">
+                            <input type="checkbox" class="ios-input" id="toggle-id-3">
+                            <label class="custom-control-label" for="toggle-id-3"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="collapse" id="collapse3">
+                    <div class="mb-0 mt-3">
+                      <div>할인대상</div>
+                      <div class="mb-3">
+                        <div class="form-check interest-check">
+                          <input class="form-check-input" type="radio" value="" name="check_discount" id="check_discount1">
+                          <label class="form-check-label rounded-xl border-08" for="check_discount1">누구나</label>
+                          <i class="fas fa-user color-white font-18"></i>
+                          <i class="fas fa-user font-16 color-secondary"></i>
+                        </div>
+                        <div class="form-check interest-check">
+                          <input class="form-check-input" type="radio" value="" name="check_discount" id="check_discount2">
+                          <label class="form-check-label rounded-xl border-08" for="check_discount2">여성</label>
+                          <i class="fas fa-female color-white font-18"></i>
+                          <i class="fas fa-female font-17 color-secondary"></i>
+                        </div>
+                        <div class="form-check interest-check">
+                          <input class="form-check-input" type="radio" value="" name="check_discount" id="check_discount3">
+                          <label class="form-check-label rounded-xl border-08" for="check_discount3">20대 여성</label>
+                          <i class="fas fa-female color-white font-18"></i>
+                          <i class="fas fa-female font-17 color-secondary"></i>
+                        </div>
+                        <div class="form-check interest-check">
+                          <input class="form-check-input" type="radio" value="" name="check_discount" id="check_discount4">
+                          <label class="form-check-label rounded-xl border-08" for="check_discount4">30대 여성</label>
+                          <i class="fas fa-female color-white font-18"></i>
+                          <i class="fas fa-female font-17 color-secondary"></i>
+                        </div>
+                        <div class="form-check interest-check">
+                          <input class="form-check-input" type="radio" value="" name="check_discount" id="check_discount5">
+                          <label class="form-check-label rounded-xl border-08" for="check_discount5">강사</label>
+                          <i class="fas fa-user-graduate color-white font-18"></i>
+                          <i class="fas fa-user-graduate font-17 color-secondary"></i>
+                        </div>
+                        <div class="form-check interest-check">
+                          <input class="form-check-input" type="radio" value="" name="check_discount" id="check_discount6">
+                          <label class="form-check-label rounded-xl border-08" for="check_discount6">여성 강사</label>
+                          <i class="fas fa-user-graduate color-white font-18"></i>
+                          <i class="fas fa-user-graduate font-17 color-secondary"></i>
+                        </div>
+                      </div>
+
+
+                    <div>할인옵션 <span class="mb-2 color-gray-light-mid font-13 ms-2 font-400"><i class="wedive_icoset wedive_icoset_info me-1"></i>1/N 선택 시 모집인원에게 안내합니다.</span></div>
+                      <div>
+                        <div class="form-check interest-check">
+                          <input class="form-check-input" type="radio" value="" name="check_money" id="check_money1">
+                          <label class="form-check-label rounded-xl border-08" for="check_discount1">센터 이용료 무료 (1/N부담)</label>
+                          <i class="fas fa-money-check-alt color-white font-18"></i>
+                          <i class="fas fa-money-check-alt font-16 color-secondary"></i>
+                        </div>
+                        <div class="form-check interest-check">
+                          <input class="form-check-input" type="radio" value="" name="check_money" id="check_money2">
+                          <label class="form-check-label rounded-xl border-08" for="check_money2">센터 이용료 무료 (개설자 부담)</label>
+                          <i class="fas fa-money-check-alt color-white font-18"></i>
+                          <i class="fas fa-money-check-alt font-17 color-secondary"></i>
+                        </div>
+                        <div class="form-check interest-check">
+                          <input class="form-check-input" type="radio" value="" name="check_money" id="check_money3">
+                          <label class="form-check-label rounded-xl border-08" for="check_money3">일부 이용료 할인 (1/N부담)</label>
+                          <i class="fab fa-slideshare color-white font-18"></i>
+                          <i class="fab fa-slideshare font-17 color-secondary"></i>
+                        </div>
+                        <div class="form-check interest-check">
+                          <input class="form-check-input" type="radio" value="" name="check_money" id="check_money4">
+                          <label class="form-check-label rounded-xl border-08" for="check_money">일부 이용료 할인 (개설자 부담)</label>
+                          <i class="fab fa-slideshare color-white font-18"></i>
+                          <i class="fab fa-slideshare font-17 color-secondary"></i>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+        </div>
+
 
 
         <div class="card card-full pb-0 mb-3 border-bottom">
           <div class="content mt-1">
-            <h4 class="pt-2 mb-2">선호 사항</h4>
+            <h4 class="pt-2 mb-2">선호 사항 <span class="mb-2 color-gray-light-mid font-13 ms-2 font-400"><i class="wedive_icoset wedive_icoset_info me-1"></i>딱 맞는 버디를 매칭해드릴께요.</span></h4>
             <a class="color-highlight font-12 hide" style="margin-top: -30px;padding-bottom: 10px;float:right;">초기화</a>
             <div class="mb-0 mt-3">
               <div>성별</div>
@@ -336,26 +489,26 @@
                 <div class="form-check interest-check">
                   <input class="form-check-input" type="radio" value="" name="check_gender" id="check_gender1">
                   <label class="form-check-label rounded-xl border-08" for="check_gender1">무관</label>
-                  <i class="fa fa-check-circle color-white font-18"></i>
-                  <i class="fas fa-user font-16 color-gray-dark"></i>
+                  <i class="fas fa-user color-white font-18"></i>
+                  <i class="fas fa-user font-16 color-highlight"></i>
                 </div>
                 <div class="form-check interest-check">
                   <input class="form-check-input" type="radio" value="" name="check_gender" id="check_gender2">
                   <label class="form-check-label rounded-xl border-08" for="check_gender2">남자</label>
-                  <i class="fa fa-check-circle color-white font-18"></i>
+                  <i class="fas fa-male color-white font-18"></i>
                   <i class="fas fa-male font-17 color-highlight"></i>
                 </div>
                 <div class="form-check interest-check">
                   <input class="form-check-input" type="radio" value="" name="check_gender" id="check_gender3">
                   <label class="form-check-label rounded-xl border-08" for="check_gender3">여자</label>
-                  <i class="fa fa-check-circle color-white font-18"></i>
-                  <i class="fas fa-female font-17 color-orange-light"></i>
+                  <i class="fas fa-female color-white font-18"></i>
+                  <i class="fas fa-female font-17 color-highlight"></i>
                 </div>
                 <div class="form-check interest-check">
                   <input class="form-check-input" type="radio" value="" name="check_gender" id="check_gender4">
                   <label class="form-check-label rounded-xl border-08" for="check_gender4">커플</label>
-                  <i class="fa fa-check-circle color-white font-18"></i>
-                  <i class="fas fa-user-friends font-17 color-red-light"></i>
+                  <i class="fas fa-user-friends color-white font-18"></i>
+                  <i class="fas fa-user-friends font-17 color-highlight"></i>
                 </div>
               </div>
             </div>
@@ -366,26 +519,26 @@
                 <div class="form-check interest-check">
                   <input class="form-check-input" type="radio" value="" name="check_age" id="check_age1">
                   <label class="form-check-label rounded-xl border-08" for="check_age1">무관</label>
-                  <i class="fa fa-check-circle color-white font-18"></i>
-                  <i class="fas fa-user font-16 color-gray-dark"></i>
+                  <i class="fas fa-user color-white font-18"></i>
+                  <i class="fas fa-user font-16 color-highlight"></i>
                 </div>
                 <div class="form-check interest-check">
                   <input class="form-check-input" type="radio" value="" name="check_age" id="check_age2">
                   <label class="form-check-label rounded-xl border-08" for="check_age2">20대</label>
-                  <i class="fa fa-check-circle color-white font-18"></i>
-                  <i class="fas fa-child font-17 color-secondary"></i>
+                  <i class="fas fa-child color-white font-18"></i>
+                  <i class="fas fa-child font-17 color-highlight"></i>
                 </div>
                 <div class="form-check interest-check">
                   <input class="form-check-input" type="radio" value="" name="check_age" id="check_age3">
                   <label class="form-check-label rounded-xl border-08" for="check_age3">30대</label>
-                  <i class="fa fa-check-circle color-white font-18"></i>
-                  <i class="fas fa-hand-rock font-17 color-grass-dark"></i>
+                  <i class="fas fa-hand-rock color-white font-18"></i>
+                  <i class="fas fa-hand-rock font-17 color-highlight"></i>
                 </div>
                 <div class="form-check interest-check">
                   <input class="form-check-input" type="radio" value="" name="check_age" id="check_age4">
                   <label class="form-check-label rounded-xl border-08" for="check_age4">40대 이상</label>
-                  <i class="fa fa-check-circle color-white font-18"></i>
-                  <i class="fas fa-hat-cowboy-side font-17 color-brown-light"></i>
+                  <i class="fas fa-hat-cowboy-side color-white font-18"></i>
+                  <i class="fas fa-hat-cowboy-side font-17 color-highlight"></i>
                 </div>
               </div>
             </div>
@@ -397,58 +550,64 @@
                 <div class="form-check interest-check">
                   <input class="form-check-input" type="checkbox" value="" id="check_diving1">
                   <label class="form-check-label rounded-xl border-08" for="check_diving1">본인케어</label>
-                  <i class="fa fa-check-circle color-white font-18"></i>
-                  <i class="fas fa-portrait font-16 color-brown-dark"></i>
+                  <i class="fas fa-portrait color-white font-18"></i>
+                  <i class="fas fa-portrait font-16 color-highlight"></i>
                 </div>
                 <div class="form-check interest-check">
                   <input class="form-check-input" type="checkbox" value="" id="check_diving2">
-                  <label class="form-check-label rounded-xl border-08" for="check_diving2">상급레벨</label>
-                  <i class="fa fa-check-circle color-white font-18"></i>
-                  <i class="fas fa-user-graduate font-16 color-secondary"></i>
+                  <label class="form-check-label rounded-xl border-08" for="check_diving2">초보환영</label>
+                  <i class="fas fa-baby color-white font-18"></i>
+                  <i class="fas fa-baby font-16 color-highlight"></i>
                 </div>
                 <div class="form-check interest-check">
                   <input class="form-check-input" type="checkbox" value="" id="check_diving3">
-                  <label class="form-check-label rounded-xl border-08" for="check_diving3">사진촬영</label>
-                  <i class="fa fa-check-circle color-white font-18"></i>
-                  <i class="fas fa-camera-retro font-17 color-gray"></i>
+                  <label class="form-check-label rounded-xl border-08" for="check_diving3">상급레벨</label>
+                  <i class="fas fa-user-graduate color-white font-18"></i>
+                  <i class="fas fa-user-graduate font-16 color-highlight"></i>
                 </div>
                 <div class="form-check interest-check">
                   <input class="form-check-input" type="checkbox" value="" id="check_diving4">
-                  <label class="form-check-label rounded-xl border-08" for="check_diving4">강사포함</label>
-                  <i class="fa fa-check-circle color-white font-18"></i>
-                  <i class="fas fa-chalkboard-teacher font-17 color-gray-dark"></i>
+                  <label class="form-check-label rounded-xl border-08" for="check_diving4">사진촬영</label>
+                  <i class="fas fa-camera-retro color-white font-18"></i>
+                  <i class="fas fa-camera-retro font-17 color-highlight"></i>
                 </div>
                 <div class="form-check interest-check">
-                  <input class="form-check-input" type="checkbox" value="" id="check_diving9">
-                  <label class="form-check-label rounded-xl border-08" for="check_diving9">강사보험</label>
-                  <i class="fa fa-check-circle color-white font-18"></i>
-                  <i class="fas fa-file-contract font-17 color-yellow-light"></i>
+                  <input class="form-check-input" type="checkbox" value="" id="check_diving5">
+                  <label class="form-check-label rounded-xl border-08" for="check_diving5">강사포함</label>
+                  <i class="fas fa-chalkboard-teacher color-white font-18"></i>
+                  <i class="fas fa-chalkboard-teacher font-17 color-highlight"></i>
+                </div>
+                <div class="form-check interest-check">
+                  <input class="form-check-input" type="checkbox" value="" id="check_diving6">
+                  <label class="form-check-label rounded-xl border-08" for="check_diving6">강사보험</label>
+                  <i class="fas fa-file-contract color-white font-18"></i>
+                  <i class="fas fa-file-contract font-17 color-highlight"></i>
                 </div>
               </div>
               <div>
                 <div class="form-check interest-check">
-                  <input class="form-check-input" type="radio" name="check_training" value="" id="check_diving5">
-                  <label class="form-check-label rounded-xl border-08" for="check_diving5">트레이닝</label>
-                  <i class="fa fa-check-circle color-white font-18"></i>
-                  <i class="fas fa-graduation-cap font-16 color-pink-light"></i>
-                </div>
-                <div class="form-check interest-check">
-                  <input class="form-check-input" type="radio" name="check_training" value="" id="check_diving6">
-                  <label class="form-check-label rounded-xl border-08" for="check_diving6">하드트레이닝</label>
-                  <i class="fa fa-check-circle color-white font-18"></i>
-                  <i class="fas fa-graduation-cap font-17 color-highlight"></i>
-                </div>
-                <div class="form-check interest-check">
                   <input class="form-check-input" type="radio" name="check_training" value="" id="check_diving7">
-                  <label class="form-check-label rounded-xl border-08" for="check_diving7">펀다이빙</label>
-                  <i class="fa fa-check-circle color-white font-18"></i>
-                  <i class="fas fa-coffee font-17 color-green-light"></i>
+                  <label class="form-check-label rounded-xl border-08" for="check_diving7">트레이닝</label>
+                  <i class="fas fa-graduation-cap color-white font-18"></i>
+                  <i class="fas fa-graduation-cap font-16 color-highlight"></i>
                 </div>
                 <div class="form-check interest-check">
                   <input class="form-check-input" type="radio" name="check_training" value="" id="check_diving8">
-                  <label class="form-check-label rounded-xl border-08" for="check_diving8">CO<sub>2</sub>트레이닝</label>
-                  <i class="fa fa-check-circle color-white font-18"></i>
-                  <i class="fas fa-lungs font-17 color-instagram"></i>
+                  <label class="form-check-label rounded-xl border-08" for="check_diving8">하드트레이닝</label>
+                  <i class="fas fa-graduation-cap color-white font-18"></i>
+                  <i class="fas fa-graduation-cap font-17 color-highlight"></i>
+                </div>
+                <div class="form-check interest-check">
+                  <input class="form-check-input" type="radio" name="check_training" value="" id="check_diving9">
+                  <label class="form-check-label rounded-xl border-08" for="check_diving9">펀다이빙</label>
+                  <i class="fas fa-coffee color-white font-18"></i>
+                  <i class="fas fa-coffee font-17 color-highlight"></i>
+                </div>
+                <div class="form-check interest-check">
+                  <input class="form-check-input" type="radio" name="check_training" value="" id="check_diving10">
+                  <label class="form-check-label rounded-xl border-08" for="check_diving10">CO<sub>2</sub>트레이닝</label>
+                  <i class="fas fa-lungs color-white font-18"></i>
+                  <i class="fas fa-lungs font-17 color-highlight"></i>
                 </div>
               </div>
             </div>
@@ -459,14 +618,14 @@
                 <div class="form-check interest-check">
                   <input class="form-check-input" type="checkbox" value="" id="check_amity1">
                   <label class="form-check-label rounded-xl border-08" for="check_amity1">뒷풀이</label>
-                  <i class="fa fa-check-circle color-white font-18"></i>
-                  <i class="fas fa-beer font-16 color-mint-light"></i>
+                  <i class="fas fa-beer color-white font-18"></i>
+                  <i class="fas fa-beer font-16 color-highlight"></i>
                 </div>
                 <div class="form-check interest-check">
                   <input class="form-check-input" type="checkbox" value="" id="check_amity2">
                   <label class="form-check-label rounded-xl border-08" for="check_amity2">식사 함께</label>
-                  <i class="fa fa-check-circle color-white font-18"></i>
-                  <i class="fas fa-utensils font-17 color-pink-dark"></i>
+                  <i class="fas fa-utensils color-white font-18"></i>
+                  <i class="fas fa-utensils font-17 color-highlight"></i>
                 </div>
               </div>
             </div>
@@ -477,20 +636,20 @@
                 <div class="form-check interest-check">
                   <input class="form-check-input" type="checkbox" value="" id="check_env1">
                   <label class="form-check-label rounded-xl border-08" for="check_env1">개별숙박</label>
-                  <i class="fa fa-check-circle color-white font-18"></i>
-                  <i class="fas fa-bed font-16 color-brown-dark"></i>
+                  <i class="fas fa-bed color-white font-18"></i>
+                  <i class="fas fa-bed font-16 color-highlight"></i>
                 </div>
                 <div class="form-check interest-check">
                   <input class="form-check-input" type="checkbox" value="" id="check_env2">
                   <label class="form-check-label rounded-xl border-08" for="check_env2">카풀가능</label>
-                  <i class="fa fa-check-circle color-white font-18"></i>
-                  <i class="fas fa-car font-17 color-magenta-dark"></i>
+                  <i class="fas fa-car color-white font-18"></i>
+                  <i class="fas fa-car font-17 color-highlight"></i>
                 </div>
                 <div class="form-check interest-check">
                   <input class="form-check-input" type="checkbox" value="" id="check_env3">
                   <label class="form-check-label rounded-xl border-08" for="check_env3">센터확정</label>
-                  <i class="fa fa-check-circle color-white font-18"></i>
-                  <i class="fas fa-store font-17 color-blue-light"></i>
+                  <i class="fas fa-store color-white font-18"></i>
+                  <i class="fas fa-store font-17 color-highlight"></i>
                 </div>
               </div>
             </div>
@@ -575,6 +734,65 @@
 
     <div id="snackbar-maxerror" class="snackbar-toast color-white bg-red-dark" data-bs-delay="3000" data-bs-autohide="true"><i class="fa fa-times me-3"></i>최대 5개 까지의 일정만 추가할 수 있습니다.</div>
 
+
+    <!-- Menu : Add Schedule -->
+    <div id="menu-add-schedule" 
+         class="menu menu-box-modal rounded-m bg-theme" 
+         data-menu-width="350"
+         data-menu-height="250">
+        <div class="menu-title p-2">
+            <h1 class="font-600 font-18">일정 추가</h1>
+            <a href="#" class="close-menu"><i class="wedive_icoset wedive_icoset_close"></i></a>
+        </div>
+        
+        <div class="content row mb-0 mt-0">
+            
+              
+            <div class="input-style validate-field col-6 pe-3 ps-0 after-tilde">
+              <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_start" placeholder="시작일" style="height: 32px !important;border-width: 1px;padding-top: 0 !important;padding-left: 10px;border-radius: 4px;">
+              <label for="form_start" class="color-highlight" style="left:14px !important;">시작일</label>
+            </div>
+            <div class="input-style validate-field col-6 ps-3 pe-0">
+              <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_end" placeholder="종료일" style="height: 32px !important;border-width: 1px;padding-top: 0 !important;padding-left: 10px;border-radius: 4px;">
+              <label for="form_end" class="color-highlight" style="left:34px !important;">종료일</label>
+            </div>
+            
+
+            <div class="mt-3 pe-0 ps-0">
+              <vue-typeahead-bootstrap
+                  class=""
+                  v-model="query"
+                  :data="users"
+                  :serializer="item => item.name_ko"
+                  :screen-reader-text-serializer="item => `${item.name_ko}`"
+                  highlightClass="special-highlight-class"
+                  @hit="selecteduser = $event"
+                  :minMatchingChars="2"
+                  placeholder="지역명, 다이빙 포인트, 센터명"
+                  inputClass="special-input-class"
+                  :disabledValues="(selecteduser ? [selecteduser.name_ko] : [])"
+                  @input="lookupUser2"
+                  >
+                  <template slot="suggestion" slot-scope="{ data, htmlText }">
+                      <div class="d-flex align-items-center">
+                      <img
+                          class="rounded-s me-2"
+                          :src="data.img_url"
+                          style="width: 40px; height: 40px;" />
+                      
+                      
+                      
+                      <span v-if="data.type == 'region'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-marked-alt\'></i> 장소</span><br/>' + htmlText"></span>
+                      <span v-else-if="data.type == 'point'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-pin\'></i> 다이빙 포인트</span><br/>' + htmlText"></span>
+                      <span v-else-if="data.type == 'center'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-store\'></i> 다이빙 센터</span><br/>' + htmlText"></span>
+                      </div>
+                  </template>
+              </vue-typeahead-bootstrap>
+            </div>
+            
+            <a href="#" v-on:click="addPersonalBest()" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mt-4">추가하기</a>
+        </div>
+    </div>
 
   </div>
 </template>
@@ -718,10 +936,11 @@ export default {
 .btn-wedive-next {width: 30%;float: right;margin-top: 10px;border-radius: 20px !important;margin-right: 10px;}
 .point-text {overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;}
 
-.border-bottom {border-bottom: 1px solid #d1d2d3 !important;}
+.border-bottom {border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important}
 .border-08 {border: 1px solid rgba(0, 0, 0, 0.08) !important;}
 .pl-10px {padding-left: 10px !important;}
 .wedive-label {left: 34px !important;transform: translateX(-14px) !important;position: absolute;padding: 0px 8px !important;height: 23px;margin-top: -27px;font-size: 12px;transition: all 250ms ease;background-color: #FFF;width: auto;}
-.after-tilde:after {content: '~';position: absolute;right: -5px;top: 12px;color: gray;margin-top: -4px;}
-.schedule-close {text-align: right;position: absolute;right: 6px;}
+.after-tilde:after {content: '~';position: absolute;right: -5px;top: 16px;color: gray;margin-top: -4px;}
+.schedule-close {text-align: right;position: absolute;right: 16px;}
+.wedive-timeline-image {width: 90px;height:90px;object-fit: cover;}
 </style>

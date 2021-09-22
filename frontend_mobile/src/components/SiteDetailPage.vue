@@ -323,7 +323,7 @@
 
         <div class="card card-style">
             <div class="content" style="margin: 15px;">
-                <h4 class="text-start mb-2 font-14">YouTube 소개</h4>
+                <h4 class="text-start mb-2">YouTube 소개</h4>
                 <div class="responsive-iframe" style="-border-radius: 16px;-moz-border-radius: 16px;border-radius: 16px;">
                     <iframe src='https://www.youtube.com/embed/84myx_Td1vE' frameborder='0' allowfullscreen></iframe>
                 </div>
@@ -490,7 +490,7 @@
                         <div class="card card-style mb-3 min-h-230">
                             <div class="content">
                                 <h1 class="text-center"><i class="fas fa-comments fa-2x color-highlight mt-4"></i></h1>
-                                <h1 class="text-center pt-3 font-20 mb-n1">5개 리뷰</h1>
+                                <h1 class="text-center pt-3 font-20 mb-n1">5개 다이빙 로그</h1>
                                 <p class="text-center color-highlight font-600">더보기 <i class="fas fa-chevron-right"></i></p>
                                 
                             </div>

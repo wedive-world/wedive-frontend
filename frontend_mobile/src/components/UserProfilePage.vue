@@ -39,7 +39,7 @@
                     <label for="form1" class="color-highlight">닉네임</label>
                     <i class="fa fa-times disabled invalid color-red-dark"></i>
                     <i class="fa fa-check disabled valid color-green-dark"></i>
-                    <em>(required)</em>
+                    <em>(필수입력)</em>
                 </div>
                 <div class="input-style no-borders has-icon validate-field mb-3">
                     <i class="fa fa-user color-gray"></i>
@@ -47,7 +47,7 @@
                     <label for="form2" class="color-highlight">이름</label>
                     <i class="fa fa-times disabled invalid color-red-dark"></i>
                     <i class="fa fa-check disabled valid color-green-dark"></i>
-                    <em>(required)</em>
+                    <em>(필수입력)</em>
                 </div>
                 <div class="input-style no-borders has-icon validate-field mb-3"">
                     <i class="fas fa-user-clock color-gray"></i>
@@ -55,7 +55,7 @@
                     <label for="form3" class="color-highlight">나이</label>
                     <i class="fa fa-times disabled invalid color-red-dark"></i>
                     <i class="fa fa-check disabled valid color-green-dark"></i>
-                    <em>(required)</em>
+                    <em>(필수입력)</em>
                 </div>
                 <div class="input-style no-borders has-icon validate-field mb-3"">
                     <i class="fas fa-venus-mars color-gray"></i>
@@ -606,7 +606,7 @@
                      aria-expanded="false" 
                      aria-controls="collapse3">
                     <div class="pt-1">
-                        <h4 class="pt-3 mb-0">위다이브 강사</h4>
+                        <h4 class="pt-3 mb-0">위다이브 강사 <span class="mb-2 color-gray-light-mid font-13 ms-2 font-400"><i class="wedive_icoset wedive_icoset_info me-1"></i>위다이브에서 강좌를 개설합니다.</span></h4>
                     </div>
                     <div class="ms-auto me-4 pe-2">
                         <div class="custom-control ios-switch">
@@ -622,7 +622,7 @@
                         <label for="form31" class="color-highlight">전화번호</label>
                         <i class="fa fa-times disabled invalid color-red-dark"></i>
                         <i class="fa fa-check disabled valid color-green-dark"></i>
-                        <em>(required)</em>
+                        <em>(필수입력)</em>
                     </div>
                     <div class="input-style no-borders has-icon validate-field mb-3">
                         <i class="fa fa-at color-gray"></i>
@@ -630,7 +630,7 @@
                         <label for="form32" class="color-highlight">이메일</label>
                         <i class="fa fa-times disabled invalid color-red-dark"></i>
                         <i class="fa fa-check disabled valid color-green-dark"></i>
-                        <em>(required)</em>
+                        <em>(필수입력)</em>
                     </div>
                     
                     <div style="border: 1px solid #abb7ba;width: 150px;height:150px;display: inline-block;background: white;position: relative;">

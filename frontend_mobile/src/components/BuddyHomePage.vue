@@ -7,7 +7,7 @@
         <h4 class="text-start pt-2 mb-0 font-18 font-900">짱스님,<br/>어떤 다이빙을 찾으시나요?</h4>
         </div>
 
-        <div class="card card-style" style="background: white;height:158px;">
+        <div class="card card-style" style="background: white;height:148px;">
             <div class="content mb-0 mt-3">
                 <img class="float-right" src="/static/images/3d/search.png" width="80" style="position: absolute;z-index: 11;right: 30px;top:10px;"/>
                 <h4 class="text-start mb-1 font-15" style="padding-top:36px;">원하는 다이빙을 빠르게 검색</h4>
@@ -35,7 +35,7 @@
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-15 line-height-s mt-2 mb-0">09.25(토) ~ 09.26(일)</h2>
-                            <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> 양양포인트 (강원 사이트)</p>
+                            <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> 하우스리프 포인트 (양양 사이트)</p>
                             <p class="color-secondary font-13 mb-0 ellipsis">#카풀가능&nbsp;&nbsp;#센터확정&nbsp;&nbsp;#개별숙박</p>
                         </div>
                     </div>
@@ -49,7 +49,7 @@
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-15 line-height-s mt-2 mb-0">09.22(수) ~ 09.25(토)</h2>
-                            <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> 서귀포포인트 (제주 사이트)</p>
+                            <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> 문섬 포인트 (서귀포 사이트)</p>
                             <p class="color-secondary font-13 mb-0 ellipsis">&nbsp;</p>
                         </div>
                     </div>
@@ -93,7 +93,7 @@
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-15 line-height-s mt-2 mb-0">09.25(토) ~ 09.26(일)</h2>
-                            <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> 양양포인트 (강원 사이트)</p>
+                            <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> 철재삼동 포인트 (양양 사이트)</p>
                             <p class="color-secondary font-13 mb-0 ellipsis">#카풀가능&nbsp;&nbsp;#센터확정&nbsp;&nbsp;#개별숙박</p>
                         </div>
                     </div>
@@ -105,7 +105,7 @@
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-15 line-height-s mt-2 mb-0">09.22(수) ~ 09.25(토)</h2>
-                            <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> 서귀포포인트 (제주 사이트)</p>
+                            <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> 문섬 포인트 (서귀포 사이트)</p>
                             <p class="color-secondary font-13 mb-0 ellipsis">&nbsp;</p>
                         </div>
                     </div>
@@ -128,7 +128,7 @@
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-15 line-height-s mt-2 mb-0">09.25(토) ~ 09.26(일)</h2>
-                            <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> 양양포인트 (강원 사이트)</p>
+                            <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> 말미잘동산 포인트 (양양 사이트)</p>
                             <p class="color-secondary font-13 mb-0 ellipsis">#카풀가능&nbsp;&nbsp;#센터확정&nbsp;&nbsp;#개별숙박</p>
                         </div>
                     </div>
@@ -142,7 +142,7 @@
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-15 line-height-s mt-2 mb-0">09.22(수) ~ 09.25(토)</h2>
-                            <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> 서귀포포인트 (제주 사이트)</p>
+                            <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> 문섬 포인트 (서귀포 사이트)</p>
                             <p class="color-secondary font-13 mb-0 ellipsis">&nbsp;</p>
                         </div>
                     </div>
@@ -174,7 +174,7 @@
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-15 line-height-s mt-2 mb-0">09.25(토) ~ 09.26(일)</h2>
-                            <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> 양양포인트 (강원 사이트)</p>
+                            <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> 철재삼동 포인트 (양양 사이트)</p>
                             <p class="color-secondary font-13 mb-0 ellipsis">#카풀가능&nbsp;&nbsp;#센터확정&nbsp;&nbsp;#개별숙박</p>
                         </div>
                     </div>
@@ -188,7 +188,7 @@
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-15 line-height-s mt-2 mb-0">09.22(수) ~ 09.25(토)</h2>
-                            <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> 서귀포포인트 (제주 사이트)</p>
+                            <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> 문섬 포인트 (서귀포 사이트)</p>
                             <p class="color-secondary font-13 mb-0 ellipsis">&nbsp;</p>
                         </div>
                     </div>
