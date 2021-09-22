@@ -942,5 +942,5 @@ export default {
 .wedive-label {left: 34px !important;transform: translateX(-14px) !important;position: absolute;padding: 0px 8px !important;height: 23px;margin-top: -27px;font-size: 12px;transition: all 250ms ease;background-color: #FFF;width: auto;}
 .after-tilde:after {content: '~';position: absolute;right: -5px;top: 16px;color: gray;margin-top: -4px;}
 .schedule-close {text-align: right;position: absolute;right: 16px;}
-.wedive-timeline-image {width: 90px;height:90px;object-fit: cover;}
+.wedive-timeline-image {width: 70px;height:70px;object-fit: cover;}
 </style>
