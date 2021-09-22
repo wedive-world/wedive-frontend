@@ -405,37 +405,37 @@
                       <div>할인대상</div>
                       <div class="mb-3">
                         <div class="form-check interest-check">
-                          <input class="form-check-input" type="radio" value="" name="check_discount" id="check_discount1">
+                          <input class="form-check-input" type="checkbox" value="" id="check_discount1">
                           <label class="form-check-label rounded-xl border-08" for="check_discount1">누구나</label>
                           <i class="fas fa-user color-white font-18"></i>
                           <i class="fas fa-user font-16 color-secondary"></i>
                         </div>
                         <div class="form-check interest-check">
-                          <input class="form-check-input" type="radio" value="" name="check_discount" id="check_discount2">
+                          <input class="form-check-input" type="checkbox" value="" id="check_discount2">
                           <label class="form-check-label rounded-xl border-08" for="check_discount2">여성</label>
                           <i class="fas fa-female color-white font-18"></i>
                           <i class="fas fa-female font-17 color-secondary"></i>
                         </div>
                         <div class="form-check interest-check">
-                          <input class="form-check-input" type="radio" value="" name="check_discount" id="check_discount3">
+                          <input class="form-check-input" type="checkbox" value="" id="check_discount3">
                           <label class="form-check-label rounded-xl border-08" for="check_discount3">20대 여성</label>
                           <i class="fas fa-female color-white font-18"></i>
                           <i class="fas fa-female font-17 color-secondary"></i>
                         </div>
                         <div class="form-check interest-check">
-                          <input class="form-check-input" type="radio" value="" name="check_discount" id="check_discount4">
+                          <input class="form-check-input" type="checkbox" value="" id="check_discount4">
                           <label class="form-check-label rounded-xl border-08" for="check_discount4">30대 여성</label>
                           <i class="fas fa-female color-white font-18"></i>
                           <i class="fas fa-female font-17 color-secondary"></i>
                         </div>
                         <div class="form-check interest-check">
-                          <input class="form-check-input" type="radio" value="" name="check_discount" id="check_discount5">
+                          <input class="form-check-input" type="checkbox" value="" id="check_discount5">
                           <label class="form-check-label rounded-xl border-08" for="check_discount5">강사</label>
                           <i class="fas fa-user-graduate color-white font-18"></i>
                           <i class="fas fa-user-graduate font-17 color-secondary"></i>
                         </div>
                         <div class="form-check interest-check">
-                          <input class="form-check-input" type="radio" value="" name="check_discount" id="check_discount6">
+                          <input class="form-check-input" type="checkbox" value="" id="check_discount6">
                           <label class="form-check-label rounded-xl border-08" for="check_discount6">여성 강사</label>
                           <i class="fas fa-user-graduate color-white font-18"></i>
                           <i class="fas fa-user-graduate font-17 color-secondary"></i>
