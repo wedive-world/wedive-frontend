@@ -115,14 +115,22 @@
                         <i class="ico_feature10 icon-point"></i>
                         <p class="span_feature text-center">구조물</p>
                     </div>
+                    <div class="ico_feature col-3">
+                        <i class="ico_feature11 icon-point"></i>
+                        <p class="span_feature text-center">국내우수</p>
+                    </div>
+                    <div class="ico_feature col-3">
+                        <i class="ico_feature12 icon-point"></i>
+                        <p class="span_feature text-center">글로벌TOP</p>
+                    </div>
                 </div>
                 <div class="justify-content-center mb-2 mt-3 text-start">
-                    <div class="splide single-slider slider-no-arrows slider-has-dots pb-0 mb-0" id="single-slider-info">
+                    <div class="splide single-slider slider-no-arrows slider-has-dots pb-4 mb-0" id="single-slider-info">
                         <div class="splide__track">
                             <div class="splide__list">
                                 <div class="splide__slide">
-                                    <div class="min-h-190">
-                                        <div class="content text-start mt-2">
+                                    <div class="min-h-190 p-4">
+                                        <div class="mt-2">
                                             <h1 class="text-center mb-0"><i class="fas fa-calendar-alt font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">방문시기</h1>
                                             <p class="text-start font-400">
@@ -132,8 +140,8 @@
                                     </div>
                                 </div>
                                 <div class="splide__slide">
-                                    <div class="min-h-190">
-                                        <div class="content text-start mt-2">
+                                    <div class="min-h-190 p-4">
+                                        <div class="mt-2">
                                             <h1 class="text-center mb-0"><i class="fas fa-temperature-high font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">수온</h1>
                                             <p class="text-start font-400">
@@ -143,8 +151,8 @@
                                     </div>
                                 </div>
                                 <div class="splide__slide">
-                                    <div class="min-h-190">
-                                        <div class="content text-start mt-2">
+                                    <div class="min-h-190 p-4">
+                                        <div class="mt-2">
                                             <h1 class="text-center mb-0"><i class="fas fa-level-down-alt font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">수심</h1>
                                             <p class="text-start font-400">
@@ -154,8 +162,8 @@
                                     </div>
                                 </div>
                                 <div class="splide__slide">
-                                    <div class="min-h-190">
-                                        <div class="content text-start mt-2">
+                                    <div class="min-h-190 p-4">
+                                        <div class="mt-2">
                                             <h1 class="text-center mb-0"><i class="fas fa-water font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">해류</h1>
                                             <p class="text-start font-400">
@@ -165,8 +173,8 @@
                                     </div>
                                 </div>
                                 <div class="splide__slide">
-                                    <div class="min-h-190">
-                                        <div class="content text-start mt-2">
+                                    <div class="min-h-190 p-4">
+                                        <div class="mt-2">
                                             <h1 class="text-center mb-0"><i class="fas fa-eye font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">시야</h1>
                                             <p class="text-start font-400">
@@ -176,8 +184,8 @@
                                     </div>
                                 </div>
                                 <div class="splide__slide">
-                                    <div class="min-h-190">
-                                        <div class="content text-start mt-2">
+                                    <div class="min-h-190 p-4">
+                                        <div class="mt-2">
                                             <h1 class="text-center mb-0"><i class="fas fa-highlighter font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">다이빙 하이라이트</h1>
                                             <p class="text-start font-400">
@@ -419,113 +427,126 @@
             </div>
         </div>
 
-        <div class="splide single-slider slider-no-arrows slider-has-dots pb-4 mb-4" id="single-slider-1">
-            <div class="splide__track">
-                <div class="splide__list">
-                    <div class="splide__slide">
-                        <div class="card card-style mb-3 min-h-230">
-                            <div class="content text-start">
-                                <div class="d-flex">
-                                    <div class="flex-grow-1">
-                                        <div class="float-start">
-                                            <h1 class="fa-2x font-900 me-2 mb-0">5.00</h1>
-                                            <p class="font-10 mb-0 mt-n2 opacity-40 text-end"></p>
+        
+        <div class="card card-style">
+            <div class="mb-0 mt-10">
+            <h4 class="text-start pt-4 mb-0 pe-3 ps-3">리뷰</h4>
+            <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
+            <div class="divider mt-3 mb-0 ms-3 me-3"></div>
+                <div class="splide single-slider slider-no-arrows slider-has-dots pb-4 mb-0" id="single-slider-1">
+                    <div class="splide__track">
+                        <div class="splide__list">
+                            <div class="splide__slide">
+                                <div class="min-h-230 p-4">
+                                        <div class="d-flex">
+                                            <div class="flex-grow-1">
+                                                <div class="float-start">
+                                                    <h1 class="fa-2x font-900 me-2 mb-0">5.00</h1>
+                                                    <p class="font-10 mb-0 mt-n2 opacity-40 text-start">펀 다이빙</p>
+                                                </div>
+                                                <span>
+                                                    <i class="fa fa-star color-yellow-dark"></i>
+                                                    <i class="fa fa-star color-yellow-dark"></i>
+                                                    <i class="fa fa-star color-yellow-dark"></i>
+                                                    <i class="fa fa-star color-yellow-dark"></i>
+                                                    <i class="fa fa-star color-yellow-dark"></i>
+                                                </span>
+                                                
+                                            </div>
+                                            <div>
+                                                <h6 class="text-end">김성진</h6>
+                                                <p class="font-10 mb-0 mt-n2 opacity-40 text-end">2021.08.30</p>
+                                            </div>
                                         </div>
-                                        <span>
-                                            <i class="fa fa-star color-yellow-dark"></i>
-                                            <i class="fa fa-star color-yellow-dark"></i>
-                                            <i class="fa fa-star color-yellow-dark"></i>
-                                            <i class="fa fa-star color-yellow-dark"></i>
-                                            <i class="fa fa-star color-yellow-dark"></i>
-                                        </span>
-                                        
-                                    </div>
-                                    <div>
-                                        <h6 class="text-end">김성진</h6>
-                                        <p class="font-10 mb-0 mt-n2 opacity-40 text-end">2021.08.30</p>
-                                    </div>
-                                </div>
-                                <p class="review-text mt-3">
-                                    <a href="https://t1.daumcdn.net/cfile/tistory/224C493F542D088905" data-gallery="gallery-99" class="filtr-item" title="" data-category="99">
-                                        <img src="/static/images/empty.png" data-src="https://t1.daumcdn.net/cfile/tistory/224C493F542D088905" class="preload-img rounded-s shadow-m review_img" alt="방문자리뷰">
-                                    </a>
-                                    나이트다이빙을 해보면 본인이 체질인지 여부를 바로 알 수 있다. 입수 후 어두운 바다가 눈앞에 펼쳐지지만 이내 모든게 밝아진다. 나이트다이빙 특유의 분위기가 가득하다. 마치 낯선 행성을 탐험하는 기분이랄까, 이국적으로 몽환적인 분위기에 한껏 취하게 된다. 함께 간 모든 사람들이 너무나도 좋아해서 힘들게 기획한만큼 보람있는 다이빙 이었다.
-                                </p>
+                                        <p class="review-text mt-2 mb-1">
+                                            <a href="https://t1.daumcdn.net/cfile/tistory/224C493F542D088905" data-gallery="gallery-99" class="filtr-item" title="" data-category="99">
+                                                <img src="/static/images/empty.png" data-src="https://t1.daumcdn.net/cfile/tistory/224C493F542D088905" class="preload-img rounded-s shadow-m review_img" alt="방문자리뷰">
+                                            </a>
+                                            나이트다이빙을 해보면 본인이 체질인지 여부를 바로 알 수 있다. 입수 후 어두운 바다가 눈앞에 펼쳐지지만 이내 모든게 밝아진다. 나이트다이빙 특유의 분위기가 가득하다. 마치 낯선 행성을 탐험하는 기분이랄까, 이국적으로 몽환적인 분위기에 한껏 취하게 된다. 함께 간 모든 사람들이 너무나도 좋아해서 힘들게 기획한만큼 보람있는 다이빙 이었다.
+                                        </p>
+                                </div>     
                             </div>
-                        </div>     
-                    </div>
-                    <div class="splide__slide">
-                        <div class="card card-style mb-3 min-h-230">
-                            <div class="content text-start">
-                                <div class="d-flex">
-                                    <div class="flex-grow-1">
-                                        <div class="float-start">
-                                            <h1 class="fa-2x font-900 me-2 mb-0">4.98</h1>
-                                            <p class="font-10 mb-0 mt-n2 opacity-40 text-end"></p>
+                            <div class="splide__slide">
+                                <div class="min-h-230 p-4">
+                                        <div class="d-flex">
+                                            <div class="flex-grow-1">
+                                                <div class="float-start">
+                                                    <h1 class="fa-2x font-900 me-2 mb-0">4.98</h1>
+                                                    <p class="font-10 mb-0 mt-n2 opacity-40 text-start">트레이닝</p>
+                                                </div>
+                                                <span>
+                                                    <i class="fa fa-star color-yellow-dark"></i>
+                                                    <i class="fa fa-star color-yellow-dark"></i>
+                                                    <i class="fa fa-star color-yellow-dark"></i>
+                                                    <i class="fa fa-star color-yellow-dark"></i>
+                                                    <i class="fa fa-star color-yellow-dark"></i>
+                                                </span>
+                                            </div>
+                                            <div>
+                                                <h6 class="text-end">조관우</h6>
+                                                <p class="font-10 mb-0 mt-n2 opacity-40 text-end">2021.08.27</p>
+                                            </div>
                                         </div>
-                                        <span>
-                                            <i class="fa fa-star color-yellow-dark"></i>
-                                            <i class="fa fa-star color-yellow-dark"></i>
-                                            <i class="fa fa-star color-yellow-dark"></i>
-                                            <i class="fa fa-star color-yellow-dark"></i>
-                                            <i class="fa fa-star color-yellow-dark"></i>
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <h6 class="text-end">조관우</h6>
-                                        <p class="font-10 mb-0 mt-n2 opacity-40 text-end">2021.08.27</p>
-                                    </div>
-                                </div>
-                                <p class="review-text mt-3">
-                                    남애 스쿠버 리조트의 젊은 스태프들은 항상 기운이 넘치고 시원시원하고 친절하다. 고객들이 원하는 바를 하나하나 세심히 맞춰주기 위해 노력하는 스태프들 덕에 편안히 다이빙을 즐길 수 있다. 작은 동물에도 애정을 쏟고 살뜰히 보살피는 마음씀씀이가 리조트 곳곳에 베어 리조트를 찾는 다이버들의 마음도 편안하게 해준다. 편안한 마음으로 신나게 기운차게 다이빙을 다이빙을 즐길 수 있는 곳, 남애 스쿠버 리조트이다.
-                                </p>
+                                        <p class="review-text mt-2 mb-1">
+                                            남애 스쿠버 리조트의 젊은 스태프들은 항상 기운이 넘치고 시원시원하고 친절하다. 고객들이 원하는 바를 하나하나 세심히 맞춰주기 위해 노력하는 스태프들 덕에 편안히 다이빙을 즐길 수 있다. 작은 동물에도 애정을 쏟고 살뜰히 보살피는 마음씀씀이가 리조트 곳곳에 베어 리조트를 찾는 다이버들의 마음도 편안하게 해준다. 편안한 마음으로 신나게 기운차게 다이빙을 다이빙을 즐길 수 있는 곳, 남애 스쿠버 리조트이다.
+                                        </p>
+                                </div>   
                             </div>
-                        </div>   
-                    </div>
-                    <div class="splide__slide">
-                        <div class="card card-style mb-3 min-h-230">
-                            <div class="content text-start">
-                                <div class="d-flex">
-                                    <div class="flex-grow-1">
-                                        <div class="float-start">
-                                            <h1 class="fa-2x font-900 me-2 mb-0">4.5</h1>
-                                            <p class="font-10 mb-0 mt-n2 opacity-40 text-end">섬 다이빙</p>
+                            <div class="splide__slide">
+                                <div class="min-h-230 p-4">
+                                        <div class="d-flex">
+                                            <div class="flex-grow-1">
+                                                <div class="float-start">
+                                                    <h1 class="fa-2x font-900 me-2 mb-0">4.5</h1>
+                                                    <p class="font-10 mb-0 mt-n2 opacity-40 text-start">펀 다이빙</p>
+                                                </div>
+                                                <span>
+                                                    <i class="fa fa-star color-yellow-dark"></i>
+                                                    <i class="fa fa-star color-yellow-dark"></i>
+                                                    <i class="fa fa-star color-yellow-dark"></i>
+                                                    <i class="fa fa-star color-yellow-dark"></i>
+                                                    <i class="fa fa-star color-yellow-dark"></i>
+                                                </span>
+                                            </div>
+                                            <div>
+                                                <h6 class="text-end">조윤구</h6>
+                                                <p class="font-10 mb-0 mt-n2 opacity-40 text-end">2021.08.20</p>
+                                            </div>
                                         </div>
-                                        <span>
-                                            <i class="fa fa-star color-yellow-dark"></i>
-                                            <i class="fa fa-star color-yellow-dark"></i>
-                                            <i class="fa fa-star color-yellow-dark"></i>
-                                            <i class="fa fa-star color-yellow-dark"></i>
-                                            <i class="fa fa-star color-yellow-dark"></i>
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <h6 class="text-end">조윤구</h6>
-                                        <p class="font-10 mb-0 mt-n2 opacity-40 text-end">2021.08.20</p>
-                                    </div>
-                                </div>
-                                <p class="review-text mt-3">
-                                    <a href="http://www.uwmagazine.co.kr/news/photo/202008/895_2811_2553.jpg" data-gallery="gallery-99" class="filtr-item" title="" data-category="99">
-                                        <img src="/static/images/empty.png" data-src="http://www.uwmagazine.co.kr/news/photo/202008/895_2811_2553.jpg" class="preload-img rounded-s shadow-m review_img" alt="방문자리뷰">
-                                    </a>
-                                    파고는 0.5미터 이상이였습니다. 해안 근처는 잔잔해 보였는데 5분정도 배타고 나가니 파고도 높아지고 조류도 제법 강했습니다.  무엇보다 시야가 너무 별로였습니다. 부유물들이 겨울바다 답지않게 너무 심했습니다. 영상을 보시면 아시겠지만 부유물덕에 입수해서 내려가는 속도가 느껴질만큼 많았습니다.
-                                </p>
+                                        <p class="review-text mt-2 mb-1">
+                                            <a href="http://www.uwmagazine.co.kr/news/photo/202008/895_2811_2553.jpg" data-gallery="gallery-99" class="filtr-item" title="" data-category="99">
+                                                <img src="/static/images/empty.png" data-src="http://www.uwmagazine.co.kr/news/photo/202008/895_2811_2553.jpg" class="preload-img rounded-s shadow-m review_img" alt="방문자리뷰">
+                                            </a>
+                                            파고는 0.5미터 이상이였습니다. 해안 근처는 잔잔해 보였는데 5분정도 배타고 나가니 파고도 높아지고 조류도 제법 강했습니다.  무엇보다 시야가 너무 별로였습니다. 부유물들이 겨울바다 답지않게 너무 심했습니다. 영상을 보시면 아시겠지만 부유물덕에 입수해서 내려가는 속도가 느껴질만큼 많았습니다.
+                                        </p>
+                                </div>   
                             </div>
-                        </div>   
-                    </div>
-                    <div class="splide__slide">
-                        <div class="card card-style mb-3 min-h-230">
-                            <div class="content">
-                                <h1 class="text-center"><i class="fas fa-comments fa-2x color-highlight mt-4"></i></h1>
-                                <h1 class="text-center pt-3 font-20 mb-n1">5개 다이빙 로그</h1>
-                                <p class="text-center color-highlight font-600">더보기 <i class="fas fa-chevron-right"></i></p>
-                                
+                            <div class="splide__slide">
+                                <div class="min-h-230 p-4">
+                                        <h1 class="text-center"><i class="fas fa-pen-square fa-2x color-highlight mt-4"></i></h1>
+                                        <h1 class="text-center pt-3 font-20 mb-n1">5개 다이빙 로그</h1>
+                                        <p class="text-center color-highlight font-600">더보기 <i class="fas fa-chevron-right"></i></p>
+                                </div>    
                             </div>
-                        </div>    
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="divider mt-4 mb-2 ms-3 me-3"></div>
+            <div class="star-area mt-4 text-center">
+                <i class="fa fa-star font-20 color-gray-light"></i>
+                <i class="fa fa-star font-20 color-gray-light"></i>
+                <i class="fa fa-star font-20 color-gray-light"></i>
+                <i class="fa fa-star font-20 color-gray-light"></i>
+                <i class="fa fa-star font-20 color-gray-light"></i>
+            </div>
+            <div class="text-center color-gray mt-2 mb-3">이곳을 방문해보셨나요?</div>
+            <div class="me-4 ms-4 mb-5" style="background: rgba(58, 58, 58, 0.03);padding: 10px 20px;">
+                <p class="mb-0" style="color: rgba(58, 58, 58, 0.6)">다녀온 기록을 남겨보세요.</p>
+                <p class="mb-0 color-highlight">지금 로그북남기기 <i class="fas fa-chevron-right ms-1"></i></p>
+            </div>
         </div>
+
 
 
         
@@ -725,8 +746,8 @@ export default {
 .ico_feature8 {width: 44px;height: 40px;background-position: -45px -42px;}
 .ico_feature9 {width: 44px;height: 40px;background-position: -90px -40px;}
 .ico_feature10 {width: 44px;height: 40px;background-position: -135px -42px;}
-.ico_feature11 {width: 44px;height: 40px;background-position: -180px -40px;}
-.ico_feature12 {width: 44px;height: 40px;background-position: -225px -40px;}
+.ico_feature11 {width: 44px;height: 40px;background-position: -180px -42px;}
+.ico_feature12 {width: 44px;height: 40px;background-position: -225px -42px;}
 
 .icon-point {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/wedive_point.png);background-repeat: no-repeat;-webkit-background-size: 270px 90px;background-size: 270px 90px;}
 
