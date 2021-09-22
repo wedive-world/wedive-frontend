@@ -160,8 +160,6 @@
   </div>
 </template>
 <script>
-import VueTypeaheadBootstrap from 'vue-typeahead-bootstrap';
-import {debounce} from 'lodash';
 var select_cnt = 0;
 
 export default {
@@ -176,7 +174,7 @@ export default {
     
   },
   components: {
-    VueTypeaheadBootstrap
+    
   },
   created() {
     

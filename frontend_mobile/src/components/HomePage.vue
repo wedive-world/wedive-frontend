@@ -1,6 +1,44 @@
 <template>
   <div class="">
     <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-home" data-menu-load=""></div>
+    <a href="#" data-menu="menu-main" class="header-icon header-icon-1"><i class="fas fa-bars" style="height: 50px;width: 45px;text-align: center;line-height: 49px;font-size: 12px;color: #fff;border: none;position: absolute;z-index:99"></i></a>
+
+    <div class="sch_logo_container">
+    <div class="sch_background">
+      <div class="sb_img_wrap">
+      <img class="sb_img" src="/static/images/mobile_back.png" />
+      </div>
+      
+    </div>
+    <vue-typeahead-bootstrap
+                            class="wedive-search-main pe-4 ps-4 mt-n4"
+                            v-model="query"
+                            :data="users"
+                            :serializer="item => item.name_ko"
+                            :screen-reader-text-serializer="item => `${item.name_ko}`"
+                            highlightClass="special-highlight-class"
+                            @hit="selecteduser = $event;show_scuba_label();"
+                            :minMatchingChars="2"
+                            placeholder="어디로 가고싶은신가요?"
+                            inputClass="special-input-class"
+                            :disabledValues="(selecteduser ? [selecteduser.name_ko] : [])"
+                            @input="lookupUser2"
+                            >
+                            <template slot="suggestion" slot-scope="{ data, htmlText }">
+                                <div class="d-flex align-items-center">
+                                <img
+                                    class="rounded-s me-2"
+                                    :src="data.img_url"
+                                    style="width: 40px; height: 40px;" />
+                                
+                                <span v-if="data.type == 'region'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-marked-alt\'></i> 장소</span><br/>' + htmlText"></span>
+                                <span v-else-if="data.type == 'point'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-pin\'></i> 다이빙 포인트</span><br/>' + htmlText"></span>
+                                <span v-else-if="data.type == 'center'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-store\'></i> 다이빙 센터</span><br/>' + htmlText"></span>
+                                </div>
+                            </template>
+                        </vue-typeahead-bootstrap>
+    </div>
+    <img v-on:click="goHome()" class="logo-image" style="position:absolute;top:0;top:30px;left: 50%;transform: translate(-50%, -50%);" src="/static/images/logo-light.svg" height="50"/>
     <div class="page-content">
         
         <div class="content">
@@ -54,6 +92,8 @@
   </div>
 </template>
 <script>
+import VueTypeaheadBootstrap from 'vue-typeahead-bootstrap';
+import {debounce} from 'lodash';
 
 export default {
   name: 'HelloWorld',
@@ -61,7 +101,12 @@ export default {
     var preloader = document.getElementById('preloader')
     if(preloader){preloader.classList.add('preloader-hide');}
     
-    
+    $(".page-title").hide();
+    $(".page-title-clear").hide();
+    $(".header-fixed").hide();
+  },
+  components: {
+    VueTypeaheadBootstrap
   },
   created() {
     
@@ -71,9 +116,19 @@ export default {
   },
   data () {
     return {
-        
+        query: '',
+        selecteduser: null,
+        users: []
     }
   }, methods: {
+    lookupUser2: debounce(function(){
+        this.users = [
+            {"id": "region_ko_jeju", "type": "region", "name_ko": "제주도", name_en: "Jeju island", "img_url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0c/bf/d2/56/photo1jpg.jpg?w=100&h=100&s=1"},
+            {"id": "region_ko_wooljin", "type": "region", "name_ko": "울진", name_en: "Wooljin", "img_url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/01/5a/31/a0/sunrise-peak-seongsan.jpg?w=100&h=100&s=1"},
+            {"id": "center_ko_jeju_bubbletank", "type": "center", "name_ko": "제주 버블탱크 스쿠버다이빙", name_en: "Bubble tank", "img_url": "/static/bubble2.jpg"},
+            {"id": "point_ko_jeju_munisland", "type": "point", "name_ko": "제주도 문섬", name_en: "Mun island", "img_url": "https://api.cdn.visitjeju.net/photomng/imgpath/201907/31/07c1996d-4374-4e77-b353-300d01783718.jpg"},
+        ];
+      }, 500),
     goStatic: function() {
         location.href='/static'
     }
@@ -87,5 +142,43 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.sch_logo_container {
+    position: relative;
+    z-index: 0;
+    min-height: 212px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.sch_background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    overflow: hidden;
+    display: block;
+    position: relative;
+    height: 146px;
+}
+.sb_img_wrap {
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+        bottom: 0;
+}
+@media (max-width: 319px)
+.sb_img {
+    width: 378px;
+}
+@media (max-width: 374px)
+.sb_img {
+    width: 530px;
+}
+.sb_img {
+    width: 568px;
+    height: auto;
+}
 
 </style>
