@@ -20,7 +20,7 @@
         
         <div class="card card-style" style="margin-top:-60px; z-index:1">
             <div class="content text-center mt-4">
-                <h2 class="font-20 font-700 mb-0">양양 다이빙 사이트</h2>
+                <h2 class="font-20 font-700 mb-0 mt-1">양양 다이빙 사이트</h2>
                 <h2 class="wedive-score">3.4</h2>
                 <span class="wedive-score-desc">일반적</span>
                 <p class="color-gray m-0"><i class="fas fa-map-marked-alt" ></i> 대한민국, 강원도</p>
@@ -561,7 +561,7 @@
                 <i class="fa fa-star font-20 color-gray-light"></i>
             </div>
             <div class="text-center color-gray mt-2 mb-3">이곳을 방문해보셨나요?</div>
-            <div class="me-4 ms-4 mb-4" style="background: rgba(58, 58, 58, 0.03);padding: 10px 20px;border-radius: 4px;">
+            <div class="me-4 ms-4" style="margin-bottom: 34px;background: rgba(58, 58, 58, 0.03);padding: 10px 20px;border-radius: 4px;">
                 <p class="mb-0" style="color: rgba(58, 58, 58, 0.6)">다녀온 기록을 남겨보세요.</p>
                 <p class="mb-0 color-highlight">지금 로그북남기기 <i class="fas fa-chevron-right ms-1"></i></p>
             </div>
@@ -803,8 +803,8 @@ export default {
 
 
 
-.wedive-score {position: absolute;right: 10px; top: 10px;background: #1d397c; border-radius: 10px 10px 10px 0px; padding: 4px 8px; color: white;}
-.wedive-score-desc {position: absolute;right: 4px; top: 40px;color: #1d397c; width:56px;}
+.wedive-score {position: absolute;right: 15px; top: 15px;background: #1d397c; border-radius: 10px 10px 10px 0px; padding: 4px 8px; color: white;}
+.wedive-score-desc {position: absolute;right: 10px; top: 44px;color: #1d397c; width:56px;}
 .wedive-title {font-family: 'Noto Sans Korean' !important;font-weight:700;margin-bottom:0px;}
 .wedive-desc {font-family: 'Noto Sans Korean' !important;font-weight:200;margin-bottom:16px;line-height: 1.6}
 .min-h-160 {min-height: 160px;}
