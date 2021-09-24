@@ -30,9 +30,9 @@
         
         <div class="card card-style" style="margin-top:-60px; z-index:1">
             <div class="content text-center mt-4">
-                <h2 class="font-20 font-700 mb-0">버블탱크 스쿠버다이빙</h2>
+                <h2 class="font-20 font-700 mb-0 mt-1">버블탱크 스쿠버다이빙</h2>
                 <p class="color-gray m-0">제주 남부에 위치한 PADI 5star 다이빙센터</p>
-                <div class="star-area mt-3">
+                <div class="star-area mt-3 mb-1">
                     <i class="fa fa-star font-20 color-yellow-dark scale-box"></i>
                     <i class="fa fa-star font-20 color-yellow-dark scale-box"></i>
                     <i class="fa fa-star font-20 color-yellow-dark scale-box"></i>
@@ -50,8 +50,9 @@
                 <div style="margin-top:8px;"><span>최근리뷰 32</span>&nbsp;&nbsp;<font class="color-gray-light">|</font>&nbsp;&nbsp;<img class="ext-img" src="/static/images/logo_padi.svg" width="48" />&nbsp;&nbsp;<font class="color-gray-light">|</font>&nbsp;&nbsp;<span>￦￦</span>
                 <!--<span class="badge font-10 bg-fade-gray-dark">PADI 공식</span>-->
                 </div>
+
+                <div class="divider mt-3 mb-3"></div>
                 <div class="d-flex mt-3 mb-0 text-center">
-                    
                     <div class="flex-grow-1 pd-0" style="border-right: 1px solid lightgray;">
                     <button href="#" v-on:click="call()">
                         <img class="ext-img" src="/static/images/ico_call.png" width="24" style="margin-top:-4px;"/>
@@ -415,7 +416,7 @@
                     
                 </div>
                 <div data-bs-parent="#tab-group-2" class="collapse px-2" id="tab-time">
-                    <div class="row mb-0 mt-2">
+                    <div class="row mb-0 mt-3">
                         <h5 class="col-6 text-start font-13 font-400">일요일</h5>
                         <p class="col-6 mb-2 text-end">08:00 - 21:00</p>
                         <h5 class="col-6 text-start font-13 font-400">월요일</h5>
@@ -532,8 +533,8 @@
 
 
         <div class="card card-style">
-            <div class="content mb-0 mt-10">
-                <h4 class="text-start pt-2 mb-0">주소</h4>
+            <div class="content mb-0">
+                <h4 class="text-start pt-2 mb-2">주소</h4>
                 <p class="text-start mb-3 mb-0">
                     <a href="#" data-menu="menu-copy"><i class="far fa-copy color-blue2-dark"></i> 제주 서귀포시 부두로 41 버블탱크</a><br/>
                     <a href="#" data-menu="menu-direction"><i class="fas fa-route color-blue2-dark"></i> 공항-샵 이동방법 안내</a>
@@ -586,17 +587,16 @@
         </div>
 
 
-
         <div class="card card-style">
-            <div class="mb-0 mt-10">
-            <h4 class="text-start pt-4 mb-0 pe-3 ps-3">리뷰</h4>
+            <div class="content">
+            <h4 class="text-start">리뷰</h4>
             <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
-            <div class="divider mt-3 mb-0 ms-3 me-3"></div>
-                <div class="splide single-slider slider-no-arrows slider-has-dots pb-4 mb-0" id="single-slider-1">
+            <div class="divider mt-3 mb-2"></div>
+                <div class="splide single-slider slider-no-arrows slider-has-dots pb-2 mb-0 me-n2 ms-n2" id="single-slider-review">
                     <div class="splide__track">
                         <div class="splide__list">
-                            <div class="splide__slide">
-                                <div class="min-h-230 p-4">
+                            <div class="splide__slide pt-2">
+                                <div class="min-h-230 p-2">
                                         <div class="d-flex">
                                             <div class="flex-grow-1">
                                                 <div class="float-start">
@@ -631,7 +631,7 @@
                                 </div>     
                             </div>
                             <div class="splide__slide">
-                                <div class="min-h-230 p-4">
+                                <div class="min-h-230 p-2">
                                         <div class="d-flex">
                                             <div class="flex-grow-1">
                                                 <div class="float-start">
@@ -662,7 +662,7 @@
                                 </div>   
                             </div>
                             <div class="splide__slide">
-                                <div class="min-h-230 p-4">
+                                <div class="min-h-230 p-2">
                                         <div class="d-flex">
                                             <div class="flex-grow-1">
                                                 <div class="float-start">
@@ -691,9 +691,9 @@
                                 </div>   
                             </div>
                             <div class="splide__slide">
-                                <div class="min-h-230 p-4">
-                                        <h1 class="text-center"><i class="fas fa-comments fa-2x color-highlight mt-4"></i></h1>
-                                        <h1 class="text-center pt-3 font-20 mb-n1">13개 리뷰</h1>
+                                <div class="min-h-230 p-2">
+                                        <h1 class="text-center"><i class="fas fa-pen-square fa-2x color-highlight mt-4"></i></h1>
+                                        <h1 class="text-center pt-3 font-20 mb-n1">5개 다이빙 로그</h1>
                                         <p class="text-center color-highlight font-600">더보기 <i class="fas fa-chevron-right"></i></p>
                                 </div>    
                             </div>
@@ -701,7 +701,7 @@
                     </div>
                 </div>
             </div>
-            <div class="divider mt-4 mb-2 ms-3 me-3"></div>
+            <div class="divider mt-2 mb-2 ms-3 me-3"></div>
             <div class="star-area mt-4 text-center">
                 <i class="fa fa-star font-20 color-gray-light"></i>
                 <i class="fa fa-star font-20 color-gray-light"></i>
@@ -710,11 +710,14 @@
                 <i class="fa fa-star font-20 color-gray-light"></i>
             </div>
             <div class="text-center color-gray mt-2 mb-3">이 다이빙 센터는 어떠셨나요?</div>
-            <div class="me-4 ms-4 mb-5" style="background: rgba(58, 58, 58, 0.03);padding: 10px 20px;">
+            <div class="me-4 ms-4" style="margin-bottom: 34px;background: rgba(58, 58, 58, 0.03);padding: 10px 20px;border-radius: 4px;">
                 <p class="mb-0" style="color: rgba(58, 58, 58, 0.6)">다른 다이버들에게 도움이 되어보세요.</p>
                 <p class="mb-0 color-highlight">지금 리뷰남기기 <i class="fas fa-chevron-right ms-1"></i></p>
             </div>
         </div>
+
+
+
 
         <!--<div class="card card-style">
             <div class="content text-start mb-0">

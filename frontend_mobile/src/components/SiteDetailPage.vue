@@ -220,8 +220,8 @@
                 <h4 class="text-start pt-2 mb-2">양양 인기 포인트</h4>
                 <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
                 <div v-for="(point,index) in point_list" v-if="index<3">
-                    <div class="map-box">
-                        <div class="bx">
+                    <div class="">
+                        <div class="">
                             <div class="justify-content-center mb-0 text-start">
                                 <a href="/point">
                                     <div style="position: relative;">
@@ -324,9 +324,9 @@
                 <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
                 
                 <div v-for="(center,index) in center_list" v-if="index<3">
-                    <div class="map-box">
+                    <div class="">
                         <a href="/center">
-                            <div class="bx">
+                            <div class="">
                                 <div class="justify-content-center mb-0 text-start">
                                     <div class="" style="float: left;position: relative;width: 95px; height:95px;">
                                         <img v-bind:src="center.img" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;">
@@ -381,6 +381,24 @@
                 <span class="wedive-txt-all color-gray mt-2"><img src="/static/images/ico_pin2.png" width="19"/> 얕은수심&nbsp;&nbsp;<img src="/static/images/ico_pin3.png" width="19"/> 깊은수심</span>
             </div>
             <div id="map" style="height: 300px;"></div>
+            <div class="map-box hide">
+                <a href="/point">
+                    <div class="bx">
+                        <div class="justify-content-center mb-0 text-start">
+                            <div class="" style="width: 95px; height:95px;">
+                                <img id="map_box_shop_img" src="" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;">
+                            </div>
+                            
+                            <div class="" style="">
+                                <h4 class="font-14 ellipsis mb-0" id="map_box_shop_name"></h4>
+                                <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark"></i>
+                                    &nbsp;<span id="map_box_shop_star"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
         </div>
 
         <h4 class="text-start mb-2" style="margin-left: 10px;margin-right: 10px;">근처 사이트</h4>
@@ -690,13 +708,47 @@ export default {
             var _img = (_type == 'sf') ? '/static/images/ico_pin2_o8.png' : (_type == 'df') ? '/static/images/ico_pin3_o8.png' : (_type == 'so') ? '/static/images/ico_pin2_o.png' : '/static/images/ico_pin3_o.png';
             var _marker_class = (_type == 'sf') ? 'marker-position2' : (_type == 'df') ? 'marker-position3' : (_type == 'so') ? 'marker-position2-o' : 'marker-position3-o';
 
-            var marker_shop = new google.maps.Marker({
+            const title = this.point_list[i].title;
+            const desc = this.point_list[i].desc;
+            const star = this.point_list[i].star;
+            const img = this.point_list[i].img1;
+
+            const marker_point = new google.maps.Marker({
                 map: this.map,
                 position: _position,
                 label: {text: _title, color: 'white', className: _marker_class},
                 icon: new google.maps.MarkerImage(_img, null, null, null, new google.maps.Size(38,43)),
             });
+
+            marker_point.addListener("click", () => {
+                $(".map-box").removeClass("hide");
+                for (var j=0; j<this.marker_list.length; j++) {
+                    var _icon = this.marker_list[j].getIcon();
+                    if (_icon.size.width != 38) {
+                        this.marker_list[j].setIcon(new google.maps.MarkerImage('/static/images/ico_pin2.png', null, null, null, new google.maps.Size(38,43)));
+                    }
+                }
+
+                $("#map_box_shop_name").text(title);
+                $("#map_box_shop_desc").text(desc);
+                $("#map_box_shop_star").text(star);
+                $("#map_box_shop_img").attr("src", img);
+                
+                
+                marker_point.setIcon(new google.maps.MarkerImage('/static/images/ico_pin_big1.png', null, null, null, new google.maps.Size(58,66)));
+                if (this.map.getZoom() == 16) {
+                    this.map.panTo(marker_point.getPosition());
+                } else {
+                    this.map.setZoom(16);
+                    this.map.setCenter(marker_point.getPosition());
+                }
+            });
+            this.marker_list.push(marker_point);
         }
+
+        this.map.addListener("click", (e) => {
+            $(".map-box").addClass("hide");
+        });
         
     };
   },
@@ -706,6 +758,7 @@ export default {
   data () {
     return {
         map: null,
+        marker_list: [],
         point_list : [
             {title: "말미잘동산", type: 'df', desc: "동해의 명물 섬유세닐말미잘이 유난히 많은 포인트로, 모래 지형 위에 커다란 암반과 크고 작은 바위들이 형성되어 있는 포인트 입니다. 섬유세닐말미잘은 낮은 수온에서 펴기 때문에 6월 이전에 방문한다면 이 포인트의 아름다움을 제대로 느낄 수 있습니다.", star: 4.6, img1: 'https://divingholic.com/wp-content/uploads/2019/02/maxresdefault-1.jpg', img2: 'https://diverz.net/data/diving/point/202102/1614156788_8f436f8c0dc8a574611b_thumb_760_504.jpg', img3: 'https://divingholic.com/wp-content/uploads/2019/02/2%EC%9B%94%EC%9D%B8%EA%B5%AC%ED%95%B4%EB%B3%80%EB%94%A5.jpg', position: {lat: 37.9668859063654, lng: 128.79946317636166}},
             {title: "철재삼동", type: 'df', desc: "여름철 동해의 상징은 볼락이라고 할 수 있습니다. 그중에서도 수많은 볼락이 태풍처럼 있다고 해서 볼락태풍이라는 별명을 가진 포인트가 철재삼동 포인트 입니다. 초여름에서 초가을까지 3달정도되는 기간에 20m전후 수심, 11~15도의 수온 삼박자가 맞아떨어지면 거대한 볼락 떼를 만날 수 있습니다.", star: 4.3, img1: '/static/images/point/ko/yangyang_chuljesamdong_01.jpg', img2: '/static/images/point/ko/yangyang_chuljesamdong_02.jpg', img3: '/static/images/point/ko/yangyang_chuljesamdong_03.jpg', position: {lat: 37.947207012548716, lng: 128.81497292286326}},
@@ -794,14 +847,7 @@ export default {
         display:inline-block;
 }
 .min-h-230 {min-height: 230px;}
-.review_img {float: left;width: 88px; height:88px;margin-right:10px;margin-bottom:2px;border-radius:10px;}
 .txt_box2 {background: #f4f4f4; border-radius: .5rem;padding: 6px 0px 8px 0px;}
-
-
-
-
-
-
 
 .wedive-score {position: absolute;right: 15px; top: 15px;background: #1d397c; border-radius: 10px 10px 10px 0px; padding: 4px 8px; color: white;}
 .wedive-score-desc {position: absolute;right: 10px; top: 44px;color: #1d397c; width:56px;}
@@ -818,4 +864,8 @@ export default {
 .review_img {float: left;width: 88px; height:88px;margin-right:10px;margin-bottom:2px;border-radius:10px;object-fit: cover !important;}
 .wd-220 {width:220px !important;}
 .card-nearby {margin-left: 10px;background-size: cover !important;}
+
+.map-box {position: absolute;right: 6px;bottom: 21px;margin: 5px 5px 4px;width: 115px;}
+.bx {background-color: rgba(255,255,255);padding: 10px;min-height: 105px;border: 1px solid rgba(0,0,0,.1);border-radius: 10px;}
+
 </style>

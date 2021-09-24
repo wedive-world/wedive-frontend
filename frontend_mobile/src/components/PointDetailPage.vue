@@ -16,28 +16,27 @@
         
 
     
-        
-        
         <div class="card card-style" style="margin-top:-60px; z-index:1">
-            <div class="text-center" style="padding:30px 10px;">
-                <h2 class="font-20 font-700 mb-0">문섬 포인트</h2>
-                <h2 class="wedive-score">4.3</h2>
+            <div class="content text-center mt-4">
+                <h2 class="font-20 font-700 mb-0 mt-1">문섬 포인트</h2>
+                <h2 class="wedive-score">4.1</h2>
                 <span class="wedive-score-desc">우수</span>
                 <p class="color-gray m-0"><i class="fas fa-map-marked-alt" ></i> 대한민국, 제주도, 서귀포 사이트</p>
                 
+
                 <div class="evaluation pt-3">
                     <div class="d-flex">
                         <div class="flex-grow-1">
-                            <div class="star-area">
+                            <div class="star-area text-start ms-3">
                                 <span class="font-14 me-2 color-gray">환경</span>
                                 <i class="fas fa-fish font-20 color-orange-light scale-box"></i>
                                 <i class="fas fa-fish font-20 color-orange-light scale-box"></i>
                                 <i class="fas fa-fish font-20 color-orange-light scale-box"></i>
-                                <i class="fas fa-fish font-20 color-gray-light scale-box"></i>
+                                <i class="fas fa-fish font-20 color-orange-light scale-box"></i>
                                 <i class="fas fa-fish font-20 color-gray-light scale-box"></i>
                                 <span class="font-14 ms-2">4.1</span>
                             </div>
-                            <div class="star-area mt-1">
+                            <div class="star-area mt-1 text-start ms-3">
                                 <span class="font-14 me-2 color-gray">유속</span>
                                 <i class="fas fa-water font-20 color-aqua-dark scale-box"></i>
                                 <i class="fas fa-water font-20 color-aqua-dark scale-box"></i>
@@ -46,14 +45,14 @@
                                 <i class="fas fa-water font-20 color-gray-light scale-box"></i>
                                 <span class="font-14 ms-2">3.9</span>
                             </div>
-                            <div class="star-area mt-1">
+                            <div class="star-area mt-1 text-start ms-3">
                                 <span class="font-14 me-2 color-gray">시야</span>
                                 <i class="fas fa-eye font-20 color-green-dark scale-box"></i>
                                 <i class="fas fa-eye font-20 color-green-dark scale-box"></i>
                                 <i class="fas fa-eye font-20 color-green-dark scale-box"></i>
+                                <i class="fas fa-eye font-20 color-green-dark scale-box"></i>
                                 <i class="fas fa-eye font-20 color-gray-light scale-box"></i>
-                                <i class="fas fa-eye font-20 color-gray-light scale-box"></i>
-                                <span class="font-14 ms-2">4.0</span>
+                                <span class="font-14 ms-2">4.2</span>
                             </div>
                         </div>
                         <div class="flex-grow-1">
@@ -64,31 +63,45 @@
                     </div>
                     <div class="divider mt-2 mb-2"></div>
                     <div class="d-flex">
-                        <div class="flex-grow-1">
+                        <div class="flex-grow-1 text-start ms-3">
                             <span class="font-14 me-2 color-gray">깊이</span>
                             15-55m
                         </div>
                         <div class="flex-grow-1">
-                            <span class="bg-green-light" style="padding: 3px 6px;border-radius:4px;">초급, 중급, 고급 가능</span>
+                            <span class="bg-gray-dark" style="padding: 3px 6px;border-radius:4px;">초급, 중급, 고급 가능</span>
                         </div>
                     </div>
                 </div>
-                
 
                 <p class="color-gray mt-3 mb-0 text-start me-2 ms-2">대한민국 3대 포인트로, 서귀포 하면 가장 먼저 떠오르는 다이빙 포인트 입니다. 물때에 따라 다른 방향으로 흘러가는 조류 다이빙, 다양한 연산호와 물고기들이 어우러진 곳이다. 서귀포항에서 배를 타고 5분 정도면 다다를 수 있을정도로 가까운 섬이며, 도지정 문화재 기념물로 보호되고 있습니다.</p>
+                
+                <div class="divider mt-3 mb-3"></div>
+                
+                <div class="d-flex mb-0 text-center">
+                    <div class="flex-grow-1 pd-0" style="border-right: 1px solid lightgray;">
+                        <img class="ext-img" src="/static/images/ico_heart.png" width="24" style="margin-top:-4px;"/>
+                        <span class="font-16 font-500 font-noto">찜 192</span>
+                    </div>
+                    
+                    <div class="flex-grow-1 pd-0" data-menu="menu-share">
+                        <img class="ext-img" src="/static/images/ico_share.png" width="24" style="margin-top:-4px;"/>
+                        <span class="font-16 font-500 font-noto">공유</span>
+                    </div>
+                </div>
 
             </div>
         </div>
         
+        
 
 
-        <div class="card card-style p-2">
-            <div class="content mb-2">
+        <div class="card card-style">
+            <div class="content">
                 <div class="text-center">
                     <i class="ico ico-wedive-w -circle color-primary scale-box fa-4x"></i>
                 </div>
                 <h4 class="text-center pt-2 mb-2">where is here?</h4>
-                <div class="row text-start mb-0 txt_box2">
+                <div class="row text-start txt_box2 m-0">
                     <div class="ico_feature col-3">
                         <i class="ico_feature2 icon-point"></i>
                         <p class="span_feature text-center">난파선</p>
@@ -102,12 +115,12 @@
                         <p class="span_feature text-center">국내우수</p>
                     </div>
                 </div>
-                <div class="justify-content-center mb-2 mt-3 text-start">
+                <div class="justify-content-center mb-2 mt-2 text-start me-n2 ms-n2">
                     <div class="splide single-slider slider-no-arrows slider-has-dots pb-4 mb-0" id="single-slider-info">
                         <div class="splide__track">
-                            <div class="splide__list">
+                            <div class="splide__list pt-n3">
                                 <div class="splide__slide">
-                                    <div class="min-h-190 p-4">
+                                    <div class="min-h-160 p-2">
                                         <div class="mt-2">
                                             <h1 class="text-center mb-0"><i class="fas fa-calendar-alt font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">방문시기</h1>
@@ -118,7 +131,7 @@
                                     </div>
                                 </div>
                                 <div class="splide__slide">
-                                    <div class="min-h-190 p-4">
+                                    <div class="min-h-160 p-2">
                                         <div class="mt-2">
                                             <h1 class="text-center mb-0"><i class="fas fa-temperature-high font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">수온</h1>
@@ -129,7 +142,7 @@
                                     </div>
                                 </div>
                                 <div class="splide__slide">
-                                    <div class="min-h-190 p-4">
+                                    <div class="min-h-190 p-2">
                                         <div class="mt-2">
                                             <h1 class="text-center mb-0"><i class="fas fa-level-down-alt font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">수심</h1>
@@ -140,7 +153,7 @@
                                     </div>
                                 </div>
                                 <div class="splide__slide">
-                                    <div class="min-h-190 p-4">
+                                    <div class="min-h-160 p-2">
                                         <div class="mt-2">
                                             <h1 class="text-center mb-0"><i class="fas fa-water font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">해류</h1>
@@ -151,7 +164,7 @@
                                     </div>
                                 </div>
                                 <div class="splide__slide">
-                                    <div class="min-h-190 p-4">
+                                    <div class="min-h-160 p-2">
                                         <div class="mt-2">
                                             <h1 class="text-center mb-0"><i class="fas fa-eye font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">시야</h1>
@@ -162,7 +175,7 @@
                                     </div>
                                 </div>
                                 <div class="splide__slide">
-                                    <div class="min-h-190 p-4">
+                                    <div class="min-h-160 p-2">
                                         <div class="mt-2">
                                             <h1 class="text-center mb-0"><i class="fas fa-highlighter font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">다이빙 하이라이트</h1>
@@ -175,22 +188,22 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
                 
             </div>
         </div>
 
-
         <div class="card card-style">
-            <div class="content" style="margin: 15px;">
-                <h4 class="text-start pt-2 mb-3">하이라이트</h4>
+            <div class="content">
+                <h4 class="text-start pt-2 mb-2">하이라이트</h4>
                 <div>
                     <div style="display: inline-block;width: 30px; height: 30px; fill: rgb(0, 0, 0);"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path d="M 10 9 C 6.132813 9 3 12.132813 3 16 L 3 34 C 3 37.867188 6.132813 41 10 41 L 40 41 C 43.867188 41 47 37.867188 47 34 L 47 16 C 47 12.132813 43.867188 9 40 9 Z M 10 11 L 40 11 C 42.757813 11 45 13.242188 45 16 L 45 34 C 45 36.757813 42.757813 39 40 39 L 10 39 C 7.242188 39 5 36.757813 5 34 L 5 16 C 5 13.242188 7.242188 11 10 11 Z M 24.53125 17.15625 C 24.101563 19.554688 22.398438 20.070313 20 20.15625 L 20 21.6875 L 24.125 21.6875 L 24.125 32.90625 L 26 32.90625 L 26 17.15625 Z"></path></svg></div>
                     국내 최대규모의 연산호 군락지, 유네스코 생물권 보호지역
                 </div>
-                <div class="ms-1 me-1">
-                    <a href="#" class="row mb-2"> 
-                        <div class="col-6 ps-1 pe-1">
+                <div class="">
+                    <a href="#" class="row m-0 mb-2"> 
+                        <div class="col-6 ps-0 pe-1">
                             <div class="card rounded-sm mb-2">
                                 <a class="" data-gallery="'gallery-0" href="/static/images/point/ko/jeju_munisland_07.jpg" title="">
                                     <img src="/static/images/empty.png" data-src="/static/images/point/ko/jeju_munisland_07.jpg" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 80px;">
@@ -204,7 +217,7 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="col-6 ps-1 pe-1">
+                        <div class="col-6 ps-1 pe-0">
                             <div class="card rounded-sm mb-0">
                                 <a class="" data-gallery="'gallery-0" href="/static/images/point/ko/jeju_munisland_09.jpg" title="">
                                     <img src="/static/images/empty.png" data-src="/static/images/point/ko/jeju_munisland_09.jpg" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 170px;">
@@ -220,7 +233,7 @@
                     <div style="display: inline-block;width: 30px; height: 30px; fill: rgb(0, 0, 0);"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path d="M 10 9 C 6.132813 9 3 12.132813 3 16 L 3 34 C 3 37.867188 6.132813 41 10 41 L 40 41 C 43.867188 41 47 37.867188 47 34 L 47 16 C 47 12.132813 43.867188 9 40 9 Z M 10 11 L 40 11 C 42.757813 11 45 13.242188 45 16 L 45 34 C 45 36.757813 42.757813 39 40 39 L 10 39 C 7.242188 39 5 36.757813 5 34 L 5 16 C 5 13.242188 7.242188 11 10 11 Z M 25.03125 17 C 20.410156 17 19.976563 20.902344 20.0625 22.71875 L 21.96875 22.71875 C 21.96875 22.199219 22.121094 18.71875 25.03125 18.71875 C 27.769531 18.71875 28.125 21.160156 28.125 21.59375 C 28.125 26.4375 19.65625 26.253906 19.65625 33 L 29.90625 33 L 29.90625 31.28125 L 21.78125 31.28125 C 22.210938 27.734375 30 27.042969 30 21.59375 C 30 20.816406 29.652344 17 25.03125 17 Z"></path></svg></div>
                     형형색색의 크고 작은 물고기 떼
                 </div>
-                <div class="row text-center row-cols-3 mb-1" style="padding-left:10px;padding-right:10px;">
+                <div class="row m-0 text-center row-cols-3 mb-1" style="margin-left: -4px !important; margin-rigth: -4px !important;">
                     <a class="col square-rect" data-gallery="'gallery-0" href="/static/images/point/ko/jeju_munisland_10.jpg" title="">
                         <img src="/static/images/empty.png" data-src="/static/images/point/ko/jeju_munisland_10.jpg" class="preload-img img-fluid rounded-s" alt="Point image">
                         <div class="wedive-source mx-80">instagram.com/p/CUFJxmJvDbN/</div>
@@ -239,9 +252,9 @@
                     <div style="display: inline-block;width: 30px; height: 30px; fill: rgb(0, 0, 0);"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path d="M 10 9 C 6.132813 9 3 12.132813 3 16 L 3 34 C 3 37.867188 6.132813 41 10 41 L 40 41 C 43.867188 41 47 37.867188 47 34 L 47 16 C 47 12.132813 43.867188 9 40 9 Z M 10 11 L 40 11 C 42.757813 11 45 13.242188 45 16 L 45 34 C 45 36.757813 42.757813 39 40 39 L 10 39 C 7.242188 39 5 36.757813 5 34 L 5 16 C 5 13.242188 7.242188 11 10 11 Z M 25.21875 17 C 20.789063 17 20.398438 21.023438 20.375 22 L 22.25 22 C 22.277344 21.324219 22.582031 18.6875 25.21875 18.6875 C 27.6875 18.6875 28.03125 20.398438 28.03125 21.25 C 28.03125 21.675781 27.785156 23.8125 25.0625 23.8125 L 24.28125 23.8125 L 24.28125 25.4375 C 24.621094 25.351563 24.980469 25.34375 25.40625 25.34375 C 25.832031 25.34375 28.71875 25.417969 28.71875 28.3125 C 28.71875 31.121094 25.738281 31.375 25.3125 31.375 C 23.804688 31.375 22.054688 30.46875 22 28 L 20.125 28 C 20.140625 29.226563 20.511719 33 25.3125 33 C 26.25 33 30.6875 32.730469 30.6875 28.21875 C 30.6875 25.410156 28.8125 24.578125 27.875 24.40625 L 27.875 24.3125 C 28.472656 23.972656 30 22.941406 30 21.15625 C 30 20.476563 29.816406 17 25.21875 17 Z"></path></svg></div>
                     구난파선, 신난파선 두군데의 난파선 포인트
                 </div>
-                <div class="ms-1 me-1">
-                    <a href="#" class="row mb-2"> 
-                        <div class="col-6 ps-1 pe-1">
+                <div class="">
+                    <a href="#" class="row m-0 mb-2"> 
+                        <div class="col-6 ps-0 pe-1">
                             <div class="card rounded-sm mb-0">
                                 <a class="" data-gallery="'gallery-0" href="/static/images/point/ko/jeju_munisland_13.jpg" title="">
                                     <img src="/static/images/empty.png" data-src="/static/images/point/ko/jeju_munisland_13.jpg" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 170px;">
@@ -249,7 +262,7 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="col-6 ps-1 pe-1">
+                        <div class="col-6 ps-1 pe-0">
                             <div class="card rounded-sm mb-2">
                                 <a class="" data-gallery="'gallery-0" href="/static/images/point/ko/jeju_munisland_14.jpg" title="">
                                     <img src="/static/images/empty.png" data-src="/static/images/point/ko/jeju_munisland_14.jpg" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 80px;">
@@ -269,25 +282,28 @@
             </div>
         </div>
 
+
         <div class="card card-style">
-            <div class="content" style="margin: 15px;">
+            <div class="content mb-4 pb-2">
                 <h4 class="text-start pt-2 mb-2">YouTube 소개</h4>
                 <div class="responsive-iframe" style="-border-radius: 16px;-moz-border-radius: 16px;border-radius: 16px;">
                     <iframe src='https://www.youtube.com/embed/L1sVcQSqDAo' frameborder='0' allowfullscreen></iframe>
                 </div>
             </div>
         </div>
+        
+
 
         <div class="card card-style">
-            <div class="content mb-0 mt-3">
+            <div class="content">
                 <h4 class="text-start pt-2 mb-0">인기 다이빙 센터</h4>
                 <p class="mb-3 color-gray-light-mid">양양 사이트의 28개의 센터 준비됨</p>
                 <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
                 
                 <div v-for="(center,index) in center_list" v-if="index<3">
-                    <div class="map-box">
+                    <div class="">
                         <a href="/center">
-                            <div class="bx">
+                            <div class="">
                                 <div class="justify-content-center mb-0 text-start">
                                     <div class="" style="float: left;position: relative;width: 95px; height:95px;">
                                         <img v-bind:src="center.img" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;">
@@ -325,7 +341,7 @@
                     <a href="#" class="gallery-view-3"><i class="fa fa-bars"></i></a>
                     <div class="clearfix"></div>
                 </div>
-                <div class="content my-n1">
+                <div class="content m-0">
                     <div class="gallery-views gallery-view-2">
                         <a data-gallery="gallery-1" href="/static/images/point/ko/jeju_munisland_01.jpg" title="문섬 바다 속 풍경">
                             <img src="images/empty.png" data-src="/static/images/point/ko/jeju_munisland_01.jpg" class="rounded-m preload-img shadow-l img-fluid" alt="img">
@@ -371,10 +387,28 @@
 
 
         <div class="card card-style">
-            <div class="content mb-0 mt-10">
-                <h4 class="text-start pt-2 mb-3">문섬 포인트와 인기 다이빙 센터</h4>
+            <div class="content mt-10">
+                <h4 class="text-start pt-2 mb-0">인기 다이빙 센터</h4>
             </div>
             <div id="map" style="height: 300px;"></div>
+            <div class="map-box hide">
+                <a href="/point">
+                    <div class="bx">
+                        <div class="justify-content-center mb-0 text-start">
+                            <div class="" style="width: 95px; height:95px;">
+                                <img id="map_box_shop_img" src="" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;">
+                            </div>
+                            
+                            <div class="" style="">
+                                <h4 class="font-14 ellipsis mb-0" id="map_box_shop_name"></h4>
+                                <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark"></i>
+                                    &nbsp;<span id="map_box_shop_star"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
         </div>
 
         <div class="card card-style">
@@ -420,18 +454,79 @@
             </div>
         </div>
 
-
+        <h4 class="text-start mb-2" style="margin-left: 10px;margin-right: 10px;">근처 포인트</h4>
+        <div class="splide single-slider slider-no-arrows visible-slider slider-no-dots" id="single-slider-nearby">
+            <div class="splide__track">
+                <div class="splide__list">
+                    <div class="splide__slide">
+                        <div class="card card-style card-nearby" style="background: url(https://image.theminda.com/data/tg/image/tour/middle/202006/2e6ff60341af47987c05eef458b07dfb.jpg)" data-card-height="260">
+                            <div class="card-top px-3 py-3">
+                                <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-red-dark"></i></a>
+                            </div>
+                            <div class="card-bottom px-3 py-3">
+                                <h4 class="color-white font-18 font-600">범섬 포인트</h4>
+                                <div class="divider bg-white opacity-20 mb-1"></div>
+                                <div class="d-flex">
+                                    <div class="align-self-center" style="max-width: 100%;">
+                                        <p class="font-11 opacity-70 font-600 color-white nearby_desc mb-0" style="max-width: 100%;">대한민국 3대 포인트가 위치한 사이트로 강원도 지역에서 가장 유명한 사이트 입니다. 특히 수중 금강산이라고 불리는 낙산대기 포인트와 개복치를 볼 수 있는 마이산 포인트 등이 유명합니다.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-overlay bg-gradient opacity-30"></div>
+                            <div class="card-overlay bg-gradient"></div>
+                        </div>
+                    </div>
+                    <div class="splide__slide">
+                        <div class="card card-style card-nearby" style="background: url(https://static.wixstatic.com/media/d49a86_3e0b03ae1cfc42979041148d5abbd332~mv2.jpg/v1/fill/w_1000,h_668,al_c,q_90,usm_0.66_1.00_0.01/d49a86_3e0b03ae1cfc42979041148d5abbd332~mv2.jpg)" data-card-height="260">
+                            <div class="card-top px-3 py-3">
+                                <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-gray-light"></i></a>
+                            </div>
+                            <div class="card-bottom px-3 py-3">
+                                <h4 class="color-white font-18 font-600">섶섬 포인트</h4>
+                                <div class="divider bg-white opacity-20 mb-1"></div>
+                                <div class="d-flex">
+                                    <div class="align-self-center" style="max-width: 100%;">
+                                        <p class="font-11 opacity-70 font-600 color-white nearby_desc mb-0" style="max-width: 100%;">일반적으로 모래바닥으로 구성된 동해안과는 다르게 속초의 바다는 암석형태가 많이 있습니다. 덕분에 이곳에서 다이빙을 한다면 다양한 볼거리를 마주할 수 있습니다.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-overlay bg-gradient opacity-30"></div>
+                            <div class="card-overlay bg-gradient"></div>
+                        </div>
+                    </div>
+                    <div class="splide__slide">
+                        <div class="card card-style card-nearby" style="background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnb0wu0n9HF7dFV51aUw69W50V4dZ9r7gLbg&usqp=CAU)" data-card-height="260">
+                            <div class="card-top px-3 py-3">
+                                <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-gray-light"></i></a>
+                            </div>
+                            <div class="card-bottom px-3 py-3">
+                                <h4 class="color-white font-18 font-600">바다목장 포인트</h4>
+                                <div class="divider bg-white opacity-20 mb-1"></div>
+                                <div class="d-flex">
+                                    <div class="align-self-center" style="max-width: 100%;">
+                                        <p class="font-11 opacity-70 font-600 color-white nearby_desc mb-0" style="max-width: 100%;">대한민국 최대 규모의 난파선 다이빙 포인트인 스텔라 난파선 포인트가 위치한 사이트 입니다. 더불어 강원도 3대 미항으로 꼽히는 삼곡항이 있는 등 아름다운 다이빙 사이트 입니다.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-overlay bg-gradient opacity-30"></div>
+                            <div class="card-overlay bg-gradient"></div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
 
         <div class="card card-style">
-            <div class="mb-0 mt-10">
-            <h4 class="text-start pt-4 mb-0 pe-3 ps-3">리뷰</h4>
+            <div class="content">
+            <h4 class="text-start">다이빙 로그</h4>
             <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
-            <div class="divider mt-3 mb-0 ms-3 me-3"></div>
-                <div class="splide single-slider slider-no-arrows slider-has-dots pb-4 mb-0" id="single-slider-1">
+            <div class="divider mt-3 mb-2"></div>
+                <div class="splide single-slider slider-no-arrows slider-has-dots pb-2 mb-0 me-n2 ms-n2" id="single-slider-review">
                     <div class="splide__track">
                         <div class="splide__list">
-                            <div class="splide__slide">
-                                <div class="min-h-230 p-4">
+                            <div class="splide__slide pt-2">
+                                <div class="min-h-230 p-2">
                                         <div class="d-flex">
                                             <div class="flex-grow-1">
                                                 <div class="float-start">
@@ -461,7 +556,7 @@
                                 </div>     
                             </div>
                             <div class="splide__slide">
-                                <div class="min-h-230 p-4">
+                                <div class="min-h-230 p-2">
                                         <div class="d-flex">
                                             <div class="flex-grow-1">
                                                 <div class="float-start">
@@ -487,7 +582,7 @@
                                 </div>   
                             </div>
                             <div class="splide__slide">
-                                <div class="min-h-230 p-4">
+                                <div class="min-h-230 p-2">
                                         <div class="d-flex">
                                             <div class="flex-grow-1">
                                                 <div class="float-start">
@@ -516,7 +611,7 @@
                                 </div>   
                             </div>
                             <div class="splide__slide">
-                                <div class="min-h-230 p-4">
+                                <div class="min-h-230 p-2">
                                         <h1 class="text-center"><i class="fas fa-pen-square fa-2x color-highlight mt-4"></i></h1>
                                         <h1 class="text-center pt-3 font-20 mb-n1">5개 다이빙 로그</h1>
                                         <p class="text-center color-highlight font-600">더보기 <i class="fas fa-chevron-right"></i></p>
@@ -526,7 +621,7 @@
                     </div>
                 </div>
             </div>
-            <div class="divider mt-4 mb-2 ms-3 me-3"></div>
+            <div class="divider mt-2 mb-2 ms-3 me-3"></div>
             <div class="star-area mt-4 text-center">
                 <i class="fa fa-star font-20 color-gray-light"></i>
                 <i class="fa fa-star font-20 color-gray-light"></i>
@@ -535,7 +630,7 @@
                 <i class="fa fa-star font-20 color-gray-light"></i>
             </div>
             <div class="text-center color-gray mt-2 mb-3">이곳을 방문해보셨나요?</div>
-            <div class="me-4 ms-4 mb-5" style="background: rgba(58, 58, 58, 0.03);padding: 10px 20px;">
+            <div class="me-4 ms-4" style="margin-bottom: 34px;background: rgba(58, 58, 58, 0.03);padding: 10px 20px;border-radius: 4px;">
                 <p class="mb-0" style="color: rgba(58, 58, 58, 0.6)">다녀온 기록을 남겨보세요.</p>
                 <p class="mb-0 color-highlight">지금 로그북남기기 <i class="fas fa-chevron-right ms-1"></i></p>
             </div>
@@ -660,21 +755,56 @@ export default {
         for (var i=0; i<this.center_list.length; i++) {
             var _title = this.center_list[i].title;
             var _position = this.center_list[i].position;
+
+            const title = this.center_list[i].title;
+            const desc = this.center_list[i].desc;
+            const star = this.center_list[i].star;
+            const img = this.center_list[i].img;
            
-            var marker_shop = new google.maps.Marker({
+            const marker_shop = new google.maps.Marker({
                 map: this.map,
                 position: _position,
                 label: {text: _title, color: 'white', className: 'marker-position'},
                 icon: new google.maps.MarkerImage('/static/images/ico_pin1.png',null, null, null, new google.maps.Size(38,43)),
             });
+
+            marker_shop.addListener("click", () => {
+                $(".map-box").removeClass("hide");
+                for (var j=0; j<this.marker_list.length; j++) {
+                    var _icon = this.marker_list[j].getIcon();
+                    if (_icon.size.width != 38) {
+                        this.marker_list[j].setIcon(new google.maps.MarkerImage('/static/images/ico_pin2.png', null, null, null, new google.maps.Size(38,43)));
+                    }
+                }
+
+                $("#map_box_shop_name").text(title);
+                $("#map_box_shop_desc").text(desc);
+                $("#map_box_shop_star").text(star);
+                $("#map_box_shop_img").attr("src", img);
+                
+                
+                marker_shop.setIcon(new google.maps.MarkerImage('/static/images/ico_pin_big1.png', null, null, null, new google.maps.Size(58,66)));
+                if (this.map.getZoom() == 16) {
+                    this.map.panTo(marker_shop.getPosition());
+                } else {
+                    this.map.setZoom(16);
+                    this.map.setCenter(marker_shop.getPosition());
+                }
+            });
+            this.marker_list.push(marker_shop);
         }
-        var marker_shop = new google.maps.Marker({
+        this.map.addListener("click", (e) => {
+            $(".map-box").addClass("hide");
+        });
+
+        
+
+        var marker_point = new google.maps.Marker({
             map: this.map,
             position: {lat: 33.226771248454575, lng: 126.56573069418906},
             label: {text: '문섬 포인트', color: 'white', className: 'marker-position2'},
             icon: new google.maps.MarkerImage('/static/images/ico_pin2.png',null, null, null, new google.maps.Size(38,43)),
         });
-        
     };
   },
   created() {
@@ -683,6 +813,7 @@ export default {
   data () {
     return {
         map: null,
+        marker_list: [],
         center_list : [
             {title: "버블탱크 스쿠버다이빙", desc: "제주 남부에 위치한 PADI 5star 다이빙센터", star: 3.8, price_index: 2, feature: "덕다이빙, 케이브, 난파선, 드리프트", img: '/static/images/shop1/diving/test1.jpg', position: {lat: 33.24134444312815, lng: 126.56484940647604}},
             {title: "다이브 투게더리조트", desc: "한줄설명1", star: 4.8, price_index: 2, feature: "덕다이빙, 케이브", img: '/static/images/shop1/diving/test2.jpg', position: {lat: 33.241633952501715, lng: 126.56456092676112}},
@@ -758,10 +889,10 @@ export default {
         display:inline-block;
 }
 .min-h-230 {min-height: 230px;}
-.review_img {float: left;width: 88px; height:88px;margin-right:10px;margin-bottom:2px;border-radius:10px;}
+.review_img {float: left;width: 88px; height:88px;margin-right:10px;margin-bottom:2px;border-radius:10px;object-fit: cover !important;}
 .txt_box2 {background: #f4f4f4; border-radius: .5rem;padding: 6px 0px 8px 0px;}
-.wedive-score {position: absolute;right: 10px; top: 10px;background: #1d397c; border-radius: 10px 10px 10px 0px; padding: 4px 8px; color: white;}
-.wedive-score-desc {position: absolute;right: 4px; top: 40px;color: #1d397c; width:56px;}
+.wedive-score {position: absolute;right: 15px; top: 15px;background: #1d397c; border-radius: 10px 10px 10px 0px; padding: 4px 8px; color: white;}
+.wedive-score-desc {position: absolute;right: 10px; top: 44px;color: #1d397c; width:56px;}
 .square-rect {position: relative;padding:0;}
 .square-rect:after {content: "";display: block;padding-bottom: 100%;}
 .square-rect > img {position: absolute;width: 100%;height: 100%;left: 0;padding:4px;object-fit: cover;}
@@ -770,4 +901,9 @@ export default {
 .mx-140 {max-width: 140px;}
 .img-fluid {width: 100%;object-fit: cover;}
 .wedive-txt-all {position: absolute;top: 20px;right: 16px;}
+.card-nearby {margin-left: 10px;background-size: cover !important;}
+.font-noto {font-family: 'Noto Sans Korean'}
+.nearby_desc {font-family: 'Noto Sans Korean' !important;font-weight:200;overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;line-height: 1.4;}
+.map-box {position: absolute;right: 6px;bottom: 21px;margin: 5px 5px 4px;width: 115px;}
+.bx {background-color: rgba(255,255,255);padding: 10px;min-height: 105px;border: 1px solid rgba(0,0,0,.1);border-radius: 10px;}
 </style>
