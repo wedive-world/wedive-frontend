@@ -3,8 +3,8 @@
     <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-chat" data-menu-load=""></div>    
     <div class="card card-style ms-0 me-0 rounded-0">
         <div class="content">
-            <a href="/chat" class="mb-2">
-                <div class="p-relative d-inline-block w-60">
+            <a href="/chat" class="">
+                <div class="p-relative d-inline-block w-60 mb-2">
                     <div class="user-img">
                         <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
                             <defs>
@@ -24,8 +24,8 @@
                 <div class="latest">어제</div>
             </a>
             <div class="divider mb-2"></div>
-            <a href="/chat" class="mb-2">
-                <div class="p-relative d-inline-block w-60">
+            <a href="/chat" class="">
+                <div class="p-relative d-inline-block w-60 mb-2">
                     <div class="user-img">
                         <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
                             <defs>
@@ -45,8 +45,8 @@
                 <div class="latest">9월 22일</div>
             </a>
             <div class="divider mb-2"></div>
-            <a href="/chat" class="mb-2">
-                <div class="p-relative d-inline-block w-60">
+            <a href="/chat" class="">
+                <div class="p-relative d-inline-block w-60 mb-2">
                     <div class="user-img">
                         <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
                             <defs>
@@ -66,9 +66,11 @@
                 <div class="latest">9월 20일</div>
             </a>
             <div class="divider mb-2"></div>
-            <a href="/chat" class="mb-2">
-                <div class="p-relative d-inline-block w-60">
-                    <div class="user-img img-small">
+            
+            
+            <a href="/chat" class="">
+                <div class="p-relative d-inline-block w-60 mb-2">
+                    <div class="user-img img-sm">
                         <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
                             <defs>
                             <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
@@ -79,7 +81,7 @@
                             <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="/static/images/user/jang.jpg"/>
                         </svg>
                     </div>
-                    <div class="user-img img-small img-right-bottom">
+                    <div class="user-img img-sm img-sm-rb">
                         <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
                             <defs>
                             <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
@@ -93,6 +95,61 @@
                 </div>
                 <div class="ms-2 d-inline-block v-align-top">
                     <h5 class="font-14 font-600 mb-0">윤장송<span class="color-gray-light-mid font-400 ms-2">3</span></h5>
+                    <p class="line-height-s opacity-60 font-13">현일아 일하자</p>
+                </div>
+                <div class="latest">오후 6:31</div>
+            </a>
+            <div class="divider mb-2"></div>
+
+            <a href="/chat" class="">
+                <div class="p-relative d-inline-block w-60 mb-2">
+                    <div class="user-img img-xs">
+                        <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                            <defs>
+                            <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                            <clipPath id="clipSquircle">
+                                <use xlink:href="#shapeSquircle"/>
+                            </clipPath>
+                            </defs>
+                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="/static/images/user/jang.jpg"/>
+                        </svg>
+                    </div>
+                    <div class="user-img img-xs img-xs-rt">
+                        <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                            <defs>
+                            <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                            <clipPath id="clipSquircle">
+                                <use xlink:href="#shapeSquircle"/>
+                            </clipPath>
+                            </defs>
+                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="/static/images/user/yoon.jpg"/>
+                        </svg>
+                    </div>
+                    <div class="user-img img-xs img-xs-lb">
+                        <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                            <defs>
+                            <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                            <clipPath id="clipSquircle">
+                                <use xlink:href="#shapeSquircle"/>
+                            </clipPath>
+                            </defs>
+                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="/static/images/user/song.jpg"/>
+                        </svg>
+                    </div>
+                    <div class="user-img img-xs img-xs-rb">
+                        <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                            <defs>
+                            <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                            <clipPath id="clipSquircle">
+                                <use xlink:href="#shapeSquircle"/>
+                            </clipPath>
+                            </defs>
+                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="/static/images/ico_wedive_d.png"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="ms-2 d-inline-block v-align-top">
+                    <h5 class="font-14 font-600 mb-0">위다이브<span class="color-gray-light-mid font-400 ms-2">3</span></h5>
                     <p class="line-height-s opacity-60 font-13">팀 위다이브 영원하라</p>
                 </div>
                 <div class="latest">오후 6:31</div>
@@ -142,17 +199,14 @@ export default {
 .p-relative {position: relative;}
 .d-inline-block {display: inline-block;}
 .v-align-top {vertical-align: top !important;}
-.w-60 {width: 60px;}
+.w-60 {width: 60px;height:60px;}
 
-.img-small {
-  width: 40px !important;
-  height: 40px !important;
-}
-.img-right-bottom {
-  position: absolute !important;
-  top: 20px;
-  left: 20px;
-}
+.img-sm {width: 40px !important;height: 40px !important;}
+.img-xs {width: 29px !important;height: 29px !important;}
+.img-sm-rb {position: absolute !important;top: 20px;left: 20px;}
+.img-xs-rb {position: absolute !important;top: 31px;left: 31px;}
+.img-xs-rt {position: absolute !important;top: 31px;left: 0px;}
+.img-xs-lb {position: absolute !important;top: 0px;left: 31px;}
 
 .user-img {
   position: relative;
