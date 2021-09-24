@@ -13,6 +13,8 @@ import CoursePage from '@/components/CoursePage'
 import SiteHomePage from '@/components/SiteHomePage'
 import SiteDetailPage from '@/components/SiteDetailPage'
 import PointDetailPage from '@/components/PointDetailPage'
+import ChatHomePage from '@/components/ChatHomePage'
+import ChatDetailPage from '@/components/ChatDetailPage'
 import StaticPage from '@/components/StaticPage'
 
 Vue.use(Router)
@@ -83,6 +85,16 @@ export default new Router({
       path: '/point',
       name: 'PointDetailPage',
       component: PointDetailPage
+    },
+    {
+      path: '/chat_home',
+      name: 'ChatHomePage',
+      component: ChatHomePage
+    },
+    {
+      path: '/chat',
+      name: 'ChatDetailPage',
+      component: ChatDetailPage
     },
     {
       path: '/static',

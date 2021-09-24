@@ -634,7 +634,7 @@
                     </div>
                     
                     <div style="border: 1px solid #abb7ba;width: 150px;height:150px;display: inline-block;background: white;position: relative;">
-                        <input type="file" id="file-upload" class="upload-file text-center" accept="image/*" style="height: 150px;">
+                        <input type="file" id="file-upload2" class="upload-file text-center" accept="image/*" style="height: 150px;">
                         <p class="upload-file-text" style="color: #abb7ba;position:absolute;left:40px;top:80px;"><i class="fas fa-plus"></i><br/>자격증 업로드</p></input>
                     </div>
                 </div>

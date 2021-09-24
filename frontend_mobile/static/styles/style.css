@@ -6035,19 +6035,19 @@ input[type=number] {
 .speach-input input {
   width: 100%;
   display: block;
-  line-height: 45px;
-  height: 45px;
+  line-height: 36px;
+  height: 36px;
   margin-top: 8px;
-  border-radius: 45px;
+  border-radius: 36px;
 }
 
 .speach-icon a {
   padding-top: 0px !important;
   display: block;
-  border-radius: 35px;
-  width: 35px;
-  height: 35px;
-  line-height: 35px;
+  border-radius: 32px;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
   margin-top: 3px;
   transform: translateY(10px);
 }
