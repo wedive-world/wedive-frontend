@@ -79,17 +79,17 @@
                     <i class="ico ico-wedive-w -circle color-primary scale-box fa-4x"></i>
                 </div>
                 <h4 class="text-center pt-2 mb-0">wedive's comment</h4>
-                <div class="justify-content-center mb-2 mt-3 text-start">
-                    <div class="color-gray-light-mid" style="float: left;position: relative;width: 20px;">01</div>
-                    <div class="mb-2" style="padding-left: 30px;">
+                <div class="justify-content-center mb-2 mt-3 text-start font-noto">
+                    <div class="color-gray-light-mid font-700 wedive-comment-number">01</div>
+                    <div class="mb-2 font-200 wedive-comment-desc">
                         대한민국에서 가장 수중환경이 뛰어난 제주 남부 다이빙 사이트 근처에 있습니다.
                     </div>
-                    <div class="color-gray-light-mid" style="float: left;position: relative;width: 20px;">02</div>
-                    <div class="mb-2" style="padding-left: 30px;">
+                    <div class="color-gray-light-mid font-700 wedive-comment-number">02</div>
+                    <div class="mb-2 font-200 wedive-comment-desc">
                         세계에서 가장 큰 다이빙 단체인 PADI 5 Star 다이브 센터 입니다.
                     </div>
-                    <div class="color-gray-light-mid" style="float: left;position: relative;width: 20px;">03</div>
-                    <div class="mb-2" style="padding-left: 30px;">
+                    <div class="color-gray-light-mid font-700 wedive-comment-number">03</div>
+                    <div class="mb-2 font-200 wedive-comment-desc">
                         교육, 장비대여, 숙박까지 모두 진행하며, 가격대비 장비의 수준과 직원들의 친절함으로 사용자 평가가 좋습니다.
                     </div>
                 </div>
@@ -524,8 +524,8 @@
             <div class="content mb-0">
                 <h4 class="text-start pt-2 mb-2">주소</h4>
                 <p class="text-start mb-3 mb-0">
-                    <a href="#" data-menu="menu-copy"><i class="far fa-copy color-blue2-dark"></i> 제주 서귀포시 부두로 41 버블탱크</a><br/>
-                    <a href="#" data-menu="menu-direction"><i class="fas fa-route color-blue2-dark"></i> 공항-샵 이동방법 안내</a>
+                    <a href="#" data-menu="menu-copy"><i class="far fa-copy me-2"></i> 제주 서귀포시 부두로 41 버블탱크</a><br/>
+                    <a href="#" class="color-highlight" data-menu="menu-direction"><i class="fas fa-route me-2"></i> 공항-샵 이동방법 안내</a>
                 </p>
             </div>
             <div id="map" style="height: 300px;"></div>
@@ -603,44 +603,140 @@
         </div>
 
         <div class="card card-style">
-            <div class="content mb-2">
-                <h4 class="text-start pt-2 mb-0">스쿠버 지수</h4>
-                <table class="table table-borderless text-center rounded-sm shadow-l mt-3" style="overflow: hidden;">
-                    <thead>
-                        <tr class="bg-blue-dark">
-                            <th scope="col" class="color-white font-12">날짜</th>
-                            <th scope="col" class="color-white font-12">파고</th>
-                            <th scope="col" class="color-white font-12">유속</th>
-                            <th scope="col" class="color-white font-12">수온</th>
-                            <th scope="col" class="color-white font-12">스쿠버</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th class="font-12" scope="row">09/11</th>
-                            <td class="font-12">0.1~0.3</td>
-                            <td class="font-12">0.4~1.0</td>
-                            <td class="font-12">22~23</td>
-                            <td class="color-blue-dark font-12">보통</td>
-                        </tr>
-                        <tr>
-                            <th class="font-12" scope="row">09/12</th>
-                            <td class="font-12">0.2~0.3</td>
-                            <td class="font-12">0.4~0.8</td>
-                            <td class="font-12">23~24</td>
-                            <td class="color-green-dark font-12">좋음</td>
-                        </tr>
-                        <tr>
-                            <th class="font-12" scope="row">09/13</th>
-                            <td class="color-red-dark font-12">0.7~0.9</td>
-                            <td class="color-red-dark font-12">0.6~1.2</td>
-                            <td class="font-12">24</td>
-                            <td class="color-red-dark font-12">나쁨</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="text-end">
-                    <img class="me-1 mb-1" height="20" src="/static/images/kaoh_logo.svg" />
+            <div class="content mb-2" id="tab-group-index">
+                <h4 class="text-start pt-2 mb-2">스쿠버 지수</h4>
+                <div class="tab-controls tabs-small tabs-rounded" data-highlight="bg-highlight">
+                    <a href="#" data-active data-bs-toggle="collapse" data-bs-target="#tab-realtime">실시간 지수</a>
+                    <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-monthly">월별 수온</a>
+                </div>
+                <div class="clearfix mb-4"></div>
+                <div data-bs-parent="#tab-group-index" class="collapse show" id="tab-realtime">
+                    <table class="table table-borderless text-center rounded-sm shadow-l mt-3" style="overflow: hidden;">
+                        <thead>
+                            <tr class="bg-secondary th-02">
+                                <th scope="col" class="color-white font-12">날짜</th>
+                                <th scope="col" class="color-white font-12">파고</th>
+                                <th scope="col" class="color-white font-12">유속</th>
+                                <th scope="col" class="color-white font-12">수온</th>
+                                <th scope="col" class="color-white font-12">스쿠버</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th class="font-12" scope="row">09/11</th>
+                                <td class="font-12">0.1~0.3</td>
+                                <td class="font-12">0.4~1.0</td>
+                                <td class="font-12">22~23</td>
+                                <td class="color-blue-dark font-12">보통</td>
+                            </tr>
+                            <tr>
+                                <th class="font-12" scope="row">09/12</th>
+                                <td class="font-12">0.2~0.3</td>
+                                <td class="font-12">0.4~0.8</td>
+                                <td class="font-12">23~24</td>
+                                <td class="color-green-dark font-12">좋음</td>
+                            </tr>
+                            <tr>
+                                <th class="font-12" scope="row">09/13</th>
+                                <td class="color-red-dark font-12">0.7~0.9</td>
+                                <td class="color-red-dark font-12">0.6~1.2</td>
+                                <td class="font-12">24</td>
+                                <td class="color-red-dark font-12">나쁨</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="text-end">
+                        <img class="me-1 mb-3" height="20" src="/static/images/logo-kaoh.svg" />
+                    </div>
+                </div>
+                <div data-bs-parent="#tab-group-index" class="collapse" id="tab-monthly">
+                    <table class="table table-borderless text-center rounded-sm shadow-l mt-3" style="overflow: hidden;">
+                        <thead>
+                            <tr class="bg-secondary th-02">
+                                <th scope="col" class="color-white font-12">월</th>
+                                <th scope="col" class="color-white font-12">최저/최고 수온</th>
+                                <th scope="col" class="color-white font-12">평균</th>
+                                <th scope="col" class="color-white font-12">인기도</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-bottom">
+                                <th class="font-12" scope="row">1월</th>
+                                <td class="font-12 color-gray">5.2ºC / 12.3ºC</td>
+                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>8.8ºC</td>
+                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_01.svg" width="32" height="32"/></td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <th class="font-12" scope="row">2월</th>
+                                <td class="font-12 color-gray">3.4ºC / 9.8ºC</td>
+                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>6.6ºC</td>
+                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_01.svg" width="32" height="32"/></td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <th class="font-12" scope="row">3월</th>
+                                <td class="font-12 color-gray">3.2ºC / 9.4ºC</td>
+                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>6.3ºC</td>
+                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_01.svg" width="32" height="32"/></td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <th class="font-12" scope="row">4월</th>
+                                <td class="font-12 color-gray">7.0ºC / 13.3ºC</td>
+                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>10.2ºC</td>
+                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_01.svg" width="32" height="32"/></td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <th class="font-12" scope="row">5월</th>
+                                <td class="font-12 color-gray">10.5ºC / 17.8ºC</td>
+                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>14.6ºC</td>
+                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_01.svg" width="32" height="32"/></td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <th class="font-12" scope="row">6월</th>
+                                <td class="font-12 color-gray">15.1ºC / 23.4ºC</td>
+                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>19.2ºC</td>
+                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_02.svg" width="32" height="32"/></td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <th class="font-12" scope="row">7월</th>
+                                <td class="font-12 color-gray">19.9ºC / 24.4ºC</td>
+                                <td class="font-12"><img class="me-2" src="/static/images/weather_heavy_rain.svg" width="20" height="20"/>22.2ºC</td>
+                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_02.svg" width="32" height="32"/></td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <th class="font-12" scope="row">8월</th>
+                                <td class="font-12 color-gray">21.3ºC / 26.0ºC</td>
+                                <td class="font-12"><img class="me-2" src="/static/images/weather_showers.svg" width="20" height="20"/>23.7ºC</td>
+                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_02.svg" width="32" height="32"/></td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <th class="font-12" scope="row">9월</th>
+                                <td class="font-12 color-gray">18.6ºC / 24.1ºC</td>
+                                <td class="font-12"><img class="me-2" src="/static/images/weather_sunny.svg" width="20" height="20"/>21.4ºC</td>
+                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_02.svg" width="32" height="32"/></td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <th class="font-12" scope="row">10월</th>
+                                <td class="font-12 color-gray">14.9ºC / 21.6ºC</td>
+                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>18.2ºC</td>
+                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_02.svg" width="32" height="32"/></td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <th class="font-12" scope="row">11월</th>
+                                <td class="font-12 color-gray">10.8ºC / 17.6ºC</td>
+                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>14.2ºC</td>
+                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_01.svg" width="32" height="32"/></td>
+                            </tr>
+                            <tr>
+                                <th class="font-12" scope="row">12월</th>
+                                <td class="font-12 color-gray">6.4ºC / 13.8ºC</td>
+                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>10.1ºC</td>
+                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_01.svg" width="32" height="32"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="text-end">
+                        <img class="me-1 mb-3" height="20" src="/static/images/logo-kma.svg" />
+                    </div>
                 </div>
             </div>
         </div>
@@ -752,7 +848,7 @@
                             <div class="splide__slide">
                                 <div class="min-h-230 p-2">
                                         <h1 class="text-center"><i class="fas fa-pen-square fa-2x color-highlight mt-4"></i></h1>
-                                        <h1 class="text-center pt-3 font-20 mb-n1">5개 다이빙 로그</h1>
+                                        <h1 class="text-center pt-3 font-20 mb-n1">17개 리뷰</h1>
                                         <p class="text-center color-highlight font-600">더보기 <i class="fas fa-chevron-right"></i></p>
                                 </div>    
                             </div>
@@ -1216,4 +1312,11 @@ export default {
 .font-noto {font-family: 'Noto Sans Korean'}
 .map-box {position: absolute;right: 6px;bottom: 21px;margin: 5px 5px 4px;width: 115px;}
 .bx {background-color: rgba(255,255,255);padding: 10px;min-height: 105px;border: 1px solid rgba(0,0,0,.1);border-radius: 10px;}
+.point_desc {font-family: 'Noto Sans Korean' !important;font-weight:200;overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;display: -webkit-box;-webkit-line-clamp: 5;-webkit-box-orient: vertical;}
+.nearby_desc {font-family: 'Noto Sans Korean' !important;font-weight:200;overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;line-height: 1.4;}
+.square-rect {position: relative;padding:0;}
+.square-rect:after {content: "";display: block;padding-bottom: 100%;}
+.square-rect > img {position: absolute;width: 100%;height: 100%;left: 0;padding:4px;object-fit: cover;}
+.wedive-comment-number {float: left;position: relative;width: 20px;}
+.wedive-comment-desc {padding-left: 30px;}
 </style>
