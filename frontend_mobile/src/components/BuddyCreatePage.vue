@@ -28,7 +28,7 @@
             <div class="timeline-deco"></div>
               <div class="drag-line"></div>
               <div class="timeline-item mt-4">
-                  <i class="bg-highlight shadow-l timeline-icon font-900">1</i>
+                  <i class="bg-highlight shadow-l timeline-icon font-900" style="margin-top: 26px;">1</i>
                   <div class="timeline-item-content rounded-sm">
                       <img data-src="http://www.gogofp.com/wp-content/uploads/fish_layout/20163/16093016281124091_577x330.png" alt="img" src="http://www.gogofp.com/wp-content/uploads/fish_layout/20163/16093016281124091_577x330.png" class="preload-img rounded-s img-fluid wedive-timeline-image">
                       <div class="ms-2" style="display: inline-block; vertical-align: top;">
@@ -41,7 +41,7 @@
               </div>
 
               <div class="timeline-item">
-                  <i class="bg-highlight shadow-l timeline-icon font-900">2</i>
+                  <i class="bg-highlight shadow-l timeline-icon font-900" style="margin-top: 26px;">2</i>
                   <div class="timeline-item-content rounded-sm">
                       <img data-src="/static/images/point/ko/jeju_bumisland_01.jpg" alt="img" src="/static/images/point/ko/jeju_bumisland_01.jpg" class="preload-img rounded-s img-fluid wedive-timeline-image">
                       <div class="ms-2" style="display: inline-block; vertical-align: top;">
@@ -54,7 +54,7 @@
               </div>
 
               <div class="timeline-item">
-                  <i class="bg-highlight shadow-l timeline-icon font-900">3</i>
+                  <i class="bg-highlight shadow-l timeline-icon font-900" style="margin-top: 26px;">3</i>
                   <div class="timeline-item-content rounded-sm">
                       <img data-src="http://ojsfile.ohmynews.com/STD_IMG_FILE/2015/0428/IE001824971_STD.jpg" alt="img" src="http://ojsfile.ohmynews.com/STD_IMG_FILE/2015/0428/IE001824971_STD.jpg" class="preload-img rounded-s img-fluid wedive-timeline-image">
                       <div class="ms-2" style="display: inline-block; vertical-align: top;">
@@ -503,27 +503,19 @@
               <div>
                 <div class="form-check interest-check">
                   <input class="form-check-input" type="checkbox" value="" id="check_gender1">
-                  <label class="form-check-label rounded-xl border-08" for="check_gender1">무관</label>
-                  <i class="fas fa-user color-white font-18"></i>
-                  <i class="fas fa-user font-16 color-highlight"></i>
+                  <label class="form-check-label rounded-xl border-08" for="check_gender1" style="padding-left: 12px;">무관</label>
                 </div>
                 <div class="form-check interest-check">
                   <input class="form-check-input" type="checkbox" value="" id="check_gender2">
-                  <label class="form-check-label rounded-xl border-08" for="check_gender2">남자</label>
-                  <i class="fas fa-male color-white font-18"></i>
-                  <i class="fas fa-male font-17 color-highlight"></i>
+                  <label class="form-check-label rounded-xl border-08" for="check_gender2" style="padding-left: 12px;">남자</label>
                 </div>
                 <div class="form-check interest-check">
                   <input class="form-check-input" type="checkbox" value="" id="check_gender3">
-                  <label class="form-check-label rounded-xl border-08" for="check_gender3">여자</label>
-                  <i class="fas fa-female color-white font-18"></i>
-                  <i class="fas fa-female font-17 color-highlight"></i>
+                  <label class="form-check-label rounded-xl border-08" for="check_gender3" style="padding-left: 12px;">여자</label>
                 </div>
                 <div class="form-check interest-check">
                   <input class="form-check-input" type="checkbox" value="" id="check_gender4">
-                  <label class="form-check-label rounded-xl border-08" for="check_gender4">커플</label>
-                  <i class="fas fa-user-friends color-white font-18"></i>
-                  <i class="fas fa-user-friends font-17 color-highlight"></i>
+                  <label class="form-check-label rounded-xl border-08" for="check_gender4" style="padding-left: 12px;">커플</label>
                 </div>
               </div>
             </div>
@@ -533,33 +525,23 @@
               <div>
                 <div class="form-check interest-check">
                   <input class="form-check-input" type="checkbox" value="" id="check_age1">
-                  <label class="form-check-label rounded-xl border-08" for="check_age1">무관</label>
-                  <i class="fas fa-user color-white font-18"></i>
-                  <i class="fas fa-user font-16 color-highlight"></i>
+                  <label class="form-check-label rounded-xl border-08" for="check_age1" style="padding-left: 12px;">무관</label>
                 </div>
                 <div class="form-check interest-check">
                   <input class="form-check-input" type="checkbox" value="" id="check_age2">
-                  <label class="form-check-label rounded-xl border-08" for="check_age2">20대</label>
-                  <i class="fas fa-child color-white font-18"></i>
-                  <i class="fas fa-child font-17 color-highlight"></i>
+                  <label class="form-check-label rounded-xl border-08" for="check_age2" style="padding-left: 12px;">20대</label>
                 </div>
                 <div class="form-check interest-check">
                   <input class="form-check-input" type="checkbox" value="" id="check_age3">
-                  <label class="form-check-label rounded-xl border-08" for="check_age3">30대</label>
-                  <i class="fas fa-hand-rock color-white font-18"></i>
-                  <i class="fas fa-hand-rock font-17 color-highlight"></i>
+                  <label class="form-check-label rounded-xl border-08" for="check_age3" style="padding-left: 12px;">30대</label>
                 </div>
                 <div class="form-check interest-check">
                   <input class="form-check-input" type="checkbox" value="" id="check_age4">
-                  <label class="form-check-label rounded-xl border-08" for="check_age4">40대</label>
-                  <i class="fas fa-hat-cowboy-side color-white font-18"></i>
-                  <i class="fas fa-hat-cowboy-side font-17 color-highlight"></i>
+                  <label class="form-check-label rounded-xl border-08" for="check_age4" style="padding-left: 12px;">40대</label>
                 </div>
                 <div class="form-check interest-check">
                   <input class="form-check-input" type="checkbox" value="" id="check_age5">
-                  <label class="form-check-label rounded-xl border-08" for="check_age5">50대 이상</label>
-                  <i class="fas fa-hat-cowboy-side color-white font-18"></i>
-                  <i class="fas fa-hat-cowboy-side font-17 color-highlight"></i>
+                  <label class="form-check-label rounded-xl border-08" for="check_age5" style="padding-left: 12px;">50대 ▲</label>
                 </div>
               </div>
             </div>
@@ -662,7 +644,7 @@
                 </div>
                 <div class="form-check interest-check">
                   <input class="form-check-input" type="checkbox" value="" id="check_env2">
-                  <label class="form-check-label rounded-xl border-08" for="check_env2">성별 별도숙박</label>
+                  <label class="form-check-label rounded-xl border-08" for="check_env2">남녀 별도숙박</label>
                   <i class="fas fa-restroom color-white font-18"></i>
                   <i class="fas fa-restroom font-16 color-highlight"></i>
                 </div>
