@@ -29,7 +29,7 @@
         
         
         <div class="card card-style" style="margin-top:-60px; z-index:1">
-            <div class="text-center" style="padding:30px 10px;">
+            <div class="content text-center mt-4">
                 <h2 class="font-20 font-700 mb-0">버블탱크 스쿠버다이빙</h2>
                 <p class="color-gray m-0">제주 남부에 위치한 PADI 5star 다이빙센터</p>
                 <div class="star-area mt-3">
@@ -50,22 +50,22 @@
                 <div style="margin-top:8px;"><span>최근리뷰 32</span>&nbsp;&nbsp;<font class="color-gray-light">|</font>&nbsp;&nbsp;<img class="ext-img" src="/static/images/logo_padi.svg" width="48" />&nbsp;&nbsp;<font class="color-gray-light">|</font>&nbsp;&nbsp;<span>￦￦</span>
                 <!--<span class="badge font-10 bg-fade-gray-dark">PADI 공식</span>-->
                 </div>
-                <div style="margin-top:26px;" class="row mb-0 text-center">
+                <div class="d-flex mt-3 mb-0 text-center">
                     
-                    <div class="col-4 pd-0" style="border-right: 1px solid lightgray;">
+                    <div class="flex-grow-1 pd-0" style="border-right: 1px solid lightgray;">
                     <button href="#" v-on:click="call()">
-                        <img class="ext-img" src="/static/images/ico_call.png" width="26" />
-                        <span class="font-14 bold">전화</span>
+                        <img class="ext-img" src="/static/images/ico_call.png" width="24" style="margin-top:-4px;"/>
+                        <span class="font-16 font-500 font-noto">전화</span>
                     </button>
                     </div>
-                    <div class="col-4 pd-0" style="border-right: 1px solid lightgray;">
-                        <img class="ext-img" src="/static/images/ico_heart.png" width="26" />
-                        <span class="font-14 bold">찜 25</span>
+                    <div class="flex-grow-1 pd-0" style="border-right: 1px solid lightgray;">
+                        <img class="ext-img" src="/static/images/ico_heart.png" width="24" style="margin-top:-4px;"/>
+                        <span class="font-16 font-500 font-noto">찜 25</span>
                     </div>
                     
-                    <div class="col-4 pd-0" data-menu="menu-share">
-                        <img class="ext-img" src="/static/images/ico_share.png" width="26" />
-                        <span class="font-14 bold">공유</span>
+                    <div class="flex-grow-1 pd-0" data-menu="menu-share">
+                        <img class="ext-img" src="/static/images/ico_share.png" width="24" style="margin-top:-4px;"/>
+                        <span class="font-16 font-500 font-noto">공유</span>
                     </div>
                     
                 </div>
@@ -1015,7 +1015,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .light-border-bottom {border-bottom: 1px solid #dee2e6;}
-.evaluation {margin: 6px 6px 0px 6px; background-color: rgba(196,187,171,.2);justify-content: space-around;border-radius: 5px;padding: 8px 8px 8px 0;}
+.evaluation {background-color: rgba(196,187,171,.2);justify-content: space-around;border-radius: 5px;padding: 8px 8px 8px 0;}
 .evaluation>span.info {padding-left: 11px;border-left: 1px solid #c4bbab;}
 .evaluation>span .icon_question {display: inline-block;position: relative;top: 1px;display: block;width: 18px;height: 18px;background-size: 18px 18px;background-repeat: no-repeat;background-image: url(/static/images/question.png);text-indent: -9999px;}
 
@@ -1095,4 +1095,5 @@ export default {
 .min-h-230 {min-height: 210px;}
 .review_img {float: left;width: 88px; height:88px;margin-right:10px;margin-bottom:2px;border-radius:10px;object-fit: cover !important;}
 .wedive-txt-all {position: absolute;top: 20px;right: 16px;}
+.font-noto {font-family: 'Noto Sans Korean'}
 </style>

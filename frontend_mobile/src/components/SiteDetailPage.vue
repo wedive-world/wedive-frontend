@@ -19,14 +19,14 @@
         
         
         <div class="card card-style" style="margin-top:-60px; z-index:1">
-            <div class="text-center" style="padding:30px 10px;">
+            <div class="content text-center mt-4">
                 <h2 class="font-20 font-700 mb-0">양양 다이빙 사이트</h2>
                 <h2 class="wedive-score">3.4</h2>
                 <span class="wedive-score-desc">일반적</span>
                 <p class="color-gray m-0"><i class="fas fa-map-marked-alt" ></i> 대한민국, 강원도</p>
                 
 
-                <div class="evaluation d-flex pt-3">
+                <div class="evaluation d-flex mt-3">
                     <div>
                         <div class="star-area">
                             <span class="font-14 me-2 color-gray">환경</span>
@@ -63,22 +63,34 @@
                     </div>
                 </div>
 
-
                 <p class="color-gray mt-3 mb-0 text-start me-2 ms-2">겨울에는 동해의 보물 섬유세닐말미잘을 볼 수 있고, 여름에는 태풍처럼 지나가는 볼락 무리를 볼 수 있는 사이트 입니다. 특히 분단국가 특성상 허가가 쉽지 않은 동해에서 야간 다이빙을 할 수 있는 유일한 사이트 입니다.</p>
                 
+                <div class="divider mt-3 mb-3"></div>
+                
+                <div class="d-flex mb-0 text-center">
+                    <div class="flex-grow-1 pd-0" style="border-right: 1px solid lightgray;">
+                        <img class="ext-img" src="/static/images/ico_heart.png" width="24" style="margin-top:-4px;"/>
+                        <span class="font-16 font-500 font-noto">찜 25</span>
+                    </div>
+                    
+                    <div class="flex-grow-1 pd-0" data-menu="menu-share">
+                        <img class="ext-img" src="/static/images/ico_share.png" width="24" style="margin-top:-4px;"/>
+                        <span class="font-16 font-500 font-noto">공유</span>
+                    </div>
+                </div>
 
             </div>
         </div>
         
 
 
-        <div class="card card-style p-2">
-            <div class="content mb-2">
+        <div class="card card-style">
+            <div class="content">
                 <div class="text-center">
                     <i class="ico ico-wedive-w -circle color-primary scale-box fa-4x"></i>
                 </div>
                 <h4 class="text-center pt-2 mb-2">where is here?</h4>
-                <div class="row text-start mb-0 txt_box2">
+                <div class="row text-start txt_box2 m-0">
                     <div class="ico_feature col-3">
                         <i class="ico_feature1 icon-point"></i>
                         <p class="span_feature text-center">동굴</p>
@@ -124,12 +136,12 @@
                         <p class="span_feature text-center">글로벌TOP</p>
                     </div>
                 </div>
-                <div class="justify-content-center mb-2 mt-3 text-start">
+                <div class="justify-content-center mb-2 mt-2 text-start me-n2 ms-n2">
                     <div class="splide single-slider slider-no-arrows slider-has-dots pb-4 mb-0" id="single-slider-info">
                         <div class="splide__track">
-                            <div class="splide__list">
+                            <div class="splide__list pt-n3">
                                 <div class="splide__slide">
-                                    <div class="min-h-190 p-4">
+                                    <div class="min-h-160 p-2">
                                         <div class="mt-2">
                                             <h1 class="text-center mb-0"><i class="fas fa-calendar-alt font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">방문시기</h1>
@@ -140,7 +152,7 @@
                                     </div>
                                 </div>
                                 <div class="splide__slide">
-                                    <div class="min-h-190 p-4">
+                                    <div class="min-h-160 p-2">
                                         <div class="mt-2">
                                             <h1 class="text-center mb-0"><i class="fas fa-temperature-high font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">수온</h1>
@@ -151,7 +163,7 @@
                                     </div>
                                 </div>
                                 <div class="splide__slide">
-                                    <div class="min-h-190 p-4">
+                                    <div class="min-h-190 p-2">
                                         <div class="mt-2">
                                             <h1 class="text-center mb-0"><i class="fas fa-level-down-alt font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">수심</h1>
@@ -162,7 +174,7 @@
                                     </div>
                                 </div>
                                 <div class="splide__slide">
-                                    <div class="min-h-190 p-4">
+                                    <div class="min-h-160 p-2">
                                         <div class="mt-2">
                                             <h1 class="text-center mb-0"><i class="fas fa-water font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">해류</h1>
@@ -173,7 +185,7 @@
                                     </div>
                                 </div>
                                 <div class="splide__slide">
-                                    <div class="min-h-190 p-4">
+                                    <div class="min-h-160 p-2">
                                         <div class="mt-2">
                                             <h1 class="text-center mb-0"><i class="fas fa-eye font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">시야</h1>
@@ -184,7 +196,7 @@
                                     </div>
                                 </div>
                                 <div class="splide__slide">
-                                    <div class="min-h-190 p-4">
+                                    <div class="min-h-160 p-2">
                                         <div class="mt-2">
                                             <h1 class="text-center mb-0"><i class="fas fa-highlighter font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">다이빙 하이라이트</h1>
@@ -197,27 +209,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mb-2 hide">
-                        <p class="wedive-title">방문시기</p>
-                        <p class="wedive-desc">일반적으로 일년 내내 다이빙이 가능하지만 가장 좋은 시기는 여름~가을 동안인 6월에서 10월입니다.</p>
-                        <p class="wedive-title">수온</p>
-                        <p class="wedive-desc">1~5월 평균 섭씨 10도, 11~12월은 15도 안팎입니다. 성수기인 6~10월에는 평균 20도까지 올라갑니다.</p>
-                        <p class="wedive-title">수심</p>
-                        <p class="wedive-desc">가까운 바다는 12~18m, 먼 바다는 20~32m정도 입니다.</p>
-                        <p class="wedive-title">해류</p>
-                        <p class="wedive-desc">6~10월 간헐적으로 청물(일본 쓰시마 섬에서 갈라진 쿠로시오 난류)가 유입되어 시야가 15m까지 좋아집니다.</p>
-                        <p class="wedive-title">시야</p>
-                        <p class="wedive-desc">평소에는 5m정도이지만, 청물이 들어오는 경우 10m~15m로 일반적인 편입니다.</p>
-                        <p class="wedive-title">다이빙 하이라이트</p>
-                        <p class="wedive-desc">쥐놀래미와 도다리, 황어, 전복, 문어, 복어, 쥐치 등을 만날 수 있습니다.</p>
-                    </div>
+
                 </div>
                 
             </div>
         </div>
 
         <div class="card card-style">
-            <div class="content" style="margin: 15px;">
+            <div class="content">
                 <h4 class="text-start pt-2 mb-2">양양 인기 포인트</h4>
                 <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
                 <div v-for="(point,index) in point_list" v-if="index<3">
@@ -319,7 +318,7 @@
 
 
         <div class="card card-style">
-            <div class="content mb-0 mt-3">
+            <div class="content mt-3">
                 <h4 class="text-start pt-2 mb-0">인기 다이빙 센터</h4>
                 <p class="mb-3 color-gray-light-mid">양양 사이트의 28개의 센터 준비됨</p>
                 <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
@@ -357,8 +356,8 @@
         </div>
 
         <div class="card card-style">
-            <div class="content" style="margin: 15px;">
-                <h4 class="text-start mb-2">YouTube 소개</h4>
+            <div class="content">
+                <h4 class="text-start pt-2 mb-2">YouTube 소개</h4>
                 <div class="responsive-iframe" style="-border-radius: 16px;-moz-border-radius: 16px;border-radius: 16px;">
                     <iframe src='https://www.youtube.com/embed/84myx_Td1vE' frameborder='0' allowfullscreen></iframe>
                 </div>
@@ -377,67 +376,88 @@
 
         
         <div class="card card-style">
-            <div class="content mb-0 mt-10">
-                <h4 class="text-start pt-2 mb-3">인기 포인트</h4>
+            <div class="content mt-10">
+                <h4 class="text-start pt-2 mb-0">인기 포인트</h4>
                 <span class="wedive-txt-all color-gray mt-2"><img src="/static/images/ico_pin2.png" width="19"/> 얕은수심&nbsp;&nbsp;<img src="/static/images/ico_pin3.png" width="19"/> 깊은수심</span>
             </div>
             <div id="map" style="height: 300px;"></div>
         </div>
 
-        <div class="card card-style">
-            <div class="content mb-2">
-                <h4 class="text-start pt-2 mb-0">스쿠버 지수</h4>
-                <table class="table table-borderless text-center rounded-sm shadow-l mt-3" style="overflow: hidden;">
-                    <thead>
-                        <tr class="bg-blue-dark">
-                            <th scope="col" class="color-white font-12">날짜</th>
-                            <th scope="col" class="color-white font-12">파고</th>
-                            <th scope="col" class="color-white font-12">유속</th>
-                            <th scope="col" class="color-white font-12">수온</th>
-                            <th scope="col" class="color-white font-12">스쿠버</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th class="font-12" scope="row">09/11</th>
-                            <td class="font-12">0.1~0.3</td>
-                            <td class="font-12">0.4~1.0</td>
-                            <td class="font-12">22~23</td>
-                            <td class="color-blue-dark font-12">보통</td>
-                        </tr>
-                        <tr>
-                            <th class="font-12" scope="row">09/12</th>
-                            <td class="font-12">0.2~0.3</td>
-                            <td class="font-12">0.4~0.8</td>
-                            <td class="font-12">23~24</td>
-                            <td class="color-green-dark font-12">좋음</td>
-                        </tr>
-                        <tr>
-                            <th class="font-12" scope="row">09/13</th>
-                            <td class="color-red-dark font-12">0.7~0.9</td>
-                            <td class="color-red-dark font-12">0.6~1.2</td>
-                            <td class="font-12">24</td>
-                            <td class="color-red-dark font-12">나쁨</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="text-end">
-                    <img class="me-1 mb-1" height="20" src="/static/images/kaoh_logo.svg" />
+        <h4 class="text-start mb-2">근처 사이트</h4>
+        <div class="splide single-slider slider-no-arrows visible-slider slider-no-dots" id="single-slider-nearby">
+            <div class="splide__track">
+                <div class="splide__list">
+                    <div class="splide__slide">
+                        <div class="card card-style" style="margin-left: 10px; background: url(http://www.outdoornews.co.kr/news/photo/201402/13021_40743_1032.jpg)" data-card-height="300">
+                            <div class="card-top px-3 py-3">
+                                <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-red-dark"></i></a>
+                            </div>
+                            <div class="card-bottom px-3 py-3">
+                                <h4 class="color-white font-18 font-600">고성 사이트</h4>
+                                <div class="divider bg-white opacity-20 mb-1"></div>
+                                <div class="d-flex">
+                                    <div class="align-self-center" style="max-width: 100%;">
+                                        <p class="font-11 opacity-70 font-600 color-white nearby_desc mb-0" style="max-width: 100%;">대한민국 3대 포인트가 위치한 사이트로 강원도 지역에서 가장 유명한 사이트 입니다. 특히 수중 금강산이라고 불리는 낙산대기 포인트와 개복치를 볼 수 있는 마이산 포인트 등이 유명합니다.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-overlay bg-gradient opacity-30"></div>
+                            <div class="card-overlay bg-gradient"></div>
+                        </div>
+                    </div>
+                    <div class="splide__slide">
+                        <div class="card card-style" style="margin-left: 10px; background: url(https://i.ytimg.com/vi/xSJ4YSt3SRI/maxresdefault.jpg)" data-card-height="300">
+                            <div class="card-top px-3 py-3">
+                                <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-gray-light"></i></a>
+                            </div>
+                            <div class="card-bottom px-3 py-3">
+                                <h4 class="color-white font-18 font-600">속초 사이트</h4>
+                                <div class="divider bg-white opacity-20 mb-1"></div>
+                                <div class="d-flex">
+                                    <div class="align-self-center" style="max-width: 100%;">
+                                        <p class="font-11 opacity-70 font-600 color-white nearby_desc mb-0" style="max-width: 100%;">일반적으로 모래바닥으로 구성된 동해안과는 다르게 속초의 바다는 암석형태가 많이 있습니다. 덕분에 이곳에서 다이빙을 한다면 다양한 볼거리를 마주할 수 있습니다.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-overlay bg-gradient opacity-30"></div>
+                            <div class="card-overlay bg-gradient"></div>
+                        </div>
+                    </div>
+                    <div class="splide__slide">
+                        <div class="card card-style" style="margin-left: 10px; background: url(https://i.ytimg.com/vi/xSJ4YSt3SRI/maxresdefault.jpg)" data-card-height="300">
+                            <div class="card-top px-3 py-3">
+                                <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-gray-light"></i></a>
+                            </div>
+                            <div class="card-bottom px-3 py-3">
+                                <h4 class="color-white font-18 font-600">강릉 사이트</h4>
+                                <div class="divider bg-white opacity-20 mb-1"></div>
+                                <div class="d-flex">
+                                    <div class="align-self-center" style="max-width: 100%;">
+                                        <p class="font-11 opacity-70 font-600 color-white nearby_desc mb-0" style="max-width: 100%;">대한민국 최대 규모의 난파선 다이빙 포인트인 스텔라 난파선 포인트가 위치한 사이트 입니다. 더불어 강원도 3대 미항으로 꼽히는 삼곡항이 있는 등 아름다운 다이빙 사이트 입니다.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-overlay bg-gradient opacity-30"></div>
+                            <div class="card-overlay bg-gradient"></div>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
         </div>
-
+        
+        
         
         <div class="card card-style">
-            <div class="mb-0 mt-10">
-            <h4 class="text-start pt-4 mb-0 pe-3 ps-3">리뷰</h4>
+            <div class="content">
+            <h4 class="text-start">다이빙 로그</h4>
             <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
-            <div class="divider mt-3 mb-0 ms-3 me-3"></div>
-                <div class="splide single-slider slider-no-arrows slider-has-dots pb-4 mb-0" id="single-slider-1">
+            <div class="divider mt-3 mb-2"></div>
+                <div class="splide single-slider slider-no-arrows slider-has-dots pb-2 mb-0 me-n2 ms-n2" id="single-slider-review">
                     <div class="splide__track">
                         <div class="splide__list">
-                            <div class="splide__slide">
-                                <div class="min-h-230 p-4">
+                            <div class="splide__slide pt-2">
+                                <div class="min-h-230 p-2">
                                         <div class="d-flex">
                                             <div class="flex-grow-1">
                                                 <div class="float-start">
@@ -467,7 +487,7 @@
                                 </div>     
                             </div>
                             <div class="splide__slide">
-                                <div class="min-h-230 p-4">
+                                <div class="min-h-230 p-2">
                                         <div class="d-flex">
                                             <div class="flex-grow-1">
                                                 <div class="float-start">
@@ -493,7 +513,7 @@
                                 </div>   
                             </div>
                             <div class="splide__slide">
-                                <div class="min-h-230 p-4">
+                                <div class="min-h-230 p-2">
                                         <div class="d-flex">
                                             <div class="flex-grow-1">
                                                 <div class="float-start">
@@ -522,7 +542,7 @@
                                 </div>   
                             </div>
                             <div class="splide__slide">
-                                <div class="min-h-230 p-4">
+                                <div class="min-h-230 p-2">
                                         <h1 class="text-center"><i class="fas fa-pen-square fa-2x color-highlight mt-4"></i></h1>
                                         <h1 class="text-center pt-3 font-20 mb-n1">5개 다이빙 로그</h1>
                                         <p class="text-center color-highlight font-600">더보기 <i class="fas fa-chevron-right"></i></p>
@@ -532,7 +552,7 @@
                     </div>
                 </div>
             </div>
-            <div class="divider mt-4 mb-2 ms-3 me-3"></div>
+            <div class="divider mt-2 mb-2 ms-3 me-3"></div>
             <div class="star-area mt-4 text-center">
                 <i class="fa fa-star font-20 color-gray-light"></i>
                 <i class="fa fa-star font-20 color-gray-light"></i>
@@ -541,7 +561,7 @@
                 <i class="fa fa-star font-20 color-gray-light"></i>
             </div>
             <div class="text-center color-gray mt-2 mb-3">이곳을 방문해보셨나요?</div>
-            <div class="me-4 ms-4 mb-5" style="background: rgba(58, 58, 58, 0.03);padding: 10px 20px;">
+            <div class="me-4 ms-4 mb-4" style="background: rgba(58, 58, 58, 0.03);padding: 10px 20px;border-radius: 4px;">
                 <p class="mb-0" style="color: rgba(58, 58, 58, 0.6)">다녀온 기록을 남겨보세요.</p>
                 <p class="mb-0 color-highlight">지금 로그북남기기 <i class="fas fa-chevron-right ms-1"></i></p>
             </div>
@@ -730,7 +750,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .light-border-bottom {border-bottom: 1px solid #dee2e6;}
-.evaluation {margin: 6px 6px 0px 6px; background-color: rgba(196,187,171,.2);justify-content: space-around;border-radius: 5px;padding: 8px 8px 8px 0;}
+.evaluation {background-color: rgba(196,187,171,.2);justify-content: space-around;border-radius: 5px;padding: 8px 8px 8px 0;}
 .evaluation>span.info {padding-left: 11px;border-left: 1px solid #c4bbab;}
 .evaluation>span .icon_question {display: inline-block;position: relative;top: 1px;display: block;width: 18px;height: 18px;background-size: 18px 18px;background-repeat: no-repeat;background-image: url(/static/images/question.png);text-indent: -9999px;}
 
@@ -787,11 +807,14 @@ export default {
 .wedive-score-desc {position: absolute;right: 4px; top: 40px;color: #1d397c; width:56px;}
 .wedive-title {font-family: 'Noto Sans Korean' !important;font-weight:700;margin-bottom:0px;}
 .wedive-desc {font-family: 'Noto Sans Korean' !important;font-weight:200;margin-bottom:16px;line-height: 1.6}
-.min-h-190 {min-height: 190px;}
+.min-h-160 {min-height: 160px;}
+.font-noto {font-family: 'Noto Sans Korean'}
 .point_desc {font-family: 'Noto Sans Korean' !important;font-weight:200;overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;display: -webkit-box;-webkit-line-clamp: 5;-webkit-box-orient: vertical;}
+.nearby_desc {font-family: 'Noto Sans Korean' !important;font-weight:200;overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;line-height: 1.4;}
 .square-rect {position: relative;padding:0;}
 .square-rect:after {content: "";display: block;padding-bottom: 100%;}
 .square-rect > img {position: absolute;width: 100%;height: 100%;left: 0;padding:4px;object-fit: cover;}
 .wedive-txt-all {position: absolute;top: 20px;right: 16px;}
 .review_img {float: left;width: 88px; height:88px;margin-right:10px;margin-bottom:2px;border-radius:10px;object-fit: cover !important;}
+.wd-220 {width:220px !important;}
 </style>
