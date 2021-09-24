@@ -9,7 +9,7 @@
         <a href="#" data-toggle-theme class="header-icon header-icon-3 show-on-theme-light"><i class="fas fa-moon"></i></a>
     </div>
 
-    <div id="footer-bar" class="d-flex" style="min-height: 52px;height: 52px;">
+    <div id="footer-bar-speach" class="d-flex" style="min-height: 52px !important;height: 52px !important;">
         <div class="me-1 speach-icon">
             
             
@@ -251,7 +251,7 @@ export default {
     $(".page-title").hide();
     $(".page-title-clear").hide();
     document.getElementById("page-back").classList.remove("hide");
-    //document.getElementById("footer-bar").classList.add("hide");
+    document.getElementById("footer-bar").classList.add("hide");
   },
   components: {
     
