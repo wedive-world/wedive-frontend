@@ -356,7 +356,7 @@
         </div>
 
         <div class="card card-style">
-            <div class="content">
+            <div class="content mb-4 pb-2">
                 <h4 class="text-start pt-2 mb-2">YouTube 소개</h4>
                 <div class="responsive-iframe" style="-border-radius: 16px;-moz-border-radius: 16px;border-radius: 16px;">
                     <iframe src='https://www.youtube.com/embed/84myx_Td1vE' frameborder='0' allowfullscreen></iframe>
@@ -383,12 +383,12 @@
             <div id="map" style="height: 300px;"></div>
         </div>
 
-        <h4 class="text-start mb-2">근처 사이트</h4>
+        <h4 class="text-start mb-2" style="margin-left: 10px;margin-right: 10px;">근처 사이트</h4>
         <div class="splide single-slider slider-no-arrows visible-slider slider-no-dots" id="single-slider-nearby">
             <div class="splide__track">
                 <div class="splide__list">
                     <div class="splide__slide">
-                        <div class="card card-style" style="margin-left: 10px; background: url(http://www.outdoornews.co.kr/news/photo/201402/13021_40743_1032.jpg)" data-card-height="300">
+                        <div class="card card-style card-nearby" style="background: url(http://www.outdoornews.co.kr/news/photo/201402/13021_40743_1032.jpg)" data-card-height="260">
                             <div class="card-top px-3 py-3">
                                 <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-red-dark"></i></a>
                             </div>
@@ -406,7 +406,7 @@
                         </div>
                     </div>
                     <div class="splide__slide">
-                        <div class="card card-style" style="margin-left: 10px; background: url(https://i.ytimg.com/vi/xSJ4YSt3SRI/maxresdefault.jpg)" data-card-height="300">
+                        <div class="card card-style card-nearby" style="background: url(https://i.ytimg.com/vi/xSJ4YSt3SRI/maxresdefault.jpg)" data-card-height="260">
                             <div class="card-top px-3 py-3">
                                 <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-gray-light"></i></a>
                             </div>
@@ -424,7 +424,7 @@
                         </div>
                     </div>
                     <div class="splide__slide">
-                        <div class="card card-style" style="margin-left: 10px; background: url(https://i.ytimg.com/vi/xSJ4YSt3SRI/maxresdefault.jpg)" data-card-height="300">
+                        <div class="card card-style card-nearby" style="background: url(http://www.uwmagazine.co.kr/news/photo/202003/368_1869_1729.jpg)" data-card-height="260">
                             <div class="card-top px-3 py-3">
                                 <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-gray-light"></i></a>
                             </div>
@@ -817,4 +817,5 @@ export default {
 .wedive-txt-all {position: absolute;top: 20px;right: 16px;}
 .review_img {float: left;width: 88px; height:88px;margin-right:10px;margin-bottom:2px;border-radius:10px;object-fit: cover !important;}
 .wd-220 {width:220px !important;}
+.card-nearby {margin-left: 10px;background-size: cover !important;}
 </style>
