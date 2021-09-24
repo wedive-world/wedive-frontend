@@ -6489,7 +6489,12 @@ input[type=number] {
 
 .interest-check input:checked ~ label {
   color: #FFF !important;
-  background-color: #1d397c !important;
+  background-color: #1d397c;
+}
+
+.interest-check_secondary input:checked ~ label {
+  color: #FFF !important;
+  background-color: #2c9ac3;
 }
 
 .interest-check input:checked ~ .fa:last-child,

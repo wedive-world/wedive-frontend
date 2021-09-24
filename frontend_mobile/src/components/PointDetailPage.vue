@@ -24,7 +24,7 @@
                 <p class="color-gray m-0"><i class="fas fa-map-marked-alt" ></i> 대한민국, 제주도, 서귀포 사이트</p>
                 
 
-                <div class="evaluation pt-3">
+                <div class="evaluation mt-3">
                     <div class="d-flex">
                         <div class="flex-grow-1">
                             <div class="star-area text-start ms-3">
@@ -765,7 +765,7 @@ export default {
                 map: this.map,
                 position: _position,
                 label: {text: _title, color: 'white', className: 'marker-position'},
-                icon: new google.maps.MarkerImage('/static/images/ico_pin1.png',null, null, null, new google.maps.Size(38,43)),
+                icon: new google.maps.MarkerImage('/static/images/ico_pin1_o.png',null, null, null, new google.maps.Size(38,43)),
             });
 
             marker_shop.addListener("click", () => {
@@ -773,7 +773,7 @@ export default {
                 for (var j=0; j<this.marker_list.length; j++) {
                     var _icon = this.marker_list[j].getIcon();
                     if (_icon.size.width != 38) {
-                        this.marker_list[j].setIcon(new google.maps.MarkerImage('/static/images/ico_pin2.png', null, null, null, new google.maps.Size(38,43)));
+                        this.marker_list[j].setIcon(new google.maps.MarkerImage('/static/images/ico_pin1_o.png', null, null, null, new google.maps.Size(38,43)));
                     }
                 }
 
@@ -845,7 +845,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .light-border-bottom {border-bottom: 1px solid #dee2e6;}
-.evaluation {margin: 6px 6px 0px 6px; background-color: rgba(196,187,171,.2);justify-content: space-around;border-radius: 5px;padding: 8px 8px 8px 0;}
+.evaluation {background-color: rgba(196,187,171,.2);justify-content: space-around;border-radius: 5px;padding: 8px 8px 8px 0;}
 .evaluation>span.info {padding-left: 11px;border-left: 1px solid #c4bbab;}
 .evaluation>span .icon_question {display: inline-block;position: relative;top: 1px;display: block;width: 18px;height: 18px;background-size: 18px 18px;background-repeat: no-repeat;background-image: url(/static/images/question.png);text-indent: -9999px;}
 

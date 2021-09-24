@@ -712,6 +712,8 @@ export default {
             const desc = this.point_list[i].desc;
             const star = this.point_list[i].star;
             const img = this.point_list[i].img1;
+            const _sml_img = _img;
+            const _big_img = (_type == 'sf') ? '/static/images/ico_pin_big2.png' : (_type == 'df') ? '/static/images/ico_pin_big3.png' : (_type == 'so') ? '/static/images/ico_pin_big2.png' : '/static/images/ico_pin_big3.png';
 
             const marker_point = new google.maps.Marker({
                 map: this.map,
@@ -725,7 +727,7 @@ export default {
                 for (var j=0; j<this.marker_list.length; j++) {
                     var _icon = this.marker_list[j].getIcon();
                     if (_icon.size.width != 38) {
-                        this.marker_list[j].setIcon(new google.maps.MarkerImage('/static/images/ico_pin2.png', null, null, null, new google.maps.Size(38,43)));
+                        this.marker_list[j].setIcon(new google.maps.MarkerImage(this.marker_img_list[j].ori, null, null, null, new google.maps.Size(38,43)));
                     }
                 }
 
@@ -735,19 +737,27 @@ export default {
                 $("#map_box_shop_img").attr("src", img);
                 
                 
-                marker_point.setIcon(new google.maps.MarkerImage('/static/images/ico_pin_big1.png', null, null, null, new google.maps.Size(58,66)));
-                if (this.map.getZoom() == 16) {
+                marker_point.setIcon(new google.maps.MarkerImage(_big_img, null, null, null, new google.maps.Size(58,66)));
+                if (this.map.getZoom() == 14) {
                     this.map.panTo(marker_point.getPosition());
                 } else {
-                    this.map.setZoom(16);
+                    this.map.setZoom(14);
                     this.map.setCenter(marker_point.getPosition());
                 }
             });
             this.marker_list.push(marker_point);
+            this.marker_img_list.push({ori: _sml_img, big: _big_img});
         }
 
         this.map.addListener("click", (e) => {
             $(".map-box").addClass("hide");
+            for (var j=0; j<this.marker_list.length; j++) {
+                var _icon = this.marker_list[j].getIcon();
+                if (_icon.size.width != 38) {
+                    this.marker_list[j].setIcon(new google.maps.MarkerImage(this.marker_img_list[j].ori, null, null, null, new google.maps.Size(38,43)));
+                }
+            }
+            this.map.setZoom(12);
         });
         
     };
@@ -759,6 +769,7 @@ export default {
     return {
         map: null,
         marker_list: [],
+        marker_img_list: [],
         point_list : [
             {title: "말미잘동산", type: 'df', desc: "동해의 명물 섬유세닐말미잘이 유난히 많은 포인트로, 모래 지형 위에 커다란 암반과 크고 작은 바위들이 형성되어 있는 포인트 입니다. 섬유세닐말미잘은 낮은 수온에서 펴기 때문에 6월 이전에 방문한다면 이 포인트의 아름다움을 제대로 느낄 수 있습니다.", star: 4.6, img1: 'https://divingholic.com/wp-content/uploads/2019/02/maxresdefault-1.jpg', img2: 'https://diverz.net/data/diving/point/202102/1614156788_8f436f8c0dc8a574611b_thumb_760_504.jpg', img3: 'https://divingholic.com/wp-content/uploads/2019/02/2%EC%9B%94%EC%9D%B8%EA%B5%AC%ED%95%B4%EB%B3%80%EB%94%A5.jpg', position: {lat: 37.9668859063654, lng: 128.79946317636166}},
             {title: "철재삼동", type: 'df', desc: "여름철 동해의 상징은 볼락이라고 할 수 있습니다. 그중에서도 수많은 볼락이 태풍처럼 있다고 해서 볼락태풍이라는 별명을 가진 포인트가 철재삼동 포인트 입니다. 초여름에서 초가을까지 3달정도되는 기간에 20m전후 수심, 11~15도의 수온 삼박자가 맞아떨어지면 거대한 볼락 떼를 만날 수 있습니다.", star: 4.3, img1: '/static/images/point/ko/yangyang_chuljesamdong_01.jpg', img2: '/static/images/point/ko/yangyang_chuljesamdong_02.jpg', img3: '/static/images/point/ko/yangyang_chuljesamdong_03.jpg', position: {lat: 37.947207012548716, lng: 128.81497292286326}},

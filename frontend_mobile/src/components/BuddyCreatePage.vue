@@ -33,7 +33,8 @@
                       <img data-src="http://www.gogofp.com/wp-content/uploads/fish_layout/20163/16093016281124091_577x330.png" alt="img" src="http://www.gogofp.com/wp-content/uploads/fish_layout/20163/16093016281124091_577x330.png" class="preload-img rounded-s img-fluid wedive-timeline-image">
                       <div class="ms-2" style="display: inline-block; vertical-align: top;">
                         <a href="#" class="schedule-close" v-on:click="closeSchedule(1)"><i class="wedive_icoset wedive_icoset_close_s"></i></a>
-                        <p class="mb-0 font-16 font-600">성산 사이트 (제주)</p>
+                        <p class="mb-0 font-16 font-600 ellipsis">성산 사이트 (제주)</p>
+                        <p class="mb-0 mt-n1 font-14 font-400 color-secondary">스쿠버 다이빙</p>
                         <p class="mb-0 font-14 font-400 color-gray">21.09.20(화) ~ 21.09.21(수)</p>
                       </div>
                   </div>
@@ -45,7 +46,8 @@
                       <img data-src="/static/images/point/ko/jeju_bumisland_01.jpg" alt="img" src="/static/images/point/ko/jeju_bumisland_01.jpg" class="preload-img rounded-s img-fluid wedive-timeline-image">
                       <div class="ms-2" style="display: inline-block; vertical-align: top;">
                         <a href="#" class="schedule-close" v-on:click="closeSchedule(2)"><i class="wedive_icoset wedive_icoset_close_s"></i></a>
-                        <p class="mb-0 font-16 font-600">문섬 사이트 (제주)</p>
+                        <p class="mb-0 font-16 font-600 ellipsis">문섬 사이트 (제주)</p>
+                        <p class="mb-0 mt-n1 font-14 font-400 color-secondary">스쿠버 다이빙</p>
                         <p class="mb-0 font-14 font-400 color-gray">21.09.22(목) ~ 21.09.23(금)</p>
                       </div>
                   </div>
@@ -57,7 +59,8 @@
                       <img data-src="http://ojsfile.ohmynews.com/STD_IMG_FILE/2015/0428/IE001824971_STD.jpg" alt="img" src="http://ojsfile.ohmynews.com/STD_IMG_FILE/2015/0428/IE001824971_STD.jpg" class="preload-img rounded-s img-fluid wedive-timeline-image">
                       <div class="ms-2" style="display: inline-block; vertical-align: top;">
                         <a href="#" class="schedule-close" v-on:click="closeSchedule(3)"><i class="wedive_icoset wedive_icoset_close_s"></i></a>
-                        <p class="mb-0 font-16 font-600">우도 사이트 (제주)</p>
+                        <p class="mb-0 font-16 font-600 ellipsis">우도 사이트 (제주)</p>
+                        <p class="mb-0 mt-n1 font-14 font-400 color-secondary">스쿠버 다이빙</p>
                         <p class="mb-0 font-14 font-400 color-gray">21.09.24(토) ~ 21.09.24(토)</p>
                       </div>
                   </div>
@@ -682,6 +685,7 @@
             
             
           </div>
+          
 
           <a href="#" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 ms-3 me-3 mb-5">생성하기</a>
             
@@ -763,7 +767,7 @@
     <div id="menu-add-schedule" 
          class="menu menu-box-modal rounded-m bg-theme" 
          data-menu-width="350"
-         data-menu-height="250">
+         data-menu-height="300">
         <div class="menu-title p-2">
             <h1 class="font-600 font-18">일정 추가</h1>
             <a href="#" class="close-menu"><i class="wedive_icoset wedive_icoset_close"></i></a>
@@ -813,11 +817,25 @@
                   </template>
               </vue-typeahead-bootstrap>
             </div>
-            
-            <a href="#" v-on:click="addPersonalBest()" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mt-4">추가하기</a>
-        </div>
-    </div>
 
+            
+            <div class="mt-3 p-0">
+            <div class="form-check interest-check interest-check_secondary" style="width: calc(50% + 20px);margin-right: -5px;text-align:center;">
+              <input class="form-check-input" type="radio" value="" name="check_schedule" id="check_schedule1" checked>
+              <label class="form-check rounded-xl border-08" for="check_schedule1" style="padding-left: 12px;height:32px;border-radius: 4px 0px 0px 4px !important;">스쿠버 다이빙</label>
+              
+            </div>
+            <div class="form-check interest-check interest-check_secondary" style="width: calc(50% + 20px);margin-right: -5px;text-align:center;">
+              <input class="form-check-input" type="radio" value="" name="check_schedule" id="check_schedule2">
+              <label class="form-check rounded-xl border-08" for="check_schedule2" style="padding-left: 12px;height:32px;border-radius: 0px 4px 4px 0px !important;">프리 다이빙</label>
+              
+            </div>
+            </div>
+            <a href="#" v-on:click="addPersonalBest()" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mt-2 font-14">추가하기</a>
+        </div>
+        
+    </div>
+    
   </div>
 </template>
 <script>
@@ -945,12 +963,13 @@ export default {
 .ico_feature17 {width: 44px;height: 40px;background-position: -180px -78px;}
 .ico_feature18 {width: 44px;height: 40px;background-position: -225px -78px;}
 
-.icon-course {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/wedive_course2.png);background-repeat: no-repeat;-webkit-background-size: 270px 118px;background-size: 270px 118px;}
-.span_feature {width:66px;}
-.text-urgent {color:#de5246; background-color: #ffebe9;padding: 2px 8px;border-radius:2px;}
 
-.square-img {width: 100%;height: 0px;padding: 50% 0;background-size: 100% 100%;background-clip: border-box;box-sizing:border-box;}
-.txt_box {background: #f4f4f4; border-radius: .5rem;padding: 14px 20px;}
+
+
+#btn-filter1 {padding: 5px 10px !important;margin-right: -2px;border-radius: 20px 0px 0px 20px !important;border: 1px solid #091a42;}
+#btn-filter1:before {clear: both;content: "";display: inline-block;margin-right: 6px;width: 14px;height: 14px;background-size: 14px 14px;background-repeat: no-repeat;background-image: url(/static/images/icon_scubadiving.png);text-indent: -9999px;vertical-align: middle;}
+#btn-filter2 {padding: 5px 10px !important;margin-left: -3px;border-radius: 0px 20px 20px 0px !important;border: 1px solid #091a42;}
+#btn-filter2:before {clear: both;content: "";display: inline-block;margin-right: 6px;width: 14px;height: 14px;background-size: 14px 14px;background-repeat: no-repeat;background-image: url(/static/images/icon_freediving.png);text-indent: -9999px;vertical-align: middle;}
 
 
 
