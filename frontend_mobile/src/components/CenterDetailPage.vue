@@ -72,6 +72,30 @@
                 </div>
             </div>
         </div>
+
+        <div class="card card-style p-2">
+            <div class="content mb-2">
+                <div class="text-center">
+                    <i class="ico ico-wedive-w -circle color-primary scale-box fa-4x"></i>
+                </div>
+                <h4 class="text-center pt-2 mb-0">wedive's comment</h4>
+                <div class="justify-content-center mb-2 mt-3 text-start">
+                    <div class="color-gray-light-mid" style="float: left;position: relative;width: 20px;">01</div>
+                    <div class="mb-2" style="padding-left: 30px;">
+                        대한민국에서 가장 수중환경이 뛰어난 제주 남부 다이빙 사이트 근처에 있습니다.
+                    </div>
+                    <div class="color-gray-light-mid" style="float: left;position: relative;width: 20px;">02</div>
+                    <div class="mb-2" style="padding-left: 30px;">
+                        세계에서 가장 큰 다이빙 단체인 PADI 5 Star 다이브 센터 입니다.
+                    </div>
+                    <div class="color-gray-light-mid" style="float: left;position: relative;width: 20px;">03</div>
+                    <div class="mb-2" style="padding-left: 30px;">
+                        교육, 장비대여, 숙박까지 모두 진행하며, 가격대비 장비의 수준과 직원들의 친절함으로 사용자 평가가 좋습니다.
+                    </div>
+                </div>
+                
+            </div>
+        </div>
         
         
         <div class="card card-style">
@@ -261,84 +285,7 @@
             </div>
         </div>
 
-        <div class="card card-style">
-            <div class="content"> 
-                <h4 class="text-start pt-2 mb-3">사진</h4>
-                
-                <ul class="gallery-filter-controls">
-                    <li class="color-highlight gallery-filter-all" data-filter="all">전체보기</li>
-                    <li data-filter="1">다이빙</li>
-                    <li data-filter="2">교육</li>
-                    <li data-filter="3">센터</li>
-                </ul>
-            </div>
-            <div class="content mb-3 mt-n3">
-                <div class="gallery gallery-filter">
-                    <a href="/static/images/shop1/diving/test1.jpg" data-gallery="gallery-1" class="filtr-item" title="" data-category="1">
-                        <img src="/static/images/empty.png" data-src="/static/images/shop1/diving/test1.jpg" class="preload-img rounded-s shadow-m">
-                    </a>
-                    <a href="/static/images/shop1/diving/test2.jpg" data-gallery="gallery-1" class="filtr-item" title="" data-category="1">
-                        <img src="/static/images/empty.png" data-src="/static/images/shop1/diving/test2.jpg" class="preload-img rounded-s shadow-m">
-                    </a>
-                    <a href="/static/images/shop1/diving/test3.jpg" data-gallery="gallery-1" class="filtr-item" title="" data-category="1">
-                        <img src="/static/images/empty.png" data-src="/static/images/shop1/diving/test3.jpg" class="preload-img rounded-s shadow-m">
-                    </a>
-                    <a href="/static/images/shop1/diving/test4.jpg" data-gallery="gallery-1" class="filtr-item" title="" data-category="1">
-                        <img src="/static/images/empty.png" data-src="/static/images/shop1/diving/test4.jpg" class="preload-img rounded-s shadow-m">
-                    </a>
-                    <a href="/static/images/shop1/diving/test5.jpg" data-gallery="gallery-1" class="filtr-item" title="" data-category="1">
-                        <img src="/static/images/empty.png" data-src="/static/images/shop1/diving/test5.jpg" class="preload-img rounded-s shadow-m">
-                    </a>
-                    <a href="/static/images/shop1/diving/test6.jpg" data-gallery="gallery-1" class="filtr-item" title="" data-category="1">
-                        <img src="/static/images/empty.png" data-src="/static/images/shop1/diving/test6.jpg" class="preload-img rounded-s shadow-m">
-                    </a>							
-                    <a href="/static/images/shop1/edu/test1.jpg" data-gallery="gallery-2" class="filtr-item" title="" data-category="2">
-                        <img src="/static/images/empty.png" data-src="/static/images/shop1/edu/test1.jpg" class="preload-img rounded-s shadow-m">
-                    </a>
-                    <a href="/static/images/shop1/shop/test3.jpg" data-gallery="gallery-3" class="filtr-item" title="" data-category="3">
-                        <img src="/static/images/empty.png" data-src="/static/images/shop1/shop/test3.jpg" class="preload-img rounded-s shadow-m">
-                    </a>
-                    <a href="/static/images/shop1/shop/test12.jpg" data-gallery="gallery-3" class="filtr-item" title="" data-category="3">
-                        <img src="/static/images/empty.png" data-src="/static/images/shop1/shop/test12.jpg" class="preload-img rounded-s shadow-m">
-                    </a>
-                    <a href="/static/images/shop1/shop/test15.jpg" data-gallery="gallery-3" class="filtr-item" title="" data-category="3">
-                        <img src="/static/images/empty.png" data-src="/static/images/shop1/shop/test15.jpg" class="preload-img rounded-s shadow-m">
-                    </a>
-                    <a href="/static/images/shop1/shop/test21.jpg" data-gallery="gallery-3" class="filtr-item" title="" data-category="3">
-                        <img src="/static/images/empty.png" data-src="/static/images/shop1/shop/test21.jpg" class="preload-img rounded-s shadow-m">
-                    </a>
-                    <a href="/static/images/shop1/shop/test22.jpg" data-gallery="gallery-3" class="filtr-item" title="" data-category="3">
-                        <img src="/static/images/empty.png" data-src="/static/images/shop1/shop/test22.jpg" class="preload-img rounded-s shadow-m">
-                    </a>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="card card-style p-2">
-            <div class="content mb-2">
-                <div class="text-center">
-                    <i class="ico ico-wedive-w -circle color-primary scale-box fa-4x"></i>
-                </div>
-                <h4 class="text-center pt-2 mb-0">wedive's comment</h4>
-                <div class="justify-content-center mb-2 mt-3 text-start">
-                    <div class="color-gray-light-mid" style="float: left;position: relative;width: 20px;">01</div>
-                    <div class="mb-2" style="padding-left: 30px;">
-                        대한민국에서 가장 수중환경이 뛰어난 제주 남부 다이빙 사이트 근처에 있습니다.
-                    </div>
-                    <div class="color-gray-light-mid" style="float: left;position: relative;width: 20px;">02</div>
-                    <div class="mb-2" style="padding-left: 30px;">
-                        세계에서 가장 큰 다이빙 단체인 PADI 5 Star 다이브 센터 입니다.
-                    </div>
-                    <div class="color-gray-light-mid" style="float: left;position: relative;width: 20px;">03</div>
-                    <div class="mb-2" style="padding-left: 30px;">
-                        교육, 장비대여, 숙박까지 모두 진행하며, 가격대비 장비의 수준과 직원들의 친절함으로 사용자 평가가 좋습니다.
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-
+        
         
         <div class="card card-style bg-theme pb-0">
             <div class="content" id="tab-group-2">
@@ -531,6 +478,47 @@
             </div>    
         </div>
 
+        <div class="card card-style">
+            <div class="content">
+                <h4 class="text-start pt-2 mb-2">다이빙 가능 포인트</h4>
+                <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
+                <div v-for="(point,index) in point_list" v-if="index<2">
+                    <div class="">
+                        <div class="">
+                            <div class="justify-content-center mb-0 text-start">
+                                <a href="/point">
+                                    <div style="position: relative;">
+                                        <h4 class="font-14 font-600 color-highlight"> {{point.title}} </h4>
+                                        <span class="color-gray-light-mid font-12 mb-0 text-more me-1">상세보기<i class="fas fa-chevron-right ms-2"></i></span>
+                                    </div>
+                                </a>
+                                <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
+                                    <span> {{point.star}} </span>
+                                </p>
+
+                                <div class="row text-center row-cols-3 mb-1" style="padding-left:10px;padding-right:10px;">
+                                    <a class="col square-rect" v-bind:data-gallery="'gallery-'+index" v-bind:href="point.img1" title="">
+                                        <img src="/static/images/empty.png" v-bind:data-src="point.img1" class="preload-img img-fluid rounded-s" alt="Point image">
+                                    </a>
+                                    <a class="col square-rect" v-bind:data-gallery="'gallery-'+index" v-bind:href="point.img2" title="">
+                                        <img src="/static/images/empty.png" v-bind:data-src="point.img2" class="preload-img img-fluid rounded-s" alt="Point image">
+                                    </a>
+                                    <a class="col square-rect" v-bind:data-gallery="'gallery-'+index" v-bind:href="point.img3" title="">
+                                        <img src="/static/images/empty.png" v-bind:data-src="point.img3" class="preload-img img-fluid rounded-s" alt="Point image">
+                                    </a>
+                                </div>
+                                <p class="pb-0 mb-0 line-height-m point_desc"> {{point.desc}} </p>
+                                <p class="pb-0 mb-0 mt-n1 ellipsis color-gray-light-mid">
+                                    {{point.feature}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="divider mt-3 mb-3"></div>
+                </div>
+            </div>
+        </div>
+
 
         <div class="card card-style">
             <div class="content mb-0">
@@ -541,6 +529,77 @@
                 </p>
             </div>
             <div id="map" style="height: 300px;"></div>
+            <div class="map-box hide">
+                <a href="/center">
+                    <div class="bx">
+                        <div class="justify-content-center mb-0 text-start">
+                            <div class="" style="width: 95px; height:95px;">
+                                <img id="map_box_shop_img" src="" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;">
+                            </div>
+                            
+                            <div class="" style="">
+                                <h4 class="font-14 ellipsis mb-0" id="map_box_shop_name"></h4>
+                                <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark"></i>
+                                    &nbsp;<span id="map_box_shop_star"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="card card-style">
+            <div class="content"> 
+                <h4 class="text-start pt-2 mb-3">사진</h4>
+                
+                <ul class="gallery-filter-controls">
+                    <li class="color-highlight gallery-filter-all" data-filter="all">전체보기</li>
+                    <li data-filter="1">다이빙</li>
+                    <li data-filter="2">교육</li>
+                    <li data-filter="3">센터</li>
+                </ul>
+            </div>
+            <div class="content mb-3 mt-n3">
+                <div class="gallery gallery-filter">
+                    <a href="/static/images/shop1/diving/test1.jpg" data-gallery="gallery-1" class="filtr-item" title="" data-category="1">
+                        <img src="/static/images/empty.png" data-src="/static/images/shop1/diving/test1.jpg" class="preload-img rounded-s shadow-m">
+                    </a>
+                    <a href="/static/images/shop1/diving/test2.jpg" data-gallery="gallery-1" class="filtr-item" title="" data-category="1">
+                        <img src="/static/images/empty.png" data-src="/static/images/shop1/diving/test2.jpg" class="preload-img rounded-s shadow-m">
+                    </a>
+                    <a href="/static/images/shop1/diving/test3.jpg" data-gallery="gallery-1" class="filtr-item" title="" data-category="1">
+                        <img src="/static/images/empty.png" data-src="/static/images/shop1/diving/test3.jpg" class="preload-img rounded-s shadow-m">
+                    </a>
+                    <a href="/static/images/shop1/diving/test4.jpg" data-gallery="gallery-1" class="filtr-item" title="" data-category="1">
+                        <img src="/static/images/empty.png" data-src="/static/images/shop1/diving/test4.jpg" class="preload-img rounded-s shadow-m">
+                    </a>
+                    <a href="/static/images/shop1/diving/test5.jpg" data-gallery="gallery-1" class="filtr-item" title="" data-category="1">
+                        <img src="/static/images/empty.png" data-src="/static/images/shop1/diving/test5.jpg" class="preload-img rounded-s shadow-m">
+                    </a>
+                    <a href="/static/images/shop1/diving/test6.jpg" data-gallery="gallery-1" class="filtr-item" title="" data-category="1">
+                        <img src="/static/images/empty.png" data-src="/static/images/shop1/diving/test6.jpg" class="preload-img rounded-s shadow-m">
+                    </a>							
+                    <a href="/static/images/shop1/edu/test1.jpg" data-gallery="gallery-2" class="filtr-item" title="" data-category="2">
+                        <img src="/static/images/empty.png" data-src="/static/images/shop1/edu/test1.jpg" class="preload-img rounded-s shadow-m">
+                    </a>
+                    <a href="/static/images/shop1/shop/test3.jpg" data-gallery="gallery-3" class="filtr-item" title="" data-category="3">
+                        <img src="/static/images/empty.png" data-src="/static/images/shop1/shop/test3.jpg" class="preload-img rounded-s shadow-m">
+                    </a>
+                    <a href="/static/images/shop1/shop/test12.jpg" data-gallery="gallery-3" class="filtr-item" title="" data-category="3">
+                        <img src="/static/images/empty.png" data-src="/static/images/shop1/shop/test12.jpg" class="preload-img rounded-s shadow-m">
+                    </a>
+                    <a href="/static/images/shop1/shop/test15.jpg" data-gallery="gallery-3" class="filtr-item" title="" data-category="3">
+                        <img src="/static/images/empty.png" data-src="/static/images/shop1/shop/test15.jpg" class="preload-img rounded-s shadow-m">
+                    </a>
+                    <a href="/static/images/shop1/shop/test21.jpg" data-gallery="gallery-3" class="filtr-item" title="" data-category="3">
+                        <img src="/static/images/empty.png" data-src="/static/images/shop1/shop/test21.jpg" class="preload-img rounded-s shadow-m">
+                    </a>
+                    <a href="/static/images/shop1/shop/test22.jpg" data-gallery="gallery-3" class="filtr-item" title="" data-category="3">
+                        <img src="/static/images/empty.png" data-src="/static/images/shop1/shop/test22.jpg" class="preload-img rounded-s shadow-m">
+                    </a>
+                </div>
+            </div>
         </div>
 
         <div class="card card-style">
@@ -983,11 +1042,52 @@ export default {
             label: {text: '버블탱크 스쿠버다이빙', color: 'white', className: 'marker-position'},
             icon: new google.maps.MarkerImage('/static/images/ico_pin1.png',null, null, null, new google.maps.Size(38,43)),
         });
-        var marker_point = new google.maps.Marker({
-            map: this.map,
-            position: {lat: 33.22900114645303, lng: 126.56260977136935},
-            label: {text: '포인트1', color: 'white', className: 'marker-position2'},
-            icon: new google.maps.MarkerImage('/static/images/ico_pin2.png',null, null, null, new google.maps.Size(38,43)),
+
+        {
+            var position = {lat: 33.22900114645303, lng: 126.56260977136935};
+            const title = '문섬 포인트';
+            const star = '4.3';
+            const img = '/static/images/point/ko/jeju_munisland_06.jpg';
+            
+
+            var marker_point = new google.maps.Marker({
+                map: this.map,
+                position: position,
+                label: {text: title, color: 'white', className: 'marker-position2'},
+                icon: new google.maps.MarkerImage('/static/images/ico_pin2.png',null, null, null, new google.maps.Size(38,43)),
+            });
+            marker_point.addListener("click", () => {
+                $(".map-box").removeClass("hide");
+                for (var j=0; j<this.marker_list.length; j++) {
+                    var _icon = this.marker_list[j].getIcon();
+                    if (_icon.size.width != 38) {
+                        this.marker_list[j].setIcon(new google.maps.MarkerImage('/static/images/ico_pin2.png', null, null, null, new google.maps.Size(38,43)));
+                    }
+                }
+
+                $("#map_box_shop_name").text(title);
+                $("#map_box_shop_star").text(star);
+                $("#map_box_shop_img").attr("src", img);
+                
+                
+                marker_point.setIcon(new google.maps.MarkerImage('/static/images/ico_pin_big2.png', null, null, null, new google.maps.Size(58,66)));
+                this.map.panTo(marker_point.getPosition());
+                //if (this.map.getZoom() == 17) {
+                //} else {
+                //    this.map.setZoom(17);
+                //    this.map.setCenter(marker_point.getPosition());
+                //}
+            });
+            this.marker_list.push(marker_point);
+        }
+        this.map.addListener("click", (e) => {
+            $(".map-box").addClass("hide");
+            for (var j=0; j<this.marker_list.length; j++) {
+                var _icon = this.marker_list[j].getIcon();
+                if (_icon.size.width != 38) {
+                    this.marker_list[j].setIcon(new google.maps.MarkerImage('/static/images/ico_pin2.png', null, null, null, new google.maps.Size(38,43)));
+                }
+            }
         });
         
         
@@ -999,6 +1099,21 @@ export default {
   data () {
     return {
         map: null,
+        marker_list: [],
+
+        point_list : [
+            {title: "말미잘동산", type: 'df', desc: "동해의 명물 섬유세닐말미잘이 유난히 많은 포인트로, 모래 지형 위에 커다란 암반과 크고 작은 바위들이 형성되어 있는 포인트 입니다. 섬유세닐말미잘은 낮은 수온에서 펴기 때문에 6월 이전에 방문한다면 이 포인트의 아름다움을 제대로 느낄 수 있습니다.", star: 4.6, img1: 'https://divingholic.com/wp-content/uploads/2019/02/maxresdefault-1.jpg', img2: 'https://diverz.net/data/diving/point/202102/1614156788_8f436f8c0dc8a574611b_thumb_760_504.jpg', img3: 'https://divingholic.com/wp-content/uploads/2019/02/2%EC%9B%94%EC%9D%B8%EA%B5%AC%ED%95%B4%EB%B3%80%EB%94%A5.jpg', position: {lat: 37.9668859063654, lng: 128.79946317636166}},
+            {title: "철재삼동", type: 'df', desc: "여름철 동해의 상징은 볼락이라고 할 수 있습니다. 그중에서도 수많은 볼락이 태풍처럼 있다고 해서 볼락태풍이라는 별명을 가진 포인트가 철재삼동 포인트 입니다. 초여름에서 초가을까지 3달정도되는 기간에 20m전후 수심, 11~15도의 수온 삼박자가 맞아떨어지면 거대한 볼락 떼를 만날 수 있습니다.", star: 4.3, img1: '/static/images/point/ko/yangyang_chuljesamdong_01.jpg', img2: '/static/images/point/ko/yangyang_chuljesamdong_02.jpg', img3: '/static/images/point/ko/yangyang_chuljesamdong_03.jpg', position: {lat: 37.947207012548716, lng: 128.81497292286326}},
+            {title: "하우스리프", type: 'sf', desc: "동해바다는 모래바닥에 재미없는 곳이라고 생각하시나요? 하우스리프 포인트는 1~2명의 다이버가 통과할 수 있는 박원 삼각 뿔 어초와 식빵 어초, W 어초, M어초, 평상어초가 있으며, 자연암반과 어우러져 물고기도 많고 다양한 종류의 어초와 고착생물을 보는 재미가 쏠쏠한 포인트 입니다.", star: 4.2, img1: '/static/images/point/ko/yangyang_houseleaf_01.jpg', img2: '/static/images/point/ko/yangyang_houseleaf_02.jpg', img3: '/static/images/point/ko/yangyang_houseleaf_03.jpg', position: {lat: 37.94825610969583, lng: 128.7946310508101}},
+            {title: "오대산", type: 'sf', desc: "", star: 4.3, img1: '', img2: '', img3: '', position: {lat: 37.942265902352936, lng: 128.81437210807638}},
+            {title: "용궁1", type: 'df', desc: "", star: 4.3, img1: '', img2: '', img3: '', position: {lat: 37.966694517671925, lng: 128.80091977131866}},
+            {title: "용궁2", type: 'df', desc: "", star: 4.3, img1: '', img2: '', img3: '', position: {lat: 37.98870094701705, lng: 128.80553232201584}},
+            {title: "대목1", type: 'sf', desc: "", star: 4.3, img1: '', img2: '', img3: '', position: {lat: 37.99262313926249, lng: 128.77955637861592}},
+            {title: "정글1", type: 'df', desc: "", star: 4.3, img1: '', img2: '', img3: '', position: {lat: 37.965163390164456, lng: 128.8213121007167}},
+            {title: "정글2", type: 'df', desc: "", star: 4.3, img1: '', img2: '', img3: '', position: {lat: 37.97587456645468, lng: 128.80344144106112}},
+            {title: "웰빙", type: 'sf', desc: "", star: 4.3, img1: '', img2: '', img3: '', position: {lat: 38.00150165886583, lng: 128.7445432664312}},
+            {title: "리멤버", type: 'sf', desc: "", star: 4.3, img1: '', img2: '', img3: '', position: {lat: 38.0118827612431, lng: 128.74771900182654}},
+        ],
     }
   }, methods: {
       call: function() {
@@ -1099,4 +1214,6 @@ export default {
 .review_img {float: left;width: 88px; height:88px;margin-right:10px;margin-bottom:2px;border-radius:10px;object-fit: cover !important;}
 .wedive-txt-all {position: absolute;top: 20px;right: 16px;}
 .font-noto {font-family: 'Noto Sans Korean'}
+.map-box {position: absolute;right: 6px;bottom: 21px;margin: 5px 5px 4px;width: 115px;}
+.bx {background-color: rgba(255,255,255);padding: 10px;min-height: 105px;border: 1px solid rgba(0,0,0,.1);border-radius: 10px;}
 </style>

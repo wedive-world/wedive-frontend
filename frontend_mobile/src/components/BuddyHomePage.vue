@@ -22,13 +22,13 @@
 
         <div class="card card-style">
             <div class="content mb-0 mt-3">
-                <h4 class="text-start pt-2 mb-0">따끈따끈 신규 다이빙</h4>
+                <h4 class="text-start pt-2 mb-0">따끈따끈 신규 프리다이빙</h4>
                 <p class="mb-3 color-gray-light-mid">19개의 다이빙 이벤트</p>
                 <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
                 
                 <div class="light-border-bottom mt-3">
                     <span class="chip chip-s bg-fade-magenta-light color-magenta-dark-more text-center font-600 wedive-chip">2자리 남음</span>
-                    <span class="chip chip-s bg-fade-mint-light05 color-green-dark-more text-center font-600 wedive-chip"><i class="far fa-user"></i> 3명 참여중</span>
+                    <span class="chip chip-s bg-fade-mint-light05 color-green-dark-more text-center font-600 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>3</span> <span class="color-google ms-1"><i class="far fa-user"></i>1</span> 참여중</span>
                     <div class="d-flex mb-3">
                         <div class="align-self-center">
                             <img src="/static/images/point/ko/kangwon_yangyang_01.jpg" class="rounded-sm me-3" width="68">
@@ -42,7 +42,7 @@
                 </div>
                 <div class="light-border-bottom mt-3">
                     <span class="chip chip-s bg-fade-magenta-light05 color-magenta-dark-more text-center font-600 wedive-chip">3자리 남음</span>
-                    <span class="chip chip-s bg-fade-mint-light05 color-green-dark-more text-center font-600 wedive-chip"><i class="far fa-user"></i> 1명 참여중</span>
+                    <span class="chip chip-s bg-fade-mint-light05 color-green-dark-more text-center font-600 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>1</span> 참여중</span>
                     <div class="d-flex mb-3">
                         <div class="align-self-center">
                             <img src="/static/images/point/ko/jeju_bumisland_01.jpg" class="rounded-sm me-3" width="68">
@@ -56,7 +56,7 @@
                 </div>
                 <div class="light-border-bottom mt-3">
                     <span class="chip chip-s bg-fade-magenta-light05 color-magenta-dark-more text-center font-600 wedive-chip">1자리 남음</span>
-                    <span class="chip chip-s bg-fade-mint-light05 color-green-dark-more text-center font-600 wedive-chip"><i class="far fa-user"></i> 5명 참여중</span>
+                    <span class="chip chip-s bg-fade-mint-light05 color-green-dark-more text-center font-600 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>2</span> <span class="color-google ms-1"><i class="far fa-user"></i>3</span> 참여중</span>
                     <div class="d-flex mb-3">
                         <div class="align-self-center">
                             <img src="/static/images/point/ko/jeju_munisland_06.jpg" class="rounded-sm me-3" width="68">
@@ -121,7 +121,7 @@
                 
                 <div class="light-border-bottom mt-3">
                     <span class="chip chip-s bg-fade-magenta-light05 color-magenta-dark-more text-center font-600 wedive-chip">1자리 남음</span>
-                    <span class="chip chip-s bg-fade-mint-light05 color-green-dark-more text-center font-600 wedive-chip"><i class="far fa-user"></i> 5명 참여중</span>
+                    <span class="chip chip-s bg-fade-mint-light05 color-green-dark-more text-center font-600 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>5</span> 참여중</span>
                     <div class="d-flex mb-3">
                         <div class="align-self-center">
                             <img src="/static/images/point/ko/kangwon_yangyang_01.jpg" class="rounded-sm me-3" width="68">
@@ -135,7 +135,7 @@
                 </div>
                 <div class="light-border-bottom mt-3">
                     <span class="chip chip-s bg-fade-magenta-light05 color-magenta-dark-more text-center font-600 wedive-chip">1자리 남음</span>
-                    <span class="chip chip-s bg-fade-mint-light05 color-green-dark-more text-center font-600 wedive-chip"><i class="far fa-user"></i> 5명 참여중</span>
+                    <span class="chip chip-s bg-fade-mint-light05 color-green-dark-more text-center font-600 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>1</span> <span class="color-google ms-1"><i class="far fa-user"></i>1</span> 참여중</span>
                     <div class="d-flex mb-3">
                         <div class="align-self-center">
                             <img src="/static/images/point/ko/jeju_bumisland_01.jpg" class="rounded-sm me-3" width="68">
@@ -167,7 +167,7 @@
                 
                 <div class="light-border-bottom mt-3">
                     <span class="chip chip-s bg-fade-magenta-light05 color-magenta-dark-more text-center font-600 wedive-chip">1자리 남음</span>
-                    <span class="chip chip-s bg-fade-mint-light05 color-green-dark-more text-center font-600 wedive-chip"><i class="far fa-user"></i> 5명 참여중</span>
+                    <span class="chip chip-s bg-fade-mint-light05 color-green-dark-more text-center font-600 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>1</span> 참여중</span>
                     <div class="d-flex mb-3">
                         <div class="align-self-center">
                             <img src="/static/images/point/ko/kangwon_yangyang_01.jpg" class="rounded-sm me-3" width="68">
@@ -181,7 +181,7 @@
                 </div>
                 <div class="light-border-bottom mt-3">
                     <span class="chip chip-s bg-fade-magenta-light05 color-magenta-dark-more text-center font-600 wedive-chip">1자리 남음</span>
-                    <span class="chip chip-s bg-fade-mint-light05 color-green-dark-more text-center font-600 wedive-chip"><i class="far fa-user"></i> 5명 참여중</span>
+                    <span class="chip chip-s bg-fade-mint-light05 color-green-dark-more text-center font-600 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>3</span> <span class="color-google ms-1"><i class="far fa-user"></i>1</span> 참여중</span>
                     <div class="d-flex mb-3">
                         <div class="align-self-center">
                             <img src="/static/images/point/ko/jeju_bumisland_01.jpg" class="rounded-sm me-3" width="68">
