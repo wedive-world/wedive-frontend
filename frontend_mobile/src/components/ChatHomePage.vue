@@ -18,7 +18,7 @@
                     </div>
                 </div>
                 <div class="ms-2 d-inline-block v-align-top">
-                    <h5 class="font-14 font-600 mb-0">윤민혁</h5>
+                    <h5 class="font-15 font-600 mb-0">윤민혁</h5>
                     <p class="line-height-s opacity-60 font-13">안녕하세요 화이팅해서 열심히 만들어봐요.</p>
                 </div>
                 <div class="latest">어제</div>
@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <div class="ms-2 d-inline-block v-align-top">
-                    <h5 class="font-14 font-600 mb-0">송현일</h5>
+                    <h5 class="font-15 font-600 mb-0">송현일</h5>
                     <p class="line-height-s opacity-60 font-13">저도 진짜 열심히 할께요.<br/>다이어트도 해야할꺼같아요.</p>
                 </div>
                 <div class="latest">9월 22일</div>
@@ -60,7 +60,7 @@
                     </div>
                 </div>
                 <div class="ms-2 d-inline-block v-align-top">
-                    <h5 class="font-14 font-600 mb-0">장성환</h5>
+                    <h5 class="font-15 font-600 mb-0">장성환</h5>
                     <p class="line-height-s opacity-60 font-13">끝이 보입니다 화이팅</p>
                 </div>
                 <div class="latest">9월 20일</div>
@@ -94,7 +94,7 @@
                     </div>
                 </div>
                 <div class="ms-2 d-inline-block v-align-top">
-                    <h5 class="font-14 font-600 mb-0">윤장송<span class="color-gray-light-mid font-400 ms-2">3</span></h5>
+                    <h5 class="font-15 font-600 mb-0">윤장송<span class="color-gray-light-mid font-400 ms-2">3</span></h5>
                     <p class="line-height-s opacity-60 font-13">현일아 일하자</p>
                 </div>
                 <div class="latest">오후 6:31</div>
@@ -149,7 +149,7 @@
                     </div>
                 </div>
                 <div class="ms-2 d-inline-block v-align-top">
-                    <h5 class="font-14 font-600 mb-0">위다이브<span class="color-gray-light-mid font-400 ms-2">3</span></h5>
+                    <h5 class="font-15 font-600 mb-0">위다이브<span class="color-gray-light-mid font-400 ms-2">3</span></h5>
                     <p class="line-height-s opacity-60 font-13">팀 위다이브 영원하라</p>
                 </div>
                 <div class="latest">오후 6:31</div>
