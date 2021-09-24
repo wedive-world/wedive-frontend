@@ -149,7 +149,7 @@
                     </div>
                 </div>
                 <div class="ms-2 d-inline-block v-align-top">
-                    <h5 class="font-15 font-600 mb-0">위다이브<span class="color-gray-light-mid font-400 ms-2">3</span></h5>
+                    <h5 class="font-15 font-600 mb-0">위다이브<span class="color-gray-light-mid font-400 ms-2">4</span></h5>
                     <p class="line-height-s opacity-60 font-13">팀 위다이브 영원하라</p>
                 </div>
                 <div class="latest">오후 6:31</div>

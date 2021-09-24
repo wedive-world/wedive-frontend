@@ -43,7 +43,7 @@
                     </div>
                 </div>
                 <div class="speech-right">
-                    <div>윤민혁</div>
+                    <div class="font-12 ms-1">윤민혁</div>
                     <div class="speech-bubble color-black">
                         이 프로젝트는 언제 끝나나요?
                     </div>
@@ -80,7 +80,7 @@
                     </div>
                 </div>
                 <div class="speech-right">
-                    <div>송현일</div>
+                    <div class="font-12 ms-1">송현일</div>
                     <div class="speech-bubble color-black">
                         괜찮아~ 그냥 하면 다 할 수 있어
                     </div>
@@ -88,7 +88,7 @@
                 </div>
             </div>
             <div class="clearfix"></div>
-            <p class="text-center mb-0 font-11">2021년 9월 22일 (수)</p>
+            <p class="text-center mt-1 mb-2 font-11">2021년 9월 22일 (수)</p>
             <div class="clearfix"></div>
             <div class="speech-left">
                 <div class="speech-bubble bg-highlight">
@@ -100,6 +100,13 @@
             <div class="speech-left">
                 <div class="speech-bubble speach-image bg-highlight">
                     <img class="img-fluid preload-img" src="/static/images/empty.png" data-src="/static/images/diving_advanced.jpg" alt="img">
+                </div>
+                <span class="time">오전 12:05</span>
+            </div>
+            <div class="clearfix"></div>
+            <div class="speech-left bg-transparent">
+                <div class="speech-bubble speach-image">
+                    <img class="img-fluid preload-img" src="/static/images/empty.png" data-src="/static/images/imogi.png" alt="img" height="120" style="object-fit: contain;">
                 </div>
                 <span class="time">오전 12:05</span>
             </div>
@@ -124,7 +131,7 @@
                     </div>
                 </div>
                 <div class="speech-right">
-                    <div>윤민혁</div>
+                    <div class="font-12 ms-1">윤민혁</div>
                     <div class="speech-bubble color-black">
                         현일이형 같이 노력해봐요~
                     </div>
@@ -147,7 +154,7 @@
                     </div>
                 </div>
                 <div class="speech-right">
-                    <div>윤민혁</div>
+                    <div class="font-12 ms-1">윤민혁</div>
                     <div class="speech-bubble color-black">
                         그건그렇고 채팅에 영상도 지원될까요?
                     </div>
@@ -170,7 +177,7 @@
                 <span class="time">오전 12:21</span>
             </div>
             <div class="clearfix"></div>
-            <p class="text-center mb-0 font-11">2021년 9월 24일 (금)</p>
+            <p class="text-center mt-1 mb-2 font-11">2021년 9월 24일 (금)</p>
             <div>
                 <div class="p-relative d-inline-block w-60 float-left">
                     <div class="user-img">
@@ -186,12 +193,12 @@
                     </div>
                 </div>
                 <div class="speech-right">
-                    <div>윤민혁</div>
+                    <div class="font-12 ms-1">윤민혁</div>
                     <div class="speech-bubble color-black">
                         와 그럼 이제 현일이형이 좀 달려주면 되겠네요~ 현일이형 화이팅 입니다.
                     </div>
+                    <span class="time">오전 12:25</span>
                 </div>
-                <span class="time">오전 12:25</span>
             </div>
             <div class="clearfix"></div>
             <div class="speech-left">
@@ -199,6 +206,13 @@
                     현일아 보고 있는거니?
                 </div>
                 <span class="time">오후 7:38</span>
+            </div>
+            <div class="clearfix"></div>
+            <div class="speech-left">
+                <div class="speech-bubble bg-highlight">
+                    현일아 일하자
+                </div>
+                <span class="time">오후 7:41</span>
             </div>			
             <div class="clearfix"></div>
             
@@ -373,6 +387,12 @@ margin-right:-4px;
 margin-top: 0px;
 transform: scaleX(-1) rotate(70deg);
 color: #1d397c ;    
+}
+.bg-transparent:before{
+    opacity: 0 !important;
+}
+.bg-transparent > .speech-bubble {
+    background: transparent;
 }
 .img-fluid {min-width: 180px;max-height: 120px;object-fit: cover;}
 .speech-right>.time {margin-top: -32px;float: right;margin-right: -54px;font-size: 11px;color: #b4bcc8;}
