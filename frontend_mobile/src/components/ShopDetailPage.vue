@@ -59,7 +59,7 @@
         <div class="justify-content-center mb-2 mt-3 text-start font-noto">
             <div class="color-gray-light-mid font-700 wedive-comment-number">01</div>
             <div class="mb-2 font-200 wedive-comment-desc">
-              기존 풋포켓이 아시아인의 체형에 맞지 않아 불편하셨나요?<br/><font class="font-500">한국인의 발모양에 맞춰</font> 한국에서 제작한 핀 입니다.
+              기존 풋포켓이 체형에 맞지 않아 불편하셨나요?<br/><font class="font-500">한국인의 발모양에 맞춰</font> 한국에서 제작한 핀 입니다.
             </div>
             <div class="color-gray-light-mid font-700 wedive-comment-number">02</div>
             <div class="mb-2 font-200 wedive-comment-desc">
@@ -76,7 +76,7 @@
 
     <!--<div class="card card-style ms-0 me-0 rounded-0 mb-2" style="border-bottom: 1px solid #dee2e6 !important;box-shadow: none !important;">-->
       <div class="bg-white" id="tab-group-1">
-        <div class="tab-controls tabs-small tabs-rounded" data-highlight="bg-highlight" id="tab-group1-header">
+        <div class="tab-controls tabs-small tabs-rounded" data-highlight="bg-highlight" id="tab-group1-header" style="z-index:999">
             <a href="#" data-active data-bs-toggle="collapse" data-bs-target="#tab-1" style="border-radius:0;">상품정보</a>
             <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-2" style="border-radius:0;">리뷰</a>
             <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-3" style="border-radius:0;">연관상품</a>
