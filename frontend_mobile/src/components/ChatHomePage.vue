@@ -3,7 +3,7 @@
     <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-chat" data-menu-load=""></div>    
     <div class="card card-style ms-0 me-0 rounded-0">
         <div class="content">
-            <a href="/chat" class="">
+            <a href="/chat" class="d-block">
                 <div class="p-relative d-inline-block w-60 mb-2">
                     <div class="user-img">
                         <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
@@ -24,7 +24,7 @@
                 <div class="latest">어제</div>
             </a>
             <div class="divider mb-2"></div>
-            <a href="/chat" class="">
+            <a href="/chat" class="d-block">
                 <div class="p-relative d-inline-block w-60 mb-2">
                     <div class="user-img">
                         <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
@@ -45,7 +45,7 @@
                 <div class="latest">9월 22일</div>
             </a>
             <div class="divider mb-2"></div>
-            <a href="/chat" class="">
+            <a href="/chat" class="d-block">
                 <div class="p-relative d-inline-block w-60 mb-2">
                     <div class="user-img">
                         <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
@@ -68,7 +68,7 @@
             <div class="divider mb-2"></div>
             
             
-            <a href="/chat" class="">
+            <a href="/chat" class="d-block">
                 <div class="p-relative d-inline-block w-60 mb-2">
                     <div class="user-img img-sm">
                         <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
@@ -101,7 +101,7 @@
             </a>
             <div class="divider mb-2"></div>
 
-            <a href="/chat" class="">
+            <a href="/chat" class="d-block">
                 <div class="p-relative d-inline-block w-60 mb-2">
                     <div class="user-img img-xs">
                         <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
@@ -249,4 +249,5 @@ export default {
 }
 
 .latest {float: right;font-size: 11px;color: #b4bcc8;}
+.d-block {display:block;}
 </style>

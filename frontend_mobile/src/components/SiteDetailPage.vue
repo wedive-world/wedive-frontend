@@ -845,7 +845,7 @@ export default {
             var _type = this.point_list[i].type;
             var _position = this.point_list[i].position;
             var _img = (_type == 'sf') ? '/static/images/ico_pin2_o8.png' : (_type == 'df') ? '/static/images/ico_pin3_o8.png' : (_type == 'so') ? '/static/images/ico_pin2_o.png' : '/static/images/ico_pin3_o.png';
-            var _marker_class = (_type == 'sf') ? 'marker-position2' : (_type == 'df') ? 'marker-position3' : (_type == 'so') ? 'marker-position2-o' : 'marker-position3-o';
+            const _marker_class = (_type == 'sf') ? 'marker-position2' : (_type == 'df') ? 'marker-position3' : (_type == 'so') ? 'marker-position2-o' : 'marker-position3-o';
 
             const title = this.point_list[i].title;
             const desc = this.point_list[i].desc;
@@ -867,6 +867,11 @@ export default {
                     var _icon = this.marker_list[j].getIcon();
                     if (_icon.size.width != 38) {
                         this.marker_list[j].setIcon(new google.maps.MarkerImage(this.marker_img_list[j].ori, null, null, null, new google.maps.Size(38,43)));
+                        try {
+                            var _title = this.marker_list[j].getLabel().text;
+                            this.marker_list[j].setLabel({text: _title, color: 'white', className: _marker_class});
+                        } catch (e) {
+                        }
                     }
                 }
 
@@ -877,6 +882,7 @@ export default {
                 
                 
                 marker_point.setIcon(new google.maps.MarkerImage(_big_img, null, null, null, new google.maps.Size(58,66)));
+                marker_point.setLabel({text: title, color: 'white', className: _marker_class + ' mt-86'});
                 if (this.map.getZoom() == 14) {
                     this.map.panTo(marker_point.getPosition());
                 } else {
@@ -894,6 +900,10 @@ export default {
                 var _icon = this.marker_list[j].getIcon();
                 if (_icon.size.width != 38) {
                     this.marker_list[j].setIcon(new google.maps.MarkerImage(this.marker_img_list[j].ori, null, null, null, new google.maps.Size(38,43)));
+                    var _label = this.marker_list[j].getLabel();
+                    var _title = _label.text;
+                    var _className = _label.className.replace('mt-86', '');
+                    this.marker_list[j].setLabel({text: _title, color: 'white', className: _className});
                 }
             }
             this.map.setZoom(12);

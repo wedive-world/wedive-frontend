@@ -876,6 +876,11 @@ export default {
                     var _icon = this.marker_list[j].getIcon();
                     if (_icon.size.width != 38) {
                         this.marker_list[j].setIcon(new google.maps.MarkerImage('/static/images/ico_pin1_o.png', null, null, null, new google.maps.Size(38,43)));
+                        try {
+                            var _title = this.marker_list[j].getLabel().text;
+                            this.marker_list[j].setLabel({text: _title, color: 'white', className: 'marker-position'});
+                        } catch (e) {
+                        }
                     }
                 }
 
@@ -886,6 +891,7 @@ export default {
                 
                 
                 marker_shop.setIcon(new google.maps.MarkerImage('/static/images/ico_pin_big1.png', null, null, null, new google.maps.Size(58,66)));
+                marker_shop.setLabel({text: title, color: 'white', className: 'marker-position mt-86'});
                 if (this.map.getZoom() == 17) {
                     this.map.panTo(marker_shop.getPosition());
                 } else {
@@ -901,6 +907,8 @@ export default {
                 var _icon = this.marker_list[j].getIcon();
                 if (_icon.size.width != 38) {
                     this.marker_list[j].setIcon(new google.maps.MarkerImage('/static/images/ico_pin1_o.png', null, null, null, new google.maps.Size(38,43)));
+                    var _title = this.marker_list[j].getLabel().text;
+                    this.marker_list[j].setLabel({text: _title, color: 'white', className: 'marker-position'});
                 }
             }
             this.map.setZoom(14);
