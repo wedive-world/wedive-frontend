@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-5 pb-5">
+  <div class="mb-3 pb-5">
     <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-shopping" data-menu-load=""></div>    
     <div class="card card-style ms-0 me-0 rounded-0 mb-2" style="border-bottom: 1px solid #dee2e6 !important;box-shadow: none !important;">
       <div class="splide single-slider cover-slider slider-no-arrows slider-has-dots" id="cover-slider-top" data-card-height="250">
@@ -83,7 +83,7 @@
             <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-4" style="border-radius:0;">문의/안내</a>
         </div>
         <div class="clearfix mb-3"></div>
-        <div data-bs-parent="#tab-group-1" class="content collapse show" id="tab-1">
+        <div data-bs-parent="#tab-group-1" class="content collapse bg-white show" id="tab-1">
           <div class="item_desc height-1100">
             <img src="/static/images/shopping/item1/content.jpg" />
             <img src="/static/images/shopping/item1/shop_portrate_1.jpg" />
@@ -124,7 +124,7 @@
             <button v-on:click="viewMore()" type="button" id="btn-more">상세정보 더보기</button>
           </div>
         </div>
-        <div data-bs-parent="#tab-group-1" class="content collapse" id="tab-2">
+        <div data-bs-parent="#tab-group-1" class="content collapse bg-white" id="tab-2">
             <div class="accordion mt-2" id="accordion-1">
                 <div class="mb-0">
                     <button class="btn ps-0 pe-0 accordion-btn color-theme no-effect" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false">
@@ -164,10 +164,10 @@
                 </div>
             </div>
         </div>
-        <div data-bs-parent="#tab-group-1" class="content collapse" id="tab-3">
+        <div data-bs-parent="#tab-group-1" class="content collapse bg-white" id="tab-3">
             <img class="img-fluid rounded-sm mt-2" src="images/pictures/28.jpg" alt="img">
         </div>
-        <div data-bs-parent="#tab-group-1" class="content collapse" id="tab-4">
+        <div data-bs-parent="#tab-group-1" class="content collapse bg-white" id="tab-4">
             <p class="bottom-0">
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
@@ -249,6 +249,7 @@ export default {
 .ico-wedive-w:before {content: "";background-image: url('/static/images/ico_wedive_d.png');background-size:40px 40px;width:40px;height:40px;display:inline-block;}
 .wedive-comment-number {float: left;position: relative;width: 20px;}
 .wedive-comment-desc {padding-left: 30px;line-height: 22px;}
+.item_desc{overflow: hidden;position: relative;}
 .item_desc > img {width: 100%; padding: 12px; object-fit: contain;}
 .product-info {margin: 12px;}
 .product-info > picture > img {width:100%; object-fit: contain;border: 1px solid black;}
