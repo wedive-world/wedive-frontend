@@ -77,15 +77,15 @@
     <!--<div class="card card-style ms-0 me-0 rounded-0 mb-2" style="border-bottom: 1px solid #dee2e6 !important;box-shadow: none !important;">-->
       <div class="bg-white" id="tab-group-1">
         <div class="tab-controls tabs-small tabs-rounded" data-highlight="bg-highlight" id="tab-group1-header" style="z-index:999">
-            <a href="#" data-active data-bs-toggle="collapse" data-bs-target="#tab-1" style="border-radius:0;">상품정보</a>
-            <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-2" style="border-radius:0;">리뷰</a>
-            <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-3" style="border-radius:0;">연관상품</a>
-            <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-4" style="border-radius:0;">문의/안내</a>
+            <a href="#" data-active data-bs-toggle="collapse" data-bs-target="#tab-1" style="border-radius:0;padding:3px 0px;">상품정보</a>
+            <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-2" style="border-radius:0;padding:3px 0px;">리뷰</a>
+            <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-3" style="border-radius:0;padding:3px 0px;">연관상품</a>
+            <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-4" style="border-radius:0;padding:3px 0px;">문의/안내</a>
         </div>
         <div class="clearfix mb-3"></div>
         <div data-bs-parent="#tab-group-1" class="content collapse bg-white show" id="tab-1">
           <div class="item_desc height-1100">
-            <img src="/static/images/shopping/item1/content.jpg" />
+            <img src="/static/images/shopping/item1/content.jpg" style="padding: 0;"/>
             <img src="/static/images/shopping/item1/shop_portrate_1.jpg" />
             <img src="/static/images/shopping/item1/shop_portrate_2.jpg" />
             <img src="/static/images/shopping/item1/shop_portrate_3.jpg" />
@@ -125,53 +125,122 @@
           </div>
         </div>
         <div data-bs-parent="#tab-group-1" class="content collapse bg-white" id="tab-2">
-            <div class="accordion mt-2" id="accordion-1">
-                <div class="mb-0">
-                    <button class="btn ps-0 pe-0 accordion-btn color-theme no-effect" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false">
-                        <i class="fa fa-heart color-red-dark me-2"></i>
-                        Accordion Title 1
-                        <i class="fa fa-plus font-10 accordion-icon"></i>
-                    </button>
-                    <div id="collapse1" class="collapse" data-parent="#accordion-1">
-                        <div class="pt-1 pb-2">
-                            This is the accordion content. You can add any content you want to it. Really, anything! Add images, text, lists, captions or any element you want.
-                        </div>
+          <div>
+            <div class="row pt-3 pb-3">
+              <div class="text-center col-6">
+                <p class="font-16 mb-3 font-noto">사용자 총 평점</p>
+                <p class="mb-0 font-30 font-600 font-noto">4.7</p>
+                <div class="wedive-star-back">
+                  <div class="wedive-star-front" style="width:65.39999999999999%">
                     </div>
                 </div>
-                <div class="mb-0">
-                    <button class="btn ps-0 pe-0 accordion-btn color-theme no-effect"  data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false">
-                        <i class="fa fa-star color-yellow-dark me-2"></i>
-                        Accordion Title 2
-                        <i class="fa fa-chevron-down font-10 accordion-icon"></i>
-                    </button>
-                    <div id="collapse2" class="collapse"  data-parent="#accordion-1">
-                        <div class="pt-1 pb-2">
-                            This is the accordion content. You can add any content you want to it. Really, anything! Add images, text, lists, captions or any element you want.
+              </div>
+              <div class="text-center col-6">
+                <p class="font-16 mb-3 font-noto">평점비율</p>
+                  <div class="wedive-score-wrapper">
+                    <ul class="wedive-score-ul">
+                      <li class="wedive-score-li">
+                        <div class="wedive-score-inner-div">
+                          <span class="wedive-score-inner-div-span" style="height:84.61538461538461%">
+                            <em class="wedive-score-inner-div-span-em" style="display: block;">11</em>
+                          </span>
                         </div>
-                    </div>
-                </div>
-                <div class="mb-0">
-                    <button class="btn ps-0 pe-0 accordion-btn color-theme no-effect" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false">
-                        <i class="fa fa-cloud color-blue-dark me-2"></i>
-                        Accordion Title 3
-                        <i class="fa fa-arrow-down font-10 accordion-icon"></i>
-                    </button>
-                    <div id="collapse3" class="collapse"  data-parent="#accordion-1">
-                        <div class="pt-1 pb-2">
-                            This is the accordion content. You can add any content you want to it. Really, anything! Add images, text, lists, captions or any element you want.
+                        <span class="wedive-score-inner-span">5점</span>
+                      </li>
+                      <li class="wedive-score-li">
+                        <div class="wedive-score-inner-div">
+                          <span class="wedive-score-inner-div-span" style="height:7.6923076923076925%">
+                            <em class="wedive-score-inner-div-span-em">1</em>
+                          </span>
                         </div>
-                    </div>
-                </div>
+                        <span class="wedive-score-inner-span">4점</span>
+                      </li>
+                      <li class="wedive-score-li">
+                        <div class="wedive-score-inner-div">
+                          <span class="wedive-score-inner-div-span" style="height:7.6923076923076925%">
+                            <em class="wedive-score-inner-div-span-em">1</em>
+                          </span>
+                        </div>
+                        <span class="wedive-score-inner-span">3점</span>
+                      </li>
+                      <li class="wedive-score-li">
+                        <div class="wedive-score-inner-div">
+                          <span class="wedive-score-inner-div-span" style="display:none">
+                            <em class="wedive-score-inner-div-span-em">0</em>
+                          </span>
+                        </div>
+                        <span class="wedive-score-inner-span">2점</span>
+                      </li>
+                      <li class="wedive-score-li">
+                        <div class="wedive-score-inner-div">
+                          <span class="wedive-score-inner-div-span" style="display:none">
+                            <em class="wedive-score-inner-div-span-em">0</em>
+                          </span>
+                        </div>
+                        <span class="wedive-score-inner-span">1점</span>
+                      </li>
+                    </ul>
+                  </div>
+              </div>
             </div>
+
+
+            <div class="review-area">
+              <div class="p-2 pt-3 border-top">
+                <div class="d-flex">
+                    <div class="flex-grow-1">
+                        <div class="float-start">
+                            <h1 class="fa-2x font-900 me-2 mb-0">5.00</h1>
+                            <p class="font-10 mb-0 mt-n2 opacity-40 text-end">보트 체험 다이빙</p>
+                        </div>
+                        <span>
+                            <i class="fa fa-star color-yellow-dark"></i>
+                            <i class="fa fa-star color-yellow-dark"></i>
+                            <i class="fa fa-star color-yellow-dark"></i>
+                            <i class="fa fa-star color-yellow-dark"></i>
+                            <i class="fa fa-star color-yellow-dark"></i>
+                        </span>
+                        
+                    </div>
+                    <div>
+                        <h6 class="text-end">김성진</h6>
+                        <p class="font-10 mb-0 mt-n2 opacity-40 text-end">2021.08.30</p>
+                    </div>
+                </div>
+                <p class="review-text mt-2 mb-1">
+                    <a href="https://myplace-phinf.pstatic.net/20210827_62/16300643312513fe1S_JPEG/upload_07fc7f5449b8fecbeca86e655f0afce3.jpg" data-gallery="gallery-99" class="filtr-item" title="" data-category="99">
+                        <img src="/static/images/empty.png" data-src="https://search.pstatic.net/common/?autoRotate=true&amp;quality=95&amp;type=f87_87&amp;src=https%3A%2F%2Fmyplace-phinf.pstatic.net%2F20210827_62%2F16300643312513fe1S_JPEG%2Fupload_07fc7f5449b8fecbeca86e655f0afce3.jpg" class="preload-img rounded-s shadow-m review_img" alt="방문자리뷰">
+                    </a>
+                    샀는데 만족해요~ 블라블라 샀는데 만족해요~ 블라블라 샀는데 만족해요~ 블라블라 샀는데 만족해요~ 블라블라 샀는데 만족해요~ 블라블라 샀는데 만족해요~ 블라블라 샀는데 만족해요~ 블라블라 샀는데 만족해요~ 블라블라 샀는데 만족해요~ 블라블라 샀는데 만족해요~ 블라블라 샀는데 만족해요~ 블라블라 샀는데 만족해요~ 블라블라 샀는데 만족해요~ 블라블라 
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
         <div data-bs-parent="#tab-group-1" class="content collapse bg-white" id="tab-3">
-            <img class="img-fluid rounded-sm mt-2" src="images/pictures/28.jpg" alt="img">
+          <div>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+          </div>
         </div>
         <div data-bs-parent="#tab-group-1" class="content collapse bg-white" id="tab-4">
-            <p class="bottom-0">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+          <div>
+            <p class="color-gray-light-mid font-13 mb-3">
+              <i class="fas fa-question-circle me-2"></i>상품 사이즈 및 옵션에 대해 궁금한점이 있으신가요?<br/>
+              <i class="fas fa-question-circle me-2 color-white"></i>상품 배송일정에 대해 궁금한점이 있으신가요?
             </p>
+            
+            <p class="color-gray mb-2"><i class="fas fa-exclamation-circle me-2"></i>아래 상품코드를 알려주시면 더 빠른 안내를 받으실 수 있어요.</p>
+            <div class="wedive-package mb-4 pt-2 pb-2 font-16" style="font-weight: 500;">
+              상품코드 3391-12034-02
+            </div>
+            <a href="#" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0mb-5">문의하기</a>
+            <br/>
+          </div>
         </div>
       </div>
     <!--</div>-->
@@ -262,11 +331,10 @@ export default {
 .table-wedive-product {width:100%;text-align:center;border-top: 2px solid #1f1f1f;border-bottom: 2px solid #1f1f1f;}
 .table-wedive-product th,.table-wedive-product td {border-top: 1px solid #eee;padding: 16px 0px;min-width:40px;}
 .table-wedive-product th {background-color: #f5f5f5;}
+.sticky {position: fixed;top: 0;width: 100%;}
+.review_img {float: left;width: 88px; height:88px;margin-right:10px;margin-bottom:2px;border-radius:10px;object-fit: cover !important;}
 
 
-.sticky {
-  position: fixed;
-  top: 0;
-  width: 100%;
-}
+
+
 </style>

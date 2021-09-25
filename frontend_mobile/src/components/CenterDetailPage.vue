@@ -32,14 +32,12 @@
             <div class="content text-center mt-4">
                 <h2 class="font-20 font-700 mb-0 mt-1">버블탱크 스쿠버다이빙</h2>
                 <p class="color-gray m-0">제주 남부에 위치한 PADI 5star 다이빙센터</p>
-                <div class="star-area mt-3 mb-1">
-                    <i class="fa fa-star font-20 color-yellow-dark scale-box"></i>
-                    <i class="fa fa-star font-20 color-yellow-dark scale-box"></i>
-                    <i class="fa fa-star font-20 color-yellow-dark scale-box"></i>
-                    <i class="fa fa-star-half-alt font-20 color-yellow-dark scale-box"></i>
-                    <i class="far fa-star font-20 color-yellow-dark scale-box"></i>
-                    <span class="font-20 ms-2">3.8</span>
+                <div class="wedive-star-back">
+                  <div class="wedive-star-front" style="width:76%">
+                  </div>
+                  <span class="wedive-star-number">3.8</span>
                 </div>
+                
                 <div class="evaluation d-flex">
                     <span class="view font-12"">경치 4.1</span>
                     <span class="training font-12"">교육 3.9</span>
