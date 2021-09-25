@@ -1581,7 +1581,8 @@ body {
 
 /*-Footer Menu-*/
 #footer-bar,
-#footer-bar-speach {
+#footer-bar-speach,
+#footer-bar-shop {
   position: fixed;
   bottom: 0px;
   left: 0px;
@@ -1604,7 +1605,8 @@ body {
   flex: 1 1 auto;
 }
 #footer-bar a span,
-#footer-bar-speach a span {
+#footer-bar-speach a span,
+#footer-bar-shop a span {
   position: relative;
   z-index: 2;
   display: block;
@@ -1615,17 +1617,20 @@ body {
   font-family: "Roboto", sans-serif !important;
 }
 #footer-bar a i,
-#footer-bar-speach a i {
+#footer-bar-speach a i,
+#footer-bar-shop a i {
   font-size: 18px;
   position: relative;
   z-index: 2;
 }
 #footer-bar a svg,
-#footer-bar-speach a svg {
+#footer-bar-speach a svg,
+#footer-bar-shop a svg {
   transform: translateY(-6px);
 }
 #footer-bar .badge,
-#footer-bar-speach .adge {
+#footer-bar-speach .badge,
+#footer-bar-shop .badge {
   font-style: normal;
   z-index: 5;
   top: 0px;
@@ -1707,7 +1712,8 @@ body {
 }
 
 #footer-bar.position-relative,
-#footer-bar-speach.position-relative {
+#footer-bar-speach.position-relative,
+#footer-bar-shop.position-relateve {
   z-index: 2 !important;
 }
 
@@ -1716,6 +1722,10 @@ body {
   height: calc(65px + (env(safe-area-inset-bottom))*1.1);
 }
 #footer-bar-speach {
+  height: calc(51px + (constant(safe-area-inset-bottom))*1.1);
+  height: calc(51px + (env(safe-area-inset-bottom))*1.1);
+}
+#footer-bar-shop {
   height: calc(51px + (constant(safe-area-inset-bottom))*1.1);
   height: calc(51px + (env(safe-area-inset-bottom))*1.1);
 }
@@ -6658,8 +6668,10 @@ input[type=number] {
 .theme-dark h6,
 .theme-dark #footer-bar a i,
 .theme-dark #footer-bar-speach a i,
+.theme-dark #footer-bar-shop a i,
 .theme-dark #footer-bar a span .theme-dark p strong,
-.theme-dark #footer-bar-speach a span .theme-dark p strong {
+.theme-dark #footer-bar-speach a span .theme-dark p strong,
+.theme-dark #footer-bar-shop a span .theme-dark p strong {
   color: #FFF;
 }
 
@@ -6770,6 +6782,7 @@ input[type=number] {
 .theme-dark .footer-links,
 .theme-dark #footer-bar,
 .theme-dark #footer-bar-speach,
+.theme-dark #footer-bar-shop,
 .theme-dark .footer-copyright {
   border-top: solid 1px rgba(255, 255, 255, 0.05) !important;
 }
@@ -6798,6 +6811,7 @@ input[type=number] {
 .theme-dark .tab-controls,
 .theme-dark #footer-bar,
 .theme-dark #footer-bar-speach,
+.theme-dark #footer-bar-shop,
 .theme-dark .menu .form-style label,
 .theme-dark .menu .form-floating-style label,
 .theme-dark .menu .form-border-bottom label,

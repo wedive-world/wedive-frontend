@@ -49,7 +49,7 @@
                     <i class="fa fa-check disabled valid color-green-dark"></i>
                     <em>(필수입력)</em>
                 </div>
-                <div class="input-style no-borders has-icon validate-field mb-3"">
+                <div class="input-style no-borders has-icon validate-field mb-3">
                     <i class="fas fa-user-clock color-gray"></i>
                     <input type="number" class="form-control validate-number" id="form3" placeholder="나이">
                     <label for="form3" class="color-highlight">나이</label>
@@ -57,7 +57,7 @@
                     <i class="fa fa-check disabled valid color-green-dark"></i>
                     <em>(필수입력)</em>
                 </div>
-                <div class="input-style no-borders has-icon validate-field mb-3"">
+                <div class="input-style no-borders has-icon validate-field mb-3">
                     <i class="fas fa-venus-mars color-gray"></i>
                     <label for="form5" class="color-highlight">성별</label>
                     <select id="form5" required>
@@ -70,7 +70,7 @@
                     <i class="fa fa-check disabled invalid color-red-dark"></i>
                     <em></em>
                 </div>
-                <div class="input-style no-borders has-icon validate-field mb-3"">
+                <div class="input-style no-borders has-icon validate-field mb-3">
                     <i class="fas fa-address-book color-gray"></i>
                     <label for="form6" class="color-highlight">거주지</label>
                     <select id="form6" required>
@@ -295,7 +295,7 @@
                     </div>
                 </div>
                 <div class="collapse" id="collapse1">
-                    <div class="input-style no-borders has-icon validate-field mb-3"">
+                    <div class="input-style no-borders has-icon validate-field mb-3">
                         <i class="fas fa-address-card color-gray"></i>
                         <label for="form11" class="color-highlight">라이센스</label>
                         <select id="form11" required>
@@ -346,7 +346,7 @@
                         <em></em>
                     </div>
 
-                    <div class="input-style no-borders has-icon validate-field mb-3"">
+                    <div class="input-style no-borders has-icon validate-field mb-3">
                         <i class="fas fa-layer-group color-gray"></i>
                         <label for="form22" class="color-highlight">레벨</label>
                         <select id="form22" required>
@@ -364,7 +364,7 @@
                         <em></em>
                     </div>
 
-                    <div class="input-style no-borders has-icon validate-field mb-3"">
+                    <div class="input-style no-borders has-icon validate-field mb-3">
                         <i class="fas fa-clipboard-check color-gray"></i>
                         <label for="form23" class="color-highlight">다이빙 로그</label>
                         <select id="form23" required>
@@ -486,7 +486,7 @@
                         </vue-typeahead-bootstrap>
                     </div>
                     
-                    <div class="input-style no-borders has-icon validate-field mb-3"">
+                    <div class="input-style no-borders has-icon validate-field mb-3">
                         <i class="fas fa-address-card color-gray"></i>
                         <label for="form21" class="color-highlight">라이센스</label>
                         <select id="form21" required>
@@ -537,7 +537,7 @@
                         <em></em>
                     </div>
 
-                    <div class="input-style no-borders has-icon validate-field mb-3"">
+                    <div class="input-style no-borders has-icon validate-field mb-3">
                         <i class="fas fa-layer-group color-gray"></i>
                         <label for="form12" class="color-highlight">레벨</label>
                         <select id="form12" required>
@@ -561,7 +561,7 @@
                         <div id="div_personal_best" style="display: inline-block;">
                         </div>
 
-                        <a href="#" data-menu="menu-personal-best" class="btn btn-xs mb-0 rounded-xl text-uppercase font-900 shadow-s bg-dark-dark"><i class="fas fa-plus""></i></a>
+                        <a href="#" data-menu="menu-personal-best" class="btn btn-xs mb-0 rounded-xl text-uppercase font-900 shadow-s bg-dark-dark"><i class="fas fa-plus"></i></a>
                     </div>
 
                     <div class="mb-0 mt-5">
@@ -715,7 +715,7 @@
         
         <div class="content">
             
-            <div class="input-style no-borders has-icon validate-field mb-3"">
+            <div class="input-style no-borders has-icon validate-field mb-3">
                 <i class="fas fa-record-vinyl color-gray"></i>
                 <label for="form_pb" class="color-highlight">Personal Best</label>
                 <select id="form_pb" required>
@@ -736,7 +736,7 @@
             </div>
 
 
-            <div class="input-style no-borders has-icon validate-field mb-3"">
+            <div class="input-style no-borders has-icon validate-field mb-3">
                 <i class="fas fa-clipboard color-gray"></i>
                 <input type="number" class="form-control validate-number" id="form_record" placeholder="기록">
                 <label for="form_record" class="color-highlight">기록</label>

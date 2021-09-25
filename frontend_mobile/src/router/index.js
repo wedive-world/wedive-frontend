@@ -15,6 +15,7 @@ import SiteDetailPage from '@/components/SiteDetailPage'
 import PointDetailPage from '@/components/PointDetailPage'
 import ChatHomePage from '@/components/ChatHomePage'
 import ChatDetailPage from '@/components/ChatDetailPage'
+import ShopHomePage from '@/components/ShopHomePage'
 import ShopDetailPage from '@/components/ShopDetailPage'
 import StaticPage from '@/components/StaticPage'
 
@@ -96,6 +97,11 @@ export default new Router({
       path: '/chat',
       name: 'ChatDetailPage',
       component: ChatDetailPage
+    },
+    {
+      path: '/shop_home',
+      name: 'ShopHomePage',
+      component: ShopHomePage
     },
     {
       path: '/shop',

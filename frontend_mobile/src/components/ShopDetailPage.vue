@@ -1,6 +1,20 @@
 <template>
   <div class="mb-3 pb-5">
     <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-shopping" data-menu-load=""></div>    
+
+    <div id="footer-bar-shop" class="d-flex" style="min-height: 52px !important;height: 52px !important;">
+        <div class="me-1 speach-icon">
+            <div style="width: 45px;display: inline-block;position: relative;color: #ff5160;">
+              <i class="far fa-heart font-16 mt-2 pt-1" style="display: block;"></i>
+              <span class="mt-n1" style="display: block;">320</span>
+            </div>
+        </div>
+        <div class="flex-fill speach-input p-2">
+          <a href="#" data-menu="menu-purchase" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0mb-5 font-noto">구매하기</a>
+        </div>
+    </div>
+
+
     <div class="card card-style ms-0 me-0 rounded-0 mb-2" style="border-bottom: 1px solid #dee2e6 !important;box-shadow: none !important;">
       <div class="splide single-slider cover-slider slider-no-arrows slider-has-dots" id="cover-slider-top" data-card-height="250">
           <div class="splide__track">
@@ -49,7 +63,7 @@
       </div>
     </div>
 
-
+    
     <div class="card card-style ms-0 me-0 rounded-0 mb-2" style="border-bottom: 1px solid #dee2e6 !important;box-shadow: none !important;">
       <div class="content">
         <div class="text-center">
@@ -246,6 +260,142 @@
     <!--</div>-->
 
 
+    <!-- Menu purchase -->
+    <div id="menu-purchase" class="menu menu-box-bottom rounded-half" data-menu-height="500">
+        <div class="content mb-0 text-start" style="position: relative;">
+          <div class="input-style no-borders has-icon validate-field mb-3 hide">
+              <i class="fas fa-id-card-alt color-gray"></i>
+              <input type="name" class="form-control validate-name" id="form0" placeholder="닉네임">
+              <label for="form0" class="color-highlight">닉네임</label>
+              <i class="fa fa-times disabled invalid color-red-dark"></i>
+              <i class="fa fa-check disabled valid color-green-dark"></i>
+              <em>(필수입력)</em>
+          </div>
+          
+          <div class="input-style no-borders has-icon validate-field mb-3 mt-2">
+              <i class="fas fa-venus-mars color-gray"></i>
+              <label for="form1" class="color-highlight">풋포켓 색상</label>
+              <select id="form1" required @change="onOptionChange($event, 'color-footpocket')">
+                  <option value="" selected disabled>풋포켓 색상</option>
+                  <option value="화이트">화이트</option>
+                  <option value="블랙">블랙</option>
+              </select>
+              <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
+              <i class="fa fa-check disabled valid color-green-dark"></i>
+              <i class="fa fa-check disabled invalid color-red-dark"></i>
+              <em></em>
+          </div>
+
+          <div class="input-style no-borders has-icon validate-field mb-3 mt-2">
+              <i class="fas fa-venus-mars color-gray"></i>
+              <label for="form2" class="color-highlight">풋포켓 사이즈</label>
+              <select id="form2" required @change="onOptionChange($event, 'size-footpocket')">
+                  <option value="" selected disabled>풋포켓 사이즈</option>
+                  <option value="2호">2호</option>
+                  <option value="3호">3호</option>
+                  <option value="4호">4호</option>
+                  <option value="5호">5호</option>
+                  <option value="6호">6호</option>
+                  <option value="7호">7호</option>
+                  <option value="8호">8호</option>
+              </select>
+              <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
+              <i class="fa fa-check disabled valid color-green-dark"></i>
+              <i class="fa fa-check disabled invalid color-red-dark"></i>
+              <em></em>
+          </div>
+
+
+          <div class="input-style no-borders has-icon validate-field mb-3 mt-2">
+              <i class="fas fa-venus-mars color-gray"></i>
+              <label for="form3" class="color-highlight">블레이드 색상</label>
+              <select id="form3" required @change="onOptionChange($event, 'color-blade')">
+                  <option value="" selected disabled>블레이드 색상</option>
+                  <option value="화이트">화이트</option>
+                  <option value="골드">골드</option>
+                  <option value="실버">실버</option>
+                  <option value="핑크">핑크</option>
+                  <option value="레드">레드</option>
+              </select>
+              <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
+              <i class="fa fa-check disabled valid color-green-dark"></i>
+              <i class="fa fa-check disabled invalid color-red-dark"></i>
+              <em></em>
+          </div>
+
+          <div class="input-style no-borders has-icon validate-field mb-3 mt-2">
+              <i class="fas fa-venus-mars color-gray"></i>
+              <label for="form4" class="color-highlight">워터레일 색상</label>
+              <select id="form4" required @change="onOptionChange($event, 'color-waterrail')">
+                  <option value="" selected disabled>워터레일 색상</option>
+                  <option value="P0000BIU000A">White</option>
+                  <option value="P0000BIU000B">Black</option>
+                  <option value="P0000BIU000C">Silver</option>
+                  <option value="P0000BIU000D">Gold</option>
+                  <option value="P0000BIU000E">Red</option>
+                  <option value="P0000BIU000F">Pink</option>
+                  <option value="P0000BIU000G">DoubleK Blue</option>
+                  <option value="P0000BIU000H">Blue</option>
+                  <option value="P0000BIU000I">Purple</option>
+                  <option value="P0000BIU000J">Neon Orange</option>
+                  <option value="P0000BIU000K">Neon Yellow</option>
+                  <option value="P0000BIU000L">Neon Coral</option>
+                  <option value="P0000BIU000M">Burgundy</option>
+                  <option value="P0000BIU000N">Pea Green</option>
+                  <option value="P0000BIU000O">Deep Green</option>
+                  <option value="P0000BIU000P">Dark Gray</option>
+                  <option value="P0000BIU000Q">Basil Mint</option>
+                  <option value="P0000BIU000R">Clear</option>
+              </select>
+              <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
+              <i class="fa fa-check disabled valid color-green-dark"></i>
+              <i class="fa fa-check disabled invalid color-red-dark"></i>
+              <em></em>
+          </div>
+
+        </div>
+        <a href="#" class="btn btn-border btn-full mb-3 rounded-sm font-500 border-gray-dark color-gray bg-theme pt-2 pb-2 font-14 font-noto btn-close-option">옵션닫기</a>
+    </div>
+
+
+
+
+
+    <div id="menu-order" class="menu menu-box-bottom rounded-half" data-menu-height="500">
+      <a href="#" data-menu="menu-purchase" class="btn btn-border btn-full mb-3 rounded-sm font-500 border-gray-dark color-gray bg-theme mt-3 me-3 ms-3 pt-2 pb-2 font-14 font-noto" style="margin-bottom:0;">옵션 선택하기</a>
+      <div class="rounded-sm border-gray-dark m-3 p-2 ps-3 pe-3" style="border: 1px solid #AAB2BD;display: flow-root;">
+        <span class="" v-for="(sel,index) in select_option">{{sel}}<span v-if="index != 'color-waterrail'"> / </span></span>
+
+        <a href="#" class="item-order-close" v-on:click="deleteOrderItem()"><i class="wedive_icoset wedive_icoset_close_s"></i></a>
+        <div class="">
+          <div class="mx-auto mt-4 mb-2" style="float:left">
+            <div class="stepper rounded-s float-start">
+                <a href="#" class="stepper-sub"><i class="fa fa-minus color-theme opacity-40"></i></a>
+                <input type="number" min="1" max="10" value="1">
+                <a href="#" class="stepper-add"><i class="fa fa-plus color-theme opacity-40"></i></a>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="font-500 font-noto font-15" style="float:right;margin-top:34px;">
+            472,000원
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-order-bottom">
+        <div class="divider mb-3"></div>
+        <div>
+          <p class="mb-0 ms-3"><font class="font-600 font-noto me-1">1</font>개 선택</p>
+          <p class="mb-0" style="float:right;margin-top:-26px;">총<span class="ms-2 me-3 font-600 font-18 font-noto color-highlight">472,000원</span></p>
+        </div>
+        <div class="divider mt-3 mb-3"></div>
+        <div class="row m-0">
+          <div class="col-6 pe-1"><a href="#" class="btn btn-border btn-full mb-3 rounded-sm font-500 border-highlight color-highlight bg-theme pt-2 pb-2 font-14 font-noto">장바구니</a></div>
+          <div class="col-6 ps-1"><a href="#" class="btn btn-border btn-full mb-3 rounded-sm font-500 color-white gradient-highlight pt-2 pb-2 font-14 font-noto">구매하기</a></div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 <script>
@@ -255,9 +405,11 @@ export default {
     var preloader = document.getElementById('preloader')
     if(preloader){preloader.classList.add('preloader-hide');}
     
+    
     $(".page-title").hide();
     $(".page-title-clear").hide();
     $(".header-auto-show").hide();
+    document.getElementById("footer-bar").classList.add("hide");
     $("body").css("background-color", "#f3f6f5");
 
     setTimeout(function() {
@@ -265,7 +417,6 @@ export default {
       var sticky = $("#tab-group1-header").offset().top;
 
       function myFunction() {
-        console.log(window.pageYOffset + "/" + sticky)
         if (window.pageYOffset > sticky) {
           $("#tab-group1-header").addClass("sticky")
           
@@ -273,8 +424,7 @@ export default {
           $("#tab-group1-header").removeClass("sticky")
         }
       }
-    },500)
-    
+    },500);
 
   },
   components: {
@@ -288,17 +438,42 @@ export default {
   },
   data () {
     return {
-        
+      select_option: {'color-footpocket': '', 'size-footpocket': '', 'color-blade': '', 'color-waterrail': ''},
     }
   }, methods: {
     viewMore: function() {
       $(".item_desc").removeClass("height-1100");
       $("#view-more").addClass("hide");
+    }, 
+    onOptionChange: function(e, item) {
+      this.select_option[item] = e.target.value;
+
+      var flag_done = true;
+      for (var key in this.select_option) {
+        if (this.select_option[key] == '') {
+          flag_done = false;
+        }
+      }
+      if ( flag_done ) {
+        // close all menu first
+        try {
+          const activeMenu = document.querySelectorAll('.menu-active');
+          for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
+          for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+0+"px)"}
+        } catch (e) {
+
+        }
+        // start order menu //
+        var menuData = 'menu-order';
+        document.getElementById(menuData).classList.add('menu-active');
+        document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
+      }
+    },
+    deleteOrderItem: function() {
+
     }
   }
 }
-
-
 
 
 </script>
@@ -333,8 +508,10 @@ export default {
 .table-wedive-product th {background-color: #f5f5f5;}
 .sticky {position: fixed;top: 0;width: 100%;}
 .review_img {float: left;width: 88px; height:88px;margin-right:10px;margin-bottom:2px;border-radius:10px;object-fit: cover !important;}
-
-
-
-
+.btn-close-option {position: absolute;bottom: 0;width: calc(100% - 32px);left: 16px;margin: 0 auto;}
+.menu-order-bottom {position: absolute;bottom: 0;width: calc(100% - 32px);left: 16px;margin: 0 auto;}
+select:invalid {color: #6c757d;}
+select {background: white; background-color: white;}
+.validate-field label {font-size: 11px !important;top: -8px !important;}
+.item-order-close {text-align: right;position: absolute;right: 30px;margin-top: 2px;}
 </style>
