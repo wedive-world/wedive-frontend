@@ -76,7 +76,7 @@
         <div class="card card-style p-2">
             <div class="content mb-2">
                 <div class="text-center">
-                    <i class="ico ico-wedive-w -circle color-primary scale-box fa-4x"></i>
+                    <i class="ico ico-wedive-w color-primary scale-box fa-4x"></i>
                 </div>
                 <h4 class="text-center pt-2 mb-0">wedive's comment</h4>
                 <div class="justify-content-center mb-2 mt-3 text-start font-noto">
@@ -1296,23 +1296,8 @@ export default {
 .small-title {color: #ababab;font-weight: 400;font-size: 10px;}
 .review-text {overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;display: -webkit-box;-webkit-line-clamp: 5;-webkit-box-orient: vertical;}
 .text-show-all{position: absolute;top: 26px;right: 20px;color: #727272 !important;font-size:13px;}
-.ico-wedive-w {-webkit-font-smoothing: antialiased;
-    display: grid;
-    margin-left: calc(50% - 20px);
-    font-style: normal;
-    font-variant: normal;
-    text-rendering: auto;
-    line-height: 1;
-    
-    width:40px;
-    height:40px;}
-.ico-wedive-w:before {content: "";
-        background-image: url('/static/images/ico_wedive_d.png');
-        background-size:40px 40px;
-        width:40px;
-        height:40px;
-        display:inline-block;
-}
+.ico-wedive-w {-webkit-font-smoothing: antialiased;display: grid;margin-left: calc(50% - 20px);font-style: normal;font-variant: normal;text-rendering: auto;line-height: 1;width:40px;height:40px;}
+.ico-wedive-w:before {content: "";background-image: url('/static/images/ico_wedive_d.png');background-size:40px 40px;width:40px;height:40px;display:inline-block;}
 .min-h-230 {min-height: 210px;}
 .review_img {float: left;width: 88px; height:88px;margin-right:10px;margin-bottom:2px;border-radius:10px;object-fit: cover !important;}
 .wedive-txt-all {position: absolute;top: 20px;right: 16px;}
