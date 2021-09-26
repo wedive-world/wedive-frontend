@@ -1,13 +1,13 @@
 <template>
-  <div class="mb-3 pb-5">
+  <div class="mb-5 pb-5">
     <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-shopping" data-menu-load=""></div>    
     
 
     <div class="card card-style bg-transparent shadow-0 mb-2 rounded-sm">
-        <div class="content mt-n3 mb-4">
+        <div class="mt-n3 mb-4">
             <div class="search-box search-dark shadow-sm border-0 mt-4 bg-theme rounded-sm bottom-0">
                 <i class="fa fa-search ms-1"></i>
-                <input type="text" class="border-0" placeholder="Searching for something? Try 'pizza'" data-search>
+                <input type="text" class="border-0" placeholder="상품을 검색해보세요 'pizza'처럼요" data-search>
             </div>   
             <div class="search-results disabled-search-list">
                 <div>
@@ -78,35 +78,77 @@
         </div>
     </div>
 
-    <div class="splide topic-slider slider-no-arrows slider-no-dots pb-2" id="topic-slider-1">
-        <div class="splide__track">
-            <div class="splide__list">
-                <div class="splide__slide">
-                    <h1 class="font-16 d-block"><a href="#" class="color-theme">슈트</a></h1>
+
+    <div class="bg-white" id="tab-group-1">
+        <div id="tab-group1-header" style="z-index:999">
+        <div class="tab-controls tabs-small tabs-rounded" data-highlight="bg-highlight">
+            <a href="#" data-active data-bs-toggle="collapse" data-bs-target="#tab-1" style="border-radius:0;padding:3px 0px;">투데이</a>
+            <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-2" style="border-radius:0;padding:3px 0px;">프리다이빙</a>
+            <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-3" style="border-radius:0;padding:3px 0px;">스쿠버다이빙</a>
+            <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-4" style="border-radius:0;padding:3px 0px;">핫딜</a>
+        </div>
+        <div class="splide topic-slider slider-no-arrows slider-no-dots " id="topic-slider-1">
+            <div class="splide__track">
+                <div class="splide__list">
+                    <div class="splide__slide">
+                        <h1 class="font-13 d-block menu-slide"><a href="#" class="color-theme">슈트</a></h1>
+                    </div>
+                    <div class="splide__slide">
+                        <h1 class="font-13 d-block menu-slide"><a href="#" class="color-theme opacity-50">핀</a></h1>
+                    </div>
+                    <div class="splide__slide">
+                        <h1 class="font-13 d-block menu-slide"><a href="#" class="color-theme opacity-50">마스크/스노클</a></h1>
+                    </div>
+                    <div class="splide__slide">
+                        <h1 class="font-13 d-block menu-slide"><a href="#" class="color-theme opacity-50">장갑/삭스/후드</a></h1>
+                    </div>
+                    <div class="splide__slide">
+                        <h1 class="font-13 d-block menu-slide"><a href="#" class="color-theme opacity-50">부이시스템</a></h1>
+                    </div>
+                    <div class="splide__slide">
+                        <h1 class="font-13 d-block menu-slide"><a href="#" class="color-theme opacity-50">웨이트시스템</a></h1>
+                    </div>
+                    <div class="splide__slide">
+                        <h1 class="font-13 d-block menu-slide"><a href="#" class="color-theme opacity-50">이퀄라이징</a></h1>
+                    </div>
+                    <div class="splide__slide">
+                        <h1 class="font-13 d-block menu-slide"><a href="#" class="color-theme opacity-50">가방</a></h1>
+                    </div>
+                    <div class="splide__slide">
+                        <h1 class="font-13 d-block menu-slide"><a href="#" class="color-theme opacity-50">악세서리</a></h1>
+                    </div>
                 </div>
-                <div class="splide__slide">
-                    <h1 class="font-16 d-block"><a href="#" class="color-theme opacity-50">핀</a></h1>
-                </div>
-                <div class="splide__slide">
-                    <h1 class="font-16 d-block"><a href="#" class="color-theme opacity-50">마스크&스노클</a></h1>
-                </div>
-                <div class="splide__slide">
-                    <h1 class="font-16 d-block"><a href="#" class="color-theme opacity-50">장갑&삭스&후드</a></h1>
-                </div>
-                <div class="splide__slide">
-                    <h1 class="font-16 d-block"><a href="#" class="color-theme opacity-50">부이시스템</a></h1>
-                </div>
-                <div class="splide__slide">
-                    <h1 class="font-16 d-block"><a href="#" class="color-theme opacity-50">웨이트시스템</a></h1>
-                </div>
-                <div class="splide__slide">
-                    <h1 class="font-16 d-block"><a href="#" class="color-theme opacity-50">이퀄라이징</a></h1>
-                </div>
-                <div class="splide__slide">
-                    <h1 class="font-16 d-block"><a href="#" class="color-theme opacity-50">가방</a></h1>
-                </div>
-                <div class="splide__slide">
-                    <h1 class="font-16 d-block"><a href="#" class="color-theme opacity-50">악세서리</a></h1>
+            </div>
+        </div>
+        </div>
+        <div class="clearfix mb-3"></div>
+        <div data-bs-parent="#tab-group-1" class="content collapse bg-white show" id="tab-1">
+        </div>
+        <div data-bs-parent="#tab-group-1" class="content collapse bg-white" id="tab-2">
+        </div>
+        <div data-bs-parent="#tab-group-1" class="content collapse bg-white" id="tab-3">
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <div class="card card-style" style="background: #5ec9bb;">
+        <div class="mb-0 mt-0 mb-1 ms-2">
+            <div class="d-flex">
+                <img class="me-2" src="https://cdn3d.iconscout.com/3d/premium/thumb/gift-box-3825105-3202861.png" width="110" />
+                <div class="flex-grow-1">
+                    <h4 class="pt-3 mb-0 font-600 color-white">날이좋아서</h4>
+                    <p class="color-white mb-1 mt-n1">위다이브가 특별쿠폰을 준비했어요.</p>
+                    <div class="me-3">
+                    <div class="wedive-coupon bg-white">
+                        선착순 쿠폰 받기
+                        <i class="fas fa-chevron-right float-right"></i>
+                    </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -115,135 +157,140 @@
 
 
 
-    <div class="divider divider-margins"></div>
-        
-        <div class="content mb-0">
-            <div class="row mb-0">
-                <div class="col-6 pe-2">
-                    <div class="card card-style mx-0 px-2">
-                        <img src="/static/images/diving_beach.jpg" class="img-fluid">
-                        <p class="color-highlight font-600 mb-n1">Pizza</p>
-                        <h2>Margerita</h2>
-                        <h5 class="font-14">$14.99</h5>
-                        <p class="font-11 line-height-s pt-3">
-                            Tomato Sauce, Mozzarella, Pizza Stuff, Oregano
-                        </p>
-                        <a href="#" class="btn btn-s btn-full border-highlight rounded-s color-highlight mb-3">Order</a>
-                    </div>
-                </div>
-                <div class="col-6 ps-2">
-                    <div class="card card-style mx-0 px-2">
-                        <img src="/static/images/diving_beach.jpg" class="img-fluid">
-                        <p class="color-highlight font-600 mb-n1">Pizza</p>
-                        <h2>Vegetarian</h2>
-                        <h5 class="font-14">$24.99</h5>
-                        <p class="font-11 line-height-s pt-3">
-                            Tomato Sauce, Mozzarella, Pizza Stuff, Oregano
-                        </p>
-                        <a href="#" class="btn btn-s btn-full border-highlight rounded-s color-highlight mb-3">Order</a>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-        
-        <div class="divider divider-margins"></div>
 
-        <div class="content mt-0 mb-0">
-            <div class="d-flex">
-                <div class="align-self-center">
-                    <h1 class="mb-0 font-18">Our Favorites</h1>
+
+    <div class="content mb-0">
+        <h4 class="text-start pt-2 mb-2">회원님을 위한 추천상품</h4>
+        <div class="row mb-0">
+            <div class="col-6 pe-2 mb-5" v-on:click="goShopDetail()">
+                <div class="card card-style mx-0 mb-0 rounded-sm no-shadow">
+                    <div class="square-rect">
+                        <img src="/static/images/shopping/item1/shop_detail_8.jpg" class="img-fluid">
+                    </div>
                 </div>
-                <div class="ms-auto align-self-center">
-                    <a href="#" class="float-end font-12 font-400">See All</a>
+                <div class="px-2">
+                    <p class="color-highlight font-600 mb-n1 font-12">프리다이빙 핀</p>
+                    <h2 class="font-17 font-noto font-800 letter-short"><font class="font-16 font-600 color-shopping me-1">20%</font>472,000</h2>
+                    <h5 class="font-14 mb-0 ellipsis">어? 이쁘다, 더블케이 프리다이빙 블랙팁 컬러 블레이드 + 코르자</h5>
+                    <p class="font-11 line-height-s mb-0 color-gray">한국인 발모양에 딱맞는 핀</p>
+                </div>
+            </div>
+            <div class="col-6 pe-2 mb-5" v-on:click="goShopDetail()">
+                <div class="card card-style mx-0 mb-0 rounded-sm no-shadow">
+                    <div class="square-rect">
+                        <img src="/static/images/shopping/item1/shop_rect1.jpg" class="img-fluid">
+                    </div>
+                </div>
+                <div class="px-2">
+                    <p class="color-highlight font-600 mb-n1 font-12">프리다이빙 핀</p>
+                    <h2 class="font-17 font-noto font-800 letter-short"><font class="font-16 font-600 color-shopping me-1">20%</font>472,000</h2>
+                    <h5 class="font-14 mb-0 ellipsis">어? 이쁘다, 더블케이 프리다이빙 블랙팁 컬러 블레이드 + 코르자</h5>
+                    <p class="font-11 line-height-s mb-0 color-gray">한국인 발모양에 딱맞는 핀</p>
+                </div>
+            </div>
+            <div class="col-6 pe-2 mb-5" v-on:click="goShopDetail()">
+                <div class="card card-style mx-0 mb-0 rounded-sm no-shadow">
+                    <div class="square-rect">
+                        <img src="/static/images/shopping/item1/shop_rect2.jpg" class="img-fluid">
+                    </div>
+                </div>
+                <div class="px-2">
+                    <p class="color-highlight font-600 mb-n1 font-12">프리다이빙 핀</p>
+                    <h2 class="font-17 font-noto font-800 letter-short"><font class="font-16 font-600 color-shopping me-1">20%</font>472,000</h2>
+                    <h5 class="font-14 mb-0 ellipsis">어? 이쁘다, 더블케이 프리다이빙 블랙팁 컬러 블레이드 + 코르자</h5>
+                    <p class="font-11 line-height-s mb-0 color-gray">한국인 발모양에 딱맞는 핀</p>
+                </div>
+            </div>
+            <div class="col-6 pe-2 mb-5" v-on:click="goShopDetail()">
+                <div class="card card-style mx-0 mb-0 rounded-sm no-shadow">
+                    <div class="square-rect">
+                        <img src="/static/images/shopping/item1/shop_rect3.jpg" class="img-fluid">
+                    </div>
+                </div>
+                <div class="px-2">
+                    <p class="color-highlight font-600 mb-n1 font-12">프리다이빙 핀</p>
+                    <h2 class="font-17 font-noto font-800 letter-short"><font class="font-16 font-600 color-shopping me-1">20%</font>472,000</h2>
+                    <h5 class="font-14 mb-0 ellipsis">어? 이쁘다, 더블케이 프리다이빙 블랙팁 컬러 블레이드 + 코르자</h5>
+                    <p class="font-11 line-height-s mb-0 color-gray">한국인 발모양에 딱맞는 핀</p>
                 </div>
             </div>
         </div>
         
-        <div class="splide double-slider visible-slider slider-no-arrows slider-no-dots" id="double-slider-1">
-            <div class="splide__track">
-                <div class="splide__list">
-                    <div class="splide__slide">
-                        <div class="card m-2 card-style">
-                            <img src="images/food/regular/1.jpg" class="img-fluid">
-                            <div class="p-2 bg-theme rounded-sm">
-                                <div class="d-flex">
-                                    <div>
-                                        <h4 class="mb-n1 font-14 line-height-xs pb-2">Royal <br>Burger</h4>
-                                    </div>
-                                    <div class="ms-auto">
-                                        <h4 class="font-16">$24</h4>
-                                    </div>
-                                </div>
-                                <p class="font-10 mb-0"><i class="fa fa-star color-yellow-dark pe-2"></i>34 Recommend It</p>
-                            </div>
+    </div>
+    
+    <div class="divider divider-margins mb-3"></div>
+
+    <div class="content mt-0 mb-0">
+        <div class="d-flex">
+            <div class="align-self-center">
+                <h4 class="text-start pt-2 mb-2">HOT <img src="https://cdn3d.iconscout.com/3d/premium/thumb/confetti-4024963-3337583.png" width="24"/> 할인폭이 큰 상품 모음</h4>
+            </div>
+            <div class="ms-auto align-self-center">
+                <a href="#" class="float-end font-12 font-400 color-highlight">모두보기</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="splide double-slider visible-slider slider-no-arrows slider-no-dots" id="double-slider-1">
+        <div class="splide__track">
+            <div class="splide__list">
+                <div class="splide__slide">
+                    <div class="card m-2 card-style rounded-sm">
+                        <div class="square-rect">
+                            <img src="/static/images/shopping/item1/shop_detail_2.jpg" class="img-fluid">
                         </div>
-                    </div>
-                    <div class="splide__slide">
-                        <div class="card m-2 card-style">
-                            <img src="images/food/regular/2.jpg" class="img-fluid">
-                            <div class="p-2 bg-theme rounded-sm">
-                                <div class="d-flex">
-                                    <div>
-                                        <h4 class="mb-n1 font-14 line-height-xs pb-2">Pizza <br>Prosciutto</h4>
-                                    </div>
-                                    <div class="ms-auto">
-                                        <h4 class="font-16">$24</h4>
-                                    </div>
-                                </div>
-                                <p class="font-10 mb-0"><i class="fa fa-star color-yellow-dark pe-2"></i>34 Recommend It</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="splide__slide">
-                        <div class="card m-2 card-style">
-                            <img src="images/food/regular/3.jpg" class="img-fluid">
-                            <div class="p-2 bg-theme rounded-sm">
-                                <div class="d-flex">
-                                    <div>
-                                        <h4 class="mb-n1 font-14 line-height-xs pb-2">Chocolate <br>Dessert</h4>
-                                    </div>
-                                    <div class="ms-auto">
-                                        <h4 class="font-16">$24</h4>
-                                    </div>
-                                </div>
-                                <p class="font-10 mb-0"><i class="fa fa-star color-yellow-dark pe-2"></i>34 Recommend It</p>
-                            </div>
+                        <div class="p-2 bg-theme rounded-sm">
+                            <h2 class="font-15 font-noto font-800 letter-short"><font class="font-14 font-600 color-shopping me-1">20%</font>472,000</h2>
+                            <h5 class="font-13 mb-0 ellipsis">어? 이쁘다, 더블케이 프리다이빙 블랙팁 컬러 블레이드 + 코르자</h5>
+                            <p class="font-11 line-height-s mb-0 color-gray">한국인 발모양에 딱맞는 핀</p>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-        <div class="card card-style card-full-left" style="background-image:url(images/food/regular/3.jpg)" data-card-height="230">
-            <div class="card rounded-0 shadow-xl" data-card-height="cover" style="width:100px; z-index:99;">
-                <div class="card-center text-center">
-                    <h1 class="font-28 text-uppercase font-900 opacity-30">Mon</h1>
-                    <h1 class="font-24 font-900">27th</h1>
+                <div class="splide__slide">
+                    <div class="card m-2 card-style rounded-sm">
+                        <div class="square-rect">
+                            <img src="/static/images/shopping/item1/shop_detail_3.jpg" class="img-fluid">
+                        </div>
+                        <div class="p-2 bg-theme rounded-sm">
+                            <h2 class="font-15 font-noto font-800 letter-short"><font class="font-14 font-600 color-shopping me-1">20%</font>472,000</h2>
+                            <h5 class="font-13 mb-0 ellipsis">어? 이쁘다, 더블케이 프리다이빙 블랙팁 컬러 블레이드 + 코르자</h5>
+                            <p class="font-11 line-height-s mb-0 color-gray">한국인 발모양에 딱맞는 핀</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="splide__slide">
+                    <div class="card m-2 card-style rounded-sm">
+                        <div class="square-rect">
+                            <img src="/static/images/shopping/item1/shop_detail_4.jpg" class="img-fluid">
+                        </div>
+                        <div class="p-2 bg-theme rounded-sm">
+                            <h2 class="font-15 font-noto font-800 letter-short"><font class="font-14 font-600 color-shopping me-1">20%</font>472,000</h2>
+                            <h5 class="font-13 mb-0 ellipsis">어? 이쁘다, 더블케이 프리다이빙 블랙팁 컬러 블레이드 + 코르자</h5>
+                            <p class="font-11 line-height-s mb-0 color-gray">한국인 발모양에 딱맞는 핀</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="card-top ps-5 ms-5 pt-3">
-                <div class="ps-4">
-                    <h1 class="color-white pt-3 pb-3">Grand Opening </h1>
-                    <p class="color-white mb-0"><i class="fa fa-mobile color-white pe-2 icon-30"></i> Bench Pressing and Squats</p>
-                    <p class="color-white"><i class="fa fa-map-marker color-white pe-2 icon-30"></i> Steve Jobs Theater, Palo Alto</p>
-                    <a href="#" data-menu="menu-join" class="btn btn-m bg-white color-black font-700">Accept</a>
-                    <a href="#" data-menu="menu-join" class="btn btn-m border-white color-white font-700 ms-3">Decline</a>
-                </div>
-            </div>
-            <div class="card-overlay bg-black opacity-70"></div>
         </div>
+    </div>
 
+
+
+
+
+
+
+    <div class="mb-5">
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+    </div>
+    
+
+
+    
   </div>
 </template>
 <script>
@@ -253,7 +300,21 @@ export default {
     var preloader = document.getElementById('preloader')
     if(preloader){preloader.classList.add('preloader-hide');}
     
-    
+    $("body").css("background-color", "#fff");
+
+    setTimeout(function() {
+      window.onscroll = function() {myFunction()};
+      var sticky = $("#tab-group1-header").offset().top;
+
+      function myFunction() {
+        if (window.pageYOffset > sticky) {
+          $("#tab-group1-header").addClass("sticky")
+          
+        } else {
+          $("#tab-group1-header").removeClass("sticky")
+        }
+      }
+    },500);
     
   },
   components: {
@@ -270,7 +331,9 @@ export default {
       
     }
   }, methods: {
-    
+    goShopDetail: function() {
+        location.href = '/shop';
+    }
   }
 }
 
@@ -280,5 +343,16 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .font-noto {font-family: 'Noto Sans Korean'}
+.px-n2 {margin-right: -0.5rem !important;margin-left: -0.5rem !important;}
+.square-rect {position: relative;padding:0;}
+.square-rect:after {content: "";display: block;padding-bottom: 100%;}
+.square-rect > img {position: absolute;width: 100%;height: 100%;left: 0;object-fit: cover;}
+.no-shadow {box-shadow: none !important;}
+.letter-short {letter-spacing: -1.2px;}
+.sticky {position: fixed;top: 0;width: 100%;}
+.menu-slide {text-align: center; padding:0; margin:0;}
+.splide__slide {height: 30px;background-color: white;border-bottom:1px solid rgba(0, 0, 0, 0.05);}
+.wedive-coupon {color: #2269e0;border-radius: 4px;width:100%;border: 1px solid #2269e0;padding: 6px 16px;font-family: 'Noto Sans Korean'}
+.float-right {float: right;margin-top:5px;}
 
 </style>

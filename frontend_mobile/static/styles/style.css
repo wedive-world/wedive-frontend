@@ -12,7 +12,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   color: #1f1f1f;
-  font-family: "Inter", sans-serif !important;
+  font-family: "Inter", sans-serif;
   margin-bottom: 5px;
   letter-spacing: -0.8px;
 }
@@ -1217,6 +1217,10 @@ body {
 
 .color-highlight {
   color: #1d397c !important;
+}
+
+.color-shopping {
+  color: #ff5160;
 }
 
 .bg-highlight {
@@ -5459,7 +5463,7 @@ input[type=number] {
   position: absolute;
   left: 0px;
   line-height: 52px;
-  padding: 0px 15px 0px 30px;
+  padding: 0px 15px 0px 15px;
 }
 .search-box a {
   position: absolute;
