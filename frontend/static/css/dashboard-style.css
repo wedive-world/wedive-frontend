@@ -195,7 +195,7 @@ section.main-dashboard-sec {
 	float:right;
 	position:relative;
 	padding:12px 30px;
-	color: #7d93b2;
+	color: #000;
 	border-radius:4px;
 	cursor:pointer;
 	font-size:12px;
@@ -338,7 +338,7 @@ section.main-dashboard-sec {
     text-align: left;
     font-weight: 600;
     font-size: 21px;
-	color: #566985;
+	color: #000;
 }
 .dashboard-title .onoffswitch {
 	position: absolute;
@@ -388,7 +388,7 @@ section.main-dashboard-sec {
     border: 1px solid #eee;
     background: #f9f9f9;
     border-radius: 4px;
-    color: #566985;
+    color: #000;
 }
 .dt-inbox {
 	margin:10px 0 30px;
@@ -626,7 +626,7 @@ section.main-dashboard-sec {
 	padding:8px 0 6px 0;
 }
 .dashboard-message-text h4 a {
-	color: #566985;
+	color: #000;
 }
 .chat-box {
 	padding:50px 30px 60px;

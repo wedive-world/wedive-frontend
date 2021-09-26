@@ -12,7 +12,7 @@
             <!-- header -->
             <header class="main-header">
                 <!-- logo-->
-                <a href="index.html" class="logo-holder"><img src="/static/images/logo.png" alt=""></a>
+                <a href="index.html" class="logo-holder"><img src="/static/images/logo-light.svg" alt=""></a>
                 <!-- logo end-->
                 <!-- header-search_btn-->         
                 <div class="header-search_btn show-search-button"><i class="fal fa-search"></i><span>Search</span></div>
@@ -41,7 +41,7 @@
                 </div>
                 <!-- nav-button-wrap end-->
                 <!--  navigation --> 
-                <div class="nav-holder main-menu">
+                <div class="nav-holder main-menu hide">
                     <nav>
                         <ul class="no-list-style">
                             <li>
@@ -258,8 +258,8 @@
                             <!-- footer-widget-->
                             <div class="col-md-4">
                                 <div class="footer-widget fl-wrap">
-                                    <div class="footer-logo"><a href="index.html"><img src="/static/images/logo.png" alt=""></a></div>
-                                    <div class="footer-contacts-widget fl-wrap">
+                                    <div class="footer-logo"><a href="index.html"><img src="/static/images/logo-light.svg" alt=""></a></div>
+                                    <div class="footer-contacts-widget fl-wrap hide">
                                         <p>In ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus. Nulla eu mi magna. Etiam suscipit commodo gravida.   </p>
                                         <ul  class="footer-contacts fl-wrap no-list-style">
                                             <li><span><i class="fal fa-envelope"></i> Mail :</span><a href="#" target="_blank">yourmail@domain.com</a></li>
@@ -281,7 +281,7 @@
                             </div>
                             <!-- footer-widget end-->
                             <!-- footer-widget-->
-                            <div class="col-md-4">
+                            <div class="col-md-4 hide">
                                 <div class="footer-widget fl-wrap">
                                     <h3>Our Last News</h3>
                                     <div class="footer-widget-posts fl-wrap">
@@ -314,9 +314,9 @@
                             </div>
                             <!-- footer-widget end-->
                             <!-- footer-widget  -->
-                            <div class="col-md-4">
+                            <div class="col-md-4 hide">
                                 <div class="footer-widget fl-wrap ">
-                                    <h3>Our  Twitter</h3>
+                                    <h3>Our Twitter</h3>
                                     <div class="twitter-holder fl-wrap scrollbar-inner2" data-simplebar data-simplebar-auto-hide="false">
                                         <div id="footer-twiit"></div>
                                     </div>
@@ -339,7 +339,7 @@
                 <!--sub-footer-->
                 <div class="sub-footer  fl-wrap">
                     <div class="container">
-                        <div class="copyright"> &#169; Townhub 2019 .  All rights reserved.</div>
+                        <div class="copyright"> &#169; WeDive 2021.  All rights reserved.</div>
                         <div class="lang-wrap">
                             <div class="show-lang"><span><i class="fal fa-globe-europe"></i><strong>En</strong></span><i class="fa fa-caret-down arrlan"></i></div>
                             <ul class="lang-tooltip lang-action no-list-style">

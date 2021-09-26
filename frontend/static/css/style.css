@@ -1999,7 +1999,7 @@ section.gray-section .section-separator {
     width: 100%;
     padding: 15px 20px 15px 45px;
     border-radius: 4px;
-	color: #7d93b2;
+	color: #000;
 	font-size:12px;
 	-webkit-appearance: none;
 	outline:none;
@@ -2079,7 +2079,7 @@ section.gray-section .section-separator {
 	text-align:left;
 	font-weight:500;
 	color:#666;
-    color: #878C9F;
+    color: #000;
     font-size: 13px;
     font-weight: 500;
 }
@@ -2220,7 +2220,7 @@ section.gray-section .section-separator {
 	position:relative;
 	top:16px;
 	padding-right:10px;
-    color: #878C9F;
+    color: #000;
     font-size: 10px;
     font-weight: 600;
     text-transform: uppercase;
@@ -2260,7 +2260,7 @@ section.gray-section .section-separator {
 	margin-bottom:20px;
 }
 .total-coast strong {
-    color: #878C9F;
+    color: #000;
     font-size: 12px;
     font-weight: 600;
 	position: absolute;
@@ -4310,7 +4310,7 @@ section.gray-section .section-separator {
 	border-radius:56px;
 	z-index:1;
     background: #fff;
-	color: #878C9F;
+	color: #000;
 	font-size:11px;
 	font-weight:600;
     box-shadow: 0 9px 26px rgba(58, 87, 135, 0.15);
@@ -5355,7 +5355,7 @@ section.gray-section .section-separator {
 }
 .list-single-main-item p , .accordion-inner p  , .author-content p , .about-wrap p , .user-profile-header_content p{
     text-align: left;
-    color: #878C9F;
+    color: #000;
 	font-size:12px;
 	line-height: 24px;
     padding-bottom: 10px;
@@ -5514,7 +5514,7 @@ section.gray-section .section-separator {
 .pricerange  span{
 	float:left;
 	margin-right: 20px;
-    color: #878C9F;
+    color: #000;
 	font-weight:700;
 	font-size:14px;
 	position:relative;
@@ -5539,7 +5539,7 @@ section.gray-section .section-separator {
     color: #24324F;
 }
 .claim-widget-link span {
-	color: #878C9F;
+	color: #000;
 	margin-right:20px;
 }
 .fw-separator {
@@ -5658,7 +5658,7 @@ section.gray-section .section-separator {
 }
 .list-single-main-item_content .listing-features li a {
  	font-weight:600;
-	color: #878C9F;
+	color: #000;
 	font-family: 'Nunito', sans-serif;
     font-size: 12px;
 }
@@ -5695,7 +5695,7 @@ section.gray-section .section-separator {
     width: 100%;
 	float:left;
 	padding:12px 0;
-	color: #878C9F;
+	color: #000;
 	position:relative;
 	border-bottom:1px solid #eee;
 	font-size:13px;
@@ -5710,7 +5710,7 @@ section.gray-section .section-separator {
 }
 .opening-hours ul li span.opening-hours-day {
 	float:left;
-	color: #878C9F;
+	color: #000;
 	font-weight:600;
 }
 .list-author-widget-contacts {
@@ -5755,7 +5755,7 @@ section.gray-section .section-separator {
 }
 .list-author-widget-contacts  li a {
 	margin-left:20px;
-	color:#878C9F;
+	color:#000;
 }
 .bottom-bcw-box {
 	margin-top:10px;
@@ -5812,7 +5812,7 @@ section.gray-section .section-separator {
 	display:block;
  	font-size:10px;
 	text-align:left;
-	color: #878C9F;
+	color: #000;
 	text-transform:uppercase;
 }
 .box-widget-author-title-img {
@@ -6019,7 +6019,7 @@ section.gray-section .section-separator {
 	float:left;
 	position:relative;
 	top:8px;
-	color: #878C9F;
+	color: #000;
 }
 .only-comments  .reviews-comments-item-date{
 	top:0;
@@ -6214,7 +6214,7 @@ section.gray-section .section-separator {
 .review-total strong {
 	display:block;
 	margin-top:10px;
-	color: #878C9F;
+	color: #000;
 	font-size:11px;
 	font-weight:400;
 }
@@ -6246,7 +6246,7 @@ section.gray-section .section-separator {
 	position:relative;
 	text-align: left;
 	top:-4px;
-	color: #878C9F;
+	color: #000;
 }
 .review-range-item .range-slider-wrap{
 	width:80%;
@@ -6286,7 +6286,7 @@ section.gray-section .section-separator {
     margin: 30px 0;
     font-size: 11px;
 	font-weight:600;
-	color: #878C9F;
+	color: #000;
     position: relative;
 }
 .fuzone .fu-text i {
@@ -6922,7 +6922,7 @@ section.gray-section .section-separator {
 	width:100%;
 	text-align:left;
 	font-size:11px;
-	color: #878C9F;
+	color: #000;
 	position:relative;
 }
 .chat-message.chat-message_user p  {
@@ -7656,7 +7656,7 @@ section.gray-section .section-separator {
 	box-shadow: 0 9px 26px rgba(58, 87, 135, 0.1);
 }
 .testimonilas-text p{
-    color: #878C9F;
+    color: #000;
 	font-size: 14px;
     font-family: Georgia, "Times New Roman", Times, serif;
     font-style: italic;
@@ -8319,7 +8319,7 @@ section.absolute-wrap_section .section-separator {
 }
 .features-box p {
 	text-align: left;
-    color: #878C9F;
+    color: #000;
     font-size: 12px;
     line-height: 22px;
 }
@@ -8357,7 +8357,7 @@ section.absolute-wrap_section .section-separator {
 	padding-left:20px;
 }
 .ab_text-title h3{
-	color: #878C9F;
+	color: #000;
     font-weight: 800;
 	text-align:left;
 	font-size:22px;
@@ -8528,7 +8528,7 @@ section.absolute-wrap_section .section-separator {
 }
 .pi-text p {
     text-align: left;
-    color: #878C9F;
+    color: #000;
     font-size: 12px;
     line-height: 24px;
     padding-bottom: 10px;
