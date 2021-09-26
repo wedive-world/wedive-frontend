@@ -354,6 +354,7 @@ export default {
     if(preloader){preloader.classList.add('preloader-hide');}
     
     $("body").css("background-color", "#fff");
+    $(".logo-image").eq(1).attr("src","/static/images/logo-shop.svg")
 
     setTimeout(function() {
       window.onscroll = function() {myFunction()};

@@ -26,7 +26,7 @@
         </div>
     </div>
     
-    <div class="card card-style ms-0 me-0 rounded-0 mt-5 mb-5">
+    <div class="card card-style ms-0 me-0 rounded-0 mt-5 mb-5" style="background-image: url(/static/images/paper_back.jpg);background-size: contain; background-repeat: repeat;">
         <div class="content">
             <div>
                 <div class="p-relative d-inline-block w-60 float-left">
