@@ -25,7 +25,7 @@
                 <span class="wedive-score-desc">일반적</span>
                 <p class="color-gray m-0"><i class="fas fa-map-marked-alt" ></i> 대한민국, 강원도</p>
                 
-                <div class="evaluation d-flex">
+                <div class="evaluation d-flex mt-3">
                     <div class="flex-grow-1">
                         <div class="star-area text-start ms-3" style="height: 30px;">
                             <span class="font-14 me-2 color-gray" style="float: left;padding-top:2px;">환경</span>
@@ -221,7 +221,7 @@
                             <div class="justify-content-center mb-0 text-start">
                                 <a href="/point">
                                     <div style="position: relative;">
-                                        <h4 class="font-14 font-600 color-highlight"> {{point.title}} </h4>
+                                        <h4 class="font-15 font-600 color-highlight"> {{point.title}} </h4>
                                         <span class="color-gray-light-mid font-12 mb-0 text-more me-1">상세보기<i class="fas fa-chevron-right ms-2"></i></span>
                                     </div>
                                 </a>
@@ -328,7 +328,7 @@
                                         <img v-bind:src="center.img" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;">
                                     </div>
                                     <div class="" style="padding-left: 110px;">
-                                        <h4> {{center.title}} </h4>
+                                        <h4 class="font-15"> {{center.title}} </h4>
                                         <p class="pb-0 mb-0 line-height-m ellipsis"> {{center.desc}} </p>
                                         <p class="pb-0 mb-0 mt-n1 ellipsis color-gray-light-mid">
                                             {{center.feature}}

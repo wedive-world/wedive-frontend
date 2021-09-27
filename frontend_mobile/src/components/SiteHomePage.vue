@@ -9,7 +9,7 @@
 
         <div v-on:click="goList()" class="card card-style" style="background: white;height:148px;">
             <div class="content mb-0 mt-3">
-                <img class="float-right" src="/static/images/3d/save-earth.png" height="150" style="position: absolute;z-index: 11;right: 0px;top:10px;"/>
+                <img class="float-right" src="/static/images/3d/save-earth.png" height="120" style="position: absolute;z-index: 11;right: 0px;top:40px;"/>
                 <h4 class="text-start mb-1 font-15" style="padding-top:36px;">지구 구석구석 다이빙 사이트 검색</h4>
 
                 <div class="search-box search-dark border-08 bg-theme rounded-sm" style="position: absolute;width: calc(100% - 30px);z-index: 9;">
@@ -110,7 +110,7 @@
                                         <img v-bind:src="site.img" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;">
                                     </div>
                                     <div class="" style="padding-left: 110px;">
-                                        <h4> {{site.title}} </h4>
+                                        <h4 class="font-15"> {{site.title}} </h4>
                                         <p class="pb-0 mb-0 line-height-m nearby_desc"> {{site.desc}} </p>
                                         
                                         <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
@@ -162,7 +162,7 @@
                                         <img v-bind:src="site.img" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;">
                                     </div>
                                     <div class="" style="padding-left: 110px;">
-                                        <h4> {{site.title}} </h4>
+                                        <h4 class="font-15"> {{site.title}} </h4>
                                         <p class="pb-0 mb-0 line-height-m nearby_desc"> {{site.desc}} </p>
                                         <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
                                             <span> {{site.star}} </span>
@@ -205,7 +205,7 @@
                                         <img v-bind:src="center.img" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;">
                                     </div>
                                     <div class="" style="padding-left: 110px;">
-                                        <h4> {{center.title}} </h4>
+                                        <h4 class="font-15"> {{center.title}} </h4>
                                         <p class="pb-0 mb-0 line-height-m ellipsis"> {{center.desc}} </p>
                                         <p class="pb-0 mb-0 mt-n1 ellipsis color-gray-light-mid">
                                             {{center.feature}}

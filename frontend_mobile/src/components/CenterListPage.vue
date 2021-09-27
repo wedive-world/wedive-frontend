@@ -74,7 +74,7 @@
                                         <img v-bind:src="center.img" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;">
                                     </div>
                                     <div class="" style="padding-left: 110px;">
-                                        <h4> {{center.title}} </h4>
+                                        <h4 class="font-15"> {{center.title}} </h4>
                                         <p class="pb-0 mb-0 line-height-m ellipsis"> {{center.desc}} </p>
                                         <p class="pb-0 mb-0 mt-n1 ellipsis color-gray-light-mid">
                                             {{center.feature}}

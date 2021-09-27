@@ -486,7 +486,7 @@
                             <div class="justify-content-center mb-0 text-start">
                                 <a href="/point">
                                     <div style="position: relative;">
-                                        <h4 class="font-14 font-600 color-highlight"> {{point.title}} </h4>
+                                        <h4 class="font-15 font-600 color-highlight"> {{point.title}} </h4>
                                         <span class="color-gray-light-mid font-12 mb-0 text-more me-1">상세보기<i class="fas fa-chevron-right ms-2"></i></span>
                                     </div>
                                 </a>

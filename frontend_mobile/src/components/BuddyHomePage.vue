@@ -27,43 +27,43 @@
                 <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
                 
                 <div class="light-border-bottom mt-3">
-                    <span class="chip chip-s bg-fade-magenta-light color-magenta-dark-more text-center font-600 wedive-chip">2자리 남음</span>
-                    <span class="chip chip-s bg-fade-mint-light05 color-green-dark-more text-center font-600 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>3</span> <span class="color-google ms-1"><i class="far fa-user"></i>1</span> 참여중</span>
+                    <span class="chip chip-s bg-fade-magenta-light color-magenta-dark-more text-center font-400 wedive-chip">2자리 남음</span>
+                    <span class="chip chip-s bg-fade-mint-light05 color-green-dark-more text-center font-400 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>3</span> <span class="color-shopping ms-1"><i class="far fa-user"></i>1</span> 참여중</span>
                     <div class="d-flex mb-3">
                         <div class="align-self-center">
                             <img src="/static/images/point/ko/kangwon_yangyang_01.jpg" class="rounded-sm me-3" width="68">
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-15 line-height-s mt-2 mb-0">09.25(토) ~ 09.26(일)</h2>
-                            <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> 하우스리프 포인트 (양양 사이트)</p>
+                            <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 하우스리프 포인트 (양양 사이트)</p>
                             <p class="color-secondary font-13 mb-0 ellipsis">#카풀가능&nbsp;&nbsp;#센터확정&nbsp;&nbsp;#개별숙박</p>
                         </div>
                     </div>
                 </div>
                 <div class="light-border-bottom mt-3">
-                    <span class="chip chip-s bg-fade-magenta-light05 color-magenta-dark-more text-center font-600 wedive-chip">3자리 남음</span>
-                    <span class="chip chip-s bg-fade-mint-light05 color-green-dark-more text-center font-600 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>1</span> 참여중</span>
+                    <span class="chip chip-s bg-fade-magenta-light05 color-magenta-dark-more text-center font-400 wedive-chip">3자리 남음</span>
+                    <span class="chip chip-s bg-fade-mint-light05 color-green-dark-more text-center font-400 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>1</span> 참여중</span>
                     <div class="d-flex mb-3">
                         <div class="align-self-center">
                             <img src="/static/images/point/ko/jeju_bumisland_01.jpg" class="rounded-sm me-3" width="68">
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-15 line-height-s mt-2 mb-0">09.22(수) ~ 09.25(토)</h2>
-                            <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> 문섬 포인트 (서귀포 사이트)</p>
+                            <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 문섬 포인트 (서귀포 사이트)</p>
                             <p class="color-secondary font-13 mb-0 ellipsis">&nbsp;</p>
                         </div>
                     </div>
                 </div>
                 <div class="light-border-bottom mt-3">
-                    <span class="chip chip-s bg-fade-magenta-light05 color-magenta-dark-more text-center font-600 wedive-chip">1자리 남음</span>
-                    <span class="chip chip-s bg-fade-mint-light05 color-green-dark-more text-center font-600 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>2</span> <span class="color-google ms-1"><i class="far fa-user"></i>3</span> 참여중</span>
+                    <span class="chip chip-s bg-fade-magenta-light05 color-magenta-dark-more text-center font-400 wedive-chip">1자리 남음</span>
+                    <span class="chip chip-s bg-fade-mint-light05 color-green-dark-more text-center font-400 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>2</span> <span class="color-shopping ms-1"><i class="far fa-user"></i>3</span> 참여중</span>
                     <div class="d-flex mb-3">
                         <div class="align-self-center">
                             <img src="/static/images/point/ko/jeju_munisland_06.jpg" class="rounded-sm me-3" width="68">
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-15 line-height-s mt-2 mb-0">09.20(월) ~ 09.25(토)</h2>
-                            <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> 문섬포인트 (제주 사이트)</p>
+                            <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 문섬포인트 (제주 사이트)</p>
                             <p class="color-secondary font-13 mb-0 ellipsis">#펀다이빙&nbsp;&nbsp;#본인케어</p>
                         </div>
                     </div>
@@ -93,7 +93,7 @@
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-15 line-height-s mt-2 mb-0">09.25(토) ~ 09.26(일)</h2>
-                            <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> 철재삼동 포인트 (양양 사이트)</p>
+                            <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 철재삼동 포인트 (양양 사이트)</p>
                             <p class="color-secondary font-13 mb-0 ellipsis">#카풀가능&nbsp;&nbsp;#센터확정&nbsp;&nbsp;#개별숙박</p>
                         </div>
                     </div>
@@ -105,7 +105,7 @@
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-15 line-height-s mt-2 mb-0">09.22(수) ~ 09.25(토)</h2>
-                            <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> 문섬 포인트 (서귀포 사이트)</p>
+                            <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 문섬 포인트 (서귀포 사이트)</p>
                             <p class="color-secondary font-13 mb-0 ellipsis">&nbsp;</p>
                         </div>
                     </div>
@@ -120,29 +120,29 @@
                 <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
                 
                 <div class="light-border-bottom mt-3">
-                    <span class="chip chip-s bg-fade-magenta-light05 color-magenta-dark-more text-center font-600 wedive-chip">1자리 남음</span>
-                    <span class="chip chip-s bg-fade-mint-light05 color-green-dark-more text-center font-600 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>5</span> 참여중</span>
+                    <span class="chip chip-s bg-fade-magenta-light05 color-magenta-dark-more text-center font-400 wedive-chip">1자리 남음</span>
+                    <span class="chip chip-s bg-fade-mint-light05 color-green-dark-more text-center font-400 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>5</span> 참여중</span>
                     <div class="d-flex mb-3">
                         <div class="align-self-center">
                             <img src="/static/images/point/ko/kangwon_yangyang_01.jpg" class="rounded-sm me-3" width="68">
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-15 line-height-s mt-2 mb-0">09.25(토) ~ 09.26(일)</h2>
-                            <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> 말미잘동산 포인트 (양양 사이트)</p>
+                            <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 말미잘동산 포인트 (양양 사이트)</p>
                             <p class="color-secondary font-13 mb-0 ellipsis">#카풀가능&nbsp;&nbsp;#센터확정&nbsp;&nbsp;#개별숙박</p>
                         </div>
                     </div>
                 </div>
                 <div class="light-border-bottom mt-3">
-                    <span class="chip chip-s bg-fade-magenta-light05 color-magenta-dark-more text-center font-600 wedive-chip">1자리 남음</span>
-                    <span class="chip chip-s bg-fade-mint-light05 color-green-dark-more text-center font-600 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>1</span> <span class="color-google ms-1"><i class="far fa-user"></i>1</span> 참여중</span>
+                    <span class="chip chip-s bg-fade-magenta-light05 color-magenta-dark-more text-center font-400 wedive-chip">1자리 남음</span>
+                    <span class="chip chip-s bg-fade-mint-light05 color-green-dark-more text-center font-400 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>1</span> <span class="color-shopping ms-1"><i class="far fa-user"></i>1</span> 참여중</span>
                     <div class="d-flex mb-3">
                         <div class="align-self-center">
                             <img src="/static/images/point/ko/jeju_bumisland_01.jpg" class="rounded-sm me-3" width="68">
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-15 line-height-s mt-2 mb-0">09.22(수) ~ 09.25(토)</h2>
-                            <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> 문섬 포인트 (서귀포 사이트)</p>
+                            <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 문섬 포인트 (서귀포 사이트)</p>
                             <p class="color-secondary font-13 mb-0 ellipsis">&nbsp;</p>
                         </div>
                     </div>
@@ -166,29 +166,29 @@
                 <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
                 
                 <div class="light-border-bottom mt-3">
-                    <span class="chip chip-s bg-fade-magenta-light05 color-magenta-dark-more text-center font-600 wedive-chip">1자리 남음</span>
-                    <span class="chip chip-s bg-fade-mint-light05 color-green-dark-more text-center font-600 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>1</span> 참여중</span>
+                    <span class="chip chip-s bg-fade-magenta-light05 color-magenta-dark-more text-center font-400 wedive-chip">1자리 남음</span>
+                    <span class="chip chip-s bg-fade-mint-light05 color-green-dark-more text-center font-400 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>1</span> 참여중</span>
                     <div class="d-flex mb-3">
                         <div class="align-self-center">
                             <img src="/static/images/point/ko/kangwon_yangyang_01.jpg" class="rounded-sm me-3" width="68">
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-15 line-height-s mt-2 mb-0">09.25(토) ~ 09.26(일)</h2>
-                            <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> 철재삼동 포인트 (양양 사이트)</p>
+                            <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 철재삼동 포인트 (양양 사이트)</p>
                             <p class="color-secondary font-13 mb-0 ellipsis">#카풀가능&nbsp;&nbsp;#센터확정&nbsp;&nbsp;#개별숙박</p>
                         </div>
                     </div>
                 </div>
                 <div class="light-border-bottom mt-3">
-                    <span class="chip chip-s bg-fade-magenta-light05 color-magenta-dark-more text-center font-600 wedive-chip">1자리 남음</span>
-                    <span class="chip chip-s bg-fade-mint-light05 color-green-dark-more text-center font-600 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>3</span> <span class="color-google ms-1"><i class="far fa-user"></i>1</span> 참여중</span>
+                    <span class="chip chip-s bg-fade-magenta-light05 color-magenta-dark-more text-center font-400 wedive-chip">1자리 남음</span>
+                    <span class="chip chip-s bg-fade-mint-light05 color-green-dark-more text-center font-400 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>3</span> <span class="color-shopping ms-1"><i class="far fa-user"></i>1</span> 참여중</span>
                     <div class="d-flex mb-3">
                         <div class="align-self-center">
                             <img src="/static/images/point/ko/jeju_bumisland_01.jpg" class="rounded-sm me-3" width="68">
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-15 line-height-s mt-2 mb-0">09.22(수) ~ 09.25(토)</h2>
-                            <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> 문섬 포인트 (서귀포 사이트)</p>
+                            <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 문섬 포인트 (서귀포 사이트)</p>
                             <p class="color-secondary font-13 mb-0 ellipsis">&nbsp;</p>
                         </div>
                     </div>
@@ -313,7 +313,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.wedive-chip {padding-left: 16px;margin: 0px 4px 0px 0px;margin-bottom: 4px;}
+.wedive-chip {padding-left: 16px;margin: 0px 4px 0px 0px;margin-bottom: 4px;font-family: 'Noto Sans Korean'}
 .wedive-chip i {width: auto;line-height: inherit;margin-right: 3px;}
 .light-border-bottom {border-bottom: 1px solid #dee2e6;}
 .wedive-txt-all {position: absolute;top: 20px;right: 16px;}
@@ -324,5 +324,5 @@ export default {
 -webkit-@keyframes motion-updown {0% {margin-top: -20px;}20% {margin-top: 0px;}40% {margin-top: -20px;}60% {margin-top: 0px;}80% {margin-top: 0px;}100% {margin-top: 0px;}}
 
 .movebox {animation: motion-updown 3s linear 0s infinite alternate; margin-top: 0;-webkit-animation: motion-updown 3s linear 0s infinite alternate; margin-top: 0;}
-
+.font-noto {font-family: 'Noto Sans Korean'}
 </style>
