@@ -27,7 +27,7 @@
                 
                 <div class="evaluation d-flex">
                     <div class="flex-grow-1">
-                        <div class="star-area text-start ms-3">
+                        <div class="star-area text-start ms-3" style="height: 30px;">
                             <span class="font-14 me-2 color-gray" style="float: left;padding-top:2px;">환경</span>
                             <div class="wedive-fish-back">
                                 <div class="wedive-fish-front" style="width:66%">
@@ -35,7 +35,7 @@
                                 <span class="wedive-score-number">3.3</span>
                             </div>
                         </div>
-                        <div class="star-area mt-1 text-start ms-3">
+                        <div class="star-area mt-1 text-start ms-3" style="height: 30px;">
                             <span class="font-14 me-2 color-gray" style="float: left;padding-top:2px;">유속</span>
                             <div class="wedive-wave-back">
                                 <div class="wedive-wave-front" style="width:66%">
@@ -43,7 +43,7 @@
                                 <span class="wedive-score-number">3.8</span>
                             </div>
                         </div>
-                        <div class="star-area mt-1 text-start ms-3">
+                        <div class="star-area mt-1 text-start ms-3" style="height: 30px;">
                             <span class="font-14 me-2 color-gray" style="float: left;padding-top:2px;">시야</span>
                             <div class="wedive-eye-back">
                                 <div class="wedive-eye-front" style="width:66%">
@@ -53,9 +53,9 @@
                         </div>
                     </div>
                     <div class="flex-grow-1">
-                        <div>일반적</div>
-                        <div class="mt-1">일반적</div>
-                        <div class="mt-1">5-15m</div>
+                        <div style="height: 30px;padding-top:2px;">일반적</div>
+                        <div class="mt-1" style="height: 30px;padding-top:2px;">일반적</div>
+                        <div class="mt-1" style="height: 30px;padding-top:2px;">5-15m</div>
                     </div>
                 </div>
                 
