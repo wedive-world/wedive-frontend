@@ -28,31 +28,28 @@
                     <div class="d-flex">
                         <div class="flex-grow-1">
                             <div class="star-area text-start ms-3">
-                                <span class="font-14 me-2 color-gray">환경</span>
-                                <i class="fas fa-fish font-20 color-orange-light scale-box"></i>
-                                <i class="fas fa-fish font-20 color-orange-light scale-box"></i>
-                                <i class="fas fa-fish font-20 color-orange-light scale-box"></i>
-                                <i class="fas fa-fish font-20 color-orange-light scale-box"></i>
-                                <i class="fas fa-fish font-20 color-gray-light scale-box"></i>
-                                <span class="font-14 ms-2">4.1</span>
+                                <span class="font-14 me-2 color-gray" style="float: left;padding-top:2px;">환경</span>
+                                <div class="wedive-fish-back">
+                                    <div class="wedive-fish-front" style="width:66%">
+                                    </div>
+                                    <span class="wedive-score-number">4.3</span>
+                                </div>
                             </div>
                             <div class="star-area mt-1 text-start ms-3">
-                                <span class="font-14 me-2 color-gray">유속</span>
-                                <i class="fas fa-water font-20 color-aqua-dark scale-box"></i>
-                                <i class="fas fa-water font-20 color-aqua-dark scale-box"></i>
-                                <i class="fas fa-water font-20 color-aqua-dark scale-box"></i>
-                                <i class="fas fa-water font-20 color-aqua-dark scale-box"></i>
-                                <i class="fas fa-water font-20 color-gray-light scale-box"></i>
-                                <span class="font-14 ms-2">3.9</span>
+                                <span class="font-14 me-2 color-gray" style="float: left;padding-top:2px;">유속</span>
+                                <div class="wedive-wave-back">
+                                    <div class="wedive-wave-front" style="width:66%">
+                                    </div>
+                                    <span class="wedive-score-number">3.9</span>
+                                </div>
                             </div>
                             <div class="star-area mt-1 text-start ms-3">
-                                <span class="font-14 me-2 color-gray">시야</span>
-                                <i class="fas fa-eye font-20 color-green-dark scale-box"></i>
-                                <i class="fas fa-eye font-20 color-green-dark scale-box"></i>
-                                <i class="fas fa-eye font-20 color-green-dark scale-box"></i>
-                                <i class="fas fa-eye font-20 color-green-dark scale-box"></i>
-                                <i class="fas fa-eye font-20 color-gray-light scale-box"></i>
-                                <span class="font-14 ms-2">4.2</span>
+                                <span class="font-14 me-2 color-gray" style="float: left;padding-top:2px;">시야</span>
+                                <div class="wedive-eye-back">
+                                    <div class="wedive-eye-front" style="width:66%">
+                                    </div>
+                                    <span class="wedive-score-number">4.2</span>
+                                </div>
                             </div>
                         </div>
                         <div class="flex-grow-1">
