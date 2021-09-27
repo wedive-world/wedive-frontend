@@ -22,7 +22,7 @@
 
             <div class="row">
                 <div class="col-md-4">
-                    <label>국가</label>
+                    <label>국가 (사이트 검색을 위해 만들어놓음)</label>
                     <div class="listsearch-input-item">
                         <select data-placeholder="국가를 선택하세요" class="chosen-select no-search-select" >
                             <option>대한민국</option>
@@ -76,19 +76,11 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-3">
-                    <label>시야(최저,m) <i class="fal fa-briefcase"></i></label>
-                    <input type="text" placeholder="10" value=""/>
-                </div>
-                <div class="col-md-3">
-                    <label>시야(최고,m) <i class="fal fa-briefcase"></i></label>
-                    <input type="text" placeholder="10" value=""/>
-                </div>
-                <div class="col-md-3">
+                <div class="col-md-6">
                     <label>수심(최저,m) <i class="fal fa-briefcase"></i></label>
                     <input type="text" placeholder="10" value=""/>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-6">
                     <label>수심(최고,m) <i class="fal fa-briefcase"></i></label>
                     <input type="text" placeholder="10" value=""/>
                 </div>

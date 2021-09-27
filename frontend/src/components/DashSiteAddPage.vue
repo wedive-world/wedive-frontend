@@ -21,6 +21,11 @@
             </div>
 
             <div class="row">
+                <label>Interest <i class="fal fa-key"></i></label>
+                추가할 예정
+            </div>
+
+            <div class="row hide">
                 <div class="col-md-4">
                     <label>국가명 <i class="fal fa-briefcase"></i></label>
                     <input type="text" placeholder="대한민국" value="대한민국"/>
@@ -441,6 +446,171 @@
                         <div class="range-slider-title">12월</div>
                         <div class="range-slider-wrap">
                             <input type="text" class="rate-range" data-min="1" data-max="3"  name="popular12"  data-step="1" value="1">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div><label>월별 날씨 (햇살쨍쨍, 보통, 비옴, 비엄청옴)</label></div>
+            <br/><br/><br/>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="review-range-item">
+                        <div class="range-slider-title">1월</div>
+                        <div class="range-slider-wrap">
+                            <select data-placeholder="날씨 선택" class="chosen-select no-search-select" >
+                                <option>sunny</option>
+                                <option>cloudy</option>
+                                <option>rainy</option>
+                                <option>heavy rainy</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="review-range-item">
+                        <div class="range-slider-title">2월</div>
+                        <div class="range-slider-wrap">
+                            <select data-placeholder="날씨 선택" class="chosen-select no-search-select" >
+                                <option>sunny</option>
+                                <option>cloudy</option>
+                                <option>rainy</option>
+                                <option>heavy rainy</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="review-range-item">
+                        <div class="range-slider-title">3월</div>
+                        <div class="range-slider-wrap">
+                            <select data-placeholder="날씨 선택" class="chosen-select no-search-select" >
+                                <option>sunny</option>
+                                <option>cloudy</option>
+                                <option>rainy</option>
+                                <option>heavy rainy</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="review-range-item">
+                        <div class="range-slider-title">4월</div>
+                        <div class="range-slider-wrap">
+                            <select data-placeholder="날씨 선택" class="chosen-select no-search-select" >
+                                <option>sunny</option>
+                                <option>cloudy</option>
+                                <option>rainy</option>
+                                <option>heavy rainy</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="review-range-item">
+                        <div class="range-slider-title">5월</div>
+                        <div class="range-slider-wrap">
+                            <select data-placeholder="날씨 선택" class="chosen-select no-search-select" >
+                                <option>sunny</option>
+                                <option>cloudy</option>
+                                <option>rainy</option>
+                                <option>heavy rainy</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="review-range-item">
+                        <div class="range-slider-title">6월</div>
+                        <div class="range-slider-wrap">
+                            <select data-placeholder="날씨 선택" class="chosen-select no-search-select" >
+                                <option>sunny</option>
+                                <option>cloudy</option>
+                                <option>rainy</option>
+                                <option>heavy rainy</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-3">
+                    <div class="review-range-item">
+                        <div class="range-slider-title">7월</div>
+                        <div class="range-slider-wrap">
+                            <select data-placeholder="날씨 선택" class="chosen-select no-search-select" >
+                                <option>sunny</option>
+                                <option>cloudy</option>
+                                <option>rainy</option>
+                                <option>heavy rainy</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="review-range-item">
+                        <div class="range-slider-title">8월</div>
+                        <div class="range-slider-wrap">
+                            <select data-placeholder="날씨 선택" class="chosen-select no-search-select" >
+                                <option>sunny</option>
+                                <option>cloudy</option>
+                                <option>rainy</option>
+                                <option>heavy rainy</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="review-range-item">
+                        <div class="range-slider-title">9월</div>
+                        <div class="range-slider-wrap">
+                            <select data-placeholder="날씨 선택" class="chosen-select no-search-select" >
+                                <option>sunny</option>
+                                <option>cloudy</option>
+                                <option>rainy</option>
+                                <option>heavy rainy</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="review-range-item">
+                        <div class="range-slider-title">10월</div>
+                        <div class="range-slider-wrap">
+                            <select data-placeholder="날씨 선택" class="chosen-select no-search-select" >
+                                <option>sunny</option>
+                                <option>cloudy</option>
+                                <option>rainy</option>
+                                <option>heavy rainy</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="review-range-item">
+                        <div class="range-slider-title">11월</div>
+                        <div class="range-slider-wrap">
+                            <select data-placeholder="날씨 선택" class="chosen-select no-search-select" >
+                                <option>sunny</option>
+                                <option>cloudy</option>
+                                <option>rainy</option>
+                                <option>heavy rainy</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="review-range-item">
+                        <div class="range-slider-title">12월</div>
+                        <div class="range-slider-wrap">
+                            <select data-placeholder="날씨 선택" class="chosen-select no-search-select" >
+                                <option>sunny</option>
+                                <option>cloudy</option>
+                                <option>rainy</option>
+                                <option>heavy rainy</option>
+                            </select>
                         </div>
                     </div>
                 </div>
