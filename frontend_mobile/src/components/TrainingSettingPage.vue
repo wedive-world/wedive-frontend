@@ -7,26 +7,30 @@
             <a href="#" data-menu="menu-main" class="header-icon header-icon-3 font-15"><i class="far fa-question-circle"></i></a>
             <a href="#" data-toggle-theme class="header-icon header-icon-4 font-15"><i class="far fa-trash-alt"></i></a>
         </div>
-        <div class="p-3">
+        <div class="p-2">
             <p class="mb-2 font-24 font-500 font-noto text-center">19:20</p>
             <p class="mb-0 font-11 font-200 font-noto text-center" style="line-height:16px;">총 트레이닝 시간</p>
             
             <div class="row mt-3">
                 <div class="col-3 text-center">
                     <img src="/static/images/icon_repeat.svg" height="40"/>
-                    <p class="mb-0 color-gray font-noto"><font class="color-highlight">반복&nbsp;&nbsp;</font>8회</p>
+                    <p class="mb-0 color-highlight font-noto">반복</p>
+                    <p class="mb-0 mt-n1 color-gray font-noto">8회</p>
                 </div>
                 <div class="col-3 text-center bl-1">
                     <img src="/static/images/icon_breath.svg" height="40"/>
-                    <p class="mb-0 color-gray font-noto"><font class="color-highlight">첫 호흡&nbsp;&nbsp;</font>02:00</p>
+                    <p class="mb-0 color-highlight font-noto">첫 호흡</p>
+                    <p class="mb-0 mt-n1 color-gray font-noto">02:00</p>
                 </div>
                 <div class="col-3 text-center bl-1">
                     <img src="/static/images/icon_breath_hold.svg" height="40"/>
-                    <p class="mb-0 color-gray font-noto"><font class="color-highlight">숨참기&nbsp;&nbsp;</font>00:40</p>
+                    <p class="mb-0 color-highlight font-noto">숨참기</p>
+                    <p class="mb-0 mt-n1 color-gray font-noto">00:40</p>
                 </div>
                 <div class="col-3 text-center bl-1">
                     <img src="/static/images/icon_decrease.svg" height="40"/>
-                    <p class="mb-0 color-gray font-noto"><font class="color-highlight">호흡감소&nbsp;&nbsp;</font>00:15</p>
+                    <p class="mb-0 color-highlight font-noto">호흡감소</p>
+                    <p class="mb-0 mt-n1 color-gray font-noto">00:15</p>
                 </div>
             </div>
         </div>
