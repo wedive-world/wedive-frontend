@@ -18,6 +18,10 @@ import ChatDetailPage from '@/components/ChatDetailPage'
 import ShopHomePage from '@/components/ShopHomePage'
 import ShopDetailPage from '@/components/ShopDetailPage'
 import StaticPage from '@/components/StaticPage'
+import TrainingPage from '@/components/TrainingPage'
+import TrainingListPage from '@/components/TrainingListPage'
+import TrainingSettingPage from '@/components/TrainingSettingPage'
+
 
 Vue.use(Router)
 
@@ -112,7 +116,23 @@ export default new Router({
       path: '/static',
       name: 'StaticPage',
       component: StaticPage
+    },
+    {
+      path: '/training',
+      name: 'TrainingPage',
+      component: TrainingPage
+    },
+    {
+      path: '/training_list',
+      name: 'TrainingListPage',
+      component: TrainingListPage
+    },
+    {
+      path: '/training_setting',
+      name: 'TrainingSettingPage',
+      component: TrainingSettingPage
     }
+    
   ],
   mode: 'history'
 })
