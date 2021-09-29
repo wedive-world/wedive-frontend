@@ -8,14 +8,24 @@
             <a href="#" data-toggle-theme class="header-icon header-icon-4 font-15"><i class="far fa-trash-alt"></i></a>
         </div>
         <div class="p-2">
-            <p class="mb-2 font-24 font-500 font-noto text-center">19:20</p>
+            <p class="mb-1 font-24 font-500 font-noto text-center">19:20</p>
             <p class="mb-0 font-11 font-200 font-noto text-center" style="line-height:16px;">총 트레이닝 시간</p>
             
-            <div class="row mt-3">
-                <div class="col-3 text-center">
+            <p class="mb-0 mt-n1 ms-1 font-11 font-200 font-noto text-start color-gray-light-mid"><i class="wedive_icoset wedive_icoset_info me-1"></i>항목을 클릭해 수정</p>
+            <div class="row mt-1">
+                <div class="col-3 text-center" v-on:click="click_repeat()">
                     <img src="/static/images/icon_repeat.svg" height="40"/>
                     <p class="mb-0 color-highlight font-noto">반복</p>
-                    <p class="mb-0 mt-n1 color-gray font-noto">8회</p>
+                    <p class="mb-0 mt-n1 color-gray font-noto"><span id="span_repeat">8</span>회</p>
+                    <select class="hide" id="select_repeat" required>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8" selected>8</option>
+                    </select>
                 </div>
                 <div class="col-3 text-center bl-1">
                     <img src="/static/images/icon_breath.svg" height="40"/>
@@ -111,6 +121,14 @@ export default {
     $(".header-auto-show").hide();
 
     document.getElementById("footer-bar").classList.add("hide");
+
+
+    setTimeout(function() {
+        $('select_repeat').on('change', function() {
+            var val = this.value;
+            $("#span_repeat").text(val);
+        });
+    },1000);
   },
   components: {
     
@@ -126,7 +144,9 @@ export default {
       
     }
   }, methods: {
-    
+    click_repeat: function() {
+        $("#select_repeat").click();
+    }
   }
 }
 
