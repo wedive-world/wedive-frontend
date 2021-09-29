@@ -19,12 +19,12 @@
                     <p class="mb-0 mt-n1 color-gray font-noto"><span id="span_repeat">8</span>회</p>
                 </div>
                 <div class="col-3 text-center bl-1" data-menu="menu-first">
-                    <img src="/static/images/icon_breath.svg" height="40"/>
+                    <img src="/static/images/icon_breath.png" height="40"/>
                     <p class="mb-0 color-highlight font-noto">첫 호흡</p>
                     <p class="mb-0 mt-n1 color-gray font-noto"><span id="span_first1">02</span>:<span id="span_first2">00</span></p>
                 </div>
                 <div class="col-3 text-center bl-1" data-menu="menu-hold">
-                    <img src="/static/images/icon_breath_hold.svg" height="40"/>
+                    <img src="/static/images/icon_breath_hold.png" height="40"/>
                     <p class="mb-0 color-highlight font-noto">숨참기</p>
                     <p class="mb-0 mt-n1 color-gray font-noto"><span id="span_hold1">00</span>:<span id="span_hold2">40</span></p>
                 </div>
