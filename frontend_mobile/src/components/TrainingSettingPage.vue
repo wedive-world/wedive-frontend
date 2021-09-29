@@ -145,7 +145,9 @@ export default {
     }
   }, methods: {
     click_repeat: function() {
-        $("#select_repeat").click();
+        var myDropDown=document.getElementById("select_repeat");
+        var length = myDropDown.options.length;
+        myDropDown.size = length;
     }
   }
 }
