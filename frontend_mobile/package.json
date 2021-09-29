@@ -13,6 +13,7 @@
     "lodash": "^4.17.21",
     "vue": "^2.6.14",
     "vue-router": "^3.0.1",
+    "vue-scroll-picker": "^0.8.0",
     "vue-typeahead-bootstrap": "^2.12.0",
     "vue2-google-maps": "^0.10.7"
   },

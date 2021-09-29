@@ -13,40 +13,30 @@
             
             <p class="mb-0 mt-n1 ms-1 font-11 font-200 font-noto text-start color-gray-light-mid"><i class="wedive_icoset wedive_icoset_info me-1"></i>항목을 클릭해 수정</p>
             <div class="row mt-1">
-                <div class="col-3 text-center" v-on:click="click_repeat()">
+                <div class="col-3 text-center" data-menu="menu-repeat">
                     <img src="/static/images/icon_repeat.svg" height="40"/>
                     <p class="mb-0 color-highlight font-noto">반복</p>
                     <p class="mb-0 mt-n1 color-gray font-noto"><span id="span_repeat">8</span>회</p>
-                    <select class="opacity-20" id="select_repeat" required>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8" selected>8</option>
-                    </select>
                 </div>
-                <div class="col-3 text-center bl-1">
+                <div class="col-3 text-center bl-1" data-menu="menu-first">
                     <img src="/static/images/icon_breath.svg" height="40"/>
                     <p class="mb-0 color-highlight font-noto">첫 호흡</p>
-                    <p class="mb-0 mt-n1 color-gray font-noto">02:00</p>
+                    <p class="mb-0 mt-n1 color-gray font-noto"><span id="span_first1">02</span>:<span id="span_first2">00</span></p>
                 </div>
-                <div class="col-3 text-center bl-1">
+                <div class="col-3 text-center bl-1" data-menu="menu-hold">
                     <img src="/static/images/icon_breath_hold.svg" height="40"/>
                     <p class="mb-0 color-highlight font-noto">숨참기</p>
-                    <p class="mb-0 mt-n1 color-gray font-noto">00:40</p>
+                    <p class="mb-0 mt-n1 color-gray font-noto"><span id="span_hold1">00</span>:<span id="span_hold2">40</span></p>
                 </div>
-                <div class="col-3 text-center bl-1">
+                <div class="col-3 text-center bl-1" data-menu="menu-decrease">
                     <img src="/static/images/icon_decrease.svg" height="40"/>
                     <p class="mb-0 color-highlight font-noto">호흡감소</p>
-                    <p class="mb-0 mt-n1 color-gray font-noto">00:15</p>
+                    <p class="mb-0 mt-n1 color-gray font-noto">00:<span id="span_decrease">15</span></p>
                 </div>
             </div>
         </div>
     </div>
 
-    
     <div class="content" style="position: relative;margin-top:220px;">
         <div class="pt-3">
             <table class="table table-borderless text-center rounded-sm shadow-l bg-white font-noto font-15" style="overflow: hidden;">
@@ -101,11 +91,61 @@
                 </tbody>
             </table>
         </div>
-        
     </div>
     
     
     <a href="#" class="btn btn-full font-400 shadow-l gradient-highlight color-white bd-w-0 mt-2 font-14" style="border-radius:0;position:fixed;width:100%;bottom:0;height:46px;padding-top:11px;">트레이닝 시작</a>
+
+    <!-- Menu select repeat -->
+    <div id="menu-repeat" class="menu menu-box-bottom rounded-half">
+        <div class="menu-title mt-n1">
+            <h2 class="pt-3 pb-3 font-16 text-center">반복 횟수</h2>
+            <a href="#" class="close-menu float-end font-12 font-400 color-highlight" v-on:click="close_repeat()">완료</a>
+        </div>
+        <div class="ms-5 me-5 mb-0 ">
+            <scroll-picker :options="[2, 3, 4, 5, 6, 7, 8]" v-model="repeat_val"></scroll-picker>
+        </div>
+    </div>
+
+    <!-- Menu select first -->
+    <div id="menu-first" class="menu menu-box-bottom rounded-half">
+        <div class="menu-title mt-n1">
+            <h2 class="pt-3 pb-3 font-16 text-center">첫 호흡</h2>
+            <a href="#" class="close-menu float-end font-12 font-400 color-highlight" v-on:click="close_first()">완료</a>
+        </div>
+        <div class="ms-5 me-5 mb-0">
+            <scroll-picker-group class="flex">
+                <scroll-picker :options="['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10']" v-model="first1_val"></scroll-picker>
+                <scroll-picker :options="['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19','20', '21', '22', '23', '24', '25', '26', '27', '28', '29','30', '31', '32', '33', '34', '35', '36', '37', '38', '39','40', '41', '42', '43', '44', '45', '46', '47', '48', '49','50', '51', '52', '53', '54', '55', '56', '57', '58', '59']" v-model="first2_val"></scroll-picker>
+            </scroll-picker-group>
+        </div>
+    </div>
+
+    <!-- Menu select hold -->
+    <div id="menu-hold" class="menu menu-box-bottom rounded-half">
+        <div class="menu-title mt-n1">
+            <h2 class="pt-3 pb-3 font-16 text-center">숨참기</h2>
+            <a href="#" class="close-menu float-end font-12 font-400 color-highlight" v-on:click="close_hold()">완료</a>
+        </div>
+        <div class="ms-5 me-5 mb-0">
+            <scroll-picker-group class="flex">
+                <scroll-picker :options="['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10']" v-model="hold1_val"></scroll-picker>
+                <scroll-picker :options="['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19','20', '21', '22', '23', '24', '25', '26', '27', '28', '29','30', '31', '32', '33', '34', '35', '36', '37', '38', '39','40', '41', '42', '43', '44', '45', '46', '47', '48', '49','50', '51', '52', '53', '54', '55', '56', '57', '58', '59']" v-model="hold2_val"></scroll-picker>
+            </scroll-picker-group>
+        </div>
+    </div>
+
+    <!-- Menu select decrease -->
+    <div id="menu-decrease" class="menu menu-box-bottom rounded-half">
+        <div class="menu-title mt-n1">
+            <h2 class="pt-3 pb-3 font-16 text-center">호흡감소</h2>
+            <a href="#" class="close-menu float-end font-12 font-400 color-highlight" v-on:click="close_decrease()">완료</a>
+        </div>
+        <div class="ms-5 me-5 mb-0">
+            <scroll-picker :options="['10', '11', '12', '13', '14', '15', '16', '17', '18', '19','20', '21', '22', '23', '24', '25', '26', '27', '28', '29','30', '31', '32', '33', '34', '35', '36', '37', '38', '39','40', '41', '42', '43', '44', '45', '46', '47', '48', '49','50', '51', '52', '53', '54', '55', '56', '57', '58', '59']" v-model="decrease_val"></scroll-picker>
+        </div>
+    </div>
+
   </div>
 </template>
 <script>
@@ -122,13 +162,6 @@ export default {
 
     document.getElementById("footer-bar").classList.add("hide");
 
-
-    setTimeout(function() {
-        $('select_repeat').on('change', function() {
-            var val = this.value;
-            $("#span_repeat").text(val);
-        });
-    },1000);
   },
   components: {
     
@@ -141,19 +174,27 @@ export default {
   },
   data () {
     return {
-      
+      repeat_val: 8,
+      first1_val: "02",
+      first2_val: "00",
+      hold1_val: "00",
+      hold2_val: "40",
+      decrease_val: "15",
     }
   }, methods: {
-    click_repeat: function() {
-        //var myDropDown=document.getElementById("select_repeat");
-        //var length = myDropDown.options.length;
-        //myDropDown.size = length;
-
-
-        var select1 = document.getElementById("select_repeat");
-        var evt = document.createEvent('UIEvents');
-        evt.initUIEvent("click", true, true, window, 1);
-        select1.dispatchEvent(evt);
+    close_repeat: function() {
+        $("#span_repeat").text(this.repeat_val);
+    },
+    close_first: function() {
+        $("#span_first1").text(this.first1_val);
+        $("#span_first2").text(this.first2_val);
+    },
+    close_hold: function() {
+        $("#span_hold1").text(this.hold1_val);
+        $("#span_hold2").text(this.hold2_val);
+    },
+    close_decrease: function() {
+        $("#span_decrease").text(this.decrease_val);
     }
   }
 }
@@ -163,8 +204,19 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
 .font-noto {font-family: 'Noto Sans Korean'}
 .bl-1 {border-left: 1px solid rgba(0, 0, 0, 0.08) !important}
 .border-bottom {border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important}
 .bg-secondary-light {background: #e0eeed;}
+
+
+
+
+
+
+
+
+
+
 </style>

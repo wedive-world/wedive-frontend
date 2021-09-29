@@ -21,7 +21,7 @@ import StaticPage from '@/components/StaticPage'
 import TrainingPage from '@/components/TrainingPage'
 import TrainingListPage from '@/components/TrainingListPage'
 import TrainingSettingPage from '@/components/TrainingSettingPage'
-
+import TrainingStartPage from '@/components/TrainingStartPage'
 
 Vue.use(Router)
 
@@ -131,7 +131,13 @@ export default new Router({
       path: '/training_setting',
       name: 'TrainingSettingPage',
       component: TrainingSettingPage
+    },
+    {
+      path: '/training_start',
+      name: 'TrainingStartPage',
+      component: TrainingStartPage
     }
+    
     
   ],
   mode: 'history'
