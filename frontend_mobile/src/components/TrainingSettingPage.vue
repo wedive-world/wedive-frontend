@@ -145,9 +145,15 @@ export default {
     }
   }, methods: {
     click_repeat: function() {
-        var myDropDown=document.getElementById("select_repeat");
-        var length = myDropDown.options.length;
-        myDropDown.size = length;
+        //var myDropDown=document.getElementById("select_repeat");
+        //var length = myDropDown.options.length;
+        //myDropDown.size = length;
+
+
+        var select1 = document.getElementById("select_repeat");
+        var evt = document.createEvent('UIEvents');
+        evt.initUIEvent("click", true, true, window, 1);
+        select1.dispatchEvent(evt);
     }
   }
 }
