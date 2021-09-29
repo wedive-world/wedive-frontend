@@ -69,8 +69,8 @@ export default {
         });
         
         $('#play').click(function() {
-            navigator.vibrate(200);
-            
+            window.navigator.vibrate(200);
+
             audioElement.play();
             $("#status").text("Status: Playing");
         });
