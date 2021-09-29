@@ -17,7 +17,7 @@
                     <img src="/static/images/icon_repeat.svg" height="40"/>
                     <p class="mb-0 color-highlight font-noto">반복</p>
                     <p class="mb-0 mt-n1 color-gray font-noto"><span id="span_repeat">8</span>회</p>
-                    <select class="hide" id="select_repeat" required>
+                    <select class="opacity-20" id="select_repeat" required>
                         <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>

@@ -396,7 +396,7 @@
                     <div class="pt-1">
                         <h4 class="pt-3 mb-0">할인(무료) 초청 하시겠습니까?</h4>
                     </div>
-                    <div class="ms-auto me-4 pe-2">
+                    <div class="ms-auto me-4 pe-2 mt-2">
                         <div class="custom-control ios-switch">
                             <input type="checkbox" class="ios-input" id="toggle-id-3">
                             <label class="custom-control-label" for="toggle-id-3"></label>

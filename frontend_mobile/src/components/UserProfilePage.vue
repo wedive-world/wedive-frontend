@@ -287,7 +287,7 @@
                     <div class="pt-1">
                         <h4 class="pt-3 mb-2">스쿠버다이빙 정보</h4>
                     </div>
-                    <div class="ms-auto me-4 pe-2">
+                    <div class="ms-auto me-4 pe-2 mt-2">
                         <div class="custom-control ios-switch">
                             <input type="checkbox" class="ios-input" id="toggle-id-1">
                             <label class="custom-control-label" for="toggle-id-1"></label>
@@ -447,7 +447,7 @@
                     <div class="pt-1">
                         <h4 class="pt-3 mb-2">프리다이빙 정보</h4>
                     </div>
-                    <div class="ms-auto me-4 pe-2">
+                    <div class="ms-auto me-4 pe-2 mt-2">
                         <div class="custom-control ios-switch">
                             <input type="checkbox" class="ios-input" id="toggle-id-2">
                             <label class="custom-control-label" for="toggle-id-2"></label>
@@ -608,7 +608,7 @@
                     <div class="pt-1">
                         <h4 class="pt-3 mb-0">위다이브 강사 <span class="mb-2 color-gray-light-mid font-13 ms-2 font-400"><i class="wedive_icoset wedive_icoset_info me-1"></i>위다이브에서 강좌를 개설합니다.</span></h4>
                     </div>
-                    <div class="ms-auto me-4 pe-2">
+                    <div class="ms-auto me-4 pe-2 mt-2">
                         <div class="custom-control ios-switch">
                             <input type="checkbox" class="ios-input" id="toggle-id-3">
                             <label class="custom-control-label" for="toggle-id-3"></label>

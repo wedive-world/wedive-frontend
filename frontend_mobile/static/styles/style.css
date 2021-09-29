@@ -4068,8 +4068,8 @@ button {
   pointer-events: all;
   margin-top: -5px;
   margin-left: -1px;
-  width: 58px !important;
-  height: 32px !important;
+  width: 42px !important;
+  height: 22px !important;
   border: solid 1px rgba(152, 152, 152, 0.4);
   border-radius: 50px !important;
   transition: all 250ms ease;
@@ -4077,10 +4077,10 @@ button {
 .ios-switch label::after {
   content: "";
   display: block !important;
-  margin-top: -31px;
+  margin-top: -21px;
   z-index: 6;
-  width: 30px !important;
-  height: 30px !important;
+  width: 20px !important;
+  height: 20px !important;
   transition: all 250ms ease;
   border-radius: 50px !important;
   background-color: #FFF;
@@ -4092,7 +4092,7 @@ button {
 }
 
 .ios-input:checked ~ .custom-control-label::after {
-  -webkit-transform: translateX(26px) !important;
+  -webkit-transform: translateX(20px) !important;
 }
 .ios-input:checked ~ .custom-control-label::before {
   background-color: #1d397c !important;
