@@ -2,21 +2,9 @@
   <div class="">
     
 
-    <a href="#" data-menu="menu-direction" class="btn btn-full font-400 shadow-l gradient-highlight color-white bd-w-0 mt-2 font-14" style="border-radius:0;position:fixed;width:100%;bottom:0;height:46px;padding-top:11px;">트레이닝 시작</a>
-    
-    
+    <a href="#" data-vibrate="10" class="btn btn-m btn-full shadow-s rounded-s bg-highlight text-uppercase font-900">10ms - Short </a>
 
 
-    <!-- Menu select -->
-    <div id="menu-direction" class="menu menu-box-bottom rounded-half">
-        <div class="menu-title mt-n1">
-            <h2 class="pt-3 pb-3 text-center">1~5선택</h2>
-            <a href="#" class="close-menu"><i class="wedive_icoset wedive_icoset_close"></i></a>
-        </div>
-        <div class="content mb-0 text-start">
-            <scroll-picker :options="[1, 2, 3, 4, 5]" v-model="fontSize"></scroll-picker>
-        </div>
-    </div>
   </div>
 </template>
 <script>

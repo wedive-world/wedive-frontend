@@ -102,7 +102,7 @@
             <h2 class="pt-3 pb-3 font-16 text-center">반복 횟수</h2>
             <a href="#" class="close-menu float-end font-12 font-400 color-highlight" v-on:click="close_repeat()">완료</a>
         </div>
-        <div class="ms-5 me-5 mb-0 ">
+        <div class="content ms-5 me-5" style="margin-bottom:20px !important;">
             <scroll-picker :options="[2, 3, 4, 5, 6, 7, 8]" v-model="repeat_val"></scroll-picker>
         </div>
     </div>
@@ -113,7 +113,7 @@
             <h2 class="pt-3 pb-3 font-16 text-center">첫 호흡</h2>
             <a href="#" class="close-menu float-end font-12 font-400 color-highlight" v-on:click="close_first()">완료</a>
         </div>
-        <div class="ms-5 me-5 mb-0">
+        <div class="content ms-5 me-5" style="margin-bottom:20px !important;">
             <scroll-picker-group class="flex">
                 <scroll-picker :options="['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10']" v-model="first1_val"></scroll-picker>
                 <scroll-picker :options="['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19','20', '21', '22', '23', '24', '25', '26', '27', '28', '29','30', '31', '32', '33', '34', '35', '36', '37', '38', '39','40', '41', '42', '43', '44', '45', '46', '47', '48', '49','50', '51', '52', '53', '54', '55', '56', '57', '58', '59']" v-model="first2_val"></scroll-picker>
@@ -127,7 +127,7 @@
             <h2 class="pt-3 pb-3 font-16 text-center">숨참기</h2>
             <a href="#" class="close-menu float-end font-12 font-400 color-highlight" v-on:click="close_hold()">완료</a>
         </div>
-        <div class="ms-5 me-5 mb-0">
+        <div class="content ms-5 me-5" style="margin-bottom:20px !important;">
             <scroll-picker-group class="flex">
                 <scroll-picker :options="['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10']" v-model="hold1_val"></scroll-picker>
                 <scroll-picker :options="['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19','20', '21', '22', '23', '24', '25', '26', '27', '28', '29','30', '31', '32', '33', '34', '35', '36', '37', '38', '39','40', '41', '42', '43', '44', '45', '46', '47', '48', '49','50', '51', '52', '53', '54', '55', '56', '57', '58', '59']" v-model="hold2_val"></scroll-picker>
@@ -141,7 +141,7 @@
             <h2 class="pt-3 pb-3 font-16 text-center">호흡감소</h2>
             <a href="#" class="close-menu float-end font-12 font-400 color-highlight" v-on:click="close_decrease()">완료</a>
         </div>
-        <div class="ms-5 me-5 mb-0">
+        <div class="content ms-5 me-5" style="margin-bottom:20px !important;">
             <scroll-picker :options="['10', '11', '12', '13', '14', '15', '16', '17', '18', '19','20', '21', '22', '23', '24', '25', '26', '27', '28', '29','30', '31', '32', '33', '34', '35', '36', '37', '38', '39','40', '41', '42', '43', '44', '45', '46', '47', '48', '49','50', '51', '52', '53', '54', '55', '56', '57', '58', '59']" v-model="decrease_val"></scroll-picker>
         </div>
     </div>
