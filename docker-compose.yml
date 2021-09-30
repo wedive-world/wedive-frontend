@@ -7,11 +7,13 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
+      
     ports: 
       - "3000:3000"
 
-    environment:
-      - API_PATH=http://api:4000
+    env_file: 
+      - /wedive-secret/frontend-config.env
+
     networks: 
       - wedive-api_default
       - default
