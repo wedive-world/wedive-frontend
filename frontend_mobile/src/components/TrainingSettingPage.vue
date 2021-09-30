@@ -180,6 +180,7 @@ export default {
       hold1_val: "00",
       hold2_val: "40",
       decrease_val: "15",
+      faster: 2,
     }
   }, methods: {
     close_repeat: function() {
