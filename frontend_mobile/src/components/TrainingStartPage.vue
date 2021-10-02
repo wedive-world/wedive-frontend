@@ -2,57 +2,57 @@
   <div class="">
     
     <div class="card card-style p-3 mb-2 mt-2">
-      <div class="progress1 text-center" style="height:170px;"></div>
+      <div class="progress1 text-center" style="height:160px;"></div>
       <div style="position: absolute;right: 20px;bottom: 14px;"><span class="font-noto font-14 mb-0 color-secondary" style="display: block;">소요시간</span><span class="font-exo2 font-20 mt-n1" style="display: block;">02:53</span></div>
     </div>
 
-    <div class="card card-style p-3 mb-2">
+    <div class="card card-style p-3 mb-2 pb-0">
       <table class="table table-borderless text-center rounded-sm shadow-l bg-white font-noto font-15" style="overflow: hidden;">
         <thead>
             <tr class="bg-highlight">
-                <th scope="col" class="color-white font-500" style="width: 80px;">회차</th>
+                <th scope="col" class="color-white font-500" style="width: 60px;">회차</th>
                 <th scope="col" class="color-white font-500">호흡</th>
                 <th scope="col" class="color-white font-500">참기</th>
             </tr>
         </thead>
         <tbody>
             <tr class="border-bottom">
-                <th class="" scope="row" style="width: 80px;">1</th>
+                <th class="" scope="row" style="width: 60px;">1</th>
                 <td><div>2:00</div></td>
                 <td><div>0:40</div><div class="td-abs">0:32</div></td>
             </tr>
             <tr class="border-bottom">
-                <th class="" scope="row" style="width: 80px;">2</th>
+                <th class="" scope="row" style="width: 60px;">2</th>
                 <td><div class="td-active">1:45</div></td>
                 <td><div>0:40</div></td>
             </tr>
             <tr class="border-bottom">
-                <th class="" scope="row" style="width: 80px;">3</th>
+                <th class="" scope="row" style="width: 60px;">3</th>
                 <td><div>1:30</div></td>
                 <td><div>0:40</div></td>
             </tr>
             <tr class="border-bottom">
-                <th class="" scope="row" style="width: 80px;">4</th>
+                <th class="" scope="row" style="width: 60px;">4</th>
                 <td><div>1:15</div></td>
                 <td><div>0:40</div></td>
             </tr>
             <tr class="border-bottom">
-                <th class="" scope="row" style="width: 80px;">5</th>
+                <th class="" scope="row" style="width: 60px;">5</th>
                 <td><div>1:00</div></td>
                 <td><div>0:40</div></td>
             </tr>
             <tr class="border-bottom">
-                <th class="" scope="row" style="width: 80px;">6</th>
+                <th class="" scope="row" style="width: 60px;">6</th>
                 <td><div>0:45</div></td>
                 <td><div>0:40</div></td>
             </tr>
             <tr class="border-bottom">
-                <th class="" scope="row" style="width: 80px;">7</th>
+                <th class="" scope="row" style="width: 60px;">7</th>
                 <td><div>0:30</div></td>
                 <td><div>0:40</div></td>
             </tr>
             <tr>
-                <th class="" scope="row" style="width: 80px;">8</th>
+                <th class="" scope="row" style="width: 60px;">8</th>
                 <td><div>0:15</div></td>
                 <td><div>0:40</div></td>
             </tr>
@@ -65,7 +65,7 @@
         <div class="col-3 text-center mt-3"><img src="/static/images/icon_giveup.svg" width="40"/><p class="mb-0 mt-2">참기 실패</p></div>
         <div class="col-3 text-center mt-3 border-left"><img src="/static/images/icon_timer.svg" width="40"/><p class="mb-0 mt-2">참기 +5초</p></div>
         <div class="col-3 text-center mt-3 border-left"><img src="/static/images/icon_pause.svg" width="40"/><p class="mb-0 mt-2">일시중지</p></div>
-        <div class="col-3 text-center mt-3 border-left"><img src="/static/images/icon_stop.svg" width="34" style="margin-top:3px;"/><p class="mb-0 mt-2">종료</p></div>
+        <div class="col-3 text-center mt-3 border-left"><img src="/static/images/icon_stop.svg" width="34" style="margin-top:3px;margin-bottom:3px;"/><p class="mb-0 mt-2">종료</p></div>
       </div>
     </div>
 
@@ -159,7 +159,7 @@ export default {
 .border-left {border-left: 1px solid rgba(0, 0, 0, 0.08);}
 td {position: relative;}
 .td-active {background: #25beb2;border-radius: 12px;}
-.td-abs {position: absolute;right:8px;;bottom:8px;color:#ff5160;}
+.td-abs {position: absolute;right:8px;;bottom:8px;color:#ff5160;font-size:14px;}
 
 
 
