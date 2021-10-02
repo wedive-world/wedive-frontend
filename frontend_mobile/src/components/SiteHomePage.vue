@@ -84,13 +84,14 @@
         </div>
 
         
-        <div class="card card-style" style="background: #f2b345;">
+        <div class="card card-style " style="background-image: url(/static/images/autumn_back.jpg);background-size: cover;background-repeat: no-repeat;">
             <div class="content mb-0 mt-3">
-                <h4 class="text-start pt-1 mb-0">지금 떠나기 좋은 다이빙 포인트</h4>
-                <p class="mb-1 color-gray">19개 포인트가 기다리고 있어요.</p>
-                <p class="mb-0 opacity-60 ls-n1">#가을&nbsp;&nbsp;#다이빙의 계절</p>
+                <h4 class="color-white text-start pt-1 mb-0">지금 떠나기 좋은 다이빙 포인트</h4>
+                <p class="mb-1 color-gray-light">19개 포인트가 기다리고 있어요.</p>
+                <p class="color-white mb-0 opacity-60 ls-n1">#가을&nbsp;&nbsp;#다이빙의 계절</p>
                 <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
                 <img class="mt-n2 float-left" src="/static/images/3d/smartwatch.png" height="200" style="margin-left:-30px;"/>
+                <div class="card-overlay bg-gradient-reverse opacity-60" style="z-index: -1;"></div>
             </div>
         </div>
 

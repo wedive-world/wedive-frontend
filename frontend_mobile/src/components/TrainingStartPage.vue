@@ -60,12 +60,12 @@
     </table>
     </div>
 
-    <div class="card card-style pb-3">
-      <div class="d-flex">
-        <div class="flex-grow-1 text-center mt-3"><img src="/static/images/icon_giveup.svg" width="40"/><p class="mb-0 mt-2">참기 실패</p></div>
-        <div class="flex-grow-1 text-center mt-3 border-left"><img src="/static/images/icon_timer.svg" width="40"/><p class="mb-0 mt-2">참기 +5초</p></div>
-        <div class="flex-grow-1 text-center mt-3 border-left"><img src="/static/images/icon_pause.svg" width="40"/><p class="mb-0 mt-2">일시중지</p></div>
-        <div class="flex-grow-1 text-center mt-3 border-left"><img src="/static/images/icon_stop.svg" width="35" style="margin-top:2.5px;"/><p class="mb-0 mt-2">종료</p></div>
+    <div class="card card-style">
+      <div class="row ms-1 me-1">
+        <div class="col-3 text-center mt-3"><img src="/static/images/icon_giveup.svg" width="40"/><p class="mb-0 mt-2">참기 실패</p></div>
+        <div class="col-3 text-center mt-3 border-left"><img src="/static/images/icon_timer.svg" width="40"/><p class="mb-0 mt-2">참기 +5초</p></div>
+        <div class="col-3 text-center mt-3 border-left"><img src="/static/images/icon_pause.svg" width="40"/><p class="mb-0 mt-2">일시중지</p></div>
+        <div class="col-3 text-center mt-3 border-left"><img src="/static/images/icon_stop.svg" width="34" style="margin-top:3px;"/><p class="mb-0 mt-2">종료</p></div>
       </div>
     </div>
 
@@ -122,7 +122,6 @@ export default {
         $(".circle-progress-text-max").css("font-family", "Noto Sans Korean");
         $(".circle-progress-text-max").css("font-weight", "600");
         
-        window.scrollTo(0, 1);
     },500)
     
   },

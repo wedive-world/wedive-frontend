@@ -754,23 +754,30 @@
             <h1 class="font-600 font-18">일정 추가</h1>
             <a href="#" class="close-menu"><i class="wedive_icoset wedive_icoset_close"></i></a>
         </div>
-        
+
+
+        <div class="content mt-0">
+          <div class="form-check icon-check" style="top: -8px;">
+              <input class="form-check-input" type="checkbox" value="" id="check_nodate">
+              <label class="form-check-label" for="check_nodate">일정 미정</label>
+              <i class="icon-check-1 far fa-square color-gray-dark font-16" style="top: 0;"></i>
+              <i class="icon-check-2 far fa-check-square font-16 color-highlight" style="top: 0;"></i>
+          </div>
+        </div>        
         <div class="content row mb-0 mt-0">
-            
-              
+
             <div class="input-style validate-field col-6 pe-3 ps-0 after-tilde">
-              <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_start" placeholder="시작일" style="height: 32px !important;border-width: 1px;padding-top: 0 !important;padding-left: 10px;border-radius: 4px;">
-              <label for="form_start" class="color-highlight" style="left:14px !important;background-color: transparent;">시작일</label>
+              <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_start" placeholder="시작일" style="height: 45px !important;border-width: 1px;padding-top: 0 !important;padding-left: 10px;border-radius: 4px;">
+              <label for="form_start" class="color-highlight" style="transform: translateX(8px) !important;opacity: 1;">시작일</label>
             </div>
             <div class="input-style validate-field col-6 ps-3 pe-0">
-              <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_end" placeholder="종료일" style="height: 32px !important;border-width: 1px;padding-top: 0 !important;padding-left: 10px;border-radius: 4px;">
-              <label for="form_end" class="color-highlight" style="left:34px !important;background-color: transparent;">종료일</label>
+              <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_end" placeholder="종료일" style="height: 45px !important;border-width: 1px;padding-top: 0 !important;padding-left: 10px;border-radius: 4px;">
+              <label for="form_end" class="color-highlight" style="transform: translateX(22px) !important;opacity: 1;">종료일</label>
             </div>
-            
 
-            <div class="mt-3 pe-0 ps-0">
+            <div class="mt-2 pe-0 ps-0">
               <vue-typeahead-bootstrap
-                  class=""
+                  class="typeahead-input"
                   v-model="query"
                   :data="users"
                   :serializer="item => item.name_ko"
@@ -801,19 +808,19 @@
             </div>
 
             
-            <div class="mt-3 p-0">
+            <div class="mt-2 p-0">
             <div class="form-check interest-check interest-check_secondary" style="width: calc(50% + 20px);margin-right: -5px;text-align:center;">
               <input class="form-check-input" type="radio" value="" name="check_schedule" id="check_schedule1" checked>
-              <label class="form-check rounded-xl border-08" for="check_schedule1" style="padding-left: 12px;height:32px;border-radius: 4px 0px 0px 4px !important;">스쿠버 다이빙</label>
+              <label class="form-check rounded-xl border-08" for="check_schedule1" style="padding-left: 12px;height:38px;border-radius: 4px 0px 0px 4px !important;padding-top:6px;">스쿠버 다이빙</label>
               
             </div>
             <div class="form-check interest-check interest-check_secondary" style="width: calc(50% + 20px);margin-right: -5px;text-align:center;">
               <input class="form-check-input" type="radio" value="" name="check_schedule" id="check_schedule2">
-              <label class="form-check rounded-xl border-08" for="check_schedule2" style="padding-left: 12px;height:32px;border-radius: 0px 4px 4px 0px !important;">프리 다이빙</label>
+              <label class="form-check rounded-xl border-08" for="check_schedule2" style="padding-left: 12px;height:38px;border-radius: 0px 4px 4px 0px !important;padding-top:6px;">프리 다이빙</label>
               
             </div>
             </div>
-            <a href="#" v-on:click="addPersonalBest()" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mt-2 font-14">추가하기</a>
+            <a href="#" v-on:click="addPersonalBest()" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mt-2 font-14" style="height: 38px;padding-top:8px;">추가하기</a>
         </div>
         
     </div>
@@ -833,6 +840,15 @@ export default {
     
     $(".page-title").hide();
     $(".page-title-clear").hide();
+
+    $("#check_nodate").change(function(){
+      $(this).toggleClass("checked");
+      if ($(this).is(":checked")) {
+        $("#form_start").attr("disabled", true);
+      } else {
+        $("#form_start").attr("disabled", false);
+      }
+    });
   },
   components: {
     VueTypeaheadBootstrap
@@ -971,4 +987,6 @@ export default {
 .timeline-item .timeline-icon {width: 35px !important;height: 35px !important;left:10px !important;}
 .timeline-deco {left: 28px !important;}
 .timeline-item-content, .timeline-item-content-full{margin: 0px 15px 30px 56px !important;}
+
+
 </style>

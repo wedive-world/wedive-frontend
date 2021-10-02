@@ -325,4 +325,5 @@ export default {
 
 .movebox {animation: motion-updown 3s linear 0s infinite alternate; margin-top: 0;-webkit-animation: motion-updown 3s linear 0s infinite alternate; margin-top: 0;}
 .font-noto {font-family: 'Noto Sans Korean'}
+.chip span {line-height: 24px !important;}
 </style>
