@@ -1,12 +1,12 @@
 <template>
   <div class="">
     
-    <div class="card card-style p-3 mb-3">
+    <div class="card card-style p-3 mb-2 mt-2">
       <div class="progress1 text-center" style="height:170px;"></div>
       <div style="position: absolute;right: 20px;bottom: 14px;"><span class="font-noto font-14 mb-0 color-secondary" style="display: block;">소요시간</span><span class="font-exo2 font-20 mt-n1" style="display: block;">02:53</span></div>
     </div>
 
-    <div class="card card-style p-3 mb-3">
+    <div class="card card-style p-3 mb-2">
       <table class="table table-borderless text-center rounded-sm shadow-l bg-white font-noto font-15" style="overflow: hidden;">
         <thead>
             <tr class="bg-highlight">
@@ -122,6 +122,7 @@ export default {
         $(".circle-progress-text-max").css("font-family", "Noto Sans Korean");
         $(".circle-progress-text-max").css("font-weight", "600");
         
+        window.scrollTo(0, 1);
     },500)
     
   },

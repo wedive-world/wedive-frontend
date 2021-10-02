@@ -98,6 +98,9 @@
                     <i class="ico ico-wedive-w -circle color-primary scale-box fa-4x"></i>
                 </div>
                 <h4 class="text-center pt-2 mb-2">where is here?</h4>
+                <div class="text-center txt_box2 mb-2 font-16">
+                    <img class="me-2" src="/static/images/wedives_choice.svg" height="34" /> wedive's choice 2021
+                </div>
                 <div class="row text-start txt_box2 m-0">
                     <div class="ico_feature col-3">
                         <i class="ico_feature2 icon-point"></i>
