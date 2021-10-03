@@ -301,6 +301,10 @@ function wediveTimer(duration, position, audio) {
         
 
         if (timer < 4 && timer > 0) {
+            if (timer == 3) {
+                audio.pause();
+                audio.currentTime = 0;
+            }
             setTimeout(function() {
                 var beep_fin = document.createElement('audio');
                 beep_fin.setAttribute('src', '/static/mp3/beep_fin.mp3');
