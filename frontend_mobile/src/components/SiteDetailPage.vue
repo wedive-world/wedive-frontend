@@ -173,7 +173,7 @@
                                     <div class="min-h-160 p-2">
                                         <div class="mt-2">
                                             <h1 class="text-center mb-0"><i class="fas fa-water font-30 color-highlight"></i></h1>
-                                            <h1 class="text-center color-highlight font-16 mb-0">해류</h1>
+                                            <h1 class="text-center color-highlight font-16 mb-0">조류</h1>
                                             <p class="text-start font-400">
                                                 6~10월 간헐적으로 청물(일본 쓰시마 섬에서 갈라진 쿠로시오 난류)가 유입되어 시야가 15m까지 좋아집니다.
                                             </p>

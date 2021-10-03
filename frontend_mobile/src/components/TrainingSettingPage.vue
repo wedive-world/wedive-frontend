@@ -300,8 +300,8 @@ function wediveTimer(duration, position, audio) {
         }
         
 
-        if (timer < 4 && timer > 0) {
-            if (timer == 3) {
+        if (timer < 5 && timer > 1) {
+            if (timer == 4) {
                 audio.pause();
                 audio.currentTime = 0;
             }
@@ -312,7 +312,7 @@ function wediveTimer(duration, position, audio) {
             },0)
             
         }
-        if (timer == 0) {
+        if (timer == 1) {
             audio.pause();
             audio.currentTime = 0;
             phase++;
