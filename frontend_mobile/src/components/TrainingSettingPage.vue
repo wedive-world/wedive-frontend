@@ -176,7 +176,7 @@
         
         <div class="card card-style p-3 mb-2 mt-2">
       <div class="progress1 text-center" style="height:160px;"></div>
-      <div style="position: absolute;right: 20px;bottom: 14px;"><span class="font-noto font-14 mb-0 color-secondary" style="display: block;">소요시간</span><span class="font-exo2 font-20 mt-n1" style="display: block;">02:53</span></div>
+      <div style="position: absolute;right: 20px;bottom: 14px;"><span class="font-noto font-14 mb-0 color-secondary" style="display: block;">소요시간</span><span class="font-exo2 font-20 mt-n1" style="display: block;"><span id="training_timer_min">00</span>:<span id="training_timer_sec">00</span></span></div>
     </div>
 
     <div class="card card-style p-3 mb-2 pb-0">
@@ -191,43 +191,43 @@
         <tbody>
             <tr class="border-bottom">
                 <th class="" scope="row" style="width: 60px;">1</th>
-                <td><div>2:00</div></td>
-                <td><div>0:40</div><div class="td-abs">0:32</div></td>
+                <td><div id="td1">2:00</div></td>
+                <td><div id="td2">0:40</div><div class="td-abs">0:32</div></td>
             </tr>
             <tr class="border-bottom">
                 <th class="" scope="row" style="width: 60px;">2</th>
-                <td><div class="td-active">1:45</div></td>
-                <td><div>0:40</div></td>
+                <td><div id="td3">1:45</div></td>
+                <td><div id="td4">0:40</div></td>
             </tr>
             <tr class="border-bottom">
                 <th class="" scope="row" style="width: 60px;">3</th>
-                <td><div>1:30</div></td>
-                <td><div>0:40</div></td>
+                <td><div id="td5">1:30</div></td>
+                <td><div id="td6">0:40</div></td>
             </tr>
             <tr class="border-bottom">
                 <th class="" scope="row" style="width: 60px;">4</th>
-                <td><div>1:15</div></td>
-                <td><div>0:40</div></td>
+                <td><div id="td7">1:15</div></td>
+                <td><div id="td8">0:40</div></td>
             </tr>
             <tr class="border-bottom">
                 <th class="" scope="row" style="width: 60px;">5</th>
-                <td><div>1:00</div></td>
-                <td><div>0:40</div></td>
+                <td><div id="td9">1:00</div></td>
+                <td><div id="td10">0:40</div></td>
             </tr>
             <tr class="border-bottom">
                 <th class="" scope="row" style="width: 60px;">6</th>
-                <td><div>0:45</div></td>
-                <td><div>0:40</div></td>
+                <td><div id="td11">0:45</div></td>
+                <td><div id="td12">0:40</div></td>
             </tr>
             <tr class="border-bottom">
                 <th class="" scope="row" style="width: 60px;">7</th>
-                <td><div>0:30</div></td>
-                <td><div>0:40</div></td>
+                <td><div id="td13">0:30</div></td>
+                <td><div id="td14">0:40</div></td>
             </tr>
             <tr>
                 <th class="" scope="row" style="width: 60px;">8</th>
-                <td><div>0:15</div></td>
-                <td><div>0:40</div></td>
+                <td><div id="td15">0:15</div></td>
+                <td><div id="td16">0:40</div></td>
             </tr>
         </tbody>
     </table>
@@ -261,10 +261,15 @@
   </div>
 </template>
 <script>
+var circle = null;
+var phase = 0;
+var entires = -1;
 function wediveTimer(duration, position, audio) {
     
   var timer = duration;
   var minutes, seconds;
+  
+  var entire_minutes, entire_seconds;
   
   var interval = setInterval(function(){
     minutes = parseInt(timer / 60 % 60, 10);
@@ -273,7 +278,58 @@ function wediveTimer(duration, position, audio) {
     minutes = minutes < 10 ? "0" + minutes : minutes;
     seconds = seconds < 10 ? "0" + seconds : seconds;
 
-    console.log(seconds);
+    if (position.includes("phase")) {
+        circle.value = parseInt(timer / duration * 100);;
+
+        entires++;
+        entire_minutes = parseInt(entires / 60 % 60, 10);
+        entire_seconds = parseInt(entires % 60, 10);
+
+        entire_minutes = entire_minutes < 10 ? "0" + entire_minutes : entire_minutes;
+        entire_seconds = entire_seconds < 10 ? "0" + entire_seconds : entire_seconds;
+
+        $("#training_timer_min").text(entire_minutes);
+        $("#training_timer_sec").text(entire_seconds);
+
+
+        $(".circle-progress-text-value").text(minutes + ":" + seconds);
+        if (position.includes("_1")) {
+            $(".circle-progress-text-max").text("호흡");
+        } else {
+            $(".circle-progress-text-max").text("참기");
+        }
+        
+
+        if (timer < 4) {
+            var beep_fin = document.createElement('audio');
+            beep_fin.setAttribute('src', '/static/mp3/beep_fin.mp3');
+            beep_fin.play();
+        }
+        if (timer == 0) {
+            audio.pause();
+            audio.currentTime = 0;
+            phase++;
+            var co2_first = document.createElement('audio');
+            co2_first.setAttribute('src', '/static/mp3/co2_first_'+phase+'.mp3');
+            co2_first.play();
+
+
+            window.navigator.vibrate(500);
+            $("td div").removeClass("td-active");
+            $("#td" + phase).addClass("td-active");
+
+
+            if (position.includes("_1")) {
+                wediveTimer(40, position.replace("_1", "_2"), co2_first);
+            } else {
+                var split_posi = position.replace("phase", "").split("_");
+                var step_to = parseInt(split_posi[0]) + 1;
+                wediveTimer(120, position.replace(("phase"+split_posi[0]), ("phase"+step_to)).replace("_2","_1"), co2_first);
+            }
+        }
+    }
+
+    
 
     if (position == 'starter') {
 
@@ -291,7 +347,6 @@ function wediveTimer(duration, position, audio) {
       if (timer == 1) {
             clearInterval(interval);
 
-
             // close all menu first
             try {
                 const activeMenu = document.querySelectorAll('.menu-active');
@@ -305,12 +360,13 @@ function wediveTimer(duration, position, audio) {
             document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
             
 
-            new CircleProgress('.progress1', {
+            circle = new CircleProgress('.progress1', {
                 textFormat: 'vertical',
                 max: 100,
-                value: 60,
+                value: 100,
             });
 
+            
             $(".progress1 svg").attr("width", "170");
             $(".progress1 svg").attr("height", "170");
             $(".circle-progress-value").css("stroke-width", "6px");
@@ -318,7 +374,7 @@ function wediveTimer(duration, position, audio) {
             $(".circle-progress-value").css("stroke-linecap", "round");
 
             $(".circle-progress-circle").css("stroke-width", "2px");
-            $(".circle-progress-text-value").text("01:32");
+            $(".circle-progress-text-value").text("00:00");
             $(".circle-progress-text-value").css("font-family", "'Exo 2', sans-serif");
             $(".circle-progress-text-value").css("font-size", "23px");
             $(".circle-progress-text-value").css("fill", "black");
@@ -327,13 +383,24 @@ function wediveTimer(duration, position, audio) {
             $(".circle-progress-text-value").css("font-style", "italic");
             $(".circle-progress-text-separator").text("_________");
             $(".circle-progress-text-separator").attr("dy", "0.5em");
-            $(".circle-progress-text-max").text("호흡");
+            $(".circle-progress-text-max").text("-");
             $(".circle-progress-text-max").attr("dy", "1.5em");
             $(".circle-progress-text-max").css("font-family", "Noto Sans Korean");
             $(".circle-progress-text-max").css("font-weight", "600");
 
             window.navigator.vibrate(500);
+
+            phase = 1;
+            var co2_first = document.createElement('audio');
+            co2_first.setAttribute('src', '/static/mp3/co2_first_'+phase+'.mp3');
+            co2_first.play();
+            
+            $("#td" + phase).addClass("td-active");
+            wediveTimer(120, 'phase1_1', co2_first);
       }
+    }
+    else if (position == 'phase1_1') {
+        
     }
     //$('#time-min').text(minutes);
     //$('#time-sec').text(seconds);
