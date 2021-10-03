@@ -1,4 +1,5 @@
 const { client, gql } = require('./driver/api-client.js')
+const { query, mutation } = require('./driver/gql/interest-gql')
 
 // Example Data
 // {
@@ -48,20 +49,6 @@ module.exports.createInterest = async (
     iconUrl
 ) => {
 
-    const mutation = gql`
-        mutation InterestMutation($interestInput: InterestInput!) {
-            interest(input: $interestInput) {
-                _id
-                title
-                type
-                iconType
-                iconName
-                iconColor
-                iconUrl
-            }
-        }
-    `;
-
     const inputData = {
         _id: _id,
         title: title,
@@ -73,7 +60,7 @@ module.exports.createInterest = async (
     }
 
     try {
-        let interest = await client.request(mutation, inputData)
+        let interest = await client.request(mutation.createInterest, inputData)
         console.log(`createInterest: interest=${JSON.stringify(interest)}`)
         return result;
 
@@ -83,23 +70,8 @@ module.exports.createInterest = async (
 }
 
 module.exports.getAllInterests = async () => {
-
-    const query = gql`
-        query Query {
-            interests {
-                _id
-                title
-                type
-                iconType
-                iconName
-                iconColor
-                iconUrl
-            }
-        }
-    `;
-
     try {
-        let interest = await client.request(query)
+        let interest = await client.request(query.getAllInterests)
         console.log(`getAllInterest: interest=${JSON.stringify(interest)}`)
         return result;
 
@@ -110,26 +82,12 @@ module.exports.getAllInterests = async () => {
 
 module.exports.getInterestsByType = async (type) => {
 
-    const query = gql`
-        query Query($interestsType: String) {
-            interests(type: $interestsType) {
-                _id
-                title
-                type
-                iconType
-                iconName
-                iconColor
-                iconUrl
-            }
-        }
-    `;
-
     const inputData = {
         interestsType: type
     }
 
     try {
-        let interest = await client.request(query, inputData)
+        let interest = await client.request(query.getInterestsByType, inputData)
         console.log(`getInterestsByType: interests=${JSON.stringify(interest)}`)
         return result;
 
@@ -143,27 +101,13 @@ module.exports.searchInterestByType = async (
     type // can be null, if null search for all types
 ) => {
 
-    const query = gql`
-        query Query($searchInterestQuery: String!, $searchInterestType: String) {
-            searchInterest(query: $searchInterestQuery, type: $searchInterestType) {
-                _id
-                title
-                type
-                iconType
-                iconName
-                iconColor
-                iconUrl
-            }
-        }
-    `;
-
     const inputData = {
         "searchInterestQuery": queryString,
         "searchInterestType": type
     }
 
     try {
-        let interest = await client.request(query, inputData)
+        let interest = await client.request(query.searchInterestByType, inputData)
         console.log(`searchInterestByType: interests=${JSON.stringify(interest)}`)
         return result;
 
