@@ -290,7 +290,15 @@ function wediveTimer(duration, position, audio) {
 
       if (timer == 1) {
             clearInterval(interval);
-            
+
+
+            // close all menu first
+            try {
+                const activeMenu = document.querySelectorAll('.menu-active');
+                for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
+                for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+0+"px)"}
+            } catch (e) {
+            }
             // start training //
             var menuData = 'menu-training';
             document.getElementById(menuData).classList.add('menu-active');
@@ -323,6 +331,8 @@ function wediveTimer(duration, position, audio) {
             $(".circle-progress-text-max").attr("dy", "1.5em");
             $(".circle-progress-text-max").css("font-family", "Noto Sans Korean");
             $(".circle-progress-text-max").css("font-weight", "600");
+
+            window.navigator.vibrate(500);
       }
     }
     //$('#time-min').text(minutes);
@@ -390,6 +400,10 @@ export default {
     },
     start_training: function() {
         $(".menu-hider").css("background-color", "rgba(0, 0, 0, 0.65)");
+
+        var start_training = document.createElement('audio');
+        start_training.setAttribute('src', '/static/mp3/start_training.mp3');
+        start_training.play();
 
         var audioBeep = document.createElement('audio');
         audioBeep.setAttribute('src', '/static/mp3/count_beep.mp3');
