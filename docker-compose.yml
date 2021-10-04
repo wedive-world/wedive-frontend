@@ -20,7 +20,7 @@ services:
       - /wedive-secret/frontend-config.env
 
     volumes:
-      - /wedive-secret:/wedive-secret
+      - /wedive-secret/frontend-config.env:/usr/src/wedive-frontend/frontend/frontend-config.env
 
 networks:
   wedive-api_default:
