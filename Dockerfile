@@ -22,8 +22,8 @@ COPY . .
 
 RUN pwd
 
-COPY /wedive-secret/frontend-config.env ./frontend/.env
-COPY /wedive-secret/frontend-config.env ./frontend_mobile/.env
+# COPY /wedive-secret/frontend-config.env ./frontend/.env
+# COPY /wedive-secret/frontend-config.env ./frontend_mobile/.env
 
 RUN npm run build --prefix frontend
 RUN npm run build --prefix frontend_mobile
