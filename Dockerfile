@@ -27,7 +27,6 @@ COPY /wedive-secret/frontend-config.env ./frontend_mobile/.env
 
 ARG VUE_APP_API_PATH
 ENV VUE_APP_API_PATH=$API_PATH
-RUN echo Build Time: $VUE_APP_API_PATH
 
 RUN npm run build --prefix frontend
 RUN npm run build --prefix frontend_mobile
