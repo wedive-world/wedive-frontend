@@ -16,11 +16,9 @@ services:
       - wedive-api_default
       - default
 
-    env_file: 
-      - /wedive-secret/frontend-config.env
-
     volumes:
-      - /wedive-secret/frontend-config.env:/usr/src/wedive-frontend/frontend/frontend-config.env
+      - /wedive-secret/frontend-config.env:/usr/src/wedive-frontend/frontend/.env
+      - /wedive-secret/frontend-config.env:/usr/src/wedive-frontend/frontend_mobile/.env
 
 networks:
   wedive-api_default:
