@@ -10,6 +10,7 @@ Vue.config.productionTip = false
 Vue.component('vue-typeahead-bootstrap', VueTypeaheadBootstrap)
 Vue.use(VueScrollPicker)
 
+require('dotenv').config();
 console.log(`==============================Env Information==============================`)
 Object.keys(process.env)
   .forEach(key => {
