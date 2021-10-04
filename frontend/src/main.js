@@ -9,8 +9,14 @@ import ApolloClient from 'apollo-boost'
 import dotenv from "dotenv"
 import path from "path"
 
-dotenv.config({ path: path.join(__dirname, '.env') });
-console.log(JSON.stringify(path.join(__dirname, '.env')))
+let result = dotenv.config({ path: path.join(__dirname, '.env') });
+
+if (result.error) {
+  throw result.error
+}
+
+console.log(result.parsed)
+
 console.log(`==============================Env Information==============================`)
 Object.keys(process.env)
   .forEach(key => {
