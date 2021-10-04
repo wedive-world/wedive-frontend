@@ -36,4 +36,6 @@ RUN npm run build --prefix frontend_mobile
 
 EXPOSE 3000
 
+ENTRYPOINT [ "cp", "/wedive-secret/frontend-config.env", "frontend/.env" ]
+
 CMD [ "pm2-runtime", "start", "backend/bin/www" ]
