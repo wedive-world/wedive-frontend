@@ -8,8 +8,12 @@ import ApolloClient from 'apollo-boost'
 
 import dotenv from "dotenv"
 import path from "path"
+import fs from "fs"
 
-let result = dotenv.config();
+let stat = fs.stat(path = path.join(__dirname, '.env'))
+console.log(stat)
+
+let result = dotenv.config({ path: path.join(__dirname, '.env') });
 
 if (result.error) {
   console.log(result.error)
