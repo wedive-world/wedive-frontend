@@ -10,10 +10,7 @@ import dotenv from "dotenv"
 import path from "path"
 import fs from "fs"
 
-let stat = fs.stat(path = path.join(__dirname, '.env'))
-console.log(stat)
-
-let result = dotenv.config({ path: path.join(__dirname, '.env') });
+let result = dotenv.config();
 
 if (result.error) {
   console.log(result.error)
