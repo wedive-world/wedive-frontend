@@ -69,6 +69,19 @@
       </div>
     </div>
 
+
+
+    <!-- Menu : starter -->
+    <div id="menu-starter" 
+         class="menu menu-box-modal" style="background: transparent;backdrop-filter:none;"
+         data-menu-width="350"
+         data-menu-height="60">
+        <div class="font-exo2 color-white text-center" style="font-size: 60px;line-height: 60px;">
+          <p id="starter_noti" class="color-white font-noto font-24 mb-0" style="line-height: 30px;">잠시 후 트레이닝을 시작합니다.<br/>소리를 켜주세요.</p>
+          <div id="starter_timer" class="hide"><span id="starter_min">00</span>:<span id="starter_sec">10</span></div>
+        </div>
+        
+    </div>
     
 
   </div>
@@ -76,6 +89,43 @@
 <script>
 import { VueScrollPicker } from 'vue-scroll-picker'
 import "vue-scroll-picker/dist/style.css"
+
+function wediveTimer(duration, position, audio) {
+    
+  var timer = duration;
+  var minutes, seconds;
+  
+  var interval = setInterval(function(){
+    minutes = parseInt(timer / 60 % 60, 10);
+    seconds = parseInt(timer % 60, 10);
+
+    var minutes_show = minutes < 10 ? "0" + minutes : minutes;
+    var seconds_show = seconds < 10 ? "0" + seconds : seconds;
+
+    console.log(seconds);
+
+    if (position == 'starter') {
+
+      if (seconds <= 5) {
+        $("#starter_noti").addClass("hide");
+        $("#starter_timer").removeClass("hide");
+        $('#starter_min').text(minutes_show);
+        $('#starter_sec').text(seconds_show);
+
+        audio.play();
+        //audioElement.pause();
+        //audioElement.currentTime = 0;
+      }
+    }
+    //$('#time-min').text(minutes);
+    //$('#time-sec').text(seconds);
+
+    if (--timer < 0) {
+        timer = 0;
+        clearInterval(interval);
+    }
+  }, 1000);
+}
 
 export default {
   name: 'HelloWorld',
@@ -93,7 +143,7 @@ export default {
     let circleProgress = document.createElement('script')
     circleProgress.setAttribute('src', '/static/scripts/circle-progress.js')
     document.head.appendChild(circleProgress)
-
+    
     setTimeout(function() {
         new CircleProgress('.progress1', {
             textFormat: 'vertical',
@@ -122,7 +172,25 @@ export default {
         $(".circle-progress-text-max").css("font-family", "Noto Sans Korean");
         $(".circle-progress-text-max").css("font-weight", "600");
         
-    },500)
+
+        // start order menu //
+        var menuData = 'menu-starter';
+        document.getElementById(menuData).classList.add('menu-active');
+        document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
+        $(".menu-hider").css("background-color", "rgba(0, 0, 0, 0.65)");
+
+        var audioBeep = document.createElement('audio');
+        audioBeep.setAttribute('src', '/static/mp3/b1.mp3');
+        audioBeep.play();
+        
+
+        wediveTimer(10, 'starter', audioBeep);
+    },700);
+
+
+    
+
+    
     
   },
   components: {
@@ -160,7 +228,6 @@ export default {
 td {position: relative;}
 .td-active {background: #25beb2;border-radius: 12px;}
 .td-abs {position: absolute;right:8px;;bottom:8px;color:#ff5160;font-size:14px;}
-
 
 
 

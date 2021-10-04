@@ -522,8 +522,11 @@ export default {
   },
   mounted() {
     $("#dash_poing_manage").addClass("user-profile-act");
+
+    
   }
 }
+
 </script>
 
 
