@@ -6,7 +6,8 @@ import router from './router'
 import VueApollo from 'vue-apollo'
 import ApolloClient from 'apollo-boost'
 
-import dotenv from "dotenv";
+import dotenv from "dotenv"
+import path from "path"
 
 dotenv.config({ path: path.join(__dirname, '.env') });
 console.log(`==============================Env Information==============================`)
