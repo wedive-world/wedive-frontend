@@ -7,11 +7,12 @@ WORKDIR /usr/src/wedive-frontend
 COPY backend/package*.json ./backend/
 COPY frontend/package*.json ./frontend/
 COPY frontend_mobile/package*.json ./frontend_mobile/
+
 COPY pm2.config.js .
 
-COPY frontend/.env ./frontend/.env
-COPY frontend_mobile/.env ./frontend_mobile/.env
-COPY frontend_mobile/.env /root/.env
+COPY .env ./frontend/.env
+COPY .env ./frontend_mobile/.env
+COPY .env /root/.env
 
 RUN npm --prefix frontend install 
 RUN npm --prefix frontend_mobile install
@@ -24,8 +25,8 @@ RUN npm install -g pm2
 # 앱 소스 추가 a
 COPY . .
 
-ARG VUE_APP_API_PATH
-ENV VUE_APP_API_PATH=$VUE_APP_API_PATH
+# ARG VUE_APP_API_PATH
+# ENV VUE_APP_API_PATH=$VUE_APP_API_PATH
 
 RUN npm run build --prefix frontend
 RUN npm run build --prefix frontend_mobile
