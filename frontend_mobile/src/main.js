@@ -6,10 +6,16 @@ import router from './router'
 import VueTypeaheadBootstrap from 'vue-typeahead-bootstrap';
 import VueScrollPicker from "vue-scroll-picker"
 
-
 Vue.config.productionTip = false
 Vue.component('vue-typeahead-bootstrap', VueTypeaheadBootstrap)
 Vue.use(VueScrollPicker)
+
+console.log(`==============================Env Information==============================`)
+Object.keys(process.env)
+  .forEach(key => {
+    console.log(`${key}=${process.env[key]}`)
+  })
+console.log(`==============================================================================`)
 
 /* eslint-disable no-new */
 new Vue({
