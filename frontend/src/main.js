@@ -7,8 +7,10 @@ import VueApollo from 'vue-apollo'
 import ApolloClient from 'apollo-boost'
 
 import dotenv from "dotenv"
+import path from "path"
+import fs from "fs"
 
-let result = dotenv.config();
+let result = dotenv.config(path.join('/root/.env'));
 
 if (result.error) {
   console.log(result.error)
