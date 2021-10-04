@@ -14,7 +14,7 @@ services:
     env_file: 
       - /wedive-secret/frontend-config.env
 
-    environments:
+    environment:
       - VUE_APP_API_PATH=${API_PATH}
 
     networks: 
