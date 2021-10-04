@@ -7,19 +7,16 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
-      args:
-        - VUE_APP_API_PATH1=${API_PATH}
-        - VUE_APP_API_PATH2=test
-      
+
     ports: 
       - "3000:3000"
-
-    env_file: 
-      - /wedive-secret/frontend-config.env
 
     networks: 
       - wedive-api_default
       - default
+
+    volumes:
+      - /wedive-secret:/wedive-secret
 
 networks:
   wedive-api_default:
