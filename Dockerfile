@@ -25,8 +25,8 @@ COPY . .
 ARG VUE_APP_API_PATH
 ENV VUE_APP_API_PATH=$API_PATH
 
-# RUN echo API_PATH=$API_PATH
-# RUN echo VUE_APP_API_PATH=$VUE_APP_API_PATH
+RUN echo API_PATH=$API_PATH
+RUN echo VUE_APP_API_PATH=$VUE_APP_API_PATH
 
 # COPY /wedive-secret/frontend-config.env frontend/.env
 # COPY /wedive-secret/frontend-config.env frontend_mobile/.env
