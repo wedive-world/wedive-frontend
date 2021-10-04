@@ -7,6 +7,8 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
+      args:
+        - VUE_APP_API_PATH=${API_PATH}
       
     ports: 
       - "3000:3000"
