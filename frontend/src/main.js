@@ -19,7 +19,7 @@ if (result.error) {
 console.log(result.parsed)
 
 console.log(`==============================Env Information==============================`)
-console.log(JSON.stringify(env))
+// console.log(JSON.stringify(env))
 console.log(`==============================================================================`)
 
 const GRAPHQL_URL = env.VUE_APP_API_PATH || 'http://localhost:4000/graphql'
