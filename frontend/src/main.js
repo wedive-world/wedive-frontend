@@ -6,9 +6,9 @@ import router from './router'
 import VueApollo from 'vue-apollo'
 import ApolloClient from 'apollo-boost'
 
-import dotenv from "dotenv"
-import path from "path"
-import fs from "fs"
+console.log(`:::::::::::::::prod.env:::::::::::::`)
+console.log(JSON.stringify(process.env))
+console.log(`:::::::::::::::prod.env:::::::::::::`)
 
 const GRAPHQL_URL = process.env.VUE_APP_API_PATH || 'http://localhost:4000/graphql'
 
