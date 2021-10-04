@@ -22,8 +22,8 @@ COPY . .
 
 RUN pwd
 
-# COPY /wedive-secret/frontend-config.env ./frontend/.env
-# COPY /wedive-secret/frontend-config.env ./frontend_mobile/.env
+COPY /wedive-secret/frontend-config.env ./frontend/.env
+COPY /wedive-secret/frontend-config.env ./frontend_mobile/.env
 
 ARG VUE_APP_API_PATH
 ENV VUE_APP_API_PATH=$API_PATH
