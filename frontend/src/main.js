@@ -6,15 +6,17 @@ import router from './router'
 import VueApollo from 'vue-apollo'
 import ApolloClient from 'apollo-boost'
 
-const GRAPHQL_URL = process.env.VUE_APP_API_PATH || 'http://localhost:4000/graphql'
+import dotenv from "dotenv";
 
-require('dotenv').config();
+dotenv.config();
 console.log(`==============================Env Information==============================`)
 Object.keys(process.env)
   .forEach(key => {
     console.log(`${key}=${process.env[key]}`)
   })
 console.log(`==============================================================================`)
+
+const GRAPHQL_URL = process.env.VUE_APP_API_PATH || 'http://localhost:4000/graphql'
 
 const apolloClient = new ApolloClient({
   uri: GRAPHQL_URL,
