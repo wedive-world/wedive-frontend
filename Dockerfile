@@ -20,7 +20,7 @@ RUN npm install -g pm2
 # 앱 소스 추가 a
 COPY . .
 
-RUN pwd
+RUN ls /
 
 COPY /wedive-secret/frontend-config.env ./frontend/.env
 COPY /wedive-secret/frontend-config.env ./frontend_mobile/.env
