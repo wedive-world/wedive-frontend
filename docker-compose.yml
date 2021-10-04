@@ -21,8 +21,8 @@ services:
       - wedive-api_default
       - default
 
-    # volumes:
-    #   - /wedive-secret:/wedive-secret
+    volumes:
+      - /wedive-secret:/wedive-secret
 
 networks:
   wedive-api_default:
