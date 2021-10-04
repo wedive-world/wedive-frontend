@@ -10,7 +10,7 @@ import dotenv from "dotenv"
 import path from "path"
 import fs from "fs"
 
-let result = dotenv.config(path.join('/root/.env'));
+let result = dotenv.config();
 
 if (result.error) {
   console.log(result.error)
