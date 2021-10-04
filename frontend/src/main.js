@@ -8,6 +8,13 @@ import ApolloClient from 'apollo-boost'
 
 const GRAPHQL_URL = process.env.API_PATH || 'http://localhost:4000/graphql'
 
+console.log(`==============================Env Information==============================`)
+Object.keys(process.env)
+  .forEach(key => {
+    console.log(`${key}=${process.env[key]}`)
+  })
+console.log(`==============================================================================`)
+
 const apolloClient = new ApolloClient({
   uri: GRAPHQL_URL,
 })
