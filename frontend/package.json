@@ -10,8 +10,11 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "apollo-boost": "^0.4.9",
+    "graphql": "^15.6.0",
     "graphql-request": "^3.5.0",
     "vue": "^2.5.2",
+    "vue-apollo": "^3.0.8",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {

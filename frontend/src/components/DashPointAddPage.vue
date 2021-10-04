@@ -512,6 +512,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'DashboardPage',
   data () {

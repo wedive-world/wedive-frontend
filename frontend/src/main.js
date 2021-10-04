@@ -3,6 +3,21 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import VueApollo from 'vue-apollo'
+import ApolloClient from 'apollo-boost'
+
+const GRAPHQL_URL = process.env.API_PATH || 'http://localhost:4000/graphql'
+
+const apolloClient = new ApolloClient({
+  uri: GRAPHQL_URL,
+})
+
+Vue.use(VueApollo)
+
+const apolloProvider = new VueApollo({
+  defaultClient: apolloClient,
+})
+
 
 Vue.config.productionTip = false
 
@@ -10,6 +25,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  apolloProvider,
   components: { App },
   template: '<App/>'
 })

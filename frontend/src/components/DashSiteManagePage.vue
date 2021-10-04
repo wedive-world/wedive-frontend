@@ -1,11 +1,15 @@
 <template>
   <div class="">
     <a href="/dashboard/site_add" class="add_new-dashboard">사이트 추가<i class="fal fa-layer-plus"></i></a>
-    <div class="dashboard-title   fl-wrap">
+    <div class="dashboard-title fl-wrap">
         <h3>사이트 리스트</h3>
     </div>
     <!-- dashboard-list-box--> 
-    <div class="dashboard-list-box  fl-wrap">
+    <div class="dashboard-list-box fl-wrap" v-for="interest in interests">
+        {{interest.title}}
+    </div>
+    
+    <div class="dashboard-list-box fl-wrap">
         <!-- dashboard-list -->    
         <div class="dashboard-list fl-wrap">
             <div class="dashboard-message">
@@ -96,12 +100,28 @@
 </template>
 
 <script>
+import gql from 'graphql-tag'
+
 export default {
   name: 'DashboardPage',
   data () {
     return {
-      
+      interests: [],
     }
+  },
+  apollo: {
+      interests: gql`
+        query Query {
+            interests {
+                title
+                type
+                iconType
+                iconName
+                iconUrl
+                iconColor
+            }
+        }
+    `
   },
   mounted() {
     $("#dash_site_manage").addClass("user-profile-act");
