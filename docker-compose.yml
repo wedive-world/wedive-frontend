@@ -4,6 +4,10 @@ services:
   frontend:
     container_name: frontend
     restart: unless-stopped
+
+    env_file: 
+      - /wedive-secret/frontend-config.env
+
     build:
       context: .
       dockerfile: ./Dockerfile
