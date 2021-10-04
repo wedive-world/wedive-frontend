@@ -20,6 +20,8 @@ RUN npm install -g pm2
 # 앱 소스 추가 a
 COPY . .
 
+ENV VUE_APP_API_PATH=${API_PATH}
+
 RUN npm run build --prefix frontend
 RUN npm run build --prefix frontend_mobile
 
