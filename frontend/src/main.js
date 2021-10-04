@@ -21,7 +21,7 @@ console.log(result.parsed)
 console.log(`==============================Env Information==============================`)
 Object.keys(process.env)
   .forEach(key => {
-    console.log(`${key}=${process.env[key]}`)
+    console.log(`${key}`)
   })
 console.log(`==============================================================================`)
 
