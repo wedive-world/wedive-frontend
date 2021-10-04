@@ -21,7 +21,7 @@ RUN npm install -g pm2
 COPY . .
 
 ARG VUE_APP_API_PATH
-ENV VUE_APP_API_PATH=asdfasdf
+ENV VUE_APP_API_PATH $API_PATH
 
 RUN npm run build --prefix frontend
 RUN npm run build --prefix frontend_mobile
