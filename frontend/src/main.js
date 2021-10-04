@@ -12,7 +12,7 @@ import path from "path"
 let result = dotenv.config({ path: path.join(__dirname, '.env') });
 
 if (result.error) {
-  throw result.error
+  console.log(result.error)
 }
 
 console.log(result.parsed)
