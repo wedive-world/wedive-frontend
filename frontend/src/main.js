@@ -10,6 +10,7 @@ import dotenv from "dotenv"
 import path from "path"
 
 dotenv.config({ path: path.join(__dirname, '.env') });
+console.log(JSON.stringify(path.join(__dirname, '.env')))
 console.log(`==============================Env Information==============================`)
 Object.keys(process.env)
   .forEach(key => {
