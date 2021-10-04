@@ -9,6 +9,9 @@ COPY frontend/package*.json ./frontend/
 COPY frontend_mobile/package*.json ./frontend_mobile/
 COPY pm2.config.js .
 
+COPY frontend/.env ./frontend/
+COPY frontend_mobile/.env ./frontend_mobile/
+
 RUN npm --prefix frontend install 
 RUN npm --prefix frontend_mobile install
 RUN npm --prefix backend install
@@ -20,21 +23,12 @@ RUN npm install -g pm2
 # 앱 소스 추가 a
 COPY . .
 
-# RUN ls /
-
 ARG VUE_APP_API_PATH
-ENV VUE_APP_API_PATH=$API_PATH
-
-RUN echo API_PATH=$API_PATH
-RUN echo VUE_APP_API_PATH=$VUE_APP_API_PATH
-
-# COPY /wedive-secret/frontend-config.env frontend/.env
-# COPY /wedive-secret/frontend-config.env frontend_mobile/.env
+ENV VUE_APP_API_PATH=$VUE_APP_API_PATH
 
 RUN npm run build --prefix frontend
 RUN npm run build --prefix frontend_mobile
 
 EXPOSE 3000
 
-# ENTRYPOINT [ "cp /wedive-secret/frontend-config.env frontend/.env" ]
 CMD [ "pm2-runtime", "start", "pm2.config.js" ]
