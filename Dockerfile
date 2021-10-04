@@ -20,11 +20,9 @@ RUN npm install -g pm2
 # 앱 소스 추가 a
 COPY . .
 
-ARG VUE_APP_API_PATH
-ENV VUE_APP_API_PATH $VUE_APP_API_PATH
+COPY /wedive-secret/frontend-config.env ./frontend/.env
+COPY /wedive-secret/frontend-config.env ./frontend_mobile/.env
 
-ARG VUE_APP_API_PATH2
-ENV VUE_APP_API_PATH2 asdfasdf
 
 RUN npm run build --prefix frontend
 RUN npm run build --prefix frontend_mobile
