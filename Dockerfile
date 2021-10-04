@@ -25,4 +25,4 @@ RUN npm run build --prefix frontend_mobile
 
 EXPOSE 3000
 
-CMD [ "pm2-runtime", "start", "pm2.config.js" ]
+CMD [ "pm2-runtime", "start", "backend/bin/www" ]
