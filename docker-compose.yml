@@ -5,14 +5,9 @@ services:
     container_name: frontend
     restart: unless-stopped
 
-    env_file: 
-      - /wedive-secret/frontend-config.env
-
     build:
       context: .
       dockerfile: ./Dockerfile
-      # args:
-      #    - VUE_APP_API_PATH
 
     ports: 
       - "3000:3000"
@@ -20,6 +15,9 @@ services:
     networks: 
       - wedive-api_default
       - default
+
+    env_file: 
+      - /wedive-secret/frontend-config.env
 
     volumes:
       - /wedive-secret:/wedive-secret
