@@ -16,6 +16,7 @@
     "graphql-request": "^3.5.0",
     "vue": "^2.5.2",
     "vue-apollo": "^3.0.8",
+    "vue-editable-grid": "^0.3.19",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {

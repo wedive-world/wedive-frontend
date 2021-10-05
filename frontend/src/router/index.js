@@ -6,7 +6,7 @@ import DashSiteManagePage from '@/components/DashSiteManagePage'
 import DashSiteAddPage from '@/components/DashSiteAddPage'
 
 import DashPointAddPage from '@/components/DashPointAddPage'
-
+import DashInterestPage from '@/components/DashInterestPage'
 Vue.use(Router)
 
 export default new Router({
@@ -32,7 +32,12 @@ export default new Router({
         {
           path: "point_add",
           component: DashPointAddPage
-        }
+        },
+        {
+          path: "interest_add",
+          component: DashInterestPage
+        },
+        
       ]
     },
   ],

@@ -8,7 +8,7 @@
         </div>
         <!--loader end-->
         <!-- main start  -->
-        <div id="main">
+        <div id="main1">
             <!-- header -->
             <header class="main-header">
                 <!-- logo-->
@@ -465,8 +465,16 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  mounted() {
+    $(".loader-wrap").fadeOut(300, function () {
+        $("#main").animate({
+            opacity: "1"
+        }, 600);
+    });
+  }
 }
+
 </script>
 
 <style>
