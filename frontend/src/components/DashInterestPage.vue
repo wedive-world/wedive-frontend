@@ -137,7 +137,7 @@ export default {
   methods: {
     cellUpdated($event) {
         console.log($event.row);
-        this.$apollo.mutate({mutation: CREATE_INTEREST, variables: $event.row}).then((data) => {console.log(data)}).catch((error) => {console.log(error);});
+        this.$apollo.mutate({mutation: CREATE_INTEREST, variables: {interestInput: $event.row}}).then((data) => {console.log(data)}).catch((error) => {console.log(error);});
 
     }
   }
