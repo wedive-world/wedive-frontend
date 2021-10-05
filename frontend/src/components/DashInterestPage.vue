@@ -136,8 +136,9 @@ export default {
   },
   methods: {
     cellUpdated($event) {
-        console.log($event.row);
-        this.$apollo.mutate({mutation: CREATE_INTEREST, variables: {interestInput: $event.row}}).then((data) => {console.log(data)}).catch((error) => {console.log(error);});
+        var i_input = {_id: $event.row._id, title: $event.row.title, type: $event.row.type, iconType: $event.row.iconType, iconName: $event.row.iconName, iconColor: $event.row.iconColor, iconUrl: $event.row.iconUrl};
+        console.log(i_input);
+        this.$apollo.mutate({mutation: CREATE_INTEREST, variables: {interestInput: i_input}}).then((data) => {console.log(data)}).catch((error) => {console.log(error);});
 
     }
   }
