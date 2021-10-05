@@ -19,7 +19,10 @@ let result = dotenv.config(path.join('/root/.env'));
 const GRAPHQL_URL = process.env.VUE_APP_API_PATH || 'https://api.wedives.com/graphql'
 const apolloClient = new ApolloClient({
   uri: GRAPHQL_URL,
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
+  headers: {
+    countryCode: "ko",
+  }
 })
 
 Vue.use(VueApollo)
