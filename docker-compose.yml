@@ -13,9 +13,8 @@ services:
       - "3000:3000"
 
     networks: 
-      - wedive-api_default
-      - default
+      - api-network
 
 networks:
-  wedive-api_default:
+  api-network:
     external: true
