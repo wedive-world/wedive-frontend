@@ -1,6 +1,7 @@
 FROM node:14
 
 WORKDIR /usr/src/wedive-frontend
+ENV NODE_OPTIONS=--max_old_space_size=2048
 # 앱 의존성 설치
 # 가능한 경우(npm@5+) package.json과 package-lock.json을 모두 복사하기 위해
 # 와일드카드를 사용
