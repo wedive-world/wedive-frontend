@@ -24,10 +24,6 @@ app.use(cookieParser());
 
 
 
-
-//app.use('/', indexRouter);
-//app.use(express.static(path.join(__dirname, 'public')));
-
 var mainapp = connect();
 mainapp.use(require('connect-history-api-fallback')());
 mainapp.use('/', indexRouter);
@@ -41,31 +37,6 @@ mobileapp.use(serveStatic(path.join(__dirname, 'public/mobile')))
 app.use(vhost("m.wedives.com", mobileapp));
 app.use(vhost("wedives.com", mainapp));
 
-
-//app.use(express.static(path.join(__dirname, 'public/mobile')));
-//app.use(express.static(path.join(__dirname, 'public')));
-//app.use('/', mobileRouter);
-
-
-//app.use(vhost("m.wedives.com", express.static(path.join(__dirname, 'public/mobile'))));
-//app.use(vhost("wedives.com", express.static(path.join(__dirname, 'public'))));
-//app.use(vhost("www.wedives.com", express.static(path.join(__dirname, 'public'))));
-//app.use(vhost("wedive.world", express.static(path.join(__dirname, 'public'))));
-//app.use(vhost("www.wedive.world", express.static(path.join(__dirname, 'public'))));
-
-/*
-app.use(vhost("m.wedives.com", express.static(path.join(__dirname, 'public/mobile'))));
-app.use(vhost("m.wedives.com", mobileRouter));
-
-app.use(vhost("wedives.com", express.static(path.join(__dirname, 'public'))));
-app.use(vhost("wedives.com", indexRouter));
-app.use(vhost("www.wedives.com", indexRouter));
-app.use(vhost("wedive.world", indexRouter));
-app.use(vhost("www.wedive.world", indexRouter));
-*/
-
-//app.use('/users', usersRouter);
-//app.use('/', indexRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

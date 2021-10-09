@@ -1,7 +1,8 @@
 'use strict'
-
+const path = require("path"); 
 const dotenv = require('dotenv');
-const env = dotenv.config().parsed;
+console.log(path.join(__dirname, '../frontend-config.env'));
+const env = dotenv.config({path: path.join(__dirname, '../frontend-config.env')});
 
 console.log(`:::::::::::::::prod.env:::::::::::::`)
 console.log(JSON.stringify(env))
