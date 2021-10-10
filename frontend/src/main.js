@@ -7,8 +7,8 @@ import router from './router'
 import store from './store'
 import App from './App.vue'
 
-import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client/core'
-import { createApolloProvider } from '@vue/apollo-option'
+import VueApollo from 'vue-apollo'
+import ApolloClient, { InMemoryCache } from 'apollo-boost'
 
 import VueEditableGrid from 'vue-editable-grid'
 import 'vue-editable-grid/dist/VueEditableGrid.css'
@@ -32,23 +32,19 @@ import '@/@fake-db/db'
 
 // GraphQL
 const GRAPHQL_URL = process.env.VUE_APP_API_PATH || 'https://api.wedives.com/graphql'
-const httpLink = new HttpLink({
-  // You should use an absolute URL here
-  uri: GRAPHQL_URL,
-})
-
 const apolloClient = new ApolloClient({
-  link: httpLink,
+  uri: GRAPHQL_URL,
   cache: new InMemoryCache(),
-  connectToDevTools: true,
+  headers: {
+    countryCode: "ko",
+  }
 })
 
-// Create a provider
-const apolloProvider = createApolloProvider({
-  defaultClient: apolloClient,
-});
+Vue.use(VueApollo)
 
-//Vue.use(apolloProvider)
+const apolloProvider = new VueApollo({
+  defaultClient: apolloClient,
+})
 
 
 Vue.component('vue-editable-grid', VueEditableGrid)
