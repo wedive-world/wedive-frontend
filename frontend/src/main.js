@@ -47,7 +47,7 @@ const apolloClient = new ApolloClient({
 const apolloProvider = createApolloProvider({
   defaultClient: apolloClient,
 });
-Vue.use(apolloProvider)
+//Vue.use(apolloProvider)
 
 
 Vue.component('vue-editable-grid', VueEditableGrid)
@@ -73,6 +73,7 @@ Vue.config.productionTip = false
 
 new Vue({
   router,
+  apolloProvider,
   store,
   i18n,
   render: h => h(App),
