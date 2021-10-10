@@ -17,7 +17,7 @@
     </ul>
 
     <!-- Left Col -->
-    <div class="bookmark-wrapper align-items-center flex-grow-1 d-none d-lg-flex">
+    <div class="bookmark-wrapper align-items-center flex-grow-1 d-none d-lg-flex hide">
       <bookmarks />
     </div>
 
@@ -68,3 +68,6 @@ export default {
 
 }
 </script>
+<style>
+.hide {display: none !important;}
+</style>

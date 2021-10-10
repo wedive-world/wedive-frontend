@@ -1,17 +1,24 @@
 export default [
   {
-    title: 'Dashboards',
-    icon: 'HomeIcon',
-    tag: '2',
+    header: 'Dashboard1',
+  },
+  {
+    title: 'Dashboard',
+    icon: 'FileTextIcon',
+    tag: '3',
     tagVariant: 'light-warning',
     children: [
       {
-        title: 'eCommerce',
-        route: 'dashboard-ecommerce',
+        title: 'Site manage',
+        route: 'charts-apex-chart',
       },
       {
-        title: 'Analytics',
-        route: 'dashboard-analytics',
+        title: 'Point manage',
+        route: 'charts-chartjs',
+      },
+      {
+        title: 'Interest manage',
+        route: 'charts-echart',
       },
     ],
   },

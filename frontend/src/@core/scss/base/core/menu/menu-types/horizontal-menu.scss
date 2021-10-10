@@ -38,6 +38,8 @@
   .horizontal-menu-wrapper {
     .header-navbar {
       min-height: $horizontal-menu-height;
+      padding-left: 1rem;
+      padding-right: 1rem;
     }
   }
 
@@ -84,7 +86,8 @@
     &.navbar-brand-center {
       .navbar-header {
         position: absolute;
-        left: calc(50% - 56px); // left 50% - branding width
+        //left: calc(50% - 56px); // left 50% - branding width
+        left: 28px;
         padding: 0;
         z-index: 1000;
         .navbar-brand {
@@ -93,7 +96,7 @@
           margin-right: 0;
           font-size: inherit;
           .brand-logo img {
-            max-width: 36px;
+            max-height: 52px;
           }
 
           // Brand Text Scss

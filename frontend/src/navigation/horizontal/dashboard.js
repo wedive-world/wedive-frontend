@@ -1,17 +1,21 @@
 export default [
   {
-    header: 'Dashboards',
-    icon: 'HomeIcon',
+    header: 'Dashboard',
+    icon: 'FileTextIcon',
+    tag: '3',
+    tagVariant: 'light-warning',
     children: [
       {
-        title: 'eCommerce',
-        route: 'dashboard-ecommerce',
-        icon: 'ShoppingCartIcon',
+        title: 'Site manage',
+        route: 'charts-apex-chart',
       },
       {
-        title: 'Analytics',
-        route: 'dashboard-analytics',
-        icon: 'ActivityIcon',
+        title: 'Point manage',
+        route: 'charts-chartjs',
+      },
+      {
+        title: 'Interest manage',
+        route: 'dashboard-interest',
       },
     ],
   },

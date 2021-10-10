@@ -23,6 +23,8 @@ title
 route: [route_obj/route_name] (I have to resolve name somehow from the route obj)
 
 */
+import home from './home'
+import dive from './dive-pages'
 import dashboard from './dashboard'
 import apps from './apps'
 import pages from './pages'
@@ -32,4 +34,5 @@ import formAndTable from './forms-and-table'
 import others from './others'
 
 // Array of sections
-export default [...dashboard, ...apps, ...uiElements, ...formAndTable, ...pages, ...chartsAndMaps, ...others]
+//export default [...dashboard, ...apps, ...uiElements, ...formAndTable, ...pages, ...chartsAndMaps, ...others]
+export default [...home, ...dive, ...dashboard]

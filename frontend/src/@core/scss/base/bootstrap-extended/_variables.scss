@@ -127,17 +127,17 @@ $box-shadow: 0 4px 24px 0 rgba($black, 0.1) !default;
 // Font, line-height, and color for body text, headings, and more.
 
 // stylelint-disable value-keyword-case
-$font-family-sans-serif: 'Montserrat', Helvetica, Arial, serif !default;
-$font-family-monospace: 'Montserrat', Helvetica, Arial, serif !default;
+$font-family-sans-serif: 'Noto Sans Korean', Helvetica, Arial, serif !default;
+$font-family-monospace: 'Noto Sans Korean', Helvetica, Arial, serif !default;
 
 // stylelint-enable value-keyword-case
 $font-size-base: 1rem !default;
 $font-size-lg: ceil($font-size-base * 1.25) !default;
 $font-size-sm: ceil($font-size-base * 0.85) !default;
 
-$font-weight-normal: 400 !default;
-$font-weight-bold: 500 !default;
-$font-weight-bolder: 600 !default;
+$font-weight-normal: 300 !default;
+$font-weight-bold: 400 !default;
+$font-weight-bolder: 500 !default;
 
 $line-height-base: 1.45 !default;
 

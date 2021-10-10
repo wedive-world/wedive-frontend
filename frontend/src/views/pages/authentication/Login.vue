@@ -4,10 +4,11 @@
 
       <!-- Brand logo-->
       <b-link class="brand-logo">
-        <vuexy-logo />
-        <h2 class="brand-text text-primary ml-1">
-          Vuexy
-        </h2>
+        <b-img
+            src="@/assets/images/logo/logo-dark.svg"
+            alt="logo"
+            style="height: 64px;"
+        />
       </b-link>
       <!-- /Brand logo-->
 
@@ -41,7 +42,7 @@
             class="mb-1 font-weight-bold"
             title-tag="h2"
           >
-            Welcome to Vuexy! 👋
+            Welcome to wedive! 👋
           </b-card-title>
           <b-card-text class="mb-2">
             Please sign-in to your account and start the adventure
