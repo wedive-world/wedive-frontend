@@ -11,10 +11,6 @@ COPY frontend_mobile/package*.json ./frontend_mobile/
 
 COPY pm2.config.js .
 
-COPY .env ./frontend/.env
-COPY .env ./frontend_mobile/.env
-COPY .env /root/.env
-
 RUN npm --prefix frontend install 
 RUN npm --prefix frontend_mobile install
 RUN npm --prefix backend install
