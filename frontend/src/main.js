@@ -47,6 +47,7 @@ const apolloClient = new ApolloClient({
 const apolloProvider = createApolloProvider({
   defaultClient: apolloClient,
 });
+
 //Vue.use(apolloProvider)
 
 
