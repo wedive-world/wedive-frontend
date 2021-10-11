@@ -29,7 +29,6 @@ import '@/libs/tour'
 // Axios Mock Adapter
 import '@/@fake-db/db'
 
-
 // GraphQL
 const GRAPHQL_URL = process.env.VUE_APP_API_PATH || 'https://api.wedives.com/graphql'
 const apolloClient = new ApolloClient({

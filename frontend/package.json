@@ -30,6 +30,7 @@
     "core-js": "3.8.1",
     "echarts": "4.8.0",
     "graphql": "^15.6.1",
+    "graphql-request": "^3.5.0",
     "graphql-tag": "^2.12.5",
     "jsonwebtoken": "8.5.1",
     "leaflet": "1.6.0",

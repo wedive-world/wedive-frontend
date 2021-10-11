@@ -1,4 +1,4 @@
-const { gql } = require('./graphql/api-client.js')
+const { gql } = require('@/graphql/driver/api-client.js')
 
 module.exports.query = {
     getAllInterests: gql`

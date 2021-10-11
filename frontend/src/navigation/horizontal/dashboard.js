@@ -7,11 +7,11 @@ export default [
     children: [
       {
         title: 'Site manage',
-        route: 'charts-apex-chart',
+        route: 'dashboard-site',
       },
       {
         title: 'Point manage',
-        route: 'charts-chartjs',
+        route: 'dashboard-point',
       },
       {
         title: 'Interest manage',

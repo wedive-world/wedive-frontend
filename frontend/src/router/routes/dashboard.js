@@ -9,4 +9,14 @@ export default [
     name: 'dashboard-interest',
     component: () => import('@/views/dashboard/wedive/InterestAdd.vue'),
   },
+  {
+    path: '/dashboard/site',
+    name: 'dashboard-site',
+    component: () => import('@/views/dashboard/wedive/SitesList.vue'),
+  },
+  {
+    path: '/dashboard/point',
+    name: 'dashboard-point',
+    component: () => import('@/views/dashboard/wedive/PointsList.vue'),
+  },
 ]
