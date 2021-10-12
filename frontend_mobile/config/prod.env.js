@@ -1,9 +1,8 @@
 'use strict'
 
-const dotenv = require('dotenv');
-const env = dotenv.config().parsed;
+require('dotenv').config({ path: process.env.PWD + '/wedive-secret/frontend-config.env' })
 
 module.exports = {
   NODE_ENV: '"production"',
-  VUE_APP_API_PATH: JSON.stringify(env.VUE_APP_API_PATH)
+  VUE_APP_API_PATH: JSON.stringify(process.env.VUE_APP_API_PATH)
 }
