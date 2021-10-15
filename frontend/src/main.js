@@ -30,6 +30,8 @@ import '@/libs/tour'
 import '@/@fake-db/db'
 
 // GraphQL
+require('dotenv').config({ path: process.env.PWD + '/wedive-secret/frontend-config.env' })
+
 const GRAPHQL_URL = process.env.VUE_APP_API_PATH || 'https://api.wedives.com/graphql'
 const apolloClient = new ApolloClient({
   uri: GRAPHQL_URL,
