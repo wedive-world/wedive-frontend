@@ -23,7 +23,7 @@
         ref="grid"
         id="mygrid"
         :column-defs="columnDefs"
-        :row-data="interests"
+        :row-data="getAllInterests"
         row-data-key='_id'
         @cell-updated="cellUpdated"
         >
@@ -31,7 +31,7 @@
             
         </template>
         <template v-slot:header-r>
-            Total rows: {{ interests.length }}
+            Total rows: {{ getAllInterests.length }}
         </template>
       </vue-editable-grid>
     </div>
@@ -134,7 +134,7 @@
       >
       <b-form-select
         v-model="delSelected"
-        :options="interests.map((inter)=>{return ({text: inter.title, value: inter._id})})"
+        :options="getAllInterests.map((inter)=>{return ({text: inter.title, value: inter._id})})"
         size="sm"
         class="mt-1"
       />
@@ -203,7 +203,7 @@ export default {
   data() {
     return {
       columnDefs: columnDefinition,
-      interests: [],
+      getAllInterests: [],
       type_options: ['discountTarget', 'discountOption', 'gender', 'age', 'diving', 'amity', 'tripFeature'],
       title: '',
       addType: '',
@@ -213,7 +213,7 @@ export default {
     }
   },
   apollo: {
-    interests: {
+    getAllInterests: {
         query: GET_INTERESTS
     }
   },
