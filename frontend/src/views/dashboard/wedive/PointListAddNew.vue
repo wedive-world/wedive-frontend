@@ -915,16 +915,16 @@ import store from '@/store'
 import gql from 'graphql-tag'
 
 const GET_INTERESTS = gql`
-    query GetInerests {
-        interests {
-            _id
-            title
-            type
-            iconType
-            iconName
-            iconUrl
-            iconColor
-        }
+    query Query {
+      getAllInterests {
+        _id
+        title
+        type
+        iconType
+        iconName
+        iconColor
+        iconUrl
+      }
     }
 `;
 

@@ -157,16 +157,16 @@ const columnDefinition = [
 ];
 
 const GET_INTERESTS = gql`
-    query GetInerests {
-        interests {
-            _id
-            title
-            type
-            iconType
-            iconName
-            iconUrl
-            iconColor
-        }
+    query Query {
+      getAllInterests {
+        _id
+        title
+        type
+        iconType
+        iconName
+        iconColor
+        iconUrl
+      }
     }
 `;
 

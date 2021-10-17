@@ -3,14 +3,14 @@ const { gql } = require('@/graphql/driver/api-client.js')
 module.exports.query = {
     getAllInterests: gql`
         query Query {
-            interests {
-                _id
-                title
-                type
-                iconType
-                iconName
-                iconColor
-                iconUrl
+            getAllInterests {
+            _id
+            title
+            type
+            iconType
+            iconName
+            iconColor
+            iconUrl
             }
         }
     `,
