@@ -6,8 +6,8 @@ import { title } from '@core/utils/filter'
 import { useToast } from 'vue-toastification/composition'
 import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
 //import gql from 'graphql-tag'
-const { createDivePoint, getDivePointById, searchDivePointByName, nearByDivePoints, getAllDivePoints } = require('@/graphql/dive-point-service')
-const { getAllInterests } = require ('@/graphql/interest-service')
+const { createDivePoint, getDivePointById, searchDivePointByName, nearByDivePoints, getAllDivePoints } = require('@/wedive-frontend-graphql/dive-point-service')
+const { getAllInterests } = require ('@/wedive-frontend-graphql/interest-service')
 
 export default function usePointsList() {
   // Use toast

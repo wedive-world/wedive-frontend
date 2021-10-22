@@ -78,7 +78,7 @@
               @input="setSelected"
               id="type"
               :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
-              :options="type_options"
+              :options="getAllInterests.type()"
             />
              
           </b-form-group>
@@ -148,6 +148,7 @@ import { BTable, BCard, BButton, BModal, BFormInput, BRow, BCol, BFormGroup, BFo
 import gql from 'graphql-tag'
 import vSelect from 'vue-select'
 import Ripple from 'vue-ripple-directive'
+const { query, mutation } = require('@/wedive-frontend-graphql/driver/gql/interest-gql')
 
 const columnDefinition = [
     { sortable: true, filter: true, field: 'title', headerName: '관심내용', editable: true },
@@ -156,19 +157,6 @@ const columnDefinition = [
     { sortable: true, filter: true, field: 'iconName', headerName: '아이콘내용', editable: true },
 ];
 
-const GET_INTERESTS = gql`
-    query Query {
-      getAllInterests {
-        _id
-        title
-        type
-        iconType
-        iconName
-        iconColor
-        iconUrl
-      }
-    }
-`;
 
 const CREATE_INTEREST = gql`
     mutation InterestMutation($interestInput: InterestInput!) {
@@ -214,7 +202,7 @@ export default {
   },
   apollo: {
     getAllInterests: {
-        query: GET_INTERESTS
+        query: query.getAllInterests
     }
   },
   methods: {
