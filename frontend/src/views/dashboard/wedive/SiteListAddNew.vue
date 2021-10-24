@@ -357,6 +357,7 @@
               label-for="scubaIndex"
             >
               <v-select
+                disabled
                 v-model="siteData.scubaIndex"
                 :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
                 :options="khoaOptions"
@@ -375,6 +376,7 @@
               label-for="seaTemperature"
             >
               <v-select
+                disabled
                 v-model="siteData.seaTemperature"
                 :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
                 :options="seaTempOptions"
@@ -869,15 +871,15 @@ export default {
   setup(props, { emit }) {
     const siteData = JSON.parse(JSON.stringify(blankSiteData))
     const resetSiteData = () => {
-      siteData.value = JSON.parse(JSON.stringify(blankSiteData))
+      //siteData = JSON.parse(JSON.stringify(blankSiteData))
     }
 
     const onSubmit = () => {
-      store.dispatch('app-site/addSite', siteData.value)
+      /*store.dispatch('app-site/addSite', siteData)
         .then(() => {
           emit('refetch-data')
           emit('update:is-add-new-site-sidebar-active', false)
-        })
+        })*/
     }
 
     const {
@@ -933,35 +935,45 @@ export default {
 
 
       // 인기도 및 날씨정보
-      var popular_id = this.interestData.filter(interest=>interest.type=='popularity' && interest.title=='popular')[0]._id
-      var soso_id = this.interestData.filter(interest=>interest.type=='popularity' && interest.title=='soso')[0]._id
-      var unrecommended_id = this.interestData.filter(interest=>interest.type=='popularity' && interest.title=='unrecommended')[0]._id
-      var popularity_id_list = {};
-      popularity_id_list[popular_id] = 3;
-      popularity_id_list[soso_id] = 2;
-      popularity_id_list[unrecommended_id] = 1;
+      {
+        var popular_id = this.interestData.filter(interest=>interest.type=='popularity' && interest.title=='popular')[0]._id
+        var soso_id = this.interestData.filter(interest=>interest.type=='popularity' && interest.title=='soso')[0]._id
+        var unrecommended_id = this.interestData.filter(interest=>interest.type=='popularity' && interest.title=='unrecommended')[0]._id
+        var popularity_id_list = {};
+        popularity_id_list[popular_id] = 3;
+        popularity_id_list[soso_id] = 2;
+        popularity_id_list[unrecommended_id] = 1;
 
-      var sunny_id = this.interestData.filter(interest=>interest.type=='climate' && interest.title=='sunny')[0]._id
-      var cloudy_id = this.interestData.filter(interest=>interest.type=='climate' && interest.title=='cloudy')[0]._id
-      var rain_id = this.interestData.filter(interest=>interest.type=='climate' && interest.title=='rain')[0]._id
-      var heavyRain_id = this.interestData.filter(interest=>interest.type=='climate' && interest.title=='heavyRain')[0]._id
-      var climate_id_list = {};
-      climate_id_list[sunny_id] = 1;
-      climate_id_list[cloudy_id] = 2;
-      climate_id_list[rain_id] = 3;
-      climate_id_list[heavyRain_id] = 4;
-      
-      for (var i=1; i<13; i++) {
-        for (var j=0; j<_data["month"+i].length; j++) {
-          var _id = _data["month"+i][j]._id;
-          if (popularity_id_list.hasOwnProperty(_id)) {
-            this.siteData.monthlyPopular[i] = popularity_id_list[_id];
-          }
-          if (climate_id_list.hasOwnProperty(_id)) {
-            this.siteData.monthlyWeather[i] = climate_id_list[_id];
+        var sunny_id = this.interestData.filter(interest=>interest.type=='climate' && interest.title=='sunny')[0]._id
+        var cloudy_id = this.interestData.filter(interest=>interest.type=='climate' && interest.title=='cloudy')[0]._id
+        var rain_id = this.interestData.filter(interest=>interest.type=='climate' && interest.title=='rain')[0]._id
+        var heavyRain_id = this.interestData.filter(interest=>interest.type=='climate' && interest.title=='heavyRain')[0]._id
+        var climate_id_list = {};
+        climate_id_list[sunny_id] = 1;
+        climate_id_list[cloudy_id] = 2;
+        climate_id_list[rain_id] = 3;
+        climate_id_list[heavyRain_id] = 4;
+        
+        for (var i=1; i<13; i++) {
+          for (var j=0; j<_data["month"+i].length; j++) {
+            var _id = _data["month"+i][j]._id;
+            if (popularity_id_list.hasOwnProperty(_id)) {
+              this.siteData.monthlyPopular[i] = popularity_id_list[_id];
+            }
+            if (climate_id_list.hasOwnProperty(_id)) {
+              this.siteData.monthlyWeather[i] = climate_id_list[_id];
+            }
           }
         }
       }
+
+      // 전체 인터레스트
+      {
+        _data.interests.map(interest => {
+          this.interestSelectedTotal.push(interest);
+        })
+      }
+      
       
     },
     backgroundRepeateAgain() {
@@ -1009,7 +1021,7 @@ export default {
       _siteData.uniqueName = _siteData.address;
       
       
-
+      // 백그라운드 이미지
       {
         // background Images for just id
         var _id_list = [];
@@ -1035,6 +1047,7 @@ export default {
         }
       }
 
+      // 월별 인기도 및 날씨 정보 입력
       {
         var popular_id = this.interestData.filter(interest=>interest.type=='popularity' && interest.title=='popular')[0]._id
         var soso_id = this.interestData.filter(interest=>interest.type=='popularity' && interest.title=='soso')[0]._id
@@ -1079,6 +1092,12 @@ export default {
         })
       }
 
+      // 전체 인터레스트 입력
+      _siteData.interests = [];
+      this.interestSelectedTotal.map(interest => {
+        _siteData.interests.push(interest._id);
+      })
+
 
       if (_siteData._id == null) delete _siteData._id;
       delete _siteData.scubaIndex;
@@ -1088,7 +1107,20 @@ export default {
       delete _siteData.monthlyWeather;
 
       
-      upsertDiveSite(_siteData);
+      try {
+        await upsertDiveSite(_siteData);
+      } catch (e) {
+        this.$swal({
+          title: 'Error!',
+          text: e,
+          icon: 'error',
+          customClass: {
+            confirmButton: 'btn btn-primary',
+          },
+          buttonsStyling: false,
+        })
+      }
+      
       this.$emit('update:is-add-new-site-sidebar-active', false)
       this.siteData = JSON.parse(JSON.stringify(blankSiteData));
     },

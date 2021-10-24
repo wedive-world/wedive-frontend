@@ -412,7 +412,7 @@
 
 
           <hr>
-          <h4 class="mt-3">하이라이트</h4>
+          <h4 class="mt-3">하이라이트 <font style="color:red">(아직 못했습니다)</font></h4>
           <div>
             <div>
               <!-- Row Loop -->
@@ -594,7 +594,7 @@
               </v-select>
             </b-col>
           </b-row>
-          <label>월별에는 타입이 <code>aquaticLife</code>(수중생물), <code>climate</code>, <code>popularity</code> 인것만 추가 가능</label>
+          <label>월별에는 타입이 <code>aquaticLife</code>(수중생물) 인것만 추가 가능</label>
           <b-row
             v-for="index in 12"
             class="mb-1"
@@ -1042,7 +1042,7 @@ export default {
       pointImageName: [],
       siteSelected: [],
       interestSelectedTotal: [],
-      interestSelected: [],
+      interestSelected: [[],[],[],[],[],[],[],[],[],[],[],[],[]],
       submitText: 'Add',
     }
   },
@@ -1117,6 +1117,22 @@ export default {
       setTimeout(function(name) {
         document.querySelector("#siteId .vs__selected").innerText = name;
       },100, selectedSite[0].name)
+
+      // 전체 인터레스트
+      {
+        _data.interests.map(interest => {
+          this.interestSelectedTotal.push(interest);
+        })
+      }
+
+      // 월별 인터레스트
+      {
+        for (var i=1; i<13; i++) {
+          _data["month"+i].map(interest => {
+            this.interestSelected[i].push(interest);
+          })
+        }
+      }
       
     },
     backgroundRepeateAgain() {
@@ -1260,6 +1276,20 @@ export default {
         }
       }
 
+      // 전체 인터레스트 입력
+      _pointData.interests = [];
+      this.interestSelectedTotal.map(interest => {
+        _pointData.interests.push(interest._id);
+      })
+
+      // 월별 인터레스트 입력
+      for (var i=1; i<13; i++) {
+        _pointData["month"+i] = [];
+        this.interestSelected[i].map(interest => {
+          _pointData["month"+i].push(interest._id);
+        })
+      }
+
       try {
         await upsertDivePoint(_pointData);
       } catch (e) {
@@ -1273,7 +1303,6 @@ export default {
           buttonsStyling: false,
         })
       }
-      
       
       this.$emit('update:is-add-new-point-sidebar-active', false)
       this.pointData = JSON.parse(JSON.stringify(blankPointData));

@@ -151,9 +151,10 @@
       @ok="DeleteInterest"
       ref="modal"
       >
+      <p>climate, popularity는 삭제가 불가합니다.</p>
       <b-form-select
         v-model="delSelected"
-        :options="interests.map((inter)=>{return ({text: inter.title, value: inter._id})})"
+        :options="interests.filter(interest=>interest.type!='climate'&&interest.type!='popularity').map((inter)=>{return ({text: inter.title, value: inter._id})})"
         size="sm"
         class="mt-1"
       />
