@@ -42,20 +42,20 @@
           <!-- Status -->
           <validation-provider
             #default="validationContext"
-            name="status"
+            name="publishStatus"
             rules="required"
           >
             <b-form-group
               label="상태선택"
-              label-for="status"
+              label-for="publishStatus"
               :state="getValidationState(validationContext)"
             >
               <v-select
-                v-model="pointData.status"
+                v-model="pointData.publishStatus"
                 :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
                 :options="statusOptions"
                 :clearable="false"
-                input-id="status"
+                input-id="publishStatus"
               />
               <b-form-invalid-feedback :state="getValidationState(validationContext)">
                 {{ validationContext.errors[0] }}
@@ -93,7 +93,7 @@
           <!-- Point name -->
           <validation-provider
             #default="validationContext"
-            name="Pointname"
+            name="name"
             rules="required"
           >
             <b-form-group
@@ -119,7 +119,7 @@
           <!-- Point name -->
           <validation-provider
             #default="validationContext"
-            name="Pointname"
+            name="name"
             rules="required"
           >
             <b-form-group
@@ -128,10 +128,11 @@
             >
               <v-select
                 id="siteId"
-                v-model="siteSelected"
+                v-model="pointData.diveSiteId"
+                value="_id"
                 :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
-                label="title"
-                :options="interests.filter(interest => interest.type!='aquaticLife')"
+                label="name"
+                :options="siteData"
               />
               <b-form-invalid-feedback>
                 {{ validationContext.errors[0] }}
@@ -173,7 +174,7 @@
             >
               <b-form-spinbutton
                 :id="'adminScore'+index"
-                v-model="pointData.adminScore[index]"
+                v-model="pointData[adminScoreName[index]]"
                 min="1"
                 max="100"
               />
@@ -194,15 +195,15 @@
                     rules="required"
                 >
                     <b-form-group
-                    label="최저 수심(m)"
-                    label-for="deepMin"
+                      label="최저 수심(m)"
+                      label-for="minDepth"
                     >
                     <b-form-input
-                    id="deepMin"
-                    v-model="pointData.deepMin"
-                    :state="getValidationState(validationContext)"
-                    placeholder="10"
-                    trim
+                      id="minDepth"
+                      v-model="pointData.minDepth"
+                      :state="getValidationState(validationContext)"
+                      placeholder="10"
+                      trim
                     />
                     <b-form-invalid-feedback>
                     {{ validationContext.errors[0] }}
@@ -218,15 +219,15 @@
                     rules="required"
                 >
                     <b-form-group
-                    label="최고 수심(m)"
-                    label-for="deepMax"
+                      label="최고 수심(m)"
+                      label-for="maxDepth"
                     >
                     <b-form-input
-                    id="deepMax"
-                    v-model="pointData.deepMax"
-                    :state="getValidationState(validationContext)"
-                    placeholder="48"
-                    trim
+                      id="maxDepth"
+                      v-model="pointData.maxDepth"
+                      :state="getValidationState(validationContext)"
+                      placeholder="48"
+                      trim
                     />
                     <b-form-invalid-feedback>
                     {{ validationContext.errors[0] }}
@@ -290,15 +291,15 @@
           <!-- info Highlight -->
           <validation-provider
             #default="validationContext"
-            name="infoHighlight"
+            name="highlightDescription"
           >
             <b-form-group
               label="하이라이트"
-              label-for="infoHighlight"
+              label-for="highlightDescription"
             >
               <b-form-input
-                id="infoHighlight"
-                v-model="pointData.infoHighlight"
+                id="highlightDescription"
+                v-model="pointData.highlightDescription"
                 :state="getValidationState(validationContext)"
                 max="80"
                 trim
@@ -320,7 +321,7 @@
               <b-row
                 v-for="(item, index) in backgroundItems"
                 :id="item.id"
-                :key="item.id"
+                :key="'rowBack' + index"
                 ref="row"
                 >
 
@@ -328,11 +329,11 @@
                 <b-col md="4" class="pr-0">
                     <b-form-group
                     label="파일"
-                    :label-for="'backgroundImagesFile' + index"
+                    :label-for="'backgroundImages' + index"
                     >
                     <b-form-file
-                        :id="'backgroundImagesFile' + index"
-                        v-model="backgroundImagesFile[index]"
+                        :id="'backgroundImages' + index"
+                        v-model="backgroundImages[index]"
                         placeholder="Choose or drop"
                         drop-placeholder="Drop here"
                         accept=".jpg,.jpeg,.png"
@@ -348,6 +349,7 @@
                     >
                     <b-form-input
                         id="backgroundImagesRef"
+                        v-model="backgroundImageRef[index]"
                         type="text"
                         placeholder=""
                     />
@@ -362,6 +364,7 @@
                     >
                     <b-form-input
                         id="backgroundImagesRef"
+                        v-model="backgroundImageName[index]"
                         type="text"
                         placeholder=""
                     />
@@ -416,7 +419,7 @@
               <b-row
                 v-for="(item, index) in highlightItems"
                 :id="item.id"
-                :key="item.id"
+                :key="'rowHigh'+index"
                 ref="row"
                 style="background: #d0d1d2;border-radius: 10px;margin-bottom:10px;"
                 >
@@ -463,9 +466,9 @@
                         >
                         <!-- Row Loop -->
                         <b-row
-                            v-for="(item2, index2) in highlightImageItems[index]"
-                            :id="item2.id"
-                            :key="item2.id"
+                            v-for="(item, index) in highlightImageItems[index]"
+                            :id="item.id"
+                            :key="'rowHighItem'+index"
                             ref="row2"
                             >
 
@@ -583,15 +586,19 @@
                 :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
                 multiple
                 label="title"
-                :options="interests.filter(interest => interest.type!='aquaticLife')"
-              />
+                :options="interestData.filter(interest => interest.type!='aquaticLife'&&interest.type!='climate'&&interest.type!='popularity')"
+              >
+              <template slot="option" slot-scope="option">
+                {{ option.title }} ({{option.type}})
+              </template>
+              </v-select>
             </b-col>
           </b-row>
-          <label>월별에는 타입이 <code>aquaticLife</code>(수중생물) 인것만 추가 가능</label>
+          <label>월별에는 타입이 <code>aquaticLife</code>(수중생물), <code>climate</code>, <code>popularity</code> 인것만 추가 가능</label>
           <b-row
             v-for="index in 12"
             class="mb-1"
-            :key="index"
+            :key="'rowMonth'+index"
           >
             <b-col md="2" class="pr-0">
               {{ index }}월
@@ -602,8 +609,12 @@
                 :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
                 multiple
                 label="title"
-                :options="interests.filter(interest => interest.type=='aquaticLife')"
-              />
+                :options="interestData.filter(interest => interest.type=='aquaticLife')"
+              >
+              <template slot="option" slot-scope="option">
+                {{ option.title }} ({{option.type}})
+              </template>
+              </v-select>
             </b-col>
           </b-row>
 
@@ -621,7 +632,7 @@
               <b-row
                 v-for="(item, index) in pointItems"
                 :id="item.id"
-                :key="item.id"
+                :key="'rowImage'+index"
                 ref="row"
                 >
 
@@ -633,7 +644,7 @@
                     >
                     <b-form-file
                         :id="'pointImagesFile' + index"
-                        v-model="pointImagesFile[index]"
+                        v-model="pointImages[index]"
                         placeholder="Choose or drop"
                         drop-placeholder="Drop here"
                         accept=".jpg,.jpeg,.png"
@@ -649,6 +660,7 @@
                     >
                     <b-form-input
                         id="pointImagesRef"
+                        v-model="pointImageRef[index]"
                         type="text"
                         placeholder=""
                     />
@@ -663,6 +675,7 @@
                     >
                     <b-form-input
                         id="pointImagesRef"
+                        v-model="pointImageName[index]"
                         type="text"
                         placeholder=""
                     />
@@ -724,7 +737,7 @@
               <b-row
                 v-for="(item, index) in youtubeItems"
                 :id="item.id"
-                :key="item.id"
+                :key="'rowYoutube'+index"
                 ref="row"
                 >
 
@@ -737,6 +750,7 @@
                     <b-form-input
                         id="youtubeVideoId"
                         type="text"
+                        v-model="pointData.youtubeVideoIds[index]"
                         placeholder="11자리 입력"
                     />
                     </b-form-group>
@@ -795,7 +809,7 @@
               <b-row
                 v-for="(item, index) in referenceItems"
                 :id="item.id"
-                :key="item.id"
+                :key="'rowRefernce' + index"
                 ref="row"
                 >
 
@@ -808,6 +822,7 @@
                     <b-form-input
                         id="referenceUrl"
                         type="text"
+                        v-model="pointData.referenceUrls[index]"
                         placeholder="실제 사이트에는 보이지 않음"
                     />
                     </b-form-group>
@@ -882,8 +897,9 @@
               variant="primary"
               class="mr-2"
               type="submit"
+              @click="submitClick"
             >
-              Add
+              {{ submitText }}
             </b-button>
             <b-button
               v-ripple.400="'rgba(186, 191, 199, 0.15)'"
@@ -912,21 +928,49 @@ import formValidation from '@core/comp-functions/forms/form-validation'
 import Ripple from 'vue-ripple-directive'
 import vSelect from 'vue-select'
 import store from '@/store'
-import gql from 'graphql-tag'
+const { upsertDivePoint } = require('@/wedive-frontend-graphql/dive-point-service')
+const { uploadSingleImage, updateImage, getImageUrl } = require('@/wedive-frontend-graphql/image-service')
 
-const GET_INTERESTS = gql`
-    query Query {
-      getAllInterests {
-        _id
-        title
-        type
-        iconType
-        iconName
-        iconColor
-        iconUrl
-      }
-    }
-`;
+const blankPointData = {
+  _id: null,
+  address: '',
+  latitude: '',
+  longitude: '',
+  countryCode: 'kr',
+  name: '',
+  uniqueName: '',
+  description: '',
+  images: [],
+  backgroundImages: [],
+  youtubeVideoIds: [],
+  referenceUrls: [],
+  memo: '',
+  publishStatus: 'inactive',
+  month1: [],
+  month2: [],
+  month3: [],
+  month4: [],
+  month5: [],
+  month6: [],
+  month7: [],
+  month8: [],
+  month9: [],
+  month10: [],
+  month11: [],
+  month12: [],
+  diveSiteId: '',
+  adminScore: 70,
+  waterEnvironmentScore: 40,
+  flowRateScore: 50,
+  eyeSightScore: 30,
+  minDepth: '',
+  maxDepth: '',
+  highlightDescription: '',
+
+  scubaIndex: '',
+  seaTemperature: '',
+  highlights: [],
+};
 
 export default {
   components: {
@@ -963,12 +1007,21 @@ export default {
       type: Array,
       required: true,
     },
+    interestData: {
+      type: Array,
+      required: true,
+    },
+    siteData: {
+      type: Array,
+      required: true,
+    }
   },
   data() {
     return {
       required,
       alphaNum,
       adminScoreLabel: ['', '해당 포인트 총점', '수중환경 점수', '유속 점수', '시야 점수'],
+      adminScoreName: ['', 'adminScore', 'waterEnvironmentScore', 'flowRateScore', 'eyeSightScore'],
       statusOptions: ['pending', 'active', 'inactive', 'deleted',],
       khoaOptions : ['동명항', '남애항', '강문해변', '오산항', '울릉도', '월포해수욕장', '구조리해수욕장', '미조도', '거문도', '홍도', '제주-성산일출봉', '제주-어멍(북부)', '제주-문섬'],
       seaTempOptions: ['강릉 (강원도)/kang-neung', '속초 (강원도)/sogcho', '동해 (강원도)/tonghae', '인천/incheon', '고양 (왜있지)/goyang', '안산 (경기도)/ansan', '화성 (경기도)/hwaseong', '포항/hoko', '울산/ulsan', '부산/busan', '진해 (창원)/chinhae', '마산/masan', '거제/kyosai', '여수/reisui', '순천/sunchun', '군산 (전라북도)/kunsan', '목포 (전라남도)/moppo', '신안 (전라남도)/sinan', '태안 (충청남도)/taesal-li', '제주-어영(북서부)/gaigeturi', '제주-제주시(북부)/jeju'],
@@ -979,70 +1032,21 @@ export default {
       pointItems: [],
       youtubeItems: [],
       referenceItems: [],
+      nextBackgroundImageId: 1,
       nextTodoId: 2,
-      backgroundImagesFile: [],
-      pointImagesFile: [],
+      backgroundImages: [],
+      backgroundImageRef: [],
+      backgroundImageName: [],
+      pointImages: [],
+      pointImageRef: [],
+      pointImageName: [],
       siteSelected: [],
       interestSelectedTotal: [],
       interestSelected: [],
-      interests: []
-    }
-  },
-  apollo: {
-    interests: {
-        query: GET_INTERESTS
+      submitText: 'Add',
     }
   },
   setup(props, { emit }) {
-    const blankPointData = {
-      status: 'inactive',
-      address: '',
-      pointname: '',
-      description: '',
-      adminScore: [0, 70, 70, 70, 70],
-      deepMin: '',
-      deepMax: '',
-
-      highlightContents: [],
-
-      latitude: '',
-      longitude: '',
-      infoVisit: '',
-      infoTemperature: '',
-      infoDeep: '',
-      infoCurrent: '',
-      infoSight: '',
-      infoHighlight: '',
-      scubaIndex: '',
-      seaTemperature: '',
-      monthlyPopular1: 2,
-      monthlyPopular2: 1,
-      monthlyPopular3: 1,
-      monthlyPopular4: 1,
-      monthlyPopular5: 1,
-      monthlyPopular6: 2,
-      monthlyPopular7: 3,
-      monthlyPopular8: 3,
-      monthlyPopular9: 3,
-      monthlyPopular10: 2,
-      monthlyPopular11: 1,
-      monthlyPopular12: 1,
-      monthlyWeather1: 2,
-      monthlyWeather2: 2,
-      monthlyWeather3: 2,
-      monthlyWeather4: 2,
-      monthlyWeather5: 2,
-      monthlyWeather6: 2,
-      monthlyWeather7: 1,
-      monthlyWeather8: 3,
-      monthlyWeather9: 3,
-      monthlyWeather10: 2,
-      monthlyWeather11: 2,
-      monthlyWeather12: 2,
-      backgroundImagesFile: null,
-      memo: '',
-    }
-
     const pointData = ref(JSON.parse(JSON.stringify(blankPointData)))
     const resetPointData = () => {
       pointData.value = JSON.parse(JSON.stringify(blankPointData))
@@ -1072,36 +1076,69 @@ export default {
     }
   },
   methods: {
+    setPointData: function(_data) {
+      for (var key in this.pointData) {
+        if (_data[key]) {
+          if (key == 'backgroundImages') {
+            _data[key].map(image=>{
+              this.backgroundItems.push({
+                id: this.nextBackgroundImageId += this.nextBackgroundImageId,
+              })
+              this.backgroundImages.push(new File([""], (image.name == null) ? '' : image.name));
+              this.backgroundImageRef.push((image.reference == null) ? '' : image.reference);
+              this.backgroundImageName.push((image.description == null) ? '' : image.description);
+            });
+            this.pointData[key] = _data[key];
+          } else if (key == 'images') {
+            _data[key].map(image=>{
+              this.pointItems.push({
+                id: this.nextImageId += this.nextImageId,
+              })
+              this.pointImages.push(new File([""], (image.name == null) ? '' : image.name));
+              this.pointImageRef.push((image.reference == null) ? '' : image.reference);
+              this.pointImageName.push((image.description == null) ? '' : image.description);
+            });
+            this.pointData[key] = _data[key];
+          } else {
+            this.pointData[key] = _data[key];
+          }
+        }
+      }
+      
+      this.youtubeItems = [];
+      _data.youtubeVideoIds.map(()=>{this.youtubeItems.push('')});
+      this.referenceItems = [];
+      _data.referenceUrls.map(()=>{this.referenceItems.push('')});
+      this.submitText = 'Update';
+
+
+      // set Site name
+      var selectedSite = this.siteData.filter(site => site._id == _data.diveSiteId);
+      setTimeout(function(name) {
+        document.querySelector("#siteId .vs__selected").innerText = name;
+      },100, selectedSite[0].name)
+      
+    },
     backgroundRepeateAgain() {
       this.backgroundItems.push({
-        id: this.nextTodoId += this.nextTodoId,
-      })
-
-      this.$nextTick(() => {
-        //this.trAddHeight(this.$refs.row[0].offsetHeight)
+        id: this.nextBackgroundImageId += this.nextBackgroundImageId,
       })
     },
     backgroundRemoveItem(index) {
       this.backgroundItems.splice(index, 1)
-      //this.trTrimHeight(this.$refs.row[0].offsetHeight)
     },
 
     
     highlightRepeateAgain() {
       this.highlightItems.push({
-        id: this.nextTodoId += this.nextTodoId,
+        id: this.nextBackgroundImageId += this.nextBackgroundImageId,
       })
 
       this.highlightImagesFile.push([])
       this.highlightImageItems.push([])
-
-      this.$nextTick(() => {
-        //this.trAddHeight(this.$refs.row[0].offsetHeight)
-      })
     },
     highlightRemoveItem(index) {
       this.highlightItems.splice(index, 1)
-      //this.trTrimHeight(this.$refs.row[0].offsetHeight)
     },
 
 
@@ -1109,59 +1146,137 @@ export default {
       this.highlightImageItems[index].push({
         id: this.nextTodoId += this.nextTodoId,
       })
-
-      this.$nextTick(() => {
-        //this.trAddHeight(this.$refs.row[0].offsetHeight)
-      })
     },
     highlightImageRemoveItem(index, index2) {
       this.highlightImageItems[index].splice(index2, 1)
-      //this.trTrimHeight(this.$refs.row[0].offsetHeight)
     },
 
-    
     pointRepeateAgain() {
       this.pointItems.push({
-        id: this.nextTodoId += this.nextTodoId,
-      })
-
-      this.$nextTick(() => {
-        //this.trAddHeight(this.$refs.row[0].offsetHeight)
+        id: this.nextImageId += this.nextImageId,
       })
     },
     pointRemoveItem(index) {
       this.pointItems.splice(index, 1)
-      //this.trTrimHeight(this.$refs.row[0].offsetHeight)
     },
+    
 
 
     youtubeRepeateAgain() {
-      this.youtubeItems.push({
-        id: this.nextTodoId += this.nextTodoId,
-      })
-
-      this.$nextTick(() => {
-        //this.trAddHeight(this.$refs.row[0].offsetHeight)
-      })
+      this.youtubeItems.push('');
+      this.pointData.youtubeVideoIds.push('');
     },
     youtubeRemoveItem(index) {
       this.youtubeItems.splice(index, 1)
-      //this.trTrimHeight(this.$refs.row[0].offsetHeight)
+      this.pointData.youtubeVideoIds.splice(index, 1)
     },
-    
-    
     referenceRepeateAgain() {
-      this.referenceItems.push({
-        id: this.nextTodoId += this.nextTodoId,
-      })
-
-      this.$nextTick(() => {
-        //this.trAddHeight(this.$refs.row[0].offsetHeight)
-      })
+      this.referenceItems.push('');
+      this.pointData.referenceUrls.push('');
     },
     referencRemoveItem(index) {
-      this.referenceItems.splice(index, 1)
-      //this.trTrimHeight(this.$refs.row[0].offsetHeight)
+      this.referenceItems.splice(index, 1);
+      this.pointData.referenceUrls.splice(index, 1);
+    },
+    async submitClick() {
+      var _pointData = JSON.parse(JSON.stringify(this.pointData));
+      if (_pointData.latitude == '' || _pointData.longitude == '') {
+        this.$swal({
+          title: 'Error!',
+          text: 'Please input latitude and longitude!!',
+          icon: 'error',
+          customClass: {
+            confirmButton: 'btn btn-primary',
+          },
+          buttonsStyling: false,
+        })
+        return false;
+      }
+      _pointData.latitude = parseFloat(_pointData.latitude);
+      _pointData.longitude = parseFloat(_pointData.longitude);
+      _pointData.uniqueName = _pointData.address;
+      _pointData.minDepth = parseInt(_pointData.minDepth);
+      _pointData.maxDepth = parseInt(_pointData.maxDepth);
+
+      if (typeof(_pointData.diveSiteId) == 'object' ) {
+        var site_id = _pointData.diveSiteId._id;
+        delete _pointData.diveSiteId;
+        _pointData.diveSiteId = site_id;
+      }
+
+      if (_pointData._id == null) delete _pointData._id;
+      delete _pointData.scubaIndex;
+      delete _pointData.seaTemperature;
+
+      // 백그라운드 이미지
+      {
+        // background Images for just id
+        var _id_list = [];
+        for (var i=0; i<_pointData.backgroundImages.length; i++) {
+          if (_pointData.backgroundImages[i].hasOwnProperty("_id")) {
+            var _id = _pointData.backgroundImages[i]._id;
+            _id_list.push(_id);
+          }
+        }
+        delete _pointData.backgroundImages;
+        _pointData.backgroundImages = _id_list;
+
+        // upload background image
+        for (var i=0; i<this.backgroundImages.length; i++) {
+          var image = this.backgroundImages[i];
+          var _id = _pointData.backgroundImages[i];
+          if (_id == null) {
+            var result = await uploadSingleImage(image);
+            _id = result.uploadImage._id;
+            _pointData.backgroundImages.push(_id);
+          }
+          var result2 = await updateImage({_id: _id, reference: this.backgroundImageRef[i], name: image.name, description: this.backgroundImageName[i], uploaderId: 'apneaofficer'})
+        }
+      }
+
+      // 포인트 이미지
+      {
+        // point Images for just id
+        var _id_list = [];
+        for (var i=0; i<_pointData.images.length; i++) {
+          if (_pointData.images[i].hasOwnProperty("_id")) {
+            var _id = _pointData.images[i]._id;
+            _id_list.push(_id);
+          }
+        }
+        delete _pointData.images;
+        _pointData.images = _id_list;
+
+        // upload point image
+        for (var i=0; i<this.pointImages.length; i++) {
+          var image = this.pointImages[i];
+          var _id = _pointData.images[i];
+          if (_id == null) {
+            var result = await uploadSingleImage(image);
+            _id = result.uploadImage._id;
+            _pointData.images.push(_id);
+          }
+          var result2 = await updateImage({_id: _id, reference: this.pointImageRef[i], name: image.name, description: this.pointImageName[i], uploaderId: 'apneaofficer'})
+        }
+      }
+
+      try {
+        await upsertDivePoint(_pointData);
+      } catch (e) {
+        this.$swal({
+          title: 'Error!',
+          text: e,
+          icon: 'error',
+          customClass: {
+            confirmButton: 'btn btn-primary',
+          },
+          buttonsStyling: false,
+        })
+      }
+      
+      
+      this.$emit('update:is-add-new-point-sidebar-active', false)
+      this.pointData = JSON.parse(JSON.stringify(blankPointData));
     },
   },
 }

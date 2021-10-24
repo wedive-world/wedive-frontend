@@ -2,6 +2,22 @@
   <b-card
     title="관심사항 관리"
   >
+    <vue-context ref="menu">
+      <li>
+        <b-link
+          v-for="data in menuData"
+          :key="data.text"
+          class="d-flex align-items-center"
+          @click="optionClicked(data.text,data.icon)"
+        >
+          <feather-icon
+            :icon="data.icon"
+            size="16"
+          />
+          <span class="ml-75">{{ data.text }}</span>
+        </b-link>
+      </li>
+    </vue-context>
     <b-button
         v-ripple.400="'rgba(113, 102, 240, 0.15)'"
         v-b-modal.modal-add
@@ -23,7 +39,7 @@
         ref="grid"
         id="mygrid"
         :column-defs="columnDefs"
-        :row-data="getAllInterests"
+        :row-data="interests"
         row-data-key='_id'
         @cell-updated="cellUpdated"
         >
@@ -31,10 +47,12 @@
             
         </template>
         <template v-slot:header-r>
-            Total rows: {{ getAllInterests.length }}
+            Total rows: {{ interests.length }}
         </template>
       </vue-editable-grid>
     </div>
+
+    
     
 
     <b-modal
@@ -74,12 +92,13 @@
             label="타입"
             label-for="type"
           >
-            <v-select
-              @input="setSelected"
-              id="type"
-              :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
-              :options="getAllInterests.type()"
-            />
+          <b-form-select
+            v-model="addType"
+            :options="interest_types"
+            size="sm"
+            class="mt-1"
+          />
+            
              
           </b-form-group>
         </b-col>
@@ -134,21 +153,23 @@
       >
       <b-form-select
         v-model="delSelected"
-        :options="getAllInterests.map((inter)=>{return ({text: inter.title, value: inter._id})})"
+        :options="interests.map((inter)=>{return ({text: inter.title, value: inter._id})})"
         size="sm"
         class="mt-1"
       />
       
     </b-modal>
   </b-card>
+
 </template>
 
 <script>
-import { BTable, BCard, BButton, BModal, BFormInput, BRow, BCol, BFormGroup, BFormSelect } from 'bootstrap-vue'
-import gql from 'graphql-tag'
+import { BTable, BCard, BButton, BModal, BFormInput, BRow, BCol, BFormGroup, BFormSelect, BLink } from 'bootstrap-vue'
+import VueContext from 'vue-context'
 import vSelect from 'vue-select'
 import Ripple from 'vue-ripple-directive'
-const { query, mutation } = require('@/wedive-frontend-graphql/driver/gql/interest-gql')
+const { getAllInterests, getInterestTypes, upsertInterest, deleteInterestById } = require ('@/wedive-frontend-graphql/interest-service')
+
 
 const columnDefinition = [
     { sortable: true, filter: true, field: 'title', headerName: '관심내용', editable: true },
@@ -157,20 +178,6 @@ const columnDefinition = [
     { sortable: true, filter: true, field: 'iconName', headerName: '아이콘내용', editable: true },
 ];
 
-
-const CREATE_INTEREST = gql`
-    mutation InterestMutation($interestInput: InterestInput!) {
-        interest(input: $interestInput) {
-            _id
-            title
-            type
-            iconType
-            iconName
-            iconColor
-            iconUrl
-        }
-    }
-`;
 
 export default {
   components: {
@@ -184,6 +191,8 @@ export default {
     BCol,
     BFormSelect,
     vSelect,
+    BLink,
+    VueContext,
   },
   directives: {
     Ripple,
@@ -191,37 +200,93 @@ export default {
   data() {
     return {
       columnDefs: columnDefinition,
-      getAllInterests: [],
-      type_options: ['discountTarget', 'discountOption', 'gender', 'age', 'diving', 'amity', 'tripFeature'],
+      interests: [],
+      interest_types: [],
       title: '',
       addType: '',
       iconType: 'awesome-font',
       iconName: '',
       delSelected: '',
+      menuData: [
+        { icon: 'PlusIcon', text: 'New' },
+        { icon: 'FileIcon', text: 'Open' },
+        { icon: 'SaveIcon', text: 'Save' },
+        { icon: 'SaveIcon', text: 'Save As' },
+        { icon: 'XIcon', text: 'Close' },
+      ],
     }
   },
-  apollo: {
-    getAllInterests: {
-        query: query.getAllInterests
-    }
+  async beforeRouteEnter(to, from, next) {
+    var interests = await getAllInterests();
+    var interest_types = await getInterestTypes();
+    next(vm => {vm.setInterests(interests, interest_types)});
   },
   methods: {
-    cellUpdated($event) {
-      var i_input = {_id: $event.row._id, title: $event.row.title, type: $event.row.type, iconType: $event.row.iconType, iconName: $event.row.iconName, iconColor: $event.row.iconColor, iconUrl: $event.row.iconUrl};
+    setInterests: function(interests, interest_types) {
+      this.interests = interests;
+      this.interest_types = interest_types;
+    },
+    async cellUpdated($event) {
+      var i_input = {_id: $event.row._id, title: $event.row.title, uniqueName: $event.row.title, type: $event.row.type, iconType: $event.row.iconType, iconName: $event.row.iconName, iconColor: $event.row.iconColor, iconUrl: $event.row.iconUrl};
       i_input[$event.column.field] = $event.value;
-      this.$apollo.mutate({mutation: CREATE_INTEREST, variables: {interestInput: i_input}}).then((data) => {console.log(data)}).catch((error) => {console.log(error);});
+      try {
+        await upsertInterest(i_input)
+      } catch (e) {
+        this.$swal({
+          title: 'Error!',
+          text: e,
+          icon: 'error',
+          customClass: {
+            confirmButton: 'btn btn-primary',
+          },
+          buttonsStyling: false,
+        })
+      }
     },
-    AddInterest() {
-      //console.log(title.value);
-      //console.log(this.addType);
-      //console.log(iconType.value);
-      //console.log(iconName.value);
-      var i_input = {title: title.value, type: this.addType, iconType: iconType.value, iconName: iconName.value, iconColor: "", iconUrl: null};
-      this.$apollo.mutate({mutation: CREATE_INTEREST, variables: {interestInput: i_input}}).then((data) => {console.log(data)}).catch((error) => {console.log(error);});
+    async AddInterest() {
+      var i_input = {title: title.value, uniqueName: title.value, type: this.addType, iconType: iconType.value, iconName: iconName.value, iconColor: "", iconUrl: null};
+      try {
+        await upsertInterest(i_input)
+      } catch (e) {
+        this.$swal({
+          title: 'Error!',
+          text: e,
+          icon: 'error',
+          customClass: {
+            confirmButton: 'btn btn-primary',
+          },
+          buttonsStyling: false,
+        })
+      }
+      //this.$apollo.mutate({mutation: CREATE_INTEREST, variables: {interestInput: i_input}}).then((data) => {console.log(data)}).catch((error) => {console.log(error);});
     },
-    DeleteInterest() {
-      console.log("DeleteInterest");
-      console.log(this.delSelected);
+    async DeleteInterest() {
+      try {
+        await deleteInterestById(this.delSelected)
+      } catch (e) {
+        this.$swal({
+          title: 'Error!',
+          text: e,
+          icon: 'error',
+          customClass: {
+            confirmButton: 'btn btn-primary',
+          },
+          buttonsStyling: false,
+        })
+      }
+    },
+    contextMenu ($event) {
+      console.log($event)
+    },
+    optionClicked(text, icon) {
+      console.log("aaaaaaa ${text}");
+      /*this.$toast({
+        component: ToastificationContent,
+        props: {
+          title: `You have click on ${text}!`,
+          icon,
+        },
+      })*/
     },
     
     setSelected(value) {
@@ -231,7 +296,8 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import '@core/scss/vue/libs/vue-context.scss';
 .my-grid-class {
   height: 400px;
 }

@@ -42,20 +42,20 @@
           <!-- Status -->
           <validation-provider
             #default="validationContext"
-            name="status"
+            name="publishStatus"
             rules="required"
           >
             <b-form-group
               label="상태선택"
-              label-for="status"
+              label-for="publishStatus"
               :state="getValidationState(validationContext)"
             >
               <v-select
-                v-model="siteData.status"
+                v-model="siteData.publishStatus"
                 :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
                 :options="statusOptions"
                 :clearable="false"
-                input-id="status"
+                input-id="publishStatus"
               />
               <b-form-invalid-feedback :state="getValidationState(validationContext)">
                 {{ validationContext.errors[0] }}
@@ -81,7 +81,7 @@
                 autofocus
                 :state="getValidationState(validationContext)"
                 trim
-                placeholder="mun-island"
+                placeholder="yangyang"
               />
 
               <b-form-invalid-feedback>
@@ -105,7 +105,7 @@
                 v-model="siteData.name"
                 :state="getValidationState(validationContext)"
                 trim
-                placeholder="문섬"
+                placeholder="양양"
               />
 
               <b-form-invalid-feedback>
@@ -208,15 +208,15 @@
           <!-- info Visit -->
           <validation-provider
             #default="validationContext"
-            name="infoVisit"
+            name="visitTimeDescription"
           >
             <b-form-group
               label="방문시기"
-              label-for="infoVisit"
+              label-for="visitTimeDescription"
             >
               <b-form-input
-                id="infoVisit"
-                v-model="siteData.infoVisit"
+                id="visitTimeDescription"
+                v-model="siteData.visitTimeDescription"
                 :state="getValidationState(validationContext)"
                 max="80"
                 trim
@@ -227,15 +227,15 @@
           <!-- info Temperature -->
           <validation-provider
             #default="validationContext"
-            name="infoTemperature"
+            name="waterTemperatureDescription"
           >
             <b-form-group
               label="수온"
-              label-for="infoTemperature"
+              label-for="waterTemperatureDescription"
             >
               <b-form-input
-                id="infoTemperature"
-                v-model="siteData.infoTemperature"
+                id="waterTemperatureDescription"
+                v-model="siteData.waterTemperatureDescription"
                 :state="getValidationState(validationContext)"
                 max="80"
                 trim
@@ -246,15 +246,15 @@
           <!-- info Deep -->
           <validation-provider
             #default="validationContext"
-            name="infoDeep"
+            name="deepDescription"
           >
             <b-form-group
               label="수심"
-              label-for="infoDeep"
+              label-for="deepDescription"
             >
               <b-form-input
-                id="infoDeep"
-                v-model="siteData.infoDeep"
+                id="deepDescription"
+                v-model="siteData.deepDescription"
                 :state="getValidationState(validationContext)"
                 max="80"
                 trim
@@ -265,15 +265,15 @@
           <!-- info Current -->
           <validation-provider
             #default="validationContext"
-            name="infoCurrent"
+            name="waterFlowDescription"
           >
             <b-form-group
               label="해류"
-              label-for="infoCurrent"
+              label-for="waterFlowDescription"
             >
               <b-form-input
-                id="infoCurrent"
-                v-model="siteData.infoCurrent"
+                id="waterFlowDescription"
+                v-model="siteData.waterFlowDescription"
                 :state="getValidationState(validationContext)"
                 max="80"
                 trim
@@ -284,15 +284,15 @@
           <!-- info Sight -->
           <validation-provider
             #default="validationContext"
-            name="infoSight"
+            name="eyeSightDescription"
           >
             <b-form-group
               label="시야"
-              label-for="infoSight"
+              label-for="eyeSightDescription"
             >
               <b-form-input
-                id="infoSight"
-                v-model="siteData.infoSight"
+                id="eyeSightDescription"
+                v-model="siteData.eyeSightDescription"
                 :state="getValidationState(validationContext)"
                 max="80"
                 trim
@@ -303,15 +303,15 @@
           <!-- info Highlight -->
           <validation-provider
             #default="validationContext"
-            name="infoHighlight"
+            name="highlightDescription"
           >
             <b-form-group
               label="하이라이트"
-              label-for="infoHighlight"
+              label-for="highlightDescription"
             >
               <b-form-input
-                id="infoHighlight"
-                v-model="siteData.infoHighlight"
+                id="highlightDescription"
+                v-model="siteData.highlightDescription"
                 :state="getValidationState(validationContext)"
                 max="80"
                 trim
@@ -334,8 +334,12 @@
                 :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
                 multiple
                 label="title"
-                :options="interests.filter(interest => interest.type!='aquaticLife')"
-              />
+                :options="interestData.filter(interest => interest.type!='aquaticLife')"
+              >
+              <template slot="option" slot-scope="option">
+                {{ option.title }} ({{option.type}})
+              </template>
+              </v-select>
             </b-col>
           </b-row>
           <label>월별관심 사항은 포인트에서 읽어옵니다.</label>
@@ -346,14 +350,11 @@
 
           <!-- Scuba Index -->
           <validation-provider
-            #default="validationContext"
             name="scubaIndex"
-            rules="required"
           >
             <b-form-group
               label="실시간 지수 (해수부)"
               label-for="scubaIndex"
-              :state="getValidationState(validationContext)"
             >
               <v-select
                 v-model="siteData.scubaIndex"
@@ -362,22 +363,16 @@
                 :clearable="false"
                 input-id="scubaIndex"
               />
-              <b-form-invalid-feedback :state="getValidationState(validationContext)">
-                {{ validationContext.errors[0] }}
-              </b-form-invalid-feedback>
             </b-form-group>
           </validation-provider>
 
           <!-- Sea Temperature -->
           <validation-provider
-            #default="validationContext"
             name="seaTemperature"
-            rules="required"
           >
             <b-form-group
               label="월별 수온 (seaTemperature)"
               label-for="seaTemperature"
-              :state="getValidationState(validationContext)"
             >
               <v-select
                 v-model="siteData.seaTemperature"
@@ -386,9 +381,6 @@
                 :clearable="false"
                 input-id="seaTemperature"
               />
-              <b-form-invalid-feedback :state="getValidationState(validationContext)">
-                {{ validationContext.errors[0] }}
-              </b-form-invalid-feedback>
             </b-form-group>
           </validation-provider>
 
@@ -469,11 +461,11 @@
                 <b-col md="4" class="pr-0">
                     <b-form-group
                     label="파일"
-                    :label-for="'backgroundImagesFile' + index"
+                    :label-for="'backgroundImages' + index"
                     >
                     <b-form-file
-                        :id="'backgroundImagesFile' + index"
-                        v-model="backgroundImagesFile[index]"
+                        :id="'backgroundImages' + index"
+                        v-model="backgroundImages[index]"
                         placeholder="Choose or drop"
                         drop-placeholder="Drop here"
                         accept=".jpg,.jpeg,.png"
@@ -489,6 +481,7 @@
                     >
                     <b-form-input
                         id="backgroundImagesRef"
+                        v-model="backgroundImageRef[index]"
                         type="text"
                         placeholder=""
                     />
@@ -503,6 +496,7 @@
                     >
                     <b-form-input
                         id="backgroundImagesRef"
+                        v-model="backgroundImageName[index]"
                         type="text"
                         placeholder=""
                     />
@@ -563,20 +557,21 @@
               <!-- Row Loop -->
               <b-row
                 v-for="(item, index) in youtubeItems"
-                :id="item.id"
-                :key="item.id"
-                ref="row"
+                :id="'youtubeVideoIds'+index"
+                :key="'youtubeVideoIds'+index"
+                ref="youtubeRow"
                 >
 
                 <!-- Video ID -->
                 <b-col md="11" class="pr-0">
                     <b-form-group
                     label="유튜브 코드"
-                    label-for="youtubeVideoId"
+                    :label-for="'youtubeVideoId'+index"
                     >
                     <b-form-input
-                        id="youtubeVideoId"
+                        :id="'youtubeVideoId'+index"
                         type="text"
+                        v-model="siteData.youtubeVideoIds[index]"
                         placeholder="11자리 입력"
                     />
                     </b-form-group>
@@ -634,20 +629,21 @@
               <!-- Row Loop -->
               <b-row
                 v-for="(item, index) in referenceItems"
-                :id="item.id"
-                :key="item.id"
-                ref="row"
+                :id="'referenceItems'+index"
+                :key="'referenceItems'+index"
+                ref="referenceRow"
                 >
 
                 <!-- Video ID -->
                 <b-col md="11" class="pr-0">
                     <b-form-group
                     label="URL"
-                    label-for="referenceUrl"
+                    :label-for="'referenceUrl'+index"
                     >
                     <b-form-input
-                        id="referenceUrl"
+                        :id="'referenceUrl'+index"
                         type="text"
+                        v-model="siteData.referenceUrls[index]"
                         placeholder="실제 사이트에는 보이지 않음"
                     />
                     </b-form-group>
@@ -722,8 +718,9 @@
               variant="primary"
               class="mr-2"
               type="submit"
+              @click="submitClick"
             >
-              Add
+              {{ submitText }}
             </b-button>
             <b-button
               v-ripple.400="'rgba(186, 191, 199, 0.15)'"
@@ -752,21 +749,58 @@ import formValidation from '@core/comp-functions/forms/form-validation'
 import Ripple from 'vue-ripple-directive'
 import vSelect from 'vue-select'
 import store from '@/store'
-import gql from 'graphql-tag'
+const { upsertDiveSite } = require('@/wedive-frontend-graphql/dive-site-service')
+const { uploadSingleImage, updateImage, getImageUrl } = require('@/wedive-frontend-graphql/image-service')
 
-const GET_INTERESTS = gql`
-    query GetInerests {
-        interests {
-            _id
-            title
-            type
-            iconType
-            iconName
-            iconUrl
-            iconColor
-        }
-    }
-`;
+const enumPopularity = ["nothing", "unrecommended", "soso", "popular"];
+const enumClimate = ["nothing", "sunny", "cloudy", "rain", "heavyRain"];
+const blankSiteData = {
+  _id: null,
+  address: '',
+  latitude: '',
+  longitude: '',
+  countryCode: 'kr',
+  name: '',
+  uniqueName: '',
+  description: '',
+  images: [],
+  backgroundImages: [],
+  youtubeVideoIds: [],
+  referenceUrls: [],
+  memo: '',
+  publishStatus: 'inactive',
+  month1: [],
+  month2: [],
+  month3: [],
+  month4: [],
+  month5: [],
+  month6: [],
+  month7: [],
+  month8: [],
+  month9: [],
+  month10: [],
+  month11: [],
+  month12: [],
+  waterTemperatureScore: 0,
+  eyeSiteScore: 0,
+  adminScore: 70,
+  visitTimeDescription: '',
+  waterTemperatureDescription: '',
+  deepDescription: '',
+  waterFlowDescription: '',
+  eyeSightDescription: '',
+  highlightDescription: '',
+  
+  
+  
+  
+  
+  scubaIndex: '',
+  seaTemperature: '',
+  monthlyPopular: [0, 2, 1, 1, 1, 2, 3, 3, 3, 3, 2, 1, 1],
+  monthlyWeather: [0, 2, 2, 2, 2, 2, 2, 1, 3, 3, 2, 2, 2],
+};
+
 
 export default {
   components: {
@@ -803,9 +837,18 @@ export default {
       type: Array,
       required: true,
     },
+    interestData: {
+      type: Array,
+      required: true,
+    },
+    /*siteData: {
+      type: Object,
+      required: true,
+    },*/
   },
   data() {
     return {
+      interest_types: [],
       required,
       alphaNum,
       statusOptions: ['pending', 'active', 'inactive', 'deleted',],
@@ -814,55 +857,17 @@ export default {
       backgroundItems: [],
       youtubeItems: [],
       referenceItems: [],
-      nextTodoId: 2,
-      backgroundImagesFile: [],
+      nextImageId: 1,
+      backgroundImages: [],
+      backgroundImageRef: [],
+      backgroundImageName: [],
       interestSelectedTotal: [],
       interestSelected: [],
-      interests: []
-    }
-  },
-  apollo: {
-    interests: {
-        query: GET_INTERESTS
+      submitText: 'Add',
     }
   },
   setup(props, { emit }) {
-    const blankSiteData = {
-      status: 'inactive',
-      address: '',
-      name: '',
-      description: '',
-      adminScore: 70,
-
-      latitude: '',
-      longitude: '',
-      infoVisit: '',
-      infoTemperature: '',
-      infoDeep: '',
-      infoCurrent: '',
-      infoSight: '',
-      infoHighlight: '',
-      scubaIndex: '',
-      seaTemperature: '',
-      monthlyPopular: [0, 2, 1, 1, 1, 2, 3, 3, 3, 3, 2, 1, 1],
-      monthlyWeather: [0, 2, 2, 2, 2, 2, 2, 1, 3, 3, 2, 2, 2],
-      monthlyWeather1: 2,
-      monthlyWeather2: 2,
-      monthlyWeather3: 2,
-      monthlyWeather4: 2,
-      monthlyWeather5: 2,
-      monthlyWeather6: 2,
-      monthlyWeather7: 1,
-      monthlyWeather8: 3,
-      monthlyWeather9: 3,
-      monthlyWeather10: 2,
-      monthlyWeather11: 2,
-      monthlyWeather12: 2,
-      backgroundImagesFile: null,
-      memo: '',
-    }
-
-    const siteData = ref(JSON.parse(JSON.stringify(blankSiteData)))
+    const siteData = JSON.parse(JSON.stringify(blankSiteData))
     const resetSiteData = () => {
       siteData.value = JSON.parse(JSON.stringify(blankSiteData))
     }
@@ -891,48 +896,201 @@ export default {
     }
   },
   methods: {
+    setSiteData: function(_data) {
+      for (var key in this.siteData) {
+        if (_data[key]) {
+          if (key.includes('month')) {
+            if (_data[key] != null) {
+              _data[key].map((item, index) => {
+                if (item.type == 'climate') {
+                  this.siteData.monthlyWeather[index+1] = enumClimate.findIndex((climate) => climate === item.title);
+                } else if (item.type == 'popularity') {
+                  this.siteData.monthlyPopular[index+1] = enumPopularity.findIndex((popularity) => popularity === item.title)
+                }
+              })
+            }
+          } else if (key == 'backgroundImages') {
+            _data[key].map(image=>{
+              this.backgroundItems.push({
+                id: this.nextImageId += this.nextImageId,
+              })
+              this.backgroundImages.push(new File([""], (image.name == null) ? '' : image.name));
+              this.backgroundImageRef.push((image.reference == null) ? '' : image.reference);
+              this.backgroundImageName.push((image.description == null) ? '' : image.description);
+            });
+            this.siteData[key] = _data[key];
+          } else {
+            this.siteData[key] = _data[key];
+          }
+        }
+      }
+      
+      this.youtubeItems = [];
+      _data.youtubeVideoIds.map(()=>{this.youtubeItems.push('')});
+      this.referenceItems = [];
+      _data.referenceUrls.map(()=>{this.referenceItems.push('')});
+      this.submitText = 'Update';
+
+
+      // 인기도 및 날씨정보
+      var popular_id = this.interestData.filter(interest=>interest.type=='popularity' && interest.title=='popular')[0]._id
+      var soso_id = this.interestData.filter(interest=>interest.type=='popularity' && interest.title=='soso')[0]._id
+      var unrecommended_id = this.interestData.filter(interest=>interest.type=='popularity' && interest.title=='unrecommended')[0]._id
+      var popularity_id_list = {};
+      popularity_id_list[popular_id] = 3;
+      popularity_id_list[soso_id] = 2;
+      popularity_id_list[unrecommended_id] = 1;
+
+      var sunny_id = this.interestData.filter(interest=>interest.type=='climate' && interest.title=='sunny')[0]._id
+      var cloudy_id = this.interestData.filter(interest=>interest.type=='climate' && interest.title=='cloudy')[0]._id
+      var rain_id = this.interestData.filter(interest=>interest.type=='climate' && interest.title=='rain')[0]._id
+      var heavyRain_id = this.interestData.filter(interest=>interest.type=='climate' && interest.title=='heavyRain')[0]._id
+      var climate_id_list = {};
+      climate_id_list[sunny_id] = 1;
+      climate_id_list[cloudy_id] = 2;
+      climate_id_list[rain_id] = 3;
+      climate_id_list[heavyRain_id] = 4;
+      
+      for (var i=1; i<13; i++) {
+        for (var j=0; j<_data["month"+i].length; j++) {
+          var _id = _data["month"+i][j]._id;
+          if (popularity_id_list.hasOwnProperty(_id)) {
+            this.siteData.monthlyPopular[i] = popularity_id_list[_id];
+          }
+          if (climate_id_list.hasOwnProperty(_id)) {
+            this.siteData.monthlyWeather[i] = climate_id_list[_id];
+          }
+        }
+      }
+      
+    },
     backgroundRepeateAgain() {
       this.backgroundItems.push({
-        id: this.nextTodoId += this.nextTodoId,
-      })
-
-      this.$nextTick(() => {
-        //this.trAddHeight(this.$refs.row[0].offsetHeight)
+        id: this.nextImageId += this.nextImageId,
       })
     },
     backgroundRemoveItem(index) {
       this.backgroundItems.splice(index, 1)
-      //this.trTrimHeight(this.$refs.row[0].offsetHeight)
     },
 
 
     youtubeRepeateAgain() {
-      this.youtubeItems.push({
-        id: this.nextTodoId += this.nextTodoId,
-      })
-
-      this.$nextTick(() => {
-        //this.trAddHeight(this.$refs.row[0].offsetHeight)
-      })
+      this.youtubeItems.push('');
+      this.siteData.youtubeVideoIds.push('');
     },
     youtubeRemoveItem(index) {
       this.youtubeItems.splice(index, 1)
-      //this.trTrimHeight(this.$refs.row[0].offsetHeight)
+      this.siteData.youtubeVideoIds.splice(index, 1)
     },
-    
-    
     referenceRepeateAgain() {
-      this.referenceItems.push({
-        id: this.nextTodoId += this.nextTodoId,
-      })
-
-      this.$nextTick(() => {
-        //this.trAddHeight(this.$refs.row[0].offsetHeight)
-      })
+      this.referenceItems.push('');
+      this.siteData.referenceUrls.push('');
     },
-    referencRemoveItem(index) {
-      this.referenceItems.splice(index, 1)
-      //this.trTrimHeight(this.$refs.row[0].offsetHeight)
+    referenceRemoveItem(index) {
+      this.referenceItems.splice(index, 1);
+      this.siteData.referenceUrls.splice(index, 1);
+    },
+    async submitClick() {
+      var _siteData = JSON.parse(JSON.stringify(this.siteData));
+      if (_siteData.latitude == '' || _siteData.longitude == '') {
+        this.$swal({
+          title: 'Error!',
+          text: 'Please input latitude and longitude!!',
+          icon: 'error',
+          customClass: {
+            confirmButton: 'btn btn-primary',
+          },
+          buttonsStyling: false,
+        })
+        return false;
+      }
+      _siteData.latitude = parseFloat(_siteData.latitude);
+      _siteData.longitude = parseFloat(_siteData.longitude);
+      _siteData.uniqueName = _siteData.address;
+      
+      
+
+      {
+        // background Images for just id
+        var _id_list = [];
+        for (var i=0; i<_siteData.backgroundImages.length; i++) {
+          if (_siteData.backgroundImages[i].hasOwnProperty("_id")) {
+            var _id = _siteData.backgroundImages[i]._id;
+            _id_list.push(_id);
+          }
+        }
+        delete _siteData.backgroundImages;
+        _siteData.backgroundImages = _id_list;
+
+        // upload background image
+        for (var i=0; i<this.backgroundImages.length; i++) {
+          var image = this.backgroundImages[i];
+          var _id = _siteData.backgroundImages[i];
+          if (_id == null) {
+            var result = await uploadSingleImage(image);
+            _id = result.uploadImage._id;
+            _siteData.backgroundImages.push(_id);
+          }
+          var result2 = await updateImage({_id: _id, reference: this.backgroundImageRef[i], name: image.name, description: this.backgroundImageName[i], uploaderId: 'apneaofficer'})
+        }
+      }
+
+      {
+        var popular_id = this.interestData.filter(interest=>interest.type=='popularity' && interest.title=='popular')[0]._id
+        var soso_id = this.interestData.filter(interest=>interest.type=='popularity' && interest.title=='soso')[0]._id
+        var unrecommended_id = this.interestData.filter(interest=>interest.type=='popularity' && interest.title=='unrecommended')[0]._id
+        var popularity_id_list = {popular_id: popular_id, soso_id: soso_id, unrecommended_id: unrecommended_id};
+
+        var sunny_id = this.interestData.filter(interest=>interest.type=='climate' && interest.title=='sunny')[0]._id
+        var cloudy_id = this.interestData.filter(interest=>interest.type=='climate' && interest.title=='cloudy')[0]._id
+        var rain_id = this.interestData.filter(interest=>interest.type=='climate' && interest.title=='rain')[0]._id
+        var heavyRain_id = this.interestData.filter(interest=>interest.type=='climate' && interest.title=='heavyRain')[0]._id
+        var climate_id_list = {sunny_id: sunny_id, cloudy_id: cloudy_id, rain_id: rain_id, heavyRain_id: heavyRain_id};
+        var arr_popularity_climate = [popular_id, soso_id, unrecommended_id, sunny_id, cloudy_id, rain_id, heavyRain_id];
+
+        for (var i=1; i<13; i++) {
+          var _id_list = [];
+          for (var j=0; j<_siteData["month" + i].length; j++) {
+            if (typeof(_siteData["month" + i][j] == 'object')) {
+              if (arr_popularity_climate.includes(_siteData["month" + i][j]._id) == false)
+                _id_list.push(_siteData["month" + i][j]._id);
+            }
+          }
+          delete _siteData["month" + i];
+          _siteData["month" + i] = _id_list;
+        }
+
+        var _siteData = JSON.parse(JSON.stringify(this.siteData));
+        _siteData.latitude = parseFloat(_siteData.latitude);
+        _siteData.longitude = parseFloat(_siteData.longitude);
+        _siteData.uniqueName = _siteData.address;
+
+
+        _siteData.monthlyPopular.map((pop, index) => {
+          if (pop != 0) { // skip 0
+            _siteData["month"+index].push(popularity_id_list[enumPopularity[pop]+'_id'])
+          }
+        })
+
+        _siteData.monthlyWeather.map((cli, index) => {
+          if (cli != 0) { // skip 0
+            _siteData["month"+index].push(climate_id_list[enumClimate[cli]+'_id'])
+          }
+        })
+      }
+
+
+      if (_siteData._id == null) delete _siteData._id;
+      delete _siteData.scubaIndex;
+      delete _siteData.seaTemperature;
+
+      delete _siteData.monthlyPopular;
+      delete _siteData.monthlyWeather;
+
+      
+      upsertDiveSite(_siteData);
+      this.$emit('update:is-add-new-site-sidebar-active', false)
+      this.siteData = JSON.parse(JSON.stringify(blankSiteData));
     },
   },
 }

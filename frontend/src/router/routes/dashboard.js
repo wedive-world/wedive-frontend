@@ -19,4 +19,5 @@ export default [
     name: 'dashboard-point',
     component: () => import('@/views/dashboard/wedive/PointsList.vue'),
   },
+  
 ]

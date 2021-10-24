@@ -5,9 +5,6 @@ import { title } from '@core/utils/filter'
 // Notification
 import { useToast } from 'vue-toastification/composition'
 import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
-//import gql from 'graphql-tag'
-const { createDivePoint, getDivePointById, searchDivePointByName, nearByDivePoints, getAllDivePoints } = require('@/wedive-frontend-graphql/dive-point-service')
-const { getAllInterests } = require ('@/wedive-frontend-graphql/interest-service')
 
 export default function usePointsList() {
   // Use toast
@@ -20,7 +17,7 @@ export default function usePointsList() {
     { key: 'address', sortable: true },
     { key: 'name', sortable: true },
     { key: 'countryCode', sortable: true },
-    { key: 'status', sortable: true },
+    { key: 'publishStatus', sortable: true },
     { key: 'actions' },
   ]
   const perPage = ref(10)
@@ -50,19 +47,7 @@ export default function usePointsList() {
     refetchData()
   })
 
-  const fetchPoints = async (ctx, callback) => {
-    var points = await getAllDivePoints();
-    var total = points.length;
-    console.log("points ==================");
-    console.log(points);
-    console.log(total);
-
-    callback(points)
-    totalPoints.value = total
-  }
-  
-
-  /*const fetchPoints = (ctx, callback) => {
+  const fetchPoints = (ctx, callback) => {
     store
       .dispatch('app-point/fetchPoints', {
         q: searchQuery.value,
@@ -74,12 +59,13 @@ export default function usePointsList() {
         status: statusFilter.value,
       })
       .then(response => {
-        const { points, total } = response.data
+        const { points, total } = response
 
         callback(points)
         totalPoints.value = total
       })
-      .catch(() => {
+      .catch((e) => {
+        console.log(e);
         toast({
           component: ToastificationContent,
           props: {
@@ -89,27 +75,57 @@ export default function usePointsList() {
           },
         })
       })
-  }*/
+  }
+
+  const fetchPoint = (ctx, callback) => {
+    store
+      .dispatch('app-point/fetchPoint', {
+        q: searchQuery.value,
+        perPage: perPage.value,
+        page: currentPage.value,
+        sortBy: sortBy.value,
+        sortDesc: isSortDirDesc.value,
+        country: countryFilter.value,
+        status: statusFilter.value,
+      })
+      .then(response => {
+        const { point } = response
+
+        callback(point)
+        totalPoints.value = total
+      })
+      .catch((e) => {
+        console.log(e);
+        toast({
+          component: ToastificationContent,
+          props: {
+            title: 'Error fetching point by id',
+            icon: 'AlertTriangleIcon',
+            variant: 'danger',
+          },
+        })
+      })
+  }
 
   // *===============================================---*
   // *--------- UI ---------------------------------------*
   // *===============================================---*
 
-  const resolvePointCountryVariant = country => {
-    if (country === 'subscriber') return 'primary'
-    if (country === 'author') return 'warning'
-    if (country === 'maintainer') return 'success'
-    if (country === 'editor') return 'info'
-    if (country === 'admin') return 'danger'
+  const resolvePointRoleVariant = role => {
+    if (role === 'subscriber') return 'primary'
+    if (role === 'author') return 'warning'
+    if (role === 'maintainer') return 'success'
+    if (role === 'editor') return 'info'
+    if (role === 'admin') return 'danger'
     return 'primary'
   }
 
-  const resolvePointCountryIcon = country => {
-    if (country === 'subscriber') return 'PointIcon'
-    if (country === 'author') return 'SettingsIcon'
-    if (country === 'maintainer') return 'DatabaseIcon'
-    if (country === 'editor') return 'Edit2Icon'
-    if (country === 'admin') return 'ServerIcon'
+  const resolvePointRoleIcon = role => {
+    if (role === 'subscriber') return 'PointIcon'
+    if (role === 'author') return 'SettingsIcon'
+    if (role === 'maintainer') return 'DatabaseIcon'
+    if (role === 'editor') return 'Edit2Icon'
+    if (role === 'admin') return 'ServerIcon'
     return 'PointIcon'
   }
 
@@ -122,6 +138,7 @@ export default function usePointsList() {
 
   return {
     fetchPoints,
+    fetchPoint,
     tableColumns,
     perPage,
     currentPage,
@@ -133,8 +150,8 @@ export default function usePointsList() {
     isSortDirDesc,
     refPointListTable,
 
-    resolvePointCountryVariant,
-    resolvePointCountryIcon,
+    resolvePointRoleVariant,
+    resolvePointRoleIcon,
     resolvePointStatusVariant,
     refetchData,
 
