@@ -172,11 +172,14 @@
               :label="adminScoreLabel[index]"
               label-for="'adminScore'+index"
             >
-              <b-form-spinbutton
+              <b-form-input
                 :id="'adminScore'+index"
                 v-model="pointData[adminScoreName[index]]"
                 min="1"
                 max="100"
+                type="number"
+                trim
+                placeholder="1~100 숫자입력"
               />
               <b-form-invalid-feedback>
                 {{ validationContext.errors[0] }}
@@ -1213,6 +1216,10 @@ export default {
       _pointData.uniqueName = _pointData.address;
       _pointData.minDepth = parseInt(_pointData.minDepth);
       _pointData.maxDepth = parseInt(_pointData.maxDepth);
+      _siteData.adminScore = parseInt(_siteData.adminScore);
+      _siteData.waterEnvironmentScore = parseInt(_siteData.waterEnvironmentScore);
+      _siteData.flowRateScore = parseInt(_siteData.flowRateScore);
+      _siteData.eyeSightScore = parseInt(_siteData.eyeSightScore);
 
       if (typeof(_pointData.diveSiteId) == 'object' ) {
         var site_id = _pointData.diveSiteId._id;

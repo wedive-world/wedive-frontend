@@ -142,12 +142,16 @@
               label="해당 사이트 총점"
               label-for="adminScore"
             >
-              <b-form-spinbutton
+              <b-form-input
                 id="adminScore"
                 v-model="siteData.adminScore"
                 min="1"
                 max="100"
+                type="number"
+                trim
+                placeholder="양양"
               />
+
               <b-form-invalid-feedback>
                 {{ validationContext.errors[0] }}
               </b-form-invalid-feedback>
@@ -1019,6 +1023,7 @@ export default {
       _siteData.latitude = parseFloat(_siteData.latitude);
       _siteData.longitude = parseFloat(_siteData.longitude);
       _siteData.uniqueName = _siteData.address;
+      _siteData.adminScore = parseInt(_siteData.adminScore);
       
       
       // 백그라운드 이미지
