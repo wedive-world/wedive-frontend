@@ -430,19 +430,19 @@
                 <!-- Content -->
                 <b-col md="11" class="pr-0">
                     <b-form-group
-                    label="내용"
-                    :label-for="'highlightContent' + index"
+                    label="타입 (보이진X)"
+                    :label-for="'highlightName' + index"
                     >
                     <b-form-input
-                        :id="'highlightContent' + index"
-                        v-model="pointData.highlightContents[index]"
+                        :id="'highlightName' + index"
+                        v-model="pointData.highlightNames[index]"
                         autofocus
-                        placeholder="국내 최대규모의 연산호 군락지, 유네스코 생물권 보호지역"
+                        placeholder="지역특징"
                     />
                     
                     </b-form-group>
                 </b-col>
-
+                
                 <!-- Remove Button -->
                 <b-col
                     md="1"
@@ -459,6 +459,23 @@
                     />
                     </b-button>
                 </b-col>
+
+                <b-col md="11" class="pr-0">
+                    <b-form-group
+                    label="내용"
+                    :label-for="'highlightContent' + index"
+                    >
+                    <b-form-input
+                        :id="'highlightContent' + index"
+                        v-model="pointData.highlightContents[index]"
+                        autofocus
+                        placeholder="국내 최대규모의 연산호 군락지, 유네스코 생물권 보호지역"
+                    />
+                    
+                    </b-form-group>
+                </b-col>
+
+                
                 <b-col cols="12">
                     <validation-provider
                         #default="validationContext"
@@ -469,9 +486,9 @@
                         >
                         <!-- Row Loop -->
                         <b-row
-                            v-for="(item, index) in highlightImageItems[index]"
+                            v-for="(item, index2) in highlightImageItems[index]"
                             :id="item.id"
-                            :key="'rowHighItem'+index"
+                            :key="'rowHighItem'+index2"
                             ref="row2"
                             >
 
@@ -495,10 +512,11 @@
                             <b-col md="3" class="pr-0">
                                 <b-form-group
                                 label="출처"
-                                label-for="highlightImagesRef"
+                                :label-for="'highlightImagesRef' + index +'_' + index2"
                                 >
                                 <b-form-input
-                                    id="highlightImagesRef"
+                                    :id="'highlightImagesRef' + index +'_' + index2"
+                                    v-model="highlightImagesRef[index][index2]"
                                     type="text"
                                     placeholder=""
                                 />
@@ -509,10 +527,11 @@
                             <b-col md="4" class="pr-0">
                                 <b-form-group
                                 label="이름"
-                                label-for="highlightImagesName"
+                                :label-for="'highlightImagesName' + index +'_' + index2"
                                 >
                                 <b-form-input
-                                    id="highlightImagesRef"
+                                    :id="'highlightImagesName' + index +'_' + index2"
+                                    v-model="highlightImagesName[index][index2]"
                                     type="text"
                                     placeholder=""
                                 />
@@ -933,6 +952,7 @@ import vSelect from 'vue-select'
 import store from '@/store'
 const { upsertDivePoint } = require('@/wedive-frontend-graphql/dive-point-service')
 const { uploadSingleImage, updateImage, getImageUrl } = require('@/wedive-frontend-graphql/image-service')
+const { upsertHighlight } = require('@/wedive-frontend-graphql/highlight-service')
 
 const blankPointData = {
   _id: null,
@@ -973,6 +993,8 @@ const blankPointData = {
   scubaIndex: '',
   seaTemperature: '',
   highlights: [],
+  highlightContents: [],
+  highlightNames: [],
 };
 
 export default {
@@ -1032,10 +1054,14 @@ export default {
       highlightItems: [],
       highlightImageItems: [],
       highlightImagesFile: [],
+      highlightImagesRef: [],
+      highlightImagesName: [],
       pointItems: [],
       youtubeItems: [],
       referenceItems: [],
       nextBackgroundImageId: 1,
+      nextHighlightId: 1,
+      nextHighlightImageId: 1,
       nextTodoId: 2,
       backgroundImages: [],
       backgroundImageRef: [],
@@ -1150,21 +1176,26 @@ export default {
     
     highlightRepeateAgain() {
       this.highlightItems.push({
-        id: this.nextBackgroundImageId += this.nextBackgroundImageId,
+        id: this.nextHighlightId += this.nextHighlightId,
       })
 
-      this.highlightImagesFile.push([])
-      this.highlightImageItems.push([])
+      this.highlightImagesFile.push([]);
+      this.highlightImagesRef.push([]);
+      this.highlightImagesName.push([]);
+      this.highlightImageItems.push([]);
     },
     highlightRemoveItem(index) {
-      this.highlightItems.splice(index, 1)
+      this.highlightImagesFile.splice(index, 1);
+      this.highlightImagesRef.splice(index, 1);
+      this.highlightImagesName.splice(index, 1);
+      this.highlightItems.splice(index, 1);
     },
 
 
     highlightImageRepeateAgain(index) {
       this.highlightImageItems[index].push({
-        id: this.nextTodoId += this.nextTodoId,
-      })
+        id: this.nextHighlightImageId += this.nextHighlightImageId,
+      });
     },
     highlightImageRemoveItem(index, index2) {
       this.highlightImageItems[index].splice(index2, 1)
@@ -1216,10 +1247,10 @@ export default {
       _pointData.uniqueName = _pointData.address;
       _pointData.minDepth = parseInt(_pointData.minDepth);
       _pointData.maxDepth = parseInt(_pointData.maxDepth);
-      _siteData.adminScore = parseInt(_siteData.adminScore);
-      _siteData.waterEnvironmentScore = parseInt(_siteData.waterEnvironmentScore);
-      _siteData.flowRateScore = parseInt(_siteData.flowRateScore);
-      _siteData.eyeSightScore = parseInt(_siteData.eyeSightScore);
+      _pointData.adminScore = parseInt(_pointData.adminScore);
+      _pointData.waterEnvironmentScore = parseInt(_pointData.waterEnvironmentScore);
+      _pointData.flowRateScore = parseInt(_pointData.flowRateScore);
+      _pointData.eyeSightScore = parseInt(_pointData.eyeSightScore);
 
       if (typeof(_pointData.diveSiteId) == 'object' ) {
         var site_id = _pointData.diveSiteId._id;
@@ -1230,6 +1261,59 @@ export default {
       if (_pointData._id == null) delete _pointData._id;
       delete _pointData.scubaIndex;
       delete _pointData.seaTemperature;
+
+      // 하이라이트
+      {
+        console.log(JSON.parse(JSON.stringify(_pointData.highlightNames)));
+        for (var k=0; k<_pointData.highlightNames.length; k++) {
+          // 하이라이트 이미지
+          {
+            var _id_list = [];
+            if (_pointData.highlights[k] != null) {
+              for (var i=0; i<_pointData.highlights[k].length; i++) {
+                if (_pointData.highlights[k][i].hasOwnProperty("_id")) {
+                  var _id = _pointData.highlights[k][i]._id;
+                  _id_list.push(_id);
+                }
+              }
+              delete _pointData.highlights;
+              _pointData.highlights = _id_list;
+            }
+            
+            // upload highlight image
+            for (var i=0; i<this.highlightImagesFile[k].length; i++) {
+              var image = this.highlightImagesFile[k][i];
+              var _id = null;
+              if (_pointData.highlights[k] != null) _id = _pointData.highlights[k][i];
+              if (_id == null) {
+                var result = await uploadSingleImage(image);
+                _id = result.uploadImage._id;
+                //_pointData.highlights[k].push(_id);
+                _id_list.push(_id);
+              }
+              var result2 = await updateImage({_id: _id, reference: this.highlightImagesRef[k][i], name: image.name, description: this.highlightImagesName[k][i], uploaderId: 'apneaofficer'})
+            }
+          }
+
+          // 실제 하이라이트 입력
+          var _highlightData = {name: _pointData.highlightNames[k], description: _pointData.highlightContents[k], images: _id_list}
+          try {
+            await upsertHighlight(_highlightData);
+          } catch(e) {
+            this.$swal({
+            title: 'Error!',
+            text: e,
+            icon: 'error',
+            customClass: {
+              confirmButton: 'btn btn-primary',
+            },
+            buttonsStyling: false,
+          })
+          }
+        }
+        delete _pointData.highlightNames;
+        delete _pointData.highlightContents;
+      }
 
       // 백그라운드 이미지
       {
