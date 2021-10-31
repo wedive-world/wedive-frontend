@@ -349,7 +349,7 @@
               </div>
             </div>
 
-            <div class="mb-0 mt-3">
+            <div class="mb-0 mt-3 hide">
               <div class="input-style no-borders has-icon validate-field mb-3">
                 <i class="fas fa-coins color-gray"></i>
                 <input type="number" class="form-control validate-text" id="form_price" placeholder="(옵션) 참가비를 입력하세요.">
@@ -360,7 +360,7 @@
               </div>
             </div>
 
-            <div class="mb-0 mt-3">
+            <div class="mb-0 mt-3 hide">
               <div class="input-style no-borders has-icon validate-field mb-3">
                 <i class="fas fa-car color-gray"></i>
                 <input type="name" class="form-control validate-name" id="form_departure" placeholder="(옵션) 출발지를 입력하세요.">
@@ -988,5 +988,5 @@ export default {
 .timeline-deco {left: 28px !important;}
 .timeline-item-content, .timeline-item-content-full{margin: 0px 15px 30px 56px !important;}
 
-
+.hide {display: none;}
 </style>

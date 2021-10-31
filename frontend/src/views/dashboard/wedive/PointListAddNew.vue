@@ -1138,10 +1138,11 @@ export default {
               this.highlightImagesRef.push([]);
               this.highlightImagesName.push([]);
               this.highlightImageItems.push([]);
-              console.log(highlight)
+
               this.pointData.highlightContents.push(highlight.description);
               this.pointData.highlightNames.push(highlight.name);
             });
+            this.pointData[key] = _data[key];
           } else {
             this.pointData[key] = _data[key];
           }
@@ -1278,12 +1279,14 @@ export default {
 
       // 하이라이트
       {
-        console.log(JSON.parse(JSON.stringify(_pointData.highlightContents)));
+        var _id_highlight_list = [];
+        var _id_highlight_image_list = [];
+
         for (var k=0; k<_pointData.highlightNames.length; k++) {
           // 하이라이트 이미지
           {
             // upload highlight image
-            var _id_highlight_image_list = [];
+            _id_highlight_image_list.push([]);
             for (var i=0; i<this.highlightImagesFile[k].length; i++) {
               var image = this.highlightImagesFile[k][i];
               var _id = null;
@@ -1292,29 +1295,28 @@ export default {
                 var result = await uploadSingleImage(image);
                 _id = result.uploadImage._id;
                 //_pointData.highlights[k].push(_id);
-                _id_highlight_image_list.push(_id);
+                _id_highlight_image_list[k].push(_id);
               } else {
-                _id_highlight_image_list.push(_id);
+                _id_highlight_image_list[k].push(_id);
               }
               await updateImage({_id: _id, reference: this.highlightImagesRef[k][i], name: image.name, description: this.highlightImagesName[k][i], uploaderId: 'apneaofficer'})
             }
 
-
-            var _id_highlight_list = [];
             if (_pointData.highlights[k] != null) {
-              for (var i=0; i<_pointData.highlights[k].length; i++) {
-                if (_pointData.highlights[k][i].hasOwnProperty("_id")) {
-                  var _id = _pointData.highlights[k][i]._id;
-                  _id_highlight_list.push(_id);
-                }
+              if (_pointData.highlights[k].hasOwnProperty("_id")) {
+                var _id = _pointData.highlights[k]._id;
+                _id_highlight_list.push(_id);
               }
-              delete _pointData.highlights;
-              _pointData.highlights = _id_highlight_list;
             }
-            
-
-            // 실제 하이라이트 입력
-            var _highlightData = (_pointData.highlights[k] != null) ? {name: _pointData.highlightNames[k], description: _pointData.highlightContents[k], images: _id_highlight_image_list, _id: _pointData.highlights[k]} : {name: _pointData.highlightNames[k], description: _pointData.highlightContents[k], images: _id_highlight_image_list};
+          }
+        }
+        delete _pointData.highlights;
+        _pointData.highlights = _id_highlight_list;
+        
+        for (var k=0; k<_pointData.highlightNames.length; k++) {
+          // 실제 하이라이트 입력
+          {
+            var _highlightData = (_pointData.highlights[k] != null) ? {name: _pointData.highlightNames[k], description: _pointData.highlightContents[k], images: _id_highlight_image_list[k], _id: _pointData.highlights[k]} : {name: _pointData.highlightNames[k], description: _pointData.highlightContents[k], images: _id_highlight_image_list[k]};
             try {
               var result = await upsertHighlight(_highlightData);
               var _id = result.upsertHighlight._id;
