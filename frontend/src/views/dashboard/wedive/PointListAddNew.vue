@@ -1260,13 +1260,7 @@ export default {
       _pointData.latitude = parseFloat(_pointData.latitude);
       _pointData.longitude = parseFloat(_pointData.longitude);
       _pointData.uniqueName = _pointData.address;
-      _pointData.minDepth = parseInt(_pointData.minDepth);
-      _pointData.maxDepth = parseInt(_pointData.maxDepth);
-      _pointData.adminScore = parseInt(_pointData.adminScore);
-      _pointData.waterEnvironmentScore = parseInt(_pointData.waterEnvironmentScore);
-      _pointData.flowRateScore = parseInt(_pointData.flowRateScore);
-      _pointData.eyeSightScore = parseInt(_pointData.eyeSightScore);
-
+      
       if (typeof(_pointData.diveSiteId) == 'object' ) {
         var site_id = _pointData.diveSiteId._id;
         delete _pointData.diveSiteId;
@@ -1406,6 +1400,12 @@ export default {
       }
 
       try {
+        _pointData.minDepth = parseInt(_pointData.minDepth);
+        _pointData.maxDepth = parseInt(_pointData.maxDepth);
+        _pointData.adminScore = parseInt(_pointData.adminScore);
+        _pointData.waterEnvironmentScore = parseInt(_pointData.waterEnvironmentScore);
+        _pointData.flowRateScore = parseInt(_pointData.flowRateScore);
+        _pointData.eyeSightScore = parseInt(_pointData.eyeSightScore);
         await upsertDivePoint(_pointData);
       } catch (e) {
         this.$swal({

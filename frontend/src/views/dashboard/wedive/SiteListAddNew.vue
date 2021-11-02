@@ -1023,7 +1023,6 @@ export default {
       _siteData.latitude = parseFloat(_siteData.latitude);
       _siteData.longitude = parseFloat(_siteData.longitude);
       _siteData.uniqueName = _siteData.address;
-      _siteData.adminScore = parseInt(_siteData.adminScore);
       
       
       // 백그라운드 이미지
@@ -1113,6 +1112,8 @@ export default {
 
       
       try {
+        _siteData.adminScore = parseInt(_siteData.adminScore);
+        console.log(_siteData);
         await upsertDiveSite(_siteData);
       } catch (e) {
         this.$swal({
