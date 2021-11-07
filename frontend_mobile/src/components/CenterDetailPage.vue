@@ -299,7 +299,7 @@
                         <div class="row text-start">
                             <div class="ico_feature col-3">
                                 <i class="ico_feature1 icon-service"></i>
-                                <p class="span_feature text-center">외국어 가능</p>
+                                <p class="span_feature text-center">외국어가능</p>
                             </div>
                             <div class="ico_feature col-3">
                                 <i class="ico_feature2 icon-service"></i>
@@ -311,7 +311,7 @@
                             </div>
                             <div class="ico_feature col-3">
                                 <i class="ico_feature4 icon-service"></i>
-                                <p class="span_feature text-center">레이트체크아웃</p>
+                                <p class="span_feature text-center">늦은 퇴실</p>
                             </div>
                             <div class="ico_feature col-3">
                                 <i class="ico_feature5 icon-service"></i>
@@ -331,19 +331,19 @@
                             </div>
                             <div class="ico_feature col-3">
                                 <i class="ico_feature9 icon-service"></i>
-                                <p class="span_feature text-center">24시리셉션</p>
+                                <p class="span_feature text-center">24업무</p>
                             </div>
                             <div class="ico_feature col-3">
                                 <i class="ico_feature10 icon-service"></i>
-                                <p class="span_feature text-center">비지니스시설</p>
+                                <p class="span_feature text-center">비지니스</p>
                             </div>
                             <div class="ico_feature col-3">
                                 <i class="ico_feature11 icon-service"></i>
-                                <p class="span_feature text-center">장애인 편의</p>
+                                <p class="span_feature text-center">장애인편의</p>
                             </div>
                             <div class="ico_feature col-3">
                                 <i class="ico_feature12 icon-service"></i>
-                                <p class="span_feature text-center">세탁 서비스</p>
+                                <p class="span_feature text-center">세탁서비스</p>
                             </div>
                             <div class="ico_feature col-3">
                                 <i class="ico_feature13 icon-service"></i>

@@ -507,6 +507,74 @@
               </v-select>
             </b-col>
           </b-row>
+
+          <b-row
+            class="mb-1"
+          >
+            <b-col md="2" class="pr-0">
+              시설 (WIFI)
+            </b-col>
+            <b-col md="10">
+              <v-select
+                v-model="interestFacility"
+                :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
+                multiple
+                label="title"
+                :options="interestData.filter(interest => interest.type=='facility')"
+              >
+              <template slot="option" slot-scope="option">
+                {{ option.title }} ({{option.type}})
+              </template>
+              </v-select>
+            </b-col>
+          </b-row>
+
+          <b-row
+            class="mb-1"
+          >
+            <b-col md="2" class="pr-0">
+              지원언어
+            </b-col>
+            <b-col md="10">
+              <v-select
+                v-model="interestLanguage"
+                :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
+                multiple
+                label="title"
+                :options="interestData.filter(interest => interest.type=='language')"
+              >
+              <template slot="option" slot-scope="option">
+                {{ option.title }} ({{option.type}})
+              </template>
+              </v-select>
+            </b-col>
+          </b-row>
+
+          <b-row
+            class="mb-1"
+          >
+            <b-col md="2" class="pr-0">
+              지불방법
+            </b-col>
+            <b-col md="10">
+              <v-select
+                v-model="interestPayment"
+                :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
+                multiple
+                label="title"
+                :options="interestData.filter(interest => interest.type=='payment')"
+              >
+              <template slot="option" slot-scope="option">
+                {{ option.title }} ({{option.type}})
+              </template>
+              </v-select>
+            </b-col>
+          </b-row>
+
+
+          
+      
+      
           
 
           <hr>
@@ -1025,7 +1093,7 @@ export default {
       // 전체 인터레스트
       {
         _data.interests.map(interest => {
-          if (interest.type != 'priceIndex')
+          if (interest.type != 'priceIndex' && interest.type != 'facility' && interest.type != 'language' && interest.type != 'payment')
             this.interestSelectedTotal.push(interest);
         })
       }
@@ -1038,6 +1106,29 @@ export default {
         })
       }
 
+      // 시설 인터레스트
+      {
+        _data.interests.map(interest => {
+          if (interest.type == 'facility')
+            this.interestFacility.push(interest);
+        })
+      }
+      
+      // 언어 인터레스트
+      {
+        _data.interests.map(interest => {
+          if (interest.type == 'language')
+            this.interestLanguage.push(interest);
+        })
+      }
+
+      // 결재수단 인터레스트
+      {
+        _data.interests.map(interest => {
+          if (interest.type == 'payment')
+            this.interestPayment.push(interest);
+        })
+      }
       
       
       
@@ -1136,6 +1227,25 @@ export default {
       this.interestPrice.map(interest => {
         _centerData.interests.push(interest._id);
       })
+
+      // 시설 인터레스트 입력
+      _centerData.interests = [];
+      this.interestFacility.map(interest => {
+        _centerData.interests.push(interest._id);
+      })
+
+      // 지원언어 인터레스트 입력
+      _centerData.interests = [];
+      this.interestLanguage.map(interest => {
+        _centerData.interests.push(interest._id);
+      })
+
+      // 결재수단 인터레스트 입력
+      _centerData.interests = [];
+      this.interestPayment.map(interest => {
+        _centerData.interests.push(interest._id);
+      })
+
       
 
       if (_centerData._id == null) delete _centerData._id;
