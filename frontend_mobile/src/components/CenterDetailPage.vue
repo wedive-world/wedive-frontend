@@ -331,7 +331,7 @@
                             </div>
                             <div class="ico_feature col-3">
                                 <i class="ico_feature9 icon-service"></i>
-                                <p class="span_feature text-center">24업무</p>
+                                <p class="span_feature text-center">24시업무</p>
                             </div>
                             <div class="ico_feature col-3">
                                 <i class="ico_feature10 icon-service"></i>

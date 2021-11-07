@@ -512,7 +512,7 @@
             class="mb-1"
           >
             <b-col md="2" class="pr-0">
-              시설 (WIFI)
+              시설
             </b-col>
             <b-col md="10">
               <v-select
@@ -533,7 +533,7 @@
             class="mb-1"
           >
             <b-col md="2" class="pr-0">
-              지원언어
+              언어
             </b-col>
             <b-col md="10">
               <v-select
@@ -554,7 +554,7 @@
             class="mb-1"
           >
             <b-col md="2" class="pr-0">
-              지불방법
+              지불
             </b-col>
             <b-col md="10">
               <v-select
@@ -570,8 +570,7 @@
               </v-select>
             </b-col>
           </b-row>
-
-
+          
           
       
       
@@ -1027,6 +1026,9 @@ export default {
       backgroundImageName: [],
       interestSelectedTotal: [],
       interestPrice: [],
+      interestFacility: [],
+      interestLanguage: [],
+      interestPayment: [],
       interestSelected: [],
       submitText: 'Add',
     }
@@ -1222,26 +1224,25 @@ export default {
 
       }
 
-      // 가격 인터레스트 입력
+      
       _centerData.interests = [];
+      // 전체 인터레스트 입력
+      this.interestSelectedTotal.map(interest => {
+        _centerData.interests.push(interest._id);
+      })
+      // 가격 인터레스트 입력
       this.interestPrice.map(interest => {
         _centerData.interests.push(interest._id);
       })
-
       // 시설 인터레스트 입력
-      _centerData.interests = [];
       this.interestFacility.map(interest => {
         _centerData.interests.push(interest._id);
       })
-
       // 지원언어 인터레스트 입력
-      _centerData.interests = [];
       this.interestLanguage.map(interest => {
         _centerData.interests.push(interest._id);
       })
-
       // 결재수단 인터레스트 입력
-      _centerData.interests = [];
       this.interestPayment.map(interest => {
         _centerData.interests.push(interest._id);
       })
