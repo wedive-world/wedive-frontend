@@ -236,7 +236,7 @@ import { avatarText } from '@core/utils/filter'
 import CentersListFilters from './CentersListFilters.vue'
 import useCentersList from './useCentersList'
 
-import CenterStoreModule from '../CenterStoreModule'
+import centerStoreModule from '../centerStoreModule'
 import CenterListAddNew from './CenterListAddNew.vue'
 const { getAllInterests, getInterestTypes } = require ('@/wedive-frontend-graphql/interest-service')
 const { deleteDivecenterById } = require('@/wedive-frontend-graphql/dive-center-service')
@@ -267,7 +267,7 @@ export default {
     const center_APP_STORE_MODULE_NAME = 'app-center'
 
     // Register module
-    if (!store.hasModule(center_APP_STORE_MODULE_NAME)) store.registerModule(center_APP_STORE_MODULE_NAME, CenterStoreModule)
+    if (!store.hasModule(center_APP_STORE_MODULE_NAME)) store.registerModule(center_APP_STORE_MODULE_NAME, centerStoreModule)
 
     // UnRegister on leave
     onUnmounted(() => {
