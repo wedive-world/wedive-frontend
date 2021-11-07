@@ -15,6 +15,11 @@ export default [
     component: () => import('@/views/dashboard/wedive/SitesList.vue'),
   },
   {
+    path: '/dashboard/center',
+    name: 'dashboard-center',
+    component: () => import('@/views/dashboard/wedive/CentersList.vue'),
+  },
+  {
     path: '/dashboard/point',
     name: 'dashboard-point',
     component: () => import('@/views/dashboard/wedive/PointsList.vue'),
