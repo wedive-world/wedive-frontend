@@ -322,16 +322,16 @@
           <!-- 홈페이지 -->
           <validation-provider
             #default="validationContext"
-            name="webpageUrl"
+            name="webPageUrl"
             rules="required"
           >
             <b-form-group
               label="홈페이지"
-              label-for="webpageUrl"
+              label-for="webPageUrl"
             >
               <b-form-input
-                id="webpageUrl"
-                v-model="centerData.webpageUrl"
+                id="webPageUrl"
+                v-model="centerData.webPageUrl"
                 type="text"
                 trim
                 placeholder="https://kua.or.kr/"
@@ -418,7 +418,7 @@
                     <b-form-input
                         :id="'wedivesComment'+index"
                         type="text"
-                        v-model="centerData.wedivesComments[index]"
+                        v-model="centerData.wediveComments[index]"
                         placeholder="대한민국에서 가장 수중환경이 뛰어난 제주 남부 다이빙 사이트 근처에 있습니다."
                     />
                     </b-form-group>
@@ -880,23 +880,9 @@ const blankCenterData = {
   backgroundImages: [],
   youtubeVideoIds: [],
   referenceUrls: [],
-  wedivesComments: [],
+  wediveComments: [],
   memo: '',
   publishStatus: 'inactive',
-  month1: [],
-  month2: [],
-  month3: [],
-  month4: [],
-  month5: [],
-  month6: [],
-  month7: [],
-  month8: [],
-  month9: [],
-  month10: [],
-  month11: [],
-  month12: [],
-  waterTemperatureScore: 0,
-  eyeCenterScore: 0,
   adminScore: 70,
   viewScore: 50,
   educationScore: 50,
@@ -904,12 +890,7 @@ const blankCenterData = {
   serviceScore: 60,
   phoneNumber: '',
   geoAddress: '',
-  webpageUrl: '',
-  
-  
-  
-  
-  
+  webPageUrl: '',
   
   scubaIndex: '',
   seaTemperature: '',
@@ -1036,7 +1017,7 @@ export default {
       this.referenceItems = [];
       _data.referenceUrls.map(()=>{this.referenceItems.push('')});
       this.wedivesCommentItems = [];
-      _data.wedivesComments.map(()=>{this.wedivesCommentItems.push('')});
+      _data.wediveComments.map(()=>{this.wedivesCommentItems.push('')});
       this.submitText = 'Update';
 
 
@@ -1044,14 +1025,16 @@ export default {
       // 전체 인터레스트
       {
         _data.interests.map(interest => {
-          this.interestSelectedTotal.push(interest);
+          if (interest.type != 'priceIndex')
+            this.interestSelectedTotal.push(interest);
         })
       }
 
       // 가격 인터레스트
       {
         _data.interests.map(interest => {
-          this.interestPrice.push(interest);
+          if (interest.type == 'priceIndex')
+            this.interestPrice.push(interest);
         })
       }
 
@@ -1087,11 +1070,11 @@ export default {
     },
     wedivesCommentRepeateAgain() {
       this.wedivesCommentItems.push('');
-      this.centerData.wedivesComments.push('');
+      this.centerData.wediveComments.push('');
     },
     wedivesCommentRemoveItem(index) {
       this.wedivesCommentItems.splice(index, 1);
-      this.centerData.wedivesComments.splice(index, 1);
+      this.centerData.wediveComments.splice(index, 1);
     },
     async submitClick() {
       var _centerData = JSON.parse(JSON.stringify(this.centerData));

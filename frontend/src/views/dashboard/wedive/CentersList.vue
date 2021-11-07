@@ -73,7 +73,7 @@
       <b-table
         ref="refCenterListTable"
         class="position-relative"
-        :items="fetchcenters"
+        :items="fetchCenters"
         responsive
         :fields="tableColumns"
         primary-key="id"
@@ -92,11 +92,11 @@
                 :src="data.item.avatar"
                 :text="avatarText(data.item.fullName)"
                 :variant="`light-${resolveCenterCountryVariant(data.item.country)}`"
-                :to="{ name: 'app-center/fetchcenter', params: { id: data.item.id } }"
+                :to="{ name: 'app-center/fetchCenter', params: { id: data.item.id } }"
               />
             </template>
             <b-link
-              :to="{ name: 'app-center/fetchcenter', params: { id: data.item.id } }"
+              :to="{ name: 'app-center/fetchCenter', params: { id: data.item.id } }"
               class="font-weight-bold d-block text-nowrap"
             >
               {{ data.item.fullName }}
@@ -313,7 +313,7 @@ export default {
     ]
 
     const {
-      fetchcenters,
+      fetchCenters,
       tableColumns,
       perPage,
       currentPage,
@@ -345,7 +345,7 @@ export default {
       // Sidebar
       isAddNewcenterSidebarActive,
 
-      fetchcenters,
+      fetchCenters,
       tableColumns,
       perPage,
       currentPage,

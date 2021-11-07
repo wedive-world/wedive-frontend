@@ -298,20 +298,76 @@
                         <strong class="small-title">시설 정보</strong>
                         <div class="row text-start">
                             <div class="ico_feature col-3">
+                                <i class="ico_feature1 icon-service"></i>
+                                <p class="span_feature text-center">외국어 가능</p>
+                            </div>
+                            <div class="ico_feature col-3">
+                                <i class="ico_feature2 icon-service"></i>
+                                <p class="span_feature text-center">샤워가능</p>
+                            </div>
+                            <div class="ico_feature col-3">
+                                <i class="ico_feature3 icon-service"></i>
+                                <p class="span_feature text-center">룸서비스</p>
+                            </div>
+                            <div class="ico_feature col-3">
+                                <i class="ico_feature4 icon-service"></i>
+                                <p class="span_feature text-center">레이트체크아웃</p>
+                            </div>
+                            <div class="ico_feature col-3">
+                                <i class="ico_feature5 icon-service"></i>
+                                <p class="span_feature text-center">컨시어지</p>
+                            </div>
+                            <div class="ico_feature col-3">
                                 <i class="ico_feature6 icon-service"></i>
                                 <p class="span_feature text-center">주차</p>
                             </div>
                             <div class="ico_feature col-3">
-                                <i class="ico_feature16 icon-service"></i>
-                                <p class="span_feature text-center">WIFI</p>
+                                <i class="ico_feature7 icon-service"></i>
+                                <p class="span_feature text-center">주방</p>
+                            </div>
+                            <div class="ico_feature col-3">
+                                <i class="ico_feature8 icon-service"></i>
+                                <p class="span_feature text-center">남녀화장실</p>
+                            </div>
+                            <div class="ico_feature col-3">
+                                <i class="ico_feature9 icon-service"></i>
+                                <p class="span_feature text-center">24시리셉션</p>
+                            </div>
+                            <div class="ico_feature col-3">
+                                <i class="ico_feature10 icon-service"></i>
+                                <p class="span_feature text-center">비지니스시설</p>
+                            </div>
+                            <div class="ico_feature col-3">
+                                <i class="ico_feature11 icon-service"></i>
+                                <p class="span_feature text-center">장애인 편의</p>
+                            </div>
+                            <div class="ico_feature col-3">
+                                <i class="ico_feature12 icon-service"></i>
+                                <p class="span_feature text-center">세탁 서비스</p>
+                            </div>
+                            <div class="ico_feature col-3">
+                                <i class="ico_feature13 icon-service"></i>
+                                <p class="span_feature text-center">금연실</p>
+                            </div>
+                            <div class="ico_feature col-3">
+                                <i class="ico_feature14 icon-service"></i>
+                                <p class="span_feature text-center">아이돌봄</p>
                             </div>
                             <div class="ico_feature col-3">
                                 <i class="ico_feature15 icon-service"></i>
                                 <p class="span_feature text-center">반려동물</p>
                             </div>
                             <div class="ico_feature col-3">
-                                <i class="ico_feature8 icon-service"></i>
-                                <p class="span_feature text-center">남녀화장실</p>
+                                <i class="ico_feature16 icon-service"></i>
+                                <p class="span_feature text-center">WIFI</p>
+                            </div>
+                            <div class="ico_feature col-3">
+                                <i class="ico_feature17 icon-service"></i>
+                                <p class="span_feature text-center">공항셔틀</p>
+                            </div>
+                            <div class="ico_feature col-3">
+                                <i class="ico_feature18 icon-service"></i>
+                                <p class="span_feature text-center">피트니스</p>
                             </div>
                         </div>
                     </div>

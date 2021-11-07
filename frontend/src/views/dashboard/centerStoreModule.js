@@ -9,9 +9,11 @@ export default {
   mutations: {},
   actions: {
     fetchCenters(ctx, queryParams) {
+      console.log("aaaaaaaaaaaaaaaaaaaaaaa");
       return new Promise((resolve, reject) => {
         getAllDiveCenters()
         .then(response => {
+          console.log(response);
           var centers = response.getAllDiveCenters
                       .filter(center => queryParams.country == null || queryParams.country == center.countryCode)
                       .filter(center => queryParams.status == null || queryParams.status == center.publishStatus)
