@@ -166,7 +166,7 @@
 
             
             <b-dropdown-item
-              @click="deletecenter(data.item)"
+              @click="deleteCenter(data.item)"
             >
               <feather-icon icon="TrashIcon" />
               <span class="align-middle ml-50">Delete</span>
@@ -239,7 +239,7 @@ import useCentersList from './useCentersList'
 import centerStoreModule from '../centerStoreModule'
 import CenterListAddNew from './CenterListAddNew.vue'
 const { getAllInterests, getInterestTypes } = require ('@/wedive-frontend-graphql/interest-service')
-const { deleteDivecenterById } = require('@/wedive-frontend-graphql/dive-center-service')
+const { deleteDiveCenterById } = require('@/wedive-frontend-graphql/dive-center-service')
 
 export default {
   components: {
@@ -387,7 +387,7 @@ export default {
       this.interests = interests;
       this.interest_types = interest_types;
     },
-    deletecenter(_data) {
+    deleteCenter(_data) {
       this.$swal({
         title: 'Are you sure?',
         text: "삭제하시면 되돌릴 수 없습니다.",
@@ -402,7 +402,7 @@ export default {
       }).then(result => {
         if (result.value) {
           console.log(_data);
-          deleteDivecenterById(_data._id);
+          deleteDiveCenterById(_data._id);
           this.$swal({
             icon: 'success',
             title: 'Deleted!',

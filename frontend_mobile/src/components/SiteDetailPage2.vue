@@ -734,7 +734,6 @@
   </div>
 </template>
 <script>
-//const { getDiveSiteByAddress } = require('@/wedive-frontend-graphql/dive-site-service')
 
 export default {
   name: 'HelloWorld',
@@ -942,20 +941,7 @@ export default {
             {title: "언더더씨 스쿠버다이빙", desc: "방가워", star: 4.7, price_index: 2, feature: "덕다이빙, 케이브", img: '/static/images/shop1/diving/test10.jpg', position: {lat: 33.244246055136834, lng: 126.5671937429616}}
         ],
     }
-  },
-  async beforeRouteEnter(to, from, next) {
-    let urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.has("site")) {
-        var aaa = await getDiveSiteByAddress(urlParams.get("site"));
-        console.log("=============");
-        console.log(aaa);
-    }
-    console.log(">>=============");
-    next({});
-    
-    //next({ path: to.path});
-  },
-  methods: {
+  }, methods: {
       call: function() {
           console.log("call");
       },

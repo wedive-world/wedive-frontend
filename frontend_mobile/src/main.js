@@ -11,13 +11,15 @@ Vue.component('vue-typeahead-bootstrap', VueTypeaheadBootstrap)
 Vue.use(VueScrollPicker)
 
 require('dotenv').config();
+
+/*
 console.log(`==============================Env Information==============================`)
 Object.keys(process.env)
   .forEach(key => {
     console.log(`${key}=${process.env[key]}`)
   })
 console.log(`==============================================================================`)
-
+*/
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
