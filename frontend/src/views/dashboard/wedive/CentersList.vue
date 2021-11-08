@@ -136,7 +136,7 @@
             icon="FileTextIcon"
             class="cursor-pointer"
             size="16"
-            @click="$refs.centerAddNewRef.setcenterData(data.item);isAddNewcenterSidebarActive = true;"
+            @click="$refs.centerAddNewRef.setCenterData(data.item);isAddNewcenterSidebarActive = true;"
           />
           <b-tooltip
             title="Details"
@@ -158,7 +158,7 @@
               />
             </template>
             <b-dropdown-item 
-              @click="$refs.centerAddNewRef.setcenterData(data.item);isAddNewcenterSidebarActive = true;"
+              @click="$refs.centerAddNewRef.setCenterData(data.item);isAddNewcenterSidebarActive = true;"
             >
               <feather-icon icon="FileTextIcon" />
               <span class="align-middle ml-50">Details</span>

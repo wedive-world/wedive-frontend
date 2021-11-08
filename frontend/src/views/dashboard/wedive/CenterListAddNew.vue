@@ -1035,7 +1035,7 @@ export default {
   },
   setup(props, { emit }) {
     const centerData = JSON.parse(JSON.stringify(blankCenterData))
-    const resetcenterData = () => {
+    const resetCenterData = () => {
       //centerData = JSON.parse(JSON.stringify(blankCenterData))
     }
 
@@ -1051,7 +1051,7 @@ export default {
       refFormObserver,
       getValidationState,
       resetForm,
-    } = formValidation(resetcenterData)
+    } = formValidation(resetCenterData)
 
     return {
       centerData,
@@ -1063,7 +1063,7 @@ export default {
     }
   },
   methods: {
-    setcenterData: function(_data) {
+    setCenterData: function(_data) {
       for (var key in this.centerData) {
         if (_data[key]) {
           if (key == 'backgroundImages') {
