@@ -3,7 +3,7 @@
   <div>
 
     <center-list-add-new
-      :is-add-new-center-sidebar-active.sync="isAddNewcenterSidebarActive"
+      :is-add-new-center-sidebar-active.sync="isAddNewCenterSidebarActive"
       :country-options="countryOptions"
       :center-data="centerData"
       :interest-data="interests"
@@ -60,7 +60,7 @@
               />
               <b-button
                 variant="primary"
-                @click="isAddNewcenterSidebarActive = true"
+                @click="isAddNewCenterSidebarActive = true"
               >
                 <span class="text-nowrap">Add center</span>
               </b-button>
@@ -136,7 +136,7 @@
             icon="FileTextIcon"
             class="cursor-pointer"
             size="16"
-            @click="$refs.centerAddNewRef.setCenterData(data.item);isAddNewcenterSidebarActive = true;"
+            @click="$refs.centerAddNewRef.setCenterData(data.item);isAddNewCenterSidebarActive = true;"
           />
           <b-tooltip
             title="Details"
@@ -158,7 +158,7 @@
               />
             </template>
             <b-dropdown-item 
-              @click="$refs.centerAddNewRef.setCenterData(data.item);isAddNewcenterSidebarActive = true;"
+              @click="$refs.centerAddNewRef.setCenterData(data.item);isAddNewCenterSidebarActive = true;"
             >
               <feather-icon icon="FileTextIcon" />
               <span class="align-middle ml-50">Details</span>
@@ -274,7 +274,7 @@ export default {
       if (store.hasModule(center_APP_STORE_MODULE_NAME)) store.unregisterModule(center_APP_STORE_MODULE_NAME)
     })
 
-    const isAddNewcenterSidebarActive = ref(false)
+    const isAddNewCenterSidebarActive = ref(false)
 
     const countryOptions = [
       { label: '대한민국', value: 'kr' },
@@ -343,7 +343,7 @@ export default {
       
 
       // Sidebar
-      isAddNewcenterSidebarActive,
+      isAddNewCenterSidebarActive,
 
       fetchCenters,
       tableColumns,
