@@ -6512,6 +6512,10 @@ input[type=number] {
   display: block !important;
 }
 
+.interest-check input ~ label {
+  background-color: white;
+}
+
 .interest-check input:checked ~ label {
   color: #FFF !important;
   background-color: #1d397c;

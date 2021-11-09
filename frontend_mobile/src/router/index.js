@@ -5,6 +5,7 @@ import RecommendPage from '@/components/RecommendPage'
 import BuddyCreatePage from '@/components/BuddyCreatePage'
 import BuddyHomePage from '@/components/BuddyHomePage'
 import UserProfilePage from '@/components/UserProfilePage'
+import UserCreatePage from '@/components/UserCreatePage'
 import CenterHomePage from '@/components/CenterHomePage'
 import CenterDetailPage from '@/components/CenterDetailPage'
 import CenterListPage from '@/components/CenterListPage'
@@ -53,6 +54,11 @@ export default new Router({
       component: UserProfilePage
     },
     {
+      path: '/user_create',
+      name: 'UserCreatePage',
+      component: UserCreatePage
+    },
+    {
       path: '/center_home',
       name: 'CenterHomePage',
       component: CenterHomePage
@@ -83,8 +89,9 @@ export default new Router({
       component: SiteHomePage
     },
     {
-      path: '/site',
+      path: '/site/:id',
       name: 'SiteDetailPage',
+      props: true,
       component: SiteDetailPage
     },
     {

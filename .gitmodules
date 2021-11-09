@@ -4,3 +4,6 @@
 [submodule "frontend/src/wedive-frontend-graphql"]
 	path = frontend/src/wedive-frontend-graphql
 	url = git@github.com:wedive-world/wedive-frontend-graphql.git
+[submodule "frontend_mobile/src/wedive-frontend-graphql"]
+	path = frontend_mobile/src/wedive-frontend-graphql
+	url = git@github.com:wedive-world/wedive-frontend-graphql.git

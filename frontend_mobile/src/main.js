@@ -12,6 +12,7 @@ Vue.use(VueScrollPicker)
 
 require('dotenv').config();
 
+
 /*
 console.log(`==============================Env Information==============================`)
 Object.keys(process.env)

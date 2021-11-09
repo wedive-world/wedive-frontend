@@ -109,7 +109,7 @@
         <template #cell(country)="data">
           <div class="text-nowrap">
             <feather-icon
-              :icon="resolvecenterCountryIcon(data.item.country)"
+              :icon="resolveCenterCountryIcon(data.item.country)"
               size="18"
               class="mr-50"
               :class="`text-${resolveCenterCountryVariant(data.item.country)}`"
@@ -194,7 +194,7 @@
 
             <b-pagination
               v-model="currentPage"
-              :total-rows="totalcenters"
+              :total-rows="totalCenters"
               :per-page="perPage"
               first-number
               last-number
@@ -317,7 +317,7 @@ export default {
       tableColumns,
       perPage,
       currentPage,
-      totalcenters,
+      totalCenters,
       dataMeta,
       perPageOptions,
       searchQuery,
@@ -349,7 +349,7 @@ export default {
       tableColumns,
       perPage,
       currentPage,
-      totalcenters,
+      totalCenters,
       dataMeta,
       perPageOptions,
       searchQuery,

@@ -734,11 +734,581 @@
   </div>
 </template>
 <script>
-//const { getDiveSiteByAddress } = require('@/wedive-frontend-graphql/dive-site-service')
+const axios = require("axios")
 
 export default {
   name: 'HelloWorld',
   mounted() {
+    axios({
+    url: 'https://api.wedives.com/graphql',
+    method: 'post',
+    data: {
+        query: `
+        query getAllDiveSites {
+        getAllDiveSites {
+            _id
+            address
+            latitude
+            longitude
+            countryCode
+            name
+            uniqueName
+            description
+            images {
+            _id
+            name
+            reference
+            description
+            uploaderId
+            mimeType
+            encoding
+            fileSize
+            createdAt
+            updatedAt
+            }
+            backgroundImages {
+            _id
+            name
+            description
+            reference
+            uploaderId
+            mimeType
+            encoding
+            fileSize
+            createdAt
+            updatedAt
+            }
+            youtubeVideoIds
+            referenceUrls
+            memo
+            publishStatus
+            month1 {
+            _id
+            title
+            type
+            iconType
+            iconName
+            iconColor
+            iconUrl
+            name
+            uniqueName
+            description
+            images {
+                _id
+                name
+                description
+                reference
+                uploaderId
+                mimeType
+                encoding
+                fileSize
+                createdAt
+                updatedAt
+            }
+            backgroundImages {
+                _id
+                name
+                description
+                reference
+                uploaderId
+                mimeType
+                encoding
+                fileSize
+                createdAt
+                updatedAt
+            }
+            youtubeVideoIds
+            referenceUrls
+            memo
+            }
+            month2 {
+            _id
+            title
+            type
+            iconType
+            iconName
+            iconColor
+            iconUrl
+            name
+            uniqueName
+            description
+            images {
+                _id
+                name
+                description
+                reference
+                uploaderId
+                mimeType
+                encoding
+                fileSize
+                createdAt
+                updatedAt
+            }
+            backgroundImages {
+                _id
+                name
+                description
+                reference
+                uploaderId
+                mimeType
+                encoding
+                fileSize
+                createdAt
+                updatedAt
+            }
+            youtubeVideoIds
+            referenceUrls
+            memo
+            }
+            month3 {
+            _id
+            title
+            type
+            iconType
+            iconName
+            iconColor
+            iconUrl
+            name
+            uniqueName
+            description
+            images {
+                _id
+                name
+                description
+                reference
+                uploaderId
+                mimeType
+                encoding
+                fileSize
+                createdAt
+                updatedAt
+            }
+            backgroundImages {
+                _id
+                name
+                description
+                reference
+                uploaderId
+                mimeType
+                encoding
+                fileSize
+                createdAt
+                updatedAt
+            }
+            youtubeVideoIds
+            referenceUrls
+            memo
+            }
+            month4 {
+            _id
+            title
+            type
+            iconType
+            iconName
+            iconColor
+            iconUrl
+            name
+            uniqueName
+            description
+            images {
+                _id
+                name
+                description
+                reference
+                uploaderId
+                mimeType
+                encoding
+                fileSize
+                createdAt
+                updatedAt
+            }
+            backgroundImages {
+                _id
+                name
+                description
+                reference
+                uploaderId
+                mimeType
+                encoding
+                fileSize
+                createdAt
+                updatedAt
+            }
+            youtubeVideoIds
+            referenceUrls
+            memo
+            }
+            month5 {
+            _id
+            title
+            type
+            iconType
+            iconName
+            iconColor
+            iconUrl
+            name
+            uniqueName
+            description
+            images {
+                _id
+                name
+                description
+                reference
+                uploaderId
+                mimeType
+                encoding
+                fileSize
+                createdAt
+                updatedAt
+            }
+            backgroundImages {
+                _id
+                name
+                description
+                reference
+                uploaderId
+                mimeType
+                encoding
+                fileSize
+                createdAt
+                updatedAt
+            }
+            youtubeVideoIds
+            referenceUrls
+            memo
+            }
+            month6 {
+            _id
+            title
+            type
+            iconType
+            iconName
+            iconColor
+            iconUrl
+            name
+            uniqueName
+            description
+            images {
+                _id
+                name
+                description
+                reference
+                uploaderId
+                mimeType
+                encoding
+                fileSize
+                createdAt
+                updatedAt
+            }
+            backgroundImages {
+                _id
+                name
+                description
+                reference
+                uploaderId
+                mimeType
+                encoding
+                fileSize
+                createdAt
+                updatedAt
+            }
+            youtubeVideoIds
+            referenceUrls
+            memo
+            }
+            month7 {
+            _id
+            title
+            type
+            iconType
+            iconName
+            iconColor
+            iconUrl
+            name
+            uniqueName
+            description
+            images {
+                _id
+                name
+                description
+                reference
+                uploaderId
+                mimeType
+                encoding
+                fileSize
+                createdAt
+                updatedAt
+            }
+            backgroundImages {
+                _id
+                name
+                description
+                reference
+                uploaderId
+                mimeType
+                encoding
+                fileSize
+                createdAt
+                updatedAt
+            }
+            youtubeVideoIds
+            referenceUrls
+            memo
+            }
+            month8 {
+            _id
+            title
+            type
+            iconType
+            iconName
+            iconColor
+            iconUrl
+            name
+            uniqueName
+            description
+            images {
+                _id
+                name
+                description
+                reference
+                uploaderId
+                mimeType
+                encoding
+                fileSize
+                createdAt
+                updatedAt
+            }
+            backgroundImages {
+                _id
+                name
+                description
+                reference
+                uploaderId
+                mimeType
+                encoding
+                fileSize
+                createdAt
+                updatedAt
+            }
+            youtubeVideoIds
+            referenceUrls
+            memo
+            }
+            month9 {
+            _id
+            title
+            type
+            iconType
+            iconName
+            iconColor
+            iconUrl
+            name
+            uniqueName
+            description
+            images {
+                _id
+                name
+                description
+                reference
+                uploaderId
+                mimeType
+                encoding
+                fileSize
+                createdAt
+                updatedAt
+            }
+            backgroundImages {
+                _id
+                name
+                description
+                reference
+                uploaderId
+                mimeType
+                encoding
+                fileSize
+                createdAt
+                updatedAt
+            }
+            youtubeVideoIds
+            referenceUrls
+            memo
+            }
+            month10 {
+            _id
+            title
+            type
+            iconType
+            iconName
+            iconColor
+            iconUrl
+            name
+            uniqueName
+            description
+            images {
+                _id
+                name
+                description
+                reference
+                uploaderId
+                mimeType
+                encoding
+                fileSize
+                createdAt
+                updatedAt
+            }
+            backgroundImages {
+                _id
+                name
+                description
+                reference
+                uploaderId
+                mimeType
+                encoding
+                fileSize
+                createdAt
+                updatedAt
+            }
+            youtubeVideoIds
+            referenceUrls
+            memo
+            }
+            month11 {
+            _id
+            title
+            type
+            iconType
+            iconName
+            iconColor
+            iconUrl
+            name
+            uniqueName
+            description
+            images {
+                _id
+                name
+                description
+                reference
+                uploaderId
+                mimeType
+                encoding
+                fileSize
+                createdAt
+                updatedAt
+            }
+            backgroundImages {
+                _id
+                name
+                description
+                reference
+                uploaderId
+                mimeType
+                encoding
+                fileSize
+                createdAt
+                updatedAt
+            }
+            youtubeVideoIds
+            referenceUrls
+            memo
+            }
+            month12 {
+            _id
+            title
+            type
+            iconType
+            iconName
+            iconColor
+            iconUrl
+            name
+            uniqueName
+            description
+            images {
+                _id
+                name
+                description
+                reference
+                uploaderId
+                mimeType
+                encoding
+                fileSize
+                createdAt
+                updatedAt
+            }
+            backgroundImages {
+                _id
+                name
+                description
+                reference
+                uploaderId
+                mimeType
+                encoding
+                fileSize
+                createdAt
+                updatedAt
+            }
+            youtubeVideoIds
+            referenceUrls
+            memo
+            }
+            interests {
+            _id
+            title
+            type
+            iconType
+            iconName
+            iconColor
+            iconUrl
+            name
+            uniqueName
+            description
+            images {
+                _id
+                name
+                description
+                reference
+                uploaderId
+                mimeType
+                encoding
+                fileSize
+            }
+            backgroundImages {
+                _id
+                name
+                description
+                reference
+                uploaderId
+                mimeType
+                encoding
+                fileSize
+            }
+            youtubeVideoIds
+            referenceUrls
+            memo
+            }
+            waterTemperatureScore
+            eyeSiteScore
+            adminScore
+            visitTimeDescription
+            waterTemperatureDescription
+            deepDescription
+            waterFlowDescription
+            eyeSightDescription
+            highlightDescription
+            createdAt
+            updatedAt
+        }
+        }
+        `
+
+    }
+    }, {
+    headers: {
+      countryCode: 'ko',
+    }
+    }).then((result) => {
+    console.log(result.data)
+    });
+
     var preloader = document.getElementById('preloader')
     if(preloader){preloader.classList.add('preloader-hide');}
     

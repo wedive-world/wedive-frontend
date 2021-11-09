@@ -50,6 +50,14 @@
                     <em>(필수입력)</em>
                 </div>
                 <div class="input-style no-borders has-icon validate-field mb-3">
+                    <i class="fa fa-user color-gray"></i>
+                    <input type="name" class="form-control validate-name" id="form7" placeholder="전화번호">
+                    <label for="form7" class="color-highlight">전화번호</label>
+                    <i class="fa fa-times disabled invalid color-red-dark"></i>
+                    <i class="fa fa-check disabled valid color-green-dark"></i>
+                    <em>(필수입력)</em>
+                </div>
+                <div class="input-style no-borders has-icon validate-field mb-3">
                     <i class="fas fa-user-clock color-gray"></i>
                     <input type="number" class="form-control validate-number" id="form3" placeholder="나이">
                     <label for="form3" class="color-highlight">나이</label>
@@ -853,5 +861,5 @@ export default {
 select:invalid {color: #6c757d;}
 select {background: white; background-color: white;}
 .wediev-label {font-size: 12px;transition: all 250ms ease;position:absolute;left:14px;z-index:99;margin-top: -16px;}
-.wedive-deep:before {content: '▼ 첫 수심 18m';position: absolute;margin-top: -20px;margin-left: 14%;color:#b4bcc8;}
+.wedive-deep:before {content: '▼ 첫 수심 18m';position: absolute;margin-top: -20px;margin-left: 16%;color:#b4bcc8;}
 </style>
