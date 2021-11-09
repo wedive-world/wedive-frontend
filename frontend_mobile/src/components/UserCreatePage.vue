@@ -9,7 +9,7 @@
     
     <div class="card card-clear" data-card-height="80"></div>
 
-    <div class="page-content pb-3"> 
+    <div class="page-content pb-0"> 
         <div class="progress" style="height:6px;">
             <div class="progress-bar border-0 bg-highlight text-start ps-2" 
                     role="progressbar" style="width: 25%" 
@@ -21,7 +21,7 @@
             <div class="splide__track">
                 <div class="splide__list">
                     <div class="splide__slide">
-                        <div class="card card-full pb-0 mb-3 border-bottom" style="height: calc( 100vh - 115px );">
+                        <div id="slide1" class="card card-full pb-0 mb-0 border-bottom" style="height: calc( 100vh - 56px );">
                         <div class="content mt-1">
                             <div class="text-center mt-5 mb-3">
                                 <div style="width: 150px;height:150px;display: inline-block;background: #e7e7e7;position: relative;border-radius:75px;">
@@ -46,7 +46,7 @@
                         </div>
                     </div>
                     <div class="splide__slide">
-                        <div class="card card-full pb-0 mb-3 border-bottom" style="height: calc( 100vh - 115px );">
+                        <div id="slide2" class="card card-full pb-0 mb-0 border-bottom" style="height: calc( 100vh - 56px );">
                         <div class="content mt-1">
                             <div class="text-center mt-2 mb-0">
                                 <div style="border-bottom: 1px solid rgba(0, 0, 0, 0.08);">
@@ -325,7 +325,7 @@
                         </div>
                     </div>
                     <div class="splide__slide">
-                        <div class="card card-full pb-0 mb-3 border-bottom" style="height: calc( 100vh - 115px );">
+                        <div id="slide3" class="card card-full pb-0 mb-0 border-bottom" style="height: calc( 100vh - 56px );">
                         <div class="content mt-1">
                             <div class="text-center mt-2 mb-3">
                                 <div>
@@ -472,7 +472,7 @@
                         </div>
                     </div>
                     <div class="splide__slide">
-                        <div class="card card-full pb-0 mb-3 border-bottom" style="height: calc( 100vh - 115px );">
+                        <div id="slide4" class="card card-full pb-0 mb-0 border-bottom" style="height: calc( 100vh - 56px );">
                         <div class="content mt-1">
                             <div class="text-center mt-2 mb-3">
                                 <div>
@@ -693,6 +693,7 @@ export default {
   mounted() {
     var preloader = document.getElementById('preloader')
     if(preloader){preloader.classList.add('preloader-hide');}
+    document.getElementById("footer-bar").classList.add("hide");
     
     $(".page-title").hide();
     $(".page-title-clear").hide();
@@ -715,8 +716,11 @@ export default {
     }, 500);
 
     var body = document.body, html = document.documentElement;
-    var height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
-    document.getElementById('map').style.height = height + 'px';
+    var height = Math.min(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight) - 56;
+    document.getElementById('slide1').style.height = height + 'px';
+    document.getElementById('slide2').style.height = height + 'px';
+    document.getElementById('slide3').style.height = height + 'px';
+    document.getElementById('slide4').style.height = height + 'px';
   },
   components: {
     VueTypeaheadBootstrap
