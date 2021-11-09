@@ -20,9 +20,9 @@
         
         <div class="card card-style" style="margin-top:-60px; z-index:1">
             <div class="content text-center mt-4">
-                <h2 class="font-20 font-700 mb-0 mt-1">양양 다이빙 사이트</h2>
-                <h2 class="wedive-score">3.4</h2>
-                <span class="wedive-score-desc">일반적</span>
+                <h2 class="font-20 font-700 mb-0 mt-1">{{ siteData.name }} 사이트</h2>
+                <h2 class="wedive-score">{{ (siteData.adminScore/20).toFixed(1) }}</h2>
+                <span class="wedive-score-desc">{{ recommend_word[parseInt(siteData.adminScore/20)] }}</span>
                 <p class="color-gray m-0"><i class="fas fa-map-marked-alt" ></i> 대한민국, 강원도</p>
                 
                 <div class="evaluation d-flex mt-3">
@@ -53,20 +53,20 @@
                         </div>
                     </div>
                     <div class="flex-grow-1">
-                        <div style="height: 30px;padding-top:2px;">일반적</div>
+                        <div style="height: 30px;padding-top:2px;">자료없음</div>
                         <div class="mt-1" style="height: 30px;padding-top:2px;">일반적</div>
                         <div class="mt-1" style="height: 30px;padding-top:2px;">5-15m</div>
                     </div>
                 </div>
                 
-                <p class="color-gray mt-3 mb-0 text-start me-2 ms-2">겨울에는 동해의 보물 섬유세닐말미잘을 볼 수 있고, 여름에는 태풍처럼 지나가는 볼락 무리를 볼 수 있는 사이트 입니다. 특히 분단국가 특성상 허가가 쉽지 않은 동해에서 야간 다이빙을 할 수 있는 유일한 사이트 입니다.</p>
+                <p class="color-gray mt-3 mb-0 text-start me-2 ms-2">{{ siteData.description }}</p>
                 
                 <div class="divider mt-3 mb-3"></div>
                 
                 <div class="d-flex mb-0 text-center">
                     <div class="flex-grow-1 pd-0" style="border-right: 1px solid lightgray;">
                         <img class="ext-img" src="/static/images/ico_heart.png" width="24" style="margin-top:-4px;"/>
-                        <span class="font-16 font-500 font-noto">찜 25</span>
+                        <span class="font-16 font-500 font-noto">찜 0</span>
                     </div>
                     
                     <div class="flex-grow-1 pd-0" data-menu="menu-share">
@@ -142,7 +142,7 @@
                                             <h1 class="text-center mb-0"><i class="fas fa-calendar-alt font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">방문시기</h1>
                                             <p class="text-start font-400">
-                                                일반적으로 일년 내내 다이빙이 가능하지만 가장 좋은 시기는 여름~가을 동안인 6월에서 10월입니다.
+                                                {{ siteData.visitTimeDescription }}
                                             </p>
                                         </div>
                                     </div>
@@ -153,7 +153,7 @@
                                             <h1 class="text-center mb-0"><i class="fas fa-temperature-high font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">수온</h1>
                                             <p class="text-start font-400">
-                                                1~5월 평균 섭씨 10도, 11~12월은 15도 안팎입니다. 성수기인 6~10월에는 평균 20도까지 올라갑니다.
+                                                {{ siteData.waterTemperatureDescription }}
                                             </p>
                                         </div>
                                     </div>
@@ -164,7 +164,7 @@
                                             <h1 class="text-center mb-0"><i class="fas fa-level-down-alt font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">수심</h1>
                                             <p class="text-start font-400">
-                                                가까운 바다는 12~18m, 먼 바다는 20~32m정도 입니다.
+                                                {{ siteData.deepDescription }}
                                             </p>
                                         </div>
                                     </div>
@@ -175,7 +175,7 @@
                                             <h1 class="text-center mb-0"><i class="fas fa-water font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">조류</h1>
                                             <p class="text-start font-400">
-                                                6~10월 간헐적으로 청물(일본 쓰시마 섬에서 갈라진 쿠로시오 난류)가 유입되어 시야가 15m까지 좋아집니다.
+                                                {{ siteData.waterFlowDescription }}
                                             </p>
                                         </div>
                                     </div>
@@ -186,7 +186,7 @@
                                             <h1 class="text-center mb-0"><i class="fas fa-eye font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">시야</h1>
                                             <p class="text-start font-400">
-                                                평소에는 5m정도이지만, 청물이 들어오는 경우 10m~15m로 일반적인 편입니다.
+                                                {{ siteData.eyeSightDescription }}
                                             </p>
                                         </div>
                                     </div>
@@ -197,7 +197,7 @@
                                             <h1 class="text-center mb-0"><i class="fas fa-highlighter font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">다이빙 하이라이트</h1>
                                             <p class="text-start font-400">
-                                                쥐놀래미와 도다리, 황어, 전복, 문어, 복어, 쥐치 등을 만날 수 있습니다.
+                                                {{ siteData.highlightDescription }}
                                             </p>
                                         </div>
                                     </div> 
@@ -213,7 +213,7 @@
 
         <div class="card card-style">
             <div class="content">
-                <h4 class="text-start pt-2 mb-2">양양 인기 포인트</h4>
+                <h4 class="text-start pt-2 mb-2">{{ siteData.name }} 인기 포인트</h4>
                 <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
                 <div v-for="(point,index) in point_list" v-if="index<3">
                     <div class="">
@@ -316,7 +316,7 @@
         <div class="card card-style">
             <div class="content mt-3">
                 <h4 class="text-start pt-2 mb-0">인기 다이빙 센터</h4>
-                <p class="mb-3 color-gray-light-mid">양양 사이트의 28개의 센터 준비됨</p>
+                <p class="mb-3 color-gray-light-mid">{{ siteData.name }} 사이트의 28개의 센터 준비됨</p>
                 <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
                 
                 <div v-for="(center,index) in center_list" v-if="index<3">
@@ -351,19 +351,11 @@
             </div>
         </div>
 
-        <div class="card card-style">
+        <div class="card card-style" v-if="siteData.youtubeVideoIds && siteData.youtubeVideoIds.length > 0">
             <div class="content mb-4 pb-2">
                 <h4 class="text-start pt-2 mb-2">YouTube 소개</h4>
-                <div class="responsive-iframe" style="-border-radius: 16px;-moz-border-radius: 16px;border-radius: 16px;">
-                    <iframe src='https://www.youtube.com/embed/84myx_Td1vE' frameborder='0' allowfullscreen></iframe>
-                </div>
-
-                <div class="responsive-iframe mt-3" style="-border-radius: 16px;-moz-border-radius: 16px;border-radius: 16px;">
-                    <iframe src='https://www.youtube.com/embed/ET0Xj8y_6uw' frameborder='0' allowfullscreen></iframe>
-                </div>
-
-                <div class="responsive-iframe mt-3" style="-border-radius: 16px;-moz-border-radius: 16px;border-radius: 16px;">
-                    <iframe src='https://www.youtube.com/embed/xuHHshrOXoE' frameborder='0' allowfullscreen></iframe>
+                <div v-for="youtube in siteData.youtubeVideoIds" class="responsive-iframe" style="-border-radius: 16px;-moz-border-radius: 16px;border-radius: 16px;">
+                    <iframe v-bind:src="'https://www.youtube.com/embed/'+youtube" frameborder='0' allowfullscreen></iframe>
                 </div>
             </div>
         </div>
@@ -519,78 +511,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">1월</th>
-                                <td class="font-12 color-gray">5.2ºC / 12.3ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>8.8ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_01.svg" width="32" height="32"/></td>
+                            <tr class="border-bottom" v-for="index in 12">
+                                <th class="font-12" scope="row">{{ index }}월</th>
+                                <td class="font-12 color-gray">1.1ºC / 2.2ºC</td>
+                                <td v-for="month in siteData['month' + index]" v-if="month.type=='climate'" class="font-12">
+                                    <img v-if="month.title=='sunny'" class="me-2" src="/static/images/weather_sunny.svg" width="20" height="20"/>
+                                    <img v-else-if="month.title=='cloudy'" class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>
+                                    <img v-else-if="month.title=='rain'" class="me-2" src="/static/images/weather_showers.svg" width="20" height="20"/>
+                                    <img v-else-if="month.title=='heavyRain'" class="me-2" src="/static/images/weather_heavy_rain.svg" width="20" height="20"/>
+                                    2.1ºC
+                                </td>
+                                <td v-for="month in siteData['month' + index]" v-if="month.type=='popularity'">
+                                    <img v-if="month.title=='unrecommended'" class="img_pop" src="/static/images/icon_popularity_01.svg" width="32" height="32"/>
+                                    <img v-if="month.title=='soso'" class="img_pop" src="/static/images/icon_popularity_02.svg" width="32" height="32"/>
+                                    <img v-if="month.title=='popular'" class="img_pop" src="/static/images/icon_popularity_03.svg" width="32" height="32"/>
+                                </td>
                             </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">2월</th>
-                                <td class="font-12 color-gray">3.4ºC / 9.8ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>6.6ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_01.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">3월</th>
-                                <td class="font-12 color-gray">3.2ºC / 9.4ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>6.3ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_01.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">4월</th>
-                                <td class="font-12 color-gray">7.0ºC / 13.3ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>10.2ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_01.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">5월</th>
-                                <td class="font-12 color-gray">10.5ºC / 17.8ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>14.6ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_01.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">6월</th>
-                                <td class="font-12 color-gray">15.1ºC / 23.4ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>19.2ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_02.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">7월</th>
-                                <td class="font-12 color-gray">19.9ºC / 24.4ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_heavy_rain.svg" width="20" height="20"/>22.2ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_02.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">8월</th>
-                                <td class="font-12 color-gray">21.3ºC / 26.0ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_showers.svg" width="20" height="20"/>23.7ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_02.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">9월</th>
-                                <td class="font-12 color-gray">18.6ºC / 24.1ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_sunny.svg" width="20" height="20"/>21.4ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_02.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">10월</th>
-                                <td class="font-12 color-gray">14.9ºC / 21.6ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>18.2ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_02.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">11월</th>
-                                <td class="font-12 color-gray">10.8ºC / 17.6ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>14.2ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_01.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr>
-                                <th class="font-12" scope="row">12월</th>
-                                <td class="font-12 color-gray">6.4ºC / 13.8ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>10.1ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_01.svg" width="32" height="32"/></td>
-                            </tr>
+
                         </tbody>
                     </table>
                     <div class="text-end">
@@ -739,61 +676,35 @@ const axios = require("axios")
 export default {
   name: 'HelloWorld',
   mounted() {
-    axios({
-    url: 'https://api.wedives.com/graphql',
-    method: 'post',
-    data: {
-        query: `
-        query getAllDiveSites {
-        getAllDiveSites {
-            _id
-            address
-            latitude
-            longitude
-            countryCode
-            name
-            uniqueName
-            description
-            images {
-            _id
-            name
-            reference
-            description
-            uploaderId
-            mimeType
-            encoding
-            fileSize
-            createdAt
-            updatedAt
-            }
-            backgroundImages {
-            _id
-            name
-            description
-            reference
-            uploaderId
-            mimeType
-            encoding
-            fileSize
-            createdAt
-            updatedAt
-            }
-            youtubeVideoIds
-            referenceUrls
-            memo
-            publishStatus
-            month1 {
-            _id
-            title
-            type
-            iconType
-            iconName
-            iconColor
-            iconUrl
-            name
-            uniqueName
-            description
-            images {
+      if (this.$route.params.id) {
+        axios({
+        url: 'https://api.wedives.com/graphql',
+        method: 'post',
+        data: {
+            query: `
+            query getDiveSiteByUniqueName($uniqueName: String!) {
+            getDiveSiteByUniqueName(uniqueName: $uniqueName) {
+                _id
+                address
+                latitude
+                longitude
+                countryCode
+                name
+                uniqueName
+                description
+                images {
+                _id
+                name
+                reference
+                description
+                uploaderId
+                mimeType
+                encoding
+                fileSize
+                createdAt
+                updatedAt
+                }
+                backgroundImages {
                 _id
                 name
                 description
@@ -804,510 +715,544 @@ export default {
                 fileSize
                 createdAt
                 updatedAt
-            }
-            backgroundImages {
+                }
+                youtubeVideoIds
+                referenceUrls
+                memo
+                publishStatus
+                month1 {
                 _id
+                title
+                type
+                iconType
+                iconName
+                iconColor
+                iconUrl
                 name
+                uniqueName
                 description
-                reference
-                uploaderId
-                mimeType
-                encoding
-                fileSize
+                images {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                backgroundImages {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                youtubeVideoIds
+                referenceUrls
+                memo
+                }
+                month2 {
+                _id
+                title
+                type
+                iconType
+                iconName
+                iconColor
+                iconUrl
+                name
+                uniqueName
+                description
+                images {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                backgroundImages {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                youtubeVideoIds
+                referenceUrls
+                memo
+                }
+                month3 {
+                _id
+                title
+                type
+                iconType
+                iconName
+                iconColor
+                iconUrl
+                name
+                uniqueName
+                description
+                images {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                backgroundImages {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                youtubeVideoIds
+                referenceUrls
+                memo
+                }
+                month4 {
+                _id
+                title
+                type
+                iconType
+                iconName
+                iconColor
+                iconUrl
+                name
+                uniqueName
+                description
+                images {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                backgroundImages {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                youtubeVideoIds
+                referenceUrls
+                memo
+                }
+                month5 {
+                _id
+                title
+                type
+                iconType
+                iconName
+                iconColor
+                iconUrl
+                name
+                uniqueName
+                description
+                images {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                backgroundImages {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                youtubeVideoIds
+                referenceUrls
+                memo
+                }
+                month6 {
+                _id
+                title
+                type
+                iconType
+                iconName
+                iconColor
+                iconUrl
+                name
+                uniqueName
+                description
+                images {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                backgroundImages {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                youtubeVideoIds
+                referenceUrls
+                memo
+                }
+                month7 {
+                _id
+                title
+                type
+                iconType
+                iconName
+                iconColor
+                iconUrl
+                name
+                uniqueName
+                description
+                images {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                backgroundImages {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                youtubeVideoIds
+                referenceUrls
+                memo
+                }
+                month8 {
+                _id
+                title
+                type
+                iconType
+                iconName
+                iconColor
+                iconUrl
+                name
+                uniqueName
+                description
+                images {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                backgroundImages {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                youtubeVideoIds
+                referenceUrls
+                memo
+                }
+                month9 {
+                _id
+                title
+                type
+                iconType
+                iconName
+                iconColor
+                iconUrl
+                name
+                uniqueName
+                description
+                images {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                backgroundImages {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                youtubeVideoIds
+                referenceUrls
+                memo
+                }
+                month10 {
+                _id
+                title
+                type
+                iconType
+                iconName
+                iconColor
+                iconUrl
+                name
+                uniqueName
+                description
+                images {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                backgroundImages {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                youtubeVideoIds
+                referenceUrls
+                memo
+                }
+                month11 {
+                _id
+                title
+                type
+                iconType
+                iconName
+                iconColor
+                iconUrl
+                name
+                uniqueName
+                description
+                images {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                backgroundImages {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                youtubeVideoIds
+                referenceUrls
+                memo
+                }
+                month12 {
+                _id
+                title
+                type
+                iconType
+                iconName
+                iconColor
+                iconUrl
+                name
+                uniqueName
+                description
+                images {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                backgroundImages {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                youtubeVideoIds
+                referenceUrls
+                memo
+                }
+                interests {
+                _id
+                title
+                type
+                iconType
+                iconName
+                iconColor
+                iconUrl
+                name
+                uniqueName
+                description
+                images {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                }
+                backgroundImages {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                }
+                youtubeVideoIds
+                referenceUrls
+                memo
+                }
+                waterTemperatureScore
+                eyeSiteScore
+                adminScore
+                visitTimeDescription
+                waterTemperatureDescription
+                deepDescription
+                waterFlowDescription
+                eyeSightDescription
+                highlightDescription
                 createdAt
                 updatedAt
             }
-            youtubeVideoIds
-            referenceUrls
-            memo
             }
-            month2 {
-            _id
-            title
-            type
-            iconType
-            iconName
-            iconColor
-            iconUrl
-            name
-            uniqueName
-            description
-            images {
-                _id
-                name
-                description
-                reference
-                uploaderId
-                mimeType
-                encoding
-                fileSize
-                createdAt
-                updatedAt
+            `,
+            variables: {
+                uniqueName: this.$route.params.id
             }
-            backgroundImages {
-                _id
-                name
-                description
-                reference
-                uploaderId
-                mimeType
-                encoding
-                fileSize
-                createdAt
-                updatedAt
-            }
-            youtubeVideoIds
-            referenceUrls
-            memo
-            }
-            month3 {
-            _id
-            title
-            type
-            iconType
-            iconName
-            iconColor
-            iconUrl
-            name
-            uniqueName
-            description
-            images {
-                _id
-                name
-                description
-                reference
-                uploaderId
-                mimeType
-                encoding
-                fileSize
-                createdAt
-                updatedAt
-            }
-            backgroundImages {
-                _id
-                name
-                description
-                reference
-                uploaderId
-                mimeType
-                encoding
-                fileSize
-                createdAt
-                updatedAt
-            }
-            youtubeVideoIds
-            referenceUrls
-            memo
-            }
-            month4 {
-            _id
-            title
-            type
-            iconType
-            iconName
-            iconColor
-            iconUrl
-            name
-            uniqueName
-            description
-            images {
-                _id
-                name
-                description
-                reference
-                uploaderId
-                mimeType
-                encoding
-                fileSize
-                createdAt
-                updatedAt
-            }
-            backgroundImages {
-                _id
-                name
-                description
-                reference
-                uploaderId
-                mimeType
-                encoding
-                fileSize
-                createdAt
-                updatedAt
-            }
-            youtubeVideoIds
-            referenceUrls
-            memo
-            }
-            month5 {
-            _id
-            title
-            type
-            iconType
-            iconName
-            iconColor
-            iconUrl
-            name
-            uniqueName
-            description
-            images {
-                _id
-                name
-                description
-                reference
-                uploaderId
-                mimeType
-                encoding
-                fileSize
-                createdAt
-                updatedAt
-            }
-            backgroundImages {
-                _id
-                name
-                description
-                reference
-                uploaderId
-                mimeType
-                encoding
-                fileSize
-                createdAt
-                updatedAt
-            }
-            youtubeVideoIds
-            referenceUrls
-            memo
-            }
-            month6 {
-            _id
-            title
-            type
-            iconType
-            iconName
-            iconColor
-            iconUrl
-            name
-            uniqueName
-            description
-            images {
-                _id
-                name
-                description
-                reference
-                uploaderId
-                mimeType
-                encoding
-                fileSize
-                createdAt
-                updatedAt
-            }
-            backgroundImages {
-                _id
-                name
-                description
-                reference
-                uploaderId
-                mimeType
-                encoding
-                fileSize
-                createdAt
-                updatedAt
-            }
-            youtubeVideoIds
-            referenceUrls
-            memo
-            }
-            month7 {
-            _id
-            title
-            type
-            iconType
-            iconName
-            iconColor
-            iconUrl
-            name
-            uniqueName
-            description
-            images {
-                _id
-                name
-                description
-                reference
-                uploaderId
-                mimeType
-                encoding
-                fileSize
-                createdAt
-                updatedAt
-            }
-            backgroundImages {
-                _id
-                name
-                description
-                reference
-                uploaderId
-                mimeType
-                encoding
-                fileSize
-                createdAt
-                updatedAt
-            }
-            youtubeVideoIds
-            referenceUrls
-            memo
-            }
-            month8 {
-            _id
-            title
-            type
-            iconType
-            iconName
-            iconColor
-            iconUrl
-            name
-            uniqueName
-            description
-            images {
-                _id
-                name
-                description
-                reference
-                uploaderId
-                mimeType
-                encoding
-                fileSize
-                createdAt
-                updatedAt
-            }
-            backgroundImages {
-                _id
-                name
-                description
-                reference
-                uploaderId
-                mimeType
-                encoding
-                fileSize
-                createdAt
-                updatedAt
-            }
-            youtubeVideoIds
-            referenceUrls
-            memo
-            }
-            month9 {
-            _id
-            title
-            type
-            iconType
-            iconName
-            iconColor
-            iconUrl
-            name
-            uniqueName
-            description
-            images {
-                _id
-                name
-                description
-                reference
-                uploaderId
-                mimeType
-                encoding
-                fileSize
-                createdAt
-                updatedAt
-            }
-            backgroundImages {
-                _id
-                name
-                description
-                reference
-                uploaderId
-                mimeType
-                encoding
-                fileSize
-                createdAt
-                updatedAt
-            }
-            youtubeVideoIds
-            referenceUrls
-            memo
-            }
-            month10 {
-            _id
-            title
-            type
-            iconType
-            iconName
-            iconColor
-            iconUrl
-            name
-            uniqueName
-            description
-            images {
-                _id
-                name
-                description
-                reference
-                uploaderId
-                mimeType
-                encoding
-                fileSize
-                createdAt
-                updatedAt
-            }
-            backgroundImages {
-                _id
-                name
-                description
-                reference
-                uploaderId
-                mimeType
-                encoding
-                fileSize
-                createdAt
-                updatedAt
-            }
-            youtubeVideoIds
-            referenceUrls
-            memo
-            }
-            month11 {
-            _id
-            title
-            type
-            iconType
-            iconName
-            iconColor
-            iconUrl
-            name
-            uniqueName
-            description
-            images {
-                _id
-                name
-                description
-                reference
-                uploaderId
-                mimeType
-                encoding
-                fileSize
-                createdAt
-                updatedAt
-            }
-            backgroundImages {
-                _id
-                name
-                description
-                reference
-                uploaderId
-                mimeType
-                encoding
-                fileSize
-                createdAt
-                updatedAt
-            }
-            youtubeVideoIds
-            referenceUrls
-            memo
-            }
-            month12 {
-            _id
-            title
-            type
-            iconType
-            iconName
-            iconColor
-            iconUrl
-            name
-            uniqueName
-            description
-            images {
-                _id
-                name
-                description
-                reference
-                uploaderId
-                mimeType
-                encoding
-                fileSize
-                createdAt
-                updatedAt
-            }
-            backgroundImages {
-                _id
-                name
-                description
-                reference
-                uploaderId
-                mimeType
-                encoding
-                fileSize
-                createdAt
-                updatedAt
-            }
-            youtubeVideoIds
-            referenceUrls
-            memo
-            }
-            interests {
-            _id
-            title
-            type
-            iconType
-            iconName
-            iconColor
-            iconUrl
-            name
-            uniqueName
-            description
-            images {
-                _id
-                name
-                description
-                reference
-                uploaderId
-                mimeType
-                encoding
-                fileSize
-            }
-            backgroundImages {
-                _id
-                name
-                description
-                reference
-                uploaderId
-                mimeType
-                encoding
-                fileSize
-            }
-            youtubeVideoIds
-            referenceUrls
-            memo
-            }
-            waterTemperatureScore
-            eyeSiteScore
-            adminScore
-            visitTimeDescription
-            waterTemperatureDescription
-            deepDescription
-            waterFlowDescription
-            eyeSightDescription
-            highlightDescription
-            createdAt
-            updatedAt
-        }
-        }
-        `
 
+        }
+        }, {
+        headers: {
+        countryCode: 'ko',
+        }
+        }).then((result) => {
+            if (result.data.data.getDiveSiteByUniqueName) {
+                this.siteData = result.data.data.getDiveSiteByUniqueName;
+                console.log(this.siteData);
+            }
+        });
     }
-    }, {
-    headers: {
-      countryCode: 'ko',
-    }
-    }).then((result) => {
-    console.log(result.data)
-    });
 
     var preloader = document.getElementById('preloader')
     if(preloader){preloader.classList.add('preloader-hide');}
@@ -1484,8 +1429,10 @@ export default {
   data () {
     return {
         map: null,
+        siteData: {},
         marker_list: [],
         marker_img_list: [],
+        recommend_word: ["비추천", "낮음", "일반적", "높음", "최고", "완벽함"],
         point_list : [
             {title: "말미잘동산", type: 'df', desc: "동해의 명물 섬유세닐말미잘이 유난히 많은 포인트로, 모래 지형 위에 커다란 암반과 크고 작은 바위들이 형성되어 있는 포인트 입니다. 섬유세닐말미잘은 낮은 수온에서 펴기 때문에 6월 이전에 방문한다면 이 포인트의 아름다움을 제대로 느낄 수 있습니다.", star: 4.6, img1: 'https://divingholic.com/wp-content/uploads/2019/02/maxresdefault-1.jpg', img2: 'https://diverz.net/data/diving/point/202102/1614156788_8f436f8c0dc8a574611b_thumb_760_504.jpg', img3: 'https://divingholic.com/wp-content/uploads/2019/02/2%EC%9B%94%EC%9D%B8%EA%B5%AC%ED%95%B4%EB%B3%80%EB%94%A5.jpg', position: {lat: 37.9668859063654, lng: 128.79946317636166}},
             {title: "철재삼동", type: 'df', desc: "여름철 동해의 상징은 볼락이라고 할 수 있습니다. 그중에서도 수많은 볼락이 태풍처럼 있다고 해서 볼락태풍이라는 별명을 가진 포인트가 철재삼동 포인트 입니다. 초여름에서 초가을까지 3달정도되는 기간에 20m전후 수심, 11~15도의 수온 삼박자가 맞아떨어지면 거대한 볼락 떼를 만날 수 있습니다.", star: 4.3, img1: '/static/images/point/ko/yangyang_chuljesamdong_01.jpg', img2: '/static/images/point/ko/yangyang_chuljesamdong_02.jpg', img3: '/static/images/point/ko/yangyang_chuljesamdong_03.jpg', position: {lat: 37.947207012548716, lng: 128.81497292286326}},
@@ -1512,18 +1459,6 @@ export default {
             {title: "언더더씨 스쿠버다이빙", desc: "방가워", star: 4.7, price_index: 2, feature: "덕다이빙, 케이브", img: '/static/images/shop1/diving/test10.jpg', position: {lat: 33.244246055136834, lng: 126.5671937429616}}
         ],
     }
-  },
-  async beforeRouteEnter(to, from, next) {
-    let urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.has("site")) {
-        var aaa = await getDiveSiteByAddress(urlParams.get("site"));
-        console.log("=============");
-        console.log(aaa);
-    }
-    console.log(">>=============");
-    next({});
-    
-    //next({ path: to.path});
   },
   methods: {
       call: function() {

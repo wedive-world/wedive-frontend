@@ -12,12 +12,12 @@
     <div class="page-content pb-3"> 
         <div class="progress" style="height:6px;">
             <div class="progress-bar border-0 bg-highlight text-start ps-2" 
-                    role="progressbar" style="width: 16.7%" 
+                    role="progressbar" style="width: 25%" 
                     aria-valuenow="10" aria-valuemin="0" 
                     aria-valuemax="100">
             </div>
         </div>
-        <div class="splide single-slider slider-no-arrows" id="single-slider-1" data-splide='{"autoplay":false, "drag": false}'>
+        <div class="splide single-slider slider-no-arrows" id="single-slider-1" data-splide='{"autoplay":false, "drag": false, "lazyLoad": "nearby", "preloadPages": 6}'>
             <div class="splide__track">
                 <div class="splide__list">
                     <div class="splide__slide">
@@ -48,29 +48,29 @@
                     <div class="splide__slide">
                         <div class="card card-full pb-0 mb-3 border-bottom" style="height: calc( 100vh - 115px );">
                         <div class="content mt-1">
-                            <div class="text-center mt-2 mb-3">
+                            <div class="text-center mt-2 mb-0">
                                 <div style="border-bottom: 1px solid rgba(0, 0, 0, 0.08);">
                                     <p class="font-noto mb-1 mt-2"><font class="color-primary">{{nickname}}</font>님 반가워요.</p>
                                     <img src="/static/images/hihi2.png" width="60%" />
                                 </div>
 
-                                <div class="text-start input-style has-icon no-borders mb-3 validate-field mt-4" style="max-width: 200px;display: inline-block;">
-                                    <i class="fa fa-user color-gray font-18"></i>
-                                    <input type="name" class="form-control font-noto input-big2" id="form2" placeholder="이름" v-model="username">
+                                <div class="text-start input-style has-icon no-borders mb-2 validate-field mt-4" style="max-width: 200px;display: inline-block;">
+                                    <i class="fa fa-user color-gray font-14"></i>
+                                    <input type="name" class="form-control font-noto input-big3" id="form2" placeholder="이름" v-model="username">
                                     <i class="fa fa-check disabled valid color-green-dark"></i>
                                     <i class="fa fa-check disabled invalid color-red-dark"></i>
                                 </div>
 
-                                <div class="text-start input-style has-icon no-borders validate-field mb-3" style="max-width: 200px;display: inline-block;">
-                                    <i class="fa fa-id-badge color-gray font-18"></i>
-                                    <input type="number" class="form-control font-noto input-big2" id="form4" placeholder="나이" v-model="userage">
+                                <div class="text-start input-style has-icon no-borders validate-field mb-2" style="max-width: 200px;display: inline-block;">
+                                    <i class="fa fa-id-badge color-gray font-14"></i>
+                                    <input type="number" class="form-control font-noto input-big3" id="form4" placeholder="나이" v-model="userage">
                                     <i class="fa fa-check disabled valid color-green-dark"></i>
                                     <i class="fa fa-check disabled invalid color-red-dark"></i>
                                 </div>
 
-                                <div class="input-style no-borders has-icon validate-field  mb-3" style="width: 200px;display: inline-block;">
-                                    <i class="fas fa-venus-mars color-gray font-18"></i>
-                                    <select id="form5" class="input-big2 font-noto" required v-model="usersex">
+                                <div class="input-style no-borders has-icon validate-field  mb-2" style="width: 200px;display: inline-block;">
+                                    <i class="fas fa-venus-mars color-gray font-14"></i>
+                                    <select id="form5" class="input-big3 font-noto" required v-model="usersex">
                                         <option value="" selected disabled>성별</option>
                                         <option value="남자">남자</option>
                                         <option value="여자">여자</option>
@@ -81,9 +81,9 @@
                                     <em></em>
                                 </div>
 
-                                <div class="input-style no-borders has-icon validate-field mb-3" style="width: 200px;display: inline-block;">
-                                    <i class="fas fa-address-card color-gray font-18"></i>
-                                    <select id="form6" class="input-big2 font-noto" required v-model="useraddress">
+                                <div class="input-style no-borders has-icon validate-field mb-2" style="width: 200px;display: inline-block;">
+                                    <i class="fas fa-address-card color-gray font-14"></i>
+                                    <select id="form6" class="input-big3 font-noto" required v-model="useraddress">
                                         <option value="" selected disabled>거주지</option>
                                         <option value="서울 강남구">서울 강남구</option>
                                         <option value="서울 강동구">서울 강동구</option>
@@ -275,6 +275,46 @@
                                     <i class="fa fa-check disabled valid color-green-dark"></i>
                                     <i class="fa fa-check disabled invalid color-red-dark"></i>
                                     <em></em>
+                                </div>
+                            </div>
+
+                            <div class="mb-0 mt-5">
+                                <label class="wediev-label pb-1 color-highlight ms-2" style="margin-top:-26px;">선호사항 (선택)</label>
+                                <div class="form-check interest-check">
+                                <input class="form-check-input" type="checkbox" value="" id="check_general1">
+                                <label class="form-check-label rounded-xl border-08" for="check_general1">국내투어</label>
+                                <i class="fas fa-caravan color-white font-17"></i>
+                                <i class="fas fa-caravan font-17 color-highlight"></i>
+                                </div>
+                                <div class="form-check interest-check">
+                                <input class="form-check-input" type="checkbox" value="" id="check_general2">
+                                <label class="form-check-label rounded-xl border-08" for="check_general2">해외투어</label>
+                                <i class="fas fa-globe-americas color-white font-17"></i>
+                                <i class="fas fa-globe-americas font-17 color-highlight"></i>
+                                </div>
+                                <div class="form-check interest-check">
+                                <input class="form-check-input" type="checkbox" value="" id="check_general3">
+                                <label class="form-check-label rounded-xl border-08" for="check_general3">수중촬영</label>
+                                <i class="fas fa-camera-retro color-white font-17"></i>
+                                <i class="fas fa-camera-retro font-17 color-highlight"></i>
+                                </div>
+                                <div class="form-check interest-check">
+                                <input class="form-check-input" type="checkbox" value="" id="check_general6">
+                                <label class="form-check-label rounded-xl border-08" for="check_general6">수중정화</label>
+                                <i class="fas fa-broom color-white font-17"></i>
+                                <i class="fas fa-broom font-17 color-highlight"></i>
+                                </div>
+                                <div class="form-check interest-check">
+                                <input class="form-check-input" type="checkbox" value="" id="check_general4">
+                                <label class="form-check-label rounded-xl border-08" for="check_general4">뒷풀이</label>
+                                <i class="fas fa-beer color-white font-17"></i>
+                                <i class="fas fa-beer font-17 color-highlight"></i>
+                                </div>
+                                <div class="form-check interest-check">
+                                <input class="form-check-input" type="checkbox" value="" id="check_general5">
+                                <label class="form-check-label rounded-xl border-08" for="check_general5">동호회</label>
+                                <i class="fas fa-users color-white font-17"></i>
+                                <i class="fas fa-users font-17 color-highlight"></i>
                                 </div>
                             </div>
                         </div>
@@ -556,19 +596,19 @@
                                     <div class="form-check interest-check">
                                     <input class="form-check-input" type="checkbox" value="" id="check_free1">
                                     <label class="form-check-label rounded-xl border-08" for="check_free1">트레이닝</label>
-                                    <i class="fas fa-graduation-cap color-white font-18"></i>
-                                    <i class="fas fa-graduation-cap font-16 color-highlight"></i>
+                                    <i class="fas fa-graduation-cap color-white font-17"></i>
+                                    <i class="fas fa-graduation-cap font-17 color-highlight"></i>
                                     </div>
                                     <div class="form-check interest-check">
                                     <input class="form-check-input" type="checkbox" value="" id="check_free2">
                                     <label class="form-check-label rounded-xl border-08" for="check_free2">스피어 피싱</label>
-                                    <i class="fas fa-fish color-white font-18"></i>
+                                    <i class="fas fa-fish color-white font-17"></i>
                                     <i class="fas fa-fish font-17 color-highlight"></i>
                                     </div>
                                     <div class="form-check interest-check">
                                     <input class="form-check-input" type="checkbox" value="" id="check_free3">
                                     <label class="form-check-label rounded-xl border-08" for="check_free3">해루질</label>
-                                    <i class="fab fa-get-pocket color-white font-18"></i>
+                                    <i class="fab fa-get-pocket color-white font-17"></i>
                                     <i class="fab fa-get-pocket font-17 color-highlight"></i>
                                     </div>
                                 </div>
@@ -579,60 +619,7 @@
                         </div>
                         </div>
                     </div>
-                    <div class="splide__slide">
-                        <div class="card card-full pb-0 mb-3 border-bottom" style="height: calc( 100vh - 115px );">
-                        <div class="content mt-1">
-                            <div class="mt-2 mb-3">
-                                <div class="text-center">
-                                    <p class="font-noto mb-2 mt-2"><font class="color-primary">{{nickname}}</font>님, 관심사항을 선택하면 맞춤 추천을 해드려요.</p>
-                                    <img src="/static/images/magicwand.png" width="40%" />
-                                </div>
-                            </div>
-
-                            <div class="mb-0 mt-5">
-                                <div class="form-check interest-check">
-                                <input class="form-check-input" type="checkbox" value="" id="check_general1">
-                                <label class="form-check-label rounded-xl border-08" for="check_general1">국내투어</label>
-                                <i class="fas fa-caravan color-white font-17"></i>
-                                <i class="fas fa-caravan font-17 color-highlight"></i>
-                                </div>
-                                <div class="form-check interest-check">
-                                <input class="form-check-input" type="checkbox" value="" id="check_general2">
-                                <label class="form-check-label rounded-xl border-08" for="check_general2">해외투어</label>
-                                <i class="fas fa-globe-americas color-white font-17"></i>
-                                <i class="fas fa-globe-americas font-17 color-highlight"></i>
-                                </div>
-                                <div class="form-check interest-check">
-                                <input class="form-check-input" type="checkbox" value="" id="check_general3">
-                                <label class="form-check-label rounded-xl border-08" for="check_general3">수중촬영</label>
-                                <i class="fas fa-camera-retro color-white font-17"></i>
-                                <i class="fas fa-camera-retro font-17 color-highlight"></i>
-                                </div>
-                                <div class="form-check interest-check">
-                                <input class="form-check-input" type="checkbox" value="" id="check_general6">
-                                <label class="form-check-label rounded-xl border-08" for="check_general6">수중정화</label>
-                                <i class="fas fa-broom color-white font-17"></i>
-                                <i class="fas fa-broom font-17 color-highlight"></i>
-                                </div>
-                                <div class="form-check interest-check">
-                                <input class="form-check-input" type="checkbox" value="" id="check_general4">
-                                <label class="form-check-label rounded-xl border-08" for="check_general4">뒷풀이</label>
-                                <i class="fas fa-beer color-white font-17"></i>
-                                <i class="fas fa-beer font-17 color-highlight"></i>
-                                </div>
-                                <div class="form-check interest-check">
-                                <input class="form-check-input" type="checkbox" value="" id="check_general5">
-                                <label class="form-check-label rounded-xl border-08" for="check_general5">동호회</label>
-                                <i class="fas fa-users color-white font-17"></i>
-                                <i class="fas fa-users font-17 color-highlight"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div style="position: absolute;bottom: 0;width:100%;">
-                            <a id="btn_next5" href="#" class="slider-next btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 ms-3 me-3 mb-3" style="height: 46px;padding-top: 10px;" v-on:click="next5()">완료</a>
-                        </div>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -726,6 +713,10 @@ export default {
         });
         $(".splide__pagination").hide();
     }, 500);
+
+    var body = document.body, html = document.documentElement;
+    var height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+    document.getElementById('map').style.height = height + 'px';
   },
   components: {
     VueTypeaheadBootstrap
@@ -784,20 +775,18 @@ export default {
   },
   methods: {
       next1() {
-          $(".progress-bar").css("width", "33.4%");
-      },
-      next2() {
           $(".progress-bar").css("width", "50%");
       },
+      next2() {
+          $(".progress-bar").css("width", "75%");
+      },
       next3() {
-          $(".progress-bar").css("width", "66.7%");
-      },
-      next4() {
-          $(".progress-bar").css("width", "88.4%");
-      },
-      next5() {
           $(".progress-bar").css("width", "100%");
       },
+      next4() {
+          
+      },
+      
       show_scuba_label: function() {
           document.getElementById('scuba_label').classList.remove('hide')
       },
@@ -832,7 +821,7 @@ export default {
                 $('#form_pb').val('');
                 $("#form_record").val('');
                 
-                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08 wedive-label bg-white">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-16 color-highlight"></i></div>');
+                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08 wedive-label bg-white">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
                 const activeMenu = document.querySelectorAll('.menu-active');
                 for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
                 for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+0+"px)"}
@@ -861,6 +850,8 @@ select {background: white; background-color: white;}
 .input-big::placeholder {font-size:22px !important;}
 .input-big2 {font-size:18px !important;}
 .input-big2::placeholder {font-size:18px !important;}
+.input-big3 {font-size:14px !important;}
+.input-big3::placeholder {font-size:14px !important;}
 .btn[disabled] {pointer-events: none !important;background-image: linear-gradient(to bottom, #ccc, #ccc) !important;}
 .bg-e7e7e7 {background-color: transparent !important;}
 </style>

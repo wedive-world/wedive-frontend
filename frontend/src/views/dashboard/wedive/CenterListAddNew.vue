@@ -68,16 +68,16 @@
           <!-- URL Address -->
           <validation-provider
             #default="validationContext"
-            name="URL Address"
+            name="URL"
             rules="required"
           >
             <b-form-group
-              label="URL Address"
-              label-for="url-address"
+              label="URL"
+              label-for="url"
             >
               <b-form-input
-                id="url-address"
-                v-model="centerData.address"
+                id="url"
+                v-model="centerData.uniqueName"
                 autofocus
                 :state="getValidationState(validationContext)"
                 trim
@@ -1185,7 +1185,6 @@ export default {
       }
       _centerData.latitude = parseFloat(_centerData.latitude);
       _centerData.longitude = parseFloat(_centerData.longitude);
-      _centerData.uniqueName = _centerData.address;
       
       
       // 백그라운드 이미지
@@ -1219,9 +1218,6 @@ export default {
         var _centerData = JSON.parse(JSON.stringify(this.centerData));
         _centerData.latitude = parseFloat(_centerData.latitude);
         _centerData.longitude = parseFloat(_centerData.longitude);
-        _centerData.uniqueName = _centerData.address;
-
-
       }
 
       

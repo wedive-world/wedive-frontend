@@ -65,19 +65,19 @@
           
           <hr>
           <h4 class="mt-3">기본정보</h4>
-          <!-- URL Address -->
+          <!-- URL -->
           <validation-provider
             #default="validationContext"
-            name="URL Address"
+            name="URL"
             rules="required"
           >
             <b-form-group
-              label="URL Address"
-              label-for="url-address"
+              label="URL"
+              label-for="url"
             >
               <b-form-input
-                id="url-address"
-                v-model="pointData.address"
+                id="url"
+                v-model="pointData.uniqueName"
                 autofocus
                 :state="getValidationState(validationContext)"
                 trim
@@ -1259,7 +1259,6 @@ export default {
       }
       _pointData.latitude = parseFloat(_pointData.latitude);
       _pointData.longitude = parseFloat(_pointData.longitude);
-      _pointData.uniqueName = _pointData.address;
       
       if (typeof(_pointData.diveSiteId) == 'object' ) {
         var site_id = _pointData.diveSiteId._id;

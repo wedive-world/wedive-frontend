@@ -65,19 +65,19 @@
           
           <hr>
           <h4 class="mt-3">기본정보</h4>
-          <!-- URL Address -->
+          <!-- URL -->
           <validation-provider
             #default="validationContext"
-            name="URL Address"
+            name="URL"
             rules="required"
           >
             <b-form-group
-              label="URL Address"
-              label-for="url-address"
+              label="URL"
+              label-for="url"
             >
               <b-form-input
-                id="url-address"
-                v-model="siteData.address"
+                id="url"
+                v-model="siteData.uniqueName"
                 autofocus
                 :state="getValidationState(validationContext)"
                 trim
@@ -1022,7 +1022,6 @@ export default {
       }
       _siteData.latitude = parseFloat(_siteData.latitude);
       _siteData.longitude = parseFloat(_siteData.longitude);
-      _siteData.uniqueName = _siteData.address;
       
       
       // 백그라운드 이미지
@@ -1080,8 +1079,7 @@ export default {
         var _siteData = JSON.parse(JSON.stringify(this.siteData));
         _siteData.latitude = parseFloat(_siteData.latitude);
         _siteData.longitude = parseFloat(_siteData.longitude);
-        _siteData.uniqueName = _siteData.address;
-
+        
 
         _siteData.monthlyPopular.map((pop, index) => {
           if (pop != 0) { // skip 0
