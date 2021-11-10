@@ -15,17 +15,17 @@
         
         <!-- card in this page format must have the class card-full to avoid seeing behind it-->
         <div class="card card-full pb-0 mb-3 border-bottom">
-          <div class="mt-1 p-3 row mb-0">
-            <div class="col-8" id="div_login">
+          <div class="mt-1 p-3 mb-0">
+            <div class="" id="div_login">
               <p class="mb-0 font-noto">정확한 매칭을 위해서<br/>로그인 또는 회원가입을 해주세요.</p>
             </div>
-            <div class="col-4">
-              <a href="#" class="btn btn-m btn-full mb-3 rounded-xl text-uppercase font-500 shadow-s bg-secondary font-noto"><i class="fas fa-user-lock me-1"></i> 로그인</a>
+            <div class="" style="position: absolute;right:16px;top:16px;">
+              <a href="#" class="btn btn-m mb-3 rounded-xl text-uppercase font-500 shadow-s bg-secondary font-noto"><i class="fas fa-user-lock me-1"></i> 로그인</a>
             </div>
           </div>
         </div>
 
-        <div class="card card-style pb-0 mb-3 ms-3 me-3 border-bottom">
+        <div class="card card-style pb-0 mb-3 ms-3 me-3 border-bottom" v-on:click="goSwimming()">
           <div class="mt-1">
             <div class="p-4" id="div_login">
               <span class="font-noto font-20 font-500">수영장 버디 모집</span>
@@ -256,6 +256,9 @@ export default {
         users: []
     }
   }, methods: {
+      goSwimming() {
+        location.href='/buddy_swimming';
+      },
       lookupUser: debounce(function(){
         // in practice this action should be debounced
         fetch(`https://api.github.com/search/users?q=${this.query}`)
