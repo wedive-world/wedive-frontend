@@ -650,43 +650,88 @@
     <div id="menu-personal-best" 
          class="menu menu-box-modal rounded-m bg-theme" 
          data-menu-width="350"
-         data-menu-height="300">
+         data-menu-height="380">
         <div class="menu-title p-2">
             <h1 class="font-600 font-18">Personal Best 추가</h1>
             <a href="#" class="close-menu"><i class="wedive_icoset wedive_icoset_close"></i></a>
         </div>
         
         <div class="content">
+            <div class="row">
+                <div class="col-6">
+                    <div class="text-start input-style has-icon no-borders mb-1">
+                        <i class="fa fa-record-vinyl color-gray font-14"></i>
+                        <label for="form_pb_sta" class="color-highlight bg-e7e7e7">STA (숨참기)</label>
+                        <input type="number" class="form-control font-noto" id="form_pb_sta" placeholder="STA (숨참기)" v-model="pb_sta">
+                        <i class="fa fa-check disabled valid color-green-dark"></i>
+                        <i class="fa fa-check disabled invalid color-red-dark"></i>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="text-start input-style has-icon no-borders mb-1">
+                        <i class="fa fa-record-vinyl color-gray font-14"></i>
+                        <label for="form_pb_dyn" class="color-highlight bg-e7e7e7">DYN (핀잠영)</label>
+                        <input type="number" class="form-control font-noto" id="form_pb_dyn" placeholder="DYN (핀잠영)" v-model="pb_dyn">
+                        <i class="fa fa-check disabled valid color-green-dark"></i>
+                        <i class="fa fa-check disabled invalid color-red-dark"></i>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="text-start input-style has-icon no-borders mb-1">
+                        <i class="fa fa-record-vinyl color-gray font-14"></i>
+                        <label for="form_pb_dnf" class="color-highlight bg-e7e7e7">DNF (맨발 잠영)</label>
+                        <input type="number" class="form-control font-noto" id="form_pb_dnf" placeholder="DNF (맨발 잠영)" v-model="pb_dnf">
+                        <i class="fa fa-check disabled valid color-green-dark"></i>
+                        <i class="fa fa-check disabled invalid color-red-dark"></i>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="text-start input-style has-icon no-borders mb-1">
+                        <i class="fa fa-record-vinyl color-gray font-14"></i>
+                        <label for="form_pb_cwt" class="color-highlight bg-e7e7e7">CWT (고정 웨이트)</label>
+                        <input type="number" class="form-control font-noto" id="form_pb_cwt" placeholder="CWT (고정 웨이트)" v-model="pb_cwt">
+                        <i class="fa fa-check disabled valid color-green-dark"></i>
+                        <i class="fa fa-check disabled invalid color-red-dark"></i>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="text-start input-style has-icon no-borders mb-1">
+                        <i class="fa fa-record-vinyl color-gray font-14"></i>
+                        <label for="form_pb_vwt" class="color-highlight bg-e7e7e7">VWT (가변 웨이트)</label>
+                        <input type="number" class="form-control font-noto" id="form_pb_vwt" placeholder="VWT (가변 웨이트)" v-model="pb_vwt">
+                        <i class="fa fa-check disabled valid color-green-dark"></i>
+                        <i class="fa fa-check disabled invalid color-red-dark"></i>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="text-start input-style has-icon no-borders mb-1">
+                        <i class="fa fa-record-vinyl color-gray font-14"></i>
+                        <label for="form_pb_fim" class="color-highlight bg-e7e7e7">FIM (프리 이머전)</label>
+                        <input type="number" class="form-control font-noto" id="form_pb_fim" placeholder="FIM (프리 이머전)" v-model="pb_fim">
+                        <i class="fa fa-check disabled valid color-green-dark"></i>
+                        <i class="fa fa-check disabled invalid color-red-dark"></i>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="text-start input-style has-icon no-borders mb-1">
+                        <i class="fa fa-record-vinyl color-gray font-14"></i>
+                        <label for="form_pb_cnf" class="color-highlight bg-e7e7e7">CNF (맨발 잠수)</label>
+                        <input type="number" class="form-control font-noto" id="form_pb_cnf" placeholder="CNF (맨발 잠수)" v-model="pb_cnf">
+                        <i class="fa fa-check disabled valid color-green-dark"></i>
+                        <i class="fa fa-check disabled invalid color-red-dark"></i>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="text-start input-style has-icon no-borders mb-1">
+                        <i class="fa fa-record-vinyl color-gray font-14"></i>
+                        <label for="form_pb_nlt" class="color-highlight bg-e7e7e7">NLT (무제한 잠수)</label>
+                        <input type="number" class="form-control font-noto" id="form_pb_nlt" placeholder="NLT (무제한 잠수)" v-model="pb_nlt">
+                        <i class="fa fa-check disabled valid color-green-dark"></i>
+                        <i class="fa fa-check disabled invalid color-red-dark"></i>
+                    </div>
+                </div>
+            </div>
             
-            <div class="input-style no-borders has-icon validate-field mb-3">
-                <i class="fas fa-record-vinyl color-gray"></i>
-                <label for="form_pb" class="color-highlight">Personal Best</label>
-                <select id="form_pb" required>
-                    <option value="" selected disabled>Personal Best</option>
-                    <option value="STA">STA (숨참기)</option>
-                    <option value="DYN">DYN (핀잠영)</option>
-                    <option value="DNF">DNF (맨발 잠영)</option>
-                    <option value="CWT">CWT (고정 웨이트)</option>
-                    <option value="VWT">VWT (가변 웨이트)</option>
-                    <option value="FIM">FIM (프리 이머전)</option>
-                    <option value="CNF">CNF (맨발 잠수)</option>
-                    <option value="NLT">NLT (무제한 잠수)</option>
-                </select>
-                <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
-                <i class="fa fa-check disabled valid color-green-dark"></i>
-                <i class="fa fa-check disabled invalid color-red-dark"></i>
-                <em></em>
-            </div>
-
-
-            <div class="input-style no-borders has-icon mb-3">
-                <i class="fas fa-clipboard color-gray"></i>
-                <input type="number" class="form-control" id="form_record" placeholder="기록">
-                <label for="form_record" class="color-highlight">기록</label>
-                <i class="fa fa-times disabled invalid color-red-dark"></i>
-                <i class="fa fa-check disabled valid color-green-dark"></i>
-                <em id="em_pb_record">(단위, 미터)</em>
-            </div>
             
             <a href="#" v-on:click="addPersonalBest()" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0">추가하기</a>
         </div>
@@ -757,6 +802,14 @@ export default {
         scuba_license: '',
         scuba_level: '',
         scuba_log: '',
+        pb_sta: '',
+        pb_dyn: '',
+        pb_dnf: '',
+        pb_cwt: '',
+        pb_vwt: '',
+        pb_fim: '',
+        pb_cnf: '',
+        pb_nlt: '',
     }
   }, 
   watch: {
@@ -862,7 +915,55 @@ export default {
         ];
       }, 500),
       addPersonalBest: function() {
-            var record_type = $('#form_pb').val();
+            if (this.pb_sta != "") {
+                var record_type = "STA"
+                var record_val = this.pb_sta;
+                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08 wedive-label bg-white">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
+            }
+            if (this.pb_dyn != "") {
+                var record_type = "STA"
+                var record_val = this.pb_sta;
+                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08 wedive-label bg-white">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
+            }
+            if (this.pb_dnf != "") {
+                var record_type = "DNF"
+                var record_val = this.pb_dnf;
+                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08 wedive-label bg-white">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
+            }
+            if (this.pb_cwt != "") {
+                var record_type = "CWT"
+                var record_val = this.pb_cwt;
+                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08 wedive-label bg-white">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
+            }
+            if (this.pb_vwt != "") {
+                var record_type = "VWT"
+                var record_val = this.pb_vwt;
+                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08 wedive-label bg-white">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
+            }
+            if (this.pb_fim != "") {
+                var record_type = "FIM"
+                var record_val = this.pb_fim;
+                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08 wedive-label bg-white">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
+            }
+            if (this.pb_cnf != "") {
+                var record_type = "CNF"
+                var record_val = this.pb_cnf;
+                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08 wedive-label bg-white">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
+            }
+            if (this.pb_nlt != "") {
+                var record_type = "NLT"
+                var record_val = this.pb_nlt;
+                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08 wedive-label bg-white">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
+            }
+
+            
+            const activeMenu = document.querySelectorAll('.menu-active');
+            for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
+            //for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+0+"px)"}
+            
+            
+
+            /*var record_type = $('#form_pb').val();
             var record_val = $("#form_record").val();
 
             if (record_type == null || record_val == '') {
@@ -878,7 +979,7 @@ export default {
                 const activeMenu = document.querySelectorAll('.menu-active');
                 for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
                 for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+0+"px)"}
-            }
+            }*/
       }
   }
 

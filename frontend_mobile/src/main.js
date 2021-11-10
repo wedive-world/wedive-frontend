@@ -5,6 +5,8 @@ import App from './App'
 import router from './router'
 import VueTypeaheadBootstrap from 'vue-typeahead-bootstrap';
 import VueScrollPicker from "vue-scroll-picker"
+import VCalendar from 'v-calendar';
+
 
 Vue.config.productionTip = false
 Vue.component('vue-typeahead-bootstrap', VueTypeaheadBootstrap)
@@ -12,6 +14,7 @@ Vue.use(VueScrollPicker)
 
 require('dotenv').config();
 
+Vue.use(VCalendar);
 
 /*
 console.log(`==============================Env Information==============================`)

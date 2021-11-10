@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import HomePage from '@/components/HomePage'
 import RecommendPage from '@/components/RecommendPage'
 import BuddyCreatePage from '@/components/BuddyCreatePage'
+import BuddyCreatePage2 from '@/components/BuddyCreatePage2'
+import BuddyCreateSwimmingPage from '@/components/BuddyCreateSwimmingPage'
 import BuddyHomePage from '@/components/BuddyHomePage'
 import UserProfilePage from '@/components/UserProfilePage'
 import UserCreatePage from '@/components/UserCreatePage'
@@ -42,6 +44,16 @@ export default new Router({
       path: '/buddy_create',
       name: 'BuddyCreatePage',
       component: BuddyCreatePage
+    },
+    {
+      path: '/buddy_create2',
+      name: 'BuddyCreatePage2',
+      component: BuddyCreatePage2
+    },
+    {
+      path: '/buddy_swimming',
+      name: 'BuddyCreateSwimmingPage',
+      component: BuddyCreateSwimmingPage
     },
     {
       path: '/buddy_home',

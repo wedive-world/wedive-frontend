@@ -2,7 +2,7 @@
   <div class="">
     <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-buddy" data-menu-load=""></div>    
     <div class="header header-fixed header-logo-center">
-        <a href="" class="header-title color ellipsis">버디 모집</a>
+        <a href="" class="header-title color ellipsis">다이브 이벤트 만들기</a>
         <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
         <a href="#" data-menu="menu-main" class="header-icon header-icon-4"><i class="fas fa-bars"></i></a>
         <a href="#" data-toggle-theme class="header-icon header-icon-3 show-on-theme-dark"><i class="fas fa-sun"></i></a>
@@ -15,54 +15,265 @@
         
         <!-- card in this page format must have the class card-full to avoid seeing behind it-->
         <div class="card card-full pb-0 mb-3 border-bottom">
-          <div class="mt-1 p-3 row mb-0">
-            <div class="col-8" id="div_login">
-              <p class="mb-0 font-noto">정확한 매칭을 위해서<br/>로그인 또는 회원가입을 해주세요.</p>
-            </div>
-            <div class="col-4">
-              <a href="#" class="btn btn-m btn-full mb-3 rounded-xl text-uppercase font-500 shadow-s bg-secondary font-noto"><i class="fas fa-user-lock me-1"></i> 로그인</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="card card-style pb-0 mb-3 ms-3 me-3 border-bottom">
           <div class="mt-1">
-            <div class="p-4" id="div_login">
-              <span class="font-noto font-20 font-500">수영장 버디 모집</span>
-              <p class="font-noto color-gray mb-0 font-200">수영장에서 함께 해요.</p>
-              <i class="wedive_icoset2x wedive_icoset2x_rightarrow"></i>
+            <h4 class="pt-3 mb-2 content mt-0">일정 정보</h4>
+            <!--<a id="delete_schedule" class="color-highlight font-12 hide" style="margin-top: -30px;padding-bottom: 10px;float:right;">일정 삭제</a>-->
+            <div class="text-center p-3 border-08 rounded-s mb-3 hide" id="div_empty">
+              <i class="far fa-folder-open font-40 color-gray-light-mid"></i>
+              
+              <p class="color-gray-light-mid">아직 일정이 없습니다.</p>
             </div>
-          </div>
-        </div>
 
-        <div class="card card-style pb-0 mb-3 ms-3 me-3 border-bottom">
-          <div class="mt-1">
-            <div class="p-4" id="div_login">
-              <span class="font-noto font-20 font-500">바다 버디 모집</span>
-              <p class="font-noto color-gray mb-0 font-200">바다에서 함께 해요.</p>
-              <i class="wedive_icoset2x wedive_icoset2x_rightarrow"></i>
+            <div class="row content m-0">
+              
+              <div class="input-style no-borders validate-field mb-3 col-6 pe-3 after-tilde">
+                <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_start" placeholder="시작일">
+                <label for="form_start" class="color-highlight" style="left: 16px !important;">시작일</label>
+              </div>
+              <div class="input-style no-borders validate-field mb-3 col-6 ps-3">
+                <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_end" placeholder="종료일">
+                <label for="form_end" class="color-highlight" style="left: 16px !important;">종료일</label>
+              </div>
             </div>
-          </div>
-        </div>
+            <div class="mt-1">
+              <vue-typeahead-bootstrap
+                  class="wedive-search content m-0"
+                  style="padding-left: 12px; padding-right: 12px;"
+                  v-model="query"
+                  :data="users"
+                  :serializer="item => item.name_ko"
+                  :screen-reader-text-serializer="item => `${item.name_ko}`"
+                  highlightClass="special-highlight-class"
+                  @hit="selecteduser = $event"
+                  :minMatchingChars="2"
+                  placeholder="지역명, 다이빙 포인트, 센터명"
+                  inputClass="special-input-class"
+                  :disabledValues="(selecteduser ? [selecteduser.name_ko] : [])"
+                  @input="lookupUser2"
+                  >
+                  <template slot="suggestion" slot-scope="{ data, htmlText }">
+                      <div class="d-flex align-items-center">
+                      <img
+                          class="rounded-s me-2"
+                          :src="data.img_url"
+                          style="width: 40px; height: 40px;" />
+                      
+                      
+                      
+                      <span v-if="data.type == 'region'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-marked-alt\'></i> 장소</span><br/>' + htmlText"></span>
+                      <span v-else-if="data.type == 'point'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-pin\'></i> 다이빙 포인트</span><br/>' + htmlText"></span>
+                      <span v-else-if="data.type == 'center'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-store\'></i> 다이빙 센터</span><br/>' + htmlText"></span>
+                      </div>
+                  </template>
+              </vue-typeahead-bootstrap>
 
-        <div class="card card-style pb-0 mb-3 ms-3 me-3 border-bottom">
-          <div class="mt-1">
-            <div class="p-4" id="div_login">
-              <span class="font-noto font-20 font-500">해외 버디 모집</span>
-              <p class="font-noto color-gray mb-0 font-200">해외 다이빙, 리브어보드 버디를 모집합니다.</p>
-              <i class="wedive_icoset2x wedive_icoset2x_rightarrow"></i>
-            </div>
-          </div>
-        </div>
 
-        <div class="card card-style pb-0 mb-3 ms-3 me-3 border-bottom">
-          <div class="mt-1">
-            <div class="p-4" id="div_login">
-              <span class="font-noto font-20 font-500">위다이브 컨시어지</span>
-              <p class="font-noto color-gray mb-0 font-200">위다이브의 매칭 매니저에게 요청합니다.</p>
-              <i class="wedive_icoset2x wedive_icoset2x_rightarrow"></i>
+
+
+
+
+              <div class="card card-full border-top mb-0" style="background: #eef2f1;height:16px;">
+              </div>
+
+
+              <div class="card card-full pb-0 mb-0">
+                <div class="content mt-1">
+                      <div class="d-flex no-effect" 
+                          data-trigger-switch="toggle-id-2"
+                          data-bs-toggle="collapse" 
+                          href="#collapse2"
+                          role="button" 
+                          aria-expanded="false" 
+                          aria-controls="collapse2">
+                          <div class="pt-1">
+                              <h4 class="pt-3 mb-0">참여 정보</h4>
+                          </div>
+                          <div class="ms-auto me-4 pe-2 mt-2">
+                              <div class="custom-control ios-switch">
+                                  <input type="checkbox" class="ios-input" id="toggle-id-2">
+                                  <label class="custom-control-label" for="toggle-id-2"></label>
+                              </div>
+                          </div>
+                      </div>
+
+                  <!--<div class="mb-0 mt-3">
+                    <div class="input-style input-style-always-active has-borders no-icon validate-field mb-0">
+                      <input type="number" class="form-control validate-text" id="form_price" placeholder="모집인원을 입력하세요.">
+                      <label for="form_price" class="color-highlight">모집인원</label>
+                      <i class="fa fa-times disabled invalid color-red-dark"></i>
+                      <i class="fa fa-check disabled valid color-green-dark"></i>
+                      <em>(필요 시 입력))</em>
+                    </div>
+                  </div>-->
+                <div class="collapse" id="collapse2">
+                  <div class="row mb-2">
+                    <div class="col-4">
+                      <div class="color-highlight font-12">모집 인원</div>
+                      <div class="mx-auto">
+                        <div class="stepper rounded-s float-start">
+                          <a href="#" class="stepper-sub"><i class="fa fa-minus color-theme opacity-40"></i></a>
+                          <input type="number" min="1" max="99" value="1">
+                          <a href="#" class="stepper-add"><i class="fa fa-plus color-theme opacity-40"></i></a>
+                        </div>
+                        <div class="clearfix"></div>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="color-secondary font-12">현재 남자</div>
+                      <div class="mx-auto">
+                        <div class="stepper rounded-s float-start">
+                          <a href="#" class="stepper-sub"><i class="fa fa-minus color-theme opacity-40"></i></a>
+                          <input type="number" min="0" max="99" value="0">
+                          <a href="#" class="stepper-add"><i class="fa fa-plus color-theme opacity-40"></i></a>
+                        </div>
+                        <div class="clearfix"></div>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="color-secondary font-12">현재 여자</div>
+                      <div class="mx-auto">
+                        <div class="stepper rounded-s float-start">
+                          <a href="#" class="stepper-sub"><i class="fa fa-minus color-theme opacity-40"></i></a>
+                          <input type="number" min="0" max="99" value="0">
+                          <a href="#" class="stepper-add"><i class="fa fa-plus color-theme opacity-40"></i></a>
+                        </div>
+                        <div class="clearfix"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="mb-0 mt-3 hide">
+                    <div class="input-style no-borders has-icon validate-field mb-3">
+                      <i class="fas fa-coins color-gray"></i>
+                      <input type="number" class="form-control validate-text" id="form_price" placeholder="(옵션) 참가비를 입력하세요.">
+                      <label for="form_price" class="color-highlight">참가비</label>
+                      <i class="fa fa-times disabled invalid color-red-dark"></i>
+                      <i class="fa fa-check disabled valid color-green-dark"></i>
+                      <em>(필요 시 입력))</em>
+                    </div>
+                  </div>
+
+                  <div class="mb-0 mt-3 hide">
+                    <div class="input-style no-borders has-icon validate-field mb-3">
+                      <i class="fas fa-car color-gray"></i>
+                      <input type="name" class="form-control validate-name" id="form_departure" placeholder="(옵션) 출발지를 입력하세요.">
+                      <label for="form_departure" class="color-highlight">출발지</label>
+                      <i class="fa fa-times disabled invalid color-red-dark"></i>
+                      <i class="fa fa-check disabled valid color-green-dark"></i>
+                      <em>(필요 시 입력))</em>
+                    </div>
+                  </div>
+
+
+                  <div class="mb-0 mt-3">
+                    <div class="input-style no-borders has-icon validate-field mb-3">
+                      <i class="fas fa-pen-alt color-gray"></i>
+                      <textarea id="form7" placeholder="이곳에 메모를 작성해보세요."></textarea>
+                      <label for="form7" class="color-highlight">메모</label>
+                    </div>
+                  </div>
+                </div>
+                
+                </div>
+              </div>
+
+
+
+              <div class="card card-full border-top mb-2" style="background: #eef2f1;height:16px;">
+              </div>
+
+
+
+              <div class="card card-full pb-0 mb-3">
+                <div class="content mt-1">
+                  <h4 class="pt-2 mb-2">선호 사항 <span class="mb-2 color-gray-light-mid font-13 ms-2 font-400"><i class="wedive_icoset wedive_icoset_info me-1"></i>딱 맞는 버디를 매칭해드릴께요.</span></h4>
+                  <a class="color-highlight font-12 hide" style="margin-top: -30px;padding-bottom: 10px;float:right;">초기화</a>
+                  <div class="mb-0 mt-3">
+                    <div>성별</div>
+                    <div>
+                      <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_gender1">
+                        <label class="form-check-label rounded-xl border-08" for="check_gender1">무관</label>
+                        <i class="fas fa-user color-white font-18"></i>
+                        <i class="fas fa-user font-16 color-highlight"></i>
+                      </div>
+                      <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_gender2">
+                        <label class="form-check-label rounded-xl border-08" for="check_gender2">남자</label>
+                        <i class="fas fa-male color-white font-18"></i>
+                        <i class="fas fa-male font-16 color-highlight"></i>
+                      </div>
+                      <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_gender3">
+                        <label class="form-check-label rounded-xl border-08" for="check_gender3">여자</label>
+                        <i class="fas fa-female color-white font-18"></i>
+                        <i class="fas fa-female font-16 color-highlight"></i>
+                      </div>
+                      <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_gender4">
+                        <label class="form-check-label rounded-xl border-08" for="check_gender4">커플</label>
+                        <i class="fas fa-user-friends color-white font-18"></i>
+                        <i class="fas fa-user-friends font-16 color-highlight"></i>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="mb-0 mt-3">
+                    <div>기타</div>
+                    <div>
+                      <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_amity1">
+                        <label class="form-check-label rounded-xl border-08" for="check_amity1">뒷풀이</label>
+                        <i class="fas fa-beer color-white font-18"></i>
+                        <i class="fas fa-beer font-16 color-highlight"></i>
+                      </div>
+                      <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_env4">
+                        <label class="form-check-label rounded-xl border-08" for="check_env4">센터확정</label>
+                        <i class="fas fa-store color-white font-18"></i>
+                        <i class="fas fa-store font-17 color-highlight"></i>
+                      </div>
+                      <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_diving2">
+                        <label class="form-check-label rounded-xl border-08" for="check_diving2">초보환영</label>
+                        <i class="fas fa-baby color-white font-18"></i>
+                        <i class="fas fa-baby font-16 color-highlight"></i>
+                      </div>
+                      <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_diving3">
+                        <label class="form-check-label rounded-xl border-08" for="check_diving3">상급레벨</label>
+                        <i class="fas fa-user-graduate color-white font-18"></i>
+                        <i class="fas fa-user-graduate font-16 color-highlight"></i>
+                      </div>
+                      <div class="form-check interest-check hide">
+                        <input class="form-check-input" type="checkbox" value="" id="check_amity2">
+                        <label class="form-check-label rounded-xl border-08" for="check_amity2">식사 함께</label>
+                        <i class="fas fa-utensils color-white font-18"></i>
+                        <i class="fas fa-utensils font-17 color-highlight"></i>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                
+
+                <a href="#" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 ms-3 me-3 mb-5">생성하기</a>
+                  
+              </div>
+
+
+
+
+
+
+
+
             </div>
+
           </div>
+            
+
         </div>
         
     </div>
@@ -382,7 +593,4 @@ export default {
 .timeline-deco {left: 28px !important;}
 .timeline-item-content, .timeline-item-content-full{margin: 0px 15px 30px 56px !important;}
 
-.font-exo2 {font-family: 'Exo 2', sans-serif;}
-.font-noto {font-family: 'Noto Sans Korean';}
-.card-style i:last-child {position: absolute;top: 37%;right: 20px;}
 </style>

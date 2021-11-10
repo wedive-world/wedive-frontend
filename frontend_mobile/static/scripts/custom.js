@@ -84,7 +84,11 @@ document.addEventListener('DOMContentLoaded', () => {
             regularTextarea.forEach(el => el.addEventListener('keyup', e => {
                 if(!el.value == ""){
                     el.parentElement.classList.add('input-style-active');
-                    el.parentElement.querySelector('em').classList.add('disabled');
+                    try {
+                        el.parentElement.querySelector('em').classList.add('disabled');
+                    } catch (e) {
+
+                    }
                 } else {
                     el.parentElement.classList.remove('input-style-active');
                     el.parentElement.querySelector('em').classList.remove('disabled');
@@ -786,7 +790,11 @@ document.addEventListener('DOMContentLoaded', () => {
             linkListToggle.forEach(el => el.addEventListener('click', event => {
                 var switchData = el.getAttribute('data-trigger-switch');
                 var getCheck = document.getElementById(switchData);
-                getCheck.checked ? getCheck.checked = false : getCheck.checked = true;
+                try {
+                    getCheck.checked ? getCheck.checked = false : getCheck.checked = true;
+                } catch(e) {
+
+                }
             }))
         }
 
