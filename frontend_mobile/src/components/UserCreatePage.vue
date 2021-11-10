@@ -319,8 +319,9 @@
                             </div>
                         </div>
 
-                        <div style="position: absolute;bottom: 0;width:100%;">
-                            <a id="btn_next2" href="#" class="slider-next btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 ms-3 me-3 mb-3" style="height: 46px;padding-top: 10px;" disabled="disabled" v-on:click="next2()">다음</a>
+                        <div class="row me-0 ms-0 mb-0" style="position: absolute;bottom: 0;width:100%;padding-left:20px;padding-right:20px;">
+                            <a href="#" class="col-6 slider-prev btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>
+                            <a id="btn_next2" href="#" class="col-6 slider-next btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;" disabled="disabled" v-on:click="next2()">다음</a>
                         </div>
                         </div>
                     </div>
@@ -339,7 +340,7 @@
                                 <div class="input-style no-borders has-icon validate-field mb-3 mt-2">
                                     <i class="fas fa-address-card color-gray" style="margin-left:6px;"></i>
                                     <label for="form11" class="color-highlight bg-e7e7e7">라이센스</label>
-                                    <select id="form11" required class="font-noto">
+                                    <select id="form11" required class="font-noto" v-model="scuba_license">
                                         <option value="" selected disabled>라이센스</option>
                                         <option value="PADI">PADI</option>
                                         <option value="NAUI">NAUI</option>
@@ -390,7 +391,7 @@
                                 <div class="input-style no-borders has-icon validate-field mb-3">
                                     <i class="fas fa-layer-group color-gray" style="margin-left:6px;"></i>
                                     <label for="form22" class="color-highlight bg-e7e7e7">레벨</label>
-                                    <select id="form22" required class="font-noto">
+                                    <select id="form22" required class="font-noto" v-model="scuba_level">
                                         <option value="" selected disabled>레벨</option>
                                         <option value="오픈워터">오픈워터</option>
                                         <option value="어드밴스드">어드밴스드</option>
@@ -408,7 +409,7 @@
                                 <div class="input-style no-borders has-icon validate-field mb-3">
                                     <i class="fas fa-clipboard-check color-gray" style="margin-left:6px;"></i>
                                     <label for="form23" class="color-highlight bg-e7e7e7">다이빙 로그</label>
-                                    <select id="form23" required class="font-noto">
+                                    <select id="form23" required class="font-noto" v-model="scuba_log">
                                         <option value="" selected disabled>다이빙 로그</option>
                                         <option value="10">~10</option>
                                         <option value="30">~30</option>
@@ -466,8 +467,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div style="position: absolute;bottom: 0;width:100%;">
-                            <a id="btn_next3" href="#" class="slider-next btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 ms-3 me-3 mb-3" style="height: 46px;padding-top: 10px;" v-on:click="next3()">다음</a>
+                        <div class="row me-0 ms-0 mb-0" style="position: absolute;bottom: 0;width:100%;padding-left:20px;padding-right:20px;">
+                            <a href="#" class="col-6 slider-prev btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>
+                            <a id="btn_next3" href="#" class="col-6 slider-next btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;" v-on:click="next3()">넘어가기</a>
                         </div>
                         </div>
                     </div>
@@ -614,15 +616,21 @@
                                 </div>
                             </div>
                         </div>
-                        <div style="position: absolute;bottom: 0;width:100%;">
-                            <a id="btn_next4" href="#" class="slider-next btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 ms-3 me-3 mb-3" style="height: 46px;padding-top: 10px;" v-on:click="next4()">다음</a>
+                        <div class="row me-0 ms-0 mb-0" style="position: absolute;bottom: 0;width:100%;padding-left:20px;padding-right:20px;">
+                            <a href="#" class="col-6 slider-prev btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>
+                            <a id="btn_next4" href="#" class="col-6 slider-next btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;" v-on:click="next4()">완료</a>
                         </div>
                         </div>
                     </div>
 
                     <div class="splide__slide">
                         <div id="slide5" class="card card-full pb-0 mb-0 border-bottom" style="height: calc( 100vh - 56px );">
-                        <div class="content mt-1">
+                        <div class="content mt-1" style="padding-top: 80px;">
+                            <div class="text-center mt-2 mb-3">
+                                <img src="/static/images/confetti.gif" width="50%"/>
+                                <p class="font-noto mb-1 mt-2 font-16">{{ nickname }}님, weDive에 오신것을 환영합니다.</p>
+                                <p class="font-noto color-gray"><span class="span_timer">3</span>초 후 메인페이지로 이동할께요.</p>
+                            </div>
                         </div>
                         </div>
                     </div>
@@ -746,6 +754,9 @@ export default {
         userage: '',
         usersex: '',
         useraddress: '',
+        scuba_license: '',
+        scuba_level: '',
+        scuba_log: '',
     }
   }, 
   watch: {
@@ -783,7 +794,28 @@ export default {
           } else {
               $("#btn_next2").attr("disabled", false);
           }
-      }
+      },
+      scuba_license: function(newVal, oldVal) {
+          if (this.scuba_license === '' || this.scuba_level === '' || this.scuba_log === '') {
+              $("#btn_next3").text("다음");
+          } else {
+              $("#btn_next2").text("넘어가기");
+          }
+      },
+      scuba_level: function(newVal, oldVal) {
+          if (this.scuba_license === '' || this.scuba_level === '' || this.scuba_log === '') {
+              $("#btn_next3").text("다음");
+          } else {
+              $("#btn_next2").text("넘어가기");
+          }
+      },
+      scuba_log: function(newVal, oldVal) {
+          if (this.scuba_license === '' || this.scuba_level === '' || this.scuba_log === '') {
+              $("#btn_next3").text("다음");
+          } else {
+              $("#btn_next2").text("넘어가기");
+          }
+      },
   },
   methods: {
       next1() {
@@ -796,7 +828,16 @@ export default {
           $(".progress-bar").css("width", "100%");
       },
       next4() {
-          
+          setTimeout(function() {
+              $(".span_timer").text("2");
+          },1000)
+          setTimeout(function() {
+              $(".span_timer").text("1");
+          },2000)
+          setTimeout(function() {
+              $(".span_timer").text("0");
+              window.location.href="/";
+          },3000)
       },
       
       show_scuba_label: function() {
