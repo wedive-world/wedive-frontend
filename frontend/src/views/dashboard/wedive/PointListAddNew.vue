@@ -1111,8 +1111,9 @@ export default {
           if (key == 'backgroundImages') {
             _data[key].forEach(image=>{
               this.backgroundItems.push({
-                id: this.nextBackgroundImageId += this.nextBackgroundImageId,
+                id: image._id
               })
+              this.nextBackgroundImageId += this.nextBackgroundImageId;
               this.backgroundImages.push(new File([""], (image.name == null) ? '' : image.name));
               this.backgroundImageRef.push((image.reference == null) ? '' : image.reference);
               this.backgroundImageName.push((image.description == null) ? '' : image.description);
@@ -1121,8 +1122,9 @@ export default {
           } else if (key == 'images') {
             _data[key].forEach(image=>{
               this.pointItems.push({
-                id: this.nextImageId += this.nextImageId,
+                id: image._id
               })
+              this.nextImageId += this.nextImageId
               this.pointImages.push(new File([""], (image.name == null) ? '' : image.name));
               this.pointImageRef.push((image.reference == null) ? '' : image.reference);
               this.pointImageName.push((image.description == null) ? '' : image.description);
@@ -1138,6 +1140,17 @@ export default {
               this.highlightImagesRef.push([]);
               this.highlightImagesName.push([]);
               this.highlightImageItems.push([]);
+              const _idx = this.highlightImagesFile.length - 1;
+              _data.highlights.images.forEach(image=>{
+                this.highlightImageItems.push({
+                  id: image._id
+                })
+                this.nextHighlightImageId += this.nextHighlightImageId
+
+                this.highlightImagesFile[_idx].push(new File([""], (image.name == null) ? '' : image.name));
+                this.highlightImagesRef[_idx].push((image.reference == null) ? '' : image.reference);
+                this.highlightImagesName[_idx].push((image.description == null) ? '' : image.description);
+              });
 
               this.pointData.highlightContents.push(highlight.description);
               this.pointData.highlightNames.push(highlight.name);
@@ -1185,7 +1198,21 @@ export default {
       })
     },
     backgroundRemoveItem(index) {
-      this.backgroundItems.splice(index, 1)
+      var _id = this.backgroundItems[index].id;
+      this.backgroundItems.splice(index, 1);
+
+      if (_id.length > 20) {
+        this.backgroundImages.splice(index, 1);
+        this.backgroundImageRef.splice(index, 1);
+        this.backgroundImageName.splice(index, 1);
+        try {
+          for (var i=0; i<this.pointData.backgroundImages.length; i++) {
+            if (this.pointData.backgroundImages[i]._id == _id) {
+              this.pointData.backgroundImages.splice(i, 1);
+            }
+          }
+        } catch (e) {console.log(e)};
+      }
     },
 
     
@@ -1213,7 +1240,23 @@ export default {
       });
     },
     highlightImageRemoveItem(index, index2) {
-      this.highlightImageItems[index].splice(index2, 1)
+      var _id = this.highlightImageItems[index][index2].id;
+      this.highlightImageItems[index].splice(index2, 1);
+
+      if (_id.length > 20) {
+        this.highlightImagesFile[index].splice(index2, 1);
+        this.highlightImagesRef[index].splice(index2, 1);
+        this.highlightImagesName[index].splice(index2, 1);
+        try {
+          for (var i=0; i<this.pointData.highlights.images.length; i++) {
+            if (this.pointData.highlights.images[i]._id == _id) {
+              this.pointData.highlights.images.splice(i, 1);
+            }
+          }
+        } catch (e) {console.log(e)};
+      }
+
+      
     },
 
     pointRepeateAgain() {
@@ -1222,10 +1265,23 @@ export default {
       })
     },
     pointRemoveItem(index) {
+      var _id = this.pointItems[index].id;
       this.pointItems.splice(index, 1)
+
+      if (_id.length > 20) {
+        this.pointImages.splice(index, 1);
+        this.pointImageRef.splice(index, 1);
+        this.pointImageName.splice(index, 1);
+        try {
+          for (var i=0; i<this.pointData.images.length; i++) {
+            if (this.pointData.images[i]._id == _id) {
+              this.pointData.images.splice(i, 1);
+            }
+          }
+        } catch (e) {console.log(e)};
+      }
     },
     
-
 
     youtubeRepeateAgain() {
       this.youtubeItems.push('');

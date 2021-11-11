@@ -918,8 +918,9 @@ export default {
           } else if (key == 'backgroundImages') {
             _data[key].map(image=>{
               this.backgroundItems.push({
-                id: this.nextImageId += this.nextImageId,
+                id: image._id
               })
+              this.nextImageId += this.nextImageId;
               this.backgroundImages.push(new File([""], (image.name == null) ? '' : image.name));
               this.backgroundImageRef.push((image.reference == null) ? '' : image.reference);
               this.backgroundImageName.push((image.description == null) ? '' : image.description);
@@ -986,7 +987,21 @@ export default {
       })
     },
     backgroundRemoveItem(index) {
-      this.backgroundItems.splice(index, 1)
+      var _id = this.backgroundItems[index].id;
+      this.backgroundItems.splice(index, 1);
+      
+      if (_id.length > 20) {
+        this.backgroundImages.splice(index, 1);
+        this.backgroundImageRef.splice(index, 1);
+        this.backgroundImageName.splice(index, 1);
+        try {
+          for (var i=0; i<this.siteData.backgroundImages.length; i++) {
+            if (this.siteData.backgroundImages[i]._id == _id) {
+              this.siteData.backgroundImages.splice(i, 1);
+            }
+          }
+        } catch (e) {console.log(e)};
+      }
     },
 
 
@@ -1022,7 +1037,6 @@ export default {
       }
       _siteData.latitude = parseFloat(_siteData.latitude);
       _siteData.longitude = parseFloat(_siteData.longitude);
-      
       
       // 백그라운드 이미지
       {
@@ -1076,7 +1090,6 @@ export default {
           _siteData["month" + i] = _id_list;
         }
 
-        var _siteData = JSON.parse(JSON.stringify(this.siteData));
         _siteData.latitude = parseFloat(_siteData.latitude);
         _siteData.longitude = parseFloat(_siteData.longitude);
         
@@ -1093,13 +1106,13 @@ export default {
           }
         })
       }
-
+      
       // 전체 인터레스트 입력
       _siteData.interests = [];
       this.interestSelectedTotal.map(interest => {
         _siteData.interests.push(interest._id);
       })
-
+      
 
       if (_siteData._id == null) delete _siteData._id;
       delete _siteData.scubaIndex;
@@ -1111,7 +1124,6 @@ export default {
       
       try {
         _siteData.adminScore = parseInt(_siteData.adminScore);
-        console.log(_siteData);
         await upsertDiveSite(_siteData);
       } catch (e) {
         this.$swal({

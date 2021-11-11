@@ -1215,7 +1215,7 @@ export default {
 
       // 월별 인기도 및 날씨 정보 입력
       {
-        var _centerData = JSON.parse(JSON.stringify(this.centerData));
+        //var _centerData = JSON.parse(JSON.stringify(this.centerData));
         _centerData.latitude = parseFloat(_centerData.latitude);
         _centerData.longitude = parseFloat(_centerData.longitude);
       }
@@ -1257,7 +1257,6 @@ export default {
         _centerData.educationScore = parseInt(_centerData.educationScore);
         _centerData.facilityScore = parseInt(_centerData.facilityScore);
         _centerData.serviceScore = parseInt(_centerData.serviceScore);
-        console.log(_centerData);
         await upsertDiveCenter(_centerData);
       } catch (e) {
         this.$swal({
