@@ -39,9 +39,9 @@
           <!-- Install Prompt for Android -->
           <div id="menu-install-pwa-android" class="menu menu-box-bottom rounded-m">
               <img class="mx-auto mt-4 rounded-m" src="/static/images/logo_d.png" alt="img" width="90">
-              <h4 class="text-center mt-4 mb-2">Appkit on your Home Screen</h4>
+              <h4 class="text-center mt-4 mb-2">WeDive on your Home Screen</h4>
               <p class="text-center boxed-text-xl">
-                  Install Appkit on your home screen, and access it just like a regular app. It really is that simple!
+                  Install WeDive on your home screen, and access it just like a regular app. It really is that simple!
               </p>
               <div class="boxed-text-l">
                   <a href="#" class="pwa-install mx-auto btn btn-m font-600 bg-highlight">Add to Home Screen</a>
@@ -53,9 +53,9 @@
           <div id="menu-install-pwa-ios" class="menu menu-box-bottom rounded-m">
               <div class="boxed-text-xl top-25">
                   <img class="mx-auto mt-4 rounded-m" src="/static/images/logo_d.png" alt="img" width="90">
-                  <h4 class="text-center mt-4 mb-2">Appkit on your Home Screen</h4>
+                  <h4 class="text-center mt-4 mb-2">WeDive on your Home Screen</h4>
                   <p class="text-center ms-3 me-3">
-                      Install Appkit on your home screen, and access it just like a regular app. Open your Safari menu and tap "Add to Home Screen".
+                      Install WeDive on your home screen, and access it just like a regular app. Open your Safari menu and tap "Add to Home Screen".
                   </p>
                   <a href="#" class="pwa-dismiss close-menu btn-full mt-3 text-center text-uppercase font-900 color-red-light opacity-90 font-110 pb-5">Maybe later</a>
               </div>
