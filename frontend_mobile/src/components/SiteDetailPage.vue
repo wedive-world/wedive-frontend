@@ -6,12 +6,12 @@
             <div class="splide__track">
                 <div class="splide__list">
                     <div class="splide__slide" v-if="siteData.backgroundImages == null || siteData.backgroundImages.length == 0">
-                        <div id="background_img_0" data-card-height="250" class="card rounded-0 mb-0" style="background: url(/static/empty.jgp);background-size: contain;">
+                        <div id="background_img_null" data-card-height="250" class="card rounded-0 mb-0" style="background: url(/static/empty.jgp);background-size: contain;">
                             
                         </div>
                     </div>
                     <div class="splide__slide" v-for="(image, index) in siteData.backgroundImages">
-                        <div :id="'background_img_' + index" data-card-height="250" class="card rounded-0 mb-0" v-bind:style="'background: url('+image.url+');background-size: contain;'">
+                        <div data-card-height="250" :class="'card rounded-0 mb-0 background_img_' + index" v-bind:style="'background: url('+image.url+');background-size: contain;'">
                             
                         </div>
                     </div>
@@ -1293,7 +1293,10 @@ export default {
             if (result_image.data.data.getImageUrlsByIds) {
                 for (var i=0; i<result_image.data.data.getImageUrlsByIds.length; i++) {
                     this.siteData.backgroundImages[i].url = result_image.data.data.getImageUrlsByIds[i];
-                    $("#background_img_" + i).css("background", "url(" + result_image.data.data.getImageUrlsByIds[i] + ")");
+                    $(".background_img_" + i).css("background", "url(" + result_image.data.data.getImageUrlsByIds[i] + ")");
+                    //setTimeout(function(url, i) {
+                        //$("#background_img_" + i).css("background", "url(" + url + ")");
+                    //}, 1000, result_image.data.data.getImageUrlsByIds[i], i);
                     //console.log(this.siteData.backgroundImages[i].url)
                 }
             }
