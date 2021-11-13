@@ -166,7 +166,7 @@
             rules="required"
           >
             <b-form-group
-              label="환경 점수 (포인트에 점수가 있으면 평균)"
+              label="환경 점수 (초기점수)"
               label-for="waterEnvironmentScore"
             >
               <b-form-input
@@ -191,7 +191,7 @@
             rules="required"
           >
             <b-form-group
-              label="유속 점수 (포인트에 점수가 있으면 평균)"
+              label="유속 점수 (초기점수)"
               label-for="flowRateScore"
             >
               <b-form-input
@@ -216,7 +216,7 @@
             rules="required"
           >
             <b-form-group
-              label="시야 점수 (포인트에 점수가 있으면 평균)"
+              label="시야 점수 (초기점수)"
               label-for="eyeSightScore"
             >
               <b-form-input
@@ -246,7 +246,7 @@
                 rules="required"
               >
                 <b-form-group
-                  label="시야 최저m (포인트 평균)"
+                  label="시야 최저m (초기값)"
                   label-for="minSight"
                 >
                   <b-form-input
@@ -273,7 +273,7 @@
                 rules="required"
               >
                 <b-form-group
-                  label="시야 최고m (포인트 평균)"
+                  label="시야 최고m (초기값)"
                   label-for="maxSight"
                 >
                   <b-form-input
