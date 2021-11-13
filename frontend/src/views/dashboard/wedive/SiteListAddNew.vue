@@ -159,6 +159,142 @@
           </validation-provider>
 
           <hr>
+          <!-- waterEnvironment Score -->
+          <validation-provider
+            #default="validationContext"
+            name="waterEnvironmentScore"
+            rules="required"
+          >
+            <b-form-group
+              label="환경 점수 (포인트에 점수가 있으면 평균)"
+              label-for="waterEnvironmentScore"
+            >
+              <b-form-input
+                id="waterEnvironmentScore"
+                v-model="siteData.waterEnvironmentScore"
+                min="1"
+                max="100"
+                type="number"
+                trim
+                placeholder="양양"
+              />
+
+              <b-form-invalid-feedback>
+                {{ validationContext.errors[0] }}
+              </b-form-invalid-feedback>
+            </b-form-group>
+          </validation-provider>
+          <!-- flowRate Score -->
+          <validation-provider
+            #default="validationContext"
+            name="flowRateScore"
+            rules="required"
+          >
+            <b-form-group
+              label="유속 점수 (포인트에 점수가 있으면 평균)"
+              label-for="flowRateScore"
+            >
+              <b-form-input
+                id="flowRateScore"
+                v-model="siteData.flowRateScore"
+                min="1"
+                max="100"
+                type="number"
+                trim
+                placeholder="양양"
+              />
+
+              <b-form-invalid-feedback>
+                {{ validationContext.errors[0] }}
+              </b-form-invalid-feedback>
+            </b-form-group>
+          </validation-provider>
+          <!-- eyeSight Score -->
+          <validation-provider
+            #default="validationContext"
+            name="eyeSightScore"
+            rules="required"
+          >
+            <b-form-group
+              label="시야 점수 (포인트에 점수가 있으면 평균)"
+              label-for="eyeSightScore"
+            >
+              <b-form-input
+                id="eyeSightScore"
+                v-model="siteData.eyeSightScore"
+                min="1"
+                max="100"
+                type="number"
+                trim
+                placeholder="양양"
+              />
+
+              <b-form-invalid-feedback>
+                {{ validationContext.errors[0] }}
+              </b-form-invalid-feedback>
+            </b-form-group>
+          </validation-provider>
+
+          <b-row
+            class=""
+          >
+            <b-col md="6" class="">
+              <!-- minSight meter -->
+              <validation-provider
+                #default="validationContext"
+                name="minSight"
+                rules="required"
+              >
+                <b-form-group
+                  label="시야 최저m (포인트 평균)"
+                  label-for="minSight"
+                >
+                  <b-form-input
+                    id="minSight"
+                    v-model="siteData.minSight"
+                    min="1"
+                    max="100"
+                    type="number"
+                    trim
+                    placeholder="양양"
+                  />
+
+                  <b-form-invalid-feedback>
+                    {{ validationContext.errors[0] }}
+                  </b-form-invalid-feedback>
+                </b-form-group>
+              </validation-provider>
+            </b-col>
+            <b-col md="6" class="">
+                  <!-- maxSight meter -->
+              <validation-provider
+                #default="validationContext"
+                name="maxSight"
+                rules="required"
+              >
+                <b-form-group
+                  label="시야 최고m (포인트 평균)"
+                  label-for="maxSight"
+                >
+                  <b-form-input
+                    id="maxSight"
+                    v-model="siteData.maxSight"
+                    min="1"
+                    max="100"
+                    type="number"
+                    trim
+                    placeholder="양양"
+                  />
+
+                  <b-form-invalid-feedback>
+                    {{ validationContext.errors[0] }}
+                  </b-form-invalid-feedback>
+                </b-form-group>
+              </validation-provider>
+            </b-col>
+          </b-row>
+
+          <hr>
           <h4 class="mt-3">위치정보</h4>
           <!-- Latitude -->
           <validation-provider
@@ -788,8 +924,12 @@ const blankSiteData = {
   month11: [],
   month12: [],
   waterTemperatureScore: 0,
-  eyeSiteScore: 0,
   adminScore: 70,
+  eyeSightScore: 50,
+  flowRateScore: 50,
+  waterEnvironmentScore: 50,
+  minSight: 0,
+  maxSight: 0,
   visitTimeDescription: '',
   waterTemperatureDescription: '',
   deepDescription: '',
@@ -1124,6 +1264,11 @@ export default {
       
       try {
         _siteData.adminScore = parseInt(_siteData.adminScore);
+        _siteData.eyeSightScore = parseInt(_siteData.eyeSightScore);
+        _siteData.flowRateScore = parseInt(_siteData.flowRateScore);
+        _siteData.waterEnvironmentScore = parseInt(_siteData.waterEnvironmentScore);
+        _siteData.minSight = parseInt(_siteData.minSight);
+        _siteData.maxSight = parseInt(_siteData.maxSight);
         await upsertDiveSite(_siteData);
       } catch (e) {
         this.$swal({

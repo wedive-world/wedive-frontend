@@ -5,9 +5,9 @@
         <div class="splide single-slider cover-slider slider-no-arrows slider-has-dots" id="cover-slider-1" data-card-height="250">
             <div class="splide__track">
                 <div class="splide__list">
-                    <div class="splide__slide">
-                        <div data-card-height="250" class="card rounded-0 mb-0" style="background-image:url(https://static.wixstatic.com/media/d49a86_c8daa727864349c498f1d93236500ea3~mv2.jpg)">
-                            
+                    <div class="splide__slide" v-for="(image, index) in siteData.backgroundImages">
+                        <div data-card-height="250" class="card rounded-0 mb-0">
+                            <img :id="'background_img_' + index" v-bind:src="image.url" width="100%" height="250" />
                         </div>         
                     </div>
                 </div>
@@ -675,9 +675,9 @@ const axios = require("axios")
 
 export default {
   name: 'HelloWorld',
-  mounted() {
+  async mounted() {
       if (this.$route.params.id) {
-        axios({
+        var result = await axios({
         url: 'https://api.wedives.com/graphql',
         method: 'post',
         data: {
@@ -1223,9 +1223,11 @@ export default {
                 referenceUrls
                 memo
                 }
+                eyeSightScore
                 waterTemperatureScore
-                eyeSiteScore
                 adminScore
+                flowRateScore
+                waterEnvironmentScore
                 visitTimeDescription
                 waterTemperatureDescription
                 deepDescription
@@ -1246,12 +1248,52 @@ export default {
         headers: {
         countryCode: 'ko',
         }
-        }).then((result) => {
-            if (result.data.data.getDiveSiteByUniqueName) {
-                this.siteData = result.data.data.getDiveSiteByUniqueName;
-                console.log(this.siteData);
-            }
         });
+
+        if (result.data.data.getDiveSiteByUniqueName) {
+            this.siteData = result.data.data.getDiveSiteByUniqueName;
+        }
+        
+        if (this.siteData.backgroundImages.length > 0) {
+            for (var i=0; i<this.siteData.backgroundImages.length; i++) {
+                this.siteData.backgroundImages[i].url = '/static/empty.jpg';
+                console.log(this.siteData.backgroundImages[i].url);
+            }
+            var id_arr = [];
+            var width_arr = [];
+            for (var i=0; i<this.siteData.backgroundImages.length; i++) {
+                id_arr.push(this.siteData.backgroundImages[i]._id);
+                width_arr.push(720);
+            }
+            var result_image = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            data: {
+                query: `
+                    query Query($ids: [ID], $widths: [Int]) {
+                        getImageUrlsByIds(_ids: $ids, widths: $widths)
+                    }
+                `,
+                variables: {
+                    ids: id_arr,
+                    widths: width_arr
+                }
+
+            }
+            }, {
+            headers: {
+            countryCode: 'ko',
+            }
+            });
+            if (result_image.data.data.getImageUrlsByIds) {
+                for (var i=0; i<result_image.data.data.getImageUrlsByIds.length; i++) {
+                    this.siteData.backgroundImages[i].url = result_image.data.data.getImageUrlsByIds[i];
+                    $("#background_img_" + i).attr("src", result_image.data.data.getImageUrlsByIds[i]);
+                    //console.log(this.siteData.backgroundImages[i].url)
+                }
+            }
+        }
+        
     }
 
     var preloader = document.getElementById('preloader')

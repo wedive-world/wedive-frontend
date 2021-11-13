@@ -191,6 +191,59 @@
             class="mb-1"
           >
             <b-col md="6">
+                <!-- sight (min) -->
+                <validation-provider
+                    #default="validationContext"
+                    name="Latitude"
+                    rules="required"
+                >
+                    <b-form-group
+                      label="최저 시야(m)"
+                      label-for="minSight"
+                    >
+                    <b-form-input
+                      id="minSight"
+                      v-model="pointData.minSight"
+                      :state="getValidationState(validationContext)"
+                      placeholder="10"
+                      trim
+                    />
+                    <b-form-invalid-feedback>
+                    {{ validationContext.errors[0] }}
+                    </b-form-invalid-feedback>
+                    </b-form-group>
+                </validation-provider>
+            </b-col>
+            <b-col md="6">
+                <!-- sight (max) -->
+                <validation-provider
+                    #default="validationContext"
+                    name="Latitude"
+                    rules="required"
+                >
+                    <b-form-group
+                      label="최고 시야(m)"
+                      label-for="maxSight"
+                    >
+                    <b-form-input
+                      id="maxSight"
+                      v-model="pointData.maxSight"
+                      :state="getValidationState(validationContext)"
+                      placeholder="48"
+                      trim
+                    />
+                    <b-form-invalid-feedback>
+                    {{ validationContext.errors[0] }}
+                    </b-form-invalid-feedback>
+                    </b-form-group>
+                </validation-provider>
+            </b-col>
+          </b-row>
+
+          <b-row
+            class="mb-1"
+          >
+            <b-col md="6">
                 <!-- Deep (min) -->
                 <validation-provider
                     #default="validationContext"
@@ -986,8 +1039,10 @@ const blankPointData = {
   waterEnvironmentScore: 40,
   flowRateScore: 50,
   eyeSightScore: 30,
-  minDepth: '',
-  maxDepth: '',
+  minDepth: 0,
+  maxDepth: 0,
+  minSight: 0,
+  maxSight: 0,
   highlightDescription: '',
 
   scubaIndex: '',
@@ -1457,6 +1512,8 @@ export default {
       try {
         _pointData.minDepth = parseInt(_pointData.minDepth);
         _pointData.maxDepth = parseInt(_pointData.maxDepth);
+        _pointData.minSight = parseInt(_pointData.minSight);
+        _pointData.maxSight = parseInt(_pointData.maxSight);
         _pointData.adminScore = parseInt(_pointData.adminScore);
         _pointData.waterEnvironmentScore = parseInt(_pointData.waterEnvironmentScore);
         _pointData.flowRateScore = parseInt(_pointData.flowRateScore);
