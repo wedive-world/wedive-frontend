@@ -17,7 +17,7 @@
                     aria-valuemax="100">
             </div>
         </div>
-        <div class="splide single-slider slider-no-arrows" id="single-slider-1" data-splide='{"autoplay":false, "drag": false, "lazyLoad": "nearby", "preloadPages": 6}'>
+        <div class="splide single-slider slider-no-arrows" id="single-slider-1" data-splide='{"autoplay":false, "drag": false, "lazyLoad": "nearby", "preloadPages": 6, "pagination": false}'>
             <div class="splide__track">
                 <div class="splide__list">
                     <div class="splide__slide">
@@ -757,7 +757,6 @@ export default {
     
     $(".page-title").hide();
     $(".page-title-clear").hide();
-    $(".splide__pagination").hide();
     
     setTimeout(function() {
         $("#toggle-id-1").click();
@@ -772,7 +771,6 @@ export default {
                 $("#em_pb_record").text("(단위, 미터)")
             }
         });
-        $(".splide__pagination").hide();
     }, 500);
 
     var body = document.body, html = document.documentElement;

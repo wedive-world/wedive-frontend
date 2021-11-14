@@ -19,7 +19,7 @@
                     aria-valuemax="100">
             </div>
         </div>
-        <div class="splide single-slider slider-no-arrows" id="single-slider-1" data-splide='{"autoplay":false, "drag": false, "lazyLoad": "nearby", "preloadPages": 6}'>
+        <div class="splide single-slider slider-no-arrows" id="single-slider-1" data-splide='{"autoplay":false, "drag": false, "lazyLoad": "nearby", "preloadPages": 6, "pagination": false}'>
             <div class="splide__track">
                 <div class="splide__list">
                     <div class="splide__slide">
@@ -73,8 +73,8 @@
                                     
                                 </div>
                                 <div class="collapse" id="collapse2">
-                                    <div class="p-2">
-                                        <div class="form-check interest-check" v-for="(hour,index) in hour_array">
+                                    <div class="p-2 row">
+                                        <div class="form-check interest-check col-3" v-for="(hour,index) in hour_array" style="width: 25%;margin-left:0px;margin-right:0px;padding-left:calc(var(--bs-gutter-x) * .5);">
                                             <input class="form-check-input" type="radio" name="check_hour" value="" :id="'check_hour'+index">
                                             <label class="form-check-label rounded-xl" :for="'check_hour'+index" style="padding-left:12px;" v-on:click="setHour(index)">{{hour}}</label>
                                         </div>
@@ -92,6 +92,7 @@
                         <div class="content mt-1">
                             <h4 class="pt-3 mb-2 content mt-0 mb-2">어디로 갈까요?</h4>
                             <vue-typeahead-bootstrap
+                                id="search_typeahead"
                                 class="wedive-search content mb-0  me-3 ms-3 mt-2"
                                 style="padding-left: 12px; padding-right: 12px;"
                                 v-model="query"
@@ -99,7 +100,7 @@
                                 :serializer="item => item.name_ko"
                                 :screen-reader-text-serializer="item => `${item.name_ko}`"
                                 highlightClass="special-highlight-class"
-                                @hit="selecteduser = $event;enableNext2();"
+                                @hit="selecteduser = $event;enableNext2($event);"
                                 :minMatchingChars="2"
                                 placeholder="지역명, 다이빙 포인트, 센터명"
                                 inputClass="special-input-class"
@@ -121,7 +122,25 @@
                                     </div>
                                 </template>
                             </vue-typeahead-bootstrap>
+                            <div 
+                                id="search_result" 
+                                class="hide" 
+                                v-on:click="search_result_click()"
+                                style="margin-left: 16px;margin-right: 16px;padding:7px;border:1px solid #ced4da;border-radius:4px;">
+                                <div class="d-flex align-items-center">
+                                <img
+                                    class="rounded-s me-2"
+                                    :src="search_img"
+                                    style="width: 40px; height: 40px;" />
+                                
+                                <span v-if="search_type == 'region'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-marked-alt\'></i> 장소</span><br/>' + search_loc"></span>
+                                <span v-else-if="search_type == 'point'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-pin\'></i> 다이빙 포인트</span><br/>' + search_loc"></span>
+                                <span v-else-if="search_type == 'center'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-store\'></i> 다이빙 센터</span><br/>' + search_loc"></span>
+                                </div>
+                            </div>
                         </div>
+                        
+                        
                         <div style="position: absolute;bottom: 0;width:100%;">
                             <a id="btn_next2" href="#" class="slider-next btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 ms-3 me-3 mb-3" style="height: 46px;padding-top: 10px;" disabled="disabled" v-on:click="next2()">다음</a>
                         </div>
@@ -301,8 +320,7 @@ export default {
     
     $(".page-title").hide();
     $(".page-title-clear").hide();
-    $(".splide__pagination").hide();
-
+    
     $("#check_nodate").change(function(){
       $(this).toggleClass("checked");
       if ($(this).is(":checked")) {
@@ -311,10 +329,7 @@ export default {
         $("#form_start").attr("disabled", false);
       }
     });
-    setTimeout(function() {
-        $(".splide__pagination").hide();
-    }, 500);
-
+    
     var body = document.body, html = document.documentElement;
     var height = Math.min(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight) - 56;
     document.getElementById('slide1').style.height = height + 'px';
@@ -339,6 +354,9 @@ export default {
         day_show: "",
         hour_show: "",
         buddy_detail: "",
+        search_type: "",
+        search_img: "",
+        search_loc: "",
         hour_array: ["7:00", "7:30", "8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30"],
         theme: {
             container: {
@@ -409,7 +427,18 @@ export default {
             $("#btn_next1").attr("disabled", false);
         }
       },
-      enableNext2() {
+      search_result_click() {
+          $("#search_typeahead").removeClass("hide");
+          $("#search_result").addClass("hide");
+          this.query = '';
+          $("#search_typeahead input").focus()
+      },
+      enableNext2(ev) {
+          this.search_img = ev.img_url;
+          this.search_type=ev.type;
+          this.search_loc=ev.name_ko;
+          $("#search_typeahead").addClass("hide");
+          $("#search_result").removeClass("hide");
           $("#btn_next2").attr("disabled", false);
       },
       onDayClick(day) {
