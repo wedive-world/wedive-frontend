@@ -2,7 +2,7 @@
   <div class="">
     <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-buddy" data-menu-load=""></div>    
     <div class="header header-fixed header-logo-center">
-        <a href="" class="header-title color ellipsis">수영장 버디 모집</a>
+        <a href="" class="header-title color ellipsis">바다 버디 모집</a>
         <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
         <a href="#" data-menu="menu-main" class="header-icon header-icon-4"><i class="fas fa-bars"></i></a>
         <a href="#" data-toggle-theme class="header-icon header-icon-3 show-on-theme-dark"><i class="fas fa-sun"></i></a>
@@ -102,7 +102,7 @@
                                 highlightClass="special-highlight-class"
                                 @hit="selecteduser = $event;enableNext2($event);"
                                 :minMatchingChars="2"
-                                placeholder="지역명, 수영장"
+                                placeholder="지역명, 포인트명, 센터명"
                                 inputClass="special-input-class"
                                 :disabledValues="(selecteduser ? [selecteduser.name_ko] : [])"
                                 @input="lookupUser2"
@@ -299,6 +299,12 @@
                                     <label class="form-check-label rounded-xl border-08" for="check_amity1">뒷풀이</label>
                                     <i class="fas fa-beer color-white font-18"></i>
                                     <i class="fas fa-beer font-16 color-highlight"></i>
+                                </div>
+                                <div class="form-check interest-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="check_env4">
+                                    <label class="form-check-label rounded-xl border-08" for="check_env4">센터확정</label>
+                                    <i class="fas fa-store color-white font-18"></i>
+                                    <i class="fas fa-store font-17 color-highlight"></i>
                                 </div>
                                 <div class="form-check interest-check">
                                     <input class="form-check-input" type="checkbox" value="" id="check_diving2">

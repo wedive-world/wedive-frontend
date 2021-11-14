@@ -1301,7 +1301,16 @@ export default {
                 }
             }
         }
-        
+
+
+        if (this.$route.query.header && this.$route.query.header == 'hide') {
+            $(".page-title").hide();
+            $(".page-title-clear").hide();
+            $(".header-fixed").hide();
+        }
+        if (this.$route.query.footer && this.$route.query.footer == 'hide') {
+            $("#footer-bar").hide();
+        }
     }
 
     var preloader = document.getElementById('preloader')

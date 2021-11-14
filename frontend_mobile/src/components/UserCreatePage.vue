@@ -12,7 +12,7 @@
     <div class="page-content pb-0"> 
         <div class="progress" style="height:6px;">
             <div class="progress-bar border-0 bg-highlight text-start ps-2" 
-                    role="progressbar" style="width: 25%" 
+                    role="progressbar" style="width: 20%" 
                     aria-valuenow="10" aria-valuemin="0" 
                     aria-valuemax="100">
             </div>
@@ -484,41 +484,10 @@
                                 </div>
                             </div>
                             <div class="p-3" style="background: #e7e7e7;border-radius:8px;">
-                                <div class="mt-2 mb-3">
-                                    <label id="scuba_label" class="color-highlight wediev-label hide ms-3">자주가는 수영장</label>
-                                    <vue-typeahead-bootstrap
-                                        class="wedive-search2"
-                                        v-model="query"
-                                        :data="users"
-                                        :serializer="item => item.name_ko"
-                                        :screen-reader-text-serializer="item => `${item.name_ko}`"
-                                        highlightClass="special-highlight-class"
-                                        @hit="selecteduser = $event;show_scuba_label();"
-                                        :minMatchingChars="2"
-                                        placeholder="자주가는 수영장"
-                                        inputClass="special-input-class"
-                                        :disabledValues="(selecteduser ? [selecteduser.name_ko] : [])"
-                                        @input="lookupUser2"
-                                        >
-                                        <template slot="suggestion" slot-scope="{ data, htmlText }">
-                                            <div class="d-flex align-items-center">
-                                            <img
-                                                class="rounded-s me-2"
-                                                :src="data.img_url"
-                                                style="width: 40px; height: 40px;" />
-                                            
-                                            <span v-if="data.type == 'region'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-marked-alt\'></i> 장소</span><br/>' + htmlText"></span>
-                                            <span v-else-if="data.type == 'point'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-pin\'></i> 다이빙 포인트</span><br/>' + htmlText"></span>
-                                            <span v-else-if="data.type == 'center'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-store\'></i> 다이빙 센터</span><br/>' + htmlText"></span>
-                                            </div>
-                                        </template>
-                                    </vue-typeahead-bootstrap>
-                                </div>
-                                
                                 <div class="input-style no-borders has-icon validate-field mb-3">
                                     <i class="fas fa-address-card color-gray" style="margin-left:6px;"></i>
                                     <label for="form21" class="color-highlight bg-e7e7e7">라이센스</label>
-                                    <select id="form21" required>
+                                    <select id="form21" required v-model="free_license">
                                         <option value="" selected disabled>라이센스</option>
                                         <option value="PADI">PADI</option>
                                         <option value="NAUI">NAUI</option>
@@ -569,7 +538,7 @@
                                 <div class="input-style no-borders has-icon validate-field mb-3">
                                     <i class="fas fa-layer-group color-gray" style="margin-left:6px;"></i>
                                     <label for="form12" class="color-highlight bg-e7e7e7">레벨</label>
-                                    <select id="form12" required>
+                                    <select id="form12" required v-model="free_level">
                                         <option value="" selected disabled>레벨</option>
                                         <option value="레벨1">레벨1</option>
                                         <option value="레벨2">레벨2</option>
@@ -618,13 +587,52 @@
                         </div>
                         <div class="row me-0 ms-0 mb-0" style="position: absolute;bottom: 0;width:100%;padding-left:20px;padding-right:20px;">
                             <a href="#" class="col-6 slider-prev btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>
-                            <a id="btn_next4" href="#" class="col-6 slider-next btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;" v-on:click="next4()">완료</a>
+                            <a id="btn_next4" href="#" class="col-6 slider-next btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;" v-on:click="next4()">넘어가기</a>
                         </div>
                         </div>
                     </div>
 
                     <div class="splide__slide">
                         <div id="slide5" class="card card-full pb-0 mb-0 border-bottom" style="height: calc( 100vh - 56px );">
+                        <div class="content mt-1">
+                            <div class="text-center mt-2 mb-3">
+                                <div>
+                                    <p class="font-noto mb-3 mt-5">{{nickname}}님, <font class="color-primary font-20 font-600">강사</font> 로 등록하시겠어요?<br/>
+                                    <font class="color-gray">위다이브에서 무료 강좌를 개설할 수 있습니다.</font>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="input-style no-borders has-icon validate-field mb-3 mt-3">
+                                <i class="fas fa-phone-alt color-gray"></i>
+                                <input type="tel" class="form-control validate-text" id="form31" placeholder="전화번호">
+                                <label for="form31" class="color-highlight">전화번호</label>
+                                <i class="fa fa-times disabled invalid color-red-dark"></i>
+                                <i class="fa fa-check disabled valid color-green-dark"></i>
+                                <em>(필수입력)</em>
+                            </div>
+                            <div class="input-style no-borders has-icon validate-field mb-3">
+                                <i class="fa fa-at color-gray"></i>
+                                <input type="email" class="form-control validate-text" id="form32" placeholder="이메일">
+                                <label for="form32" class="color-highlight">이메일</label>
+                                <i class="fa fa-times disabled invalid color-red-dark"></i>
+                                <i class="fa fa-check disabled valid color-green-dark"></i>
+                                <em>(필수입력)</em>
+                            </div>
+                            
+                            <div style="border: 1px solid #abb7ba;width: 150px;height:150px;display: inline-block;background: white;position: relative;">
+                                <input type="file" id="file-upload2" class="upload-file text-center" accept="image/*" style="height: 150px;">
+                                <p class="upload-file-text" style="color: #abb7ba;position:absolute;left:40px;top:80px;"><i class="fas fa-plus"></i><br/>자격증 업로드</p></input>
+                            </div>
+                        </div>
+                        <div class="row me-0 ms-0 mb-0" style="position: absolute;bottom: 0;width:100%;padding-left:20px;padding-right:20px;">
+                            <a href="#" class="col-6 slider-prev btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>
+                            <a id="btn_next4" href="#" class="col-6 slider-next btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;" v-on:click="next5()">완료</a>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="splide__slide">
+                        <div id="slide6" class="card card-full pb-0 mb-0 border-bottom" style="height: calc( 100vh - 56px );">
                         <div class="content mt-1" style="padding-top: 80px;">
                             <div class="text-center mt-2 mb-3">
                                 <img src="/static/images/confetti.gif" width="50%"/>
@@ -780,6 +788,16 @@ export default {
     document.getElementById('slide3').style.height = height + 'px';
     document.getElementById('slide4').style.height = height + 'px';
     document.getElementById('slide5').style.height = height + 'px';
+    document.getElementById('slide6').style.height = height + 'px';
+
+    if (this.$route.query.header && this.$route.query.header == 'hide') {
+      $(".page-title").hide();
+      $(".page-title-clear").hide();
+      $(".header-fixed").hide();
+    }
+    if (this.$route.query.footer && this.$route.query.footer == 'hide') {
+      $("#footer-bar").hide();
+    }
   },
   components: {
     VueTypeaheadBootstrap
@@ -800,6 +818,8 @@ export default {
         scuba_license: '',
         scuba_level: '',
         scuba_log: '',
+        free_license: '',
+        free_level: '',
         pb_sta: '',
         pb_dyn: '',
         pb_dnf: '',
@@ -850,35 +870,52 @@ export default {
           if (this.scuba_license === '' || this.scuba_level === '' || this.scuba_log === '') {
               $("#btn_next3").text("다음");
           } else {
-              $("#btn_next2").text("넘어가기");
+              $("#btn_next3").text("넘어가기");
           }
       },
       scuba_level: function(newVal, oldVal) {
           if (this.scuba_license === '' || this.scuba_level === '' || this.scuba_log === '') {
               $("#btn_next3").text("다음");
           } else {
-              $("#btn_next2").text("넘어가기");
+              $("#btn_next3").text("넘어가기");
           }
       },
       scuba_log: function(newVal, oldVal) {
           if (this.scuba_license === '' || this.scuba_level === '' || this.scuba_log === '') {
               $("#btn_next3").text("다음");
           } else {
-              $("#btn_next2").text("넘어가기");
+              $("#btn_next3").text("넘어가기");
+          }
+      },
+      free_license: function(newVal, oldVal) {
+          if (this.free_license === '' || this.free_level === '') {
+              $("#btn_next4").text("다음");
+          } else {
+              $("#btn_next4").text("넘어가기");
+          }
+      },
+      free_level: function(newVal, oldVal) {
+          if (this.free_license === '' || this.free_level === '') {
+              $("#btn_next4").text("다음");
+          } else {
+              $("#btn_next4").text("넘어가기");
           }
       },
   },
   methods: {
       next1() {
-          $(".progress-bar").css("width", "50%");
+          $(".progress-bar").css("width", "40%");
       },
       next2() {
-          $(".progress-bar").css("width", "75%");
+          $(".progress-bar").css("width", "60%");
       },
       next3() {
-          $(".progress-bar").css("width", "100%");
+          $(".progress-bar").css("width", "80%");
       },
       next4() {
+          $(".progress-bar").css("width", "100%");
+      },
+      next5() {
           setTimeout(function() {
               $(".span_timer").text("2");
           },1000)

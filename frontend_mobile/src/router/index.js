@@ -5,6 +5,8 @@ import RecommendPage from '@/components/RecommendPage'
 import BuddyCreatePage from '@/components/BuddyCreatePage'
 import BuddyCreatePage2 from '@/components/BuddyCreatePage2'
 import BuddyCreateSwimmingPage from '@/components/BuddyCreateSwimmingPage'
+import BuddyCreateSeaPage from '@/components/BuddyCreateSeaPage'
+import BuddyCreateAbroadPage from '@/components/BuddyCreateAbroadPage'
 import BuddyHomePage from '@/components/BuddyHomePage'
 import UserProfilePage from '@/components/UserProfilePage'
 import UserCreatePage from '@/components/UserCreatePage'
@@ -54,6 +56,16 @@ export default new Router({
       path: '/buddy_swimming',
       name: 'BuddyCreateSwimmingPage',
       component: BuddyCreateSwimmingPage
+    },
+    {
+      path: '/buddy_sea',
+      name: 'BuddyCreateSeaPage',
+      component: BuddyCreateSeaPage
+    },
+    {
+      path: '/buddy_abroad',
+      name: 'BuddyCreateAbroadPage',
+      component: BuddyCreateAbroadPage
     },
     {
       path: '/buddy_home',

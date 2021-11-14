@@ -2,7 +2,7 @@
   <div class="">
     <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-buddy" data-menu-load=""></div>    
     <div class="header header-fixed header-logo-center">
-        <a href="" class="header-title color ellipsis">수영장 버디 모집</a>
+        <a href="" class="header-title color ellipsis">해외 버디 모집</a>
         <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
         <a href="#" data-menu="menu-main" class="header-icon header-icon-4"><i class="fas fa-bars"></i></a>
         <a href="#" data-toggle-theme class="header-icon header-icon-3 show-on-theme-dark"><i class="fas fa-sun"></i></a>
@@ -36,16 +36,16 @@
                                     v-on:click="collapse1()"
                                     >
                                     <div class="">
-                                        <h4 class="pt-3 mb-2 content mt-0 mb-2">모집일자</h4>
-                                        <h4 class="pt-3 mb-2 content mt-0 mb-2 font-300 color-secondary" style="position: absolute;right: 0px;top: 4px;">{{ day_show }}</h4>
+                                        <h4 class="pt-3 mb-2 content mt-0 mb-2">여행 시작일</h4>
+                                        <h4 class="pt-3 mb-2 content mt-0 mb-2 font-300 color-secondary" style="position: absolute;right: 0px;top: 4px;">{{ day_show_start }}</h4>
                                     </div>
                                     
                                 </div>
                                 <div class="collapse show" id="collapse1">
                                     <v-calendar
                                         is-expanded
-                                        v-model="selectedDate"
-                                        @dayclick="onDayClick"
+                                        v-model="selectedDateStart"
+                                        @dayclick="onDayClickStart"
                                         :min-date="new Date()"
                                         :attributes="attributes"
                                         :select-attribute="selectAttribute"
@@ -67,20 +67,27 @@
                                     v-on:click="collapse2()"
                                     >
                                     <div class="">
-                                        <h4 class="pt-3 mb-2 content mt-0 mb-2">시간</h4>
-                                        <h4 class="pt-3 mb-2 content mt-0 mb-2 font-300 color-secondary" style="position: absolute;right: 0px;top: 4px;">{{hour_show}}</h4>
+                                        <h4 class="pt-3 mb-2 content mt-0 mb-2">여행 종료일</h4>
+                                        <h4 class="pt-3 mb-2 content mt-0 mb-2 font-300 color-secondary" style="position: absolute;right: 0px;top: 4px;">{{ day_show_end }}</h4>
                                     </div>
                                     
                                 </div>
                                 <div class="collapse" id="collapse2">
-                                    <div class="p-2 row">
-                                        <div class="form-check interest-check col-3" v-for="(hour,index) in hour_array" style="width: 25%;margin-left:0px;margin-right:0px;padding-left:calc(var(--bs-gutter-x) * .5);">
-                                            <input class="form-check-input" type="radio" name="check_hour" value="" :id="'check_hour'+index">
-                                            <label class="form-check-label rounded-xl" :for="'check_hour'+index" style="padding-left:12px;" v-on:click="setHour(index)">{{hour}}</label>
-                                        </div>
-                                    </div>
+                                    <v-calendar
+                                        is-expanded
+                                        v-model="selectedDateEnd"
+                                        @dayclick="onDayClickEnd"
+                                        :min-date="new Date()"
+                                        :attributes="attributes"
+                                        :select-attribute="selectAttribute"
+                                        :theme="theme"></v-calendar>
                                 </div>
                             </div>
+
+
+
+
+                            
                         </div>
                         <div style="position: absolute;bottom: 0;width:100%;">
                             <a id="btn_next1" href="#" class="slider-next btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 ms-3 me-3 mb-3" style="height: 46px;padding-top: 10px;" disabled="disabled" v-on:click="next1()">다음</a>
@@ -102,7 +109,7 @@
                                 highlightClass="special-highlight-class"
                                 @hit="selecteduser = $event;enableNext2($event);"
                                 :minMatchingChars="2"
-                                placeholder="지역명, 수영장"
+                                placeholder="국가명, 지역명, 포인트명, 센터명"
                                 inputClass="special-input-class"
                                 :disabledValues="(selecteduser ? [selecteduser.name_ko] : [])"
                                 @input="lookupUser2"
@@ -301,6 +308,12 @@
                                     <i class="fas fa-beer font-16 color-highlight"></i>
                                 </div>
                                 <div class="form-check interest-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="check_env4">
+                                    <label class="form-check-label rounded-xl border-08" for="check_env4">센터확정</label>
+                                    <i class="fas fa-store color-white font-18"></i>
+                                    <i class="fas fa-store font-17 color-highlight"></i>
+                                </div>
+                                <div class="form-check interest-check">
                                     <input class="form-check-input" type="checkbox" value="" id="check_diving2">
                                     <label class="form-check-label rounded-xl border-08" for="check_diving2">초보환영</label>
                                     <i class="fas fa-baby color-white font-18"></i>
@@ -396,15 +409,15 @@ export default {
         query: '',
         selecteduser: null,
         users: [],
-        selectedDate: null,
+        selectedDateStart: null,
+        selectedDateEnd: null,
         collapse1_showed: true,
-        day_show: "",
-        hour_show: "",
+        day_show_start: "",
+        day_show_end: "",
         buddy_detail: "",
         search_type: "",
         search_img: "",
         search_loc: "",
-        hour_array: ["7:00", "7:30", "8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30"],
         theme: {
             container: {
             light: 'light-container-class',  // Classes to apply for light mode
@@ -467,13 +480,6 @@ export default {
       collapse2() {
         $("#collapse1_area").click();
       },
-      setHour(index) {
-        this.hour_show = this.hour_array[index];
-        //$("#collapse2_area").click();
-        if (this.day_show != "" && this.hour_show != "") {
-            $("#btn_next1").attr("disabled", false);
-        }
-      },
       search_recommend_click(type, name, img, target) {
           this.search_img = img;
           this.search_type=type;
@@ -498,7 +504,7 @@ export default {
           $("#search_result").removeClass("hide");
           $("#btn_next2").attr("disabled", false);
       },
-      onDayClick(day) {
+      onDayClickStart(day) {
         var yesterday = new Date();
         yesterday.setDate(yesterday.getDate()-1);
         if (new Date(day.id) < yesterday) {
@@ -507,13 +513,32 @@ export default {
             var notificationToast = new bootstrap.Toast(notificationToast);
             notificationToast.show();
         } else {
-            this.selectedDate = day;
-            this.day_show = day.month + "." + day.day + " (" + weekday_ko[day.weekdayPosition] + ")";
+            this.selectedDateStart = day;
+            this.day_show_start = day.month + "." + day.day + " (" + weekday_ko[day.weekdayPosition] + ")";
             $("#collapse1_area").click();
             $("#collapse2_area").click();
         }
         
-        if (this.day_show != "" && this.hour_show != "") {
+        if (this.day_show_start != "" && this.day_show_end != "") {
+            $("#btn_next1").attr("disabled", false);
+        }
+      },
+      onDayClickEnd(day) {
+        var yesterday = new Date();
+        yesterday.setDate(yesterday.getDate()-1);
+        if (new Date(day.id) < yesterday) {
+            var toastData = 'snackbar-error';
+            var notificationToast = document.getElementById(toastData);
+            var notificationToast = new bootstrap.Toast(notificationToast);
+            notificationToast.show();
+        } else {
+            this.selectedDateEnd = day;
+            this.day_show_end = day.month + "." + day.day + " (" + weekday_ko[day.weekdayPosition] + ")";
+            //$("#collapse1_area").click();
+            //$("#collapse2_area").click();
+        }
+        
+        if (this.day_show_start != "" && this.day_show_end != "") {
             $("#btn_next1").attr("disabled", false);
         }
       },

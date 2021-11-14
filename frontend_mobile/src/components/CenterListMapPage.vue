@@ -534,6 +534,14 @@ export default {
     var height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
     document.getElementById('map').style.height = height + 'px';
 
+    if (this.$route.query.header && this.$route.query.header == 'hide') {
+      $(".page-title").hide();
+      $(".page-title-clear").hide();
+      $(".header-fixed").hide();
+    }
+    if (this.$route.query.footer && this.$route.query.footer == 'hide') {
+      $("#footer-bar").hide();
+    }
   },
   created() {
     

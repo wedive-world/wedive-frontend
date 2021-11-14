@@ -35,7 +35,7 @@
           </div>
         </div>
 
-        <div class="card card-style pb-0 mb-3 ms-3 me-3 border-bottom">
+        <div class="card card-style pb-0 mb-3 ms-3 me-3 border-bottom" v-on:click="goSea()">
           <div class="mt-1">
             <div class="p-4" id="div_login">
               <span class="font-noto font-20 font-500">바다 버디 모집</span>
@@ -45,7 +45,7 @@
           </div>
         </div>
 
-        <div class="card card-style pb-0 mb-3 ms-3 me-3 border-bottom">
+        <div class="card card-style pb-0 mb-3 ms-3 me-3 border-bottom" v-on:click="goAbroad()">
           <div class="mt-1">
             <div class="p-4" id="div_login">
               <span class="font-noto font-20 font-500">해외 버디 모집</span>
@@ -234,6 +234,15 @@ export default {
     $(".page-title").hide();
     $(".page-title-clear").hide();
 
+    if (this.$route.query.header && this.$route.query.header == 'hide') {
+      $(".page-title").hide();
+      $(".page-title-clear").hide();
+      $(".header-fixed").hide();
+    }
+    if (this.$route.query.footer && this.$route.query.footer == 'hide') {
+      $("#footer-bar").hide();
+    }
+
     $("#check_nodate").change(function(){
       $(this).toggleClass("checked");
       if ($(this).is(":checked")) {
@@ -258,6 +267,12 @@ export default {
   }, methods: {
       goSwimming() {
         location.href='/buddy_swimming';
+      },
+      goSea() {
+        location.href='/buddy_sea';
+      },
+      goAbroad() {
+        location.href='/buddy_abroad';
       },
       lookupUser: debounce(function(){
         // in practice this action should be debounced
