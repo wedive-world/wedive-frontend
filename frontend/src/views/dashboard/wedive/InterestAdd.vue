@@ -110,13 +110,13 @@
         >
 
           <b-form-group
-            label="아이콘 타입"
-            label-for="iconType"
+            label="동의어"
+            label-for="aliases"
           >
             <b-form-input
-              id="iconType"
-              v-model="iconType"
-              placeholder="아이콘 타입"
+              id="aliases"
+              v-model="aliases"
+              placeholder="동의어,동의어,동의어"
               value="awesome-font"
             />
           </b-form-group>
@@ -129,18 +129,18 @@
         >
 
           <b-form-group
-            label="아이콘 내용"
-            label-for="iconName"
+            label="유의어"
+            label-for="searchTerms"
           >
             <b-form-input
-              id="iconName"
-              v-model="iconName"
-              placeholder="아이콘 내용"
+              id="searchTerms"
+              v-model="searchTerms"
+              placeholder="유의어,유의어,유의어"
             />
           </b-form-group>
         </b-col>
       </b-row>
-      아이콘 내용은 <code><a href="https://fontawesome.com/v5.15/icons?d=gallery&p=2&m=free" target="_blank">이곳</a></code>을 클릭해서 확인하세요. (fa-코드 입력)
+      <span class="hide">아이콘 내용은 <code><a href="https://fontawesome.com/v5.15/icons?d=gallery&p=2&m=free" target="_blank">이곳</a></code>을 클릭해서 확인하세요. (fa-코드 입력)</span>
     </b-modal>
 
     <b-modal
@@ -175,8 +175,8 @@ const { getAllInterests, getInterestTypes, upsertInterest, deleteInterestById } 
 const columnDefinition = [
     { sortable: true, filter: true, field: 'title', headerName: '관심내용', editable: true },
     { sortable: true, filter: true, field: 'type', headerName: '타입', editable: true},
-    { sortable: true, filter: true, field: 'iconType', headerName: '아이콘타입', editable: true },
-    { sortable: true, filter: true, field: 'iconName', headerName: '아이콘내용', editable: true },
+    { sortable: true, filter: true, field: 'aliases_show', headerName: '동의어', editable: true },
+    { sortable: true, filter: true, field: 'searchTerms_show', headerName: '유의어', editable: true },
 ];
 
 
@@ -205,8 +205,8 @@ export default {
       interest_types: [],
       title: '',
       addType: '',
-      iconType: 'awesome-font',
-      iconName: '',
+      aliases: '',
+      searchTerms: '',
       delSelected: '',
       menuData: [
         { icon: 'PlusIcon', text: 'New' },
@@ -226,10 +226,24 @@ export default {
     setInterests: function(interests, interest_types) {
       this.interests = interests;
       this.interest_types = interest_types;
+      this.interests.forEach(interest=>{if(interest.aliases) {interest.aliases_show = interest.aliases.join();}if(interest.searchTerms){interest.searchTerms_show = interest.searchTerms.join();}});
     },
     async cellUpdated($event) {
-      var i_input = {_id: $event.row._id, title: $event.row.title, uniqueName: $event.row.title, type: $event.row.type, iconType: $event.row.iconType, iconName: $event.row.iconName, iconColor: $event.row.iconColor, iconUrl: $event.row.iconUrl};
-      i_input[$event.column.field] = $event.value;
+      //console.log($event);
+      var aliases = [];
+      if ($event.row.hasOwnProperty("aliases_show")) {aliases = $event.row.aliases_show.replace(/, /gi,",").split(",");}
+      var searchTerms = [];
+      if ($event.row.hasOwnProperty("searchTerms_show")) {searchTerms = $event.row.searchTerms_show.replace(/, /gi,",").split(",");}
+      console.log(aliases)
+      console.log(searchTerms)
+      var i_input = {_id: $event.row._id, title: $event.row.title, uniqueName: $event.row.title, type: $event.row.type, aliases: aliases, searchTerms: searchTerms, iconColor: $event.row.iconColor, iconUrl: $event.row.iconUrl};
+      if ($event.column.field == 'aliases_show') {
+        i_input['aliases'] = $event.value.replace(/, /gi,",").split(",");
+      } else if ($event.column.field != 'searchTerms_show') {
+        i_input['searchTerms'] = $event.value.replace(/, /gi,",").split(",");
+      } else {
+        i_input[$event.column.field] = $event.value;
+      }
       try {
         await upsertInterest(i_input)
       } catch (e) {
@@ -245,7 +259,7 @@ export default {
       }
     },
     async AddInterest() {
-      var i_input = {title: title.value, uniqueName: title.value, type: this.addType, iconType: iconType.value, iconName: iconName.value, iconColor: "", iconUrl: null};
+      var i_input = {title: title.value, uniqueName: title.value, type: this.addType, aliases: aliases.value, searchTerms: searchTerms.value, iconColor: "", iconUrl: null};
       try {
         await upsertInterest(i_input)
       } catch (e) {
