@@ -188,7 +188,7 @@
           </validation-provider>
 
           <b-row
-            class="mb-1"
+            class="mb-1 hide"
           >
             <b-col md="6">
                 <!-- sight (min) -->
@@ -1041,8 +1041,6 @@ const blankPointData = {
   eyeSightScore: 30,
   minDepth: 0,
   maxDepth: 0,
-  minSight: 0,
-  maxSight: 0,
   highlightDescription: '',
 
   scubaIndex: '',
@@ -1512,8 +1510,8 @@ export default {
       try {
         _pointData.minDepth = parseInt(_pointData.minDepth);
         _pointData.maxDepth = parseInt(_pointData.maxDepth);
-        _pointData.minSight = parseInt(_pointData.minSight);
-        _pointData.maxSight = parseInt(_pointData.maxSight);
+        //_pointData.minSight = parseInt(_pointData.minSight);
+        //_pointData.maxSight = parseInt(_pointData.maxSight);
         _pointData.adminScore = parseInt(_pointData.adminScore);
         _pointData.waterEnvironmentScore = parseInt(_pointData.waterEnvironmentScore);
         _pointData.flowRateScore = parseInt(_pointData.flowRateScore);
