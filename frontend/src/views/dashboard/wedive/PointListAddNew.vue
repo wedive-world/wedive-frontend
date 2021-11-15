@@ -468,7 +468,7 @@
 
 
           <hr>
-          <h4 class="mt-3">하이라이트 <font style="color:red">(아직 못했습니다)</font></h4>
+          <h4 class="mt-3">하이라이트</h4>
           <div>
             <div>
               <!-- Row Loop -->

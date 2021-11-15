@@ -30,37 +30,36 @@
         
         <div class="card card-style" style="margin-top:-60px; z-index:1">
             <div class="content text-center mt-4">
-                <h2 class="font-20 font-700 mb-0 mt-1">{{ centerData.name }}</h2>
-                <p class="color-gray m-0">{{ centerData.description }}</p>
+                <h2 class="font-20 font-700 mb-0 mt-1">버블탱크 스쿠버다이빙</h2>
+                <p class="color-gray m-0">제주 남부에 위치한 PADI 5star 다이빙센터</p>
                 <div class="wedive-star-back">
-                  <div class="wedive-star-front" v-bind:style="'width:'+centerData.adminScore+'%'">
+                  <div class="wedive-star-front" style="width:76%">
                   </div>
-                  <span class="wedive-star-number">{{ (centerData.adminScore/20).toFixed(1) }}</span>
+                  <span class="wedive-star-number">3.8</span>
                 </div>
                 
                 <div class="evaluation d-flex">
-                    <span class="view font-12">경치 {{ (centerData.viewScore/20).toFixed(1) }}</span>
-                    <span class="training font-12">교육 {{ (centerData.educationScore/20).toFixed(1) }}</span>
-                    <span class="equiptment font-12">시설 {{ (centerData.facilityScore/20).toFixed(1) }}</span>
-                    <span class="service font-12">서비스 {{ (centerData.serviceScore/20).toFixed(1) }}</span>
+                    <span class="view font-12"">경치 4.1</span>
+                    <span class="training font-12"">교육 3.9</span>
+                    <span class="equiptment font-12">시설 3.4</span>
+                    <span class="service font-12">서비스 4.2</span>
                     <!--<span class="info" style="margin-bottom:3px;margin-top:3px;"><i class="icon_question font-12">별점 안내</i></span>-->
                 </div>
-                <div style="margin-top:8px;"><span>최근리뷰 {{ (centerData.reviewCount)?centerData.reviewCount:'0' }}</span>&nbsp;&nbsp;<font class="color-gray-light">|</font>&nbsp;&nbsp;<img class="ext-img" src="/static/images/logo_padi.svg" width="48" />&nbsp;&nbsp;<font class="color-gray-light">|</font>&nbsp;&nbsp;
-                <span v-if="interest.type=='priceIndex'" v-for="interest in centerData.interests">{{interest.title.replace(/\$/gi, '￦')}}</span>
+                <div style="margin-top:8px;"><span>최근리뷰 32</span>&nbsp;&nbsp;<font class="color-gray-light">|</font>&nbsp;&nbsp;<img class="ext-img" src="/static/images/logo_padi.svg" width="48" />&nbsp;&nbsp;<font class="color-gray-light">|</font>&nbsp;&nbsp;<span>￦￦</span>
                 <!--<span class="badge font-10 bg-fade-gray-dark">PADI 공식</span>-->
                 </div>
 
                 <div class="divider mt-3 mb-3"></div>
                 <div class="d-flex mt-3 mb-0 text-center">
                     <div class="flex-grow-1 pd-0" style="border-right: 1px solid lightgray;">
-                    <button :href="'tel:'+centerData.phoneNumber"">
+                    <button href="#" v-on:click="call()">
                         <img class="ext-img" src="/static/images/ico_call.png" width="24" style="margin-top:-4px;"/>
                         <span class="font-16 font-500 font-noto">전화</span>
                     </button>
                     </div>
                     <div class="flex-grow-1 pd-0" style="border-right: 1px solid lightgray;">
                         <img class="ext-img" src="/static/images/ico_heart.png" width="24" style="margin-top:-4px;"/>
-                        <span class="font-16 font-500 font-noto">찜 0</span>
+                        <span class="font-16 font-500 font-noto">찜 25</span>
                     </div>
                     
                     <div class="flex-grow-1 pd-0" data-menu="menu-share">
@@ -72,18 +71,24 @@
             </div>
         </div>
 
-        <div class="card card-style p-2" v-if="centerData.wediveComments && centerData.wediveComments.length > 0">
+        <div class="card card-style p-2">
             <div class="content mb-2">
                 <div class="text-center">
                     <i class="ico ico-wedive-w color-primary scale-box fa-4x"></i>
                 </div>
                 <h4 class="text-center pt-2 mb-0">wedive's comment</h4>
                 <div class="justify-content-center mb-2 mt-3 text-start font-noto">
-                    <div v-for="(comment, index) in centerData.wediveComments">
-                        <div class="color-gray-light-mid font-700 wedive-comment-number">0{{index}}</div>
-                        <div class="mb-2 font-200 wedive-comment-desc">
-                            {{comment}}
-                        </div>
+                    <div class="color-gray-light-mid font-700 wedive-comment-number">01</div>
+                    <div class="mb-2 font-200 wedive-comment-desc">
+                        대한민국에서 가장 수중환경이 뛰어난 제주 남부 다이빙 사이트 근처에 있습니다.
+                    </div>
+                    <div class="color-gray-light-mid font-700 wedive-comment-number">02</div>
+                    <div class="mb-2 font-200 wedive-comment-desc">
+                        세계에서 가장 큰 다이빙 단체인 PADI 5 Star 다이브 센터 입니다.
+                    </div>
+                    <div class="color-gray-light-mid font-700 wedive-comment-number">03</div>
+                    <div class="mb-2 font-200 wedive-comment-desc">
+                        교육, 장비대여, 숙박까지 모두 진행하며, 가격대비 장비의 수준과 직원들의 친절함으로 사용자 평가가 좋습니다.
                     </div>
                 </div>
                 
@@ -292,9 +297,77 @@
                     <div class=" line-height-l pb-3 mt-2 light-border-bottom">
                         <strong class="small-title">시설 정보</strong>
                         <div class="row text-start">
-                            <div class="ico_feature col-3" v-if="interest.type=='facility'" v-for="interest in centerData.interests">
-                                <i v-if="item == interest.title" v-for="(item, index) in feature_list" :class="'ico_feature'+(index+1)+' icon-service'"></i>
-                                <p class="span_feature text-center">{{ interest.title }}</p>
+                            <div class="ico_feature col-3">
+                                <i class="ico_feature1 icon-service"></i>
+                                <p class="span_feature text-center">외국어가능</p>
+                            </div>
+                            <div class="ico_feature col-3">
+                                <i class="ico_feature2 icon-service"></i>
+                                <p class="span_feature text-center">샤워가능</p>
+                            </div>
+                            <div class="ico_feature col-3">
+                                <i class="ico_feature3 icon-service"></i>
+                                <p class="span_feature text-center">룸서비스</p>
+                            </div>
+                            <div class="ico_feature col-3">
+                                <i class="ico_feature4 icon-service"></i>
+                                <p class="span_feature text-center">늦은 퇴실</p>
+                            </div>
+                            <div class="ico_feature col-3">
+                                <i class="ico_feature5 icon-service"></i>
+                                <p class="span_feature text-center">컨시어지</p>
+                            </div>
+                            <div class="ico_feature col-3">
+                                <i class="ico_feature6 icon-service"></i>
+                                <p class="span_feature text-center">주차</p>
+                            </div>
+                            <div class="ico_feature col-3">
+                                <i class="ico_feature7 icon-service"></i>
+                                <p class="span_feature text-center">주방</p>
+                            </div>
+                            <div class="ico_feature col-3">
+                                <i class="ico_feature8 icon-service"></i>
+                                <p class="span_feature text-center">남녀화장실</p>
+                            </div>
+                            <div class="ico_feature col-3">
+                                <i class="ico_feature9 icon-service"></i>
+                                <p class="span_feature text-center">24시업무</p>
+                            </div>
+                            <div class="ico_feature col-3">
+                                <i class="ico_feature10 icon-service"></i>
+                                <p class="span_feature text-center">비지니스</p>
+                            </div>
+                            <div class="ico_feature col-3">
+                                <i class="ico_feature11 icon-service"></i>
+                                <p class="span_feature text-center">장애인편의</p>
+                            </div>
+                            <div class="ico_feature col-3">
+                                <i class="ico_feature12 icon-service"></i>
+                                <p class="span_feature text-center">세탁서비스</p>
+                            </div>
+                            <div class="ico_feature col-3">
+                                <i class="ico_feature13 icon-service"></i>
+                                <p class="span_feature text-center">금연실</p>
+                            </div>
+                            <div class="ico_feature col-3">
+                                <i class="ico_feature14 icon-service"></i>
+                                <p class="span_feature text-center">아이돌봄</p>
+                            </div>
+                            <div class="ico_feature col-3">
+                                <i class="ico_feature15 icon-service"></i>
+                                <p class="span_feature text-center">반려동물</p>
+                            </div>
+                            <div class="ico_feature col-3">
+                                <i class="ico_feature16 icon-service"></i>
+                                <p class="span_feature text-center">WIFI</p>
+                            </div>
+                            <div class="ico_feature col-3">
+                                <i class="ico_feature17 icon-service"></i>
+                                <p class="span_feature text-center">공항셔틀</p>
+                            </div>
+                            <div class="ico_feature col-3">
+                                <i class="ico_feature18 icon-service"></i>
+                                <p class="span_feature text-center">피트니스</p>
                             </div>
                         </div>
                     </div>
@@ -302,18 +375,27 @@
                     <div class="vcard-field line-height-l pb-3 mt-3">
                         <strong>결제 방법</strong>
                         <ul class="wedive-ul ps-0">
-                            <li v-if="interest.type=='payment'" v-for="interest in centerData.interests" class="col-md-6">{{interest.title}}</li>
+                            <li class="col-md-6">현금</li>
+                            <li class="col-md-6">VISA</li>
+                            <li class="col-md-6">MasterCard</li>
+                            <li class="col-md-6">UnionPay</li>
+                            <li class="col-md-6">JCB</li>
+                            <li class="col-md-6">American Express</li>
+                            <li class="col-md-6">Discover card</li>
+                            <li class="col-md-6">PAYCO</li>
+                            <li class="col-md-6">Kakao Pay</li>
+                            <li class="col-md-6">Naver Pay</li>
                         </ul>
                         <i class="fas fa-credit-card color-blue2-dark mt-n2"></i>
                     </div>
 
-                    <div class="vcard-field line-height-l pb-3 mt-3 hide">
+                    <div class="vcard-field line-height-l pb-3 mt-3">
                         <strong>사이트 까지 거리</strong>
                         20km 이상 소요
                         <i class="fa fa-map-marker color-blue2-dark mt-n2"></i>
                     </div>
 
-                    <div class="vcard-field line-height-l pb-3 mt-3 hide">
+                    <div class="vcard-field line-height-l pb-3 mt-3">
                         <strong>직원수</strong>
                         <div class="row mb-0">
                             <div class="col-6 text-start font-13">다이브 마스터</div>
@@ -327,7 +409,7 @@
                     <div class="vcard-field line-height-l pb-0 mt-3 bd-b-w-0">
                         <strong>지원 언어</strong>
                         <ul class="wedive-ul ps-0">
-                            <li v-if="interest.type=='language'" v-for="interest in centerData.interests" class="col-md-6">{{interest.title}}</li>
+                            <li class="col-md-6">한국어</li>
                         </ul>
                         <i class="fas fa-language color-blue2-dark mt-n2"></i>
                     </div>
@@ -364,7 +446,7 @@
                         </div>
                         <div class="ico_equipt col-3">
                             <i class="ico_equipt3 icon-equiptment"></i>
-                            <p class="span_feature text-center">다이버 PC</p>
+                            <p class="span_feature text-center">모르겠음</p>
                         </div>
                         <div class="ico_equipt col-3">
                             <i class="ico_equipt4 icon-equiptment"></i>
@@ -496,7 +578,7 @@
             <div class="content mb-0">
                 <h4 class="text-start pt-2 mb-2">주소</h4>
                 <p class="text-start mb-3 mb-0">
-                    <a href="#" data-menu="menu-copy"><i class="far fa-copy me-2"></i>{{ centerData.geoAddress }}</a><br/>
+                    <a href="#" data-menu="menu-copy"><i class="far fa-copy me-2"></i> 제주 서귀포시 부두로 41 버블탱크</a><br/>
                     <a href="#" class="color-highlight" data-menu="menu-direction"><i class="fas fa-route me-2"></i> 공항-샵 이동방법 안내</a>
                 </p>
             </div>
@@ -1002,170 +1084,10 @@
   </div>
 </template>
 <script>
-const axios = require("axios")
 
 export default {
   name: 'HelloWorld',
-  async mounted() {
-    if (this.$route.params.id) {
-        var result = await axios({
-        url: 'https://api.wedives.com/graphql',
-        method: 'post',
-        data: {
-            query: `
-                query GetDiveCenterByUniqueName($uniqueName: String!) {
-                    getDiveCenterByUniqueName(uniqueName: $uniqueName) {
-                        _id
-                        managers {
-                        _id
-                        name
-                        email
-                        gender
-                        birthAge
-                        }
-                        clerks {
-                        _id
-                        name
-                        email
-                        gender
-                        birthAge
-                        }
-                        divingType
-                        phoneNumber
-                        webPageUrl
-                        geoAddress
-                        adminScore
-                        viewScore
-                        educationScore
-                        facilityScore
-                        serviceScore
-                        wediveComments
-                        diveSites {
-                        _id
-                        divePoints {
-                            _id
-                            adminScore
-                            highlightDescription
-                            images {
-                            _id
-                            }
-                        }
-                        highlightDescription
-                        adminScore
-                        images {
-                            _id
-                        }
-                        }
-                        images {
-                        _id
-                        }
-                        backgroundImages {
-                        _id
-                        }
-                        interests {
-                        _id
-                        title
-                        type
-                        }
-                        name
-                        uniqueName
-                        description
-                        youtubeVideoIds
-                        referenceUrls
-                        memo
-                        address
-                        latitude
-                        longitude
-                        countryCode
-                        publishStatus
-                        reviews {
-                        _id
-                        targetId
-                        targetTypeName
-                        author {
-                            name
-                            email
-                            _id
-                        }
-                        title
-                        description
-                        images {
-                            _id
-                        }
-                        }
-                        reviewCount
-                    }
-                }
-            `,
-            variables: {
-                uniqueName: this.$route.params.id
-            }
-
-        }
-        }, {
-        headers: {
-        countryCode: 'ko',
-        }
-        });
-
-        if (result.data.data.getDiveCenterByUniqueName) {
-            this.centerData = result.data.data.getDiveCenterByUniqueName;
-        }
-        
-        if (this.centerData.backgroundImages.length > 0) {
-            for (var i=0; i<this.centerData.backgroundImages.length; i++) {
-                this.centerData.backgroundImages[i].url = '/static/empty.jpg';
-                console.log(this.centerData.backgroundImages[i].url);
-            }
-            var id_arr = [];
-            var width_arr = [];
-            for (var i=0; i<this.centerData.backgroundImages.length; i++) {
-                id_arr.push(this.centerData.backgroundImages[i]._id);
-                width_arr.push(720);
-            }
-            var result_image = await axios({
-            url: 'https://api.wedives.com/graphql',
-            method: 'post',
-            data: {
-                query: `
-                    query Query($ids: [ID], $widths: [Int]) {
-                        getImageUrlsByIds(_ids: $ids, widths: $widths)
-                    }
-                `,
-                variables: {
-                    ids: id_arr,
-                    widths: width_arr
-                }
-
-            }
-            }, {
-            headers: {
-            countryCode: 'ko',
-            }
-            });
-            if (result_image.data.data.getImageUrlsByIds) {
-                for (var i=0; i<result_image.data.data.getImageUrlsByIds.length; i++) {
-                    this.centerData.backgroundImages[i].url = result_image.data.data.getImageUrlsByIds[i];
-                    $(".background_img_" + i).css("background", "url(" + result_image.data.data.getImageUrlsByIds[i] + ")");
-                    //setTimeout(function(url, i) {
-                        //$("#background_img_" + i).css("background", "url(" + url + ")");
-                    //}, 1000, result_image.data.data.getImageUrlsByIds[i], i);
-                    //console.log(this.centerData.backgroundImages[i].url)
-                }
-            }
-        }
-    }
-    if (this.$route.query.header && this.$route.query.header == 'hide') {
-        $(".page-title").hide();
-        $(".page-title-clear").hide();
-        $(".header-fixed").hide();
-    }
-    if (this.$route.query.footer && this.$route.query.footer == 'hide') {
-        $("#footer-bar").hide();
-    }
-
-
-
+  mounted() {
     var preloader = document.getElementById('preloader')
     if(preloader){preloader.classList.add('preloader-hide');}
     
@@ -1325,6 +1247,15 @@ export default {
             }
         });
     };
+
+    if (this.$route.query.header && this.$route.query.header == 'hide') {
+      $(".page-title").hide();
+      $(".page-title-clear").hide();
+      $(".header-fixed").hide();
+    }
+    if (this.$route.query.footer && this.$route.query.footer == 'hide') {
+      $("#footer-bar").hide();
+    }
   },
   created() {
     
@@ -1333,11 +1264,8 @@ export default {
     return {
         map: null,
         marker_list: [],
-        centerData: {},
-        feature_list: ["외국어가능", "샤워가능", "룸서비스", "늦은 퇴실", "컨시어지", "주차", "주방", "남녀화장실", "24시업무", "비지니스", "장애인편의", "세탁서비스", "금연실", "아이돌봄", "반려동물", "WIFI", "공항셔틀", "피트니스"],
-        pay_list: ["현금", "VISA", "MasterCard", "UnionPay", "JCB", "American Express", "Discover card", "PAYCO", "Kakao Pay", "Naver Pay"],
-        equipt_list: ["마스크", "레귤레이터", "다이버 PC", "다이버 워치", "나침반", "수중 스쿠터", "산소탱크", "핀", "구명조끼", "나이프", "스노쿨링", "부츠", "잠수복 상의", "잠수복 하의", "라이트", "스쿠버 세트", "카메라", "수심계", , "게이지", "잠수복", , "풀세트", "유아장비"],
-        point_list: [
+
+        point_list : [
             {title: "말미잘동산", type: 'df', desc: "동해의 명물 섬유세닐말미잘이 유난히 많은 포인트로, 모래 지형 위에 커다란 암반과 크고 작은 바위들이 형성되어 있는 포인트 입니다. 섬유세닐말미잘은 낮은 수온에서 펴기 때문에 6월 이전에 방문한다면 이 포인트의 아름다움을 제대로 느낄 수 있습니다.", star: 4.6, img1: 'https://divingholic.com/wp-content/uploads/2019/02/maxresdefault-1.jpg', img2: 'https://diverz.net/data/diving/point/202102/1614156788_8f436f8c0dc8a574611b_thumb_760_504.jpg', img3: 'https://divingholic.com/wp-content/uploads/2019/02/2%EC%9B%94%EC%9D%B8%EA%B5%AC%ED%95%B4%EB%B3%80%EB%94%A5.jpg', position: {lat: 37.9668859063654, lng: 128.79946317636166}},
             {title: "철재삼동", type: 'df', desc: "여름철 동해의 상징은 볼락이라고 할 수 있습니다. 그중에서도 수많은 볼락이 태풍처럼 있다고 해서 볼락태풍이라는 별명을 가진 포인트가 철재삼동 포인트 입니다. 초여름에서 초가을까지 3달정도되는 기간에 20m전후 수심, 11~15도의 수온 삼박자가 맞아떨어지면 거대한 볼락 떼를 만날 수 있습니다.", star: 4.3, img1: '/static/images/point/ko/yangyang_chuljesamdong_01.jpg', img2: '/static/images/point/ko/yangyang_chuljesamdong_02.jpg', img3: '/static/images/point/ko/yangyang_chuljesamdong_03.jpg', position: {lat: 37.947207012548716, lng: 128.81497292286326}},
             {title: "하우스리프", type: 'sf', desc: "동해바다는 모래바닥에 재미없는 곳이라고 생각하시나요? 하우스리프 포인트는 1~2명의 다이버가 통과할 수 있는 박원 삼각 뿔 어초와 식빵 어초, W 어초, M어초, 평상어초가 있으며, 자연암반과 어우러져 물고기도 많고 다양한 종류의 어초와 고착생물을 보는 재미가 쏠쏠한 포인트 입니다.", star: 4.2, img1: '/static/images/point/ko/yangyang_houseleaf_01.jpg', img2: '/static/images/point/ko/yangyang_houseleaf_02.jpg', img3: '/static/images/point/ko/yangyang_houseleaf_03.jpg', position: {lat: 37.94825610969583, lng: 128.7946310508101}},
@@ -1352,6 +1280,9 @@ export default {
         ],
     }
   }, methods: {
+      call: function() {
+          console.log("call");
+      },
       goCourse: function() {
           location.href='/course';
       }

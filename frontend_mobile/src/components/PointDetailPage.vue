@@ -18,9 +18,9 @@
     
         <div class="card card-style" style="margin-top:-60px; z-index:1">
             <div class="content text-center mt-4">
-                <h2 class="font-20 font-700 mb-0 mt-1">문섬 포인트</h2>
-                <h2 class="wedive-score">4.1</h2>
-                <span class="wedive-score-desc">우수</span>
+                <h2 class="font-20 font-700 mb-0 mt-1">{{ pointData.name }} 포인트</h2>
+                <h2 class="wedive-score">{{ (pointData.adminScore/20).toFixed(1) }}</h2>
+                <span class="wedive-score-desc">{{ recommend_word[parseInt(pointData.adminScore/20)] }}</span>
                 <p class="color-gray m-0"><i class="fas fa-map-marked-alt" ></i> 대한민국, 제주도, 서귀포 사이트</p>
                 
 
@@ -30,39 +30,39 @@
                             <div class="star-area text-start ms-3" style="height: 30px;">
                                 <span class="font-14 me-2 color-gray" style="float: left;padding-top:2px;">환경</span>
                                 <div class="wedive-fish-back">
-                                    <div class="wedive-fish-front" style="width:66%">
+                                    <div class="wedive-fish-front" v-bind:style="'width:'+pointData.waterEnvironmentScore+'%'">
                                     </div>
-                                    <span class="wedive-score-number">4.3</span>
+                                    <span class="wedive-score-number">{{ (pointData.waterEnvironmentScore/20).toFixed(1) }}</span>
                                 </div>
                             </div>
                             <div class="star-area mt-1 text-start ms-3" style="height: 30px;">
                                 <span class="font-14 me-2 color-gray" style="float: left;padding-top:2px;">유속</span>
                                 <div class="wedive-wave-back">
-                                    <div class="wedive-wave-front" style="width:66%">
+                                    <div class="wedive-wave-front" v-bind:style="'width:'+pointData.flowRateScore+'%'">
                                     </div>
-                                    <span class="wedive-score-number">3.9</span>
+                                    <span class="wedive-score-number">{{ (pointData.flowRateScore/20).toFixed(1) }}</span>
                                 </div>
                             </div>
                             <div class="star-area mt-1 text-start ms-3" style="height: 30px;">
                                 <span class="font-14 me-2 color-gray" style="float: left;padding-top:2px;">시야</span>
                                 <div class="wedive-eye-back">
-                                    <div class="wedive-eye-front" style="width:66%">
+                                    <div class="wedive-eye-front" v-bind:style="'width:'+pointData.eyeSightScore+'%'">
                                     </div>
-                                    <span class="wedive-score-number">4.2</span>
+                                    <span class="wedive-score-number">{{ (pointData.eyeSightScore/20).toFixed(1) }}</span>
                                 </div>
                             </div>
                         </div>
                         <div class="flex-grow-1">
-                            <div style="height: 30px;padding-top:2px;">우수</div>
-                            <div class="mt-1" style="height: 30px;padding-top:2px;">빠름</div>
-                            <div class="mt-1" style="height: 30px;padding-top:2px;">10-20m</div>
+                            <div style="height: 30px;padding-top:2px;">{{ recommend_env_word[parseInt(pointData.adminScore/20)] }}</div>
+                            <div class="mt-1" style="height: 30px;padding-top:2px;">{{ recommend_flow_word[parseInt(pointData.adminScore/20)] }}</div>
+                            <div class="mt-1" style="height: 30px;padding-top:2px;">{{ pointData.minSight }}-{{ pointData.maxSight }}m</div>
                         </div>
                     </div>
                     <div class="divider mt-2 mb-2"></div>
                     <div class="d-flex">
                         <div class="flex-grow-1 text-start ms-3">
                             <span class="font-14 me-2 color-gray">깊이</span>
-                            15-55m
+                            {{ pointData.minDepth }}-{{ pointData.maxDepth }}m
                         </div>
                         <div class="flex-grow-1">
                             <span style="background-color: gray;color:white;padding: 4px 8px;border-radius:4px;">초급, 중급, 고급 가능</span>
@@ -70,14 +70,14 @@
                     </div>
                 </div>
 
-                <p class="color-gray mt-3 mb-0 text-start me-2 ms-2">대한민국 3대 포인트로, 서귀포 하면 가장 먼저 떠오르는 다이빙 포인트 입니다. 물때에 따라 다른 방향으로 흘러가는 조류 다이빙, 다양한 연산호와 물고기들이 어우러진 곳이다. 서귀포항에서 배를 타고 5분 정도면 다다를 수 있을정도로 가까운 섬이며, 도지정 문화재 기념물로 보호되고 있습니다.</p>
+                <p class="color-gray mt-3 mb-0 text-start me-2 ms-2">{{ pointData.description }}</p>
                 
                 <div class="divider mt-3 mb-3"></div>
                 
                 <div class="d-flex mb-0 text-center">
                     <div class="flex-grow-1 pd-0" style="border-right: 1px solid lightgray;">
                         <img class="ext-img" src="/static/images/ico_heart.png" width="24" style="margin-top:-4px;"/>
-                        <span class="font-16 font-500 font-noto">찜 192</span>
+                        <span class="font-16 font-500 font-noto">찜 0</span>
                     </div>
                     
                     <div class="flex-grow-1 pd-0" data-menu="menu-share">
@@ -180,7 +180,7 @@
                                             <h1 class="text-center mb-0"><i class="fas fa-highlighter font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">다이빙 하이라이트</h1>
                                             <p class="text-start font-400">
-                                                쥐놀래미와 도다리, 황어, 전복, 문어, 복어, 쥐치 등을 만날 수 있습니다.
+                                                {{ pointData.highlightDescription }}
                                             </p>
                                         </div>
                                     </div> 
@@ -282,16 +282,14 @@
             </div>
         </div>
 
-
-        <div class="card card-style">
+        <div class="card card-style" v-if="pointData.youtubeVideoIds && pointData.youtubeVideoIds.length > 0">
             <div class="content mb-4 pb-2">
                 <h4 class="text-start pt-2 mb-2">YouTube 소개</h4>
-                <div class="responsive-iframe" style="-border-radius: 16px;-moz-border-radius: 16px;border-radius: 16px;">
-                    <iframe src='https://www.youtube.com/embed/L1sVcQSqDAo' frameborder='0' allowfullscreen></iframe>
+                <div v-for="youtube in pointData.youtubeVideoIds" class="responsive-iframe" style="-border-radius: 16px;-moz-border-radius: 16px;border-radius: 16px;">
+                    <iframe v-bind:src="'https://www.youtube.com/embed/'+youtube" frameborder='0' allowfullscreen></iframe>
                 </div>
             </div>
         </div>
-        
 
 
         <div class="card card-style">
@@ -751,10 +749,246 @@
   </div>
 </template>
 <script>
+const axios = require("axios")
 
 export default {
   name: 'HelloWorld',
-  mounted() {
+  async mounted() {
+    if (this.$route.params.id) {
+        var result = await axios({
+        url: 'https://api.wedives.com/graphql',
+        method: 'post',
+        data: {
+            query: `
+                query getAllDivePoints($uniqueName: String!) {
+                    getDivePointByUniqueName(uniqueName: $uniqueName) {
+                        _id
+                        diveSiteId
+                        adminScore
+                        minDepth
+                        maxDepth
+                        minSight
+                        maxSight
+                        flowRateScore
+                        waterEnvironmentScore
+                        eyeSightScore
+                        highlightDescription
+                        createdAt
+                        updatedAt
+                        highlights {
+                        _id
+                        name
+                        description
+                        divePointId
+                        images {
+                            _id
+                        }
+                        interests {
+                            _id
+                            title
+                            type
+                            iconType
+                            iconName
+                        }
+                        }
+                        images {
+                        _id
+                        }
+                        backgroundImages {
+                        _id
+                        }
+                        interests {
+                        _id
+                        title
+                        iconType
+                        iconName
+                        }
+                        month1 {
+                        _id
+                        title
+                        iconType
+                        iconName
+                        }
+                        month2 {
+                        _id
+                        title
+                        iconType
+                        iconName
+                        }
+                        month3 {
+                        _id
+                        title
+                        iconType
+                        iconName
+                        }
+                        month4 {
+                        _id
+                        title
+                        iconType
+                        iconName
+                        }
+                        month5 {
+                        _id
+                        title
+                        iconType
+                        iconName
+                        }
+                        month6 {
+                        _id
+                        title
+                        iconType
+                        iconName
+                        }
+                        month7 {
+                        _id
+                        title
+                        iconType
+                        iconName
+                        }
+                        month8 {
+                        _id
+                        title
+                        iconType
+                        iconName
+                        }
+                        month9 {
+                        _id
+                        title
+                        iconType
+                        iconName
+                        }
+                        month10 {
+                        _id
+                        title
+                        iconType
+                        iconName
+                        }
+                        month11 {
+                        _id
+                        title
+                        iconType
+                        iconName
+                        }
+                        month12 {
+                        _id
+                        title
+                        iconType
+                        iconName
+                        }
+                        name
+                        uniqueName
+                        description
+                        youtubeVideoIds
+                        referenceUrls
+                        memo
+                        address
+                        latitude
+                        longitude
+                        countryCode
+                        publishStatus
+                        reviews {
+                        _id
+                        targetId
+                        targetTypeName
+                        author {
+                            _id
+                            name
+                            email
+                            birthAge
+                            gender
+                            profileImages {
+                            _id
+                            }
+                        }
+                        title
+                        description
+                        images {
+                            _id
+                        }
+                        }
+                        reviewCount
+                        userReactions {
+                        key
+                        value
+                        }
+                        userReactionCountMap {
+                        key
+                        count
+                        }
+                        searchTerms
+                        aliases
+                    }
+                    }
+            `,
+            variables: {
+                uniqueName: this.$route.params.id
+            }
+
+        }
+        }, {
+        headers: {
+        countryCode: 'ko',
+        }
+        });
+
+        if (result.data.data.getDivePointByUniqueName) {
+            this.pointData = result.data.data.getDivePointByUniqueName;
+        }
+        
+        if (this.pointData.backgroundImages.length > 0) {
+            for (var i=0; i<this.pointData.backgroundImages.length; i++) {
+                this.pointData.backgroundImages[i].url = '/static/empty.jpg';
+                console.log(this.pointData.backgroundImages[i].url);
+            }
+            var id_arr = [];
+            var width_arr = [];
+            for (var i=0; i<this.pointData.backgroundImages.length; i++) {
+                id_arr.push(this.pointData.backgroundImages[i]._id);
+                width_arr.push(720);
+            }
+            var result_image = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            data: {
+                query: `
+                    query Query($ids: [ID], $widths: [Int]) {
+                        getImageUrlsByIds(_ids: $ids, widths: $widths)
+                    }
+                `,
+                variables: {
+                    ids: id_arr,
+                    widths: width_arr
+                }
+
+            }
+            }, {
+            headers: {
+            countryCode: 'ko',
+            }
+            });
+            if (result_image.data.data.getImageUrlsByIds) {
+                for (var i=0; i<result_image.data.data.getImageUrlsByIds.length; i++) {
+                    this.pointData.backgroundImages[i].url = result_image.data.data.getImageUrlsByIds[i];
+                    $(".background_img_" + i).css("background", "url(" + result_image.data.data.getImageUrlsByIds[i] + ")");
+                    //setTimeout(function(url, i) {
+                        //$("#background_img_" + i).css("background", "url(" + url + ")");
+                    //}, 1000, result_image.data.data.getImageUrlsByIds[i], i);
+                    //console.log(this.pointData.backgroundImages[i].url)
+                }
+            }
+        }
+    }
+    if (this.$route.query.header && this.$route.query.header == 'hide') {
+        $(".page-title").hide();
+        $(".page-title-clear").hide();
+        $(".header-fixed").hide();
+    }
+    if (this.$route.query.footer && this.$route.query.footer == 'hide') {
+        $("#footer-bar").hide();
+    }
+
+
+
     var preloader = document.getElementById('preloader')
     if(preloader){preloader.classList.add('preloader-hide');}
     
@@ -924,14 +1158,6 @@ export default {
         });
     };
 
-    if (this.$route.query.header && this.$route.query.header == 'hide') {
-      $(".page-title").hide();
-      $(".page-title-clear").hide();
-      $(".header-fixed").hide();
-    }
-    if (this.$route.query.footer && this.$route.query.footer == 'hide') {
-      $("#footer-bar").hide();
-    }
   },
   created() {
     
@@ -939,7 +1165,11 @@ export default {
   data () {
     return {
         map: null,
+        pointData: {},
         marker_list: [],
+        recommend_word: ["비추천", "낮음", "일반적", "높음", "최고", "완벽함"],
+        recommend_env_word: ["매우열악", "열악", "평범", "우수", "최고", "극락"],
+        recommend_flow_word: ["매우느림", "느림", "일반적", "빠름", "매우빠름", "폭풍"],
         center_list : [
             {title: "버블탱크 스쿠버다이빙", desc: "제주 남부에 위치한 PADI 5star 다이빙센터", star: 3.8, price_index: 2, feature: "덕다이빙, 케이브, 난파선, 드리프트", img: '/static/images/shop1/diving/test1.jpg', position: {lat: 33.24134444312815, lng: 126.56484940647604}},
             {title: "다이브 투게더리조트", desc: "한줄설명1", star: 4.8, price_index: 2, feature: "덕다이빙, 케이브", img: '/static/images/shop1/diving/test2.jpg', position: {lat: 33.241633952501715, lng: 126.56456092676112}},

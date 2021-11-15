@@ -88,8 +88,9 @@ export default new Router({
       component: CenterHomePage
     },
     {
-      path: '/center',
+      path: '/center/:id',
       name: 'CenterDetailPage',
+      props: true,
       component: CenterDetailPage
     },
     {
@@ -119,8 +120,9 @@ export default new Router({
       component: SiteDetailPage
     },
     {
-      path: '/point',
+      path: '/point/:id',
       name: 'PointDetailPage',
+      props: true,
       component: PointDetailPage
     },
     {

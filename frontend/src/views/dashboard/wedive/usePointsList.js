@@ -14,7 +14,7 @@ export default function usePointsList() {
 
   // Table Handlers
   const tableColumns = [
-    { key: 'address', sortable: true },
+    { key: 'uniqueName', sortable: true },
     { key: 'name', sortable: true },
     { key: 'countryCode', sortable: true },
     { key: 'publishStatus', sortable: true },
