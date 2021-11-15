@@ -36,20 +36,23 @@
                                     v-on:click="collapse1()"
                                     >
                                     <div class="">
-                                        <h4 class="pt-3 mb-2 content mt-0 mb-2">여행 시작일</h4>
-                                        <h4 class="pt-3 mb-2 content mt-0 mb-2 font-300 color-secondary" style="position: absolute;right: 0px;top: 4px;">{{ day_show_start }}</h4>
+                                        <h4 class="pt-3 mb-2 content mt-0 mb-2">여행 일정</h4>
+                                        <h4 class="pt-3 mb-2 content mt-0 mb-2 font-300 color-secondary" style="position: absolute;right: 0px;top: 4px;">{{ day_show }}</h4>
                                     </div>
                                     
                                 </div>
                                 <div class="collapse show" id="collapse1">
-                                    <v-calendar
+                                    <v-date-picker
                                         is-expanded
-                                        v-model="selectedDateStart"
-                                        @dayclick="onDayClickStart"
+                                        is-inline
+                                        v-model="selectedDay"
+                                        mode="range"
+                                        @drag="onRangeClick($event)"
+                                        @dayclick="onDayClick($event)"
                                         :min-date="new Date()"
                                         :attributes="attributes"
                                         :select-attribute="selectAttribute"
-                                        :theme="theme"></v-calendar>
+                                        :theme="theme"></v-date-picker>
                                 </div>
                             </div>
 
@@ -67,23 +70,20 @@
                                     v-on:click="collapse2()"
                                     >
                                     <div class="">
-                                        <h4 class="pt-3 mb-2 content mt-0 mb-2">여행 종료일</h4>
-                                        <h4 class="pt-3 mb-2 content mt-0 mb-2 font-300 color-secondary" style="position: absolute;right: 0px;top: 4px;">{{ day_show_end }}</h4>
+                                        <h4 class="pt-3 mb-2 content mt-0 mb-2">출발시간</h4>
+                                        <h4 class="pt-3 mb-2 content mt-0 mb-2 font-300 color-secondary" style="position: absolute;right: 0px;top: 4px;">{{hour_show}}</h4>
                                     </div>
                                     
                                 </div>
                                 <div class="collapse" id="collapse2">
-                                    <v-calendar
-                                        is-expanded
-                                        v-model="selectedDateEnd"
-                                        @dayclick="onDayClickEnd"
-                                        :min-date="new Date()"
-                                        :attributes="attributes"
-                                        :select-attribute="selectAttribute"
-                                        :theme="theme"></v-calendar>
+                                    <div class="p-2 row">
+                                        <div class="form-check interest-check col-3" v-for="(hour,index) in hour_array" style="width: 25%;margin-left:0px;margin-right:0px;padding-left:calc(var(--bs-gutter-x) * .5);">
+                                            <input class="form-check-input" type="radio" name="check_hour" value="" :id="'check_hour'+index">
+                                            <label class="form-check-label rounded-xl" :for="'check_hour'+index" style="padding-left:12px;" v-on:click="setHour(index)">{{hour}}</label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
 
 
 
@@ -362,7 +362,7 @@
         
     
 
-
+    <div id="snackbar-info" class="snackbar-toast color-white bg-yellow-dark" data-bs-delay="3000" data-bs-autohide="true"><i class="fa fa-times me-3"></i>종료일을 추가로 선택하세요.</div>
     <div id="snackbar-error" class="snackbar-toast color-white bg-red-dark" data-bs-delay="3000" data-bs-autohide="true"><i class="fa fa-times me-3"></i>선택할 수 없는 날짜 입니다.</div>
   </div>
 </template>
@@ -409,11 +409,13 @@ export default {
         query: '',
         selecteduser: null,
         users: [],
-        selectedDateStart: null,
-        selectedDateEnd: null,
+        selectedDay: null,
+        selectedRange: {},
+        rangeToggle: 0,
         collapse1_showed: true,
-        day_show_start: "",
-        day_show_end: "",
+        day_show: "",
+        hour_show: "",
+        hour_array: ["7:00", "7:30", "8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30"],
         buddy_detail: "",
         search_type: "",
         search_img: "",
@@ -480,6 +482,13 @@ export default {
       collapse2() {
         $("#collapse1_area").click();
       },
+      setHour(index) {
+        this.hour_show = this.hour_array[index];
+        //$("#collapse2_area").click();
+        if (this.day_show != "" && this.hour_show != "") {
+            $("#btn_next1").attr("disabled", false);
+        }
+      },
       search_recommend_click(type, name, img, target) {
           this.search_img = img;
           this.search_type=type;
@@ -504,43 +513,41 @@ export default {
           $("#search_result").removeClass("hide");
           $("#btn_next2").attr("disabled", false);
       },
-      onDayClickStart(day) {
-        var yesterday = new Date();
-        yesterday.setDate(yesterday.getDate()-1);
-        if (new Date(day.id) < yesterday) {
-            var toastData = 'snackbar-error';
-            var notificationToast = document.getElementById(toastData);
-            var notificationToast = new bootstrap.Toast(notificationToast);
-            notificationToast.show();
-        } else {
-            this.selectedDateStart = day;
-            this.day_show_start = day.month + "." + day.day + " (" + weekday_ko[day.weekdayPosition] + ")";
-            $("#collapse1_area").click();
-            $("#collapse2_area").click();
-        }
-        
-        if (this.day_show_start != "" && this.day_show_end != "") {
-            $("#btn_next1").attr("disabled", false);
-        }
+      onRangeClick(range) {
+          try {
+              this.selectedRange.start = new Date(range.start.getTime());
+              this.selectedRange.end = new Date(range.end.getTime());
+          } catch(e) {}
       },
-      onDayClickEnd(day) {
-        var yesterday = new Date();
-        yesterday.setDate(yesterday.getDate()-1);
-        if (new Date(day.id) < yesterday) {
+      onDayClick(day) {
+          var yesterday = new Date();
+          yesterday.setDate(yesterday.getDate()-1);
+          if (new Date(day.id) < yesterday) {
             var toastData = 'snackbar-error';
             var notificationToast = document.getElementById(toastData);
             var notificationToast = new bootstrap.Toast(notificationToast);
             notificationToast.show();
-        } else {
-            this.selectedDateEnd = day;
-            this.day_show_end = day.month + "." + day.day + " (" + weekday_ko[day.weekdayPosition] + ")";
-            //$("#collapse1_area").click();
-            //$("#collapse2_area").click();
-        }
-        
-        if (this.day_show_start != "" && this.day_show_end != "") {
-            $("#btn_next1").attr("disabled", false);
-        }
+            if (this.rangeToggle == 0) this.rangeToggle = 1;
+            else this.rangeToggle = 0;
+          } else {
+                if (this.rangeToggle == 0) {
+                        this.rangeToggle = 1;
+                        var toastData = 'snackbar-info';
+                        var notificationToast = document.getElementById(toastData);
+                        var notificationToast = new bootstrap.Toast(notificationToast);
+                        notificationToast.show();
+                } else if (this.rangeToggle == 1) {
+                    this.rangeToggle = 0;
+                    
+                    this.day_show = (this.selectedRange.start.getMonth()+1) + "." + this.selectedRange.start.getDate() + " (" + weekday_ko[this.selectedRange.start.getDay()] + ") ~ " + (this.selectedRange.end.getMonth()+1) + "." + this.selectedRange.end.getDate() + " (" + weekday_ko[this.selectedRange.end.getDay()] + ")";
+                    $("#collapse1_area").click();
+                    $("#collapse2_area").click();
+                    
+                    if (this.day_show != "" && this.hour_show != "") {
+                        $("#btn_next1").attr("disabled", false);
+                    }
+                }
+          }
       },
       lookupUser: debounce(function(){
         // in practice this action should be debounced

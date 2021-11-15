@@ -36,20 +36,23 @@
                                     v-on:click="collapse1()"
                                     >
                                     <div class="">
-                                        <h4 class="pt-3 mb-2 content mt-0 mb-2">모집일자</h4>
+                                        <h4 class="pt-3 mb-2 content mt-0 mb-2">모집일정</h4>
                                         <h4 class="pt-3 mb-2 content mt-0 mb-2 font-300 color-secondary" style="position: absolute;right: 0px;top: 4px;">{{ day_show }}</h4>
                                     </div>
                                     
                                 </div>
                                 <div class="collapse show" id="collapse1">
-                                    <v-calendar
+                                    <v-date-picker
                                         is-expanded
-                                        v-model="selectedDate"
-                                        @dayclick="onDayClick"
+                                        is-inline
+                                        v-model="selectedDay"
+                                        mode="range"
+                                        @drag="onRangeClick($event)"
+                                        @dayclick="onDayClick($event)"
                                         :min-date="new Date()"
                                         :attributes="attributes"
                                         :select-attribute="selectAttribute"
-                                        :theme="theme"></v-calendar>
+                                        :theme="theme"></v-date-picker>
                                 </div>
                             </div>
 
@@ -67,7 +70,7 @@
                                     v-on:click="collapse2()"
                                     >
                                     <div class="">
-                                        <h4 class="pt-3 mb-2 content mt-0 mb-2">시간</h4>
+                                        <h4 class="pt-3 mb-2 content mt-0 mb-2">출발시간</h4>
                                         <h4 class="pt-3 mb-2 content mt-0 mb-2 font-300 color-secondary" style="position: absolute;right: 0px;top: 4px;">{{hour_show}}</h4>
                                     </div>
                                     
@@ -355,7 +358,7 @@
         
     
 
-
+    <div id="snackbar-info" class="snackbar-toast color-white bg-yellow-dark" data-bs-delay="3000" data-bs-autohide="true"><i class="fa fa-times me-3"></i>종료일을 추가로 선택하세요.</div>
     <div id="snackbar-error" class="snackbar-toast color-white bg-red-dark" data-bs-delay="3000" data-bs-autohide="true"><i class="fa fa-times me-3"></i>선택할 수 없는 날짜 입니다.</div>
   </div>
 </template>
@@ -402,7 +405,9 @@ export default {
         query: '',
         selecteduser: null,
         users: [],
-        selectedDate: null,
+        selectedDay: null,
+        selectedRange: {},
+        rangeToggle: 0,
         collapse1_showed: true,
         day_show: "",
         hour_show: "",
@@ -504,8 +509,44 @@ export default {
           $("#search_result").removeClass("hide");
           $("#btn_next2").attr("disabled", false);
       },
+      onRangeClick(range) {
+          try {
+              this.selectedRange.start = new Date(range.start.getTime());
+              this.selectedRange.end = new Date(range.end.getTime());
+          } catch(e) {}
+      },
       onDayClick(day) {
-        var yesterday = new Date();
+          var yesterday = new Date();
+          yesterday.setDate(yesterday.getDate()-1);
+          if (new Date(day.id) < yesterday) {
+            var toastData = 'snackbar-error';
+            var notificationToast = document.getElementById(toastData);
+            var notificationToast = new bootstrap.Toast(notificationToast);
+            notificationToast.show();
+            if (this.rangeToggle == 0) this.rangeToggle = 1;
+            else this.rangeToggle = 0;
+          } else {
+                if (this.rangeToggle == 0) {
+                        this.rangeToggle = 1;
+                        var toastData = 'snackbar-info';
+                        var notificationToast = document.getElementById(toastData);
+                        var notificationToast = new bootstrap.Toast(notificationToast);
+                        notificationToast.show();
+                } else if (this.rangeToggle == 1) {
+                    this.rangeToggle = 0;
+                    
+                    this.day_show = (this.selectedRange.start.getMonth()+1) + "." + this.selectedRange.start.getDate() + " (" + weekday_ko[this.selectedRange.start.getDay()] + ") ~ " + (this.selectedRange.end.getMonth()+1) + "." + this.selectedRange.end.getDate() + " (" + weekday_ko[this.selectedRange.end.getDay()] + ")";
+                    $("#collapse1_area").click();
+                    $("#collapse2_area").click();
+                    
+                    if (this.day_show != "" && this.hour_show != "") {
+                        $("#btn_next1").attr("disabled", false);
+                    }
+                }
+          }
+          
+          
+        /*var yesterday = new Date();
         yesterday.setDate(yesterday.getDate()-1);
         if (new Date(day.id) < yesterday) {
             var toastData = 'snackbar-error';
@@ -513,7 +554,7 @@ export default {
             var notificationToast = new bootstrap.Toast(notificationToast);
             notificationToast.show();
         } else {
-            this.selectedDate = day;
+            this.selectedRange.start = day;
             this.day_show = day.month + "." + day.day + " (" + weekday_ko[day.weekdayPosition] + ")";
             $("#collapse1_area").click();
             $("#collapse2_area").click();
@@ -521,7 +562,7 @@ export default {
         
         if (this.day_show != "" && this.hour_show != "") {
             $("#btn_next1").attr("disabled", false);
-        }
+        }*/
       },
       lookupUser: debounce(function(){
         // in practice this action should be debounced
