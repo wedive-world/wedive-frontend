@@ -124,8 +124,8 @@
                                         <div class="mt-2">
                                             <h1 class="text-center mb-0"><i class="fas fa-calendar-alt font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">방문시기</h1>
-                                            <p class="text-start font-400">
-                                                일반적으로 일년 내내 다이빙이 가능하지만 가장 좋은 시기는 여름~가을 동안인 6월에서 10월입니다.
+                                            <p class="text-start font-400" v-if="pointData.diveSite != null">
+                                                {{pointData.diveSite.visitTimeDescription}}
                                             </p>
                                         </div>
                                     </div>
@@ -135,8 +135,8 @@
                                         <div class="mt-2">
                                             <h1 class="text-center mb-0"><i class="fas fa-temperature-high font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">수온</h1>
-                                            <p class="text-start font-400">
-                                                1~5월 평균 섭씨 10도, 11~12월은 15도 안팎입니다. 성수기인 6~10월에는 평균 20도까지 올라갑니다.
+                                            <p class="text-start font-400" v-if="pointData.diveSite != null">
+                                                {{pointData.diveSite.waterTemperatureDescription}}
                                             </p>
                                         </div>
                                     </div>
@@ -146,8 +146,8 @@
                                         <div class="mt-2">
                                             <h1 class="text-center mb-0"><i class="fas fa-level-down-alt font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">수심</h1>
-                                            <p class="text-start font-400">
-                                                가까운 바다는 12~18m, 먼 바다는 20~32m정도 입니다.
+                                            <p class="text-start font-400" v-if="pointData.diveSite != null">
+                                                {{pointData.diveSite.deepDescription}}
                                             </p>
                                         </div>
                                     </div>
@@ -157,8 +157,8 @@
                                         <div class="mt-2">
                                             <h1 class="text-center mb-0"><i class="fas fa-water font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">조류</h1>
-                                            <p class="text-start font-400">
-                                                6~10월 간헐적으로 청물(일본 쓰시마 섬에서 갈라진 쿠로시오 난류)가 유입되어 시야가 15m까지 좋아집니다.
+                                            <p class="text-start font-400" v-if="pointData.diveSite != null">
+                                                {{pointData.diveSite.waterFlowDescription}}
                                             </p>
                                         </div>
                                     </div>
@@ -168,8 +168,8 @@
                                         <div class="mt-2">
                                             <h1 class="text-center mb-0"><i class="fas fa-eye font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">시야</h1>
-                                            <p class="text-start font-400">
-                                                평소에는 5m정도이지만, 청물이 들어오는 경우 10m~15m로 일반적인 편입니다.
+                                            <p class="text-start font-400" v-if="pointData.diveSite != null">
+                                                {{pointData.diveSite.eyeSightDescription}}
                                             </p>
                                         </div>
                                     </div>
@@ -179,9 +179,8 @@
                                         <div class="mt-2">
                                             <h1 class="text-center mb-0"><i class="fas fa-highlighter font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">다이빙 하이라이트</h1>
-                                            <p class="text-start font-400">
-                                                {{ pointData.highlightDescription }}
-                                            </p>
+                                            <p v-if="pointData.highlightDescription == '' && pointData.diveSite != null" class="text-start font-400">{{ pointData.diveSite.highlightDescription }}</p>
+                                            <p class="text-start font-400">{{ pointData.highlightDescription }}</p>
                                         </div>
                                     </div> 
                                 </div>
@@ -524,7 +523,7 @@
                     </div>
                 </div>
                 <div data-bs-parent="#tab-group-index" class="collapse" id="tab-monthly">
-                    <table class="table table-borderless text-center rounded-sm shadow-l mt-3" style="overflow: hidden;">
+                    <table v-if="pointData.diveSite != null" class="table table-borderless text-center rounded-sm shadow-l mt-3" style="overflow: hidden;">
                         <thead>
                             <tr class="bg-secondary th-02">
                                 <th scope="col" class="color-white font-12">월</th>
@@ -534,79 +533,24 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">1월</th>
-                                <td class="font-12 color-gray">5.2ºC / 12.3ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>8.8ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_01.svg" width="32" height="32"/></td>
+                            <tr class="border-bottom" v-for="index in 12">
+                                <th class="font-12" scope="row">{{ index }}월</th>
+                                <td class="font-12 color-gray">1.1ºC / 2.2ºC</td>
+                                <td v-for="month in pointData.diveSite['month' + index]" v-if="month.type=='climate'" class="font-12">
+                                    <img v-if="month.title=='sunny'" class="me-2" src="/static/images/weather_sunny.svg" width="20" height="20"/>
+                                    <img v-else-if="month.title=='cloudy'" class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>
+                                    <img v-else-if="month.title=='rain'" class="me-2" src="/static/images/weather_showers.svg" width="20" height="20"/>
+                                    <img v-else-if="month.title=='heavyRain'" class="me-2" src="/static/images/weather_heavy_rain.svg" width="20" height="20"/>
+                                    2.1ºC
+                                </td>
+                                <td v-for="month in pointData.diveSite['month' + index]" v-if="month.type=='popularity'">
+                                    <img v-if="month.title=='unrecommended'" class="img_pop" src="/static/images/icon_popularity_01.svg" width="32" height="32"/>
+                                    <img v-if="month.title=='soso'" class="img_pop" src="/static/images/icon_popularity_02.svg" width="32" height="32"/>
+                                    <img v-if="month.title=='popular'" class="img_pop" src="/static/images/icon_popularity_03.svg" width="32" height="32"/>
+                                </td>
                             </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">2월</th>
-                                <td class="font-12 color-gray">3.4ºC / 9.8ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>6.6ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_01.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">3월</th>
-                                <td class="font-12 color-gray">3.2ºC / 9.4ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>6.3ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_01.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">4월</th>
-                                <td class="font-12 color-gray">7.0ºC / 13.3ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>10.2ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_01.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">5월</th>
-                                <td class="font-12 color-gray">10.5ºC / 17.8ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>14.6ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_01.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">6월</th>
-                                <td class="font-12 color-gray">15.1ºC / 23.4ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>19.2ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_02.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">7월</th>
-                                <td class="font-12 color-gray">19.9ºC / 24.4ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_heavy_rain.svg" width="20" height="20"/>22.2ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_02.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">8월</th>
-                                <td class="font-12 color-gray">21.3ºC / 26.0ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_showers.svg" width="20" height="20"/>23.7ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_02.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">9월</th>
-                                <td class="font-12 color-gray">18.6ºC / 24.1ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_sunny.svg" width="20" height="20"/>21.4ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_02.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">10월</th>
-                                <td class="font-12 color-gray">14.9ºC / 21.6ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>18.2ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_02.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">11월</th>
-                                <td class="font-12 color-gray">10.8ºC / 17.6ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>14.2ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_01.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr>
-                                <th class="font-12" scope="row">12월</th>
-                                <td class="font-12 color-gray">6.4ºC / 13.8ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>10.1ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_01.svg" width="32" height="32"/></td>
-                            </tr>
-                        </tbody>
+
+                        </tbody>                        
                     </table>
                     <div class="text-end">
                         <img class="me-1 mb-3" height="20" src="/static/images/logo-kma.svg" />
@@ -764,6 +708,62 @@ export default {
                     getDivePointByUniqueName(uniqueName: $uniqueName) {
                         _id
                         diveSiteId
+                        diveSite {
+                            visitTimeDescription
+                            waterTemperatureDescription
+                            deepDescription
+                            waterFlowDescription
+                            eyeSightDescription
+                            highlightDescription
+                            month1 {
+                                type
+                                title
+                            }
+                            month2 {
+                                type
+                                title
+                            }
+                            month3 {
+                                type
+                                title
+                            }
+                            month4 {
+                                type
+                                title
+                            }
+                            month5 {
+                                type
+                                title
+                            }
+                            month6 {
+                                type
+                                title
+                            }
+                            month7 {
+                                type
+                                title
+                            }
+                            month8 {
+                                type
+                                title
+                            }
+                            month9 {
+                                type
+                                title
+                            }
+                            month10 {
+                                type
+                                title
+                            }
+                            month11 {
+                                type
+                                title
+                            }
+                            month12 {
+                                type
+                                title
+                            }
+                        }
                         adminScore
                         minDepth
                         maxDepth
@@ -800,78 +800,91 @@ export default {
                         interests {
                         _id
                         title
+                        type
                         iconType
                         iconName
                         }
                         month1 {
                         _id
                         title
+                        type
                         iconType
                         iconName
                         }
                         month2 {
                         _id
                         title
+                        type
                         iconType
                         iconName
                         }
                         month3 {
                         _id
                         title
+                        type
                         iconType
                         iconName
                         }
                         month4 {
                         _id
                         title
+                        type
                         iconType
                         iconName
                         }
                         month5 {
                         _id
                         title
+                        type
                         iconType
                         iconName
                         }
                         month6 {
                         _id
                         title
+                        type
                         iconType
                         iconName
                         }
                         month7 {
                         _id
                         title
+                        type
                         iconType
                         iconName
                         }
                         month8 {
                         _id
                         title
+                        type
                         iconType
                         iconName
                         }
                         month9 {
                         _id
                         title
+                        type
                         iconType
                         iconName
                         }
                         month10 {
                         _id
                         title
+                        type
                         iconType
                         iconName
                         }
                         month11 {
                         _id
                         title
+                        type
                         iconType
                         iconName
                         }
                         month12 {
                         _id
                         title
+                        type
                         iconType
                         iconName
                         }
@@ -934,6 +947,7 @@ export default {
         if (result.data.data.getDivePointByUniqueName) {
             this.pointData = result.data.data.getDivePointByUniqueName;
         }
+        //console.log(this.pointData);
         
         if (this.pointData.backgroundImages.length > 0) {
             for (var i=0; i<this.pointData.backgroundImages.length; i++) {
