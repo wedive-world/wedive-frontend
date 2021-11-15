@@ -1032,6 +1032,11 @@ export default {
                         }
                         divingType
                         phoneNumber
+                        email
+                        enteranceFee
+                        enteranceLevelFree
+                        enteranceLevelScuba
+                        openingHours
                         webPageUrl
                         geoAddress
                         adminScore

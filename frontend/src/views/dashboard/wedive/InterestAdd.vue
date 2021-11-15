@@ -239,7 +239,7 @@ export default {
       var i_input = {_id: $event.row._id, title: $event.row.title, uniqueName: $event.row.title, type: $event.row.type, aliases: aliases, searchTerms: searchTerms, iconColor: $event.row.iconColor, iconUrl: $event.row.iconUrl};
       if ($event.column.field == 'aliases_show') {
         i_input['aliases'] = $event.value.replace(/, /gi,",").split(",");
-      } else if ($event.column.field != 'searchTerms_show') {
+      } else if ($event.column.field == 'searchTerms_show') {
         i_input['searchTerms'] = $event.value.replace(/, /gi,",").split(",");
       } else {
         i_input[$event.column.field] = $event.value;

@@ -295,7 +295,31 @@
             </b-form-group>
           </validation-provider>
 
-          <!-- 전화번호 -->
+          <!-- 이메일 -->
+          <validation-provider
+            #default="validationContext"
+            name="email"
+            rules="required"
+          >
+            <b-form-group
+              label="이메일"
+              label-for="email"
+            >
+              <b-form-input
+                id="email"
+                v-model="centerData.email"
+                type="email"
+                trim
+                placeholder="test@test.com"
+              />
+
+              <b-form-invalid-feedback>
+                {{ validationContext.errors[0] }}
+              </b-form-invalid-feedback>
+            </b-form-group>
+          </validation-provider>
+
+          <!-- 주소 -->
           <validation-provider
             #default="validationContext"
             name="geoAddress"
@@ -342,6 +366,171 @@
               </b-form-invalid-feedback>
             </b-form-group>
           </validation-provider>
+
+          <br/>
+
+          <!-- 입장료 -->
+          <validation-provider
+            #default="validationContext"
+            name="enteranceFee"
+            rules="required"
+          >
+            <b-form-group
+              label="입장료"
+              label-for="enteranceFee"
+            >
+              <b-form-input
+                id="enteranceFee"
+                v-model="centerData.enteranceFee"
+                type="number"
+                trim
+                placeholder="20000 (원화, 숫자만 입력)"
+              />
+
+              <b-form-invalid-feedback>
+                {{ validationContext.errors[0] }}
+              </b-form-invalid-feedback>
+            </b-form-group>
+          </validation-provider>
+
+
+          <b-row>
+            <b-col md="6" class="">
+              <!-- 스쿠버 최소 입장 레벨 -->
+              <validation-provider
+                #default="validationContext"
+                name="enteranceLevelScuba"
+                rules="required"
+              >
+                <b-form-group
+                  label="최소 입장레벨 (스쿠버)"
+                  label-for="enteranceLevelScuba"
+                  :state="getValidationState(validationContext)"
+                >
+                  <v-select
+                    v-model="centerData.enteranceLevelScuba"
+                    :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
+                    :options="scubaEnterenceOptions"
+                    :clearable="false"
+                    input-id="enteranceLevelScuba"
+                  />
+                  <b-form-invalid-feedback :state="getValidationState(validationContext)">
+                    {{ validationContext.errors[0] }}
+                  </b-form-invalid-feedback>
+                </b-form-group>
+              </validation-provider>
+            </b-col>
+            <b-col md="6" class="">
+              <!-- 프리 최소 입장 레벨 -->
+              <validation-provider
+                #default="validationContext"
+                name="enteranceLevelFree"
+                rules="required"
+              >
+                <b-form-group
+                  label="최소 입장레벨 (프리)"
+                  label-for="enteranceLevelFree"
+                  :state="getValidationState(validationContext)"
+                >
+                  <v-select
+                    v-model="centerData.enteranceLevelFree"
+                    :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
+                    :options="freeEnterenceOptions"
+                    :clearable="false"
+                    input-id="enteranceLevelFree"
+                  />
+                  <b-form-invalid-feedback :state="getValidationState(validationContext)">
+                    {{ validationContext.errors[0] }}
+                  </b-form-invalid-feedback>
+                </b-form-group>
+              </validation-provider>
+            </b-col>
+          </b-row>
+
+
+          <h4 class="mt-3">영업시간</h4>
+          <validation-provider
+            #default="validationContext"
+            name="openingHours"
+            rules="required"
+          >
+            <b-form-group
+            >
+              <!-- Row Loop -->
+              <b-row
+                v-for="(item, index) in openingItems"
+                :id="'openingHours'+index"
+                :key="'openingHours'+index"
+                ref="youtubeRow"
+                >
+
+                <b-col md="4" class="pr-0">
+                  <b-form-group
+                    label="구분"
+                    :label-for="'openingHours_index_'+index"
+                    >
+                    <v-select
+                      :id="'openingHours_index_'+index"
+                      v-model="openingHoursIndex[index]"
+                      :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
+                      :options="openingHoursOptions"
+                      :clearable="false"
+                    />
+                  </b-form-group>
+                </b-col>
+                <!-- 영업시간 -->
+                <b-col md="7" class="pr-0">
+                    <b-form-group
+                    label="내용"
+                    :label-for="'openingHours_content_'+index"
+                    >
+                    <b-form-input
+                        :id="'openingHours_content_'+index"
+                        type="text"
+                        v-model="openingHoursContent[index]"
+                        placeholder="10:00 - 11:00 (띠워쓰기 양식)"
+                    />
+                    </b-form-group>
+                </b-col>
+
+                <!-- Remove Button -->
+                <b-col
+                    md="1"
+                    class="mb-50"
+                >
+                    <b-button
+                    variant="flat-danger"
+                    class="mt-0 mt-md-2 pl-0 pr-0"
+                    @click="openingHourRemoveItem(index)"
+                    >
+                    <feather-icon
+                        icon="XIcon"
+                        class="mr-25"
+                    />
+                    </b-button>
+                </b-col>
+                <b-col cols="12">
+                    <hr class="mt-0" style="border-top: 1px dashed #ebe9f1 !important;">
+                </b-col>
+              </b-row>
+              <b-button
+                v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+                variant="flat-primary"
+                @click="openingHourRepeateAgain"
+                >
+                <feather-icon
+                    icon="PlusIcon"
+                    class="mr-25"
+                />
+                <span>Add New Opening hour</span>
+              </b-button>
+              <b-form-invalid-feedback>
+                {{ validationContext.errors[0] }}
+              </b-form-invalid-feedback>
+            </b-form-group>
+          </validation-provider>
+
+              
 
           <hr>
           <h4 class="mt-3">위치정보</h4>
@@ -956,6 +1145,11 @@ const blankCenterData = {
   facilityScore: 50,
   serviceScore: 60,
   phoneNumber: '',
+  email: '',
+  enteranceFee: '',
+  enteranceLevelFree: '',
+  enteranceLevelScuba: '',
+  openingHours: [],
   geoAddress: '',
   webPageUrl: '',
   
@@ -1016,10 +1210,14 @@ export default {
       statusOptions: ['pending', 'active', 'inactive', 'deleted',],
       khoaOptions : ['동명항', '남애항', '강문해변', '오산항', '울릉도', '월포해수욕장', '구조리해수욕장', '미조도', '거문도', '홍도', '제주-성산일출봉', '제주-어멍(북부)', '제주-문섬'],
       seaTempOptions: ['강릉 (강원도)/kang-neung', '속초 (강원도)/sogcho', '동해 (강원도)/tonghae', '인천/incheon', '고양 (왜있지)/goyang', '안산 (경기도)/ansan', '화성 (경기도)/hwaseong', '포항/hoko', '울산/ulsan', '부산/busan', '진해 (창원)/chinhae', '마산/masan', '거제/kyosai', '여수/reisui', '순천/sunchun', '군산 (전라북도)/kunsan', '목포 (전라남도)/moppo', '신안 (전라남도)/sinan', '태안 (충청남도)/taesal-li', '제주-어영(북서부)/gaigeturi', '제주-제주시(북부)/jeju'],
+      scubaEnterenceOptions: ["1", "2", "3", "4", "5"],
+      freeEnterenceOptions: ["1", "2", "3", "4", "5"],
+      openingHoursOptions: ["1부", "2부", "3부", "4부", "5부", "매일", "평일", "주말", "월-토", "일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "공휴일", "휴게시간"],
       backgroundItems: [],
       youtubeItems: [],
       referenceItems: [],
       wedivesCommentItems: [],
+      openingItems: [],
       nextImageId: 1,
       backgroundImages: [],
       backgroundImageRef: [],
@@ -1030,6 +1228,8 @@ export default {
       interestLanguage: [],
       interestPayment: [],
       interestSelected: [],
+      openingHoursIndex: [],
+      openingHoursContent: [],
       submitText: 'Add',
     }
   },
@@ -1082,12 +1282,14 @@ export default {
         }
       }
       
+      this.openingItems = [];
+      if (_data.openingHours) _data.openingHours.map(()=>{this.openingItems.push(['', ''])});
       this.youtubeItems = [];
-      _data.youtubeVideoIds.map(()=>{this.youtubeItems.push('')});
+      if (_data.youtubeVideoIds) _data.youtubeVideoIds.map(()=>{this.youtubeItems.push('')});
       this.referenceItems = [];
-      _data.referenceUrls.map(()=>{this.referenceItems.push('')});
+      if (_data.referenceUrls) _data.referenceUrls.map(()=>{this.referenceItems.push('')});
       this.wedivesCommentItems = [];
-      _data.wediveComments.map(()=>{this.wedivesCommentItems.push('')});
+      if (_data.wediveComments) _data.wediveComments.map(()=>{this.wedivesCommentItems.push('')});
       this.submitText = 'Update';
 
 
@@ -1144,7 +1346,18 @@ export default {
       this.backgroundItems.splice(index, 1)
     },
 
+    
 
+    openingHourRepeateAgain() {
+      this.openingItems.push('');
+      this.centerData.openingHours.push(['', '']);
+    },
+    openingHourRemoveItem(index) {
+      this.openingItems.splice(index, 1);
+      this.openingHoursIndex.splice(index, 1);
+      this.openingHoursContent.splice(index, 1);
+      this.centerData.openingHours.splice(index, 1);
+    },
     youtubeRepeateAgain() {
       this.youtubeItems.push('');
       this.centerData.youtubeVideoIds.push('');
@@ -1257,6 +1470,16 @@ export default {
         _centerData.educationScore = parseInt(_centerData.educationScore);
         _centerData.facilityScore = parseInt(_centerData.facilityScore);
         _centerData.serviceScore = parseInt(_centerData.serviceScore);
+
+        console.log(_centerData.openingHours);
+        console.log(this.openingHoursIndex);
+        console.log(this.openingHoursContent);
+
+        for (var i=0; i<this.openingHoursIndex.length; i++) {
+          _centerData.openingHours[i][0] = this.openingHoursIndex[i];
+          _centerData.openingHours[i][1] = this.openingHoursContent[i];
+        }
+        
         await upsertDiveCenter(_centerData);
       } catch (e) {
         this.$swal({
