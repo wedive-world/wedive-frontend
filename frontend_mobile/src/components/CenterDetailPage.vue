@@ -335,21 +335,11 @@
                     
                 </div>
                 <div data-bs-parent="#tab-group-2" class="collapse px-2" id="tab-time">
-                    <div class="row mb-0 mt-3">
-                        <h5 class="col-6 text-start font-13 font-400">일요일</h5>
-                        <p class="col-6 mb-2 text-end">08:00 - 21:00</p>
-                        <h5 class="col-6 text-start font-13 font-400">월요일</h5>
-                        <p class="col-6 mb-2 text-end">08:00 - 21:00</p>
-                        <h5 class="col-6 text-start font-13 font-400">화요일</h5>
-                        <p class="col-6 mb-2 text-end">08:00 - 21:00</p>
-                        <h5 class="col-6 text-start font-13 font-400">수요일</h5>
-                        <p class="col-6 mb-2 text-end">08:00 - 21:00</p>
-                        <h5 class="col-6 text-start font-13 font-400">목요일</h5>
-                        <p class="col-6 mb-2 text-end">08:00 - 21:00</p>
-                        <h5 class="col-6 text-start font-13 font-400">금요일</h5>
-                        <p class="col-6 mb-2 text-end">08:00 - 21:00</p>
-                        <h5 class="col-6 text-start font-13 font-400">토요일</h5>
-                        <p class="col-6 mb-2 text-end">08:00 - 21:00</p>
+                    <div class="mt-3">
+                        <div v-for="opening in centerData.openingHours" class="row mb-0">
+                            <h5 class="col-6 text-start font-13 font-400">{{ opening[0] }}</h5>
+                            <p class="col-6 mb-2 text-end">{{ opening[1] }}</p>
+                        </div>
                     </div>
                 </div>
                 <div data-bs-parent="#tab-group-2" class="collapse px-2" id="tab-eqpt">

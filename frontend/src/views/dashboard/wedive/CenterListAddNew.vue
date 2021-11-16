@@ -1283,7 +1283,9 @@ export default {
       }
       
       this.openingItems = [];
-      if (_data.openingHours) _data.openingHours.map(()=>{this.openingItems.push(['', ''])});
+      if (_data.openingHours) {_data.openingHours.map(()=>{this.openingItems.push(['', '']);});
+        _data.openingHours.forEach((item, index)=>{this.openingHoursIndex.push(item[0]);this.openingHoursContent.push(item[1])});
+      }
       this.youtubeItems = [];
       if (_data.youtubeVideoIds) _data.youtubeVideoIds.map(()=>{this.youtubeItems.push('')});
       this.referenceItems = [];
@@ -1471,10 +1473,7 @@ export default {
         _centerData.facilityScore = parseInt(_centerData.facilityScore);
         _centerData.serviceScore = parseInt(_centerData.serviceScore);
 
-        console.log(_centerData.openingHours);
-        console.log(this.openingHoursIndex);
-        console.log(this.openingHoursContent);
-
+        
         for (var i=0; i<this.openingHoursIndex.length; i++) {
           _centerData.openingHours[i][0] = this.openingHoursIndex[i];
           _centerData.openingHours[i][1] = this.openingHoursContent[i];
