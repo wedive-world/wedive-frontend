@@ -132,6 +132,31 @@
             </b-form-group>
           </validation-provider>
 
+
+          <!-- 단체 -->
+          <validation-provider
+            #default="validationContext"
+            name="institutionTypes"
+            rules="required"
+          >
+            <b-form-group
+              label="다이빙 단체"
+              label-for="institutionTypes"
+              :state="getValidationState(validationContext)"
+            >
+              <v-select
+                v-model="centerData.institutionTypes"
+                :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
+                :options="institutionOptions"
+                :clearable="false"
+                input-id="institutionTypes"
+              />
+              <b-form-invalid-feedback :state="getValidationState(validationContext)">
+                {{ validationContext.errors[0] }}
+              </b-form-invalid-feedback>
+            </b-form-group>
+          </validation-provider>
+
           <br/>
 
           <!-- Total Score -->
@@ -1213,6 +1238,7 @@ export default {
       scubaEnterenceOptions: ["1", "2", "3", "4", "5"],
       freeEnterenceOptions: ["1", "2", "3", "4", "5"],
       openingHoursOptions: ["1부", "2부", "3부", "4부", "5부", "매일", "평일", "주말", "월-토", "일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "공휴일", "휴게시간"],
+      institutionOptions: ["AIDA", "CMAS", "PADI", "SSI", "AA", "KF", "UTA", "RAID", "SNSI", "MOLCHANOVA", "AFIA"],
       backgroundItems: [],
       youtubeItems: [],
       referenceItems: [],

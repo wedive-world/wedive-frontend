@@ -1027,6 +1027,7 @@ export default {
                         enteranceLevelFree
                         enteranceLevelScuba
                         openingHours
+                        institutionTypes
                         webPageUrl
                         geoAddress
                         adminScore
