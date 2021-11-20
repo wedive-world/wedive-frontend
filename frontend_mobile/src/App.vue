@@ -80,6 +80,8 @@ export default {
   }
 }
 
+const userAgent = navigator.userAgent.toLowerCase();
+
 if (userAgent.indexOf('android') !== -1) {
 
   wondow.console.log(`android connected, ${Andorid.getUserUid()}`)
