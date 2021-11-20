@@ -82,7 +82,7 @@ export default {
 
 if (userAgent.indexOf('android') !== -1) {
 
-  console.log(`android connected, ${Andorid.getUserUid()}`)
+  wondow.console.log(`android connected, ${Andorid.getUserUid()}`)
 
 } else if (userAgent.indexOf('iphone') !== -1 || userAgent.indexOf('ipad') !== -1) {
   //ios
