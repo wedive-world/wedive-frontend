@@ -84,7 +84,7 @@ const userAgent = navigator.userAgent.toLowerCase();
 
 if (userAgent.indexOf('android') !== -1) {
 
-  window.console.log(`android connected, ${andorid.getUserUid()}`)
+  window.console.log(`android connected, ${Andorid.getUserUid()}`)
 
 } else if (userAgent.indexOf('iphone') !== -1 || userAgent.indexOf('ipad') !== -1) {
   //ios
