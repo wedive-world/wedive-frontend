@@ -80,6 +80,10 @@ export default {
   }
 }
 
+</script>
+
+<script type="text/javascript">
+
 const userAgent = navigator.userAgent.toLowerCase();
 
 if (userAgent.indexOf('android') !== -1) {
@@ -88,7 +92,6 @@ if (userAgent.indexOf('android') !== -1) {
 
 } else if (userAgent.indexOf('iphone') !== -1 || userAgent.indexOf('ipad') !== -1) {
   //ios
-
 } else { // 안드로이드, IOS 가 아닌 경우 (더 조건을 추가해서 처리해도 됨)
 }
 
