@@ -1322,7 +1322,7 @@ export default {
 .ico_feature17 {width: 44px;height: 40px;background-position: -180px -72px;}
 .ico_feature18 {width: 44px;height: 40px;background-position: -225px -72px;}
 
-.icon-service {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/wedive_service2.png);background-repeat: no-repeat;-webkit-background-size: 270px 118px;background-size: 270px 118px;}
+.icon-service {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/wedive_service2.png);background-repeat: no-repeat;-webkit-background-size: 270px 200px;background-size: 270px 200px;}
 
 .ico_equipt {}
 .ico_equipt1 {width: 60px;height: 63px;background-position: 0px 0px;}

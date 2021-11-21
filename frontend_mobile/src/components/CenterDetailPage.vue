@@ -366,7 +366,7 @@
                         </div>
                         <div class="ico_equipt col-3">
                             <i class="ico_equipt6 icon-equiptment"></i>
-                            <p class="span_feature text-center">수중 스쿠터</p>
+                            <p class="span_feature text-center">DPV</p>
                         </div>
 
                         <div class="ico_equipt col-3">
@@ -1387,8 +1387,20 @@ export default {
 .ico_feature16 {width: 44px;height: 40px;background-position: -135px -72px;}
 .ico_feature17 {width: 44px;height: 40px;background-position: -180px -72px;}
 .ico_feature18 {width: 44px;height: 40px;background-position: -225px -72px;}
+.ico_feature19 {width: 44px;height: 40px;background-position: 0px -108px;}
+.ico_feature20 {width: 44px;height: 40px;background-position: -45px -108px;}
+.ico_feature21 {width: 44px;height: 40px;background-position: -90px -108px;}
+.ico_feature22 {width: 44px;height: 40px;background-position: -135px -108px;}
+.ico_feature23 {width: 44px;height: 40px;background-position: -180px -108px;}
+.ico_feature24 {width: 44px;height: 40px;background-position: -225px -108px;}
+.ico_feature25 {width: 44px;height: 40px;background-position: 0px -144px;}
+.ico_feature26 {width: 44px;height: 40px;background-position: -45px -144px;}
+.ico_feature27 {width: 44px;height: 40px;background-position: -90px -144px;}
+.ico_feature28 {width: 44px;height: 40px;background-position: -135px -144px;}
+.ico_feature29 {width: 44px;height: 40px;background-position: -180px -144px;}
+.ico_feature30 {width: 44px;height: 40px;background-position: -225px -144px;}
 
-.icon-service {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/wedive_service2.png);background-repeat: no-repeat;-webkit-background-size: 270px 118px;background-size: 270px 118px;}
+.icon-service {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/wedive_service2.png);background-repeat: no-repeat;-webkit-background-size: 270px 200px;background-size: 270px 200px;}
 
 .ico_equipt {}
 .ico_equipt1 {width: 60px;height: 63px;background-position: 0px 0px;}

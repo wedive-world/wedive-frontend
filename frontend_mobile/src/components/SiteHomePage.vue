@@ -9,7 +9,7 @@
 
         <div v-on:click="goList()" class="card card-style" style="background: white;height:148px;">
             <div class="content mb-0 mt-3">
-                <img class="float-right" src="/static/images/3d/save-earth.png" height="120" style="position: absolute;z-index: 11;right: 0px;top:40px;"/>
+                <img class="float-right" src="/static/images/3d/save_earth.png" style="position: absolute;z-index: 11;right: 10px;top:40px;"/>
                 <h4 class="text-start mb-1 font-15" style="padding-top:36px;">지구 구석구석 다이빙 사이트 검색</h4>
 
                 <div class="search-box search-dark border-08 bg-theme rounded-sm" style="position: absolute;width: calc(100% - 30px);z-index: 9;">
@@ -90,7 +90,7 @@
                 <p class="mb-1 color-gray-light">19개 포인트가 기다리고 있어요.</p>
                 <p class="color-white mb-0 opacity-60 ls-n1">#가을&nbsp;&nbsp;#다이빙의 계절</p>
                 <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
-                <img class="mt-n2 float-left" src="/static/images/3d/smartwatch.png" height="200" style="margin-left:-30px;"/>
+                <img class="mt-n2 float-left" src="/static/images/3d/smartwatch.png" style="margin-left:-20px;padding-top:20px;padding-bottom:16px;"/>
                 <div class="card-overlay bg-gradient-reverse opacity-60" style="z-index: -1;"></div>
             </div>
         </div>
@@ -135,7 +135,7 @@
                 <p class="mb-1">37개의 다이빙 사이트</p>
                 <p class="mb-0 opacity-60 ls-n1">#인생샷&nbsp;&nbsp;#인스타를 평정하다</p>
                 <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
-                <img class=" mt-n4 float-right" src="/static/images/3d/camera.png" width="220" style="margin-right: -20px;"/>
+                <img class=" mt-n4 float-right" src="/static/images/3d/camera.png" style="margin-right: 16px;margin-bottom:16px;"/>
             </div>
         </div>
 
@@ -238,7 +238,7 @@
                 <h4 class="color-white text-start pt-1 mb-1">환상의 시간, 리브어보드</h4>
                 <p class="color-white mb-0 color-gray">287개 리브어보드 모아보기</p>
                 <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
-                <img class="float-right mt-n3 movebox" src="/static/images/3d/boat.png" width="200"/>
+                <img class="float-right mt-n3 movebox" src="/static/images/3d/boat.png" style="padding-bottom:16px;"/>
                 <img class="movebox2" src="/static/images/3d/cloud.png" width="100"/>
                 <img class="movebox3" src="/static/images/3d/cloud.png" width="70"/>
             </div>
@@ -250,7 +250,7 @@
                 <p class="color-white mb-1">인기 대물 포인트 28곳</p>
                 <p class="color-white mb-0 opacity-60 ls-n1">#자연의 신비&nbsp;&nbsp;#버킷리스트</p>
                 <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
-                <img class="float-right" src="/static/images/3d/whale.png" width="230"/>
+                <img class="float-right" src="/static/images/3d/whale.png" />
             </div>
         </div>
 
