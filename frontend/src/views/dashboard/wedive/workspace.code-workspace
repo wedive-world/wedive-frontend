@@ -4,7 +4,13 @@
 			"path": "../../../.."
 		},
 		{
+			"path": "../../../../../frontend_mobile"
+		},
+		{
 			"path": "../../../../../../wedive-api"
+		},
+		{
+			"path": "../../../../../backend"
 		}
 	],
 	"settings": {}

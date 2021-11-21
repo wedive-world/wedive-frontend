@@ -940,7 +940,8 @@ export default {
         }
         }, {
         headers: {
-        countryCode: 'ko',
+            countryCode: 'ko',
+            android: (localStorage.android) ? localStorage.android : "",
         }
         });
 

@@ -93,6 +93,22 @@
                     <div class="splide__slide">
                         <div id="slide2" class="card card-full pb-0 mb-0 border-bottom" style="height: calc( 100vh - 56px );">
                         <div class="content mt-1">
+                            <h4 class="pt-3 mb-2 content mt-0 mb-2">어떤 다이빙을 원하시나요?</h4>
+                            <div class="ms-3 me-3 mb-2">
+                                <div class="form-check interest-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="check_diving_scuba">
+                                    <label class="form-check-label rounded-xl border-08" for="check_diving_scuba" style="border-radius: 17px 0 0 17px !important;">스쿠버 다이빙</label>
+                                    <i class="fas fa-ship color-white font-18"></i>
+                                    <i class="fas fa-ship font-16 color-highlight"></i>
+                                </div>
+                                <div class="form-check interest-check" style="margin-left: -28px;">
+                                    <input class="form-check-input" type="checkbox" value="" id="check_diving_free">
+                                    <label class="form-check-label rounded-xl border-08" for="check_diving_free" style="border-radius: 0 17px 17px 0 !important;">프리 다이빙</label>
+                                    <i class="fas fa-swimmer color-white font-18"></i>
+                                    <i class="fas fa-swimmer font-16 color-highlight"></i>
+                                </div>
+                            </div>
+                            
                             <h4 class="pt-3 mb-2 content mt-0 mb-2">어디로 갈까요?</h4>
                             <vue-typeahead-bootstrap
                                 id="search_typeahead"
@@ -144,7 +160,7 @@
                         </div>
 
                         <div class="content mt-1">
-                            <h5 class="pt-3 mb-2 content mt-0 mb-2">이곳은 어떠신가요?</h5>
+                            <label class="color-highlight font-12 me-3 ms-3">이곳은 어떠세요?</label>
 
                             <div
                                 id="search_recommend_1"
@@ -196,9 +212,9 @@
                             </div>
                         </div>
                         
-                        
-                        <div style="position: absolute;bottom: 0;width:100%;">
-                            <a id="btn_next2" href="#" class="slider-next btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 ms-3 me-3 mb-3" style="height: 46px;padding-top: 10px;" disabled="disabled" v-on:click="next2()">다음</a>
+                        <div class="row me-0 ms-0 mb-0" style="position: absolute;bottom: 0;width:100%;padding-left:20px;padding-right:20px;">
+                            <a href="#" class="col-6 slider-prev btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>
+                            <a id="btn_next2" href="#" class="slider-next col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;" disabled="disabled" v-on:click="next2()">다음</a>
                         </div>
                         </div>
                     </div>
@@ -213,8 +229,9 @@
                             </div>
                             
                         </div>
-                        <div style="position: absolute;bottom: 0;width:100%;">
-                            <a id="btn_next3" href="#" class="slider-next btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 ms-3 me-3 mb-3" style="height: 46px;padding-top: 10px;" disabled="disabled" v-on:click="next3()">다음</a>
+                        <div class="row me-0 ms-0 mb-0" style="position: absolute;bottom: 0;width:100%;padding-left:20px;padding-right:20px;">
+                            <a href="#" class="col-6 slider-prev btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>
+                            <a id="btn_next3" href="#" class="slider-next col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;" disabled="disabled" v-on:click="next3()">다음</a>
                         </div>
                         </div>
                     </div>
@@ -330,8 +347,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div style="position: absolute;bottom: 0;width:100%;">
-                            <a id="btn_next4" href="#" class="slider-next btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 ms-3 me-3 mb-3" style="height: 46px;padding-top: 10px;" v-on:click="next4()">완료</a>
+                        <div class="row me-0 ms-0 mb-0" style="position: absolute;bottom: 0;width:100%;padding-left:20px;padding-right:20px;">
+                            <a href="#" class="col-6 slider-prev btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>
+                            <a id="btn_next4" href="#" class="slider-next col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;" v-on:click="next4()">완료</a>
                         </div>
                         </div>
                     </div>
@@ -499,7 +517,11 @@ export default {
           $("#search_typeahead").removeClass("hide");
           $("#search_result").addClass("hide");
           this.query = '';
-          $("#search_typeahead input").focus()
+          $("#search_typeahead input").focus();
+
+          $("#search_recommend_1").removeClass("bg-secondary");
+          $("#search_recommend_2").removeClass("bg-secondary");
+          $("#search_recommend_3").removeClass("bg-secondary");
       },
       enableNext2(ev) {
           this.search_img = ev.img_url;

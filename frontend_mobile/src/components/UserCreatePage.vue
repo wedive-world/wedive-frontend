@@ -54,13 +54,6 @@
                                     <img src="/static/images/hihi2.png" width="60%" />
                                 </div>
 
-                                <div class="text-start input-style has-icon no-borders mb-2 validate-field mt-4" style="width: 200px;display: inline-block;">
-                                    <i class="fa fa-user color-gray font-14"></i>
-                                    <input type="name" class="form-control font-noto input-big3" id="form2" placeholder="이름" v-model="username">
-                                    <i class="fa fa-check disabled valid color-green-dark"></i>
-                                    <i class="fa fa-check disabled invalid color-red-dark"></i>
-                                </div>
-
                                 <div class="text-start input-style has-icon no-borders validate-field mb-2" style="width: 200px;display: inline-block;">
                                     <i class="fa fa-id-badge color-gray font-14"></i>
                                     <input type="number" class="form-control font-noto input-big3" id="form4" placeholder="나이" v-model="userage">
@@ -839,28 +832,28 @@ export default {
           }
       },
       username: function(newVal, oldVal) {
-          if (this.username === '' || this.userage === '' || this.usersex === '' || this.useraddress === '') {
+          if (this.userage === '' || this.usersex === '' || this.useraddress === '') {
               $("#btn_next2").attr("disabled", true);
           } else {
               $("#btn_next2").attr("disabled", false);
           }
       },
       userage: function(newVal, oldVal) {
-          if (this.username === '' || this.userage === '' || this.usersex === '' || this.useraddress === '') {
+          if (this.userage === '' || this.usersex === '' || this.useraddress === '') {
               $("#btn_next2").attr("disabled", true);
           } else {
               $("#btn_next2").attr("disabled", false);
           }
       },
       usersex: function(newVal, oldVal) {
-          if (this.username === '' || this.userage === '' || this.usersex === '' || this.useraddress === '') {
+          if (this.userage === '' || this.usersex === '' || this.useraddress === '') {
               $("#btn_next2").attr("disabled", true);
           } else {
               $("#btn_next2").attr("disabled", false);
           }
       },
       useraddress: function(newVal, oldVal) {
-          if (this.username === '' || this.userage === '' || this.usersex === '' || this.useraddress === '') {
+          if (this.userage === '' || this.usersex === '' || this.useraddress === '') {
               $("#btn_next2").attr("disabled", true);
           } else {
               $("#btn_next2").attr("disabled", false);
