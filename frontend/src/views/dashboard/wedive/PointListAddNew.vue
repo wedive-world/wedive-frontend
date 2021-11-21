@@ -661,7 +661,7 @@
                 :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
                 multiple
                 label="title"
-                :options="interestData.filter(interest => interest.type!='aquaticLife'&&interest.type!='climate'&&interest.type!='popularity')"
+                :options="interestData.filter(interest => interest.type!='aquaticLife'&&interest.type!='aquaticLife100'&&interest.type!='climate'&&interest.type!='popularity')"
               >
               <template slot="option" slot-scope="option">
                 {{ option.title }} ({{option.type}})
@@ -669,7 +669,7 @@
               </v-select>
             </b-col>
           </b-row>
-          <label>월별에는 타입이 <code>aquaticLife</code>(수중생물) 인것만 추가 가능</label>
+          <label>월별에는 타입이 <code>aquaticLife</code>, <code>aquaticLife100</code> 인것만 추가 가능</label>
           <b-row
             v-for="index in 12"
             class="mb-1"
@@ -684,7 +684,7 @@
                 :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
                 multiple
                 label="title"
-                :options="interestData.filter(interest => interest.type=='aquaticLife')"
+                :options="interestData.filter(interest => interest.type=='aquaticLife' || interest.type=='aquaticLife100')"
               >
               <template slot="option" slot-scope="option">
                 {{ option.title }} ({{option.type}})

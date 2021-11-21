@@ -340,7 +340,7 @@
                 :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
                 multiple
                 label="title"
-                :options="interestData.filter(interest => interest.type!='aquaticLife')"
+                :options="interestData.filter(interest => interest.type!='aquaticLife' && interest.type!='aquaticLife100')"
               >
               <template slot="option" slot-scope="option">
                 {{ option.title }} ({{option.type}})
