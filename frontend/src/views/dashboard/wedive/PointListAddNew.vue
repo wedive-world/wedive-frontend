@@ -683,10 +683,12 @@
                 v-model="interestSelected[index]"
                 :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
                 multiple
-                label="title"
                 :options="interestData.filter(interest => interest.type=='aquaticLife' || interest.type=='aquaticLife100')"
               >
               <template slot="option" slot-scope="option">
+                {{ option.title }} ({{option.type}})
+              </template>
+              <template slot="selected-option" slot-scope="option">
                 {{ option.title }} ({{option.type}})
               </template>
               </v-select>
@@ -1196,17 +1198,19 @@ export default {
               this.highlightImagesName.push([]);
               this.highlightImageItems.push([]);
               const _idx = this.highlightImagesFile.length - 1;
-              _data.highlights.images.forEach(image=>{
-                this.highlightImageItems.push({
-                  id: image._id
-                })
-                this.nextHighlightImageId += this.nextHighlightImageId
+              if (_data.highlights.images) {
+                _data.highlights.images.forEach(image=>{
+                  this.highlightImageItems.push({
+                    id: image._id
+                  })
+                  this.nextHighlightImageId += this.nextHighlightImageId
 
-                this.highlightImagesFile[_idx].push(new File([""], (image.name == null) ? '' : image.name));
-                this.highlightImagesRef[_idx].push((image.reference == null) ? '' : image.reference);
-                this.highlightImagesName[_idx].push((image.description == null) ? '' : image.description);
-              });
-
+                  this.highlightImagesFile[_idx].push(new File([""], (image.name == null) ? '' : image.name));
+                  this.highlightImagesRef[_idx].push((image.reference == null) ? '' : image.reference);
+                  this.highlightImagesName[_idx].push((image.description == null) ? '' : image.description);
+                });
+              }
+              
               this.pointData.highlightContents.push(highlight.description);
               this.pointData.highlightNames.push(highlight.name);
             });
