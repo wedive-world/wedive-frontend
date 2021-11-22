@@ -82,7 +82,7 @@
                                         <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
                                             <span> {{center.star}} </span>
                                             &nbsp;<font class="color-gray-light">|</font>&nbsp;
-                                            <img src="/static/images/logo_padi.svg" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
+                                            <img src="https://image-bucket.us-east-1.linodeobjects.com/image/logo_padi.svg" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
                                             &nbsp;<font class="color-gray-light">|</font>&nbsp;
                                             <span v-for="i in center.price_index">￦</span>
                                         </p>
@@ -481,9 +481,9 @@ export default {
 .wedive-action {position: fixed;background-color: #1d397c;height:36px;border-radius: 18px;left: 50%!important;bottom: 90px;-webkit-box-shadow: 3px 2px 6px 0 rgb(0 0 0 / 20%);box-shadow: 3px 2px 6px 0 rgb(0 0 0 / 20%);-webkit-transform: translateX(-50%);transform: translateX(-50%);}
 .wedive-action:before {display: block;clear: both;content: "";position: absolute;top: 9px;left: 50%;width: 1px;height: 16px;background-color: #fff;}
 .action-filter {display: block;float: left;width: 84px;height: 35px;font-size: 14px;color: #d1d2d3;line-height: 35px;}
-.action-filter:before {clear: both;content: "";display: inline-block;margin-right: 6px;width: 14px;height: 14px;background-size: 14px 14px;background-repeat: no-repeat;background-image: url(/static/images/icon_filter.png);text-indent: -9999px;vertical-align: middle;}
+.action-filter:before {clear: both;content: "";display: inline-block;margin-right: 6px;width: 14px;height: 14px;background-size: 14px 14px;background-repeat: no-repeat;background-image: url(https://image-bucket.us-east-1.linodeobjects.com/image/icon_filter.png);text-indent: -9999px;vertical-align: middle;}
 .action-map {position: relative;float: right;width: 74px;height: 35px;font-size: 14px;color: #d1d2d3;line-height: 35px;}
-.action-map:before {clear: both;content: "";display: inline-block;margin-right: 6px;width: 14px;height: 14px;background-size: 14px 14px;background-repeat: no-repeat;background-image: url(/static/images/icon_map.png);text-indent: -9999px;vertical-align: middle;}
+.action-map:before {clear: both;content: "";display: inline-block;margin-right: 6px;width: 14px;height: 14px;background-size: 14px 14px;background-repeat: no-repeat;background-image: url(https://image-bucket.us-east-1.linodeobjects.com/image/icon_map.png);text-indent: -9999px;vertical-align: middle;}
 #filter_list {white-space: nowrap;overflow-x: scroll;height: 32px;}
 .transform-none {transform: inherit !important;};
 </style>

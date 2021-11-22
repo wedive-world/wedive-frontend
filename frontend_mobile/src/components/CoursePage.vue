@@ -634,7 +634,7 @@ export default {
 .ico_feature17 {width: 44px;height: 40px;background-position: -180px -78px;}
 .ico_feature18 {width: 44px;height: 40px;background-position: -225px -78px;}
 
-.icon-course {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/wedive_course2.png);background-repeat: no-repeat;-webkit-background-size: 270px 118px;background-size: 270px 118px;}
+.icon-course {overflow: hidden;display: block;margin-left: 11px;background-image: url(https://image-bucket.us-east-1.linodeobjects.com/image/wedive_course2.png);background-repeat: no-repeat;-webkit-background-size: 270px 118px;background-size: 270px 118px;}
 .span_feature {width:66px;}
 .text-urgent {color:#de5246; background-color: #ffebe9;padding: 2px 8px;border-radius:2px;}
 

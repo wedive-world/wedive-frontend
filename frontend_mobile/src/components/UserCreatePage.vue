@@ -26,7 +26,7 @@
                             <div class="text-center mt-5 mb-3">
                                 <div style="width: 150px;height:150px;display: inline-block;background: #e7e7e7;position: relative;border-radius:75px;">
                                     <input type="file" id="file-upload" class="upload-file text-center" accept="image/*" style="height: 150px;">
-                                    <p class="upload-file-text" style="color: #abb7ba;position:absolute;left:20px;top:60px;"><img src="/static/images/icon_user.png" width="110"></img></p></input>
+                                    <p class="upload-file-text" style="color: #abb7ba;position:absolute;left:20px;top:60px;"><img src="https://image-bucket.us-east-1.linodeobjects.com/image/icon_user.png" width="110"></img></p></input>
                                 </div>
                             </div>
                             <div class="text-center">
@@ -51,7 +51,7 @@
                             <div class="text-center mt-2 mb-0">
                                 <div style="border-bottom: 1px solid rgba(0, 0, 0, 0.08);">
                                     <p class="font-noto mb-1 mt-2"><font class="color-primary">{{nickname}}</font>님 반가워요.</p>
-                                    <img src="/static/images/hihi2.png" width="60%" />
+                                    <img src="https://image-bucket.us-east-1.linodeobjects.com/image/hihi2.png" width="60%" />
                                 </div>
 
                                 <div class="text-start input-style has-icon no-borders validate-field mb-2" style="width: 200px;display: inline-block;">
@@ -628,7 +628,7 @@
                         <div id="slide6" class="card card-full pb-0 mb-0 border-bottom" style="height: calc( 100vh - 56px );">
                         <div class="content mt-1" style="padding-top: 80px;">
                             <div class="text-center mt-2 mb-3">
-                                <img src="/static/images/confetti.gif" width="50%"/>
+                                <img src="https://image-bucket.us-east-1.linodeobjects.com/image/confetti.gif" width="50%"/>
                                 <p class="font-noto mb-1 mt-2 font-16">{{ nickname }}님, weDive에 오신것을 환영합니다.</p>
                                 <p class="font-noto color-gray"><span class="span_timer">3</span>초 후 메인페이지로 이동할께요.</p>
                             </div>
