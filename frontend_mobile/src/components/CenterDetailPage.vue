@@ -289,7 +289,17 @@
                 </div>
                 
                 <div data-bs-parent="#tab-group-2" class="collapse text-start px-2 show" id="tab-info">
-                    <div class=" line-height-l pb-3 mt-2 light-border-bottom">
+                    <div class="line-height-l pb-3 mt-2 light-border-bottom" v-if="centerData.tickets && centerData.tickets.length > 0">
+                        <strong class="small-title">입장료</strong>
+                        <div class="">
+                            <div v-for="ticket in centerData.tickets" class="row mb-0">
+                                <h5 class="col-6 text-start font-13 font-400">{{ ticket.unitName }}</h5>
+                                <p class="col-6 mb-2 text-end">{{ ticket.price | makeComma }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="line-height-l pb-3 mt-2 light-border-bottom">
                         <strong class="small-title">시설 정보</strong>
                         <div class="row text-start">
                             <div class="ico_feature col-3" v-if="interest.type=='facility'" v-for="interest in centerData.interests">
@@ -299,7 +309,7 @@
                         </div>
                     </div>
                     
-                    <div class="vcard-field line-height-l pb-3 mt-3">
+                    <div class="vcard-field line-height-l pb-3 mt-4">
                         <strong>결제 방법</strong>
                         <ul class="wedive-ul ps-0">
                             <li v-if="interest.type=='payment'" v-for="interest in centerData.interests" class="col-md-6">{{interest.title}}</li>
@@ -335,122 +345,29 @@
                     
                 </div>
                 <div data-bs-parent="#tab-group-2" class="collapse px-2" id="tab-time">
-                    <div class="mt-3">
+                    <div class="mt-3" v-if="centerData.openingHours && centerData.openingHours.length > 0">
                         <div v-for="opening in centerData.openingHours" class="row mb-0">
                             <h5 class="col-6 text-start font-13 font-400">{{ opening[0] }}</h5>
                             <p class="col-6 mb-2 text-end">{{ opening[1] }}</p>
                         </div>
                     </div>
+                    <div class="mt-3" v-else>
+                        <div class="text-center"><img src="https://image-bucket.us-east-1.linodeobjects.com/image/empty_time.jpg" width="60%"/></div>
+                        <div class="font-noto text-center mb-3" style="color: #717a92;">영업시간 데이터가 아직 없어요.</div>
+                    </div>
                 </div>
                 <div data-bs-parent="#tab-group-2" class="collapse px-2" id="tab-eqpt">
-                    <div class="mt-3 text-start row">
-                        <div class="ico_equipt col-3">
-                            <i class="ico_equipt1 icon-equiptment"></i>
-                            <p class="span_feature text-center">스킨스쿠버</p>
-                        </div>
-                        <div class="ico_equipt col-3">
-                            <i class="ico_equipt2 icon-equiptment"></i>
-                            <p class="span_feature text-center">스킨 세트</p>
-                        </div>
-                        <div class="ico_equipt col-3">
-                            <i class="ico_equipt3 icon-equiptment"></i>
-                            <p class="span_feature text-center">마스크</p>
-                        </div>
-                        <div class="ico_equipt col-3">
-                            <i class="ico_equipt4 icon-equiptment"></i>
-                            <p class="span_feature text-center">스노쿨</p>
-                        </div>
-                        <div class="ico_equipt col-3">
-                            <i class="ico_equipt5 icon-equiptment"></i>
-                            <p class="span_feature text-center">잠수복</p>
-                        </div>
-                        <div class="ico_equipt col-3">
-                            <i class="ico_equipt6 icon-equiptment"></i>
-                            <p class="span_feature text-center">오리발(핀)</p>
+                    <div class="mt-3 text-start row" v-if="centerData.rentals && centerData.rentals.length > 0">
+                        <div class="ico_equipt col-3" v-for="rental in centerData.rentals">
+                            <i :class="'ico_equipt' + (rentalOptions.findIndex(x=>x==rental.name)+1) + ' icon-equiptment'"></i>
+                            <p class="span_feature text-center mb-0">{{ rental.name }}</p>
+                            <p class="span_feature text-center mb-0 color-gray">{{ rental.price | makeComma }}/{{ rental.unitName}}</p>
                         </div>
 
-                        <div class="ico_equipt col-3">
-                            <i class="ico_equipt7 icon-equiptment"></i>
-                            <p class="span_feature text-center">부츠</p>
-                        </div>
-                        <div class="ico_equipt col-3">
-                            <i class="ico_equipt8 icon-equiptment"></i>
-                            <p class="span_feature text-center">웨이트&#38;벨트</p>
-                        </div>
-                        <div class="ico_equipt col-3">
-                            <i class="ico_equipt9 icon-equiptment"></i>
-                            <p class="span_feature text-center">스쿠버 세트</p>
-                        </div>
-                        <div class="ico_equipt col-3">
-                            <i class="ico_equipt10 icon-equiptment"></i>
-                            <p class="span_feature text-center">부력조절기</p>
-                        </div>
-                        <div class="ico_equipt col-3">
-                            <i class="ico_equipt11 icon-equiptment"></i>
-                            <p class="span_feature text-center">레귤레이터</p>
-                        </div>
-                        <div class="ico_equipt col-3">
-                            <i class="ico_equipt12 icon-equiptment"></i>
-                            <p class="span_feature text-center">보조호흡기</p>
-                        </div>
-
-                        <div class="ico_equipt col-3">
-                            <i class="ico_equipt13 icon-equiptment"></i>
-                            <p class="span_feature text-center">SMB</p>
-                        </div>
-                        <div class="ico_equipt col-3">
-                            <i class="ico_equipt14 icon-equiptment"></i>
-                            <p class="span_feature text-center">공기통</p>
-                        </div>
-                        <div class="ico_equipt col-3">
-                            <i class="ico_equipt15 icon-equiptment"></i>
-                            <p class="span_feature text-center">나이트록스</p>
-                        </div>
-                        <div class="ico_equipt col-3">
-                            <i class="ico_equipt16 icon-equiptment"></i>
-                            <p class="span_feature text-center">라이트</p>
-                        </div>
-                        <div class="ico_equipt col-3">
-                            <i class="ico_equipt17 icon-equiptment"></i>
-                            <p class="span_feature text-center">다이브컴퓨터</p>
-                        </div>
-                        <div class="ico_equipt col-3">
-                            <i class="ico_equipt18 icon-equiptment"></i>
-                            <p class="span_feature text-center">카메라</p>
-                        </div>
-                        <div class="ico_equipt col-3">
-                            <i class="ico_equipt19 icon-equiptment"></i>
-                            <p class="span_feature text-center">DPV</p>
-                        </div>
-                        <div class="ico_equipt col-3">
-                            <i class="ico_equipt20 icon-equiptment"></i>
-                            <p class="span_feature text-center">프리 핀</p>
-                        </div>
-                        <div class="ico_equipt col-3">
-                            <i class="ico_equipt21 icon-equiptment"></i>
-                            <p class="span_feature text-center">프리 마스크</p>
-                        </div>
-                        <div class="ico_equipt col-3">
-                            <i class="ico_equipt22 icon-equiptment"></i>
-                            <p class="span_feature text-center">프리 잠수복</p>
-                        </div>
-                        <div class="ico_equipt col-3">
-                            <i class="ico_equipt23 icon-equiptment"></i>
-                            <p class="span_feature text-center">프리 벨트</p>
-                        </div>
-                        <div class="ico_equipt col-3">
-                            <i class="ico_equipt24 icon-equiptment"></i>
-                            <p class="span_feature text-center">랜야드</p>
-                        </div>
-                        <div class="ico_equipt col-3">
-                            <i class="ico_equipt25 icon-equiptment"></i>
-                            <p class="span_feature text-center">부이</p>
-                        </div>
-                        <div class="ico_equipt col-3">
-                            <i class="ico_equipt26 icon-equiptment"></i>
-                            <p class="span_feature text-center">로프</p>
-                        </div>
-                        
+                    </div>
+                    <div class="mt-3 text-start row" v-else>
+                        <div class="text-center"><img src="https://image-bucket.us-east-1.linodeobjects.com/image/empty_list.jpg" width="60%"/></div>
+                        <div class="font-noto text-center mb-3" style="color: #717a92;">대여장비 리스트가 아직 없어요.</div>
                     </div>
                 </div>
             </div>    
@@ -541,40 +458,40 @@
             <div class="content mb-3 mt-n3">
                 <div class="gallery gallery-filter">
                     <a href="/static/images/shop1/diving/test1.jpg" data-gallery="gallery-1" class="filtr-item" title="" data-category="1">
-                        <img src="/static/images/empty.png" data-src="/static/images/shop1/diving/test1.jpg" class="preload-img rounded-s shadow-m">
+                        <img src="https://image-bucket.us-east-1.linodeobjects.com/image/empty.png" data-src="/static/images/shop1/diving/test1.jpg" class="preload-img rounded-s shadow-m">
                     </a>
                     <a href="/static/images/shop1/diving/test2.jpg" data-gallery="gallery-1" class="filtr-item" title="" data-category="1">
-                        <img src="/static/images/empty.png" data-src="/static/images/shop1/diving/test2.jpg" class="preload-img rounded-s shadow-m">
+                        <img src="https://image-bucket.us-east-1.linodeobjects.com/image/empty.png" data-src="/static/images/shop1/diving/test2.jpg" class="preload-img rounded-s shadow-m">
                     </a>
                     <a href="/static/images/shop1/diving/test3.jpg" data-gallery="gallery-1" class="filtr-item" title="" data-category="1">
-                        <img src="/static/images/empty.png" data-src="/static/images/shop1/diving/test3.jpg" class="preload-img rounded-s shadow-m">
+                        <img src="https://image-bucket.us-east-1.linodeobjects.com/image/empty.png" data-src="/static/images/shop1/diving/test3.jpg" class="preload-img rounded-s shadow-m">
                     </a>
                     <a href="/static/images/shop1/diving/test4.jpg" data-gallery="gallery-1" class="filtr-item" title="" data-category="1">
-                        <img src="/static/images/empty.png" data-src="/static/images/shop1/diving/test4.jpg" class="preload-img rounded-s shadow-m">
+                        <img src="https://image-bucket.us-east-1.linodeobjects.com/image/empty.png" data-src="/static/images/shop1/diving/test4.jpg" class="preload-img rounded-s shadow-m">
                     </a>
                     <a href="/static/images/shop1/diving/test5.jpg" data-gallery="gallery-1" class="filtr-item" title="" data-category="1">
-                        <img src="/static/images/empty.png" data-src="/static/images/shop1/diving/test5.jpg" class="preload-img rounded-s shadow-m">
+                        <img src="https://image-bucket.us-east-1.linodeobjects.com/image/empty.png" data-src="/static/images/shop1/diving/test5.jpg" class="preload-img rounded-s shadow-m">
                     </a>
                     <a href="/static/images/shop1/diving/test6.jpg" data-gallery="gallery-1" class="filtr-item" title="" data-category="1">
-                        <img src="/static/images/empty.png" data-src="/static/images/shop1/diving/test6.jpg" class="preload-img rounded-s shadow-m">
+                        <img src="https://image-bucket.us-east-1.linodeobjects.com/image/empty.png" data-src="/static/images/shop1/diving/test6.jpg" class="preload-img rounded-s shadow-m">
                     </a>							
                     <a href="/static/images/shop1/edu/test1.jpg" data-gallery="gallery-2" class="filtr-item" title="" data-category="2">
-                        <img src="/static/images/empty.png" data-src="/static/images/shop1/edu/test1.jpg" class="preload-img rounded-s shadow-m">
+                        <img src="https://image-bucket.us-east-1.linodeobjects.com/image/empty.png" data-src="/static/images/shop1/edu/test1.jpg" class="preload-img rounded-s shadow-m">
                     </a>
                     <a href="/static/images/shop1/shop/test3.jpg" data-gallery="gallery-3" class="filtr-item" title="" data-category="3">
-                        <img src="/static/images/empty.png" data-src="/static/images/shop1/shop/test3.jpg" class="preload-img rounded-s shadow-m">
+                        <img src="https://image-bucket.us-east-1.linodeobjects.com/image/empty.png" data-src="/static/images/shop1/shop/test3.jpg" class="preload-img rounded-s shadow-m">
                     </a>
                     <a href="/static/images/shop1/shop/test12.jpg" data-gallery="gallery-3" class="filtr-item" title="" data-category="3">
-                        <img src="/static/images/empty.png" data-src="/static/images/shop1/shop/test12.jpg" class="preload-img rounded-s shadow-m">
+                        <img src="https://image-bucket.us-east-1.linodeobjects.com/image/empty.png" data-src="/static/images/shop1/shop/test12.jpg" class="preload-img rounded-s shadow-m">
                     </a>
                     <a href="/static/images/shop1/shop/test15.jpg" data-gallery="gallery-3" class="filtr-item" title="" data-category="3">
-                        <img src="/static/images/empty.png" data-src="/static/images/shop1/shop/test15.jpg" class="preload-img rounded-s shadow-m">
+                        <img src="https://image-bucket.us-east-1.linodeobjects.com/image/empty.png" data-src="/static/images/shop1/shop/test15.jpg" class="preload-img rounded-s shadow-m">
                     </a>
                     <a href="/static/images/shop1/shop/test21.jpg" data-gallery="gallery-3" class="filtr-item" title="" data-category="3">
-                        <img src="/static/images/empty.png" data-src="/static/images/shop1/shop/test21.jpg" class="preload-img rounded-s shadow-m">
+                        <img src="https://image-bucket.us-east-1.linodeobjects.com/image/empty.png" data-src="/static/images/shop1/shop/test21.jpg" class="preload-img rounded-s shadow-m">
                     </a>
                     <a href="/static/images/shop1/shop/test22.jpg" data-gallery="gallery-3" class="filtr-item" title="" data-category="3">
-                        <img src="/static/images/empty.png" data-src="/static/images/shop1/shop/test22.jpg" class="preload-img rounded-s shadow-m">
+                        <img src="https://image-bucket.us-east-1.linodeobjects.com/image/empty.png" data-src="/static/images/shop1/shop/test22.jpg" class="preload-img rounded-s shadow-m">
                     </a>
                 </div>
             </div>
@@ -1079,6 +996,46 @@ export default {
                         title
                         type
                         }
+                        tickets {
+                        _id
+                        price
+                        unitName
+                        name
+                        uniqueName
+                        days
+                        hours
+                        amount
+                        }
+                        educations {
+                        _id
+                        price
+                        unitName
+                        name
+                        uniqueName
+                        days
+                        hours
+                        amount
+                        }
+                        courses {
+                        _id
+                        price
+                        unitName
+                        name
+                        uniqueName
+                        days
+                        hours
+                        amount
+                        }
+                        rentals {
+                        _id
+                        price
+                        unitName
+                        name
+                        uniqueName
+                        days
+                        hours
+                        amount
+                        }
                         name
                         uniqueName
                         description
@@ -1350,6 +1307,7 @@ export default {
         feature_list: ["외국어가능", "샤워가능", "룸서비스", "늦은 퇴실", "컨시어지", "주차", "주방", "남녀화장실", "24시업무", "비지니스", "장애인편의", "세탁서비스", "금연실", "아이돌봄", "반려동물", "WIFI", "공항셔틀", "피트니스"],
         pay_list: ["현금", "VISA", "MasterCard", "UnionPay", "JCB", "American Express", "Discover card", "PAYCO", "Kakao Pay", "Naver Pay"],
         equipt_list: ["마스크", "레귤레이터", "다이버 PC", "다이버 워치", "나침반", "수중 스쿠터", "산소탱크", "핀", "구명조끼", "나이프", "스노쿨링", "부츠", "잠수복 상의", "잠수복 하의", "라이트", "스쿠버 세트", "카메라", "수심계", , "게이지", "잠수복", , "풀세트", "유아장비"],
+        rentalOptions: ["스킨스쿠버 세트", "스킨 세트", "마스크", "스노클", "잠수복", "오리발(핀)", "부츠", "웨이트&벨트", "스쿠버 세트", "부력조절기", "레귤레이터", "보조호흡기", "SMB", "공기통", "나이트록스", "라이트", "다이브컴퓨터", "카메라", "DPV", "프리 핀", "프리 마스크", "프리 잠수복", "프리 벨트", "랜야드", "부이", "로프"],
         point_list: [
             {title: "말미잘동산", type: 'df', desc: "동해의 명물 섬유세닐말미잘이 유난히 많은 포인트로, 모래 지형 위에 커다란 암반과 크고 작은 바위들이 형성되어 있는 포인트 입니다. 섬유세닐말미잘은 낮은 수온에서 펴기 때문에 6월 이전에 방문한다면 이 포인트의 아름다움을 제대로 느낄 수 있습니다.", star: 4.6, img1: 'https://divingholic.com/wp-content/uploads/2019/02/maxresdefault-1.jpg', img2: 'https://diverz.net/data/diving/point/202102/1614156788_8f436f8c0dc8a574611b_thumb_760_504.jpg', img3: 'https://divingholic.com/wp-content/uploads/2019/02/2%EC%9B%94%EC%9D%B8%EA%B5%AC%ED%95%B4%EB%B3%80%EB%94%A5.jpg', position: {lat: 37.9668859063654, lng: 128.79946317636166}},
             {title: "철재삼동", type: 'df', desc: "여름철 동해의 상징은 볼락이라고 할 수 있습니다. 그중에서도 수많은 볼락이 태풍처럼 있다고 해서 볼락태풍이라는 별명을 가진 포인트가 철재삼동 포인트 입니다. 초여름에서 초가을까지 3달정도되는 기간에 20m전후 수심, 11~15도의 수온 삼박자가 맞아떨어지면 거대한 볼락 떼를 만날 수 있습니다.", star: 4.3, img1: '/static/images/point/ko/yangyang_chuljesamdong_01.jpg', img2: '/static/images/point/ko/yangyang_chuljesamdong_02.jpg', img3: '/static/images/point/ko/yangyang_chuljesamdong_03.jpg', position: {lat: 37.947207012548716, lng: 128.81497292286326}},

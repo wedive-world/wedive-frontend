@@ -16,6 +16,11 @@ require('dotenv').config();
 
 Vue.use(VCalendar);
 
+Vue.filter("makeComma", val =>{
+  return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+})
+
+
 /*
 console.log(`==============================Env Information==============================`)
 Object.keys(process.env)

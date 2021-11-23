@@ -11,7 +11,7 @@ export const $themeConfig = {
   app: {
     appName: 'wedive', // Will update name in navigation menu (Branding)
     // eslint-disable-next-line global-require
-    appLogoImage: require('https://image-bucket.us-east-1.linodeobjects.com/image/logo-dark.svg'), // Will update logo in navigation menu (Branding)
+    appLogoImage: require('@/assets/images/logo/logo-dark.svg'), // Will update logo in navigation menu (Branding)
   },
   layout: {
     isRTL: false,

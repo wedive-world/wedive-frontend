@@ -436,95 +436,113 @@
                 </div>
                 <div data-bs-parent="#tab-group-2" class="collapse px-2" id="tab-eqpt">
                     <div class="mt-3 text-start row">
+                        
+
                         <div class="ico_equipt col-3">
                             <i class="ico_equipt1 icon-equiptment"></i>
-                            <p class="span_feature text-center">마스크</p>
+                            <p class="span_feature text-center">스킨스쿠버</p>
                         </div>
                         <div class="ico_equipt col-3">
                             <i class="ico_equipt2 icon-equiptment"></i>
-                            <p class="span_feature text-center">레귤레이터</p>
+                            <p class="span_feature text-center">스킨 세트</p>
                         </div>
                         <div class="ico_equipt col-3">
                             <i class="ico_equipt3 icon-equiptment"></i>
-                            <p class="span_feature text-center">모르겠음</p>
+                            <p class="span_feature text-center">마스크</p>
                         </div>
                         <div class="ico_equipt col-3">
                             <i class="ico_equipt4 icon-equiptment"></i>
-                            <p class="span_feature text-center">다이버 워치</p>
+                            <p class="span_feature text-center">스노쿨</p>
                         </div>
                         <div class="ico_equipt col-3">
                             <i class="ico_equipt5 icon-equiptment"></i>
-                            <p class="span_feature text-center">나침반</p>
+                            <p class="span_feature text-center">잠수복</p>
                         </div>
                         <div class="ico_equipt col-3">
                             <i class="ico_equipt6 icon-equiptment"></i>
-                            <p class="span_feature text-center">수중 스쿠터</p>
+                            <p class="span_feature text-center">오리발(핀)</p>
                         </div>
 
                         <div class="ico_equipt col-3">
                             <i class="ico_equipt7 icon-equiptment"></i>
-                            <p class="span_feature text-center">산소탱크</p>
+                            <p class="span_feature text-center">부츠</p>
                         </div>
                         <div class="ico_equipt col-3">
                             <i class="ico_equipt8 icon-equiptment"></i>
-                            <p class="span_feature text-center">핀</p>
+                            <p class="span_feature text-center">웨이트&#38;벨트</p>
                         </div>
                         <div class="ico_equipt col-3">
                             <i class="ico_equipt9 icon-equiptment"></i>
-                            <p class="span_feature text-center">구명조끼</p>
+                            <p class="span_feature text-center">스쿠버 세트</p>
                         </div>
                         <div class="ico_equipt col-3">
                             <i class="ico_equipt10 icon-equiptment"></i>
-                            <p class="span_feature text-center">나이프</p>
+                            <p class="span_feature text-center">부력조절기</p>
                         </div>
                         <div class="ico_equipt col-3">
                             <i class="ico_equipt11 icon-equiptment"></i>
-                            <p class="span_feature text-center">스노쿨링</p>
+                            <p class="span_feature text-center">레귤레이터</p>
                         </div>
                         <div class="ico_equipt col-3">
                             <i class="ico_equipt12 icon-equiptment"></i>
-                            <p class="span_feature text-center">부츠</p>
+                            <p class="span_feature text-center">보조호흡기</p>
                         </div>
 
                         <div class="ico_equipt col-3">
                             <i class="ico_equipt13 icon-equiptment"></i>
-                            <p class="span_feature text-center">잠수복 상의</p>
+                            <p class="span_feature text-center">SMB</p>
                         </div>
                         <div class="ico_equipt col-3">
                             <i class="ico_equipt14 icon-equiptment"></i>
-                            <p class="span_feature text-center">잠수복 하의</p>
+                            <p class="span_feature text-center">공기통</p>
                         </div>
                         <div class="ico_equipt col-3">
                             <i class="ico_equipt15 icon-equiptment"></i>
-                            <p class="span_feature text-center">라이트</p>
+                            <p class="span_feature text-center">나이트록스</p>
                         </div>
                         <div class="ico_equipt col-3">
                             <i class="ico_equipt16 icon-equiptment"></i>
-                            <p class="span_feature text-center">모름</p>
+                            <p class="span_feature text-center">라이트</p>
                         </div>
                         <div class="ico_equipt col-3">
                             <i class="ico_equipt17 icon-equiptment"></i>
+                            <p class="span_feature text-center">다이브컴퓨터</p>
+                        </div>
+                        <div class="ico_equipt col-3">
+                            <i class="ico_equipt18 icon-equiptment"></i>
                             <p class="span_feature text-center">카메라</p>
                         </div>
                         <div class="ico_equipt col-3">
                             <i class="ico_equipt19 icon-equiptment"></i>
-                            <p class="span_feature text-center">수심계</p>
+                            <p class="span_feature text-center">DPV</p>
                         </div>
                         <div class="ico_equipt col-3">
                             <i class="ico_equipt20 icon-equiptment"></i>
-                            <p class="span_feature text-center">게이지</p>
+                            <p class="span_feature text-center">프리 핀</p>
                         </div>
                         <div class="ico_equipt col-3">
                             <i class="ico_equipt21 icon-equiptment"></i>
-                            <p class="span_feature text-center">잠수복</p>
+                            <p class="span_feature text-center">프리 마스크</p>
                         </div>
                         <div class="ico_equipt col-3">
                             <i class="ico_equipt22 icon-equiptment"></i>
-                            <p class="span_feature text-center">모름</p>
+                            <p class="span_feature text-center">프리 잠수복</p>
                         </div>
                         <div class="ico_equipt col-3">
                             <i class="ico_equipt23 icon-equiptment"></i>
-                            <p class="span_feature text-center">유아장비</p>
+                            <p class="span_feature text-center">프리 벨트</p>
+                        </div>
+                        <div class="ico_equipt col-3">
+                            <i class="ico_equipt24 icon-equiptment"></i>
+                            <p class="span_feature text-center">랜야드</p>
+                        </div>
+                        <div class="ico_equipt col-3">
+                            <i class="ico_equipt25 icon-equiptment"></i>
+                            <p class="span_feature text-center">부이</p>
+                        </div>
+                        <div class="ico_equipt col-3">
+                            <i class="ico_equipt26 icon-equiptment"></i>
+                            <p class="span_feature text-center">로프</p>
                         </div>
                         
                     </div>

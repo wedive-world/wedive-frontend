@@ -460,7 +460,7 @@
             >
               <!-- Row Loop -->
               <b-row
-                v-for="(item, index) in centerData.ticktes"
+                v-for="(item, index) in ticketsItems"
                 :id="'tickets'+index"
                 :key="'tickets'+index"
                 ref="ticketsRow"
@@ -524,6 +524,104 @@
                     class="mr-25"
                 />
                 <span>Add ticket</span>
+              </b-button>
+              <b-form-invalid-feedback>
+                {{ validationContext.errors[0] }}
+              </b-form-invalid-feedback>
+            </b-form-group>
+          </validation-provider>
+
+
+          <h4 class="mt-3">장비대여 (Rentals)</h4>
+          <validation-provider
+            #default="validationContext"
+            name="rentals"
+            rules="required"
+          >
+            <b-form-group
+            >
+              <!-- Row Loop -->
+              <b-row
+                v-for="(item, index) in rentalsItems"
+                :id="'rentals'+index"
+                :key="'rentals'+index"
+                ref="rentalsRow"
+                >
+
+                <b-col md="4" class="pr-0">
+                  <b-form-group
+                    label="물품명"
+                    :label-for="'rentals_name_'+index"
+                    >
+                  <v-select
+                    :id="'rentals_name_'+index"
+                    v-model="item.name"
+                    :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
+                    :options="rentalOptions"
+                    :clearable="false"
+                    input-id="rentalOption"
+                  />
+                  </b-form-group>
+                </b-col>
+                <!-- 구분 (단위) -->
+                <b-col md="3" class="pr-0">
+                  <b-form-group
+                    label="구분 (단위)"
+                    :label-for="'rentals_unitName_'+index"
+                    >
+                    <b-form-input
+                        :id="'rentals_unitName_'+index"
+                        type="text"
+                        v-model="item.unitName"
+                        placeholder="1시간"
+                    />
+                  </b-form-group>
+                </b-col>
+                <!-- 가격 -->
+                <b-col md="4" class="pr-0">
+                    <b-form-group
+                    label="가격"
+                    :label-for="'rentals_price_'+index"
+                    >
+                    <b-form-input
+                        :id="'rentals_price_'+index"
+                        type="number"
+                        v-model="item.price"
+                        placeholder="20000"
+                    />
+                    </b-form-group>
+                </b-col>
+
+                <!-- Remove Button -->
+                <b-col
+                    md="1"
+                    class="mb-50"
+                >
+                    <b-button
+                    variant="flat-danger"
+                    class="mt-0 mt-md-2 pl-0 pr-0"
+                    @click="rentalsRemoveItem(index)"
+                    >
+                    <feather-icon
+                        icon="XIcon"
+                        class="mr-25"
+                    />
+                    </b-button>
+                </b-col>
+                <b-col cols="12">
+                    <hr class="mt-0" style="border-top: 1px dashed #ebe9f1 !important;">
+                </b-col>
+              </b-row>
+              <b-button
+                v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+                variant="flat-primary"
+                @click="rentalsRepeateAgain"
+                >
+                <feather-icon
+                    icon="PlusIcon"
+                    class="mr-25"
+                />
+                <span>Add rental</span>
               </b-button>
               <b-form-invalid-feedback>
                 {{ validationContext.errors[0] }}
@@ -1209,6 +1307,7 @@ import vSelect from 'vue-select'
 import store from '@/store'
 const { upsertDiveCenter } = require('@/wedive-frontend-graphql/dive-center-service')
 const { uploadSingleImage, updateImage, getImageUrl } = require('@/wedive-frontend-graphql/image-service')
+const { upsertProduct } = require('@/wedive-frontend-graphql/product-service')
 
 const blankCenterData = {
   _id: null,
@@ -1238,6 +1337,8 @@ const blankCenterData = {
   openingHours: [],
   geoAddress: '',
   webPageUrl: '',
+  tickets: [],
+  rentals: [],
   
   scubaIndex: '',
   seaTemperature: '',
@@ -1300,11 +1401,14 @@ export default {
       freeEnterenceOptions: ["1", "2", "3", "4", "5"],
       openingHoursOptions: ["1부", "2부", "3부", "4부", "5부", "매일", "평일", "주말", "월-토", "일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "공휴일", "휴게시간"],
       institutionOptions: ["AIDA", "CMAS", "PADI", "SSI", "AA", "KF", "UTA", "RAID", "SNSI", "MOLCHANOVA", "AFIA"],
+      rentalOptions: ["스킨스쿠버 세트", "스킨 세트", "마스크", "스노클", "잠수복", "오리발(핀)", "부츠", "웨이트&벨트", "스쿠버 세트", "부력조절기", "레귤레이터", "보조호흡기", "SMB", "공기통", "나이트록스", "라이트", "다이브컴퓨터", "카메라", "DPV", "프리 핀", "프리 마스크", "프리 잠수복", "프리 벨트", "랜야드", "부이", "로프"],
       backgroundItems: [],
       youtubeItems: [],
       referenceItems: [],
       wedivesCommentItems: [],
       openingItems: [],
+      ticketsItems: [],
+      rentalsItems: [],
       nextImageId: 1,
       backgroundImages: [],
       backgroundImageRef: [],
@@ -1363,7 +1467,19 @@ export default {
               this.backgroundImageName.push((image.description == null) ? '' : image.description);
             });
             this.centerData[key] = _data[key];
-          } else {
+          } else if (key == 'tickets') {
+            if (_data[key]) {
+              _data[key].map(ticket=>{
+                this.ticketsItems.push(ticket);
+              });
+            }
+          } else if (key == 'rentals') {
+            if (_data[key]) {
+              _data[key].map(rental=>{
+                this.rentalsItems.push(rental);
+              });
+            }
+          }else {
             this.centerData[key] = _data[key];
           }
         }
@@ -1448,10 +1564,16 @@ export default {
       this.centerData.openingHours.splice(index, 1);
     },
     ticketsRepeateAgain() {
-      this.centerData.tickets.push({unitName: '', price: 0});
+      this.ticketsItems.push({unitName: '', price: 0, name: '입장료', type: ['ticket']});
     },
     ticketsRemoveItem(index) {
-      this.centerData.tickets.splice(index, 1);
+      this.ticketsItems.splice(index, 1);
+    },
+    rentalsRepeateAgain() {
+      this.rentalsItems.push({unitName: '', price: 0, name: '', type: ['rental']});
+    },
+    rentalsRemoveItem(index) {
+      this.rentalsItems.splice(index, 1);
     },
     youtubeRepeateAgain() {
       this.youtubeItems.push('');
@@ -1523,12 +1645,26 @@ export default {
 
       // tickets
       {
-        for (var i=0; i<_centerData.tickets.length; i++) {
-          if (_centerData.tickets[i].hasOwnProperty(_id) == false) {
+        _centerData.tickets = [];
+        for (var i=0; i<this.ticketsItems.length; i++) {
+          if (this.ticketsItems[i].hasOwnProperty(_id) == false) {
             // add new ticket product
-            var result = await upsertProduct(_centerData.tickets);
-            console.log(result);
-            //_centerData.tickets[i]._id = result.
+            this.ticketsItems[i].price = parseInt(this.ticketsItems[i].price);
+            var result = await upsertProduct(this.ticketsItems[i]);
+            _centerData.tickets.push(result.upsertProduct._id);
+          }
+        }
+      }
+
+      // rentals
+      {
+        _centerData.rentals = [];
+        for (var i=0; i<this.rentalsItems.length; i++) {
+          if (this.rentalsItems[i].hasOwnProperty(_id) == false) {
+            // add new ticket product
+            this.rentalsItems[i].price = parseInt(this.rentalsItems[i].price);
+            var result = await upsertProduct(this.rentalsItems[i]);
+            _centerData.rentals.push(result.upsertProduct._id);
           }
         }
       }

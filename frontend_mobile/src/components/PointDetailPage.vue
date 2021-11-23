@@ -205,13 +205,13 @@
                         <div class="col-6 ps-0 pe-1">
                             <div class="card rounded-sm mb-2">
                                 <a class="" data-gallery="'gallery-0" href="/static/images/point/ko/jeju_munisland_07.jpg" title="">
-                                    <img src="/static/images/empty.png" data-src="/static/images/point/ko/jeju_munisland_07.jpg" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 80px;">
+                                    <img src="https://image-bucket.us-east-1.linodeobjects.com/image/empty.png" data-src="/static/images/point/ko/jeju_munisland_07.jpg" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 80px;">
                                     <div class="wedive-source mx-140">instagram.com/p/CUFJxmJvDbN</div>
                                 </a>
                             </div>
                             <div class="card rounded-sm mb-0">
                                 <a class="" data-gallery="'gallery-0" href="/static/images/point/ko/jeju_munisland_08.jpg" title="">
-                                    <img src="/static/images/empty.png" data-src="/static/images/point/ko/jeju_munisland_08.jpg" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 80px;">
+                                    <img src="https://image-bucket.us-east-1.linodeobjects.com/image/empty.png" data-src="/static/images/point/ko/jeju_munisland_08.jpg" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 80px;">
                                     <div class="wedive-source mx-140">instagram.com/p/CRc8e6FBxaQ/</div>
                                 </a>
                             </div>
@@ -219,7 +219,7 @@
                         <div class="col-6 ps-1 pe-0">
                             <div class="card rounded-sm mb-0">
                                 <a class="" data-gallery="'gallery-0" href="/static/images/point/ko/jeju_munisland_09.jpg" title="">
-                                    <img src="/static/images/empty.png" data-src="/static/images/point/ko/jeju_munisland_09.jpg" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 170px;">
+                                    <img src="https://image-bucket.us-east-1.linodeobjects.com/image/empty.png" data-src="/static/images/point/ko/jeju_munisland_09.jpg" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 170px;">
                                     <div class="wedive-source mx-140">instagram.com/p/CUDBy28PAHn/</div>
                                 </a>
                             </div>
@@ -234,15 +234,15 @@
                 </div>
                 <div class="row m-0 text-center row-cols-3 mb-1" style="margin-left: -4px !important; margin-rigth: -4px !important;">
                     <a class="col square-rect" data-gallery="'gallery-0" href="/static/images/point/ko/jeju_munisland_10.jpg" title="">
-                        <img src="/static/images/empty.png" data-src="/static/images/point/ko/jeju_munisland_10.jpg" class="preload-img img-fluid rounded-s" alt="Point image">
+                        <img src="https://image-bucket.us-east-1.linodeobjects.com/image/empty.png" data-src="/static/images/point/ko/jeju_munisland_10.jpg" class="preload-img img-fluid rounded-s" alt="Point image">
                         <div class="wedive-source mx-80">instagram.com/p/CUFJxmJvDbN/</div>
                     </a>
                     <a class="col square-rect" data-gallery="'gallery-0" href="/static/images/point/ko/jeju_munisland_11.jpg" title="">
-                        <img src="/static/images/empty.png" data-src="/static/images/point/ko/jeju_munisland_11.jpg" class="preload-img img-fluid rounded-s" alt="Point image">
+                        <img src="https://image-bucket.us-east-1.linodeobjects.com/image/empty.png" data-src="/static/images/point/ko/jeju_munisland_11.jpg" class="preload-img img-fluid rounded-s" alt="Point image">
                         <div class="wedive-source mx-80">instagram.com/p/CRkZLrTB8XW/</div>
                     </a>
                     <a class="col square-rect" data-gallery="'gallery-0" href="/static/images/point/ko/jeju_munisland_12.jpg" title="">
-                        <img src="/static/images/empty.png" data-src="/static/images/point/ko/jeju_munisland_12.jpg" class="preload-img img-fluid rounded-s" alt="Point image">
+                        <img src="https://image-bucket.us-east-1.linodeobjects.com/image/empty.png" data-src="/static/images/point/ko/jeju_munisland_12.jpg" class="preload-img img-fluid rounded-s" alt="Point image">
                         <div class="wedive-source mx-80">instagram.com/p/CUGnqi5v9kf/</div>
                     </a>
                 </div>
@@ -256,7 +256,7 @@
                         <div class="col-6 ps-0 pe-1">
                             <div class="card rounded-sm mb-0">
                                 <a class="" data-gallery="'gallery-0" href="/static/images/point/ko/jeju_munisland_13.jpg" title="">
-                                    <img src="/static/images/empty.png" data-src="/static/images/point/ko/jeju_munisland_13.jpg" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 170px;">
+                                    <img src="https://image-bucket.us-east-1.linodeobjects.com/image/empty.png" data-src="/static/images/point/ko/jeju_munisland_13.jpg" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 170px;">
                                     <div class="wedive-source mx-140">tripadvisor.co.kr/LocationPhotoDirectLink-g297892-d1776327-i52724201-Seogwipo_Submarine-Seogwipo_Jeju_Island.html/</div>
                                 </a>
                             </div>
@@ -264,13 +264,13 @@
                         <div class="col-6 ps-1 pe-0">
                             <div class="card rounded-sm mb-2">
                                 <a class="" data-gallery="'gallery-0" href="/static/images/point/ko/jeju_munisland_14.jpg" title="">
-                                    <img src="/static/images/empty.png" data-src="/static/images/point/ko/jeju_munisland_14.jpg" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 80px;">
+                                    <img src="https://image-bucket.us-east-1.linodeobjects.com/image/empty.png" data-src="/static/images/point/ko/jeju_munisland_14.jpg" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 80px;">
                                     <div class="wedive-source mx-140">instagram.com/p/CQ9-DMchbMa/</div>
                                 </a>
                             </div>
                             <div class="card rounded-sm mb-0">
                                 <a class="" data-gallery="'gallery-0" href="/static/images/point/ko/jeju_munisland_15.jpg" title="">
-                                    <img src="/static/images/empty.png" data-src="/static/images/point/ko/jeju_munisland_15.jpg" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 80px;">
+                                    <img src="https://image-bucket.us-east-1.linodeobjects.com/image/empty.png" data-src="/static/images/point/ko/jeju_munisland_15.jpg" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 80px;">
                                     <div class="wedive-source mx-140">instagram.com/p/CQVrSaSB0l8/</div>
                                 </a>
                             </div>
