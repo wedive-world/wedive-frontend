@@ -1425,12 +1425,12 @@ export default {
 .ico_equipt4 {width: 60px;height: 63px;background-position: -168px 0px;}
 .ico_equipt5 {width: 60px;height: 63px;background-position: -224px 0px;}
 .ico_equipt6 {width: 60px;height: 63px;background-position: -280px 0px;}
-.ico_equipt7 {width: 60px;height: 63px;background-position: 0px -60px;}
-.ico_equipt8 {width: 60px;height: 63px;background-position: -56px -60px;}
-.ico_equipt9 {width: 60px;height: 63px;background-position: -112px -60px;}
-.ico_equipt10 {width: 60px;height: 63px;background-position: -168px -60px;}
-.ico_equipt11 {width: 60px;height: 63px;background-position: -222px -60px;}
-.ico_equipt12 {width: 60px;height: 63px;background-position: -280px -60px;}
+.ico_equipt7 {width: 60px;height: 63px;background-position: 0px -54px;}
+.ico_equipt8 {width: 60px;height: 63px;background-position: -56px -54px;}
+.ico_equipt9 {width: 60px;height: 63px;background-position: -112px -54px;}
+.ico_equipt10 {width: 60px;height: 63px;background-position: -168px -54px;}
+.ico_equipt11 {width: 60px;height: 63px;background-position: -222px -56px;}
+.ico_equipt12 {width: 60px;height: 63px;background-position: -280px -54px;}
 
 .ico_equipt13 {width: 60px;height: 63px;background-position: 0px -110px;}
 .ico_equipt14 {width: 60px;height: 63px;background-position: -56px -110px;}
