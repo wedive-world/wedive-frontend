@@ -15,7 +15,7 @@
       <!-- Header -->
       <div class="d-flex justify-content-between align-items-center content-sidebar-header px-2 py-1">
         <h5 class="mb-0">
-          Add New Center
+          Add Center
         </h5>
 
         <feather-icon
@@ -394,29 +394,7 @@
 
           <br/>
 
-          <!-- 입장료 -->
-          <validation-provider
-            #default="validationContext"
-            name="enteranceFee"
-            rules="required"
-          >
-            <b-form-group
-              label="입장료"
-              label-for="enteranceFee"
-            >
-              <b-form-input
-                id="enteranceFee"
-                v-model="centerData.enteranceFee"
-                type="number"
-                trim
-                placeholder="20000 (원화, 숫자만 입력)"
-              />
-
-              <b-form-invalid-feedback>
-                {{ validationContext.errors[0] }}
-              </b-form-invalid-feedback>
-            </b-form-group>
-          </validation-provider>
+          
 
 
           <b-row>
@@ -472,6 +450,87 @@
             </b-col>
           </b-row>
 
+          <h4 class="mt-3">입장료 (Ticket)</h4>
+          <validation-provider
+            #default="validationContext"
+            name="tickets"
+            rules="required"
+          >
+            <b-form-group
+            >
+              <!-- Row Loop -->
+              <b-row
+                v-for="(item, index) in centerData.ticktes"
+                :id="'tickets'+index"
+                :key="'tickets'+index"
+                ref="ticketsRow"
+                >
+
+                <b-col md="4" class="pr-0">
+                  <b-form-group
+                    label="구분 (단위)"
+                    :label-for="'tickets_unitName_'+index"
+                    >
+                    <b-form-input
+                        :id="'tickets_unitName_'+index"
+                        type="text"
+                        v-model="item.unitName"
+                        placeholder="주말 (스쿠버)"
+                    />
+                  </b-form-group>
+                </b-col>
+                <!-- 가격 -->
+                <b-col md="7" class="pr-0">
+                    <b-form-group
+                    label="가격"
+                    :label-for="'tickets_price_'+index"
+                    >
+                    <b-form-input
+                        :id="'tickets_price_'+index"
+                        type="number"
+                        v-model="item.price"
+                        placeholder="20000"
+                    />
+                    </b-form-group>
+                </b-col>
+
+                <!-- Remove Button -->
+                <b-col
+                    md="1"
+                    class="mb-50"
+                >
+                    <b-button
+                    variant="flat-danger"
+                    class="mt-0 mt-md-2 pl-0 pr-0"
+                    @click="ticketsRemoveItem(index)"
+                    >
+                    <feather-icon
+                        icon="XIcon"
+                        class="mr-25"
+                    />
+                    </b-button>
+                </b-col>
+                <b-col cols="12">
+                    <hr class="mt-0" style="border-top: 1px dashed #ebe9f1 !important;">
+                </b-col>
+              </b-row>
+              <b-button
+                v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+                variant="flat-primary"
+                @click="ticketsRepeateAgain"
+                >
+                <feather-icon
+                    icon="PlusIcon"
+                    class="mr-25"
+                />
+                <span>Add ticket</span>
+              </b-button>
+              <b-form-invalid-feedback>
+                {{ validationContext.errors[0] }}
+              </b-form-invalid-feedback>
+            </b-form-group>
+          </validation-provider>
+
 
           <h4 class="mt-3">영업시간</h4>
           <validation-provider
@@ -486,7 +545,7 @@
                 v-for="(item, index) in openingItems"
                 :id="'openingHours'+index"
                 :key="'openingHours'+index"
-                ref="youtubeRow"
+                ref="openingHoursRow"
                 >
 
                 <b-col md="4" class="pr-0">
@@ -547,7 +606,7 @@
                     icon="PlusIcon"
                     class="mr-25"
                 />
-                <span>Add New Opening hour</span>
+                <span>Add opening hour</span>
               </b-button>
               <b-form-invalid-feedback>
                 {{ validationContext.errors[0] }}
@@ -667,7 +726,7 @@
                     icon="PlusIcon"
                     class="mr-25"
                 />
-                <span>Add New Wedive's comment</span>
+                <span>Add Wedive's comment</span>
               </b-button>
               <b-form-invalid-feedback>
                 {{ validationContext.errors[0] }}
@@ -694,6 +753,9 @@
                 :options="interestData.filter(interest => interest.type!='aquaticLife')"
               >
               <template slot="option" slot-scope="option">
+                {{ option.title }} ({{option.type}})
+              </template>
+              <template slot="selected-option" slot-scope="option">
                 {{ option.title }} ({{option.type}})
               </template>
               </v-select>
@@ -930,7 +992,7 @@
                     icon="PlusIcon"
                     class="mr-25"
                 />
-                <span>Add New Background Image</span>
+                <span>Add background image</span>
               </b-button>
               <b-form-invalid-feedback>
                 {{ validationContext.errors[0] }}
@@ -1002,7 +1064,7 @@
                     icon="PlusIcon"
                     class="mr-25"
                 />
-                <span>Add New Youtube Video</span>
+                <span>Add youtube video</span>
               </b-button>
               <b-form-invalid-feedback>
                 {{ validationContext.errors[0] }}
@@ -1074,7 +1136,7 @@
                     icon="PlusIcon"
                     class="mr-25"
                 />
-                <span>Add New Reference URL</span>
+                <span>Add reference URL</span>
               </b-button>
               <b-form-invalid-feedback>
                 {{ validationContext.errors[0] }}
@@ -1171,7 +1233,6 @@ const blankCenterData = {
   serviceScore: 60,
   phoneNumber: '',
   email: '',
-  enteranceFee: '',
   enteranceLevelFree: '',
   enteranceLevelScuba: '',
   openingHours: [],
@@ -1386,6 +1447,12 @@ export default {
       this.openingHoursContent.splice(index, 1);
       this.centerData.openingHours.splice(index, 1);
     },
+    ticketsRepeateAgain() {
+      this.centerData.tickets.push({unitName: '', price: 0});
+    },
+    ticketsRemoveItem(index) {
+      this.centerData.tickets.splice(index, 1);
+    },
     youtubeRepeateAgain() {
       this.youtubeItems.push('');
       this.centerData.youtubeVideoIds.push('');
@@ -1451,6 +1518,18 @@ export default {
             _centerData.backgroundImages.push(_id);
           }
           var result2 = await updateImage({_id: _id, reference: this.backgroundImageRef[i], name: image.name, description: this.backgroundImageName[i], uploaderId: 'apneaofficer'})
+        }
+      }
+
+      // tickets
+      {
+        for (var i=0; i<_centerData.tickets.length; i++) {
+          if (_centerData.tickets[i].hasOwnProperty(_id) == false) {
+            // add new ticket product
+            var result = await upsertProduct(_centerData.tickets);
+            console.log(result);
+            //_centerData.tickets[i]._id = result.
+          }
         }
       }
 

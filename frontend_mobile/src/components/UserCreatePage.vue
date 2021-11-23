@@ -54,7 +54,7 @@
                                     <img src="https://image-bucket.us-east-1.linodeobjects.com/image/hihi2.png" width="60%" />
                                 </div>
 
-                                <div class="text-start input-style has-icon no-borders validate-field mb-2" style="width: 200px;display: inline-block;">
+                                <div class="text-start input-style has-icon no-borders validate-field mb-2 mt-3" style="width: 200px;display: inline-block;">
                                     <i class="fa fa-id-badge color-gray font-14"></i>
                                     <input type="number" class="form-control font-noto input-big3" id="form4" placeholder="나이" v-model="userage">
                                     <i class="fa fa-check disabled valid color-green-dark"></i>
@@ -287,13 +287,7 @@
                                 </div>
                                 <div class="form-check interest-check">
                                 <input class="form-check-input" type="checkbox" value="" id="check_general3">
-                                <label class="form-check-label rounded-xl border-08" for="check_general3">수중촬영</label>
-                                <i class="fas fa-camera-retro color-white font-17"></i>
-                                <i class="fas fa-camera-retro font-17 color-highlight"></i>
-                                </div>
-                                <div class="form-check interest-check">
-                                <input class="form-check-input" type="checkbox" value="" id="check_general6">
-                                <label class="form-check-label rounded-xl border-08" for="check_general6">수중정화</label>
+                                <label class="form-check-label rounded-xl border-08" for="check_general3">수중정화</label>
                                 <i class="fas fa-broom color-white font-17"></i>
                                 <i class="fas fa-broom font-17 color-highlight"></i>
                                 </div>
@@ -423,40 +417,55 @@
                                     <label class="wediev-label pb-1 color-highlight ms-3" style="margin-top:-26px;">선호사항</label>
                                     <div class="form-check interest-check">
                                     <input class="form-check-input" type="checkbox" value="" id="check_scuba1">
-                                    <label class="form-check-label rounded-xl border-08" for="check_scuba1">체크다이빙</label>
-                                    <i class="fas fa-check-square color-white font-17"></i>
-                                    <i class="fas fa-check-square font-17 color-highlight"></i>
+                                    <label class="form-check-label rounded-xl border-08" for="check_scuba1">대물포인트</label>
+                                    <i class="fas fa-fish color-white font-17"></i>
+                                    <i class="fas fa-fish font-17 color-highlight"></i>
                                     </div>
                                     <div class="form-check interest-check">
                                     <input class="form-check-input" type="checkbox" value="" id="check_scuba2">
-                                    <label class="form-check-label rounded-xl border-08" for="check_scuba2">먹다이빙</label>
-                                    <i class="fab fa-get-pocket color-white font-17"></i>
-                                    <i class="fab fa-get-pocket font-17 color-highlight"></i>
+                                    <label class="form-check-label rounded-xl border-08" for="check_scuba2">이색포인트</label>
+                                    <i class="fas fa-grin-stars color-white font-17"></i>
+                                    <i class="fas fa-grin-stars font-17 color-highlight"></i>
                                     </div>
                                     <div class="form-check interest-check">
                                     <input class="form-check-input" type="checkbox" value="" id="check_scuba3">
-                                    <label class="form-check-label rounded-xl border-08" for="check_scuba3">리브어보드</label>
+                                    <label class="form-check-label rounded-xl border-08" for="check_scuba3">수중촬영</label>
+                                    <i class="fas fa-camera-retro color-white font-17"></i>
+                                    <i class="fas fa-camera-retro font-17 color-highlight"></i>
+                                    </div>
+                                    <div class="form-check interest-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="check_scuba4">
+                                    <label class="form-check-label rounded-xl border-08" for="check_scuba4">리브어보드</label>
                                     <i class="fas fa-ship color-white font-17"></i>
                                     <i class="fas fa-ship font-17 color-highlight"></i>
                                     </div>
                                     <div class="form-check interest-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="check_scuba4">
-                                    <label class="form-check-label rounded-xl border-08" for="check_scuba4">테크니컬다이빙</label>
+                                    <input class="form-check-input" type="checkbox" value="" id="check_scuba5">
+                                    <label class="form-check-label rounded-xl border-08" for="check_scuba5">체크다이빙</label>
+                                    <i class="fas fa-check-square color-white font-17"></i>
+                                    <i class="fas fa-check-square font-17 color-highlight"></i>
+                                    </div>
+                                    
+                                    
+                                    <div class="form-check interest-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="check_scuba6">
+                                    <label class="form-check-label rounded-xl border-08" for="check_scuba6">먹다이빙</label>
+                                    <i class="fab fa-get-pocket color-white font-17"></i>
+                                    <i class="fab fa-get-pocket font-17 color-highlight"></i>
+                                    </div>
+                                    <div class="form-check interest-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="check_scuba7">
+                                    <label class="form-check-label rounded-xl border-08" for="check_scuba7">테크니컬다이빙</label>
                                     <i class="fas fa-drafting-compass color-white font-17"></i>
                                     <i class="fas fa-drafting-compass font-17 color-highlight"></i>
                                     </div>
                                     <div class="form-check interest-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="check_scuba6">
-                                    <label class="form-check-label rounded-xl border-08" for="check_scuba6">마크로포인트</label>
+                                    <input class="form-check-input" type="checkbox" value="" id="check_scuba8">
+                                    <label class="form-check-label rounded-xl border-08" for="check_scuba8">마크로포인트</label>
                                     <i class="fas fa-fish color-white font-17"></i>
                                     <i class="fas fa-fish font-17 color-highlight"></i>
                                     </div>
-                                    <div class="form-check interest-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="check_scuba7">
-                                    <label class="form-check-label rounded-xl border-08" for="check_scuba7">대물포인트</label>
-                                    <i class="fas fa-fish color-white font-17"></i>
-                                    <i class="fas fa-fish font-17 color-highlight"></i>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -546,7 +555,7 @@
                                     <em></em>
                                 </div>
 
-                                <div class="mb-0 mt-5">
+                                <div class="mb-2 mt-5">
                                     <label class="wediev-label pb-1 color-highlight ms-3" style="margin-top:-26px;">Personal Best</label>
                                     
                                     <div id="div_personal_best" style="display: inline-block;">
@@ -555,8 +564,8 @@
                                     <a href="#" data-menu="menu-personal-best" class="btn btn-xs mb-0 rounded-xl text-uppercase font-900 shadow-s bg-dark-dark"><i class="fas fa-plus"></i></a>
                                 </div>
 
-                                <div class="mb-0 mt-4">
-                                    <label class="wediev-label pb-1 color-highlight ms-3" style="margin-top:-26px;">선호사항</label>
+                                <div class="mb-0" style="margin-top:30px;">
+                                    <label class="wediev-label pb-1 color-highlight ms-3" style="margin-top:-24px;">선호사항</label>
                                     <div class="form-check interest-check">
                                     <input class="form-check-input" type="checkbox" value="" id="check_free1">
                                     <label class="form-check-label rounded-xl border-08" for="check_free1">트레이닝</label>
@@ -565,9 +574,9 @@
                                     </div>
                                     <div class="form-check interest-check">
                                     <input class="form-check-input" type="checkbox" value="" id="check_free2">
-                                    <label class="form-check-label rounded-xl border-08" for="check_free2">스피어 피싱</label>
-                                    <i class="fas fa-fish color-white font-17"></i>
-                                    <i class="fas fa-fish font-17 color-highlight"></i>
+                                    <label class="form-check-label rounded-xl border-08" for="check_free2">수중화보</label>
+                                    <i class="fas fa-camera-retro color-white font-17"></i>
+                                    <i class="fas fa-camera-retro font-17 color-highlight"></i>
                                     </div>
                                     <div class="form-check interest-check">
                                     <input class="form-check-input" type="checkbox" value="" id="check_free3">
@@ -591,7 +600,7 @@
                             <div class="text-center mt-2 mb-3">
                                 <div>
                                     <p class="font-noto mb-3 mt-5">{{nickname}}님, <font class="color-primary font-20 font-600">강사</font> 로 등록하시겠어요?<br/>
-                                    <font class="color-gray">위다이브에서 무료 강좌를 개설할 수 있습니다.</font>
+                                    <font class="color-gray">위다이브에서 무료로 강습생을 추천해드려요.</font>
                                     </p>
                                 </div>
                             </div>
