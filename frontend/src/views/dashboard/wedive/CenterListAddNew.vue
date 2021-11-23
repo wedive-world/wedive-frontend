@@ -1307,7 +1307,7 @@ import vSelect from 'vue-select'
 import store from '@/store'
 const { upsertDiveCenter } = require('@/wedive-frontend-graphql/dive-center-service')
 const { uploadSingleImage, updateImage, getImageUrl } = require('@/wedive-frontend-graphql/image-service')
-const { upsertProduct } = require('@/wedive-frontend-graphql/product-service')
+const { upsertProduct, deleteProductById } = require('@/wedive-frontend-graphql/product-service')
 
 const blankCenterData = {
   _id: null,
@@ -1566,13 +1566,24 @@ export default {
     ticketsRepeateAgain() {
       this.ticketsItems.push({unitName: '', price: 0, name: '입장료', type: ['ticket']});
     },
-    ticketsRemoveItem(index) {
+    async ticketsRemoveItem(index) {
+      var id = this.ticketsItems[index]._id;
+      if (id != null) {
+        var result = await deleteProductById(id);
+        console.log(result);
+      }
       this.ticketsItems.splice(index, 1);
+      
     },
     rentalsRepeateAgain() {
       this.rentalsItems.push({unitName: '', price: 0, name: '', type: ['rental']});
     },
-    rentalsRemoveItem(index) {
+    async rentalsRemoveItem(index) {
+      var id = this.rentalsItems[index]._id;
+      if (id != null) {
+        var result = await deleteProductById(id);
+        console.log(result);
+      }
       this.rentalsItems.splice(index, 1);
     },
     youtubeRepeateAgain() {
