@@ -1350,7 +1350,7 @@ export default {
 .ico_equipt22 {width: 60px;height: 63px;background-position: -168px -176px;}
 .ico_equipt23 {width: 60px;height: 63px;background-position: -224px -176px;}
 .ico_equipt24 {width: 60px;height: 63px;background-position: -280px -176px;}
-.icon-equiptment {overflow: hidden;display: block;margin-left: 3px;background-image: url(/static/images/wedive_equiptment2.png);background-repeat: no-repeat;-webkit-background-size: 335px 240px;background-size: 335px 240px;}
+.icon-equiptment {overflow: hidden;display: block;margin-left: 3px;background-image: url(/static/images/wedive_equiptment2.png);background-repeat: no-repeat;-webkit-background-size: 335px 290px;background-size: 335px 290px;}
 
 .wedive-ul {width: 100%;list-style:none;display: inline-block;margin-bottom: 0;padding-left: 5px !important;padding-right: 5px !important;}
 .wedive-ul > li {float: left;width: 50%;}
