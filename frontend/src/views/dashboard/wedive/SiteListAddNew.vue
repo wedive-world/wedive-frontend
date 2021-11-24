@@ -473,7 +473,7 @@
                     >
                     <b-form-file
                         :id="'backgroundImages' + index"
-                        v-model="backgroundImages[index]"
+                        v-model="item.file"
                         placeholder="Choose or drop"
                         drop-placeholder="Drop here"
                         accept=".jpg,.jpeg,.png"
@@ -485,11 +485,11 @@
                 <b-col md="3" class="pr-0">
                     <b-form-group
                     label="출처"
-                    label-for="backgroundImagesRef"
+                    :label-for="'backgroundImagesRef'+index"
                     >
                     <b-form-input
-                        id="backgroundImagesRef"
-                        v-model="backgroundImageRef[index]"
+                        :id="'backgroundImagesRef'+index"
+                        v-model="item.reference"
                         type="text"
                         placeholder=""
                     />
@@ -500,11 +500,11 @@
                 <b-col md="4" class="pr-0">
                     <b-form-group
                     label="이름"
-                    label-for="backgroundImagesName"
+                    :label-for="'backgroundImagesName'+index"
                     >
                     <b-form-input
-                        id="backgroundImagesRef"
-                        v-model="backgroundImageName[index]"
+                        :id="'backgroundImagesRef'+index"
+                        v-model="item.description"
                         type="text"
                         placeholder=""
                     />
@@ -864,10 +864,6 @@ export default {
       backgroundItems: [],
       youtubeItems: [],
       referenceItems: [],
-      nextImageId: 1,
-      backgroundImages: [],
-      backgroundImageRef: [],
-      backgroundImageName: [],
       interestSelectedTotal: [],
       interestSelected: [],
       submitText: 'Add',
@@ -917,16 +913,9 @@ export default {
               })
             }
           } else if (key == 'backgroundImages') {
-            _data[key].map(image=>{
-              this.backgroundItems.push({
-                id: image._id
-              })
-              this.nextImageId += this.nextImageId;
-              this.backgroundImages.push(new File([""], (image.name == null) ? '' : image.name));
-              this.backgroundImageRef.push((image.reference == null) ? '' : image.reference);
-              this.backgroundImageName.push((image.description == null) ? '' : image.description);
+            _data[key].forEach(image=>{
+              this.backgroundItems.push(image)
             });
-            this.siteData[key] = _data[key];
           } else {
             this.siteData[key] = _data[key];
           }
@@ -983,26 +972,16 @@ export default {
       
     },
     backgroundRepeateAgain() {
-      this.backgroundItems.push({
-        id: this.nextImageId += this.nextImageId,
-      })
+      this.backgroundItems.push({reference: "", description: "", file: null});
     },
-    backgroundRemoveItem(index) {
-      var _id = this.backgroundItems[index].id;
-      this.backgroundItems.splice(index, 1);
-      
-      if (_id.length > 20) {
-        this.backgroundImages.splice(index, 1);
-        this.backgroundImageRef.splice(index, 1);
-        this.backgroundImageName.splice(index, 1);
-        try {
-          for (var i=0; i<this.siteData.backgroundImages.length; i++) {
-            if (this.siteData.backgroundImages[i]._id == _id) {
-              this.siteData.backgroundImages.splice(i, 1);
-            }
-          }
-        } catch (e) {console.log(e)};
+    async backgroundRemoveItem(index) {
+      var id = this.backgroundItems[index]._id;
+      if (id != null) {
+        // jjangs 여기 구현 필요
+        //var result = await deleteImageById(id);
+        //console.log(result);
       }
+      this.backgroundItems.splice(index, 1);
     },
 
 
@@ -1041,27 +1020,19 @@ export default {
       
       // 백그라운드 이미지
       {
-        // background Images for just id
-        var _id_list = [];
-        for (var i=0; i<_siteData.backgroundImages.length; i++) {
-          if (_siteData.backgroundImages[i].hasOwnProperty("_id")) {
-            var _id = _siteData.backgroundImages[i]._id;
-            _id_list.push(_id);
+        _siteData.backgroundImages = [];
+        for (var i=0; i<this.backgroundItems.length; i++) {
+          // Upload Image first
+          if (this.backgroundItems[i].file != null) {
+            var result = await uploadSingleImage(this.backgroundItems[i].file);
+            this.backgroundItems[i]._id = result.uploadImage._id;
+            this.backgroundItems[i].name = this.backgroundItems[i].file.name;
           }
-        }
-        delete _siteData.backgroundImages;
-        _siteData.backgroundImages = _id_list;
-
-        // upload background image
-        for (var i=0; i<this.backgroundImages.length; i++) {
-          var image = this.backgroundImages[i];
-          var _id = _siteData.backgroundImages[i];
-          if (_id == null) {
-            var result = await uploadSingleImage(image);
-            _id = result.uploadImage._id;
-            _siteData.backgroundImages.push(_id);
-          }
-          var result2 = await updateImage({_id: _id, reference: this.backgroundImageRef[i], name: image.name, description: this.backgroundImageName[i], uploaderId: 'apneaofficer'})
+          
+          delete this.backgroundItems[i].file;
+          this.backgroundItems[i].uploaderId = 'apneaofficer';
+          var result2 = await updateImage(this.backgroundItems[i]);
+          _siteData.backgroundImages.push(result2.updateImage._id);
         }
       }
 

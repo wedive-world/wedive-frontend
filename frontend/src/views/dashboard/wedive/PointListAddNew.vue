@@ -389,7 +389,7 @@
                     >
                     <b-form-file
                         :id="'backgroundImages' + index"
-                        v-model="backgroundImages[index]"
+                        v-model="item.file"
                         placeholder="Choose or drop"
                         drop-placeholder="Drop here"
                         accept=".jpg,.jpeg,.png"
@@ -401,11 +401,11 @@
                 <b-col md="3" class="pr-0">
                     <b-form-group
                     label="출처"
-                    label-for="backgroundImagesRef"
+                    :label-for="'backgroundImagesRef'+index"
                     >
                     <b-form-input
-                        id="backgroundImagesRef"
-                        v-model="backgroundImageRef[index]"
+                        :id="'backgroundImagesRef'+index"
+                        v-model="item.reference"
                         type="text"
                         placeholder=""
                     />
@@ -416,11 +416,11 @@
                 <b-col md="4" class="pr-0">
                     <b-form-group
                     label="이름"
-                    label-for="backgroundImagesName"
+                    :label-for="'backgroundImagesName'+index"
                     >
                     <b-form-input
-                        id="backgroundImagesRef"
-                        v-model="backgroundImageName[index]"
+                        :id="'backgroundImagesRef'+index"
+                        v-model="item.description"
                         type="text"
                         placeholder=""
                     />
@@ -707,7 +707,7 @@
             >
               <!-- Row Loop -->
               <b-row
-                v-for="(item, index) in pointItems"
+                v-for="(item, index) in imageItems"
                 :id="item.id"
                 :key="'rowImage'+index"
                 ref="row"
@@ -721,7 +721,7 @@
                     >
                     <b-form-file
                         :id="'pointImagesFile' + index"
-                        v-model="pointImages[index]"
+                        v-model="item.file"
                         placeholder="Choose or drop"
                         drop-placeholder="Drop here"
                         accept=".jpg,.jpeg,.png"
@@ -733,11 +733,11 @@
                 <b-col md="3" class="pr-0">
                     <b-form-group
                     label="출처"
-                    label-for="pointImagesRef"
+                    :label-for="'pointImagesRef' + index"
                     >
                     <b-form-input
-                        id="pointImagesRef"
-                        v-model="pointImageRef[index]"
+                        :id="'pointImagesRef' + index"
+                        v-model="item.reference"
                         type="text"
                         placeholder=""
                     />
@@ -748,11 +748,11 @@
                 <b-col md="4" class="pr-0">
                     <b-form-group
                     label="이름"
-                    label-for="pointImagesName"
+                    :label-for="'pointImagesName' + index"
                     >
                     <b-form-input
-                        id="pointImagesRef"
-                        v-model="pointImageName[index]"
+                        :id="'pointImagesName' + index"
+                        v-model="item.description"
                         type="text"
                         placeholder=""
                     />
@@ -769,7 +769,7 @@
                     <b-button
                     variant="flat-danger"
                     class="mt-0 mt-md-2 pl-0 pr-0"
-                    @click="pointRemoveItem(index)"
+                    @click="imageRemoveItem(index)"
                     >
                     <feather-icon
                         icon="XIcon"
@@ -784,7 +784,7 @@
               <b-button
                 v-ripple.400="'rgba(255, 255, 255, 0.15)'"
                 variant="flat-primary"
-                @click="pointRepeateAgain"
+                @click="imageRepeateAgain"
                 >
                 <feather-icon
                     icon="PlusIcon"
@@ -1113,19 +1113,11 @@ export default {
       highlightImagesFile: [],
       highlightImagesRef: [],
       highlightImagesName: [],
-      pointItems: [],
+      imageItems: [],
       youtubeItems: [],
       referenceItems: [],
-      nextBackgroundImageId: 1,
       nextHighlightId: 1,
       nextHighlightImageId: 1,
-      nextTodoId: 2,
-      backgroundImages: [],
-      backgroundImageRef: [],
-      backgroundImageName: [],
-      pointImages: [],
-      pointImageRef: [],
-      pointImageName: [],
       siteSelected: [],
       interestSelectedTotal: [],
       interestSelected: [[],[],[],[],[],[],[],[],[],[],[],[],[]],
@@ -1167,24 +1159,12 @@ export default {
         if (_data[key]) {
           if (key == 'backgroundImages') {
             _data[key].forEach(image=>{
-              this.backgroundItems.push({
-                id: image._id
-              })
-              this.nextBackgroundImageId += this.nextBackgroundImageId;
-              this.backgroundImages.push(new File([""], (image.name == null) ? '' : image.name));
-              this.backgroundImageRef.push((image.reference == null) ? '' : image.reference);
-              this.backgroundImageName.push((image.description == null) ? '' : image.description);
+              this.backgroundItems.push(image)
             });
             this.pointData[key] = _data[key];
           } else if (key == 'images') {
             _data[key].forEach(image=>{
-              this.pointItems.push({
-                id: image._id
-              })
-              this.nextImageId += this.nextImageId
-              this.pointImages.push(new File([""], (image.name == null) ? '' : image.name));
-              this.pointImageRef.push((image.reference == null) ? '' : image.reference);
-              this.pointImageName.push((image.description == null) ? '' : image.description);
+              this.imageItems.push(image)
             });
             this.pointData[key] = _data[key];
           } else if (key == 'highlights') {
@@ -1252,26 +1232,16 @@ export default {
       
     },
     backgroundRepeateAgain() {
-      this.backgroundItems.push({
-        id: this.nextBackgroundImageId += this.nextBackgroundImageId,
-      })
+      this.backgroundItems.push({reference: "", description: "", file: null});
     },
-    backgroundRemoveItem(index) {
-      var _id = this.backgroundItems[index].id;
-      this.backgroundItems.splice(index, 1);
-
-      if (_id.length > 20) {
-        this.backgroundImages.splice(index, 1);
-        this.backgroundImageRef.splice(index, 1);
-        this.backgroundImageName.splice(index, 1);
-        try {
-          for (var i=0; i<this.pointData.backgroundImages.length; i++) {
-            if (this.pointData.backgroundImages[i]._id == _id) {
-              this.pointData.backgroundImages.splice(i, 1);
-            }
-          }
-        } catch (e) {console.log(e)};
+    async backgroundRemoveItem(index) {
+      var id = this.backgroundItems[index]._id;
+      if (id != null) {
+        // jjangs 여기 구현 필요
+        //var result = await deleteImageById(id);
+        //console.log(result);
       }
+      this.backgroundItems.splice(index, 1);
     },
 
     
@@ -1318,27 +1288,17 @@ export default {
       
     },
 
-    pointRepeateAgain() {
-      this.pointItems.push({
-        id: this.nextImageId += this.nextImageId,
-      })
+    imageRepeateAgain() {
+      this.imageItems.push({reference: "", description: "", file: null});
     },
-    pointRemoveItem(index) {
-      var _id = this.pointItems[index].id;
-      this.pointItems.splice(index, 1)
-
-      if (_id.length > 20) {
-        this.pointImages.splice(index, 1);
-        this.pointImageRef.splice(index, 1);
-        this.pointImageName.splice(index, 1);
-        try {
-          for (var i=0; i<this.pointData.images.length; i++) {
-            if (this.pointData.images[i]._id == _id) {
-              this.pointData.images.splice(i, 1);
-            }
-          }
-        } catch (e) {console.log(e)};
+    imageRemoveItem(index) {
+      var id = this.imageItems[index]._id;
+      if (id != null) {
+        // jjangs 여기 구현 필요
+        //var result = await deleteImageById(id);
+        //console.log(result);
       }
+      this.imageItems.splice(index, 1);
     },
     
 
@@ -1449,55 +1409,41 @@ export default {
 
       // 백그라운드 이미지
       {
-        // background Images for just id
-        var _id_list = [];
-        for (var i=0; i<_pointData.backgroundImages.length; i++) {
-          if (_pointData.backgroundImages[i].hasOwnProperty("_id")) {
-            var _id = _pointData.backgroundImages[i]._id;
-            _id_list.push(_id);
+        _pointData.backgroundImages = [];
+        for (var i=0; i<this.backgroundItems.length; i++) {
+          // Upload Image first
+          if (this.backgroundItems[i].file != null) {
+            var result = await uploadSingleImage(this.backgroundItems[i].file);
+            this.backgroundItems[i]._id = result.uploadImage._id;
+            this.backgroundItems[i].name = this.backgroundItems[i].file.name;
           }
-        }
-        delete _pointData.backgroundImages;
-        _pointData.backgroundImages = _id_list;
-
-        // upload background image
-        for (var i=0; i<this.backgroundImages.length; i++) {
-          var image = this.backgroundImages[i];
-          var _id = _pointData.backgroundImages[i];
-          if (_id == null) {
-            var result = await uploadSingleImage(image);
-            _id = result.uploadImage._id;
-            _pointData.backgroundImages.push(_id);
-          }
-          var result2 = await updateImage({_id: _id, reference: this.backgroundImageRef[i], name: image.name, description: this.backgroundImageName[i], uploaderId: 'apneaofficer'})
+          
+          delete this.backgroundItems[i].file;
+          this.backgroundItems[i].uploaderId = 'apneaofficer';
+          var result2 = await updateImage(this.backgroundItems[i]);
+          _pointData.backgroundImages.push(result2.updateImage._id);
         }
       }
+      
 
       // 포인트 이미지
       {
-        // point Images for just id
-        var _id_list = [];
-        for (var i=0; i<_pointData.images.length; i++) {
-          if (_pointData.images[i].hasOwnProperty("_id")) {
-            var _id = _pointData.images[i]._id;
-            _id_list.push(_id);
+        _pointData.images = [];
+        for (var i=0; i<this.imageItems.length; i++) {
+          // Upload Image first
+          if (this.imageItems[i].file != null) {
+            var result = await uploadSingleImage(this.imageItems[i].file);
+            this.imageItems[i]._id = result.uploadImage._id;
+            this.imageItems[i].name = this.imageItems[i].file.name;
           }
-        }
-        delete _pointData.images;
-        _pointData.images = _id_list;
-
-        // upload point image
-        for (var i=0; i<this.pointImages.length; i++) {
-          var image = this.pointImages[i];
-          var _id = _pointData.images[i];
-          if (_id == null) {
-            var result = await uploadSingleImage(image);
-            _id = result.uploadImage._id;
-            _pointData.images.push(_id);
-          }
-          var result2 = await updateImage({_id: _id, reference: this.pointImageRef[i], name: image.name, description: this.pointImageName[i], uploaderId: 'apneaofficer'})
+          
+          delete this.imageItems[i].file;
+          this.imageItems[i].uploaderId = 'apneaofficer';
+          var result2 = await updateImage(this.imageItems[i]);
+          _pointData.images.push(result2.updateImage._id);
         }
       }
+      
 
       // 전체 인터레스트 입력
       _pointData.interests = [];

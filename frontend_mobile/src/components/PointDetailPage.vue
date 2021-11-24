@@ -76,12 +76,12 @@
                 
                 <div class="d-flex mb-0 text-center">
                     <div class="flex-grow-1 pd-0" style="border-right: 1px solid lightgray;">
-                        <img class="ext-img" src="https://image-bucket.us-east-1.linodeobjects.com/image/ico_heart.png" width="24" style="margin-top:-4px;"/>
+                        <img class="ext-img" src="/static/images/assets/ico_heart.png" width="24" style="margin-top:-4px;"/>
                         <span class="font-16 font-500 font-noto">찜 0</span>
                     </div>
                     
                     <div class="flex-grow-1 pd-0" data-menu="menu-share">
-                        <img class="ext-img" src="https://image-bucket.us-east-1.linodeobjects.com/image/ico_share.png" width="24" style="margin-top:-4px;"/>
+                        <img class="ext-img" src="/static/images/assets/ico_share.png" width="24" style="margin-top:-4px;"/>
                         <span class="font-16 font-500 font-noto">공유</span>
                     </div>
                 </div>
@@ -99,7 +99,7 @@
                 </div>
                 <h4 class="text-center pt-2 mb-2">where is here?</h4>
                 <div class="text-center txt_box2 mb-2 font-16">
-                    <img class="me-2" src="https://image-bucket.us-east-1.linodeobjects.com/image/wedives_choice.svg" height="34" /> wedive's choice 2021
+                    <img class="me-2" src="/static/images/assets/wedives_choice.svg" height="34" /> wedive's choice 2021
                 </div>
                 <div class="row text-start txt_box2 m-0">
                     <div class="ico_feature col-3">
@@ -205,13 +205,13 @@
                         <div class="col-6 ps-0 pe-1">
                             <div class="card rounded-sm mb-2">
                                 <a class="" data-gallery="'gallery-0" href="/static/images/point/ko/jeju_munisland_07.jpg" title="">
-                                    <img src="https://image-bucket.us-east-1.linodeobjects.com/image/empty.png" data-src="/static/images/point/ko/jeju_munisland_07.jpg" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 80px;">
+                                    <img src="/static/images/assets/empty.png" data-src="/static/images/point/ko/jeju_munisland_07.jpg" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 80px;">
                                     <div class="wedive-source mx-140">instagram.com/p/CUFJxmJvDbN</div>
                                 </a>
                             </div>
                             <div class="card rounded-sm mb-0">
                                 <a class="" data-gallery="'gallery-0" href="/static/images/point/ko/jeju_munisland_08.jpg" title="">
-                                    <img src="https://image-bucket.us-east-1.linodeobjects.com/image/empty.png" data-src="/static/images/point/ko/jeju_munisland_08.jpg" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 80px;">
+                                    <img src="/static/images/assets/empty.png" data-src="/static/images/point/ko/jeju_munisland_08.jpg" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 80px;">
                                     <div class="wedive-source mx-140">instagram.com/p/CRc8e6FBxaQ/</div>
                                 </a>
                             </div>
@@ -219,7 +219,7 @@
                         <div class="col-6 ps-1 pe-0">
                             <div class="card rounded-sm mb-0">
                                 <a class="" data-gallery="'gallery-0" href="/static/images/point/ko/jeju_munisland_09.jpg" title="">
-                                    <img src="https://image-bucket.us-east-1.linodeobjects.com/image/empty.png" data-src="/static/images/point/ko/jeju_munisland_09.jpg" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 170px;">
+                                    <img src="/static/images/assets/empty.png" data-src="/static/images/point/ko/jeju_munisland_09.jpg" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 170px;">
                                     <div class="wedive-source mx-140">instagram.com/p/CUDBy28PAHn/</div>
                                 </a>
                             </div>
@@ -234,15 +234,15 @@
                 </div>
                 <div class="row m-0 text-center row-cols-3 mb-1" style="margin-left: -4px !important; margin-rigth: -4px !important;">
                     <a class="col square-rect" data-gallery="'gallery-0" href="/static/images/point/ko/jeju_munisland_10.jpg" title="">
-                        <img src="https://image-bucket.us-east-1.linodeobjects.com/image/empty.png" data-src="/static/images/point/ko/jeju_munisland_10.jpg" class="preload-img img-fluid rounded-s" alt="Point image">
+                        <img src="/static/images/assets/empty.png" data-src="/static/images/point/ko/jeju_munisland_10.jpg" class="preload-img img-fluid rounded-s" alt="Point image">
                         <div class="wedive-source mx-80">instagram.com/p/CUFJxmJvDbN/</div>
                     </a>
                     <a class="col square-rect" data-gallery="'gallery-0" href="/static/images/point/ko/jeju_munisland_11.jpg" title="">
-                        <img src="https://image-bucket.us-east-1.linodeobjects.com/image/empty.png" data-src="/static/images/point/ko/jeju_munisland_11.jpg" class="preload-img img-fluid rounded-s" alt="Point image">
+                        <img src="/static/images/assets/empty.png" data-src="/static/images/point/ko/jeju_munisland_11.jpg" class="preload-img img-fluid rounded-s" alt="Point image">
                         <div class="wedive-source mx-80">instagram.com/p/CRkZLrTB8XW/</div>
                     </a>
                     <a class="col square-rect" data-gallery="'gallery-0" href="/static/images/point/ko/jeju_munisland_12.jpg" title="">
-                        <img src="https://image-bucket.us-east-1.linodeobjects.com/image/empty.png" data-src="/static/images/point/ko/jeju_munisland_12.jpg" class="preload-img img-fluid rounded-s" alt="Point image">
+                        <img src="/static/images/assets/empty.png" data-src="/static/images/point/ko/jeju_munisland_12.jpg" class="preload-img img-fluid rounded-s" alt="Point image">
                         <div class="wedive-source mx-80">instagram.com/p/CUGnqi5v9kf/</div>
                     </a>
                 </div>
@@ -256,7 +256,7 @@
                         <div class="col-6 ps-0 pe-1">
                             <div class="card rounded-sm mb-0">
                                 <a class="" data-gallery="'gallery-0" href="/static/images/point/ko/jeju_munisland_13.jpg" title="">
-                                    <img src="https://image-bucket.us-east-1.linodeobjects.com/image/empty.png" data-src="/static/images/point/ko/jeju_munisland_13.jpg" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 170px;">
+                                    <img src="/static/images/assets/empty.png" data-src="/static/images/point/ko/jeju_munisland_13.jpg" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 170px;">
                                     <div class="wedive-source mx-140">tripadvisor.co.kr/LocationPhotoDirectLink-g297892-d1776327-i52724201-Seogwipo_Submarine-Seogwipo_Jeju_Island.html/</div>
                                 </a>
                             </div>
@@ -264,13 +264,13 @@
                         <div class="col-6 ps-1 pe-0">
                             <div class="card rounded-sm mb-2">
                                 <a class="" data-gallery="'gallery-0" href="/static/images/point/ko/jeju_munisland_14.jpg" title="">
-                                    <img src="https://image-bucket.us-east-1.linodeobjects.com/image/empty.png" data-src="/static/images/point/ko/jeju_munisland_14.jpg" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 80px;">
+                                    <img src="/static/images/assets/empty.png" data-src="/static/images/point/ko/jeju_munisland_14.jpg" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 80px;">
                                     <div class="wedive-source mx-140">instagram.com/p/CQ9-DMchbMa/</div>
                                 </a>
                             </div>
                             <div class="card rounded-sm mb-0">
                                 <a class="" data-gallery="'gallery-0" href="/static/images/point/ko/jeju_munisland_15.jpg" title="">
-                                    <img src="https://image-bucket.us-east-1.linodeobjects.com/image/empty.png" data-src="/static/images/point/ko/jeju_munisland_15.jpg" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 80px;">
+                                    <img src="/static/images/assets/empty.png" data-src="/static/images/point/ko/jeju_munisland_15.jpg" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 80px;">
                                     <div class="wedive-source mx-140">instagram.com/p/CQVrSaSB0l8/</div>
                                 </a>
                             </div>
@@ -314,7 +314,7 @@
                                         <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
                                             <span> {{center.star}} </span>
                                             &nbsp;<font class="color-gray-light">|</font>&nbsp;
-                                            <img src="https://image-bucket.us-east-1.linodeobjects.com/image/logo_padi.svg" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
+                                            <img src="/static/images/assets/logo_padi.svg" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
                                             &nbsp;<font class="color-gray-light">|</font>&nbsp;
                                             <span v-for="i in center.price_index">￦</span>
                                         </p>
@@ -519,7 +519,7 @@
                         </tbody>
                     </table>
                     <div class="text-end">
-                        <img class="me-1 mb-3" height="20" src="https://image-bucket.us-east-1.linodeobjects.com/image/logo-kaoh.svg" />
+                        <img class="me-1 mb-3" height="20" src="/static/images/assets/logo-kaoh.svg" />
                     </div>
                 </div>
                 <div data-bs-parent="#tab-group-index" class="collapse" id="tab-monthly">
@@ -537,23 +537,23 @@
                                 <th class="font-12" scope="row">{{ index }}월</th>
                                 <td class="font-12 color-gray">1.1ºC / 2.2ºC</td>
                                 <td v-for="month in pointData.diveSite['month' + index]" v-if="month.type=='climate'" class="font-12">
-                                    <img v-if="month.title=='sunny'" class="me-2" src="https://image-bucket.us-east-1.linodeobjects.com/image/weather_sunny.svg" width="20" height="20"/>
-                                    <img v-else-if="month.title=='cloudy'" class="me-2" src="https://image-bucket.us-east-1.linodeobjects.com/image/weather_partly_cloudy.svg" width="20" height="20"/>
-                                    <img v-else-if="month.title=='rain'" class="me-2" src="https://image-bucket.us-east-1.linodeobjects.com/image/weather_showers.svg" width="20" height="20"/>
-                                    <img v-else-if="month.title=='heavyRain'" class="me-2" src="https://image-bucket.us-east-1.linodeobjects.com/image/weather_heavy_rain.svg" width="20" height="20"/>
+                                    <img v-if="month.title=='sunny'" class="me-2" src="/static/images/assets/weather_sunny.svg" width="20" height="20"/>
+                                    <img v-else-if="month.title=='cloudy'" class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>
+                                    <img v-else-if="month.title=='rain'" class="me-2" src="/static/images/assets/weather_showers.svg" width="20" height="20"/>
+                                    <img v-else-if="month.title=='heavyRain'" class="me-2" src="/static/images/assets/weather_heavy_rain.svg" width="20" height="20"/>
                                     2.1ºC
                                 </td>
                                 <td v-for="month in pointData.diveSite['month' + index]" v-if="month.type=='popularity'">
-                                    <img v-if="month.title=='unrecommended'" class="img_pop" src="https://image-bucket.us-east-1.linodeobjects.com/image/icon_popularity_01.svg" width="32" height="32"/>
-                                    <img v-if="month.title=='soso'" class="img_pop" src="https://image-bucket.us-east-1.linodeobjects.com/image/icon_popularity_02.svg" width="32" height="32"/>
-                                    <img v-if="month.title=='popular'" class="img_pop" src="https://image-bucket.us-east-1.linodeobjects.com/image/icon_popularity_03.svg" width="32" height="32"/>
+                                    <img v-if="month.title=='unrecommended'" class="img_pop" src="/static/images/assets/icon_popularity_01.svg" width="32" height="32"/>
+                                    <img v-if="month.title=='soso'" class="img_pop" src="/static/images/assets/icon_popularity_02.svg" width="32" height="32"/>
+                                    <img v-if="month.title=='popular'" class="img_pop" src="/static/images/assets/icon_popularity_03.svg" width="32" height="32"/>
                                 </td>
                             </tr>
 
                         </tbody>                        
                     </table>
                     <div class="text-end">
-                        <img class="me-1 mb-3" height="20" src="https://image-bucket.us-east-1.linodeobjects.com/image/logo-kma.svg" />
+                        <img class="me-1 mb-3" height="20" src="/static/images/assets/logo-kma.svg" />
                     </div>
                 </div>
             </div>
@@ -593,7 +593,7 @@
                                         </div>
                                         <p class="review-text mt-2 mb-1">
                                             <a href="https://t1.daumcdn.net/cfile/tistory/224C493F542D088905" data-gallery="gallery-99" class="filtr-item" title="" data-category="99">
-                                                <img src="https://image-bucket.us-east-1.linodeobjects.com/image/empty.png" data-src="https://t1.daumcdn.net/cfile/tistory/224C493F542D088905" class="preload-img rounded-s shadow-m review_img" alt="방문자리뷰">
+                                                <img src="/static/images/assets/empty.png" data-src="https://t1.daumcdn.net/cfile/tistory/224C493F542D088905" class="preload-img rounded-s shadow-m review_img" alt="방문자리뷰">
                                             </a>
                                             나이트다이빙을 해보면 본인이 체질인지 여부를 바로 알 수 있다. 입수 후 어두운 바다가 눈앞에 펼쳐지지만 이내 모든게 밝아진다. 나이트다이빙 특유의 분위기가 가득하다. 마치 낯선 행성을 탐험하는 기분이랄까, 이국적으로 몽환적인 분위기에 한껏 취하게 된다. 함께 간 모든 사람들이 너무나도 좋아해서 힘들게 기획한만큼 보람있는 다이빙 이었다.
                                         </p>
@@ -648,7 +648,7 @@
                                         </div>
                                         <p class="review-text mt-2 mb-1">
                                             <a href="http://www.uwmagazine.co.kr/news/photo/202008/895_2811_2553.jpg" data-gallery="gallery-99" class="filtr-item" title="" data-category="99">
-                                                <img src="https://image-bucket.us-east-1.linodeobjects.com/image/empty.png" data-src="http://www.uwmagazine.co.kr/news/photo/202008/895_2811_2553.jpg" class="preload-img rounded-s shadow-m review_img" alt="방문자리뷰">
+                                                <img src="/static/images/assets/empty.png" data-src="http://www.uwmagazine.co.kr/news/photo/202008/895_2811_2553.jpg" class="preload-img rounded-s shadow-m review_img" alt="방문자리뷰">
                                             </a>
                                             파고는 0.5미터 이상이였습니다. 해안 근처는 잔잔해 보였는데 5분정도 배타고 나가니 파고도 높아지고 조류도 제법 강했습니다.  무엇보다 시야가 너무 별로였습니다. 부유물들이 겨울바다 답지않게 너무 심했습니다. 영상을 보시면 아시겠지만 부유물덕에 입수해서 내려가는 속도가 느껴질만큼 많았습니다.
                                         </p>
@@ -1116,7 +1116,7 @@ export default {
                 map: this.map,
                 position: _position,
                 label: {text: _title, color: 'white', className: 'marker-position'},
-                icon: new google.maps.MarkerImage('https://image-bucket.us-east-1.linodeobjects.com/image/ico_pin1_o.png',null, null, null, new google.maps.Size(38,43)),
+                icon: new google.maps.MarkerImage('/static/images/assets/ico_pin1_o.png',null, null, null, new google.maps.Size(38,43)),
             });
 
             marker_shop.addListener("click", () => {
@@ -1124,7 +1124,7 @@ export default {
                 for (var j=0; j<this.marker_list.length; j++) {
                     var _icon = this.marker_list[j].getIcon();
                     if (_icon.size.width != 38) {
-                        this.marker_list[j].setIcon(new google.maps.MarkerImage('https://image-bucket.us-east-1.linodeobjects.com/image/ico_pin1_o.png', null, null, null, new google.maps.Size(38,43)));
+                        this.marker_list[j].setIcon(new google.maps.MarkerImage('/static/images/assets/ico_pin1_o.png', null, null, null, new google.maps.Size(38,43)));
                         try {
                             var _title = this.marker_list[j].getLabel().text;
                             this.marker_list[j].setLabel({text: _title, color: 'white', className: 'marker-position'});
@@ -1139,7 +1139,7 @@ export default {
                 $("#map_box_shop_img").attr("src", img);
                 
                 
-                marker_shop.setIcon(new google.maps.MarkerImage('https://image-bucket.us-east-1.linodeobjects.com/image/ico_pin_big1.png', null, null, null, new google.maps.Size(58,66)));
+                marker_shop.setIcon(new google.maps.MarkerImage('/static/images/assets/ico_pin_big1.png', null, null, null, new google.maps.Size(58,66)));
                 marker_shop.setLabel({text: title, color: 'white', className: 'marker-position mt-86'});
                 if (this.map.getZoom() == 17) {
                     this.map.panTo(marker_shop.getPosition());
@@ -1155,7 +1155,7 @@ export default {
             for (var j=0; j<this.marker_list.length; j++) {
                 var _icon = this.marker_list[j].getIcon();
                 if (_icon.size.width != 38) {
-                    this.marker_list[j].setIcon(new google.maps.MarkerImage('https://image-bucket.us-east-1.linodeobjects.com/image/ico_pin1_o.png', null, null, null, new google.maps.Size(38,43)));
+                    this.marker_list[j].setIcon(new google.maps.MarkerImage('/static/images/assets/ico_pin1_o.png', null, null, null, new google.maps.Size(38,43)));
                     var _title = this.marker_list[j].getLabel().text;
                     this.marker_list[j].setLabel({text: _title, color: 'white', className: 'marker-position'});
                 }
@@ -1169,7 +1169,7 @@ export default {
             map: this.map,
             position: {lat: 33.226771248454575, lng: 126.56573069418906},
             label: {text: '문섬 포인트', color: 'white', className: 'marker-position2'},
-            icon: new google.maps.MarkerImage('https://image-bucket.us-east-1.linodeobjects.com/image/ico_pin2.png',null, null, null, new google.maps.Size(38,43)),
+            icon: new google.maps.MarkerImage('/static/images/assets/ico_pin2.png',null, null, null, new google.maps.Size(38,43)),
         });
     };
 

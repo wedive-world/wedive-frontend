@@ -239,7 +239,7 @@
                             <h4 class="pt-3 mb-2 content mt-0 mb-2">선택사항</h4>
                             <div class="row mt-3">
                                 <div class="col-4 text-center">
-                                    <img src="https://image-bucket.us-east-1.linodeobjects.com/image/ico_unknown.png" width="60%" />
+                                    <img src="/static/images/assets/ico_unknown.png" width="60%" />
                                     <div class="">
                                         <div class="color-highlight font-12">모집 인원</div>
                                         <div class="mx-auto" style="display: inline-block;">
@@ -253,7 +253,7 @@
                                     </div>
                                 </div>
                                 <div class="col-4 text-center">
-                                    <img src="https://image-bucket.us-east-1.linodeobjects.com/image/ico_man.png" width="60%" />
+                                    <img src="/static/images/assets/ico_man.png" width="60%" />
                                     <div class="">
                                         <div class="color-secondary font-12">참여중 남성</div>
                                         <div class="mx-auto" style="display: inline-block;">
@@ -267,7 +267,7 @@
                                     </div>
                                 </div>
                                 <div class="col-4 text-center">
-                                    <img src="https://image-bucket.us-east-1.linodeobjects.com/image/ico_woman.png" width="60%" />
+                                    <img src="/static/images/assets/ico_woman.png" width="60%" />
                                     <div class="">
                                         <div class="color-secondary font-12">참여중 여성</div>
                                         <div class="mx-auto" style="display: inline-block;">
@@ -349,7 +349,7 @@
                         <div id="slide5" class="card card-full pb-0 mb-0 border-bottom" style="height: calc( 100vh - 56px );">
                         <div class="content mt-1">
                             <div class="text-center mt-2 mb-3">
-                                <img src="https://image-bucket.us-east-1.linodeobjects.com/image/search.gif"/>
+                                <img src="/static/images/assets/search.gif"/>
                                 <p class="font-noto mb-1 mt-2 font-16">세상에서 가장 빠르게 다이빙 버디를 찾아드려요.</p>
                                 <p class="font-noto color-gray"><span class="span_timer">3</span>초 후 리스트로 이동할께요.</p>
                             </div>

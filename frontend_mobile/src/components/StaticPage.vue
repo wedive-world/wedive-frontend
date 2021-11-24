@@ -17,7 +17,7 @@
         
 
         <div class="p-4 mb-0">
-            <h5 class="wedive-static-title">스노쿨링</h5>
+            <h5 class="wedive-static-title">스노클링</h5>
         </div>
         <div class="row mb-0">
             <img class="col-6 pe-1 ps-0" src="https://image.kkday.com/v2/image/get/w_960%2Cc_fit%2Cq_55%2Ct_webp/s1.kkday.com/product_20593/20181119094948_Pb22V/jpg"/>

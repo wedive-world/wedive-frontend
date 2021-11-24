@@ -376,9 +376,9 @@ export default {
 
 
 #btn-filter1 {padding: 5px 10px !important;margin-right: -2px;border-radius: 20px 0px 0px 20px !important;border: 1px solid #091a42;}
-#btn-filter1:before {clear: both;content: "";display: inline-block;margin-right: 6px;width: 14px;height: 14px;background-size: 14px 14px;background-repeat: no-repeat;background-image: url(https://image-bucket.us-east-1.linodeobjects.com/image/icon_scubadiving.png);text-indent: -9999px;vertical-align: middle;}
+#btn-filter1:before {clear: both;content: "";display: inline-block;margin-right: 6px;width: 14px;height: 14px;background-size: 14px 14px;background-repeat: no-repeat;background-image: url(/static/images/assets/icon_scubadiving.png);text-indent: -9999px;vertical-align: middle;}
 #btn-filter2 {padding: 5px 10px !important;margin-left: -3px;border-radius: 0px 20px 20px 0px !important;border: 1px solid #091a42;}
-#btn-filter2:before {clear: both;content: "";display: inline-block;margin-right: 6px;width: 14px;height: 14px;background-size: 14px 14px;background-repeat: no-repeat;background-image: url(https://image-bucket.us-east-1.linodeobjects.com/image/icon_freediving.png);text-indent: -9999px;vertical-align: middle;}
+#btn-filter2:before {clear: both;content: "";display: inline-block;margin-right: 6px;width: 14px;height: 14px;background-size: 14px 14px;background-repeat: no-repeat;background-image: url(/static/images/assets/icon_freediving.png);text-indent: -9999px;vertical-align: middle;}
 
 
 

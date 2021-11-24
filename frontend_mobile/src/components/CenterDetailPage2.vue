@@ -452,7 +452,7 @@
                         </div>
                         <div class="ico_equipt col-3">
                             <i class="ico_equipt4 icon-equiptment"></i>
-                            <p class="span_feature text-center">스노쿨</p>
+                            <p class="span_feature text-center">스노클</p>
                         </div>
                         <div class="ico_equipt col-3">
                             <i class="ico_equipt5 icon-equiptment"></i>

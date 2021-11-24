@@ -512,7 +512,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.body.classList.add('theme-light');
                 document.body.classList.remove('theme-dark','detect-theme');
                 document.querySelectorAll('.logo-image').forEach((elem, index)=> {
-                    elem.setAttribute("src", "https://image-bucket.us-east-1.linodeobjects.com/image/logo-dark.svg");
+                    elem.setAttribute("src", "/static/images/assets/logo-dark.svg");
                 });
                 document.querySelectorAll('.footer-bar-6 a img').forEach((elem, index)=> {
                     elem.style.filter = 'invert(0%)';

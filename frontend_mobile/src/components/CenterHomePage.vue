@@ -9,7 +9,7 @@
 
         <div v-on:click="goList()" class="card card-style" style="background: white;height:158px;">
             <div class="content mb-0 mt-3">
-                <img class="float-right" src="https://image-bucket.us-east-1.linodeobjects.com/image/exam-sheet.png" style="position: absolute;z-index: 11;right: 30px;top:10px;"/>
+                <img class="float-right" src="/static/images/assets/exam-sheet.png" style="position: absolute;z-index: 11;right: 30px;top:10px;"/>
                 <h4 class="text-start mb-1 font-15" style="padding-top:36px;">엄선한 다이빙 센터를 검색</h4>
 
                 <div class="search-box search-dark border-08 bg-theme rounded-sm" style="position: absolute;width: calc(100% - 30px);z-index: 9;">
@@ -45,7 +45,7 @@
                                         <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
                                             <span> {{center.star}} </span>
                                             &nbsp;<font class="color-gray-light">|</font>&nbsp;
-                                            <img src="https://image-bucket.us-east-1.linodeobjects.com/image/logo_padi.svg" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
+                                            <img src="/static/images/assets/logo_padi.svg" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
                                             &nbsp;<font class="color-gray-light">|</font>&nbsp;
                                             <span v-for="i in center.price_index">￦</span>
                                         </p>
@@ -65,9 +65,9 @@
                 <h4 class="color-white text-start pt-1 mb-1">자체 보트를 운영중인 센터</h4>
                 <p class="color-white mb-0 color-gray">1,387개 센터</p>
                 <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
-                <img class="float-right mt-n3 movebox" src="https://image-bucket.us-east-1.linodeobjects.com/image/boat.png" width="200"/>
-                <img class="movebox2" src="https://image-bucket.us-east-1.linodeobjects.com/image/cloud.png" width="100"/>
-                <img class="movebox3" src="https://image-bucket.us-east-1.linodeobjects.com/image/cloud.png" width="70"/>
+                <img class="float-right mt-n3 movebox" src="/static/images/assets/boat.png" width="200"/>
+                <img class="movebox2" src="/static/images/assets/cloud.png" width="100"/>
+                <img class="movebox3" src="/static/images/assets/cloud.png" width="70"/>
             </div>
         </div>
 
@@ -94,7 +94,7 @@
                                         <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
                                             <span> {{center.star}} </span>
                                             &nbsp;<font class="color-gray-light">|</font>&nbsp;
-                                            <img src="https://image-bucket.us-east-1.linodeobjects.com/image/logo_padi.svg" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
+                                            <img src="/static/images/assets/logo_padi.svg" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
                                             &nbsp;<font class="color-gray-light">|</font>&nbsp;
                                             <span v-for="i in center.price_index">￦</span>
                                         </p>
@@ -132,7 +132,7 @@
                                         <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
                                             <span> {{center.star}} </span>
                                             &nbsp;<font class="color-gray-light">|</font>&nbsp;
-                                            <img src="https://image-bucket.us-east-1.linodeobjects.com/image/logo_padi.svg" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
+                                            <img src="/static/images/assets/logo_padi.svg" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
                                             &nbsp;<font class="color-gray-light">|</font>&nbsp;
                                             <span v-for="i in center.price_index">￦</span>
                                         </p>
@@ -154,13 +154,13 @@
                 <h4 class="text-start pt-2 mb-1 font-600"><i class="fas fa-plane me-2"></i>전세계 10대 포인트 센터</h4>
                 <p class="mb-0">3,219개의 다이빙 센터</p>
                 <a class="font-12 wedive-txt-all">모두보기</a>
-                <img class="float-right mt-n3" src="https://image-bucket.us-east-1.linodeobjects.com/image/earth.gif" width="300" style="margin-right: -20px;margin-bottom:-30px;margin-top:-10px;"/>
+                <img class="float-right mt-n3" src="/static/images/assets/earth.gif" width="300" style="margin-right: -20px;margin-bottom:-30px;margin-top:-10px;"/>
             </div>
         </div>
 
         <div class="card card-style">
             <div class="content mb-0 mt-3">
-                <h4 class="text-start pt-2 mb-0 color-primary"><img src="https://image-bucket.us-east-1.linodeobjects.com/image/ico_wedive_d.png" width="30" />위다이브 추천</h4>
+                <h4 class="text-start pt-2 mb-0 color-primary"><img src="/static/images/assets/ico_wedive_d.png" width="30" />위다이브 추천</h4>
                 <p class="mb-3 color-gray-light-mid">38개의 다이빙 센터</p>
                 <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
                 
@@ -181,7 +181,7 @@
                                         <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
                                             <span> {{center.star}} </span>
                                             &nbsp;<font class="color-gray-light">|</font>&nbsp;
-                                            <img src="https://image-bucket.us-east-1.linodeobjects.com/image/logo_padi.svg" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
+                                            <img src="/static/images/assets/logo_padi.svg" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
                                             &nbsp;<font class="color-gray-light">|</font>&nbsp;
                                             <span v-for="i in center.price_index">￦</span>
                                         </p>
@@ -200,8 +200,8 @@
         <div class="card card-style" style="background: #5ec9bb;">
             <div class="content mb-0 mt-3">
                 <div class="text-center">
-                    <img class="mt-n1" src="https://image-bucket.us-east-1.linodeobjects.com/image/id-card.png" />
-                    <h4 class="pt-3 mb-0 font-600"><img src="https://image-bucket.us-east-1.linodeobjects.com/image/logo_padi.svg" height="18" class="ext-img mt-n1"> 인증 센터</h4>
+                    <img class="mt-n1" src="/static/images/assets/id-card.png" />
+                    <h4 class="pt-3 mb-0 font-600"><img src="/static/images/assets/logo_padi.svg" height="18" class="ext-img mt-n1"> 인증 센터</h4>
                     <p class="color-white mb-1 mt-n1">601개의 다이빙 센터</p>
                     <p class="color-white mb-3 opacity-60 ls-n1">#세계최대&nbsp;&nbsp;#공식인증</p>
                 </div>
@@ -215,7 +215,7 @@
                 <p class="mb-1">37개의 다이빙 센터</p>
                 <p class="mb-0 opacity-60 ls-n1">#인생샷&nbsp;&nbsp;#좀 찍는듯</p>
                 <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
-                <img class=" mt-n4 float-right" src="https://image-bucket.us-east-1.linodeobjects.com/image/camera.png" width="220" style="margin-right: -20px;"/>
+                <img class=" mt-n4 float-right" src="/static/images/assets/camera.png" width="220" style="margin-right: -20px;"/>
             </div>
         </div>
 
@@ -225,7 +225,7 @@
                 <p class="mb-1 color-gray-light">268개의 다이빙 센터</p>
                 <p class="color-white mb-0 opacity-60 ls-n1">#친절설명&nbsp;&nbsp;#차근차근</p>
                 <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
-                <img class=" mt-n4 mb-2 float-right" src="https://image-bucket.us-east-1.linodeobjects.com/image/blackboard.png" />
+                <img class=" mt-n4 mb-2 float-right" src="/static/images/assets/blackboard.png" />
             </div>
         </div>
 
@@ -235,7 +235,7 @@
                 <p class="color-white mb-1">463개의 다이빙 센터</p>
                 <p class="color-white mb-0 opacity-60 ls-n1">#김종국 저리가라&nbsp;&nbsp;#3대 300해도 힘듦</p>
                 <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
-                <img class="mt-n5 mb-n2 me-n3 float-right" src="https://image-bucket.us-east-1.linodeobjects.com/image/stopwatch.png" />
+                <img class="mt-n5 mb-n2 me-n3 float-right" src="/static/images/assets/stopwatch.png" />
             </div>
         </div>
 
@@ -245,7 +245,7 @@
                 <p class="color-white mb-1">천천히 쉬엄쉬엄 배워보는</p>
                 <p class="color-white mb-0 opacity-60 ls-n1">#안빈낙도&nbsp;&nbsp;#인조이라이프</p>
                 <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
-                <img class="mt-n5 float-right" src="https://image-bucket.us-east-1.linodeobjects.com/image/male-holding-coffee.png"/>
+                <img class="mt-n5 float-right" src="/static/images/assets/male-holding-coffee.png"/>
             </div>
         </div>
         

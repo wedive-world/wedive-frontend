@@ -9,7 +9,7 @@
 
         <div class="card card-style" style="background: white;height:148px;">
             <div class="content mb-0 mt-3">
-                <img class="float-right" src="https://image-bucket.us-east-1.linodeobjects.com/image/search.png" width="80" style="position: absolute;z-index: 11;right: 30px;top:10px;"/>
+                <img class="float-right" src="/static/images/assets/search.png" width="80" style="position: absolute;z-index: 11;right: 30px;top:10px;"/>
                 <h4 class="text-start mb-1 font-15" style="padding-top:36px;">원하는 다이빙을 빠르게 검색</h4>
 
                 <div class="search-box search-dark border-08 bg-theme rounded-sm" style="position: absolute;width: calc(100% - 30px);z-index: 99;">
@@ -76,7 +76,7 @@
                 <h4 class="text-start pt-1 mb-2">얼마 남지 않은<br/>다이빙 D-7</h4>
                 <p class="mb-0 color-gray">53개의 다이빙 이벤트</p>
                 <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
-                <img class="float-right mt-n5" src="https://image-bucket.us-east-1.linodeobjects.com/image/hourglass.png" style="padding-bottom:16px;padding-right:10px;"/>
+                <img class="float-right mt-n5" src="/static/images/assets/hourglass.png" style="padding-bottom:16px;padding-right:10px;"/>
             </div>
         </div>
 
@@ -155,7 +155,7 @@
                 <h4 class="text-start pt-2 mb-1 font-600 color-white"><i class="fas fa-map-marker-alt me-2"></i>내 주변 다이빙</h4>
                 <p class="color-white mb-0">7개의 다이빙 이벤트</p>
                 <a class="color-white font-12 wedive-txt-all">모두보기</a>
-                <div style="text-align:center;"><img class="mt-n3" src="https://image-bucket.us-east-1.linodeobjects.com/image/magnifying.png"/></div>
+                <div style="text-align:center;"><img class="mt-n3" src="/static/images/assets/magnifying.png"/></div>
             </div>
         </div>
 
@@ -204,7 +204,7 @@
                 <p class="color-white mb-1">63개의 다이빙 이벤트</p>
                 <p class="color-white mb-0 opacity-60 ls-n1">#떠나요&nbsp;&nbsp;#제주도&nbsp;&nbsp;#낭만 바다</p>
                 <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
-                <img class="float-right" src="https://image-bucket.us-east-1.linodeobjects.com/image/jeju.jpg" width="260" />
+                <img class="float-right" src="/static/images/assets/jeju.jpg" width="260" />
             </div>
         </div>
 
@@ -214,7 +214,7 @@
                 <p class="mb-1">13개의 다이빙 이벤트</p>
                 <p class="mb-0 opacity-60 ls-n1">#인스타 사진&nbsp;&nbsp;#인생 한컷</p>
                 <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
-                <img class=" mt-n4 float-right" src="https://image-bucket.us-east-1.linodeobjects.com/image/actioncam.png" style="margin-right: 10px;margin-bottom:10px;"/>
+                <img class=" mt-n4 float-right" src="/static/images/assets/actioncam.png" style="margin-right: 10px;margin-bottom:10px;"/>
             </div>
         </div>
 
@@ -224,7 +224,7 @@
                 <p class="mb-1 color-gray-light">39개의 다이빙 이벤트</p>
                 <p class="color-white mb-0 opacity-60 ls-n1">#맥주인생&nbsp;&nbsp;#좋은사람</p>
                 <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
-                <img class=" mt-n4 mb-2 float-right" src="https://image-bucket.us-east-1.linodeobjects.com/image/beer.png" />
+                <img class=" mt-n4 mb-2 float-right" src="/static/images/assets/beer.png" />
             </div>
         </div>
 
@@ -234,7 +234,7 @@
                 <p class="mb-1">3개의 다이빙 이벤트</p>
                 <p class="mb-0 opacity-60 ls-n1">#세계 10대 포인트&nbsp;&nbsp;#나도 글로벌</p>
                 <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
-                <img class="mb-n3 float-right movebox" src="https://image-bucket.us-east-1.linodeobjects.com/image/air-plane.png" width="200"/>
+                <img class="mb-n3 float-right movebox" src="/static/images/assets/air-plane.png" width="200"/>
             </div>
         </div>
 
@@ -244,7 +244,7 @@
                 <p class="mb-1">12개의 다이빙 이벤트</p>
                 <p class="mb-0 opacity-60 ls-n1">#걱정마요&nbsp;&nbsp;#누구나 시작은&nbsp;&nbsp;#함께 해요</p>
                 <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
-                <img class="mt-n5 float-right" src="https://image-bucket.us-east-1.linodeobjects.com/image/lifebuoy.png" style="padding-top:16px;padding-bottom:20px;"/>
+                <img class="mt-n5 float-right" src="/static/images/assets/lifebuoy.png" style="padding-top:16px;padding-bottom:20px;"/>
             </div>
         </div>
         
