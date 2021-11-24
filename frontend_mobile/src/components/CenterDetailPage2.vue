@@ -577,7 +577,7 @@
                         </div>
                         <div class="ico_equipt col-3">
                             <i class="ico_equipt34 icon-equiptment"></i>
-                            <p class="span_feature text-center">로프</p>
+                            <p class="span_feature text-center">로프1</p>
                         </div>
                         <div class="ico_equipt col-3">
                             <i class="ico_equipt35 icon-equiptment"></i>
