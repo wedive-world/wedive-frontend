@@ -1451,6 +1451,16 @@ export default {
   },
   methods: {
     setCenterData: function(_data) {
+      this.centerData = JSON.parse(JSON.stringify(blankCenterData));
+      this.backgroundItems = [];
+      this.youtubeItems = [];
+      this.referenceItems = [];
+      this.wedivesCommentItems = [];
+      this.openingItems = [];
+      this.ticketsItems = [];
+      this.rentalsItems = [];
+
+
       for (var key in this.centerData) {
         if (_data[key]) {
           if (key == 'backgroundImages') {
@@ -1644,12 +1654,12 @@ export default {
       {
         _centerData.tickets = [];
         for (var i=0; i<this.ticketsItems.length; i++) {
-          if (this.ticketsItems[i].hasOwnProperty("_id") == false) {
+          //if (this.ticketsItems[i].hasOwnProperty("_id") == false) {
             // add new ticket product
             this.ticketsItems[i].price = parseInt(this.ticketsItems[i].price);
             var result = await upsertProduct(this.ticketsItems[i]);
             _centerData.tickets.push(result.upsertProduct._id);
-          }
+          //}
         }
       }
 
@@ -1657,12 +1667,12 @@ export default {
       {
         _centerData.rentals = [];
         for (var i=0; i<this.rentalsItems.length; i++) {
-          if (this.rentalsItems[i].hasOwnProperty("_id") == false) {
+          //if (this.rentalsItems[i].hasOwnProperty("_id") == false) {
             // add new ticket product
             this.rentalsItems[i].price = parseInt(this.rentalsItems[i].price);
             var result = await upsertProduct(this.rentalsItems[i]);
             _centerData.rentals.push(result.upsertProduct._id);
-          }
+          //}
         }
       }
 

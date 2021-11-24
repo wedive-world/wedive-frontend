@@ -15,7 +15,7 @@
       <!-- Header -->
       <div class="d-flex justify-content-between align-items-center content-sidebar-header px-2 py-1">
         <h5 class="mb-0">
-          Add New Point
+          Add point
         </h5>
 
         <feather-icon
@@ -458,7 +458,7 @@
                     icon="PlusIcon"
                     class="mr-25"
                 />
-                <span>Add New Background Image</span>
+                <span>Add background image</span>
               </b-button>
               <b-form-invalid-feedback>
                 {{ validationContext.errors[0] }}
@@ -488,9 +488,9 @@
                     >
                     <b-form-input
                         :id="'highlightName' + index"
-                        v-model="pointData.highlightNames[index]"
+                        v-model="item.name"
                         autofocus
-                        placeholder="문섭 하이라이트1"
+                        placeholder="문섬 하이라이트1"
                     />
                     
                     </b-form-group>
@@ -520,7 +520,7 @@
                     >
                     <b-form-input
                         :id="'highlightContent' + index"
-                        v-model="pointData.highlightContents[index]"
+                        v-model="item.description"
                         autofocus
                         placeholder="국내 최대규모의 연산호 군락지, 유네스코 생물권 보호지역"
                     />
@@ -539,8 +539,8 @@
                         >
                         <!-- Row Loop -->
                         <b-row
-                            v-for="(item, index2) in highlightImageItems[index]"
-                            :id="item.id"
+                            v-for="(item2, index2) in item.images"
+                            :id="item2.id"
                             :key="'rowHighItem'+index2"
                             ref="row2"
                             >
@@ -553,7 +553,7 @@
                                 >
                                 <b-form-file
                                     :id="'highlightImagesFile' + index + '_' + index2"
-                                    v-model="highlightImagesFile[index][index2]"
+                                    v-model="item2.file"
                                     placeholder="Choose or drop"
                                     drop-placeholder="Drop here"
                                     accept=".jpg,.jpeg,.png"
@@ -569,7 +569,7 @@
                                 >
                                 <b-form-input
                                     :id="'highlightImagesRef' + index +'_' + index2"
-                                    v-model="highlightImagesRef[index][index2]"
+                                    v-model="item2.reference"
                                     type="text"
                                     placeholder=""
                                 />
@@ -584,7 +584,7 @@
                                 >
                                 <b-form-input
                                     :id="'highlightImagesName' + index +'_' + index2"
-                                    v-model="highlightImagesName[index][index2]"
+                                    v-model="item2.description"
                                     type="text"
                                     placeholder=""
                                 />
@@ -622,7 +622,7 @@
                                 icon="PlusIcon"
                                 class="mr-25"
                             />
-                            <span>Add New Highlight Image</span>
+                            <span>Add highlight image</span>
                         </b-button>
                         <b-form-invalid-feedback>
                             {{ validationContext.errors[0] }}
@@ -640,7 +640,7 @@
                     icon="PlusIcon"
                     class="mr-25"
                 />
-                <span>Add New Highlight</span>
+                <span>Add highlight</span>
               </b-button>
             </div>
           </div>
@@ -790,7 +790,7 @@
                     icon="PlusIcon"
                     class="mr-25"
                 />
-                <span>Add New Point Image</span>
+                <span>Add point image</span>
               </b-button>
               <b-form-invalid-feedback>
                 {{ validationContext.errors[0] }}
@@ -862,7 +862,7 @@
                     icon="PlusIcon"
                     class="mr-25"
                 />
-                <span>Add New Youtube Video</span>
+                <span>Add youtube video</span>
               </b-button>
               <b-form-invalid-feedback>
                 {{ validationContext.errors[0] }}
@@ -934,7 +934,7 @@
                     icon="PlusIcon"
                     class="mr-25"
                 />
-                <span>Add New Reference URL</span>
+                <span>Add reference URL</span>
               </b-button>
               <b-form-invalid-feedback>
                 {{ validationContext.errors[0] }}
@@ -1007,7 +1007,7 @@ import vSelect from 'vue-select'
 import store from '@/store'
 const { upsertDivePoint } = require('@/wedive-frontend-graphql/dive-point-service')
 const { uploadSingleImage, updateImage, getImageUrl } = require('@/wedive-frontend-graphql/image-service')
-const { upsertHighlight } = require('@/wedive-frontend-graphql/highlight-service')
+const { upsertHighlight, deleteHighlightById } = require('@/wedive-frontend-graphql/highlight-service')
 
 const blankPointData = {
   _id: null,
@@ -1050,8 +1050,6 @@ const blankPointData = {
   scubaIndex: '',
   seaTemperature: '',
   highlights: [],
-  highlightContents: [],
-  highlightNames: [],
 };
 
 export default {
@@ -1109,15 +1107,9 @@ export default {
       seaTempOptions: ['강릉 (강원도)/kang-neung', '속초 (강원도)/sogcho', '동해 (강원도)/tonghae', '인천/incheon', '고양 (왜있지)/goyang', '안산 (경기도)/ansan', '화성 (경기도)/hwaseong', '포항/hoko', '울산/ulsan', '부산/busan', '진해 (창원)/chinhae', '마산/masan', '거제/kyosai', '여수/reisui', '순천/sunchun', '군산 (전라북도)/kunsan', '목포 (전라남도)/moppo', '신안 (전라남도)/sinan', '태안 (충청남도)/taesal-li', '제주-어영(북서부)/gaigeturi', '제주-제주시(북부)/jeju'],
       backgroundItems: [],
       highlightItems: [],
-      highlightImageItems: [],
-      highlightImagesFile: [],
-      highlightImagesRef: [],
-      highlightImagesName: [],
       imageItems: [],
       youtubeItems: [],
       referenceItems: [],
-      nextHighlightId: 1,
-      nextHighlightImageId: 1,
       siteSelected: [],
       interestSelectedTotal: [],
       interestSelected: [[],[],[],[],[],[],[],[],[],[],[],[],[]],
@@ -1155,6 +1147,13 @@ export default {
   },
   methods: {
     setPointData: function(_data) {
+      this.pointData = JSON.parse(JSON.stringify(blankPointData));
+      this.backgroundItems = [];
+      this.highlightItems = [];
+      this.imageItems = [];
+      this.youtubeItems = [];
+      this.referenceItems = [];
+
       for (var key in this.pointData) {
         if (_data[key]) {
           if (key == 'backgroundImages') {
@@ -1169,30 +1168,7 @@ export default {
             this.pointData[key] = _data[key];
           } else if (key == 'highlights') {
             _data[key].forEach(highlight=>{
-              this.highlightItems.push({
-                id: this.nextHighlightId += this.nextHighlightId,
-              })
-              
-              this.highlightImagesFile.push([]);
-              this.highlightImagesRef.push([]);
-              this.highlightImagesName.push([]);
-              this.highlightImageItems.push([]);
-              const _idx = this.highlightImagesFile.length - 1;
-              if (_data.highlights.images) {
-                _data.highlights.images.forEach(image=>{
-                  this.highlightImageItems.push({
-                    id: image._id
-                  })
-                  this.nextHighlightImageId += this.nextHighlightImageId
-
-                  this.highlightImagesFile[_idx].push(new File([""], (image.name == null) ? '' : image.name));
-                  this.highlightImagesRef[_idx].push((image.reference == null) ? '' : image.reference);
-                  this.highlightImagesName[_idx].push((image.description == null) ? '' : image.description);
-                });
-              }
-              
-              this.pointData.highlightContents.push(highlight.description);
-              this.pointData.highlightNames.push(highlight.name);
+              this.highlightItems.push(highlight);
             });
             this.pointData[key] = _data[key];
           } else {
@@ -1246,46 +1222,28 @@ export default {
 
     
     highlightRepeateAgain() {
-      this.highlightItems.push({
-        id: this.nextHighlightId += this.nextHighlightId,
-      })
-
-      this.highlightImagesFile.push([]);
-      this.highlightImagesRef.push([]);
-      this.highlightImagesName.push([]);
-      this.highlightImageItems.push([]);
+      this.highlightItems.push({name: "", description: "", images: []});
     },
-    highlightRemoveItem(index) {
-      this.highlightImagesFile.splice(index, 1);
-      this.highlightImagesRef.splice(index, 1);
-      this.highlightImagesName.splice(index, 1);
+    async highlightRemoveItem(index) {
+      var id = this.highlightItems[index]._id;
+      if (id != null) {
+        var result = await deleteHighlightById(id);
+      }
       this.highlightItems.splice(index, 1);
     },
 
 
     highlightImageRepeateAgain(index) {
-      this.highlightImageItems[index].push({
-        id: this.nextHighlightImageId += this.nextHighlightImageId,
-      });
+      this.highlightItems[index].images.push({reference: "", description: "", file: null});
     },
-    highlightImageRemoveItem(index, index2) {
-      var _id = this.highlightImageItems[index][index2].id;
-      this.highlightImageItems[index].splice(index2, 1);
-
-      if (_id.length > 20) {
-        this.highlightImagesFile[index].splice(index2, 1);
-        this.highlightImagesRef[index].splice(index2, 1);
-        this.highlightImagesName[index].splice(index2, 1);
-        try {
-          for (var i=0; i<this.pointData.highlights.images.length; i++) {
-            if (this.pointData.highlights.images[i]._id == _id) {
-              this.pointData.highlights.images.splice(i, 1);
-            }
-          }
-        } catch (e) {console.log(e)};
+    async highlightImageRemoveItem(index, index2) {
+      var id = this.highlightItems[index].images[index2]._id;
+      if (id != null) {
+        // jjangs 여기 구현 필요
+        //var result = await deleteImageById(id);
+        //console.log(result);
       }
-
-      
+      var id = this.highlightItems[index].images.splice(index2, 1);      
     },
 
     imageRepeateAgain() {
@@ -1347,65 +1305,33 @@ export default {
 
       // 하이라이트
       {
-        var _id_highlight_list = [];
-        var _id_highlight_image_list = [];
-
-        for (var k=0; k<_pointData.highlightNames.length; k++) {
-          // 하이라이트 이미지
-          {
-            // upload highlight image
-            _id_highlight_image_list.push([]);
-            for (var i=0; i<this.highlightImagesFile[k].length; i++) {
-              var image = this.highlightImagesFile[k][i];
-              var _id = null;
-              if (_pointData.highlights[k] != null && _pointData.highlights[k].images != null && _pointData.highlights[k].images[i] != null) _id = _pointData.highlights[k].images[i]._id;
-              if (_id == null) {
-                var result = await uploadSingleImage(image);
-                _id = result.uploadImage._id;
-                //_pointData.highlights[k].push(_id);
-                _id_highlight_image_list[k].push(_id);
-              } else {
-                _id_highlight_image_list[k].push(_id);
-              }
-              await updateImage({_id: _id, reference: this.highlightImagesRef[k][i], name: image.name, description: this.highlightImagesName[k][i], uploaderId: 'apneaofficer'})
+        _pointData.highlights = [];
+        for (var i=0; i<this.highlightItems.length; i++) {
+          var highlight_id_list = [];
+          for (var j=0; j<this.highlightItems[i].images.length; j++) {
+            if (this.highlightItems[i].images[j].file != null) {
+              var result = await uploadSingleImage(this.highlightItems[i].images[j].file);
+              this.highlightItems[i].images[j]._id = result.uploadImage._id;
+              this.highlightItems[i].images[j].name = this.highlightItems[i].images[j].file.name;
             }
-
-            if (_pointData.highlights[k] != null) {
-              if (_pointData.highlights[k].hasOwnProperty("_id")) {
-                var _id = _pointData.highlights[k]._id;
-                _id_highlight_list.push(_id);
-              }
-            }
+            delete this.highlightItems[i].images[j].file;
+            this.highlightItems[i].images[j].uploaderId = 'apneaofficer';
+            var result2 = await updateImage(this.highlightItems[i].images[j]);
+            highlight_id_list.push(result2.updateImage._id);
           }
-        }
-        delete _pointData.highlights;
-        _pointData.highlights = _id_highlight_list;
-        
-        for (var k=0; k<_pointData.highlightNames.length; k++) {
-          // 실제 하이라이트 입력
-          {
-            var _highlightData = (_pointData.highlights[k] != null) ? {name: _pointData.highlightNames[k], description: _pointData.highlightContents[k], images: _id_highlight_image_list[k], _id: _pointData.highlights[k]} : {name: _pointData.highlightNames[k], description: _pointData.highlightContents[k], images: _id_highlight_image_list[k]};
-            try {
-              var result = await upsertHighlight(_highlightData);
-              var _id = result.upsertHighlight._id;
-              console.log("_id = " + _id);
-              _pointData.highlights.push(_id);
-            } catch(e) {
-              this.$swal({
-                title: 'Error!',
-                text: e,
-                icon: 'error',
-                customClass: {
-                  confirmButton: 'btn btn-primary',
-                },
-                buttonsStyling: false,
-              })
-            }
+          // delete images
+          delete this.highlightItems[i].images;
+          this.highlightItems[i].images = [];
+          for (var j=0; j<highlight_id_list.length; j++) {
+            this.highlightItems[i].images.push(highlight_id_list[j]);
           }
+          // add highlight
+          var result = await upsertHighlight(this.highlightItems[i]);
+          _pointData.highlights.push(result.upsertHighlight._id);
         }
-        delete _pointData.highlightNames;
-        delete _pointData.highlightContents;
       }
+
+      
 
       // 백그라운드 이미지
       {

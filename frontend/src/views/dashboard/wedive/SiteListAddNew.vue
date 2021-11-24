@@ -900,6 +900,12 @@ export default {
   },
   methods: {
     setSiteData: function(_data) {
+      this.siteData = JSON.parse(JSON.stringify(blankSiteData));
+      this.backgroundItems = [];
+      this.youtubeItems = [];
+      this.referenceItems = [];
+
+
       for (var key in this.siteData) {
         if (_data[key]) {
           if (key.includes('month')) {
