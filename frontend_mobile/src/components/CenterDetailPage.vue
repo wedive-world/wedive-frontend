@@ -362,6 +362,7 @@
                             <i :class="'ico_equipt' + (rentalOptions.findIndex(x=>x==rental.name)+1) + ' icon-equiptment'"></i>
                             <p class="span_feature text-center mb-0">{{ rental.name }}</p>
                             <p v-if="rental.price==0" class="span_feature text-center mb-0 color-gray mt-n1">무료</p>
+                            <p v-else-if="rental.unitName==''" class="span_feature text-center mb-0 color-gray mt-n1">{{ rental.price | makeComma }}</p>
                             <p v-else class="span_feature text-center mb-0 color-gray mt-n1">{{ rental.price | makeComma }}/{{ rental.unitName}}</p>
                         </div>
 

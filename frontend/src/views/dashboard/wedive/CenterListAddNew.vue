@@ -148,7 +148,7 @@
                 v-model="centerData.institutionTypes"
                 :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
                 :options="institutionOptions"
-                :clearable="false"
+                multiple
                 input-id="institutionTypes"
               />
               <b-form-invalid-feedback :state="getValidationState(validationContext)">
@@ -1339,6 +1339,7 @@ const blankCenterData = {
   webPageUrl: '',
   tickets: [],
   rentals: [],
+  institutionTypes: [],
   
   scubaIndex: '',
   seaTemperature: '',
@@ -1399,7 +1400,7 @@ export default {
       seaTempOptions: ['강릉 (강원도)/kang-neung', '속초 (강원도)/sogcho', '동해 (강원도)/tonghae', '인천/incheon', '고양 (왜있지)/goyang', '안산 (경기도)/ansan', '화성 (경기도)/hwaseong', '포항/hoko', '울산/ulsan', '부산/busan', '진해 (창원)/chinhae', '마산/masan', '거제/kyosai', '여수/reisui', '순천/sunchun', '군산 (전라북도)/kunsan', '목포 (전라남도)/moppo', '신안 (전라남도)/sinan', '태안 (충청남도)/taesal-li', '제주-어영(북서부)/gaigeturi', '제주-제주시(북부)/jeju'],
       scubaEnterenceOptions: ["1", "2", "3", "4", "5"],
       freeEnterenceOptions: ["1", "2", "3", "4", "5"],
-      openingHoursOptions: ["1부", "2부", "3부", "4부", "5부", "매일", "평일", "주말", "월-토", "일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "공휴일", "휴게시간"],
+      openingHoursOptions: ["1부", "2부", "3부", "4부", "5부", "매일", "평일", "주말", "월-토", "일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "공휴일", "휴게시간", "휴무일"],
       institutionOptions: ["AIDA", "CMAS", "PADI", "SSI", "AA", "KF", "UTA", "RAID", "SNSI", "MOLCHANOVA", "AFIA"],
       rentalOptions: ["스킨스쿠버 세트", "스킨 세트", "마스크", "스노클", "잠수복", "오리발(핀)", "부츠", "장갑", "부츠&장갑", "웨이트&벨트", "웨이트", "스쿠버 세트", "부력조절기", "레귤레이터", "보조호흡기", "SMB", "공기통", "나이트록스", "라이트", "다이브컴퓨터", "카메라", "DPV", "조류걸이", "프리 세트", "프리 핀", "프리 마스크", "프리 스노클", "프리 잠수복", "프리 웨이트&벨트", "프리 웨이트", "바텀웨이트", "랜야드", "부이", "로프", "부이&로프", "고정부이"],
       backgroundItems: [],
@@ -1460,7 +1461,7 @@ export default {
       this.ticketsItems = [];
       this.rentalsItems = [];
 
-
+      console.log(_data);
       for (var key in this.centerData) {
         if (_data[key]) {
           if (key == 'backgroundImages') {
@@ -1479,7 +1480,16 @@ export default {
                 this.rentalsItems.push(rental);
               });
             }
-          }else {
+          } else if (key == 'institutionTypes') {
+            console.log(_data[key]);
+            if (_data[key]) {
+              this.centerData[key] = [];
+              _data[key].map(type=>{
+                this.centerData[key].push(type)
+              });
+              
+            }
+          } else {
             this.centerData[key] = _data[key];
           }
         }
