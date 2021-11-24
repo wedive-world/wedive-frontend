@@ -544,6 +544,49 @@
                             <i class="ico_equipt26 icon-equiptment"></i>
                             <p class="span_feature text-center">로프</p>
                         </div>
+
+
+                        <div class="ico_equipt col-3">
+                            <i class="ico_equipt27 icon-equiptment"></i>
+                            <p class="span_feature text-center">프리 벨트</p>
+                        </div>
+                        <div class="ico_equipt col-3">
+                            <i class="ico_equipt28 icon-equiptment"></i>
+                            <p class="span_feature text-center">랜야드</p>
+                        </div>
+                        <div class="ico_equipt col-3">
+                            <i class="ico_equipt29 icon-equiptment"></i>
+                            <p class="span_feature text-center">부이</p>
+                        </div>
+                        <div class="ico_equipt col-3">
+                            <i class="ico_equipt30 icon-equiptment"></i>
+                            <p class="span_feature text-center">로프</p>
+                        </div>
+
+                        <div class="ico_equipt col-3">
+                            <i class="ico_equipt31 icon-equiptment"></i>
+                            <p class="span_feature text-center">프리 벨트</p>
+                        </div>
+                        <div class="ico_equipt col-3">
+                            <i class="ico_equipt32 icon-equiptment"></i>
+                            <p class="span_feature text-center">랜야드</p>
+                        </div>
+                        <div class="ico_equipt col-3">
+                            <i class="ico_equipt33 icon-equiptment"></i>
+                            <p class="span_feature text-center">부이</p>
+                        </div>
+                        <div class="ico_equipt col-3">
+                            <i class="ico_equipt34 icon-equiptment"></i>
+                            <p class="span_feature text-center">로프</p>
+                        </div>
+                        <div class="ico_equipt col-3">
+                            <i class="ico_equipt35 icon-equiptment"></i>
+                            <p class="span_feature text-center">부이</p>
+                        </div>
+                        <div class="ico_equipt col-3">
+                            <i class="ico_equipt36 icon-equiptment"></i>
+                            <p class="span_feature text-center">로프</p>
+                        </div>
                         
                     </div>
                 </div>
@@ -1343,32 +1386,43 @@ export default {
 .icon-service {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/wedive_service2.png);background-repeat: no-repeat;-webkit-background-size: 270px 200px;background-size: 270px 200px;}
 
 .ico_equipt {}
-.ico_equipt1 {width: 60px;height: 63px;background-position: 0px 0px;}
-.ico_equipt2 {width: 60px;height: 63px;background-position: -56px 0px;}
-.ico_equipt3 {width: 60px;height: 63px;background-position: -112px 0px;}
-.ico_equipt4 {width: 60px;height: 63px;background-position: -168px 0px;}
-.ico_equipt5 {width: 60px;height: 63px;background-position: -224px 0px;}
-.ico_equipt6 {width: 60px;height: 63px;background-position: -280px 0px;}
-.ico_equipt7 {width: 60px;height: 63px;background-position: 0px -60px;}
-.ico_equipt8 {width: 60px;height: 63px;background-position: -56px -60px;}
-.ico_equipt9 {width: 60px;height: 63px;background-position: -112px -60px;}
-.ico_equipt10 {width: 60px;height: 63px;background-position: -168px -60px;}
-.ico_equipt11 {width: 60px;height: 63px;background-position: -222px -60px;}
-.ico_equipt12 {width: 60px;height: 63px;background-position: -280px -60px;}
-
-.ico_equipt13 {width: 60px;height: 63px;background-position: 0px -118px;}
-.ico_equipt14 {width: 60px;height: 63px;background-position: -56px -118px;}
-.ico_equipt15 {width: 60px;height: 63px;background-position: -112px -118px;}
-.ico_equipt16 {width: 60px;height: 63px;background-position: -168px -118px;}
-.ico_equipt17 {width: 60px;height: 63px;background-position: -224px -118px;}
-.ico_equipt18 {width: 60px;height: 63px;background-position: -280px -118px;}
-.ico_equipt19 {width: 60px;height: 63px;background-position: 0px -176px;}
-.ico_equipt20 {width: 60px;height: 63px;background-position: -56px -176px;}
-.ico_equipt21 {width: 60px;height: 63px;background-position: -112px -176px;}
-.ico_equipt22 {width: 60px;height: 63px;background-position: -168px -176px;}
-.ico_equipt23 {width: 60px;height: 63px;background-position: -224px -176px;}
-.ico_equipt24 {width: 60px;height: 63px;background-position: -280px -176px;}
-.icon-equiptment {overflow: hidden;display: block;margin-left: 3px;background-image: url(/static/images/wedive_equiptment2.png);background-repeat: no-repeat;-webkit-background-size: 335px 290px;background-size: 335px 290px;}
+.ico_equipt1 {width: 60px;height: 63px;background-position: 0px 3px;}
+.ico_equipt2 {width: 60px;height: 63px;background-position: -56px 3px;}
+.ico_equipt3 {width: 60px;height: 63px;background-position: -112px 3px;}
+.ico_equipt4 {width: 60px;height: 63px;background-position: -168px 3px;}
+.ico_equipt5 {width: 60px;height: 63px;background-position: -224px 3px;}
+.ico_equipt6 {width: 60px;height: 63px;background-position: -280px 3px;}
+.ico_equipt7 {width: 60px;height: 63px;background-position: 0px -54px;}
+.ico_equipt8 {width: 60px;height: 63px;background-position: -56px -54px;}
+.ico_equipt9 {width: 60px;height: 63px;background-position: -112px -54px;}
+.ico_equipt10 {width: 60px;height: 63px;background-position: -168px -54px;}
+.ico_equipt11 {width: 60px;height: 63px;background-position: -222px -56px;}
+.ico_equipt12 {width: 60px;height: 63px;background-position: -280px -54px;}
+.ico_equipt13 {width: 60px;height: 63px;background-position: 0px -110px;}
+.ico_equipt14 {width: 60px;height: 63px;background-position: -56px -110px;}
+.ico_equipt15 {width: 60px;height: 63px;background-position: -112px -110px;}
+.ico_equipt16 {width: 60px;height: 63px;background-position: -168px -110px;}
+.ico_equipt17 {width: 60px;height: 63px;background-position: -224px -110px;}
+.ico_equipt18 {width: 60px;height: 63px;background-position: -280px -110px;}
+.ico_equipt19 {width: 60px;height: 63px;background-position: 0px -168px;}
+.ico_equipt20 {width: 60px;height: 63px;background-position: -56px -170px;}
+.ico_equipt21 {width: 60px;height: 63px;background-position: -112px -168px;}
+.ico_equipt22 {width: 60px;height: 63px;background-position: -168px -168px;}
+.ico_equipt23 {width: 60px;height: 63px;background-position: -224px -168px;}
+.ico_equipt24 {width: 60px;height: 63px;background-position: -280px -168px;}
+.ico_equipt25 {width: 60px;height: 63px;background-position: 0px -224px;}
+.ico_equipt26 {width: 60px;height: 63px;background-position: -56px -224px;}
+.ico_equipt27 {width: 60px;height: 63px;background-position: -112px -224px;}
+.ico_equipt28 {width: 60px;height: 63px;background-position: -168px -224px;}
+.ico_equipt29 {width: 60px;height: 63px;background-position: -224px -224px;}
+.ico_equipt30 {width: 60px;height: 63px;background-position: -280px -224px;}
+.ico_equipt31 {width: 60px;height: 63px;background-position: 0px -280px;}
+.ico_equipt32 {width: 60px;height: 63px;background-position: -58px -280px;}
+.ico_equipt33 {width: 60px;height: 63px;background-position: -112px -280px;}
+.ico_equipt34 {width: 60px;height: 63px;background-position: -168px -280px;}
+.ico_equipt35 {width: 60px;height: 63px;background-position: -224px -280px;}
+.ico_equipt36 {width: 60px;height: 63px;background-position: -280px -280px;}
+.icon-equiptment {overflow: hidden;display: block;margin-left: 3px;background-image: url(/static/images/assets/wedive_equiptment2.png);background-repeat: no-repeat;-webkit-background-size: 335px 350px;background-size: 335px 350px;}
 
 .wedive-ul {width: 100%;list-style:none;display: inline-block;margin-bottom: 0;padding-left: 5px !important;padding-right: 5px !important;}
 .wedive-ul > li {float: left;width: 50%;}
