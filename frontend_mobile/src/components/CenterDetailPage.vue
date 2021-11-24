@@ -346,9 +346,12 @@
                 </div>
                 <div data-bs-parent="#tab-group-2" class="collapse px-2" id="tab-time">
                     <div class="mt-3" v-if="centerData.openingHours && centerData.openingHours.length > 0">
-                        <div v-for="opening in centerData.openingHours" class="row mb-0">
-                            <h5 class="col-6 text-start font-13 font-400">{{ opening[0] }}</h5>
-                            <p class="col-6 mb-2 text-end">{{ opening[1] }}</p>
+                        <div v-for="opening in centerData.openingHours" class="row mb-0" style="position: relative;">
+                            <div v-if="opening[0].includes('>')" class="timeline-deco" style="padding: 0;left: 16px;"></div>
+                            <hr v-if="opening[0].includes('>')" class="hori-line">
+                            <h5 v-if="opening[0].includes('>')" class="col-6 text-start font-13 font-400 mb-0" style="width: calc(50% - 26px);">{{ opening[0].replace('>','') }}</h5>
+                            <h5 v-else class="col-6 text-start font-13 font-400 mb-0">{{ opening[0] }}</h5>
+                            <p class="col-6 mb-1 text-end">{{ opening[1] }}</p>
                         </div>
                     </div>
                     <div class="mt-3" v-else>
@@ -1438,4 +1441,5 @@ export default {
 .square-rect > img {position: absolute;width: 100%;height: 100%;left: 0;padding:4px;object-fit: cover;}
 .wedive-comment-number {float: left;position: relative;width: 20px;}
 .wedive-comment-desc {padding-left: 30px;}
+.hori-line {border: 1px solid silver;width: 10px;padding: 0;margin-left: 16px;margin-top: 10px;}
 </style>
