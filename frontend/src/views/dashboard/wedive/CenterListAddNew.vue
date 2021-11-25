@@ -458,62 +458,65 @@
           >
             <b-form-group
             >
-              <!-- Row Loop -->
-              <b-row
-                v-for="(item, index) in ticketsItems"
-                :id="'tickets'+index"
-                :key="'tickets'+index"
-                ref="ticketsRow"
-                >
+              <draggable :list="ticketsItems" group="ticketsItems" @start="drag=true" @end="drag=false">
+                <div v-for="(item, index) in ticketsItems" style="cursor: move" :key="index">
+                  <!-- Row Loop -->
+                  <b-row
+                    :id="'tickets'+index"
+                    :key="'tickets'+index"
+                    ref="ticketsRow"
+                    >
 
-                <b-col md="4" class="pr-0">
-                  <b-form-group
-                    label="구분 (단위)"
-                    :label-for="'tickets_unitName_'+index"
-                    >
-                    <b-form-input
-                        :id="'tickets_unitName_'+index"
-                        type="text"
-                        v-model="item.unitName"
-                        placeholder="주말 (스쿠버)"
-                    />
-                  </b-form-group>
-                </b-col>
-                <!-- 가격 -->
-                <b-col md="7" class="pr-0">
-                    <b-form-group
-                    label="가격"
-                    :label-for="'tickets_price_'+index"
-                    >
-                    <b-form-input
-                        :id="'tickets_price_'+index"
-                        type="number"
-                        v-model="item.price"
-                        placeholder="20000"
-                    />
-                    </b-form-group>
-                </b-col>
+                    <b-col md="4" class="pr-0">
+                      <b-form-group
+                        label="구분 (단위)"
+                        :label-for="'tickets_unitName_'+index"
+                        >
+                        <b-form-input
+                            :id="'tickets_unitName_'+index"
+                            type="text"
+                            v-model="item.unitName"
+                            placeholder="주말 (스쿠버)"
+                        />
+                      </b-form-group>
+                    </b-col>
+                    <!-- 가격 -->
+                    <b-col md="7" class="pr-0">
+                        <b-form-group
+                        label="가격"
+                        :label-for="'tickets_price_'+index"
+                        >
+                        <b-form-input
+                            :id="'tickets_price_'+index"
+                            type="number"
+                            v-model="item.price"
+                            placeholder="20000"
+                        />
+                        </b-form-group>
+                    </b-col>
 
-                <!-- Remove Button -->
-                <b-col
-                    md="1"
-                    class="mb-50"
-                >
-                    <b-button
-                    variant="flat-danger"
-                    class="mt-0 mt-md-2 pl-0 pr-0"
-                    @click="ticketsRemoveItem(index)"
+                    <!-- Remove Button -->
+                    <b-col
+                        md="1"
+                        class="mb-50"
                     >
-                    <feather-icon
-                        icon="XIcon"
-                        class="mr-25"
-                    />
-                    </b-button>
-                </b-col>
-                <b-col cols="12">
-                    <hr class="mt-0" style="border-top: 1px dashed #ebe9f1 !important;">
-                </b-col>
-              </b-row>
+                        <b-button
+                        variant="flat-danger"
+                        class="mt-0 mt-md-2 pl-0 pr-0"
+                        @click="ticketsRemoveItem(index)"
+                        >
+                        <feather-icon
+                            icon="XIcon"
+                            class="mr-25"
+                        />
+                        </b-button>
+                    </b-col>
+                    <b-col cols="12">
+                        <hr class="mt-0" style="border-top: 1px dashed #ebe9f1 !important;">
+                    </b-col>
+                  </b-row>
+                </div>
+              </draggable>
               <b-button
                 v-ripple.400="'rgba(255, 255, 255, 0.15)'"
                 variant="flat-primary"
@@ -540,78 +543,81 @@
           >
             <b-form-group
             >
-              <!-- Row Loop -->
-              <b-row
-                v-for="(item, index) in rentalsItems"
-                :id="'rentals'+index"
-                :key="'rentals'+index"
-                ref="rentalsRow"
-                >
+              <draggable :list="rentalsItems" group="rentalsItems" @start="drag=true" @end="drag=false">
+                <div v-for="(item, index) in rentalsItems" style="cursor: move" :key="index">
+                  <!-- Row Loop -->
+                  <b-row
+                    :id="'rentals'+index"
+                    :key="'rentals'+index"
+                    ref="rentalsRow"
+                    >
 
-                <b-col md="4" class="pr-0">
-                  <b-form-group
-                    label="물품명"
-                    :label-for="'rentals_name_'+index"
-                    >
-                  <v-select
-                    :id="'rentals_name_'+index"
-                    v-model="item.name"
-                    :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
-                    :options="rentalOptions"
-                    :clearable="false"
-                    input-id="rentalOption"
-                  />
-                  </b-form-group>
-                </b-col>
-                <!-- 구분 (단위) -->
-                <b-col md="3" class="pr-0">
-                  <b-form-group
-                    label="구분 (단위)"
-                    :label-for="'rentals_unitName_'+index"
-                    >
-                    <b-form-input
-                        :id="'rentals_unitName_'+index"
-                        type="text"
-                        v-model="item.unitName"
-                        placeholder="1시간"
-                    />
-                  </b-form-group>
-                </b-col>
-                <!-- 가격 -->
-                <b-col md="4" class="pr-0">
-                    <b-form-group
-                    label="가격"
-                    :label-for="'rentals_price_'+index"
-                    >
-                    <b-form-input
-                        :id="'rentals_price_'+index"
-                        type="number"
-                        v-model="item.price"
-                        placeholder="20000"
-                    />
-                    </b-form-group>
-                </b-col>
+                    <b-col md="4" class="pr-0">
+                      <b-form-group
+                        label="물품명"
+                        :label-for="'rentals_name_'+index"
+                        >
+                      <v-select
+                        :id="'rentals_name_'+index"
+                        v-model="item.name"
+                        :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
+                        :options="rentalOptions"
+                        :clearable="false"
+                        input-id="rentalOption"
+                      />
+                      </b-form-group>
+                    </b-col>
+                    <!-- 구분 (단위) -->
+                    <b-col md="3" class="pr-0">
+                      <b-form-group
+                        label="구분 (단위)"
+                        :label-for="'rentals_unitName_'+index"
+                        >
+                        <b-form-input
+                            :id="'rentals_unitName_'+index"
+                            type="text"
+                            v-model="item.unitName"
+                            placeholder="1시간"
+                        />
+                      </b-form-group>
+                    </b-col>
+                    <!-- 가격 -->
+                    <b-col md="4" class="pr-0">
+                        <b-form-group
+                        label="가격"
+                        :label-for="'rentals_price_'+index"
+                        >
+                        <b-form-input
+                            :id="'rentals_price_'+index"
+                            type="number"
+                            v-model="item.price"
+                            placeholder="20000"
+                        />
+                        </b-form-group>
+                    </b-col>
 
-                <!-- Remove Button -->
-                <b-col
-                    md="1"
-                    class="mb-50"
-                >
-                    <b-button
-                    variant="flat-danger"
-                    class="mt-0 mt-md-2 pl-0 pr-0"
-                    @click="rentalsRemoveItem(index)"
+                    <!-- Remove Button -->
+                    <b-col
+                        md="1"
+                        class="mb-50"
                     >
-                    <feather-icon
-                        icon="XIcon"
-                        class="mr-25"
-                    />
-                    </b-button>
-                </b-col>
-                <b-col cols="12">
-                    <hr class="mt-0" style="border-top: 1px dashed #ebe9f1 !important;">
-                </b-col>
-              </b-row>
+                        <b-button
+                        variant="flat-danger"
+                        class="mt-0 mt-md-2 pl-0 pr-0"
+                        @click="rentalsRemoveItem(index)"
+                        >
+                        <feather-icon
+                            icon="XIcon"
+                            class="mr-25"
+                        />
+                        </b-button>
+                    </b-col>
+                    <b-col cols="12">
+                        <hr class="mt-0" style="border-top: 1px dashed #ebe9f1 !important;">
+                    </b-col>
+                  </b-row>
+                </div>
+              </draggable>
               <b-button
                 v-ripple.400="'rgba(255, 255, 255, 0.15)'"
                 variant="flat-primary"
@@ -636,65 +642,68 @@
             name="openingHours"
             rules="required"
           >
+          
             <b-form-group
             >
-              <!-- Row Loop -->
-              <b-row
-                v-for="(item, index) in openingItems"
-                :id="'openingHours'+index"
-                :key="'openingHours'+index"
-                ref="openingHoursRow"
-                >
+              <draggable :list="openingItems" group="openingItems" @start="drag=true" @end="drag=false">
+                <div v-for="(item, index) in openingItems" style="cursor: move" :key="index">
+                <!-- Row Loop -->
+                <b-row
+                  :id="'openingHours'+index"
+                  :key="'openingHours'+index"
+                  >
 
-                <b-col md="4" class="pr-0">
-                  <b-form-group
-                    label="구분"
-                    :label-for="'openingHours_index_'+index"
-                    >
-                    <v-select
-                      :id="'openingHours_index_'+index"
-                      v-model="openingHoursIndex[index]"
-                      :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
-                      :options="openingHoursOptions"
-                      :clearable="false"
-                    />
-                  </b-form-group>
-                </b-col>
-                <!-- 영업시간 -->
-                <b-col md="7" class="pr-0">
+                  <b-col md="4" class="pr-0">
                     <b-form-group
-                    label="내용"
-                    :label-for="'openingHours_content_'+index"
-                    >
-                    <b-form-input
-                        :id="'openingHours_content_'+index"
-                        type="text"
-                        v-model="openingHoursContent[index]"
-                        placeholder="10:00 - 11:00 (띠워쓰기 양식)"
-                    />
+                      label="구분"
+                      :label-for="'openingHours_index_'+index"
+                      >
+                      <v-select
+                        :id="'openingHours_index_'+index"
+                        v-model="item[0]"
+                        :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
+                        :options="openingHoursOptions"
+                        :clearable="false"
+                      />
                     </b-form-group>
-                </b-col>
+                  </b-col>
+                  <!-- 영업시간 -->
+                  <b-col md="7" class="pr-0">
+                      <b-form-group
+                      label="내용"
+                      :label-for="'openingHours_content_'+index"
+                      >
+                      <b-form-input
+                          :id="'openingHours_content_'+index"
+                          type="text"
+                          v-model="item[1]"
+                          placeholder="10:00 - 11:00 (띠워쓰기 양식)"
+                      />
+                      </b-form-group>
+                  </b-col>
 
-                <!-- Remove Button -->
-                <b-col
-                    md="1"
-                    class="mb-50"
-                >
-                    <b-button
-                    variant="flat-danger"
-                    class="mt-0 mt-md-2 pl-0 pr-0"
-                    @click="openingHourRemoveItem(index)"
-                    >
-                    <feather-icon
-                        icon="XIcon"
-                        class="mr-25"
-                    />
-                    </b-button>
-                </b-col>
-                <b-col cols="12">
-                    <hr class="mt-0" style="border-top: 1px dashed #ebe9f1 !important;">
-                </b-col>
-              </b-row>
+                  <!-- Remove Button -->
+                  <b-col
+                      md="1"
+                      class="mb-50"
+                  >
+                      <b-button
+                      variant="flat-danger"
+                      class="mt-0 mt-md-2 pl-0 pr-0"
+                      @click="openingHourRemoveItem(index)"
+                      >
+                      <feather-icon
+                          icon="XIcon"
+                          class="mr-25"
+                      />
+                      </b-button>
+                  </b-col>
+                  <b-col cols="12">
+                      <hr class="mt-0" style="border-top: 1px dashed #ebe9f1 !important;">
+                  </b-col>
+                </b-row>
+              </div>
+              </draggable>
               <b-button
                 v-ripple.400="'rgba(255, 255, 255, 0.15)'"
                 variant="flat-primary"
@@ -772,49 +781,52 @@
           >
             <b-form-group
             >
-              <!-- Row Loop -->
-              <b-row
-                v-for="(item, index) in wedivesCommentItems"
-                :id="'wedivesCommentItems'+index"
-                :key="'wedivesCommentItems'+index"
-                ref="wedivesCommentRow"
-                >
-
-                <!-- Video ID -->
-                <b-col md="11" class="pr-0">
-                    <b-form-group
-                    label="Comment"
-                    :label-for="'wedivesComment'+index"
+              <draggable :list="wedivesCommentItems" group="wedivesCommentItems" @start="drag=true" @end="drag=false">
+                <div v-for="(item, index) in wedivesCommentItems" style="cursor: move" :key="index">
+                  <!-- Row Loop -->
+                  <b-row
+                    :id="'wedivesCommentItems'+index"
+                    :key="'wedivesCommentItems'+index"
+                    ref="wedivesCommentRow"
                     >
-                    <b-form-input
-                        :id="'wedivesComment'+index"
-                        type="text"
-                        v-model="centerData.wediveComments[index]"
-                        placeholder="대한민국에서 가장 수중환경이 뛰어난 제주 남부 다이빙 사이트 근처에 있습니다."
-                    />
-                    </b-form-group>
-                </b-col>
 
-                <!-- Remove Button -->
-                <b-col
-                    md="1"
-                    class="mb-50"
-                >
-                    <b-button
-                    variant="flat-danger"
-                    class="mt-0 mt-md-2 pl-0 pr-0"
-                    @click="wedivesCommentRemoveItem(index)"
+                    <!-- Video ID -->
+                    <b-col md="11" class="pr-0">
+                        <b-form-group
+                        label="Comment"
+                        :label-for="'wedivesComment'+index"
+                        >
+                        <b-form-input
+                            :id="'wedivesComment'+index"
+                            type="text"
+                            v-model="wedivesCommentItems[index]"
+                            placeholder="대한민국에서 가장 수중환경이 뛰어난 제주 남부 다이빙 사이트 근처에 있습니다."
+                        />
+                        </b-form-group>
+                    </b-col>
+
+                    <!-- Remove Button -->
+                    <b-col
+                        md="1"
+                        class="mb-50"
                     >
-                    <feather-icon
-                        icon="XIcon"
-                        class="mr-25"
-                    />
-                    </b-button>
-                </b-col>
-                <b-col cols="12">
-                    <hr class="mt-0" style="border-top: 1px dashed #ebe9f1 !important;">
-                </b-col>
-              </b-row>
+                        <b-button
+                        variant="flat-danger"
+                        class="mt-0 mt-md-2 pl-0 pr-0"
+                        @click="wedivesCommentRemoveItem(index)"
+                        >
+                        <feather-icon
+                            icon="XIcon"
+                            class="mr-25"
+                        />
+                        </b-button>
+                    </b-col>
+                    <b-col cols="12">
+                        <hr class="mt-0" style="border-top: 1px dashed #ebe9f1 !important;">
+                    </b-col>
+                  </b-row>
+                </div>
+              </draggable>
               <b-button
                 v-ripple.400="'rgba(255, 255, 255, 0.15)'"
                 variant="flat-primary"
@@ -1005,82 +1017,85 @@
           >
             <b-form-group
             >
-              <!-- Row Loop -->
-              <b-row
-                v-for="(item, index) in backgroundItems"
-                :id="item.id"
-                :key="item.id"
-                ref="row"
-                >
-
-                <!-- File -->
-                <b-col md="4" class="pr-0">
-                    <b-form-group
-                    label="파일"
-                    :label-for="'backgroundImages' + index"
+              <draggable :list="backgroundItems" group="backgroundItems" @start="drag=true" @end="drag=false">
+                <div v-for="(item, index) in backgroundItems" style="cursor: move" :key="index">
+                  <!-- Row Loop -->
+                  <b-row
+                    :id="item.id"
+                    :key="item.id"
+                    ref="row"
                     >
-                    <b-form-file
-                        :id="'backgroundImages' + index"
-                        v-model="item.file"
-                        placeholder="Choose or drop"
-                        drop-placeholder="Drop here"
-                        accept=".jpg,.jpeg,.png"
-                    />
-                    </b-form-group>
-                </b-col>
 
-                <!-- File Reference -->
-                <b-col md="3" class="pr-0">
-                    <b-form-group
-                    label="출처"
-                    :label-for="'backgroundImagesRef'+index"
+                    <!-- File -->
+                    <b-col md="4" class="pr-0">
+                        <b-form-group
+                        label="파일"
+                        :label-for="'backgroundImages' + index"
+                        >
+                        <b-form-file
+                            :id="'backgroundImages' + index"
+                            v-model="item.file"
+                            placeholder="Choose or drop"
+                            drop-placeholder="Drop here"
+                            accept=".jpg,.jpeg,.png"
+                        />
+                        </b-form-group>
+                    </b-col>
+
+                    <!-- File Reference -->
+                    <b-col md="3" class="pr-0">
+                        <b-form-group
+                        label="출처"
+                        :label-for="'backgroundImagesRef'+index"
+                        >
+                        <b-form-input
+                            :id="'backgroundImagesRef'+index"
+                            v-model="item.reference"
+                            type="text"
+                            placeholder=""
+                        />
+                        </b-form-group>
+                    </b-col>
+
+                    <!-- File Name -->
+                    <b-col md="4" class="pr-0">
+                        <b-form-group
+                        label="이름"
+                        :label-for="'backgroundImagesName'+index"
+                        >
+                        <b-form-input
+                            :id="'backgroundImagesRef'+index"
+                            v-model="item.description"
+                            type="text"
+                            placeholder=""
+                        />
+                        </b-form-group>
+                    </b-col>
+
+                  
+
+                    <!-- Remove Button -->
+                    <b-col
+                        md="1"
+                        class="mb-50"
                     >
-                    <b-form-input
-                        :id="'backgroundImagesRef'+index"
-                        v-model="item.reference"
-                        type="text"
-                        placeholder=""
-                    />
-                    </b-form-group>
-                </b-col>
-
-                <!-- File Name -->
-                <b-col md="4" class="pr-0">
-                    <b-form-group
-                    label="이름"
-                    :label-for="'backgroundImagesName'+index"
-                    >
-                    <b-form-input
-                        :id="'backgroundImagesRef'+index"
-                        v-model="item.description"
-                        type="text"
-                        placeholder=""
-                    />
-                    </b-form-group>
-                </b-col>
-
-               
-
-                <!-- Remove Button -->
-                <b-col
-                    md="1"
-                    class="mb-50"
-                >
-                    <b-button
-                    variant="flat-danger"
-                    class="mt-0 mt-md-2 pl-0 pr-0"
-                    @click="backgroundRemoveItem(index)"
-                    >
-                    <feather-icon
-                        icon="XIcon"
-                        class="mr-25"
-                    />
-                    </b-button>
-                </b-col>
-                <b-col cols="12">
-                    <hr class="mt-0" style="border-top: 1px dashed #ebe9f1 !important;">
-                </b-col>
-              </b-row>
+                        <b-button
+                        variant="flat-danger"
+                        class="mt-0 mt-md-2 pl-0 pr-0"
+                        @click="backgroundRemoveItem(index)"
+                        >
+                        <feather-icon
+                            icon="XIcon"
+                            class="mr-25"
+                        />
+                        </b-button>
+                    </b-col>
+                    <b-col cols="12">
+                        <hr class="mt-0" style="border-top: 1px dashed #ebe9f1 !important;">
+                    </b-col>
+                  </b-row>
+                </div>
+              </draggable>
               <b-button
                 v-ripple.400="'rgba(255, 255, 255, 0.15)'"
                 variant="flat-primary"
@@ -1110,49 +1125,52 @@
           >
             <b-form-group
             >
-              <!-- Row Loop -->
-              <b-row
-                v-for="(item, index) in youtubeItems"
-                :id="'youtubeVideoIds'+index"
-                :key="'youtubeVideoIds'+index"
-                ref="youtubeRow"
-                >
-
-                <!-- Video ID -->
-                <b-col md="11" class="pr-0">
-                    <b-form-group
-                    label="유튜브 코드"
-                    :label-for="'youtubeVideoId'+index"
+              <draggable :list="youtubeItems" group="youtubeItems" @start="drag=true" @end="drag=false">
+                <div v-for="(item, index) in youtubeItems" style="cursor: move" :key="index">
+                  <!-- Row Loop -->
+                  <b-row
+                    :id="'youtubeVideoIds'+index"
+                    :key="'youtubeVideoIds'+index"
+                    ref="youtubeRow"
                     >
-                    <b-form-input
-                        :id="'youtubeVideoId'+index"
-                        type="text"
-                        v-model="centerData.youtubeVideoIds[index]"
-                        placeholder="11자리 입력"
-                    />
-                    </b-form-group>
-                </b-col>
 
-                <!-- Remove Button -->
-                <b-col
-                    md="1"
-                    class="mb-50"
-                >
-                    <b-button
-                    variant="flat-danger"
-                    class="mt-0 mt-md-2 pl-0 pr-0"
-                    @click="youtubeRemoveItem(index)"
+                    <!-- Video ID -->
+                    <b-col md="11" class="pr-0">
+                        <b-form-group
+                        label="유튜브 코드"
+                        :label-for="'youtubeVideoId'+index"
+                        >
+                        <b-form-input
+                            :id="'youtubeVideoId'+index"
+                            type="text"
+                            v-model="youtubeItems[index]"
+                            placeholder="11자리 입력"
+                        />
+                        </b-form-group>
+                    </b-col>
+
+                    <!-- Remove Button -->
+                    <b-col
+                        md="1"
+                        class="mb-50"
                     >
-                    <feather-icon
-                        icon="XIcon"
-                        class="mr-25"
-                    />
-                    </b-button>
-                </b-col>
-                <b-col cols="12">
-                    <hr class="mt-0" style="border-top: 1px dashed #ebe9f1 !important;">
-                </b-col>
-              </b-row>
+                        <b-button
+                        variant="flat-danger"
+                        class="mt-0 mt-md-2 pl-0 pr-0"
+                        @click="youtubeRemoveItem(index)"
+                        >
+                        <feather-icon
+                            icon="XIcon"
+                            class="mr-25"
+                        />
+                        </b-button>
+                    </b-col>
+                    <b-col cols="12">
+                        <hr class="mt-0" style="border-top: 1px dashed #ebe9f1 !important;">
+                    </b-col>
+                  </b-row>
+                </div>
+              </draggable>
               <b-button
                 v-ripple.400="'rgba(255, 255, 255, 0.15)'"
                 variant="flat-primary"
@@ -1182,49 +1200,52 @@
           >
             <b-form-group
             >
-              <!-- Row Loop -->
-              <b-row
-                v-for="(item, index) in referenceItems"
-                :id="'referenceItems'+index"
-                :key="'referenceItems'+index"
-                ref="referenceRow"
-                >
-
-                <!-- Video ID -->
-                <b-col md="11" class="pr-0">
-                    <b-form-group
-                    label="URL"
-                    :label-for="'referenceUrl'+index"
+              <draggable :list="referenceItems" group="referenceItems" @start="drag=true" @end="drag=false">
+                <div v-for="(item, index) in referenceItems" style="cursor: move" :key="index">
+                  <!-- Row Loop -->
+                  <b-row
+                    :id="'referenceItems'+index"
+                    :key="'referenceItems'+index"
+                    ref="referenceRow"
                     >
-                    <b-form-input
-                        :id="'referenceUrl'+index"
-                        type="text"
-                        v-model="centerData.referenceUrls[index]"
-                        placeholder="실제 사이트에는 보이지 않음"
-                    />
-                    </b-form-group>
-                </b-col>
 
-                <!-- Remove Button -->
-                <b-col
-                    md="1"
-                    class="mb-50"
-                >
-                    <b-button
-                    variant="flat-danger"
-                    class="mt-0 mt-md-2 pl-0 pr-0"
-                    @click="referenceRemoveItem(index)"
+                    <!-- Video ID -->
+                    <b-col md="11" class="pr-0">
+                        <b-form-group
+                        label="URL"
+                        :label-for="'referenceUrl'+index"
+                        >
+                        <b-form-input
+                            :id="'referenceUrl'+index"
+                            type="text"
+                            v-model="referenceItems[index]"
+                            placeholder="실제 사이트에는 보이지 않음"
+                        />
+                        </b-form-group>
+                    </b-col>
+
+                    <!-- Remove Button -->
+                    <b-col
+                        md="1"
+                        class="mb-50"
                     >
-                    <feather-icon
-                        icon="XIcon"
-                        class="mr-25"
-                    />
-                    </b-button>
-                </b-col>
-                <b-col cols="12">
-                    <hr class="mt-0" style="border-top: 1px dashed #ebe9f1 !important;">
-                </b-col>
-              </b-row>
+                        <b-button
+                        variant="flat-danger"
+                        class="mt-0 mt-md-2 pl-0 pr-0"
+                        @click="referenceRemoveItem(index)"
+                        >
+                        <feather-icon
+                            icon="XIcon"
+                            class="mr-25"
+                        />
+                        </b-button>
+                    </b-col>
+                    <b-col cols="12">
+                        <hr class="mt-0" style="border-top: 1px dashed #ebe9f1 !important;">
+                    </b-col>
+                  </b-row>
+                </div>
+              </draggable>
               <b-button
                 v-ripple.400="'rgba(255, 255, 255, 0.15)'"
                 variant="flat-primary"
@@ -1304,6 +1325,7 @@ import { required, alphaNum } from '@validations'
 import formValidation from '@core/comp-functions/forms/form-validation'
 import Ripple from 'vue-ripple-directive'
 import vSelect from 'vue-select'
+import draggable from 'vuedraggable'
 import store from '@/store'
 const { upsertDiveCenter } = require('@/wedive-frontend-graphql/dive-center-service')
 const { uploadSingleImage, updateImage, getImageUrl } = require('@/wedive-frontend-graphql/image-service')
@@ -1364,6 +1386,7 @@ export default {
     // Form Validation
     ValidationProvider,
     ValidationObserver,
+    draggable,
   },
   directives: {
     Ripple,
@@ -1392,6 +1415,7 @@ export default {
   },
   data() {
     return {
+      drag: false,
       interest_types: [],
       required,
       alphaNum,
@@ -1416,8 +1440,6 @@ export default {
       interestLanguage: [],
       interestPayment: [],
       interestSelected: [],
-      openingHoursIndex: [],
-      openingHoursContent: [],
       submitText: 'Add',
     }
   },
@@ -1487,7 +1509,30 @@ export default {
               _data[key].map(type=>{
                 this.centerData[key].push(type)
               });
-              
+            }
+          } else if (key == 'openingHours') {
+            if (_data[key]) {
+              _data[key].map(opening=>{
+                this.openingItems.push(opening);
+              });
+            }
+          } else if (key == 'youtubeVideoIds') {
+            if (_data[key]) {
+              _data[key].map(youtube=>{
+                this.youtubeItems.push(youtube);
+              });
+            }
+          } else if (key == 'referenceUrls') {
+            if (_data[key]) {
+              _data[key].map(reference=>{
+                this.referenceItems.push(reference);
+              });
+            }
+          } else if (key == 'wediveComments') {
+            if (_data[key]) {
+              _data[key].map(comment=>{
+                this.wedivesCommentItems.push(comment);
+              });
             }
           } else {
             this.centerData[key] = _data[key];
@@ -1495,16 +1540,6 @@ export default {
         }
       }
       
-      this.openingItems = [];
-      if (_data.openingHours) {_data.openingHours.map(()=>{this.openingItems.push(['', '']);});
-        _data.openingHours.forEach((item, index)=>{this.openingHoursIndex.push(item[0]);this.openingHoursContent.push(item[1])});
-      }
-      this.youtubeItems = [];
-      if (_data.youtubeVideoIds) _data.youtubeVideoIds.map(()=>{this.youtubeItems.push('')});
-      this.referenceItems = [];
-      if (_data.referenceUrls) _data.referenceUrls.map(()=>{this.referenceItems.push('')});
-      this.wedivesCommentItems = [];
-      if (_data.wediveComments) _data.wediveComments.map(()=>{this.wedivesCommentItems.push('')});
       this.submitText = 'Update';
 
 
@@ -1569,13 +1604,9 @@ export default {
 
     openingHourRepeateAgain() {
       this.openingItems.push('');
-      this.centerData.openingHours.push(['', '']);
     },
     openingHourRemoveItem(index) {
       this.openingItems.splice(index, 1);
-      this.openingHoursIndex.splice(index, 1);
-      this.openingHoursContent.splice(index, 1);
-      this.centerData.openingHours.splice(index, 1);
     },
     ticketsRepeateAgain() {
       this.ticketsItems.push({unitName: '', price: 0, name: '입장료', type: ['ticket']});
@@ -1602,27 +1633,21 @@ export default {
     },
     youtubeRepeateAgain() {
       this.youtubeItems.push('');
-      this.centerData.youtubeVideoIds.push('');
     },
     youtubeRemoveItem(index) {
       this.youtubeItems.splice(index, 1)
-      this.centerData.youtubeVideoIds.splice(index, 1)
     },
     referenceRepeateAgain() {
       this.referenceItems.push('');
-      this.centerData.referenceUrls.push('');
     },
     referenceRemoveItem(index) {
       this.referenceItems.splice(index, 1);
-      this.centerData.referenceUrls.splice(index, 1);
     },
     wedivesCommentRepeateAgain() {
       this.wedivesCommentItems.push('');
-      this.centerData.wediveComments.push('');
     },
     wedivesCommentRemoveItem(index) {
       this.wedivesCommentItems.splice(index, 1);
-      this.centerData.wediveComments.splice(index, 1);
     },
     async submitClick() {
       var _centerData = JSON.parse(JSON.stringify(this.centerData));
@@ -1716,6 +1741,31 @@ export default {
         _centerData.interests.push(interest._id);
       })
 
+      // 영업시간
+      _centerData.openingHours = [];
+      for (var i=0; i<this.openingItems.length; i++) {
+        _centerData.openingHours.push(this.openingItems[i]);
+      }
+
+      // youtubeVideoIds
+      _centerData.youtubeVideoIds = [];
+      for (var i=0; i<this.youtubeItems.length; i++) {
+        _centerData.youtubeVideoIds.push(this.youtubeItems[i]);
+      }
+
+      // referenceUrls
+      _centerData.referenceUrls = [];
+      for (var i=0; i<this.referenceItems.length; i++) {
+        _centerData.referenceUrls.push(this.referenceItems[i]);
+      }
+
+      // wediveComments
+      _centerData.wediveComments = [];
+      for (var i=0; i<this.wedivesCommentItems.length; i++) {
+        _centerData.wediveComments.push(this.wedivesCommentItems[i]);
+      }
+
+
       
 
       if (_centerData._id == null) delete _centerData._id;
@@ -1731,11 +1781,6 @@ export default {
         _centerData.facilityScore = parseInt(_centerData.facilityScore);
         _centerData.serviceScore = parseInt(_centerData.serviceScore);
 
-        
-        for (var i=0; i<this.openingHoursIndex.length; i++) {
-          _centerData.openingHours[i][0] = this.openingHoursIndex[i];
-          _centerData.openingHours[i][1] = this.openingHoursContent[i];
-        }
         
         await upsertDiveCenter(_centerData);
       } catch (e) {

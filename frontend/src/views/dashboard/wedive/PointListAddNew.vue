@@ -373,82 +373,85 @@
           >
             <b-form-group
             >
-              <!-- Row Loop -->
-              <b-row
-                v-for="(item, index) in backgroundItems"
-                :id="item.id"
-                :key="'rowBack' + index"
-                ref="row"
-                >
-
-                <!-- File -->
-                <b-col md="4" class="pr-0">
-                    <b-form-group
-                    label="파일"
-                    :label-for="'backgroundImages' + index"
+              <draggable :list="backgroundItems" group="backgroundItems" @start="drag=true" @end="drag=false">
+                <div v-for="(item, index) in backgroundItems" style="cursor: move" :key="index">
+                  <!-- Row Loop -->
+                  <b-row
+                    :id="item.id"
+                    :key="'rowBack' + index"
+                    ref="row"
                     >
-                    <b-form-file
-                        :id="'backgroundImages' + index"
-                        v-model="item.file"
-                        placeholder="Choose or drop"
-                        drop-placeholder="Drop here"
-                        accept=".jpg,.jpeg,.png"
-                    />
-                    </b-form-group>
-                </b-col>
 
-                <!-- File Reference -->
-                <b-col md="3" class="pr-0">
-                    <b-form-group
-                    label="출처"
-                    :label-for="'backgroundImagesRef'+index"
+                    <!-- File -->
+                    <b-col md="4" class="pr-0">
+                        <b-form-group
+                        label="파일"
+                        :label-for="'backgroundImages' + index"
+                        >
+                        <b-form-file
+                            :id="'backgroundImages' + index"
+                            v-model="item.file"
+                            placeholder="Choose or drop"
+                            drop-placeholder="Drop here"
+                            accept=".jpg,.jpeg,.png"
+                        />
+                        </b-form-group>
+                    </b-col>
+
+                    <!-- File Reference -->
+                    <b-col md="3" class="pr-0">
+                        <b-form-group
+                        label="출처"
+                        :label-for="'backgroundImagesRef'+index"
+                        >
+                        <b-form-input
+                            :id="'backgroundImagesRef'+index"
+                            v-model="item.reference"
+                            type="text"
+                            placeholder=""
+                        />
+                        </b-form-group>
+                    </b-col>
+
+                    <!-- File Name -->
+                    <b-col md="4" class="pr-0">
+                        <b-form-group
+                        label="이름"
+                        :label-for="'backgroundImagesName'+index"
+                        >
+                        <b-form-input
+                            :id="'backgroundImagesRef'+index"
+                            v-model="item.description"
+                            type="text"
+                            placeholder=""
+                        />
+                        </b-form-group>
+                    </b-col>
+
+                  
+
+                    <!-- Remove Button -->
+                    <b-col
+                        md="1"
+                        class="mb-50"
                     >
-                    <b-form-input
-                        :id="'backgroundImagesRef'+index"
-                        v-model="item.reference"
-                        type="text"
-                        placeholder=""
-                    />
-                    </b-form-group>
-                </b-col>
-
-                <!-- File Name -->
-                <b-col md="4" class="pr-0">
-                    <b-form-group
-                    label="이름"
-                    :label-for="'backgroundImagesName'+index"
-                    >
-                    <b-form-input
-                        :id="'backgroundImagesRef'+index"
-                        v-model="item.description"
-                        type="text"
-                        placeholder=""
-                    />
-                    </b-form-group>
-                </b-col>
-
-               
-
-                <!-- Remove Button -->
-                <b-col
-                    md="1"
-                    class="mb-50"
-                >
-                    <b-button
-                    variant="flat-danger"
-                    class="mt-0 mt-md-2 pl-0 pr-0"
-                    @click="backgroundRemoveItem(index)"
-                    >
-                    <feather-icon
-                        icon="XIcon"
-                        class="mr-25"
-                    />
-                    </b-button>
-                </b-col>
-                <b-col cols="12">
-                    <hr class="mt-0" style="border-top: 1px dashed #ebe9f1 !important;">
-                </b-col>
-              </b-row>
+                        <b-button
+                        variant="flat-danger"
+                        class="mt-0 mt-md-2 pl-0 pr-0"
+                        @click="backgroundRemoveItem(index)"
+                        >
+                        <feather-icon
+                            icon="XIcon"
+                            class="mr-25"
+                        />
+                        </b-button>
+                    </b-col>
+                    <b-col cols="12">
+                        <hr class="mt-0" style="border-top: 1px dashed #ebe9f1 !important;">
+                    </b-col>
+                  </b-row>
+                </div>
+              </draggable>
               <b-button
                 v-ripple.400="'rgba(255, 255, 255, 0.15)'"
                 variant="flat-primary"
@@ -471,166 +474,169 @@
           <h4 class="mt-3">하이라이트</h4>
           <div>
             <div>
-              <!-- Row Loop -->
-              <b-row
-                v-for="(item, index) in highlightItems"
-                :id="item.id"
-                :key="'rowHigh'+index"
-                ref="row"
-                style="background: #d0d1d2;border-radius: 10px;margin-bottom:10px;"
-                >
+              <draggable :list="highlightItems" group="highlightItems" @start="drag=true" @end="drag=false">
+                <div v-for="(item, index) in highlightItems" style="cursor: move" :key="index">
+                  <!-- Row Loop -->
+                  <b-row
+                    :id="item.id"
+                    :key="'rowHigh'+index"
+                    ref="row"
+                    style="background: #d0d1d2;border-radius: 10px;margin-bottom:10px;"
+                    >
 
-                <!-- Content -->
-                <b-col md="11" class="pr-0">
-                    <b-form-group
-                    label="관리용 이름"
-                    :label-for="'highlightName' + index"
-                    >
-                    <b-form-input
-                        :id="'highlightName' + index"
-                        v-model="item.name"
-                        autofocus
-                        placeholder="문섬 하이라이트1"
-                    />
-                    
-                    </b-form-group>
-                </b-col>
-                
-                <!-- Remove Button -->
-                <b-col
-                    md="1"
-                    class="mb-50"
-                >
-                    <b-button
-                    variant="flat-danger"
-                    class="mt-0 mt-md-2 pl-0 pr-0"
-                    @click="highlightRemoveItem(index)"
-                    >
-                    <feather-icon
-                        icon="XIcon"
-                        class="mr-25"
-                    />
-                    </b-button>
-                </b-col>
-
-                <b-col md="11" class="pr-0">
-                    <b-form-group
-                    label="내용"
-                    :label-for="'highlightContent' + index"
-                    >
-                    <b-form-input
-                        :id="'highlightContent' + index"
-                        v-model="item.description"
-                        autofocus
-                        placeholder="국내 최대규모의 연산호 군락지, 유네스코 생물권 보호지역"
-                    />
-                    
-                    </b-form-group>
-                </b-col>
-
-                
-                <b-col cols="12">
-                    <validation-provider
-                        #default="validationContext"
-                        name="highlightImages"
-                        rules="required"
-                    >
+                    <!-- Content -->
+                    <b-col md="11" class="pr-0">
                         <b-form-group
+                        label="관리용 이름"
+                        :label-for="'highlightName' + index"
                         >
-                        <!-- Row Loop -->
-                        <b-row
-                            v-for="(item2, index2) in item.images"
-                            :id="item2.id"
-                            :key="'rowHighItem'+index2"
-                            ref="row2"
-                            >
-
-                            <!-- File -->
-                            <b-col md="4" class="pr-0">
-                                <b-form-group
-                                label="파일"
-                                :label-for="'highlightImagesFile' + index + '_' + index2"
-                                >
-                                <b-form-file
-                                    :id="'highlightImagesFile' + index + '_' + index2"
-                                    v-model="item2.file"
-                                    placeholder="Choose or drop"
-                                    drop-placeholder="Drop here"
-                                    accept=".jpg,.jpeg,.png"
-                                />
-                                </b-form-group>
-                            </b-col>
-
-                            <!-- File Reference -->
-                            <b-col md="3" class="pr-0">
-                                <b-form-group
-                                label="출처"
-                                :label-for="'highlightImagesRef' + index +'_' + index2"
-                                >
-                                <b-form-input
-                                    :id="'highlightImagesRef' + index +'_' + index2"
-                                    v-model="item2.reference"
-                                    type="text"
-                                    placeholder=""
-                                />
-                                </b-form-group>
-                            </b-col>
-
-                            <!-- File Name -->
-                            <b-col md="4" class="pr-0">
-                                <b-form-group
-                                label="이름"
-                                :label-for="'highlightImagesName' + index +'_' + index2"
-                                >
-                                <b-form-input
-                                    :id="'highlightImagesName' + index +'_' + index2"
-                                    v-model="item2.description"
-                                    type="text"
-                                    placeholder=""
-                                />
-                                </b-form-group>
-                            </b-col>
-
+                        <b-form-input
+                            :id="'highlightName' + index"
+                            v-model="item.name"
+                            autofocus
+                            placeholder="문섬 하이라이트1"
+                        />
                         
+                        </b-form-group>
+                    </b-col>
+                    
+                    <!-- Remove Button -->
+                    <b-col
+                        md="1"
+                        class="mb-50"
+                    >
+                        <b-button
+                        variant="flat-danger"
+                        class="mt-0 mt-md-2 pl-0 pr-0"
+                        @click="highlightRemoveItem(index)"
+                        >
+                        <feather-icon
+                            icon="XIcon"
+                            class="mr-25"
+                        />
+                        </b-button>
+                    </b-col>
 
-                            <!-- Remove Button -->
-                            <b-col
-                                md="1"
-                                class="mb-50"
+                    <b-col md="11" class="pr-0">
+                        <b-form-group
+                        label="내용"
+                        :label-for="'highlightContent' + index"
+                        >
+                        <b-form-input
+                            :id="'highlightContent' + index"
+                            v-model="item.description"
+                            autofocus
+                            placeholder="국내 최대규모의 연산호 군락지, 유네스코 생물권 보호지역"
+                        />
+                        
+                        </b-form-group>
+                    </b-col>
+
+                    
+                    <b-col cols="12">
+                        <validation-provider
+                            #default="validationContext"
+                            name="highlightImages"
+                            rules="required"
+                        >
+                            <b-form-group
                             >
-                                <b-button
-                                variant="flat-danger"
-                                class="mt-0 mt-md-2 pl-0 pr-0"
-                                @click="highlightImageRemoveItem(index, index2)"
+                            <!-- Row Loop -->
+                            <b-row
+                                v-for="(item2, index2) in item.images"
+                                :id="item2.id"
+                                :key="'rowHighItem'+index2"
+                                ref="row2"
+                                >
+
+                                <!-- File -->
+                                <b-col md="4" class="pr-0">
+                                    <b-form-group
+                                    label="파일"
+                                    :label-for="'highlightImagesFile' + index + '_' + index2"
+                                    >
+                                    <b-form-file
+                                        :id="'highlightImagesFile' + index + '_' + index2"
+                                        v-model="item2.file"
+                                        placeholder="Choose or drop"
+                                        drop-placeholder="Drop here"
+                                        accept=".jpg,.jpeg,.png"
+                                    />
+                                    </b-form-group>
+                                </b-col>
+
+                                <!-- File Reference -->
+                                <b-col md="3" class="pr-0">
+                                    <b-form-group
+                                    label="출처"
+                                    :label-for="'highlightImagesRef' + index +'_' + index2"
+                                    >
+                                    <b-form-input
+                                        :id="'highlightImagesRef' + index +'_' + index2"
+                                        v-model="item2.reference"
+                                        type="text"
+                                        placeholder=""
+                                    />
+                                    </b-form-group>
+                                </b-col>
+
+                                <!-- File Name -->
+                                <b-col md="4" class="pr-0">
+                                    <b-form-group
+                                    label="이름"
+                                    :label-for="'highlightImagesName' + index +'_' + index2"
+                                    >
+                                    <b-form-input
+                                        :id="'highlightImagesName' + index +'_' + index2"
+                                        v-model="item2.description"
+                                        type="text"
+                                        placeholder=""
+                                    />
+                                    </b-form-group>
+                                </b-col>
+
+                            
+
+                                <!-- Remove Button -->
+                                <b-col
+                                    md="1"
+                                    class="mb-50"
+                                >
+                                    <b-button
+                                    variant="flat-danger"
+                                    class="mt-0 mt-md-2 pl-0 pr-0"
+                                    @click="highlightImageRemoveItem(index, index2)"
+                                    >
+                                    <feather-icon
+                                        icon="XIcon"
+                                        class="mr-25"
+                                    />
+                                    </b-button>
+                                </b-col>
+                                <b-col cols="12">
+                                    <hr class="mt-0" style="border-top: 1px dashed #ebe9f1 !important;">
+                                </b-col>
+                            </b-row>
+                            <b-button
+                                v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+                                variant="flat-primary"
+                                @click="highlightImageRepeateAgain(index)"
                                 >
                                 <feather-icon
-                                    icon="XIcon"
+                                    icon="PlusIcon"
                                     class="mr-25"
                                 />
-                                </b-button>
-                            </b-col>
-                            <b-col cols="12">
-                                <hr class="mt-0" style="border-top: 1px dashed #ebe9f1 !important;">
-                            </b-col>
-                        </b-row>
-                        <b-button
-                            v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-                            variant="flat-primary"
-                            @click="highlightImageRepeateAgain(index)"
-                            >
-                            <feather-icon
-                                icon="PlusIcon"
-                                class="mr-25"
-                            />
-                            <span>Add highlight image</span>
-                        </b-button>
-                        <b-form-invalid-feedback>
-                            {{ validationContext.errors[0] }}
-                        </b-form-invalid-feedback>
-                        </b-form-group>
-                    </validation-provider>
-                </b-col>
-              </b-row>
+                                <span>Add highlight image</span>
+                            </b-button>
+                            <b-form-invalid-feedback>
+                                {{ validationContext.errors[0] }}
+                            </b-form-invalid-feedback>
+                            </b-form-group>
+                        </validation-provider>
+                    </b-col>
+                  </b-row>
+                </div>
+              </draggable>
               <b-button
                 v-ripple.400="'rgba(255, 255, 255, 0.15)'"
                 variant="flat-primary"
@@ -705,82 +711,85 @@
           >
             <b-form-group
             >
-              <!-- Row Loop -->
-              <b-row
-                v-for="(item, index) in imageItems"
-                :id="item.id"
-                :key="'rowImage'+index"
-                ref="row"
-                >
-
-                <!-- File -->
-                <b-col md="4" class="pr-0">
-                    <b-form-group
-                    label="파일"
-                    :label-for="'pointImagesFile' + index"
+              <draggable :list="imageItems" group="imageItems" @start="drag=true" @end="drag=false">
+                <div v-for="(item, index) in imageItems" style="cursor: move" :key="index">
+                  <!-- Row Loop -->
+                  <b-row
+                    :id="item.id"
+                    :key="'rowImage'+index"
+                    ref="row"
                     >
-                    <b-form-file
-                        :id="'pointImagesFile' + index"
-                        v-model="item.file"
-                        placeholder="Choose or drop"
-                        drop-placeholder="Drop here"
-                        accept=".jpg,.jpeg,.png"
-                    />
-                    </b-form-group>
-                </b-col>
 
-                <!-- File Reference -->
-                <b-col md="3" class="pr-0">
-                    <b-form-group
-                    label="출처"
-                    :label-for="'pointImagesRef' + index"
+                    <!-- File -->
+                    <b-col md="4" class="pr-0">
+                        <b-form-group
+                        label="파일"
+                        :label-for="'pointImagesFile' + index"
+                        >
+                        <b-form-file
+                            :id="'pointImagesFile' + index"
+                            v-model="item.file"
+                            placeholder="Choose or drop"
+                            drop-placeholder="Drop here"
+                            accept=".jpg,.jpeg,.png"
+                        />
+                        </b-form-group>
+                    </b-col>
+
+                    <!-- File Reference -->
+                    <b-col md="3" class="pr-0">
+                        <b-form-group
+                        label="출처"
+                        :label-for="'pointImagesRef' + index"
+                        >
+                        <b-form-input
+                            :id="'pointImagesRef' + index"
+                            v-model="item.reference"
+                            type="text"
+                            placeholder=""
+                        />
+                        </b-form-group>
+                    </b-col>
+
+                    <!-- File Name -->
+                    <b-col md="4" class="pr-0">
+                        <b-form-group
+                        label="이름"
+                        :label-for="'pointImagesName' + index"
+                        >
+                        <b-form-input
+                            :id="'pointImagesName' + index"
+                            v-model="item.description"
+                            type="text"
+                            placeholder=""
+                        />
+                        </b-form-group>
+                    </b-col>
+
+                  
+
+                    <!-- Remove Button -->
+                    <b-col
+                        md="1"
+                        class="mb-50"
                     >
-                    <b-form-input
-                        :id="'pointImagesRef' + index"
-                        v-model="item.reference"
-                        type="text"
-                        placeholder=""
-                    />
-                    </b-form-group>
-                </b-col>
-
-                <!-- File Name -->
-                <b-col md="4" class="pr-0">
-                    <b-form-group
-                    label="이름"
-                    :label-for="'pointImagesName' + index"
-                    >
-                    <b-form-input
-                        :id="'pointImagesName' + index"
-                        v-model="item.description"
-                        type="text"
-                        placeholder=""
-                    />
-                    </b-form-group>
-                </b-col>
-
-               
-
-                <!-- Remove Button -->
-                <b-col
-                    md="1"
-                    class="mb-50"
-                >
-                    <b-button
-                    variant="flat-danger"
-                    class="mt-0 mt-md-2 pl-0 pr-0"
-                    @click="imageRemoveItem(index)"
-                    >
-                    <feather-icon
-                        icon="XIcon"
-                        class="mr-25"
-                    />
-                    </b-button>
-                </b-col>
-                <b-col cols="12">
-                    <hr class="mt-0" style="border-top: 1px dashed #ebe9f1 !important;">
-                </b-col>
-              </b-row>
+                        <b-button
+                        variant="flat-danger"
+                        class="mt-0 mt-md-2 pl-0 pr-0"
+                        @click="imageRemoveItem(index)"
+                        >
+                        <feather-icon
+                            icon="XIcon"
+                            class="mr-25"
+                        />
+                        </b-button>
+                    </b-col>
+                    <b-col cols="12">
+                        <hr class="mt-0" style="border-top: 1px dashed #ebe9f1 !important;">
+                    </b-col>
+                  </b-row>
+                </div>
+              </draggable>
               <b-button
                 v-ripple.400="'rgba(255, 255, 255, 0.15)'"
                 variant="flat-primary"
@@ -810,49 +819,52 @@
           >
             <b-form-group
             >
-              <!-- Row Loop -->
-              <b-row
-                v-for="(item, index) in youtubeItems"
-                :id="item.id"
-                :key="'rowYoutube'+index"
-                ref="row"
-                >
-
-                <!-- Video ID -->
-                <b-col md="11" class="pr-0">
-                    <b-form-group
-                    label="유튜브 코드"
-                    label-for="youtubeVideoId"
+              <draggable :list="youtubeItems" group="youtubeItems" @start="drag=true" @end="drag=false">
+                <div v-for="(item, index) in youtubeItems" style="cursor: move" :key="index">
+                  <!-- Row Loop -->
+                  <b-row
+                    :id="item.id"
+                    :key="'rowYoutube'+index"
+                    ref="row"
                     >
-                    <b-form-input
-                        id="youtubeVideoId"
-                        type="text"
-                        v-model="pointData.youtubeVideoIds[index]"
-                        placeholder="11자리 입력"
-                    />
-                    </b-form-group>
-                </b-col>
 
-                <!-- Remove Button -->
-                <b-col
-                    md="1"
-                    class="mb-50"
-                >
-                    <b-button
-                    variant="flat-danger"
-                    class="mt-0 mt-md-2 pl-0 pr-0"
-                    @click="youtubeRemoveItem(index)"
+                    <!-- Video ID -->
+                    <b-col md="11" class="pr-0">
+                        <b-form-group
+                        label="유튜브 코드"
+                        label-for="youtubeVideoId"
+                        >
+                        <b-form-input
+                            id="youtubeVideoId"
+                            type="text"
+                            v-model="youtubeItems[index]"
+                            placeholder="11자리 입력"
+                        />
+                        </b-form-group>
+                    </b-col>
+
+                    <!-- Remove Button -->
+                    <b-col
+                        md="1"
+                        class="mb-50"
                     >
-                    <feather-icon
-                        icon="XIcon"
-                        class="mr-25"
-                    />
-                    </b-button>
-                </b-col>
-                <b-col cols="12">
-                    <hr class="mt-0" style="border-top: 1px dashed #ebe9f1 !important;">
-                </b-col>
-              </b-row>
+                        <b-button
+                        variant="flat-danger"
+                        class="mt-0 mt-md-2 pl-0 pr-0"
+                        @click="youtubeRemoveItem(index)"
+                        >
+                        <feather-icon
+                            icon="XIcon"
+                            class="mr-25"
+                        />
+                        </b-button>
+                    </b-col>
+                    <b-col cols="12">
+                        <hr class="mt-0" style="border-top: 1px dashed #ebe9f1 !important;">
+                    </b-col>
+                  </b-row>
+                </div>
+              </draggable>
               <b-button
                 v-ripple.400="'rgba(255, 255, 255, 0.15)'"
                 variant="flat-primary"
@@ -882,49 +894,52 @@
           >
             <b-form-group
             >
-              <!-- Row Loop -->
-              <b-row
-                v-for="(item, index) in referenceItems"
-                :id="item.id"
-                :key="'rowRefernce' + index"
-                ref="row"
-                >
-
-                <!-- Video ID -->
-                <b-col md="11" class="pr-0">
-                    <b-form-group
-                    label="URL"
-                    label-for="referenceUrl"
+              <draggable :list="referenceItems" group="referenceItems" @start="drag=true" @end="drag=false">
+                <div v-for="(item, index) in referenceItems" style="cursor: move" :key="index">
+                  <!-- Row Loop -->
+                  <b-row
+                    :id="item.id"
+                    :key="'rowRefernce' + index"
+                    ref="row"
                     >
-                    <b-form-input
-                        id="referenceUrl"
-                        type="text"
-                        v-model="pointData.referenceUrls[index]"
-                        placeholder="실제 사이트에는 보이지 않음"
-                    />
-                    </b-form-group>
-                </b-col>
 
-                <!-- Remove Button -->
-                <b-col
-                    md="1"
-                    class="mb-50"
-                >
-                    <b-button
-                    variant="flat-danger"
-                    class="mt-0 mt-md-2 pl-0 pr-0"
-                    @click="referenceRemoveItem(index)"
+                    <!-- Video ID -->
+                    <b-col md="11" class="pr-0">
+                        <b-form-group
+                        label="URL"
+                        label-for="referenceUrl"
+                        >
+                        <b-form-input
+                            id="referenceUrl"
+                            type="text"
+                            v-model="referenceItems[index]"
+                            placeholder="실제 사이트에는 보이지 않음"
+                        />
+                        </b-form-group>
+                    </b-col>
+
+                    <!-- Remove Button -->
+                    <b-col
+                        md="1"
+                        class="mb-50"
                     >
-                    <feather-icon
-                        icon="XIcon"
-                        class="mr-25"
-                    />
-                    </b-button>
-                </b-col>
-                <b-col cols="12">
-                    <hr class="mt-0" style="border-top: 1px dashed #ebe9f1 !important;">
-                </b-col>
-              </b-row>
+                        <b-button
+                        variant="flat-danger"
+                        class="mt-0 mt-md-2 pl-0 pr-0"
+                        @click="referenceRemoveItem(index)"
+                        >
+                        <feather-icon
+                            icon="XIcon"
+                            class="mr-25"
+                        />
+                        </b-button>
+                    </b-col>
+                    <b-col cols="12">
+                        <hr class="mt-0" style="border-top: 1px dashed #ebe9f1 !important;">
+                    </b-col>
+                  </b-row>
+                </div>
+              </draggable>
               <b-button
                 v-ripple.400="'rgba(255, 255, 255, 0.15)'"
                 variant="flat-primary"
@@ -1004,6 +1019,7 @@ import { required, alphaNum } from '@validations'
 import formValidation from '@core/comp-functions/forms/form-validation'
 import Ripple from 'vue-ripple-directive'
 import vSelect from 'vue-select'
+import draggable from 'vuedraggable'
 import store from '@/store'
 const { upsertDivePoint } = require('@/wedive-frontend-graphql/dive-point-service')
 const { uploadSingleImage, updateImage, getImageUrl } = require('@/wedive-frontend-graphql/image-service')
@@ -1070,6 +1086,7 @@ export default {
     // Form Validation
     ValidationProvider,
     ValidationObserver,
+    draggable,
   },
   directives: {
     Ripple,
@@ -1171,16 +1188,24 @@ export default {
               this.highlightItems.push(highlight);
             });
             this.pointData[key] = _data[key];
+          } else if (key == 'youtubeVideoIds') {
+            if (_data[key]) {
+              _data[key].map(youtube=>{
+                this.youtubeItems.push(youtube);
+              });
+            }
+          } else if (key == 'referenceUrls') {
+            if (_data[key]) {
+              _data[key].map(reference=>{
+                this.referenceItems.push(reference);
+              });
+            }
           } else {
             this.pointData[key] = _data[key];
           }
         }
       }
       
-      this.youtubeItems = [];
-      _data.youtubeVideoIds.forEach(()=>{this.youtubeItems.push('')});
-      this.referenceItems = [];
-      _data.referenceUrls.forEach(()=>{this.referenceItems.push('')});
       this.submitText = 'Update';
 
 
@@ -1262,19 +1287,15 @@ export default {
 
     youtubeRepeateAgain() {
       this.youtubeItems.push('');
-      this.pointData.youtubeVideoIds.push('');
     },
     youtubeRemoveItem(index) {
       this.youtubeItems.splice(index, 1)
-      this.pointData.youtubeVideoIds.splice(index, 1)
     },
     referenceRepeateAgain() {
       this.referenceItems.push('');
-      this.pointData.referenceUrls.push('');
     },
-    referencRemoveItem(index) {
+    referenceRemoveItem(index) {
       this.referenceItems.splice(index, 1);
-      this.pointData.referenceUrls.splice(index, 1);
     },
     async submitClick() {
       var _pointData = JSON.parse(JSON.stringify(this.pointData));
@@ -1383,6 +1404,18 @@ export default {
         this.interestSelected[i].map(interest => {
           _pointData["month"+i].push(interest._id);
         })
+      }
+
+      // youtubeVideoIds
+      _pointData.youtubeVideoIds = [];
+      for (var i=0; i<this.youtubeItems.length; i++) {
+        _pointData.youtubeVideoIds.push(this.youtubeItems[i]);
+      }
+
+      // referenceUrls
+      _pointData.referenceUrls = [];
+      for (var i=0; i<this.referenceItems.length; i++) {
+        _pointData.referenceUrls.push(this.referenceItems[i]);
       }
 
       try {
