@@ -45,7 +45,7 @@
                                         <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
                                             <span> {{center.star}} </span>
                                             &nbsp;<font class="color-gray-light">|</font>&nbsp;
-                                            <img src="/static/images/assets/logo_padi.svg" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
+                                            <img src="/static/images/agency/logo_padi.svg" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
                                             &nbsp;<font class="color-gray-light">|</font>&nbsp;
                                             <span v-for="i in center.price_index">￦</span>
                                         </p>
@@ -94,7 +94,7 @@
                                         <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
                                             <span> {{center.star}} </span>
                                             &nbsp;<font class="color-gray-light">|</font>&nbsp;
-                                            <img src="/static/images/assets/logo_padi.svg" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
+                                            <img src="/static/images/agency/logo_padi.svg" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
                                             &nbsp;<font class="color-gray-light">|</font>&nbsp;
                                             <span v-for="i in center.price_index">￦</span>
                                         </p>
@@ -132,7 +132,7 @@
                                         <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
                                             <span> {{center.star}} </span>
                                             &nbsp;<font class="color-gray-light">|</font>&nbsp;
-                                            <img src="/static/images/assets/logo_padi.svg" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
+                                            <img src="/static/images/agency/logo_padi.svg" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
                                             &nbsp;<font class="color-gray-light">|</font>&nbsp;
                                             <span v-for="i in center.price_index">￦</span>
                                         </p>
@@ -181,7 +181,7 @@
                                         <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
                                             <span> {{center.star}} </span>
                                             &nbsp;<font class="color-gray-light">|</font>&nbsp;
-                                            <img src="/static/images/assets/logo_padi.svg" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
+                                            <img src="/static/images/agency/logo_padi.svg" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
                                             &nbsp;<font class="color-gray-light">|</font>&nbsp;
                                             <span v-for="i in center.price_index">￦</span>
                                         </p>
@@ -201,7 +201,7 @@
             <div class="content mb-0 mt-3">
                 <div class="text-center">
                     <img class="mt-n1" src="/static/images/assets/id-card.png" />
-                    <h4 class="pt-3 mb-0 font-600"><img src="/static/images/assets/logo_padi.svg" height="18" class="ext-img mt-n1"> 인증 센터</h4>
+                    <h4 class="pt-3 mb-0 font-600"><img src="/static/images/agency/logo_padi.svg" height="18" class="ext-img mt-n1"> 인증 센터</h4>
                     <p class="color-white mb-1 mt-n1">601개의 다이빙 센터</p>
                     <p class="color-white mb-3 opacity-60 ls-n1">#세계최대&nbsp;&nbsp;#공식인증</p>
                 </div>

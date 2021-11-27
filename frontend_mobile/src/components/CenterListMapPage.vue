@@ -31,7 +31,7 @@
                             <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
                                 &nbsp;<span id="map_box_shop_star"></span>
                                 &nbsp;<font class="color-gray-light">|</font>&nbsp;
-                                <img id="map_box_shop_fed" src="/static/images/assets/logo_padi.svg" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
+                                <img id="map_box_shop_fed" src="/static/images/agency/logo_padi.svg" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
                                 &nbsp;<font class="color-gray-light">|</font>&nbsp;
                                 <span id="map_box_shop_price"></span>
                             </p>

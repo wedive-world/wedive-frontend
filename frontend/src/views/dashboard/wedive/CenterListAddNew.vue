@@ -120,7 +120,7 @@
             name="Content"
           >
             <b-form-group
-              label="Description"
+              label="한줄설명 (최대 50자)"
               label-for="content"
             >
             <b-form-textarea
@@ -1425,7 +1425,7 @@ export default {
       scubaEnterenceOptions: ["1", "2", "3", "4", "5"],
       freeEnterenceOptions: ["1", "2", "3", "4", "5"],
       openingHoursOptions: ["1부", "2부", "3부", "4부", "5부", "매일", "평일", "주말", "월-토", "일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "공휴일", "휴게시간", "휴무일", ">평일", ">주말", ">휴일", ">1부", ">2부", ">3부", ">4부", ">5부"],
-      institutionOptions: ["AIDA", "CMAS", "PADI", "SSI", "AA", "KF", "UTA", "RAID", "SNSI", "MOLCHANOVA", "AFIA"],
+      institutionOptions: ["PADI", "NAUI", "DAN", "RAID", "AFIA", "AIDA", "CMAS", "MOLCHANOVA", "SNSI", "SSI", "UTA", "ACUC", "BDSG", "BHA", "BSAC", "DDRC", "GADAP", "IANTD", "IDA", "IDEST", "IRISH", "LIFEBOATS", "NOB", "PSA", "SAA", "SDI", "SITA", "SSAC", "TDI", "UKDMC"],
       rentalOptions: ["스킨스쿠버 세트", "스킨 세트", "마스크", "스노클", "잠수복", "오리발(핀)", "부츠", "장갑", "부츠&장갑", "웨이트&벨트", "웨이트", "스쿠버 세트", "부력조절기", "레귤레이터", "보조호흡기", "SMB", "공기통", "나이트록스", "라이트", "다이브컴퓨터", "카메라", "DPV", "조류걸이", "프리 세트", "프리 핀", "프리 마스크", "프리 스노클", "프리 잠수복", "프리 웨이트&벨트", "프리 웨이트", "바텀웨이트", "랜야드", "부이", "로프", "부이&로프", "고정부이"],
       backgroundItems: [],
       youtubeItems: [],
