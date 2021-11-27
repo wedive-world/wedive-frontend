@@ -1,2 +1,7 @@
 var galleryFilterOptions = {gutterPixels: 3,};
-var filterizr = new Filterizr('.gallery-filter', galleryFilterOptions);
+try {
+    var filterizr = new Filterizr('.gallery-filter', galleryFilterOptions);
+} catch (e) {
+    
+}
+

@@ -504,7 +504,7 @@
                         :label-for="'backgroundImagesName'+index"
                         >
                         <b-form-input
-                            :id="'backgroundImagesRef'+index"
+                            :id="'backgroundImagesName'+index"
                             v-model="item.description"
                             type="text"
                             placeholder=""

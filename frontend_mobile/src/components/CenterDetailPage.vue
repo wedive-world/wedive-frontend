@@ -11,7 +11,7 @@
                         </div>
                     </div>
                     <div class="splide__slide" v-for="(image, index) in centerData.backgroundImages">
-                        <div data-card-height="250" :class="'card rounded-0 mb-0 background_img_' + index" v-bind:style="'background: url('+image.url+');background-size: contain !important;'">
+                        <div data-card-height="250" :class="'card rounded-0 mb-0 background_img_' + index" v-bind:style="'background: url('+image.thumbnailUrl+');background-size: contain !important;'">
                             
                         </div>
                     </div>
@@ -90,93 +90,29 @@
         <div class="card card-style">
             <div class="content mb-0 mt-3" id="tab-group-1">
                 <div class="tab-controls tabs-small tabs-rounded" data-highlight="bg-highlight">
-                    <a href="#" data-active data-bs-toggle="collapse" data-bs-target="#tab-1ab">스쿠버 교육</a>
-                    <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-2ab">펀 다이빙</a>
-                    <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-3ab">체험 다이빙</a>
+                    <a v-if="centerData.educations && centerData.educations.filter(x=>x.type.includes('education')).length > 0" href="#" data-active data-bs-toggle="collapse" data-bs-target="#tab-1ab">교육</a>
+                    <a v-else-if="centerData.educations && centerData.educations.filter(x=>x.type.includes('fun')).length > 0" href="#" data-bs-toggle="collapse" data-bs-target="#tab-2ab">펀 다이빙</a>
+                    <a v-else-if="centerData.educations && centerData.educations.filter(x=>x.type.includes('experience')).length > 0" href="#" data-bs-toggle="collapse" data-bs-target="#tab-3ab">체험 다이빙</a>
                 </div>
 
                 <div class="clearfix mb-4"></div>
-                <div data-bs-parent="#tab-group-1" class="collapse show" id="tab-1ab">
-                    <div class="d-flex mb-3">
+                <div v-if="centerData.educations && centerData.educations.filter(x=>x.type.includes('education')).length > 0" data-bs-parent="#tab-group-1" class="collapse show" id="tab-1ab">
+                    <div v-for="education in centerData.educations.filter(x=>x.type.includes('education'))" class="d-flex mb-3">
                         <div class="align-self-center">
-                            <img src="/static/images/diving_openwater.jpg" class="rounded-sm me-3" width="40">
+                            <img :src="education.images[0].thumbnailUrl" class="rounded-sm" width="40" height="40" style="object-fit: cover;margin-right:10px;">
                         </div>
                         <div class="text-start align-self-center">
-                            <h2 class="font-15 line-height-s mt-1 mb-n1">오픈워터 코스</h2>
-                            <p class="color-highlight font-11">자격증/렌탈/숙박/중식</p>
+                            <h2 class="font-15 line-height-s mt-1 mb-n1">{{ education.name }}</h2>
+                            <p class="color-highlight font-11" v-if="education.interest && education.interest.length > 0">{{ education.interest.map(x=>x.title).join()}}</p>
+                            <p class="color-highlight font-11" v-else>&nbsp;</p>
                         </div>
                         <div class="ms-auto ps-3 align-self-center text-end">
-                            <h2 class="font-15 mb-n1">￦550,000</h2>
-                            <p class="color-highlight font-10">3일 전일</p>
-                        </div>
-                    </div>
-                    <div class="d-flex mb-3">
-                        <div class="align-self-center">
-                            <img src="/static/images/diving_advanced.jpg" class="rounded-sm me-3" width="40">
-                        </div>
-                        <div class="text-start align-self-center">
-                            <h2 class="font-15 line-height-s mt-1 mb-n1">어드벤스드 코스</h2>
-                            <p class="color-highlight font-11">자격증/렌탈/숙박/중식</p>
-                        </div>
-                        <div class="ms-auto ps-3 align-self-center text-end">
-                            <h2 class="font-15 mb-n1">￦500,000</h2>
-                            <p class="color-highlight font-10">2일 전일</p>
-                        </div>
-                    </div>
-                    <div class="d-flex mb-3">
-                        <div class="align-self-center">
-                            <img src="/static/images/diving_advanced.jpg" class="rounded-sm me-3" width="40">
-                        </div>
-                        <div class="text-start align-self-center">
-                            <h2 class="font-15 line-height-s mt-1 mb-n1">오픈워터+어드벤스드</h2>
-                            <p class="color-highlight font-11">자격증/렌탈/숙박/중식</p>
-                        </div>
-                        <div class="ms-auto ps-3 align-self-center text-end">
-                            <h2 class="font-15 mb-n1">￦950,000</h2>
-                            <p class="color-highlight font-10">5일 전일</p>
-                        </div>
-                    </div>
-                    <div class="d-flex mb-3">
-                        <div class="align-self-center">
-                            <img src="/static/images/diving_specialtea.jpg" class="rounded-sm me-3" width="40">
-                        </div>
-                        <div class="text-start align-self-center">
-                            <h2 class="font-15 line-height-s mt-1 mb-n1">스페셜티 코스</h2>
-                            <p class="color-highlight font-11">자격증/렌탈/숙박/중식</p>
-                        </div>
-                        <div class="ms-auto ps-3 align-self-center text-end">
-                            <h2 class="font-15 mb-n1">￦300,000</h2>
-                            <p class="color-highlight font-10">2일 전일</p>
-                        </div>
-                    </div>
-                    <div class="d-flex mb-3">
-                        <div class="align-self-center">
-                            <img src="/static/images/diving_rescue.jpg" class="rounded-sm me-3" width="40">
-                        </div>
-                        <div class="text-start align-self-center">
-                            <h2 class="font-15 line-height-s mt-1 mb-n1">레스큐+응급처치</h2>
-                            <p class="color-highlight font-11">자격증/렌탈/숙박/중식</p>
-                        </div>
-                        <div class="ms-auto ps-3 align-self-center text-end">
-                            <h2 class="font-15 mb-n1">￦650,000</h2>
-                            <p class="color-highlight font-10">3일 전일</p>
-                        </div>
-                    </div>
-                    <div class="d-flex mb-3">
-                        <div class="align-self-center">
-                            <img src="/static/images/diving_master.jpg" class="rounded-sm me-3" width="40">
-                        </div>
-                        <div class="text-start align-self-center">
-                            <h2 class="font-15 line-height-s mt-1 mb-n1">다이브마스터</h2>
-                            <p class="color-highlight font-11">자격증/렌탈/숙박/중식</p>
-                        </div>
-                        <div class="ms-auto ps-3 align-self-center text-end">
-                            <h2 class="font-15 mb-n1">￦1,350,000</h2>
-                            <p class="color-highlight font-10">5일 전일</p>
+                            <h2 class="font-15 mb-n1">￦{{ education.price | makeComma}}</h2>
+                            <p class="color-highlight font-10">{{ education.unitName }}</p>
                         </div>
                     </div>
                 </div>
-                <div data-bs-parent="#tab-group-1" class="collapse" id="tab-2ab">
+                <div v-else-if="centerData.educations && centerData.educations.filter(x=>x.type.includes('fun')).length > 0" data-bs-parent="#tab-group-1" class="collapse" id="tab-2ab">
                     <div class="d-flex mb-3">
                         <div class="align-self-center">
                             <img src="/static/images/diving_island.jpg" class="rounded-sm me-3" width="70">
@@ -243,7 +179,7 @@
                         </div>
                     </div>
                 </div>
-                <div data-bs-parent="#tab-group-1" class="collapse" id="tab-3ab">
+                <div v-else-if="centerData.educations && centerData.educations.filter(x=>x.type.includes('experience')).length > 0" data-bs-parent="#tab-group-1" class="collapse" id="tab-3ab">
                     <div class="d-flex mb-3">
                         <div class="align-self-center">
                             <img src="/static/images/diving_beach.jpg" class="rounded-sm me-3" width="70">
@@ -285,7 +221,7 @@
                 </div>
                 
                 <div data-bs-parent="#tab-group-2" class="collapse text-start px-2 show" id="tab-info">
-                    <div class="line-height-l pb-3 mt-2 light-border-bottom" v-if="centerData.tickets && centerData.tickets.length > 0">
+                    <div class="line-height-l pb-3 mt-2 light-border-bottom" v-if="centerData.tickets && centerData.tickets.length > 0" style="position: relative;">
                         <strong class="small-title">입장료</strong>
                         <div class="">
                             <div v-for="ticket in centerData.tickets" class="row mb-0">
@@ -293,9 +229,10 @@
                                 <p class="col-6 mb-2 text-end">{{ ticket.price | makeComma }}</p>
                             </div>
                         </div>
+                        <i class="fas fa-money-bill-alt color-blue2-dark mt-n2 right-icon"></i>
                     </div>
 
-                    <div class="line-height-l pb-3 mt-2 light-border-bottom">
+                    <div class="line-height-l pb-3 mt-2 light-border-bottom" style="position: relative;">
                         <strong class="small-title">시설 정보</strong>
                         <div class="row text-start">
                             <div class="ico_feature col-3" v-if="interest.type=='facility'" v-for="interest in centerData.interests">
@@ -303,6 +240,7 @@
                                 <p class="span_feature text-center">{{ interest.title }}</p>
                             </div>
                         </div>
+                        <i class="fas fa-highlighter color-blue2-dark mt-n2 right-icon"></i>
                     </div>
                     
                     <div class="vcard-field line-height-l pb-3 mt-4">
@@ -459,8 +397,8 @@
             </div>
             <div class="content mb-3 mt-n3">
                 <div class="gallery gallery-filter">
-                    <a v-for="(image, index) in centerData.images" :href="image.url" data-gallery="gallery-image" class="center_image filtr-item" title="" :data-category="(imageCategory.findIndex(x=>x==image.description)+1)">
-                        <img src="/static/empty.jpg" :data-src="image.url" :data-index="index" class="preload-img rounded-s shadow-m">
+                    <a v-for="(image, index) in centerData.images" :href="image.thumbnailUrl" data-gallery-api="gallery-image" class="center_image filtr-item" title="" :data-category="(imageCategory.findIndex(x=>x==image.description)+1)">
+                        <img :src="image.thumbnailUrl" :data-src="image.thumbnailUrl" :data-index="index" class="preload-img rounded-s shadow-m">
                     </a>
                 </div>
             </div>
@@ -949,6 +887,7 @@ export default {
                                 name
                                 description
                                 reference
+                                thumbnailUrl
                             }
                         }
                         highlightDescription
@@ -958,6 +897,7 @@ export default {
                             name
                             description
                             reference
+                            thumbnailUrl
                         }
                         }
                         images {
@@ -965,12 +905,14 @@ export default {
                             name
                             description
                             reference
+                            thumbnailUrl
                         }
                         backgroundImages {
                             _id
                             name
                             description
                             reference
+                            thumbnailUrl
                         }
                         interests {
                         _id
@@ -990,12 +932,25 @@ export default {
                         educations {
                         _id
                         price
+                        type
                         unitName
                         name
                         uniqueName
                         days
                         hours
                         amount
+                        images {
+                            _id
+                            name
+                            description
+                            reference
+                            thumbnailUrl
+                        }
+                        interests {
+                            _id
+                            title
+                            type
+                        }
                         }
                         courses {
                         _id
@@ -1044,6 +999,7 @@ export default {
                             name
                             description
                             reference
+                            thumbnailUrl
                         }
                         }
                         reviewCount
@@ -1138,30 +1094,27 @@ export default {
             if (result_image.data.data.getImageUrlsByIds) {
                 for (var i=0; i<result_image.data.data.getImageUrlsByIds.length; i++) {
                     this.centerData.images[i].url = result_image.data.data.getImageUrlsByIds[i];
-                    $(".center_image > [data-index="+i+"]").attr("src", this.centerData.images[i].url);
-                    $(".center_image > [data-index="+i+"]").attr("data-src", this.centerData.images[i].url);
                     $(".center_image > [data-index="+i+"]").parent().attr("href", this.centerData.images[i].url);
-                    //$(".center_image > [data-index="+i+"]").attr("data-category", this.imageCategory.findIndex(x=>x==this.centerData.images[i].description));
                 }
             }
 
-            setTimeout(function() {
-                var lightbox = GLightbox({
-                    closeOnOutsideClick: false,
-                    zoomable:false,
-                    descPosition:'bottom',
-                    selector: '[data-gallery]',
-                    openEffect: 'fade',
-                    closeEffect: 'fade',
-                    dragAutoSnap:true,
-                });
+            var galleryFilterOptions = {gutterPixels: 3,};
+            var filterizr = new Filterizr('.gallery-filter', galleryFilterOptions);
 
-                var galleryFilterOptions = {gutterPixels: 3,};
-                var filterizr = new Filterizr('.gallery-filter', galleryFilterOptions);
-            },1000)
+            var lightbox = GLightbox({
+                closeOnOutsideClick: false,
+                zoomable:false,
+                descPosition:'bottom',
+                selector: '[data-gallery-api]',
+                openEffect: 'fade',
+                closeEffect: 'fade',
+                dragAutoSnap:true,
+                preload:true,
+            });
             
         }
     }
+
     if (this.$route.query.header && this.$route.query.header == 'hide') {
         $(".page-title").hide();
         $(".page-title-clear").hide();
@@ -1333,9 +1286,6 @@ export default {
         });
     };
   },
-  created() {
-    
-  },
   data () {
     return {
         map: null,
@@ -1363,7 +1313,14 @@ export default {
   }, methods: {
       goCourse: function() {
           location.href='/course';
-      }
+      },
+      gallery_show: function() {
+          for (var i=0; i<this.centerData.images.length; i++) {
+              setTimeout(function(src, dst) {
+                  $("[src='"+src+"']").attr("src", dst);
+              }, 50, this.centerData.images[i].thumbnailUrl, this.centerData.images[i].url)
+          }
+      },
   }
 
   
@@ -1475,4 +1432,5 @@ export default {
 .wedive-comment-number {float: left;position: relative;width: 20px;}
 .wedive-comment-desc {padding-left: 30px;}
 .hori-line {border: 1px solid silver;width: 10px;padding: 0;margin-left: 16px;margin-top: 10px;}
+.right-icon {position: absolute;top: 10px;width: 15px;text-align: center;right: 0px;opacity: 0.3;}
 </style>

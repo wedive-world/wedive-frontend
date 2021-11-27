@@ -531,7 +531,7 @@
                         :label-for="'backgroundImagesName'+index"
                         >
                         <b-form-input
-                            :id="'backgroundImagesRef'+index"
+                            :id="'backgroundImagesName'+index"
                             v-model="item.description"
                             type="text"
                             placeholder=""
@@ -760,6 +760,188 @@
                     class="mr-25"
                 />
                 <span>Add rental</span>
+              </b-button>
+              <b-form-invalid-feedback>
+                {{ validationContext.errors[0] }}
+              </b-form-invalid-feedback>
+            </b-form-group>
+          </validation-provider>
+
+
+          <h4 class="mt-3">교육 (Educations)</h4>
+          <validation-provider
+            #default="validationContext"
+            name="educations"
+            rules="required"
+          >
+            <b-form-group
+            >
+              <draggable :list="educationsItems" group="educationsItems" @start="drag=true" @end="drag=false">
+                <div v-for="(item, index) in educationsItems" style="cursor: move" :key="index">
+                  <!-- Row Loop -->
+                  <b-row
+                    :id="'educations'+index"
+                    :key="'educations'+index"
+                    ref="educationsRow"
+                    style="background: rgb(208, 209, 210); border-radius: 10px; margin-bottom: 10px;"
+                    >
+                    <b-col md="5" class="pr-0">
+                      <b-form-group
+                        label="교육 타입"
+                        :label-for="'educations_type_'+index"
+                        >
+                      <v-select
+                        :id="'educations_type_'+index"
+                        v-model="item.type[0]"
+                        :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
+                        label="type"
+                        :options="eduTypeOptions"
+                      >
+                      </v-select>
+                      </b-form-group>
+                    </b-col>
+                    
+                    <!-- Interests -->
+                    <b-col md="6">
+                      <b-form-group
+                        label="포함사항"
+                        :label-for="'educations_type_'+index"
+                        >
+                      <v-select
+                        v-model="item.interests"
+                        :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
+                        multiple
+                        label="title"
+                        :options="interestData.filter(interest => interest.type=='eduInclude')"
+                      >
+                      <template slot="option" slot-scope="option">
+                        {{ option.title }} ({{option.type}})
+                      </template>
+                      <template slot="selected-option" slot-scope="option">
+                        {{ option.title }} ({{option.type}})
+                      </template>
+                      </v-select>
+                      </b-form-group>
+                    </b-col>
+
+                    <!-- Remove Button -->
+                    <b-col
+                        md="1"
+                        class="mb-50"
+                    >
+                        <b-button
+                        variant="flat-danger"
+                        class="mt-0 mt-md-2 pl-0 pr-0"
+                        @click="educationsRemoveItem(index)"
+                        >
+                        <feather-icon
+                            icon="XIcon"
+                            class="mr-25"
+                        />
+                        </b-button>
+                    </b-col>
+
+                    <b-col md="4" class="pr-0">
+                      <b-form-group
+                        label="교육명"
+                        :label-for="'educations_name_'+index"
+                        >
+                      <b-form-input
+                        :id="'educations_name_'+index"
+                        type="text"
+                        v-model="item.name"
+                        placeholder="오픈워터 코스"
+                        />
+                      </b-form-group>
+                    </b-col>
+                    <!-- 구분 (단위) -->
+                    <b-col md="3" class="pr-0">
+                      <b-form-group
+                        label="구분 (단위)"
+                        :label-for="'educations_unitName_'+index"
+                        >
+                        <b-form-input
+                            :id="'educations_unitName_'+index"
+                            type="text"
+                            v-model="item.unitName"
+                            placeholder="3일 전일/오전 반일"
+                        />
+                      </b-form-group>
+                    </b-col>
+                    <!-- 가격 -->
+                    <b-col md="5" class="pr-0">
+                        <b-form-group
+                        label="가격"
+                        :label-for="'educations_price_'+index"
+                        >
+                        <b-form-input
+                            :id="'educations_price_'+index"
+                            type="number"
+                            v-model="item.price"
+                            placeholder="20000"
+                        />
+                        </b-form-group>
+                    </b-col>
+
+                    <!-- File -->
+                    <b-col md="4" class="pr-0">
+                        <b-form-group
+                        label="이미지 파일 (필수)"
+                        :label-for="'education_image' + index"
+                        >
+                        <b-form-file
+                            :id="'education_image' + index"
+                            v-model="item.images[0].file"
+                            placeholder="Choose or drop"
+                            drop-placeholder="Drop here"
+                            accept=".jpg,.jpeg,.png"
+                        />
+                        </b-form-group>
+                    </b-col>
+
+                    <!-- File Reference -->
+                    <b-col md="4" class="pr-0">
+                        <b-form-group
+                        label="(이미지) 출처"
+                        :label-for="'education_image_Ref'+index"
+                        >
+                        <b-form-input
+                            :id="'education_image_Ref'+index"
+                            v-model="item.images[0].reference"
+                            type="text"
+                            placeholder=""
+                        />
+                        </b-form-group>
+                    </b-col>
+
+                    <!-- File Name -->
+                    <b-col md="4" class="pr-0">
+                        <b-form-group
+                        label="(이미지) 이름"
+                        :label-for="'education_image_Name'+index"
+                        >
+                        <b-form-input
+                            :id="'education_image_Name'+index"
+                            v-model="item.images[0].description"
+                            type="text"
+                            placeholder=""
+                        />
+                        </b-form-group>
+                    </b-col>
+
+                  </b-row>
+                </div>
+              </draggable>
+              <b-button
+                v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+                variant="flat-primary"
+                @click="educationsRepeateAgain"
+                >
+                <feather-icon
+                    icon="PlusIcon"
+                    class="mr-25"
+                />
+                <span>Add education</span>
               </b-button>
               <b-form-invalid-feedback>
                 {{ validationContext.errors[0] }}
@@ -1495,6 +1677,7 @@ const blankCenterData = {
   webPageUrl: '',
   tickets: [],
   rentals: [],
+  educations: [],
   institutionTypes: [],
   
   scubaIndex: '',
@@ -1566,6 +1749,7 @@ export default {
       institutionOptions: ["PADI", "NAUI", "DAN", "RAID", "AFIA", "AIDA", "CMAS", "MOLCHANOVA", "SNSI", "SSI", "UTA", "ACUC", "BDSG", "BHA", "BSAC", "DDRC", "GADAP", "IANTD", "IDA", "IDEST", "IRISH", "LIFEBOATS", "NOB", "PSA", "SAA", "SDI", "SITA", "SSAC", "TDI", "UKDMC"],
       rentalOptions: ["스킨스쿠버 세트", "스킨 세트", "마스크", "스노클", "잠수복", "오리발(핀)", "부츠", "장갑", "부츠&장갑", "웨이트&벨트", "웨이트", "스쿠버 세트", "부력조절기", "레귤레이터", "보조호흡기", "SMB", "공기통", "나이트록스", "라이트", "다이브컴퓨터", "카메라", "DPV", "조류걸이", "프리 세트", "프리 핀", "프리 마스크", "프리 스노클", "프리 잠수복", "프리 웨이트&벨트", "프리 웨이트", "바텀웨이트", "랜야드", "부이", "로프", "부이&로프", "고정부이"],
       imageOptions: ["센터", "교육", "다이빙"],
+      eduTypeOptions: ["education", "fun", "experience"],
       backgroundItems: [],
       imageItems: [],
       youtubeItems: [],
@@ -1574,6 +1758,7 @@ export default {
       openingItems: [],
       ticketsItems: [],
       rentalsItems: [],
+      educationsItems: [],
       interestSelectedTotal: [],
       interestPrice: [],
       interestFacility: [],
@@ -1623,6 +1808,7 @@ export default {
       this.openingItems = [];
       this.ticketsItems = [];
       this.rentalsItems = [];
+      this.educationsItems = [];
 
       console.log(_data);
       for (var key in this.centerData) {
@@ -1645,6 +1831,14 @@ export default {
             if (_data[key]) {
               _data[key].map(rental=>{
                 this.rentalsItems.push(rental);
+              });
+            }
+          } else if (key == 'educations') {
+            if (_data[key]) {
+              _data[key].map(education=>{
+                console.log(education);
+                education.images[0].file = null;
+                this.educationsItems.push(education);
               });
             }
           } else if (key == 'institutionTypes') {
@@ -1790,6 +1984,17 @@ export default {
       }
       this.rentalsItems.splice(index, 1);
     },
+    educationsRepeateAgain() {
+      this.educationsItems.push({unitName: '', price: 0, name: '', type: [], images:[{reference: "", description: "", file: null}], interests: []});
+    },
+    async educationsRemoveItem(index) {
+      var id = this.educationsItems[index]._id;
+      if (id != null) {
+        var result = await deleteProductById(id);
+        console.log(result);
+      }
+      this.educationsItems.splice(index, 1);
+    },
     youtubeRepeateAgain() {
       this.youtubeItems.push('');
     },
@@ -1884,6 +2089,41 @@ export default {
             this.rentalsItems[i].price = parseInt(this.rentalsItems[i].price);
             var result = await upsertProduct(this.rentalsItems[i]);
             _centerData.rentals.push(result.upsertProduct._id);
+          //}
+        }
+      }
+
+      // educations
+      {
+        _centerData.educations = [];
+        for (var i=0; i<this.educationsItems.length; i++) {
+          //if (this.educationsItems[i].hasOwnProperty("_id") == false) {
+            if (this.educationsItems[i].images[0].file != null) {
+              var result = await uploadSingleImage(this.educationsItems[i].images[0].file);
+              this.educationsItems[i].images[0]._id = result.uploadImage._id;
+              this.educationsItems[i].images[0].name = this.educationsItems[i].images[0].file.name;
+            }
+            
+            delete this.educationsItems[i].images[0].file;
+            this.educationsItems[i].images[0].uploaderId = 'apneaofficer';
+            var result2 = await updateImage(this.educationsItems[i].images[0]);
+            var _id = this.educationsItems[i].images[0]._id;
+            this.educationsItems[i].images = [];
+            this.educationsItems[i].images.push(_id);
+
+
+            // interest 정리
+            var interest_id_list = [];
+            for (var j=0; j<this.educationsItems[i].interests.length; j++) {
+              interest_id_list.push(this.educationsItems[i].interests[j]._id);
+            }
+            this.educationsItems[i].interests = [];
+            this.educationsItems[i].interests = interest_id_list
+
+            // add new education product
+            this.educationsItems[i].price = parseInt(this.educationsItems[i].price);
+            var result = await upsertProduct(this.educationsItems[i]);
+            _centerData.educations.push(result.upsertProduct._id);
           //}
         }
       }
