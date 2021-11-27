@@ -157,6 +157,31 @@
             </b-form-group>
           </validation-provider>
 
+          <!-- Point select -->
+          <validation-provider
+            #default="validationContext"
+            name="name"
+            rules="required"
+          >
+            <b-form-group
+              label="포인트 선택"
+              label-for="pointId"
+            >
+              <v-select
+                id="siteId"
+                v-model="centerData.divePoints"
+                value="_id"
+                :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
+                label="name"
+                :options="pointData"
+                multiple
+              />
+              <b-form-invalid-feedback>
+                {{ validationContext.errors[0] }}
+              </b-form-invalid-feedback>
+            </b-form-group>
+          </validation-provider>
+
           <br/>
 
           <!-- Total Score -->
@@ -449,6 +474,113 @@
               </validation-provider>
             </b-col>
           </b-row>
+
+          <h4 class="mt-3">배경 이미지</h4>
+
+          <validation-provider
+            #default="validationContext"
+            name="backgroundImages"
+            rules="required"
+          >
+            <b-form-group
+            >
+              <draggable :list="backgroundItems" group="backgroundItems" @start="drag=true" @end="drag=false">
+                <div v-for="(item, index) in backgroundItems" style="cursor: move" :key="index">
+                  <!-- Row Loop -->
+                  <b-row
+                    :id="item.id"
+                    :key="item.id"
+                    ref="row"
+                    >
+
+                    <!-- File -->
+                    <b-col md="4" class="pr-0">
+                        <b-form-group
+                        label="파일"
+                        :label-for="'backgroundImages' + index"
+                        >
+                        <b-form-file
+                            :id="'backgroundImages' + index"
+                            v-model="item.file"
+                            placeholder="Choose or drop"
+                            drop-placeholder="Drop here"
+                            accept=".jpg,.jpeg,.png"
+                        />
+                        </b-form-group>
+                    </b-col>
+
+                    <!-- File Reference -->
+                    <b-col md="3" class="pr-0">
+                        <b-form-group
+                        label="출처"
+                        :label-for="'backgroundImagesRef'+index"
+                        >
+                        <b-form-input
+                            :id="'backgroundImagesRef'+index"
+                            v-model="item.reference"
+                            type="text"
+                            placeholder=""
+                        />
+                        </b-form-group>
+                    </b-col>
+
+                    <!-- File Name -->
+                    <b-col md="4" class="pr-0">
+                        <b-form-group
+                        label="이름"
+                        :label-for="'backgroundImagesName'+index"
+                        >
+                        <b-form-input
+                            :id="'backgroundImagesRef'+index"
+                            v-model="item.description"
+                            type="text"
+                            placeholder=""
+                        />
+                        </b-form-group>
+                    </b-col>
+
+                  
+
+                    <!-- Remove Button -->
+                    <b-col
+                        md="1"
+                        class="mb-50"
+                    >
+                        <b-button
+                        variant="flat-danger"
+                        class="mt-0 mt-md-2 pl-0 pr-0"
+                        @click="backgroundRemoveItem(index)"
+                        >
+                        <feather-icon
+                            icon="XIcon"
+                            class="mr-25"
+                        />
+                        </b-button>
+                    </b-col>
+                    <b-col cols="12">
+                        <hr class="mt-0" style="border-top: 1px dashed #ebe9f1 !important;">
+                    </b-col>
+                  </b-row>
+                </div>
+              </draggable>
+              <b-button
+                v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+                variant="flat-primary"
+                @click="backgroundRepeateAgain"
+                >
+                <feather-icon
+                    icon="PlusIcon"
+                    class="mr-25"
+                />
+                <span>Add background image</span>
+              </b-button>
+              <b-form-invalid-feedback>
+                {{ validationContext.errors[0] }}
+              </b-form-invalid-feedback>
+            </b-form-group>
+          </validation-provider>
+
+          <hr>
 
           <h4 class="mt-3">입장료 (Ticket)</h4>
           <validation-provider
@@ -1008,17 +1140,17 @@
 
           
           <hr>
-          <h4 class="mt-3">배경 이미지</h4>
+          <h4 class="mt-3">센터 이미지</h4>
 
           <validation-provider
             #default="validationContext"
-            name="backgroundImages"
+            name="centerImages"
             rules="required"
           >
             <b-form-group
             >
-              <draggable :list="backgroundItems" group="backgroundItems" @start="drag=true" @end="drag=false">
-                <div v-for="(item, index) in backgroundItems" style="cursor: move" :key="index">
+              <draggable :list="imageItems" group="imageItems" @start="drag=true" @end="drag=false">
+                <div v-for="(item, index) in imageItems" style="cursor: move" :key="index">
                   <!-- Row Loop -->
                   <b-row
                     :id="item.id"
@@ -1030,10 +1162,10 @@
                     <b-col md="4" class="pr-0">
                         <b-form-group
                         label="파일"
-                        :label-for="'backgroundImages' + index"
+                        :label-for="'centerImages' + index"
                         >
                         <b-form-file
-                            :id="'backgroundImages' + index"
+                            :id="'centerImages' + index"
                             v-model="item.file"
                             placeholder="Choose or drop"
                             drop-placeholder="Drop here"
@@ -1046,10 +1178,10 @@
                     <b-col md="3" class="pr-0">
                         <b-form-group
                         label="출처"
-                        :label-for="'backgroundImagesRef'+index"
+                        :label-for="'centerImagesRef'+index"
                         >
                         <b-form-input
-                            :id="'backgroundImagesRef'+index"
+                            :id="'centerImagesRef'+index"
                             v-model="item.reference"
                             type="text"
                             placeholder=""
@@ -1060,14 +1192,15 @@
                     <!-- File Name -->
                     <b-col md="4" class="pr-0">
                         <b-form-group
-                        label="이름"
-                        :label-for="'backgroundImagesName'+index"
+                        label="카테고리"
+                        :label-for="'centerImagesName'+index"
                         >
-                        <b-form-input
-                            :id="'backgroundImagesRef'+index"
-                            v-model="item.description"
-                            type="text"
-                            placeholder=""
+                        <v-select
+                          v-model="item.description"
+                          :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
+                          :options="imageOptions"
+                          :clearable="false"
+                          input-id="imageDesc"
                         />
                         </b-form-group>
                     </b-col>
@@ -1082,7 +1215,7 @@
                         <b-button
                         variant="flat-danger"
                         class="mt-0 mt-md-2 pl-0 pr-0"
-                        @click="backgroundRemoveItem(index)"
+                        @click="imageRemoveItem(index)"
                         >
                         <feather-icon
                             icon="XIcon"
@@ -1099,13 +1232,13 @@
               <b-button
                 v-ripple.400="'rgba(255, 255, 255, 0.15)'"
                 variant="flat-primary"
-                @click="backgroundRepeateAgain"
+                @click="imageRepeateAgain"
                 >
                 <feather-icon
                     icon="PlusIcon"
                     class="mr-25"
                 />
-                <span>Add background image</span>
+                <span>Add center image</span>
               </b-button>
               <b-form-invalid-feedback>
                 {{ validationContext.errors[0] }}
@@ -1345,6 +1478,7 @@ const blankCenterData = {
   youtubeVideoIds: [],
   referenceUrls: [],
   wediveComments: [],
+  divePoints: [],
   memo: '',
   publishStatus: 'inactive',
   adminScore: 70,
@@ -1408,6 +1542,10 @@ export default {
       type: Array,
       required: true,
     },
+    pointData: {
+      type: Array,
+      required: true,
+    }
     /*centerData: {
       type: Object,
       required: true,
@@ -1427,7 +1565,9 @@ export default {
       openingHoursOptions: ["1부", "2부", "3부", "4부", "5부", "매일", "평일", "주말", "월-토", "일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "공휴일", "휴게시간", "휴무일", ">평일", ">주말", ">휴일", ">1부", ">2부", ">3부", ">4부", ">5부"],
       institutionOptions: ["PADI", "NAUI", "DAN", "RAID", "AFIA", "AIDA", "CMAS", "MOLCHANOVA", "SNSI", "SSI", "UTA", "ACUC", "BDSG", "BHA", "BSAC", "DDRC", "GADAP", "IANTD", "IDA", "IDEST", "IRISH", "LIFEBOATS", "NOB", "PSA", "SAA", "SDI", "SITA", "SSAC", "TDI", "UKDMC"],
       rentalOptions: ["스킨스쿠버 세트", "스킨 세트", "마스크", "스노클", "잠수복", "오리발(핀)", "부츠", "장갑", "부츠&장갑", "웨이트&벨트", "웨이트", "스쿠버 세트", "부력조절기", "레귤레이터", "보조호흡기", "SMB", "공기통", "나이트록스", "라이트", "다이브컴퓨터", "카메라", "DPV", "조류걸이", "프리 세트", "프리 핀", "프리 마스크", "프리 스노클", "프리 잠수복", "프리 웨이트&벨트", "프리 웨이트", "바텀웨이트", "랜야드", "부이", "로프", "부이&로프", "고정부이"],
+      imageOptions: ["센터", "교육", "다이빙"],
       backgroundItems: [],
+      imageItems: [],
       youtubeItems: [],
       referenceItems: [],
       wedivesCommentItems: [],
@@ -1476,6 +1616,7 @@ export default {
     setCenterData: function(_data) {
       this.centerData = JSON.parse(JSON.stringify(blankCenterData));
       this.backgroundItems = [];
+      this.imageItems = [];
       this.youtubeItems = [];
       this.referenceItems = [];
       this.wedivesCommentItems = [];
@@ -1489,6 +1630,10 @@ export default {
           if (key == 'backgroundImages') {
             _data[key].forEach(image=>{
               this.backgroundItems.push(image)
+            });
+          } else if (key == 'images') {
+            _data[key].forEach(image=>{
+              this.imageItems.push(image)
             });
           } else if (key == 'tickets') {
             if (_data[key]) {
@@ -1600,6 +1745,20 @@ export default {
       this.backgroundItems.splice(index, 1);
     },
 
+    imageRepeateAgain() {
+      this.imageItems.push({reference: "", description: "", file: null});
+    },
+    async imageRemoveItem(index) {
+      var id = this.imageItems[index]._id;
+      if (id != null) {
+        // jjangs 여기 구현 필요
+        //var result = await deleteImageById(id);
+        //console.log(result);
+      }
+      this.imageItems.splice(index, 1);
+    },
+
+
     
 
     openingHourRepeateAgain() {
@@ -1684,6 +1843,24 @@ export default {
           _centerData.backgroundImages.push(result2.updateImage._id);
         }
       }
+      // 센터 이미지
+      {
+        _centerData.images = [];
+        for (var i=0; i<this.imageItems.length; i++) {
+          // Upload Image first
+          if (this.imageItems[i].file != null) {
+            var result = await uploadSingleImage(this.imageItems[i].file);
+            this.imageItems[i]._id = result.uploadImage._id;
+            this.imageItems[i].name = this.imageItems[i].file.name;
+          }
+          
+          delete this.imageItems[i].file;
+          this.imageItems[i].uploaderId = 'apneaofficer';
+          var result2 = await updateImage(this.imageItems[i]);
+          _centerData.backgroundImages.push(result2.updateImage._id);
+        }
+      }
+      
 
       // tickets
       {
@@ -1765,6 +1942,20 @@ export default {
         _centerData.wediveComments.push(this.wedivesCommentItems[i]);
       }
 
+      // dive points
+      {
+        var pointIds = [];
+        for (var i=0; i<_centerData.divePoints.length; i++) {
+          if (typeof(_centerData.divePoints[i]) == 'object' ) {
+            var point_id = _centerData.divePoints[i]._id;
+            pointIds.push(point_id);
+          } else {
+            pointIds.push(_centerData.divePoints[i]);
+          }
+        }
+        _centerData.divePoints = [];
+        _centerData.divePoints = pointIds;
+      }
 
       
 

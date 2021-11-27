@@ -6,6 +6,7 @@
       :is-add-new-center-sidebar-active.sync="isAddNewCenterSidebarActive"
       :country-options="countryOptions"
       :center-data="centerData"
+      :point-data="points"
       :interest-data="interests"
       @refetch-data="refetchData"
       ref="centerAddNewRef"
@@ -238,6 +239,7 @@ import useCentersList from './useCentersList'
 
 import centerStoreModule from '../centerStoreModule'
 import CenterListAddNew from './CenterListAddNew.vue'
+const { getAllDivePoints } = require('@/wedive-frontend-graphql/dive-point-service')
 const { getAllInterests, getInterestTypes } = require ('@/wedive-frontend-graphql/interest-service')
 const { deleteDiveCenterById } = require('@/wedive-frontend-graphql/dive-center-service')
 
@@ -340,7 +342,7 @@ export default {
     return {
       interests: [],
       interest_types: [],
-      
+      points: [],
 
       // Sidebar
       isAddNewCenterSidebarActive,
@@ -380,12 +382,14 @@ export default {
   async beforeRouteEnter(to, from, next) {
     var interests = await getAllInterests();
     var interest_types = await getInterestTypes();
-    next(vm => {vm.setInterests(interests, interest_types)});
+    var points = await getAllDivePoints();
+    next(vm => {vm.setInterests(interests, interest_types, points)});
   },
   methods: {
-    setInterests: function(interests, interest_types) {
+    setInterests: function(interests, interest_types, points) {
       this.interests = interests;
       this.interest_types = interest_types;
+      this.points = points.getAllDivePoints;
     },
     deleteCenter(_data) {
       this.$swal({
