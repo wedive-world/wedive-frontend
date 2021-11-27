@@ -5,20 +5,15 @@
         <div class="splide single-slider cover-slider slider-no-arrows slider-has-dots" id="cover-slider-1" data-card-height="250">
             <div class="splide__track">
                 <div class="splide__list">
-                    <div class="splide__slide">
-                        <div data-card-height="250" class="card rounded-0 mb-0" style="background-image:url(/static/bubble1.jpg)">
-                            
-                        </div>         
-                    </div>
-                    <div class="splide__slide">
-                        <div data-card-height="250" class="card rounded-0 mb-0" style="background-image:url(/static/bubble2.jpg)">
+                    <div class="splide__slide" v-if="centerData.backgroundImages == null || centerData.backgroundImages.length == 0">
+                        <div id="background_img_null" data-card-height="250" class="card rounded-0 mb-0" style="background: url(/static/empty.jpg);background-size: contain !important;">
                             
                         </div>
                     </div>
-                    <div class="splide__slide">
-                        <div data-card-height="250" class="card rounded-0 mb-0" style="background-image:url(/static/bubble3.jpg)">
+                    <div class="splide__slide" v-for="(image, index) in centerData.backgroundImages">
+                        <div data-card-height="250" :class="'card rounded-0 mb-0 background_img_' + index" v-bind:style="'background: url('+image.url+');background-size: contain !important;'">
                             
-                        </div>   
+                        </div>
                     </div>
                 </div>
             </div>
@@ -453,51 +448,19 @@
         <div class="card card-style">
             <div class="content"> 
                 <h4 class="text-start pt-2 mb-3">사진</h4>
-                
-                <ul class="gallery-filter-controls">
+                <ul v-if="centerData.images != null && centerData.images.length > 0" class="gallery-filter-controls">
                     <li class="color-highlight gallery-filter-all" data-filter="all">전체보기</li>
-                    <li data-filter="1">다이빙</li>
-                    <li data-filter="2">교육</li>
-                    <li data-filter="3">센터</li>
+                    <li v-for="(option, index) in imageCategory" :data-filter="(index+1)">{{ option }}</li>
                 </ul>
+            </div>
+            <div v-if="centerData.images == null || centerData.images.length == 0" class="content mb-3 mt-n3">
+                <div class="text-center"><img src="/static/images/assets/empty_image.jpg" width="60%" style="margin-top:-40px;"/></div>
+                <div class="font-noto text-center mb-3" style="color: #717a92;">등록된 사진이 아직 없어요.</div>
             </div>
             <div class="content mb-3 mt-n3">
                 <div class="gallery gallery-filter">
-                    <a href="/static/images/shop1/diving/test1.jpg" data-gallery="gallery-1" class="filtr-item" title="" data-category="1">
-                        <img src="/static/images/assets/empty.png" data-src="/static/images/shop1/diving/test1.jpg" class="preload-img rounded-s shadow-m">
-                    </a>
-                    <a href="/static/images/shop1/diving/test2.jpg" data-gallery="gallery-1" class="filtr-item" title="" data-category="1">
-                        <img src="/static/images/assets/empty.png" data-src="/static/images/shop1/diving/test2.jpg" class="preload-img rounded-s shadow-m">
-                    </a>
-                    <a href="/static/images/shop1/diving/test3.jpg" data-gallery="gallery-1" class="filtr-item" title="" data-category="1">
-                        <img src="/static/images/assets/empty.png" data-src="/static/images/shop1/diving/test3.jpg" class="preload-img rounded-s shadow-m">
-                    </a>
-                    <a href="/static/images/shop1/diving/test4.jpg" data-gallery="gallery-1" class="filtr-item" title="" data-category="1">
-                        <img src="/static/images/assets/empty.png" data-src="/static/images/shop1/diving/test4.jpg" class="preload-img rounded-s shadow-m">
-                    </a>
-                    <a href="/static/images/shop1/diving/test5.jpg" data-gallery="gallery-1" class="filtr-item" title="" data-category="1">
-                        <img src="/static/images/assets/empty.png" data-src="/static/images/shop1/diving/test5.jpg" class="preload-img rounded-s shadow-m">
-                    </a>
-                    <a href="/static/images/shop1/diving/test6.jpg" data-gallery="gallery-1" class="filtr-item" title="" data-category="1">
-                        <img src="/static/images/assets/empty.png" data-src="/static/images/shop1/diving/test6.jpg" class="preload-img rounded-s shadow-m">
-                    </a>							
-                    <a href="/static/images/shop1/edu/test1.jpg" data-gallery="gallery-2" class="filtr-item" title="" data-category="2">
-                        <img src="/static/images/assets/empty.png" data-src="/static/images/shop1/edu/test1.jpg" class="preload-img rounded-s shadow-m">
-                    </a>
-                    <a href="/static/images/shop1/shop/test3.jpg" data-gallery="gallery-3" class="filtr-item" title="" data-category="3">
-                        <img src="/static/images/assets/empty.png" data-src="/static/images/shop1/shop/test3.jpg" class="preload-img rounded-s shadow-m">
-                    </a>
-                    <a href="/static/images/shop1/shop/test12.jpg" data-gallery="gallery-3" class="filtr-item" title="" data-category="3">
-                        <img src="/static/images/assets/empty.png" data-src="/static/images/shop1/shop/test12.jpg" class="preload-img rounded-s shadow-m">
-                    </a>
-                    <a href="/static/images/shop1/shop/test15.jpg" data-gallery="gallery-3" class="filtr-item" title="" data-category="3">
-                        <img src="/static/images/assets/empty.png" data-src="/static/images/shop1/shop/test15.jpg" class="preload-img rounded-s shadow-m">
-                    </a>
-                    <a href="/static/images/shop1/shop/test21.jpg" data-gallery="gallery-3" class="filtr-item" title="" data-category="3">
-                        <img src="/static/images/assets/empty.png" data-src="/static/images/shop1/shop/test21.jpg" class="preload-img rounded-s shadow-m">
-                    </a>
-                    <a href="/static/images/shop1/shop/test22.jpg" data-gallery="gallery-3" class="filtr-item" title="" data-category="3">
-                        <img src="/static/images/assets/empty.png" data-src="/static/images/shop1/shop/test22.jpg" class="preload-img rounded-s shadow-m">
+                    <a v-for="(image, index) in centerData.images" :href="image.url" data-gallery="gallery-image" class="center_image filtr-item" title="" :data-category="(imageCategory.findIndex(x=>x==image.description)+1)">
+                        <img src="/static/empty.jpg" :data-src="image.url" :data-index="index" class="preload-img rounded-s shadow-m">
                     </a>
                 </div>
             </div>
@@ -982,20 +945,32 @@ export default {
                             adminScore
                             highlightDescription
                             images {
-                            _id
+                                _id
+                                name
+                                description
+                                reference
                             }
                         }
                         highlightDescription
                         adminScore
                         images {
                             _id
+                            name
+                            description
+                            reference
                         }
                         }
                         images {
-                        _id
+                            _id
+                            name
+                            description
+                            reference
                         }
                         backgroundImages {
-                        _id
+                            _id
+                            name
+                            description
+                            reference
                         }
                         interests {
                         _id
@@ -1066,6 +1041,9 @@ export default {
                         description
                         images {
                             _id
+                            name
+                            description
+                            reference
                         }
                         }
                         reviewCount
@@ -1091,7 +1069,6 @@ export default {
         if (this.centerData.backgroundImages.length > 0) {
             for (var i=0; i<this.centerData.backgroundImages.length; i++) {
                 this.centerData.backgroundImages[i].url = '/static/empty.jpg';
-                console.log(this.centerData.backgroundImages[i].url);
             }
             var id_arr = [];
             var width_arr = [];
@@ -1123,12 +1100,66 @@ export default {
                 for (var i=0; i<result_image.data.data.getImageUrlsByIds.length; i++) {
                     this.centerData.backgroundImages[i].url = result_image.data.data.getImageUrlsByIds[i];
                     $(".background_img_" + i).css("background", "url(" + result_image.data.data.getImageUrlsByIds[i] + ")");
-                    //setTimeout(function(url, i) {
-                        //$("#background_img_" + i).css("background", "url(" + url + ")");
-                    //}, 1000, result_image.data.data.getImageUrlsByIds[i], i);
-                    //console.log(this.centerData.backgroundImages[i].url)
                 }
             }
+        }
+
+
+        if (this.centerData.images.length > 0) {
+            for (var i=0; i<this.centerData.images.length; i++) {
+                this.centerData.images[i].url = '/static/empty.jpg';
+            }
+            var id_arr = [];
+            var width_arr = [];
+            for (var i=0; i<this.centerData.images.length; i++) {
+                id_arr.push(this.centerData.images[i]._id);
+                width_arr.push(720);
+            }
+            var result_image = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            data: {
+                query: `
+                    query Query($ids: [ID], $widths: [Int]) {
+                        getImageUrlsByIds(_ids: $ids, widths: $widths)
+                    }
+                `,
+                variables: {
+                    ids: id_arr,
+                    widths: width_arr
+                }
+
+            }
+            }, {
+            headers: {
+            countryCode: 'ko',
+            }
+            });
+            if (result_image.data.data.getImageUrlsByIds) {
+                for (var i=0; i<result_image.data.data.getImageUrlsByIds.length; i++) {
+                    this.centerData.images[i].url = result_image.data.data.getImageUrlsByIds[i];
+                    $(".center_image > [data-index="+i+"]").attr("src", this.centerData.images[i].url);
+                    $(".center_image > [data-index="+i+"]").attr("data-src", this.centerData.images[i].url);
+                    $(".center_image > [data-index="+i+"]").parent().attr("href", this.centerData.images[i].url);
+                    //$(".center_image > [data-index="+i+"]").attr("data-category", this.imageCategory.findIndex(x=>x==this.centerData.images[i].description));
+                }
+            }
+
+            setTimeout(function() {
+                var lightbox = GLightbox({
+                    closeOnOutsideClick: false,
+                    zoomable:false,
+                    descPosition:'bottom',
+                    selector: '[data-gallery]',
+                    openEffect: 'fade',
+                    closeEffect: 'fade',
+                    dragAutoSnap:true,
+                });
+
+                var galleryFilterOptions = {gutterPixels: 3,};
+                var filterizr = new Filterizr('.gallery-filter', galleryFilterOptions);
+            },1000)
+            
         }
     }
     if (this.$route.query.header && this.$route.query.header == 'hide') {
@@ -1314,6 +1345,7 @@ export default {
         pay_list: ["현금", "VISA", "MasterCard", "UnionPay", "JCB", "American Express", "Discover card", "PAYCO", "Kakao Pay", "Naver Pay"],
         equipt_list: ["마스크", "레귤레이터", "다이버 PC", "다이버 워치", "나침반", "수중 스쿠터", "산소탱크", "핀", "구명조끼", "나이프", "스노클링", "부츠", "잠수복 상의", "잠수복 하의", "라이트", "스쿠버 세트", "카메라", "수심계", , "게이지", "잠수복", , "풀세트", "유아장비"],
         rentalOptions: ["스킨스쿠버 세트", "스킨 세트", "마스크", "스노클", "잠수복", "오리발(핀)", "부츠", "장갑", "부츠&장갑", "웨이트&벨트", "웨이트", "스쿠버 세트", "부력조절기", "레귤레이터", "보조호흡기", "SMB", "공기통", "나이트록스", "라이트", "다이브컴퓨터", "카메라", "DPV", "조류걸이", "프리 세트", "프리 핀", "프리 마스크", "프리 스노클", "프리 잠수복", "프리 웨이트&벨트", "프리 웨이트", "바텀웨이트", "랜야드", "부이", "로프", "부이&로프", "고정부이"],
+        imageCategory: ["다이빙", "교육", "센터"],
         point_list: [
             {title: "말미잘동산", type: 'df', desc: "동해의 명물 섬유세닐말미잘이 유난히 많은 포인트로, 모래 지형 위에 커다란 암반과 크고 작은 바위들이 형성되어 있는 포인트 입니다. 섬유세닐말미잘은 낮은 수온에서 펴기 때문에 6월 이전에 방문한다면 이 포인트의 아름다움을 제대로 느낄 수 있습니다.", star: 4.6, img1: 'https://divingholic.com/wp-content/uploads/2019/02/maxresdefault-1.jpg', img2: 'https://diverz.net/data/diving/point/202102/1614156788_8f436f8c0dc8a574611b_thumb_760_504.jpg', img3: 'https://divingholic.com/wp-content/uploads/2019/02/2%EC%9B%94%EC%9D%B8%EA%B5%AC%ED%95%B4%EB%B3%80%EB%94%A5.jpg', position: {lat: 37.9668859063654, lng: 128.79946317636166}},
             {title: "철재삼동", type: 'df', desc: "여름철 동해의 상징은 볼락이라고 할 수 있습니다. 그중에서도 수많은 볼락이 태풍처럼 있다고 해서 볼락태풍이라는 별명을 가진 포인트가 철재삼동 포인트 입니다. 초여름에서 초가을까지 3달정도되는 기간에 20m전후 수심, 11~15도의 수온 삼박자가 맞아떨어지면 거대한 볼락 떼를 만날 수 있습니다.", star: 4.3, img1: '/static/images/point/ko/yangyang_chuljesamdong_01.jpg', img2: '/static/images/point/ko/yangyang_chuljesamdong_02.jpg', img3: '/static/images/point/ko/yangyang_chuljesamdong_03.jpg', position: {lat: 37.947207012548716, lng: 128.81497292286326}},

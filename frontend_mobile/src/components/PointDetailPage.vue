@@ -5,10 +5,15 @@
         <div class="splide single-slider cover-slider slider-no-arrows slider-has-dots" id="cover-slider-1" data-card-height="250">
             <div class="splide__track">
                 <div class="splide__list">
-                    <div class="splide__slide">
-                        <div data-card-height="250" class="card rounded-0 mb-0" style="background-image:url(/static/images/point/ko/jeju_munisland_01.jpg)">
+                    <div class="splide__slide" v-if="pointData.backgroundImages == null || pointData.backgroundImages.length == 0">
+                        <div id="background_img_null" data-card-height="250" class="card rounded-0 mb-0" style="background: url(/static/empty.jpg);background-size: contain !important;">
                             
-                        </div>         
+                        </div>
+                    </div>
+                    <div class="splide__slide" v-for="(image, index) in pointData.backgroundImages">
+                        <div data-card-height="250" :class="'card rounded-0 mb-0 background_img_' + index" v-bind:style="'background: url('+image.url+');background-size: contain !important;'">
+                            
+                        </div>
                     </div>
                 </div>
             </div>
@@ -953,7 +958,6 @@ export default {
         if (this.pointData.backgroundImages.length > 0) {
             for (var i=0; i<this.pointData.backgroundImages.length; i++) {
                 this.pointData.backgroundImages[i].url = '/static/empty.jpg';
-                console.log(this.pointData.backgroundImages[i].url);
             }
             var id_arr = [];
             var width_arr = [];

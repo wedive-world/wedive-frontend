@@ -1857,7 +1857,7 @@ export default {
           delete this.imageItems[i].file;
           this.imageItems[i].uploaderId = 'apneaofficer';
           var result2 = await updateImage(this.imageItems[i]);
-          _centerData.backgroundImages.push(result2.updateImage._id);
+          _centerData.images.push(result2.updateImage._id);
         }
       }
       
@@ -1972,7 +1972,7 @@ export default {
         _centerData.facilityScore = parseInt(_centerData.facilityScore);
         _centerData.serviceScore = parseInt(_centerData.serviceScore);
 
-        
+
         await upsertDiveCenter(_centerData);
       } catch (e) {
         this.$swal({

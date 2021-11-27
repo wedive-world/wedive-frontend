@@ -6,12 +6,12 @@
             <div class="splide__track">
                 <div class="splide__list">
                     <div class="splide__slide" v-if="siteData.backgroundImages == null || siteData.backgroundImages.length == 0">
-                        <div id="background_img_null" data-card-height="250" class="card rounded-0 mb-0" style="background: url(/static/empty.jgp);background-size: contain;">
+                        <div id="background_img_null" data-card-height="250" class="card rounded-0 mb-0" style="background: url(/static/empty.jpg);background-size: contain !important;">
                             
                         </div>
                     </div>
                     <div class="splide__slide" v-for="(image, index) in siteData.backgroundImages">
-                        <div data-card-height="250" :class="'card rounded-0 mb-0 background_img_' + index" v-bind:style="'background: url('+image.url+');background-size: contain;'">
+                        <div data-card-height="250" :class="'card rounded-0 mb-0 background_img_' + index" v-bind:style="'background: url('+image.url+');background-size: contain !important;'">
                             
                         </div>
                     </div>
@@ -1263,7 +1263,6 @@ export default {
         if (this.siteData.backgroundImages.length > 0) {
             for (var i=0; i<this.siteData.backgroundImages.length; i++) {
                 this.siteData.backgroundImages[i].url = '/static/empty.jpg';
-                console.log(this.siteData.backgroundImages[i].url);
             }
             var id_arr = [];
             var width_arr = [];
