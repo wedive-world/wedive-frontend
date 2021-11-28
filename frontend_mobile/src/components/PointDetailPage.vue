@@ -198,20 +198,18 @@
             </div>
         </div>
 
-        <div class="card card-style">
+        <div v-if="pointData.highlights && pointData.highlights.length>0" class="card card-style">
             <div class="content">
                 <h4 class="text-start pt-2 mb-2">하이라이트</h4>
                 <div>
                     <div style="display: inline-block;width: 30px; height: 30px; fill: rgb(0, 0, 0);"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path d="M 10 9 C 6.132813 9 3 12.132813 3 16 L 3 34 C 3 37.867188 6.132813 41 10 41 L 40 41 C 43.867188 41 47 37.867188 47 34 L 47 16 C 47 12.132813 43.867188 9 40 9 Z M 10 11 L 40 11 C 42.757813 11 45 13.242188 45 16 L 45 34 C 45 36.757813 42.757813 39 40 39 L 10 39 C 7.242188 39 5 36.757813 5 34 L 5 16 C 5 13.242188 7.242188 11 10 11 Z M 24.53125 17.15625 C 24.101563 19.554688 22.398438 20.070313 20 20.15625 L 20 21.6875 L 24.125 21.6875 L 24.125 32.90625 L 26 32.90625 L 26 17.15625 Z"></path></svg></div>
-                    국내 최대규모의 연산호 군락지, 유네스코 생물권 보호지역
-                </div>
-                <div class="">
+                    {{ pointData.highlights[0].description }}
                     <a href="#" class="row m-0 mb-2"> 
                         <div class="col-6 ps-0 pe-1">
                             <div class="card rounded-sm mb-2">
-                                <a class="" data-gallery="'gallery-0" href="/static/images/point/ko/jeju_munisland_07.jpg" title="">
-                                    <img src="/static/images/assets/empty.png" data-src="/static/images/point/ko/jeju_munisland_07.jpg" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 80px;">
-                                    <div class="wedive-source mx-140">instagram.com/p/CUFJxmJvDbN</div>
+                                <a class="" data-gallery-api="'gallery-0" :href="pointData.highlights[0].images[0].url" :title="pointData.highlights[0].images[0].name">
+                                    <img src="/static/images/assets/empty.png" :data-src="pointData.highlights[0].images[0].thumbnailUrl" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 80px;">
+                                    <div class="wedive-source mx-140">{{ pointData.highlights[0].images[0].reference }}</div>
                                 </a>
                             </div>
                             <div class="card rounded-sm mb-0">
@@ -781,26 +779,38 @@ export default {
                         createdAt
                         updatedAt
                         highlights {
-                        _id
-                        name
-                        description
-                        divePointId
+                            _id
+                            name
+                            description
+                            divePointId
+                            images {
+                                _id
+                                name
+                                description
+                                reference
+                                thumbnailUrl
+                            }
+                            interests {
+                                _id
+                                title
+                                type
+                                iconType
+                                iconName
+                            }
+                        }
                         images {
                             _id
-                        }
-                        interests {
-                            _id
-                            title
-                            type
-                            iconType
-                            iconName
-                        }
-                        }
-                        images {
-                        _id
+                            name
+                            description
+                            reference
+                            thumbnailUrl
                         }
                         backgroundImages {
-                        _id
+                            _id
+                            name
+                            description
+                            reference
+                            thumbnailUrl
                         }
                         interests {
                         _id
@@ -905,38 +915,38 @@ export default {
                         countryCode
                         publishStatus
                         reviews {
-                        _id
-                        targetId
-                        targetTypeName
-                        author {
                             _id
-                            name
-                            email
-                            birthAge
-                            gender
-                            profileImages {
-                            _id
+                            targetId
+                            targetTypeName
+                            author {
+                                _id
+                                name
+                                email
+                                birthAge
+                                gender
+                                profileImages {
+                                    _id
+                                    name
+                                    description
+                                    reference
+                                    thumbnailUrl
+                                }
+                            }
+                            title
+                            description
+                            images {
+                                _id
+                                name
+                                description
+                                reference
+                                thumbnailUrl
                             }
                         }
-                        title
-                        description
-                        images {
-                            _id
-                        }
-                        }
                         reviewCount
-                        userReactions {
-                        key
-                        value
-                        }
-                        userReactionCountMap {
-                        key
-                        count
-                        }
                         searchTerms
                         aliases
                     }
-                    }
+                }
             `,
             variables: {
                 uniqueName: this.$route.params.id
@@ -949,11 +959,11 @@ export default {
             android: (localStorage.android) ? localStorage.android : "",
         }
         });
-
+        
         if (result.data.data.getDivePointByUniqueName) {
             this.pointData = result.data.data.getDivePointByUniqueName;
         }
-        //console.log(this.pointData);
+        console.log(this.pointData);
         
         if (this.pointData.backgroundImages.length > 0) {
             for (var i=0; i<this.pointData.backgroundImages.length; i++) {
@@ -989,13 +999,27 @@ export default {
                 for (var i=0; i<result_image.data.data.getImageUrlsByIds.length; i++) {
                     this.pointData.backgroundImages[i].url = result_image.data.data.getImageUrlsByIds[i];
                     $(".background_img_" + i).css("background", "url(" + result_image.data.data.getImageUrlsByIds[i] + ")");
-                    //setTimeout(function(url, i) {
-                        //$("#background_img_" + i).css("background", "url(" + url + ")");
-                    //}, 1000, result_image.data.data.getImageUrlsByIds[i], i);
-                    //console.log(this.pointData.backgroundImages[i].url)
                 }
             }
         }
+
+
+
+
+
+        var galleryFilterOptions = {gutterPixels: 3,};
+        var filterizr = new Filterizr('.gallery-filter', galleryFilterOptions);
+
+        var lightbox = GLightbox({
+            closeOnOutsideClick: false,
+            zoomable:false,
+            descPosition:'bottom',
+            selector: '[data-gallery-api]',
+            openEffect: 'fade',
+            closeEffect: 'fade',
+            dragAutoSnap:true,
+            preload:true,
+        });
     }
     if (this.$route.query.header && this.$route.query.header == 'hide') {
         $(".page-title").hide();
@@ -1187,8 +1211,8 @@ export default {
         pointData: {},
         marker_list: [],
         recommend_word: ["비추천", "낮음", "일반적", "높음", "최고", "완벽함"],
-        recommend_env_word: ["매우열악", "열악", "평범", "우수", "최고", "극락"],
-        recommend_flow_word: ["매우느림", "느림", "일반적", "빠름", "매우빠름", "폭풍"],
+        recommend_env_word: ["매우열악", "열악", "평범", "우수", "최고", "극락"],
+        recommend_flow_word: ["매우느림", "느림", "일반적", "빠름", "매우빠름", "폭풍"],
         center_list : [
             {title: "버블탱크 스쿠버다이빙", desc: "제주 남부에 위치한 PADI 5star 다이빙센터", star: 3.8, price_index: 2, feature: "덕다이빙, 케이브, 난파선, 드리프트", img: '/static/images/shop1/diving/test1.jpg', position: {lat: 33.24134444312815, lng: 126.56484940647604}},
             {title: "다이브 투게더리조트", desc: "한줄설명1", star: 4.8, price_index: 2, feature: "덕다이빙, 케이브", img: '/static/images/shop1/diving/test2.jpg', position: {lat: 33.241633952501715, lng: 126.56456092676112}},
@@ -1226,20 +1250,38 @@ export default {
 
 .span_feature {width:66px;}
 .ico_feature {}
-.ico_feature1 {width: 44px;height: 40px;background-position: 0px -3px;}
-.ico_feature2 {width: 44px;height: 40px;background-position: -45px -3px;}
-.ico_feature3 {width: 44px;height: 40px;background-position: -90px -3px;}
-.ico_feature4 {width: 44px;height: 40px;background-position: -135px -3px;}
-.ico_feature5 {width: 44px;height: 40px;background-position: -180px -3px;}
-.ico_feature6 {width: 44px;height: 40px;background-position: -225px -3px;}
-.ico_feature7 {width: 44px;height: 40px;background-position: 0px -40px;}
-.ico_feature8 {width: 44px;height: 40px;background-position: -45px -42px;}
-.ico_feature9 {width: 44px;height: 40px;background-position: -90px -40px;}
-.ico_feature10 {width: 44px;height: 40px;background-position: -135px -42px;}
-.ico_feature11 {width: 44px;height: 40px;background-position: -180px -42px;}
-.ico_feature12 {width: 44px;height: 40px;background-position: -225px -42px;}
+.ico_feature1 {width: 44px;height: 40px;background-position: 0px 0px;}
+.ico_feature2 {width: 44px;height: 40px;background-position: -45px 0px;}
+.ico_feature3 {width: 44px;height: 40px;background-position: -90px 0px;}
+.ico_feature4 {width: 44px;height: 40px;background-position: -135px 0px;}
+.ico_feature5 {width: 44px;height: 40px;background-position: -180px 0px;}
+.ico_feature6 {width: 44px;height: 40px;background-position: -225px 0px;}
+.ico_feature7 {width: 44px;height: 40px;background-position: 0px -38px;}
+.ico_feature8 {width: 44px;height: 40px;background-position: -45px -38px;}
+.ico_feature9 {width: 44px;height: 40px;background-position: -90px -38px;}
+.ico_feature10 {width: 44px;height: 40px;background-position: -135px -38px;}
+.ico_feature11 {width: 44px;height: 40px;background-position: -180px -38px;}
+.ico_feature12 {width: 44px;height: 40px;background-position: -225px -38px;}
+.ico_feature13 {width: 44px;height: 40px;background-position: 0px -72px;}
+.ico_feature14 {width: 44px;height: 40px;background-position: -45px -72px;}
+.ico_feature15 {width: 44px;height: 40px;background-position: -90px -72px;}
+.ico_feature16 {width: 44px;height: 40px;background-position: -135px -72px;}
+.ico_feature17 {width: 44px;height: 40px;background-position: -180px -72px;}
+.ico_feature18 {width: 44px;height: 40px;background-position: -225px -72px;}
+.ico_feature19 {width: 44px;height: 40px;background-position: 0px -108px;}
+.ico_feature20 {width: 44px;height: 40px;background-position: -45px -108px;}
+.ico_feature21 {width: 44px;height: 40px;background-position: -90px -108px;}
+.ico_feature22 {width: 44px;height: 40px;background-position: -135px -108px;}
+.ico_feature23 {width: 44px;height: 40px;background-position: -180px -108px;}
+.ico_feature24 {width: 44px;height: 40px;background-position: -225px -108px;}
+.ico_feature25 {width: 44px;height: 40px;background-position: 0px -144px;}
+.ico_feature26 {width: 44px;height: 40px;background-position: -45px -144px;}
+.ico_feature27 {width: 44px;height: 40px;background-position: -90px -144px;}
+.ico_feature28 {width: 44px;height: 40px;background-position: -135px -144px;}
+.ico_feature29 {width: 44px;height: 40px;background-position: -180px -144px;}
+.ico_feature30 {width: 44px;height: 40px;background-position: -225px -144px;}
 
-.icon-point {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/wedive_point.png);background-repeat: no-repeat;-webkit-background-size: 270px 90px;background-size: 270px 90px;}
+.icon-point {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/assets/wedive_point.png);background-repeat: no-repeat;-webkit-background-size: 270px 118px;background-size: 270px 118px;}
 
 .wedive-ul {width: 100%;list-style:none;display: inline-block;margin-bottom: 0;padding-left: 5px !important;padding-right: 5px !important;}
 .wedive-ul > li {float: left;width: 50%;}

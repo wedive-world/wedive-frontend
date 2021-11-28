@@ -19,6 +19,7 @@ import CoursePage from '@/components/CoursePage'
 import SiteHomePage from '@/components/SiteHomePage'
 import SiteDetailPage from '@/components/SiteDetailPage'
 import PointDetailPage from '@/components/PointDetailPage'
+import PointDetailPage2 from '@/components/PointDetailPage2'
 import ChatHomePage from '@/components/ChatHomePage'
 import ChatDetailPage from '@/components/ChatDetailPage'
 import ShopHomePage from '@/components/ShopHomePage'
@@ -130,6 +131,11 @@ export default new Router({
       name: 'PointDetailPage',
       props: true,
       component: PointDetailPage
+    },
+    {
+      path: '/point2',
+      name: 'PointDetailPage2',
+      component: PointDetailPage2
     },
     {
       path: '/chat_home',

@@ -42,7 +42,7 @@
                 </div>
                 <div style="margin-top:8px;"><span>최근리뷰 {{ (centerData.reviewCount)?centerData.reviewCount:'0' }}</span>&nbsp;&nbsp;<font class="color-gray-light">|</font>&nbsp;&nbsp;
                 <span v-if="centerData.institutionTypes && centerData.institutionTypes.length > 0"><img v-if="insti in centerData.institutionTypes" class="ext-img" :src="'/static/images/agency/logo_'+insti.toLowerCase()+'.svg'" width="48" />&nbsp;&nbsp;<font class="color-gray-light">|</font>&nbsp;&nbsp;</span>
-                <span v-if="interest.type=='priceIndex'" v-for="interest in centerData.interests">{{interest.title.replace(/\$/gi, '￦')}}</span>
+                <span v-if="interest.type=='priceIndex'" v-for="interest in centerData.interests" style="letter-spacing: -2px;">{{interest.title.replace(/\$/gi, '￦')}}</span>
                 <!--<span class="badge font-10 bg-fade-gray-dark">PADI 공식</span>-->
                 </div>
 
@@ -1113,6 +1113,169 @@ export default {
             });
             
         }
+
+
+        if (result.data.data.getDiveCenterByUniqueName.latitude && result.data.data.getDiveCenterByUniqueName.longitude) {
+            var preloader = document.getElementById('preloader')
+            if(preloader){preloader.classList.add('preloader-hide');}
+            
+            let script = document.createElement('script');
+            script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCWu8Fw-h-f1t8Sp3I7R3l_Ukr24HunXQM';
+            document.body.appendChild(script);
+            script.onload = () => {
+                const night_style = [
+                    { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
+                    { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
+                    { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
+                    {
+                        featureType: "administrative.locality",
+                        elementType: "labels.text.fill",
+                        stylers: [{ color: "#d59563" }],
+                    },
+                    {
+                        featureType: "poi",
+                        elementType: "labels.text.fill",
+                        stylers: [{ color: "#d59563" }],
+                    },
+                    {
+                        featureType: "poi.park",
+                        elementType: "geometry",
+                        stylers: [{ color: "#263c3f" }],
+                    },
+                    {
+                        featureType: "poi.park",
+                        elementType: "labels.text.fill",
+                        stylers: [{ color: "#6b9a76" }],
+                    },
+                    {
+                        featureType: "road",
+                        elementType: "geometry",
+                        stylers: [{ color: "#38414e" }],
+                    },
+                    {
+                        featureType: "road",
+                        elementType: "geometry.stroke",
+                        stylers: [{ color: "#212a37" }],
+                    },
+                    {
+                        featureType: "road",
+                        elementType: "labels.text.fill",
+                        stylers: [{ color: "#9ca5b3" }],
+                    },
+                    {
+                        featureType: "road.highway",
+                        elementType: "geometry",
+                        stylers: [{ color: "#746855" }],
+                    },
+                    {
+                        featureType: "road.highway",
+                        elementType: "geometry.stroke",
+                        stylers: [{ color: "#1f2835" }],
+                    },
+                    {
+                        featureType: "road.highway",
+                        elementType: "labels.text.fill",
+                        stylers: [{ color: "#f3d19c" }],
+                    },
+                    {
+                        featureType: "transit",
+                        elementType: "geometry",
+                        stylers: [{ color: "#2f3948" }],
+                    },
+                    {
+                        featureType: "transit.station",
+                        elementType: "labels.text.fill",
+                        stylers: [{ color: "#d59563" }],
+                    },
+                    {
+                        featureType: "water",
+                        elementType: "geometry",
+                        stylers: [{ color: "#17263c" }],
+                    },
+                    {
+                        featureType: "water",
+                        elementType: "labels.text.fill",
+                        stylers: [{ color: "#515c6d" }],
+                    },
+                    {
+                        featureType: "water",
+                        elementType: "labels.text.stroke",
+                        stylers: [{ color: "#17263c" }],
+                    },
+                    ];
+
+                const map_style = (localStorage['wedive-Theme'] == 'light-mode') ? [] : night_style;
+
+                this.map = new google.maps.Map(document.getElementById('map'), {
+                    center: {lat: result.data.data.getDiveCenterByUniqueName.latitude, lng: result.data.data.getDiveCenterByUniqueName.longitude},
+                    zoom: 13,
+                    mapTypeControl: false,
+                    streetViewControl: false,
+                    zoomControl: false,
+                    styles: map_style
+                });
+                var marker_shop = new google.maps.Marker({
+                    map: this.map,
+                    position: {lat: result.data.data.getDiveCenterByUniqueName.latitude, lng: result.data.data.getDiveCenterByUniqueName.longitude},
+                    label: {text: result.data.data.getDiveCenterByUniqueName.name, color: 'white', className: 'marker-position'},
+                    icon: new google.maps.MarkerImage('/static/images/assets/ico_pin1.png',null, null, null, new google.maps.Size(38,43)),
+                });
+
+                if (false) {
+                    var position = {lat: 33.22900114645303, lng: 126.56260977136935};
+                    const title = '문섬 포인트';
+                    const star = '4.3';
+                    const img = '/static/images/point/ko/jeju_munisland_06.jpg';
+                    
+
+                    var marker_point = new google.maps.Marker({
+                        map: this.map,
+                        position: position,
+                        label: {text: title, color: 'white', className: 'marker-position2'},
+                        icon: new google.maps.MarkerImage('/static/images/assets/ico_pin2.png',null, null, null, new google.maps.Size(38,43)),
+                    });
+                    marker_point.addListener("click", () => {
+                        $(".map-box").removeClass("hide");
+                        for (var j=0; j<this.marker_list.length; j++) {
+                            var _icon = this.marker_list[j].getIcon();
+                            if (_icon.size.width != 38) {
+                                this.marker_list[j].setIcon(new google.maps.MarkerImage('/static/images/assets/ico_pin2.png', null, null, null, new google.maps.Size(38,43)));
+                                try {
+                                    this.marker_list[j].setLabel({text: title, color: 'white', className: 'marker-position2'});
+                                } catch (e) {
+                                }
+                            }
+                        }
+
+                        $("#map_box_shop_name").text(title);
+                        $("#map_box_shop_star").text(star);
+                        $("#map_box_shop_img").attr("src", img);
+                        
+                        
+                        marker_point.setIcon(new google.maps.MarkerImage('/static/images/assets/ico_pin_big2.png', null, null, null, new google.maps.Size(58,66)));
+                        marker_point.setLabel({text: title, color: 'white', className: 'marker-position2 mt-86'});
+                        this.map.panTo(marker_point.getPosition());
+                        //if (this.map.getZoom() == 17) {
+                        //} else {
+                        //    this.map.setZoom(17);
+                        //    this.map.setCenter(marker_point.getPosition());
+                        //}
+                    });
+                    this.marker_list.push(marker_point);
+                }
+                this.map.addListener("click", (e) => {
+                    $(".map-box").addClass("hide");
+                    for (var j=0; j<this.marker_list.length; j++) {
+                        var _icon = this.marker_list[j].getIcon();
+                        if (_icon.size.width != 38) {
+                            this.marker_list[j].setIcon(new google.maps.MarkerImage('/static/images/assets/ico_pin2.png', null, null, null, new google.maps.Size(38,43)));
+                            var _title = this.marker_list[j].getLabel().text;
+                            this.marker_list[j].setLabel({text: _title, color: 'white', className: 'marker-position2'});
+                        }
+                    }
+                });
+            };
+        }
     }
 
     if (this.$route.query.header && this.$route.query.header == 'hide') {
@@ -1124,167 +1287,6 @@ export default {
         $("#footer-bar").hide();
     }
 
-
-
-    var preloader = document.getElementById('preloader')
-    if(preloader){preloader.classList.add('preloader-hide');}
-    
-    let script = document.createElement('script');
-    script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCWu8Fw-h-f1t8Sp3I7R3l_Ukr24HunXQM';
-    document.body.appendChild(script);
-    script.onload = () => {
-        const night_style = [
-            { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
-            { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
-            { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
-            {
-                featureType: "administrative.locality",
-                elementType: "labels.text.fill",
-                stylers: [{ color: "#d59563" }],
-            },
-            {
-                featureType: "poi",
-                elementType: "labels.text.fill",
-                stylers: [{ color: "#d59563" }],
-            },
-            {
-                featureType: "poi.park",
-                elementType: "geometry",
-                stylers: [{ color: "#263c3f" }],
-            },
-            {
-                featureType: "poi.park",
-                elementType: "labels.text.fill",
-                stylers: [{ color: "#6b9a76" }],
-            },
-            {
-                featureType: "road",
-                elementType: "geometry",
-                stylers: [{ color: "#38414e" }],
-            },
-            {
-                featureType: "road",
-                elementType: "geometry.stroke",
-                stylers: [{ color: "#212a37" }],
-            },
-            {
-                featureType: "road",
-                elementType: "labels.text.fill",
-                stylers: [{ color: "#9ca5b3" }],
-            },
-            {
-                featureType: "road.highway",
-                elementType: "geometry",
-                stylers: [{ color: "#746855" }],
-            },
-            {
-                featureType: "road.highway",
-                elementType: "geometry.stroke",
-                stylers: [{ color: "#1f2835" }],
-            },
-            {
-                featureType: "road.highway",
-                elementType: "labels.text.fill",
-                stylers: [{ color: "#f3d19c" }],
-            },
-            {
-                featureType: "transit",
-                elementType: "geometry",
-                stylers: [{ color: "#2f3948" }],
-            },
-            {
-                featureType: "transit.station",
-                elementType: "labels.text.fill",
-                stylers: [{ color: "#d59563" }],
-            },
-            {
-                featureType: "water",
-                elementType: "geometry",
-                stylers: [{ color: "#17263c" }],
-            },
-            {
-                featureType: "water",
-                elementType: "labels.text.fill",
-                stylers: [{ color: "#515c6d" }],
-            },
-            {
-                featureType: "water",
-                elementType: "labels.text.stroke",
-                stylers: [{ color: "#17263c" }],
-            },
-            ];
-
-        const map_style = (localStorage['wedive-Theme'] == 'light-mode') ? [] : night_style;
-
-        this.map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: this.centerData.latitude, lng: this.centerData.longitude},
-            zoom: 13,
-            mapTypeControl: false,
-            streetViewControl: false,
-            zoomControl: false,
-            styles: map_style
-        });
-        var marker_shop = new google.maps.Marker({
-            map: this.map,
-            position: {lat: this.centerData.latitude, lng: this.centerData.longitude},
-            label: {text: this.centerData.name, color: 'white', className: 'marker-position'},
-            icon: new google.maps.MarkerImage('/static/images/assets/ico_pin1.png',null, null, null, new google.maps.Size(38,43)),
-        });
-
-        {
-            var position = {lat: 33.22900114645303, lng: 126.56260977136935};
-            const title = '문섬 포인트';
-            const star = '4.3';
-            const img = '/static/images/point/ko/jeju_munisland_06.jpg';
-            
-
-            var marker_point = new google.maps.Marker({
-                map: this.map,
-                position: position,
-                label: {text: title, color: 'white', className: 'marker-position2'},
-                icon: new google.maps.MarkerImage('/static/images/assets/ico_pin2.png',null, null, null, new google.maps.Size(38,43)),
-            });
-            marker_point.addListener("click", () => {
-                $(".map-box").removeClass("hide");
-                for (var j=0; j<this.marker_list.length; j++) {
-                    var _icon = this.marker_list[j].getIcon();
-                    if (_icon.size.width != 38) {
-                        this.marker_list[j].setIcon(new google.maps.MarkerImage('/static/images/assets/ico_pin2.png', null, null, null, new google.maps.Size(38,43)));
-                        try {
-                            this.marker_list[j].setLabel({text: title, color: 'white', className: 'marker-position2'});
-                        } catch (e) {
-                        }
-                    }
-                }
-
-                $("#map_box_shop_name").text(title);
-                $("#map_box_shop_star").text(star);
-                $("#map_box_shop_img").attr("src", img);
-                
-                
-                marker_point.setIcon(new google.maps.MarkerImage('/static/images/assets/ico_pin_big2.png', null, null, null, new google.maps.Size(58,66)));
-                marker_point.setLabel({text: title, color: 'white', className: 'marker-position2 mt-86'});
-                this.map.panTo(marker_point.getPosition());
-                //if (this.map.getZoom() == 17) {
-                //} else {
-                //    this.map.setZoom(17);
-                //    this.map.setCenter(marker_point.getPosition());
-                //}
-            });
-            this.marker_list.push(marker_point);
-        }
-        this.map.addListener("click", (e) => {
-            $(".map-box").addClass("hide");
-            for (var j=0; j<this.marker_list.length; j++) {
-                var _icon = this.marker_list[j].getIcon();
-                if (_icon.size.width != 38) {
-                    this.marker_list[j].setIcon(new google.maps.MarkerImage('/static/images/assets/ico_pin2.png', null, null, null, new google.maps.Size(38,43)));
-                    var _title = this.marker_list[j].getLabel().text;
-                    this.marker_list[j].setLabel({text: _title, color: 'white', className: 'marker-position2'});
-                }
-            }
-        });
-    };
   },
   data () {
     return {
