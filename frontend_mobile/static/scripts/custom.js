@@ -1655,7 +1655,11 @@
     }
 
     //init_template();
-
+    setTimeout(function() {
+        init_template();
+        var preloader = document.getElementById('preloader')
+        if(preloader){preloader.classList.add('preloader-hide');}
+      }, 3000);
 //},1500);
 
 //setTimeout(function() {
