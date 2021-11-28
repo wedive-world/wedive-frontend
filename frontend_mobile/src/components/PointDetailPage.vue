@@ -297,7 +297,7 @@
                 
                 <div v-for="(center,index) in pointData.diveCenters" v-if="index<3">
                     <div class="">
-                        <a href="/center">
+                        <a :href="'/center/'+center.uniqueName">
                             <div class="">
                                 <div class="justify-content-center mb-0 text-start">
                                     <div class="" style="float: left;position: relative;width: 95px; height:95px;">
@@ -313,8 +313,7 @@
                                         <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
                                             <span> {{ (center.adminScore/20).toFixed(1) }} </span>
                                             &nbsp;<font class="color-gray-light">|</font>&nbsp;
-                                            <img src="/static/images/agency/logo_padi.svg" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
-                                            &nbsp;<font class="color-gray-light">|</font>&nbsp;
+                                            <span v-if="center.institutionTypes && center.institutionTypes.length > 0"><img v-if="insti in center.institutionTypes" class="ext-img" :src="'/static/images/agency/logo_'+insti.toLowerCase()+'.svg'" height="14" />&nbsp;&nbsp;<font class="color-gray-light">|</font>&nbsp;&nbsp;</span>
                                             <span v-if="interest.type=='priceIndex'" v-for="interest in center.interests" style="letter-spacing: -2px;">{{interest.title.replace(/\$/gi, '￦')}}</span>
                                         </p>
                                     </div>
@@ -362,7 +361,7 @@
             </div>
             <div id="map" style="height: 300px;"></div>
             <div class="map-box hide">
-                <a href="/center">
+                <a id="map_box_shop_href" href="">
                     <div class="bx">
                         <div class="justify-content-center mb-0 text-start">
                             <div class="" style="width: 95px; height:95px;">
@@ -664,6 +663,8 @@ export default {
                                 reference
                                 thumbnailUrl
                             }
+                            latitude
+                            longitude
                         }
                         diveSite {
                             visitTimeDescription
@@ -1247,19 +1248,18 @@ export default {
             styles: map_style
         });
 
-        /*for (var i=0; i<this.center_list.length; i++) {
-            var _title = this.center_list[i].title;
-            var _position = this.center_list[i].position;
 
-            const title = this.center_list[i].title;
-            //const desc = this.center_list[i].desc;
-            const star = this.center_list[i].star;
-            const img = this.center_list[i].img;
+        for (var i=0; i<this.pointData.diveCenters.length; i++) {
+            const title = this.pointData.diveCenters[i].name;
+            const uniqueName = this.pointData.diveCenters[i].uniqueName;
+            const desc = this.pointData.diveCenters[i].description;
+            const star = this.pointData.diveCenters[i].adminScore;
+            const img = (this.pointData.diveCenters[i].backgroundImages && this.pointData.diveCenters[i].backgroundImages.length>0) ? this.pointData.diveCenters[i].backgroundImages[0].thumbnailUrl : "/static/empty.jpg";
            
             const marker_shop = new google.maps.Marker({
                 map: this.map,
-                position: _position,
-                label: {text: _title, color: 'white', className: 'marker-position'},
+                position: {lat: this.pointData.diveCenters[i].latitude, lng: this.pointData.diveCenters[i].longitude},
+                label: {text: title, color: 'white', className: 'marker-position'},
                 icon: new google.maps.MarkerImage('/static/images/assets/ico_pin1_o.png',null, null, null, new google.maps.Size(38,43)),
             });
 
@@ -1278,9 +1278,10 @@ export default {
                 }
 
                 $("#map_box_shop_name").text(title);
-                //$("#map_box_shop_desc").text(desc);
-                $("#map_box_shop_star").text(star);
+                $("#map_box_shop_desc").text(desc);
+                $("#map_box_shop_star").text((star/20).toFixed(1));
                 $("#map_box_shop_img").attr("src", img);
+                $("#map_box_shop_href").attr("href", "/center/" + uniqueName);
                 
                 
                 marker_shop.setIcon(new google.maps.MarkerImage('/static/images/assets/ico_pin_big1.png', null, null, null, new google.maps.Size(58,66)));
@@ -1293,7 +1294,7 @@ export default {
                 }
             });
             this.marker_list.push(marker_shop);
-        }*/
+        }
         this.map.addListener("click", (e) => {
             $(".map-box").addClass("hide");
             for (var j=0; j<this.marker_list.length; j++) {
