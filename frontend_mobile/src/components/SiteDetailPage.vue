@@ -91,7 +91,7 @@
                     <i class="ico ico-wedive-w -circle color-primary scale-box fa-4x"></i>
                 </div>
                 <h4 class="text-center pt-2 mb-2">where is here?</h4>
-                <div v-if="siteData.interests" class="row text-start txt_box2 m-0">
+                <div v-if="siteData.interests && siteData.interests.filter(x=>x.type=='divingPointEnvironment'||x.type=='divingType').length>0" class="row text-start txt_box2 m-0">
                     <div v-for="interest in siteData.interests.filter(x=>x.type=='divingPointEnvironment')" class="ico_feature col-3">
                         <i :class="'ico_feature'+(point_category.findIndex(x=>x==interest.title)+1)+' icon-point'"></i>
                         <p class="span_feature text-center">{{ interest.title }}</p>
@@ -283,32 +283,33 @@
         </div>-->
 
 
-        <div class="card card-style">
+        <div v-if="siteData.diveCenters && siteData.diveCenters.length>0" class="card card-style">
             <div class="content mt-3">
                 <h4 class="text-start pt-2 mb-0">인기 다이빙 센터</h4>
-                <p class="mb-3 color-gray-light-mid">{{ siteData.name }} 사이트의 28개의 센터 준비됨</p>
+                <p class="mb-3 color-gray-light-mid">{{ siteData.name }} 사이트의 {{ siteData.diveCenters.length }}개의 센터 준비됨</p>
                 <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
-                
-                <div v-for="(center,index) in center_list" v-if="index<3">
+
+                <div v-for="(center,index) in siteData.diveCenters" v-if="index<3">
                     <div class="">
                         <a href="/center">
                             <div class="">
                                 <div class="justify-content-center mb-0 text-start">
                                     <div class="" style="float: left;position: relative;width: 95px; height:95px;">
-                                        <img v-bind:src="center.img" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;">
+                                        <img v-if="center.backgroundImages&&center.backgroundImages.length>0" v-bind:src="center.backgroundImages[0].thumbnailUrl" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;">
+                                        <img v-else src="/static/empty.jpg" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;">
                                     </div>
                                     <div class="" style="padding-left: 110px;">
-                                        <h4 class="font-15"> {{center.title}} </h4>
-                                        <p class="pb-0 mb-0 line-height-m ellipsis"> {{center.desc}} </p>
+                                        <h4 class="font-15"> {{ center.name }} </h4>
+                                        <p class="pb-0 mb-0 line-height-m ellipsis"> {{ center.description }} </p>
                                         <p class="pb-0 mb-0 mt-n1 ellipsis color-gray-light-mid">
-                                            {{center.feature}}
+                                            {{ (center.interests == null) ? "" : center.interests.filter(x=>x.type=='facility').map(x=>{return x.title}).join().replace(",",", ") }}&nbsp;
                                         </p>
                                         <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
-                                            <span> {{center.star}} </span>
+                                            <span> {{ (center.adminScore/20).toFixed(1) }} </span>
                                             &nbsp;<font class="color-gray-light">|</font>&nbsp;
                                             <img src="/static/images/agency/logo_padi.svg" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
                                             &nbsp;<font class="color-gray-light">|</font>&nbsp;
-                                            <span v-for="i in center.price_index">￦</span>
+                                            <span v-if="interest.type=='priceIndex'" v-for="interest in center.interests" style="letter-spacing: -2px;">{{interest.title.replace(/\$/gi, '￦')}}</span>
                                         </p>
                                     </div>
                                 </div>
@@ -340,7 +341,7 @@
             </div>
             <div id="map" style="height: 300px;"></div>
             <div class="map-box hide">
-                <a href="">
+                <a href="" id="map_box_shop_href">
                     <div class="bx">
                         <div class="justify-content-center mb-0 text-start">
                             <div class="" style="width: 95px; height:95px;">
@@ -652,6 +653,13 @@ export default {
                         }    
                     }
                     images {
+                        _id
+                        name
+                        description
+                        reference
+                        thumbnailUrl
+                    }
+                    backgroundImages {
                         _id
                         name
                         description
@@ -1512,8 +1520,10 @@ export default {
             const _marker_class = (minDepth < 18) ? 'marker-position2' : 'marker-position3';
 
             const title = this.siteData.divePoints[i].name;
+            const uniqueName = this.siteData.divePoints[i].uniqueName;
             const desc = this.siteData.divePoints[i].description;
             const star = (this.siteData.divePoints[i].adminScore/20).toFixed(1);
+            console.log(this.siteData.divePoints[i]);
             const img = (this.siteData.divePoints[i].backgroundImages&&this.siteData.divePoints[i].backgroundImages.length>0) ? this.siteData.divePoints[i].backgroundImages[0].thumbnailUrl : '/static/empty.jpg';
             const _sml_img = _img;
             const _big_img = (minDepth < 18) ? '/static/images/assets/ico_pin_big2.png' : '/static/images/assets/ico_pin_big3.png';
@@ -1538,7 +1548,8 @@ export default {
                         }
                     }
                 }
-
+                
+                $("#map_box_shop_href").attr("href", "/point/" + uniqueName);
                 $("#map_box_shop_name").text(title);
                 $("#map_box_shop_desc").text(desc);
                 $("#map_box_shop_star").text(star);
@@ -1613,6 +1624,11 @@ export default {
                   this.nearData.push(d);
               }
           });
+          setTimeout(function() {
+            init_template();
+            var preloader = document.getElementById('preloader')
+            if(preloader){preloader.classList.add('preloader-hide');}
+          }, 1000);
       },
       call: function() {
           console.log("call");

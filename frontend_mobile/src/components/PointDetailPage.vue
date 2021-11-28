@@ -107,7 +107,7 @@
                 <div class="text-center txt_box2 mb-2 font-16">
                     <img class="me-2" src="/static/images/assets/wedives_choice.svg" height="34" /> wedive's choice 2021
                 </div>
-                <div v-if="pointData.interests" class="row text-start txt_box2 m-0">
+                <div v-if="pointData.interests && pointData.interests.filter(x=>x.type=='divingPointEnvironment'||x.type=='divingType').length>0" class="row text-start txt_box2 m-0">
                     <div v-for="interest in pointData.interests.filter(x=>x.type=='divingPointEnvironment')" class="ico_feature col-3">
                         <i :class="'ico_feature'+(point_category.findIndex(x=>x==interest.title)+1)+' icon-point'"></i>
                         <p class="span_feature text-center">{{ interest.title }}</p>
@@ -289,32 +289,33 @@
         </div>
 
 
-        <div class="card card-style">
+        <div v-if="pointData.diveCenters && pointData.diveCenters.length>0" class="card card-style">
             <div class="content">
                 <h4 class="text-start pt-2 mb-0">인기 다이빙 센터</h4>
-                <p class="mb-3 color-gray-light-mid">양양 사이트의 28개의 센터 준비됨</p>
+                <p class="mb-3 color-gray-light-mid">{{ pointData.name }} 포인트의 {{ pointData.diveCenters.length }}개의 센터 준비됨</p>
                 <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
                 
-                <div v-for="(center,index) in center_list" v-if="index<3">
+                <div v-for="(center,index) in pointData.diveCenters" v-if="index<3">
                     <div class="">
                         <a href="/center">
                             <div class="">
                                 <div class="justify-content-center mb-0 text-start">
                                     <div class="" style="float: left;position: relative;width: 95px; height:95px;">
-                                        <img v-bind:src="center.img" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;">
+                                        <img v-if="center.backgroundImages&&center.backgroundImages.length>0" v-bind:src="center.backgroundImages[0].thumbnailUrl" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;">
+                                        <img v-else src="/static/empty.jpg" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;">
                                     </div>
                                     <div class="" style="padding-left: 110px;">
-                                        <h4 class="font-15"> {{center.title}} </h4>
-                                        <p class="pb-0 mb-0 line-height-m ellipsis"> {{center.desc}} </p>
+                                        <h4 class="font-15"> {{ center.name }} </h4>
+                                        <p class="pb-0 mb-0 line-height-m ellipsis"> {{ center.description }} </p>
                                         <p class="pb-0 mb-0 mt-n1 ellipsis color-gray-light-mid">
-                                            {{center.feature}}
+                                            {{ (center.interests == null) ? "" : center.interests.filter(x=>x.type=='facility').map(x=>{return x.title}).join().replace(",",", ") }}&nbsp;
                                         </p>
                                         <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
-                                            <span> {{center.star}} </span>
+                                            <span> {{ (center.adminScore/20).toFixed(1) }} </span>
                                             &nbsp;<font class="color-gray-light">|</font>&nbsp;
                                             <img src="/static/images/agency/logo_padi.svg" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
                                             &nbsp;<font class="color-gray-light">|</font>&nbsp;
-                                            <span v-for="i in center.price_index">￦</span>
+                                            <span v-if="interest.type=='priceIndex'" v-for="interest in center.interests" style="letter-spacing: -2px;">{{interest.title.replace(/\$/gi, '￦')}}</span>
                                         </p>
                                     </div>
                                 </div>
@@ -332,12 +333,11 @@
                 <div class="text-center"><img src="/static/images/assets/empty_image.jpg" width="60%" style="margin-top:-40px;"/></div>
                 <div class="font-noto text-center mb-3" style="color: #717a92;">등록된 사진이 아직 없어요.</div>
             </div>
-            <div v-else class="content">
+            <div class="content">
                 <div class="gallery-view-controls">
                     <div class="divider mb-0"></div>
-                    <a href="#" class="gallery-view-1"><i class="fa fa-th"></i></a>
-                    <a href="#" class="color-highlight gallery-view-2"><i class="fa fa-th-large"></i></a>
-                    <a href="#" class="gallery-view-3"><i class="fa fa-bars"></i></a>
+                    <a href="#" class="gallery-view-1" style="width: 50%;"><i class="fa fa-th"></i></a>
+                    <a href="#" class="color-highlight gallery-view-2" style="width: 50%;"><i class="fa fa-th-large"></i></a>
                     <div class="clearfix"></div>
                 </div>
                 <div class="content m-0">
@@ -646,6 +646,25 @@ export default {
                     getDivePointByUniqueName(uniqueName: $uniqueName) {
                         _id
                         diveSiteId
+                        diveCenters {
+                            _id
+                            name
+                            uniqueName
+                            description
+                            interests {
+                                title
+                                type
+                            }
+                            institutionTypes
+                            adminScore
+                            backgroundImages {
+                                _id
+                                name
+                                description
+                                reference
+                                thumbnailUrl
+                            }
+                        }
                         diveSite {
                             visitTimeDescription
                             waterTemperatureDescription
@@ -1341,6 +1360,29 @@ export default {
               else if (this.pointData.minDepth <= 40) this.pointData.depthShow = "중급, 고급";
               else this.pointData.depthShow = "고급";
           }
+
+          setTimeout(function() {
+            init_template();
+            var preloader = document.getElementById('preloader')
+            if(preloader){preloader.classList.add('preloader-hide');}
+
+            var galleryColorClass = 'color-highlight'
+            var galleryViews = document.querySelectorAll('.gallery-views');
+            var galleryViewControls = document.querySelectorAll('.gallery-view-controls a');
+
+            function removeSelected(el){
+                galleryViewControls[0].classList.add(galleryColorClass);
+                for (var i = 0; i < galleryViewControls.length; i++){galleryViewControls[i].classList.remove(galleryColorClass)}
+                for (var i = 0; i < galleryViews.length; i++){galleryViews[i].removeAttribute("class"); galleryViews[i].setAttribute('class','gallery-views');}
+            }   
+            galleryViewControls.forEach(el => el.addEventListener('click', e => {
+                removeSelected(el);
+                var galleryActiveString = el.getAttribute('class');
+                var galleryActiveValue = galleryActiveString.split("gallery-view-");
+                galleryViews[0].classList.add('gallery-view-'+galleryActiveValue[1]);
+                el.classList.add(galleryColorClass);
+            }));
+          }, 1000);
       },
       call: function() {
           console.log("call");

@@ -1351,6 +1351,11 @@ export default {
   }, methods: {
       setData(_centerData) {
           this.centerData = _centerData;
+          setTimeout(function() {
+            init_template();
+            var preloader = document.getElementById('preloader')
+            if(preloader){preloader.classList.add('preloader-hide');}
+          }, 1000);
       },
       goCourse: function() {
           location.href='/course';

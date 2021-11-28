@@ -1,8 +1,8 @@
 //Removing Preloader
 
-document.onreadystatechange = () => { 
-    if (document.readyState == "complete") { 
-        setTimeout(function(){
+//document.onreadystatechange = () => { 
+    //if (document.readyState == "complete") { 
+        //setTimeout(function(){
 
     'use strict'
 
@@ -1651,13 +1651,13 @@ document.onreadystatechange = () => {
         }
     }
 
-    init_template();
+    //init_template();
 
-},1500);
+//},1500);
 
-setTimeout(function() {
-    var preloader = document.getElementById('preloader')
-    if(preloader){preloader.classList.add('preloader-hide');}
-},2500);
-} 
-}
+//setTimeout(function() {
+//    var preloader = document.getElementById('preloader')
+//    if(preloader){preloader.classList.add('preloader-hide');}
+//},2500);
+//} 
+//}

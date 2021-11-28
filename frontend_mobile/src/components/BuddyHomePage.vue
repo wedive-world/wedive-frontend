@@ -279,6 +279,11 @@ export default {
   },
   created() {
     window.addEventListener('scroll', this.handleScroll);
+    setTimeout(function() {
+        init_template();
+        var preloader = document.getElementById('preloader')
+        if(preloader){preloader.classList.add('preloader-hide');}
+    }, 500);
   },
   destroyed () {
     window.removeEventListener('scroll', this.handleScroll);

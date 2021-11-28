@@ -448,7 +448,7 @@
           
           
           <hr>
-          <h4 class="mt-3">배경 이미지</h4>
+          <h4 class="mt-3">배경 이미지 (항구사진으로)</h4>
 
           <validation-provider
             #default="validationContext"
@@ -1107,15 +1107,15 @@ export default {
       })
 
       // youtubeVideoIds
-      _pointData.youtubeVideoIds = [];
+      _siteData.youtubeVideoIds = [];
       for (var i=0; i<this.youtubeItems.length; i++) {
-        _pointData.youtubeVideoIds.push(this.youtubeItems[i]);
+        _siteData.youtubeVideoIds.push(this.youtubeItems[i]);
       }
 
       // referenceUrls
-      _pointData.referenceUrls = [];
+      _siteData.referenceUrls = [];
       for (var i=0; i<this.referenceItems.length; i++) {
-        _pointData.referenceUrls.push(this.referenceItems[i]);
+        _siteData.referenceUrls.push(this.referenceItems[i]);
       }
       
 
