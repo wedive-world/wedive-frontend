@@ -30,7 +30,7 @@
                 
                 <div v-for="(center,index) in center_list" v-if="index<3">
                     <div class="map-box">
-                        <a href="/center">
+                        <a href="/center/k26">
                             <div class="bx">
                                 <div class="justify-content-center mb-0 text-start">
                                     <div class="" style="float: left;position: relative;width: 95px; height:95px;">
@@ -79,7 +79,7 @@
                 
                 <div v-for="(center,index) in center_list" v-if="index>6 && index<11">
                     <div class="map-box">
-                        <a href="/center">
+                        <a href="/center/k26">
                             <div class="bx">
                                 <div class="justify-content-center mb-0 text-start">
                                     <div class="" style="float: left;position: relative;width: 95px; height:95px;">
@@ -117,7 +117,7 @@
                 
                 <div v-for="(center,index) in center_list" v-if="index>3 && index<7">
                     <div class="map-box">
-                        <a href="/center">
+                        <a href="/center/k26">
                             <div class="bx">
                                 <div class="justify-content-center mb-0 text-start">
                                     <div class="" style="float: left;position: relative;width: 95px; height:95px;">
@@ -166,7 +166,7 @@
                 
                 <div v-for="(center,index) in center_list" v-if="index>2 && index<5">
                     <div class="map-box">
-                        <a href="/center">
+                        <a href="/center/k26">
                             <div class="bx">
                                 <div class="justify-content-center mb-0 text-start">
                                     <div class="" style="float: left;position: relative;width: 95px; height:95px;">
@@ -266,8 +266,6 @@
 export default {
   name: 'HelloWorld',
   mounted() {
-    var preloader = document.getElementById('preloader')
-    if(preloader){preloader.classList.add('preloader-hide');}
     
     this.btn_new_html = $("#btn_new").html();
 

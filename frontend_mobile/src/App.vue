@@ -77,7 +77,11 @@ export default {
       goHome: function() {
           window.location.href="/";
       }
-  }
+  },
+  setup() {
+    console.log("11 setup");
+    return {}
+  },
 }
 
 </script>

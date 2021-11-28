@@ -11,7 +11,7 @@
                         </div>
                     </div>
                     <div class="splide__slide" v-for="(image, index) in pointData.backgroundImages">
-                        <div data-card-height="250" :class="'card rounded-0 mb-0 background_img_' + index" v-bind:style="'background: url('+image.url+');background-size: contain !important;'">
+                        <div data-card-height="250" :class="'card rounded-0 mb-0 background_img_' + index" v-bind:style="'background: url('+image.url+');background-size: cover !important;'">
                             
                         </div>
                     </div>
@@ -70,7 +70,8 @@
                             {{ pointData.minDepth }}-{{ pointData.maxDepth }}m
                         </div>
                         <div class="flex-grow-1">
-                            <span style="background-color: gray;color:white;padding: 4px 8px;border-radius:4px;">초급, 중급, 고급 가능</span>
+                            
+                            <span style="background-color: gray;color:white;padding: 4px 8px;border-radius:4px;">{{ pointData.depthShow }} 가능</span>
                         </div>
                     </div>
                 </div>
@@ -106,18 +107,14 @@
                 <div class="text-center txt_box2 mb-2 font-16">
                     <img class="me-2" src="/static/images/assets/wedives_choice.svg" height="34" /> wedive's choice 2021
                 </div>
-                <div class="row text-start txt_box2 m-0">
-                    <div class="ico_feature col-3">
-                        <i class="ico_feature2 icon-point"></i>
-                        <p class="span_feature text-center">난파선</p>
+                <div v-if="pointData.interests" class="row text-start txt_box2 m-0">
+                    <div v-for="interest in pointData.interests.filter(x=>x.type=='divingPointEnvironment')" class="ico_feature col-3">
+                        <i :class="'ico_feature'+(point_category.findIndex(x=>x==interest.title)+1)+' icon-point'"></i>
+                        <p class="span_feature text-center">{{ interest.title }}</p>
                     </div>
-                    <div class="ico_feature col-3">
-                        <i class="ico_feature5 icon-point"></i>
-                        <p class="span_feature text-center">월다이빙</p>
-                    </div>
-                    <div class="ico_feature col-3">
-                        <i class="ico_feature11 icon-point"></i>
-                        <p class="span_feature text-center">국내우수</p>
+                    <div v-for="interest in pointData.interests.filter(x=>x.type=='divingType')" class="ico_feature col-3">
+                        <i :class="'ico_feature'+(type_category.findIndex(x=>x==interest.title)+1)+' icon-type'"></i>
+                        <p class="span_feature text-center">{{ interest.title }}</p>
                     </div>
                 </div>
                 <div class="justify-content-center mb-2 mt-2 text-start me-n2 ms-n2">
@@ -204,26 +201,26 @@
                 <div>
                     <div style="display: inline-block;width: 30px; height: 30px; fill: rgb(0, 0, 0);"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path d="M 10 9 C 6.132813 9 3 12.132813 3 16 L 3 34 C 3 37.867188 6.132813 41 10 41 L 40 41 C 43.867188 41 47 37.867188 47 34 L 47 16 C 47 12.132813 43.867188 9 40 9 Z M 10 11 L 40 11 C 42.757813 11 45 13.242188 45 16 L 45 34 C 45 36.757813 42.757813 39 40 39 L 10 39 C 7.242188 39 5 36.757813 5 34 L 5 16 C 5 13.242188 7.242188 11 10 11 Z M 24.53125 17.15625 C 24.101563 19.554688 22.398438 20.070313 20 20.15625 L 20 21.6875 L 24.125 21.6875 L 24.125 32.90625 L 26 32.90625 L 26 17.15625 Z"></path></svg></div>
                     {{ pointData.highlights[0].description }}
-                    <a href="#" class="row m-0 mb-2"> 
+                    <a v-if="pointData.highlights[0].images && pointData.highlights[0].images.length>0" href="#" class="row m-0 mb-2"> 
                         <div class="col-6 ps-0 pe-1">
                             <div class="card rounded-sm mb-2">
-                                <a class="" data-gallery-api="'gallery-0" :href="pointData.highlights[0].images[0].url" :title="pointData.highlights[0].images[0].name">
-                                    <img src="/static/images/assets/empty.png" :data-src="pointData.highlights[0].images[0].thumbnailUrl" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 80px;">
-                                    <div class="wedive-source mx-140">{{ pointData.highlights[0].images[0].reference }}</div>
+                                <a class="" data-gallery="'gallery-highlight" :href="pointData.highlights[0].images[0].url" title="">
+                                    <img src="/static/images/assets/empty.png" :data-src="pointData.highlights[0].images[0].url" class="preload-img img-fluid rounded-s" :alt="pointData.highlights[0].images[0].name" style="height: 80px;">
+                                    <div class="wedive-source mx-140">{{ pointData.highlights[0].images[0].reference | makeReference }}</div>
                                 </a>
                             </div>
-                            <div class="card rounded-sm mb-0">
-                                <a class="" data-gallery="'gallery-0" href="/static/images/point/ko/jeju_munisland_08.jpg" title="">
-                                    <img src="/static/images/assets/empty.png" data-src="/static/images/point/ko/jeju_munisland_08.jpg" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 80px;">
-                                    <div class="wedive-source mx-140">instagram.com/p/CRc8e6FBxaQ/</div>
+                            <div v-if="pointData.highlights[0].images.length>1" class="card rounded-sm mb-0">
+                                <a class="" data-gallery="'gallery-highlight" :href="pointData.highlights[0].images[1].url" title="">
+                                    <img src="/static/images/assets/empty.png" :data-src="pointData.highlights[0].images[1].url" class="preload-img img-fluid rounded-s" :alt="pointData.highlights[0].images[1].name" style="height: 80px;">
+                                    <div class="wedive-source mx-140">{{ pointData.highlights[0].images[1].reference | makeReference }}</div>
                                 </a>
                             </div>
                         </div>
                         <div class="col-6 ps-1 pe-0">
-                            <div class="card rounded-sm mb-0">
-                                <a class="" data-gallery="'gallery-0" href="/static/images/point/ko/jeju_munisland_09.jpg" title="">
-                                    <img src="/static/images/assets/empty.png" data-src="/static/images/point/ko/jeju_munisland_09.jpg" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 170px;">
-                                    <div class="wedive-source mx-140">instagram.com/p/CUDBy28PAHn/</div>
+                            <div v-if="pointData.highlights[0].images.length>2" class="card rounded-sm mb-0">
+                                <a class="" data-gallery="'gallery-highlight" :href="pointData.highlights[0].images[2].url" title="">
+                                    <img src="/static/images/assets/empty.png" :data-src="pointData.highlights[0].images[2].url" class="preload-img img-fluid rounded-s" :alt="pointData.highlights[0].images[2].name" style="height: 170px;">
+                                    <div class="wedive-source mx-140">{{ pointData.highlights[0].images[2].reference | makeReference }}</div>
                                 </a>
                             </div>
                         </div>
@@ -231,56 +228,54 @@
                 </div>
                 
                 
-                <div class="mt-4">
+                <div v-if="pointData.highlights.length>1" class="mt-4">
                     <div style="display: inline-block;width: 30px; height: 30px; fill: rgb(0, 0, 0);"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path d="M 10 9 C 6.132813 9 3 12.132813 3 16 L 3 34 C 3 37.867188 6.132813 41 10 41 L 40 41 C 43.867188 41 47 37.867188 47 34 L 47 16 C 47 12.132813 43.867188 9 40 9 Z M 10 11 L 40 11 C 42.757813 11 45 13.242188 45 16 L 45 34 C 45 36.757813 42.757813 39 40 39 L 10 39 C 7.242188 39 5 36.757813 5 34 L 5 16 C 5 13.242188 7.242188 11 10 11 Z M 25.03125 17 C 20.410156 17 19.976563 20.902344 20.0625 22.71875 L 21.96875 22.71875 C 21.96875 22.199219 22.121094 18.71875 25.03125 18.71875 C 27.769531 18.71875 28.125 21.160156 28.125 21.59375 C 28.125 26.4375 19.65625 26.253906 19.65625 33 L 29.90625 33 L 29.90625 31.28125 L 21.78125 31.28125 C 22.210938 27.734375 30 27.042969 30 21.59375 C 30 20.816406 29.652344 17 25.03125 17 Z"></path></svg></div>
-                    형형색색의 크고 작은 물고기 떼
-                </div>
-                <div class="row m-0 text-center row-cols-3 mb-1" style="margin-left: -4px !important; margin-rigth: -4px !important;">
-                    <a class="col square-rect" data-gallery="'gallery-0" href="/static/images/point/ko/jeju_munisland_10.jpg" title="">
-                        <img src="/static/images/assets/empty.png" data-src="/static/images/point/ko/jeju_munisland_10.jpg" class="preload-img img-fluid rounded-s" alt="Point image">
-                        <div class="wedive-source mx-80">instagram.com/p/CUFJxmJvDbN/</div>
-                    </a>
-                    <a class="col square-rect" data-gallery="'gallery-0" href="/static/images/point/ko/jeju_munisland_11.jpg" title="">
-                        <img src="/static/images/assets/empty.png" data-src="/static/images/point/ko/jeju_munisland_11.jpg" class="preload-img img-fluid rounded-s" alt="Point image">
-                        <div class="wedive-source mx-80">instagram.com/p/CRkZLrTB8XW/</div>
-                    </a>
-                    <a class="col square-rect" data-gallery="'gallery-0" href="/static/images/point/ko/jeju_munisland_12.jpg" title="">
-                        <img src="/static/images/assets/empty.png" data-src="/static/images/point/ko/jeju_munisland_12.jpg" class="preload-img img-fluid rounded-s" alt="Point image">
-                        <div class="wedive-source mx-80">instagram.com/p/CUGnqi5v9kf/</div>
-                    </a>
-                </div>
-
-                <div class="mt-4">
-                    <div style="display: inline-block;width: 30px; height: 30px; fill: rgb(0, 0, 0);"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path d="M 10 9 C 6.132813 9 3 12.132813 3 16 L 3 34 C 3 37.867188 6.132813 41 10 41 L 40 41 C 43.867188 41 47 37.867188 47 34 L 47 16 C 47 12.132813 43.867188 9 40 9 Z M 10 11 L 40 11 C 42.757813 11 45 13.242188 45 16 L 45 34 C 45 36.757813 42.757813 39 40 39 L 10 39 C 7.242188 39 5 36.757813 5 34 L 5 16 C 5 13.242188 7.242188 11 10 11 Z M 25.21875 17 C 20.789063 17 20.398438 21.023438 20.375 22 L 22.25 22 C 22.277344 21.324219 22.582031 18.6875 25.21875 18.6875 C 27.6875 18.6875 28.03125 20.398438 28.03125 21.25 C 28.03125 21.675781 27.785156 23.8125 25.0625 23.8125 L 24.28125 23.8125 L 24.28125 25.4375 C 24.621094 25.351563 24.980469 25.34375 25.40625 25.34375 C 25.832031 25.34375 28.71875 25.417969 28.71875 28.3125 C 28.71875 31.121094 25.738281 31.375 25.3125 31.375 C 23.804688 31.375 22.054688 30.46875 22 28 L 20.125 28 C 20.140625 29.226563 20.511719 33 25.3125 33 C 26.25 33 30.6875 32.730469 30.6875 28.21875 C 30.6875 25.410156 28.8125 24.578125 27.875 24.40625 L 27.875 24.3125 C 28.472656 23.972656 30 22.941406 30 21.15625 C 30 20.476563 29.816406 17 25.21875 17 Z"></path></svg></div>
-                    구난파선, 신난파선 두군데의 난파선 포인트
-                </div>
-                <div class="">
-                    <a href="#" class="row m-0 mb-2"> 
-                        <div class="col-6 ps-0 pe-1">
-                            <div class="card rounded-sm mb-0">
-                                <a class="" data-gallery="'gallery-0" href="/static/images/point/ko/jeju_munisland_13.jpg" title="">
-                                    <img src="/static/images/assets/empty.png" data-src="/static/images/point/ko/jeju_munisland_13.jpg" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 170px;">
-                                    <div class="wedive-source mx-140">tripadvisor.co.kr/LocationPhotoDirectLink-g297892-d1776327-i52724201-Seogwipo_Submarine-Seogwipo_Jeju_Island.html/</div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-6 ps-1 pe-0">
-                            <div class="card rounded-sm mb-2">
-                                <a class="" data-gallery="'gallery-0" href="/static/images/point/ko/jeju_munisland_14.jpg" title="">
-                                    <img src="/static/images/assets/empty.png" data-src="/static/images/point/ko/jeju_munisland_14.jpg" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 80px;">
-                                    <div class="wedive-source mx-140">instagram.com/p/CQ9-DMchbMa/</div>
-                                </a>
-                            </div>
-                            <div class="card rounded-sm mb-0">
-                                <a class="" data-gallery="'gallery-0" href="/static/images/point/ko/jeju_munisland_15.jpg" title="">
-                                    <img src="/static/images/assets/empty.png" data-src="/static/images/point/ko/jeju_munisland_15.jpg" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 80px;">
-                                    <div class="wedive-source mx-140">instagram.com/p/CQVrSaSB0l8/</div>
-                                </a>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+                    {{ pointData.highlights[1].description }}
                 
+                    <div v-if="pointData.highlights[1].images && pointData.highlights[1].images.length>0" class="row m-0 text-center row-cols-3 mb-1" style="margin-left: -4px !important; margin-rigth: -4px !important;">
+                        <a class="col square-rect" data-gallery="'gallery-highlight" :href="pointData.highlights[1].images[0].url" title="">
+                            <img src="/static/images/assets/empty.png" :data-src="pointData.highlights[1].images[0].url" class="preload-img img-fluid rounded-s" :alt="pointData.highlights[1].images[0].name">
+                            <div class="wedive-source mx-80">{{ pointData.highlights[1].images[0].reference | makeReference }}</div>
+                        </a>
+                        <a v-if="pointData.highlights[1].images.length>1" class="col square-rect" data-gallery="'gallery-highlight" :href="pointData.highlights[1].images[1].url" title="">
+                            <img src="/static/images/assets/empty.png" :data-src="pointData.highlights[1].images[1].url" class="preload-img img-fluid rounded-s" :alt="pointData.highlights[1].images[1].name">
+                            <div class="wedive-source mx-80">{{ pointData.highlights[1].images[1].reference | makeReference }}</div>
+                        </a>
+                        <a v-if="pointData.highlights[1].images.length>2" class="col square-rect" data-gallery="'gallery-highlight" :href="pointData.highlights[1].images[2].url" title="">
+                            <img src="/static/images/assets/empty.png" :data-src="pointData.highlights[1].images[2].url" class="preload-img img-fluid rounded-s" :alt="pointData.highlights[1].images[2].name">
+                            <div class="wedive-source mx-80">{{ pointData.highlights[1].images[2].reference | makeReference }}</div>
+                        </a>
+                    </div>
+
+                    <div v-if="pointData.highlights.length>2" class="mt-4">
+                        <div style="display: inline-block;width: 30px; height: 30px; fill: rgb(0, 0, 0);"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path d="M 10 9 C 6.132813 9 3 12.132813 3 16 L 3 34 C 3 37.867188 6.132813 41 10 41 L 40 41 C 43.867188 41 47 37.867188 47 34 L 47 16 C 47 12.132813 43.867188 9 40 9 Z M 10 11 L 40 11 C 42.757813 11 45 13.242188 45 16 L 45 34 C 45 36.757813 42.757813 39 40 39 L 10 39 C 7.242188 39 5 36.757813 5 34 L 5 16 C 5 13.242188 7.242188 11 10 11 Z M 25.21875 17 C 20.789063 17 20.398438 21.023438 20.375 22 L 22.25 22 C 22.277344 21.324219 22.582031 18.6875 25.21875 18.6875 C 27.6875 18.6875 28.03125 20.398438 28.03125 21.25 C 28.03125 21.675781 27.785156 23.8125 25.0625 23.8125 L 24.28125 23.8125 L 24.28125 25.4375 C 24.621094 25.351563 24.980469 25.34375 25.40625 25.34375 C 25.832031 25.34375 28.71875 25.417969 28.71875 28.3125 C 28.71875 31.121094 25.738281 31.375 25.3125 31.375 C 23.804688 31.375 22.054688 30.46875 22 28 L 20.125 28 C 20.140625 29.226563 20.511719 33 25.3125 33 C 26.25 33 30.6875 32.730469 30.6875 28.21875 C 30.6875 25.410156 28.8125 24.578125 27.875 24.40625 L 27.875 24.3125 C 28.472656 23.972656 30 22.941406 30 21.15625 C 30 20.476563 29.816406 17 25.21875 17 Z"></path></svg></div>
+                        {{ pointData.highlights[2].description }}
+                        <a v-if="pointData.highlights[2].images && pointData.highlights[2].images.length>0" href="#" class="row m-0 mb-2"> 
+                            <div class="col-6 ps-0 pe-1">
+                                <div class="card rounded-sm mb-0">
+                                    <a class="" data-gallery="'gallery-highlight" :href="pointData.highlights[2].images[0].url" title="">
+                                        <img src="/static/images/assets/empty.png" :data-src="pointData.highlights[2].images[0].url" class="preload-img img-fluid rounded-s" :alt="pointData.highlights[2].images[0].name" style="height: 170px;">
+                                        <div class="wedive-source mx-140">{{ pointData.highlights[2].images[0].reference | makeReference }}</div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-6 ps-1 pe-0">
+                                <div v-if="pointData.highlights[2].images.length>1" class="card rounded-sm mb-2">
+                                    <a class="" data-gallery="'gallery-highlight" :href="pointData.highlights[2].images[1].url" title="">
+                                        <img src="/static/images/assets/empty.png" :data-src="pointData.highlights[2].images[1].url" class="preload-img img-fluid rounded-s" :alt="pointData.highlights[2].images[1].name" style="height: 80px;">
+                                        <div class="wedive-source mx-140">{{ pointData.highlights[2].images[1].reference | makeReference }}</div>
+                                    </a>
+                                </div>
+                                <div v-if="pointData.highlights[2].images.length>2" class="card rounded-sm mb-0">
+                                    <a class="" data-gallery="'gallery-highlight" :href="pointData.highlights[2].images[2].url" title="">
+                                        <img src="/static/images/assets/empty.png" :data-src="pointData.highlights[2].images[2].url" class="preload-img img-fluid rounded-s" :alt="pointData.highlights[2].images[2].name" style="height: 80px;">
+                                        <div class="wedive-source mx-140">{{ pointData.highlights[2].images[2].reference | makeReference }}</div>
+                                    </a>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -333,7 +328,11 @@
         </div>
 
         <div class="card card-style">
-            <div class="content">
+            <div v-if="pointData.images == null || pointData.images.length == 0" class="content">
+                <div class="text-center"><img src="/static/images/assets/empty_image.jpg" width="60%" style="margin-top:-40px;"/></div>
+                <div class="font-noto text-center mb-3" style="color: #717a92;">등록된 사진이 아직 없어요.</div>
+            </div>
+            <div v-else class="content">
                 <div class="gallery-view-controls">
                     <div class="divider mb-0"></div>
                     <a href="#" class="gallery-view-1"><i class="fa fa-th"></i></a>
@@ -343,42 +342,13 @@
                 </div>
                 <div class="content m-0">
                     <div class="gallery-views gallery-view-2">
-                        <a data-gallery="gallery-1" href="/static/images/point/ko/jeju_munisland_01.jpg" title="문섬 바다 속 풍경">
-                            <img src="images/empty.png" data-src="/static/images/point/ko/jeju_munisland_01.jpg" class="rounded-m preload-img shadow-l img-fluid" alt="img">
+                        <a v-for="image in pointData.images" data-gallery="gallery-1" :href="image.url" title="" style="position: relative;" class="square-rect">
+                            <img src="/static/images/assets/empty.png" :data-src="image.url" class="rounded-m preload-img shadow-l img-fluid" alt="img" style="padding: 0px;">
+                            <div class="wedive-source mx-140">{{ image.reference | makeReference }}</div>
                             <div class="caption pt-0 mb-2 ms-3">
-                                <p class="color-gray-light-mid font-600 mb-n1">문섬 바다 속 풍경</p>
+                                <p class="color-gray-light-mid font-600 mb-n1">{{ image.name }}</p>
                             </div>
                         </a>
-                        <a data-gallery="gallery-1" href="/static/images/point/ko/jeju_munisland_02.jpg" title="연산호 주변 범돔 무리">
-                            <img src="images/empty.png" data-src="/static/images/point/ko/jeju_munisland_02.jpg" class="rounded-m preload-img shadow-l img-fluid" alt="img">
-                            <div class="caption pt-0 mb-2 ms-3">
-                                <p class="color-gray-light-mid font-600 mb-n1">연산호 주변 범돔 무리</p>
-                            </div>
-                        </a>		
-                        <a data-gallery="gallery-1" href="/static/images/point/ko/jeju_munisland_03.jpg" title="적벽 형태의 포인트">
-                            <img src="images/empty.png" data-src="/static/images/point/ko/jeju_munisland_03.jpg" class="rounded-m preload-img shadow-l img-fluid" alt="img">
-                            <div class="caption pt-0 mb-2 ms-3">
-                                <p class="color-gray-light-mid font-600 mb-n1">적벽 형태의 포인트</p>
-                            </div>
-                        </a>	
-                        <a data-gallery="gallery-1" href="/static/images/point/ko/jeju_munisland_04.jpg" title="형형색색의 연산호">
-                            <img src="images/empty.png" data-src="/static/images/point/ko/jeju_munisland_04.jpg" class="rounded-m preload-img shadow-l img-fluid" alt="img">
-                            <div class="caption pt-0 mb-2 ms-3">
-                                <p class="color-gray-light-mid font-600 mb-n1">형형색색의 연산호</p>
-                            </div>
-                        </a>
-                        <a data-gallery="gallery-1" href="/static/images/point/ko/jeju_munisland_05.jpg" title="다양한 수중생물">
-                            <img src="images/empty.png" data-src="/static/images/point/ko/jeju_munisland_05.jpg" class="rounded-m preload-img shadow-l img-fluid" alt="img">
-                            <div class="caption pt-0 mb-2 ms-3">
-                                <p class="color-gray-light-mid font-600 mb-n1">다양한 수중생물</p>
-                            </div>
-                        </a>
-                        <a data-gallery="gallery-1" href="/static/images/point/ko/jeju_munisland_06.jpg" title="문섬, 새끼섬">
-                            <img src="images/empty.png" data-src="/static/images/point/ko/jeju_munisland_06.jpg" class="rounded-m preload-img shadow-l img-fluid" alt="img">
-                            <div class="caption pt-0 mb-2 ms-3 mb-4">
-                                <p class="color-gray-light-mid font-600 mb-n1">문섬, 새끼섬</p>
-                            </div>
-                        </a>			
                     </div>
                 </div>
                 
@@ -412,57 +382,22 @@
         </div>
 
         
-        <h4 class="text-start mb-2" style="margin-left: 10px;margin-right: 10px;">근처 포인트</h4>
-        <div class="splide single-slider slider-no-arrows visible-slider slider-no-dots" id="single-slider-nearby">
+        <h4 v-if="nearData.length > 0" class="text-start mb-2" style="margin-left: 10px;margin-right: 10px;">근처 포인트</h4>
+        <div v-if="nearData.length > 0" class="splide single-slider slider-no-arrows visible-slider slider-no-dots" id="single-slider-nearby">
             <div class="splide__track">
                 <div class="splide__list">
-                    <div class="splide__slide">
-                        <div class="card card-style card-nearby" style="background: url(https://image.theminda.com/data/tg/image/tour/middle/202006/2e6ff60341af47987c05eef458b07dfb.jpg)" data-card-height="260">
+                    <div v-for="near in nearData" class="splide__slide">
+                        <div class="card card-style card-nearby" :style="'background: url('+((near.backgroundImages!=null&&near.backgroundImages[0]!=null) ? near.backgroundImages[0].url : '/static/empty.jpg')+')'" data-card-height="260">
+                        
                             <div class="card-top px-3 py-3">
                                 <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-red-dark"></i></a>
                             </div>
                             <div class="card-bottom px-3 py-3">
-                                <h4 class="color-white font-18 font-600">범섬 포인트</h4>
+                                <h4 class="color-white font-18 font-600">{{ near.name }} 포인트</h4>
                                 <div class="divider bg-white opacity-20 mb-1"></div>
                                 <div class="d-flex">
                                     <div class="align-self-center" style="max-width: 100%;">
-                                        <p class="font-11 opacity-70 font-600 color-white nearby_desc mb-0" style="max-width: 100%;">대한민국 3대 포인트가 위치한 사이트로 강원도 지역에서 가장 유명한 사이트 입니다. 특히 수중 금강산이라고 불리는 낙산대기 포인트와 개복치를 볼 수 있는 마이산 포인트 등이 유명합니다.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-overlay bg-gradient opacity-30"></div>
-                            <div class="card-overlay bg-gradient"></div>
-                        </div>
-                    </div>
-                    <div class="splide__slide">
-                        <div class="card card-style card-nearby" style="background: url(https://static.wixstatic.com/media/d49a86_3e0b03ae1cfc42979041148d5abbd332~mv2.jpg/v1/fill/w_1000,h_668,al_c,q_90,usm_0.66_1.00_0.01/d49a86_3e0b03ae1cfc42979041148d5abbd332~mv2.jpg)" data-card-height="260">
-                            <div class="card-top px-3 py-3">
-                                <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-gray-light"></i></a>
-                            </div>
-                            <div class="card-bottom px-3 py-3">
-                                <h4 class="color-white font-18 font-600">섶섬 포인트</h4>
-                                <div class="divider bg-white opacity-20 mb-1"></div>
-                                <div class="d-flex">
-                                    <div class="align-self-center" style="max-width: 100%;">
-                                        <p class="font-11 opacity-70 font-600 color-white nearby_desc mb-0" style="max-width: 100%;">일반적으로 모래바닥으로 구성된 동해안과는 다르게 속초의 바다는 암석형태가 많이 있습니다. 덕분에 이곳에서 다이빙을 한다면 다양한 볼거리를 마주할 수 있습니다.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-overlay bg-gradient opacity-30"></div>
-                            <div class="card-overlay bg-gradient"></div>
-                        </div>
-                    </div>
-                    <div class="splide__slide">
-                        <div class="card card-style card-nearby" style="background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnb0wu0n9HF7dFV51aUw69W50V4dZ9r7gLbg&usqp=CAU)" data-card-height="260">
-                            <div class="card-top px-3 py-3">
-                                <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-gray-light"></i></a>
-                            </div>
-                            <div class="card-bottom px-3 py-3">
-                                <h4 class="color-white font-18 font-600">바다목장 포인트</h4>
-                                <div class="divider bg-white opacity-20 mb-1"></div>
-                                <div class="d-flex">
-                                    <div class="align-self-center" style="max-width: 100%;">
-                                        <p class="font-11 opacity-70 font-600 color-white nearby_desc mb-0" style="max-width: 100%;">대한민국 최대 규모의 난파선 다이빙 포인트인 스텔라 난파선 포인트가 위치한 사이트 입니다. 더불어 강원도 3대 미항으로 꼽히는 삼곡항이 있는 등 아름다운 다이빙 사이트 입니다.</p>
+                                        <p class="font-11 opacity-70 font-600 color-white nearby_desc mb-0" style="max-width: 100%;">{{ near.description }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -700,8 +635,8 @@ const axios = require("axios")
 
 export default {
   name: 'HelloWorld',
-  async mounted() {
-    if (this.$route.params.id) {
+  async beforeRouteEnter(to, from, next) {
+    if (to.params.id != null) {
         var result = await axios({
         url: 'https://api.wedives.com/graphql',
         method: 'post',
@@ -949,7 +884,7 @@ export default {
                 }
             `,
             variables: {
-                uniqueName: this.$route.params.id
+                uniqueName: to.params.id
             }
 
         }
@@ -960,33 +895,157 @@ export default {
         }
         });
         
-        if (result.data.data.getDivePointByUniqueName) {
-            this.pointData = result.data.data.getDivePointByUniqueName;
-        }
-        console.log(this.pointData);
         
-        if (this.pointData.backgroundImages.length > 0) {
-            for (var i=0; i<this.pointData.backgroundImages.length; i++) {
-                this.pointData.backgroundImages[i].url = '/static/empty.jpg';
+        if (result.data.data.getDivePointByUniqueName.backgroundImages.length > 0) {
+            for (var i=0; i<result.data.data.getDivePointByUniqueName.backgroundImages.length; i++) {
+                result.data.data.getDivePointByUniqueName.backgroundImages[i].url = '/static/empty.jpg';
             }
             var id_arr = [];
             var width_arr = [];
-            for (var i=0; i<this.pointData.backgroundImages.length; i++) {
-                id_arr.push(this.pointData.backgroundImages[i]._id);
+            for (var i=0; i<result.data.data.getDivePointByUniqueName.backgroundImages.length; i++) {
+                id_arr.push(result.data.data.getDivePointByUniqueName.backgroundImages[i]._id);
                 width_arr.push(720);
             }
-            var result_image = await axios({
+            if (id_arr.length > 0) {
+                var result_image = await axios({
+                url: 'https://api.wedives.com/graphql',
+                method: 'post',
+                data: {
+                    query: `
+                        query Query($ids: [ID], $widths: [Int]) {
+                            getImageUrlsByIds(_ids: $ids, widths: $widths)
+                        }
+                    `,
+                    variables: {
+                        ids: id_arr,
+                        widths: width_arr
+                    }
+
+                }
+                }, {
+                headers: {
+                countryCode: 'ko',
+                }
+                });
+                if (result_image.data.data.getImageUrlsByIds) {
+                    for (var i=0; i<result_image.data.data.getImageUrlsByIds.length; i++) {
+                        result.data.data.getDivePointByUniqueName.backgroundImages[i].url = result_image.data.data.getImageUrlsByIds[i];
+                        //$(".background_img_" + i).css("background", "url(" + result_image.data.data.getImageUrlsByIds[i] + ")");
+                    }
+                }
+            }
+        }
+        
+
+        if (result.data.data.getDivePointByUniqueName.images.length > 0) {
+            for (var i=0; i<result.data.data.getDivePointByUniqueName.images.length; i++) {
+                result.data.data.getDivePointByUniqueName.images[i].url = '/static/empty.jpg';
+            }
+            var id_arr = [];
+            var width_arr = [];
+            for (var i=0; i<result.data.data.getDivePointByUniqueName.images.length; i++) {
+                id_arr.push(result.data.data.getDivePointByUniqueName.images[i]._id);
+                width_arr.push(720);
+            }
+            if (id_arr.length > 0) {
+                var result_image = await axios({
+                url: 'https://api.wedives.com/graphql',
+                method: 'post',
+                data: {
+                    query: `
+                        query Query($ids: [ID], $widths: [Int]) {
+                            getImageUrlsByIds(_ids: $ids, widths: $widths)
+                        }
+                    `,
+                    variables: {
+                        ids: id_arr,
+                        widths: width_arr
+                    }
+
+                }
+                }, {
+                headers: {
+                countryCode: 'ko',
+                }
+                });
+                if (result_image.data.data.getImageUrlsByIds) {
+                    for (var i=0; i<result_image.data.data.getImageUrlsByIds.length; i++) {
+                        result.data.data.getDivePointByUniqueName.images[i].url = result_image.data.data.getImageUrlsByIds[i];
+                        
+                    }
+                }
+            }
+        }
+        
+
+        if (result.data.data.getDivePointByUniqueName.highlights.length > 0) {
+            for (var j=0; j<result.data.data.getDivePointByUniqueName.highlights.length; j++) {
+                for (var i=0; i<result.data.data.getDivePointByUniqueName.highlights[j].images.length; i++) {
+                    result.data.data.getDivePointByUniqueName.highlights[j].images[i].url = '/static/empty.jpg';
+                }
+                var id_arr = [];
+                var width_arr = [];
+                for (var i=0; i<result.data.data.getDivePointByUniqueName.highlights[j].images.length; i++) {
+                    id_arr.push(result.data.data.getDivePointByUniqueName.highlights[j].images[i]._id);
+                    width_arr.push(720);
+                }
+                if (id_arr.length > 0) {
+                    var result_image = await axios({
+                    url: 'https://api.wedives.com/graphql',
+                    method: 'post',
+                    data: {
+                        query: `
+                            query Query($ids: [ID], $widths: [Int]) {
+                                getImageUrlsByIds(_ids: $ids, widths: $widths)
+                            }
+                        `,
+                        variables: {
+                            ids: id_arr,
+                            widths: width_arr
+                        }
+
+                    }
+                    }, {
+                    headers: {
+                    countryCode: 'ko',
+                    }
+                    });
+                    if (result_image.data.data.getImageUrlsByIds) {
+                        for (var i=0; i<result_image.data.data.getImageUrlsByIds.length; i++) {
+                            result.data.data.getDivePointByUniqueName.highlights[j].images[i].url = result_image.data.data.getImageUrlsByIds[i];
+                            
+                        }
+                    }
+                }
+            }
+        }
+
+        // 근처 포인트 조회
+        var result_nearby = null;
+        {
+            result_nearby = await axios({
             url: 'https://api.wedives.com/graphql',
             method: 'post',
             data: {
                 query: `
-                    query Query($ids: [ID], $widths: [Int]) {
-                        getImageUrlsByIds(_ids: $ids, widths: $widths)
+                    query GetDivePointsNearBy($lat1: Float!, $lon1: Float!, $lat2: Float!, $lon2: Float!) {
+                        getDivePointsNearBy(lat1: $lat1, lon1: $lon1, lat2: $lat2, lon2: $lon2) {
+                            _id
+                            backgroundImages {
+                                _id
+                                thumbnailUrl
+                            }
+                            name
+                            uniqueName
+                            description
+                        }
                     }
                 `,
                 variables: {
-                    ids: id_arr,
-                    widths: width_arr
+                    lat1: (result.data.data.getDivePointByUniqueName.latitude-0.02),
+                    lon1: (result.data.data.getDivePointByUniqueName.longitude-0.02),
+                    lat2: (result.data.data.getDivePointByUniqueName.latitude+0.02),
+                    lon2: (result.data.data.getDivePointByUniqueName.longitude+0.02),
                 }
 
             }
@@ -995,10 +1054,47 @@ export default {
             countryCode: 'ko',
             }
             });
-            if (result_image.data.data.getImageUrlsByIds) {
-                for (var i=0; i<result_image.data.data.getImageUrlsByIds.length; i++) {
-                    this.pointData.backgroundImages[i].url = result_image.data.data.getImageUrlsByIds[i];
-                    $(".background_img_" + i).css("background", "url(" + result_image.data.data.getImageUrlsByIds[i] + ")");
+        }
+        // 근처포인트 backgroundImage
+        if (result_nearby.data.data.getDivePointsNearBy.length > 0) {
+            for (var j=0; j<result_nearby.data.data.getDivePointsNearBy.length; j++) {
+                if (result_nearby.data.data.getDivePointsNearBy[j]._id != result.data.data.getDivePointByUniqueName._id) {
+                    for (var i=0; i<result_nearby.data.data.getDivePointsNearBy[j].backgroundImages.length; i++) {
+                        result_nearby.data.data.getDivePointsNearBy[j].backgroundImages[i].url = '/static/empty.jpg';
+                    }
+                    var id_arr = [];
+                    var width_arr = [];
+                    for (var i=0; i<result_nearby.data.data.getDivePointsNearBy[j].backgroundImages.length; i++) {
+                        id_arr.push(result_nearby.data.data.getDivePointsNearBy[j].backgroundImages[i]._id);
+                        width_arr.push(720);
+                    }
+                    if (id_arr.length > 0) {
+                        var result_image = await axios({
+                        url: 'https://api.wedives.com/graphql',
+                        method: 'post',
+                        data: {
+                            query: `
+                                query Query($ids: [ID], $widths: [Int]) {
+                                    getImageUrlsByIds(_ids: $ids, widths: $widths)
+                                }
+                            `,
+                            variables: {
+                                ids: id_arr,
+                                widths: width_arr
+                            }
+
+                        }
+                        }, {
+                        headers: {
+                        countryCode: 'ko',
+                        }
+                        });
+                        if (result_image.data.data.getImageUrlsByIds) {
+                            for (var i=0; i<result_image.data.data.getImageUrlsByIds.length; i++) {
+                                result_nearby.data.data.getDivePointsNearBy[j].backgroundImages[i].url = result_image.data.data.getImageUrlsByIds[i];
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -1007,7 +1103,7 @@ export default {
 
 
 
-        var galleryFilterOptions = {gutterPixels: 3,};
+        /*var galleryFilterOptions = {gutterPixels: 3,};
         var filterizr = new Filterizr('.gallery-filter', galleryFilterOptions);
 
         var lightbox = GLightbox({
@@ -1019,8 +1115,12 @@ export default {
             closeEffect: 'fade',
             dragAutoSnap:true,
             preload:true,
-        });
+        });*/
+        next(vm => {vm.setData(result.data.data.getDivePointByUniqueName, result_nearby.data.data.getDivePointsNearBy)});
     }
+  },
+  async mounted() {
+    
     if (this.$route.query.header && this.$route.query.header == 'hide') {
         $(".page-title").hide();
         $(".page-title-clear").hide();
@@ -1030,10 +1130,7 @@ export default {
         $("#footer-bar").hide();
     }
 
-
-
-    var preloader = document.getElementById('preloader')
-    if(preloader){preloader.classList.add('preloader-hide');}
+    
     
     let script = document.createElement('script');
     script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCWu8Fw-h-f1t8Sp3I7R3l_Ukr24HunXQM';
@@ -1123,7 +1220,7 @@ export default {
         const map_style = (localStorage['wedive-Theme'] == 'light-mode') ? [] : night_style;
 
         this.map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: (33.226771248454575+0.01), lng: 126.56573069418906},
+            center: {lat: this.pointData.latitude, lng: this.pointData.longitude},
             zoom: 14,
             mapTypeControl: false,
             streetViewControl: false,
@@ -1131,7 +1228,7 @@ export default {
             styles: map_style
         });
 
-        for (var i=0; i<this.center_list.length; i++) {
+        /*for (var i=0; i<this.center_list.length; i++) {
             var _title = this.center_list[i].title;
             var _position = this.center_list[i].position;
 
@@ -1177,7 +1274,7 @@ export default {
                 }
             });
             this.marker_list.push(marker_shop);
-        }
+        }*/
         this.map.addListener("click", (e) => {
             $(".map-box").addClass("hide");
             for (var j=0; j<this.marker_list.length; j++) {
@@ -1195,8 +1292,8 @@ export default {
 
         var marker_point = new google.maps.Marker({
             map: this.map,
-            position: {lat: 33.226771248454575, lng: 126.56573069418906},
-            label: {text: '문섬 포인트', color: 'white', className: 'marker-position2'},
+            position: {lat: this.pointData.latitude, lng: this.pointData.longitude},
+            label: {text: this.pointData.name + ' 포인트', color: 'white', className: 'marker-position2'},
             icon: new google.maps.MarkerImage('/static/images/assets/ico_pin2.png',null, null, null, new google.maps.Size(38,43)),
         });
     };
@@ -1209,10 +1306,13 @@ export default {
     return {
         map: null,
         pointData: {},
+        nearData: [],
         marker_list: [],
-        recommend_word: ["비추천", "낮음", "일반적", "높음", "최고", "완벽함"],
+        recommend_word: ["비추천", "낮음", "일반적", "좋음", "최고", "완벽함"],
         recommend_env_word: ["매우열악", "열악", "평범", "우수", "최고", "극락"],
         recommend_flow_word: ["매우느림", "느림", "일반적", "빠름", "매우빠름", "폭풍"],
+        point_category: ["해저지형", "해저협곡", "큰 암반", "강한조류", "난파선", "가두리양식장", "마크로", "먹(Muck)", "인공어초", "블루홀", "리프다이빙", "빙하", "초대형난파선", "난파선성지", "수중조형물", "수중유적", "대물"],
+        type_category: ["월다이빙", "블랙워터다이빙", "드리프트다이빙", "아이스다이빙", "야간다이빙", "동굴다이빙", "해루질", "프리다이빙", "스노클링", "케이지다이빙", "렉다이빙", "테크니컬다이빙", "나이트록스다이빙"],
         center_list : [
             {title: "버블탱크 스쿠버다이빙", desc: "제주 남부에 위치한 PADI 5star 다이빙센터", star: 3.8, price_index: 2, feature: "덕다이빙, 케이브, 난파선, 드리프트", img: '/static/images/shop1/diving/test1.jpg', position: {lat: 33.24134444312815, lng: 126.56484940647604}},
             {title: "다이브 투게더리조트", desc: "한줄설명1", star: 4.8, price_index: 2, feature: "덕다이빙, 케이브", img: '/static/images/shop1/diving/test2.jpg', position: {lat: 33.241633952501715, lng: 126.56456092676112}},
@@ -1227,6 +1327,21 @@ export default {
         ],
     }
   }, methods: {
+      setData(_pointData, _nearData) {
+          this.pointData = _pointData;
+          _nearData.forEach(d => {
+              if (d._id != this.pointData._id) {
+                  this.nearData.push(d);
+              }
+          });
+          
+          this.pointData.depthShow = "";
+          if (this.pointData.minDepth && this.pointData.maxDepth) {
+              if (this.pointData.minDepth <= 18) this.pointData.depthShow = "초급, 중급, 고급";
+              else if (this.pointData.minDepth <= 40) this.pointData.depthShow = "중급, 고급";
+              else this.pointData.depthShow = "고급";
+          }
+      },
       call: function() {
           console.log("call");
       },
@@ -1246,7 +1361,7 @@ export default {
 .light-border-bottom {border-bottom: 1px solid #dee2e6;}
 .evaluation {background-color: rgba(196,187,171,.2);justify-content: space-around;border-radius: 5px;padding: 8px 8px 8px 0;}
 .evaluation>span.info {padding-left: 11px;border-left: 1px solid #c4bbab;}
-.evaluation>span .icon_question {display: inline-block;position: relative;top: 1px;display: block;width: 18px;height: 18px;background-size: 18px 18px;background-repeat: no-repeat;background-image: url(/static/images/question.png);text-indent: -9999px;}
+.evaluation>span .icon_question {display: inline-block;position: relative;top: 1px;display: block;width: 18px;height: 18px;background-size: 18px 18px;background-repeat: no-repeat;background-image: url(/static/images/assets/question.png);text-indent: -9999px;}
 
 .span_feature {width:66px;}
 .ico_feature {}
@@ -1282,6 +1397,7 @@ export default {
 .ico_feature30 {width: 44px;height: 40px;background-position: -225px -144px;}
 
 .icon-point {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/assets/wedive_point.png);background-repeat: no-repeat;-webkit-background-size: 270px 118px;background-size: 270px 118px;}
+.icon-type {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/assets/wedive_type.png);background-repeat: no-repeat;-webkit-background-size: 270px 118px;background-size: 270px 118px;}
 
 .wedive-ul {width: 100%;list-style:none;display: inline-block;margin-bottom: 0;padding-left: 5px !important;padding-right: 5px !important;}
 .wedive-ul > li {float: left;width: 50%;}
@@ -1299,7 +1415,7 @@ export default {
     width:40px;
     height:40px;}
 .ico-wedive-w:before {content: "";
-        background-image: url('/static/images/ico_wedive_d.png');
+        background-image: url('/static/images/assets/ico_wedive_d.png');
         background-size:40px 40px;
         width:40px;
         height:40px;

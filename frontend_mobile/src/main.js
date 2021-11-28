@@ -19,6 +19,9 @@ Vue.use(VCalendar);
 Vue.filter("makeComma", val =>{
   return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 })
+Vue.filter("makeReference", val => {
+  return String(val).replace("https://","").replace("http://","").replace("www.","");
+})
 
 
 /*

@@ -1,10 +1,9 @@
 //Removing Preloader
-setTimeout(function(){
-    var preloader = document.getElementById('preloader')
-    if(preloader){preloader.classList.add('preloader-hide');}
-},500);
 
-document.addEventListener('DOMContentLoaded', () => {
+document.onreadystatechange = () => { 
+    if (document.readyState == "complete") { 
+        setTimeout(function(){
+
     'use strict'
 
     //Global Variables
@@ -1653,5 +1652,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     init_template();
-});
 
+},1500);
+
+setTimeout(function() {
+    var preloader = document.getElementById('preloader')
+    if(preloader){preloader.classList.add('preloader-hide');}
+},2500);
+} 
+}

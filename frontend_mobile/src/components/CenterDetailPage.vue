@@ -11,7 +11,7 @@
                         </div>
                     </div>
                     <div class="splide__slide" v-for="(image, index) in centerData.backgroundImages">
-                        <div data-card-height="250" :class="'card rounded-0 mb-0 background_img_' + index" v-bind:style="'background: url('+image.thumbnailUrl+');background-size: contain !important;'">
+                        <div data-card-height="250" :class="'card rounded-0 mb-0 background_img_' + index" v-bind:style="'background: url('+image.url+');background-size: cover !important;'">
                             
                         </div>
                     </div>
@@ -312,39 +312,39 @@
             </div>    
         </div>
 
-        <div class="card card-style">
+        <div v-if="centerData.divePoints && centerData.divePoints.length > 0" class="card card-style">
             <div class="content">
                 <h4 class="text-start pt-2 mb-2">다이빙 가능 포인트</h4>
                 <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
-                <div v-for="(point,index) in point_list" v-if="index<2">
+                <div v-for="(point,index) in centerData.divePoints">
                     <div class="">
                         <div class="">
                             <div class="justify-content-center mb-0 text-start">
-                                <a href="/point">
+                                <a :href="'/point/'+point.uniqueName">
                                     <div style="position: relative;">
-                                        <h4 class="font-15 font-600 color-highlight"> {{point.title}} </h4>
+                                        <h4 class="font-15 font-600 color-highlight"> {{ point.name }} </h4>
                                         <span class="color-gray-light-mid font-12 mb-0 text-more me-1">상세보기<i class="fas fa-chevron-right ms-2"></i></span>
                                     </div>
                                 </a>
                                 <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
-                                    <span> {{point.star}} </span>
+                                    <span> {{ (point.adminScore/20).toFixed(1) }} </span>
                                 </p>
 
-                                <div class="row text-center row-cols-3 mb-1" style="padding-left:10px;padding-right:10px;">
-                                    <a class="col square-rect" v-bind:data-gallery="'gallery-'+index" v-bind:href="point.img1" title="">
-                                        <img src="/static/images/assets/empty.png" v-bind:data-src="point.img1" class="preload-img img-fluid rounded-s" alt="Point image">
+                                <div v-if="point.highlights" class="row text-center row-cols-3 mb-1" style="padding-left:10px;padding-right:10px;">
+                                    <a v-if="point.highlights.length>0&&point.highlights[0].images&&point.highlights[0].images.length>0" class="col square-rect" v-bind:data-gallery="'gallery-'+index" v-bind:href="point.highlights[0].images[0].url" title="">
+                                        <img src="/static/images/assets/empty.png" v-bind:data-src="point.highlights[0].images[0].url" class="preload-img img-fluid rounded-s" alt="Point image">
+                                        <div class="wedive-source mx-140">{{ point.highlights[0].images[0].reference | makeReference }}</div>
                                     </a>
-                                    <a class="col square-rect" v-bind:data-gallery="'gallery-'+index" v-bind:href="point.img2" title="">
-                                        <img src="/static/images/assets/empty.png" v-bind:data-src="point.img2" class="preload-img img-fluid rounded-s" alt="Point image">
+                                    <a v-if="point.highlights.length>1&&point.highlights[1].images&&point.highlights[1].images.length>0" class="col square-rect" v-bind:data-gallery="'gallery-'+index" v-bind:href="point.highlights[1].images[0].url" title="">
+                                        <img src="/static/images/assets/empty.png" v-bind:data-src="point.highlights[1].images[0].url" class="preload-img img-fluid rounded-s" alt="Point image">
+                                        <div class="wedive-source mx-140">{{ point.highlights[1].images[0].reference | makeReference }}</div>
                                     </a>
-                                    <a class="col square-rect" v-bind:data-gallery="'gallery-'+index" v-bind:href="point.img3" title="">
-                                        <img src="/static/images/assets/empty.png" v-bind:data-src="point.img3" class="preload-img img-fluid rounded-s" alt="Point image">
+                                    <a v-if="point.highlights.length>2&&point.highlights[2].images&&point.highlights[2].images.length>0" class="col square-rect" v-bind:data-gallery="'gallery-'+index" v-bind:href="point.highlights[2].images[0].url" title="">
+                                        <img src="/static/images/assets/empty.png" v-bind:data-src="point.highlights[2].images[0].url" class="preload-img img-fluid rounded-s" alt="Point image">
+                                        <div class="wedive-source mx-140">{{ point.highlights[2].images[0].reference | makeReference }}</div>
                                     </a>
                                 </div>
-                                <p class="pb-0 mb-0 line-height-m point_desc"> {{point.desc}} </p>
-                                <p class="pb-0 mb-0 mt-n1 ellipsis color-gray-light-mid">
-                                    {{point.feature}}
-                                </p>
+                                <p class="pb-0 mb-0 line-height-m point_desc"> {{point.highlightDescription}} </p>
                             </div>
                         </div>
                     </div>
@@ -397,8 +397,8 @@
             </div>
             <div class="content mb-3 mt-n3">
                 <div class="gallery gallery-filter">
-                    <a v-for="(image, index) in centerData.images" :href="image.thumbnailUrl" data-gallery-api="gallery-image" class="center_image filtr-item" title="" :data-category="(imageCategory.findIndex(x=>x==image.description)+1)">
-                        <img :src="image.thumbnailUrl" :data-src="image.thumbnailUrl" :data-index="index" class="preload-img rounded-s shadow-m">
+                    <a v-for="(image, index) in centerData.images" :href="image.url" data-gallery="gallery-image" class="center_image filtr-item" title="" :data-category="(imageCategory.findIndex(x=>x==image.description)+1)">
+                        <img :src="image.url" :data-src="image.url" :data-index="index" class="preload-img rounded-s shadow-m">
                     </a>
                 </div>
             </div>
@@ -836,8 +836,8 @@ const axios = require("axios")
 
 export default {
   name: 'HelloWorld',
-  async mounted() {
-    if (this.$route.params.id) {
+  async beforeRouteEnter(to, from, next) {
+    if (to.params.id != null) {
         var result = await axios({
         url: 'https://api.wedives.com/graphql',
         method: 'post',
@@ -876,12 +876,21 @@ export default {
                         facilityScore
                         serviceScore
                         wediveComments
-                        diveSites {
-                        _id
                         divePoints {
                             _id
+                            name
+                            uniqueName
                             adminScore
                             highlightDescription
+                            highlights {
+                                images {
+                                    _id
+                                    name
+                                    description
+                                    reference
+                                    thumbnailUrl
+                                }    
+                            }
                             images {
                                 _id
                                 name
@@ -889,16 +898,6 @@ export default {
                                 reference
                                 thumbnailUrl
                             }
-                        }
-                        highlightDescription
-                        adminScore
-                        images {
-                            _id
-                            name
-                            description
-                            reference
-                            thumbnailUrl
-                        }
                         }
                         images {
                             _id
@@ -1007,7 +1006,7 @@ export default {
                 }
             `,
             variables: {
-                uniqueName: this.$route.params.id
+                uniqueName: to.params.id
             }
 
         }
@@ -1018,104 +1017,141 @@ export default {
         }
         });
 
-        if (result.data.data.getDiveCenterByUniqueName) {
-            this.centerData = result.data.data.getDiveCenterByUniqueName;
-        }
-        
-        if (this.centerData.backgroundImages.length > 0) {
-            for (var i=0; i<this.centerData.backgroundImages.length; i++) {
-                this.centerData.backgroundImages[i].url = '/static/empty.jpg';
+        if (result.data.data.getDiveCenterByUniqueName.backgroundImages.length > 0) {
+            for (var i=0; i<result.data.data.getDiveCenterByUniqueName.backgroundImages.length; i++) {
+                result.data.data.getDiveCenterByUniqueName.backgroundImages[i].url = '/static/empty.jpg';
             }
             var id_arr = [];
             var width_arr = [];
-            for (var i=0; i<this.centerData.backgroundImages.length; i++) {
-                id_arr.push(this.centerData.backgroundImages[i]._id);
+            for (var i=0; i<result.data.data.getDiveCenterByUniqueName.backgroundImages.length; i++) {
+                id_arr.push(result.data.data.getDiveCenterByUniqueName.backgroundImages[i]._id);
                 width_arr.push(720);
             }
-            var result_image = await axios({
-            url: 'https://api.wedives.com/graphql',
-            method: 'post',
-            data: {
-                query: `
-                    query Query($ids: [ID], $widths: [Int]) {
-                        getImageUrlsByIds(_ids: $ids, widths: $widths)
+            if (id_arr.length > 0) {
+                var result_image = await axios({
+                url: 'https://api.wedives.com/graphql',
+                method: 'post',
+                data: {
+                    query: `
+                        query Query($ids: [ID], $widths: [Int]) {
+                            getImageUrlsByIds(_ids: $ids, widths: $widths)
+                        }
+                    `,
+                    variables: {
+                        ids: id_arr,
+                        widths: width_arr
                     }
-                `,
-                variables: {
-                    ids: id_arr,
-                    widths: width_arr
-                }
 
-            }
-            }, {
-            headers: {
-            countryCode: 'ko',
-            }
-            });
-            if (result_image.data.data.getImageUrlsByIds) {
-                for (var i=0; i<result_image.data.data.getImageUrlsByIds.length; i++) {
-                    this.centerData.backgroundImages[i].url = result_image.data.data.getImageUrlsByIds[i];
-                    $(".background_img_" + i).css("background", "url(" + result_image.data.data.getImageUrlsByIds[i] + ")");
+                }
+                }, {
+                headers: {
+                countryCode: 'ko',
+                }
+                });
+                if (result_image.data.data.getImageUrlsByIds) {
+                    for (var i=0; i<result_image.data.data.getImageUrlsByIds.length; i++) {
+                        result.data.data.getDiveCenterByUniqueName.backgroundImages[i].url = result_image.data.data.getImageUrlsByIds[i];
+                        //$(".background_img_" + i).css("background", "url(" + result_image.data.data.getImageUrlsByIds[i] + ")");
+                    }
                 }
             }
         }
 
 
-        if (this.centerData.images.length > 0) {
-            for (var i=0; i<this.centerData.images.length; i++) {
-                this.centerData.images[i].url = '/static/empty.jpg';
+        if (result.data.data.getDiveCenterByUniqueName.images.length > 0) {
+            for (var i=0; i<result.data.data.getDiveCenterByUniqueName.images.length; i++) {
+                result.data.data.getDiveCenterByUniqueName.images[i].url = '/static/empty.jpg';
             }
             var id_arr = [];
             var width_arr = [];
-            for (var i=0; i<this.centerData.images.length; i++) {
-                id_arr.push(this.centerData.images[i]._id);
+            for (var i=0; i<result.data.data.getDiveCenterByUniqueName.images.length; i++) {
+                id_arr.push(result.data.data.getDiveCenterByUniqueName.images[i]._id);
                 width_arr.push(720);
             }
-            var result_image = await axios({
-            url: 'https://api.wedives.com/graphql',
-            method: 'post',
-            data: {
-                query: `
-                    query Query($ids: [ID], $widths: [Int]) {
-                        getImageUrlsByIds(_ids: $ids, widths: $widths)
+            if (id_arr.length > 0) {
+                var result_image = await axios({
+                url: 'https://api.wedives.com/graphql',
+                method: 'post',
+                data: {
+                    query: `
+                        query Query($ids: [ID], $widths: [Int]) {
+                            getImageUrlsByIds(_ids: $ids, widths: $widths)
+                        }
+                    `,
+                    variables: {
+                        ids: id_arr,
+                        widths: width_arr
                     }
-                `,
-                variables: {
-                    ids: id_arr,
-                    widths: width_arr
-                }
 
-            }
-            }, {
-            headers: {
-            countryCode: 'ko',
-            }
-            });
-            if (result_image.data.data.getImageUrlsByIds) {
-                for (var i=0; i<result_image.data.data.getImageUrlsByIds.length; i++) {
-                    this.centerData.images[i].url = result_image.data.data.getImageUrlsByIds[i];
-                    $(".center_image > [data-index="+i+"]").parent().attr("href", this.centerData.images[i].url);
+                }
+                }, {
+                headers: {
+                countryCode: 'ko',
+                }
+                });
+                if (result_image.data.data.getImageUrlsByIds) {
+                    for (var i=0; i<result_image.data.data.getImageUrlsByIds.length; i++) {
+                        result.data.data.getDiveCenterByUniqueName.images[i].url = result_image.data.data.getImageUrlsByIds[i];
+                        //$(".center_image > [data-index="+i+"]").parent().attr("href", result.data.data.getDiveCenterByUniqueName.images[i].url);
+                    }
                 }
             }
-
-            var galleryFilterOptions = {gutterPixels: 3,};
-            var filterizr = new Filterizr('.gallery-filter', galleryFilterOptions);
-
-            var lightbox = GLightbox({
-                closeOnOutsideClick: false,
-                zoomable:false,
-                descPosition:'bottom',
-                selector: '[data-gallery-api]',
-                openEffect: 'fade',
-                closeEffect: 'fade',
-                dragAutoSnap:true,
-                preload:true,
-            });
             
         }
 
+        // points 내 하이라이트 이미지 리스트
+        if (result.data.data.getDiveCenterByUniqueName.divePoints.length > 0) {
+            for (var j=0; j<result.data.data.getDiveCenterByUniqueName.divePoints.length; j++) {
+                for (var i=0; i<result.data.data.getDiveCenterByUniqueName.divePoints[j].highlights.length; i++) {
+                    if (result.data.data.getDiveCenterByUniqueName.divePoints[j].highlights[i].images && result.data.data.getDiveCenterByUniqueName.divePoints[j].highlights[i].images.length>0) {
+                        result.data.data.getDiveCenterByUniqueName.divePoints[j].highlights[i].images[0].url = '/static/empty.jpg';
+                    }
+                }
+                var id_arr = [];
+                var width_arr = [];
+                for (var i=0; i<result.data.data.getDiveCenterByUniqueName.divePoints[j].highlights.length; i++) {
+                    if (result.data.data.getDiveCenterByUniqueName.divePoints[j].highlights[i].images && result.data.data.getDiveCenterByUniqueName.divePoints[j].highlights[i].images.length > 0) {
+                        id_arr.push(result.data.data.getDiveCenterByUniqueName.divePoints[j].highlights[i].images[0]._id);
+                        width_arr.push(720);
+                    }
+                }
+                if (id_arr.length > 0) {
+                    var result_image = await axios({
+                    url: 'https://api.wedives.com/graphql',
+                    method: 'post',
+                    data: {
+                        query: `
+                            query Query($ids: [ID], $widths: [Int]) {
+                                getImageUrlsByIds(_ids: $ids, widths: $widths)
+                            }
+                        `,
+                        variables: {
+                            ids: id_arr,
+                            widths: width_arr
+                        }
 
-        if (result.data.data.getDiveCenterByUniqueName.latitude && result.data.data.getDiveCenterByUniqueName.longitude) {
+                    }
+                    }, {
+                    headers: {
+                    countryCode: 'ko',
+                    }
+                    });
+
+                    var cnt = 0;
+                    for (var i=0; i<result.data.data.getDiveCenterByUniqueName.divePoints[j].highlights.length; i++) {
+                        if (result.data.data.getDiveCenterByUniqueName.divePoints[j].highlights[i].images && result.data.data.getDiveCenterByUniqueName.divePoints[j].highlights[i].images.length > 0) {
+                            result.data.data.getDiveCenterByUniqueName.divePoints[j].highlights[i].images[0].url = result_image.data.data.getImageUrlsByIds[cnt++];
+                        }
+                    }
+                }
+            }
+        }
+        next(vm => {vm.setData(result.data.data.getDiveCenterByUniqueName)});
+    }
+  },
+  async mounted() {
+    if (this.$route.params.id) {
+        if (this.centerData.latitude && this.centerData.longitude) {
             var preloader = document.getElementById('preloader')
             if(preloader){preloader.classList.add('preloader-hide');}
             
@@ -1207,7 +1243,7 @@ export default {
                 const map_style = (localStorage['wedive-Theme'] == 'light-mode') ? [] : night_style;
 
                 this.map = new google.maps.Map(document.getElementById('map'), {
-                    center: {lat: result.data.data.getDiveCenterByUniqueName.latitude, lng: result.data.data.getDiveCenterByUniqueName.longitude},
+                    center: {lat: this.centerData.latitude, lng: this.centerData.longitude},
                     zoom: 13,
                     mapTypeControl: false,
                     streetViewControl: false,
@@ -1216,8 +1252,8 @@ export default {
                 });
                 var marker_shop = new google.maps.Marker({
                     map: this.map,
-                    position: {lat: result.data.data.getDiveCenterByUniqueName.latitude, lng: result.data.data.getDiveCenterByUniqueName.longitude},
-                    label: {text: result.data.data.getDiveCenterByUniqueName.name, color: 'white', className: 'marker-position'},
+                    position: {lat: this.centerData.latitude, lng: this.centerData.longitude},
+                    label: {text: this.centerData.name, color: 'white', className: 'marker-position'},
                     icon: new google.maps.MarkerImage('/static/images/assets/ico_pin1.png',null, null, null, new google.maps.Size(38,43)),
                 });
 
@@ -1313,6 +1349,9 @@ export default {
         ],
     }
   }, methods: {
+      setData(_centerData) {
+          this.centerData = _centerData;
+      },
       goCourse: function() {
           location.href='/course';
       },

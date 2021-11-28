@@ -350,8 +350,6 @@
 export default {
   name: 'HelloWorld',
   mounted() {
-    var preloader = document.getElementById('preloader')
-    if(preloader){preloader.classList.add('preloader-hide');}
     
     document.getElementById("page-back").classList.remove("hide");
     document.getElementById("footer-bar").classList.add("hide");

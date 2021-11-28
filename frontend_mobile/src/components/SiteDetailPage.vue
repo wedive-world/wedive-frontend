@@ -11,7 +11,7 @@
                         </div>
                     </div>
                     <div class="splide__slide" v-for="(image, index) in siteData.backgroundImages">
-                        <div data-card-height="250" :class="'card rounded-0 mb-0 background_img_' + index" v-bind:style="'background: url('+image.url+');background-size: contain !important;'">
+                        <div data-card-height="250" :class="'card rounded-0 mb-0 background_img_' + index" v-bind:style="'background: url('+image.url+');background-size: cover !important;'">
                             
                         </div>
                     </div>
@@ -35,32 +35,32 @@
                         <div class="star-area text-start ms-3" style="height: 30px;">
                             <span class="font-14 me-2 color-gray" style="float: left;padding-top:2px;">환경</span>
                             <div class="wedive-fish-back">
-                                <div class="wedive-fish-front" style="width:66%">
+                                <div class="wedive-fish-front" :style="'width:'+siteData.waterEnvironmentScore+'%;'">
                                 </div>
-                                <span class="wedive-score-number">3.3</span>
+                                <span class="wedive-score-number">{{ (siteData.waterEnvironmentScore/20).toFixed(1) }}</span>
                             </div>
                         </div>
                         <div class="star-area mt-1 text-start ms-3" style="height: 30px;">
                             <span class="font-14 me-2 color-gray" style="float: left;padding-top:2px;">유속</span>
                             <div class="wedive-wave-back">
-                                <div class="wedive-wave-front" style="width:66%">
+                                <div class="wedive-wave-front" :style="'width:'+siteData.flowRateScore+'%;'">
                                 </div>
-                                <span class="wedive-score-number">3.8</span>
+                                <span class="wedive-score-number">{{ (siteData.flowRateScore/20).toFixed(1) }}</span>
                             </div>
                         </div>
                         <div class="star-area mt-1 text-start ms-3" style="height: 30px;">
                             <span class="font-14 me-2 color-gray" style="float: left;padding-top:2px;">시야</span>
                             <div class="wedive-eye-back">
-                                <div class="wedive-eye-front" style="width:66%">
+                                <div class="wedive-eye-front" :style="'width:'+siteData.eyeSightScore+'%;'">
                                 </div>
-                                <span class="wedive-score-number">3.3</span>
+                                <span class="wedive-score-number">{{ (siteData.eyeSightScore/20).toFixed(1) }}</span>
                             </div>
                         </div>
                     </div>
                     <div class="flex-grow-1">
-                        <div style="height: 30px;padding-top:2px;">자료없음</div>
-                        <div class="mt-1" style="height: 30px;padding-top:2px;">일반적</div>
-                        <div class="mt-1" style="height: 30px;padding-top:2px;">5-15m</div>
+                        <div style="height: 30px;padding-top:2px;">{{ recommend_env_word[parseInt(siteData.adminScore/20)] }}</div>
+                        <div class="mt-1" style="height: 30px;padding-top:2px;">{{ recommend_flow_word[parseInt(siteData.adminScore/20)] }}</div>
+                        <div class="mt-1" style="height: 30px;padding-top:2px;">{{ siteData.minSight }}-{{ siteData.maxSight }}m</div>
                     </div>
                 </div>
                 
@@ -91,50 +91,14 @@
                     <i class="ico ico-wedive-w -circle color-primary scale-box fa-4x"></i>
                 </div>
                 <h4 class="text-center pt-2 mb-2">where is here?</h4>
-                <div class="row text-start txt_box2 m-0">
-                    <div class="ico_feature col-3">
-                        <i class="ico_feature1 icon-point"></i>
-                        <p class="span_feature text-center">동굴</p>
+                <div v-if="siteData.interests" class="row text-start txt_box2 m-0">
+                    <div v-for="interest in siteData.interests.filter(x=>x.type=='divingPointEnvironment')" class="ico_feature col-3">
+                        <i :class="'ico_feature'+(point_category.findIndex(x=>x==interest.title)+1)+' icon-point'"></i>
+                        <p class="span_feature text-center">{{ interest.title }}</p>
                     </div>
-                    <div class="ico_feature col-3">
-                        <i class="ico_feature2 icon-point"></i>
-                        <p class="span_feature text-center">난파선</p>
-                    </div>
-                    <div class="ico_feature col-3">
-                        <i class="ico_feature3 icon-point"></i>
-                        <p class="span_feature text-center">마크로</p>
-                    </div>
-                    <div class="ico_feature col-3">
-                        <i class="ico_feature4 icon-point"></i>
-                        <p class="span_feature text-center">대물</p>
-                    </div>
-                    <div class="ico_feature col-3">
-                        <i class="ico_feature5 icon-point"></i>
-                        <p class="span_feature text-center">월다이빙</p>
-                    </div>
-                    <div class="ico_feature col-3">
-                        <i class="ico_feature6 icon-point"></i>
-                        <p class="span_feature text-center">딥다이빙</p>
-                    </div>
-                    <div class="ico_feature col-3">
-                        <i class="ico_feature8 icon-point"></i>
-                        <p class="span_feature text-center">드리프트</p>
-                    </div>
-                    <div class="ico_feature col-3">
-                        <i class="ico_feature9 icon-point"></i>
-                        <p class="span_feature text-center">리브어보드</p>
-                    </div>
-                    <div class="ico_feature col-3">
-                        <i class="ico_feature10 icon-point"></i>
-                        <p class="span_feature text-center">구조물</p>
-                    </div>
-                    <div class="ico_feature col-3">
-                        <i class="ico_feature11 icon-point"></i>
-                        <p class="span_feature text-center">국내우수</p>
-                    </div>
-                    <div class="ico_feature col-3">
-                        <i class="ico_feature12 icon-point"></i>
-                        <p class="span_feature text-center">글로벌TOP</p>
+                    <div v-for="interest in siteData.interests.filter(x=>x.type=='divingType')" class="ico_feature col-3">
+                        <i :class="'ico_feature'+(type_category.findIndex(x=>x==interest.title)+1)+' icon-type'"></i>
+                        <p class="span_feature text-center">{{ interest.title }}</p>
                     </div>
                 </div>
                 <div class="justify-content-center mb-2 mt-2 text-start me-n2 ms-n2">
@@ -220,35 +184,36 @@
             <div class="content">
                 <h4 class="text-start pt-2 mb-2">{{ siteData.name }} 인기 포인트</h4>
                 <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
-                <div v-for="(point,index) in point_list" v-if="index<3">
+                <div v-for="(point,index) in siteData.divePoints" v-if="index<3">
                     <div class="">
                         <div class="">
                             <div class="justify-content-center mb-0 text-start">
-                                <a href="/point">
+                                <a :href="'/point/' + point.uniqueName">
                                     <div style="position: relative;">
-                                        <h4 class="font-15 font-600 color-highlight"> {{point.title}} </h4>
+                                        <h4 class="font-15 font-600 color-highlight"> {{ point.name }} </h4>
                                         <span class="color-gray-light-mid font-12 mb-0 text-more me-1">상세보기<i class="fas fa-chevron-right ms-2"></i></span>
                                     </div>
                                 </a>
                                 <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
-                                    <span> {{point.star}} </span>
+                                    <span> {{ (point.adminScore/20).toFixed(1) }} </span>
                                 </p>
 
-                                <div class="row text-center row-cols-3 mb-1" style="padding-left:10px;padding-right:10px;">
-                                    <a class="col square-rect" v-bind:data-gallery="'gallery-'+index" v-bind:href="point.img1" title="">
-                                        <img src="/static/images/assets/empty.png" v-bind:data-src="point.img1" class="preload-img img-fluid rounded-s" alt="Point image">
+                                <div v-if="point.highlights" class="row text-center row-cols-3 mb-1" style="padding-left:10px;padding-right:10px;">
+                                    <a v-if="point.highlights.length>0&&point.highlights[0].images&&point.highlights[0].images.length>0" class="col square-rect" v-bind:data-gallery="'gallery-'+index" v-bind:href="point.highlights[0].images[0].url" title="">
+                                        <img src="/static/images/assets/empty.png" v-bind:data-src="point.highlights[0].images[0].url" class="preload-img img-fluid rounded-s" alt="Point image">
+                                        <div class="wedive-source mx-140">{{ point.highlights[0].images[0].reference | makeReference }}</div>
                                     </a>
-                                    <a class="col square-rect" v-bind:data-gallery="'gallery-'+index" v-bind:href="point.img2" title="">
-                                        <img src="/static/images/assets/empty.png" v-bind:data-src="point.img2" class="preload-img img-fluid rounded-s" alt="Point image">
+                                    <a v-if="point.highlights.length>1&&point.highlights[1].images&&point.highlights[1].images.length>0" class="col square-rect" v-bind:data-gallery="'gallery-'+index" v-bind:href="point.highlights[1].images[0].url" title="">
+                                        <img src="/static/images/assets/empty.png" v-bind:data-src="point.highlights[1].images[0].url" class="preload-img img-fluid rounded-s" alt="Point image">
+                                        <div class="wedive-source mx-140">{{ point.highlights[1].images[0].reference | makeReference }}</div>
                                     </a>
-                                    <a class="col square-rect" v-bind:data-gallery="'gallery-'+index" v-bind:href="point.img3" title="">
-                                        <img src="/static/images/assets/empty.png" v-bind:data-src="point.img3" class="preload-img img-fluid rounded-s" alt="Point image">
+                                    <a v-if="point.highlights.length>2&&point.highlights[2].images&&point.highlights[2].images.length>0" class="col square-rect" v-bind:data-gallery="'gallery-'+index" v-bind:href="point.highlights[2].images[0].url" title="">
+                                        <img src="/static/images/assets/empty.png" v-bind:data-src="point.highlights[2].images[0].url" class="preload-img img-fluid rounded-s" alt="Point image">
+                                        <div class="wedive-source mx-140">{{ point.highlights[2].images[0].reference | makeReference }}</div>
                                     </a>
                                 </div>
-                                <p class="pb-0 mb-0 line-height-m point_desc"> {{point.desc}} </p>
-                                <p class="pb-0 mb-0 mt-n1 ellipsis color-gray-light-mid">
-                                    {{point.feature}}
-                                </p>
+                                
+                                <p class="pb-0 mb-0 line-height-m point_desc"> {{point.highlightDescription}} </p>
                             </div>
                         </div>
                     </div>
@@ -375,7 +340,7 @@
             </div>
             <div id="map" style="height: 300px;"></div>
             <div class="map-box hide">
-                <a href="/point">
+                <a href="">
                     <div class="bx">
                         <div class="justify-content-center mb-0 text-start">
                             <div class="" style="width: 95px; height:95px;">
@@ -398,17 +363,18 @@
         <div class="splide single-slider slider-no-arrows visible-slider slider-no-dots" id="single-slider-nearby">
             <div class="splide__track">
                 <div class="splide__list">
-                    <div class="splide__slide">
-                        <div class="card card-style card-nearby" style="background: url(http://www.outdoornews.co.kr/news/photo/201402/13021_40743_1032.jpg)" data-card-height="260">
+                    <div v-for="near in nearData" class="splide__slide">
+                        <div class="card card-style card-nearby" :style="'background: url('+((near.backgroundImages!=null&&near.backgroundImages[0]!=null) ? near.backgroundImages[0].url : '/static/empty.jpg')+')'" data-card-height="260">
+                        
                             <div class="card-top px-3 py-3">
                                 <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-red-dark"></i></a>
                             </div>
                             <div class="card-bottom px-3 py-3">
-                                <h4 class="color-white font-18 font-600">고성 사이트</h4>
+                                <h4 class="color-white font-18 font-600">{{ near.name }} 사이트</h4>
                                 <div class="divider bg-white opacity-20 mb-1"></div>
                                 <div class="d-flex">
                                     <div class="align-self-center" style="max-width: 100%;">
-                                        <p class="font-11 opacity-70 font-600 color-white nearby_desc mb-0" style="max-width: 100%;">대한민국 3대 포인트가 위치한 사이트로 강원도 지역에서 가장 유명한 사이트 입니다. 특히 수중 금강산이라고 불리는 낙산대기 포인트와 개복치를 볼 수 있는 마이산 포인트 등이 유명합니다.</p>
+                                        <p class="font-11 opacity-70 font-600 color-white nearby_desc mb-0" style="max-width: 100%;">{{ near.description }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -416,42 +382,7 @@
                             <div class="card-overlay bg-gradient"></div>
                         </div>
                     </div>
-                    <div class="splide__slide">
-                        <div class="card card-style card-nearby" style="background: url(https://i.ytimg.com/vi/xSJ4YSt3SRI/maxresdefault.jpg)" data-card-height="260">
-                            <div class="card-top px-3 py-3">
-                                <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-gray-light"></i></a>
-                            </div>
-                            <div class="card-bottom px-3 py-3">
-                                <h4 class="color-white font-18 font-600">속초 사이트</h4>
-                                <div class="divider bg-white opacity-20 mb-1"></div>
-                                <div class="d-flex">
-                                    <div class="align-self-center" style="max-width: 100%;">
-                                        <p class="font-11 opacity-70 font-600 color-white nearby_desc mb-0" style="max-width: 100%;">일반적으로 모래바닥으로 구성된 동해안과는 다르게 속초의 바다는 암석형태가 많이 있습니다. 덕분에 이곳에서 다이빙을 한다면 다양한 볼거리를 마주할 수 있습니다.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-overlay bg-gradient opacity-30"></div>
-                            <div class="card-overlay bg-gradient"></div>
-                        </div>
-                    </div>
-                    <div class="splide__slide">
-                        <div class="card card-style card-nearby" style="background: url(http://www.uwmagazine.co.kr/news/photo/202003/368_1869_1729.jpg)" data-card-height="260">
-                            <div class="card-top px-3 py-3">
-                                <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-gray-light"></i></a>
-                            </div>
-                            <div class="card-bottom px-3 py-3">
-                                <h4 class="color-white font-18 font-600">강릉 사이트</h4>
-                                <div class="divider bg-white opacity-20 mb-1"></div>
-                                <div class="d-flex">
-                                    <div class="align-self-center" style="max-width: 100%;">
-                                        <p class="font-11 opacity-70 font-600 color-white nearby_desc mb-0" style="max-width: 100%;">대한민국 최대 규모의 난파선 다이빙 포인트인 스텔라 난파선 포인트가 위치한 사이트 입니다. 더불어 강원도 3대 미항으로 꼽히는 삼곡항이 있는 등 아름다운 다이빙 사이트 입니다.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-overlay bg-gradient opacity-30"></div>
-                            <div class="card-overlay bg-gradient"></div>
-                        </div>
-                    </div>
+                    
                     
                 </div>
             </div>
@@ -680,8 +611,8 @@ const axios = require("axios")
 
 export default {
   name: 'HelloWorld',
-  async mounted() {
-      if (this.$route.params.id) {
+  async beforeRouteEnter(to, from, next) {
+    if (to.params.id != null) {
         var result = await axios({
         url: 'https://api.wedives.com/graphql',
         method: 'post',
@@ -689,6 +620,45 @@ export default {
             query: `
             query getDiveSiteByUniqueName($uniqueName: String!) {
             getDiveSiteByUniqueName(uniqueName: $uniqueName) {
+                diveCenters {
+                    _id
+                    name
+                    uniqueName
+                    adminScore
+                    images {
+                        _id
+                        name
+                        description
+                        reference
+                        thumbnailUrl
+                    }
+                }
+                divePoints {
+                    _id
+                    name
+                    uniqueName
+                    latitude
+                    longitude
+                    minDepth
+                    adminScore
+                    highlightDescription
+                    highlights {
+                        images {
+                            _id
+                            name
+                            description
+                            reference
+                            thumbnailUrl
+                        }    
+                    }
+                    images {
+                        _id
+                        name
+                        description
+                        reference
+                        thumbnailUrl
+                    }
+                }
                 _id
                 address
                 latitude
@@ -1233,6 +1203,8 @@ export default {
                 adminScore
                 flowRateScore
                 waterEnvironmentScore
+                minSight
+                maxSight
                 visitTimeDescription
                 waterTemperatureDescription
                 deepDescription
@@ -1245,7 +1217,7 @@ export default {
             }
             `,
             variables: {
-                uniqueName: this.$route.params.id
+                uniqueName: to.params.id
             }
 
         }
@@ -1256,18 +1228,15 @@ export default {
         }
         });
 
-        if (result.data.data.getDiveSiteByUniqueName) {
-            this.siteData = result.data.data.getDiveSiteByUniqueName;
-        }
-        
-        if (this.siteData.backgroundImages.length > 0) {
-            for (var i=0; i<this.siteData.backgroundImages.length; i++) {
-                this.siteData.backgroundImages[i].url = '/static/empty.jpg';
+        console.log(result.data.data.getDiveSiteByUniqueName);
+        if (result.data.data.getDiveSiteByUniqueName.backgroundImages.length > 0) {
+            for (var i=0; i<result.data.data.getDiveSiteByUniqueName.backgroundImages.length; i++) {
+                result.data.data.getDiveSiteByUniqueName.backgroundImages[i].url = '/static/empty.jpg';
             }
             var id_arr = [];
             var width_arr = [];
-            for (var i=0; i<this.siteData.backgroundImages.length; i++) {
-                id_arr.push(this.siteData.backgroundImages[i]._id);
+            for (var i=0; i<result.data.data.getDiveSiteByUniqueName.backgroundImages.length; i++) {
+                id_arr.push(result.data.data.getDiveSiteByUniqueName.backgroundImages[i]._id);
                 width_arr.push(720);
             }
             var result_image = await axios({
@@ -1292,16 +1261,144 @@ export default {
             });
             if (result_image.data.data.getImageUrlsByIds) {
                 for (var i=0; i<result_image.data.data.getImageUrlsByIds.length; i++) {
-                    this.siteData.backgroundImages[i].url = result_image.data.data.getImageUrlsByIds[i];
-                    $(".background_img_" + i).css("background", "url(" + result_image.data.data.getImageUrlsByIds[i] + ")");
-                    //setTimeout(function(url, i) {
-                        //$("#background_img_" + i).css("background", "url(" + url + ")");
-                    //}, 1000, result_image.data.data.getImageUrlsByIds[i], i);
-                    //console.log(this.siteData.backgroundImages[i].url)
+                    result.data.data.getDiveSiteByUniqueName.backgroundImages[i].url = result_image.data.data.getImageUrlsByIds[i];
+                    //$(".background_img_" + i).css("background", "url(" + result_image.data.data.getImageUrlsByIds[i] + ")");
                 }
             }
         }
+
+
+        // points 내 하이라이트 이미지 리스트
+        if (result.data.data.getDiveSiteByUniqueName.divePoints.length > 0) {
+            for (var j=0; j<result.data.data.getDiveSiteByUniqueName.divePoints.length; j++) {
+                for (var i=0; i<result.data.data.getDiveSiteByUniqueName.divePoints[j].highlights.length; i++) {
+                    if (result.data.data.getDiveSiteByUniqueName.divePoints[j].highlights[i].images && result.data.data.getDiveSiteByUniqueName.divePoints[j].highlights[i].images.length>0) {
+                        result.data.data.getDiveSiteByUniqueName.divePoints[j].highlights[i].images[0].url = '/static/empty.jpg';
+                    }
+                }
+                var id_arr = [];
+                var width_arr = [];
+                for (var i=0; i<result.data.data.getDiveSiteByUniqueName.divePoints[j].highlights.length; i++) {
+                    if (result.data.data.getDiveSiteByUniqueName.divePoints[j].highlights[i].images && result.data.data.getDiveSiteByUniqueName.divePoints[j].highlights[i].images.length > 0) {
+                        id_arr.push(result.data.data.getDiveSiteByUniqueName.divePoints[j].highlights[i].images[0]._id);
+                        width_arr.push(720);
+                    }
+                }
+                if (id_arr.length > 0) {
+                    var result_image = await axios({
+                    url: 'https://api.wedives.com/graphql',
+                    method: 'post',
+                    data: {
+                        query: `
+                            query Query($ids: [ID], $widths: [Int]) {
+                                getImageUrlsByIds(_ids: $ids, widths: $widths)
+                            }
+                        `,
+                        variables: {
+                            ids: id_arr,
+                            widths: width_arr
+                        }
+
+                    }
+                    }, {
+                    headers: {
+                    countryCode: 'ko',
+                    }
+                    });
+
+                    var cnt = 0;
+                    for (var i=0; i<result.data.data.getDiveSiteByUniqueName.divePoints[j].highlights.length; i++) {
+                        if (result.data.data.getDiveSiteByUniqueName.divePoints[j].highlights[i].images && result.data.data.getDiveSiteByUniqueName.divePoints[j].highlights[i].images.length > 0) {
+                            result.data.data.getDiveSiteByUniqueName.divePoints[j].highlights[i].images[0].url = result_image.data.data.getImageUrlsByIds[cnt++];
+                        }
+                    }
+                }
+            }
+        }
+        // 근처 사이트 조회
+        var result_nearby = null;
+        {
+            result_nearby = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            data: {
+                query: `
+                    query GetDiveSitesNearBy($lat1: Float!, $lon1: Float!, $lat2: Float!, $lon2: Float!) {
+                        getDiveSitesNearby(lat1: $lat1, lon1: $lon1, lat2: $lat2, lon2: $lon2) {
+                            _id
+                            backgroundImages {
+                                _id
+                                thumbnailUrl
+                            }
+                            name
+                            uniqueName
+                            description
+                        }
+                    }
+                `,
+                variables: {
+                    lat1: (result.data.data.getDiveSiteByUniqueName.latitude-0.4),
+                    lon1: (result.data.data.getDiveSiteByUniqueName.longitude-0.4),
+                    lat2: (result.data.data.getDiveSiteByUniqueName.latitude+0.4),
+                    lon2: (result.data.data.getDiveSiteByUniqueName.longitude+0.4),
+                }
+
+            }
+            }, {
+            headers: {
+            countryCode: 'ko',
+            }
+            });
+        }
+        // 근처 사이트 backgroundImage
+        if (result_nearby.data.data.getDiveSitesNearby.length > 0) {
+            for (var j=0; j<result_nearby.data.data.getDiveSitesNearby.length; j++) {
+                if (result_nearby.data.data.getDiveSitesNearby[j]._id != result.data.data.getDiveSiteByUniqueName._id) {
+                    for (var i=0; i<result_nearby.data.data.getDiveSitesNearby[j].backgroundImages.length; i++) {
+                        result_nearby.data.data.getDiveSitesNearby[j].backgroundImages[i].url = '/static/empty.jpg';
+                    }
+                    var id_arr = [];
+                    var width_arr = [];
+                    for (var i=0; i<result_nearby.data.data.getDiveSitesNearby[j].backgroundImages.length; i++) {
+                        id_arr.push(result_nearby.data.data.getDiveSitesNearby[j].backgroundImages[i]._id);
+                        width_arr.push(720);
+                    }
+                    if (id_arr.length > 0) {
+                        var result_image = await axios({
+                        url: 'https://api.wedives.com/graphql',
+                        method: 'post',
+                        data: {
+                            query: `
+                                query Query($ids: [ID], $widths: [Int]) {
+                                    getImageUrlsByIds(_ids: $ids, widths: $widths)
+                                }
+                            `,
+                            variables: {
+                                ids: id_arr,
+                                widths: width_arr
+                            }
+
+                        }
+                        }, {
+                        headers: {
+                        countryCode: 'ko',
+                        }
+                        });
+                        if (result_image.data.data.getImageUrlsByIds) {
+                            for (var i=0; i<result_image.data.data.getImageUrlsByIds.length; i++) {
+                                result_nearby.data.data.getDiveSitesNearby[j].backgroundImages[i].url = result_image.data.data.getImageUrlsByIds[i];
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        next(vm => {vm.setData(result.data.data.getDiveSiteByUniqueName, result_nearby.data.data.getDiveSitesNearby)});
     }
+  },
+  async mounted() {
+    
     if (this.$route.query.header && this.$route.query.header == 'hide') {
         $(".page-title").hide();
         $(".page-title-clear").hide();
@@ -1311,8 +1408,6 @@ export default {
         $("#footer-bar").hide();
     }
 
-    var preloader = document.getElementById('preloader')
-    if(preloader){preloader.classList.add('preloader-hide');}
     
     let script = document.createElement('script');
     script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCWu8Fw-h-f1t8Sp3I7R3l_Ukr24HunXQM';
@@ -1402,31 +1497,31 @@ export default {
         const map_style = (localStorage['wedive-Theme'] == 'light-mode') ? [] : night_style;
 
         this.map = new google.maps.Map(document.getElementById('map'), {
-            center: this.point_list[0].position,
+            center: {lat: this.siteData.latitude, lng: this.siteData.longitude},
             zoom: 12,
             mapTypeControl: false,
             streetViewControl: false,
             zoomControl: false,
             styles: map_style
         });
-        for (var i=0; i<this.point_list.length; i++) {
-            var _title = this.point_list[i].title;
-            var _type = this.point_list[i].type;
-            var _position = this.point_list[i].position;
-            var _img = (_type == 'sf') ? '/static/images/assets/ico_pin2_o8.png' : (_type == 'df') ? '/static/images/assets/ico_pin3_o8.png' : (_type == 'so') ? '/static/images/assets/ico_pin2_o.png' : '/static/images/assets/ico_pin3_o.png';
-            const _marker_class = (_type == 'sf') ? 'marker-position2' : (_type == 'df') ? 'marker-position3' : (_type == 'so') ? 'marker-position2-o' : 'marker-position3-o';
 
-            const title = this.point_list[i].title;
-            const desc = this.point_list[i].desc;
-            const star = this.point_list[i].star;
-            const img = this.point_list[i].img1;
+        for (var i=0; i<this.siteData.divePoints.length; i++) {
+            var minDepth = this.siteData.divePoints[i].minDepth;
+            var _position = {lat: this.siteData.divePoints[i].latitude, lng: this.siteData.divePoints[i].longitude};
+            var _img = (minDepth < 18) ? '/static/images/assets/ico_pin2_o8.png' : '/static/images/assets/ico_pin3_o8.png';
+            const _marker_class = (minDepth < 18) ? 'marker-position2' : 'marker-position3';
+
+            const title = this.siteData.divePoints[i].name;
+            const desc = this.siteData.divePoints[i].description;
+            const star = (this.siteData.divePoints[i].adminScore/20).toFixed(1);
+            const img = (this.siteData.divePoints[i].backgroundImages&&this.siteData.divePoints[i].backgroundImages.length>0) ? this.siteData.divePoints[i].backgroundImages[0].thumbnailUrl : '/static/empty.jpg';
             const _sml_img = _img;
-            const _big_img = (_type == 'sf') ? '/static/images/assets/ico_pin_big2.png' : (_type == 'df') ? '/static/images/assets/ico_pin_big3.png' : (_type == 'so') ? '/static/images/assets/ico_pin_big2.png' : '/static/images/assets/ico_pin_big3.png';
+            const _big_img = (minDepth < 18) ? '/static/images/assets/ico_pin_big2.png' : '/static/images/assets/ico_pin_big3.png';
 
             const marker_point = new google.maps.Marker({
                 map: this.map,
                 position: _position,
-                label: {text: _title, color: 'white', className: _marker_class},
+                label: {text: title, color: 'white', className: _marker_class},
                 icon: new google.maps.MarkerImage(_img, null, null, null, new google.maps.Size(38,43)),
             });
 
@@ -1487,22 +1582,15 @@ export default {
     return {
         map: null,
         siteData: {},
+        nearData: [],
         marker_list: [],
         marker_img_list: [],
-        recommend_word: ["비추천", "낮음", "일반적", "높음", "최고", "완벽함"],
-        point_list : [
-            {title: "말미잘동산", type: 'df', desc: "동해의 명물 섬유세닐말미잘이 유난히 많은 포인트로, 모래 지형 위에 커다란 암반과 크고 작은 바위들이 형성되어 있는 포인트 입니다. 섬유세닐말미잘은 낮은 수온에서 펴기 때문에 6월 이전에 방문한다면 이 포인트의 아름다움을 제대로 느낄 수 있습니다.", star: 4.6, img1: 'https://divingholic.com/wp-content/uploads/2019/02/maxresdefault-1.jpg', img2: 'https://diverz.net/data/diving/point/202102/1614156788_8f436f8c0dc8a574611b_thumb_760_504.jpg', img3: 'https://divingholic.com/wp-content/uploads/2019/02/2%EC%9B%94%EC%9D%B8%EA%B5%AC%ED%95%B4%EB%B3%80%EB%94%A5.jpg', position: {lat: 37.9668859063654, lng: 128.79946317636166}},
-            {title: "철재삼동", type: 'df', desc: "여름철 동해의 상징은 볼락이라고 할 수 있습니다. 그중에서도 수많은 볼락이 태풍처럼 있다고 해서 볼락태풍이라는 별명을 가진 포인트가 철재삼동 포인트 입니다. 초여름에서 초가을까지 3달정도되는 기간에 20m전후 수심, 11~15도의 수온 삼박자가 맞아떨어지면 거대한 볼락 떼를 만날 수 있습니다.", star: 4.3, img1: '/static/images/point/ko/yangyang_chuljesamdong_01.jpg', img2: '/static/images/point/ko/yangyang_chuljesamdong_02.jpg', img3: '/static/images/point/ko/yangyang_chuljesamdong_03.jpg', position: {lat: 37.947207012548716, lng: 128.81497292286326}},
-            {title: "하우스리프", type: 'sf', desc: "동해바다는 모래바닥에 재미없는 곳이라고 생각하시나요? 하우스리프 포인트는 1~2명의 다이버가 통과할 수 있는 박원 삼각 뿔 어초와 식빵 어초, W 어초, M어초, 평상어초가 있으며, 자연암반과 어우러져 물고기도 많고 다양한 종류의 어초와 고착생물을 보는 재미가 쏠쏠한 포인트 입니다.", star: 4.2, img1: '/static/images/point/ko/yangyang_houseleaf_01.jpg', img2: '/static/images/point/ko/yangyang_houseleaf_02.jpg', img3: '/static/images/point/ko/yangyang_houseleaf_03.jpg', position: {lat: 37.94825610969583, lng: 128.7946310508101}},
-            {title: "오대산", type: 'sf', desc: "", star: 4.3, img1: '', img2: '', img3: '', position: {lat: 37.942265902352936, lng: 128.81437210807638}},
-            {title: "용궁1", type: 'df', desc: "", star: 4.3, img1: '', img2: '', img3: '', position: {lat: 37.966694517671925, lng: 128.80091977131866}},
-            {title: "용궁2", type: 'df', desc: "", star: 4.3, img1: '', img2: '', img3: '', position: {lat: 37.98870094701705, lng: 128.80553232201584}},
-            {title: "대목1", type: 'sf', desc: "", star: 4.3, img1: '', img2: '', img3: '', position: {lat: 37.99262313926249, lng: 128.77955637861592}},
-            {title: "정글1", type: 'df', desc: "", star: 4.3, img1: '', img2: '', img3: '', position: {lat: 37.965163390164456, lng: 128.8213121007167}},
-            {title: "정글2", type: 'df', desc: "", star: 4.3, img1: '', img2: '', img3: '', position: {lat: 37.97587456645468, lng: 128.80344144106112}},
-            {title: "웰빙", type: 'sf', desc: "", star: 4.3, img1: '', img2: '', img3: '', position: {lat: 38.00150165886583, lng: 128.7445432664312}},
-            {title: "리멤버", type: 'sf', desc: "", star: 4.3, img1: '', img2: '', img3: '', position: {lat: 38.0118827612431, lng: 128.74771900182654}},
-        ],
+        recommend_word: ["비추천", "낮음", "일반적", "좋음", "최고", "완벽함"],
+        point_category: ["해저지형", "해저협곡", "큰 암반", "강한조류", "난파선", "가두리양식장", "마크로", "먹(Muck)", "인공어초", "블루홀", "리프다이빙", "빙하", "초대형난파선", "난파선성지", "수중조형물", "수중유적", "대물"],
+        type_category: ["월다이빙", "블랙워터다이빙", "드리프트다이빙", "아이스다이빙", "야간다이빙", "동굴다이빙", "해루질", "프리다이빙", "스노클링", "케이지다이빙", "렉다이빙", "테크니컬다이빙", "나이트록스다이빙"],
+        recommend_env_word: ["매우열악", "열악", "평범", "우수", "최고", "극락"],
+        recommend_flow_word: ["매우느림", "느림", "일반적", "빠름", "매우빠름", "폭풍"],
+
         center_list : [
             {title: "버블탱크 스쿠버다이빙", desc: "제주 남부에 위치한 PADI 5star 다이빙센터", star: 3.8, price_index: 2, feature: "덕다이빙, 케이브, 난파선, 드리프트", img: '/static/images/shop1/diving/test1.jpg', position: {lat: 33.24134444312815, lng: 126.56484940647604}},
             {title: "다이브 투게더리조트", desc: "한줄설명1", star: 4.8, price_index: 2, feature: "덕다이빙, 케이브", img: '/static/images/shop1/diving/test2.jpg', position: {lat: 33.241633952501715, lng: 126.56456092676112}},
@@ -1518,6 +1606,14 @@ export default {
     }
   },
   methods: {
+      setData(_siteData, _nearData) {
+          this.siteData = _siteData;
+          _nearData.forEach(d => {
+              if (d._id != this.siteData._id) {
+                  this.nearData.push(d);
+              }
+          });
+      },
       call: function() {
           console.log("call");
       },
@@ -1541,20 +1637,39 @@ export default {
 
 .span_feature {width:66px;}
 .ico_feature {}
-.ico_feature1 {width: 44px;height: 40px;background-position: 0px -3px;}
-.ico_feature2 {width: 44px;height: 40px;background-position: -45px -3px;}
-.ico_feature3 {width: 44px;height: 40px;background-position: -90px -3px;}
-.ico_feature4 {width: 44px;height: 40px;background-position: -135px -3px;}
-.ico_feature5 {width: 44px;height: 40px;background-position: -180px -3px;}
-.ico_feature6 {width: 44px;height: 40px;background-position: -225px -3px;}
-.ico_feature7 {width: 44px;height: 40px;background-position: 0px -40px;}
-.ico_feature8 {width: 44px;height: 40px;background-position: -45px -42px;}
-.ico_feature9 {width: 44px;height: 40px;background-position: -90px -40px;}
-.ico_feature10 {width: 44px;height: 40px;background-position: -135px -42px;}
-.ico_feature11 {width: 44px;height: 40px;background-position: -180px -42px;}
-.ico_feature12 {width: 44px;height: 40px;background-position: -225px -42px;}
+.ico_feature1 {width: 44px;height: 40px;background-position: 0px 0px;}
+.ico_feature2 {width: 44px;height: 40px;background-position: -45px 0px;}
+.ico_feature3 {width: 44px;height: 40px;background-position: -90px 0px;}
+.ico_feature4 {width: 44px;height: 40px;background-position: -135px 0px;}
+.ico_feature5 {width: 44px;height: 40px;background-position: -180px 0px;}
+.ico_feature6 {width: 44px;height: 40px;background-position: -225px 0px;}
+.ico_feature7 {width: 44px;height: 40px;background-position: 0px -38px;}
+.ico_feature8 {width: 44px;height: 40px;background-position: -45px -38px;}
+.ico_feature9 {width: 44px;height: 40px;background-position: -90px -38px;}
+.ico_feature10 {width: 44px;height: 40px;background-position: -135px -38px;}
+.ico_feature11 {width: 44px;height: 40px;background-position: -180px -38px;}
+.ico_feature12 {width: 44px;height: 40px;background-position: -225px -38px;}
+.ico_feature13 {width: 44px;height: 40px;background-position: 0px -72px;}
+.ico_feature14 {width: 44px;height: 40px;background-position: -45px -72px;}
+.ico_feature15 {width: 44px;height: 40px;background-position: -90px -72px;}
+.ico_feature16 {width: 44px;height: 40px;background-position: -135px -72px;}
+.ico_feature17 {width: 44px;height: 40px;background-position: -180px -72px;}
+.ico_feature18 {width: 44px;height: 40px;background-position: -225px -72px;}
+.ico_feature19 {width: 44px;height: 40px;background-position: 0px -108px;}
+.ico_feature20 {width: 44px;height: 40px;background-position: -45px -108px;}
+.ico_feature21 {width: 44px;height: 40px;background-position: -90px -108px;}
+.ico_feature22 {width: 44px;height: 40px;background-position: -135px -108px;}
+.ico_feature23 {width: 44px;height: 40px;background-position: -180px -108px;}
+.ico_feature24 {width: 44px;height: 40px;background-position: -225px -108px;}
+.ico_feature25 {width: 44px;height: 40px;background-position: 0px -144px;}
+.ico_feature26 {width: 44px;height: 40px;background-position: -45px -144px;}
+.ico_feature27 {width: 44px;height: 40px;background-position: -90px -144px;}
+.ico_feature28 {width: 44px;height: 40px;background-position: -135px -144px;}
+.ico_feature29 {width: 44px;height: 40px;background-position: -180px -144px;}
+.ico_feature30 {width: 44px;height: 40px;background-position: -225px -144px;}
 
-.icon-point {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/wedive_point.png);background-repeat: no-repeat;-webkit-background-size: 270px 90px;background-size: 270px 90px;}
+.icon-point {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/assets/wedive_point.png);background-repeat: no-repeat;-webkit-background-size: 270px 118px;background-size: 270px 118px;}
+.icon-type {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/assets/wedive_type.png);background-repeat: no-repeat;-webkit-background-size: 270px 118px;background-size: 270px 118px;}
 
 .wedive-ul {width: 100%;list-style:none;display: inline-block;margin-bottom: 0;padding-left: 5px !important;padding-right: 5px !important;}
 .wedive-ul > li {float: left;width: 50%;}
@@ -1572,7 +1687,7 @@ export default {
     width:40px;
     height:40px;}
 .ico-wedive-w:before {content: "";
-        background-image: url('/static/images/ico_wedive_d.png');
+        background-image: url('/static/images/assets/ico_wedive_d.png');
         background-size:40px 40px;
         width:40px;
         height:40px;

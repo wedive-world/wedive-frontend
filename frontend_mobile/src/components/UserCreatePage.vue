@@ -761,8 +761,6 @@ var schedule_status = [0, 0, 0, 0, 0];
 export default {
   name: 'HelloWorld',
   mounted() {
-    var preloader = document.getElementById('preloader')
-    if(preloader){preloader.classList.add('preloader-hide');}
     document.getElementById("footer-bar").classList.add("hide");
     
     $(".page-title").hide();
