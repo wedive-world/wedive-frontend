@@ -1343,6 +1343,18 @@ export default {
             var preloader = document.getElementById('preloader')
             if(preloader){preloader.classList.add('preloader-hide');}
           }, 1000);
+
+          setTimeout(function() {
+            init_template();
+            var preloader = document.getElementById('preloader')
+            if(preloader){preloader.classList.add('preloader-hide');}
+          }, 2000);
+
+          setTimeout(function() {
+            init_template();
+            var preloader = document.getElementById('preloader')
+            if(preloader){preloader.classList.add('preloader-hide');}
+          }, 3000);
       },
       goCourse: function() {
           location.href='/course';
