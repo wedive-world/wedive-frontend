@@ -1646,8 +1646,11 @@
                 ],
                 linkSelector:'a:not(.external-link):not(.default-link):not([href^="https"]):not([href^="http"]):not([data-gallery])'
             };
-            const swup = new Swup(options);
-            document.addEventListener('swup:pageView',(e) => { init_template(); })
+            setTimeout(function() {
+                const swup = new Swup(options);
+                document.addEventListener('swup:pageView',(e) => { init_template(); })
+            },2000);
+            
         }
     }
 
