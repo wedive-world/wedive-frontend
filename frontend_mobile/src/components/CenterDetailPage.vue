@@ -2,7 +2,11 @@
   <div class="">
     <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-site" data-menu-load=""></div>    
     <div class="page-content">
-        <div class="splide single-slider cover-slider slider-no-arrows slider-has-dots" id="cover-slider-1" data-card-height="250">
+        <div v-if="centerData.backgroundImages == null || centerData.backgroundImages.length == 0" style="background:url(/static/empty.jpg);background-size: contain;height:250px;">
+        </div>
+        <div v-else :style="'background:url('+centerData.backgroundImages[0].url+');background-size: cover;height:250px;'">
+        </div>
+        <!--<div class="splide single-slider cover-slider slider-no-arrows slider-has-dots" id="cover-slider-1" data-card-height="250">
             <div class="splide__track">
                 <div class="splide__list">
                     <div class="splide__slide" v-if="centerData.backgroundImages == null || centerData.backgroundImages.length == 0">
@@ -17,7 +21,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
         
 
     

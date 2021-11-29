@@ -1613,7 +1613,7 @@
                     loadScriptJS.className = plugins[i].id+'-c'
                     loadScriptJS.src = plugLoc + plugins[i].call;
                     loadScript.parentNode.insertBefore(loadScriptJS, loadScript);
-                    },50);
+                    },10);
                 }
                 //If Style doesn't exist in array, don't do anything
                 if(plugins[i].style !== undefined){
