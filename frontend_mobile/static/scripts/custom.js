@@ -152,7 +152,7 @@
                         var sliderPrev = document.querySelectorAll('.slider-prev');
                         sliderNext.forEach(el => el.addEventListener('click', el => {single.go('>');}));
                         sliderPrev.forEach(el => el.addEventListener('click', el => {single.go('<');}));
-                    },1000, e);
+                    },50, e);
                     
                 });
             }
@@ -1356,13 +1356,13 @@
         //Online / Offine Status
         function isOnline(){
             onlinePage(); onlineMessage.classList.add('online-message-active');
-            setTimeout(function(){onlineMessage.classList.remove('online-message-active'); },2000)
+            setTimeout(function(){onlineMessage.classList.remove('online-message-active'); },50)
             console.info( 'Connection: Online');
         }
 
         function isOffline(){
             offlinePage(); offlineMessage.classList.add('offline-message-active');
-            setTimeout(function(){offlineMessage.classList.remove('offline-message-active'); },2000)
+            setTimeout(function(){offlineMessage.classList.remove('offline-message-active'); },50)
             console.info( 'Connection: Offline');
         }
 
@@ -1443,7 +1443,7 @@
                                         document.getElementById('menu-install-pwa-android').classList.add('menu-active');
                                         document.querySelectorAll('.menu-hider')[0].classList.add('menu-active');
                                     }
-                                },3500);
+                                },50);
                             }
                             var deferredPrompt;
                             window.addEventListener('beforeinstallprompt', (e) => {
@@ -1486,7 +1486,7 @@
                                     document.getElementById('menu-install-pwa-ios').classList.add('menu-active');
                                     document.querySelectorAll('.menu-hider')[0].classList.add('menu-active');
                                 }
-                            },3500);
+                            },50);
                         }
                     }
                 }
@@ -1647,10 +1647,10 @@
                 ],
                 linkSelector:'a:not(.external-link):not(.default-link):not([href^="https"]):not([href^="http"]):not([data-gallery])'
             };
-            setTimeout(function() {
+            /*setTimeout(function() {
                 const swup = new Swup(options);
                 document.addEventListener('swup:pageView',(e) => { init_template(); })
-            },2000);
+            },2000);*/
             
         }
     }
