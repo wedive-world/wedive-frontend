@@ -1276,6 +1276,7 @@
         }
 
         //Calling Functions Required After External Menus are Loaded
+        /*
         var dataMenuLoad = document.querySelectorAll('[data-menu-load]')
         dataMenuLoad.forEach(function(e){
             var menuLoad = e.getAttribute('data-menu-load')
@@ -1296,7 +1297,7 @@
                     }
                 },500);
             })
-        })
+        })*/
 
         //Detecting Mobile OS
         let isMobile = {
@@ -1655,11 +1656,7 @@
     }
 
     //init_template();
-    setTimeout(function() {
-        init_template();
-        var preloader = document.getElementById('preloader')
-        if(preloader){preloader.classList.add('preloader-hide');}
-      }, 3000);
+    
 //},1500);
 
 //setTimeout(function() {
