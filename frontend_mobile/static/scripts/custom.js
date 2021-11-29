@@ -152,7 +152,7 @@
                         var sliderPrev = document.querySelectorAll('.slider-prev');
                         sliderNext.forEach(el => el.addEventListener('click', el => {single.go('>');}));
                         sliderPrev.forEach(el => el.addEventListener('click', el => {single.go('<');}));
-                    },50, e);
+                    },0, e);
                     
                 });
             }
@@ -1356,13 +1356,13 @@
         //Online / Offine Status
         function isOnline(){
             onlinePage(); onlineMessage.classList.add('online-message-active');
-            setTimeout(function(){onlineMessage.classList.remove('online-message-active'); },50)
+            setTimeout(function(){onlineMessage.classList.remove('online-message-active'); },10)
             console.info( 'Connection: Online');
         }
 
         function isOffline(){
             offlinePage(); offlineMessage.classList.add('offline-message-active');
-            setTimeout(function(){offlineMessage.classList.remove('offline-message-active'); },50)
+            setTimeout(function(){offlineMessage.classList.remove('offline-message-active'); },10)
             console.info( 'Connection: Offline');
         }
 
@@ -1432,7 +1432,7 @@
                 }));
 
                 //Trigger Install Prompt for Android
-                const pwaWindows = document.querySelectorAll('#menu-install-pwa-android, #menu-install-pwa-ios');
+                /*const pwaWindows = document.querySelectorAll('#menu-install-pwa-android, #menu-install-pwa-ios');
                 if(pwaWindows.length){
                     if (isMobile.Android()) {
                         if (localStorage.getItem(pwaName+'-PWA-Prompt') != "install-rejected") {
@@ -1443,7 +1443,7 @@
                                         document.getElementById('menu-install-pwa-android').classList.add('menu-active');
                                         document.querySelectorAll('.menu-hider')[0].classList.add('menu-active');
                                     }
-                                },50);
+                                },10);
                             }
                             var deferredPrompt;
                             window.addEventListener('beforeinstallprompt', (e) => {
@@ -1490,6 +1490,7 @@
                         }
                     }
                 }
+                */
             }
             checkPWA.setAttribute('class','isPWA');
         }
