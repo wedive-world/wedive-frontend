@@ -2014,6 +2014,14 @@ export default {
       this.wedivesCommentItems.splice(index, 1);
     },
     async submitClick() {
+      this.$swal({
+        title: '저장중 입니다.',
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        onOpen: () => {
+          this.$swal.showLoading();
+        }
+      });
       var _centerData = JSON.parse(JSON.stringify(this.centerData));
       if (_centerData.latitude == '' || _centerData.longitude == '') {
         this.$swal({
@@ -2228,6 +2236,8 @@ export default {
       
       this.$emit('update:is-add-new-center-sidebar-active', false)
       this.centerData = JSON.parse(JSON.stringify(blankCenterData));
+
+      location.reload();
     },
   },
 }

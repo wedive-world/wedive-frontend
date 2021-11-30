@@ -556,6 +556,189 @@
 
 
           <hr>
+          <h4 class="mt-3">하이라이트</h4>
+          <div>
+            <div>
+              <draggable :list="highlightItems" group="highlightItems" @start="drag=true" @end="drag=false">
+                <div v-for="(item, index) in highlightItems" style="cursor: move" :key="index">
+                  <!-- Row Loop -->
+                  <b-row
+                    :id="item.id"
+                    :key="'rowHigh'+index"
+                    ref="row"
+                    style="background: #d0d1d2;border-radius: 10px;margin-bottom:10px;"
+                    >
+
+                    <!-- Content -->
+                    <b-col md="11" class="pr-0">
+                        <b-form-group
+                        label="관리용 이름"
+                        :label-for="'highlightName' + index"
+                        >
+                        <b-form-input
+                            :id="'highlightName' + index"
+                            v-model="item.name"
+                            autofocus
+                            placeholder="문섬 하이라이트1"
+                        />
+                        
+                        </b-form-group>
+                    </b-col>
+                    
+                    <!-- Remove Button -->
+                    <b-col
+                        md="1"
+                        class="mb-50"
+                    >
+                        <b-button
+                        variant="flat-danger"
+                        class="mt-0 mt-md-2 pl-0 pr-0"
+                        @click="highlightRemoveItem(index)"
+                        >
+                        <feather-icon
+                            icon="XIcon"
+                            class="mr-25"
+                        />
+                        </b-button>
+                    </b-col>
+
+                    <b-col md="11" class="pr-0">
+                        <b-form-group
+                        label="내용"
+                        :label-for="'highlightContent' + index"
+                        >
+                        <b-form-input
+                            :id="'highlightContent' + index"
+                            v-model="item.description"
+                            autofocus
+                            placeholder="국내 최대규모의 연산호 군락지, 유네스코 생물권 보호지역"
+                        />
+                        
+                        </b-form-group>
+                    </b-col>
+
+                    
+                    <b-col cols="12">
+                        <validation-provider
+                            #default="validationContext"
+                            name="highlightImages"
+                            rules="required"
+                        >
+                            <b-form-group
+                            >
+                            <!-- Row Loop -->
+                            <b-row
+                                v-for="(item2, index2) in item.images"
+                                :id="item2.id"
+                                :key="'rowHighItem'+index2"
+                                ref="row2"
+                                >
+
+                                <!-- File -->
+                                <b-col md="4" class="pr-0">
+                                    <b-form-group
+                                    label="파일"
+                                    :label-for="'highlightImagesFile' + index + '_' + index2"
+                                    >
+                                    <b-form-file
+                                        :id="'highlightImagesFile' + index + '_' + index2"
+                                        v-model="item2.file"
+                                        placeholder="Choose or drop"
+                                        drop-placeholder="Drop here"
+                                        accept=".jpg,.jpeg,.png"
+                                    />
+                                    </b-form-group>
+                                </b-col>
+
+                                <!-- File Reference -->
+                                <b-col md="3" class="pr-0">
+                                    <b-form-group
+                                    label="출처"
+                                    :label-for="'highlightImagesRef' + index +'_' + index2"
+                                    >
+                                    <b-form-input
+                                        :id="'highlightImagesRef' + index +'_' + index2"
+                                        v-model="item2.reference"
+                                        type="text"
+                                        placeholder=""
+                                    />
+                                    </b-form-group>
+                                </b-col>
+
+                                <!-- File Name -->
+                                <b-col md="4" class="pr-0">
+                                    <b-form-group
+                                    label="이름"
+                                    :label-for="'highlightImagesName' + index +'_' + index2"
+                                    >
+                                    <b-form-input
+                                        :id="'highlightImagesName' + index +'_' + index2"
+                                        v-model="item2.description"
+                                        type="text"
+                                        placeholder=""
+                                    />
+                                    </b-form-group>
+                                </b-col>
+
+                            
+
+                                <!-- Remove Button -->
+                                <b-col
+                                    md="1"
+                                    class="mb-50"
+                                >
+                                    <b-button
+                                    variant="flat-danger"
+                                    class="mt-0 mt-md-2 pl-0 pr-0"
+                                    @click="highlightImageRemoveItem(index, index2)"
+                                    >
+                                    <feather-icon
+                                        icon="XIcon"
+                                        class="mr-25"
+                                    />
+                                    </b-button>
+                                </b-col>
+                                <b-col cols="12">
+                                    <hr class="mt-0" style="border-top: 1px dashed #ebe9f1 !important;">
+                                </b-col>
+                            </b-row>
+                            <b-button
+                                v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+                                variant="flat-primary"
+                                @click="highlightImageRepeateAgain(index)"
+                                >
+                                <feather-icon
+                                    icon="PlusIcon"
+                                    class="mr-25"
+                                />
+                                <span>Add highlight image</span>
+                            </b-button>
+                            <b-form-invalid-feedback>
+                                {{ validationContext.errors[0] }}
+                            </b-form-invalid-feedback>
+                            </b-form-group>
+                        </validation-provider>
+                    </b-col>
+                  </b-row>
+                </div>
+              </draggable>
+              <b-button
+                v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+                variant="flat-primary"
+                @click="highlightRepeateAgain"
+                >
+                <feather-icon
+                    icon="PlusIcon"
+                    class="mr-25"
+                />
+                <span>Add highlight</span>
+              </b-button>
+            </div>
+          </div>
+
+
+
+          <hr>
         
           <h4 class="mt-3">유튜브 영상</h4>
           <validation-provider
@@ -769,6 +952,7 @@ import draggable from 'vuedraggable'
 import store from '@/store'
 const { upsertDiveSite } = require('@/wedive-frontend-graphql/dive-site-service')
 const { uploadSingleImage, updateImage, getImageUrl } = require('@/wedive-frontend-graphql/image-service')
+const { upsertHighlight, deleteHighlightById } = require('@/wedive-frontend-graphql/highlight-service')
 
 const enumPopularity = ["nothing", "unrecommended", "soso", "popular"];
 const enumClimate = ["nothing", "sunny", "cloudy", "rain", "heavyRain"];
@@ -807,7 +991,7 @@ const blankSiteData = {
   waterFlowDescription: '',
   eyeSightDescription: '',
   highlightDescription: '',
-  
+  highlights: [],
   
   
   
@@ -873,6 +1057,7 @@ export default {
       khoaOptions : ['동명항', '남애항', '강문해변', '오산항', '울릉도', '월포해수욕장', '구조리해수욕장', '미조도', '거문도', '홍도', '제주-성산일출봉', '제주-어멍(북부)', '제주-문섬'],
       seaTempOptions: ['강릉 (강원도)/kang-neung', '속초 (강원도)/sogcho', '동해 (강원도)/tonghae', '인천/incheon', '고양 (왜있지)/goyang', '안산 (경기도)/ansan', '화성 (경기도)/hwaseong', '포항/hoko', '울산/ulsan', '부산/busan', '진해 (창원)/chinhae', '마산/masan', '거제/kyosai', '여수/reisui', '순천/sunchun', '군산 (전라북도)/kunsan', '목포 (전라남도)/moppo', '신안 (전라남도)/sinan', '태안 (충청남도)/taesal-li', '제주-어영(북서부)/gaigeturi', '제주-제주시(북부)/jeju'],
       backgroundItems: [],
+      highlightItems: [],
       youtubeItems: [],
       referenceItems: [],
       interestSelectedTotal: [],
@@ -913,6 +1098,7 @@ export default {
     setSiteData: function(_data) {
       this.siteData = JSON.parse(JSON.stringify(blankSiteData));
       this.backgroundItems = [];
+      this.highlightItems = [];
       this.youtubeItems = [];
       this.referenceItems = [];
 
@@ -933,6 +1119,11 @@ export default {
             _data[key].forEach(image=>{
               this.backgroundItems.push(image)
             });
+          } else if (key == 'highlights') {
+            _data[key].forEach(highlight=>{
+              this.highlightItems.push(highlight);
+            });
+            this.siteData[key] = _data[key];
           } else if (key == 'youtubeVideoIds') {
             if (_data[key]) {
               _data[key].map(youtube=>{
@@ -1008,6 +1199,30 @@ export default {
       }
       this.backgroundItems.splice(index, 1);
     },
+    highlightRepeateAgain() {
+      this.highlightItems.push({name: "", description: "", images: []});
+    },
+    async highlightRemoveItem(index) {
+      var id = this.highlightItems[index]._id;
+      if (id != null) {
+        var result = await deleteHighlightById(id);
+      }
+      this.highlightItems.splice(index, 1);
+    },
+
+
+    highlightImageRepeateAgain(index) {
+      this.highlightItems[index].images.push({reference: "", description: "", file: null});
+    },
+    async highlightImageRemoveItem(index, index2) {
+      var id = this.highlightItems[index].images[index2]._id;
+      if (id != null) {
+        // jjangs 여기 구현 필요
+        //var result = await deleteImageById(id);
+        //console.log(result);
+      }
+      var id = this.highlightItems[index].images.splice(index2, 1);      
+    },
 
 
     youtubeRepeateAgain() {
@@ -1023,6 +1238,14 @@ export default {
       this.referenceItems.splice(index, 1);
     },
     async submitClick() {
+      this.$swal({
+        title: '저장중 입니다.',
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        onOpen: () => {
+          this.$swal.showLoading();
+        }
+      });
       var _siteData = JSON.parse(JSON.stringify(this.siteData));
       if (_siteData.latitude == '' || _siteData.longitude == '') {
         this.$swal({
@@ -1038,6 +1261,35 @@ export default {
       }
       _siteData.latitude = parseFloat(_siteData.latitude);
       _siteData.longitude = parseFloat(_siteData.longitude);
+
+
+      // 하이라이트
+      {
+        _siteData.highlights = [];
+        for (var i=0; i<this.highlightItems.length; i++) {
+          var highlight_id_list = [];
+          for (var j=0; j<this.highlightItems[i].images.length; j++) {
+            if (this.highlightItems[i].images[j].file != null) {
+              var result = await uploadSingleImage(this.highlightItems[i].images[j].file);
+              this.highlightItems[i].images[j]._id = result.uploadImage._id;
+              this.highlightItems[i].images[j].name = this.highlightItems[i].images[j].file.name;
+            }
+            delete this.highlightItems[i].images[j].file;
+            this.highlightItems[i].images[j].uploaderId = 'apneaofficer';
+            var result2 = await updateImage(this.highlightItems[i].images[j]);
+            highlight_id_list.push(result2.updateImage._id);
+          }
+          // delete images
+          delete this.highlightItems[i].images;
+          this.highlightItems[i].images = [];
+          for (var j=0; j<highlight_id_list.length; j++) {
+            this.highlightItems[i].images.push(highlight_id_list[j]);
+          }
+          // add highlight
+          var result = await upsertHighlight(this.highlightItems[i]);
+          _siteData.highlights.push(result.upsertHighlight._id);
+        }
+      }
       
       // 백그라운드 이미지
       {
@@ -1144,6 +1396,8 @@ export default {
       
       this.$emit('update:is-add-new-site-sidebar-active', false)
       this.siteData = JSON.parse(JSON.stringify(blankSiteData));
+
+      location.reload();
     },
   },
 }

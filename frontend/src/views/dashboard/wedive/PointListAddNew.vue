@@ -471,8 +471,8 @@
 
 
           <hr>
-          <h4 class="mt-3">하이라이트</h4>
-          <div>
+          <h4 class="mt-3 hide">하이라이트</h4>
+          <div class="hide">
             <div>
               <draggable :list="highlightItems" group="highlightItems" @start="drag=true" @end="drag=false">
                 <div v-for="(item, index) in highlightItems" style="cursor: move" :key="index">
@@ -703,7 +703,7 @@
 
           
           <hr>
-          <h4 class="mt-3">포인트 이미지</h4>
+          <h4 class="mt-3">포인트 이미지 (3개 이상 필수)</h4>
           <validation-provider
             #default="validationContext"
             name="pointImages"
@@ -1298,6 +1298,14 @@ export default {
       this.referenceItems.splice(index, 1);
     },
     async submitClick() {
+      this.$swal({
+        title: '저장중 입니다.',
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        onOpen: () => {
+          this.$swal.showLoading();
+        }
+      });
       var _pointData = JSON.parse(JSON.stringify(this.pointData));
       if (_pointData.latitude == '' || _pointData.longitude == '') {
         this.$swal({
@@ -1442,6 +1450,8 @@ export default {
       
       this.$emit('update:is-add-new-point-sidebar-active', false)
       this.pointData = JSON.parse(JSON.stringify(blankPointData));
+
+      location.reload();
     },
   },
 }

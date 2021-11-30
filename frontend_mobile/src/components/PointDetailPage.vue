@@ -199,90 +199,7 @@
             </div>
         </div>
 
-        <div v-if="pointData.highlights && pointData.highlights.length>0" class="card card-style">
-            <div class="content">
-                <h4 class="text-start pt-2 mb-2">하이라이트</h4>
-                <div>
-                    <div style="display: inline-block;width: 30px; height: 30px; fill: rgb(0, 0, 0);"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path d="M 10 9 C 6.132813 9 3 12.132813 3 16 L 3 34 C 3 37.867188 6.132813 41 10 41 L 40 41 C 43.867188 41 47 37.867188 47 34 L 47 16 C 47 12.132813 43.867188 9 40 9 Z M 10 11 L 40 11 C 42.757813 11 45 13.242188 45 16 L 45 34 C 45 36.757813 42.757813 39 40 39 L 10 39 C 7.242188 39 5 36.757813 5 34 L 5 16 C 5 13.242188 7.242188 11 10 11 Z M 24.53125 17.15625 C 24.101563 19.554688 22.398438 20.070313 20 20.15625 L 20 21.6875 L 24.125 21.6875 L 24.125 32.90625 L 26 32.90625 L 26 17.15625 Z"></path></svg></div>
-                    {{ pointData.highlights[0].description }}
-                    <a v-if="pointData.highlights[0].images && pointData.highlights[0].images.length>0" href="#" class="row m-0 mb-2"> 
-                        <div class="col-6 ps-0 pe-1">
-                            <div class="card rounded-sm mb-2">
-                                <a class="" data-gallery="'gallery-highlight" :href="pointData.highlights[0].images[0].url" title="">
-                                    <img src="/static/images/assets/empty.png" :data-src="pointData.highlights[0].images[0].url" class="preload-img img-fluid rounded-s" :alt="pointData.highlights[0].images[0].name" style="height: 80px;">
-                                    <div class="wedive-source mx-140">{{ pointData.highlights[0].images[0].reference | makeReference }}</div>
-                                </a>
-                            </div>
-                            <div v-if="pointData.highlights[0].images.length>1" class="card rounded-sm mb-0">
-                                <a class="" data-gallery="'gallery-highlight" :href="pointData.highlights[0].images[1].url" title="">
-                                    <img src="/static/images/assets/empty.png" :data-src="pointData.highlights[0].images[1].url" class="preload-img img-fluid rounded-s" :alt="pointData.highlights[0].images[1].name" style="height: 80px;">
-                                    <div class="wedive-source mx-140">{{ pointData.highlights[0].images[1].reference | makeReference }}</div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-6 ps-1 pe-0">
-                            <div v-if="pointData.highlights[0].images.length>2" class="card rounded-sm mb-0">
-                                <a class="" data-gallery="'gallery-highlight" :href="pointData.highlights[0].images[2].url" title="">
-                                    <img src="/static/images/assets/empty.png" :data-src="pointData.highlights[0].images[2].url" class="preload-img img-fluid rounded-s" :alt="pointData.highlights[0].images[2].name" style="height: 170px;">
-                                    <div class="wedive-source mx-140">{{ pointData.highlights[0].images[2].reference | makeReference }}</div>
-                                </a>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                
-                
-                <div v-if="pointData.highlights.length>1" class="mt-4">
-                    <div style="display: inline-block;width: 30px; height: 30px; fill: rgb(0, 0, 0);"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path d="M 10 9 C 6.132813 9 3 12.132813 3 16 L 3 34 C 3 37.867188 6.132813 41 10 41 L 40 41 C 43.867188 41 47 37.867188 47 34 L 47 16 C 47 12.132813 43.867188 9 40 9 Z M 10 11 L 40 11 C 42.757813 11 45 13.242188 45 16 L 45 34 C 45 36.757813 42.757813 39 40 39 L 10 39 C 7.242188 39 5 36.757813 5 34 L 5 16 C 5 13.242188 7.242188 11 10 11 Z M 25.03125 17 C 20.410156 17 19.976563 20.902344 20.0625 22.71875 L 21.96875 22.71875 C 21.96875 22.199219 22.121094 18.71875 25.03125 18.71875 C 27.769531 18.71875 28.125 21.160156 28.125 21.59375 C 28.125 26.4375 19.65625 26.253906 19.65625 33 L 29.90625 33 L 29.90625 31.28125 L 21.78125 31.28125 C 22.210938 27.734375 30 27.042969 30 21.59375 C 30 20.816406 29.652344 17 25.03125 17 Z"></path></svg></div>
-                    {{ pointData.highlights[1].description }}
-                
-                    <div v-if="pointData.highlights[1].images && pointData.highlights[1].images.length>0" class="row m-0 text-center row-cols-3 mb-1" style="margin-left: -4px !important; margin-rigth: -4px !important;">
-                        <a class="col square-rect" data-gallery="'gallery-highlight" :href="pointData.highlights[1].images[0].url" title="">
-                            <img src="/static/images/assets/empty.png" :data-src="pointData.highlights[1].images[0].url" class="preload-img img-fluid rounded-s" :alt="pointData.highlights[1].images[0].name">
-                            <div class="wedive-source mx-80">{{ pointData.highlights[1].images[0].reference | makeReference }}</div>
-                        </a>
-                        <a v-if="pointData.highlights[1].images.length>1" class="col square-rect" data-gallery="'gallery-highlight" :href="pointData.highlights[1].images[1].url" title="">
-                            <img src="/static/images/assets/empty.png" :data-src="pointData.highlights[1].images[1].url" class="preload-img img-fluid rounded-s" :alt="pointData.highlights[1].images[1].name">
-                            <div class="wedive-source mx-80">{{ pointData.highlights[1].images[1].reference | makeReference }}</div>
-                        </a>
-                        <a v-if="pointData.highlights[1].images.length>2" class="col square-rect" data-gallery="'gallery-highlight" :href="pointData.highlights[1].images[2].url" title="">
-                            <img src="/static/images/assets/empty.png" :data-src="pointData.highlights[1].images[2].url" class="preload-img img-fluid rounded-s" :alt="pointData.highlights[1].images[2].name">
-                            <div class="wedive-source mx-80">{{ pointData.highlights[1].images[2].reference | makeReference }}</div>
-                        </a>
-                    </div>
-
-                    <div v-if="pointData.highlights.length>2" class="mt-4">
-                        <div style="display: inline-block;width: 30px; height: 30px; fill: rgb(0, 0, 0);"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path d="M 10 9 C 6.132813 9 3 12.132813 3 16 L 3 34 C 3 37.867188 6.132813 41 10 41 L 40 41 C 43.867188 41 47 37.867188 47 34 L 47 16 C 47 12.132813 43.867188 9 40 9 Z M 10 11 L 40 11 C 42.757813 11 45 13.242188 45 16 L 45 34 C 45 36.757813 42.757813 39 40 39 L 10 39 C 7.242188 39 5 36.757813 5 34 L 5 16 C 5 13.242188 7.242188 11 10 11 Z M 25.21875 17 C 20.789063 17 20.398438 21.023438 20.375 22 L 22.25 22 C 22.277344 21.324219 22.582031 18.6875 25.21875 18.6875 C 27.6875 18.6875 28.03125 20.398438 28.03125 21.25 C 28.03125 21.675781 27.785156 23.8125 25.0625 23.8125 L 24.28125 23.8125 L 24.28125 25.4375 C 24.621094 25.351563 24.980469 25.34375 25.40625 25.34375 C 25.832031 25.34375 28.71875 25.417969 28.71875 28.3125 C 28.71875 31.121094 25.738281 31.375 25.3125 31.375 C 23.804688 31.375 22.054688 30.46875 22 28 L 20.125 28 C 20.140625 29.226563 20.511719 33 25.3125 33 C 26.25 33 30.6875 32.730469 30.6875 28.21875 C 30.6875 25.410156 28.8125 24.578125 27.875 24.40625 L 27.875 24.3125 C 28.472656 23.972656 30 22.941406 30 21.15625 C 30 20.476563 29.816406 17 25.21875 17 Z"></path></svg></div>
-                        {{ pointData.highlights[2].description }}
-                        <a v-if="pointData.highlights[2].images && pointData.highlights[2].images.length>0" href="#" class="row m-0 mb-2"> 
-                            <div class="col-6 ps-0 pe-1">
-                                <div class="card rounded-sm mb-0">
-                                    <a class="" data-gallery="'gallery-highlight" :href="pointData.highlights[2].images[0].url" title="">
-                                        <img src="/static/images/assets/empty.png" :data-src="pointData.highlights[2].images[0].url" class="preload-img img-fluid rounded-s" :alt="pointData.highlights[2].images[0].name" style="height: 170px;">
-                                        <div class="wedive-source mx-140">{{ pointData.highlights[2].images[0].reference | makeReference }}</div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-6 ps-1 pe-0">
-                                <div v-if="pointData.highlights[2].images.length>1" class="card rounded-sm mb-2">
-                                    <a class="" data-gallery="'gallery-highlight" :href="pointData.highlights[2].images[1].url" title="">
-                                        <img src="/static/images/assets/empty.png" :data-src="pointData.highlights[2].images[1].url" class="preload-img img-fluid rounded-s" :alt="pointData.highlights[2].images[1].name" style="height: 80px;">
-                                        <div class="wedive-source mx-140">{{ pointData.highlights[2].images[1].reference | makeReference }}</div>
-                                    </a>
-                                </div>
-                                <div v-if="pointData.highlights[2].images.length>2" class="card rounded-sm mb-0">
-                                    <a class="" data-gallery="'gallery-highlight" :href="pointData.highlights[2].images[2].url" title="">
-                                        <img src="/static/images/assets/empty.png" :data-src="pointData.highlights[2].images[2].url" class="preload-img img-fluid rounded-s" :alt="pointData.highlights[2].images[2].name" style="height: 80px;">
-                                        <div class="wedive-source mx-140">{{ pointData.highlights[2].images[2].reference | makeReference }}</div>
-                                    </a>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+        
         <div class="card card-style" v-if="pointData.youtubeVideoIds && pointData.youtubeVideoIds.length > 0">
             <div class="content mb-4 pb-2">
                 <h4 class="text-start pt-2 mb-2">YouTube 소개</h4>
@@ -737,26 +654,6 @@ export default {
                         highlightDescription
                         createdAt
                         updatedAt
-                        highlights {
-                            _id
-                            name
-                            description
-                            divePointId
-                            images {
-                                _id
-                                name
-                                description
-                                reference
-                                thumbnailUrl
-                            }
-                            interests {
-                                _id
-                                title
-                                type
-                                iconType
-                                iconName
-                            }
-                        }
                         images {
                             _id
                             name
@@ -1002,48 +899,7 @@ export default {
         }
         
 
-        if (result.data.data.getDivePointByUniqueName.highlights.length > 0) {
-            for (var j=0; j<result.data.data.getDivePointByUniqueName.highlights.length; j++) {
-                for (var i=0; i<result.data.data.getDivePointByUniqueName.highlights[j].images.length; i++) {
-                    result.data.data.getDivePointByUniqueName.highlights[j].images[i].url = '/static/empty.jpg';
-                }
-                var id_arr = [];
-                var width_arr = [];
-                for (var i=0; i<result.data.data.getDivePointByUniqueName.highlights[j].images.length; i++) {
-                    id_arr.push(result.data.data.getDivePointByUniqueName.highlights[j].images[i]._id);
-                    width_arr.push(720);
-                }
-                if (id_arr.length > 0) {
-                    var result_image = await axios({
-                    url: 'https://api.wedives.com/graphql',
-                    method: 'post',
-                    data: {
-                        query: `
-                            query Query($ids: [ID], $widths: [Int]) {
-                                getImageUrlsByIds(_ids: $ids, widths: $widths)
-                            }
-                        `,
-                        variables: {
-                            ids: id_arr,
-                            widths: width_arr
-                        }
-
-                    }
-                    }, {
-                    headers: {
-                    countryCode: 'ko',
-                    }
-                    });
-                    if (result_image.data.data.getImageUrlsByIds) {
-                        for (var i=0; i<result_image.data.data.getImageUrlsByIds.length; i++) {
-                            result.data.data.getDivePointByUniqueName.highlights[j].images[i].url = result_image.data.data.getImageUrlsByIds[i];
-                            
-                        }
-                    }
-                }
-            }
-        }
-
+        
         // 근처 포인트 조회
         var result_nearby = null;
         {
