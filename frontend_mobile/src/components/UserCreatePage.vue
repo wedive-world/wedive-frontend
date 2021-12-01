@@ -31,8 +31,9 @@
                         </div>
                         <div style="position: absolute;bottom: 20px;width:100%;padding:0px 20px;">
                             <a v-on:click="loginGoogle()" href="#" class="mb-3 rounded-xl text-start btn btn-m btn-full bg-google btn-icon font-600"><i class="fab fa-google rounded-xl font-16 text-center"></i> Google 계정으로 로그인</a>
-                            <a href="#" class="mb-3 rounded-xl text-start btn btn-m btn-full bg-black btn-icon font-600"><i class="fab fa-apple rounded-xl font-16 text-center"></i> Apple 계정으로 로그인</a>
+                            <a href="#" class="mb-3 rounded-xl text-start btn btn-m btn-full bg-dark-dark btn-icon font-600"><i class="fab fa-apple rounded-xl font-16 text-center"></i> Apple 계정으로 로그인</a>
                             <a href="#" class="mb-3 rounded-xl text-start btn btn-m btn-full bg-yellow-dark btn-icon font-600"><i class="text-center rounded-xl" style="position: absolute;left: 0px;top: 0px;line-height: 43px;width: 40px;height: 100%;background-color: rgba(0, 0, 0, 0.1);"><img src="/static/images/assets/logo_kakao.png" height="16" style="vertical-align: middle;"/></i> Kakao 계정으로 로그인</a>
+                            <a id="btn_next0" href="#" class="slider-next btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 ms-3 me-3 mb-3" style="height: 46px;padding-top: 10px;display:none;" ref="next0">다음</a>
                         </div>
                         </div>
                     </div>
@@ -926,9 +927,6 @@ export default {
       },
   },
   methods: {
-      next0() {
-          $(".progress-bar").css("width", "20%");
-      },
       next1() {
           $(".progress-bar").css("width", "40%");
       },
@@ -1056,6 +1054,13 @@ export default {
             console.log(credential)
             console.log(token)
             console.log(user)
+            var single = new Splide( '#single-slider-1', {
+                type:'loop',
+                autoplay:true,
+                interval:4000,
+                perPage: 1,
+            }).mount().go(2);
+            $(".progress-bar").css("width", "20%");
             // ...
         }).catch((error) => {
             // Handle Errors here.
