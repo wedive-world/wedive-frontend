@@ -12,14 +12,30 @@
     <div class="page-content pb-0"> 
         <div class="progress" style="height:6px;">
             <div class="progress-bar border-0 bg-highlight text-start ps-2" 
-                    role="progressbar" style="width: 20%" 
-                    aria-valuenow="10" aria-valuemin="0" 
+                    role="progressbar" style="width: 0%" 
+                    aria-valuenow="0" aria-valuemin="0" 
                     aria-valuemax="100">
             </div>
         </div>
         <div class="splide single-slider slider-no-arrows" id="single-slider-1" data-splide='{"autoplay":false, "drag": false, "lazyLoad": "nearby", "preloadPages": 6, "pagination": false}'>
             <div class="splide__track">
                 <div class="splide__list">
+                    <div class="splide__slide">
+                        <div id="slide0" class="card card-full pb-0 mb-0 border-bottom" style="height: calc( 100vh - 56px );background:#fafafa;">
+                        <div class="content mt-1">
+                            <div class="text-center">
+                                <div class="color-primary font-noto font-20 font-600 mt-5"><i class="ico ico-wedive-w -circle color-primary scale-box fa-4x mb-2"></i> wedive에 로그인</div>
+                                <img src="/static/images/assets/login_back.jpg" width="100%"/>
+                            </div>
+
+                        </div>
+                        <div style="position: absolute;bottom: 20px;width:100%;padding:0px 20px;">
+                            <a v-on:click="loginGoogle()" href="#" class="mb-3 rounded-xl text-start btn btn-m btn-full bg-google btn-icon font-600"><i class="fab fa-google rounded-xl font-16 text-center"></i> Google 계정으로 로그인</a>
+                            <a href="#" class="mb-3 rounded-xl text-start btn btn-m btn-full bg-black btn-icon font-600"><i class="fab fa-apple rounded-xl font-16 text-center"></i> Apple 계정으로 로그인</a>
+                            <a href="#" class="mb-3 rounded-xl text-start btn btn-m btn-full bg-yellow-dark btn-icon font-600"><i class="text-center rounded-xl" style="position: absolute;left: 0px;top: 0px;line-height: 43px;width: 40px;height: 100%;background-color: rgba(0, 0, 0, 0.1);"><img src="/static/images/assets/logo_kakao.png" height="16" style="vertical-align: middle;"/></i> Kakao 계정으로 로그인</a>
+                        </div>
+                        </div>
+                    </div>
                     <div class="splide__slide">
                         <div id="slide1" class="card card-full pb-0 mb-0 border-bottom" style="height: calc( 100vh - 56px );">
                         <div class="content mt-1">
@@ -756,6 +772,8 @@
 <script>
 import VueTypeaheadBootstrap from 'vue-typeahead-bootstrap';
 import {debounce} from 'lodash';
+import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+
 var schedule_status = [0, 0, 0, 0, 0];
 
 export default {
@@ -798,6 +816,7 @@ export default {
     if (this.$route.query.footer && this.$route.query.footer == 'hide') {
       $("#footer-bar").hide();
     }
+    
   },
   components: {
     VueTypeaheadBootstrap
@@ -907,6 +926,9 @@ export default {
       },
   },
   methods: {
+      next0() {
+          $(".progress-bar").css("width", "20%");
+      },
       next1() {
           $(".progress-bar").css("width", "40%");
       },
@@ -931,7 +953,6 @@ export default {
               window.location.href="/";
           },3000)
       },
-      
       show_scuba_label: function() {
           document.getElementById('scuba_label').classList.remove('hide')
       },
@@ -1019,6 +1040,33 @@ export default {
                 for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
                 for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+0+"px)"}
             }*/
+      },
+      loginGoogle: function() {
+        const provider = new GoogleAuthProvider();
+        const auth = getAuth();
+        auth.languageCode = 'ko';
+
+        signInWithPopup(auth, provider)
+        .then((result) => {
+            // This gives you a Google Access Token. You can use it to access the Google API.
+            const credential = GoogleAuthProvider.credentialFromResult(result);
+            const token = credential.accessToken;
+            // The signed-in user info.
+            const user = result.user;
+            console.log(credential)
+            console.log(token)
+            console.log(user)
+            // ...
+        }).catch((error) => {
+            // Handle Errors here.
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // The email of the user's account used.
+            const email = error.email;
+            // The AuthCredential type that was used.
+            const credential = GoogleAuthProvider.credentialFromError(error);
+            // ...
+        });
       }
   }
 
@@ -1047,4 +1095,21 @@ select {background: white; background-color: white;}
 .input-big3::placeholder {font-size:14px !important;}
 .btn[disabled] {pointer-events: none !important;background-image: linear-gradient(to bottom, #ccc, #ccc) !important;}
 .bg-e7e7e7 {background-color: transparent !important;}
+.ico-wedive-w {-webkit-font-smoothing: antialiased;
+    display: grid;
+    margin-left: calc(50% - 20px);
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+    
+    width:40px;
+    height:40px;}
+.ico-wedive-w:before {content: "";
+        background-image: url('/static/images/assets/ico_wedive_d.png');
+        background-size:40px 40px;
+        width:40px;
+        height:40px;
+        display:inline-block;
+}
 </style>

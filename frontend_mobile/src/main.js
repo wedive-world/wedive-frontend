@@ -6,7 +6,7 @@ import router from './router'
 import VueTypeaheadBootstrap from 'vue-typeahead-bootstrap';
 import VueScrollPicker from "vue-scroll-picker"
 import VCalendar from 'v-calendar';
-
+import { initializeApp } from 'firebase/app';
 
 Vue.config.productionTip = false
 Vue.component('vue-typeahead-bootstrap', VueTypeaheadBootstrap)
@@ -33,6 +33,14 @@ Object.keys(process.env)
 console.log(`==============================================================================`)
 */
 /* eslint-disable no-new */
+
+
+import 'firebase/auth';
+// TODO: Replace the following with your app's Firebase project configuration
+import firebaseConfig from '../firebaseConfig.js';
+const firebaseApp = initializeApp(firebaseConfig);
+
+
 new Vue({
   el: '#app',
   router,
