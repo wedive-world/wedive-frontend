@@ -4,7 +4,7 @@
     <div class="page-content">
         <div v-if="siteData.backgroundImages == null || siteData.backgroundImages.length == 0" style="background:url(/static/empty.jpg);background-size: contain;height:250px;">
         </div>
-        <div v-else :style="'background:url('+siteData.backgroundImages[0].url+');background-size: cover;height:250px;'">
+        <div v-else :style="'background:url('+siteData.backgroundImages[0].url+');background-size: cover;height:250px;background-position: bottom !important;'">
         </div>
         <!--<div class="splide single-slider cover-slider slider-no-arrows" id="cover-slider-1" data-card-height="250">
             <div class="splide__track">
@@ -27,7 +27,7 @@
     
         
         
-        <div class="card card-style" style="margin-top:-60px; z-index:1">
+        <div class="card card-style" style="margin-top:-40px; z-index:1">
             <div class="content text-center mt-4">
                 <h2 class="font-20 font-700 mb-0 mt-1">{{ siteData.name }} 사이트</h2>
                 <h2 class="wedive-score">{{ (siteData.adminScore/20).toFixed(1) }}</h2>

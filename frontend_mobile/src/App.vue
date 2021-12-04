@@ -5,16 +5,17 @@
       <div id="page">
           
           <div class="header header-auto-show header-fixed header-logo-center">
-              <a class="header-title" v-on:click="goHome()"><img class="logo-image" src="/static/images/assets/logo-dark.svg" height="38" /></a>
-              <a href="#" data-menu="menu-main" class="header-icon header-icon-1"><i class="fas fa-bars"></i></a>
+              <a class="header-title" href="/"><img class="logo-image" src="/static/images/assets/logo-dark.svg" height="38" /></a>
+              <!--<a href="#" data-menu="menu-main" class="header-icon header-icon-1"><i class="fas fa-bars"></i></a>
               <a href="#" data-toggle-theme class="header-icon header-icon-4 show-on-theme-dark"><i class="fas fa-sun"></i></a>
-              <a href="#" data-toggle-theme class="header-icon header-icon-4 show-on-theme-light"><i class="fas fa-moon"></i></a>
+              <a href="#" data-toggle-theme class="header-icon header-icon-4 show-on-theme-light"><i class="fas fa-moon"></i></a>-->
           </div>
 
           
-          <div id="footer-bar" class="footer-bar">
-            <a href="/buddy_home" id="nav-buddy"><div class="menu-ico menu-ico1"></div><span>버디</span></a>
-            <a href="/book_home" id="nav-book"><div class="menu-ico menu-ico2"></div><span>로그북</span></a>
+          <div id="footer-bar" class="footer-bar" style="border-radius: 30px 30px 0px 0px;">
+            <a href="/" id="nav-buddy"><div class="menu-ico menu-ico1"></div><span>버디</span></a>
+            <a href="/site_home" id="nav-site"><div class="menu-ico menu-ico2"></div><span>장소</span></a>
+            <a href="/book_home" id="nav-book"><div class="menu-ico menu-ico3"></div><span>로그북</span></a>
             <a href="/chat_home" id="nav-chat"><div class="menu-ico menu-ico4"></div><span>채팅</span></a>
           </div>
         
@@ -23,10 +24,11 @@
           </div>
           <div class="page-title page-title-fixed ps-3">
             <i class="fas fa-arrow-left font-24 me-2 pt-2 hide" style="opacity: 0.6;" id="page-back" v-on:click="goBack()"></i>
-            <img v-on:click="goHome()" class="logo-image mt-n2" style="margin-right: auto;" src="/static/images/assets/logo-dark.svg" height="46"/>
-            <a href="#" class="page-title-icon shadow-xl bg-theme color-theme show-on-theme-light" data-toggle-theme><i class="fa fa-moon"></i></a>
+            <img href="/" class="logo-image mt-n2" style="margin-right: auto;" src="/static/images/assets/logo-dark.svg" height="46"/>
+            <a href="#" class="page-title-icon color-theme" data-menu="menu-main"><i class="wedive_icoset2x wedive_icoset2x_plus"></i></a>
+            <!--<a href="#" class="page-title-icon shadow-xl bg-theme color-theme show-on-theme-light" data-toggle-theme><i class="fa fa-moon"></i></a>
             <a href="#" class="page-title-icon shadow-xl bg-theme color-theme show-on-theme-dark" data-toggle-theme><i class="fa fa-sun"></i></a>
-            <a href="#" class="page-title-icon shadow-xl bg-theme color-theme" data-menu="menu-main"><i class="fa fa-bars"></i></a>
+            <a href="#" class="page-title-icon shadow-xl bg-theme color-theme" data-menu="menu-main"><i class="fa fa-bars"></i></a>-->
           </div>
           <div class="page-title-clear"></div>
 
@@ -97,8 +99,8 @@ export default {
 .menu-ico {height:22px;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;margin-bottom:5px;}
 #nav-home > .menu-ico {background: url('/static/images/assets/menu0_off.png');}
 #nav-buddy > .menu-ico {background: url('/static/images/assets/menu1_off.png');}
-#nav-book > .menu-ico {background: url('/static/images/assets/menu2_off.png');}
-#nav-shopping > .menu-ico {background: url('/static/images/assets/menu3_off.png');}
+#nav-site > .menu-ico {background: url('/static/images/assets/menu2_off.png');}
+#nav-book > .menu-ico {background: url('/static/images/assets/menu3_off.png');}
 #nav-chat  .menu-ico {background: url('/static/images/assets/menu4_off.png');}
 #nav-training > .menu-ico {background: url('/static/images/assets/menu5_off.png');}
 .active-nav > .menu-ico0 {background: url('/static/images/assets/menu0_on.png') !important;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;}

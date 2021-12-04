@@ -1,301 +1,540 @@
 <template>
-  <div class="">
+  <div class="" style="height: 100%; !important">
     <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-site" data-menu-load=""></div>
-    <div class="page-content">
-        
-        <div class="content">
-        <h4 class="text-start pt-2 mb-0 font-18 font-900">짱스님,<br/>어디로 떠나볼까요?</h4>
-        </div>
-
-        <div v-on:click="goList()" class="card card-style" style="background: white;height:148px;">
-            <div class="content mb-0 mt-3">
-                <img class="float-right" src="/static/images/assets/save_earth.png" style="position: absolute;z-index: 11;right: 10px;top:40px;"/>
-                <h4 class="text-start mb-1 font-15" style="padding-top:36px;">지구 구석구석 다이빙 사이트 검색</h4>
-
-                <div class="search-box search-dark border-08 bg-theme rounded-sm" style="position: absolute;width: calc(100% - 30px);z-index: 9;">
-                    <i class="fa fa-search" style="padding: 0px 15px 0px 15px;"></i>
-                    <input type="text" class="border-0" placeholder="37,216개의 장소가 준비되어있어요." data-search>
-                </div>
-                
-            </div>
-        </div>
-
-        <h4 class="text-start mb-2" style="margin-left: 10px;margin-right: 10px;">최근 살펴본 사이트</h4>
-        <div class="splide single-slider slider-no-arrows visible-slider slider-no-dots" id="single-slider-latest">
-            <div class="splide__track">
-                <div class="splide__list">
-                    <div class="splide__slide">
-                        <div class="card card-style card-nearby" style="background: url(http://www.outdoornews.co.kr/news/photo/201402/13021_40743_1032.jpg)" data-card-height="260">
-                            <div class="card-top px-3 py-3">
-                                <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-red-dark"></i></a>
-                            </div>
-                            <div class="card-bottom px-3 py-3">
-                                <h4 class="color-white font-18 font-600">고성 사이트</h4>
-                                <div class="divider bg-white opacity-20 mb-1"></div>
-                                <div class="d-flex">
-                                    <div class="align-self-center" style="max-width: 100%;">
-                                        <p class="font-11 opacity-70 font-600 color-white nearby_desc mb-0" style="max-width: 100%;">대한민국 3대 포인트가 위치한 사이트로 강원도 지역에서 가장 유명한 사이트 입니다. 특히 수중 금강산이라고 불리는 낙산대기 포인트와 개복치를 볼 수 있는 마이산 포인트 등이 유명합니다.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-overlay bg-gradient opacity-30"></div>
-                            <div class="card-overlay bg-gradient"></div>
-                        </div>
-                    </div>
-                    <div class="splide__slide">
-                        <div class="card card-style card-nearby" style="background: url(https://i.ytimg.com/vi/xSJ4YSt3SRI/maxresdefault.jpg)" data-card-height="260">
-                            <div class="card-top px-3 py-3">
-                                <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-gray-light"></i></a>
-                            </div>
-                            <div class="card-bottom px-3 py-3">
-                                <h4 class="color-white font-18 font-600">속초 사이트</h4>
-                                <div class="divider bg-white opacity-20 mb-1"></div>
-                                <div class="d-flex">
-                                    <div class="align-self-center" style="max-width: 100%;">
-                                        <p class="font-11 opacity-70 font-600 color-white nearby_desc mb-0" style="max-width: 100%;">일반적으로 모래바닥으로 구성된 동해안과는 다르게 속초의 바다는 암석형태가 많이 있습니다. 덕분에 이곳에서 다이빙을 한다면 다양한 볼거리를 마주할 수 있습니다.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-overlay bg-gradient opacity-30"></div>
-                            <div class="card-overlay bg-gradient"></div>
-                        </div>
-                    </div>
-                    <div class="splide__slide">
-                        <div class="card card-style card-nearby" style="background: url(http://www.uwmagazine.co.kr/news/photo/202003/368_1869_1729.jpg)" data-card-height="260">
-                            <div class="card-top px-3 py-3">
-                                <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-gray-light"></i></a>
-                            </div>
-                            <div class="card-bottom px-3 py-3">
-                                <h4 class="color-white font-18 font-600">강릉 사이트</h4>
-                                <div class="divider bg-white opacity-20 mb-1"></div>
-                                <div class="d-flex">
-                                    <div class="align-self-center" style="max-width: 100%;">
-                                        <p class="font-11 opacity-70 font-600 color-white nearby_desc mb-0" style="max-width: 100%;">대한민국 최대 규모의 난파선 다이빙 포인트인 스텔라 난파선 포인트가 위치한 사이트 입니다. 더불어 강원도 3대 미항으로 꼽히는 삼곡항이 있는 등 아름다운 다이빙 사이트 입니다.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-overlay bg-gradient opacity-30"></div>
-                            <div class="card-overlay bg-gradient"></div>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-
-        
-        <div class="card card-style " style="background-image: url(/static/images/assets/autumn_back.jpg);background-size: cover;background-repeat: no-repeat;">
-            <div class="content mb-0 mt-3">
-                <h4 class="color-white text-start pt-1 mb-0">지금 떠나기 좋은 다이빙 포인트</h4>
-                <p class="mb-1 color-gray-light">19개 포인트가 기다리고 있어요.</p>
-                <p class="color-white mb-0 opacity-60 ls-n1">#가을&nbsp;&nbsp;#다이빙의 계절</p>
-                <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
-                <img class="mt-n2 float-left" src="/static/images/assets/smartwatch.png" style="margin-left:-20px;padding-top:20px;padding-bottom:16px;"/>
-                <div class="card-overlay bg-gradient-reverse opacity-60" style="z-index: -1;"></div>
-            </div>
-        </div>
-
-
-        <div class="card card-style">
-            <div class="content mb-0 mt-3">
-                <h4 class="text-start pt-2 mb-0">지금 인기있는 사이트</h4>
-                <p class="mb-3 color-gray-light-mid">52개의 사이트 인기 유지중</p>
-                <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
-                
-                <div v-for="(site,index) in site_list">
-                    <div class="map-box">
-                        <a href="/site/gosung">
-                            <div class="bx">
-                                <div class="justify-content-center mb-0 text-start">
-                                    <div class="" style="float: left;position: relative;width: 95px; height:95px;">
-                                        <img v-bind:src="site.img" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;">
-                                    </div>
-                                    <div class="" style="padding-left: 110px;">
-                                        <h4 class="font-15"> {{site.title}} </h4>
-                                        <p class="pb-0 mb-0 line-height-m nearby_desc"> {{site.desc}} </p>
-                                        
-                                        <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
-                                            <span> {{site.star}} </span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="divider mt-3 mb-3"></div>
-                </div>
-                
-            </div>
-        </div>
-
-
-        <div class="card card-style" style="background: #f086a2;">
-            <div class="content mb-0 mt-3">
-                <h4 class="text-start pt-2 mb-0 font-600"><i class="fas fa-camera me-2"></i>사진 찍기 좋은 사이트</h4>
-                <p class="mb-1">37개의 다이빙 사이트</p>
-                <p class="mb-0 opacity-60 ls-n1">#인생샷&nbsp;&nbsp;#인스타를 평정하다</p>
-                <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
-                <img class=" mt-n4 float-right" src="/static/images/assets/camera.png" style="margin-right: 16px;margin-bottom:16px;"/>
-            </div>
-        </div>
-
-        <div class="card card-style" style="background: #badefc;">
-            <div class="content mb-0 mt-3">
-                <h4 class="text-start pt-2 mb-1 font-600"><i class="fas fa-plane me-2"></i>전세계 10대 포인트</h4>
-                <p class="mb-0">한눈에 살펴보는 10대 포인트</p>
-                <a class="font-12 wedive-txt-all">모두보기</a>
-                <img class="float-right mt-n3" src="/static/images/assets/earth.gif" width="300" style="margin-right: -20px;margin-bottom:-30px;margin-top:-10px;"/>
-            </div>
-        </div>
-
-        <div class="card card-style">
-            <div class="content mb-0 mt-3">
-                <h4 class="text-start pt-2 mb-0">이색 다이빙 포인트</h4>
-                <p class="mb-3 color-gray-light-mid">난파선 등 171개의 이색 포인트</p>
-                <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
-                
-                <div v-for="(site,index) in site_list">
-                    <div class="map-box">
-                        <a href="/site/gosung">
-                            <div class="bx">
-                                <div class="justify-content-center mb-0 text-start">
-                                    <div class="" style="float: left;position: relative;width: 95px; height:95px;">
-                                        <img v-bind:src="site.img" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;">
-                                    </div>
-                                    <div class="" style="padding-left: 110px;">
-                                        <h4 class="font-15"> {{site.title}} </h4>
-                                        <p class="pb-0 mb-0 line-height-m nearby_desc"> {{site.desc}} </p>
-                                        <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
-                                            <span> {{site.star}} </span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="divider mt-3 mb-3"></div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="card card-style" style="background: #beb8b1;">
-            <div class="content mb-0 mt-3">
-                <h4 class="color-white text-start pt-1 mb-0">실내 수영장 포인트</h4>
-                <p class="color-white mb-1">첫 트레이닝은 수영장에서</p>
-                <p class="color-white mb-0 opacity-60 ls-n1">#차근차근&nbsp;&nbsp;#날씨무관</p>
-                <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
-                <img class="mt-n2 mb-2 float-right" src="/static/images/assets/pool.png" width="240"/>
-            </div>
-        </div>
-
-        
-
-        <div class="card card-style">
-            <div class="content mb-0 mt-3">
-                <h4 class="text-start pt-2 mb-0 color-primary"><img src="/static/images/assets/ico_wedive_d.png" width="30" />위다이브 추천</h4>
-                <p class="mb-3 color-gray-light-mid">38개의 다이빙 센터</p>
-                <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
-                
-                <div v-for="(center,index) in center_list" v-if="index>2 && index<5">
-                    <div class="map-box">
-                        <a href="/site/gosung">
-                            <div class="bx">
-                                <div class="justify-content-center mb-0 text-start">
-                                    <div class="" style="float: left;position: relative;width: 95px; height:95px;">
-                                        <img v-bind:src="center.img" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;">
-                                    </div>
-                                    <div class="" style="padding-left: 110px;">
-                                        <h4 class="font-15"> {{center.title}} </h4>
-                                        <p class="pb-0 mb-0 line-height-m ellipsis"> {{center.desc}} </p>
-                                        <p class="pb-0 mb-0 mt-n1 ellipsis color-gray-light-mid">
-                                            {{center.feature}}
-                                        </p>
-                                        <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
-                                            <span> {{center.star}} </span>
-                                            &nbsp;<font class="color-gray-light">|</font>&nbsp;
-                                            <img src="/static/images/agency/logo_padi.svg" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
-                                            &nbsp;<font class="color-gray-light">|</font>&nbsp;
-                                            <span v-for="i in center.price_index">￦</span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="divider mt-3 mb-3"></div>
-                </div>
-            </div>
-        </div>
-
-        
-
+    <div class="main-header header header-fixed header-logo-center">
+        <a class="" href="/" style="margin-left: 16px;"><img class="logo-image" src="/static/images/assets/logo-dark.svg" height="46" /></a>
         
         
-
-        <div class="card card-style" style="background: #2885df;">
-            <div class="content mb-0 mt-3">
-                <h4 class="color-white text-start pt-1 mb-1">환상의 시간, 리브어보드</h4>
-                <p class="color-white mb-0 color-gray">287개 리브어보드 모아보기</p>
-                <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
-                <img class="float-right mt-n3 movebox" src="/static/images/assets/boat.png" style="padding-bottom:16px;"/>
-                <img class="movebox2" src="/static/images/assets/cloud.png" width="100"/>
-                <img class="movebox3" src="/static/images/assets/cloud.png" width="70"/>
-            </div>
-        </div>
-
-        <div class="card card-style" style="background: #28344e;height:240px;">
-            <div class="content mb-0 mt-3">
-                <h4 class="color-white text-start pt-1 mb-0">혹동고래 보신분?</h4>
-                <p class="color-white mb-1">인기 대물 포인트 28곳</p>
-                <p class="color-white mb-0 opacity-60 ls-n1">#자연의 신비&nbsp;&nbsp;#버킷리스트</p>
-                <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
-                <img class="float-right" src="/static/images/assets/whale.png" />
-            </div>
-        </div>
-
-        
-        
-        <div data-menu-load="/static/menu-footer.html"></div>
+        <a v-on:click="searchBox()" href="#" class="header-icon header-icon-4 font-18" style="color: #858585;"><i class="fas fa-search"></i></a>
     </div>
     
 
+    <div class="page-content pb-0" style="height: 100% !important;">
+        
+        <div id="map" style="height: 100% !important;position: inherit !important;"></div>
 
-    <!-- End of Page Content--> 
-    
-    
+        <div class="map-search hide">
+            <div class="bx-search">
+                <vue-typeahead-bootstrap
+                    v-model="query"
+                    :data="users"
+                    :serializer="item => item.name_ko"
+                    :screen-reader-text-serializer="item => `${item.name_ko}`"
+                    highlightClass="special-highlight-class"
+                    @hit="selecteduser = $event;show_scuba_label();"
+                    :minMatchingChars="2"
+                    placeholder="짱스님, 어디로 다이빙 할까요?"
+                    inputClass="special-input-class"
+                    :disabledValues="(selecteduser ? [selecteduser.name_ko] : [])"
+                    @input="lookupUser2"
+                    >
+                    <template slot="suggestion" slot-scope="{ data, htmlText }">
+                        <div class="d-flex align-items-center">
+                        <img
+                            class="rounded-s me-2"
+                            :src="data.img_url"
+                            style="width: 40px; height: 40px;" />
+                        
+                        <span v-if="data.type == 'region'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-marked-alt\'></i> 장소</span><br/>' + htmlText"></span>
+                        <span v-else-if="data.type == 'point'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-pin\'></i> 다이빙 포인트</span><br/>' + htmlText"></span>
+                        <span v-else-if="data.type == 'center'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-store\'></i> 다이빙 센터</span><br/>' + htmlText"></span>
+                        </div>
+                    </template>
+                </vue-typeahead-bootstrap>
+            </div>
+        </div>
+
+
+        <div class="map-filter">
+            <div v-on:click="mapFilter('category')" class="bx-filter bg-white me-2">종류</div>
+            <div id="map-item-category" class="display-block" style="display: none;">
+                <div class="bx-filter bg-gray-light color-black">스쿠버</div>
+                <div class="bx-filter bg-gray-light color-black">프리</div>
+                <div class="bx-filter bg-gray-light color-black">리브어보드</div>
+            </div>
+        </div>
+        <div class="map-filter" style="top: 170px;">
+            <div v-on:click="mapFilter('level')" class="bx-filter bg-white me-2">레벨</div>
+            <div id="map-item-level" class="display-block" style="display: none;">
+                <div class="bx-filter bg-gray-light color-black">초급</div>
+                <div class="bx-filter bg-gray-light color-black">중급</div>
+                <div class="bx-filter bg-gray-light color-black">고급</div>
+            </div>
+        </div>
+        <div class="map-filter" style="top: 220px;">
+            <div v-on:click="mapFilter('fish')" class="bx-filter bg-white me-2">어종</div>
+            <div id="map-item-fish" class="display-block" style="display: none;">
+                <div class="bx-filter bg-gray-light color-black">거북</div>
+                <div class="bx-filter bg-gray-light color-black">만타</div>
+                <div class="bx-filter bg-gray-light color-black">상어</div>
+                <div class="bx-filter bg-gray-light color-black">고래</div>
+                <div class="bx-filter bg-gray-light color-black">잭피쉬</div>
+            </div>
+        </div>
+        <div class="map-filter" style="top: 270px;">
+            <div v-on:click="mapFilter('type')" class="bx-filter bg-white me-2">타입</div>
+            <div id="map-item-type" class="display-block" style="display: none;">
+                <div class="bx-filter bg-gray-light color-black">난파선</div>
+                <div class="bx-filter bg-gray-light color-black">동굴</div>
+                <div class="bx-filter bg-gray-light color-black">해루질</div>
+                <div class="bx-filter bg-gray-light color-black">케이지</div>
+                <div class="bx-filter bg-gray-light color-black">월</div>
+                <div class="bx-filter bg-gray-light color-black">렉</div>
+            </div>
+        </div>
+        <div class="map-filter" style="top: 320px;">
+            <div v-on:click="mapFilter('exotic')" class="bx-filter bg-white me-2">이색</div>
+            <div id="map-item-exotic" class="display-block" style="display: none;">
+                <div class="bx-filter bg-gray-light color-black">세계10대</div>
+                <div class="bx-filter bg-gray-light color-black">대물</div>
+                <div class="bx-filter bg-gray-light color-black">수영장</div>
+            </div>
+        </div>
+        
+        <div class="map-box hide">
+            <a href="/center/k26">
+                <div class="bx">
+                    <div class="justify-content-center mb-0 text-start">
+                        <div class="" style="float: left;position: relative;width: 95px; height:95px;">
+                            <img id="map_box_shop_img" src="" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;">
+                        </div>
+                        
+                        <div class="" style="padding-left: 110px;">
+                            <h4 id="map_box_shop_name" class="mb-0"></h4>
+                            <p id="map_box_shop_desc" class="pb-0 mb-0 line-height-m ellipsis"></p>
+                            <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
+                                &nbsp;<span id="map_box_shop_star"></span>
+                                &nbsp;<font class="color-gray-light">|</font>&nbsp;
+                                <img id="map_box_shop_fed" src="/static/images/agency/logo_padi.svg" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
+                                &nbsp;<font class="color-gray-light">|</font>&nbsp;
+                                <span id="map_box_shop_price"></span>
+                            </p>
+                            <div class="box-bottom">
+                                <div class="wedive-corner wedive-corner-bottom"></div>
+                                <div class="bg-secondary box-bottom-area color-white row">
+                                    <span class="col-4 text-center box-bottom-item">컨시어지</span><span class="col-4 text-center box-bottom-item">버디찾기</span><span class="col-4 text-center box-bottom-item">강사찾기</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Menu Fliter -->
+    <div id="menu-filter" class="menu menu-box-bottom" style="height:100%;border-radius: 0px !important;">
+        <div class="menu-title mt-n1">
+            <h2 class="pt-3 pb-3 text-center">필터를 선택하세요</h2>
+            <a href="#" class="close-menu"><i class="wedive_icoset wedive_icoset_close"></i></a>
+        </div>
+        <div class="content m-0 text-start">
+            <div class="card card-style ms-0 me-0 rounded-0 mb-0">
+                <div class="content">
+                    <div>
+                        <label for="filter_type" class="color-highlight font-700">다이빙 종류</label>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_type1" checked>
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_type1">스쿠버 다이빙</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-air-freshener font-16 color-highlight"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_type2" checked>
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_type2">프리 다이빙</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-swimmer font-17 color-secondary"></i>
+                    </div>
+
+                    <div>
+                        <label for="filter_type" class="color-highlight font-700">센터 평점</label>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_star5">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_star5">5</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-star font-16 color-yellow-dark"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_star4">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_star4">4</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-star font-17 color-yellow-dark"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_star3">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_star3">3</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-star font-16 color-yellow-dark"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_star2">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_star2">2</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-star font-17 color-yellow-dark"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_star1">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_star1">1</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-star font-16 color-yellow-dark"></i>
+                    </div>
+
+                    <div>
+                        <label for="filter_type" class="color-highlight font-700">수중 환경</label>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_fish5">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_fish5">5</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-fish font-16 color-orange-light"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_fish4">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_fish4">4</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-fish font-17 color-orange-light"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_fish3">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_fish3">3</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-fish font-16 color-orange-light"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_fish2">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_fish2">2</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-fish font-17 color-orange-light"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_fish1">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_fish1">1</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-fish font-16 color-orange-light"></i>
+                    </div>
+
+                    <div>
+                        <label for="filter_type" class="color-highlight font-700">시야</label>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_sight5">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_sight5">5</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-eye font-16 color-gray-light-mid2"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_sight4">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_sight4">4</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-eye font-17 color-gray-light-mid2"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_sight3">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_sight3">3</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-eye font-16 color-gray-light-mid2"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_sight2">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_sight2">2</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-eye font-17 color-gray-light-mid2"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_sight1">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_sight1">1</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-eye font-16 color-gray-light-mid2"></i>
+                    </div>
+
+                    <div>
+                        <label for="filter_type" class="color-highlight font-700">다이빙 환경</label>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_env1">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_env1">케이브 포인트</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-window-restore font-17 color-red-dark"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_env2">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_env2">난파선 포인트</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-ship font-17 color-brown-dark"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_env3">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_env3">마크로 포인트</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-fish font-17 color-gray-dark"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_env4">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_env4">대물 포인트</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-fish font-17 color-blue-dark"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_env5">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_env5">월다이빙 포인트</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fa fa-bars color-brown-dark font-17"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_env6">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_env6">딥다이빙 포인트</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-ruler-vertical font-17 color-blue-light"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_env7">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_env7">먹다이빙 포인트</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-wind font-17 color-instagram"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_env8">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_env8">드리프트 포인트</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-water font-14 color-dark-dark"></i>
+                    </div>
+
+                    <div>
+                        <label for="filter_type" class="color-highlight font-700">다이빙 타이밍</label>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_time1">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_time1">야간 다이빙</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-moon font-16 color-yellow-dark"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_time2">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_time2">조류 다이빙</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-water font-17 color-green-dark"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_time3">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_time3">아이스 다이빙</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-temperature-low font-17 color-blue-dark"></i>
+                    </div>
+                </div>
+                
+                
+                <div class="content hide" id="tab-center-filter">
+                    <div class="tab-controls tabs-small tabs-rounded" data-highlight="bg-blue-dark">
+                        <a href="#" data-active data-bs-toggle="collapse" data-bs-target="#tab-general">기본</a>
+                        <!--<a href="#" data-bs-toggle="collapse" data-bs-target="#tab-level">레벨</a>-->
+                        <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-env">환경</a>
+                        <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-time">시간</a>
+                    </div>
+                    <div class="clearfix mb-3"></div>
+                    <div data-bs-parent="#tab-center-filter" class="collapse ps-2 pe-2 show" id="tab-general">
+                        <div class="list-group list-custom-small list-icon-0 check-visited">
+                            <div class="form-check icon-check">
+                                <label for="filter_type" class="color-highlight">다이빙 종류</label>
+                                <div class="form-check icon-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="check_scuba">
+                                    <label class="form-check-label" for="check_scuba">스쿠버 다이빙</label>
+                                    <i class="icon-check-1 far fa-circle color-gray-dark font-16"></i>
+                                    <i class="icon-check-2 far fa-check-circle font-16 color-highlight"></i>
+                                </div>
+                                <div class="form-check icon-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="check_free">
+                                    <label class="form-check-label" for="check_free">프리 다이빙</label>
+                                    <i class="icon-check-1 far fa-circle color-gray-dark font-16"></i>
+                                    <i class="icon-check-2 far fa-check-circle font-16 color-highlight"></i>
+                                </div>
+                            </div>
+                            <div class="input-style has-borders no-icon mb-4">
+                                <label for="filter_star" class="color-highlight">평점</label>
+                                <select id="filter_star">
+                                    <option value="0" selected>전체</option>
+                                    <option value="5">아주 좋음</option>
+                                    <option value="4">좋음</option>
+                                    <option value="3">보통</option>
+                                    <option value="2">나쁨</option>
+                                    <option value="1">아주 나쁨</option>
+                                </select>
+                            </div>
+                            <div class="input-style has-borders no-icon mb-4">
+                                <label for="filter_fish" class="color-highlight">물고기</label>
+                                <select id="filter_fish">
+                                    <option value="0" selected>전체</option>
+                                    <option value="5">아주 많음</option>
+                                    <option value="4">많음</option>
+                                    <option value="3">보통</option>
+                                    <option value="2">적음</option>
+                                    <option value="1">아주 적음</option>
+                                </select>
+                            </div>
+                            <div class="input-style has-borders no-icon mb-4">
+                                <label for="filter_sight" class="color-highlight">시야</label>
+                                <select id="filter_sight">
+                                    <option value="0" selected>전체</option>
+                                    <option value="5">아주 좋음</option>
+                                    <option value="4">좋음</option>
+                                    <option value="3">보통</option>
+                                    <option value="2">나쁨</option>
+                                    <option value="1">아주 나쁨</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div data-bs-parent="#tab-center-filter" class="collapse ps-2 pe-2" id="tab-level">
+                        <div class="list-group list-custom-small list-icon-0 wedive-filter-list">
+                            <a href="" v-on:click="selectFilter($event, '교육자')"><i class="fas fa-user-tie font-14 rounded-sm bg-green-light"></i><span>교육자</span><i class="far fa-check-circle color-highlight font-16"></i></a>
+                            <a href="" v-on:click="selectFilter($event, '초급자')"><i class="fas fa-user font-14 rounded-sm bg-blue-light"></i><span>초급자</span><i class="far fa-check-circle color-highlight font-16"></i></a>
+                            <a href="" v-on:click="selectFilter($event, '중급자')"><i class="fas fa-user-shield font-14 rounded-sm bg-red-light"></i><span>중급자</span><i class="far fa-check-circle color-highlight font-16"></i></a>
+                            <a href="" v-on:click="selectFilter($event, '고급자')"><i class="fas fa-user-clock font-14 rounded-sm bg-magenta-dark"></i><span>고급자</span><i class="far fa-check-circle color-highlight font-16"></i></a>
+                            <a href="" v-on:click="selectFilter($event, '전문가')"><i class="fas fa-user-check font-14 rounded-sm bg-brown-dark"></i><span>전문가</span><i class="far fa-check-circle color-highlight font-16"></i></a>
+                            <a href="" v-on:click="selectFilter($event, '특수기술')"><i class="fas fa-user-graduate rounded-sm bg-green-dark"></i><span>특수기술</span><i class="far fa-check-circle color-highlight font-16"></i></a>
+                        </div>
+                    </div>-->
+                    <div data-bs-parent="#tab-center-filter" class="collapse ps-2 pe-2" id="tab-env">
+                        <div class="list-group list-custom-small list-icon-0">
+                            <a href="" v-on:click="selectFilter($event, '케이브 포인트')"><i class="fas fa-window-restore rounded-sm bg-brown-dark"></i><span>케이브 포인트</span><i class="far fa-check-circle color-highlight font-16"></i></a>
+                            <a href="" v-on:click="selectFilter($event, '난파선 포인트')"><i class="fas fa-ship rounded-sm bg-red-dark"></i><span>난파선 포인트</span><i class="far fa-check-circle color-highlight font-16"></i></a>
+                            <a href="" v-on:click="selectFilter($event, '마크로 포인트')"><i class="fas fa-fish rounded-sm bg-yellow-dark"></i><span>마크로 포인트</span><i class="far fa-check-circle color-highlight font-16"></i></a>
+                            <a href="" v-on:click="selectFilter($event, '대물 포인트')"><i class="fas fa-fish rounded-sm bg-blue-dark"></i><span>대물 포인트</span><i class="far fa-check-circle color-highlight font-16"></i></a>
+                            <a href="" v-on:click="selectFilter($event, '월다이빙 포인트')"><i class="fa fa-bars rounded-sm bg-teal-dark"></i><span>월다이빙 포인트</span><i class="far fa-check-circle color-highlight font-16"></i></a>
+                            <a href="" v-on:click="selectFilter($event, '딥다이빙 포인트')"><i class="fas fa-ruler-vertical rounded-sm bg-brown-dark"></i><span>딥다이빙 포인트</span><i class="far fa-check-circle color-highlight font-16"></i></a>
+                            <a href="" v-on:click="selectFilter($event, '먹다이빙 포인트')"><i class="fas fa-wind rounded-sm bg-orange-dark"></i><span>먹다이빙 포인트</span><i class="far fa-check-circle color-highlight font-16"></i></a>
+                            <a href="" v-on:click="selectFilter($event, '드리프트 포인트')"><i class="fas fa-water font-14 rounded-sm bg-green-light"></i><span>드리프트 포인트</span><i class="far fa-check-circle color-highlight font-16"></i></a>
+                        </div>
+                    </div>
+                    <div data-bs-parent="#tab-center-filter" class="collapse ps-2 pe-2" id="tab-time">
+                        <div class="list-group list-custom-small list-icon-0">
+                            <a href="" v-on:click="selectFilter($event, '야간 다이빙')"><i class="fas fa-moon font-14 rounded-sm bg-blue-light"></i><span>야간 다이빙</span><i class="far fa-check-circle color-highlight font-16"></i></a>
+                            <a href="" v-on:click="selectFilter($event, '조류 다이빙')"><i class="fas fa-water font-14 rounded-sm bg-red-light"></i><span>조류 다이빙</span><i class="far fa-check-circle color-highlight font-16"></i></a>
+                            <a href="" v-on:click="selectFilter($event, '아이스 다이빙')"><i class="fas fa-temperature-low font-14 rounded-sm bg-magenta-dark"></i><span>아이스 다이빙</span><i class="far fa-check-circle color-highlight font-16"></i></a>
+                        </div>
+                    </div>
+                </div>    
+            </div>
+            <div style="position: absolute;width: 100%;bottom:16px;">
+                <div id="filter_list" class="ms-3 me-3 mb-3"></div>
+                <a href="#" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 ms-3 me-3">적용</a>
+            </div>
+        </div>
+    </div>
+    <a href="/buddy_create" id="btn_new" class="btn btn-m mb-3 rounded-xl font-900 shadow-s bg-dark-dark icon-concierge"></a>
   </div>
 </template>
 <script>
+import VueTypeaheadBootstrap from 'vue-typeahead-bootstrap';
+import {debounce} from 'lodash';
 
 export default {
   name: 'HelloWorld',
   mounted() {
     
-    this.btn_new_html = $("#btn_new").html();
+    document.getElementById("page-back").classList.remove("hide");
+    //document.getElementById("footer-bar").classList.add("hide");
+    document.getElementById("footer-bar").style.borderRadius = "30px 30px 0 0";
 
-    if (this.$route.query.header && this.$route.query.header == 'hide') {
-      $(".page-title").hide();
-      $(".page-title-clear").hide();
-      $(".header-fixed").hide();
-    }
-    if (this.$route.query.footer && this.$route.query.footer == 'hide') {
-      $("#footer-bar").hide();
-    }
-  },
-  created() {
-    setTimeout(function() {
-        init_template();
-        var preloader = document.getElementById('preloader')
-        if(preloader){preloader.classList.add('preloader-hide');}
-    }, 500);
-  },
-  destroyed () {
-    
-  },
-  data () {
-    return {
-        center_list : [
+    let script = document.createElement('script');
+    script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCWu8Fw-h-f1t8Sp3I7R3l_Ukr24HunXQM';
+    document.body.appendChild(script);
+    script.onload = () => {
+        const night_style = [
+            { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
+            { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
+            { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
+            {
+                featureType: "administrative.locality",
+                elementType: "labels.text.fill",
+                stylers: [{ color: "#d59563" }],
+            },
+            {
+                featureType: "poi",
+                elementType: "labels.text.fill",
+                stylers: [{ color: "#d59563" }],
+            },
+            {
+                featureType: "poi.park",
+                elementType: "geometry",
+                stylers: [{ color: "#263c3f" }],
+            },
+            {
+                featureType: "poi.park",
+                elementType: "labels.text.fill",
+                stylers: [{ color: "#6b9a76" }],
+            },
+            {
+                featureType: "road",
+                elementType: "geometry",
+                stylers: [{ color: "#38414e" }],
+            },
+            {
+                featureType: "road",
+                elementType: "geometry.stroke",
+                stylers: [{ color: "#212a37" }],
+            },
+            {
+                featureType: "road",
+                elementType: "labels.text.fill",
+                stylers: [{ color: "#9ca5b3" }],
+            },
+            {
+                featureType: "road.highway",
+                elementType: "geometry",
+                stylers: [{ color: "#746855" }],
+            },
+            {
+                featureType: "road.highway",
+                elementType: "geometry.stroke",
+                stylers: [{ color: "#1f2835" }],
+            },
+            {
+                featureType: "road.highway",
+                elementType: "labels.text.fill",
+                stylers: [{ color: "#f3d19c" }],
+            },
+            {
+                featureType: "transit",
+                elementType: "geometry",
+                stylers: [{ color: "#2f3948" }],
+            },
+            {
+                featureType: "transit.station",
+                elementType: "labels.text.fill",
+                stylers: [{ color: "#d59563" }],
+            },
+            {
+                featureType: "water",
+                elementType: "geometry",
+                stylers: [{ color: "#17263c" }],
+            },
+            {
+                featureType: "water",
+                elementType: "labels.text.fill",
+                stylers: [{ color: "#515c6d" }],
+            },
+            {
+                featureType: "water",
+                elementType: "labels.text.stroke",
+                stylers: [{ color: "#17263c" }],
+            },
+            ];
+
+        const map_style = (localStorage['wedive-Theme'] == 'light-mode') ? [] : night_style;
+
+        this.map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 33.24134444312815, lng: 126.56484940647604},
+            zoom: 16,
+            mapTypeControl: false,
+            streetViewControl: false,
+            fullscreenControl: false,
+            zoomControl: false,
+            styles: map_style
+        });
+
+        var center_list = [
             {title: "버블탱크 스쿠버다이빙", desc: "제주 남부에 위치한 PADI 5star 다이빙센터", star: 3.8, price_index: 2, feature: "덕다이빙, 케이브, 난파선, 드리프트", img: '/static/images/shop1/diving/test1.jpg', position: {lat: 33.24134444312815, lng: 126.56484940647604}},
             {title: "다이브 투게더리조트", desc: "한줄설명1", star: 4.8, price_index: 2, feature: "덕다이빙, 케이브", img: '/static/images/shop1/diving/test2.jpg', position: {lat: 33.241633952501715, lng: 126.56456092676112}},
             {title: "태평양 다이빙스쿨", desc: "블라블라", star: 3.1, price_index: 3, feature: "난파선, 드리프트", img: '/static/images/shop1/diving/test3.jpg', position: {lat: 33.24030993345755, lng: 126.56472966827262}},
@@ -306,17 +545,128 @@ export default {
             {title: "홀리데이 다이빙 코리아", desc: "히히", star: 4.2, price_index: 3, feature: "덕다이빙, 케이브, 난파선, 드리프트", img: '/static/images/shop1/diving/test8.jpg', position: {lat: 33.24088391439924, lng: 126.5628795809329}},
             {title: "천지연40", desc: "헬로", star: 4.3, price_index: 2, feature: "난파선, 드리프트", img: '/static/images/shop1/diving/test9.jpg', position: {lat: 33.242485636047576, lng: 126.5623109526933}},
             {title: "언더더씨 스쿠버다이빙", desc: "방가워", star: 4.7, price_index: 2, feature: "덕다이빙, 케이브", img: '/static/images/shop1/diving/test10.jpg', position: {lat: 33.244246055136834, lng: 126.5671937429616}}
-        ],
-        site_list: [
-            {title: "고성 사이트", "desc": "대한민국 3대 포인트가 위치한 사이트로 강원도 지역에서 가장 유명한 사이트 입니다. 특히 수중 금강산이라고 불리는 낙산대기 포인트와 개복치를 볼 수 있는 마이산 포인트 등이 유명합니다.", "img": "http://www.outdoornews.co.kr/news/photo/201402/13021_40743_1032.jpg", star: 3.8},
-            {title: "속초 사이트", desc: "일반적으로 모래바닥으로 구성된 동해안과는 다르게 속초의 바다는 암석형태가 많이 있습니다. 덕분에 이곳에서 다이빙을 한다면 다양한 볼거리를 마주할 수 있습니다.", img: "https://i.ytimg.com/vi/xSJ4YSt3SRI/maxresdefault.jpg", star: 3.9},
-            {title: "강릉 사이트", desc: "대한민국 최대 규모의 난파선 다이빙 포인트인 스텔라 난파선 포인트가 위치한 사이트 입니다. 더불어 강원도 3대 미항으로 꼽히는 삼곡항이 있는 등 아름다운 다이빙 사이트 입니다.", img: "http://www.uwmagazine.co.kr/news/photo/202003/368_1869_1729.jpg", star: 3.9},
-        ],
+        ];
+
+
+        for (var i=0; i<center_list.length; i++) {
+            const img_path = '/static/images/assets/' + ( (center_list[i].hasOwnProperty("type") && center_list[i].type == 'selected') ? 'ico_pin_big1.png' : 'ico_pin2.png');
+            const img_size = (center_list[i].hasOwnProperty("type") && center_list[i].type == 'selected') ? new google.maps.Size(58,66) : new google.maps.Size(38,43)
+            const title = center_list[i].title;
+            const desc = center_list[i].desc;
+            const star = center_list[i].star;
+            const price_index = center_list[i].price_index;
+            const feature = center_list[i].feature;
+            const img = center_list[i].img;
+
+            const marker_shop = new google.maps.Marker({
+                map: this.map,
+                position: center_list[i].position,
+                icon: new google.maps.MarkerImage(img_path, null, null, null, img_size),
+            });
+            marker_shop.addListener("click", () => {
+                $(".map-box").removeClass("hide");
+                $("#btn_new").addClass("hide");
+                for (var j=0; j<this.marker_list.length; j++) {
+                    var _icon = this.marker_list[j].getIcon();
+                    if (_icon.size.width != 38) {
+                        this.marker_list[j].setIcon(new google.maps.MarkerImage('/static/images/assets/ico_pin2.png', null, null, null, new google.maps.Size(38,43)));
+                    }
+                }
+
+                $("#map_box_shop_name").text(title);
+                $("#map_box_shop_desc").text(desc);
+                $("#map_box_shop_star").text(star);
+                //map_box_shop_fed
+                
+                $("#map_box_shop_price").text("￦".repeat(price_index));
+                $("#map_box_shop_feature").text(feature);
+                $("#map_box_shop_img").attr("src", img);
+                
+                
+                marker_shop.setIcon(new google.maps.MarkerImage('/static/images/assets/ico_pin_big1.png', null, null, null, new google.maps.Size(58,66)));
+                if (this.map.getZoom() == 18) {
+                    this.map.panTo(marker_shop.getPosition());
+                } else {
+                    this.map.setZoom(18);
+                    this.map.setCenter(marker_shop.getPosition());
+                }
+            });
+            this.marker_list.push(marker_shop);
+        }
+
+        this.map.addListener("click", (e) => {
+            $(".map-box").addClass("hide");
+            $("#btn_new").removeClass("hide");
+            if ($('.map-search').hasClass("hide") == false ) $('.map-search').addClass("hide");
+        });
+
+
+        
+        
+    };
+    //$(".page-title-wrapper").css("background-color", "#eef2f1");
+    //$(".page-title-wrapper").css("height", "58px");
+    //$(".page-title-wrapper").css("width", "100%");
+    //$(".page-title-wrapper").css("z-index", "980");
+    //$(".page-title-wrapper").css("position", "absolute");
+    //$(".page-title-fixed").css("position", "absolute");
+    //$(".page-title-fixed").css("z-index", "990");
+    $(".page-title-clear").addClass("hide");
+    var body = document.body, html = document.documentElement;
+    var height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+    document.getElementById('map').style.height = height + 'px';
+
+    if (this.$route.query.header && this.$route.query.header == 'hide') {
+      $(".page-title").hide();
+      $(".page-title-clear").hide();
+      $(".header-fixed").hide();
+    }
+    if (this.$route.query.footer && this.$route.query.footer == 'hide') {
+      $("#footer-bar").hide();
+    }
+    this.btn_new_html = $("#btn_new").html();
+  },
+  created() {
+    setTimeout(function() {
+        init_template();
+        var preloader = document.getElementById('preloader')
+        if(preloader){preloader.classList.add('preloader-hide');}
+    }, 50);
+  },
+  destroyed () {
+    window.removeEventListener('scroll', this.handleScroll);
+  },
+  data () {
+    return {
+        query: '',
+        selecteduser: null,
+        map: null,
+        marker_list: [],
+        btn_new_html: '',
+        users: [],
     }
   }, methods: {
-    goList: function() {
-        location.href='/center_list'
-    }
+      mapFilter(type) {
+        if ($("#map-item-" + type).css("display") == 'none') $("#map-item-" + type).fadeIn(200);
+        else $("#map-item-" + type).fadeOut(200);
+      },
+      searchBox() {
+        if ($('.map-search').hasClass("hide") ) $('.map-search').removeClass("hide");
+        else $('.map-search').addClass("hide");
+
+        $(".bx-search input").css("border-width", "0");
+        setTimeout(function() {
+            $(".bx-search input").focus();
+        },200)
+      },
+      lookupUser2: debounce(function(){
+        this.users = [
+            {"id": "region_ko_jeju", "type": "region", "name_ko": "제주도", name_en: "Jeju island", "img_url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0c/bf/d2/56/photo1jpg.jpg?w=100&h=100&s=1"},
+            {"id": "region_ko_wooljin", "type": "region", "name_ko": "울진", name_en: "Wooljin", "img_url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/01/5a/31/a0/sunrise-peak-seongsan.jpg?w=100&h=100&s=1"},
+            {"id": "center_ko_jeju_bubbletank", "type": "center", "name_ko": "제주 버블탱크 스쿠버다이빙", name_en: "Bubble tank", "img_url": "/static/bubble2.jpg"},
+            {"id": "point_ko_jeju_munisland", "type": "point", "name_ko": "제주도 문섬", name_en: "Mun island", "img_url": "https://api.cdn.visitjeju.net/photomng/imgpath/201907/31/07c1996d-4374-4e77-b353-300d01783718.jpg"},
+        ];
+      }, 500),
   }
 
   
@@ -327,23 +677,53 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.wedive-chip {padding-left: 16px;margin: 0px 4px 0px 0px;margin-bottom: 4px;}
-.wedive-chip i {width: auto;line-height: inherit;margin-right: 3px;}
-.light-border-bottom {border-bottom: 1px solid #dee2e6;}
-.wedive-txt-all {position: absolute;top: 20px;right: 16px;}
-.border-08 {border: 1px solid rgba(0, 0, 0, 0.08) !important;}
-.ls-n1 {letter-spacing: -1px;}
+.map-box {position: absolute;right: 0;bottom: 75px;left: 0;margin: 5px 10px 4px;border-radius:16px;background-color: white;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
+.map-filter {position: absolute;top: 120px;left: 10px;margin: 5px 5px 4px;}
+.display-block {display:inline-block;}
+.map-search {position: absolute;right: 0;top: 57px;left: 0;margin: 5px 12px 4px;border-radius:16px;background-color: white;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
+.bx {padding: 15px 14px;min-height: 125px;}
+.bx-search {padding: 8px 14px;min-height: 48px;}
+.bx-filter {border: 1px solid rgba(0,0,0,.1);padding: 8px 4px;display:inline-block;}
 
-@keyframes motion-updown {0% {margin-top: 0px;}20% {margin-top: 10px;}40% {margin-top: 0px;}60% {margin-top: 10px;}80% {margin-top: 0px;}100% {margin-top: 0px;}}
--webkit-@keyframes motion-updown {0% {margin-top: 0px;}20% {margin-top: 10px;}40% {margin-top: 0px;}60% {margin-top: 10px;}80% {margin-top: 0px;}100% {margin-top: 0px;}}
-@keyframes motion-leftright {0% {margin-right: 0px;}20% {margin-right: 25px;}40% {margin-right: 0px;}60% {margin-right: 25px;}80% {margin-right: 0px;}100% {margin-right: 0px;}}
--webkit-@keyframes motion-leftright {0% {margin-right: 0px;}20% {margin-right: 25px;}40% {margin-right: 0px;}60% {margin-right: 25px;}80% {margin-right: 0px;}100% {margin-right: 0px;}}
-@keyframes motion-endtoend {0% {left: -100px; opacity: .5;}50% {left: 40%; opacity: .5;}100% {left: 100%; opacity: 0;}}
--webkit-@keyframes motion-endtoend {0% {left: -100px; opacity: .5;}50% {left: 40%; opacity: .5;}100% {left: 100%; opacity: 0;}}
 
-.movebox {animation: motion-leftright 3s linear 0s infinite alternate; margin-top: 0;-webkit-animation: motion-leftright 3s linear 0s infinite alternate; margin-top: 0;}
-.movebox2 {position:absolute;white-space: nowrap;left:-100px;padding-top:5px;opacity:.5;animation: motion-endtoend 20s linear infinite;-webkit-animation: motion-endtoend 20s linear infinite;}
-.movebox3 {position:absolute;white-space: nowrap;left:-100px;padding-top:50px;opacity:.5;animation: motion-endtoend 30s linear infinite;-webkit-animation: motion-endtoend 30s linear infinite;}
-.nearby_desc {font-family: 'Noto Sans Korean' !important;font-weight:200;overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;line-height: 1.4;}
-.card-nearby {margin-left: 10px;background-size: cover !important;}
+.icon-concierge {
+    position: fixed;width: 58px;height: 58px;bottom: 70px;right:24px;background: url(https://www.svgrepo.com/show/56194/concierge.svg);
+    background-position-y: 8px;
+    background-repeat: no-repeat;
+    box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;
+}
+.box-bottom {
+    width:calc(100% - 120px);height:36px;position: absolute;right: 0;bottom: 0;display:flex;
+}
+.box-bottom-corner {
+    display:inline-block;
+    width:36px;
+    height:36px;
+    z-index:999;
+}
+.box-bottom-corner:before {
+    content: '';
+    position: absolute;
+    height: 80px;
+    width: 80px;
+    border-radius: 100%;
+    z-index: -1;
+    box-shadow: 10px 10px 5px 100px #1d397c;
+}
+.box-bottom-area {
+    width:100%;border-radius: 24px 0 16px 0;justify-content: space-around;margin:0 !important;padding: 0 4px;
+}
+.box-bottom-item {
+    padding: 6px 0;
+}
+.box-bottom-item:not(:last-child) {
+    border-right: 1px solid rgba(255,255,255,.3);
+}
+.header-bottom-round {
+    position: absolute;top: 50px;left: 0px;right: 0px;height:30px;
+}
+.bx-search input {border-width: 0 !important;}
+.bx-search > div > div {display: contents;}
+.main-header {background:#eef2f1;}
+
 </style>

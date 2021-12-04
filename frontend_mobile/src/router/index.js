@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HomePage from '@/components/HomePage'
-import HomePage2 from '@/components/HomePage2'
 import RecommendPage from '@/components/RecommendPage'
 import BuddyCreatePage from '@/components/BuddyCreatePage'
 import BuddyCreatePage2 from '@/components/BuddyCreatePage2'
@@ -18,6 +17,7 @@ import CenterListPage from '@/components/CenterListPage'
 import CenterListMapPage from '@/components/CenterListMapPage'
 import CoursePage from '@/components/CoursePage'
 import SiteHomePage from '@/components/SiteHomePage'
+import SiteHomePage2 from '@/components/SiteHomePage2'
 import SiteDetailPage from '@/components/SiteDetailPage'
 import PointDetailPage from '@/components/PointDetailPage'
 import PointDetailPage2 from '@/components/PointDetailPage2'
@@ -39,12 +39,7 @@ export default new Router({
     {
       path: '/',
       name: 'HomePage',
-      component: HomePage2
-    },
-    {
-      path: '/home',
-      name: 'HomePage2',
-      component: HomePage2
+      component: BuddyHomePage
     },
     {
       path: '/recommend',

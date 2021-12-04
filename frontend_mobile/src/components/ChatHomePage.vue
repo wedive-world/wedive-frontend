@@ -165,8 +165,8 @@ export default {
   name: 'HelloWorld',
   mounted() {
     
-    $(".page-title").hide();
-    $(".page-title-clear").hide();
+    //$(".page-title").hide();
+    //$(".page-title-clear").hide();
 
     if (this.$route.query.header && this.$route.query.header == 'hide') {
       $(".page-title").hide();
