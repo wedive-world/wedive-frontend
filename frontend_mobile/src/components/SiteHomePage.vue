@@ -5,7 +5,7 @@
         <a class="" href="/" style="margin-left: 16px;"><img class="logo-image" src="/static/images/assets/logo-dark.svg" height="46" /></a>
         
         
-        <a v-on:click="searchBox()" href="#" class="header-icon header-icon-4 font-18" style="color: #858585;"><i class="fas fa-search"></i></a>
+        <a v-on:click="searchBox()" href="#" class="header-icon header-icon-4 font-18" style="color: #858585;margin-right: 13.3333333333px;"><i class="fas fa-search"></i></a>
     </div>
     
 
@@ -685,43 +685,18 @@ export default {
 .bx-search {padding: 8px 14px;min-height: 48px;}
 .bx-filter {border: 1px solid rgba(0,0,0,.1);padding: 8px 4px;display:inline-block;}
 
-
-.icon-concierge {
-    position: fixed;width: 58px;height: 58px;bottom: 70px;right:24px;background: url(https://www.svgrepo.com/show/56194/concierge.svg);
-    background-position-y: 8px;
-    background-repeat: no-repeat;
-    box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;
-}
-.box-bottom {
-    width:calc(100% - 120px);height:36px;position: absolute;right: 0;bottom: 0;display:flex;
-}
-.box-bottom-corner {
-    display:inline-block;
-    width:36px;
-    height:36px;
-    z-index:999;
-}
-.box-bottom-corner:before {
-    content: '';
-    position: absolute;
-    height: 80px;
-    width: 80px;
-    border-radius: 100%;
-    z-index: -1;
-    box-shadow: 10px 10px 5px 100px #1d397c;
-}
-.box-bottom-area {
-    width:100%;border-radius: 24px 0 16px 0;justify-content: space-around;margin:0 !important;padding: 0 4px;
-}
-.box-bottom-item {
-    padding: 6px 0;
-}
-.box-bottom-item:not(:last-child) {
-    border-right: 1px solid rgba(255,255,255,.3);
-}
-.header-bottom-round {
-    position: absolute;top: 50px;left: 0px;right: 0px;height:30px;
-}
+.wedive-corner {position: absolute;width: 30px;height: 30px;overflow: hidden;z-index:999;}
+.wedive-corner:after {content: '';position: absolute;height: 200%;width: 200%;border-radius: 100%;z-index: -1;box-shadow: 10px 10px 5px 100px #eef2f1;}
+.wedive-corner-bottom {left:-16px;bottom:0;width:16px;height:16px;}
+.wedive-corner-bottom:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #25beb2 !important;}
+.icon-concierge {position: fixed;width: 58px;height: 58px;bottom: 70px;right:24px;background: url(https://www.svgrepo.com/show/56194/concierge.svg);background-position-y: 8px;background-repeat: no-repeat;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
+.box-bottom {width:calc(100% - 120px);height:36px;position: absolute;right: 0;bottom: 0;display:flex;}
+.box-bottom-corner {display:inline-block;width:36px;height:36px;z-index:999;}
+.box-bottom-corner:before {content: '';position: absolute;height: 80px;width: 80px;border-radius: 100%;z-index: -1;box-shadow: 10px 10px 5px 100px #1d397c;}
+.box-bottom-area {width:100%;border-radius: 24px 0 16px 0;justify-content: space-around;margin:0 !important;padding: 0 4px;}
+.box-bottom-item {padding: 6px 0;}
+.box-bottom-item:not(:last-child) {border-right: 1px solid rgba(255,255,255,.3);}
+.header-bottom-round {osition: absolute;top: 50px;left: 0px;right: 0px;height:30px;}
 .bx-search input {border-width: 0 !important;}
 .bx-search > div > div {display: contents;}
 .main-header {background:#eef2f1;}

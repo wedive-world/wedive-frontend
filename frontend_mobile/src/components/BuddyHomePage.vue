@@ -17,7 +17,7 @@
 
         <div class="card card-style">
             <div class="content mb-0 mt-3">
-                <h4 class="text-start pt-2 mb-0"><a href="/">따끈따끈 신규 프리다이빙<i class="wedive-txt-all wedive_right_mid"></i></a></h4>
+                <h4 class="text-start pt-2 mb-0"><a href="/">따끈따끈 신규 프리다이빙<i class="wedive-txt-all wedive_right"></i></a></h4>
                 
                 
                 <div class="light-border-bottom mt-3">
@@ -61,14 +61,14 @@
 
         <div class="card card-style" style="background: #9bd1f4;">
             <div class="content mb-0 mt-3">
-                <h4 class="text-start pt-1 mb-2">얼마 남지 않은 다이빙 D-7<i class="wedive-txt-all wedive_right_mid"></i></h4>
+                <h4 class="text-start pt-1 mb-2">얼마 남지 않은 다이빙 D-7<i class="wedive-txt-all wedive_right"></i></h4>
                 <div class="text-center"><img class="mt-n1 p-4" src="/static/images/assets/hourglass.png"/></div>
             </div>
         </div>
 
         <div class="card card-style">
             <div class="content mb-0 mt-3">
-                <h4 class="text-start pt-2 mb-0">신청 즉시 확정되는 1인 예약<i class="wedive-txt-all wedive_right_mid"></i></h4>
+                <h4 class="text-start pt-2 mb-0">신청 즉시 확정되는 1인 예약<i class="wedive-txt-all wedive_right"></i></h4>
                 
                 <div class="light-border-bottom mt-3">
                     <div class="d-flex mb-3 position-relative">
@@ -99,7 +99,7 @@
 
         <div class="card card-style">
             <div class="content mb-0 mt-3">
-                <h4 class="text-start pt-2 mb-0">수도권 지역 다이빙<i class="wedive-txt-all wedive_right_mid"></i></h4>
+                <h4 class="text-start pt-2 mb-0">수도권 지역 다이빙<i class="wedive-txt-all wedive_right"></i></h4>
                 
                 <div class="light-border-bottom mt-3">
                     <div class="d-flex mb-3 position-relative">
@@ -130,14 +130,14 @@
 
         <div class="card card-style" style="background: #5f9b75;">
             <div class="content mb-0 mt-3">
-                <h4 class="text-start pt-2 mb-1 font-600 color-white"><i class="fas fa-map-marker-alt me-2"></i>내 주변 다이빙<i class="wedive-txt-all wedive_right_mid"></i></h4>
+                <h4 class="text-start pt-2 mb-1 font-600 color-white"><i class="fas fa-map-marker-alt me-2"></i>내 주변 다이빙<i class="wedive-txt-all wedive_right"></i></h4>
                 <div style="text-align:center;"><img class="mt-n3" src="/static/images/assets/magnifying.png"/></div>
             </div>
         </div>
 
         <div class="card card-style">
             <div class="content mb-0 mt-3">
-                <h4 class="text-start pt-2 mb-0">3박 이상 다이빙<i class="wedive-txt-all wedive_right_mid"></i></h4>
+                <h4 class="text-start pt-2 mb-0">3박 이상 다이빙<i class="wedive-txt-all wedive_right"></i></h4>
                 
                 <div class="light-border-bottom mt-3">
                     <div class="d-flex mb-3 position-relative">
@@ -172,7 +172,7 @@
 
         <div class="card card-style" style="background: #3295aa;">
             <div class="content mb-0 mt-3">
-                <h4 class="color-white text-start pt-2 mb-0 font-600">제주 지역 다이빙<i class="wedive-txt-all wedive_right_mid"></i></h4>
+                <h4 class="color-white text-start pt-2 mb-0 font-600">제주 지역 다이빙<i class="wedive-txt-all wedive_right"></i></h4>
                 <p class="color-white mb-0 opacity-60 ls-n1">#떠나요&nbsp;&nbsp;#제주도&nbsp;&nbsp;#낭만 바다</p>
                 <img class="float-right" src="/static/images/assets/jeju.jpg" width="260" />
             </div>
@@ -180,7 +180,7 @@
 
         <div class="card card-style" style="background: #e8b8db;">
             <div class="content mb-0 mt-3">
-                <h4 class="text-start pt-2 mb-0 font-600"><i class="fas fa-camera me-2"></i>수중 촬영 다이빙<i class="wedive-txt-all wedive_right_mid"></i></h4>
+                <h4 class="text-start pt-2 mb-0 font-600"><i class="fas fa-camera me-2"></i>수중 촬영 다이빙<i class="wedive-txt-all wedive_right"></i></h4>
                 <p class="mb-0 opacity-60 ls-n1">#인스타 사진&nbsp;&nbsp;#인생 한컷</p>
                 <div class="text-center"><img class="mt-0 mb-3" src="/static/images/assets/actioncam.png"/></div>
             </div>
@@ -188,7 +188,7 @@
 
         <div class="card card-style" style="background: #dbaa47;">
             <div class="content mb-0 mt-3">
-                <h4 class="color-white text-start pt-1 mb-0">뒷풀이 포함 이벤트<i class="wedive-txt-all wedive_right_mid"></i></h4>
+                <h4 class="color-white text-start pt-1 mb-0">뒷풀이 포함 이벤트<i class="wedive-txt-all wedive_right"></i></h4>
                 <p class="color-white mb-0 opacity-60 ls-n1">#맥주인생&nbsp;&nbsp;#좋은사람</p>
                 <img class="mt-n2 mb-4 float-right" src="/static/images/assets/beer.png" />
             </div>
@@ -196,7 +196,7 @@
 
         <div class="card card-style" style="background: #99dfe3;height:270px;">
             <div class="content mb-0 mt-3">
-                <h4 class="text-start pt-1 mb-0">해외투어<i class="wedive-txt-all wedive_right_mid"></i></h4>
+                <h4 class="text-start pt-1 mb-0">해외투어<i class="wedive-txt-all wedive_right"></i></h4>
                 <p class="mb-0 opacity-60 ls-n1">#세계 10대 포인트&nbsp;&nbsp;#가자 성지로!</p>
                 <div class="text-center"><img class="movebox" src="/static/images/assets/air-plane.png" width="200"/></div>
             </div>
@@ -204,7 +204,7 @@
 
         <div class="card card-style" style="background: #e9ad9b;">
             <div class="content mb-0 mt-3">
-                <h4 class="text-start pt-1 mb-0">초보자 참여 가능<i class="wedive-txt-all wedive_right_mid"></i></h4>
+                <h4 class="text-start pt-1 mb-0">초보자 참여 가능<i class="wedive-txt-all wedive_right"></i></h4>
                 <p class="mb-0 opacity-60 ls-n1">#걱정마요&nbsp;&nbsp;#누구나 시작은&nbsp;&nbsp;#함께 해요</p>
                 <div class="text-center"><img class="mt-4 mb-5" src="/static/images/assets/lifebuoy.png"/></div>
             </div>
