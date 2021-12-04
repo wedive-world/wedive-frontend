@@ -4,9 +4,9 @@
     <div class="main-header header header-fixed header-logo-center" style="background: #1d397c;color:white;">
         <a href="" class="header-title color"><img src="/static/images/assets/logo-light.svg" height="50" style="margin-top: -6px;"/></a>
         
-        <a href="#" class="header-icon header-icon-4 color-white font-18" style="top:5px;"><i class="fas fa-search"></i></a>
+        <a v-on:click="searchBox()" href="#" class="header-icon header-icon-4 color-white font-18" style="top:5px;"><i class="fas fa-search"></i></a>
     </div>
-    <div class="" style="position: fixed;top: 50px;left: 0px;right: 0px;height:30px;position:relative;">
+    <div class="header-bottom-round" style="">
         <div width="30" height="30" class="wedive-corner wedive-corner-left"></div>
         <div width="30" height="30" class="wedive-corner wedive-corner-right"></div>
     </div>
@@ -14,9 +14,43 @@
     <div class="page-content pb-0" style="height: 100% !important;">
         
         <div id="map" style="height: 100% !important;position: inherit !important;"></div>
+
+        <div class="map-search hide">
+            <div class="bx-search">
+                <div class="justify-content-center mb-0 text-start">
+                    <vue-typeahead-bootstrap
+                        class="pe-4 ps-4 mt-n4"
+                        v-model="query"
+                        :data="users"
+                        :serializer="item => item.name_ko"
+                        :screen-reader-text-serializer="item => `${item.name_ko}`"
+                        highlightClass="special-highlight-class"
+                        @hit="selecteduser = $event;show_scuba_label();"
+                        :minMatchingChars="2"
+                        placeholder="짱스님, 어디로 다이빙 할까요?"
+                        inputClass="special-input-class"
+                        :disabledValues="(selecteduser ? [selecteduser.name_ko] : [])"
+                        @input="lookupUser2"
+                        >
+                        <template slot="suggestion" slot-scope="{ data, htmlText }">
+                            <div class="d-flex align-items-center">
+                            <img
+                                class="rounded-s me-2"
+                                :src="data.img_url"
+                                style="width: 40px; height: 40px;" />
+                            
+                            <span v-if="data.type == 'region'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-marked-alt\'></i> 장소</span><br/>' + htmlText"></span>
+                            <span v-else-if="data.type == 'point'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-pin\'></i> 다이빙 포인트</span><br/>' + htmlText"></span>
+                            <span v-else-if="data.type == 'center'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-store\'></i> 다이빙 센터</span><br/>' + htmlText"></span>
+                            </div>
+                        </template>
+                    </vue-typeahead-bootstrap>
+                </div>
+            </div>
+        </div>
         
         <div class="map-box hide">
-            <a href="/center">
+            <a href="/center/k26">
                 <div class="bx">
                     <div class="justify-content-center mb-0 text-start">
                         <div class="" style="float: left;position: relative;width: 95px; height:95px;">
@@ -35,7 +69,7 @@
                             </p>
                             <div class="box-bottom">
                                 <div class="wedive-corner wedive-corner-bottom"></div>
-                                <div class="bg-highlight box-bottom-area color-white row">
+                                <div class="bg-secondary box-bottom-area color-white row">
                                     <span class="col-4 text-center box-bottom-item">컨시어지</span><span class="col-4 text-center box-bottom-item">버디찾기</span><span class="col-4 text-center box-bottom-item">강사찾기</span>
                                 </div>
                             </div>
@@ -346,11 +380,12 @@
             </div>
         </div>
     </div>
-    <a href="/buddy_create" id="btn_new" class="btn btn-m mb-3 rounded-xl font-900 shadow-s bg-highlight icon-concierge"></a>
+    <a href="/buddy_create" id="btn_new" class="btn btn-m mb-3 rounded-xl font-900 shadow-s bg-secondary icon-concierge"></a>
   </div>
 </template>
 <script>
-
+import VueTypeaheadBootstrap from 'vue-typeahead-bootstrap';
+import {debounce} from 'lodash';
 
 export default {
   name: 'HelloWorld',
@@ -520,6 +555,7 @@ export default {
         this.map.addListener("click", (e) => {
             $(".map-box").addClass("hide");
             $("#btn_new").removeClass("hide");
+            if ($('.map-search').hasClass("hide") == false ) $('.map-search').addClass("hide");
         });
 
 
@@ -560,12 +596,28 @@ export default {
   },
   data () {
     return {
+        query: '',
+        selecteduser: null,
         map: null,
         marker_list: [],
         btn_new_html: '',
+        users: [],
     }
   }, methods: {
-      
+      searchBox() {
+        if ($('.map-search').hasClass("hide") ) $('.map-search').removeClass("hide");
+        else $('.map-search').addClass("hide");
+
+        $(".bx-search input").css("border-width", "0");
+      },
+      lookupUser2: debounce(function(){
+        this.users = [
+            {"id": "region_ko_jeju", "type": "region", "name_ko": "제주도", name_en: "Jeju island", "img_url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0c/bf/d2/56/photo1jpg.jpg?w=100&h=100&s=1"},
+            {"id": "region_ko_wooljin", "type": "region", "name_ko": "울진", name_en: "Wooljin", "img_url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/01/5a/31/a0/sunrise-peak-seongsan.jpg?w=100&h=100&s=1"},
+            {"id": "center_ko_jeju_bubbletank", "type": "center", "name_ko": "제주 버블탱크 스쿠버다이빙", name_en: "Bubble tank", "img_url": "/static/bubble2.jpg"},
+            {"id": "point_ko_jeju_munisland", "type": "point", "name_ko": "제주도 문섬", name_en: "Mun island", "img_url": "https://api.cdn.visitjeju.net/photomng/imgpath/201907/31/07c1996d-4374-4e77-b353-300d01783718.jpg"},
+        ];
+      }, 500),
   }
 
   
@@ -577,8 +629,10 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .map-filter {position: absolute;right: 0;bottom: 30px;left: 0;z-index:999;}
-.map-box {position: absolute;right: 0;bottom: 100px;left: 0;margin: 5px 10px 4px;border-radius:16px;background-color: rgba(255,255,255);box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
+.map-box {position: absolute;right: 0;bottom: 75px;left: 0;margin: 5px 10px 4px;border-radius:16px;background-color: rgba(255,255,255);box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
+.map-search {position: absolute;right: 0;top: 57px;left: 0;margin: 5px 12px 4px;border-radius:16px;background-color: rgba(255,255,255);box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
 .bx {padding: 15px 14px;min-height: 125px;}
+.bx-search {padding: 8px 14px;min-height: 48px;}
 
 
 
@@ -616,6 +670,7 @@ export default {
 .wedive-corner-bottom:after {
     right: 0;
     bottom: 0;
+    box-shadow: 10px 10px 5px 100px #25beb2 !important;
 }
 .icon-concierge {
     position: fixed;width: 58px;height: 58px;bottom: 70px;right:24px;background: url(https://www.svgrepo.com/show/56194/concierge.svg);
@@ -648,7 +703,11 @@ export default {
     padding: 6px 0;
 }
 .box-bottom-item:not(:last-child) {
-    border-right: 1px solid rgba(255,255,255,.1);
+    border-right: 1px solid rgba(255,255,255,.3);
 }
-
+.header-bottom-round {
+    position: absolute;top: 50px;left: 0px;right: 0px;height:30px;
+}
+.bx-search input {border-width: 0 !important;}
+.bx-search > div > div {display: contents;}
 </style>
