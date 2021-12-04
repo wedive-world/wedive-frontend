@@ -30,6 +30,7 @@ import TrainingPage from '@/components/TrainingPage'
 import TrainingListPage from '@/components/TrainingListPage'
 import TrainingSettingPage from '@/components/TrainingSettingPage'
 import TrainingStartPage from '@/components/TrainingStartPage'
+import LogBookPage from '@/components/LogBookPage'
 
 Vue.use(Router)
 
@@ -38,7 +39,7 @@ export default new Router({
     {
       path: '/',
       name: 'HomePage',
-      component: HomePage
+      component: HomePage2
     },
     {
       path: '/home',
@@ -187,7 +188,12 @@ export default new Router({
       path: '/training_start',
       name: 'TrainingStartPage',
       component: TrainingStartPage
-    }
+    },
+    {
+      path: '/book_home',
+      name: 'LogBookPage',
+      component: LogBookPage
+    },
     
     
   ],

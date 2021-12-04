@@ -298,7 +298,7 @@ export default {
         $("#div_schedule" + el_idx).addClass("hide");
         schedule_status[(el_idx-1)] = 0;
         if (schedule_status.includes(1) == false) {
-          $("#div_empty").fadeIn(100);;
+          $("#div_empty").fadeIn(100);
         }
       },
       addSchedule: function() {

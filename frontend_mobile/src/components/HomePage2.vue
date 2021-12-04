@@ -1,8 +1,8 @@
 <template>
   <div class="" style="height: 100%; !important">
-    <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-site" data-menu-load=""></div>
-    <div class="main-header header header-fixed header-logo-center" style="background: #1d397c;color:white;">
-        <a href="" class="header-title color"><img src="/static/images/assets/logo-light.svg" height="50" style="margin-top: -6px;"/></a>
+    <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-load=""></div>
+    <div class="main-header header header-fixed header-logo-center">
+        <a href="" class="header-title color"><img src="/static/images/assets/logo-light.svg" height="46" style="margin-top: -8px;"/></a>
         
         <a v-on:click="searchBox()" href="#" class="header-icon header-icon-4 color-white font-18" style="top:5px;"><i class="fas fa-search"></i></a>
     </div>
@@ -17,35 +17,79 @@
 
         <div class="map-search hide">
             <div class="bx-search">
-                <div class="justify-content-center mb-0 text-start">
-                    <vue-typeahead-bootstrap
-                        class="pe-4 ps-4 mt-n4"
-                        v-model="query"
-                        :data="users"
-                        :serializer="item => item.name_ko"
-                        :screen-reader-text-serializer="item => `${item.name_ko}`"
-                        highlightClass="special-highlight-class"
-                        @hit="selecteduser = $event;show_scuba_label();"
-                        :minMatchingChars="2"
-                        placeholder="짱스님, 어디로 다이빙 할까요?"
-                        inputClass="special-input-class"
-                        :disabledValues="(selecteduser ? [selecteduser.name_ko] : [])"
-                        @input="lookupUser2"
-                        >
-                        <template slot="suggestion" slot-scope="{ data, htmlText }">
-                            <div class="d-flex align-items-center">
-                            <img
-                                class="rounded-s me-2"
-                                :src="data.img_url"
-                                style="width: 40px; height: 40px;" />
-                            
-                            <span v-if="data.type == 'region'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-marked-alt\'></i> 장소</span><br/>' + htmlText"></span>
-                            <span v-else-if="data.type == 'point'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-pin\'></i> 다이빙 포인트</span><br/>' + htmlText"></span>
-                            <span v-else-if="data.type == 'center'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-store\'></i> 다이빙 센터</span><br/>' + htmlText"></span>
-                            </div>
-                        </template>
-                    </vue-typeahead-bootstrap>
-                </div>
+                <vue-typeahead-bootstrap
+                    v-model="query"
+                    :data="users"
+                    :serializer="item => item.name_ko"
+                    :screen-reader-text-serializer="item => `${item.name_ko}`"
+                    highlightClass="special-highlight-class"
+                    @hit="selecteduser = $event;show_scuba_label();"
+                    :minMatchingChars="2"
+                    placeholder="짱스님, 어디로 다이빙 할까요?"
+                    inputClass="special-input-class"
+                    :disabledValues="(selecteduser ? [selecteduser.name_ko] : [])"
+                    @input="lookupUser2"
+                    >
+                    <template slot="suggestion" slot-scope="{ data, htmlText }">
+                        <div class="d-flex align-items-center">
+                        <img
+                            class="rounded-s me-2"
+                            :src="data.img_url"
+                            style="width: 40px; height: 40px;" />
+                        
+                        <span v-if="data.type == 'region'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-marked-alt\'></i> 장소</span><br/>' + htmlText"></span>
+                        <span v-else-if="data.type == 'point'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-pin\'></i> 다이빙 포인트</span><br/>' + htmlText"></span>
+                        <span v-else-if="data.type == 'center'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-store\'></i> 다이빙 센터</span><br/>' + htmlText"></span>
+                        </div>
+                    </template>
+                </vue-typeahead-bootstrap>
+            </div>
+        </div>
+
+
+        <div class="map-filter">
+            <div v-on:click="mapFilter('category')" class="bx-filter bg-white me-2">종류</div>
+            <div id="map-item-category" class="display-block" style="display: none;">
+                <div class="bx-filter bg-gray-light color-black">스쿠버</div>
+                <div class="bx-filter bg-gray-light color-black">프리</div>
+                <div class="bx-filter bg-gray-light color-black">리브어보드</div>
+            </div>
+        </div>
+        <div class="map-filter" style="top: 170px;">
+            <div v-on:click="mapFilter('level')" class="bx-filter bg-white me-2">레벨</div>
+            <div id="map-item-level" class="display-block" style="display: none;">
+                <div class="bx-filter bg-gray-light color-black">초급</div>
+                <div class="bx-filter bg-gray-light color-black">중급</div>
+                <div class="bx-filter bg-gray-light color-black">고급</div>
+            </div>
+        </div>
+        <div class="map-filter" style="top: 220px;">
+            <div v-on:click="mapFilter('fish')" class="bx-filter bg-white me-2">어종</div>
+            <div id="map-item-fish" class="display-block" style="display: none;">
+                <div class="bx-filter bg-gray-light color-black">거북</div>
+                <div class="bx-filter bg-gray-light color-black">만타</div>
+                <div class="bx-filter bg-gray-light color-black">상어</div>
+                <div class="bx-filter bg-gray-light color-black">고래</div>
+                <div class="bx-filter bg-gray-light color-black">잭피쉬</div>
+            </div>
+        </div>
+        <div class="map-filter" style="top: 270px;">
+            <div v-on:click="mapFilter('type')" class="bx-filter bg-white me-2">타입</div>
+            <div id="map-item-type" class="display-block" style="display: none;">
+                <div class="bx-filter bg-gray-light color-black">난파선</div>
+                <div class="bx-filter bg-gray-light color-black">동굴</div>
+                <div class="bx-filter bg-gray-light color-black">해루질</div>
+                <div class="bx-filter bg-gray-light color-black">케이지</div>
+                <div class="bx-filter bg-gray-light color-black">월</div>
+                <div class="bx-filter bg-gray-light color-black">렉</div>
+            </div>
+        </div>
+        <div class="map-filter" style="top: 320px;">
+            <div v-on:click="mapFilter('exotic')" class="bx-filter bg-white me-2">이색</div>
+            <div id="map-item-exotic" class="display-block" style="display: none;">
+                <div class="bx-filter bg-gray-light color-black">세계10대</div>
+                <div class="bx-filter bg-gray-light color-black">대물</div>
+                <div class="bx-filter bg-gray-light color-black">수영장</div>
             </div>
         </div>
         
@@ -604,11 +648,18 @@ export default {
         users: [],
     }
   }, methods: {
+      mapFilter(type) {
+        if ($("#map-item-" + type).css("display") == 'none') $("#map-item-" + type).fadeIn(200);
+        else $("#map-item-" + type).fadeOut(200);
+      },
       searchBox() {
         if ($('.map-search').hasClass("hide") ) $('.map-search').removeClass("hide");
         else $('.map-search').addClass("hide");
 
         $(".bx-search input").css("border-width", "0");
+        setTimeout(function() {
+            $(".bx-search input").focus();
+        },200)
       },
       lookupUser2: debounce(function(){
         this.users = [
@@ -628,12 +679,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.map-filter {position: absolute;right: 0;bottom: 30px;left: 0;z-index:999;}
-.map-box {position: absolute;right: 0;bottom: 75px;left: 0;margin: 5px 10px 4px;border-radius:16px;background-color: rgba(255,255,255);box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
-.map-search {position: absolute;right: 0;top: 57px;left: 0;margin: 5px 12px 4px;border-radius:16px;background-color: rgba(255,255,255);box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
+.map-box {position: absolute;right: 0;bottom: 75px;left: 0;margin: 5px 10px 4px;border-radius:16px;background-color: white;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
+.map-filter {position: absolute;top: 120px;left: 10px;margin: 5px 5px 4px;}
+.display-block {display:inline-block;}
+.map-search {position: absolute;right: 0;top: 57px;left: 0;margin: 5px 12px 4px;border-radius:16px;background-color: white;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
 .bx {padding: 15px 14px;min-height: 125px;}
 .bx-search {padding: 8px 14px;min-height: 48px;}
-
+.bx-filter {border: 1px solid rgba(0,0,0,.1);padding: 8px 4px;display:inline-block;}
 
 
 .wedive-corner {
@@ -697,7 +749,7 @@ export default {
     box-shadow: 10px 10px 5px 100px #1d397c;
 }
 .box-bottom-area {
-    width:100%;border-radius: 24px 0 16px 0;justify-content: space-around;margin:0 !important;padding: 0 10px;
+    width:100%;border-radius: 24px 0 16px 0;justify-content: space-around;margin:0 !important;padding: 0 4px;
 }
 .box-bottom-item {
     padding: 6px 0;
@@ -710,4 +762,6 @@ export default {
 }
 .bx-search input {border-width: 0 !important;}
 .bx-search > div > div {display: contents;}
+.main-header {background: #1d397c;color:white;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
+
 </style>
