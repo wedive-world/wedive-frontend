@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HomePage from '@/components/HomePage'
+import HomePage2 from '@/components/HomePage2'
 import RecommendPage from '@/components/RecommendPage'
 import BuddyCreatePage from '@/components/BuddyCreatePage'
 import BuddyCreatePage2 from '@/components/BuddyCreatePage2'
@@ -38,6 +39,11 @@ export default new Router({
       path: '/',
       name: 'HomePage',
       component: HomePage
+    },
+    {
+      path: '/home',
+      name: 'HomePage2',
+      component: HomePage2
     },
     {
       path: '/recommend',
