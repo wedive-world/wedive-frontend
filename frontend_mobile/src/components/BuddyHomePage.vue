@@ -26,7 +26,7 @@
                             <img src="/static/images/point/ko/kangwon_yangyang_01.jpg" class="rounded-sm me-3" width="68">
                         </div>
                         <div class="text-start align-self-center">
-                            <h2 class="font-18 line-height-s mt-2 mb-1">09.25(토) ~ 09.26(일)</h2>
+                            <h2 class="font-17 line-height-s mt-2 mb-1">09.25(토) ~ 09.26(일)</h2>
                             <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 하우스리프 포인트 (양양 사이트)</p>
                         </div>
                         <span class="chip chip-s bg-gray-light text-center font-400 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>1</span> <span class="color-shopping ms-1"><i class="far fa-user"></i>1</span></span>
@@ -38,7 +38,7 @@
                             <img src="/static/images/point/ko/jeju_bumisland_01.jpg" class="rounded-sm me-3" width="68">
                         </div>
                         <div class="text-start align-self-center">
-                            <h2 class="font-18 line-height-s mt-2 mb-1">09.22(수) ~ 09.25(토)</h2>
+                            <h2 class="font-17 line-height-s mt-2 mb-1">09.22(수) ~ 09.25(토)</h2>
                             <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 문섬 포인트 (서귀포 사이트)</p>
                         </div>
                         <span class="chip chip-s bg-gray-light text-center font-400 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>1</span> <span class="color-shopping ms-1"><i class="far fa-user"></i>1</span></span>
@@ -50,7 +50,7 @@
                             <img src="/static/images/point/ko/jeju_munisland_06.jpg" class="rounded-sm me-3" width="68">
                         </div>
                         <div class="text-start align-self-center">
-                            <h2 class="font-18 line-height-s mt-2 mb-1">09.20(월) ~ 09.25(토)</h2>
+                            <h2 class="font-17 line-height-s mt-2 mb-1">09.20(월) ~ 09.25(토)</h2>
                             <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 문섬포인트 (제주 사이트)</p>
                         </div>
                         <span class="chip chip-s bg-gray-light text-center font-400 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>1</span> <span class="color-shopping ms-1"><i class="far fa-user"></i>1</span></span>
@@ -76,7 +76,7 @@
                             <img src="/static/images/point/ko/kangwon_yangyang_01.jpg" class="rounded-sm me-3" width="68">
                         </div>
                         <div class="text-start align-self-center">
-                            <h2 class="font-18 line-height-s mt-2 mb-1">09.25(토) ~ 09.26(일)</h2>
+                            <h2 class="font-17 line-height-s mt-2 mb-1">09.25(토) ~ 09.26(일)</h2>
                             <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 철재삼동 포인트 (양양 사이트)</p>
                         </div>
                         <span class="chip chip-s bg-gray-light text-center font-400 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>1</span> <span class="color-shopping ms-1"><i class="far fa-user"></i>5</span></span>
@@ -88,7 +88,7 @@
                             <img src="/static/images/point/ko/jeju_bumisland_01.jpg" class="rounded-sm me-3" width="68">
                         </div>
                         <div class="text-start align-self-center">
-                            <h2 class="font-18 line-height-s mt-2 mb-1">09.22(수) ~ 09.25(토)</h2>
+                            <h2 class="font-17 line-height-s mt-2 mb-1">09.22(수) ~ 09.25(토)</h2>
                             <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 문섬 포인트 (서귀포 사이트)</p>
                         </div>
                         <span class="chip chip-s bg-gray-light text-center font-400 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>2</span> <span class="color-shopping ms-1"><i class="far fa-user"></i>3</span></span>
@@ -107,7 +107,7 @@
                             <img src="/static/images/point/ko/kangwon_yangyang_01.jpg" class="rounded-sm me-3" width="68">
                         </div>
                         <div class="text-start align-self-center">
-                            <h2 class="font-18 line-height-s mt-2 mb-1">09.25(토) ~ 09.26(일)</h2>
+                            <h2 class="font-17 line-height-s mt-2 mb-1">09.25(토) ~ 09.26(일)</h2>
                             <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 말미잘동산 포인트 (양양 사이트)</p>
                         </div>
                         <span class="chip chip-s bg-gray-light text-center font-400 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>1</span> <span class="color-shopping ms-1"><i class="far fa-user"></i>1</span></span>
@@ -119,7 +119,7 @@
                             <img src="/static/images/point/ko/jeju_bumisland_01.jpg" class="rounded-sm me-3" width="68">
                         </div>
                         <div class="text-start align-self-center">
-                            <h2 class="font-18 line-height-s mt-2 mb-1">09.22(수) ~ 09.25(토)</h2>
+                            <h2 class="font-17 line-height-s mt-2 mb-1">09.22(수) ~ 09.25(토)</h2>
                             <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 문섬 포인트 (서귀포 사이트)</p>
                         </div>
                         <span class="chip chip-s bg-gray-light text-center font-400 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>1</span> <span class="color-shopping ms-1"><i class="far fa-user"></i>1</span></span>
@@ -145,9 +145,8 @@
                             <img src="/static/images/point/ko/kangwon_yangyang_01.jpg" class="rounded-sm me-3" width="68">
                         </div>
                         <div class="text-start align-self-center">
-                            <h2 class="font-18 line-height-s mt-2 mb-1">09.25(토) ~ 09.26(일)</h2>
+                            <h2 class="font-17 line-height-s mt-2 mb-1">09.25(토) ~ 09.26(일)</h2>
                             <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 철재삼동 포인트 (양양 사이트)</p>
-                            <p class="color-secondary font-13 mb-0 ellipsis">#카풀가능&nbsp;&nbsp;#센터확정&nbsp;&nbsp;#개별숙박</p>
                         </div>
                         <span class="chip chip-s bg-gray-light text-center font-400 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>1</span> <span class="color-shopping ms-1"><i class="far fa-user"></i>1</span></span>
                     </div>
@@ -158,9 +157,8 @@
                             <img src="/static/images/point/ko/jeju_bumisland_01.jpg" class="rounded-sm me-3" width="68">
                         </div>
                         <div class="text-start align-self-center">
-                            <h2 class="font-18 line-height-s mt-2 mb-1">09.22(수) ~ 09.25(토)</h2>
+                            <h2 class="font-17 line-height-s mt-2 mb-1">09.22(수) ~ 09.25(토)</h2>
                             <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 문섬 포인트 (서귀포 사이트)</p>
-                            <p class="color-secondary font-13 mb-0 ellipsis">&nbsp;</p>
                         </div>
                         <span class="chip chip-s bg-gray-light text-center font-400 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>1</span> <span class="color-shopping ms-1"><i class="far fa-user"></i>1</span></span>
                     </div>
