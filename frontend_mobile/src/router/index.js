@@ -1,18 +1,26 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HomePage from '@/components/HomePage'
+import HomePage2 from '@/components/HomePage2'
 import RecommendPage from '@/components/RecommendPage'
 import BuddyCreatePage from '@/components/BuddyCreatePage'
+import BuddyCreatePage2 from '@/components/BuddyCreatePage2'
+import BuddyCreateSwimmingPage from '@/components/BuddyCreateSwimmingPage'
+import BuddyCreateSeaPage from '@/components/BuddyCreateSeaPage'
+import BuddyCreateAbroadPage from '@/components/BuddyCreateAbroadPage'
 import BuddyHomePage from '@/components/BuddyHomePage'
 import UserProfilePage from '@/components/UserProfilePage'
+import UserCreatePage from '@/components/UserCreatePage'
 import CenterHomePage from '@/components/CenterHomePage'
 import CenterDetailPage from '@/components/CenterDetailPage'
+import CenterDetailPage2 from '@/components/CenterDetailPage2'
 import CenterListPage from '@/components/CenterListPage'
 import CenterListMapPage from '@/components/CenterListMapPage'
 import CoursePage from '@/components/CoursePage'
 import SiteHomePage from '@/components/SiteHomePage'
 import SiteDetailPage from '@/components/SiteDetailPage'
 import PointDetailPage from '@/components/PointDetailPage'
+import PointDetailPage2 from '@/components/PointDetailPage2'
 import ChatHomePage from '@/components/ChatHomePage'
 import ChatDetailPage from '@/components/ChatDetailPage'
 import ShopHomePage from '@/components/ShopHomePage'
@@ -33,6 +41,11 @@ export default new Router({
       component: HomePage
     },
     {
+      path: '/home',
+      name: 'HomePage2',
+      component: HomePage2
+    },
+    {
       path: '/recommend',
       name: 'RecommendPage',
       component: RecommendPage
@@ -41,6 +54,26 @@ export default new Router({
       path: '/buddy_create',
       name: 'BuddyCreatePage',
       component: BuddyCreatePage
+    },
+    {
+      path: '/buddy_create2',
+      name: 'BuddyCreatePage2',
+      component: BuddyCreatePage2
+    },
+    {
+      path: '/buddy_swimming',
+      name: 'BuddyCreateSwimmingPage',
+      component: BuddyCreateSwimmingPage
+    },
+    {
+      path: '/buddy_sea',
+      name: 'BuddyCreateSeaPage',
+      component: BuddyCreateSeaPage
+    },
+    {
+      path: '/buddy_abroad',
+      name: 'BuddyCreateAbroadPage',
+      component: BuddyCreateAbroadPage
     },
     {
       path: '/buddy_home',
@@ -53,14 +86,25 @@ export default new Router({
       component: UserProfilePage
     },
     {
+      path: '/user_create',
+      name: 'UserCreatePage',
+      component: UserCreatePage
+    },
+    {
       path: '/center_home',
       name: 'CenterHomePage',
       component: CenterHomePage
     },
     {
-      path: '/center',
+      path: '/center/:id',
       name: 'CenterDetailPage',
+      props: true,
       component: CenterDetailPage
+    },
+    {
+      path: '/center2',
+      name: 'CenterDetailPage2',
+      component: CenterDetailPage2
     },
     {
       path: '/center_list',
@@ -83,14 +127,21 @@ export default new Router({
       component: SiteHomePage
     },
     {
-      path: '/site',
+      path: '/site/:id',
       name: 'SiteDetailPage',
+      props: true,
       component: SiteDetailPage
     },
     {
-      path: '/point',
+      path: '/point/:id',
       name: 'PointDetailPage',
+      props: true,
       component: PointDetailPage
+    },
+    {
+      path: '/point2',
+      name: 'PointDetailPage2',
+      component: PointDetailPage2
     },
     {
       path: '/chat_home',

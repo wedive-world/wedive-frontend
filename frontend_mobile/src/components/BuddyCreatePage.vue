@@ -2,7 +2,7 @@
   <div class="">
     <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-buddy" data-menu-load=""></div>    
     <div class="header header-fixed header-logo-center">
-        <a href="" class="header-title color ellipsis">다이브 이벤트 만들기</a>
+        <a href="" class="header-title color ellipsis">버디 모집</a>
         <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
         <a href="#" data-menu="menu-main" class="header-icon header-icon-4"><i class="fas fa-bars"></i></a>
         <a href="#" data-toggle-theme class="header-icon header-icon-3 show-on-theme-dark"><i class="fas fa-sun"></i></a>
@@ -15,663 +15,56 @@
         
         <!-- card in this page format must have the class card-full to avoid seeing behind it-->
         <div class="card card-full pb-0 mb-3 border-bottom">
-          <div class="content mt-1">
-            <h4 class="pt-3 mb-2">일정 정보</h4>
-            <!--<a id="delete_schedule" class="color-highlight font-12 hide" style="margin-top: -30px;padding-bottom: 10px;float:right;">일정 삭제</a>-->
-            <div class="text-center p-3 border-08 rounded-s mb-3" id="div_empty">
-              <i class="far fa-folder-open font-40 color-gray-light-mid"></i>
-              
-              <p class="color-gray-light-mid">아직 일정이 없습니다.</p>
+          <div class="mt-1 p-3 mb-0">
+            <div class="" id="div_login">
+              <p class="mb-0 font-noto">정확한 매칭을 위해서<br/>로그인 또는 회원가입을 해주세요.</p>
             </div>
-
-            <div class="timeline-body pt-2">
-            <div class="timeline-deco"></div>
-              <div class="drag-line"></div>
-              <div class="timeline-item mt-4">
-                  <i class="bg-highlight shadow-l timeline-icon font-900" style="margin-top: 26px;">1</i>
-                  <div class="timeline-item-content rounded-sm">
-                      <img data-src="http://www.gogofp.com/wp-content/uploads/fish_layout/20163/16093016281124091_577x330.png" alt="img" src="http://www.gogofp.com/wp-content/uploads/fish_layout/20163/16093016281124091_577x330.png" class="preload-img rounded-s img-fluid wedive-timeline-image">
-                      <div class="ms-2" style="display: inline-block; vertical-align: top;">
-                        <a href="#" class="schedule-close" v-on:click="closeSchedule(1)"><i class="wedive_icoset wedive_icoset_close_s"></i></a>
-                        <p class="mb-0 font-16 font-600 ellipsis">성산 사이트 (제주)</p>
-                        <p class="mb-0 mt-n1 font-14 font-400 color-secondary">스쿠버 다이빙</p>
-                        <p class="mb-0 font-14 font-400 color-gray">21.09.20(화) ~ 21.09.21(수)</p>
-                      </div>
-                  </div>
-              </div>
-
-              <div class="timeline-item">
-                  <i class="bg-highlight shadow-l timeline-icon font-900" style="margin-top: 26px;">2</i>
-                  <div class="timeline-item-content rounded-sm">
-                      <img data-src="/static/images/point/ko/jeju_bumisland_01.jpg" alt="img" src="/static/images/point/ko/jeju_bumisland_01.jpg" class="preload-img rounded-s img-fluid wedive-timeline-image">
-                      <div class="ms-2" style="display: inline-block; vertical-align: top;">
-                        <a href="#" class="schedule-close" v-on:click="closeSchedule(2)"><i class="wedive_icoset wedive_icoset_close_s"></i></a>
-                        <p class="mb-0 font-16 font-600 ellipsis">문섬 사이트 (제주)</p>
-                        <p class="mb-0 mt-n1 font-14 font-400 color-secondary">스쿠버 다이빙</p>
-                        <p class="mb-0 font-14 font-400 color-gray">21.09.22(목) ~ 21.09.23(금)</p>
-                      </div>
-                  </div>
-              </div>
-
-              <div class="timeline-item">
-                  <i class="bg-highlight shadow-l timeline-icon font-900" style="margin-top: 26px;">3</i>
-                  <div class="timeline-item-content rounded-sm">
-                      <img data-src="http://ojsfile.ohmynews.com/STD_IMG_FILE/2015/0428/IE001824971_STD.jpg" alt="img" src="http://ojsfile.ohmynews.com/STD_IMG_FILE/2015/0428/IE001824971_STD.jpg" class="preload-img rounded-s img-fluid wedive-timeline-image">
-                      <div class="ms-2" style="display: inline-block; vertical-align: top;">
-                        <a href="#" class="schedule-close" v-on:click="closeSchedule(3)"><i class="wedive_icoset wedive_icoset_close_s"></i></a>
-                        <p class="mb-0 font-16 font-600 ellipsis">우도 사이트 (제주)</p>
-                        <p class="mb-0 mt-n1 font-14 font-400 color-secondary">스쿠버 다이빙</p>
-                        <p class="mb-0 font-14 font-400 color-gray">21.09.24(토) ~ 21.09.24(토)</p>
-                      </div>
-                  </div>
-              </div>
-
-          </div>
-            
-            <div class="p-3 rounded-s mb-4 mt-3 row hide" id="div_schedule1" style="border: 1px solid rgba(0, 0, 0, 0.08) !important;">
-              <a href="#" class="schedule-close" v-on:click="closeSchedule(1)"><i class="wedive_icoset wedive_icoset_close_s"></i></a>
-              <label class="wedive-label color-secondary">일정 1</label>
-              <div class="input-style no-borders has-icon validate-field mb-3 col-6 pe-3 after-tilde">
-                <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_start" placeholder="시작일">
-                <label for="form_start" class="color-highlight">시작일</label>
-              </div>
-              <div class="input-style no-borders has-icon validate-field mb-3 col-6 ps-3">
-                <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_end" placeholder="종료일">
-                <label for="form_end" class="color-highlight">종료일</label>
-              </div>
-              
-
-              <div class="mt-3">
-                <vue-typeahead-bootstrap
-                    class="wedive-search border-bottom"
-                    v-model="query"
-                    :data="users"
-                    :serializer="item => item.name_ko"
-                    :screen-reader-text-serializer="item => `${item.name_ko}`"
-                    highlightClass="special-highlight-class"
-                    @hit="selecteduser = $event"
-                    :minMatchingChars="2"
-                    placeholder="지역명, 다이빙 포인트, 센터명"
-                    inputClass="special-input-class"
-                    :disabledValues="(selecteduser ? [selecteduser.name_ko] : [])"
-                    @input="lookupUser2"
-                    >
-                    <template slot="suggestion" slot-scope="{ data, htmlText }">
-                        <div class="d-flex align-items-center">
-                        <img
-                            class="rounded-s me-2"
-                            :src="data.img_url"
-                            style="width: 40px; height: 40px;" />
-                        
-                        
-                        
-                        <span v-if="data.type == 'region'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-marked-alt\'></i> 장소</span><br/>' + htmlText"></span>
-                        <span v-else-if="data.type == 'point'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-pin\'></i> 다이빙 포인트</span><br/>' + htmlText"></span>
-                        <span v-else-if="data.type == 'center'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-store\'></i> 다이빙 센터</span><br/>' + htmlText"></span>
-                        </div>
-                    </template>
-                </vue-typeahead-bootstrap>
-              </div>
+            <div class="" style="position: absolute;right:16px;top:16px;">
+              <a href="/user_create" class="btn btn-m mb-3 rounded-xl text-uppercase font-500 shadow-s bg-secondary font-noto"><i class="fas fa-user-lock me-1"></i> 로그인</a>
             </div>
-            <div class="p-3 rounded-s mb-4 row hide" id="div_schedule2" style="border: 1px solid rgba(0, 0, 0, 0.08) !important;">
-              <a href="#" class="schedule-close" v-on:click="closeSchedule(2)"><i class="wedive_icoset wedive_icoset_close_s"></i></a>
-              <label class="wedive-label color-secondary">일정 2</label>
-              <div class="input-style input-style-always-active has-borders no-icon mt-2 col-6 pe-3 after-tilde">
-                <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_start" placeholder="시작일">
-                <label for="form_start" class="color-highlight">시작일</label>
-              </div>
-              <div class="input-style input-style-always-active has-borders no-icon mt-2 col-6 ps-3">
-                <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_end" placeholder="종료일">
-                <label for="form_end" class="color-highlight">종료일</label>
-              </div>
-
-              <div class="mt-3">
-                <vue-typeahead-bootstrap
-                    class="form-control wedive-search"
-                    style="border-radius: 10px !important;border-color: rgba(0, 0, 0, 0.08) !important;"
-                    v-model="query"
-                    :data="users"
-                    :serializer="item => item.name_ko"
-                    :screen-reader-text-serializer="item => `${item.name_ko}`"
-                    highlightClass="special-highlight-class"
-                    @hit="selecteduser = $event"
-                    :minMatchingChars="2"
-                    placeholder="지역명, 다이빙 포인트, 센터명"
-                    inputClass="special-input-class"
-                    :disabledValues="(selecteduser ? [selecteduser.name_ko] : [])"
-                    @input="lookupUser2"
-                    >
-                    <template slot="suggestion" slot-scope="{ data, htmlText }">
-                        <div class="d-flex align-items-center">
-                        <img
-                            class="rounded-s me-2"
-                            :src="data.img_url"
-                            style="width: 40px; height: 40px;" />
-                        
-                        
-                        
-                        <span v-if="data.type == 'region'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-marked-alt\'></i> 장소</span><br/>' + htmlText"></span>
-                        <span v-else-if="data.type == 'point'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-pin\'></i> 다이빙 포인트</span><br/>' + htmlText"></span>
-                        <span v-else-if="data.type == 'center'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-store\'></i> 다이빙 센터</span><br/>' + htmlText"></span>
-                        </div>
-                    </template>
-                </vue-typeahead-bootstrap>
-              </div>
-            </div>
-            <div class="p-3 rounded-s mb-4 row hide" id="div_schedule3" style="border: 1px solid rgba(0, 0, 0, 0.08) !important;">
-              <a href="#" class="schedule-close" v-on:click="closeSchedule(3)"><i class="wedive_icoset wedive_icoset_close_s"></i></a>
-              <label class="wedive-label color-secondary">일정 3</label>
-              <div class="input-style input-style-always-active has-borders no-icon mt-2 col-6 pe-3 after-tilde">
-                <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_start" placeholder="시작일">
-                <label for="form_start" class="color-highlight">시작일</label>
-              </div>
-              <div class="input-style input-style-always-active has-borders no-icon mt-2 col-6 ps-3">
-                <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_end" placeholder="종료일">
-                <label for="form_end" class="color-highlight">종료일</label>
-              </div>
-
-              <div class="mt-3">
-                <vue-typeahead-bootstrap
-                    class="form-control wedive-search"
-                    style="border-radius: 10px !important;border-color: rgba(0, 0, 0, 0.08) !important;"
-                    v-model="query"
-                    :data="users"
-                    :serializer="item => item.name_ko"
-                    :screen-reader-text-serializer="item => `${item.name_ko}`"
-                    highlightClass="special-highlight-class"
-                    @hit="selecteduser = $event"
-                    :minMatchingChars="2"
-                    placeholder="지역명, 다이빙 포인트, 센터명"
-                    inputClass="special-input-class"
-                    :disabledValues="(selecteduser ? [selecteduser.name_ko] : [])"
-                    @input="lookupUser2"
-                    >
-                    <template slot="suggestion" slot-scope="{ data, htmlText }">
-                        <div class="d-flex align-items-center">
-                        <img
-                            class="rounded-s me-2"
-                            :src="data.img_url"
-                            style="width: 40px; height: 40px;" />
-                        
-                        
-                        
-                        <span v-if="data.type == 'region'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-marked-alt\'></i> 장소</span><br/>' + htmlText"></span>
-                        <span v-else-if="data.type == 'point'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-pin\'></i> 다이빙 포인트</span><br/>' + htmlText"></span>
-                        <span v-else-if="data.type == 'center'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-store\'></i> 다이빙 센터</span><br/>' + htmlText"></span>
-                        </div>
-                    </template>
-                </vue-typeahead-bootstrap>
-              </div>
-            </div>
-            <div class="p-3 rounded-s mb-4 row hide" id="div_schedule4" style="border: 1px solid rgba(0, 0, 0, 0.08) !important;">
-              <a href="#" class="schedule-close" v-on:click="closeSchedule(4)"><i class="wedive_icoset wedive_icoset_close_s"></i></a>
-              <label class="wedive-label color-secondary">일정 4</label>
-              <div class="input-style input-style-always-active has-borders no-icon mt-2 col-6 pe-3 after-tilde">
-                <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_start" placeholder="시작일">
-                <label for="form_start" class="color-highlight">시작일</label>
-              </div>
-              <div class="input-style input-style-always-active has-borders no-icon mt-2 col-6 ps-3">
-                <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_end" placeholder="종료일">
-                <label for="form_end" class="color-highlight">종료일</label>
-              </div>
-
-              <div class="mt-3">
-                <vue-typeahead-bootstrap
-                    class="form-control wedive-search"
-                    style="border-radius: 10px !important;border-color: rgba(0, 0, 0, 0.08) !important;"
-                    v-model="query"
-                    :data="users"
-                    :serializer="item => item.name_ko"
-                    :screen-reader-text-serializer="item => `${item.name_ko}`"
-                    highlightClass="special-highlight-class"
-                    @hit="selecteduser = $event"
-                    :minMatchingChars="2"
-                    placeholder="지역명, 다이빙 포인트, 센터명"
-                    inputClass="special-input-class"
-                    :disabledValues="(selecteduser ? [selecteduser.name_ko] : [])"
-                    @input="lookupUser2"
-                    >
-                    <template slot="suggestion" slot-scope="{ data, htmlText }">
-                        <div class="d-flex align-items-center">
-                        <img
-                            class="rounded-s me-2"
-                            :src="data.img_url"
-                            style="width: 40px; height: 40px;" />
-                        
-                        
-                        
-                        <span v-if="data.type == 'region'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-marked-alt\'></i> 장소</span><br/>' + htmlText"></span>
-                        <span v-else-if="data.type == 'point'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-pin\'></i> 다이빙 포인트</span><br/>' + htmlText"></span>
-                        <span v-else-if="data.type == 'center'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-store\'></i> 다이빙 센터</span><br/>' + htmlText"></span>
-                        </div>
-                    </template>
-                </vue-typeahead-bootstrap>
-              </div>
-            </div>
-            <div class="p-3 rounded-s row hide" id="div_schedule5" style="border: 1px solid rgba(0, 0, 0, 0.08) !important;">
-              <a href="#" class="schedule-close" v-on:click="closeSchedule(5)"><i class="wedive_icoset wedive_icoset_close_s"></i></a>
-              <label class="wedive-label color-secondary">일정 5</label>
-              <div class="input-style input-style-always-active has-borders no-icon mt-2 col-6 pe-3 after-tilde">
-                <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_start" placeholder="시작일">
-                <label for="form_start" class="color-highlight">시작일</label>
-              </div>
-              <div class="input-style input-style-always-active has-borders no-icon mt-2 col-6 ps-3">
-                <input type="date" value="" max="2030-01-01" min="2021-09-01" class="form-control validate-text mb-0" id="form_end" placeholder="종료일">
-                <label for="form_end" class="color-highlight">종료일</label>
-              </div>
-
-              <div class="mt-3">
-                <vue-typeahead-bootstrap
-                    class="form-control wedive-search"
-                    style="border-radius: 10px !important;border-color: rgba(0, 0, 0, 0.08) !important;"
-                    v-model="query"
-                    :data="users"
-                    :serializer="item => item.name_ko"
-                    :screen-reader-text-serializer="item => `${item.name_ko}`"
-                    highlightClass="special-highlight-class"
-                    @hit="selecteduser = $event"
-                    :minMatchingChars="2"
-                    placeholder="지역명, 다이빙 포인트, 센터명"
-                    inputClass="special-input-class"
-                    :disabledValues="(selecteduser ? [selecteduser.name_ko] : [])"
-                    @input="lookupUser2"
-                    >
-                    <template slot="suggestion" slot-scope="{ data, htmlText }">
-                        <div class="d-flex align-items-center">
-                        <img
-                            class="rounded-s me-2"
-                            :src="data.img_url"
-                            style="width: 40px; height: 40px;" />
-                        
-                        
-                        
-                        <span v-if="data.type == 'region'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-marked-alt\'></i> 장소</span><br/>' + htmlText"></span>
-                        <span v-else-if="data.type == 'point'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-pin\'></i> 다이빙 포인트</span><br/>' + htmlText"></span>
-                        <span v-else-if="data.type == 'center'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-store\'></i> 다이빙 센터</span><br/>' + htmlText"></span>
-                        </div>
-                    </template>
-                </vue-typeahead-bootstrap>
-              </div>
-            </div>
-            <div class="">
-              <a href="#" data-menu="menu-add-schedule" class="btn btn-full mb-1 pt-3 pb-3 font-14 font-500 color-highlight"><i class="fas fa-plus"></i> 일정 추가하기</a>
-            </div>
-
-          </div>
-        </div>
-        <div class="card card-full pb-0 mb-3 border-bottom">
-          <div class="content mt-1">
-
-            <h4 class="pt-2 mb-2">참여 정보</h4>
-            <!--<div class="mb-0 mt-3">
-              <div class="input-style input-style-always-active has-borders no-icon validate-field mb-0">
-                <input type="number" class="form-control validate-text" id="form_price" placeholder="모집인원을 입력하세요.">
-                <label for="form_price" class="color-highlight">모집인원</label>
-                <i class="fa fa-times disabled invalid color-red-dark"></i>
-                <i class="fa fa-check disabled valid color-green-dark"></i>
-                <em>(필요 시 입력))</em>
-              </div>
-            </div>-->
-
-            <div class="row mb-2">
-              <div class="col-4">
-                <div class="color-highlight font-12">모집 인원</div>
-                <div class="mx-auto">
-                  <div class="stepper rounded-s float-start">
-                    <a href="#" class="stepper-sub"><i class="fa fa-minus color-theme opacity-40"></i></a>
-                    <input type="number" min="1" max="99" value="1">
-                    <a href="#" class="stepper-add"><i class="fa fa-plus color-theme opacity-40"></i></a>
-                  </div>
-                  <div class="clearfix"></div>
-                </div>
-              </div>
-              <div class="col-4">
-                <div class="color-secondary font-12">현재 남자</div>
-                <div class="mx-auto">
-                  <div class="stepper rounded-s float-start">
-                    <a href="#" class="stepper-sub"><i class="fa fa-minus color-theme opacity-40"></i></a>
-                    <input type="number" min="0" max="99" value="0">
-                    <a href="#" class="stepper-add"><i class="fa fa-plus color-theme opacity-40"></i></a>
-                  </div>
-                  <div class="clearfix"></div>
-                </div>
-              </div>
-              <div class="col-4">
-                <div class="color-secondary font-12">현재 여자</div>
-                <div class="mx-auto">
-                  <div class="stepper rounded-s float-start">
-                    <a href="#" class="stepper-sub"><i class="fa fa-minus color-theme opacity-40"></i></a>
-                    <input type="number" min="0" max="99" value="0">
-                    <a href="#" class="stepper-add"><i class="fa fa-plus color-theme opacity-40"></i></a>
-                  </div>
-                  <div class="clearfix"></div>
-                </div>
-              </div>
-            </div>
-
-            <div class="mb-0 mt-3">
-              <div class="input-style no-borders has-icon validate-field mb-3">
-                <i class="fas fa-coins color-gray"></i>
-                <input type="number" class="form-control validate-text" id="form_price" placeholder="(옵션) 참가비를 입력하세요.">
-                <label for="form_price" class="color-highlight">참가비</label>
-                <i class="fa fa-times disabled invalid color-red-dark"></i>
-                <i class="fa fa-check disabled valid color-green-dark"></i>
-                <em>(필요 시 입력))</em>
-              </div>
-            </div>
-
-            <div class="mb-0 mt-3">
-              <div class="input-style no-borders has-icon validate-field mb-3">
-                <i class="fas fa-car color-gray"></i>
-                <input type="name" class="form-control validate-name" id="form_departure" placeholder="(옵션) 출발지를 입력하세요.">
-                <label for="form_departure" class="color-highlight">출발지</label>
-                <i class="fa fa-times disabled invalid color-red-dark"></i>
-                <i class="fa fa-check disabled valid color-green-dark"></i>
-                <em>(필요 시 입력))</em>
-              </div>
-            </div>
-
-
-            <div class="mb-0 mt-3">
-              <div class="input-style no-borders has-icon validate-field mb-3">
-                <i class="fas fa-pen-alt color-gray"></i>
-                <textarea id="form7" placeholder="이곳에 메모를 작성해보세요."></textarea>
-                <label for="form7" class="color-highlight">메모</label>
-              </div>
-            </div>
-
           </div>
         </div>
 
-
-        <div class="card card-full pb-0 mb-3 border-bottom">
-          <div class="content mt-1">
-                <div class="d-flex no-effect" 
-                     data-trigger-switch="toggle-id-3"
-                     data-bs-toggle="collapse" 
-                     href="#collapse3"
-                     role="button" 
-                     aria-expanded="false" 
-                     aria-controls="collapse3">
-                    <div class="pt-1">
-                        <h4 class="pt-3 mb-0">할인(무료) 초청 하시겠습니까?</h4>
-                    </div>
-                    <div class="ms-auto me-4 pe-2 mt-2">
-                        <div class="custom-control ios-switch">
-                            <input type="checkbox" class="ios-input" id="toggle-id-3">
-                            <label class="custom-control-label" for="toggle-id-3"></label>
-                        </div>
-                    </div>
-                </div>
-                <div class="collapse" id="collapse3">
-                    <div class="mb-0 mt-3">
-                      <div>할인대상</div>
-                      <div class="mb-3">
-                        <div class="form-check interest-check">
-                          <input class="form-check-input" type="checkbox" value="" id="check_discount1">
-                          <label class="form-check-label rounded-xl border-08" for="check_discount1">누구나</label>
-                          <i class="fas fa-user color-white font-18"></i>
-                          <i class="fas fa-user font-16 color-secondary"></i>
-                        </div>
-                        <div class="form-check interest-check">
-                          <input class="form-check-input" type="checkbox" value="" id="check_discount2">
-                          <label class="form-check-label rounded-xl border-08" for="check_discount2">여성</label>
-                          <i class="fas fa-female color-white font-18"></i>
-                          <i class="fas fa-female font-17 color-secondary"></i>
-                        </div>
-                        <div class="form-check interest-check">
-                          <input class="form-check-input" type="checkbox" value="" id="check_discount3">
-                          <label class="form-check-label rounded-xl border-08" for="check_discount3">20대 여성</label>
-                          <i class="fas fa-female color-white font-18"></i>
-                          <i class="fas fa-female font-17 color-secondary"></i>
-                        </div>
-                        <div class="form-check interest-check">
-                          <input class="form-check-input" type="checkbox" value="" id="check_discount4">
-                          <label class="form-check-label rounded-xl border-08" for="check_discount4">30대 여성</label>
-                          <i class="fas fa-female color-white font-18"></i>
-                          <i class="fas fa-female font-17 color-secondary"></i>
-                        </div>
-                        <div class="form-check interest-check">
-                          <input class="form-check-input" type="checkbox" value="" id="check_discount5">
-                          <label class="form-check-label rounded-xl border-08" for="check_discount5">강사</label>
-                          <i class="fas fa-user-graduate color-white font-18"></i>
-                          <i class="fas fa-user-graduate font-17 color-secondary"></i>
-                        </div>
-                        <div class="form-check interest-check">
-                          <input class="form-check-input" type="checkbox" value="" id="check_discount6">
-                          <label class="form-check-label rounded-xl border-08" for="check_discount6">여성 강사</label>
-                          <i class="fas fa-user-graduate color-white font-18"></i>
-                          <i class="fas fa-user-graduate font-17 color-secondary"></i>
-                        </div>
-                      </div>
-
-
-                    <div>할인옵션 <span class="mb-2 color-gray-light-mid font-13 ms-2 font-400"><i class="wedive_icoset wedive_icoset_info me-1"></i>1/N 선택 시 모집인원에게 안내합니다.</span></div>
-                      <div>
-                        <div class="form-check interest-check">
-                          <input class="form-check-input" type="radio" value="" name="check_money" id="check_money1">
-                          <label class="form-check-label rounded-xl border-08" for="check_money1">일부 이용료 할인 (1/N부담)</label>
-                          <i class="fab fa-slideshare color-white font-18"></i>
-                          <i class="fab fa-slideshare font-17 color-secondary"></i>
-                        </div>
-                        <div class="form-check interest-check">
-                          <input class="form-check-input" type="radio" value="" name="check_money" id="check_money2">
-                          <label class="form-check-label rounded-xl border-08" for="check_money2">일부 이용료 할인 (개설자 부담)</label>
-                          <i class="fab fa-slideshare color-white font-18"></i>
-                          <i class="fab fa-slideshare font-17 color-secondary"></i>
-                        </div>
-                        <div class="form-check interest-check">
-                          <input class="form-check-input" type="radio" value="" name="check_money" id="check_money3">
-                          <label class="form-check-label rounded-xl border-08" for="check_money3">식사+숙박 무료 (1/N부담)</label>
-                          <i class="fas fa-money-check-alt color-white font-18"></i>
-                          <i class="fas fa-money-check-alt font-16 color-secondary"></i>
-                        </div>
-                        <div class="form-check interest-check">
-                          <input class="form-check-input" type="radio" value="" name="check_money" id="check_money4">
-                          <label class="form-check-label rounded-xl border-08" for="check_money4">식사+숙박 무료 (개설자 부담)</label>
-                          <i class="fas fa-money-check-alt color-white font-18"></i>
-                          <i class="fas fa-money-check-alt font-17 color-secondary"></i>
-                        </div>
-                        <div class="form-check interest-check">
-                          <input class="form-check-input" type="radio" value="" name="check_money" id="check_money5">
-                          <label class="form-check-label rounded-xl border-08" for="check_money5">식사 무료 (1/N부담)</label>
-                          <i class="fas fa-utensils color-white font-18"></i>
-                          <i class="fas fa-utensils font-16 color-secondary"></i>
-                        </div>
-                        <div class="form-check interest-check">
-                          <input class="form-check-input" type="radio" value="" name="check_money" id="check_money6">
-                          <label class="form-check-label rounded-xl border-08" for="check_money6">식사 무료 (개설자 부담)</label>
-                          <i class="fas fa-utensils color-white font-18"></i>
-                          <i class="fas fa-utensils font-17 color-secondary"></i>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    
-                </div>
+        <div class="card card-style pb-0 mb-3 ms-3 me-3 border-bottom" v-on:click="goSwimming()">
+          <div class="mt-1">
+            <div class="p-4" id="div_login">
+              <span class="font-noto font-20 font-500">수영장 버디 모집</span>
+              <p class="font-noto color-gray mb-0 font-200">수영장에서 함께 해요.</p>
+              <i class="wedive_icoset2x wedive_icoset2x_rightarrow"></i>
             </div>
-        </div>
-
-
-
-        <div class="card card-full pb-0 mb-3 border-bottom">
-          <div class="content mt-1">
-            <h4 class="pt-2 mb-2">선호 사항 <span class="mb-2 color-gray-light-mid font-13 ms-2 font-400"><i class="wedive_icoset wedive_icoset_info me-1"></i>딱 맞는 버디를 매칭해드릴께요.</span></h4>
-            <a class="color-highlight font-12 hide" style="margin-top: -30px;padding-bottom: 10px;float:right;">초기화</a>
-            <div class="mb-0 mt-3">
-              <div>성별</div>
-              <div>
-                <div class="form-check interest-check">
-                  <input class="form-check-input" type="checkbox" value="" id="check_gender1">
-                  <label class="form-check-label rounded-xl border-08" for="check_gender1" style="padding-left: 12px;">무관</label>
-                </div>
-                <div class="form-check interest-check">
-                  <input class="form-check-input" type="checkbox" value="" id="check_gender2">
-                  <label class="form-check-label rounded-xl border-08" for="check_gender2" style="padding-left: 12px;">남자</label>
-                </div>
-                <div class="form-check interest-check">
-                  <input class="form-check-input" type="checkbox" value="" id="check_gender3">
-                  <label class="form-check-label rounded-xl border-08" for="check_gender3" style="padding-left: 12px;">여자</label>
-                </div>
-                <div class="form-check interest-check">
-                  <input class="form-check-input" type="checkbox" value="" id="check_gender4">
-                  <label class="form-check-label rounded-xl border-08" for="check_gender4" style="padding-left: 12px;">커플</label>
-                </div>
-              </div>
-            </div>
-
-            <div class="mb-0 mt-3">
-            <div>나이</div>
-              <div>
-                <div class="form-check interest-check">
-                  <input class="form-check-input" type="checkbox" value="" id="check_age1">
-                  <label class="form-check-label rounded-xl border-08" for="check_age1" style="padding-left: 12px;">무관</label>
-                </div>
-                <div class="form-check interest-check">
-                  <input class="form-check-input" type="checkbox" value="" id="check_age2">
-                  <label class="form-check-label rounded-xl border-08" for="check_age2" style="padding-left: 12px;">20대</label>
-                </div>
-                <div class="form-check interest-check">
-                  <input class="form-check-input" type="checkbox" value="" id="check_age3">
-                  <label class="form-check-label rounded-xl border-08" for="check_age3" style="padding-left: 12px;">30대</label>
-                </div>
-                <div class="form-check interest-check">
-                  <input class="form-check-input" type="checkbox" value="" id="check_age4">
-                  <label class="form-check-label rounded-xl border-08" for="check_age4" style="padding-left: 12px;">40대</label>
-                </div>
-                <div class="form-check interest-check">
-                  <input class="form-check-input" type="checkbox" value="" id="check_age5">
-                  <label class="form-check-label rounded-xl border-08" for="check_age5" style="padding-left: 12px;">50대 ▲</label>
-                </div>
-              </div>
-            </div>
-
-
-            <div class="mb-0 mt-3">
-              <div>다이빙</div>
-              <div>
-                <div class="form-check interest-check">
-                  <input class="form-check-input" type="checkbox" value="" id="check_diving1">
-                  <label class="form-check-label rounded-xl border-08" for="check_diving1">본인케어</label>
-                  <i class="fas fa-portrait color-white font-18"></i>
-                  <i class="fas fa-portrait font-16 color-highlight"></i>
-                </div>
-                <div class="form-check interest-check">
-                  <input class="form-check-input" type="checkbox" value="" id="check_diving2">
-                  <label class="form-check-label rounded-xl border-08" for="check_diving2">초보환영</label>
-                  <i class="fas fa-baby color-white font-18"></i>
-                  <i class="fas fa-baby font-16 color-highlight"></i>
-                </div>
-                <div class="form-check interest-check">
-                  <input class="form-check-input" type="checkbox" value="" id="check_diving3">
-                  <label class="form-check-label rounded-xl border-08" for="check_diving3">상급레벨</label>
-                  <i class="fas fa-user-graduate color-white font-18"></i>
-                  <i class="fas fa-user-graduate font-16 color-highlight"></i>
-                </div>
-                <div class="form-check interest-check">
-                  <input class="form-check-input" type="checkbox" value="" id="check_diving4">
-                  <label class="form-check-label rounded-xl border-08" for="check_diving4">사진촬영</label>
-                  <i class="fas fa-camera-retro color-white font-18"></i>
-                  <i class="fas fa-camera-retro font-17 color-highlight"></i>
-                </div>
-                <div class="form-check interest-check">
-                  <input class="form-check-input" type="checkbox" value="" id="check_diving5">
-                  <label class="form-check-label rounded-xl border-08" for="check_diving5">강사포함</label>
-                  <i class="fas fa-chalkboard-teacher color-white font-18"></i>
-                  <i class="fas fa-chalkboard-teacher font-17 color-highlight"></i>
-                </div>
-                <div class="form-check interest-check">
-                  <input class="form-check-input" type="checkbox" value="" id="check_diving6">
-                  <label class="form-check-label rounded-xl border-08" for="check_diving6">강사보험</label>
-                  <i class="fas fa-file-contract color-white font-18"></i>
-                  <i class="fas fa-file-contract font-17 color-highlight"></i>
-                </div>
-              </div>
-              <div>
-                <div class="form-check interest-check">
-                  <input class="form-check-input" type="radio" name="check_training" value="" id="check_diving7">
-                  <label class="form-check-label rounded-xl border-08" for="check_diving7">트레이닝</label>
-                  <i class="fas fa-graduation-cap color-white font-18"></i>
-                  <i class="fas fa-graduation-cap font-16 color-highlight"></i>
-                </div>
-                <div class="form-check interest-check">
-                  <input class="form-check-input" type="radio" name="check_training" value="" id="check_diving8">
-                  <label class="form-check-label rounded-xl border-08" for="check_diving8">하드트레이닝</label>
-                  <i class="fas fa-graduation-cap color-white font-18"></i>
-                  <i class="fas fa-graduation-cap font-17 color-highlight"></i>
-                </div>
-                <div class="form-check interest-check">
-                  <input class="form-check-input" type="radio" name="check_training" value="" id="check_diving9">
-                  <label class="form-check-label rounded-xl border-08" for="check_diving9">펀다이빙</label>
-                  <i class="fas fa-coffee color-white font-18"></i>
-                  <i class="fas fa-coffee font-17 color-highlight"></i>
-                </div>
-                <div class="form-check interest-check">
-                  <input class="form-check-input" type="radio" name="check_training" value="" id="check_diving10">
-                  <label class="form-check-label rounded-xl border-08" for="check_diving10">CO<sub>2</sub>트레이닝</label>
-                  <i class="fas fa-lungs color-white font-18"></i>
-                  <i class="fas fa-lungs font-17 color-highlight"></i>
-                </div>
-              </div>
-            </div>
-
-            <div class="mb-0 mt-3">
-              <div>친목</div>
-              <div>
-                <div class="form-check interest-check">
-                  <input class="form-check-input" type="checkbox" value="" id="check_amity1">
-                  <label class="form-check-label rounded-xl border-08" for="check_amity1">뒷풀이</label>
-                  <i class="fas fa-beer color-white font-18"></i>
-                  <i class="fas fa-beer font-16 color-highlight"></i>
-                </div>
-                <div class="form-check interest-check">
-                  <input class="form-check-input" type="checkbox" value="" id="check_amity2">
-                  <label class="form-check-label rounded-xl border-08" for="check_amity2">식사 함께</label>
-                  <i class="fas fa-utensils color-white font-18"></i>
-                  <i class="fas fa-utensils font-17 color-highlight"></i>
-                </div>
-              </div>
-            </div>
-
-            <div class="mb-0 mt-3">
-              <div>환경</div>
-              <div>
-                <div class="form-check interest-check">
-                  <input class="form-check-input" type="checkbox" value="" id="check_env1">
-                  <label class="form-check-label rounded-xl border-08" for="check_env1">개별숙박</label>
-                  <i class="fas fa-bed color-white font-18"></i>
-                  <i class="fas fa-bed font-16 color-highlight"></i>
-                </div>
-                <div class="form-check interest-check">
-                  <input class="form-check-input" type="checkbox" value="" id="check_env2">
-                  <label class="form-check-label rounded-xl border-08" for="check_env2">남녀 별도숙박</label>
-                  <i class="fas fa-restroom color-white font-18"></i>
-                  <i class="fas fa-restroom font-16 color-highlight"></i>
-                </div>
-                <div class="form-check interest-check">
-                  <input class="form-check-input" type="checkbox" value="" id="check_env3">
-                  <label class="form-check-label rounded-xl border-08" for="check_env3">카풀가능</label>
-                  <i class="fas fa-car color-white font-18"></i>
-                  <i class="fas fa-car font-17 color-highlight"></i>
-                </div>
-                <div class="form-check interest-check">
-                  <input class="form-check-input" type="checkbox" value="" id="check_env4">
-                  <label class="form-check-label rounded-xl border-08" for="check_env4">센터확정</label>
-                  <i class="fas fa-store color-white font-18"></i>
-                  <i class="fas fa-store font-17 color-highlight"></i>
-                </div>
-              </div>
-            </div>
-
-            
-            
-            
           </div>
-          
-
-          <a href="#" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 ms-3 me-3 mb-5">생성하기</a>
-            
         </div>
+
+        <div class="card card-style pb-0 mb-3 ms-3 me-3 border-bottom" v-on:click="goSea()">
+          <div class="mt-1">
+            <div class="p-4" id="div_login">
+              <span class="font-noto font-20 font-500">바다 버디 모집</span>
+              <p class="font-noto color-gray mb-0 font-200">바다에서 함께 해요.</p>
+              <i class="wedive_icoset2x wedive_icoset2x_rightarrow"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-style pb-0 mb-3 ms-3 me-3 border-bottom" v-on:click="goAbroad()">
+          <div class="mt-1">
+            <div class="p-4" id="div_login">
+              <span class="font-noto font-20 font-500">해외 버디 모집</span>
+              <p class="font-noto color-gray mb-0 font-200">해외 다이빙, 리브어보드 버디를 모집합니다.</p>
+              <i class="wedive_icoset2x wedive_icoset2x_rightarrow"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-style pb-0 mb-3 ms-3 me-3 border-bottom">
+          <div class="mt-1">
+            <div class="p-4" id="div_login">
+              <span class="font-noto font-20 font-500">위다이브 컨시어지</span>
+              <p class="font-noto color-gray mb-0 font-200">위다이브의 매칭 매니저에게 요청합니다.</p>
+              <i class="wedive_icoset2x wedive_icoset2x_rightarrow"></i>
+            </div>
+          </div>
+        </div>
+        
     </div>
     <!-- Page content ends here-->
         
@@ -835,11 +228,18 @@ var schedule_status = [0, 0, 0, 0, 0];
 export default {
   name: 'HelloWorld',
   mounted() {
-    var preloader = document.getElementById('preloader')
-    if(preloader){preloader.classList.add('preloader-hide');}
     
     $(".page-title").hide();
     $(".page-title-clear").hide();
+
+    if (this.$route.query.header && this.$route.query.header == 'hide') {
+      $(".page-title").hide();
+      $(".page-title-clear").hide();
+      $(".header-fixed").hide();
+    }
+    if (this.$route.query.footer && this.$route.query.footer == 'hide') {
+      $("#footer-bar").hide();
+    }
 
     $("#check_nodate").change(function(){
       $(this).toggleClass("checked");
@@ -854,7 +254,11 @@ export default {
     VueTypeaheadBootstrap
   },
   created() {
-    
+    setTimeout(function() {
+        init_template();
+        var preloader = document.getElementById('preloader')
+        if(preloader){preloader.classList.add('preloader-hide');}
+    }, 500);
   },
   data () {
     return {
@@ -863,6 +267,15 @@ export default {
         users: []
     }
   }, methods: {
+      goSwimming() {
+        location.href='/buddy_swimming';
+      },
+      goSea() {
+        location.href='/buddy_sea';
+      },
+      goAbroad() {
+        location.href='/buddy_abroad';
+      },
       lookupUser: debounce(function(){
         // in practice this action should be debounced
         fetch(`https://api.github.com/search/users?q=${this.query}`)
@@ -965,9 +378,9 @@ export default {
 
 
 #btn-filter1 {padding: 5px 10px !important;margin-right: -2px;border-radius: 20px 0px 0px 20px !important;border: 1px solid #091a42;}
-#btn-filter1:before {clear: both;content: "";display: inline-block;margin-right: 6px;width: 14px;height: 14px;background-size: 14px 14px;background-repeat: no-repeat;background-image: url(/static/images/icon_scubadiving.png);text-indent: -9999px;vertical-align: middle;}
+#btn-filter1:before {clear: both;content: "";display: inline-block;margin-right: 6px;width: 14px;height: 14px;background-size: 14px 14px;background-repeat: no-repeat;background-image: url(/static/images/assets/icon_scubadiving.png);text-indent: -9999px;vertical-align: middle;}
 #btn-filter2 {padding: 5px 10px !important;margin-left: -3px;border-radius: 0px 20px 20px 0px !important;border: 1px solid #091a42;}
-#btn-filter2:before {clear: both;content: "";display: inline-block;margin-right: 6px;width: 14px;height: 14px;background-size: 14px 14px;background-repeat: no-repeat;background-image: url(/static/images/icon_freediving.png);text-indent: -9999px;vertical-align: middle;}
+#btn-filter2:before {clear: both;content: "";display: inline-block;margin-right: 6px;width: 14px;height: 14px;background-size: 14px 14px;background-repeat: no-repeat;background-image: url(/static/images/assets/icon_freediving.png);text-indent: -9999px;vertical-align: middle;}
 
 
 
@@ -977,6 +390,7 @@ export default {
 .btn-wedive-next {width: 30%;float: right;margin-top: 10px;border-radius: 20px !important;margin-right: 10px;}
 .point-text {overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;}
 
+.border-top {border-top: 1px solid rgba(0, 0, 0, 0.08) !important}
 .border-bottom {border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important}
 .border-08 {border: 1px solid rgba(0, 0, 0, 0.08) !important;}
 .pl-10px {padding-left: 10px !important;}
@@ -988,5 +402,7 @@ export default {
 .timeline-deco {left: 28px !important;}
 .timeline-item-content, .timeline-item-content-full{margin: 0px 15px 30px 56px !important;}
 
-
+.font-exo2 {font-family: 'Exo 2', sans-serif;}
+.font-noto {font-family: 'Noto Sans Korean';}
+.card-style i:last-child {position: absolute;top: 37%;right: 20px;}
 </style>

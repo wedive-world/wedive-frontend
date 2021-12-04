@@ -559,14 +559,25 @@
 export default {
   name: 'HelloWorld',
   mounted() {
-    var preloader = document.getElementById('preloader')
-    if(preloader){preloader.classList.add('preloader-hide');}
     
     $(".page-title").hide();
     $(".page-title-clear").hide();
+
+    if (this.$route.query.header && this.$route.query.header == 'hide') {
+      $(".page-title").hide();
+      $(".page-title-clear").hide();
+      $(".header-fixed").hide();
+    }
+    if (this.$route.query.footer && this.$route.query.footer == 'hide') {
+      $("#footer-bar").hide();
+    }
   },
   created() {
-    
+    setTimeout(function() {
+        init_template();
+        var preloader = document.getElementById('preloader')
+        if(preloader){preloader.classList.add('preloader-hide');}
+    }, 500);
   },
   data () {
     return {
@@ -625,7 +636,7 @@ export default {
 .ico_feature17 {width: 44px;height: 40px;background-position: -180px -78px;}
 .ico_feature18 {width: 44px;height: 40px;background-position: -225px -78px;}
 
-.icon-course {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/wedive_course2.png);background-repeat: no-repeat;-webkit-background-size: 270px 118px;background-size: 270px 118px;}
+.icon-course {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/assets/wedive_course2.png);background-repeat: no-repeat;-webkit-background-size: 270px 118px;background-size: 270px 118px;}
 .span_feature {width:66px;}
 .text-urgent {color:#de5246; background-color: #ffebe9;padding: 2px 8px;border-radius:2px;}
 

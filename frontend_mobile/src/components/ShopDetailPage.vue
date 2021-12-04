@@ -223,7 +223,7 @@
                 </div>
                 <p class="review-text mt-2 mb-1">
                     <a href="https://myplace-phinf.pstatic.net/20210827_62/16300643312513fe1S_JPEG/upload_07fc7f5449b8fecbeca86e655f0afce3.jpg" data-gallery="gallery-99" class="filtr-item" title="" data-category="99">
-                        <img src="/static/images/empty.png" data-src="https://search.pstatic.net/common/?autoRotate=true&amp;quality=95&amp;type=f87_87&amp;src=https%3A%2F%2Fmyplace-phinf.pstatic.net%2F20210827_62%2F16300643312513fe1S_JPEG%2Fupload_07fc7f5449b8fecbeca86e655f0afce3.jpg" class="preload-img rounded-s shadow-m review_img" alt="방문자리뷰">
+                        <img src="/static/images/assets/empty.png" data-src="https://search.pstatic.net/common/?autoRotate=true&amp;quality=95&amp;type=f87_87&amp;src=https%3A%2F%2Fmyplace-phinf.pstatic.net%2F20210827_62%2F16300643312513fe1S_JPEG%2Fupload_07fc7f5449b8fecbeca86e655f0afce3.jpg" class="preload-img rounded-s shadow-m review_img" alt="방문자리뷰">
                     </a>
                     샀는데 만족해요~ 블라블라 샀는데 만족해요~ 블라블라 샀는데 만족해요~ 블라블라 샀는데 만족해요~ 블라블라 샀는데 만족해요~ 블라블라 샀는데 만족해요~ 블라블라 샀는데 만족해요~ 블라블라 샀는데 만족해요~ 블라블라 샀는데 만족해요~ 블라블라 샀는데 만족해요~ 블라블라 샀는데 만족해요~ 블라블라 샀는데 만족해요~ 블라블라 샀는데 만족해요~ 블라블라 
                 </p>
@@ -402,8 +402,6 @@
 export default {
   name: 'HelloWorld',
   mounted() {
-    var preloader = document.getElementById('preloader')
-    if(preloader){preloader.classList.add('preloader-hide');}
     
     
     $(".page-title").hide();
@@ -426,12 +424,24 @@ export default {
       }
     },500);
 
+    if (this.$route.query.header && this.$route.query.header == 'hide') {
+      $(".page-title").hide();
+      $(".page-title-clear").hide();
+      $(".header-fixed").hide();
+    }
+    if (this.$route.query.footer && this.$route.query.footer == 'hide') {
+      $("#footer-bar").hide();
+    }
   },
   components: {
     
   },
   created() {
-    
+    setTimeout(function() {
+        init_template();
+        var preloader = document.getElementById('preloader')
+        if(preloader){preloader.classList.add('preloader-hide');}
+    }, 500);
   },
   destroyed () {
     

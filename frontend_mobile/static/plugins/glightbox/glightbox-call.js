@@ -6,4 +6,5 @@ var lightbox = GLightbox({
     openEffect: 'fade',
     closeEffect: 'fade',
     dragAutoSnap:true,
+    preload:true,
 });

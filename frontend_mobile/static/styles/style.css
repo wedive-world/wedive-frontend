@@ -161,12 +161,12 @@ body {
 }
 
 .bg-fade-highlight-dark {
-  background-color: !important;
+  background-color: #888893!important;
   color: #FFF !important;
 }
 
 .bg-fade-highlight-light {
-  background-color: !important;
+  background-color: #a8a8b1!important;
   color: #FFF !important;
 }
 
@@ -176,7 +176,7 @@ body {
 
 .color-icon-highlight {
   stroke: #1d397c !important;
-  fill: !important;
+  fill: #1d397c!important;
 }
 
 .bg-highlight-dark {
@@ -4666,7 +4666,7 @@ button:active {
 .input-style .valid,
 .input-style .invalid {
   position: absolute;
-  top: 50%;
+  top: 56%;
   margin-top: -5px;
   right: 5px;
   pointer-events: none;
@@ -6510,6 +6510,10 @@ input[type=number] {
 
 .interest-check input:checked ~ .fa {
   display: block !important;
+}
+
+.interest-check input ~ label {
+  background-color: white;
 }
 
 .interest-check input:checked ~ label {

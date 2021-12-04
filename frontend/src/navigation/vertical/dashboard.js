@@ -20,6 +20,10 @@ export default [
         title: 'Interest manage',
         route: 'dashboard-interest',
       },
+      {
+        title: 'Center manage',
+        route: 'dashboard-center',
+      },
     ],
   },
 ]

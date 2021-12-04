@@ -2,17 +2,26 @@
   <div class="">
     <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-site" data-menu-load=""></div>    
     <div class="page-content">
-        <div class="splide single-slider cover-slider slider-no-arrows slider-has-dots" id="cover-slider-1" data-card-height="250">
+        <div v-if="siteData.backgroundImages == null || siteData.backgroundImages.length == 0" style="background:url(/static/empty.jpg);background-size: contain;height:250px;">
+        </div>
+        <div v-else :style="'background:url('+siteData.backgroundImages[0].url+');background-size: cover;height:250px;'">
+        </div>
+        <!--<div class="splide single-slider cover-slider slider-no-arrows" id="cover-slider-1" data-card-height="250">
             <div class="splide__track">
                 <div class="splide__list">
-                    <div class="splide__slide">
-                        <div data-card-height="250" class="card rounded-0 mb-0" style="background-image:url(https://static.wixstatic.com/media/d49a86_c8daa727864349c498f1d93236500ea3~mv2.jpg)">
+                    <div class="splide__slide" v-if="siteData.backgroundImages == null || siteData.backgroundImages.length == 0">
+                        <div id="background_img_null" data-card-height="250" class="card rounded-0 mb-0" style="background: url(/static/empty.jpg);background-size: contain !important;">
                             
-                        </div>         
+                        </div>
+                    </div>
+                    <div class="splide__slide" v-for="(image, index) in siteData.backgroundImages">
+                        <div data-card-height="250" :class="'card rounded-0 mb-0 background_img_' + index" v-bind:style="'background: url('+image.url+');background-size: cover !important;'">
+                            
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
         
 
     
@@ -20,9 +29,9 @@
         
         <div class="card card-style" style="margin-top:-60px; z-index:1">
             <div class="content text-center mt-4">
-                <h2 class="font-20 font-700 mb-0 mt-1">양양 다이빙 사이트</h2>
-                <h2 class="wedive-score">3.4</h2>
-                <span class="wedive-score-desc">일반적</span>
+                <h2 class="font-20 font-700 mb-0 mt-1">{{ siteData.name }} 사이트</h2>
+                <h2 class="wedive-score">{{ (siteData.adminScore/20).toFixed(1) }}</h2>
+                <span class="wedive-score-desc">{{ recommend_word[parseInt(siteData.adminScore/20)] }}</span>
                 <p class="color-gray m-0"><i class="fas fa-map-marked-alt" ></i> 대한민국, 강원도</p>
                 
                 <div class="evaluation d-flex mt-3">
@@ -30,47 +39,47 @@
                         <div class="star-area text-start ms-3" style="height: 30px;">
                             <span class="font-14 me-2 color-gray" style="float: left;padding-top:2px;">환경</span>
                             <div class="wedive-fish-back">
-                                <div class="wedive-fish-front" style="width:66%">
+                                <div class="wedive-fish-front" :style="'width:'+siteData.waterEnvironmentScore+'%;'">
                                 </div>
-                                <span class="wedive-score-number">3.3</span>
+                                <span class="wedive-score-number">{{ (siteData.waterEnvironmentScore/20).toFixed(1) }}</span>
                             </div>
                         </div>
                         <div class="star-area mt-1 text-start ms-3" style="height: 30px;">
                             <span class="font-14 me-2 color-gray" style="float: left;padding-top:2px;">유속</span>
                             <div class="wedive-wave-back">
-                                <div class="wedive-wave-front" style="width:66%">
+                                <div class="wedive-wave-front" :style="'width:'+siteData.flowRateScore+'%;'">
                                 </div>
-                                <span class="wedive-score-number">3.8</span>
+                                <span class="wedive-score-number">{{ (siteData.flowRateScore/20).toFixed(1) }}</span>
                             </div>
                         </div>
                         <div class="star-area mt-1 text-start ms-3" style="height: 30px;">
                             <span class="font-14 me-2 color-gray" style="float: left;padding-top:2px;">시야</span>
                             <div class="wedive-eye-back">
-                                <div class="wedive-eye-front" style="width:66%">
+                                <div class="wedive-eye-front" :style="'width:'+siteData.eyeSightScore+'%;'">
                                 </div>
-                                <span class="wedive-score-number">3.3</span>
+                                <span class="wedive-score-number">{{ (siteData.eyeSightScore/20).toFixed(1) }}</span>
                             </div>
                         </div>
                     </div>
                     <div class="flex-grow-1">
-                        <div style="height: 30px;padding-top:2px;">일반적</div>
-                        <div class="mt-1" style="height: 30px;padding-top:2px;">일반적</div>
-                        <div class="mt-1" style="height: 30px;padding-top:2px;">5-15m</div>
+                        <div style="height: 30px;padding-top:2px;">{{ recommend_env_word[parseInt(siteData.adminScore/20)] }}</div>
+                        <div class="mt-1" style="height: 30px;padding-top:2px;">{{ recommend_flow_word[parseInt(siteData.adminScore/20)] }}</div>
+                        <div class="mt-1" style="height: 30px;padding-top:2px;">{{ siteData.minSight }}-{{ siteData.maxSight }}m</div>
                     </div>
                 </div>
                 
-                <p class="color-gray mt-3 mb-0 text-start me-2 ms-2">겨울에는 동해의 보물 섬유세닐말미잘을 볼 수 있고, 여름에는 태풍처럼 지나가는 볼락 무리를 볼 수 있는 사이트 입니다. 특히 분단국가 특성상 허가가 쉽지 않은 동해에서 야간 다이빙을 할 수 있는 유일한 사이트 입니다.</p>
+                <p class="color-gray mt-3 mb-0 text-start me-2 ms-2">{{ siteData.description }}</p>
                 
                 <div class="divider mt-3 mb-3"></div>
                 
                 <div class="d-flex mb-0 text-center">
                     <div class="flex-grow-1 pd-0" style="border-right: 1px solid lightgray;">
-                        <img class="ext-img" src="/static/images/ico_heart.png" width="24" style="margin-top:-4px;"/>
-                        <span class="font-16 font-500 font-noto">찜 25</span>
+                        <img class="ext-img" src="/static/images/assets/ico_heart.png" width="24" style="margin-top:-4px;"/>
+                        <span class="font-16 font-500 font-noto">찜 0</span>
                     </div>
                     
                     <div class="flex-grow-1 pd-0" data-menu="menu-share">
-                        <img class="ext-img" src="/static/images/ico_share.png" width="24" style="margin-top:-4px;"/>
+                        <img class="ext-img" src="/static/images/assets/ico_share.png" width="24" style="margin-top:-4px;"/>
                         <span class="font-16 font-500 font-noto">공유</span>
                     </div>
                 </div>
@@ -86,50 +95,14 @@
                     <i class="ico ico-wedive-w -circle color-primary scale-box fa-4x"></i>
                 </div>
                 <h4 class="text-center pt-2 mb-2">where is here?</h4>
-                <div class="row text-start txt_box2 m-0">
-                    <div class="ico_feature col-3">
-                        <i class="ico_feature1 icon-point"></i>
-                        <p class="span_feature text-center">동굴</p>
+                <div v-if="siteData.interests && siteData.interests.filter(x=>x.type=='divingPointEnvironment'||x.type=='divingType').length>0" class="row text-start txt_box2 m-0">
+                    <div v-for="interest in siteData.interests.filter(x=>x.type=='divingPointEnvironment')" class="ico_feature col-3">
+                        <i :class="'ico_feature'+(point_category.findIndex(x=>x==interest.title)+1)+' icon-point'"></i>
+                        <p class="span_feature text-center">{{ interest.title }}</p>
                     </div>
-                    <div class="ico_feature col-3">
-                        <i class="ico_feature2 icon-point"></i>
-                        <p class="span_feature text-center">난파선</p>
-                    </div>
-                    <div class="ico_feature col-3">
-                        <i class="ico_feature3 icon-point"></i>
-                        <p class="span_feature text-center">마크로</p>
-                    </div>
-                    <div class="ico_feature col-3">
-                        <i class="ico_feature4 icon-point"></i>
-                        <p class="span_feature text-center">대물</p>
-                    </div>
-                    <div class="ico_feature col-3">
-                        <i class="ico_feature5 icon-point"></i>
-                        <p class="span_feature text-center">월다이빙</p>
-                    </div>
-                    <div class="ico_feature col-3">
-                        <i class="ico_feature6 icon-point"></i>
-                        <p class="span_feature text-center">딥다이빙</p>
-                    </div>
-                    <div class="ico_feature col-3">
-                        <i class="ico_feature8 icon-point"></i>
-                        <p class="span_feature text-center">드리프트</p>
-                    </div>
-                    <div class="ico_feature col-3">
-                        <i class="ico_feature9 icon-point"></i>
-                        <p class="span_feature text-center">리브어보드</p>
-                    </div>
-                    <div class="ico_feature col-3">
-                        <i class="ico_feature10 icon-point"></i>
-                        <p class="span_feature text-center">구조물</p>
-                    </div>
-                    <div class="ico_feature col-3">
-                        <i class="ico_feature11 icon-point"></i>
-                        <p class="span_feature text-center">국내우수</p>
-                    </div>
-                    <div class="ico_feature col-3">
-                        <i class="ico_feature12 icon-point"></i>
-                        <p class="span_feature text-center">글로벌TOP</p>
+                    <div v-for="interest in siteData.interests.filter(x=>x.type=='divingType')" class="ico_feature col-3">
+                        <i :class="'ico_feature'+(type_category.findIndex(x=>x==interest.title)+1)+' icon-type'"></i>
+                        <p class="span_feature text-center">{{ interest.title }}</p>
                     </div>
                 </div>
                 <div class="justify-content-center mb-2 mt-2 text-start me-n2 ms-n2">
@@ -142,7 +115,7 @@
                                             <h1 class="text-center mb-0"><i class="fas fa-calendar-alt font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">방문시기</h1>
                                             <p class="text-start font-400">
-                                                일반적으로 일년 내내 다이빙이 가능하지만 가장 좋은 시기는 여름~가을 동안인 6월에서 10월입니다.
+                                                {{ siteData.visitTimeDescription }}
                                             </p>
                                         </div>
                                     </div>
@@ -153,7 +126,7 @@
                                             <h1 class="text-center mb-0"><i class="fas fa-temperature-high font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">수온</h1>
                                             <p class="text-start font-400">
-                                                1~5월 평균 섭씨 10도, 11~12월은 15도 안팎입니다. 성수기인 6~10월에는 평균 20도까지 올라갑니다.
+                                                {{ siteData.waterTemperatureDescription }}
                                             </p>
                                         </div>
                                     </div>
@@ -164,7 +137,7 @@
                                             <h1 class="text-center mb-0"><i class="fas fa-level-down-alt font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">수심</h1>
                                             <p class="text-start font-400">
-                                                가까운 바다는 12~18m, 먼 바다는 20~32m정도 입니다.
+                                                {{ siteData.deepDescription }}
                                             </p>
                                         </div>
                                     </div>
@@ -175,7 +148,7 @@
                                             <h1 class="text-center mb-0"><i class="fas fa-water font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">조류</h1>
                                             <p class="text-start font-400">
-                                                6~10월 간헐적으로 청물(일본 쓰시마 섬에서 갈라진 쿠로시오 난류)가 유입되어 시야가 15m까지 좋아집니다.
+                                                {{ siteData.waterFlowDescription }}
                                             </p>
                                         </div>
                                     </div>
@@ -186,7 +159,7 @@
                                             <h1 class="text-center mb-0"><i class="fas fa-eye font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">시야</h1>
                                             <p class="text-start font-400">
-                                                평소에는 5m정도이지만, 청물이 들어오는 경우 10m~15m로 일반적인 편입니다.
+                                                {{ siteData.eyeSightDescription }}
                                             </p>
                                         </div>
                                     </div>
@@ -197,7 +170,7 @@
                                             <h1 class="text-center mb-0"><i class="fas fa-highlighter font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">다이빙 하이라이트</h1>
                                             <p class="text-start font-400">
-                                                쥐놀래미와 도다리, 황어, 전복, 문어, 복어, 쥐치 등을 만날 수 있습니다.
+                                                {{ siteData.highlightDescription }}
                                             </p>
                                         </div>
                                     </div> 
@@ -211,43 +184,120 @@
             </div>
         </div>
 
-        <div class="card card-style">
+        <div v-if="siteData.divePoints && siteData.divePoints.length> 0" class="card card-style">
             <div class="content">
-                <h4 class="text-start pt-2 mb-2">양양 인기 포인트</h4>
+                <h4 class="text-start pt-2 mb-2">{{ siteData.name }} 인기 포인트</h4>
                 <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
-                <div v-for="(point,index) in point_list" v-if="index<3">
+                <div v-for="(point,index) in siteData.divePoints" v-if="index<3">
                     <div class="">
                         <div class="">
                             <div class="justify-content-center mb-0 text-start">
-                                <a href="/point">
+                                <a :href="'/point/' + point.uniqueName">
                                     <div style="position: relative;">
-                                        <h4 class="font-15 font-600 color-highlight"> {{point.title}} </h4>
+                                        <h4 class="font-15 font-600 color-highlight"> {{ point.name }} </h4>
                                         <span class="color-gray-light-mid font-12 mb-0 text-more me-1">상세보기<i class="fas fa-chevron-right ms-2"></i></span>
                                     </div>
                                 </a>
                                 <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
-                                    <span> {{point.star}} </span>
+                                    <span> {{ (point.adminScore/20).toFixed(1) }} </span>
                                 </p>
 
-                                <div class="row text-center row-cols-3 mb-1" style="padding-left:10px;padding-right:10px;">
-                                    <a class="col square-rect" v-bind:data-gallery="'gallery-'+index" v-bind:href="point.img1" title="">
-                                        <img src="/static/images/empty.png" v-bind:data-src="point.img1" class="preload-img img-fluid rounded-s" alt="Point image">
-                                    </a>
-                                    <a class="col square-rect" v-bind:data-gallery="'gallery-'+index" v-bind:href="point.img2" title="">
-                                        <img src="/static/images/empty.png" v-bind:data-src="point.img2" class="preload-img img-fluid rounded-s" alt="Point image">
-                                    </a>
-                                    <a class="col square-rect" v-bind:data-gallery="'gallery-'+index" v-bind:href="point.img3" title="">
-                                        <img src="/static/images/empty.png" v-bind:data-src="point.img3" class="preload-img img-fluid rounded-s" alt="Point image">
+                                <div v-if="point.images" class="row text-center row-cols-3 mb-1" style="padding-left:10px;padding-right:10px;">
+                                    <a v-for="(image, index) in point.images" v-if="point.images&&point.images.length>0&&index<3" class="col square-rect" v-bind:data-gallery="'gallery-'+index" v-bind:href="image.url" title="">
+                                        <img src="/static/images/assets/empty.png" v-bind:data-src="image.url" class="preload-img img-fluid rounded-s" alt="Point image">
+                                        <div class="wedive-source mx-140">{{ image.reference | makeReference }}</div>
                                     </a>
                                 </div>
-                                <p class="pb-0 mb-0 line-height-m point_desc"> {{point.desc}} </p>
-                                <p class="pb-0 mb-0 mt-n1 ellipsis color-gray-light-mid">
-                                    {{point.feature}}
-                                </p>
+                                
+                                <p class="pb-0 mb-0 line-height-m point_desc"> {{point.highlightDescription}} </p>
                             </div>
                         </div>
                     </div>
                     <div class="divider mt-3 mb-3"></div>
+                </div>
+            </div>
+        </div>
+
+        <div v-if="siteData.highlights && siteData.highlights.length>0" class="card card-style">
+            <div class="content">
+                <h4 class="text-start pt-2 mb-2">하이라이트</h4>
+                <div>
+                    <div style="display: inline-block;width: 30px; height: 30px; fill: rgb(0, 0, 0);"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path d="M 10 9 C 6.132813 9 3 12.132813 3 16 L 3 34 C 3 37.867188 6.132813 41 10 41 L 40 41 C 43.867188 41 47 37.867188 47 34 L 47 16 C 47 12.132813 43.867188 9 40 9 Z M 10 11 L 40 11 C 42.757813 11 45 13.242188 45 16 L 45 34 C 45 36.757813 42.757813 39 40 39 L 10 39 C 7.242188 39 5 36.757813 5 34 L 5 16 C 5 13.242188 7.242188 11 10 11 Z M 24.53125 17.15625 C 24.101563 19.554688 22.398438 20.070313 20 20.15625 L 20 21.6875 L 24.125 21.6875 L 24.125 32.90625 L 26 32.90625 L 26 17.15625 Z"></path></svg></div>
+                    {{ siteData.highlights[0].description }}
+                    <a v-if="siteData.highlights[0].images && siteData.highlights[0].images.length>0" href="#" class="row m-0 mb-2"> 
+                        <div class="col-6 ps-0 pe-1">
+                            <div class="card rounded-sm mb-2">
+                                <a class="" data-gallery="'gallery-highlight" :href="siteData.highlights[0].images[0].url" title="">
+                                    <img src="/static/images/assets/empty.png" :data-src="siteData.highlights[0].images[0].url" class="preload-img img-fluid rounded-s" :alt="siteData.highlights[0].images[0].name" style="height: 80px;">
+                                    <div class="wedive-source mx-140">{{ siteData.highlights[0].images[0].reference | makeReference }}</div>
+                                </a>
+                            </div>
+                            <div v-if="siteData.highlights[0].images.length>1" class="card rounded-sm mb-0">
+                                <a class="" data-gallery="'gallery-highlight" :href="siteData.highlights[0].images[1].url" title="">
+                                    <img src="/static/images/assets/empty.png" :data-src="siteData.highlights[0].images[1].url" class="preload-img img-fluid rounded-s" :alt="siteData.highlights[0].images[1].name" style="height: 80px;">
+                                    <div class="wedive-source mx-140">{{ siteData.highlights[0].images[1].reference | makeReference }}</div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-6 ps-1 pe-0">
+                            <div v-if="siteData.highlights[0].images.length>2" class="card rounded-sm mb-0">
+                                <a class="" data-gallery="'gallery-highlight" :href="siteData.highlights[0].images[2].url" title="">
+                                    <img src="/static/images/assets/empty.png" :data-src="siteData.highlights[0].images[2].url" class="preload-img img-fluid rounded-s" :alt="siteData.highlights[0].images[2].name" style="height: 170px;">
+                                    <div class="wedive-source mx-140">{{ siteData.highlights[0].images[2].reference | makeReference }}</div>
+                                </a>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+                
+                <div v-if="siteData.highlights.length>1" class="mt-4">
+                    <div style="display: inline-block;width: 30px; height: 30px; fill: rgb(0, 0, 0);"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path d="M 10 9 C 6.132813 9 3 12.132813 3 16 L 3 34 C 3 37.867188 6.132813 41 10 41 L 40 41 C 43.867188 41 47 37.867188 47 34 L 47 16 C 47 12.132813 43.867188 9 40 9 Z M 10 11 L 40 11 C 42.757813 11 45 13.242188 45 16 L 45 34 C 45 36.757813 42.757813 39 40 39 L 10 39 C 7.242188 39 5 36.757813 5 34 L 5 16 C 5 13.242188 7.242188 11 10 11 Z M 25.03125 17 C 20.410156 17 19.976563 20.902344 20.0625 22.71875 L 21.96875 22.71875 C 21.96875 22.199219 22.121094 18.71875 25.03125 18.71875 C 27.769531 18.71875 28.125 21.160156 28.125 21.59375 C 28.125 26.4375 19.65625 26.253906 19.65625 33 L 29.90625 33 L 29.90625 31.28125 L 21.78125 31.28125 C 22.210938 27.734375 30 27.042969 30 21.59375 C 30 20.816406 29.652344 17 25.03125 17 Z"></path></svg></div>
+                    {{ siteData.highlights[1].description }}
+                
+                    <div v-if="siteData.highlights[1].images && siteData.highlights[1].images.length>0" class="row m-0 text-center row-cols-3 mb-1" style="margin-left: -4px !important; margin-rigth: -4px !important;">
+                        <a class="col square-rect" data-gallery="'gallery-highlight" :href="siteData.highlights[1].images[0].url" title="">
+                            <img src="/static/images/assets/empty.png" :data-src="siteData.highlights[1].images[0].url" class="preload-img img-fluid rounded-s" :alt="siteData.highlights[1].images[0].name">
+                            <div class="wedive-source mx-80">{{ siteData.highlights[1].images[0].reference | makeReference }}</div>
+                        </a>
+                        <a v-if="siteData.highlights[1].images.length>1" class="col square-rect" data-gallery="'gallery-highlight" :href="siteData.highlights[1].images[1].url" title="">
+                            <img src="/static/images/assets/empty.png" :data-src="siteData.highlights[1].images[1].url" class="preload-img img-fluid rounded-s" :alt="siteData.highlights[1].images[1].name">
+                            <div class="wedive-source mx-80">{{ siteData.highlights[1].images[1].reference | makeReference }}</div>
+                        </a>
+                        <a v-if="siteData.highlights[1].images.length>2" class="col square-rect" data-gallery="'gallery-highlight" :href="siteData.highlights[1].images[2].url" title="">
+                            <img src="/static/images/assets/empty.png" :data-src="siteData.highlights[1].images[2].url" class="preload-img img-fluid rounded-s" :alt="siteData.highlights[1].images[2].name">
+                            <div class="wedive-source mx-80">{{ siteData.highlights[1].images[2].reference | makeReference }}</div>
+                        </a>
+                    </div>
+
+                    <div v-if="siteData.highlights.length>2" class="mt-4">
+                        <div style="display: inline-block;width: 30px; height: 30px; fill: rgb(0, 0, 0);"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path d="M 10 9 C 6.132813 9 3 12.132813 3 16 L 3 34 C 3 37.867188 6.132813 41 10 41 L 40 41 C 43.867188 41 47 37.867188 47 34 L 47 16 C 47 12.132813 43.867188 9 40 9 Z M 10 11 L 40 11 C 42.757813 11 45 13.242188 45 16 L 45 34 C 45 36.757813 42.757813 39 40 39 L 10 39 C 7.242188 39 5 36.757813 5 34 L 5 16 C 5 13.242188 7.242188 11 10 11 Z M 25.21875 17 C 20.789063 17 20.398438 21.023438 20.375 22 L 22.25 22 C 22.277344 21.324219 22.582031 18.6875 25.21875 18.6875 C 27.6875 18.6875 28.03125 20.398438 28.03125 21.25 C 28.03125 21.675781 27.785156 23.8125 25.0625 23.8125 L 24.28125 23.8125 L 24.28125 25.4375 C 24.621094 25.351563 24.980469 25.34375 25.40625 25.34375 C 25.832031 25.34375 28.71875 25.417969 28.71875 28.3125 C 28.71875 31.121094 25.738281 31.375 25.3125 31.375 C 23.804688 31.375 22.054688 30.46875 22 28 L 20.125 28 C 20.140625 29.226563 20.511719 33 25.3125 33 C 26.25 33 30.6875 32.730469 30.6875 28.21875 C 30.6875 25.410156 28.8125 24.578125 27.875 24.40625 L 27.875 24.3125 C 28.472656 23.972656 30 22.941406 30 21.15625 C 30 20.476563 29.816406 17 25.21875 17 Z"></path></svg></div>
+                        {{ siteData.highlights[2].description }}
+                        <a v-if="siteData.highlights[2].images && siteData.highlights[2].images.length>0" href="#" class="row m-0 mb-2"> 
+                            <div class="col-6 ps-0 pe-1">
+                                <div class="card rounded-sm mb-0">
+                                    <a class="" data-gallery="'gallery-highlight" :href="siteData.highlights[2].images[0].url" title="">
+                                        <img src="/static/images/assets/empty.png" :data-src="siteData.highlights[2].images[0].url" class="preload-img img-fluid rounded-s" :alt="siteData.highlights[2].images[0].name" style="height: 170px;">
+                                        <div class="wedive-source mx-140">{{ siteData.highlights[2].images[0].reference | makeReference }}</div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-6 ps-1 pe-0">
+                                <div v-if="siteData.highlights[2].images.length>1" class="card rounded-sm mb-2">
+                                    <a class="" data-gallery="'gallery-highlight" :href="siteData.highlights[2].images[1].url" title="">
+                                        <img src="/static/images/assets/empty.png" :data-src="siteData.highlights[2].images[1].url" class="preload-img img-fluid rounded-s" :alt="siteData.highlights[2].images[1].name" style="height: 80px;">
+                                        <div class="wedive-source mx-140">{{ siteData.highlights[2].images[1].reference | makeReference }}</div>
+                                    </a>
+                                </div>
+                                <div v-if="siteData.highlights[2].images.length>2" class="card rounded-sm mb-0">
+                                    <a class="" data-gallery="'gallery-highlight" :href="siteData.highlights[2].images[2].url" title="">
+                                        <img src="/static/images/assets/empty.png" :data-src="siteData.highlights[2].images[2].url" class="preload-img img-fluid rounded-s" :alt="siteData.highlights[2].images[2].name" style="height: 80px;">
+                                        <div class="wedive-source mx-140">{{ siteData.highlights[2].images[2].reference | makeReference }}</div>
+                                    </a>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -313,32 +363,32 @@
         </div>-->
 
 
-        <div class="card card-style">
+        <div v-if="siteData.diveCenters && siteData.diveCenters.length>0" class="card card-style">
             <div class="content mt-3">
                 <h4 class="text-start pt-2 mb-0">인기 다이빙 센터</h4>
-                <p class="mb-3 color-gray-light-mid">양양 사이트의 28개의 센터 준비됨</p>
+                <p class="mb-3 color-gray-light-mid">{{ siteData.name }} 사이트의 {{ siteData.diveCenters.length }}개의 센터 준비됨</p>
                 <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
-                
-                <div v-for="(center,index) in center_list" v-if="index<3">
+
+                <div v-for="(center,index) in siteData.diveCenters" v-if="index<3">
                     <div class="">
                         <a href="/center">
                             <div class="">
                                 <div class="justify-content-center mb-0 text-start">
                                     <div class="" style="float: left;position: relative;width: 95px; height:95px;">
-                                        <img v-bind:src="center.img" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;">
+                                        <img v-if="center.backgroundImages&&center.backgroundImages.length>0" v-bind:src="center.backgroundImages[0].thumbnailUrl" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;">
+                                        <img v-else src="/static/empty.jpg" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;">
                                     </div>
                                     <div class="" style="padding-left: 110px;">
-                                        <h4 class="font-15"> {{center.title}} </h4>
-                                        <p class="pb-0 mb-0 line-height-m ellipsis"> {{center.desc}} </p>
+                                        <h4 class="font-15"> {{ center.name }} </h4>
+                                        <p class="pb-0 mb-0 line-height-m ellipsis"> {{ center.description }} </p>
                                         <p class="pb-0 mb-0 mt-n1 ellipsis color-gray-light-mid">
-                                            {{center.feature}}
+                                            {{ (center.interests == null) ? "" : center.interests.filter(x=>x.type=='facility').map(x=>{return x.title}).join().replace(",",", ") }}&nbsp;
                                         </p>
                                         <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
-                                            <span> {{center.star}} </span>
+                                            <span> {{ (center.adminScore/20).toFixed(1) }} </span>
                                             &nbsp;<font class="color-gray-light">|</font>&nbsp;
-                                            <img src="/static/images/logo_padi.svg" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
-                                            &nbsp;<font class="color-gray-light">|</font>&nbsp;
-                                            <span v-for="i in center.price_index">￦</span>
+                                            <span v-if="center.institutionTypes && center.institutionTypes.length > 0"><img v-if="insti in center.institutionTypes" class="ext-img" :src="'/static/images/agency/logo_'+insti.toLowerCase()+'.svg'" height="14" />&nbsp;&nbsp;<font class="color-gray-light">|</font>&nbsp;&nbsp;</span>
+                                            <span v-if="interest.type=='priceIndex'" v-for="interest in center.interests" style="letter-spacing: -2px;">{{interest.title.replace(/\$/gi, '￦')}}</span>
                                         </p>
                                     </div>
                                 </div>
@@ -351,19 +401,11 @@
             </div>
         </div>
 
-        <div class="card card-style">
+        <div class="card card-style" v-if="siteData.youtubeVideoIds && siteData.youtubeVideoIds.length > 0">
             <div class="content mb-4 pb-2">
                 <h4 class="text-start pt-2 mb-2">YouTube 소개</h4>
-                <div class="responsive-iframe" style="-border-radius: 16px;-moz-border-radius: 16px;border-radius: 16px;">
-                    <iframe src='https://www.youtube.com/embed/84myx_Td1vE' frameborder='0' allowfullscreen></iframe>
-                </div>
-
-                <div class="responsive-iframe mt-3" style="-border-radius: 16px;-moz-border-radius: 16px;border-radius: 16px;">
-                    <iframe src='https://www.youtube.com/embed/ET0Xj8y_6uw' frameborder='0' allowfullscreen></iframe>
-                </div>
-
-                <div class="responsive-iframe mt-3" style="-border-radius: 16px;-moz-border-radius: 16px;border-radius: 16px;">
-                    <iframe src='https://www.youtube.com/embed/xuHHshrOXoE' frameborder='0' allowfullscreen></iframe>
+                <div v-for="youtube in siteData.youtubeVideoIds" class="responsive-iframe" style="-border-radius: 16px;-moz-border-radius: 16px;border-radius: 16px;">
+                    <iframe v-bind:src="'https://www.youtube.com/embed/'+youtube" frameborder='0' allowfullscreen></iframe>
                 </div>
             </div>
         </div>
@@ -374,11 +416,11 @@
         <div class="card card-style">
             <div class="content mt-10">
                 <h4 class="text-start pt-2 mb-0">인기 포인트</h4>
-                <span class="wedive-txt-all color-gray mt-2"><img src="/static/images/ico_pin2.png" width="19"/> 얕은수심&nbsp;&nbsp;<img src="/static/images/ico_pin3.png" width="19"/> 깊은수심</span>
+                <span class="wedive-txt-all color-gray mt-2"><img src="/static/images/assets/ico_pin2.png" width="19"/> 얕은수심&nbsp;&nbsp;<img src="/static/images/assets/ico_pin3.png" width="19"/> 깊은수심</span>
             </div>
             <div id="map" style="height: 300px;"></div>
             <div class="map-box hide">
-                <a href="/point">
+                <a href="" id="map_box_shop_href">
                     <div class="bx">
                         <div class="justify-content-center mb-0 text-start">
                             <div class="" style="width: 95px; height:95px;">
@@ -401,17 +443,18 @@
         <div class="splide single-slider slider-no-arrows visible-slider slider-no-dots" id="single-slider-nearby">
             <div class="splide__track">
                 <div class="splide__list">
-                    <div class="splide__slide">
-                        <div class="card card-style card-nearby" style="background: url(http://www.outdoornews.co.kr/news/photo/201402/13021_40743_1032.jpg)" data-card-height="260">
+                    <div v-for="near in nearData" class="splide__slide">
+                        <div class="card card-style card-nearby" :style="'background: url('+((near.backgroundImages!=null&&near.backgroundImages[0]!=null) ? near.backgroundImages[0].url : '/static/empty.jpg')+')'" data-card-height="260">
+                        
                             <div class="card-top px-3 py-3">
                                 <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-red-dark"></i></a>
                             </div>
                             <div class="card-bottom px-3 py-3">
-                                <h4 class="color-white font-18 font-600">고성 사이트</h4>
+                                <h4 class="color-white font-18 font-600">{{ near.name }} 사이트</h4>
                                 <div class="divider bg-white opacity-20 mb-1"></div>
                                 <div class="d-flex">
                                     <div class="align-self-center" style="max-width: 100%;">
-                                        <p class="font-11 opacity-70 font-600 color-white nearby_desc mb-0" style="max-width: 100%;">대한민국 3대 포인트가 위치한 사이트로 강원도 지역에서 가장 유명한 사이트 입니다. 특히 수중 금강산이라고 불리는 낙산대기 포인트와 개복치를 볼 수 있는 마이산 포인트 등이 유명합니다.</p>
+                                        <p class="font-11 opacity-70 font-600 color-white nearby_desc mb-0" style="max-width: 100%;">{{ near.description }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -419,42 +462,7 @@
                             <div class="card-overlay bg-gradient"></div>
                         </div>
                     </div>
-                    <div class="splide__slide">
-                        <div class="card card-style card-nearby" style="background: url(https://i.ytimg.com/vi/xSJ4YSt3SRI/maxresdefault.jpg)" data-card-height="260">
-                            <div class="card-top px-3 py-3">
-                                <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-gray-light"></i></a>
-                            </div>
-                            <div class="card-bottom px-3 py-3">
-                                <h4 class="color-white font-18 font-600">속초 사이트</h4>
-                                <div class="divider bg-white opacity-20 mb-1"></div>
-                                <div class="d-flex">
-                                    <div class="align-self-center" style="max-width: 100%;">
-                                        <p class="font-11 opacity-70 font-600 color-white nearby_desc mb-0" style="max-width: 100%;">일반적으로 모래바닥으로 구성된 동해안과는 다르게 속초의 바다는 암석형태가 많이 있습니다. 덕분에 이곳에서 다이빙을 한다면 다양한 볼거리를 마주할 수 있습니다.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-overlay bg-gradient opacity-30"></div>
-                            <div class="card-overlay bg-gradient"></div>
-                        </div>
-                    </div>
-                    <div class="splide__slide">
-                        <div class="card card-style card-nearby" style="background: url(http://www.uwmagazine.co.kr/news/photo/202003/368_1869_1729.jpg)" data-card-height="260">
-                            <div class="card-top px-3 py-3">
-                                <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-gray-light"></i></a>
-                            </div>
-                            <div class="card-bottom px-3 py-3">
-                                <h4 class="color-white font-18 font-600">강릉 사이트</h4>
-                                <div class="divider bg-white opacity-20 mb-1"></div>
-                                <div class="d-flex">
-                                    <div class="align-self-center" style="max-width: 100%;">
-                                        <p class="font-11 opacity-70 font-600 color-white nearby_desc mb-0" style="max-width: 100%;">대한민국 최대 규모의 난파선 다이빙 포인트인 스텔라 난파선 포인트가 위치한 사이트 입니다. 더불어 강원도 3대 미항으로 꼽히는 삼곡항이 있는 등 아름다운 다이빙 사이트 입니다.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-overlay bg-gradient opacity-30"></div>
-                            <div class="card-overlay bg-gradient"></div>
-                        </div>
-                    </div>
+                    
                     
                 </div>
             </div>
@@ -505,7 +513,7 @@
                         </tbody>
                     </table>
                     <div class="text-end">
-                        <img class="me-1 mb-3" height="20" src="/static/images/logo-kaoh.svg" />
+                        <img class="me-1 mb-3" height="20" src="/static/images/assets/logo-kaoh.svg" />
                     </div>
                 </div>
                 <div data-bs-parent="#tab-group-index" class="collapse" id="tab-monthly">
@@ -519,82 +527,27 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">1월</th>
-                                <td class="font-12 color-gray">5.2ºC / 12.3ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>8.8ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_01.svg" width="32" height="32"/></td>
+                            <tr class="border-bottom" v-for="index in 12">
+                                <th class="font-12" scope="row">{{ index }}월</th>
+                                <td class="font-12 color-gray">1.1ºC / 2.2ºC</td>
+                                <td v-for="month in siteData['month' + index]" v-if="month.type=='climate'" class="font-12">
+                                    <img v-if="month.title=='sunny'" class="me-2" src="/static/images/assets/weather_sunny.svg" width="20" height="20"/>
+                                    <img v-else-if="month.title=='cloudy'" class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>
+                                    <img v-else-if="month.title=='rain'" class="me-2" src="/static/images/assets/weather_showers.svg" width="20" height="20"/>
+                                    <img v-else-if="month.title=='heavyRain'" class="me-2" src="/static/images/assets/weather_heavy_rain.svg" width="20" height="20"/>
+                                    2.1ºC
+                                </td>
+                                <td v-for="month in siteData['month' + index]" v-if="month.type=='popularity'">
+                                    <img v-if="month.title=='unrecommended'" class="img_pop" src="/static/images/assets/icon_popularity_01.svg" width="32" height="32"/>
+                                    <img v-if="month.title=='soso'" class="img_pop" src="/static/images/assets/icon_popularity_02.svg" width="32" height="32"/>
+                                    <img v-if="month.title=='popular'" class="img_pop" src="/static/images/assets/icon_popularity_03.svg" width="32" height="32"/>
+                                </td>
                             </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">2월</th>
-                                <td class="font-12 color-gray">3.4ºC / 9.8ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>6.6ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_01.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">3월</th>
-                                <td class="font-12 color-gray">3.2ºC / 9.4ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>6.3ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_01.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">4월</th>
-                                <td class="font-12 color-gray">7.0ºC / 13.3ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>10.2ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_01.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">5월</th>
-                                <td class="font-12 color-gray">10.5ºC / 17.8ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>14.6ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_01.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">6월</th>
-                                <td class="font-12 color-gray">15.1ºC / 23.4ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>19.2ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_02.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">7월</th>
-                                <td class="font-12 color-gray">19.9ºC / 24.4ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_heavy_rain.svg" width="20" height="20"/>22.2ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_02.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">8월</th>
-                                <td class="font-12 color-gray">21.3ºC / 26.0ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_showers.svg" width="20" height="20"/>23.7ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_02.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">9월</th>
-                                <td class="font-12 color-gray">18.6ºC / 24.1ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_sunny.svg" width="20" height="20"/>21.4ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_02.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">10월</th>
-                                <td class="font-12 color-gray">14.9ºC / 21.6ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>18.2ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_02.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">11월</th>
-                                <td class="font-12 color-gray">10.8ºC / 17.6ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>14.2ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_01.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr>
-                                <th class="font-12" scope="row">12월</th>
-                                <td class="font-12 color-gray">6.4ºC / 13.8ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>10.1ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_01.svg" width="32" height="32"/></td>
-                            </tr>
+
                         </tbody>
                     </table>
                     <div class="text-end">
-                        <img class="me-1 mb-3" height="20" src="/static/images/logo-kma.svg" />
+                        <img class="me-1 mb-3" height="20" src="/static/images/assets/logo-kma.svg" />
                     </div>
                 </div>
             </div>
@@ -633,7 +586,7 @@
                                         </div>
                                         <p class="review-text mt-2 mb-1">
                                             <a href="https://t1.daumcdn.net/cfile/tistory/224C493F542D088905" data-gallery="gallery-99" class="filtr-item" title="" data-category="99">
-                                                <img src="/static/images/empty.png" data-src="https://t1.daumcdn.net/cfile/tistory/224C493F542D088905" class="preload-img rounded-s shadow-m review_img" alt="방문자리뷰">
+                                                <img src="/static/images/assets/empty.png" data-src="https://t1.daumcdn.net/cfile/tistory/224C493F542D088905" class="preload-img rounded-s shadow-m review_img" alt="방문자리뷰">
                                             </a>
                                             나이트다이빙을 해보면 본인이 체질인지 여부를 바로 알 수 있다. 입수 후 어두운 바다가 눈앞에 펼쳐지지만 이내 모든게 밝아진다. 나이트다이빙 특유의 분위기가 가득하다. 마치 낯선 행성을 탐험하는 기분이랄까, 이국적으로 몽환적인 분위기에 한껏 취하게 된다. 함께 간 모든 사람들이 너무나도 좋아해서 힘들게 기획한만큼 보람있는 다이빙 이었다.
                                         </p>
@@ -688,7 +641,7 @@
                                         </div>
                                         <p class="review-text mt-2 mb-1">
                                             <a href="http://www.uwmagazine.co.kr/news/photo/202008/895_2811_2553.jpg" data-gallery="gallery-99" class="filtr-item" title="" data-category="99">
-                                                <img src="/static/images/empty.png" data-src="http://www.uwmagazine.co.kr/news/photo/202008/895_2811_2553.jpg" class="preload-img rounded-s shadow-m review_img" alt="방문자리뷰">
+                                                <img src="/static/images/assets/empty.png" data-src="http://www.uwmagazine.co.kr/news/photo/202008/895_2811_2553.jpg" class="preload-img rounded-s shadow-m review_img" alt="방문자리뷰">
                                             </a>
                                             파고는 0.5미터 이상이였습니다. 해안 근처는 잔잔해 보였는데 5분정도 배타고 나가니 파고도 높아지고 조류도 제법 강했습니다.  무엇보다 시야가 너무 별로였습니다. 부유물들이 겨울바다 답지않게 너무 심했습니다. 영상을 보시면 아시겠지만 부유물덕에 입수해서 내려가는 속도가 느껴질만큼 많았습니다.
                                         </p>
@@ -734,12 +687,877 @@
   </div>
 </template>
 <script>
+const axios = require("axios")
 
 export default {
   name: 'HelloWorld',
-  mounted() {
-    var preloader = document.getElementById('preloader')
-    if(preloader){preloader.classList.add('preloader-hide');}
+  async beforeRouteEnter(to, from, next) {
+    if (to.params.id != null) {
+        var result = await axios({
+        url: 'https://api.wedives.com/graphql',
+        method: 'post',
+        data: {
+            query: `
+            query getDiveSiteByUniqueName($uniqueName: String!) {
+            getDiveSiteByUniqueName(uniqueName: $uniqueName) {
+                diveCenters {
+                    _id
+                    name
+                    uniqueName
+                    adminScore
+                    images {
+                        _id
+                        name
+                        description
+                        reference
+                        thumbnailUrl
+                    }
+                }
+                divePoints {
+                    _id
+                    name
+                    uniqueName
+                    latitude
+                    longitude
+                    minDepth
+                    adminScore
+                    highlightDescription
+                    highlights {
+                        images {
+                            _id
+                            name
+                            description
+                            reference
+                            thumbnailUrl
+                        }    
+                    }
+                    images {
+                        _id
+                        name
+                        description
+                        reference
+                        thumbnailUrl
+                    }
+                    backgroundImages {
+                        _id
+                        name
+                        description
+                        reference
+                        thumbnailUrl
+                    }
+                }
+                _id
+                address
+                latitude
+                longitude
+                countryCode
+                name
+                uniqueName
+                description
+                images {
+                _id
+                name
+                reference
+                description
+                uploaderId
+                mimeType
+                encoding
+                fileSize
+                createdAt
+                updatedAt
+                }
+                backgroundImages {
+                _id
+                name
+                description
+                reference
+                uploaderId
+                mimeType
+                encoding
+                fileSize
+                createdAt
+                updatedAt
+                }
+                youtubeVideoIds
+                referenceUrls
+                memo
+                publishStatus
+                month1 {
+                _id
+                title
+                type
+                iconType
+                iconName
+                iconColor
+                iconUrl
+                name
+                uniqueName
+                description
+                images {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                backgroundImages {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                youtubeVideoIds
+                referenceUrls
+                memo
+                }
+                month2 {
+                _id
+                title
+                type
+                iconType
+                iconName
+                iconColor
+                iconUrl
+                name
+                uniqueName
+                description
+                images {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                backgroundImages {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                youtubeVideoIds
+                referenceUrls
+                memo
+                }
+                month3 {
+                _id
+                title
+                type
+                iconType
+                iconName
+                iconColor
+                iconUrl
+                name
+                uniqueName
+                description
+                images {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                backgroundImages {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                youtubeVideoIds
+                referenceUrls
+                memo
+                }
+                month4 {
+                _id
+                title
+                type
+                iconType
+                iconName
+                iconColor
+                iconUrl
+                name
+                uniqueName
+                description
+                images {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                backgroundImages {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                youtubeVideoIds
+                referenceUrls
+                memo
+                }
+                month5 {
+                _id
+                title
+                type
+                iconType
+                iconName
+                iconColor
+                iconUrl
+                name
+                uniqueName
+                description
+                images {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                backgroundImages {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                youtubeVideoIds
+                referenceUrls
+                memo
+                }
+                month6 {
+                _id
+                title
+                type
+                iconType
+                iconName
+                iconColor
+                iconUrl
+                name
+                uniqueName
+                description
+                images {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                backgroundImages {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                youtubeVideoIds
+                referenceUrls
+                memo
+                }
+                month7 {
+                _id
+                title
+                type
+                iconType
+                iconName
+                iconColor
+                iconUrl
+                name
+                uniqueName
+                description
+                images {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                backgroundImages {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                youtubeVideoIds
+                referenceUrls
+                memo
+                }
+                month8 {
+                _id
+                title
+                type
+                iconType
+                iconName
+                iconColor
+                iconUrl
+                name
+                uniqueName
+                description
+                images {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                backgroundImages {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                youtubeVideoIds
+                referenceUrls
+                memo
+                }
+                month9 {
+                _id
+                title
+                type
+                iconType
+                iconName
+                iconColor
+                iconUrl
+                name
+                uniqueName
+                description
+                images {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                backgroundImages {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                youtubeVideoIds
+                referenceUrls
+                memo
+                }
+                month10 {
+                _id
+                title
+                type
+                iconType
+                iconName
+                iconColor
+                iconUrl
+                name
+                uniqueName
+                description
+                images {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                backgroundImages {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                youtubeVideoIds
+                referenceUrls
+                memo
+                }
+                month11 {
+                _id
+                title
+                type
+                iconType
+                iconName
+                iconColor
+                iconUrl
+                name
+                uniqueName
+                description
+                images {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                backgroundImages {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                youtubeVideoIds
+                referenceUrls
+                memo
+                }
+                month12 {
+                _id
+                title
+                type
+                iconType
+                iconName
+                iconColor
+                iconUrl
+                name
+                uniqueName
+                description
+                images {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                backgroundImages {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                    createdAt
+                    updatedAt
+                }
+                youtubeVideoIds
+                referenceUrls
+                memo
+                }
+                interests {
+                _id
+                title
+                type
+                iconType
+                iconName
+                iconColor
+                iconUrl
+                name
+                uniqueName
+                description
+                images {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                }
+                backgroundImages {
+                    _id
+                    name
+                    description
+                    reference
+                    uploaderId
+                    mimeType
+                    encoding
+                    fileSize
+                }
+                youtubeVideoIds
+                referenceUrls
+                memo
+                }
+                highlights {
+                    _id
+                    name
+                    description
+                    divePointId
+                    images {
+                        _id
+                        name
+                        description
+                        reference
+                        thumbnailUrl
+                    }
+                    interests {
+                        _id
+                        title
+                        type
+                        iconType
+                        iconName
+                    }
+                }
+                eyeSightScore
+                waterTemperatureScore
+                adminScore
+                flowRateScore
+                waterEnvironmentScore
+                minSight
+                maxSight
+                visitTimeDescription
+                waterTemperatureDescription
+                deepDescription
+                waterFlowDescription
+                eyeSightDescription
+                highlightDescription
+                createdAt
+                updatedAt
+            }
+            }
+            `,
+            variables: {
+                uniqueName: to.params.id
+            }
+
+        }
+        }, {
+        headers: {
+            countryCode: 'ko',
+            android: (localStorage.android) ? localStorage.android : "",
+        }
+        });
+
+        
+        if (result.data.data.getDiveSiteByUniqueName.backgroundImages.length > 0) {
+            for (var i=0; i<result.data.data.getDiveSiteByUniqueName.backgroundImages.length; i++) {
+                result.data.data.getDiveSiteByUniqueName.backgroundImages[i].url = '/static/empty.jpg';
+            }
+            var id_arr = [];
+            var width_arr = [];
+            for (var i=0; i<result.data.data.getDiveSiteByUniqueName.backgroundImages.length; i++) {
+                id_arr.push(result.data.data.getDiveSiteByUniqueName.backgroundImages[i]._id);
+                width_arr.push(720);
+            }
+            var result_image = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            data: {
+                query: `
+                    query Query($ids: [ID], $widths: [Int]) {
+                        getImageUrlsByIds(_ids: $ids, widths: $widths)
+                    }
+                `,
+                variables: {
+                    ids: id_arr,
+                    widths: width_arr
+                }
+
+            }
+            }, {
+            headers: {
+            countryCode: 'ko',
+            }
+            });
+            if (result_image.data.data.getImageUrlsByIds) {
+                for (var i=0; i<result_image.data.data.getImageUrlsByIds.length; i++) {
+                    result.data.data.getDiveSiteByUniqueName.backgroundImages[i].url = result_image.data.data.getImageUrlsByIds[i];
+                    //$(".background_img_" + i).css("background", "url(" + result_image.data.data.getImageUrlsByIds[i] + ")");
+                }
+            }
+        }
+
+        // 하이라이트
+        if (result.data.data.getDiveSiteByUniqueName.highlights.length > 0) {
+            for (var j=0; j<result.data.data.getDiveSiteByUniqueName.highlights.length; j++) {
+                for (var i=0; i<result.data.data.getDiveSiteByUniqueName.highlights[j].images.length; i++) {
+                    result.data.data.getDiveSiteByUniqueName.highlights[j].images[i].url = '/static/empty.jpg';
+                }
+                var id_arr = [];
+                var width_arr = [];
+                for (var i=0; i<result.data.data.getDiveSiteByUniqueName.highlights[j].images.length; i++) {
+                    id_arr.push(result.data.data.getDiveSiteByUniqueName.highlights[j].images[i]._id);
+                    width_arr.push(720);
+                }
+                if (id_arr.length > 0) {
+                    var result_image = await axios({
+                    url: 'https://api.wedives.com/graphql',
+                    method: 'post',
+                    data: {
+                        query: `
+                            query Query($ids: [ID], $widths: [Int]) {
+                                getImageUrlsByIds(_ids: $ids, widths: $widths)
+                            }
+                        `,
+                        variables: {
+                            ids: id_arr,
+                            widths: width_arr
+                        }
+
+                    }
+                    }, {
+                    headers: {
+                    countryCode: 'ko',
+                    }
+                    });
+                    if (result_image.data.data.getImageUrlsByIds) {
+                        for (var i=0; i<result_image.data.data.getImageUrlsByIds.length; i++) {
+                            result.data.data.getDiveSiteByUniqueName.highlights[j].images[i].url = result_image.data.data.getImageUrlsByIds[i];
+                            
+                        }
+                    }
+                }
+            }
+        }
+
+
+        // points 내 하이라이트 이미지 리스트
+        if (result.data.data.getDiveSiteByUniqueName.divePoints.length > 0) {
+            for (var j=0; j<result.data.data.getDiveSiteByUniqueName.divePoints.length; j++) {
+                for (var i=0; i<result.data.data.getDiveSiteByUniqueName.divePoints[j].images.length; i++) {
+                    if (i < 3) {
+                        result.data.data.getDiveSiteByUniqueName.divePoints[j].images[i].url = '/static/empty.jpg';
+                    }
+                }
+                var id_arr = [];
+                var width_arr = [];
+                for (var i=0; i<result.data.data.getDiveSiteByUniqueName.divePoints[j].images.length; i++) {
+                    if (i < 3) {
+                        id_arr.push(result.data.data.getDiveSiteByUniqueName.divePoints[j].images[i]._id);
+                        width_arr.push(720);
+                    }
+                }
+                if (id_arr.length > 0) {
+                    var result_image = await axios({
+                    url: 'https://api.wedives.com/graphql',
+                    method: 'post',
+                    data: {
+                        query: `
+                            query Query($ids: [ID], $widths: [Int]) {
+                                getImageUrlsByIds(_ids: $ids, widths: $widths)
+                            }
+                        `,
+                        variables: {
+                            ids: id_arr,
+                            widths: width_arr
+                        }
+
+                    }
+                    }, {
+                    headers: {
+                    countryCode: 'ko',
+                    }
+                    });
+
+                    var cnt = 0;
+                    for (var i=0; i<result.data.data.getDiveSiteByUniqueName.divePoints[j].images.length; i++) {
+                        var _url = result_image.data.data.getImageUrlsByIds[cnt++];
+                        if (_url == null) _url = '/static/empty.jpg';
+                        result.data.data.getDiveSiteByUniqueName.divePoints[j].images[i].url = _url;
+                    }
+                }
+            }
+        }
+        // 근처 사이트 조회
+        var result_nearby = null;
+        {
+            result_nearby = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            data: {
+                query: `
+                    query GetDiveSitesNearBy($lat1: Float!, $lon1: Float!, $lat2: Float!, $lon2: Float!) {
+                        getDiveSitesNearby(lat1: $lat1, lon1: $lon1, lat2: $lat2, lon2: $lon2) {
+                            _id
+                            backgroundImages {
+                                _id
+                                thumbnailUrl
+                            }
+                            name
+                            uniqueName
+                            description
+                        }
+                    }
+                `,
+                variables: {
+                    lat1: (result.data.data.getDiveSiteByUniqueName.latitude-0.4),
+                    lon1: (result.data.data.getDiveSiteByUniqueName.longitude-0.4),
+                    lat2: (result.data.data.getDiveSiteByUniqueName.latitude+0.4),
+                    lon2: (result.data.data.getDiveSiteByUniqueName.longitude+0.4),
+                }
+
+            }
+            }, {
+            headers: {
+            countryCode: 'ko',
+            }
+            });
+        }
+        // 근처 사이트 backgroundImage
+        if (result_nearby.data.data.getDiveSitesNearby.length > 0) {
+            for (var j=0; j<result_nearby.data.data.getDiveSitesNearby.length; j++) {
+                if (result_nearby.data.data.getDiveSitesNearby[j]._id != result.data.data.getDiveSiteByUniqueName._id) {
+                    for (var i=0; i<result_nearby.data.data.getDiveSitesNearby[j].backgroundImages.length; i++) {
+                        result_nearby.data.data.getDiveSitesNearby[j].backgroundImages[i].url = '/static/empty.jpg';
+                    }
+                    var id_arr = [];
+                    var width_arr = [];
+                    for (var i=0; i<result_nearby.data.data.getDiveSitesNearby[j].backgroundImages.length; i++) {
+                        id_arr.push(result_nearby.data.data.getDiveSitesNearby[j].backgroundImages[i]._id);
+                        width_arr.push(720);
+                    }
+                    if (id_arr.length > 0) {
+                        var result_image = await axios({
+                        url: 'https://api.wedives.com/graphql',
+                        method: 'post',
+                        data: {
+                            query: `
+                                query Query($ids: [ID], $widths: [Int]) {
+                                    getImageUrlsByIds(_ids: $ids, widths: $widths)
+                                }
+                            `,
+                            variables: {
+                                ids: id_arr,
+                                widths: width_arr
+                            }
+
+                        }
+                        }, {
+                        headers: {
+                        countryCode: 'ko',
+                        }
+                        });
+                        if (result_image.data.data.getImageUrlsByIds) {
+                            for (var i=0; i<result_image.data.data.getImageUrlsByIds.length; i++) {
+                                result_nearby.data.data.getDiveSitesNearby[j].backgroundImages[i].url = result_image.data.data.getImageUrlsByIds[i];
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        next(vm => {vm.setData(result.data.data.getDiveSiteByUniqueName, result_nearby.data.data.getDiveSitesNearby)});
+    }
+  },
+  async mounted() {
+    
+    if (this.$route.query.header && this.$route.query.header == 'hide') {
+        $(".page-title").hide();
+        $(".page-title-clear").hide();
+        $(".header-fixed").hide();
+    }
+    if (this.$route.query.footer && this.$route.query.footer == 'hide') {
+        $("#footer-bar").hide();
+    }
+
     
     let script = document.createElement('script');
     script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCWu8Fw-h-f1t8Sp3I7R3l_Ukr24HunXQM';
@@ -829,31 +1647,33 @@ export default {
         const map_style = (localStorage['wedive-Theme'] == 'light-mode') ? [] : night_style;
 
         this.map = new google.maps.Map(document.getElementById('map'), {
-            center: this.point_list[0].position,
+            center: {lat: this.siteData.latitude, lng: this.siteData.longitude},
             zoom: 12,
             mapTypeControl: false,
             streetViewControl: false,
             zoomControl: false,
             styles: map_style
         });
-        for (var i=0; i<this.point_list.length; i++) {
-            var _title = this.point_list[i].title;
-            var _type = this.point_list[i].type;
-            var _position = this.point_list[i].position;
-            var _img = (_type == 'sf') ? '/static/images/ico_pin2_o8.png' : (_type == 'df') ? '/static/images/ico_pin3_o8.png' : (_type == 'so') ? '/static/images/ico_pin2_o.png' : '/static/images/ico_pin3_o.png';
-            const _marker_class = (_type == 'sf') ? 'marker-position2' : (_type == 'df') ? 'marker-position3' : (_type == 'so') ? 'marker-position2-o' : 'marker-position3-o';
 
-            const title = this.point_list[i].title;
-            const desc = this.point_list[i].desc;
-            const star = this.point_list[i].star;
-            const img = this.point_list[i].img1;
+        for (var i=0; i<this.siteData.divePoints.length; i++) {
+            var minDepth = this.siteData.divePoints[i].minDepth;
+            var _position = {lat: this.siteData.divePoints[i].latitude, lng: this.siteData.divePoints[i].longitude};
+            var _img = (minDepth < 18) ? '/static/images/assets/ico_pin2_o8.png' : '/static/images/assets/ico_pin3_o8.png';
+            const _marker_class = (minDepth < 18) ? 'marker-position2' : 'marker-position3';
+
+            const title = this.siteData.divePoints[i].name;
+            const uniqueName = this.siteData.divePoints[i].uniqueName;
+            const desc = this.siteData.divePoints[i].description;
+            const star = (this.siteData.divePoints[i].adminScore/20).toFixed(1);
+            console.log(this.siteData.divePoints[i]);
+            const img = (this.siteData.divePoints[i].backgroundImages&&this.siteData.divePoints[i].backgroundImages.length>0) ? this.siteData.divePoints[i].backgroundImages[0].thumbnailUrl : '/static/empty.jpg';
             const _sml_img = _img;
-            const _big_img = (_type == 'sf') ? '/static/images/ico_pin_big2.png' : (_type == 'df') ? '/static/images/ico_pin_big3.png' : (_type == 'so') ? '/static/images/ico_pin_big2.png' : '/static/images/ico_pin_big3.png';
+            const _big_img = (minDepth < 18) ? '/static/images/assets/ico_pin_big2.png' : '/static/images/assets/ico_pin_big3.png';
 
             const marker_point = new google.maps.Marker({
                 map: this.map,
                 position: _position,
-                label: {text: _title, color: 'white', className: _marker_class},
+                label: {text: title, color: 'white', className: _marker_class},
                 icon: new google.maps.MarkerImage(_img, null, null, null, new google.maps.Size(38,43)),
             });
 
@@ -870,7 +1690,8 @@ export default {
                         }
                     }
                 }
-
+                
+                $("#map_box_shop_href").attr("href", "/point/" + uniqueName);
                 $("#map_box_shop_name").text(title);
                 $("#map_box_shop_desc").text(desc);
                 $("#map_box_shop_star").text(star);
@@ -913,35 +1734,31 @@ export default {
   data () {
     return {
         map: null,
+        siteData: {},
+        nearData: [],
         marker_list: [],
         marker_img_list: [],
-        point_list : [
-            {title: "말미잘동산", type: 'df', desc: "동해의 명물 섬유세닐말미잘이 유난히 많은 포인트로, 모래 지형 위에 커다란 암반과 크고 작은 바위들이 형성되어 있는 포인트 입니다. 섬유세닐말미잘은 낮은 수온에서 펴기 때문에 6월 이전에 방문한다면 이 포인트의 아름다움을 제대로 느낄 수 있습니다.", star: 4.6, img1: 'https://divingholic.com/wp-content/uploads/2019/02/maxresdefault-1.jpg', img2: 'https://diverz.net/data/diving/point/202102/1614156788_8f436f8c0dc8a574611b_thumb_760_504.jpg', img3: 'https://divingholic.com/wp-content/uploads/2019/02/2%EC%9B%94%EC%9D%B8%EA%B5%AC%ED%95%B4%EB%B3%80%EB%94%A5.jpg', position: {lat: 37.9668859063654, lng: 128.79946317636166}},
-            {title: "철재삼동", type: 'df', desc: "여름철 동해의 상징은 볼락이라고 할 수 있습니다. 그중에서도 수많은 볼락이 태풍처럼 있다고 해서 볼락태풍이라는 별명을 가진 포인트가 철재삼동 포인트 입니다. 초여름에서 초가을까지 3달정도되는 기간에 20m전후 수심, 11~15도의 수온 삼박자가 맞아떨어지면 거대한 볼락 떼를 만날 수 있습니다.", star: 4.3, img1: '/static/images/point/ko/yangyang_chuljesamdong_01.jpg', img2: '/static/images/point/ko/yangyang_chuljesamdong_02.jpg', img3: '/static/images/point/ko/yangyang_chuljesamdong_03.jpg', position: {lat: 37.947207012548716, lng: 128.81497292286326}},
-            {title: "하우스리프", type: 'sf', desc: "동해바다는 모래바닥에 재미없는 곳이라고 생각하시나요? 하우스리프 포인트는 1~2명의 다이버가 통과할 수 있는 박원 삼각 뿔 어초와 식빵 어초, W 어초, M어초, 평상어초가 있으며, 자연암반과 어우러져 물고기도 많고 다양한 종류의 어초와 고착생물을 보는 재미가 쏠쏠한 포인트 입니다.", star: 4.2, img1: '/static/images/point/ko/yangyang_houseleaf_01.jpg', img2: '/static/images/point/ko/yangyang_houseleaf_02.jpg', img3: '/static/images/point/ko/yangyang_houseleaf_03.jpg', position: {lat: 37.94825610969583, lng: 128.7946310508101}},
-            {title: "오대산", type: 'sf', desc: "", star: 4.3, img1: '', img2: '', img3: '', position: {lat: 37.942265902352936, lng: 128.81437210807638}},
-            {title: "용궁1", type: 'df', desc: "", star: 4.3, img1: '', img2: '', img3: '', position: {lat: 37.966694517671925, lng: 128.80091977131866}},
-            {title: "용궁2", type: 'df', desc: "", star: 4.3, img1: '', img2: '', img3: '', position: {lat: 37.98870094701705, lng: 128.80553232201584}},
-            {title: "대목1", type: 'sf', desc: "", star: 4.3, img1: '', img2: '', img3: '', position: {lat: 37.99262313926249, lng: 128.77955637861592}},
-            {title: "정글1", type: 'df', desc: "", star: 4.3, img1: '', img2: '', img3: '', position: {lat: 37.965163390164456, lng: 128.8213121007167}},
-            {title: "정글2", type: 'df', desc: "", star: 4.3, img1: '', img2: '', img3: '', position: {lat: 37.97587456645468, lng: 128.80344144106112}},
-            {title: "웰빙", type: 'sf', desc: "", star: 4.3, img1: '', img2: '', img3: '', position: {lat: 38.00150165886583, lng: 128.7445432664312}},
-            {title: "리멤버", type: 'sf', desc: "", star: 4.3, img1: '', img2: '', img3: '', position: {lat: 38.0118827612431, lng: 128.74771900182654}},
-        ],
-        center_list : [
-            {title: "버블탱크 스쿠버다이빙", desc: "제주 남부에 위치한 PADI 5star 다이빙센터", star: 3.8, price_index: 2, feature: "덕다이빙, 케이브, 난파선, 드리프트", img: '/static/images/shop1/diving/test1.jpg', position: {lat: 33.24134444312815, lng: 126.56484940647604}},
-            {title: "다이브 투게더리조트", desc: "한줄설명1", star: 4.8, price_index: 2, feature: "덕다이빙, 케이브", img: '/static/images/shop1/diving/test2.jpg', position: {lat: 33.241633952501715, lng: 126.56456092676112}},
-            {title: "태평양 다이빙스쿨", desc: "블라블라", star: 3.1, price_index: 3, feature: "난파선, 드리프트", img: '/static/images/shop1/diving/test3.jpg', position: {lat: 33.24030993345755, lng: 126.56472966827262}},
-            {title: "쿨다이브", desc: "뭐라적지", star: 2.8, price_index: 2, feature: "드리프트", img: '/static/images/shop1/diving/test4.jpg', position: {lat: 33.241266401158086, lng: 126.56278906254684}},
-            {title: "스플래시 리조트", desc: "이곳에 설명이", star: 4.2, price_index: 4, feature: "난파선, 드리프트", img: '/static/images/shop1/diving/test5.jpg', position: {lat: 33.24245948959435, lng: 126.5633415608148}},
-            {title: "제주 블루샤크다이빙", desc: "ㅁㄴㅇㄹㄴㄷㅁㅈㄷㄻㄴㄷㄹㄷㅁㄴㄻㄴㄷㄻㄴㄷㄻㄴㄷㄹ", star: 3.9, price_index: 2, feature: "난파선", img: '/static/images/shop1/diving/test6.jpg', position: {lat: 33.24380026488202, lng: 126.56288927674295}},
-            {title: "잠수타기 다이브클럽", desc: "ㅁㄷㄴㄻㄴㄷㄻㄴㄷㄻㄴㄷㄻㄴㄷㄻㄴㄹㄷㅁㄷㄴㄻㄷㄴㄻㄴㄻㄴㄷㄹㄷㅁㄴㄹ", star: 4.1, price_index: 2, feature: "난파선, 드리프트", img: '/static/images/shop1/diving/test7.jpg', position: {lat: 33.24194725508795, lng: 126.5616725869943}},
-            {title: "홀리데이 다이빙 코리아", desc: "히히", star: 4.2, price_index: 3, feature: "덕다이빙, 케이브, 난파선, 드리프트", img: '/static/images/shop1/diving/test8.jpg', position: {lat: 33.24088391439924, lng: 126.5628795809329}},
-            {title: "천지연40", desc: "헬로", star: 4.3, price_index: 2, feature: "난파선, 드리프트", img: '/static/images/shop1/diving/test9.jpg', position: {lat: 33.242485636047576, lng: 126.5623109526933}},
-            {title: "언더더씨 스쿠버다이빙", desc: "방가워", star: 4.7, price_index: 2, feature: "덕다이빙, 케이브", img: '/static/images/shop1/diving/test10.jpg', position: {lat: 33.244246055136834, lng: 126.5671937429616}}
-        ],
+        recommend_word: ["비추천", "낮음", "일반적", "좋음", "최고", "완벽함"],
+        point_category: ["해저지형", "해저협곡", "큰 암반", "강한조류", "난파선", "가두리양식장", "마크로", "먹(Muck)", "인공어초", "블루홀", "리프다이빙", "빙하", "초대형난파선", "난파선성지", "수중조형물", "수중유적", "대물"],
+        type_category: ["월다이빙", "블랙워터다이빙", "드리프트다이빙", "아이스다이빙", "야간다이빙", "동굴다이빙", "해루질", "프리다이빙", "스노클링", "케이지다이빙", "렉다이빙", "테크니컬다이빙", "나이트록스다이빙"],
+        recommend_env_word: ["매우열악", "열악", "평범", "우수", "최고", "극락"],
+        recommend_flow_word: ["매우느림", "느림", "일반적", "빠름", "매우빠름", "폭풍"],
     }
-  }, methods: {
+  },
+  methods: {
+      setData(_siteData, _nearData) {
+          this.siteData = _siteData;
+          _nearData.forEach(d => {
+              if (d._id != this.siteData._id) {
+                  this.nearData.push(d);
+              }
+          });
+          setTimeout(function() {
+            init_template();
+            var preloader = document.getElementById('preloader')
+            if(preloader){preloader.classList.add('preloader-hide');}
+          }, 1000);
+      },
       call: function() {
           console.log("call");
       },
@@ -961,24 +1778,43 @@ export default {
 .light-border-bottom {border-bottom: 1px solid #dee2e6;}
 .evaluation {background-color: rgba(196,187,171,.2);justify-content: space-around;border-radius: 5px;padding: 8px 8px 8px 0;}
 .evaluation>span.info {padding-left: 11px;border-left: 1px solid #c4bbab;}
-.evaluation>span .icon_question {display: inline-block;position: relative;top: 1px;display: block;width: 18px;height: 18px;background-size: 18px 18px;background-repeat: no-repeat;background-image: url(/static/images/question.png);text-indent: -9999px;}
+.evaluation>span .icon_question {display: inline-block;position: relative;top: 1px;display: block;width: 18px;height: 18px;background-size: 18px 18px;background-repeat: no-repeat;background-image: url(/static/images/assets/question.png);text-indent: -9999px;}
 
 .span_feature {width:66px;}
 .ico_feature {}
-.ico_feature1 {width: 44px;height: 40px;background-position: 0px -3px;}
-.ico_feature2 {width: 44px;height: 40px;background-position: -45px -3px;}
-.ico_feature3 {width: 44px;height: 40px;background-position: -90px -3px;}
-.ico_feature4 {width: 44px;height: 40px;background-position: -135px -3px;}
-.ico_feature5 {width: 44px;height: 40px;background-position: -180px -3px;}
-.ico_feature6 {width: 44px;height: 40px;background-position: -225px -3px;}
-.ico_feature7 {width: 44px;height: 40px;background-position: 0px -40px;}
-.ico_feature8 {width: 44px;height: 40px;background-position: -45px -42px;}
-.ico_feature9 {width: 44px;height: 40px;background-position: -90px -40px;}
-.ico_feature10 {width: 44px;height: 40px;background-position: -135px -42px;}
-.ico_feature11 {width: 44px;height: 40px;background-position: -180px -42px;}
-.ico_feature12 {width: 44px;height: 40px;background-position: -225px -42px;}
+.ico_feature1 {width: 44px;height: 40px;background-position: 0px 0px;}
+.ico_feature2 {width: 44px;height: 40px;background-position: -45px 0px;}
+.ico_feature3 {width: 44px;height: 40px;background-position: -90px 0px;}
+.ico_feature4 {width: 44px;height: 40px;background-position: -135px 0px;}
+.ico_feature5 {width: 44px;height: 40px;background-position: -180px 0px;}
+.ico_feature6 {width: 44px;height: 40px;background-position: -225px 0px;}
+.ico_feature7 {width: 44px;height: 40px;background-position: 0px -38px;}
+.ico_feature8 {width: 44px;height: 40px;background-position: -45px -38px;}
+.ico_feature9 {width: 44px;height: 40px;background-position: -90px -38px;}
+.ico_feature10 {width: 44px;height: 40px;background-position: -135px -38px;}
+.ico_feature11 {width: 44px;height: 40px;background-position: -180px -38px;}
+.ico_feature12 {width: 44px;height: 40px;background-position: -225px -38px;}
+.ico_feature13 {width: 44px;height: 40px;background-position: 0px -72px;}
+.ico_feature14 {width: 44px;height: 40px;background-position: -45px -72px;}
+.ico_feature15 {width: 44px;height: 40px;background-position: -90px -72px;}
+.ico_feature16 {width: 44px;height: 40px;background-position: -135px -72px;}
+.ico_feature17 {width: 44px;height: 40px;background-position: -180px -72px;}
+.ico_feature18 {width: 44px;height: 40px;background-position: -225px -72px;}
+.ico_feature19 {width: 44px;height: 40px;background-position: 0px -108px;}
+.ico_feature20 {width: 44px;height: 40px;background-position: -45px -108px;}
+.ico_feature21 {width: 44px;height: 40px;background-position: -90px -108px;}
+.ico_feature22 {width: 44px;height: 40px;background-position: -135px -108px;}
+.ico_feature23 {width: 44px;height: 40px;background-position: -180px -108px;}
+.ico_feature24 {width: 44px;height: 40px;background-position: -225px -108px;}
+.ico_feature25 {width: 44px;height: 40px;background-position: 0px -144px;}
+.ico_feature26 {width: 44px;height: 40px;background-position: -45px -144px;}
+.ico_feature27 {width: 44px;height: 40px;background-position: -90px -144px;}
+.ico_feature28 {width: 44px;height: 40px;background-position: -135px -144px;}
+.ico_feature29 {width: 44px;height: 40px;background-position: -180px -144px;}
+.ico_feature30 {width: 44px;height: 40px;background-position: -225px -144px;}
 
-.icon-point {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/wedive_point.png);background-repeat: no-repeat;-webkit-background-size: 270px 90px;background-size: 270px 90px;}
+.icon-point {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/assets/wedive_point.png);background-repeat: no-repeat;-webkit-background-size: 270px 118px;background-size: 270px 118px;}
+.icon-type {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/assets/wedive_type.png);background-repeat: no-repeat;-webkit-background-size: 270px 118px;background-size: 270px 118px;}
 
 .wedive-ul {width: 100%;list-style:none;display: inline-block;margin-bottom: 0;padding-left: 5px !important;padding-right: 5px !important;}
 .wedive-ul > li {float: left;width: 50%;}
@@ -996,7 +1832,7 @@ export default {
     width:40px;
     height:40px;}
 .ico-wedive-w:before {content: "";
-        background-image: url('/static/images/ico_wedive_d.png');
+        background-image: url('/static/images/assets/ico_wedive_d.png');
         background-size:40px 40px;
         width:40px;
         height:40px;
@@ -1020,6 +1856,7 @@ export default {
 .review_img {float: left;width: 88px; height:88px;margin-right:10px;margin-bottom:2px;border-radius:10px;object-fit: cover !important;}
 .wd-220 {width:220px !important;}
 .card-nearby {margin-left: 10px;background-size: cover !important;}
+.img-fluid {width: 100%;object-fit: cover;}
 
 .map-box {position: absolute;right: 6px;bottom: 21px;margin: 5px 5px 4px;width: 115px;}
 .bx {background-color: rgba(255,255,255);padding: 10px;min-height: 105px;border: 1px solid rgba(0,0,0,.1);border-radius: 10px;}

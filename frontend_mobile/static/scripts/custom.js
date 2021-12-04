@@ -1,10 +1,9 @@
 //Removing Preloader
-setTimeout(function(){
-    var preloader = document.getElementById('preloader')
-    if(preloader){preloader.classList.add('preloader-hide');}
-},500);
 
-document.addEventListener('DOMContentLoaded', () => {
+//document.onreadystatechange = () => { 
+    //if (document.readyState == "complete") { 
+        //setTimeout(function(){
+
     'use strict'
 
     //Global Variables
@@ -65,14 +64,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
             var regularField = document.querySelectorAll('.input-style input:not([type="date"])')
             regularField.forEach(el => el.addEventListener('keyup', e => {
-                if(!el.value == ""){
-                    el.parentElement.classList.add('input-style-active');
-                    el.parentElement.querySelector('em').classList.add('disabled');
-                } else {
-                    el.parentElement.querySelectorAll('.valid')[0].classList.add('disabled');
-                    el.parentElement.querySelectorAll('.invalid')[0].classList.add('disabled');
-                    el.parentElement.classList.remove('input-style-active');
-                    el.parentElement.querySelector('em').classList.remove('disabled');
+                try {
+                    if(!el.value == ""){
+                        el.parentElement.classList.add('input-style-active');
+                        el.parentElement.querySelector('em').classList.add('disabled');
+                    } else {
+                        el.parentElement.querySelectorAll('.valid')[0].classList.add('disabled');
+                        el.parentElement.querySelectorAll('.invalid')[0].classList.add('disabled');
+                        el.parentElement.classList.remove('input-style-active');
+                        el.parentElement.querySelector('em').classList.remove('disabled');
+                    }
+                } catch (e) {
+
                 }
             }));
 
@@ -80,7 +83,11 @@ document.addEventListener('DOMContentLoaded', () => {
             regularTextarea.forEach(el => el.addEventListener('keyup', e => {
                 if(!el.value == ""){
                     el.parentElement.classList.add('input-style-active');
-                    el.parentElement.querySelector('em').classList.add('disabled');
+                    try {
+                        el.parentElement.querySelector('em').classList.add('disabled');
+                    } catch (e) {
+
+                    }
                 } else {
                     el.parentElement.classList.remove('input-style-active');
                     el.parentElement.querySelector('em').classList.remove('disabled');
@@ -132,18 +139,21 @@ document.addEventListener('DOMContentLoaded', () => {
         var splide = document.getElementsByClassName('splide');
         if(splide.length){
             var singleSlider = document.querySelectorAll('.single-slider');
-            if(singleSlider.length){
+            if(singleSlider.length) {
                 singleSlider.forEach(function(e){
-                    var single = new Splide( '#'+e.id, {
-                        type:'loop',
-                        autoplay:true,
-                        interval:4000,
-                        perPage: 1,
-                    }).mount();
-                    var sliderNext = document.querySelectorAll('.slider-next');
-                    var sliderPrev = document.querySelectorAll('.slider-prev');
-                    sliderNext.forEach(el => el.addEventListener('click', el => {single.go('>');}));
-                    sliderPrev.forEach(el => el.addEventListener('click', el => {single.go('<');}));
+                    setTimeout(function(e) {
+                        var single = new Splide( '#'+e.id, {
+                            type:'loop',
+                            autoplay:true,
+                            interval:4000,
+                            perPage: 1,
+                        }).mount();
+                        var sliderNext = document.querySelectorAll('.slider-next');
+                        var sliderPrev = document.querySelectorAll('.slider-prev');
+                        sliderNext.forEach(el => el.addEventListener('click', el => {single.go('>');}));
+                        sliderPrev.forEach(el => el.addEventListener('click', el => {single.go('<');}));
+                    },0, e);
+                    
                 });
             }
 
@@ -501,7 +511,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.body.classList.add('theme-light');
                 document.body.classList.remove('theme-dark','detect-theme');
                 document.querySelectorAll('.logo-image').forEach((elem, index)=> {
-                    elem.setAttribute("src", "/static/images/logo-dark.svg");
+                    elem.setAttribute("src", "/static/images/assets/logo-dark.svg");
                 });
                 document.querySelectorAll('.footer-bar-6 a img').forEach((elem, index)=> {
                     elem.style.filter = 'invert(0%)';
@@ -782,7 +792,11 @@ document.addEventListener('DOMContentLoaded', () => {
             linkListToggle.forEach(el => el.addEventListener('click', event => {
                 var switchData = el.getAttribute('data-trigger-switch');
                 var getCheck = document.getElementById(switchData);
-                getCheck.checked ? getCheck.checked = false : getCheck.checked = true;
+                try {
+                    getCheck.checked ? getCheck.checked = false : getCheck.checked = true;
+                } catch(e) {
+
+                }
             }))
         }
 
@@ -1262,6 +1276,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         //Calling Functions Required After External Menus are Loaded
+        /*
         var dataMenuLoad = document.querySelectorAll('[data-menu-load]')
         dataMenuLoad.forEach(function(e){
             var menuLoad = e.getAttribute('data-menu-load')
@@ -1282,7 +1297,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 },500);
             })
-        })
+        })*/
 
         //Detecting Mobile OS
         let isMobile = {
@@ -1341,13 +1356,13 @@ document.addEventListener('DOMContentLoaded', () => {
         //Online / Offine Status
         function isOnline(){
             onlinePage(); onlineMessage.classList.add('online-message-active');
-            setTimeout(function(){onlineMessage.classList.remove('online-message-active'); },2000)
+            setTimeout(function(){onlineMessage.classList.remove('online-message-active'); },10)
             console.info( 'Connection: Online');
         }
 
         function isOffline(){
             offlinePage(); offlineMessage.classList.add('offline-message-active');
-            setTimeout(function(){offlineMessage.classList.remove('offline-message-active'); },2000)
+            setTimeout(function(){offlineMessage.classList.remove('offline-message-active'); },10)
             console.info( 'Connection: Offline');
         }
 
@@ -1417,7 +1432,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }));
 
                 //Trigger Install Prompt for Android
-                const pwaWindows = document.querySelectorAll('#menu-install-pwa-android, #menu-install-pwa-ios');
+                /*const pwaWindows = document.querySelectorAll('#menu-install-pwa-android, #menu-install-pwa-ios');
                 if(pwaWindows.length){
                     if (isMobile.Android()) {
                         if (localStorage.getItem(pwaName+'-PWA-Prompt') != "install-rejected") {
@@ -1428,7 +1443,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                         document.getElementById('menu-install-pwa-android').classList.add('menu-active');
                                         document.querySelectorAll('.menu-hider')[0].classList.add('menu-active');
                                     }
-                                },3500);
+                                },10);
                             }
                             var deferredPrompt;
                             window.addEventListener('beforeinstallprompt', (e) => {
@@ -1471,10 +1486,11 @@ document.addEventListener('DOMContentLoaded', () => {
                                     document.getElementById('menu-install-pwa-ios').classList.add('menu-active');
                                     document.querySelectorAll('.menu-hider')[0].classList.add('menu-active');
                                 }
-                            },3500);
+                            },50);
                         }
                     }
                 }
+                */
             }
             checkPWA.setAttribute('class','isPWA');
         }
@@ -1598,7 +1614,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     loadScriptJS.className = plugins[i].id+'-c'
                     loadScriptJS.src = plugLoc + plugins[i].call;
                     loadScript.parentNode.insertBefore(loadScriptJS, loadScript);
-                    },50);
+                    },10);
                 }
                 //If Style doesn't exist in array, don't do anything
                 if(plugins[i].style !== undefined){
@@ -1632,11 +1648,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 ],
                 linkSelector:'a:not(.external-link):not(.default-link):not([href^="https"]):not([href^="http"]):not([data-gallery])'
             };
-            const swup = new Swup(options);
-            document.addEventListener('swup:pageView',(e) => { init_template(); })
+            /*setTimeout(function() {
+                const swup = new Swup(options);
+                document.addEventListener('swup:pageView',(e) => { init_template(); })
+            },2000);*/
+            
         }
     }
 
-    init_template();
-});
+    //init_template();
+    
+//},1500);
 
+//setTimeout(function() {
+//    var preloader = document.getElementById('preloader')
+//    if(preloader){preloader.classList.add('preloader-hide');}
+//},2500);
+//} 
+//}

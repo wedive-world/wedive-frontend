@@ -5,7 +5,11 @@
     <point-list-add-new
       :is-add-new-point-sidebar-active.sync="isAddNewPointSidebarActive"
       :country-options="countryOptions"
+      :point-data="pointData"
+      :site-data="sites"
+      :interest-data="interests"
       @refetch-data="refetchData"
+      ref="pointAddNewRef"
     />
 
     <!-- Filters -->
@@ -89,11 +93,11 @@
                 :src="data.item.avatar"
                 :text="avatarText(data.item.fullName)"
                 :variant="`light-${resolvePointCountryVariant(data.item.country)}`"
-                :to="{ name: 'apps-points-view', params: { id: data.item.id } }"
+                :to="{ name: 'app-point/fetchPoint', params: { id: data.item.id } }"
               />
             </template>
             <b-link
-              :to="{ name: 'apps-points-view', params: { id: data.item.id } }"
+              :to="{ name: 'app-point/fetchPoint', params: { id: data.item.id } }"
               class="font-weight-bold d-block text-nowrap"
             >
               {{ data.item.fullName }}
@@ -128,6 +132,19 @@
 
         <!-- Column: Actions -->
         <template #cell(actions)="data">
+          <feather-icon
+            :id="`point-row-${data.item.id}-detail-icon`"
+            icon="FileTextIcon"
+            class="cursor-pointer"
+            size="16"
+            @click="$refs.pointAddNewRef.setPointData(data.item);isAddNewPointSidebarActive = true;"
+          />
+          <b-tooltip
+            title="Details"
+            class="cursor-pointer"
+            :target="`point-row-${data.item.id}-detail-icon`"
+          />
+
           <b-dropdown
             variant="link"
             no-caret
@@ -141,17 +158,17 @@
                 class="align-middle text-body"
               />
             </template>
-            <b-dropdown-item :to="{ name: 'apps-points-view', params: { id: data.item.id } }">
+            <b-dropdown-item 
+              @click="$refs.pointAddNewRef.setPointData(data.item);isAddNewPointSidebarActive = true;"
+            >
               <feather-icon icon="FileTextIcon" />
               <span class="align-middle ml-50">Details</span>
             </b-dropdown-item>
 
-            <b-dropdown-item :to="{ name: 'apps-points-edit', params: { id: data.item.id } }">
-              <feather-icon icon="EditIcon" />
-              <span class="align-middle ml-50">Edit</span>
-            </b-dropdown-item>
-
-            <b-dropdown-item>
+            
+            <b-dropdown-item
+              @click="deletePoint(data.item)"
+            >
               <feather-icon icon="TrashIcon" />
               <span class="align-middle ml-50">Delete</span>
             </b-dropdown-item>
@@ -211,7 +228,7 @@
 <script>
 import {
   BCard, BRow, BCol, BFormInput, BButton, BTable, BMedia, BAvatar, BLink,
-  BBadge, BDropdown, BDropdownItem, BPagination,
+  BBadge, BDropdown, BDropdownItem, BPagination, BTooltip,
 } from 'bootstrap-vue'
 import vSelect from 'vue-select'
 import store from '@/store'
@@ -219,7 +236,12 @@ import { ref, onUnmounted } from '@vue/composition-api'
 import { avatarText } from '@core/utils/filter'
 import PointsListFilters from './PointsListFilters.vue'
 import usePointsList from './usePointsList'
+
+import pointStoreModule from '../pointStoreModule'
 import PointListAddNew from './PointListAddNew.vue'
+const { getAllDiveSites } = require('@/wedive-frontend-graphql/dive-site-service')
+const { getAllInterests, getInterestTypes } = require ('@/wedive-frontend-graphql/interest-service')
+const { deleteDivePointById } = require('@/wedive-frontend-graphql/dive-point-service')
 
 export default {
   components: {
@@ -239,12 +261,21 @@ export default {
     BDropdown,
     BDropdownItem,
     BPagination,
+    BTooltip,
 
     vSelect,
   },
   setup() {
-    // 이곳에 데이터 추가
-    
+    const POINT_APP_STORE_MODULE_NAME = 'app-point'
+
+    // Register module
+    if (!store.hasModule(POINT_APP_STORE_MODULE_NAME)) store.registerModule(POINT_APP_STORE_MODULE_NAME, pointStoreModule)
+
+    // UnRegister on leave
+    onUnmounted(() => {
+      if (store.hasModule(POINT_APP_STORE_MODULE_NAME)) store.unregisterModule(POINT_APP_STORE_MODULE_NAME)
+    })
+
     const isAddNewPointSidebarActive = ref(false)
 
     const countryOptions = [
@@ -307,7 +338,11 @@ export default {
       statusFilter,
     } = usePointsList()
 
+
     return {
+      interests: [],
+      interest_types: [],
+      sites: [],
 
       // Sidebar
       isAddNewPointSidebarActive,
@@ -339,7 +374,50 @@ export default {
       // Extra Filters
       countryFilter,
       statusFilter,
+
+      // point data
+      pointData: {},
     }
+  },
+  async beforeRouteEnter(to, from, next) {
+    var interests = await getAllInterests();
+    var interest_types = await getInterestTypes();
+    var sites = await getAllDiveSites();
+    next(vm => {vm.setInterests(interests, interest_types, sites)});
+  },
+  methods: {
+    setInterests: function(interests, interest_types, sites) {
+      this.interests = interests;
+      this.interest_types = interest_types;
+      this.sites = sites.getAllDiveSites;
+    },
+    deletePoint(_data) {
+      this.$swal({
+        title: 'Are you sure?',
+        text: "삭제하시면 되돌릴 수 없습니다.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, 삭제합니다',
+        customClass: {
+          confirmButton: 'btn btn-primary',
+          cancelButton: 'btn btn-outline-danger ml-1',
+        },
+        buttonsStyling: false,
+      }).then(result => {
+        if (result.value) {
+          console.log(_data);
+          deleteDivePointById(_data._id);
+          this.$swal({
+            icon: 'success',
+            title: 'Deleted!',
+            text: 'Your file has been deleted.',
+            customClass: {
+              confirmButton: 'btn btn-success',
+            },
+          })
+        }
+      })
+    },
   },
 }
 </script>

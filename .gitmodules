@@ -1,3 +1,6 @@
 [submodule "wedive-secret"]
 	path = wedive-secret
 	url = git@github.com:wedive-world/wedive-secret.git
+[submodule "frontend/src/wedive-frontend-graphql"]
+	path = frontend/src/wedive-frontend-graphql
+	url = git@github.com:wedive-world/wedive-frontend-graphql.git

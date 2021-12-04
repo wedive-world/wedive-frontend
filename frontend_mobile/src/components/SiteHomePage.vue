@@ -9,7 +9,7 @@
 
         <div v-on:click="goList()" class="card card-style" style="background: white;height:148px;">
             <div class="content mb-0 mt-3">
-                <img class="float-right" src="/static/images/3d/save-earth.png" height="120" style="position: absolute;z-index: 11;right: 0px;top:40px;"/>
+                <img class="float-right" src="/static/images/assets/save_earth.png" style="position: absolute;z-index: 11;right: 10px;top:40px;"/>
                 <h4 class="text-start mb-1 font-15" style="padding-top:36px;">지구 구석구석 다이빙 사이트 검색</h4>
 
                 <div class="search-box search-dark border-08 bg-theme rounded-sm" style="position: absolute;width: calc(100% - 30px);z-index: 9;">
@@ -84,13 +84,13 @@
         </div>
 
         
-        <div class="card card-style " style="background-image: url(/static/images/autumn_back.jpg);background-size: cover;background-repeat: no-repeat;">
+        <div class="card card-style " style="background-image: url(/static/images/assets/autumn_back.jpg);background-size: cover;background-repeat: no-repeat;">
             <div class="content mb-0 mt-3">
                 <h4 class="color-white text-start pt-1 mb-0">지금 떠나기 좋은 다이빙 포인트</h4>
                 <p class="mb-1 color-gray-light">19개 포인트가 기다리고 있어요.</p>
                 <p class="color-white mb-0 opacity-60 ls-n1">#가을&nbsp;&nbsp;#다이빙의 계절</p>
                 <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
-                <img class="mt-n2 float-left" src="/static/images/3d/smartwatch.png" height="200" style="margin-left:-30px;"/>
+                <img class="mt-n2 float-left" src="/static/images/assets/smartwatch.png" style="margin-left:-20px;padding-top:20px;padding-bottom:16px;"/>
                 <div class="card-overlay bg-gradient-reverse opacity-60" style="z-index: -1;"></div>
             </div>
         </div>
@@ -104,7 +104,7 @@
                 
                 <div v-for="(site,index) in site_list">
                     <div class="map-box">
-                        <a href="/site">
+                        <a href="/site/gosung">
                             <div class="bx">
                                 <div class="justify-content-center mb-0 text-start">
                                     <div class="" style="float: left;position: relative;width: 95px; height:95px;">
@@ -135,7 +135,7 @@
                 <p class="mb-1">37개의 다이빙 사이트</p>
                 <p class="mb-0 opacity-60 ls-n1">#인생샷&nbsp;&nbsp;#인스타를 평정하다</p>
                 <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
-                <img class=" mt-n4 float-right" src="/static/images/3d/camera.png" width="220" style="margin-right: -20px;"/>
+                <img class=" mt-n4 float-right" src="/static/images/assets/camera.png" style="margin-right: 16px;margin-bottom:16px;"/>
             </div>
         </div>
 
@@ -144,7 +144,7 @@
                 <h4 class="text-start pt-2 mb-1 font-600"><i class="fas fa-plane me-2"></i>전세계 10대 포인트</h4>
                 <p class="mb-0">한눈에 살펴보는 10대 포인트</p>
                 <a class="font-12 wedive-txt-all">모두보기</a>
-                <img class="float-right mt-n3" src="/static/images/3d/earth.gif" width="300" style="margin-right: -20px;margin-bottom:-30px;margin-top:-10px;"/>
+                <img class="float-right mt-n3" src="/static/images/assets/earth.gif" width="300" style="margin-right: -20px;margin-bottom:-30px;margin-top:-10px;"/>
             </div>
         </div>
 
@@ -156,7 +156,7 @@
                 
                 <div v-for="(site,index) in site_list">
                     <div class="map-box">
-                        <a href="/site">
+                        <a href="/site/gosung">
                             <div class="bx">
                                 <div class="justify-content-center mb-0 text-start">
                                     <div class="" style="float: left;position: relative;width: 95px; height:95px;">
@@ -185,7 +185,7 @@
                 <p class="color-white mb-1">첫 트레이닝은 수영장에서</p>
                 <p class="color-white mb-0 opacity-60 ls-n1">#차근차근&nbsp;&nbsp;#날씨무관</p>
                 <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
-                <img class="mt-n2 mb-2 float-right" src="/static/images/3d/pool.png" width="240"/>
+                <img class="mt-n2 mb-2 float-right" src="/static/images/assets/pool.png" width="240"/>
             </div>
         </div>
 
@@ -193,13 +193,13 @@
 
         <div class="card card-style">
             <div class="content mb-0 mt-3">
-                <h4 class="text-start pt-2 mb-0 color-primary"><img src="/static/images/ico_wedive_d.png" width="30" />위다이브 추천</h4>
+                <h4 class="text-start pt-2 mb-0 color-primary"><img src="/static/images/assets/ico_wedive_d.png" width="30" />위다이브 추천</h4>
                 <p class="mb-3 color-gray-light-mid">38개의 다이빙 센터</p>
                 <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
                 
                 <div v-for="(center,index) in center_list" v-if="index>2 && index<5">
                     <div class="map-box">
-                        <a href="/site">
+                        <a href="/site/gosung">
                             <div class="bx">
                                 <div class="justify-content-center mb-0 text-start">
                                     <div class="" style="float: left;position: relative;width: 95px; height:95px;">
@@ -214,7 +214,7 @@
                                         <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
                                             <span> {{center.star}} </span>
                                             &nbsp;<font class="color-gray-light">|</font>&nbsp;
-                                            <img src="/static/images/logo_padi.svg" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
+                                            <img src="/static/images/agency/logo_padi.svg" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
                                             &nbsp;<font class="color-gray-light">|</font>&nbsp;
                                             <span v-for="i in center.price_index">￦</span>
                                         </p>
@@ -238,9 +238,9 @@
                 <h4 class="color-white text-start pt-1 mb-1">환상의 시간, 리브어보드</h4>
                 <p class="color-white mb-0 color-gray">287개 리브어보드 모아보기</p>
                 <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
-                <img class="float-right mt-n3 movebox" src="/static/images/3d/boat.png" width="200"/>
-                <img class="movebox2" src="/static/images/3d/cloud.png" width="100"/>
-                <img class="movebox3" src="/static/images/3d/cloud.png" width="70"/>
+                <img class="float-right mt-n3 movebox" src="/static/images/assets/boat.png" style="padding-bottom:16px;"/>
+                <img class="movebox2" src="/static/images/assets/cloud.png" width="100"/>
+                <img class="movebox3" src="/static/images/assets/cloud.png" width="70"/>
             </div>
         </div>
 
@@ -250,7 +250,7 @@
                 <p class="color-white mb-1">인기 대물 포인트 28곳</p>
                 <p class="color-white mb-0 opacity-60 ls-n1">#자연의 신비&nbsp;&nbsp;#버킷리스트</p>
                 <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
-                <img class="float-right" src="/static/images/3d/whale.png" width="230"/>
+                <img class="float-right" src="/static/images/assets/whale.png" />
             </div>
         </div>
 
@@ -271,13 +271,24 @@
 export default {
   name: 'HelloWorld',
   mounted() {
-    var preloader = document.getElementById('preloader')
-    if(preloader){preloader.classList.add('preloader-hide');}
     
     this.btn_new_html = $("#btn_new").html();
+
+    if (this.$route.query.header && this.$route.query.header == 'hide') {
+      $(".page-title").hide();
+      $(".page-title-clear").hide();
+      $(".header-fixed").hide();
+    }
+    if (this.$route.query.footer && this.$route.query.footer == 'hide') {
+      $("#footer-bar").hide();
+    }
   },
   created() {
-    
+    setTimeout(function() {
+        init_template();
+        var preloader = document.getElementById('preloader')
+        if(preloader){preloader.classList.add('preloader-hide');}
+    }, 500);
   },
   destroyed () {
     

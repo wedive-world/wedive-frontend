@@ -5,7 +5,7 @@
       <div id="page">
           
           <div class="header header-auto-show header-fixed header-logo-center">
-              <a class="header-title" v-on:click="goHome()"><img class="logo-image" src="/static/images/logo-dark.svg" height="38" /></a>
+              <a class="header-title" v-on:click="goHome()"><img class="logo-image" src="/static/images/assets/logo-dark.svg" height="38" /></a>
               <a href="#" data-menu="menu-main" class="header-icon header-icon-1"><i class="fas fa-bars"></i></a>
               <a href="#" data-toggle-theme class="header-icon header-icon-4 show-on-theme-dark"><i class="fas fa-sun"></i></a>
               <a href="#" data-toggle-theme class="header-icon header-icon-4 show-on-theme-light"><i class="fas fa-moon"></i></a>
@@ -25,7 +25,7 @@
           </div>
           <div class="page-title page-title-fixed ps-3">
             <i class="fas fa-arrow-left font-24 me-2 pt-2 hide" style="opacity: 0.6;" id="page-back" v-on:click="goBack()"></i>
-            <img v-on:click="goHome()" class="logo-image mt-n2" style="margin-right: auto;" src="/static/images/logo-dark.svg" height="46"/>
+            <img v-on:click="goHome()" class="logo-image mt-n2" style="margin-right: auto;" src="/static/images/assets/logo-dark.svg" height="46"/>
             <a href="#" class="page-title-icon shadow-xl bg-theme color-theme show-on-theme-light" data-toggle-theme><i class="fa fa-moon"></i></a>
             <a href="#" class="page-title-icon shadow-xl bg-theme color-theme show-on-theme-dark" data-toggle-theme><i class="fa fa-sun"></i></a>
             <a href="#" class="page-title-icon shadow-xl bg-theme color-theme" data-menu="menu-main"><i class="fa fa-bars"></i></a>
@@ -38,10 +38,10 @@
           <!-- Be sure this is on your main visiting page, for example, the index.html page-->
           <!-- Install Prompt for Android -->
           <div id="menu-install-pwa-android" class="menu menu-box-bottom rounded-m">
-              <img class="mx-auto mt-4 rounded-m" src="/static/images/logo_d.png" alt="img" width="90">
-              <h4 class="text-center mt-4 mb-2">Appkit on your Home Screen</h4>
+              <img class="mx-auto mt-4 rounded-m" src="/static/images/assets/logo_d.png" alt="img" width="90">
+              <h4 class="text-center mt-4 mb-2">WeDive on your Home Screen</h4>
               <p class="text-center boxed-text-xl">
-                  Install Appkit on your home screen, and access it just like a regular app. It really is that simple!
+                  Install WeDive on your home screen, and access it just like a regular app. It really is that simple!
               </p>
               <div class="boxed-text-l">
                   <a href="#" class="pwa-install mx-auto btn btn-m font-600 bg-highlight">Add to Home Screen</a>
@@ -52,10 +52,10 @@
           <!-- Install instructions for iOS -->
           <div id="menu-install-pwa-ios" class="menu menu-box-bottom rounded-m">
               <div class="boxed-text-xl top-25">
-                  <img class="mx-auto mt-4 rounded-m" src="/static/images/logo_d.png" alt="img" width="90">
-                  <h4 class="text-center mt-4 mb-2">Appkit on your Home Screen</h4>
+                  <img class="mx-auto mt-4 rounded-m" src="/static/images/assets/logo_d.png" alt="img" width="90">
+                  <h4 class="text-center mt-4 mb-2">WeDive on your Home Screen</h4>
                   <p class="text-center ms-3 me-3">
-                      Install Appkit on your home screen, and access it just like a regular app. Open your Safari menu and tap "Add to Home Screen".
+                      Install WeDive on your home screen, and access it just like a regular app. Open your Safari menu and tap "Add to Home Screen".
                   </p>
                   <a href="#" class="pwa-dismiss close-menu btn-full mt-3 text-center text-uppercase font-900 color-red-light opacity-90 font-110 pb-5">Maybe later</a>
               </div>
@@ -77,8 +77,13 @@ export default {
       goHome: function() {
           window.location.href="/";
       }
-  }
+  },
+  setup() {
+    console.log("11 setup");
+    return {}
+  },
 }
+
 </script>
 
 <style>
@@ -92,15 +97,15 @@ export default {
 .footer-bar > a{color: #a8a8b1;flex: 1 1 0px !important;}
 .footer-bar .active-nav span {color: #1d397c !important;font-weight:600 !important;}
 .menu-ico {height:22px;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;margin-bottom:5px;}
-#nav-home > .menu-ico {background: url('/static/images/menu0_off.png');}
-#nav-buddy > .menu-ico {background: url('/static/images/menu1_off.png');}
-#nav-site > .menu-ico {background: url('/static/images/menu2_off.png');}
-#nav-shopping > .menu-ico {background: url('/static/images/menu3_off.png');}
-#nav-chat  .menu-ico {background: url('/static/images/menu4_off.png');}
-#nav-training > .menu-ico {background: url('/static/images/menu5_off.png');}
-.active-nav > .menu-ico0 {background: url('/static/images/menu0_on.png') !important;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;}
-.active-nav > .menu-ico1 {background: url('/static/images/menu1_on.png') !important;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;}
-.active-nav > .menu-ico2 {background: url('/static/images/menu2_on.png') !important;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;}
-.active-nav > .menu-ico3 {background: url('/static/images/menu3_on.png') !important;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;}
-.active-nav > .menu-ico4 {background: url('/static/images/menu4_on.png') !important;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;}
+#nav-home > .menu-ico {background: url('/static/images/assets/menu0_off.png');}
+#nav-buddy > .menu-ico {background: url('/static/images/assets/menu1_off.png');}
+#nav-site > .menu-ico {background: url('/static/images/assets/menu2_off.png');}
+#nav-shopping > .menu-ico {background: url('/static/images/assets/menu3_off.png');}
+#nav-chat  .menu-ico {background: url('/static/images/assets/menu4_off.png');}
+#nav-training > .menu-ico {background: url('/static/images/assets/menu5_off.png');}
+.active-nav > .menu-ico0 {background: url('/static/images/assets/menu0_on.png') !important;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;}
+.active-nav > .menu-ico1 {background: url('/static/images/assets/menu1_on.png') !important;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;}
+.active-nav > .menu-ico2 {background: url('/static/images/assets/menu2_on.png') !important;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;}
+.active-nav > .menu-ico3 {background: url('/static/images/assets/menu3_on.png') !important;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;}
+.active-nav > .menu-ico4 {background: url('/static/images/assets/menu4_on.png') !important;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;}
 </style>

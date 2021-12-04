@@ -2,6 +2,22 @@
   <b-card
     title="관심사항 관리"
   >
+    <vue-context ref="menu">
+      <li>
+        <b-link
+          v-for="data in menuData"
+          :key="data.text"
+          class="d-flex align-items-center"
+          @click="optionClicked(data.text,data.icon)"
+        >
+          <feather-icon
+            :icon="data.icon"
+            size="16"
+          />
+          <span class="ml-75">{{ data.text }}</span>
+        </b-link>
+      </li>
+    </vue-context>
     <b-button
         v-ripple.400="'rgba(113, 102, 240, 0.15)'"
         v-b-modal.modal-add
@@ -35,6 +51,8 @@
         </template>
       </vue-editable-grid>
     </div>
+
+    
     
 
     <b-modal
@@ -74,12 +92,13 @@
             label="타입"
             label-for="type"
           >
-            <v-select
-              @input="setSelected"
-              id="type"
-              :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
-              :options="type_options"
-            />
+          <b-form-select
+            v-model="addType"
+            :options="interest_types"
+            size="sm"
+            class="mt-1"
+          />
+            
              
           </b-form-group>
         </b-col>
@@ -91,13 +110,13 @@
         >
 
           <b-form-group
-            label="아이콘 타입"
-            label-for="iconType"
+            label="동의어"
+            label-for="aliases"
           >
             <b-form-input
-              id="iconType"
-              v-model="iconType"
-              placeholder="아이콘 타입"
+              id="aliases"
+              v-model="aliases"
+              placeholder="동의어,동의어,동의어"
               value="awesome-font"
             />
           </b-form-group>
@@ -110,18 +129,18 @@
         >
 
           <b-form-group
-            label="아이콘 내용"
-            label-for="iconName"
+            label="유의어"
+            label-for="searchTerms"
           >
             <b-form-input
-              id="iconName"
-              v-model="iconName"
-              placeholder="아이콘 내용"
+              id="searchTerms"
+              v-model="searchTerms"
+              placeholder="유의어,유의어,유의어"
             />
           </b-form-group>
         </b-col>
       </b-row>
-      아이콘 내용은 <code><a href="https://fontawesome.com/v5.15/icons?d=gallery&p=2&m=free" target="_blank">이곳</a></code>을 클릭해서 확인하세요. (fa-코드 입력)
+      <span class="hide">아이콘 내용은 <code><a href="https://fontawesome.com/v5.15/icons?d=gallery&p=2&m=free" target="_blank">이곳</a></code>을 클릭해서 확인하세요. (fa-코드 입력)</span>
     </b-modal>
 
     <b-modal
@@ -132,57 +151,34 @@
       @ok="DeleteInterest"
       ref="modal"
       >
+      <p>climate, popularity는 삭제가 불가합니다.</p>
       <b-form-select
         v-model="delSelected"
-        :options="interests.map((inter)=>{return ({text: inter.title, value: inter._id})})"
+        :options="interests.filter(interest=>interest.type!='climate'&&interest.type!='popularity').map((inter)=>{return ({text: inter.title, value: inter._id})})"
         size="sm"
         class="mt-1"
       />
       
     </b-modal>
   </b-card>
+
 </template>
 
 <script>
-import { BTable, BCard, BButton, BModal, BFormInput, BRow, BCol, BFormGroup, BFormSelect } from 'bootstrap-vue'
-import gql from 'graphql-tag'
+import { BTable, BCard, BButton, BModal, BFormInput, BRow, BCol, BFormGroup, BFormSelect, BLink } from 'bootstrap-vue'
+import VueContext from 'vue-context'
 import vSelect from 'vue-select'
 import Ripple from 'vue-ripple-directive'
+const { getAllInterests, getInterestTypes, upsertInterest, deleteInterestById } = require ('@/wedive-frontend-graphql/interest-service')
+
 
 const columnDefinition = [
     { sortable: true, filter: true, field: 'title', headerName: '관심내용', editable: true },
     { sortable: true, filter: true, field: 'type', headerName: '타입', editable: true},
-    { sortable: true, filter: true, field: 'iconType', headerName: '아이콘타입', editable: true },
-    { sortable: true, filter: true, field: 'iconName', headerName: '아이콘내용', editable: true },
+    { sortable: true, filter: true, field: 'aliases_show', headerName: '동의어', editable: true },
+    { sortable: true, filter: true, field: 'searchTerms_show', headerName: '유의어', editable: true },
 ];
 
-const GET_INTERESTS = gql`
-    query GetInerests {
-        interests {
-            _id
-            title
-            type
-            iconType
-            iconName
-            iconUrl
-            iconColor
-        }
-    }
-`;
-
-const CREATE_INTEREST = gql`
-    mutation InterestMutation($interestInput: InterestInput!) {
-        interest(input: $interestInput) {
-            _id
-            title
-            type
-            iconType
-            iconName
-            iconColor
-            iconUrl
-        }
-    }
-`;
 
 export default {
   components: {
@@ -196,6 +192,8 @@ export default {
     BCol,
     BFormSelect,
     vSelect,
+    BLink,
+    VueContext,
   },
   directives: {
     Ripple,
@@ -204,36 +202,106 @@ export default {
     return {
       columnDefs: columnDefinition,
       interests: [],
-      type_options: ['discountTarget', 'discountOption', 'gender', 'age', 'diving', 'amity', 'tripFeature'],
+      interest_types: [],
       title: '',
       addType: '',
-      iconType: 'awesome-font',
-      iconName: '',
+      aliases: '',
+      searchTerms: '',
       delSelected: '',
+      menuData: [
+        { icon: 'PlusIcon', text: 'New' },
+        { icon: 'FileIcon', text: 'Open' },
+        { icon: 'SaveIcon', text: 'Save' },
+        { icon: 'SaveIcon', text: 'Save As' },
+        { icon: 'XIcon', text: 'Close' },
+      ],
     }
   },
-  apollo: {
-    interests: {
-        query: GET_INTERESTS
-    }
+  async beforeRouteEnter(to, from, next) {
+    var interests = await getAllInterests();
+    var interest_types = await getInterestTypes();
+    next(vm => {vm.setInterests(interests, interest_types)});
   },
   methods: {
-    cellUpdated($event) {
-      var i_input = {_id: $event.row._id, title: $event.row.title, type: $event.row.type, iconType: $event.row.iconType, iconName: $event.row.iconName, iconColor: $event.row.iconColor, iconUrl: $event.row.iconUrl};
-      i_input[$event.column.field] = $event.value;
-      this.$apollo.mutate({mutation: CREATE_INTEREST, variables: {interestInput: i_input}}).then((data) => {console.log(data)}).catch((error) => {console.log(error);});
+    setInterests: function(interests, interest_types) {
+      this.interests = interests;
+      this.interest_types = interest_types;
+      this.interests.forEach(interest=>{if(interest.aliases) {interest.aliases_show = interest.aliases.join();}if(interest.searchTerms){interest.searchTerms_show = interest.searchTerms.join();}});
     },
-    AddInterest() {
-      //console.log(title.value);
-      //console.log(this.addType);
-      //console.log(iconType.value);
-      //console.log(iconName.value);
-      var i_input = {title: title.value, type: this.addType, iconType: iconType.value, iconName: iconName.value, iconColor: "", iconUrl: null};
-      this.$apollo.mutate({mutation: CREATE_INTEREST, variables: {interestInput: i_input}}).then((data) => {console.log(data)}).catch((error) => {console.log(error);});
+    async cellUpdated($event) {
+      //console.log($event);
+      var aliases = [];
+      if ($event.row.hasOwnProperty("aliases_show")) {aliases = $event.row.aliases_show.replace(/, /gi,",").split(",");}
+      var searchTerms = [];
+      if ($event.row.hasOwnProperty("searchTerms_show")) {searchTerms = $event.row.searchTerms_show.replace(/, /gi,",").split(",");}
+      console.log(aliases)
+      console.log(searchTerms)
+      var i_input = {_id: $event.row._id, title: $event.row.title, uniqueName: $event.row.title, type: $event.row.type, aliases: aliases, searchTerms: searchTerms, iconColor: $event.row.iconColor, iconUrl: $event.row.iconUrl};
+      if ($event.column.field == 'aliases_show') {
+        i_input['aliases'] = $event.value.replace(/, /gi,",").split(",");
+      } else if ($event.column.field == 'searchTerms_show') {
+        i_input['searchTerms'] = $event.value.replace(/, /gi,",").split(",");
+      } else {
+        i_input[$event.column.field] = $event.value;
+      }
+      try {
+        await upsertInterest(i_input)
+      } catch (e) {
+        this.$swal({
+          title: 'Error!',
+          text: e,
+          icon: 'error',
+          customClass: {
+            confirmButton: 'btn btn-primary',
+          },
+          buttonsStyling: false,
+        })
+      }
     },
-    DeleteInterest() {
-      console.log("DeleteInterest");
-      console.log(this.delSelected);
+    async AddInterest() {
+      var i_input = {title: title.value, uniqueName: title.value, type: this.addType, aliases: aliases.value, searchTerms: searchTerms.value, iconColor: "", iconUrl: null};
+      try {
+        await upsertInterest(i_input)
+      } catch (e) {
+        this.$swal({
+          title: 'Error!',
+          text: e,
+          icon: 'error',
+          customClass: {
+            confirmButton: 'btn btn-primary',
+          },
+          buttonsStyling: false,
+        })
+      }
+      //this.$apollo.mutate({mutation: CREATE_INTEREST, variables: {interestInput: i_input}}).then((data) => {console.log(data)}).catch((error) => {console.log(error);});
+    },
+    async DeleteInterest() {
+      try {
+        await deleteInterestById(this.delSelected)
+      } catch (e) {
+        this.$swal({
+          title: 'Error!',
+          text: e,
+          icon: 'error',
+          customClass: {
+            confirmButton: 'btn btn-primary',
+          },
+          buttonsStyling: false,
+        })
+      }
+    },
+    contextMenu ($event) {
+      console.log($event)
+    },
+    optionClicked(text, icon) {
+      console.log("aaaaaaa ${text}");
+      /*this.$toast({
+        component: ToastificationContent,
+        props: {
+          title: `You have click on ${text}!`,
+          icon,
+        },
+      })*/
     },
     
     setSelected(value) {
@@ -243,7 +311,8 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import '@core/scss/vue/libs/vue-context.scss';
 .my-grid-class {
   height: 400px;
 }

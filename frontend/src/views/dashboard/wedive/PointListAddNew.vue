@@ -15,7 +15,7 @@
       <!-- Header -->
       <div class="d-flex justify-content-between align-items-center content-sidebar-header px-2 py-1">
         <h5 class="mb-0">
-          Add New Point
+          Add point
         </h5>
 
         <feather-icon
@@ -42,20 +42,20 @@
           <!-- Status -->
           <validation-provider
             #default="validationContext"
-            name="status"
+            name="publishStatus"
             rules="required"
           >
             <b-form-group
               label="상태선택"
-              label-for="status"
+              label-for="publishStatus"
               :state="getValidationState(validationContext)"
             >
               <v-select
-                v-model="pointData.status"
+                v-model="pointData.publishStatus"
                 :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
                 :options="statusOptions"
                 :clearable="false"
-                input-id="status"
+                input-id="publishStatus"
               />
               <b-form-invalid-feedback :state="getValidationState(validationContext)">
                 {{ validationContext.errors[0] }}
@@ -65,19 +65,19 @@
           
           <hr>
           <h4 class="mt-3">기본정보</h4>
-          <!-- URL Address -->
+          <!-- URL -->
           <validation-provider
             #default="validationContext"
-            name="URL Address"
+            name="URL"
             rules="required"
           >
             <b-form-group
-              label="URL Address"
-              label-for="url-address"
+              label="URL"
+              label-for="url"
             >
               <b-form-input
-                id="url-address"
-                v-model="pointData.address"
+                id="url"
+                v-model="pointData.uniqueName"
                 autofocus
                 :state="getValidationState(validationContext)"
                 trim
@@ -93,7 +93,7 @@
           <!-- Point name -->
           <validation-provider
             #default="validationContext"
-            name="Pointname"
+            name="name"
             rules="required"
           >
             <b-form-group
@@ -119,7 +119,7 @@
           <!-- Point name -->
           <validation-provider
             #default="validationContext"
-            name="Pointname"
+            name="name"
             rules="required"
           >
             <b-form-group
@@ -128,10 +128,11 @@
             >
               <v-select
                 id="siteId"
-                v-model="siteSelected"
+                v-model="pointData.diveSiteId"
+                value="_id"
                 :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
-                label="title"
-                :options="interests.filter(interest => interest.type!='aquaticLife')"
+                label="name"
+                :options="siteData"
               />
               <b-form-invalid-feedback>
                 {{ validationContext.errors[0] }}
@@ -171,17 +172,73 @@
               :label="adminScoreLabel[index]"
               label-for="'adminScore'+index"
             >
-              <b-form-spinbutton
+              <b-form-input
                 :id="'adminScore'+index"
-                v-model="pointData.adminScore[index]"
+                v-model="pointData[adminScoreName[index]]"
                 min="1"
                 max="100"
+                type="number"
+                trim
+                placeholder="1~100 숫자입력"
               />
               <b-form-invalid-feedback>
                 {{ validationContext.errors[0] }}
               </b-form-invalid-feedback>
             </b-form-group>
           </validation-provider>
+
+          <b-row
+            class="mb-1"
+          >
+            <b-col md="6">
+                <!-- sight (min) -->
+                <validation-provider
+                    #default="validationContext"
+                    name="Latitude"
+                    rules="required"
+                >
+                    <b-form-group
+                      label="최저 시야(m)"
+                      label-for="minSight"
+                    >
+                    <b-form-input
+                      id="minSight"
+                      v-model="pointData.minSight"
+                      :state="getValidationState(validationContext)"
+                      placeholder="10"
+                      trim
+                    />
+                    <b-form-invalid-feedback>
+                    {{ validationContext.errors[0] }}
+                    </b-form-invalid-feedback>
+                    </b-form-group>
+                </validation-provider>
+            </b-col>
+            <b-col md="6">
+                <!-- sight (max) -->
+                <validation-provider
+                    #default="validationContext"
+                    name="Latitude"
+                    rules="required"
+                >
+                    <b-form-group
+                      label="최고 시야(m)"
+                      label-for="maxSight"
+                    >
+                    <b-form-input
+                      id="maxSight"
+                      v-model="pointData.maxSight"
+                      :state="getValidationState(validationContext)"
+                      placeholder="48"
+                      trim
+                    />
+                    <b-form-invalid-feedback>
+                    {{ validationContext.errors[0] }}
+                    </b-form-invalid-feedback>
+                    </b-form-group>
+                </validation-provider>
+            </b-col>
+          </b-row>
 
           <b-row
             class="mb-1"
@@ -194,15 +251,15 @@
                     rules="required"
                 >
                     <b-form-group
-                    label="최저 수심(m)"
-                    label-for="deepMin"
+                      label="최저 수심(m)"
+                      label-for="minDepth"
                     >
                     <b-form-input
-                    id="deepMin"
-                    v-model="pointData.deepMin"
-                    :state="getValidationState(validationContext)"
-                    placeholder="10"
-                    trim
+                      id="minDepth"
+                      v-model="pointData.minDepth"
+                      :state="getValidationState(validationContext)"
+                      placeholder="10"
+                      trim
                     />
                     <b-form-invalid-feedback>
                     {{ validationContext.errors[0] }}
@@ -218,15 +275,15 @@
                     rules="required"
                 >
                     <b-form-group
-                    label="최고 수심(m)"
-                    label-for="deepMax"
+                      label="최고 수심(m)"
+                      label-for="maxDepth"
                     >
                     <b-form-input
-                    id="deepMax"
-                    v-model="pointData.deepMax"
-                    :state="getValidationState(validationContext)"
-                    placeholder="48"
-                    trim
+                      id="maxDepth"
+                      v-model="pointData.maxDepth"
+                      :state="getValidationState(validationContext)"
+                      placeholder="48"
+                      trim
                     />
                     <b-form-invalid-feedback>
                     {{ validationContext.errors[0] }}
@@ -290,15 +347,15 @@
           <!-- info Highlight -->
           <validation-provider
             #default="validationContext"
-            name="infoHighlight"
+            name="highlightDescription"
           >
             <b-form-group
               label="하이라이트"
-              label-for="infoHighlight"
+              label-for="highlightDescription"
             >
               <b-form-input
-                id="infoHighlight"
-                v-model="pointData.infoHighlight"
+                id="highlightDescription"
+                v-model="pointData.highlightDescription"
                 :state="getValidationState(validationContext)"
                 max="80"
                 trim
@@ -316,80 +373,85 @@
           >
             <b-form-group
             >
-              <!-- Row Loop -->
-              <b-row
-                v-for="(item, index) in backgroundItems"
-                :id="item.id"
-                :key="item.id"
-                ref="row"
-                >
-
-                <!-- File -->
-                <b-col md="4" class="pr-0">
-                    <b-form-group
-                    label="파일"
-                    :label-for="'backgroundImagesFile' + index"
+              <draggable :list="backgroundItems" group="backgroundItems" @start="drag=true" @end="drag=false">
+                <div v-for="(item, index) in backgroundItems" style="cursor: move" :key="index">
+                  <!-- Row Loop -->
+                  <b-row
+                    :id="item.id"
+                    :key="'rowBack' + index"
+                    ref="row"
                     >
-                    <b-form-file
-                        :id="'backgroundImagesFile' + index"
-                        v-model="backgroundImagesFile[index]"
-                        placeholder="Choose or drop"
-                        drop-placeholder="Drop here"
-                        accept=".jpg,.jpeg,.png"
-                    />
-                    </b-form-group>
-                </b-col>
 
-                <!-- File Reference -->
-                <b-col md="3" class="pr-0">
-                    <b-form-group
-                    label="출처"
-                    label-for="backgroundImagesRef"
+                    <!-- File -->
+                    <b-col md="4" class="pr-0">
+                        <b-form-group
+                        label="파일"
+                        :label-for="'backgroundImages' + index"
+                        >
+                        <b-form-file
+                            :id="'backgroundImages' + index"
+                            v-model="item.file"
+                            placeholder="Choose or drop"
+                            drop-placeholder="Drop here"
+                            accept=".jpg,.jpeg,.png"
+                        />
+                        </b-form-group>
+                    </b-col>
+
+                    <!-- File Reference -->
+                    <b-col md="3" class="pr-0">
+                        <b-form-group
+                        label="출처"
+                        :label-for="'backgroundImagesRef'+index"
+                        >
+                        <b-form-input
+                            :id="'backgroundImagesRef'+index"
+                            v-model="item.reference"
+                            type="text"
+                            placeholder=""
+                        />
+                        </b-form-group>
+                    </b-col>
+
+                    <!-- File Name -->
+                    <b-col md="4" class="pr-0">
+                        <b-form-group
+                        label="이름"
+                        :label-for="'backgroundImagesName'+index"
+                        >
+                        <b-form-input
+                            :id="'backgroundImagesName'+index"
+                            v-model="item.description"
+                            type="text"
+                            placeholder=""
+                        />
+                        </b-form-group>
+                    </b-col>
+
+                  
+
+                    <!-- Remove Button -->
+                    <b-col
+                        md="1"
+                        class="mb-50"
                     >
-                    <b-form-input
-                        id="backgroundImagesRef"
-                        type="text"
-                        placeholder=""
-                    />
-                    </b-form-group>
-                </b-col>
-
-                <!-- File Name -->
-                <b-col md="4" class="pr-0">
-                    <b-form-group
-                    label="이름"
-                    label-for="backgroundImagesName"
-                    >
-                    <b-form-input
-                        id="backgroundImagesRef"
-                        type="text"
-                        placeholder=""
-                    />
-                    </b-form-group>
-                </b-col>
-
-               
-
-                <!-- Remove Button -->
-                <b-col
-                    md="1"
-                    class="mb-50"
-                >
-                    <b-button
-                    variant="flat-danger"
-                    class="mt-0 mt-md-2 pl-0 pr-0"
-                    @click="backgroundRemoveItem(index)"
-                    >
-                    <feather-icon
-                        icon="XIcon"
-                        class="mr-25"
-                    />
-                    </b-button>
-                </b-col>
-                <b-col cols="12">
-                    <hr class="mt-0" style="border-top: 1px dashed #ebe9f1 !important;">
-                </b-col>
-              </b-row>
+                        <b-button
+                        variant="flat-danger"
+                        class="mt-0 mt-md-2 pl-0 pr-0"
+                        @click="backgroundRemoveItem(index)"
+                        >
+                        <feather-icon
+                            icon="XIcon"
+                            class="mr-25"
+                        />
+                        </b-button>
+                    </b-col>
+                    <b-col cols="12">
+                        <hr class="mt-0" style="border-top: 1px dashed #ebe9f1 !important;">
+                    </b-col>
+                  </b-row>
+                </div>
+              </draggable>
               <b-button
                 v-ripple.400="'rgba(255, 255, 255, 0.15)'"
                 variant="flat-primary"
@@ -399,7 +461,7 @@
                     icon="PlusIcon"
                     class="mr-25"
                 />
-                <span>Add New Background Image</span>
+                <span>Add background image</span>
               </b-button>
               <b-form-invalid-feedback>
                 {{ validationContext.errors[0] }}
@@ -409,150 +471,172 @@
 
 
           <hr>
-          <h4 class="mt-3">하이라이트</h4>
-          <div>
+          <h4 class="mt-3 hide">하이라이트</h4>
+          <div class="hide">
             <div>
-              <!-- Row Loop -->
-              <b-row
-                v-for="(item, index) in highlightItems"
-                :id="item.id"
-                :key="item.id"
-                ref="row"
-                style="background: #d0d1d2;border-radius: 10px;margin-bottom:10px;"
-                >
+              <draggable :list="highlightItems" group="highlightItems" @start="drag=true" @end="drag=false">
+                <div v-for="(item, index) in highlightItems" style="cursor: move" :key="index">
+                  <!-- Row Loop -->
+                  <b-row
+                    :id="item.id"
+                    :key="'rowHigh'+index"
+                    ref="row"
+                    style="background: #d0d1d2;border-radius: 10px;margin-bottom:10px;"
+                    >
 
-                <!-- Content -->
-                <b-col md="11" class="pr-0">
-                    <b-form-group
-                    label="내용"
-                    :label-for="'highlightContent' + index"
-                    >
-                    <b-form-input
-                        :id="'highlightContent' + index"
-                        v-model="pointData.highlightContents[index]"
-                        autofocus
-                        placeholder="국내 최대규모의 연산호 군락지, 유네스코 생물권 보호지역"
-                    />
-                    
-                    </b-form-group>
-                </b-col>
-
-                <!-- Remove Button -->
-                <b-col
-                    md="1"
-                    class="mb-50"
-                >
-                    <b-button
-                    variant="flat-danger"
-                    class="mt-0 mt-md-2 pl-0 pr-0"
-                    @click="highlightRemoveItem(index)"
-                    >
-                    <feather-icon
-                        icon="XIcon"
-                        class="mr-25"
-                    />
-                    </b-button>
-                </b-col>
-                <b-col cols="12">
-                    <validation-provider
-                        #default="validationContext"
-                        name="highlightImages"
-                        rules="required"
-                    >
+                    <!-- Content -->
+                    <b-col md="11" class="pr-0">
                         <b-form-group
+                        label="관리용 이름"
+                        :label-for="'highlightName' + index"
                         >
-                        <!-- Row Loop -->
-                        <b-row
-                            v-for="(item2, index2) in highlightImageItems[index]"
-                            :id="item2.id"
-                            :key="item2.id"
-                            ref="row2"
-                            >
-
-                            <!-- File -->
-                            <b-col md="4" class="pr-0">
-                                <b-form-group
-                                label="파일"
-                                :label-for="'highlightImagesFile' + index + '_' + index2"
-                                >
-                                <b-form-file
-                                    :id="'highlightImagesFile' + index + '_' + index2"
-                                    v-model="highlightImagesFile[index][index2]"
-                                    placeholder="Choose or drop"
-                                    drop-placeholder="Drop here"
-                                    accept=".jpg,.jpeg,.png"
-                                />
-                                </b-form-group>
-                            </b-col>
-
-                            <!-- File Reference -->
-                            <b-col md="3" class="pr-0">
-                                <b-form-group
-                                label="출처"
-                                label-for="highlightImagesRef"
-                                >
-                                <b-form-input
-                                    id="highlightImagesRef"
-                                    type="text"
-                                    placeholder=""
-                                />
-                                </b-form-group>
-                            </b-col>
-
-                            <!-- File Name -->
-                            <b-col md="4" class="pr-0">
-                                <b-form-group
-                                label="이름"
-                                label-for="highlightImagesName"
-                                >
-                                <b-form-input
-                                    id="highlightImagesRef"
-                                    type="text"
-                                    placeholder=""
-                                />
-                                </b-form-group>
-                            </b-col>
-
+                        <b-form-input
+                            :id="'highlightName' + index"
+                            v-model="item.name"
+                            autofocus
+                            placeholder="문섬 하이라이트1"
+                        />
                         
+                        </b-form-group>
+                    </b-col>
+                    
+                    <!-- Remove Button -->
+                    <b-col
+                        md="1"
+                        class="mb-50"
+                    >
+                        <b-button
+                        variant="flat-danger"
+                        class="mt-0 mt-md-2 pl-0 pr-0"
+                        @click="highlightRemoveItem(index)"
+                        >
+                        <feather-icon
+                            icon="XIcon"
+                            class="mr-25"
+                        />
+                        </b-button>
+                    </b-col>
 
-                            <!-- Remove Button -->
-                            <b-col
-                                md="1"
-                                class="mb-50"
+                    <b-col md="11" class="pr-0">
+                        <b-form-group
+                        label="내용"
+                        :label-for="'highlightContent' + index"
+                        >
+                        <b-form-input
+                            :id="'highlightContent' + index"
+                            v-model="item.description"
+                            autofocus
+                            placeholder="국내 최대규모의 연산호 군락지, 유네스코 생물권 보호지역"
+                        />
+                        
+                        </b-form-group>
+                    </b-col>
+
+                    
+                    <b-col cols="12">
+                        <validation-provider
+                            #default="validationContext"
+                            name="highlightImages"
+                            rules="required"
+                        >
+                            <b-form-group
                             >
-                                <b-button
-                                variant="flat-danger"
-                                class="mt-0 mt-md-2 pl-0 pr-0"
-                                @click="highlightImageRemoveItem(index, index2)"
+                            <!-- Row Loop -->
+                            <b-row
+                                v-for="(item2, index2) in item.images"
+                                :id="item2.id"
+                                :key="'rowHighItem'+index2"
+                                ref="row2"
+                                >
+
+                                <!-- File -->
+                                <b-col md="4" class="pr-0">
+                                    <b-form-group
+                                    label="파일"
+                                    :label-for="'highlightImagesFile' + index + '_' + index2"
+                                    >
+                                    <b-form-file
+                                        :id="'highlightImagesFile' + index + '_' + index2"
+                                        v-model="item2.file"
+                                        placeholder="Choose or drop"
+                                        drop-placeholder="Drop here"
+                                        accept=".jpg,.jpeg,.png"
+                                    />
+                                    </b-form-group>
+                                </b-col>
+
+                                <!-- File Reference -->
+                                <b-col md="3" class="pr-0">
+                                    <b-form-group
+                                    label="출처"
+                                    :label-for="'highlightImagesRef' + index +'_' + index2"
+                                    >
+                                    <b-form-input
+                                        :id="'highlightImagesRef' + index +'_' + index2"
+                                        v-model="item2.reference"
+                                        type="text"
+                                        placeholder=""
+                                    />
+                                    </b-form-group>
+                                </b-col>
+
+                                <!-- File Name -->
+                                <b-col md="4" class="pr-0">
+                                    <b-form-group
+                                    label="이름"
+                                    :label-for="'highlightImagesName' + index +'_' + index2"
+                                    >
+                                    <b-form-input
+                                        :id="'highlightImagesName' + index +'_' + index2"
+                                        v-model="item2.description"
+                                        type="text"
+                                        placeholder=""
+                                    />
+                                    </b-form-group>
+                                </b-col>
+
+                            
+
+                                <!-- Remove Button -->
+                                <b-col
+                                    md="1"
+                                    class="mb-50"
+                                >
+                                    <b-button
+                                    variant="flat-danger"
+                                    class="mt-0 mt-md-2 pl-0 pr-0"
+                                    @click="highlightImageRemoveItem(index, index2)"
+                                    >
+                                    <feather-icon
+                                        icon="XIcon"
+                                        class="mr-25"
+                                    />
+                                    </b-button>
+                                </b-col>
+                                <b-col cols="12">
+                                    <hr class="mt-0" style="border-top: 1px dashed #ebe9f1 !important;">
+                                </b-col>
+                            </b-row>
+                            <b-button
+                                v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+                                variant="flat-primary"
+                                @click="highlightImageRepeateAgain(index)"
                                 >
                                 <feather-icon
-                                    icon="XIcon"
+                                    icon="PlusIcon"
                                     class="mr-25"
                                 />
-                                </b-button>
-                            </b-col>
-                            <b-col cols="12">
-                                <hr class="mt-0" style="border-top: 1px dashed #ebe9f1 !important;">
-                            </b-col>
-                        </b-row>
-                        <b-button
-                            v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-                            variant="flat-primary"
-                            @click="highlightImageRepeateAgain(index)"
-                            >
-                            <feather-icon
-                                icon="PlusIcon"
-                                class="mr-25"
-                            />
-                            <span>Add New Highlight Image</span>
-                        </b-button>
-                        <b-form-invalid-feedback>
-                            {{ validationContext.errors[0] }}
-                        </b-form-invalid-feedback>
-                        </b-form-group>
-                    </validation-provider>
-                </b-col>
-              </b-row>
+                                <span>Add highlight image</span>
+                            </b-button>
+                            <b-form-invalid-feedback>
+                                {{ validationContext.errors[0] }}
+                            </b-form-invalid-feedback>
+                            </b-form-group>
+                        </validation-provider>
+                    </b-col>
+                  </b-row>
+                </div>
+              </draggable>
               <b-button
                 v-ripple.400="'rgba(255, 255, 255, 0.15)'"
                 variant="flat-primary"
@@ -562,7 +646,7 @@
                     icon="PlusIcon"
                     class="mr-25"
                 />
-                <span>Add New Highlight</span>
+                <span>Add highlight</span>
               </b-button>
             </div>
           </div>
@@ -583,15 +667,19 @@
                 :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
                 multiple
                 label="title"
-                :options="interests.filter(interest => interest.type!='aquaticLife')"
-              />
+                :options="interestData.filter(interest => interest.type!='aquaticLife'&&interest.type!='aquaticLife100'&&interest.type!='climate'&&interest.type!='popularity')"
+              >
+              <template slot="option" slot-scope="option">
+                {{ option.title }} ({{option.type}})
+              </template>
+              </v-select>
             </b-col>
           </b-row>
-          <label>월별에는 타입이 <code>aquaticLife</code>(수중생물) 인것만 추가 가능</label>
+          <label>월별에는 타입이 <code>aquaticLife</code>, <code>aquaticLife100</code> 인것만 추가 가능</label>
           <b-row
             v-for="index in 12"
             class="mb-1"
-            :key="index"
+            :key="'rowMonth'+index"
           >
             <b-col md="2" class="pr-0">
               {{ index }}월
@@ -601,15 +689,21 @@
                 v-model="interestSelected[index]"
                 :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
                 multiple
-                label="title"
-                :options="interests.filter(interest => interest.type=='aquaticLife')"
-              />
+                :options="interestData.filter(interest => interest.type=='aquaticLife' || interest.type=='aquaticLife100')"
+              >
+              <template slot="option" slot-scope="option">
+                {{ option.title }} ({{option.type}})
+              </template>
+              <template slot="selected-option" slot-scope="option">
+                {{ option.title }} ({{option.type}})
+              </template>
+              </v-select>
             </b-col>
           </b-row>
 
           
           <hr>
-          <h4 class="mt-3">포인트 이미지</h4>
+          <h4 class="mt-3">포인트 이미지 (3개 이상 필수)</h4>
           <validation-provider
             #default="validationContext"
             name="pointImages"
@@ -617,90 +711,95 @@
           >
             <b-form-group
             >
-              <!-- Row Loop -->
-              <b-row
-                v-for="(item, index) in pointItems"
-                :id="item.id"
-                :key="item.id"
-                ref="row"
-                >
-
-                <!-- File -->
-                <b-col md="4" class="pr-0">
-                    <b-form-group
-                    label="파일"
-                    :label-for="'pointImagesFile' + index"
+              <draggable :list="imageItems" group="imageItems" @start="drag=true" @end="drag=false">
+                <div v-for="(item, index) in imageItems" style="cursor: move" :key="index">
+                  <!-- Row Loop -->
+                  <b-row
+                    :id="item.id"
+                    :key="'rowImage'+index"
+                    ref="row"
                     >
-                    <b-form-file
-                        :id="'pointImagesFile' + index"
-                        v-model="pointImagesFile[index]"
-                        placeholder="Choose or drop"
-                        drop-placeholder="Drop here"
-                        accept=".jpg,.jpeg,.png"
-                    />
-                    </b-form-group>
-                </b-col>
 
-                <!-- File Reference -->
-                <b-col md="3" class="pr-0">
-                    <b-form-group
-                    label="출처"
-                    label-for="pointImagesRef"
+                    <!-- File -->
+                    <b-col md="4" class="pr-0">
+                        <b-form-group
+                        label="파일"
+                        :label-for="'pointImagesFile' + index"
+                        >
+                        <b-form-file
+                            :id="'pointImagesFile' + index"
+                            v-model="item.file"
+                            placeholder="Choose or drop"
+                            drop-placeholder="Drop here"
+                            accept=".jpg,.jpeg,.png"
+                        />
+                        </b-form-group>
+                    </b-col>
+
+                    <!-- File Reference -->
+                    <b-col md="3" class="pr-0">
+                        <b-form-group
+                        label="출처"
+                        :label-for="'pointImagesRef' + index"
+                        >
+                        <b-form-input
+                            :id="'pointImagesRef' + index"
+                            v-model="item.reference"
+                            type="text"
+                            placeholder=""
+                        />
+                        </b-form-group>
+                    </b-col>
+
+                    <!-- File Name -->
+                    <b-col md="4" class="pr-0">
+                        <b-form-group
+                        label="이름"
+                        :label-for="'pointImagesName' + index"
+                        >
+                        <b-form-input
+                            :id="'pointImagesName' + index"
+                            v-model="item.description"
+                            type="text"
+                            placeholder=""
+                        />
+                        </b-form-group>
+                    </b-col>
+
+                  
+
+                    <!-- Remove Button -->
+                    <b-col
+                        md="1"
+                        class="mb-50"
                     >
-                    <b-form-input
-                        id="pointImagesRef"
-                        type="text"
-                        placeholder=""
-                    />
-                    </b-form-group>
-                </b-col>
-
-                <!-- File Name -->
-                <b-col md="4" class="pr-0">
-                    <b-form-group
-                    label="이름"
-                    label-for="pointImagesName"
-                    >
-                    <b-form-input
-                        id="pointImagesRef"
-                        type="text"
-                        placeholder=""
-                    />
-                    </b-form-group>
-                </b-col>
-
-               
-
-                <!-- Remove Button -->
-                <b-col
-                    md="1"
-                    class="mb-50"
-                >
-                    <b-button
-                    variant="flat-danger"
-                    class="mt-0 mt-md-2 pl-0 pr-0"
-                    @click="pointRemoveItem(index)"
-                    >
-                    <feather-icon
-                        icon="XIcon"
-                        class="mr-25"
-                    />
-                    </b-button>
-                </b-col>
-                <b-col cols="12">
-                    <hr class="mt-0" style="border-top: 1px dashed #ebe9f1 !important;">
-                </b-col>
-              </b-row>
+                        <b-button
+                        variant="flat-danger"
+                        class="mt-0 mt-md-2 pl-0 pr-0"
+                        @click="imageRemoveItem(index)"
+                        >
+                        <feather-icon
+                            icon="XIcon"
+                            class="mr-25"
+                        />
+                        </b-button>
+                    </b-col>
+                    <b-col cols="12">
+                        <hr class="mt-0" style="border-top: 1px dashed #ebe9f1 !important;">
+                    </b-col>
+                  </b-row>
+                </div>
+              </draggable>
               <b-button
                 v-ripple.400="'rgba(255, 255, 255, 0.15)'"
                 variant="flat-primary"
-                @click="pointRepeateAgain"
+                @click="imageRepeateAgain"
                 >
                 <feather-icon
                     icon="PlusIcon"
                     class="mr-25"
                 />
-                <span>Add New Point Image</span>
+                <span>Add point image</span>
               </b-button>
               <b-form-invalid-feedback>
                 {{ validationContext.errors[0] }}
@@ -720,48 +819,52 @@
           >
             <b-form-group
             >
-              <!-- Row Loop -->
-              <b-row
-                v-for="(item, index) in youtubeItems"
-                :id="item.id"
-                :key="item.id"
-                ref="row"
-                >
-
-                <!-- Video ID -->
-                <b-col md="11" class="pr-0">
-                    <b-form-group
-                    label="유튜브 코드"
-                    label-for="youtubeVideoId"
+              <draggable :list="youtubeItems" group="youtubeItems" @start="drag=true" @end="drag=false">
+                <div v-for="(item, index) in youtubeItems" style="cursor: move" :key="index">
+                  <!-- Row Loop -->
+                  <b-row
+                    :id="item.id"
+                    :key="'rowYoutube'+index"
+                    ref="row"
                     >
-                    <b-form-input
-                        id="youtubeVideoId"
-                        type="text"
-                        placeholder="11자리 입력"
-                    />
-                    </b-form-group>
-                </b-col>
 
-                <!-- Remove Button -->
-                <b-col
-                    md="1"
-                    class="mb-50"
-                >
-                    <b-button
-                    variant="flat-danger"
-                    class="mt-0 mt-md-2 pl-0 pr-0"
-                    @click="youtubeRemoveItem(index)"
+                    <!-- Video ID -->
+                    <b-col md="11" class="pr-0">
+                        <b-form-group
+                        label="유튜브 코드"
+                        label-for="youtubeVideoId"
+                        >
+                        <b-form-input
+                            id="youtubeVideoId"
+                            type="text"
+                            v-model="youtubeItems[index]"
+                            placeholder="11자리 입력"
+                        />
+                        </b-form-group>
+                    </b-col>
+
+                    <!-- Remove Button -->
+                    <b-col
+                        md="1"
+                        class="mb-50"
                     >
-                    <feather-icon
-                        icon="XIcon"
-                        class="mr-25"
-                    />
-                    </b-button>
-                </b-col>
-                <b-col cols="12">
-                    <hr class="mt-0" style="border-top: 1px dashed #ebe9f1 !important;">
-                </b-col>
-              </b-row>
+                        <b-button
+                        variant="flat-danger"
+                        class="mt-0 mt-md-2 pl-0 pr-0"
+                        @click="youtubeRemoveItem(index)"
+                        >
+                        <feather-icon
+                            icon="XIcon"
+                            class="mr-25"
+                        />
+                        </b-button>
+                    </b-col>
+                    <b-col cols="12">
+                        <hr class="mt-0" style="border-top: 1px dashed #ebe9f1 !important;">
+                    </b-col>
+                  </b-row>
+                </div>
+              </draggable>
               <b-button
                 v-ripple.400="'rgba(255, 255, 255, 0.15)'"
                 variant="flat-primary"
@@ -771,7 +874,7 @@
                     icon="PlusIcon"
                     class="mr-25"
                 />
-                <span>Add New Youtube Video</span>
+                <span>Add youtube video</span>
               </b-button>
               <b-form-invalid-feedback>
                 {{ validationContext.errors[0] }}
@@ -791,48 +894,52 @@
           >
             <b-form-group
             >
-              <!-- Row Loop -->
-              <b-row
-                v-for="(item, index) in referenceItems"
-                :id="item.id"
-                :key="item.id"
-                ref="row"
-                >
-
-                <!-- Video ID -->
-                <b-col md="11" class="pr-0">
-                    <b-form-group
-                    label="URL"
-                    label-for="referenceUrl"
+              <draggable :list="referenceItems" group="referenceItems" @start="drag=true" @end="drag=false">
+                <div v-for="(item, index) in referenceItems" style="cursor: move" :key="index">
+                  <!-- Row Loop -->
+                  <b-row
+                    :id="item.id"
+                    :key="'rowRefernce' + index"
+                    ref="row"
                     >
-                    <b-form-input
-                        id="referenceUrl"
-                        type="text"
-                        placeholder="실제 사이트에는 보이지 않음"
-                    />
-                    </b-form-group>
-                </b-col>
 
-                <!-- Remove Button -->
-                <b-col
-                    md="1"
-                    class="mb-50"
-                >
-                    <b-button
-                    variant="flat-danger"
-                    class="mt-0 mt-md-2 pl-0 pr-0"
-                    @click="referenceRemoveItem(index)"
+                    <!-- Video ID -->
+                    <b-col md="11" class="pr-0">
+                        <b-form-group
+                        label="URL"
+                        label-for="referenceUrl"
+                        >
+                        <b-form-input
+                            id="referenceUrl"
+                            type="text"
+                            v-model="referenceItems[index]"
+                            placeholder="실제 사이트에는 보이지 않음"
+                        />
+                        </b-form-group>
+                    </b-col>
+
+                    <!-- Remove Button -->
+                    <b-col
+                        md="1"
+                        class="mb-50"
                     >
-                    <feather-icon
-                        icon="XIcon"
-                        class="mr-25"
-                    />
-                    </b-button>
-                </b-col>
-                <b-col cols="12">
-                    <hr class="mt-0" style="border-top: 1px dashed #ebe9f1 !important;">
-                </b-col>
-              </b-row>
+                        <b-button
+                        variant="flat-danger"
+                        class="mt-0 mt-md-2 pl-0 pr-0"
+                        @click="referenceRemoveItem(index)"
+                        >
+                        <feather-icon
+                            icon="XIcon"
+                            class="mr-25"
+                        />
+                        </b-button>
+                    </b-col>
+                    <b-col cols="12">
+                        <hr class="mt-0" style="border-top: 1px dashed #ebe9f1 !important;">
+                    </b-col>
+                  </b-row>
+                </div>
+              </draggable>
               <b-button
                 v-ripple.400="'rgba(255, 255, 255, 0.15)'"
                 variant="flat-primary"
@@ -842,7 +949,7 @@
                     icon="PlusIcon"
                     class="mr-25"
                 />
-                <span>Add New Reference URL</span>
+                <span>Add reference URL</span>
               </b-button>
               <b-form-invalid-feedback>
                 {{ validationContext.errors[0] }}
@@ -882,8 +989,9 @@
               variant="primary"
               class="mr-2"
               type="submit"
+              @click="submitClick"
             >
-              Add
+              {{ submitText }}
             </b-button>
             <b-button
               v-ripple.400="'rgba(186, 191, 199, 0.15)'"
@@ -911,22 +1019,54 @@ import { required, alphaNum } from '@validations'
 import formValidation from '@core/comp-functions/forms/form-validation'
 import Ripple from 'vue-ripple-directive'
 import vSelect from 'vue-select'
+import draggable from 'vuedraggable'
 import store from '@/store'
-import gql from 'graphql-tag'
+const { upsertDivePoint } = require('@/wedive-frontend-graphql/dive-point-service')
+const { uploadSingleImage, updateImage, getImageUrl } = require('@/wedive-frontend-graphql/image-service')
+const { upsertHighlight, deleteHighlightById } = require('@/wedive-frontend-graphql/highlight-service')
 
-const GET_INTERESTS = gql`
-    query GetInerests {
-        interests {
-            _id
-            title
-            type
-            iconType
-            iconName
-            iconUrl
-            iconColor
-        }
-    }
-`;
+const blankPointData = {
+  _id: null,
+  address: '',
+  latitude: '',
+  longitude: '',
+  countryCode: 'kr',
+  name: '',
+  uniqueName: '',
+  description: '',
+  images: [],
+  backgroundImages: [],
+  youtubeVideoIds: [],
+  referenceUrls: [],
+  memo: '',
+  publishStatus: 'inactive',
+  month1: [],
+  month2: [],
+  month3: [],
+  month4: [],
+  month5: [],
+  month6: [],
+  month7: [],
+  month8: [],
+  month9: [],
+  month10: [],
+  month11: [],
+  month12: [],
+  diveSiteId: '',
+  adminScore: 70,
+  waterEnvironmentScore: 40,
+  flowRateScore: 50,
+  eyeSightScore: 30,
+  minDepth: 0,
+  maxDepth: 0,
+  minSight: 0,
+  maxSight: 0,
+  highlightDescription: '',
+
+  scubaIndex: '',
+  seaTemperature: '',
+  highlights: [],
+};
 
 export default {
   components: {
@@ -946,6 +1086,7 @@ export default {
     // Form Validation
     ValidationProvider,
     ValidationObserver,
+    draggable,
   },
   directives: {
     Ripple,
@@ -963,86 +1104,36 @@ export default {
       type: Array,
       required: true,
     },
+    interestData: {
+      type: Array,
+      required: true,
+    },
+    siteData: {
+      type: Array,
+      required: true,
+    }
   },
   data() {
     return {
       required,
       alphaNum,
       adminScoreLabel: ['', '해당 포인트 총점', '수중환경 점수', '유속 점수', '시야 점수'],
+      adminScoreName: ['', 'adminScore', 'waterEnvironmentScore', 'flowRateScore', 'eyeSightScore'],
       statusOptions: ['pending', 'active', 'inactive', 'deleted',],
       khoaOptions : ['동명항', '남애항', '강문해변', '오산항', '울릉도', '월포해수욕장', '구조리해수욕장', '미조도', '거문도', '홍도', '제주-성산일출봉', '제주-어멍(북부)', '제주-문섬'],
       seaTempOptions: ['강릉 (강원도)/kang-neung', '속초 (강원도)/sogcho', '동해 (강원도)/tonghae', '인천/incheon', '고양 (왜있지)/goyang', '안산 (경기도)/ansan', '화성 (경기도)/hwaseong', '포항/hoko', '울산/ulsan', '부산/busan', '진해 (창원)/chinhae', '마산/masan', '거제/kyosai', '여수/reisui', '순천/sunchun', '군산 (전라북도)/kunsan', '목포 (전라남도)/moppo', '신안 (전라남도)/sinan', '태안 (충청남도)/taesal-li', '제주-어영(북서부)/gaigeturi', '제주-제주시(북부)/jeju'],
       backgroundItems: [],
       highlightItems: [],
-      highlightImageItems: [],
-      highlightImagesFile: [],
-      pointItems: [],
+      imageItems: [],
       youtubeItems: [],
       referenceItems: [],
-      nextTodoId: 2,
-      backgroundImagesFile: [],
-      pointImagesFile: [],
       siteSelected: [],
       interestSelectedTotal: [],
-      interestSelected: [],
-      interests: []
-    }
-  },
-  apollo: {
-    interests: {
-        query: GET_INTERESTS
+      interestSelected: [[],[],[],[],[],[],[],[],[],[],[],[],[]],
+      submitText: 'Add',
     }
   },
   setup(props, { emit }) {
-    const blankPointData = {
-      status: 'inactive',
-      address: '',
-      pointname: '',
-      description: '',
-      adminScore: [0, 70, 70, 70, 70],
-      deepMin: '',
-      deepMax: '',
-
-      highlightContents: [],
-
-      latitude: '',
-      longitude: '',
-      infoVisit: '',
-      infoTemperature: '',
-      infoDeep: '',
-      infoCurrent: '',
-      infoSight: '',
-      infoHighlight: '',
-      scubaIndex: '',
-      seaTemperature: '',
-      monthlyPopular1: 2,
-      monthlyPopular2: 1,
-      monthlyPopular3: 1,
-      monthlyPopular4: 1,
-      monthlyPopular5: 1,
-      monthlyPopular6: 2,
-      monthlyPopular7: 3,
-      monthlyPopular8: 3,
-      monthlyPopular9: 3,
-      monthlyPopular10: 2,
-      monthlyPopular11: 1,
-      monthlyPopular12: 1,
-      monthlyWeather1: 2,
-      monthlyWeather2: 2,
-      monthlyWeather3: 2,
-      monthlyWeather4: 2,
-      monthlyWeather5: 2,
-      monthlyWeather6: 2,
-      monthlyWeather7: 1,
-      monthlyWeather8: 3,
-      monthlyWeather9: 3,
-      monthlyWeather10: 2,
-      monthlyWeather11: 2,
-      monthlyWeather12: 2,
-      backgroundImagesFile: null,
-      memo: '',
-    }
-
     const pointData = ref(JSON.parse(JSON.stringify(blankPointData)))
     const resetPointData = () => {
       pointData.value = JSON.parse(JSON.stringify(blankPointData))
@@ -1072,96 +1163,295 @@ export default {
     }
   },
   methods: {
-    backgroundRepeateAgain() {
-      this.backgroundItems.push({
-        id: this.nextTodoId += this.nextTodoId,
-      })
+    setPointData: function(_data) {
+      this.pointData = JSON.parse(JSON.stringify(blankPointData));
+      this.backgroundItems = [];
+      this.highlightItems = [];
+      this.imageItems = [];
+      this.youtubeItems = [];
+      this.referenceItems = [];
 
-      this.$nextTick(() => {
-        //this.trAddHeight(this.$refs.row[0].offsetHeight)
-      })
+      for (var key in this.pointData) {
+        if (_data[key]) {
+          if (key == 'backgroundImages') {
+            _data[key].forEach(image=>{
+              this.backgroundItems.push(image)
+            });
+            this.pointData[key] = _data[key];
+          } else if (key == 'images') {
+            _data[key].forEach(image=>{
+              this.imageItems.push(image)
+            });
+            this.pointData[key] = _data[key];
+          } else if (key == 'highlights') {
+            _data[key].forEach(highlight=>{
+              this.highlightItems.push(highlight);
+            });
+            this.pointData[key] = _data[key];
+          } else if (key == 'youtubeVideoIds') {
+            if (_data[key]) {
+              _data[key].map(youtube=>{
+                this.youtubeItems.push(youtube);
+              });
+            }
+          } else if (key == 'referenceUrls') {
+            if (_data[key]) {
+              _data[key].map(reference=>{
+                this.referenceItems.push(reference);
+              });
+            }
+          } else {
+            this.pointData[key] = _data[key];
+          }
+        }
+      }
+      
+      this.submitText = 'Update';
+
+
+      // set Site name
+      var selectedSite = this.siteData.filter(site => site._id == _data.diveSiteId);
+      setTimeout(function(name) {
+        document.querySelector("#siteId .vs__selected").innerText = name;
+      },100, selectedSite[0].name)
+
+      // 전체 인터레스트
+      {
+        _data.interests.map(interest => {
+          this.interestSelectedTotal.push(interest);
+        })
+      }
+
+      // 월별 인터레스트
+      {
+        for (var i=1; i<13; i++) {
+          _data["month"+i].map(interest => {
+            this.interestSelected[i].push(interest);
+          })
+        }
+      }
+      
     },
-    backgroundRemoveItem(index) {
-      this.backgroundItems.splice(index, 1)
-      //this.trTrimHeight(this.$refs.row[0].offsetHeight)
+    backgroundRepeateAgain() {
+      this.backgroundItems.push({reference: "", description: "", file: null});
+    },
+    async backgroundRemoveItem(index) {
+      var id = this.backgroundItems[index]._id;
+      if (id != null) {
+        // jjangs 여기 구현 필요
+        //var result = await deleteImageById(id);
+        //console.log(result);
+      }
+      this.backgroundItems.splice(index, 1);
     },
 
     
     highlightRepeateAgain() {
-      this.highlightItems.push({
-        id: this.nextTodoId += this.nextTodoId,
-      })
-
-      this.highlightImagesFile.push([])
-      this.highlightImageItems.push([])
-
-      this.$nextTick(() => {
-        //this.trAddHeight(this.$refs.row[0].offsetHeight)
-      })
+      this.highlightItems.push({name: "", description: "", images: []});
     },
-    highlightRemoveItem(index) {
-      this.highlightItems.splice(index, 1)
-      //this.trTrimHeight(this.$refs.row[0].offsetHeight)
+    async highlightRemoveItem(index) {
+      var id = this.highlightItems[index]._id;
+      if (id != null) {
+        var result = await deleteHighlightById(id);
+      }
+      this.highlightItems.splice(index, 1);
     },
 
 
     highlightImageRepeateAgain(index) {
-      this.highlightImageItems[index].push({
-        id: this.nextTodoId += this.nextTodoId,
-      })
-
-      this.$nextTick(() => {
-        //this.trAddHeight(this.$refs.row[0].offsetHeight)
-      })
+      this.highlightItems[index].images.push({reference: "", description: "", file: null});
     },
-    highlightImageRemoveItem(index, index2) {
-      this.highlightImageItems[index].splice(index2, 1)
-      //this.trTrimHeight(this.$refs.row[0].offsetHeight)
+    async highlightImageRemoveItem(index, index2) {
+      var id = this.highlightItems[index].images[index2]._id;
+      if (id != null) {
+        // jjangs 여기 구현 필요
+        //var result = await deleteImageById(id);
+        //console.log(result);
+      }
+      var id = this.highlightItems[index].images.splice(index2, 1);      
     },
 
+    imageRepeateAgain() {
+      this.imageItems.push({reference: "", description: "", file: null});
+    },
+    imageRemoveItem(index) {
+      var id = this.imageItems[index]._id;
+      if (id != null) {
+        // jjangs 여기 구현 필요
+        //var result = await deleteImageById(id);
+        //console.log(result);
+      }
+      this.imageItems.splice(index, 1);
+    },
     
-    pointRepeateAgain() {
-      this.pointItems.push({
-        id: this.nextTodoId += this.nextTodoId,
-      })
-
-      this.$nextTick(() => {
-        //this.trAddHeight(this.$refs.row[0].offsetHeight)
-      })
-    },
-    pointRemoveItem(index) {
-      this.pointItems.splice(index, 1)
-      //this.trTrimHeight(this.$refs.row[0].offsetHeight)
-    },
-
 
     youtubeRepeateAgain() {
-      this.youtubeItems.push({
-        id: this.nextTodoId += this.nextTodoId,
-      })
-
-      this.$nextTick(() => {
-        //this.trAddHeight(this.$refs.row[0].offsetHeight)
-      })
+      this.youtubeItems.push('');
     },
     youtubeRemoveItem(index) {
       this.youtubeItems.splice(index, 1)
-      //this.trTrimHeight(this.$refs.row[0].offsetHeight)
     },
-    
-    
     referenceRepeateAgain() {
-      this.referenceItems.push({
-        id: this.nextTodoId += this.nextTodoId,
+      this.referenceItems.push('');
+    },
+    referenceRemoveItem(index) {
+      this.referenceItems.splice(index, 1);
+    },
+    async submitClick() {
+      this.$swal({
+        title: '저장중 입니다.',
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        onOpen: () => {
+          this.$swal.showLoading();
+        }
+      });
+      var _pointData = JSON.parse(JSON.stringify(this.pointData));
+      if (_pointData.latitude == '' || _pointData.longitude == '') {
+        this.$swal({
+          title: 'Error!',
+          text: 'Please input latitude and longitude!!',
+          icon: 'error',
+          customClass: {
+            confirmButton: 'btn btn-primary',
+          },
+          buttonsStyling: false,
+        })
+        return false;
+      }
+      _pointData.latitude = parseFloat(_pointData.latitude);
+      _pointData.longitude = parseFloat(_pointData.longitude);
+      
+      if (typeof(_pointData.diveSiteId) == 'object' ) {
+        var site_id = _pointData.diveSiteId._id;
+        delete _pointData.diveSiteId;
+        _pointData.diveSiteId = site_id;
+      }
+
+      if (_pointData._id == null) delete _pointData._id;
+      delete _pointData.scubaIndex;
+      delete _pointData.seaTemperature;
+
+      // 하이라이트
+      {
+        _pointData.highlights = [];
+        for (var i=0; i<this.highlightItems.length; i++) {
+          var highlight_id_list = [];
+          for (var j=0; j<this.highlightItems[i].images.length; j++) {
+            if (this.highlightItems[i].images[j].file != null) {
+              var result = await uploadSingleImage(this.highlightItems[i].images[j].file);
+              this.highlightItems[i].images[j]._id = result.uploadImage._id;
+              this.highlightItems[i].images[j].name = this.highlightItems[i].images[j].file.name;
+            }
+            delete this.highlightItems[i].images[j].file;
+            this.highlightItems[i].images[j].uploaderId = 'apneaofficer';
+            var result2 = await updateImage(this.highlightItems[i].images[j]);
+            highlight_id_list.push(result2.updateImage._id);
+          }
+          // delete images
+          delete this.highlightItems[i].images;
+          this.highlightItems[i].images = [];
+          for (var j=0; j<highlight_id_list.length; j++) {
+            this.highlightItems[i].images.push(highlight_id_list[j]);
+          }
+          // add highlight
+          var result = await upsertHighlight(this.highlightItems[i]);
+          _pointData.highlights.push(result.upsertHighlight._id);
+        }
+      }
+
+      
+
+      // 백그라운드 이미지
+      {
+        _pointData.backgroundImages = [];
+        for (var i=0; i<this.backgroundItems.length; i++) {
+          // Upload Image first
+          if (this.backgroundItems[i].file != null) {
+            var result = await uploadSingleImage(this.backgroundItems[i].file);
+            this.backgroundItems[i]._id = result.uploadImage._id;
+            this.backgroundItems[i].name = this.backgroundItems[i].file.name;
+          }
+          
+          delete this.backgroundItems[i].file;
+          this.backgroundItems[i].uploaderId = 'apneaofficer';
+          var result2 = await updateImage(this.backgroundItems[i]);
+          _pointData.backgroundImages.push(result2.updateImage._id);
+        }
+      }
+      
+
+      // 포인트 이미지
+      {
+        _pointData.images = [];
+        for (var i=0; i<this.imageItems.length; i++) {
+          // Upload Image first
+          if (this.imageItems[i].file != null) {
+            var result = await uploadSingleImage(this.imageItems[i].file);
+            this.imageItems[i]._id = result.uploadImage._id;
+            this.imageItems[i].name = this.imageItems[i].file.name;
+          }
+          
+          delete this.imageItems[i].file;
+          this.imageItems[i].uploaderId = 'apneaofficer';
+          var result2 = await updateImage(this.imageItems[i]);
+          _pointData.images.push(result2.updateImage._id);
+        }
+      }
+      
+
+      // 전체 인터레스트 입력
+      _pointData.interests = [];
+      this.interestSelectedTotal.map(interest => {
+        _pointData.interests.push(interest._id);
       })
 
-      this.$nextTick(() => {
-        //this.trAddHeight(this.$refs.row[0].offsetHeight)
-      })
-    },
-    referencRemoveItem(index) {
-      this.referenceItems.splice(index, 1)
-      //this.trTrimHeight(this.$refs.row[0].offsetHeight)
+      // 월별 인터레스트 입력
+      for (var i=1; i<13; i++) {
+        _pointData["month"+i] = [];
+        this.interestSelected[i].map(interest => {
+          _pointData["month"+i].push(interest._id);
+        })
+      }
+
+      // youtubeVideoIds
+      _pointData.youtubeVideoIds = [];
+      for (var i=0; i<this.youtubeItems.length; i++) {
+        _pointData.youtubeVideoIds.push(this.youtubeItems[i]);
+      }
+
+      // referenceUrls
+      _pointData.referenceUrls = [];
+      for (var i=0; i<this.referenceItems.length; i++) {
+        _pointData.referenceUrls.push(this.referenceItems[i]);
+      }
+
+      try {
+        _pointData.minDepth = parseInt(_pointData.minDepth);
+        _pointData.maxDepth = parseInt(_pointData.maxDepth);
+        _pointData.minSight = parseInt(_pointData.minSight);
+        _pointData.maxSight = parseInt(_pointData.maxSight);
+        _pointData.adminScore = parseInt(_pointData.adminScore);
+        _pointData.waterEnvironmentScore = parseInt(_pointData.waterEnvironmentScore);
+        _pointData.flowRateScore = parseInt(_pointData.flowRateScore);
+        _pointData.eyeSightScore = parseInt(_pointData.eyeSightScore);
+        await upsertDivePoint(_pointData);
+      } catch (e) {
+        this.$swal({
+          title: 'Error!',
+          text: e,
+          icon: 'error',
+          customClass: {
+            confirmButton: 'btn btn-primary',
+          },
+          buttonsStyling: false,
+        })
+      }
+      
+      this.$emit('update:is-add-new-point-sidebar-active', false)
+      this.pointData = JSON.parse(JSON.stringify(blankPointData));
+
+      location.reload();
     },
   },
 }

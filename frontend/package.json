@@ -1,5 +1,5 @@
 {
-  "name": "vuexy-vuejs-react-html-laravel-admin-dashboard-template",
+  "name": "wedive",
   "version": "6.4.0",
   "private": true,
   "scripts": {
@@ -17,7 +17,7 @@
     "@fullcalendar/list": "5.x",
     "@fullcalendar/timegrid": "5.x",
     "@fullcalendar/vue": "5.x",
-    "@vue/composition-api": "1.0.2",
+    "@vue/composition-api": "^1.0.2",
     "@vueuse/core": "4.0.0",
     "animate.css": "4.1.1",
     "apexcharts": "3.23.0",
@@ -68,7 +68,7 @@
     "vue-tour": "1.5.0",
     "vue-tree-halower": "1.8.3",
     "vue2-leaflet": "2.5.2",
-    "vuedraggable": "2.24.3",
+    "vuedraggable": "^2.24.3",
     "vuex": "3.6.0"
   },
   "devDependencies": {

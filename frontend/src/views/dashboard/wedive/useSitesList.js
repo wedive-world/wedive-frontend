@@ -5,9 +5,6 @@ import { title } from '@core/utils/filter'
 // Notification
 import { useToast } from 'vue-toastification/composition'
 import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
-//import gql from 'graphql-tag'
-const { createDiveSite, getDiveSiteById, searchDiveSiteByName, nearByDiveSites, getAllDiveSites } = require('@/graphql/dive-site-service')
-const { getAllInterests } = require ('@/graphql/interest-service')
 
 export default function useSitesList() {
   // Use toast
@@ -17,10 +14,10 @@ export default function useSitesList() {
 
   // Table Handlers
   const tableColumns = [
-    { key: 'address', sortable: true },
+    { key: 'uniqueName', sortable: true },
     { key: 'name', sortable: true },
     { key: 'countryCode', sortable: true },
-    { key: 'status', sortable: true },
+    { key: 'publishStatus', sortable: true },
     { key: 'actions' },
   ]
   const perPage = ref(10)
@@ -50,19 +47,7 @@ export default function useSitesList() {
     refetchData()
   })
 
-  const fetchSites = async (ctx, callback) => {
-    var sites = await getAllDiveSites();
-    var total = sites.length;
-    console.log("sites ==================");
-    console.log(sites);
-    console.log(total);
-
-    callback(sites)
-    totalSites.value = total
-  }
-  
-
-  /*const fetchSites = (ctx, callback) => {
+  const fetchSites = (ctx, callback) => {
     store
       .dispatch('app-site/fetchSites', {
         q: searchQuery.value,
@@ -74,12 +59,13 @@ export default function useSitesList() {
         status: statusFilter.value,
       })
       .then(response => {
-        const { sites, total } = response.data
+        const { sites, total } = response
 
         callback(sites)
         totalSites.value = total
       })
-      .catch(() => {
+      .catch((e) => {
+        console.log(e);
         toast({
           component: ToastificationContent,
           props: {
@@ -89,27 +75,57 @@ export default function useSitesList() {
           },
         })
       })
-  }*/
+  }
+
+  const fetchSite = (ctx, callback) => {
+    store
+      .dispatch('app-site/fetchSite', {
+        q: searchQuery.value,
+        perPage: perPage.value,
+        page: currentPage.value,
+        sortBy: sortBy.value,
+        sortDesc: isSortDirDesc.value,
+        country: countryFilter.value,
+        status: statusFilter.value,
+      })
+      .then(response => {
+        const { site } = response
+
+        callback(site)
+        totalSites.value = total
+      })
+      .catch((e) => {
+        console.log(e);
+        toast({
+          component: ToastificationContent,
+          props: {
+            title: 'Error fetching site by id',
+            icon: 'AlertTriangleIcon',
+            variant: 'danger',
+          },
+        })
+      })
+  }
 
   // *===============================================---*
   // *--------- UI ---------------------------------------*
   // *===============================================---*
 
-  const resolveSiteCountryVariant = country => {
-    if (country === 'subscriber') return 'primary'
-    if (country === 'author') return 'warning'
-    if (country === 'maintainer') return 'success'
-    if (country === 'editor') return 'info'
-    if (country === 'admin') return 'danger'
+  const resolveSiteRoleVariant = role => {
+    if (role === 'subscriber') return 'primary'
+    if (role === 'author') return 'warning'
+    if (role === 'maintainer') return 'success'
+    if (role === 'editor') return 'info'
+    if (role === 'admin') return 'danger'
     return 'primary'
   }
 
-  const resolveSiteCountryIcon = country => {
-    if (country === 'subscriber') return 'SiteIcon'
-    if (country === 'author') return 'SettingsIcon'
-    if (country === 'maintainer') return 'DatabaseIcon'
-    if (country === 'editor') return 'Edit2Icon'
-    if (country === 'admin') return 'ServerIcon'
+  const resolveSiteRoleIcon = role => {
+    if (role === 'subscriber') return 'SiteIcon'
+    if (role === 'author') return 'SettingsIcon'
+    if (role === 'maintainer') return 'DatabaseIcon'
+    if (role === 'editor') return 'Edit2Icon'
+    if (role === 'admin') return 'ServerIcon'
     return 'SiteIcon'
   }
 
@@ -122,6 +138,7 @@ export default function useSitesList() {
 
   return {
     fetchSites,
+    fetchSite,
     tableColumns,
     perPage,
     currentPage,
@@ -133,8 +150,8 @@ export default function useSitesList() {
     isSortDirDesc,
     refSiteListTable,
 
-    resolveSiteCountryVariant,
-    resolveSiteCountryIcon,
+    resolveSiteRoleVariant,
+    resolveSiteRoleIcon,
     resolveSiteStatusVariant,
     refetchData,
 

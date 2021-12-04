@@ -26,7 +26,7 @@
         </div>
     </div>
     
-    <div class="card card-style ms-0 me-0 rounded-0 mt-5 mb-5" style="background-image: url(/static/images/paper_back.jpg);background-size: contain; background-repeat: repeat;">
+    <div class="card card-style ms-0 me-0 rounded-0 mt-5 mb-5" style="background-image: url(/static/images/assets/paper_back.jpg);background-size: contain; background-repeat: repeat;">
         <div class="content">
             <div>
                 <div class="p-relative d-inline-block w-60 float-left">
@@ -99,14 +99,14 @@
             <div class="clearfix"></div>
             <div class="speech-left">
                 <div class="speech-bubble speach-image bg-highlight">
-                    <img class="img-fluid preload-img" src="/static/images/empty.png" data-src="/static/images/diving_advanced.jpg" alt="img">
+                    <img class="img-fluid preload-img" src="/static/images/assets/empty.png" data-src="/static/images/diving_advanced.jpg" alt="img">
                 </div>
                 <span class="time">오전 12:05</span>
             </div>
             <div class="clearfix"></div>
             <div class="speech-left bg-transparent">
                 <div class="speech-bubble speach-image">
-                    <img class="img-fluid preload-img" src="/static/images/empty.png" data-src="/static/images/imogi.png" alt="img" height="120" style="object-fit: contain;">
+                    <img class="img-fluid preload-img" src="/static/images/assets/empty.png" data-src="/static/images/imogi.png" alt="img" height="120" style="object-fit: contain;">
                 </div>
                 <span class="time">오전 12:05</span>
             </div>
@@ -259,19 +259,30 @@
 export default {
   name: 'HelloWorld',
   mounted() {
-    var preloader = document.getElementById('preloader')
-    if(preloader){preloader.classList.add('preloader-hide');}
     
     $(".page-title").hide();
     $(".page-title-clear").hide();
     document.getElementById("page-back").classList.remove("hide");
     document.getElementById("footer-bar").classList.add("hide");
+
+    if (this.$route.query.header && this.$route.query.header == 'hide') {
+      $(".page-title").hide();
+      $(".page-title-clear").hide();
+      $(".header-fixed").hide();
+    }
+    if (this.$route.query.footer && this.$route.query.footer == 'hide') {
+      $("#footer-bar").hide();
+    }
   },
   components: {
     
   },
   created() {
-    
+    setTimeout(function() {
+        init_template();
+        var preloader = document.getElementById('preloader')
+        if(preloader){preloader.classList.add('preloader-hide');}
+    }, 500);
   },
   destroyed () {
     
