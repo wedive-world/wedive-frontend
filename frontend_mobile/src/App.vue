@@ -25,7 +25,7 @@
           <div class="page-title page-title-fixed ps-3">
             <i class="fas fa-arrow-left font-24 me-2 pt-2 hide" style="opacity: 0.6;" id="page-back" v-on:click="goBack()"></i>
             <img href="/" class="logo-image mt-n2" style="margin-right: auto;" src="/static/images/assets/logo-dark.svg" height="46"/>
-            <a href="#" class="page-title-icon color-theme" data-menu="menu-main"><i class="wedive_plus"></i></a>
+            <a v-on:click="addItem()" class="page-title-icon color-theme"><i class="wedive_plus"></i></a>
             <!--<a href="#" class="page-title-icon shadow-xl bg-theme color-theme show-on-theme-light" data-toggle-theme><i class="fa fa-moon"></i></a>
             <a href="#" class="page-title-icon shadow-xl bg-theme color-theme show-on-theme-dark" data-toggle-theme><i class="fa fa-sun"></i></a>
             <a href="#" class="page-title-icon shadow-xl bg-theme color-theme" data-menu="menu-main"><i class="fa fa-bars"></i></a>-->
@@ -71,12 +71,27 @@
 export default {
   name: 'App',
   methods: {
-      goHack: function() {
-          window.history.back();
-      },
-      goHome: function() {
-          window.location.href="/";
+    addItem() {
+      var item = ($("#menu-main").data("menu-active")) ? $("#menu-main").data("menu-active").replace("nav-","") : "";
+      console.log("item = " + item)
+      switch(item) {
+        case "buddy":
+          location.href="/buddy_create";
+        break;
+        case "book":
+          location.href="/book_create";
+        break;
+        case "chat":
+          location.href="/chat_create";
+        break;
       }
+    },
+    goHack: function() {
+        window.history.back();
+    },
+    goHome: function() {
+        window.location.href="/";
+    }
   },
   setup() {
     console.log("11 setup");

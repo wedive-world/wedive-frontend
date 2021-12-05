@@ -15,6 +15,16 @@
             </div>
         </div>
 
+        <div class="card card-style bg-dark-dark" style="box-shadow: none;">
+            <div class="content mb-0 mt-3">
+                <div class="row mb-0"><div class="col-8">
+                    <h4 class="text-start pt-3 mb-0 color-white">위다이브 컨시어지</h4>
+                    <p class="text-start mb-0 color-white opacity-70">전문 매니저가 버디를 매칭해드려요.</p>
+                </div>
+                <img class="col-3" src="/static/images/assets/concierge.png"/></div>
+            </div>
+        </div>
+
         <div class="card card-style">
             <div class="content mb-0 mt-3">
                 <h4 class="text-start pt-2 mb-0"><a href="/">따끈따끈 신규 프리다이빙<i class="wedive-txt-all wedive_right"></i></a></h4>

@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-site" data-menu-load=""></div>    
+    <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-site" data-menu-load=""></div>
     <div class="page-content">
         <div v-if="siteData.backgroundImages == null || siteData.backgroundImages.length == 0" style="background:url(/static/empty.jpg);background-size: contain;height:250px;">
         </div>
@@ -1739,7 +1739,7 @@ export default {
         marker_list: [],
         marker_img_list: [],
         recommend_word: ["비추천", "낮음", "일반적", "좋음", "최고", "완벽함"],
-        point_category: ["해저지형", "해저협곡", "큰 암반", "강한조류", "난파선", "가두리양식장", "마크로", "먹(Muck)", "인공어초", "블루홀", "리프다이빙", "빙하", "초대형난파선", "난파선성지", "수중조형물", "수중유적", "대물"],
+        point_category: ["해저지형", "해저협곡", "큰 암반", "강한조류", "난파선", "가두리양식장", "마크로", "먹(Muck)", "인공어초", "블루홀", "리프다이빙", "빙하", "초대형난파선", "난파선성지", "수중조형물", "수중유적", "대물", "유네스코", "10대포인트"],
         type_category: ["월다이빙", "블랙워터다이빙", "드리프트다이빙", "아이스다이빙", "야간다이빙", "동굴다이빙", "해루질", "프리다이빙", "스노클링", "케이지다이빙", "렉다이빙", "테크니컬다이빙", "나이트록스다이빙"],
         recommend_env_word: ["매우열악", "열악", "평범", "우수", "최고", "극락"],
         recommend_flow_word: ["매우느림", "느림", "일반적", "빠름", "매우빠름", "폭풍"],
@@ -1813,7 +1813,7 @@ export default {
 .ico_feature29 {width: 44px;height: 40px;background-position: -180px -144px;}
 .ico_feature30 {width: 44px;height: 40px;background-position: -225px -144px;}
 
-.icon-point {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/assets/wedive_point.png);background-repeat: no-repeat;-webkit-background-size: 270px 118px;background-size: 270px 118px;}
+.icon-point {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/assets/wedive_point.png);background-repeat: no-repeat;-webkit-background-size: 270px 200px;background-size: 270px 200px;}
 .icon-type {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/assets/wedive_type.png);background-repeat: no-repeat;-webkit-background-size: 270px 118px;background-size: 270px 118px;}
 
 .wedive-ul {width: 100%;list-style:none;display: inline-block;margin-bottom: 0;padding-left: 5px !important;padding-right: 5px !important;}

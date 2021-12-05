@@ -992,7 +992,7 @@ export default {
 .ico_feature11 {width: 44px;height: 40px;background-position: -180px -42px;}
 .ico_feature12 {width: 44px;height: 40px;background-position: -225px -42px;}
 
-.icon-point {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/wedive_point.png);background-repeat: no-repeat;-webkit-background-size: 270px 90px;background-size: 270px 90px;}
+.icon-point {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/wedive_point.png);background-repeat: no-repeat;-webkit-background-size: 270px 200px;background-size: 270px 200px;}
 
 .wedive-ul {width: 100%;list-style:none;display: inline-block;margin-bottom: 0;padding-left: 5px !important;padding-right: 5px !important;}
 .wedive-ul > li {float: left;width: 50%;}
