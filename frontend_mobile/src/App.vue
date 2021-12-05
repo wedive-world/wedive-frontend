@@ -63,11 +63,30 @@
           
       </div>
 
+      <!-- Menu login -->
+      <div id="menu-login" class="menu menu-box-bottom rounded-half">
+          <div class="menu-title">
+              <div class="m-3 text-center">
+                  <div class="color-primary font-noto font-20 font-600"><i class="ico ico-wedive-w color-primary ico-26" style="display: inline-block;margin:0;margin-bottom: -5px;"></i> wedive에 로그인</div>
+              </div>
+              <a href="#" class="close-menu"><i class="wedive_icoset wedive_icoset_close"></i></a>
+          </div>
+          <div class="content pt-3 row">
+              <a v-on:click="loginGoogle()" href="#" class="mb-3 rounded-xl text-start btn btn-m btn-full bg-google btn-icon font-600"><i class="fab fa-google rounded-xl font-16 text-center"></i> Google 계정으로 로그인</a>
+              <a href="#" class="mb-3 rounded-xl text-start btn btn-m btn-full bg-dark-dark btn-icon font-600"><i class="fab fa-apple rounded-xl font-16 text-center"></i> Apple 계정으로 로그인</a>
+              <a href="#" class="mb-3 rounded-xl text-start btn btn-m btn-full bg-yellow-dark btn-icon font-600"><i class="text-center rounded-xl" style="position: absolute;left: 0px;top: 0px;line-height: 43px;width: 40px;height: 100%;background-color: rgba(0, 0, 0, 0.1);"><img src="/static/images/assets/logo_kakao.png" height="16" style="vertical-align: middle;"/></i> Kakao 계정으로 로그인</a>
+          </div>
+          <br/>
+      </div>
+
     <div class="menu-hider"></div>
+    <div id="snackbar-error" class="snackbar-toast color-white bg-red-dark" data-bs-delay="1500" data-bs-autohide="true"><i class="fa fa-times me-3"></i>로그인에 실패하였습니다.</div>
   </div>
 </template>
 
 <script>
+import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+
 export default {
   name: 'App',
   mounted() {
@@ -96,7 +115,41 @@ export default {
     },
     goHome: function() {
         window.location.href="/";
-    }
+    },
+    loginGoogle: function() {
+      const provider = new GoogleAuthProvider();
+      const auth = getAuth();
+      auth.languageCode = 'ko';
+
+      signInWithPopup(auth, provider)
+      .then((result) => {
+          const credential = GoogleAuthProvider.credentialFromResult(result);
+          const token = credential.accessToken;
+          const user = result.user;
+          
+          localStorage.userName = user.hasOwnProperty('displayName') ? user.displayName : "";
+          localStorage.userEmail = user.hasOwnProperty('email') ? user.email : "";
+          localStorage.fcmToken = token;
+          localStorage.firebaseUid = user.hasOwnProperty('uid') ? user.uid : "";
+          localStorage.photoUrl = user.hasOwnProperty('photoUrl') ? user.photoUrl : "";
+          localStorage.loginBy = "google"
+          localStorage.loginAt = (new Date()).getTime();
+
+          location.href='/user_create';
+      }).catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          const email = error.email;
+          const credential = GoogleAuthProvider.credentialFromError(error);
+          
+          console.log(errorCode)
+          console.log(errorMessage)
+          var toastData = 'snackbar-error';
+          var notificationToast = document.getElementById(toastData);
+          var notificationToast = new bootstrap.Toast(notificationToast);
+          notificationToast.show();
+      });
+    },
   },
 }
 
@@ -124,4 +177,8 @@ export default {
 .active-nav > .menu-ico2 {background: url('/static/images/assets/menu2_on.png') !important;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;}
 .active-nav > .menu-ico3 {background: url('/static/images/assets/menu3_on.png') !important;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;}
 .active-nav > .menu-ico4 {background: url('/static/images/assets/menu4_on.png') !important;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;}
+.ico-wedive-w {-webkit-font-smoothing: antialiased;display: grid;margin-left: calc(50% - 20px);font-style: normal;font-variant: normal;text-rendering: auto;line-height: 1;width:40px;height:40px;}
+.ico-wedive-w:before {content: "";background-image: url('/static/images/assets/ico_wedive_d.png');background-size:40px 40px;width:40px;height:40px;display:block;}
+.ico-26 {width: 26px !important; height: 26px !important;}
+.ico-26:before {background-size: 26px 26px !important;width: 26px !important;height: 26px !important;}
 </style>
