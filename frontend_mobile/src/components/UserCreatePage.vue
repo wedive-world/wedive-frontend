@@ -12,8 +12,8 @@
     <div class="page-content pb-0"> 
         <div class="progress" style="height:6px;">
             <div class="progress-bar border-0 bg-highlight text-start ps-2" 
-                    role="progressbar" style="width: 0%" 
-                    aria-valuenow="0" aria-valuemin="0" 
+                    role="progressbar" style="width: 25%" 
+                    aria-valuenow="0" aria-valuemin="25" 
                     aria-valuemax="100">
             </div>
         </div>
@@ -21,29 +21,18 @@
             <div class="splide__track">
                 <div class="splide__list">
                     <div class="splide__slide">
-                        <div id="slide0" class="card card-full pb-0 mb-0 border-bottom" style="height: calc( 100vh - 56px );background:#fafafa;">
-                        <div class="content mt-1">
-                            <div class="text-center">
-                                <div class="color-primary font-noto font-20 font-600 mt-5"><i class="ico ico-wedive-w -circle color-primary scale-box fa-4x mb-2"></i> wedive에 로그인</div>
-                                <img src="/static/images/assets/login_back.jpg" width="100%"/>
-                            </div>
-
-                        </div>
-                        <div style="position: absolute;bottom: 20px;width:100%;padding:0px 20px;">
-                            <a v-on:click="loginGoogle()" href="#" class="mb-3 rounded-xl text-start btn btn-m btn-full bg-google btn-icon font-600"><i class="fab fa-google rounded-xl font-16 text-center"></i> Google 계정으로 로그인</a>
-                            <a href="#" class="mb-3 rounded-xl text-start btn btn-m btn-full bg-dark-dark btn-icon font-600"><i class="fab fa-apple rounded-xl font-16 text-center"></i> Apple 계정으로 로그인</a>
-                            <a href="#" class="mb-3 rounded-xl text-start btn btn-m btn-full bg-yellow-dark btn-icon font-600"><i class="text-center rounded-xl" style="position: absolute;left: 0px;top: 0px;line-height: 43px;width: 40px;height: 100%;background-color: rgba(0, 0, 0, 0.1);"><img src="/static/images/assets/logo_kakao.png" height="16" style="vertical-align: middle;"/></i> Kakao 계정으로 로그인</a>
-                            <a id="btn_next0" href="#" class="slider-next btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 ms-3 me-3 mb-3" style="height: 46px;padding-top: 10px;display:none;" ref="next0">다음</a>
-                        </div>
-                        </div>
-                    </div>
-                    <div class="splide__slide">
                         <div id="slide1" class="card card-full pb-0 mb-0 border-bottom" style="height: calc( 100vh - 56px );">
-                        <div class="content mt-1">
+                        <div class="content mt-0">
+                            <div class="font-noto font-400 mt-3 mb-2 d-flex" style="background: #e7e7e7;color:#5f6368;padding: 10px 16px;">
+                                <div style="background-color:#fff;display: inline-block;align-self: flex-start;border-radius: 4px;height: 32px;flex-shrink: 0;margin: 7px 16px 0 0;width: 32px;padding: 7px;"><svg style="vertical-align: baseline;fill: currentColor;"width="18" height="18" viewBox="0 0 24 24" focusable="false" class="HLbGM NMm5M"><path d="M11 7h2v2h-2zm0 4h2v6h-2z"></path><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"></path></svg></div>
+                                <div style="display: inline-block;">간단한 프로필을 등록해주시면,<br/>더 정확하게 버디와 관심장소를 추천해드려요.</div>
+                            </div>
                             <div class="text-center mt-5 mb-3">
-                                <div style="width: 150px;height:150px;display: inline-block;background: #e7e7e7;position: relative;border-radius:75px;">
-                                    <input type="file" id="file-upload" class="upload-file text-center" accept="image/*" style="height: 150px;">
-                                    <p class="upload-file-text" style="color: #abb7ba;position:absolute;left:20px;top:60px;"><img src="/static/images/assets/icon_user.png" width="110"></img></p></input>
+                                <div id="file-upload1-back" style="width: 150px;height:150px;display: inline-block;background: #e7e7e7;position: relative;border-radius:75px;background-size:cover;">
+                                    <input type="file" @change="imageUserChange" id="file-upload1" class="upload-file text-center" accept="image/*" style="height: 150px;">
+                                    <p class="upload-file-text" style="color: #abb7ba;position:absolute;left:40px;top:76px;">
+                                        <img id="file-upload1-img" src="/static/images/assets/icon_image.png" width="70"></img>
+                                    </p></input>
                                 </div>
                             </div>
                             <div class="text-center">
@@ -65,22 +54,23 @@
                     <div class="splide__slide">
                         <div id="slide2" class="card card-full pb-0 mb-0 border-bottom" style="height: calc( 100vh - 56px );">
                         <div class="content mt-1">
-                            <div class="text-center mt-2 mb-0">
-                                <div style="border-bottom: 1px solid rgba(0, 0, 0, 0.08);">
-                                    <p class="font-noto mb-1 mt-2"><font class="color-primary">{{nickname}}</font>님 반가워요.</p>
-                                    <img src="/static/images/assets/hihi2.png" width="60%" />
-                                </div>
+                            <div class="font-noto font-400 mt-3 mb-2 d-flex" style="background: #e7e7e7;color:#5f6368;padding: 10px 16px;">
+                                <div style="background-color:#fff;display: inline-block;align-self: flex-start;border-radius: 4px;height: 32px;flex-shrink: 0;margin: 7px 16px 0 0;width: 32px;padding: 7px;"><svg style="vertical-align: baseline;fill: currentColor;"width="18" height="18" viewBox="0 0 24 24" focusable="false" class="HLbGM NMm5M"><path d="M11 7h2v2h-2zm0 4h2v6h-2z"></path><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"></path></svg></div>
+                                <div style="display: inline-block;"><font class="color-primary font-14">{{nickname}}</font>님 반가워요.<br/>비슷한 나이의 친구들을 찾아드릴께요.</div>
+                            </div>
 
-                                <div class="text-start input-style has-icon no-borders validate-field mb-2 mt-3" style="width: 200px;display: inline-block;">
-                                    <i class="fa fa-id-badge color-gray font-14"></i>
-                                    <input type="number" class="form-control font-noto input-big3" id="form4" placeholder="나이" v-model="userage">
+                            <div>
+                            <div class="mt-2">
+                                <div class="input-style no-borders has-icon validate-field mb-3">
+                                    <i class="fa fa-id-badge color-gray" style="margin-left:5px;"></i>
+                                    <input type="number" class="form-control font-noto" id="form2" placeholder="나이" v-model="userage" style="width: 90%;">
                                     <i class="fa fa-check disabled valid color-green-dark"></i>
                                     <i class="fa fa-check disabled invalid color-red-dark"></i>
                                 </div>
 
-                                <div class="input-style no-borders has-icon validate-field  mb-2" style="width: 200px;display: inline-block;">
-                                    <i class="fas fa-venus-mars color-gray font-14"></i>
-                                    <select id="form5" class="input-big3 font-noto" required v-model="usersex">
+                                <div class="input-style no-borders has-icon validate-field  mb-2">
+                                    <i class="fas fa-venus-mars color-gray" style="margin-left:3px;"></i>
+                                    <select id="form3" class="font-noto" required v-model="usersex">
                                         <option value="" selected disabled>성별</option>
                                         <option value="남자">남자</option>
                                         <option value="여자">여자</option>
@@ -91,231 +81,37 @@
                                     <em></em>
                                 </div>
 
-                                <div class="input-style no-borders has-icon validate-field mb-2" style="width: 200px;display: inline-block;">
-                                    <i class="fas fa-address-card color-gray font-14"></i>
-                                    <select id="form6" class="input-big3 font-noto" required v-model="useraddress">
-                                        <option value="" selected disabled>거주지</option>
-                                        <option value="서울 강남구">서울 강남구</option>
-                                        <option value="서울 강동구">서울 강동구</option>
-                                        <option value="서울 강북구">서울 강북구</option>
-                                        <option value="서울 강서구">서울 강서구</option>
-                                        <option value="서울 관악구">서울 관악구</option>
-                                        <option value="서울 광진구">서울 광진구</option>
-                                        <option value="서울 구로구">서울 구로구</option>
-                                        <option value="서울 금천구">서울 금천구</option>
-                                        <option value="서울 노원구">서울 노원구</option>
-                                        <option value="서울 도봉구">서울 도봉구</option>
-                                        <option value="서울 동대문구">서울 동대문구</option>
-                                        <option value="서울 동작구">서울 동작구</option>
-                                        <option value="서울 마포구">서울 마포구</option>
-                                        <option value="서울 서대문구">서울 서대문구</option>
-                                        <option value="서울 서초구">서울 서초구</option>
-                                        <option value="서울 성동구">서울 성동구</option>
-                                        <option value="서울 성북구">서울 성북구</option>
-                                        <option value="서울 송파구">서울 송파구</option>
-                                        <option value="서울 양천구">서울 양천구</option>
-                                        <option value="서울 영등포구">서울 영등포구</option>
-                                        <option value="서울 용산구">서울 용산구</option>
-                                        <option value="서울 은평구">서울 은평구</option>
-                                        <option value="서울 종로구">서울 종로구</option>
-                                        <option value="서울 중구">서울 중구</option>
-                                        <option value="서울 중랑구">서울 중랑구</option>
-                                        <option value="부산광역시">부산광역시</option>
-                                        <option value="대구광역시">대구광역시</option>
-                                        <option value="인천광역시">인천광역시</option>
-                                        <option value="광주광역시">광주광역시</option>
-                                        <option value="대전광역시">대전광역시</option>
-                                        <option value="울산광역시">울산광역시</option>
-                                        <option value="세종특별자치시">세종특별자치시</option>
-                                        <option value="경기도 수원시">경기도 수원시</option>
-                                        <option value="경기도 성남시">경기도 성남시</option>
-                                        <option value="경기도 안양시">경기도 안양시</option>
-                                        <option value="경기도 안산시">경기도 안산시</option>
-                                        <option value="경기도 용인시">경기도 용인시</option>
-                                        <option value="경기도 부천시">경기도 부천시</option>
-                                        <option value="경기도 광명시">경기도 광명시</option>
-                                        <option value="경기도 평택시">경기도 평택시</option>
-                                        <option value="경기도 과천시">경기도 과천시</option>
-                                        <option value="경기도 오산시">경기도 오산시</option>
-                                        <option value="경기도 시흥시">경기도 시흥시</option>
-                                        <option value="경기도 군포시">경기도 군포시</option>
-                                        <option value="경기도 의왕시">경기도 의왕시</option>
-                                        <option value="경기도 하남시">경기도 하남시</option>
-                                        <option value="경기도 이천시">경기도 이천시</option>
-                                        <option value="경기도 안성시">경기도 안성시</option>
-                                        <option value="경기도 김포시">경기도 김포시</option>
-                                        <option value="경기도 화성시">경기도 화성시</option>
-                                        <option value="경기도 광주시">경기도 광주시</option>
-                                        <option value="경기도 여주시">경기도 여주시</option>
-                                        <option value="경기도 고양시">경기도 고양시</option>
-                                        <option value="경기도 의정부시">경기도 의정부시</option>
-                                        <option value="경기도 동두천시">경기도 동두천시</option>
-                                        <option value="경기도 구리시">경기도 구리시</option>
-                                        <option value="경기도 남양주시">경기도 남양주시</option>
-                                        <option value="경기도 파주시">경기도 파주시</option>
-                                        <option value="경기도 양주시">경기도 양주시</option>
-                                        <option value="경기도 포천시">경기도 포천시</option>
-                                        <option value="경기도 연천군">경기도 연천군</option>
-                                        <option value="경기도 가평군">경기도 가평군</option>
-                                        <option value="강원도 춘천시">강원도 춘천시</option>
-                                        <option value="강원도 원주시">강원도 원주시</option>
-                                        <option value="강원도 강릉시">강원도 강릉시</option>
-                                        <option value="강원도 동해시">강원도 동해시</option>
-                                        <option value="강원도 태백시">강원도 태백시</option>
-                                        <option value="강원도 속초시">강원도 속초시</option>
-                                        <option value="강원도 삼척시">강원도 삼척시</option>
-                                        <option value="강원도 홍천군">강원도 홍천군</option>
-                                        <option value="강원도 횡성군">강원도 횡성군</option>
-                                        <option value="강원도 영월군">강원도 영월군</option>
-                                        <option value="강원도 평창군">강원도 평창군</option>
-                                        <option value="강원도 정선군">강원도 정선군</option>
-                                        <option value="강원도 철원군">강원도 철원군</option>
-                                        <option value="강원도 화천군">강원도 화천군</option>
-                                        <option value="강원도 양구군">강원도 양구군</option>
-                                        <option value="강원도 인제군">강원도 인제군</option>
-                                        <option value="강원도 고성군">강원도 고성군</option>
-                                        <option value="강원도 양양군">강원도 양양군</option>
-                                        <option value="경상북도 포항시">경상북도 포항시</option>
-                                        <option value="경상북도 경주시">경상북도 경주시</option>
-                                        <option value="경상북도 김천시">경상북도 김천시</option>
-                                        <option value="경상북도 안동시">경상북도 안동시</option>
-                                        <option value="경상북도 구미시">경상북도 구미시</option>
-                                        <option value="경상북도 영주시">경상북도 영주시</option>
-                                        <option value="경상북도 영천시">경상북도 영천시</option>
-                                        <option value="경상북도 상주시">경상북도 상주시</option>
-                                        <option value="경상북도 문경시">경상북도 문경시</option>
-                                        <option value="경상북도 경산시">경상북도 경산시</option>
-                                        <option value="경상북도 군위군">경상북도 군위군</option>
-                                        <option value="경상북도 의성군">경상북도 의성군</option>
-                                        <option value="경상북도 청송군">경상북도 청송군</option>
-                                        <option value="경상북도 영양군">경상북도 영양군</option>
-                                        <option value="경상북도 영덕군">경상북도 영덕군</option>
-                                        <option value="경상북도 청도군">경상북도 청도군</option>
-                                        <option value="경상북도 고령군">경상북도 고령군</option>
-                                        <option value="경상북도 성주군">경상북도 성주군</option>
-                                        <option value="경상북도 칠곡군">경상북도 칠곡군</option>
-                                        <option value="경상북도 예천군">경상북도 예천군</option>
-                                        <option value="경상북도 봉화군">경상북도 봉화군</option>
-                                        <option value="경상북도 울진군">경상북도 울진군</option>
-                                        <option value="경상북도 울릉군">경상북도 울릉군</option>
-                                        <option value="경상남도 창원시">경상남도 창원시</option>
-                                        <option value="경상남도 진주시">경상남도 진주시</option>
-                                        <option value="경상남도 통영시">경상남도 통영시</option>
-                                        <option value="경상남도 사천시">경상남도 사천시</option>
-                                        <option value="경상남도 김해시">경상남도 김해시</option>
-                                        <option value="경상남도 밀양시">경상남도 밀양시</option>
-                                        <option value="경상남도 거제시">경상남도 거제시</option>
-                                        <option value="경상남도 양산시">경상남도 양산시</option>
-                                        <option value="경상남도 의령군">경상남도 의령군</option>
-                                        <option value="경상남도 함안군">경상남도 함안군</option>
-                                        <option value="경상남도 창녕군">경상남도 창녕군</option>
-                                        <option value="경상남도 고성군">경상남도 고성군</option>
-                                        <option value="경상남도 남해군">경상남도 남해군</option>
-                                        <option value="경상남도 하동군">경상남도 하동군</option>
-                                        <option value="경상남도 산청군">경상남도 산청군</option>
-                                        <option value="경상남도 함양군">경상남도 함양군</option>
-                                        <option value="경상남도 거창군">경상남도 거창군</option>
-                                        <option value="경상남도 합천군">경상남도 합천군</option>
-                                        <option value="충청북도 청주시">충청북도 청주시</option>
-                                        <option value="충청북도 충주시">충청북도 충주시</option>
-                                        <option value="충청북도 제천시">충청북도 제천시</option>
-                                        <option value="충청북도 보은군">충청북도 보은군</option>
-                                        <option value="충청북도 옥천군">충청북도 옥천군</option>
-                                        <option value="충청북도 영동군">충청북도 영동군</option>
-                                        <option value="충청북도 증평군">충청북도 증평군</option>
-                                        <option value="충청북도 진천군">충청북도 진천군</option>
-                                        <option value="충청북도 괴산군">충청북도 괴산군</option>
-                                        <option value="충청북도 음성군">충청북도 음성군</option>
-                                        <option value="충청북도 단양군">충청북도 단양군</option>
-                                        <option value="충청남도 천안시">충청남도 천안시</option>
-                                        <option value="충청남도 공주시">충청남도 공주시</option>
-                                        <option value="충청남도 보령시">충청남도 보령시</option>
-                                        <option value="충청남도 아산시">충청남도 아산시</option>
-                                        <option value="충청남도 서산시">충청남도 서산시</option>
-                                        <option value="충청남도 논산시">충청남도 논산시</option>
-                                        <option value="충청남도 계룡시">충청남도 계룡시</option>
-                                        <option value="충청남도 당진시">충청남도 당진시</option>
-                                        <option value="충청남도 금산군">충청남도 금산군</option>
-                                        <option value="충청남도 부여군">충청남도 부여군</option>
-                                        <option value="충청남도 서천군">충청남도 서천군</option>
-                                        <option value="충청남도 청양군">충청남도 청양군</option>
-                                        <option value="충청남도 홍성군">충청남도 홍성군</option>
-                                        <option value="충청남도 예산군">충청남도 예산군</option>
-                                        <option value="충청남도 태안군">충청남도 태안군</option>
-                                        <option value="전랴북도 전주시">전랴북도 전주시</option>
-                                        <option value="전랴북도 군산시">전랴북도 군산시</option>
-                                        <option value="전랴북도 익산시">전랴북도 익산시</option>
-                                        <option value="전랴북도 정읍시">전랴북도 정읍시</option>
-                                        <option value="전랴북도 남원시">전랴북도 남원시</option>
-                                        <option value="전랴북도 김제시">전랴북도 김제시</option>
-                                        <option value="전랴북도 완주군">전랴북도 완주군</option>
-                                        <option value="전랴북도 진안군">전랴북도 진안군</option>
-                                        <option value="전랴북도 무주군">전랴북도 무주군</option>
-                                        <option value="전랴북도 장수군">전랴북도 장수군</option>
-                                        <option value="전랴북도 임실군">전랴북도 임실군</option>
-                                        <option value="전랴북도 순창군">전랴북도 순창군</option>
-                                        <option value="전랴북도 고창군">전랴북도 고창군</option>
-                                        <option value="전랴북도 부안군">전랴북도 부안군</option>
-                                        <option value="전라남도 목포시">전라남도 목포시</option>
-                                        <option value="전라남도 여수시">전라남도 여수시</option>
-                                        <option value="전라남도 순천시">전라남도 순천시</option>
-                                        <option value="전라남도 나주시">전라남도 나주시</option>
-                                        <option value="전라남도 광양시">전라남도 광양시</option>
-                                        <option value="전라남도 담양군">전라남도 담양군</option>
-                                        <option value="전라남도 곡성군">전라남도 곡성군</option>
-                                        <option value="전라남도 구례군">전라남도 구례군</option>
-                                        <option value="전라남도 고흥군">전라남도 고흥군</option>
-                                        <option value="전라남도 보성군">전라남도 보성군</option>
-                                        <option value="전라남도 화순군">전라남도 화순군</option>
-                                        <option value="전라남도 장흥군">전라남도 장흥군</option>
-                                        <option value="전라남도 강진군">전라남도 강진군</option>
-                                        <option value="전라남도 해남군">전라남도 해남군</option>
-                                        <option value="전라남도 영암군">전라남도 영암군</option>
-                                        <option value="전라남도 무안군">전라남도 무안군</option>
-                                        <option value="전라남도 함평군">전라남도 함평군</option>
-                                        <option value="전라남도 영광군">전라남도 영광군</option>
-                                        <option value="전라남도 장성군">전라남도 장성군</option>
-                                        <option value="전라남도 완도군">전라남도 완도군</option>
-                                        <option value="전라남도 진도군">전라남도 진도군</option>
-                                        <option value="전라남도 신안군">전라남도 신안군</option>
-                                        <option value="제주특별자치도 제주시">제주특별자치도 제주시</option>
-                                        <option value="제주특별자치도 서귀포시">제주특별자치도 서귀포시</option>
-                                    </select>
-                                    <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
-                                    <i class="fa fa-check disabled valid color-green-dark"></i>
-                                    <i class="fa fa-check disabled invalid color-red-dark"></i>
-                                    <em></em>
-                                </div>
+                            </div>
                             </div>
 
-                            <div class="mb-0 mt-5">
+                            <div class="mb-0 mt-5 pt-2">
                                 <label class="wediev-label pb-1 color-highlight ms-2" style="margin-top:-26px;">선호사항 (선택)</label>
                                 <div class="form-check interest-check">
-                                <input class="form-check-input" type="checkbox" value="" id="check_general1">
+                                <input v-on:click="interest1=!interest1;" class="form-check-input" type="checkbox" id="check_general1">
                                 <label class="form-check-label rounded-xl border-08" for="check_general1">국내투어</label>
                                 <i class="fas fa-caravan color-white font-17"></i>
                                 <i class="fas fa-caravan font-17 color-highlight"></i>
                                 </div>
                                 <div class="form-check interest-check">
-                                <input class="form-check-input" type="checkbox" value="" id="check_general2">
+                                <input v-on:click="interest2=!interest2;" class="form-check-input" type="checkbox" value="" id="check_general2">
                                 <label class="form-check-label rounded-xl border-08" for="check_general2">해외투어</label>
                                 <i class="fas fa-globe-americas color-white font-17"></i>
                                 <i class="fas fa-globe-americas font-17 color-highlight"></i>
                                 </div>
                                 <div class="form-check interest-check">
-                                <input class="form-check-input" type="checkbox" value="" id="check_general3">
+                                <input v-on:click="interest3=!interest3;" class="form-check-input" type="checkbox" value="" id="check_general3">
                                 <label class="form-check-label rounded-xl border-08" for="check_general3">수중정화</label>
                                 <i class="fas fa-broom color-white font-17"></i>
                                 <i class="fas fa-broom font-17 color-highlight"></i>
                                 </div>
                                 <div class="form-check interest-check">
-                                <input class="form-check-input" type="checkbox" value="" id="check_general4">
+                                <input v-on:click="interest4=!interest4;" class="form-check-input" type="checkbox" value="" id="check_general4">
                                 <label class="form-check-label rounded-xl border-08" for="check_general4">뒷풀이</label>
                                 <i class="fas fa-beer color-white font-17"></i>
                                 <i class="fas fa-beer font-17 color-highlight"></i>
                                 </div>
                                 <div class="form-check interest-check">
-                                <input class="form-check-input" type="checkbox" value="" id="check_general5">
+                                <input v-on:click="interest5=!interest5;" class="form-check-input" type="checkbox" value="" id="check_general5">
                                 <label class="form-check-label rounded-xl border-08" for="check_general5">동호회</label>
                                 <i class="fas fa-users color-white font-17"></i>
                                 <i class="fas fa-users font-17 color-highlight"></i>
@@ -332,15 +128,12 @@
                     <div class="splide__slide">
                         <div id="slide3" class="card card-full pb-0 mb-0 border-bottom" style="height: calc( 100vh - 56px );">
                         <div class="content mt-1">
-                            <div class="text-center mt-2 mb-3">
-                                <div>
-                                    <p class="font-noto mb-3 mt-5">{{nickname}}님, <font class="color-primary font-20 font-600">스쿠버 다이빙</font> 해보셨나요?<br/>
-                                    <font class="color-gray">정보가 없으면 다음을 클릭해주세요.</font>
-                                    </p>
-                                </div>
-
+                            <div class="font-noto font-400 mt-3 mb-2 d-flex" style="background: #e7e7e7;color:#5f6368;padding: 10px 16px;">
+                                <div style="background-color:#fff;display: inline-block;align-self: flex-start;border-radius: 4px;height: 32px;flex-shrink: 0;margin: 7px 16px 0 0;width: 32px;padding: 7px;"><svg style="vertical-align: baseline;fill: currentColor;"width="18" height="18" viewBox="0 0 24 24" focusable="false" class="HLbGM NMm5M"><path d="M11 7h2v2h-2zm0 4h2v6h-2z"></path><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"></path></svg></div>
+                                <div style="display: inline-block;"><font class="color-primary font-14">{{nickname}}</font>님, <font class="color-shopping">스쿠버 다이빙</font> 해보셨나요?<br/>정보가 없으면 다음을 클릭해주세요.</div>
                             </div>
-                            <div class="p-3" style="background: #e7e7e7;border-radius:8px;">
+
+                            <div class="mt-3">
                                 <div class="input-style no-borders has-icon validate-field mb-3 mt-2">
                                     <i class="fas fa-address-card color-gray" style="margin-left:6px;"></i>
                                     <label for="form11" class="color-highlight bg-e7e7e7">라이센스</label>
@@ -384,7 +177,6 @@
                                         <option value="GUE">GUE</option>
                                         <option value="PSAI">PSAI</option>
                                         <option value="SEI">SEI</option>
-                                        <option value="없음">없음</option>
                                     </select>
                                     <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
                                     <i class="fa fa-check disabled valid color-green-dark"></i>
@@ -397,12 +189,11 @@
                                     <label for="form22" class="color-highlight bg-e7e7e7">레벨</label>
                                     <select id="form22" required class="font-noto" v-model="scuba_level">
                                         <option value="" selected disabled>레벨</option>
-                                        <option value="오픈워터">오픈워터</option>
-                                        <option value="어드밴스드">어드밴스드</option>
-                                        <option value="레스큐">레스큐</option>
-                                        <option value="마스터">마스터</option>
-                                        <option value="강사">강사</option>
-                                        <option value="없음">없음</option>
+                                        <option value="1">오픈워터</option>
+                                        <option value="2">어드밴스드</option>
+                                        <option value="3">레스큐</option>
+                                        <option value="4">마스터</option>
+                                        <option value="5">강사</option>
                                     </select>
                                     <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
                                     <i class="fa fa-check disabled valid color-green-dark"></i>
@@ -430,34 +221,34 @@
                                     <em></em>
                                 </div>
 
-                                <div class="mb-0 mt-5">
-                                    <label class="wediev-label pb-1 color-highlight ms-3" style="margin-top:-26px;">선호사항</label>
+                                <div class="mb-0 mt-5 pt-2">
+                                    <label class="wediev-label pb-1 color-highlight ms-2" style="margin-top:-26px;">선호사항</label>
                                     <div class="form-check interest-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="check_scuba1">
+                                    <input v-on:click="interest6=!interest6;" class="form-check-input" type="checkbox" value="" id="check_scuba1">
                                     <label class="form-check-label rounded-xl border-08" for="check_scuba1">대물포인트</label>
                                     <i class="fas fa-fish color-white font-17"></i>
                                     <i class="fas fa-fish font-17 color-highlight"></i>
                                     </div>
                                     <div class="form-check interest-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="check_scuba2">
+                                    <input v-on:click="interest6=!interest7;" class="form-check-input" type="checkbox" value="" id="check_scuba2">
                                     <label class="form-check-label rounded-xl border-08" for="check_scuba2">이색포인트</label>
                                     <i class="fas fa-grin-stars color-white font-17"></i>
                                     <i class="fas fa-grin-stars font-17 color-highlight"></i>
                                     </div>
                                     <div class="form-check interest-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="check_scuba3">
+                                    <input v-on:click="interest8=!interest8;" class="form-check-input" type="checkbox" value="" id="check_scuba3">
                                     <label class="form-check-label rounded-xl border-08" for="check_scuba3">수중촬영</label>
                                     <i class="fas fa-camera-retro color-white font-17"></i>
                                     <i class="fas fa-camera-retro font-17 color-highlight"></i>
                                     </div>
                                     <div class="form-check interest-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="check_scuba4">
+                                    <input v-on:click="interest9=!interest9;" class="form-check-input" type="checkbox" value="" id="check_scuba4">
                                     <label class="form-check-label rounded-xl border-08" for="check_scuba4">리브어보드</label>
                                     <i class="fas fa-ship color-white font-17"></i>
                                     <i class="fas fa-ship font-17 color-highlight"></i>
                                     </div>
                                     <div class="form-check interest-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="check_scuba5">
+                                    <input v-on:click="interest10=!interest10;" class="form-check-input" type="checkbox" value="" id="check_scuba5">
                                     <label class="form-check-label rounded-xl border-08" for="check_scuba5">체크다이빙</label>
                                     <i class="fas fa-check-square color-white font-17"></i>
                                     <i class="fas fa-check-square font-17 color-highlight"></i>
@@ -465,19 +256,19 @@
                                     
                                     
                                     <div class="form-check interest-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="check_scuba6">
+                                    <input v-on:click="interest11=!interest11;" class="form-check-input" type="checkbox" value="" id="check_scuba6">
                                     <label class="form-check-label rounded-xl border-08" for="check_scuba6">먹다이빙</label>
                                     <i class="fab fa-get-pocket color-white font-17"></i>
                                     <i class="fab fa-get-pocket font-17 color-highlight"></i>
                                     </div>
                                     <div class="form-check interest-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="check_scuba7">
+                                    <input v-on:click="interest12=!interest12;" class="form-check-input" type="checkbox" value="" id="check_scuba7">
                                     <label class="form-check-label rounded-xl border-08" for="check_scuba7">테크니컬다이빙</label>
                                     <i class="fas fa-drafting-compass color-white font-17"></i>
                                     <i class="fas fa-drafting-compass font-17 color-highlight"></i>
                                     </div>
                                     <div class="form-check interest-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="check_scuba8">
+                                    <input v-on:click="interest13=!interest13;" class="form-check-input" type="checkbox" value="" id="check_scuba8">
                                     <label class="form-check-label rounded-xl border-08" for="check_scuba8">마크로포인트</label>
                                     <i class="fas fa-fish color-white font-17"></i>
                                     <i class="fas fa-fish font-17 color-highlight"></i>
@@ -495,14 +286,12 @@
                     <div class="splide__slide">
                         <div id="slide4" class="card card-full pb-0 mb-0 border-bottom" style="height: calc( 100vh - 56px );">
                         <div class="content mt-1">
-                            <div class="text-center mt-2 mb-3">
-                                <div>
-                                    <p class="font-noto mb-3 mt-5">{{nickname}}님, <font class="color-primary font-20 font-600">프리 다이빙</font> 해보셨나요?<br/>
-                                    <font class="color-gray">정보가 없으면 다음을 클릭해주세요.</font>
-                                    </p>
-                                </div>
+                            <div class="font-noto font-400 mt-3 mb-2 d-flex" style="background: #e7e7e7;color:#5f6368;padding: 10px 16px;">
+                                <div style="background-color:#fff;display: inline-block;align-self: flex-start;border-radius: 4px;height: 32px;flex-shrink: 0;margin: 7px 16px 0 0;width: 32px;padding: 7px;"><svg style="vertical-align: baseline;fill: currentColor;"width="18" height="18" viewBox="0 0 24 24" focusable="false" class="HLbGM NMm5M"><path d="M11 7h2v2h-2zm0 4h2v6h-2z"></path><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"></path></svg></div>
+                                <div style="display: inline-block;"><font class="color-primary font-14">{{nickname}}</font>님, <font class="color-shopping">프리 다이빙</font> 해보셨나요?<br/>정보가 없으면 다음을 클릭해주세요.</div>
                             </div>
-                            <div class="p-3" style="background: #e7e7e7;border-radius:8px;">
+
+                            <div class="mt-3">
                                 <div class="input-style no-borders has-icon validate-field mb-3">
                                     <i class="fas fa-address-card color-gray" style="margin-left:6px;"></i>
                                     <label for="form21" class="color-highlight bg-e7e7e7">라이센스</label>
@@ -546,7 +335,6 @@
                                         <option value="GUE">GUE</option>
                                         <option value="PSAI">PSAI</option>
                                         <option value="SEI">SEI</option>
-                                        <option value="없음">없음</option>
                                     </select>
                                     <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
                                     <i class="fa fa-check disabled valid color-green-dark"></i>
@@ -559,12 +347,11 @@
                                     <label for="form12" class="color-highlight bg-e7e7e7">레벨</label>
                                     <select id="form12" required v-model="free_level">
                                         <option value="" selected disabled>레벨</option>
-                                        <option value="레벨1">레벨1</option>
-                                        <option value="레벨2">레벨2</option>
-                                        <option value="레벨3">레벨3</option>
-                                        <option value="레벨4">레벨4</option>
-                                        <option value="강사">강사</option>
-                                        <option value="없음">없음</option>
+                                        <option value="1">레벨1</option>
+                                        <option value="2">레벨2</option>
+                                        <option value="3">레벨3</option>
+                                        <option value="4">레벨4</option>
+                                        <option value="5">강사</option>
                                     </select>
                                     <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
                                     <i class="fa fa-check disabled valid color-green-dark"></i>
@@ -573,7 +360,7 @@
                                 </div>
 
                                 <div class="mb-2 mt-5">
-                                    <label class="wediev-label pb-1 color-highlight ms-3" style="margin-top:-26px;">Personal Best</label>
+                                    <label class="wediev-label pb-1 color-highlight ms-2" style="margin-top:-26px;">Personal Best</label>
                                     
                                     <div id="div_personal_best" style="display: inline-block;">
                                     </div>
@@ -581,22 +368,22 @@
                                     <a href="#" data-menu="menu-personal-best" class="btn btn-xs mb-0 rounded-xl text-uppercase font-900 shadow-s bg-dark-dark"><i class="fas fa-plus"></i></a>
                                 </div>
 
-                                <div class="mb-0" style="margin-top:30px;">
-                                    <label class="wediev-label pb-1 color-highlight ms-3" style="margin-top:-24px;">선호사항</label>
+                                <div class="mb-0" style="margin-top:40px;">
+                                    <label class="wediev-label pb-1 color-highlight ms-2" style="margin-top:-24px;">선호사항</label>
                                     <div class="form-check interest-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="check_free1">
+                                    <input v-on:click="interest14=!interest14;" class="form-check-input" type="checkbox" value="" id="check_free1">
                                     <label class="form-check-label rounded-xl border-08" for="check_free1">트레이닝</label>
                                     <i class="fas fa-graduation-cap color-white font-17"></i>
                                     <i class="fas fa-graduation-cap font-17 color-highlight"></i>
                                     </div>
                                     <div class="form-check interest-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="check_free2">
+                                    <input v-on:click="interest15=!interest15;" class="form-check-input" type="checkbox" value="" id="check_free2">
                                     <label class="form-check-label rounded-xl border-08" for="check_free2">수중화보</label>
                                     <i class="fas fa-camera-retro color-white font-17"></i>
                                     <i class="fas fa-camera-retro font-17 color-highlight"></i>
                                     </div>
                                     <div class="form-check interest-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="check_free3">
+                                    <input v-on:click="interest16=!interest16;" class="form-check-input" type="checkbox" value="" id="check_free3">
                                     <label class="form-check-label rounded-xl border-08" for="check_free3">해루질</label>
                                     <i class="fab fa-get-pocket color-white font-17"></i>
                                     <i class="fab fa-get-pocket font-17 color-highlight"></i>
@@ -614,33 +401,25 @@
                     <div class="splide__slide">
                         <div id="slide5" class="card card-full pb-0 mb-0 border-bottom" style="height: calc( 100vh - 56px );">
                         <div class="content mt-1">
-                            <div class="text-center mt-2 mb-3">
-                                <div>
-                                    <p class="font-noto mb-3 mt-5">{{nickname}}님, <font class="color-primary font-20 font-600">강사</font> 로 등록하시겠어요?<br/>
-                                    <font class="color-gray">위다이브에서 무료로 강습생을 추천해드려요.</font>
-                                    </p>
-                                </div>
+                            <div class="font-noto font-400 mt-3 mb-2 d-flex" style="background: #e7e7e7;color:#5f6368;padding: 10px 16px;">
+                                <div style="background-color:#fff;display: inline-block;align-self: flex-start;border-radius: 4px;height: 32px;flex-shrink: 0;margin: 7px 16px 0 0;width: 32px;padding: 7px;"><svg style="vertical-align: baseline;fill: currentColor;"width="18" height="18" viewBox="0 0 24 24" focusable="false" class="HLbGM NMm5M"><path d="M11 7h2v2h-2zm0 4h2v6h-2z"></path><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"></path></svg></div>
+                                <div style="display: inline-block;"><font class="color-shopping">강사</font> 이신가요?<br/>무료로 강습생을 연결해드려요.</div>
                             </div>
+
                             <div class="input-style no-borders has-icon validate-field mb-3 mt-3">
                                 <i class="fas fa-phone-alt color-gray"></i>
-                                <input type="tel" class="form-control validate-text" id="form31" placeholder="전화번호">
+                                <input type="tel" class="form-control validate-text" id="form31" placeholder="전화번호" v-model="instructor_phone">
                                 <label for="form31" class="color-highlight">전화번호</label>
                                 <i class="fa fa-times disabled invalid color-red-dark"></i>
                                 <i class="fa fa-check disabled valid color-green-dark"></i>
                                 <em>(필수입력)</em>
                             </div>
-                            <div class="input-style no-borders has-icon validate-field mb-3">
-                                <i class="fa fa-at color-gray"></i>
-                                <input type="email" class="form-control validate-text" id="form32" placeholder="이메일">
-                                <label for="form32" class="color-highlight">이메일</label>
-                                <i class="fa fa-times disabled invalid color-red-dark"></i>
-                                <i class="fa fa-check disabled valid color-green-dark"></i>
-                                <em>(필수입력)</em>
-                            </div>
                             
-                            <div style="border: 1px solid #abb7ba;width: 150px;height:150px;display: inline-block;background: white;position: relative;">
-                                <input type="file" id="file-upload2" class="upload-file text-center" accept="image/*" style="height: 150px;">
-                                <p class="upload-file-text" style="color: #abb7ba;position:absolute;left:40px;top:80px;"><i class="fas fa-plus"></i><br/>자격증 업로드</p></input>
+                            
+                            <div id="file-upload2-back" style="border: 1px solid #abb7ba;width: 150px;height:150px;display: inline-block;background: white;position: relative;">
+                                <input type="file" @change="imageInstructorChange" id="file-upload2" class="upload-file text-center" accept="image/*" style="height: 150px;">
+                                    <p id="file-upload2-text" class="upload-file-text" style="color: #abb7ba;position:absolute;left:40px;top:80px;"><i class="fas fa-plus"></i><br/>자격증 업로드</p>
+                                </input>
                             </div>
                         </div>
                         <div class="row me-0 ms-0 mb-0" style="position: absolute;bottom: 0;width:100%;padding-left:20px;padding-right:20px;">
@@ -771,11 +550,7 @@
   </div>
 </template>
 <script>
-import VueTypeaheadBootstrap from 'vue-typeahead-bootstrap';
-import {debounce} from 'lodash';
-import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
-
-var schedule_status = [0, 0, 0, 0, 0];
+const axios = require("axios")
 
 export default {
   name: 'HelloWorld',
@@ -798,8 +573,9 @@ export default {
                 $("#em_pb_record").text("(단위, 미터)")
             }
         });
-    }, 500);
-
+        $("#form1").focus();
+    }, 1000);
+    
     var body = document.body, html = document.documentElement;
     var height = Math.min(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight) - 56;
     document.getElementById('slide1').style.height = height + 'px';
@@ -820,7 +596,7 @@ export default {
     
   },
   components: {
-    VueTypeaheadBootstrap
+    
   },
   created() {
     setTimeout(function() {
@@ -831,19 +607,17 @@ export default {
   },
   data () {
     return {
-        query: '',
-        selecteduser: null,
-        users: [],
         nickname: '',
-        username: '',
         userage: '',
         usersex: '',
-        useraddress: '',
         scuba_license: '',
         scuba_level: '',
         scuba_log: '',
         free_license: '',
         free_level: '',
+        instructor_phone: '',
+        file_photo: null,
+        file_certificate: null,
         pb_sta: '',
         pb_dyn: '',
         pb_dnf: '',
@@ -852,6 +626,22 @@ export default {
         pb_fim: '',
         pb_cnf: '',
         pb_nlt: '',
+        interest1: false,
+        interest2: false,
+        interest3: false,
+        interest4: false,
+        interest5: false,
+        interest6: false,
+        interest7: false,
+        interest8: false,
+        interest9: false,
+        interest10: false,
+        interest11: false,
+        interest12: false,
+        interest13: false,
+        interest14: false,
+        interest15: false,
+        interest16: false,
     }
   }, 
   watch: {
@@ -862,29 +652,15 @@ export default {
               $("#btn_next1").attr("disabled", false);
           }
       },
-      username: function(newVal, oldVal) {
-          if (this.userage === '' || this.usersex === '' || this.useraddress === '') {
-              $("#btn_next2").attr("disabled", true);
-          } else {
-              $("#btn_next2").attr("disabled", false);
-          }
-      },
       userage: function(newVal, oldVal) {
-          if (this.userage === '' || this.usersex === '' || this.useraddress === '') {
+          if (this.userage === '' || this.usersex === '') {
               $("#btn_next2").attr("disabled", true);
           } else {
               $("#btn_next2").attr("disabled", false);
           }
       },
       usersex: function(newVal, oldVal) {
-          if (this.userage === '' || this.usersex === '' || this.useraddress === '') {
-              $("#btn_next2").attr("disabled", true);
-          } else {
-              $("#btn_next2").attr("disabled", false);
-          }
-      },
-      useraddress: function(newVal, oldVal) {
-          if (this.userage === '' || this.usersex === '' || this.useraddress === '') {
+          if (this.userage === '' || this.usersex === '') {
               $("#btn_next2").attr("disabled", true);
           } else {
               $("#btn_next2").attr("disabled", false);
@@ -927,8 +703,29 @@ export default {
       },
   },
   methods: {
+      imageUserChange({ target: { files = [] } }) {
+        if (!files.length) {
+          return
+        }
+        this.file_photo = files[0];
+        $("#file-upload1-back").css("background", "url(" + URL.createObjectURL(this.file_photo) + ")");
+        $("#file-upload1-back").css("background-size", "cover");
+        $("#file-upload1-img").hide();
+      },
+      imageInstructorChange({ target: { files = [] } }) {
+        if (!files.length) {
+          return
+        }
+        this.file_certificate = files[0];
+        $("#file-upload2-back").css("background", "url(" + URL.createObjectURL(this.file_certificate) + ")");
+        $("#file-upload2-back").css("background-size", "cover");
+        $("#file-upload2-text").hide();
+      },
       next1() {
           $(".progress-bar").css("width", "40%");
+          setTimeout(function() {
+              $("#form2").focus();
+          },200);
       },
       next2() {
           $(".progress-bar").css("width", "60%");
@@ -939,39 +736,240 @@ export default {
       next4() {
           $(".progress-bar").css("width", "100%");
       },
-      next5() {
-          setTimeout(function() {
-              $(".span_timer").text("2");
-          },1000)
-          setTimeout(function() {
-              $(".span_timer").text("1");
-          },2000)
-          setTimeout(function() {
-              $(".span_timer").text("0");
-              window.location.href="/";
-          },3000)
+      async next5() {
+        //console.log(this.file_photo);
+        
+        localStorage.nickName = this.nickname;
+        localStorage.userAge = ((new Date()).getFullYear() - parseInt(this.userage) + 1);
+        localStorage.userSex = ((this.usersex == "남자") ? "m" : "f");
+
+        
+        
+        var freeBest = new Array();
+        if (this.pb_sta != null) freeBest.push({"key": "STA", "value": this.pb_sta});
+        if (this.pb_dyn != null) freeBest.push({"key": "DYN", "value": this.pb_dyn});
+        if (this.pb_dnf != null) freeBest.push({"key": "DNF", "value": this.pb_dnf});
+        if (this.pb_cwt != null) freeBest.push({"key": "CWT", "value": this.pb_cwt});
+        if (this.pb_vwt != null) freeBest.push({"key": "VWT", "value": this.pb_vwt});
+        if (this.pb_fim != null) freeBest.push({"key": "FIM", "value": this.pb_fim});
+        if (this.pb_cnf != null) freeBest.push({"key": "CNF", "value": this.pb_cnf});
+        if (this.pb_nlt != null) freeBest.push({"key": "NLT", "value": this.pb_nlt});
+
+        var interest_id = ["61ac9d06eac3ebfb7ac9f952", "61ac9d0beac3ebfb7ac9f955", "61ac9d18eac3ebfb7ac9f958", "6174da70a60639819c3e6ad9", "61ac9d25eac3ebfb7ac9f95b", "61a2fefa098b3785ef439cb3", "61ac9de8eac3ebfb7ac9f95e", "61ac9deceac3ebfb7ac9f961", "6174da75a60639819c3e6ae5", "61ac9e21eac3ebfb7ac9f964", "6178f02df7c3a048b4706cc8", "6198ff5eae1cc12e02c3cca0", "6178f01cf7c3a048b4706cc6", "61ac9eaeeac3ebfb7ac9f968", "61ac9eb7eac3ebfb7ac9f96b", "61780278f7c3a048b4704a85"];
+        var interest_list = new Array();
+        for (var i=0; i<15; i++) {
+            if (this['interest'+(i+1)] == true) {
+                interest_list.push(interest_id[i]);
+            }
+        }
+
+        var result_img_user = null;
+        if (this.file_photo != null) {
+            const _file = this.file_photo;
+            console.log(_file);
+            result_img_user = await axios({
+                url: 'https://api.wedives.com/graphql',
+                method: 'post',
+                data: {
+                    query: `
+                        mutation UploadImage($file: Upload!) {
+                            uploadImage(file: $file) {
+                                _id
+                            }
+                        }
+                    `,
+                    variables: {
+                        "file": _file
+                    }
+                },
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            await axios({
+                url: 'https://api.wedives.com/graphql',
+                method: 'post',
+                data: {
+                    query: `
+                        mutation UpdateImage($input: UpdateImageInput!) {
+                            updateImage(input: $input) {
+                                _id
+                            }
+                        }
+                    `,
+                    variables: {
+                        "input": {
+                            "_id": result_img_user.uploadImage._id,
+                            "name": "userImage",
+                            "description": null,
+                            "reference": null,
+                            "uploaderId": null
+                        }
+                    }
+                }
+            });
+        }
+        
+        var result_img_certi = null;
+        if (this.file_certificate != null) {
+            const _file = this.file_certificate;
+            result_img_certi = await axios({
+                url: 'https://api.wedives.com/graphql',
+                method: 'post',
+                data: {
+                    query: `
+                        mutation UploadImage($file: Upload!) {
+                            uploadImage(file: $file) {
+                                _id
+                            }
+                        }
+                    `,
+                    variables: {
+                        "file": _file
+                    }
+                },
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            await axios({
+                url: 'https://api.wedives.com/graphql',
+                method: 'post',
+                data: {
+                    query: `
+                        mutation UpdateImage($input: UpdateImageInput!) {
+                            updateImage(input: $input) {
+                                _id
+                            }
+                        }
+                    `,
+                    variables: {
+                        "input": {
+                            "_id": result_img_certi.uploadImage._id,
+                            "name": "certificateImage",
+                            "description": null,
+                            "reference": null,
+                            "uploaderId": null
+                        }
+                    }
+                }
+            });
+        }
+        
+        
+
+        var result = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            data: {
+                query: `
+                    mutation Mutation($input: UserInput) {
+                        upsertUser(input: $input) {
+                            instructorLicenseImages {
+                            _id
+                            }
+                            instructorTypes
+                            instructorVerifications {
+                            _id
+                            }
+                            scubaLicenseType
+                            scubaLicenseLevel
+                            freeLicenseType
+                            freeLicenseLevel
+                            _id
+                            firebaseUid
+                            fcmToken
+                            email
+                            emailVerified
+                            phoneNumber
+                            phoneNumberVerified
+                            profileImages {
+                            _id
+                            }
+                            nickName
+                            name
+                            birthAge
+                            gender
+                            residence
+                            interests {
+                            _id
+                            }
+                            divingLog
+                            freeDivingBests {
+                            key
+                            value
+                            }
+                        }
+                    }
+                `,
+                variables: {
+                    "input": {
+                        "instructorVerifications": null,
+                        "scubaLicenseType": this.scuba_license,
+                        "scubaLicenseLevel": parseInt(this.scuba_level),
+                        "freeLicenseType": this.free_license,
+                        "freeLicenseLevel": parseInt(this.free_level),
+                        "name": localStorage.userName,
+                        "nickName": this.nickname,
+                        "email": localStorage.userEmail,
+                        "birthAge": localStorage.userAge,
+                        "gender": localStorage.userSex,
+                        "instructors": null,
+                        "profileImages": ((result_img_user == null) ? null : [result_img_user.uploadImage._id]),
+                        "divingLog": parseInt(this.scuba_log),
+                        "freeDivingBest": freeBest,
+                        "interests": interest_list
+                    }
+                }
+            }
+        });
+
+        console.log("result ================");
+        console.log(result);
+        console.log(this.instructor_phone)
+
+
+        var result2 = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            data: {
+                query: `
+                    mutation UpsertInstructorVerification($input: InstructorVerificationInput) {
+                        upsertInstructorVerification(input: $input) {
+                            _id
+                            instructorType
+                            isVerified
+                            verificationReason
+                        }
+                    }
+                `,
+                variables: {
+                    "input": {
+                        "instructorLicenseImage": ((result_img_certi == null) ? null : result_img_certi.uploadImage._id),
+                        "instructorType": null,
+                        "isVerified": null,
+                        "verificationReason": null,
+                        "user": result.upsertUser._id
+                    }
+                }
+            }
+        });
+        console.log("result2 ================");
+        console.log(result2);
+        
+
+        setTimeout(function() {
+            $(".span_timer").text("2");
+        },1000)
+        setTimeout(function() {
+            $(".span_timer").text("1");
+        },2000)
+        setTimeout(function() {
+            
+            //window.location.href="/";
+        },2100)
       },
-      show_scuba_label: function() {
-          document.getElementById('scuba_label').classList.remove('hide')
-      },
-      lookupUser: debounce(function(){
-        // in practice this action should be debounced
-        fetch(`https://api.github.com/search/users?q=${this.query}`)
-          .then(response => {
-            return response.json();
-          })
-          .then(data => {
-            this.users = data.items;
-          })
-      }, 500),
-      lookupUser2: debounce(function(){
-        this.users = [
-            {"id": "region_ko_jeju", "type": "region", "name_ko": "제주도", name_en: "Jeju island", "img_url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0c/bf/d2/56/photo1jpg.jpg?w=100&h=100&s=1"},
-            {"id": "region_ko_wooljin", "type": "region", "name_ko": "울진", name_en: "Wooljin", "img_url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/01/5a/31/a0/sunrise-peak-seongsan.jpg?w=100&h=100&s=1"},
-            {"id": "center_ko_jeju_bubbletank", "type": "center", "name_ko": "제주 버블탱크 스쿠버다이빙", name_en: "Bubble tank", "img_url": "/static/bubble2.jpg"},
-            {"id": "point_ko_jeju_munisland", "type": "point", "name_ko": "제주도 문섬", name_en: "Mun island", "img_url": "https://api.cdn.visitjeju.net/photomng/imgpath/201907/31/07c1996d-4374-4e77-b353-300d01783718.jpg"},
-        ];
-      }, 500),
+      
       addPersonalBest: function() {
             if (this.pb_sta != "") {
                 var record_type = "STA"
@@ -1039,40 +1037,7 @@ export default {
                 for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+0+"px)"}
             }*/
       },
-      loginGoogle: function() {
-        const provider = new GoogleAuthProvider();
-        const auth = getAuth();
-        auth.languageCode = 'ko';
-
-        signInWithPopup(auth, provider)
-        .then((result) => {
-            // This gives you a Google Access Token. You can use it to access the Google API.
-            const credential = GoogleAuthProvider.credentialFromResult(result);
-            const token = credential.accessToken;
-            // The signed-in user info.
-            const user = result.user;
-            console.log(credential)
-            console.log(token)
-            console.log(user)
-            var single = new Splide( '#single-slider-1', {
-                type:'loop',
-                autoplay:true,
-                interval:4000,
-                perPage: 1,
-            }).mount().go(2);
-            $(".progress-bar").css("width", "20%");
-            // ...
-        }).catch((error) => {
-            // Handle Errors here.
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            // The email of the user's account used.
-            const email = error.email;
-            // The AuthCredential type that was used.
-            const credential = GoogleAuthProvider.credentialFromError(error);
-            // ...
-        });
-      }
+      
   }
 
   
@@ -1100,21 +1065,4 @@ select {background: white; background-color: white;}
 .input-big3::placeholder {font-size:14px !important;}
 .btn[disabled] {pointer-events: none !important;background-image: linear-gradient(to bottom, #ccc, #ccc) !important;}
 .bg-e7e7e7 {background-color: transparent !important;}
-.ico-wedive-w {-webkit-font-smoothing: antialiased;
-    display: grid;
-    margin-left: calc(50% - 20px);
-    font-style: normal;
-    font-variant: normal;
-    text-rendering: auto;
-    line-height: 1;
-    
-    width:40px;
-    height:40px;}
-.ico-wedive-w:before {content: "";
-        background-image: url('/static/images/assets/ico_wedive_d.png');
-        background-size:40px 40px;
-        width:40px;
-        height:40px;
-        display:inline-block;
-}
 </style>

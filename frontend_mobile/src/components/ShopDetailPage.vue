@@ -499,8 +499,6 @@ export default {
 .wedive-coupon {color: #2269e0;border-radius: 4px;width:100%;border: 1px solid #2269e0;padding: 6px 16px;font-family: 'Noto Sans Korean'}
 .float-right {float: right;margin-top:5px;}
 .wedive-package {background: #f4f4f4;padding: 2px 12px;border-radius: 4px;font-family: 'Noto Sans Korean';font-weight:200;}
-.ico-wedive-w {-webkit-font-smoothing: antialiased;display: grid;margin-left: calc(50% - 20px);font-style: normal;font-variant: normal;text-rendering: auto;line-height: 1;width:40px;height:40px;}
-.ico-wedive-w:before {content: "";background-image: url('/static/images/ico_wedive_d.png');background-size:40px 40px;width:40px;height:40px;display:inline-block;}
 .wedive-comment-number {float: left;position: relative;width: 20px;}
 .wedive-comment-desc {padding-left: 30px;line-height: 22px;}
 .item_desc{overflow: hidden;position: relative;}

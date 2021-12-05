@@ -11,32 +11,33 @@
     <div class="page-content pb-3"> 
         
         <!-- card in this page format must have the class card-full to avoid seeing behind it-->
-        <div class="card card-full pb-0 mb-3 border-bottom">
+        <div v-if="userToken == null || nickName == null" class="card card-full pb-0 mb-0 border-bottom">
           <div class="mt-1 p-3 mb-0">
-            <div class="" id="div_login">
-              <p class="mb-0 font-noto">정확한 매칭을 위해서<br/>로그인 또는 회원가입을 해주세요.</p>
+            <div id="div_login">
+              <p v-if="userToken == null && nickName == null" class="mb-0 font-noto">정확한 매칭을 위해서<br/>로그인 또는 회원가입을 해주세요.</p>
+              <p v-else class="mb-0 font-noto">정확한 매칭을 위해서<br/>사용자 프로필을 등록해주세요.</p>
             </div>
-            <div class="" style="position: absolute;right:16px;top:16px;">
-              <a href="/user_create" class="btn btn-m mb-3 rounded-xl text-uppercase font-500 shadow-s bg-secondary font-noto"><i class="fas fa-user-lock me-1"></i> 로그인</a>
+            <div style="position: absolute;right:16px;top:16px;">
+              <a v-on:click="login()" class="btn btn-m mb-3 rounded-xl text-uppercase font-500 shadow-s bg-secondary font-noto"><i class="fas fa-user-lock me-1"></i> {{ login_word }}</a>
             </div>
           </div>
         </div>
 
-        <div class="card card-style pb-0 mb-3 ms-3 me-3 border-bottom">
+        <div class="card card-style pb-0 mb-3 ms-3 me-3 mt-4 border-bottom">
           <div class="mt-1">
             <div class="p-4">
-              <span class="font-noto font-20 font-500">컨시어지</span>
-              <p class="font-noto color-gray mb-0 font-200">위다이브의 전문 매니저에게 요청합니다.</p>
+              <span :class="'font-noto font-20 font-500' + ((userToken == null || nickName == null) ? ' opacity-40' : '')">컨시어지</span>
+              <p :class="'font-noto color-gray mb-0 font-200' + ((userToken == null || nickName == null) ? ' opacity-40' : '')">위다이브의 전문 매니저에게 요청합니다.</p>
               <i class="wedive_icoset2x wedive_icoset2x_rightarrow"></i>
             </div>
           </div>
         </div>
 
-        <div class="card card-style pb-0 mb-3 ms-3 me-3 border-bottom" data-menu="menu-type">
+        <div class="card card-style pb-0 mb-3 ms-3 me-3 border-bottom" :data-menu="((userToken != null && nickName != null) ? 'menu-type' : '')">
           <div class="mt-1">
             <div class="p-4">
-              <span class="font-noto font-20 font-500">직접 모집</span>
-              <p class="font-noto color-gray mb-0 font-200">직접 맞춤 버디를 모집할께요.</p>
+              <span :class="'font-noto font-20 font-500' + ((userToken == null || nickName == null) ? ' opacity-40' : '')">직접 모집</span>
+              <p :class="'font-noto color-gray mb-0 font-200' + ((userToken == null || nickName == null) ? ' opacity-40' : '')">직접 맞춤 버디를 모집할께요.</p>
               <i class="wedive_icoset2x wedive_icoset2x_rightarrow"></i>
             </div>
           </div>
@@ -75,6 +76,7 @@
         </div>
         <br/>
     </div>
+
     
   </div>
 </template>
@@ -120,97 +122,77 @@ export default {
   },
   data () {
     return {
-        query: '',
-        selecteduser: null,
-        users: []
+        userToken: localStorage.userToken,
+        nickName: localStorage.nickName,
+        login_word : (localStorage.userToken == null) ? '로그인' : '등록',
     }
   }, methods: {
+      login() {
+        localStorage.loginUrl = window.location.pathname;
+        if (localStorage.hasOwnProperty("userToken") == false || localStorage.userToken == null) {
+          const activeMenu = document.querySelectorAll('.menu-active');
+          for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
+          //Open Clicked Menu
+          var menuData = "menu-login"
+          document.getElementById(menuData).classList.add('menu-active');
+          document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
+          //Check and Apply Effects
+          var menu = document.getElementById(menuData);
+          var menuEffect = menu.getAttribute('data-menu-effect');
+          var menuLeft = menu.classList.contains('menu-box-left');
+          var menuRight = menu.classList.contains('menu-box-right');
+          var menuTop = menu.classList.contains('menu-box-top');
+          var menuBottom = menu.classList.contains('menu-box-bottom');
+          var menuWidth = menu.offsetWidth;
+          var menuHeight = menu.offsetHeight;
+          var menuTimeout = menu.getAttribute('data-menu-hide');
+
+          if(menuTimeout){
+              setTimeout(function(){
+                  document.getElementById(menuData).classList.remove('menu-active');
+                  document.getElementsByClassName('menu-hider')[0].classList.remove('menu-active');
+              },menuTimeout)
+          }
+
+          if(menuEffect === "menu-push"){
+              var menuWidth = document.getElementById(menuData).getAttribute('data-menu-width');
+              if(menuLeft){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX("+menuWidth+"px)"}}
+              if(menuRight){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+menuWidth+"px)"}}
+              if(menuBottom){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY(-"+menuHeight+"px)"}}
+              if(menuTop){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY("+menuHeight+"px)"}}
+          }
+          if(menuEffect === "menu-parallax"){
+              var menuWidth = document.getElementById(menuData).getAttribute('data-menu-width');
+              if(menuLeft){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX("+menuWidth/10+"px)"}}
+              if(menuRight){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+menuWidth/10+"px)"}}
+              if(menuBottom){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY(-"+menuHeight/5+"px)"}}
+              if(menuTop){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY("+menuHeight/5+"px)"}}
+          }
+        } else if (localStorage.hasOwnProperty("nickName") == false || localStorage.nickName == null) {
+          location.href='/user_create';
+        }
+      },
       goSwimming() {
         $(".pool").css("background", "#25beb2");
         setTimeout(function() {
           location.href='/buddy_swimming';
-        }, 50);
+        }, 30);
       },
       goSea() {
         console.log("sea")
         $(".sea").css("background", "#25beb2");
         setTimeout(function() {
           location.href='/buddy_sea';
-        }, 50);
+        }, 30);
       },
       goAbroad() {
         $(".oversea").css("background", "#25beb2");
         setTimeout(function() {
           location.href='/buddy_abroad';
-        }, 50);
+        }, 30);
       },
-      lookupUser: debounce(function(){
-        // in practice this action should be debounced
-        fetch(`https://api.github.com/search/users?q=${this.query}`)
-          .then(response => {
-            return response.json();
-          })
-          .then(data => {
-            this.users = data.items;
-          })
-      }, 500),
-      lookupUser2: debounce(function(){
-        this.users = [
-            {"id": "region_ko_jeju", "type": "region", "name_ko": "제주도", name_en: "Jeju island", "img_url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0c/bf/d2/56/photo1jpg.jpg?w=100&h=100&s=1"},
-            {"id": "region_ko_wooljin", "type": "region", "name_ko": "울진", name_en: "Wooljin", "img_url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/01/5a/31/a0/sunrise-peak-seongsan.jpg?w=100&h=100&s=1"},
-            {"id": "center_ko_jeju_bubbletank", "type": "center", "name_ko": "제주 버블탱크 스쿠버다이빙", name_en: "Bubble tank", "img_url": "/static/bubble2.jpg"},
-            {"id": "point_ko_jeju_munisland", "type": "point", "name_ko": "제주도 문섬", name_en: "Mun island", "img_url": "https://api.cdn.visitjeju.net/photomng/imgpath/201907/31/07c1996d-4374-4e77-b353-300d01783718.jpg"},
-        ];
-      }, 500),
-      closeSchedule: function(el_idx) {
-        $("#div_schedule" + el_idx).addClass("hide");
-        schedule_status[(el_idx-1)] = 0;
-        if (schedule_status.includes(1) == false) {
-          $("#div_empty").fadeIn(100);
-        }
-      },
-      addSchedule: function() {
-        if (schedule_status.includes(1) == false) {
-          $("#div_empty").fadeOut(100);;
-          //$("#delete_schedule").removeClass("hide");
-        }
-        if (schedule_status.includes(0) == false) {
-          var toastData = 'snackbar-maxerror';
-          var notificationToast = document.getElementById(toastData);
-          var notificationToast = new bootstrap.Toast(notificationToast);
-          notificationToast.show();
-        } else{
-          for (var i=1; i<(schedule_status.length+1); i++) {
-            if (schedule_status[i-1] == 0) {
-              $("#div_schedule" + i).removeClass("hide");
-              schedule_status[i-1] = 1;
-              break;
-            }
-          }
-          
-        }
-      },
-      reserve_next: function() {
-          setTimeout(function() {
-            const activeMenu = document.querySelectorAll('.menu-active');
-            for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
-          },100);
-
-          setTimeout(function() {
-            var menuData = 'menu-reserve2';
-            document.getElementById(menuData).classList.add('menu-active');
-            document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
-          },200);
-      },
-      reserve_finish: function() {
-          setTimeout(function() {
-            const activeMenu = document.querySelectorAll('.menu-active');
-            for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
-          },100);
-      },
-      goPoint: function() {
-          location.href = '/point';
-      }
+      
+      
   }
 
   

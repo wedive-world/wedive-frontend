@@ -142,6 +142,7 @@
             if(singleSlider.length) {
                 singleSlider.forEach(function(e){
                     setTimeout(function(e) {
+                        console.log("..")
                         var single = new Splide( '#'+e.id, {
                             type:'loop',
                             autoplay:true,
@@ -152,7 +153,7 @@
                         var sliderPrev = document.querySelectorAll('.slider-prev');
                         sliderNext.forEach(el => el.addEventListener('click', el => {single.go('>');}));
                         sliderPrev.forEach(el => el.addEventListener('click', el => {single.go('<');}));
-                    },0, e);
+                    },100, e);
                     
                 });
             }
@@ -298,39 +299,41 @@
                     for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
                     //Open Clicked Menu
                     var menuData = el.getAttribute('data-menu');
-                    document.getElementById(menuData).classList.add('menu-active');
-                    document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
-                    //Check and Apply Effects
-                    var menu = document.getElementById(menuData);
-                    var menuEffect = menu.getAttribute('data-menu-effect');
-                    var menuLeft = menu.classList.contains('menu-box-left');
-                    var menuRight = menu.classList.contains('menu-box-right');
-                    var menuTop = menu.classList.contains('menu-box-top');
-                    var menuBottom = menu.classList.contains('menu-box-bottom');
-                    var menuWidth = menu.offsetWidth;
-                    var menuHeight = menu.offsetHeight;
-                    var menuTimeout = menu.getAttribute('data-menu-hide');
+                    if (menuData != "") {
+                        document.getElementById(menuData).classList.add('menu-active');
+                        document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
+                        //Check and Apply Effects
+                        var menu = document.getElementById(menuData);
+                        var menuEffect = menu.getAttribute('data-menu-effect');
+                        var menuLeft = menu.classList.contains('menu-box-left');
+                        var menuRight = menu.classList.contains('menu-box-right');
+                        var menuTop = menu.classList.contains('menu-box-top');
+                        var menuBottom = menu.classList.contains('menu-box-bottom');
+                        var menuWidth = menu.offsetWidth;
+                        var menuHeight = menu.offsetHeight;
+                        var menuTimeout = menu.getAttribute('data-menu-hide');
 
-                    if(menuTimeout){
-                        setTimeout(function(){
-                            document.getElementById(menuData).classList.remove('menu-active');
-                            document.getElementsByClassName('menu-hider')[0].classList.remove('menu-active');
-                        },menuTimeout)
-                    }
+                        if(menuTimeout){
+                            setTimeout(function(){
+                                document.getElementById(menuData).classList.remove('menu-active');
+                                document.getElementsByClassName('menu-hider')[0].classList.remove('menu-active');
+                            },menuTimeout)
+                        }
 
-                    if(menuEffect === "menu-push"){
-                        var menuWidth = document.getElementById(menuData).getAttribute('data-menu-width');
-                        if(menuLeft){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX("+menuWidth+"px)"}}
-                        if(menuRight){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+menuWidth+"px)"}}
-                        if(menuBottom){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY(-"+menuHeight+"px)"}}
-                        if(menuTop){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY("+menuHeight+"px)"}}
-                    }
-                    if(menuEffect === "menu-parallax"){
-                        var menuWidth = document.getElementById(menuData).getAttribute('data-menu-width');
-                        if(menuLeft){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX("+menuWidth/10+"px)"}}
-                        if(menuRight){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+menuWidth/10+"px)"}}
-                        if(menuBottom){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY(-"+menuHeight/5+"px)"}}
-                        if(menuTop){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY("+menuHeight/5+"px)"}}
+                        if(menuEffect === "menu-push"){
+                            var menuWidth = document.getElementById(menuData).getAttribute('data-menu-width');
+                            if(menuLeft){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX("+menuWidth+"px)"}}
+                            if(menuRight){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+menuWidth+"px)"}}
+                            if(menuBottom){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY(-"+menuHeight+"px)"}}
+                            if(menuTop){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY("+menuHeight+"px)"}}
+                        }
+                        if(menuEffect === "menu-parallax"){
+                            var menuWidth = document.getElementById(menuData).getAttribute('data-menu-width');
+                            if(menuLeft){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX("+menuWidth/10+"px)"}}
+                            if(menuRight){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+menuWidth/10+"px)"}}
+                            if(menuBottom){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY(-"+menuHeight/5+"px)"}}
+                            if(menuTop){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY("+menuHeight/5+"px)"}}
+                        }
                     }
                 }));
 
@@ -582,12 +585,12 @@
         //File Upload
         const inputArray = document.getElementsByClassName('upload-file');
         if(inputArray.length){
-            inputArray[0].addEventListener('change',prepareUpload,false);
-                function prepareUpload(event){
+            //inputArray[0].addEventListener('change',prepareUpload,false);
+                /*function prepareUpload(event){
                   if (this.files && this.files[0]) {
-                  var img = document.getElementById('image-data');
-                  img.src = URL.createObjectURL(this.files[0]);
-              }
+                    var img = document.getElementById('image-data');
+                    img.src = URL.createObjectURL(this.files[0]);
+                  }
                 const files = event.target.files;
                 const fileName = files[0].name;
                 document.getElementsByClassName('file-data')[0].classList.add('disabled');
@@ -596,7 +599,7 @@
                 document.getElementsByClassName('upload-file-modified')[0].innerHTML = files[0].lastModifiedDate;
                 document.getElementsByClassName('upload-file-size')[0].innerHTML = files[0].size/1000+'kb';
                 document.getElementsByClassName('upload-file-type')[0].innerHTML = files[0].type;
-            }
+            }*/
 
         }
         var locationBut = document.querySelectorAll('.get-location');
