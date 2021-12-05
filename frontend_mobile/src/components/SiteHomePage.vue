@@ -4,7 +4,7 @@
     <div class="main-header header header-fixed header-logo-center">
         <a class="" href="/" style="margin-left: 16px;"><img class="logo-image" src="/static/images/assets/logo-dark.svg" height="46" /></a>
         
-        
+        <a href="/site_list" class="header-icon header-icon-3 font-18" style="color: #858585;margin-right: 13.3333333333px;"><i class="fas fa-list"></i></a>
         <a v-on:click="searchBox()" href="#" class="header-icon header-icon-4 font-18" style="color: #858585;margin-right: 13.3333333333px;"><i class="fas fa-search"></i></a>
     </div>
     
@@ -111,7 +111,7 @@
                             </p>
                             <div class="box-bottom">
                                 <div class="wedive-corner wedive-corner-bottom"></div>
-                                <div class="bg-secondary box-bottom-area color-white row">
+                                <div class="bg-secondary box-bottom-area color-white row" style="box-shadow: rgb(0 0 0 / 20%) 3px 3px 10px inset;">
                                     <span class="col-4 text-center box-bottom-item">컨시어지</span><span class="col-4 text-center box-bottom-item">버디찾기</span><span class="col-4 text-center box-bottom-item">강사찾기</span>
                                 </div>
                             </div>
@@ -688,7 +688,7 @@ export default {
 .wedive-corner {position: absolute;width: 30px;height: 30px;overflow: hidden;z-index:999;}
 .wedive-corner:after {content: '';position: absolute;height: 200%;width: 200%;border-radius: 100%;z-index: -1;box-shadow: 10px 10px 5px 100px #eef2f1;}
 .wedive-corner-bottom {left:-16px;bottom:0;width:16px;height:16px;}
-.wedive-corner-bottom:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #25beb2 !important;}
+.wedive-corner-bottom:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #20a399 !important;}
 .icon-concierge {position: fixed;width: 58px;height: 58px;bottom: 70px;right:24px;background: url(https://www.svgrepo.com/show/56194/concierge.svg);background-position-y: 8px;background-repeat: no-repeat;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
 .box-bottom {width:calc(100% - 120px);height:36px;position: absolute;right: 0;bottom: 0;display:flex;}
 .box-bottom-corner {display:inline-block;width:36px;height:36px;z-index:999;}

@@ -3,10 +3,6 @@
     <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-site" data-menu-load=""></div>
     <div class="page-content">
         
-        <div class="content">
-        <h4 class="text-start pt-2 mb-0 font-18 font-900">짱스님,<br/>어디로 떠나볼까요?</h4>
-        </div>
-
         <div v-on:click="goList()" class="card card-style" style="background: white;height:148px;">
             <div class="content mb-0 mt-3">
                 <img class="float-right" src="/static/images/assets/save_earth.png" style="position: absolute;z-index: 11;right: 10px;top:40px;"/>

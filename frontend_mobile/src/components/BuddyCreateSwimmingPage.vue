@@ -140,9 +140,9 @@
                             </vue-typeahead-bootstrap>
                             <div 
                                 id="search_result" 
-                                class="hide bg-secondary" 
+                                class="hide bg-secondary2" 
                                 v-on:click="search_result_click()"
-                                style="margin-left: 16px;margin-right: 16px;padding:7px;border:1px solid #ced4da;border-radius:4px;">
+                                style="margin-left: 16px;margin-right: 16px;padding:7px 11px 7px;border:1px solid #ced4da;border-radius:16px;">
                                 <div class="d-flex align-items-center">
                                 <img
                                     class="rounded-s me-2"
@@ -163,7 +163,7 @@
                                 id="search_recommend_1"
                                 class="mb-1 search_recommend"
                                 v-on:click="search_recommend_click('center', '서면 DIT', '/static/bubble1.jpg', 'search_recommend_1')"
-                                style="margin-left: 16px;margin-right: 16px;padding:7px;border:1px solid #ced4da;border-radius:4px;">
+                                style="margin-left: 16px;margin-right: 16px;padding:7px 11px 7px;border:1px solid #ced4da;border-radius:16px;">
                                 <div class="d-flex align-items-center">
                                 <img
                                     class="rounded-s me-2"
@@ -179,7 +179,7 @@
                                 id="search_recommend_2"
                                 class="mb-1 search_recommend"
                                 v-on:click="search_recommend_click('center', '송도풀장', '/static/bubble1.jpg', 'search_recommend_2')"
-                                style="margin-left: 16px;margin-right: 16px;padding:7px;border:1px solid #ced4da;border-radius:4px;">
+                                style="margin-left: 16px;margin-right: 16px;padding:7px 11px 7px;border:1px solid #ced4da;border-radius:16px;">
                                 <div class="d-flex align-items-center">
                                 <img
                                     class="rounded-s me-2"
@@ -195,7 +195,7 @@
                                 id="search_recommend_3"
                                 class="mb-1 search_recommend"
                                 v-on:click="search_recommend_click('center', 'K26', '/static/bubble1.jpg', 'search_recommend_3')"
-                                style="margin-left: 16px;margin-right: 16px;padding:7px;border:1px solid #ced4da;border-radius:4px;">
+                                style="margin-left: 16px;margin-right: 16px;padding:7px 11px 7px;border:1px solid #ced4da;border-radius:16px;">
                                 <div class="d-flex align-items-center">
                                 <img
                                     class="rounded-s me-2"
@@ -237,48 +237,42 @@
                         <div id="slide4" class="card card-full pb-0 mb-0 border-bottom" style="height: calc( 100vh - 56px );">
                         <div class="content mt-1">
                             <h4 class="pt-3 mb-2 content mt-0 mb-2">선택사항</h4>
-                            <div class="row mt-3">
-                                <div class="col-4 text-center">
-                                    <img src="/static/images/assets/ico_unknown.png" width="60%" />
-                                    <div class="">
-                                        <div class="color-highlight font-12">모집 인원</div>
-                                        <div class="mx-auto" style="display: inline-block;">
-                                            <div class="stepper rounded-s float-start">
-                                            <a href="#" class="stepper-sub"><i class="fa fa-minus color-theme opacity-40"></i></a>
-                                            <input type="number" min="1" max="99" value="10">
-                                            <a href="#" class="stepper-add"><i class="fa fa-plus color-theme opacity-40"></i></a>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                        </div>
+                            <div class="mt-3 row ms-3 mb-2">
+                                <div class="col-3" style="display: inline-block;"><img class="mt-2" src="/static/images/assets/ico_unknown.png" width="40px" /></div>
+                                <div class="mx-auto col-9" style="display: inline-block;">
+                                    <div class="color-highlight font-12 col-4">모집 인원</div>
+                                    <div class="stepper rounded-s float-start">
+                                    <a href="#" class="stepper-sub"><i class="fa fa-minus color-theme opacity-40"></i></a>
+                                    <input type="number" min="1" max="99" value="3">
+                                    <a href="#" class="stepper-add"><i class="fa fa-plus color-theme opacity-40"></i></a>
                                     </div>
+                                    <div class="clearfix"></div>
                                 </div>
-                                <div class="col-4 text-center">
-                                    <img src="/static/images/assets/ico_man.png" width="60%" />
-                                    <div class="">
-                                        <div class="color-secondary font-12">참여중 남성</div>
-                                        <div class="mx-auto" style="display: inline-block;">
-                                            <div class="stepper rounded-s float-start">
-                                            <a href="#" class="stepper-sub"><i class="fa fa-minus color-theme opacity-40"></i></a>
-                                            <input type="number" min="0" max="99" value="0">
-                                            <a href="#" class="stepper-add"><i class="fa fa-plus color-theme opacity-40"></i></a>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                        </div>
+                            </div>
+
+                            <div class="mt-1 row ms-3 mb-2">
+                                <div class="col-3" style="display: inline-block;"><img class="mt-2" src="/static/images/assets/ico_man.png" width="40px" /></div>
+                                <div class="mx-auto col-9" style="display: inline-block;">
+                                    <div class="color-secondary font-12">참여 남성</div>
+                                    <div class="stepper rounded-s float-start">
+                                    <a href="#" class="stepper-sub"><i class="fa fa-minus color-theme opacity-40"></i></a>
+                                    <input type="number" min="1" max="99" value="0">
+                                    <a href="#" class="stepper-add"><i class="fa fa-plus color-theme opacity-40"></i></a>
                                     </div>
+                                    <div class="clearfix"></div>
                                 </div>
-                                <div class="col-4 text-center">
-                                    <img src="/static/images/assets/ico_woman.png" width="60%" />
-                                    <div class="">
-                                        <div class="color-secondary font-12">참여중 여성</div>
-                                        <div class="mx-auto" style="display: inline-block;">
-                                            <div class="stepper rounded-s float-start">
-                                            <a href="#" class="stepper-sub"><i class="fa fa-minus color-theme opacity-40"></i></a>
-                                            <input type="number" min="0" max="99" value="0">
-                                            <a href="#" class="stepper-add"><i class="fa fa-plus color-theme opacity-40"></i></a>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                        </div>
+                            </div>
+
+                            <div class="mt-1 row ms-3">
+                                <div class="col-3" style="display: inline-block;"><img class="mt-2" src="/static/images/assets/ico_woman.png" width="40px" /></div>
+                                <div class="mx-auto col-9" style="display: inline-block;">
+                                    <div class="color-secondary font-12">참여 여성</div>
+                                    <div class="stepper rounded-s float-start">
+                                    <a href="#" class="stepper-sub"><i class="fa fa-minus color-theme opacity-40"></i></a>
+                                    <input type="number" min="1" max="99" value="0">
+                                    <a href="#" class="stepper-add"><i class="fa fa-plus color-theme opacity-40"></i></a>
                                     </div>
+                                    <div class="clearfix"></div>
                                 </div>
                             </div>
 
@@ -466,6 +460,9 @@ export default {
       },
       next2() {
           $(".progress-bar").css("width", "75%");
+          setTimeout(function() {
+              $("#form7").focus();
+          },200);
       },
       next3() {
           $(".progress-bar").css("width", "100%");
@@ -502,8 +499,8 @@ export default {
           $("#search_typeahead").addClass("hide");
           $("#search_result").removeClass("hide");
           $("#btn_next2").attr("disabled", false);
-          $(".search_recommend").removeClass("bg-secondary");
-          $("#"+target).addClass("bg-secondary");
+          $(".search_recommend").removeClass("bg-secondary2");
+          $("#"+target).addClass("bg-secondary2");
       },
       search_result_click() {
           $("#search_typeahead").removeClass("hide");
@@ -511,9 +508,9 @@ export default {
           this.query = '';
           $("#search_typeahead input").focus();
 
-          $("#search_recommend_1").removeClass("bg-secondary");
-          $("#search_recommend_2").removeClass("bg-secondary");
-          $("#search_recommend_3").removeClass("bg-secondary");
+          $("#search_recommend_1").removeClass("bg-secondary2");
+          $("#search_recommend_2").removeClass("bg-secondary2");
+          $("#search_recommend_3").removeClass("bg-secondary2");
       },
       enableNext2(ev) {
           this.search_img = ev.img_url;

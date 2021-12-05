@@ -1232,6 +1232,10 @@ body {
   background-color: #25beb2 !important;
   color: #FFF !important;
 }
+.bg-secondary2 {
+  background-color:#2c9ac3 !important;
+  color: #FFF !important;
+}
 
 /*--Header---*/
 .header-title span {

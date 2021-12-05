@@ -157,7 +157,6 @@
             
         </div>
     </div>
-    <a href="/chat_new" id="btn_new_chat" class="btn btn-m mb-3 rounded-xl font-900 shadow-s bg-dark-dark" style="position: fixed;width: 48px;height: 48px;bottom: 70px;right:40px;"><i class="fas fa-comment font-16 ms-n1"></i></a>
   </div>
 </template>
 <script>
