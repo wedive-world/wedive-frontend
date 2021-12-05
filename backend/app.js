@@ -37,6 +37,7 @@ mobileapp.use(serveStatic(path.join(__dirname, 'public/mobile')))
 app.use(vhost("m.wedives.com", mobileapp));
 app.use(vhost("wedives.com", mainapp));
 
+app.use(mobileapp);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
