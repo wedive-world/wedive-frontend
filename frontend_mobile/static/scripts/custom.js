@@ -817,9 +817,12 @@
         if(toastTrigger.length){
             toastTrigger.forEach(el => el.addEventListener('click', event => {
                 var toastData = el.getAttribute('data-toast')
-                var notificationToast = document.getElementById(toastData);
-                var notificationToast = new bootstrap.Toast(notificationToast);
-                notificationToast.show();
+                if (toastData != "") {
+                    var notificationToast = document.getElementById(toastData);
+                    var notificationToast = new bootstrap.Toast(notificationToast);
+                    notificationToast.show();
+                }
+                
             }));
         }
 

@@ -129,7 +129,7 @@ export default {
           
           localStorage.userName = user.hasOwnProperty('displayName') ? user.displayName : "";
           localStorage.userEmail = user.hasOwnProperty('email') ? user.email : "";
-          localStorage.fcmToken = token;
+          localStorage.userToken = token;
           localStorage.firebaseUid = user.hasOwnProperty('uid') ? user.uid : "";
           localStorage.photoUrl = user.hasOwnProperty('photoUrl') ? user.photoUrl : "";
           localStorage.loginBy = "google"

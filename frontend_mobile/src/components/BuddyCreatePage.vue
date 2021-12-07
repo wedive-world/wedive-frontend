@@ -23,22 +23,22 @@
           </div>
         </div>
 
-        <div class="card card-style pb-0 mb-3 ms-3 me-3 mt-4 border-bottom">
+        <div class="card card-style pb-0 mb-3 ms-3 me-3 mt-4 border-bottom" :data-toast="((userToken != null && nickName != null) ? '' : 'snackbar-info')">
           <div class="mt-1">
             <div class="p-4">
               <span :class="'font-noto font-20 font-500' + ((userToken == null || nickName == null) ? ' opacity-40' : '')">컨시어지</span>
               <p :class="'font-noto color-gray mb-0 font-200' + ((userToken == null || nickName == null) ? ' opacity-40' : '')">위다이브의 전문 매니저에게 요청합니다.</p>
-              <i class="wedive_icoset2x wedive_icoset2x_rightarrow"></i>
+              <i :class="'wedive_icoset2x wedive_icoset2x_rightarrow' + ((userToken == null || nickName == null) ? ' opacity-40' : '')"></i>
             </div>
           </div>
         </div>
 
-        <div class="card card-style pb-0 mb-3 ms-3 me-3 border-bottom" :data-menu="((userToken != null && nickName != null) ? 'menu-type' : '')">
+        <div class="card card-style pb-0 mb-3 ms-3 me-3 border-bottom" :data-menu="((userToken != null && nickName != null) ? 'menu-type' : '')" :data-toast="((userToken != null && nickName != null) ? '' : 'snackbar-info')">
           <div class="mt-1">
             <div class="p-4">
               <span :class="'font-noto font-20 font-500' + ((userToken == null || nickName == null) ? ' opacity-40' : '')">직접 모집</span>
               <p :class="'font-noto color-gray mb-0 font-200' + ((userToken == null || nickName == null) ? ' opacity-40' : '')">직접 맞춤 버디를 모집할께요.</p>
-              <i class="wedive_icoset2x wedive_icoset2x_rightarrow"></i>
+              <i :class="'wedive_icoset2x wedive_icoset2x_rightarrow' + ((userToken == null || nickName == null) ? ' opacity-40' : '')"></i>
             </div>
           </div>
         </div>
@@ -76,8 +76,7 @@
         </div>
         <br/>
     </div>
-
-    
+    <div id="snackbar-info" class="snackbar-toast color-white bg-yellow-dark" data-bs-delay="1500" data-bs-autohide="true"><i class="fa fa-times me-3"></i>{{login_word}}을 먼저 해주세요.</div>
   </div>
 </template>
 <script>
