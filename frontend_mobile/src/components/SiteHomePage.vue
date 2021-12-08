@@ -111,7 +111,7 @@
                             </p>
                             <div class="box-bottom">
                                 <div class="wedive-corner wedive-corner-bottom"></div>
-                                <div class="bg-secondary box-bottom-area color-white row" style="box-shadow: rgb(0 0 0 / 20%) 3px 3px 10px inset;">
+                                <div class="box-bottom-area color-white row" style="box-shadow: rgb(0 0 0 / 20%) 3px 3px 10px inset;">
                                     <span class="col-4 text-center box-bottom-item">컨시어지</span><span class="col-4 text-center box-bottom-item">버디찾기</span><span class="col-4 text-center box-bottom-item">강사찾기</span>
                                 </div>
                             </div>
@@ -428,7 +428,318 @@
 <script>
 import VueTypeaheadBootstrap from 'vue-typeahead-bootstrap';
 import {debounce} from 'lodash';
+const axios = require("axios")
 
+var map = null;
+var markerList = [];
+
+var siteList = new Array();
+var pointList = new Array();
+var centerList = new Array();
+
+async function updateSite() {
+    var bounds = map.getBounds();
+    var sw = bounds.getSouthWest();
+    var ne = bounds.getNorthEast();
+    siteList = [];
+
+    // 기존 그린 마커를 모두 삭제한다.
+        for (var i = 0; i < markerList.length; i++ ) {
+        markerList[i].setMap(null);
+    }
+    // 맵 박스 컬러를 변경한다.
+    if ($(".box-bottom").hasClass('site') == false) $(".box-bottom").addClass('site')
+    if ($(".box-bottom").hasClass('point')) $(".box-bottom").addClass('point')
+    if ($(".box-bottom").hasClass('center')) $(".box-bottom").addClass('center')
+
+    markerList.length = 0;
+    markerList = [];
+    var result = await axios({
+        url: 'https://api.wedives.com/graphql',
+        method: 'post',
+        data: {
+            query: `
+                query GetDiveSitesNearby($lat1: Float!, $lon1: Float!, $lat2: Float!, $lon2: Float!) {
+                    getDiveSitesNearby(lat1: $lat1, lon1: $lon1, lat2: $lat2, lon2: $lon2) {
+                        name
+                        uniqueName
+                        description
+                        highlightDescription
+                        adminScore
+                        latitude
+                        longitude
+                        eyeSightScore
+                        flowRateScore
+                        waterEnvironmentScore
+                        backgroundImages {
+                            thumbnailUrl
+                        }
+                    }
+                }
+            `,
+            variables: {
+                "lat1": sw.lat(),
+                "lon1": sw.lng(),
+                "lat2": ne.lat(),
+                "lon2": ne.lng()
+            }
+        }
+    });
+    result.data.data.getDiveSitesNearby.forEach(item => siteList.push(item));
+    
+    
+    // 새롭게 마커를 그려준다.
+    for (var i=0; i<siteList.length; i++) {
+        const img_path = '/static/images/assets/ico_pin1.png';
+        const img = (siteList[i].backgroundImages && siteList[i].backgroundImages.length>0) ? siteList[i].backgroundImages[0].thumbnailUrl : '/static/empty.jpg';
+        const img_size = new google.maps.Size(38,43);
+        const title = siteList[i].name;
+        const desc = siteList[i].description;
+        const star = (siteList[i].adminScore/20).toFixed(1);
+        const price_index = '';
+        const feature = '';
+        const position = {lat: siteList[i].latitude, lng: siteList[i].longitude};
+
+        const marker_shop = new google.maps.Marker({
+            map: map,
+            position: position,
+            icon: new google.maps.MarkerImage(img_path, null, null, null, img_size),
+        });
+        marker_shop.addListener("click", () => {
+            $(".map-box").removeClass("hide");
+            $("#btn_new").addClass("hide");
+            for (var j=0; j<markerList.length; j++) {
+                var _icon = markerList[j].getIcon();
+                if (_icon.size.width != 38) {
+                    markerList[j].setIcon(new google.maps.MarkerImage('/static/images/assets/ico_pin1.png', null, null, null, new google.maps.Size(38,43)));
+                }
+            }
+
+            $("#map_box_shop_name").text(title);
+            $("#map_box_shop_desc").text(desc);
+            $("#map_box_shop_star").text(star);
+            //map_box_shop_fed
+            
+            $("#map_box_shop_price").text("￦".repeat(price_index));
+            $("#map_box_shop_feature").text(feature);
+            $("#map_box_shop_img").attr("src", img);
+            
+            
+            marker_shop.setIcon(new google.maps.MarkerImage('/static/images/assets/ico_pin_big1.png', null, null, null, new google.maps.Size(58,66)));
+            /*if (map.getZoom() == 18) {
+                map.panTo(marker_shop.getPosition());
+            } else {
+                map.setZoom(18);
+                map.setCenter(marker_shop.getPosition());
+            }*/
+        });
+        
+        markerList.push(marker_shop);
+    }
+}
+
+async function updatePoint() {
+    var bounds = map.getBounds();
+    var sw = bounds.getSouthWest();
+    var ne = bounds.getNorthEast();
+    pointList = [];
+    
+    // 기존 그린 마커를 모두 삭제한다.
+        for (var i = 0; i < markerList.length; i++ ) {
+        markerList[i].setMap(null);
+    }
+    // 맵 박스 컬러를 변경한다.
+    if ($(".box-bottom").hasClass('point') == false) $(".box-bottom").addClass('point')
+    if ($(".box-bottom").hasClass('site')) $(".box-bottom").addClass('site')
+    if ($(".box-bottom").hasClass('center')) $(".box-bottom").addClass('center')
+
+    markerList.length = 0;
+    markerList = [];
+
+    var result = await axios({
+        url: 'https://api.wedives.com/graphql',
+        method: 'post',
+        data: {
+            query: `
+                query GetDivePointsNearBy($lat1: Float!, $lon1: Float!, $lat2: Float!, $lon2: Float!) {
+                    getDivePointsNearBy(lat1: $lat1, lon1: $lon1, lat2: $lat2, lon2: $lon2) {
+                        name
+                        uniqueName
+                        description
+                        highlightDescription
+                        adminScore
+                        latitude
+                        longitude
+                        flowRateScore
+                        waterEnvironmentScore
+                        eyeSightScore
+                        backgroundImages {
+                        thumbnailUrl
+                        }
+                    }
+                }
+            `,
+            variables: {
+                "lat1": sw.lat(),
+                "lon1": sw.lng(),
+                "lat2": ne.lat(),
+                "lon2": ne.lng()
+            }
+        }
+    });
+    result.data.data.getDivePointsNearBy.forEach(item => pointList.push(item));
+    
+    
+    // 새롭게 마커를 그려준다.
+    for (var i=0; i<pointList.length; i++) {
+        const img_path = '/static/images/assets/ico_pin2.png';
+        const img = (pointList[i].backgroundImages && pointList[i].backgroundImages.length>0) ? pointList[i].backgroundImages[0].thumbnailUrl : '/static/empty.jpg';
+        const img_size = new google.maps.Size(38,43);
+        const title = pointList[i].name;
+        const desc = pointList[i].description;
+        const star = (pointList[i].adminScore/20).toFixed(1);
+        const price_index = '';
+        const feature = '';
+        const position = {lat: pointList[i].latitude, lng: pointList[i].longitude};
+
+        const marker_shop = new google.maps.Marker({
+            map: map,
+            position: position,
+            icon: new google.maps.MarkerImage(img_path, null, null, null, img_size),
+        });
+        marker_shop.addListener("click", () => {
+            $(".map-box").removeClass("hide");
+            $("#btn_new").addClass("hide");
+            for (var j=0; j<markerList.length; j++) {
+                var _icon = markerList[j].getIcon();
+                if (_icon.size.width != 38) {
+                    markerList[j].setIcon(new google.maps.MarkerImage('/static/images/assets/ico_pin2.png', null, null, null, new google.maps.Size(38,43)));
+                }
+            }
+
+            $("#map_box_shop_name").text(title);
+            $("#map_box_shop_desc").text(desc);
+            $("#map_box_shop_star").text(star);
+            //map_box_shop_fed
+            
+            $("#map_box_shop_price").text("￦".repeat(price_index));
+            $("#map_box_shop_feature").text(feature);
+            $("#map_box_shop_img").attr("src", img);
+            
+            
+            marker_shop.setIcon(new google.maps.MarkerImage('/static/images/assets/ico_pin_big2.png', null, null, null, new google.maps.Size(58,66)));
+            /*if (map.getZoom() == 18) {
+                map.panTo(marker_shop.getPosition());
+            } else {
+                map.setZoom(18);
+                map.setCenter(marker_shop.getPosition());
+            }*/
+        });
+        
+        markerList.push(marker_shop);
+    }
+}
+async function updateCenter() {
+    var bounds = map.getBounds();
+    var sw = bounds.getSouthWest();
+    var ne = bounds.getNorthEast();
+    centerList = [];
+    
+    // 기존 그린 마커를 모두 삭제한다.
+        for (var i = 0; i < markerList.length; i++ ) {
+        markerList[i].setMap(null);
+    }
+    // 맵 박스 컬러를 변경한다.
+    if ($(".box-bottom").hasClass('center') == false) $(".box-bottom").addClass('center')
+    if ($(".box-bottom").hasClass('site')) $(".box-bottom").addClass('site')
+    if ($(".box-bottom").hasClass('point')) $(".box-bottom").addClass('point')
+
+    markerList.length = 0;
+    markerList = [];
+
+    var result = await axios({
+        url: 'https://api.wedives.com/graphql',
+        method: 'post',
+        data: {
+            query: `
+                query GetDiveCentersNearBy($lat1: Float!, $lon1: Float!, $lat2: Float!, $lon2: Float!) {
+                    getDiveCentersNearBy(lat1: $lat1, lon1: $lon1, lat2: $lat2, lon2: $lon2) {
+                        name
+                        uniqueName
+                        description
+                        adminScore
+                        latitude
+                        longitude
+                        viewScore
+                        educationScore
+                        facilityScore
+                        serviceScore
+                        backgroundImages {
+                        thumbnailUrl
+                        }
+                    }
+                }
+            `,
+            variables: {
+                "lat1": sw.lat(),
+                "lon1": sw.lng(),
+                "lat2": ne.lat(),
+                "lon2": ne.lng()
+            }
+        }
+    });
+    result.data.data.getDiveCentersNearBy.forEach(item => centerList.push(item));
+    
+    
+    // 새롭게 마커를 그려준다.
+    for (var i=0; i<centerList.length; i++) {
+        const img_path = '/static/images/assets/ico_pin1.png';
+        const img = (centerList[i].backgroundImages && centerList[i].backgroundImages.length>0) ? centerList[i].backgroundImages[0].thumbnailUrl : '/static/empty.jpg';
+        const img_size = new google.maps.Size(38,43);
+        const title = centerList[i].name;
+        const desc = centerList[i].description;
+        const star = (centerList[i].adminScore/20).toFixed(1);
+        const price_index = '';
+        const feature = '';
+        const position = {lat: centerList[i].latitude, lng: centerList[i].longitude};
+
+        const marker_shop = new google.maps.Marker({
+            map: map,
+            position: position,
+            icon: new google.maps.MarkerImage(img_path, null, null, null, img_size),
+        });
+        marker_shop.addListener("click", () => {
+            $(".map-box").removeClass("hide");
+            $("#btn_new").addClass("hide");
+            for (var j=0; j<markerList.length; j++) {
+                var _icon = markerList[j].getIcon();
+                if (_icon.size.width != 38) {
+                    markerList[j].setIcon(new google.maps.MarkerImage('/static/images/assets/ico_pin1.png', null, null, null, new google.maps.Size(38,43)));
+                }
+            }
+
+            $("#map_box_shop_name").text(title);
+            $("#map_box_shop_desc").text(desc);
+            $("#map_box_shop_star").text(star);
+            //map_box_shop_fed
+            
+            $("#map_box_shop_price").text("￦".repeat(price_index));
+            $("#map_box_shop_feature").text(feature);
+            $("#map_box_shop_img").attr("src", img);
+            
+            
+            marker_shop.setIcon(new google.maps.MarkerImage('/static/images/assets/ico_pin_big1.png', null, null, null, new google.maps.Size(58,66)));
+            /*if (map.getZoom() == 18) {
+                map.panTo(marker_shop.getPosition());
+            } else {
+                map.setZoom(18);
+                map.setCenter(marker_shop.getPosition());
+            }*/
+        });
+        
+        markerList.push(marker_shop);
+    }
+}
 export default {
   name: 'HelloWorld',
   mounted() {
@@ -524,7 +835,7 @@ export default {
 
         const map_style = (localStorage['wedive-Theme'] == 'light-mode') ? [] : night_style;
 
-        this.map = new google.maps.Map(document.getElementById('map'), {
+        map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 33.24134444312815, lng: 126.56484940647604},
             zoom: 16,
             mapTypeControl: false,
@@ -559,17 +870,17 @@ export default {
             const img = center_list[i].img;
 
             const marker_shop = new google.maps.Marker({
-                map: this.map,
+                map: map,
                 position: center_list[i].position,
                 icon: new google.maps.MarkerImage(img_path, null, null, null, img_size),
             });
             marker_shop.addListener("click", () => {
                 $(".map-box").removeClass("hide");
                 $("#btn_new").addClass("hide");
-                for (var j=0; j<this.marker_list.length; j++) {
-                    var _icon = this.marker_list[j].getIcon();
+                for (var j=0; j<markerList.length; j++) {
+                    var _icon = markerList[j].getIcon();
                     if (_icon.size.width != 38) {
-                        this.marker_list[j].setIcon(new google.maps.MarkerImage('/static/images/assets/ico_pin2.png', null, null, null, new google.maps.Size(38,43)));
+                        markerList[j].setIcon(new google.maps.MarkerImage('/static/images/assets/ico_pin2.png', null, null, null, new google.maps.Size(38,43)));
                     }
                 }
 
@@ -584,20 +895,45 @@ export default {
                 
                 
                 marker_shop.setIcon(new google.maps.MarkerImage('/static/images/assets/ico_pin_big1.png', null, null, null, new google.maps.Size(58,66)));
-                if (this.map.getZoom() == 18) {
-                    this.map.panTo(marker_shop.getPosition());
+                if (map.getZoom() == 18) {
+                    map.panTo(marker_shop.getPosition());
                 } else {
-                    this.map.setZoom(18);
-                    this.map.setCenter(marker_shop.getPosition());
+                    map.setZoom(18);
+                    map.setCenter(marker_shop.getPosition());
                 }
             });
-            this.marker_list.push(marker_shop);
+            markerList.push(marker_shop);
         }
 
-        this.map.addListener("click", (e) => {
+        map.addListener("click", (e) => {
             $(".map-box").addClass("hide");
             $("#btn_new").removeClass("hide");
             if ($('.map-search').hasClass("hide") == false ) $('.map-search').addClass("hide");
+        });
+
+        
+        map.addListener('zoom_changed', async function() {
+            var zoomLevel = map.getZoom();
+            if (zoomLevel < 10) { // site
+                updateSite();
+            } else if (zoomLevel < 14) { // point
+                updatePoint();
+            } else {
+                updateCenter();
+            }
+        });
+
+        map.addListener('dragend', async function() {
+            
+            var zoomLevel = map.getZoom();
+            console.log(zoomLevel);
+            if (zoomLevel < 11) { // site
+                updateSite();
+            } else if (zoomLevel < 14) { // point
+                updatePoint();
+            } else {
+                updateCenter();
+            }
         });
 
 
@@ -640,8 +976,6 @@ export default {
     return {
         query: '',
         selecteduser: null,
-        map: null,
-        marker_list: [],
         btn_new_html: '',
         users: [],
     }
@@ -688,7 +1022,9 @@ export default {
 .wedive-corner {position: absolute;width: 30px;height: 30px;overflow: hidden;z-index:999;}
 .wedive-corner:after {content: '';position: absolute;height: 200%;width: 200%;border-radius: 100%;z-index: -1;box-shadow: 10px 10px 5px 100px #eef2f1;}
 .wedive-corner-bottom {left:-16px;bottom:0;width:16px;height:16px;}
-.wedive-corner-bottom:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #20a399 !important;}
+.site .wedive-corner-bottom:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #52555a !important;}
+.point .wedive-corner-bottom:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #20a399 !important;}
+.center .wedive-corner-bottom:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #19316b !important;}
 .icon-concierge {position: fixed;width: 58px;height: 58px;bottom: 70px;right:24px;background: url(https://www.svgrepo.com/show/56194/concierge.svg);background-position-y: 8px;background-repeat: no-repeat;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
 .box-bottom {width:calc(100% - 120px);height:36px;position: absolute;right: 0;bottom: 0;display:flex;}
 .box-bottom-corner {display:inline-block;width:36px;height:36px;z-index:999;}
@@ -700,5 +1036,7 @@ export default {
 .bx-search input {border-width: 0 !important;}
 .bx-search > div > div {display: contents;}
 .main-header {background:#eef2f1;}
-
+.site .box-bottom-area {background-color: #5f6368;}
+.point .box-bottom-area {background-color: #25beb2;}
+.center .box-bottom-area {background-color: #1d397c;}
 </style>

@@ -61,14 +61,14 @@
 
                             <div>
                             <div class="mt-2">
-                                <div class="input-style no-borders has-icon validate-field mb-3">
+                                <div class="input-style no-borders has-icon validate-field mb-3" style="width: 48%;display:inline-block;">
                                     <i class="fa fa-id-badge color-gray" style="margin-left:5px;"></i>
-                                    <input type="number" class="form-control font-noto" id="form2" placeholder="나이" v-model="userage" style="width: 90%;">
+                                    <input type="number" class="form-control font-noto" id="form2" placeholder="나이" v-model="userage">
                                     <i class="fa fa-check disabled valid color-green-dark"></i>
                                     <i class="fa fa-check disabled invalid color-red-dark"></i>
                                 </div>
 
-                                <div class="input-style no-borders has-icon validate-field  mb-2">
+                                <div class="input-style no-borders has-icon validate-field  mb-2" style="width: 48%;display:inline-block;">
                                     <i class="fas fa-venus-mars color-gray" style="margin-left:3px;"></i>
                                     <select id="form3" class="font-noto" required v-model="usersex">
                                         <option value="" selected disabled>성별</option>
@@ -84,7 +84,7 @@
                             </div>
                             </div>
 
-                            <div class="mb-0 mt-5 pt-2">
+                            <div class="mb-0 mt-4 pt-2">
                                 <label class="wediev-label pb-1 color-highlight ms-2" style="margin-top:-26px;">선호사항 (선택)</label>
                                 <div class="form-check interest-check">
                                 <input v-on:click="interest1=!interest1;" class="form-check-input" type="checkbox" id="check_general1">
@@ -550,9 +550,11 @@
   </div>
 </template>
 <script>
+import { GraphQLClient, request, gql } from "graphql-request";
+
 const axios = require("axios")
-var file_photo = null;
 var file_certificate = null;
+
 
 
 export default {
@@ -579,15 +581,6 @@ export default {
         $("#form1").focus();
     }, 1000);
     
-    var body = document.body, html = document.documentElement;
-    var height = Math.min(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight) - 56;
-    document.getElementById('slide1').style.height = height + 'px';
-    document.getElementById('slide2').style.height = height + 'px';
-    document.getElementById('slide3').style.height = height + 'px';
-    document.getElementById('slide4').style.height = height + 'px';
-    document.getElementById('slide5').style.height = height + 'px';
-    document.getElementById('slide6').style.height = height + 'px';
-
     if (this.$route.query.header && this.$route.query.header == 'hide') {
       $(".page-title").hide();
       $(".page-title-clear").hide();
@@ -596,6 +589,15 @@ export default {
     if (this.$route.query.footer && this.$route.query.footer == 'hide') {
       $("#footer-bar").hide();
     }
+
+    var body = document.body, html = document.documentElement;
+    var height = Math.min(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight) - 56;
+    document.getElementById('slide1').style.height = height + 'px';
+    document.getElementById('slide2').style.height = height + 'px';
+    document.getElementById('slide3').style.height = height + 'px';
+    document.getElementById('slide4').style.height = height + 'px';
+    document.getElementById('slide5').style.height = height + 'px';
+    document.getElementById('slide6').style.height = height + 'px';
     
   },
   components: {
@@ -713,7 +715,6 @@ export default {
           return
         }
         this.file_photo = files[0];
-        file_photo = files[0];
         $("#file-upload1-back").css("background", "url(" + URL.createObjectURL(this.file_photo) + ")");
         $("#file-upload1-back").css("background-size", "cover");
         $("#file-upload1-img").hide();
@@ -752,14 +753,14 @@ export default {
         
         
         var freeBest = new Array();
-        if (this.pb_sta != null) freeBest.push({"key": "STA", "value": this.pb_sta});
-        if (this.pb_dyn != null) freeBest.push({"key": "DYN", "value": this.pb_dyn});
-        if (this.pb_dnf != null) freeBest.push({"key": "DNF", "value": this.pb_dnf});
-        if (this.pb_cwt != null) freeBest.push({"key": "CWT", "value": this.pb_cwt});
-        if (this.pb_vwt != null) freeBest.push({"key": "VWT", "value": this.pb_vwt});
-        if (this.pb_fim != null) freeBest.push({"key": "FIM", "value": this.pb_fim});
-        if (this.pb_cnf != null) freeBest.push({"key": "CNF", "value": this.pb_cnf});
-        if (this.pb_nlt != null) freeBest.push({"key": "NLT", "value": this.pb_nlt});
+        if (this.pb_sta != null && this.pb_sta != '') freeBest.push({"key": "STA", "value": this.pb_sta});
+        if (this.pb_dyn != null && this.pb_dyn != '') freeBest.push({"key": "DYN", "value": this.pb_dyn});
+        if (this.pb_dnf != null && this.pb_dnf != '') freeBest.push({"key": "DNF", "value": this.pb_dnf});
+        if (this.pb_cwt != null && this.pb_cwt != '') freeBest.push({"key": "CWT", "value": this.pb_cwt});
+        if (this.pb_vwt != null && this.pb_vwt != '') freeBest.push({"key": "VWT", "value": this.pb_vwt});
+        if (this.pb_fim != null && this.pb_fim != '') freeBest.push({"key": "FIM", "value": this.pb_fim});
+        if (this.pb_cnf != null && this.pb_cnf != '') freeBest.push({"key": "CNF", "value": this.pb_cnf});
+        if (this.pb_nlt != null && this.pb_nlt != '') freeBest.push({"key": "NLT", "value": this.pb_nlt});
 
         var interest_id = ["61ac9d06eac3ebfb7ac9f952", "61ac9d0beac3ebfb7ac9f955", "61ac9d18eac3ebfb7ac9f958", "6174da70a60639819c3e6ad9", "61ac9d25eac3ebfb7ac9f95b", "61a2fefa098b3785ef439cb3", "61ac9de8eac3ebfb7ac9f95e", "61ac9deceac3ebfb7ac9f961", "6174da75a60639819c3e6ae5", "61ac9e21eac3ebfb7ac9f964", "6178f02df7c3a048b4706cc8", "6198ff5eae1cc12e02c3cca0", "6178f01cf7c3a048b4706cc6", "61ac9eaeeac3ebfb7ac9f968", "61ac9eb7eac3ebfb7ac9f96b", "61780278f7c3a048b4704a85"];
         var interest_list = new Array();
@@ -770,98 +771,99 @@ export default {
         }
 
         var result_img_user = null;
-        console.log(this.file_photo);
-        console.log(file_photo);
-        if (file_photo != null) {
-            const _file = file_photo;
-            console.log(_file);
-            result_img_user = await axios({
-                url: 'https://api.wedives.com/graphql',
-                method: 'post',
-                data: {
-                    query: `
-                        mutation UploadImage($file: Upload!) {
-                            uploadImage(file: $file) {
-                                _id
-                            }
-                        }
-                    `,
-                    variables: {
-                        "file": _file
+        if (this.file_photo != null) {
+            var mutation = gql`
+                mutation UploadImageMutation($uploadImageFile: Upload!) {
+                    uploadImage(file: $uploadImageFile) {
+                        _id
+                        name
+                        mimeType
+                        encoding
+                        createdAt
+                        updatedAt
                     }
-                },
+                }
+            `
+            
+            var client = new GraphQLClient('https://api.wedives.com/graphql',
+            {
                 headers: {
-                    'Content-Type': 'multipart/form-data'
+                    countryCode: "ko"
                 }
-            });
-            await axios({
-                url: 'https://api.wedives.com/graphql',
-                method: 'post',
-                data: {
-                    query: `
-                        mutation UpdateImage($input: UpdateImageInput!) {
-                            updateImage(input: $input) {
-                                _id
-                            }
-                        }
-                    `,
-                    variables: {
-                        "input": {
-                            "_id": result_img_user.uploadImage._id,
-                            "name": "userImage",
-                            "description": null,
-                            "reference": null,
-                            "uploaderId": null
-                        }
+            })
+
+            result_img_user = await client.request(mutation, {uploadImageFile: this.file_photo,});
+            console.log(result_img_user);
+
+
+            var updateMutation = gql`
+                mutation Mutation($input: UpdateImageInput!) {
+                    updateImage(input: $input) {
+                        _id
+                        name
+                        description
+                        reference
+                        uploaderId
+                        mimeType
+                        encoding
+                        fileSize
                     }
                 }
-            });
+            `;
+            
+
+            var result_upload = await client.request(updateMutation, {input: {"_id": result_img_user.uploadImage._id,"name": result_img_user.name,"description": "userImage","reference": null}})
+            console.log(result_upload);
+
+
         }
         
         var result_img_certi = null;
         if (this.file_certificate != null) {
-            const _file = this.file_certificate;
-            result_img_certi = await axios({
-                url: 'https://api.wedives.com/graphql',
-                method: 'post',
-                data: {
-                    query: `
-                        mutation UploadImage($file: Upload!) {
-                            uploadImage(file: $file) {
-                                _id
-                            }
-                        }
-                    `,
-                    variables: {
-                        "file": _file
+            var mutation = gql`
+                mutation UploadImageMutation($uploadImageFile: Upload!) {
+                    uploadImage(file: $uploadImageFile) {
+                        _id
+                        name
+                        mimeType
+                        encoding
+                        createdAt
+                        updatedAt
                     }
-                },
+                }
+            `
+            
+            var client = new GraphQLClient('https://api.wedives.com/graphql',
+            {
                 headers: {
-                    'Content-Type': 'multipart/form-data'
+                    countryCode: "ko"
                 }
-            });
-            await axios({
-                url: 'https://api.wedives.com/graphql',
-                method: 'post',
-                data: {
-                    query: `
-                        mutation UpdateImage($input: UpdateImageInput!) {
-                            updateImage(input: $input) {
-                                _id
-                            }
-                        }
-                    `,
-                    variables: {
-                        "input": {
-                            "_id": result_img_certi.uploadImage._id,
-                            "name": "certificateImage",
-                            "description": null,
-                            "reference": null,
-                            "uploaderId": null
-                        }
+            })
+
+            result_img_certi = await client.request(mutation, {uploadImageFile: this.file_certificate,});
+            console.log(result_img_certi);
+
+
+            var updateMutation = gql`
+                mutation Mutation($input: UpdateImageInput!) {
+                    updateImage(input: $input) {
+                        _id
+                        name
+                        description
+                        reference
+                        uploaderId
+                        mimeType
+                        encoding
+                        fileSize
                     }
                 }
-            });
+            `;
+            
+
+            var result_upload = await client.request(updateMutation, {input: {"_id": result_img_certi.uploadImage._id,"description": "userCertificate","reference": null}})
+            console.log(result_upload);
+
+
         }
         
         

@@ -86,6 +86,7 @@
 
 <script>
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+const axios = require("axios")
 
 export default {
   name: 'App',
@@ -122,7 +123,7 @@ export default {
       auth.languageCode = 'ko';
 
       signInWithPopup(auth, provider)
-      .then((result) => {
+      .then(async(result) => {
           const credential = GoogleAuthProvider.credentialFromResult(result);
           const token = credential.accessToken;
           const user = result.user;
@@ -135,7 +136,57 @@ export default {
           localStorage.loginBy = "google"
           localStorage.loginAt = (new Date()).getTime();
 
-          location.href='/user_create';
+          var result = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            data: {
+                query: `
+                    query Query($email: String) {
+                      getUserByEmail(email: $email) {
+                        instructorTypes
+                        scubaLicenseType
+                        scubaLicenseLevel
+                        freeLicenseType
+                        freeLicenseLevel
+                        firebaseUid
+                        _id
+                        fcmToken
+                        email
+                        phoneNumber
+                        profileImages {
+                          _id
+                          thumbnailUrl
+                        }
+                        nickName
+                        name
+                        birthAge
+                        gender
+                        residence
+                        interests {
+                          title
+                          type
+                        }
+                        divingLog
+                        freeDivingBests {
+                          key
+                          value
+                        }
+                      }
+                    }
+                `,
+                variables: {
+                    "input": {
+                        "email": localStorage.userEmail
+                    }
+                }
+            }
+          });
+
+          if (result.data.data.getUserByEmail && result.data.data.getUserByEmail.nickName) {
+            location.href='/user_create';
+          } else {
+
+          }
       }).catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
