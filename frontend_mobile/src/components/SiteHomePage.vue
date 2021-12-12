@@ -110,13 +110,13 @@
                                 </span>
                                 <span id="map_box_price" class="hide">
                                     <font class="color-gray-light">&nbsp;|&nbsp;</font>
-                                    <span id="map_box_price_index"></span>
+                                    <span id="map_box_price_index" style="letter-spacing: -2px;"></span>
                                 </span>
                             </p>
                             <div class="box-bottom">
                                 <div class="wedive-corner wedive-corner-bottom"></div>
-                                <div class="box-bottom-area color-white row" style="box-shadow: rgb(0 0 0 / 20%) 3px 3px 10px inset;">
-                                    <span class="col-4 text-center box-bottom-item">컨시어지</span><span class="col-4 text-center box-bottom-item">버디찾기</span><span class="col-4 text-center box-bottom-item">강사찾기</span>
+                                <div class="box-bottom-area color-white row" style="box-shadow: inset 0px 0px 5px rgb(0 0 0 / 50%);">
+                                    <a href="" class="col-4 text-center box-bottom-item">컨시어지</a><a href="" class="col-4 text-center box-bottom-item">버디찾기</a><a href="" class="col-4 text-center box-bottom-item">강사찾기</a>
                                 </div>
                             </div>
                         </div>
@@ -535,7 +535,6 @@ async function updateSite() {
                 if ($("#map_box_agency").hasClass("hide") == false) $("#map_box_agency").addClass("hide");
                 if ($("#map_box_price").hasClass("hide") == false) $("#map_box_price").addClass("hide");
                 
-                //$("#map_box_shop_price").text("￦".repeat(price_index));
                 $("#map_box_shop_feature").text('');
                 $("#map_box_shop_img").attr("src", img);
                 
@@ -648,7 +647,6 @@ async function updatePoint() {
                 if ($("#map_box_agency").hasClass("hide") == false) $("#map_box_agency").addClass("hide");
                 if ($("#map_box_price").hasClass("hide") == false) $("#map_box_price").addClass("hide");
                 
-                //$("#map_box_shop_price").text("￦".repeat(price_index));
                 $("#map_box_shop_feature").text('');
                 $("#map_box_shop_img").attr("src", img);
                 
@@ -766,7 +764,6 @@ async function updateCenter() {
                 $(".box-bottom").removeClass('site').removeClass('point').removeClass('center');
                 $(".box-bottom").addClass('center')
                 
-                $("#map_box_shop_price").text("￦".repeat(price_index));
                 $("#map_box_shop_feature").text('');
                 $("#map_box_shop_img").attr("src", img);
 
@@ -897,9 +894,29 @@ export default {
                 elementType: "labels.text.stroke",
                 stylers: [{ color: "#17263c" }],
             },
-            ];
+        ];
 
-        const map_style = (localStorage['wedive-Theme'] == 'light-mode') ? [] : night_style;
+        const light_style = [
+            
+            {
+                featureType: "road",
+                elementType: "geometry",
+                stylers: [{ visibility: "off" }],
+            },
+            {
+                featureType: "road",
+                elementType: "geometry.stroke",
+                stylers: [{ visibility: "off" }],
+            },
+            {
+                featureType: "road",
+                elementType: "labels",
+                stylers: [{ visibility: "off" }],
+            },
+            
+        ];
+
+        const map_style = (localStorage['wedive-Theme'] == 'light-mode') ? light_style : night_style;
 
         map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 33.24134444312815, lng: 126.56484940647604},
@@ -1042,7 +1059,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.map-box {position: absolute;right: 0;bottom: 75px;left: 0;margin: 5px 10px 4px;border-radius:16px;background-color: white;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
+.map-box {position: absolute;right: 0;bottom: 75px;left: 0;margin: 5px 10px 4px;border-radius:16px;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;
+background: radial-gradient(1.5em 6.28571em at 1.95em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 0 0, radial-gradient(1.5em 6.28571em at -0.45em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 1.5em 5.5em, radial-gradient(2.3em 4.57143em at 2.99em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0.3) 55%, rgba(255, 255, 255, 0) 55%) 0 0, radial-gradient(2.3em 4.57143em at -0.69em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0.3) 55%, rgba(255, 255, 255, 0) 55%) 2.3em 4em, radial-gradient(3.5em 6.28571em at 4.55em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 0 0, radial-gradient(3.5em 6.28571em at -1.05em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 3.5em 5.5em, radial-gradient(#fff, #e2e7ec);
+  background-color: #fff;
+  background-size: 1.5em 11em, 1.5em 11em, 2.3em 8em, 2.3em 8em, 3.5em 11em, 3.5em 11em, 100% 100%;
+  background-repeat: repeat;}
 .map-filter {position: absolute;top: 120px;left: 10px;margin: 5px 5px 4px;}
 .display-block {display:inline-block;}
 .map-search {position: absolute;right: 0;top: 57px;left: 0;margin: 5px 12px 4px;border-radius:16px;background-color: white;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
@@ -1053,21 +1074,21 @@ export default {
 .wedive-corner {position: absolute;width: 30px;height: 30px;overflow: hidden;z-index:999;}
 .wedive-corner:after {content: '';position: absolute;height: 200%;width: 200%;border-radius: 100%;z-index: -1;box-shadow: 10px 10px 5px 100px #eef2f1;}
 .wedive-corner-bottom {left:-16px;bottom:0;width:16px;height:16px;}
-.site .wedive-corner-bottom:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #52555a !important;}
-.point .wedive-corner-bottom:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #20a399 !important;}
-.center .wedive-corner-bottom:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #19316b !important;}
-.icon-concierge {position: fixed;width: 58px;height: 58px;bottom: 70px;right:24px;background: url(https://www.svgrepo.com/show/56194/concierge.svg);background-position-y: 8px;background-repeat: no-repeat;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
+.site .wedive-corner-bottom:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #4b4e52 !important;}
+.point .wedive-corner-bottom:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #396e78 !important;}
+.center .wedive-corner-bottom:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #214057 !important;}
+.icon-concierge {position: fixed;width: 58px;height: 58px;bottom: 70px;right:24px;background: url(/static/images/assets/concierge.png);background-size:contain !important;background-position-y: 8px;background-repeat: no-repeat;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
 .box-bottom {width:calc(100% - 120px);height:36px;position: absolute;right: 0;bottom: 0;display:flex;}
 .box-bottom-corner {display:inline-block;width:36px;height:36px;z-index:999;}
 .box-bottom-corner:before {content: '';position: absolute;height: 80px;width: 80px;border-radius: 100%;z-index: -1;box-shadow: 10px 10px 5px 100px #1d397c;}
 .box-bottom-area {width:100%;border-radius: 24px 0 16px 0;justify-content: space-around;margin:0 !important;padding: 0 4px;}
 .box-bottom-item {padding: 6px 0;}
-.box-bottom-item:not(:last-child) {border-right: 1px solid rgba(255,255,255,.3);}
+.box-bottom-item:not(:last-child) {border-right: 1px solid rgba(255,255,255,.3);box-shadow: inset -2px 0px 0px 0px rgb(0 0 0 / 20%);}
 .header-bottom-round {osition: absolute;top: 50px;left: 0px;right: 0px;height:30px;}
 .bx-search input {border-width: 0 !important;}
 .bx-search > div > div {display: contents;}
 .main-header {background:#eef2f1;}
 .site .box-bottom-area {background-color: #5f6368;}
-.point .box-bottom-area {background-color: #25beb2;}
-.center .box-bottom-area {background-color: #1d397c;}
+.point .box-bottom-area {background-color: #498c99;}
+.center .box-bottom-area {background-color: #2a526f;}
 </style>

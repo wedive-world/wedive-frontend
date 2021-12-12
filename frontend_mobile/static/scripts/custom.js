@@ -142,7 +142,6 @@
             if(singleSlider.length) {
                 singleSlider.forEach(function(e){
                     setTimeout(function(e) {
-                        console.log("..")
                         var single = new Splide( '#'+e.id, {
                             type:'loop',
                             autoplay:true,

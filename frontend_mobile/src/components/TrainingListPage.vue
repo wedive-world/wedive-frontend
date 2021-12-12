@@ -171,15 +171,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.font-noto {font-family: 'Noto Sans Korean'}
-
-
-
-
-
-
-
-.progressbar{
+ .progressbar{
   counter-reset: step;
   margin-bottom: 0;
   padding-top: 20px;

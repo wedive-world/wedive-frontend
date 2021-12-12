@@ -18,7 +18,7 @@
         <div class="card card-style bg-dark-dark" style="box-shadow: none;">
             <div class="content mb-0 mt-3">
                 <div class="row mb-0"><div class="col-8">
-                    <h4 class="text-start pt-3 mb-0 color-white">위다이브 컨시어지</h4>
+                    <h4 class="text-start pt-2 mb-0 color-white">위다이브 컨시어지</h4>
                     <p class="text-start mb-0 color-white opacity-70">전문 매니저가 버디를 매칭해드려요.</p>
                 </div>
                 <img class="col-3" src="/static/images/assets/concierge.png"/></div>
@@ -286,13 +286,7 @@ export default {
 -webkit-@keyframes motion-updown {0% {margin-top: -20px;}20% {margin-top: 0px;}40% {margin-top: -20px;}60% {margin-top: 0px;}80% {margin-top: 0px;}100% {margin-top: 0px;}}
 
 .movebox {animation: motion-updown 3s linear 0s infinite alternate; margin-top: 0;-webkit-animation: motion-updown 3s linear 0s infinite alternate; margin-top: 0;}
-.font-noto {font-family: 'Noto Sans Korean'}
 .chip span {line-height: 24px !important;}
-.icon-concierge {
-    position: fixed;width: 58px;height: 58px;bottom: 70px;right:24px;background: url(https://www.svgrepo.com/show/56194/concierge.svg);
-    background-position-y: 8px;
-    background-repeat: no-repeat;
-    box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;
-}
+.icon-concierge {position: fixed;width: 58px;height: 58px;bottom: 70px;right:24px;background-size:cover;background: url(/static/images/assets/concierge.png);background-size:contain !important;background-position-y: 8px;background-repeat: no-repeat;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
 .position-relative {position: relative;}
 </style>

@@ -406,7 +406,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.font-noto {font-family: 'Noto Sans Korean'}
 .px-n2 {margin-right: -0.5rem !important;margin-left: -0.5rem !important;}
 .square-rect {position: relative;padding:0;}
 .square-rect:after {content: "";display: block;padding-bottom: 100%;}

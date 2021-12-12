@@ -490,7 +490,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.font-noto {font-family: 'Noto Sans Korean'}
 .item_title {letter-spacing: -.4px;line-height: 18px;font-size: 15px;}
 .price-margin {margin-top: 16px;margin-bottom: 20px;}
 .price_percent {color: #ff5160;font-weight: 500;font-size: 20px;margin-right: 1.8vw;margin-bottom:0;}

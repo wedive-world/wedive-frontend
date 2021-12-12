@@ -1829,7 +1829,6 @@ export default {
 .wedive-title {font-family: 'Noto Sans Korean' !important;font-weight:700;margin-bottom:0px;}
 .wedive-desc {font-family: 'Noto Sans Korean' !important;font-weight:200;margin-bottom:16px;line-height: 1.6}
 .min-h-160 {min-height: 160px;}
-.font-noto {font-family: 'Noto Sans Korean'}
 .point_desc {font-family: 'Noto Sans Korean' !important;font-weight:200;overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;display: -webkit-box;-webkit-line-clamp: 5;-webkit-box-orient: vertical;}
 .nearby_desc {font-family: 'Noto Sans Korean' !important;font-weight:200;overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;line-height: 1.4;}
 .square-rect {position: relative;padding:0;}

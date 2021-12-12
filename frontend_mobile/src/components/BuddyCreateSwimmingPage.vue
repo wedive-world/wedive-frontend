@@ -93,13 +93,13 @@
                             <h4 class="pt-3 mb-2 content mt-0 mb-2">어떤 다이빙을 원하시나요?</h4>
                             <div class="ms-3 me-3 mb-2">
                                 <div class="form-check interest-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="check_diving_scuba">
+                                    <input class="form-check-input" type="checkbox" value="" id="check_diving_scuba" v-model="check_diving_scuba">
                                     <label class="form-check-label rounded-xl border-08" for="check_diving_scuba" style="border-radius: 17px 0 0 17px !important;">스쿠버 다이빙</label>
                                     <i class="fas fa-ship color-white font-18"></i>
                                     <i class="fas fa-ship font-16 color-highlight"></i>
                                 </div>
                                 <div class="form-check interest-check" style="margin-left: -28px;">
-                                    <input class="form-check-input" type="checkbox" value="" id="check_diving_free">
+                                    <input class="form-check-input" type="checkbox" value="" id="check_diving_free" v-model="check_diving_free">
                                     <label class="form-check-label rounded-xl border-08" for="check_diving_free" style="border-radius: 0 17px 17px 0 !important;">프리 다이빙</label>
                                     <i class="fas fa-swimmer color-white font-18"></i>
                                     <i class="fas fa-swimmer font-16 color-highlight"></i>
@@ -113,28 +113,25 @@
                                 style="padding-left: 12px; padding-right: 12px;"
                                 v-model="query"
                                 :data="users"
-                                :serializer="item => item.name_ko"
-                                :screen-reader-text-serializer="item => `${item.name_ko}`"
+                                :serializer="item => item.name"
+                                :screen-reader-text-serializer="item => `${item.name}`"
                                 highlightClass="special-highlight-class"
                                 @hit="selecteduser = $event;enableNext2($event);"
                                 :minMatchingChars="2"
                                 placeholder="지역명, 수영장"
                                 inputClass="special-input-class"
-                                :disabledValues="(selecteduser ? [selecteduser.name_ko] : [])"
+                                :disabledValues="(selecteduser ? [selecteduser.name] : [])"
                                 @input="lookupUser2"
                                 >
                                 <template slot="suggestion" slot-scope="{ data, htmlText }">
                                     <div class="d-flex align-items-center">
                                     <img
                                         class="rounded-s me-2"
-                                        :src="data.img_url"
+                                        :src="(data.backgroundImages && data.backgroundImages.length>0) ? data.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'"
                                         style="width: 40px; height: 40px;" />
-                                    
-                                    
-                                    
-                                    <span v-if="data.type == 'region'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-marked-alt\'></i> 장소</span><br/>' + htmlText"></span>
-                                    <span v-else-if="data.type == 'point'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-pin\'></i> 다이빙 포인트</span><br/>' + htmlText"></span>
-                                    <span v-else-if="data.type == 'center'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-store\'></i> 다이빙 센터</span><br/>' + htmlText"></span>
+                                    <span v-if="data.type == 'site'" class="ml-4" v-html="'<span class=\'badge border color-site border-site\'>사이트</span>&nbsp;<i class=\'fa fa-star color-yellow-dark icon-10 text-center me-2\'></i>'+(data.adminScore/20).toFixed(1)+'<br/><span class=\'font-noto font-16\'>' + htmlText + '</span>'"></span>
+                                    <span v-else-if="data.type == 'point'" class="ml-4" v-html="'<span class=\'badge border color-point border-point\'>포인트</span>&nbsp;<i class=\'fa fa-star color-yellow-dark icon-10 text-center me-2\'></i>'+(data.adminScore/20).toFixed(1)+'<br/><span class=\'font-noto font-16\'>' + htmlText + '</span>'"></span>
+                                    <span v-else-if="data.type == 'center'" class="ml-4" v-html="'<span class=\'badge border color-center border-center\'>센터</span>&nbsp;<i class=\'fa fa-star color-yellow-dark icon-10 text-center me-2\'></i>'+(data.adminScore/20).toFixed(1)+'<br/><span class=\'font-noto font-16\'>' + htmlText + '</span>'"></span>
                                     </div>
                                 </template>
                             </vue-typeahead-bootstrap>
@@ -149,15 +146,16 @@
                                     :src="search_img"
                                     style="width: 40px; height: 40px;" />
                                 
-                                <span v-if="search_type == 'region'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-marked-alt\'></i> 장소</span><br/>' + search_loc"></span>
-                                <span v-else-if="search_type == 'point'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-pin\'></i> 다이빙 포인트</span><br/>' + search_loc"></span>
-                                <span v-else-if="search_type == 'center'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-store\'></i> 다이빙 센터</span><br/>' + search_loc"></span>
+                                <span v-if="search_type == 'region'" class="ml-4" v-html="'<span class=\'badge border color-site border-site\'>사이트</span>&nbsp;<i class=\'fa fa-star color-yellow-dark icon-10 text-center me-2\'></i>'+(search_adminScore/20).toFixed(1)+'<br/><span class=\'font-noto font-16\'>' + search_loc + '</span>'"></span>
+                                <span v-else-if="search_type == 'point'" class="ml-4" v-html="'<span class=\'badge border color-point border-point\'>포인트</span>&nbsp;<i class=\'fa fa-star color-yellow-dark icon-10 text-center me-2\'></i>'+(search_adminScore/20).toFixed(1)+'<br/><span class=\'font-noto font-16\'>' + search_loc + '</span>'"></span>
+                                <span v-else-if="search_type == 'center'" class="ml-4" v-html="'<span class=\'badge border color-center border-center\'>센터</span>&nbsp;<i class=\'fa fa-star color-yellow-dark icon-10 text-center me-2\'></i>'+(search_adminScore/20).toFixed(1)+'<br/><span class=\'font-noto font-16\'>' + search_loc + '</span>'"></span>
+                                
                                 </div>
                             </div>
                         </div>
 
                         <div class="content mt-1">
-                            <label class="color-highlight font-12 me-3 ms-3">이곳은 어떠세요?</label>
+                            <label class="font-12 me-3 ms-3" style="color: #b4bcc8"><i class="wedive_icoset wedive_icoset_info me-1"/>추천 장소</label>
                             
                             <div
                                 id="search_recommend_1"
@@ -170,9 +168,7 @@
                                     src="/static/bubble1.jpg"
                                     style="width: 40px; height: 40px;" />
                                 
-                                <span v-if="'center' == 'region'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-marked-alt\'></i> 장소</span><br/>제주도'"></span>
-                                <span v-else-if="'center' == 'point'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-pin\'></i> 다이빙 포인트</span><br/>' + search_loc"></span>
-                                <span v-else-if="'center' == 'center'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-store\'></i> 다이빙 센터</span><br/>서면 DIT'"></span>
+                                <span class="ml-4" v-html="'<span class=\'badge border color-center border-center\'>센터</span>&nbsp;<i class=\'fa fa-star color-yellow-dark icon-10 text-center me-2\'></i>3.6<br/><span class=\'font-noto font-16\'>서면 DIT</span>'"></span>
                                 </div>
                             </div>
                             <div
@@ -186,9 +182,7 @@
                                     src="/static/bubble1.jpg"
                                     style="width: 40px; height: 40px;" />
                                 
-                                <span v-if="'center' == 'region'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-marked-alt\'></i> 장소</span><br/>제주도'"></span>
-                                <span v-else-if="'center' == 'point'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-pin\'></i> 다이빙 포인트</span><br/>' + search_loc"></span>
-                                <span v-else-if="'center' == 'center'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-store\'></i> 다이빙 센터</span><br/>송도풀장'"></span>
+                                <span class="ml-4" v-html="'<span class=\'badge border color-point border-point\'>포인트</span>&nbsp;<i class=\'fa fa-star color-yellow-dark icon-10 text-point me-2\'></i>3.6<br/><span class=\'font-noto font-16\'>문섬 포인트</span>'"></span>
                                 </div>
                             </div>
                             <div
@@ -202,9 +196,7 @@
                                     src="/static/bubble1.jpg"
                                     style="width: 40px; height: 40px;" />
                                 
-                                <span v-if="'center' == 'region'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-marked-alt\'></i> 장소</span><br/>제주도'"></span>
-                                <span v-else-if="'center' == 'point'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-pin\'></i> 다이빙 포인트</span><br/>' + search_loc"></span>
-                                <span v-else-if="'center' == 'center'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-store\'></i> 다이빙 센터</span><br/>K26'"></span>
+                                <span class="ml-4" v-html="'<span class=\'badge border color-site border-site\'>사이트</span>&nbsp;<i class=\'fa fa-star color-yellow-dark icon-10 text-site me-2\'></i>3.6<br/><span class=\'font-noto font-16\'>제주도 사이트</span>'"></span>
                                 </div>
                             </div>
                         </div>
@@ -220,10 +212,8 @@
                         <div id="slide3" class="card card-full pb-0 mb-0 border-bottom" style="height: calc( 100vh - 56px );">
                         <div class="content mt-1">
                             <h4 class="pt-3 mb-2 content mt-0 mb-2">모집 내용을 입력해주세요.</h4>
-                            <div class="input-style no-borders has-icon validate-field mb-3 mt-4 me-3 ms-3">
-                                <i class="fas fa-pen-alt color-gray"></i>
-                                <textarea id="form7" placeholder="이곳에 모집상세를 작성해보세요." v-model="buddy_detail"></textarea>
-                                <label for="form7" class="color-highlight">상세정보</label>
+                            <div class="input-style validate-field mb-3 mt-4 me-3 ms-3">
+                                <textarea id="form7" class="wedive-textarea" placeholder="이곳에 모집상세를 작성해보세요." v-model="buddy_detail"></textarea>
                             </div>
                             
                         </div>
@@ -238,12 +228,12 @@
                         <div class="content mt-1">
                             <h4 class="pt-3 mb-2 content mt-0 mb-2">선택사항</h4>
                             <div class="mt-3 row ms-3 mb-2">
-                                <div class="col-3" style="display: inline-block;"><img class="mt-2" src="/static/images/assets/ico_unknown.png" width="40px" /></div>
+                                <div class="col-3" style="display: inline-block;"><img class="mt-2" src="/static/images/assets/user_empty_u.png" width="40px" /></div>
                                 <div class="mx-auto col-9" style="display: inline-block;">
                                     <div class="color-highlight font-12 col-4">모집 인원</div>
                                     <div class="stepper rounded-s float-start">
                                     <a href="#" class="stepper-sub"><i class="fa fa-minus color-theme opacity-40"></i></a>
-                                    <input type="number" min="1" max="99" value="3">
+                                    <input type="number" min="1" max="99" value="3" id="num_recruit">
                                     <a href="#" class="stepper-add"><i class="fa fa-plus color-theme opacity-40"></i></a>
                                     </div>
                                     <div class="clearfix"></div>
@@ -251,12 +241,12 @@
                             </div>
 
                             <div class="mt-1 row ms-3 mb-2">
-                                <div class="col-3" style="display: inline-block;"><img class="mt-2" src="/static/images/assets/ico_man.png" width="40px" /></div>
+                                <div class="col-3" style="display: inline-block;"><img class="mt-2" src="/static/images/assets/user_empty_m.png" width="40px" /></div>
                                 <div class="mx-auto col-9" style="display: inline-block;">
                                     <div class="color-secondary font-12">참여 남성</div>
                                     <div class="stepper rounded-s float-start">
                                     <a href="#" class="stepper-sub"><i class="fa fa-minus color-theme opacity-40"></i></a>
-                                    <input type="number" min="1" max="99" value="0">
+                                    <input type="number" min="1" max="99" value="0" id="num_man">
                                     <a href="#" class="stepper-add"><i class="fa fa-plus color-theme opacity-40"></i></a>
                                     </div>
                                     <div class="clearfix"></div>
@@ -264,12 +254,12 @@
                             </div>
 
                             <div class="mt-1 row ms-3">
-                                <div class="col-3" style="display: inline-block;"><img class="mt-2" src="/static/images/assets/ico_woman.png" width="40px" /></div>
+                                <div class="col-3" style="display: inline-block;"><img class="mt-2" src="/static/images/assets/user_empty_f.png" width="40px" /></div>
                                 <div class="mx-auto col-9" style="display: inline-block;">
                                     <div class="color-secondary font-12">참여 여성</div>
                                     <div class="stepper rounded-s float-start">
                                     <a href="#" class="stepper-sub"><i class="fa fa-minus color-theme opacity-40"></i></a>
-                                    <input type="number" min="1" max="99" value="0">
+                                    <input type="number" min="1" max="99" value="0" id="num_woman">
                                     <a href="#" class="stepper-add"><i class="fa fa-plus color-theme opacity-40"></i></a>
                                     </div>
                                     <div class="clearfix"></div>
@@ -280,25 +270,25 @@
                                 <label class="color-highlight font-12">선호사항</label>
                                 <div>
                                 <div class="form-check interest-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="check_gender1">
+                                    <input class="form-check-input" type="checkbox" value="" id="check_gender1" v-model="check_gender1">
                                     <label class="form-check-label rounded-xl border-08" for="check_gender1">무관</label>
                                     <i class="fas fa-user color-white font-18"></i>
                                     <i class="fas fa-user font-16 color-highlight"></i>
                                 </div>
                                 <div class="form-check interest-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="check_gender2">
+                                    <input class="form-check-input" type="checkbox" value="" id="check_gender2" v-model="check_gender2">
                                     <label class="form-check-label rounded-xl border-08" for="check_gender2">남자</label>
                                     <i class="fas fa-male color-white font-18"></i>
                                     <i class="fas fa-male font-16 color-highlight"></i>
                                 </div>
                                 <div class="form-check interest-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="check_gender3">
+                                    <input class="form-check-input" type="checkbox" value="" id="check_gender3" v-model="check_gender3">
                                     <label class="form-check-label rounded-xl border-08" for="check_gender3">여자</label>
                                     <i class="fas fa-female color-white font-18"></i>
                                     <i class="fas fa-female font-16 color-highlight"></i>
                                 </div>
                                 <div class="form-check interest-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="check_gender4">
+                                    <input class="form-check-input" type="checkbox" value="" id="check_gender4" v-model="check_gender4">
                                     <label class="form-check-label rounded-xl border-08" for="check_gender4">커플</label>
                                     <i class="fas fa-user-friends color-white font-18"></i>
                                     <i class="fas fa-user-friends font-16 color-highlight"></i>
@@ -307,28 +297,22 @@
 
                                 <div>
                                 <div class="form-check interest-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="check_amity1">
+                                    <input class="form-check-input" type="checkbox" value="" id="check_amity1" v-model="check_amity1">
                                     <label class="form-check-label rounded-xl border-08" for="check_amity1">뒷풀이</label>
                                     <i class="fas fa-beer color-white font-18"></i>
                                     <i class="fas fa-beer font-16 color-highlight"></i>
                                 </div>
                                 <div class="form-check interest-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="check_diving2">
-                                    <label class="form-check-label rounded-xl border-08" for="check_diving2">초보환영</label>
+                                    <input class="form-check-input" type="checkbox" value="" id="check_amity2" v-model="check_amity2">
+                                    <label class="form-check-label rounded-xl border-08" for="check_amity2">초보환영</label>
                                     <i class="fas fa-baby color-white font-18"></i>
                                     <i class="fas fa-baby font-16 color-highlight"></i>
                                 </div>
                                 <div class="form-check interest-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="check_diving3">
-                                    <label class="form-check-label rounded-xl border-08" for="check_diving3">상급레벨</label>
+                                    <input class="form-check-input" type="checkbox" value="" id="check_amity3" v-model="check_amity3">
+                                    <label class="form-check-label rounded-xl border-08" for="check_amity3">상급레벨</label>
                                     <i class="fas fa-user-graduate color-white font-18"></i>
                                     <i class="fas fa-user-graduate font-16 color-highlight"></i>
-                                </div>
-                                <div class="form-check interest-check hide">
-                                    <input class="form-check-input" type="checkbox" value="" id="check_amity2">
-                                    <label class="form-check-label rounded-xl border-08" for="check_amity2">식사 함께</label>
-                                    <i class="fas fa-utensils color-white font-18"></i>
-                                    <i class="fas fa-utensils font-17 color-highlight"></i>
                                 </div>
                                 </div>
                             </div>
@@ -342,10 +326,9 @@
                     <div class="splide__slide">
                         <div id="slide5" class="card card-full pb-0 mb-0 border-bottom" style="height: calc( 100vh - 56px );">
                         <div class="content mt-1">
-                            <div class="text-center mt-2 mb-3">
-                                <img src="/static/images/assets/search.gif"/>
+                            <div class="text-center mt-4 mb-3">
+                                <img src="/static/images/assets/search.gif" width="40%" class="m-5"/>
                                 <p class="font-noto mb-1 mt-2 font-16">세상에서 가장 빠르게 다이빙 버디를 찾아드려요.</p>
-                                <p class="font-noto color-gray"><span class="span_timer">3</span>초 후 리스트로 이동할께요.</p>
                             </div>
                         </div>
                         </div>
@@ -369,6 +352,8 @@
 <script>
 import VueTypeaheadBootstrap from 'vue-typeahead-bootstrap';
 import {debounce} from 'lodash';
+const axios = require("axios")
+
 var weekday_ko = ["", "일", "월", "화", "수", "목", "금", "토"];
 
 export default {
@@ -408,6 +393,18 @@ export default {
   },
   data () {
     return {
+        check_diving_scuba: false,
+        check_diving_free: false,
+        
+        check_gender1: false,
+        check_gender2: false,
+        check_gender3: false,
+        check_gender4: false,
+
+        check_amity1: false,
+        check_amity2: false,
+        check_amity3: false,
+
         query: '',
         selecteduser: null,
         users: [],
@@ -419,6 +416,8 @@ export default {
         search_type: "",
         search_img: "",
         search_loc: "",
+        search_adminScore: "",
+        selected_id: "",
         hour_array: ["7:00", "7:30", "8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30"],
         theme: {
             container: {
@@ -467,17 +466,87 @@ export default {
       next3() {
           $(".progress-bar").css("width", "100%");
       },
-      next4() {
-          setTimeout(function() {
-              $(".span_timer").text("2");
-          },1000)
-          setTimeout(function() {
-              $(".span_timer").text("1");
-          },2000)
-          setTimeout(function() {
-              $(".span_timer").text("0");
-              window.location.href="/buddy_home";
-          },3000)
+      async next4() {
+        const s_date = this.selectedDate.year + "-" + (this.selectedDate.month<10?"0"+this.selectedDate.month:this.selectedDate.month) + "-" + (this.selectedDate.day<10?"0"+this.selectedDate.day:this.selectedDate.day) + " " + this.hour_show + ":00";
+        const buddy_detail = this.buddy_detail;
+        var participants = new Array();
+        for (var i=0; i<parseInt($("#num_man").val()); i++) {
+            participants.push({"user": null, "status": "joined", "name": null, "birth": null, "gender": "m"});
+        }
+        for (var i=0; i<parseInt($("#num_woman").val()); i++) {
+            participants.push({"user": null, "status": "joined", "name": null, "birth": null, "gender": "f"});
+        }
+        const parti = participants;
+
+
+        const center_id = this.selected_id;
+
+
+        var interests = new Array();
+        if (this.check_diving_scuba) interests.push("61b45a9f13f324035a6c86b3");
+        if (this.check_diving_free) interests.push("6178027df7c3a048b4704a87");
+        if (this.check_gender1) interests.push("6174da5da60639819c3e6ac7");
+        if (this.check_gender2) interests.push("6174da5ea60639819c3e6ac9");
+        if (this.check_gender3) interests.push("6174da5fa60639819c3e6acb");
+        if (this.check_gender4) interests.push("6174da60a60639819c3e6acd");
+        if (this.check_amity1) interests.push("6174da70a60639819c3e6ad9");
+        if (this.check_amity2) interests.push("61b45bb413f324035a6c86bc");
+        if (this.check_amity3) interests.push("61b45bb913f324035a6c86bf");
+        const inter = interests
+
+        var result = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            data: {
+                query: `
+                    mutation Mutation($input: DivingInput) {
+                        upsertDiving(input: $input) {
+                            _id
+                        }
+                    }
+                `,
+                variables: {
+                    "input": {
+                        "title": null,
+                        "description": buddy_detail,
+                        "status": "searchable",
+                        "hostUser": localStorage.userId,
+                        "participants": parti,
+                        "interests": inter,
+                        "diveSites": null,
+                        "divePoints": null,
+                        "diveCenters": center_id,
+                        "startedAt": s_date,
+                        "finishedAt": s_date,
+                    }
+                }
+            }
+        }, {
+        headers: {
+            countryCode: 'ko',
+            android: (localStorage.android) ? localStorage.android : "",
+        }
+        });
+        const diving_id = result.data.data.upsertDiving;
+        setTimeout(function() {
+            window.location.href="/diving/" + diving_id;
+        }, 500);
+        
+        
+        //parseInt($("#num_recruit").val())
+        //console.log(this.query);
+        
+        
+        /*setTimeout(function() {
+            $(".span_timer").text("2");
+        },1000)
+        setTimeout(function() {
+            $(".span_timer").text("1");
+        },2000)
+        setTimeout(function() {
+            //$(".span_timer").text("0");
+            window.location.href="/buddy_home";
+        },2100)*/
       },
       collapse1() {
         $("#collapse2_area").click();
@@ -513,9 +582,14 @@ export default {
           $("#search_recommend_3").removeClass("bg-secondary2");
       },
       enableNext2(ev) {
-          this.search_img = ev.img_url;
+          console.log(ev);
+          this.search_img = (ev.backgroundImages && ev.backgroundImages.length>0) ? ev.backgroundImages[0].thumbnailUrl : '/static/empty.jpg';
           this.search_type=ev.type;
-          this.search_loc=ev.name_ko;
+          this.search_loc=ev.name;
+          this.search_adminScore=ev.adminScore;
+          this.selected_id = ev._id;
+
+          
           $("#search_typeahead").addClass("hide");
           $("#search_result").removeClass("hide");
           $("#btn_next2").attr("disabled", false);
@@ -549,14 +623,44 @@ export default {
             this.users = data.items;
           })
       }, 500),
-      lookupUser2: debounce(function(){
-        this.users = [
-            {"id": "region_ko_jeju", "type": "region", "name_ko": "제주도", name_en: "Jeju island", "img_url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0c/bf/d2/56/photo1jpg.jpg?w=100&h=100&s=1"},
-            {"id": "region_ko_wooljin", "type": "region", "name_ko": "울진", name_en: "Wooljin", "img_url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/01/5a/31/a0/sunrise-peak-seongsan.jpg?w=100&h=100&s=1"},
-            {"id": "center_ko_jeju_bubbletank", "type": "center", "name_ko": "제주 버블탱크 스쿠버다이빙", name_en: "Bubble tank", "img_url": "/static/bubble2.jpg"},
-            {"id": "point_ko_jeju_munisland", "type": "point", "name_ko": "제주도 문섬", name_en: "Mun island", "img_url": "https://api.cdn.visitjeju.net/photomng/imgpath/201907/31/07c1996d-4374-4e77-b353-300d01783718.jpg"},
-        ];
-      }, 500),
+      async lookupUser2() {
+        this.users = [];
+        const query = this.query;
+        console.log(query);
+        var result = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            data: {
+                query: `
+                    query Query($query: String!) {
+                        searchDiveCentersByName(query: $query) {
+                            _id
+                            uniqueName
+                            name
+                            description
+                            divingType
+                            adminScore
+                            backgroundImages {
+                            thumbnailUrl
+                            }
+                        }
+                    }
+                `,
+                variables: {
+                    "query": query
+                }
+            }
+        }, {
+        headers: {
+            countryCode: 'ko',
+            android: (localStorage.android) ? localStorage.android : "",
+        }
+        });
+        //result.data.data.searchDiveCentersByName.forEach(x=>result.data.data.searchDiveCentersByName)
+        this.users = result.data.data.searchDiveCentersByName;
+        this.users.forEach(x=>x.type = 'center');
+        console.log(this.users);
+      },
       
   }
 
@@ -568,13 +672,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-.font-exo2 {font-family: 'Exo 2', sans-serif;}
-.font-noto {font-family: 'Noto Sans Korean';}
 .card-style i:last-child {position: absolute;top: 37%;right: 20px;}
 .form-check-label {min-width: 60px;text-align:center;}
 .btn[disabled] {pointer-events: none !important;background-image: linear-gradient(to bottom, #ccc, #ccc) !important;}
 .bg-e7e7e7 {background-color: transparent !important;}
 .border-08 {border: 1px solid rgba(0, 0, 0, 0.08) !important;}
 .interest-check input:checked ~ label {background-color: #2c9ac3;}
+.wedive-textarea {min-height: 160px;border: 2px solid #e9e9e9;background: #f5f5f5;padding-left: 10px;padding-right: 10px;}
 </style>

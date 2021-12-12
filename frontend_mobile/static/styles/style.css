@@ -12,7 +12,6 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   color: #1f1f1f;
-  font-family: "Inter", sans-serif;
   margin-bottom: 5px;
   letter-spacing: -0.8px;
 }
@@ -329,6 +328,10 @@ body {
   stroke: #DA4453 !important;
   fill: rgba(218, 68, 83, 0.3) !important;
 }
+
+.bg-site {background:#5f6368;} .color-site {color:#5f6368;} .border-site {border-color:#5f6368 !important;}
+.bg-point {background:#498c99;} .color-point {color:#498c99;} .border-point {border-color:#498c99 !important;}
+.bg-center {background:#2a526f;} .color-center {color:#2a526f;} .border-center {border-color:#2a526f !important;}
 
 .bg-red-dark {
   background-color: #DA4453 !important;
@@ -1221,6 +1224,10 @@ body {
 
 .color-shopping {
   color: #ff5160;
+}
+
+.bg-heart {
+  background-color: #cd5b3c;
 }
 
 .bg-highlight {

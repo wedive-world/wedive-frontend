@@ -21,6 +21,8 @@ import SiteHomeListPage from '@/components/SiteHomeListPage'
 import SiteDetailPage from '@/components/SiteDetailPage'
 import PointDetailPage from '@/components/PointDetailPage'
 import PointDetailPage2 from '@/components/PointDetailPage2'
+import DivingDetailPage from '@/components/DivingDetailPage'
+import UserDetailPage from '@/components/UserDetailPage'
 import ChatHomePage from '@/components/ChatHomePage'
 import ChatDetailPage from '@/components/ChatDetailPage'
 import ShopHomePage from '@/components/ShopHomePage'
@@ -143,6 +145,18 @@ export default new Router({
       path: '/point2',
       name: 'PointDetailPage2',
       component: PointDetailPage2
+    },
+    {
+      path: '/diving/:id',
+      name: 'DivingDetailPage',
+      props: true,
+      component: DivingDetailPage
+    },
+    {
+      path: '/user/:id',
+      name: 'UserDetailPage',
+      props: true,
+      component: UserDetailPage
     },
     {
       path: '/chat_home',

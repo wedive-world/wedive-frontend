@@ -29,8 +29,8 @@
         
         <div class="card card-style" style="margin-top:-40px; z-index:1">
             <div class="content text-center mt-4">
-                <h2 class="font-20 font-700 mb-0 mt-1">{{ centerData.name }}</h2>
-                <p class="color-gray m-0">{{ centerData.description }}</p>
+                <h2 class="font-20 font-700 mb-1 mt-1">{{ centerData.name }}</h2>
+                <p class="text-start color-gray m-0" style="line-height: 1.5;">{{ centerData.description }}</p>
                 <div class="wedive-star-back">
                   <div class="wedive-star-front" v-bind:style="'width:'+centerData.adminScore+'%'">
                   </div>
@@ -44,8 +44,8 @@
                     <span class="service font-12">서비스 {{ (centerData.serviceScore/20).toFixed(1) }}</span>
                     <!--<span class="info" style="margin-bottom:3px;margin-top:3px;"><i class="icon_question font-12">별점 안내</i></span>-->
                 </div>
-                <div style="margin-top:8px;"><span>최근리뷰 {{ (centerData.reviewCount)?centerData.reviewCount:'0' }}</span>&nbsp;&nbsp;<font class="color-gray-light">|</font>&nbsp;&nbsp;
-                <span v-if="centerData.institutionTypes && centerData.institutionTypes.length > 0"><img v-if="insti in centerData.institutionTypes" class="ext-img" :src="'/static/images/agency/logo_'+insti.toLowerCase()+'.svg'" height="14" />&nbsp;&nbsp;<font class="color-gray-light">|</font>&nbsp;&nbsp;</span>
+                <div style="margin-top:8px;"><span>최근리뷰 {{ (centerData.reviewCount)?centerData.reviewCount:'0' }}</span>&nbsp;<font class="color-gray-light">|</font>&nbsp;
+                <span v-if="centerData.institutionTypes && centerData.institutionTypes.length > 0"><span v-for="(insti,index) in centerData.institutionTypes" v-if="index < 6"><img class="ext-img" :src="'/static/images/agency/logo_'+insti.toLowerCase()+'.svg'" height="17" style="padding-bottom: 1px;" /><span v-if="index != (centerData.institutionTypes.length-1)">&nbsp;&nbsp;</span></span>&nbsp;<font class="color-gray-light">|</font>&nbsp;</span>
                 <span v-if="interest.type=='priceIndex'" v-for="interest in centerData.interests" style="letter-spacing: -2px;">{{interest.title.replace(/\$/gi, '￦')}}</span>
                 <!--<span class="badge font-10 bg-fade-gray-dark">PADI 공식</span>-->
                 </div>
@@ -91,7 +91,7 @@
         </div>
         
         
-        <div class="card card-style">
+        <div v-if="centerData.educations && centerData.educations.length > 0" class="card card-style">
             <div class="content mb-0 mt-3" id="tab-group-1">
                 <div class="tab-controls tabs-small tabs-rounded" data-highlight="bg-highlight">
                     <a v-if="centerData.educations && centerData.educations.filter(x=>x.type.includes('education')).length > 0" href="#" data-active data-bs-toggle="collapse" data-bs-target="#tab-1ab">교육</a>
@@ -219,7 +219,7 @@
         <div class="card card-style bg-theme pb-0">
             <div class="content" id="tab-group-2">
                 <div class="tab-controls tabs-small tabs-rounded" data-highlight="bg-blue-dark">
-                    <a href="#" data-active data-bs-toggle="collapse" data-bs-target="#tab-info">기타 정보</a>
+                    <a href="#" data-active data-bs-toggle="collapse" data-bs-target="#tab-info">기본 정보</a>
                     <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-time">영업 시간</a>
                     <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-eqpt">대여 장비</a>
                 </div>
@@ -1458,7 +1458,6 @@ export default {
 .min-h-230 {min-height: 210px;}
 .review_img {float: left;width: 88px; height:88px;margin-right:10px;margin-bottom:2px;border-radius:10px;object-fit: cover !important;}
 .wedive-txt-all {position: absolute;top: 20px;right: 16px;}
-.font-noto {font-family: 'Noto Sans Korean'}
 .map-box {position: absolute;right: 6px;bottom: 21px;margin: 5px 5px 4px;width: 115px;}
 .bx {background-color: rgba(255,255,255);padding: 10px;min-height: 105px;border: 1px solid rgba(0,0,0,.1);border-radius: 10px;}
 .point_desc {font-family: 'Noto Sans Korean' !important;font-weight:200;overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;display: -webkit-box;-webkit-line-clamp: 5;-webkit-box-orient: vertical;}

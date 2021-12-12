@@ -937,7 +937,7 @@ export default {
         console.log("result ================");
         console.log(result);
         console.log(this.instructor_phone)
-
+        localStorage.userId = result.data.data.upsertUser._id;
 
         var result2 = await axios({
             url: 'https://api.wedives.com/graphql',
@@ -959,7 +959,7 @@ export default {
                         "instructorType": null,
                         "isVerified": null,
                         "verificationReason": null,
-                        "user": result.upsertUser._id
+                        "user": result.data.data.upsertUser._id
                     }
                 }
             }
@@ -1065,8 +1065,6 @@ select:invalid {color: #6c757d;}
 select {background: white; background-color: white;}
 .wediev-label {font-size: 12px;transition: all 250ms ease;position:absolute;left:14px;z-index:99;margin-top: -16px;}
 .wedive-deep:before {content: '▼ 첫 수심 18m';position: absolute;margin-top: -20px;margin-left: 16%;color:#b4bcc8;}
-.font-exo2 {font-family: 'Exo 2', sans-serif;}
-.font-noto {font-family: 'Noto Sans Korean';}
 .input-big {font-size:22px !important;}
 .input-big::placeholder {font-size:22px !important;}
 .input-big2 {font-size:18px !important;}

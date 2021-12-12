@@ -599,9 +599,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-.font-exo2 {font-family: 'Exo 2', sans-serif;}
-.font-noto {font-family: 'Noto Sans Korean';}
 .card-style i:last-child {position: absolute;top: 37%;right: 20px;}
 .form-check-label {min-width: 60px;text-align:center;}
 .btn[disabled] {pointer-events: none !important;background-image: linear-gradient(to bottom, #ccc, #ccc) !important;}

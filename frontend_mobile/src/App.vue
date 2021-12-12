@@ -182,10 +182,12 @@ export default {
             }
           });
 
+          localStorage.userId = result.data.data.getUserByEmail._id;
+
           if (result.data.data.getUserByEmail && result.data.data.getUserByEmail.nickName) {
             location.href='/user_create';
           } else {
-
+            location.reload();
           }
       }).catch((error) => {
           const errorCode = error.code;

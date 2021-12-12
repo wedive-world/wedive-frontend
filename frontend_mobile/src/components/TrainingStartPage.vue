@@ -227,10 +227,6 @@ export default {
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@1,700&display=swap');
-
-
-.font-exo2 {font-family: 'Exo 2', sans-serif;}
-.font-noto {font-family: 'Noto Sans Korean';}
 .bl-1 {border-left: 1px solid rgba(0, 0, 0, 0.08) !important;}
 .border-bottom {border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;}
 .border-left {border-left: 1px solid rgba(0, 0, 0, 0.08);}

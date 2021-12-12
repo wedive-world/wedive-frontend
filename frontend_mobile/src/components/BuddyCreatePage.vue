@@ -172,20 +172,29 @@ export default {
         }
       },
       goSwimming() {
-        $(".pool").css("background", "#25beb2");
+        $(".pool").css("background", "#2c9ac3");
+        $(".pool img").css("-webkit-filter", "invert(100%)");
+        $(".pool img").css("filter", "invert(100%)");
+        $(".pool p").css("color", "white");
         setTimeout(function() {
           location.href='/buddy_swimming';
         }, 30);
       },
       goSea() {
         console.log("sea")
-        $(".sea").css("background", "#25beb2");
+        $(".sea").css("background", "#2c9ac3");
+        $(".sea img").css("-webkit-filter", "invert(100%)");
+        $(".sea img").css("filter", "invert(100%)");
+        $(".sea p").css("color", "white");
         setTimeout(function() {
           location.href='/buddy_sea';
         }, 30);
       },
       goAbroad() {
-        $(".oversea").css("background", "#25beb2");
+        $(".oversea").css("background", "#2c9ac3");
+        $(".oversea img").css("-webkit-filter", "invert(100%)");
+        $(".oversea img").css("filter", "invert(100%)");
+        $(".oversea p").css("color", "white");
         setTimeout(function() {
           location.href='/buddy_abroad';
         }, 30);
@@ -202,13 +211,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 .border-top {border-top: 1px solid rgba(0, 0, 0, 0.08) !important}
 .border-bottom {border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important}
 .border-08 {border: 1px solid rgba(0, 0, 0, 0.08) !important;border-radius:8px;}
-
-.font-exo2 {font-family: 'Exo 2', sans-serif;}
-.font-noto {font-family: 'Noto Sans Korean';}
 .card-style i:last-child {position: absolute;top: 37%;right: 20px;}
 
 </style>
