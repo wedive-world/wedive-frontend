@@ -875,26 +875,24 @@ export default {
                 query: `
                     mutation Mutation($input: UserInput) {
                         upsertUser(input: $input) {
-                            instructorLicenseImages {
                             _id
+                            instructorLicenseImages {
+                                _id
                             }
                             instructorTypes
-                            instructorVerifications {
-                            _id
-                            }
                             scubaLicenseType
                             scubaLicenseLevel
                             freeLicenseType
                             freeLicenseLevel
-                            _id
-                            firebaseUid
-                            fcmToken
+                            uid
+                            authProvider
+                            oauthToken
                             email
                             emailVerified
                             phoneNumber
                             phoneNumberVerified
                             profileImages {
-                            _id
+                                _id
                             }
                             nickName
                             name
@@ -902,7 +900,7 @@ export default {
                             gender
                             residence
                             interests {
-                            _id
+                                _id
                             }
                             divingLog
                             freeDivingBests {
@@ -914,58 +912,64 @@ export default {
                 `,
                 variables: {
                     "input": {
-                        "instructorVerifications": null,
                         "scubaLicenseType": (this.scuba_license == '') ? null : this.scuba_license,
                         "scubaLicenseLevel": parseInt(this.scuba_level),
                         "freeLicenseType": (this.free_license == '') ? null : this.free_license,
                         "freeLicenseLevel": parseInt(this.free_level),
-                        "name": localStorage.userName,
-                        "nickName": this.nickname,
+                        "uid": localStorage.uid,
+                        "authProvider": localStorage.providerId,
+                        "oauthToken": localStorage.userToken,
                         "email": localStorage.userEmail,
+                        "profileImages": ((result_img_user == null) ? null : [result_img_user.uploadImage._id]),
+                        "nickName": this.nickname,
+                        "name": localStorage.userName,
                         "birthAge": parseInt(localStorage.userAge),
                         "gender": localStorage.userSex,
-                        "instructors": null,
-                        "profileImages": ((result_img_user == null) ? null : [result_img_user.uploadImage._id]),
+                        "interests": interest_list,
                         "divingLog": parseInt(this.scuba_log),
-                        "freeDivingBest": freeBest,
-                        "interests": interest_list
+                        "freeDivingBest": freeBest
                     }
                 }
             }
         });
+        //"phoneNumber": this.instructor_phone,
 
         console.log("result ================");
         console.log(result);
         console.log(this.instructor_phone)
         localStorage.userId = result.data.data.upsertUser._id;
 
-        var result2 = await axios({
-            url: 'https://api.wedives.com/graphql',
-            method: 'post',
-            data: {
-                query: `
-                    mutation UpsertInstructorVerification($input: InstructorVerificationInput) {
-                        upsertInstructorVerification(input: $input) {
-                            _id
-                            instructorType
-                            isVerified
-                            verificationReason
+        if (result_img_certi != null) {
+            var result2 = await axios({
+                url: 'https://api.wedives.com/graphql',
+                method: 'post',
+                data: {
+                    query: `
+                        mutation UpsertInstructorVerification($input: InstructorVerificationInput) {
+                            upsertInstructorVerification(input: $input) {
+                                _id
+                                instructorType
+                                isVerified
+                                verificationReason
+                            }
+                        }
+                    `,
+                    variables: {
+                        "input": {
+                            "instructorLicenseImage": ((result_img_certi == null) ? null : result_img_certi.uploadImage._id),
+                            "instructorType": null,
+                            "isVerified": null,
+                            "verificationReason": null,
+                            "user": result.data.data.upsertUser._id
                         }
                     }
-                `,
-                variables: {
-                    "input": {
-                        "instructorLicenseImage": ((result_img_certi == null) ? null : result_img_certi.uploadImage._id),
-                        "instructorType": null,
-                        "isVerified": null,
-                        "verificationReason": null,
-                        "user": result.data.data.upsertUser._id
-                    }
                 }
-            }
-        });
-        console.log("result2 ================");
-        console.log(result2);
+            });
+            console.log("result2 ================");
+            console.log(result2);
+        }
+        
+        
         
 
         setTimeout(function() {

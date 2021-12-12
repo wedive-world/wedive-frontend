@@ -226,7 +226,7 @@ export default {
   name: 'HelloWorld',
   async beforeRouteEnter(to, from, next) {
     if (to.params.id != null) {
-        /*var result = await axios({
+        var result = await axios({
             url: 'https://api.wedives.com/graphql',
             method: 'post',
             data: {
@@ -325,8 +325,8 @@ export default {
         
         
         
-        next(vm => {vm.setData(result.data.data.getDivingById)});*/
-        next(vm => {vm.setData({_id: '61b47d6213f324035a6ca34e',
+        next(vm => {vm.setData(result.data.data.getDivingById)});
+        /*next(vm => {vm.setData({_id: '61b47d6213f324035a6ca34e',
     title: null,
     description: '잠실 프리다이빙을 모집해요.\n여러분 함께해요.',
     status: 'searchable',
@@ -380,7 +380,7 @@ export default {
     finishedAt: '2021-12-20T20:00:00.000Z',
     images: [],
     createdAt: '2021-12-11T10:28:50.525Z',
-    updatedAt: '2021-12-11T10:28:50.525Z',})});
+    updatedAt: '2021-12-11T10:28:50.525Z',})});*/
     }
   },
   async mounted() {

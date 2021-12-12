@@ -1333,7 +1333,7 @@ export default {
         map: null,
         marker_list: [],
         centerData: {},
-        feature_list: ["외국어가능", "샤워가능", "룸서비스", "늦은 퇴실", "컨시어지", "주차", "주방", "남녀화장실", "24시업무", "비지니스", "장애인편의", "세탁서비스", "금연실", "아이돌봄", "반려동물", "WIFI", "공항셔틀", "피트니스"],
+        feature_list: ["외국어가능", "샤워가능", "룸서비스", "늦은 퇴실", "컨시어지", "주차", "주방", "남녀화장실", "24시업무", "비지니스", "장애인편의", "세탁서비스", "금연실", "아이돌봄", "반려동물", "WIFI", "공항셔틀", "피트니스", "도미토리", "감압챔버", "픽업", "", "전용보트", "아쿠아리움", "나이트록스", "DPV", "무료렌탈"],
         pay_list: ["현금", "VISA", "MasterCard", "UnionPay", "JCB", "American Express", "Discover card", "PAYCO", "Kakao Pay", "Naver Pay"],
         equipt_list: ["마스크", "레귤레이터", "다이버 PC", "다이버 워치", "나침반", "수중 스쿠터", "산소탱크", "핀", "구명조끼", "나이프", "스노클링", "부츠", "잠수복 상의", "잠수복 하의", "라이트", "스쿠버 세트", "카메라", "수심계", , "게이지", "잠수복", , "풀세트", "유아장비"],
         rentalOptions: ["스킨스쿠버 세트", "스킨 세트", "마스크", "스노클", "잠수복", "오리발(핀)", "부츠", "장갑", "부츠&장갑", "웨이트&벨트", "웨이트", "스쿠버 세트", "부력조절기", "레귤레이터", "보조호흡기", "SMB", "공기통", "나이트록스", "라이트", "다이브컴퓨터", "카메라", "DPV", "조류걸이", "프리 세트", "프리 핀", "프리 마스크", "프리 스노클", "프리 잠수복", "프리 웨이트&벨트", "프리 웨이트", "바텀웨이트", "랜야드", "부이", "로프", "부이&로프", "고정부이"],
@@ -1401,12 +1401,12 @@ export default {
 .ico_feature22 {width: 44px;height: 40px;background-position: -135px -108px;}
 .ico_feature23 {width: 44px;height: 40px;background-position: -180px -108px;}
 .ico_feature24 {width: 44px;height: 40px;background-position: -225px -108px;}
-.ico_feature25 {width: 44px;height: 40px;background-position: 0px -144px;}
-.ico_feature26 {width: 44px;height: 40px;background-position: -45px -144px;}
-.ico_feature27 {width: 44px;height: 40px;background-position: -90px -144px;}
-.ico_feature28 {width: 44px;height: 40px;background-position: -135px -144px;}
-.ico_feature29 {width: 44px;height: 40px;background-position: -180px -144px;}
-.ico_feature30 {width: 44px;height: 40px;background-position: -225px -144px;}
+.ico_feature25 {width: 44px;height: 40px;background-position: 0px -156px;}
+.ico_feature26 {width: 44px;height: 40px;background-position: -45px -156px;}
+.ico_feature27 {width: 44px;height: 40px;background-position: -90px -156px;}
+.ico_feature28 {width: 44px;height: 40px;background-position: -135px -156px;}
+.ico_feature29 {width: 44px;height: 40px;background-position: -180px -156px;}
+.ico_feature30 {width: 44px;height: 40px;background-position: -225px -156px;}
 
 .icon-service {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/assets/wedive_service2.png);background-repeat: no-repeat;-webkit-background-size: 270px 200px;background-size: 270px 200px;}
 

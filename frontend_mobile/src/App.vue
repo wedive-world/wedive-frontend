@@ -131,9 +131,10 @@ export default {
           localStorage.userName = user.hasOwnProperty('displayName') ? user.displayName : "";
           localStorage.userEmail = user.hasOwnProperty('email') ? user.email : "";
           localStorage.userToken = token;
-          localStorage.firebaseUid = user.hasOwnProperty('uid') ? user.uid : "";
+          localStorage.uid = user.hasOwnProperty('uid') ? user.uid : "";
+          localStorage.accessToken = user.hasOwnProperty('accessToken') ? user.accessToken : "";
           localStorage.photoUrl = user.hasOwnProperty('photoUrl') ? user.photoUrl : "";
-          localStorage.loginBy = "google"
+          localStorage.providerId = user.providerId;
           localStorage.loginAt = (new Date()).getTime();
 
           var result = await axios({
@@ -143,51 +144,26 @@ export default {
                 query: `
                     query Query($email: String) {
                       getUserByEmail(email: $email) {
-                        instructorTypes
-                        scubaLicenseType
-                        scubaLicenseLevel
-                        freeLicenseType
-                        freeLicenseLevel
-                        firebaseUid
                         _id
-                        fcmToken
-                        email
-                        phoneNumber
-                        profileImages {
-                          _id
-                          thumbnailUrl
-                        }
                         nickName
-                        name
                         birthAge
                         gender
-                        residence
-                        interests {
-                          title
-                          type
-                        }
-                        divingLog
-                        freeDivingBests {
-                          key
-                          value
-                        }
                       }
                     }
                 `,
                 variables: {
-                    "input": {
-                        "email": localStorage.userEmail
-                    }
+                    "email": localStorage.userEmail
                 }
             }
           });
-
-          localStorage.userId = result.data.data.getUserByEmail._id;
-
-          if (result.data.data.getUserByEmail && result.data.data.getUserByEmail.nickName) {
-            location.href='/user_create';
-          } else {
+          if (result.data.data.getUserByEmail != null) {
+            localStorage.nickName = result.data.data.getUserByEmail.nickName;
+            localStorage.userAge = result.data.data.getUserByEmail.birthAge;
+            localStorage.userSex = result.data.data.getUserByEmail.gender;
+            localStorage.userId = result.data.data.getUserByEmail._id;
             location.reload();
+          } else {
+            location.href='/user_create';
           }
       }).catch((error) => {
           const errorCode = error.code;
