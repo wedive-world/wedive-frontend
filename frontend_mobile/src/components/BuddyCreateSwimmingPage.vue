@@ -626,7 +626,6 @@ export default {
       async lookupUser2() {
         this.users = [];
         const query = this.query;
-        console.log(query);
         var result = await axios({
             url: 'https://api.wedives.com/graphql',
             method: 'post',
@@ -641,7 +640,27 @@ export default {
                             divingType
                             adminScore
                             backgroundImages {
-                            thumbnailUrl
+                                thumbnailUrl
+                            }
+                        }
+                        searchDivePointsByName(query: $query) {
+                            _id
+                            uniqueName
+                            name
+                            description
+                            adminScore
+                            backgroundImages {
+                                thumbnailUrl
+                            }
+                        }
+                        searchDiveSitesByName(query: $query) {
+                            _id
+                            uniqueName
+                            name
+                            description
+                            adminScore
+                            backgroundImages {
+                                thumbnailUrl
                             }
                         }
                     }
@@ -657,9 +676,11 @@ export default {
         }
         });
         //result.data.data.searchDiveCentersByName.forEach(x=>result.data.data.searchDiveCentersByName)
-        this.users = result.data.data.searchDiveCentersByName;
-        this.users.forEach(x=>x.type = 'center');
-        console.log(this.users);
+        var result_list = new Array();
+        if (result.data.data.searchDiveSitesByName) result.data.data.searchDiveSitesByName.forEach(x=>{x.type='site';result_list.push(x)});
+        if (result.data.data.searchDivePointsByName) result.data.data.searchDivePointsByName.forEach(x=>{x.type='point';result_list.push(x)});
+        if (result.data.data.searchDiveCentersByName) result.data.data.searchDiveCentersByName.forEach(x=>{x.type='center';result_list.push(x)});
+        this.users = result_list;
       },
       
   }

@@ -15,29 +15,30 @@
 
         <div class="map-search hide">
             <div class="bx-search">
+                
+                
                 <vue-typeahead-bootstrap
                     v-model="query"
                     :data="users"
-                    :serializer="item => item.name_ko"
-                    :screen-reader-text-serializer="item => `${item.name_ko}`"
+                    :serializer="item => item.name"
+                    :screen-reader-text-serializer="item => `${item.name}`"
                     highlightClass="special-highlight-class"
-                    @hit="selecteduser = $event;show_scuba_label();"
+                    @hit="selecteduser = $event;enableNext2($event);"
                     :minMatchingChars="2"
-                    placeholder="짱스님, 어디로 다이빙 할까요?"
+                    placeholder="사이트, 포인트, 센터 (수영장)"
                     inputClass="special-input-class"
-                    :disabledValues="(selecteduser ? [selecteduser.name_ko] : [])"
+                    :disabledValues="(selecteduser ? [selecteduser.name] : [])"
                     @input="lookupUser2"
                     >
                     <template slot="suggestion" slot-scope="{ data, htmlText }">
                         <div class="d-flex align-items-center">
                         <img
                             class="rounded-s me-2"
-                            :src="data.img_url"
+                            :src="(data.backgroundImages && data.backgroundImages.length>0) ? data.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'"
                             style="width: 40px; height: 40px;" />
-                        
-                        <span v-if="data.type == 'region'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-marked-alt\'></i> 장소</span><br/>' + htmlText"></span>
-                        <span v-else-if="data.type == 'point'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-pin\'></i> 다이빙 포인트</span><br/>' + htmlText"></span>
-                        <span v-else-if="data.type == 'center'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-store\'></i> 다이빙 센터</span><br/>' + htmlText"></span>
+                        <span v-if="data.type == 'site'" class="ml-4" v-html="'<span class=\'badge border color-site border-site\'>사이트</span>&nbsp;<i class=\'fa fa-star color-yellow-dark icon-10 text-center me-2\'></i>'+(data.adminScore/20).toFixed(1)+'<br/><span class=\'font-noto font-16\'>' + htmlText + '</span>'"></span>
+                        <span v-else-if="data.type == 'point'" class="ml-4" v-html="'<span class=\'badge border color-point border-point\'>포인트</span>&nbsp;<i class=\'fa fa-star color-yellow-dark icon-10 text-center me-2\'></i>'+(data.adminScore/20).toFixed(1)+'<br/><span class=\'font-noto font-16\'>' + htmlText + '</span>'"></span>
+                        <span v-else-if="data.type == 'center'" class="ml-4" v-html="'<span class=\'badge border color-center border-center\'>센터</span>&nbsp;<i class=\'fa fa-star color-yellow-dark icon-10 text-center me-2\'></i>'+(data.adminScore/20).toFixed(1)+'<br/><span class=\'font-noto font-16\'>' + htmlText + '</span>'"></span>
                         </div>
                     </template>
                 </vue-typeahead-bootstrap>
@@ -436,6 +437,7 @@ const axios = require("axios")
 
 var map = null;
 var markerList = [];
+var selecteduser = null;
 
 var siteList = new Array();
 var pointList = new Array();
@@ -527,10 +529,18 @@ async function updateAll() {
     if (result.data.data.getDiveCentersNearBy)
         result.data.data.getDiveCentersNearBy.forEach(item => centerList.push(item));
     // 필요 없는 그린 마커를 모두 삭제한다.
+    var zoomLevel = map.getZoom();
     for (var i = 0; i < markerList.length; i++ ) {
-        if (siteList.filter(x=>x._id == markerList[i]._id).length == 0 && pointList.filter(x=>x._id == markerList[i]._id).length == 0 && centerList.filter(x=>x._id == markerList[i]._id).length == 0) {
+        if ((siteList.filter(x=>x._id == markerList[i]._id).length == 0 && pointList.filter(x=>x._id == markerList[i]._id).length == 0 && centerList.filter(x=>x._id == markerList[i]._id).length == 0) || (zoomLevel>12 && markerList[i].type == 'site')) {
             markerList[i].setMap(null);
             markerList.splice(i, 1);
+        }
+        else if (zoomLevel < 9) {
+            markerList[i].setLabel(" ");
+        } else {
+            var label_color = (markerList[i].type=='site') ? '#5f6368' : ((markerList[i].type=='point') ? '#498c99' : '#2a526f')
+            var label_text = markerList[i].title + ((markerList[i].type=='site')?' 사이트' : ((markerList[i].type=='point') ? ' 포인트': ''));
+            markerList[i].setLabel({ color: label_color, fontWeight: 'bold', fontSize: '14px', className: 'wedive-label', text: label_text });
         }
     }
     
@@ -538,10 +548,9 @@ async function updateAll() {
     var allList_item = ["site", "point", "center"];
     for (var k=0; k<3; k++) {
         var allList = null;
-        if (k == 0) allList = siteList;
+        if (k == 0) {if (zoomLevel > 12)allList = []; else allList = siteList;}
         else if (k == 1) allList = pointList;
         else if (k == 2) allList = centerList;
-        console.log(allList)
         for (var i=0; i<allList.length; i++) {
             if (markerList.filter(x=>x._id == allList[i]._id).length == 0) {
                 const img_path = (allList[i].adminScore > 40) ? '/static/images/assets/ico_pin'+k+'.png' : '/static/images/assets/ico_pin_small'+k+'.png'
@@ -560,11 +569,14 @@ async function updateAll() {
                 const m_type = allList_item[k];
                 const _k = k;
 
+                const label_text = (zoomLevel < 9) ? ' ' : (title + ((k==0)?' 사이트':((k==1)?' 포인트':'')));
+                const label_color = (k==0) ? '#5f6368' : ((k==1) ? '#498c99' : '#2a526f');
+                
                 const marker_shop = new google.maps.Marker({
                     map: map,
                     position: position,
                     icon: new google.maps.MarkerImage(img_path, null, null, null, img_size),
-                    label: { color: '#5f6368', fontWeight: 'bold', fontSize: '14px', className: 'wedive-label', text: star },
+                    label: { color: label_color, fontWeight: 'bold', fontSize: '14px', className: 'wedive-label', text: label_text },
                     img_path: img_path,
                     star: star,
                     title: title,
@@ -582,7 +594,7 @@ async function updateAll() {
                         }
                     }
 
-                    $("#map_box_shop_name").text(title + " 사이트");
+                    $("#map_box_shop_name").text(title + (k==0?' 사이트':(k==1?' 포인트':'')));
                     $("#map_box_shop_desc").text(desc);
                     $("#map_box_shop_star").text(star);
                     $("#map_box_href").attr("href", "/" + m_type + "/" + uniqueName);
@@ -615,6 +627,11 @@ async function updateAll() {
                         map.setCenter(marker_shop.getPosition());
                     }*/
                 });
+
+                if (selecteduser != null && selecteduser._id == _id) {
+                    new google.maps.event.trigger( marker_shop, 'click' );
+                    selecteduser = null;
+                }
                 
                 markerList.push(marker_shop);
             }
@@ -664,9 +681,11 @@ async function updateSite() {
     result.data.data.getDiveSitesNearby.forEach(item => siteList.push(item));
     // 필요 없는 그린 마커를 모두 삭제한다.
     for (var i = 0; i < markerList.length; i++ ) {
-        if (siteList.filter(x=>x._id == markerList[i]._id).length == 0) {
+        if (siteList.filter(x=>x._id == markerList[i]._id).length == 0 && pointList.filter(x=>x._id == markerList[i]._id).length == 0 && centerList.filter(x=>x._id == markerList[i]._id).length == 0) {
             markerList[i].setMap(null);
             markerList.splice(i, 1);
+        } else if (map.getZoom() < 9) {
+            markerList[i].setLabel("");
         }
     }
     
@@ -683,12 +702,14 @@ async function updateSite() {
             const price_index = '';
             const position = {lat: siteList[i].latitude, lng: siteList[i].longitude};
             const _id = siteList[i]._id;
+            const label_text = (map.getZoom() < 9) ? '' : (title + ((k==0)?' 사이트':((k==1)?' 포인트':'')));
+            
 
             const marker_shop = new google.maps.Marker({
                 map: map,
                 position: position,
                 icon: new google.maps.MarkerImage(img_path, null, null, null, img_size),
-                label: { color: '#5f6368', fontWeight: 'bold', fontSize: '14px', className: 'wedive-label', text: star },
+                label: { color: '#5f6368', fontWeight: 'bold', fontSize: '14px', className: 'wedive-label', text: label_text },
                 img_path: img_path,
                 star: star,
                 title: title,
@@ -1120,7 +1141,6 @@ export default {
         map.addListener('zoom_changed', async function() {
             if ($(".map-box").hasClass("hide") == false) $(".map-box").addClass("hide");
             var zoomLevel = map.getZoom();
-            
             //updateSite();
             //updatePoint();
             //updateCenter();
@@ -1202,6 +1222,7 @@ export default {
         users: [],
         my_latitude: 37.56425754670452,
         my_longitude: 126.9741944890715,
+        nickName: localStorage.nickName,
     }
   }, 
   watch: {
@@ -1212,6 +1233,12 @@ export default {
       }
   },
   methods: {
+      enableNext2(ev) {
+          selecteduser = ev;
+          map.panTo({lat: ev.latitude, lng: ev.longitude});
+          map.setZoom(10);
+          updateAll();
+      },
       mapFilter(type) {
         if ($("#map-item-" + type).css("display") == 'none') $("#map-item-" + type).fadeIn(200);
         else $("#map-item-" + type).fadeOut(200);
@@ -1225,14 +1252,71 @@ export default {
             $(".bx-search input").focus();
         },200)
       },
-      lookupUser2: debounce(function(){
-        this.users = [
-            {"id": "region_ko_jeju", "type": "region", "name_ko": "제주도", name_en: "Jeju island", "img_url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0c/bf/d2/56/photo1jpg.jpg?w=100&h=100&s=1"},
-            {"id": "region_ko_wooljin", "type": "region", "name_ko": "울진", name_en: "Wooljin", "img_url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/01/5a/31/a0/sunrise-peak-seongsan.jpg?w=100&h=100&s=1"},
-            {"id": "center_ko_jeju_bubbletank", "type": "center", "name_ko": "제주 버블탱크 스쿠버다이빙", name_en: "Bubble tank", "img_url": "/static/bubble2.jpg"},
-            {"id": "point_ko_jeju_munisland", "type": "point", "name_ko": "제주도 문섬", name_en: "Mun island", "img_url": "https://api.cdn.visitjeju.net/photomng/imgpath/201907/31/07c1996d-4374-4e77-b353-300d01783718.jpg"},
-        ];
-      }, 500),
+      async lookupUser2() {
+        this.users = [];
+        const query = this.query;
+        var result = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            data: {
+                query: `
+                    query Query($query: String!) {
+                        searchDiveCentersByName(query: $query) {
+                            _id
+                            uniqueName
+                            name
+                            description
+                            divingType
+                            adminScore
+                            latitude
+                            longitude
+                            backgroundImages {
+                                thumbnailUrl
+                            }
+                        }
+                        searchDivePointsByName(query: $query) {
+                            _id
+                            uniqueName
+                            name
+                            description
+                            adminScore
+                            latitude
+                            longitude
+                            backgroundImages {
+                                thumbnailUrl
+                            }
+                        }
+                        searchDiveSitesByName(query: $query) {
+                            _id
+                            uniqueName
+                            name
+                            description
+                            adminScore
+                            latitude
+                            longitude
+                            backgroundImages {
+                                thumbnailUrl
+                            }
+                        }
+                    }
+                `,
+                variables: {
+                    "query": query
+                }
+            }
+        }, {
+        headers: {
+            countryCode: 'ko',
+            android: (localStorage.android) ? localStorage.android : "",
+        }
+        });
+        //result.data.data.searchDiveCentersByName.forEach(x=>result.data.data.searchDiveCentersByName)
+        var result_list = new Array();
+        if (result.data.data.searchDiveSitesByName) result.data.data.searchDiveSitesByName.forEach(x=>{x.type='site';result_list.push(x)});
+        if (result.data.data.searchDivePointsByName) result.data.data.searchDivePointsByName.forEach(x=>{x.type='point';result_list.push(x)});
+        if (result.data.data.searchDiveCentersByName) result.data.data.searchDiveCentersByName.forEach(x=>{x.type='center';result_list.push(x)});
+        this.users = result_list;
+      },
   }
 
   
