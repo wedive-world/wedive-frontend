@@ -17,12 +17,16 @@ export default [
         route: 'dashboard-point',
       },
       {
+        title: 'Center manage',
+        route: 'dashboard-center',
+      },
+      {
         title: 'Interest manage',
         route: 'dashboard-interest',
       },
       {
-        title: 'Center manage',
-        route: 'dashboard-center',
+        title: 'Center excel',
+        route: 'dashboard-center2',
       },
     ],
   },

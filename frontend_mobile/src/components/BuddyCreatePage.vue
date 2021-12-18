@@ -30,6 +30,7 @@
               <p :class="'font-noto color-gray mb-0 font-200' + ((userToken == null || nickName == null) ? ' opacity-40' : '')">위다이브의 전문 매니저에게 요청합니다.</p>
               <i :class="'wedive_icoset2x wedive_icoset2x_rightarrow' + ((userToken == null || nickName == null) ? ' opacity-40' : '')"></i>
             </div>
+            <img src="/static/images/assets/concierge2.png" style="position: absolute;height: 80px;bottom: 0;right: 40px;">
           </div>
         </div>
 
@@ -40,6 +41,7 @@
               <p :class="'font-noto color-gray mb-0 font-200' + ((userToken == null || nickName == null) ? ' opacity-40' : '')">직접 맞춤 버디를 모집할께요.</p>
               <i :class="'wedive_icoset2x wedive_icoset2x_rightarrow' + ((userToken == null || nickName == null) ? ' opacity-40' : '')"></i>
             </div>
+            <img src="/static/images/assets/together.png" style="position: absolute;height: 80px;bottom: 6px;right: 40px;">
           </div>
         </div>
 

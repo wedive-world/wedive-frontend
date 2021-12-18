@@ -1,6 +1,6 @@
 <template>
   <b-card
-    title="관심사항 관리"
+    title="센터 엑셀처럼 관리"
   >
     <vue-context ref="menu">
       <li>
@@ -39,7 +39,7 @@
         ref="grid"
         id="mygrid"
         :column-defs="columnDefs"
-        :row-data="interests"
+        :row-data="centers"
         row-data-key='_id'
         @cell-updated="cellUpdated"
         >
@@ -47,7 +47,7 @@
             
         </template>
         <template v-slot:header-r>
-            Total rows: {{ interests.length }}
+            Total rows: {{ centers.length }}
         </template>
       </vue-editable-grid>
     </div>
@@ -170,13 +170,52 @@ import VueContext from 'vue-context'
 import vSelect from 'vue-select'
 import Ripple from 'vue-ripple-directive'
 const { getAllInterests, getInterestTypes, upsertInterest, deleteInterestById } = require ('@/wedive-frontend-graphql/interest-service')
+const { upsertDiveCenter, getAllDiveCenters } = require('@/wedive-frontend-graphql/dive-center-service')
+const { getAllDivePoints } = require('@/wedive-frontend-graphql/dive-point-service')
 
+const selectOptionsStatus = [
+  {value: 'pending', text: 'pending'},
+  {value: 'active', text: 'active'},
+  {value: 'inactive', text: 'inactive'},
+  {value: 'deleted', text: 'deleted'}
+]
 
 const columnDefinition = [
-    { sortable: true, filter: true, field: 'title', headerName: '관심내용', editable: true },
-    { sortable: true, filter: true, field: 'type', headerName: '타입', editable: true},
-    { sortable: true, filter: true, field: 'aliases_show', headerName: '동의어', editable: true },
-    { sortable: true, filter: true, field: 'searchTerms_show', headerName: '유의어', editable: true },
+    { sortable: true, filter: true, field: 'publishStatus', headerName: '상태', editable: true, type: 'select', selectOptions: selectOptionsStatus },
+    { sortable: true, filter: true, field: 'uniqueName', headerName: 'URL', editable: true },
+    { sortable: true, filter: true, field: 'name', headerName: '이름', editable: true},
+    { sortable: true, filter: true, field: 'description', headerName: '한줄설명', editable: true },
+    { sortable: true, filter: true, field: 'divingType', headerName: '타입', editable: true },
+    { sortable: true, filter: true, field: 'institutionTypes', headerName: '다이빙 단체', editable: true },
+
+    { sortable: true, filter: true, field: 'latitude', headerName: '위도', editable: true },
+    { sortable: true, filter: true, field: 'longitude', headerName: '경도', editable: true },
+    
+    { sortable: true, filter: true, field: 'divePointsName', headerName: '포인트', editable: true },
+    { sortable: true, filter: true, field: 'adminScore', headerName: '총점', editable: true },
+    { sortable: true, filter: true, field: 'viewScore', headerName: '경치 점수', editable: true },
+    { sortable: true, filter: true, field: 'educationScore', headerName: '교육 점수', editable: true },
+    { sortable: true, filter: true, field: 'facilityScore', headerName: '시설 점수', editable: true },
+    { sortable: true, filter: true, field: 'serviceScore', headerName: '서비스 점수', editable: true },
+    
+    { sortable: true, filter: true, field: 'phoneNumber', headerName: '전화번호', editable: true },
+    { sortable: true, filter: true, field: 'email', headerName: '이메일', editable: true },
+    { sortable: true, filter: true, field: 'geoAddress', headerName: '주소', editable: true },
+    { sortable: true, filter: true, field: 'webPageUrl', headerName: '홈페이지', editable: true },
+    { sortable: true, filter: true, field: 'enteranceLevelFree', headerName: '입장레벨 (프리)', editable: true },
+    { sortable: true, filter: true, field: 'enteranceLevelScuba', headerName: '입장레벨 (스쿠버)', editable: true },
+
+    { sortable: true, filter: true, field: 'wediveComments', headerName: '위다이브 코멘트', editable: true },
+    { sortable: true, filter: true, field: 'aliases', headerName: '동의어 (별명)', editable: true },
+    { sortable: true, filter: true, field: 'searchTerms', headerName: '유의어 (검색)', editable: true },
+
+    { sortable: true, filter: true, field: 'interestsTitle', headerName: '관심사항', editable: true },
+
+    { sortable: true, filter: true, field: 'openingHours', headerName: '영업시간', editable: true },
+
+    { sortable: true, filter: true, field: 'youtubeVideoIds', headerName: '유튜브 영상', editable: true },
+    { sortable: true, filter: true, field: 'referenceUrls', headerName: '참고 사이트', editable: true },
+    { sortable: true, filter: true, field: 'memo', headerName: '메모', editable: true },
 ];
 
 
@@ -203,6 +242,8 @@ export default {
       columnDefs: columnDefinition,
       interests: [],
       interest_types: [],
+      centers: [],
+      points: [],
       title: '',
       addType: '',
       aliases: '',
@@ -220,17 +261,98 @@ export default {
   async beforeRouteEnter(to, from, next) {
     var interests = await getAllInterests();
     var interest_types = await getInterestTypes();
-    next(vm => {vm.setInterests(interests, interest_types)});
+    var centers = await getAllDiveCenters();
+    var points = await getAllDivePoints();
+    next(vm => {vm.setInterests(interests, interest_types, centers, points)});
   },
   methods: {
-    setInterests: function(interests, interest_types) {
+    setInterests: function(interests, interest_types, centers, points) {
       this.interests = interests;
       this.interest_types = interest_types;
       this.interests.forEach(interest=>{if(interest.aliases) {interest.aliases_show = interest.aliases.join();}if(interest.searchTerms){interest.searchTerms_show = interest.searchTerms.join();}});
+
+      this.centers = centers.getAllDiveCenters;
+      this.centers.forEach(center => {center.divePointsName = center.divePoints.map(point => {return point.name})})
+      this.centers.forEach(center => {center.interestsTitle = center.interests.map(interest => {return interest.title})})
+      
+      this.points = points.getAllDivePoints;
     },
     async cellUpdated($event) {
-      //console.log($event);
-      var aliases = [];
+      console.log($event);
+      var _id = $event.row._id;
+      var uniqueName = $event.row.uniqueName;
+      var latitude = $event.row.latitude;
+      var longitude = $event.row.longitude;
+      var field = $event.column.field;
+      var value = $event.value;
+      if (field == 'latitude' || field == 'longitude') value = parseFloat(value);
+      if (field == 'divingType' || field == 'openingHours' || field == 'wediveComments' || field == 'institutionTypes' || field == 'youtubeVideoIds' || field == 'referenceUrls' || field == 'aliases' || field == 'searchTerms') value = JSON.parse(value);
+
+      var hasError = false;
+      var errString = '';
+      // interests
+      if (field == 'interestsTitle') {
+        var temp_list = JSON.parse(value);
+        value = temp_list.map(temp => {
+          var _list = this.interests.filter(interest=>interest.title == temp);
+          if (_list.length > 0) {
+            return _list[0]._id
+          } else {
+            errString = temp + ' 값을 interest에서 찾을 수 없습니다.';
+            hasError = true;
+          }
+        });
+        field = 'interests';
+      }
+
+      //divingPoint
+      if (field == 'divePointsName') {
+        var temp_list = JSON.parse(value);
+        value = temp_list.map(temp => {
+          var _list = this.points.filter(point=>point.name == temp);
+          if (_list.length > 0) {
+            return _list[0]._id
+          } else {
+            errString = temp + ' 값을 point에서 찾을 수 없습니다.';
+            hasError = true;
+          }
+        });
+        field = 'divePoints';
+      }
+      
+
+      if (hasError) {
+        this.$swal({
+          title: 'Error!',
+          text: errString,
+          icon: 'error',
+          customClass: {
+            confirmButton: 'btn btn-primary',
+          },
+          buttonsStyling: false,
+        })
+      } else {
+        try {
+          var ipt = {_id : _id, uniqueName: uniqueName, latitude: latitude, longitude: longitude };
+          ipt[field] = value;
+          console.log(ipt);
+          var result = await upsertDiveCenter(ipt);
+        } catch(e) {
+          this.$swal({
+            title: 'Error!',
+            text: e,
+            icon: 'error',
+            customClass: {
+              confirmButton: 'btn btn-primary',
+            },
+            buttonsStyling: false,
+          })
+        }
+      }
+      
+      
+      
+      /*var aliases = [];
       if ($event.row.hasOwnProperty("aliases_show")) {aliases = $event.row.aliases_show.replace(/, /gi,",").split(",");}
       var searchTerms = [];
       if ($event.row.hasOwnProperty("searchTerms_show")) {searchTerms = $event.row.searchTerms_show.replace(/, /gi,",").split(",");}
@@ -256,7 +378,7 @@ export default {
           },
           buttonsStyling: false,
         })
-      }
+      }*/
     },
     async AddInterest() {
       var i_input = {title: title.value, uniqueName: title.value, type: this.addType, aliases: aliases.value, searchTerms: searchTerms.value, iconColor: "", iconUrl: null};

@@ -5,14 +5,14 @@ export default [
     component: () => import('@/views/dashboard/ecommerce/Ecommerce.vue'),
   },
   {
-    path: '/dashboard/interest',
-    name: 'dashboard-interest',
-    component: () => import('@/views/dashboard/wedive/InterestAdd.vue'),
-  },
-  {
     path: '/dashboard/site',
     name: 'dashboard-site',
     component: () => import('@/views/dashboard/wedive/SitesList.vue'),
+  },
+  {
+    path: '/dashboard/point',
+    name: 'dashboard-point',
+    component: () => import('@/views/dashboard/wedive/PointsList.vue'),
   },
   {
     path: '/dashboard/center',
@@ -20,9 +20,15 @@ export default [
     component: () => import('@/views/dashboard/wedive/CentersList.vue'),
   },
   {
-    path: '/dashboard/point',
-    name: 'dashboard-point',
-    component: () => import('@/views/dashboard/wedive/PointsList.vue'),
+    path: '/dashboard/interest',
+    name: 'dashboard-interest',
+    component: () => import('@/views/dashboard/wedive/InterestAdd.vue'),
   },
+  {
+    path: '/dashboard/center2',
+    name: 'dashboard-center2',
+    component: () => import('@/views/dashboard/wedive/CenterExcel.vue'),
+  },
+  
   
 ]
