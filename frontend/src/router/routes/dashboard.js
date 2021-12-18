@@ -25,6 +25,11 @@ export default [
     component: () => import('@/views/dashboard/wedive/InterestAdd.vue'),
   },
   {
+    path: '/dashboard/site2',
+    name: 'dashboard-site2',
+    component: () => import('@/views/dashboard/wedive/SiteExcel.vue'),
+  },
+  {
     path: '/dashboard/point2',
     name: 'dashboard-point2',
     component: () => import('@/views/dashboard/wedive/PointExcel.vue'),
@@ -33,6 +38,12 @@ export default [
     path: '/dashboard/center2',
     name: 'dashboard-center2',
     component: () => import('@/views/dashboard/wedive/CenterExcel.vue'),
+  },
+  {
+    path: '/dashboard/center/:id',
+    name: 'dashboard-center-detail',
+    props: true,
+    component: () => import('@/views/dashboard/wedive/CenterPage.vue'),
   },
   
   

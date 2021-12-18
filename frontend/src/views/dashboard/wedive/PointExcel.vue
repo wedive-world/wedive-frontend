@@ -269,11 +269,11 @@ export default {
       }
     },
     async cellUpdated($event) {
-      console.log($event);
+      //console.log($event);
       var _id = $event.row._id;
       var uniqueName = $event.row.uniqueName;
-      var latitude = $event.row.latitude;
-      var longitude = $event.row.longitude;
+      var latitude = parseFloat($event.row.latitude);
+      var longitude = parseFloat($event.row.longitude);
       var field = $event.column.field;
       var value = $event.value;
       if (field == 'latitude' || field == 'longitude') value = parseFloat(value);

@@ -313,5 +313,7 @@ export default {
 
 <style scoped lang="scss">
 @import '@core/scss/vue/libs/vue-context.scss';
-
+.my-grid-class {
+  height: 1200px;
+}
 </style>
