@@ -1,6 +1,6 @@
 <template>
   <b-card
-    title="센터 엑셀처럼 관리"
+    title="포인트 엑셀처럼 관리"
   >
     <vue-context ref="menu">
       <li>
@@ -23,7 +23,7 @@
         v-b-modal.modal-add
         variant="outline-primary"
       >
-      센터 추가
+      포인트 추가
     </b-button>
     <div class="dashboard-list-box fl-wrap">
       <vue-editable-grid
@@ -31,7 +31,7 @@
         ref="grid"
         id="mygrid"
         :column-defs="columnDefs"
-        :row-data="centers"
+        :row-data="points"
         row-data-key='_id'
         @cell-updated="cellUpdated"
         >
@@ -39,20 +39,19 @@
             
         </template>
         <template v-slot:header-r>
-            Total rows: {{ centers.length }}
+            Total rows: {{ points.length }}
         </template>
       </vue-editable-grid>
     </div>
 
-    
-    
+
 
     <b-modal
       id="modal-add"
-      title="센터 추가"
+      title="포인트 추가"
       ok-only
       ok-title="Add"
-      @ok="AddCenter"
+      @ok="AddPoint"
       ref="modal"
     >
       <b-row>
@@ -130,23 +129,6 @@
       </b-row>
     </b-modal>
 
-    <b-modal
-      id="modal-delete"
-      title="관심사항 삭제"
-      ok-only
-      ok-title="Delete"
-      @ok="DeleteInterest"
-      ref="modal"
-      >
-      <p>climate, popularity는 삭제가 불가합니다.</p>
-      <b-form-select
-        v-model="delSelected"
-        :options="interests.filter(interest=>interest.type!='climate'&&interest.type!='popularity').map((inter)=>{return ({text: inter.title, value: inter._id})})"
-        size="sm"
-        class="mt-1"
-      />
-      
-    </b-modal>
   </b-card>
 
 </template>
@@ -157,10 +139,8 @@ import VueContext from 'vue-context'
 import vSelect from 'vue-select'
 import Ripple from 'vue-ripple-directive'
 const { getAllInterests, getInterestTypes, upsertInterest, deleteInterestById } = require ('@/wedive-frontend-graphql/interest-service')
-const { upsertDiveCenter, getAllDiveCenters } = require('@/wedive-frontend-graphql/dive-center-service')
-const { getAllDivePoints } = require('@/wedive-frontend-graphql/dive-point-service')
-const { upsertProduct, deleteProductById } = require('@/wedive-frontend-graphql/product-service')
-
+const { upsertDivePoint, getAllDivePoints } = require('@/wedive-frontend-graphql/dive-point-service')
+const { upsertDiveSite, getAllDiveSites } = require('@/wedive-frontend-graphql/dive-site-service')
 
 const selectOptionsStatus = [
   {value: 'pending', text: 'pending'},
@@ -174,35 +154,40 @@ const columnDefinition = [
     { sortable: true, filter: true, field: 'uniqueName', headerName: 'URL', editable: true },
     { sortable: true, filter: true, field: 'name', headerName: '이름', editable: true},
     { sortable: true, filter: true, field: 'description', headerName: '한줄설명', editable: true },
-    { sortable: true, filter: true, field: 'divingType', headerName: '타입', editable: true },
-    { sortable: true, filter: true, field: 'institutionTypes', headerName: '다이빙 단체', editable: true },
+    { sortable: true, filter: true, field: 'highlightDescription', headerName: '하이라이트 설명', editable: true },
 
     { sortable: true, filter: true, field: 'latitude', headerName: '위도', editable: true },
     { sortable: true, filter: true, field: 'longitude', headerName: '경도', editable: true },
     
-    { sortable: true, filter: true, field: 'divePointsName', headerName: '포인트', editable: true },
+    { sortable: true, filter: true, field: 'diveSiteName', headerName: '사이트', editable: true },
     { sortable: true, filter: true, field: 'adminScore', headerName: '총점', editable: true },
-    { sortable: true, filter: true, field: 'viewScore', headerName: '경치 점수', editable: true },
-    { sortable: true, filter: true, field: 'educationScore', headerName: '교육 점수', editable: true },
-    { sortable: true, filter: true, field: 'facilityScore', headerName: '시설 점수', editable: true },
-    { sortable: true, filter: true, field: 'serviceScore', headerName: '서비스 점수', editable: true },
+    { sortable: true, filter: true, field: 'flowRateScore', headerName: '유속 점수', editable: true },
+    { sortable: true, filter: true, field: 'waterEnvironmentScore', headerName: '환경 점수', editable: true },
+    { sortable: true, filter: true, field: 'eyeSightScore', headerName: '시야 점수', editable: true },
     
-    { sortable: true, filter: true, field: 'phoneNumber', headerName: '전화번호', editable: true },
-    { sortable: true, filter: true, field: 'email', headerName: '이메일', editable: true },
-    { sortable: true, filter: true, field: 'geoAddress', headerName: '주소', editable: true },
-    { sortable: true, filter: true, field: 'webPageUrl', headerName: '홈페이지', editable: true },
-    { sortable: true, filter: true, field: 'enteranceLevelFree', headerName: '입장레벨 (프리)', editable: true },
-    { sortable: true, filter: true, field: 'enteranceLevelScuba', headerName: '입장레벨 (스쿠버)', editable: true },
-
-    { sortable: true, filter: true, field: 'wediveComments', headerName: '위다이브 코멘트', editable: true },
+    { sortable: true, filter: true, field: 'minDepth', headerName: '최소 깊이', editable: true },
+    { sortable: true, filter: true, field: 'maxDepth', headerName: '최대 깊이', editable: true },
+    { sortable: true, filter: true, field: 'minSight', headerName: '최소 시야', editable: true },
+    { sortable: true, filter: true, field: 'maxSight', headerName: '최대 시야', editable: true },
+    
     { sortable: true, filter: true, field: 'aliases', headerName: '동의어 (별명)', editable: true },
     { sortable: true, filter: true, field: 'searchTerms', headerName: '유의어 (검색)', editable: true },
 
     { sortable: true, filter: true, field: 'interestsTitle', headerName: '관심사항', editable: true },
-    { sortable: true, filter: true, field: 'openingHours', headerName: '영업시간', editable: true },
-    { sortable: true, filter: true, field: 'rentalsName', headerName: '장비', editable: true },
-    { sortable: true, filter: true, field: 'ticketsName', headerName: '입장료', editable: true },
-    
+    { sortable: true, filter: true, field: 'month1Title', headerName: '1월', editable: true },
+    { sortable: true, filter: true, field: 'month2Title', headerName: '2월', editable: true },
+    { sortable: true, filter: true, field: 'month3Title', headerName: '3월', editable: true },
+    { sortable: true, filter: true, field: 'month4Title', headerName: '4월', editable: true },
+    { sortable: true, filter: true, field: 'month5Title', headerName: '5월', editable: true },
+    { sortable: true, filter: true, field: 'month6Title', headerName: '6월', editable: true },
+    { sortable: true, filter: true, field: 'month7Title', headerName: '7월', editable: true },
+    { sortable: true, filter: true, field: 'month8Title', headerName: '8월', editable: true },
+    { sortable: true, filter: true, field: 'month9Title', headerName: '9월', editable: true },
+    { sortable: true, filter: true, field: 'month10Title', headerName: '10월', editable: true },
+    { sortable: true, filter: true, field: 'month11Title', headerName: '11월', editable: true },
+    { sortable: true, filter: true, field: 'month12Title', headerName: '12월', editable: true },
+
+
     { sortable: true, filter: true, field: 'youtubeVideoIds', headerName: '유튜브 영상', editable: true },
     { sortable: true, filter: true, field: 'referenceUrls', headerName: '참고 사이트', editable: true },
     { sortable: true, filter: true, field: 'memo', headerName: '메모', editable: true },
@@ -232,14 +217,14 @@ export default {
       columnDefs: columnDefinition,
       interests: [],
       interest_types: [],
-      centers: [],
+      sites: [],
       points: [],
-
+      
       uniqueName: '',
       name: '',
       latitude: '',
       longitude: '',
-      
+
       delSelected: '',
       menuData: [
         { icon: 'PlusIcon', text: 'New' },
@@ -253,22 +238,35 @@ export default {
   async beforeRouteEnter(to, from, next) {
     var interests = await getAllInterests();
     var interest_types = await getInterestTypes();
-    var centers = await getAllDiveCenters();
+    var sites = await getAllDiveSites();
     var points = await getAllDivePoints();
-    next(vm => {vm.setInterests(interests, interest_types, centers, points)});
+    next(vm => {vm.setInterests(interests, interest_types, sites, points)});
   },
   methods: {
-    setInterests: function(interests, interest_types, centers, points) {
+    setInterests: function(interests, interest_types, sites, points) {
       this.interests = interests;
       this.interest_types = interest_types;
       this.interests.forEach(interest=>{if(interest.aliases) {interest.aliases_show = interest.aliases.join();}if(interest.searchTerms){interest.searchTerms_show = interest.searchTerms.join();}});
 
-      this.centers = centers.getAllDiveCenters;
-      this.centers.forEach(center => {center.divePointsName = center.divePoints.map(point => {return point.uniqueName})})
-      this.centers.forEach(center => {center.interestsTitle = center.interests.map(interest => {return interest.title})})
-      this.centers.forEach(center => {center.rentalsName = center.rentals.map(rental => {return [rental.name,((rental.unitName==null)?'':rental.unitName),((rental.price==null)?'':rental.price)]})})
-      this.centers.forEach(center => {center.ticketsName = center.tickets.map(ticket => {return [ticket.unitName,((ticket.price==null)?'':ticket.price)]})})
+      this.sites = sites.getAllDiveSites;
       this.points = points.getAllDivePoints;
+
+      this.points.forEach(point => {
+          try {
+                point.diveSiteName = '';
+                point.diveSiteName = (point.diveSiteId != null) ? (this.sites.filter(x=>x._id == point.diveSiteId)[0].uniqueName) : '';
+            } catch(e) {
+                console.log(e);
+            }
+      }
+      );
+      //this.points.forEach(point => {point.diveSitesName = point.diveSites.map(site => {return site.name})})
+      
+      
+      this.points.forEach(point => {point.interestsTitle = point.interests.map(interest => {return interest.title})})
+      for (var i=1 ; i<13; i++) {
+          this.points.forEach(point => {point['month'+i+'Title'] = point['month'+i].map(interest => {return interest.title})})
+      }
     },
     async cellUpdated($event) {
       console.log($event);
@@ -296,59 +294,35 @@ export default {
           }
         });
         field = 'interests';
-      }
-      // rentals
-      if (field == 'rentalsName') {
-        var temp_list = JSON.parse(value.replace(/\'/gi,'"'));
-        console.log(value);
-        console.log(temp_list);
-        var _id_list = new Array();
-        for (var i=0 ; i<temp_list.length; i++) {
-          var _id2 = $event.row.rentals[i]._id;
-          var ipt = {name: temp_list[i][0], type: ["rental"]};
-          ipt.unitName = temp_list[i][1];
-          ipt.price = parseInt(temp_list[i][2]);
-          if (_id2 != null) ipt._id = _id2;
+      } 
 
-          var resultProduct = await upsertProduct(ipt);
-          _id_list.push(resultProduct.upsertProduct._id)
-        }
-        
-        field = 'rentals';
-        value = _id_list;
-      }
-      // tickets
-      if (field == 'ticketsName') {
+      // month1 ~ month12
+      if (field.includes('month') && field.includes('Title')) {
         var temp_list = JSON.parse(value.replace(/\'/gi,'"'));
-        var _id_list = new Array();
-        for (var i=0 ; i<temp_list.length; i++) {
-          var _id2 = $event.row.tickets[i]._id;
-          var ipt = {name: "입장료", type: ["ticket"]};
-          ipt.unitName = temp_list[i][0];
-          ipt.price = parseInt(temp_list[i][1]);
-          if (_id2 != null) ipt._id = _id2;
-
-          var resultProduct = await upsertProduct(ipt);
-          _id_list.push(resultProduct.upsertProduct._id)
-        }
-        
-        field = 'tickets';
-        value = _id_list;
-      }
-
-      //divingPoint
-      if (field == 'divePointsName') {
-        var temp_list = JSON.parse(value.replace(/\'/gi,'"'));
+        var month = field.replace('Title','');
         value = temp_list.map(temp => {
-          var _list = this.points.filter(point=>point.uniqueName == temp);
+          var _list = this.interests.filter(interest=>interest.title == temp);
           if (_list.length > 0) {
             return _list[0]._id
           } else {
-            errString = temp + ' 값을 point에서 찾을 수 없습니다.';
+            errString = temp + ' 값을 interest에서 찾을 수 없습니다.';
             hasError = true;
           }
         });
-        field = 'divePoints';
+        field = month;
+      }
+
+      //divingSite
+      if (field == 'diveSiteName') {
+        var temp = this.sites.filter(site=>site.uniqueName == value);
+        if (temp.length > 0) {
+            value = temp[0]._id;
+            field = 'diveSite';
+        }
+        else {
+            errString = temp + ' 값을 site에서 찾을 수 없습니다.';
+            hasError = true;
+        }
       }
       
 
@@ -367,7 +341,7 @@ export default {
           var ipt = {_id : _id, uniqueName: uniqueName, latitude: latitude, longitude: longitude };
           ipt[field] = value;
           console.log(ipt);
-          var result = await upsertDiveCenter(ipt);
+          var result = await upsertDivePoint(ipt);
         } catch(e) {
           this.$swal({
             title: 'Error!',
@@ -411,10 +385,10 @@ export default {
         })
       }*/
     },
-    async AddCenter() {
+    async AddPoint() {
       var i_input = {uniqueName: this.uniqueName.value, name: this.name.value, latitude: parseFloat(this.latitude), longitude: parseFloat(this.longitude)};
       try {
-        await upsertDiveCenter(i_input)
+        await upsertDivePoint(i_input)
       } catch (e) {
         this.$swal({
           title: 'Error!',
@@ -426,7 +400,6 @@ export default {
           buttonsStyling: false,
         })
       }
-      location.reload();
       //this.$apollo.mutate({mutation: CREATE_INTEREST, variables: {interestInput: i_input}}).then((data) => {console.log(data)}).catch((error) => {console.log(error);});
     },
     async DeleteInterest() {

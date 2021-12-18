@@ -22,6 +22,10 @@ export default [
         route: 'dashboard-interest',
       },
       {
+        title: 'Point excel',
+        route: 'dashboard-point',
+      },
+      {
         title: 'Center Excel',
         route: 'dashboard-center2',
       },
