@@ -4,9 +4,6 @@
     <div class="header header-fixed header-logo-center">
         <a href="" class="header-title color ellipsis">수영장 버디 모집</a>
         <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
-        <a href="#" data-menu="menu-main" class="header-icon header-icon-4"><i class="fas fa-bars"></i></a>
-        <a href="#" data-toggle-theme class="header-icon header-icon-3 show-on-theme-dark"><i class="fas fa-sun"></i></a>
-        <a href="#" data-toggle-theme class="header-icon header-icon-3 show-on-theme-light"><i class="fas fa-moon"></i></a>
     </div>
     
     <div class="card card-clear" data-card-height="80"></div>
@@ -124,14 +121,17 @@
                                 @input="lookupUser2"
                                 >
                                 <template slot="suggestion" slot-scope="{ data, htmlText }">
-                                    <div class="d-flex align-items-center">
-                                    <img
-                                        class="rounded-s me-2"
+                                    <div class="d-flex align-items-center" style="position:relative !important;">
+                                    <div :class="''+data.type + '_img'">
+                                        <img
+                                        class="rounded-s me-3"
                                         :src="(data.backgroundImages && data.backgroundImages.length>0) ? data.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'"
-                                        style="width: 40px; height: 40px;" />
-                                    <span v-if="data.type == 'site'" class="ml-4" v-html="'<span class=\'badge border color-site border-site\'>사이트</span>&nbsp;<i class=\'fa fa-star color-yellow-dark icon-10 text-center me-2\'></i>'+(data.adminScore/20).toFixed(1)+'<br/><span class=\'font-noto font-16\'>' + htmlText + '</span>'"></span>
-                                    <span v-else-if="data.type == 'point'" class="ml-4" v-html="'<span class=\'badge border color-point border-point\'>포인트</span>&nbsp;<i class=\'fa fa-star color-yellow-dark icon-10 text-center me-2\'></i>'+(data.adminScore/20).toFixed(1)+'<br/><span class=\'font-noto font-16\'>' + htmlText + '</span>'"></span>
-                                    <span v-else-if="data.type == 'center'" class="ml-4" v-html="'<span class=\'badge border color-center border-center\'>센터</span>&nbsp;<i class=\'fa fa-star color-yellow-dark icon-10 text-center me-2\'></i>'+(data.adminScore/20).toFixed(1)+'<br/><span class=\'font-noto font-16\'>' + htmlText + '</span>'"></span>
+                                        style="width: 40px; height: 40px;margin-top:5px;" />
+                                    </div>
+                                    <span v-if="data.type == 'site'" class="ml-4" style="margin-top: -14px;" v-html="'<span class=\'font-noto font-16\'>' + htmlText + ' 사이트</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-dark-dark icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 164px);position: fixed;margin-top:-4px;\'>' + data.description+'</span>'"></span>
+                                    <span v-else-if="data.type == 'point'" class="ml-4" style="margin-top: -14px;" v-html="'<span class=\'font-noto font-16\'>' + htmlText + ' 포인트</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-dark-dark icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 164px);position: fixed;margin-top:-4px;\'>' + data.description+'</span>'"></span>
+                                    <span v-else-if="data.type == 'center'" class="ml-4" style="margin-top: -14px;" v-html="'<span class=\'font-noto font-16\'>' + htmlText + '</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-dark-dark icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 164px);position: fixed;margin-top:-4px;\'>' + data.description+'</span>'"></span>
+                                    
                                     </div>
                                 </template>
                             </vue-typeahead-bootstrap>
@@ -139,16 +139,17 @@
                                 id="search_result" 
                                 class="hide bg-secondary2" 
                                 v-on:click="search_result_click()"
-                                style="margin-left: 16px;margin-right: 16px;padding:7px 11px 7px;border:1px solid #ced4da;border-radius:16px;">
-                                <div class="d-flex align-items-center">
+                                style="margin-left: 16px;margin-right: 16px;padding:7px 11px 7px;border:1px solid #ced4da;border-radius:16px;min-height:68px;">
+                                <div class="d-flex align-items-center" style="position:relative !important;">
+                                <div :class="''+search_type + '_img'">
                                 <img
-                                    class="rounded-s me-2"
+                                    class="rounded-s me-3"
                                     :src="search_img"
-                                    style="width: 40px; height: 40px;" />
-                                
-                                <span v-if="search_type == 'region'" class="ml-4" v-html="'<span class=\'badge border color-site border-site\'>사이트</span>&nbsp;<i class=\'fa fa-star color-yellow-dark icon-10 text-center me-2\'></i>'+(search_adminScore/20).toFixed(1)+'<br/><span class=\'font-noto font-16\'>' + search_loc + '</span>'"></span>
-                                <span v-else-if="search_type == 'point'" class="ml-4" v-html="'<span class=\'badge border color-point border-point\'>포인트</span>&nbsp;<i class=\'fa fa-star color-yellow-dark icon-10 text-center me-2\'></i>'+(search_adminScore/20).toFixed(1)+'<br/><span class=\'font-noto font-16\'>' + search_loc + '</span>'"></span>
-                                <span v-else-if="search_type == 'center'" class="ml-4" v-html="'<span class=\'badge border color-center border-center\'>센터</span>&nbsp;<i class=\'fa fa-star color-yellow-dark icon-10 text-center me-2\'></i>'+(search_adminScore/20).toFixed(1)+'<br/><span class=\'font-noto font-16\'>' + search_loc + '</span>'"></span>
+                                    style="width: 40px; height: 40px;margin-top:5px;" />
+                                </div>
+                                <span v-if="search_type == 'site'" class="ml-4" style="margin-top: -14px;" v-html="'<span class=\'font-noto font-16\'>' + search_loc + ' 사이트</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-dark-dark icon-10 text-center me-1\'></i>'+(search_adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 132px);position: fixed;\'>' + search_desc+'</span>'"></span>
+                                <span v-else-if="search_type == 'point'" class="ml-4" style="margin-top: -14px;" v-html="'<span class=\'font-noto font-16\'>' + search_loc + ' 포인트</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-dark-dark icon-10 text-center me-1\'></i>'+(search_adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 132px);position: fixed;\'>' + search_desc+'</span>'"></span>
+                                <span v-else-if="search_type == 'center'" class="ml-4" style="margin-top: -14px;" v-html="'<span class=\'font-noto font-16\'>' + search_loc + '</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-dark-dark icon-10 text-center me-1\'></i>'+(search_adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 132px);position: fixed;\'>' + search_desc+'</span>'"></span>
                                 
                                 </div>
                             </div>
@@ -160,7 +161,7 @@
                             <div
                                 id="search_recommend_1"
                                 class="mb-1 search_recommend"
-                                v-on:click="search_recommend_click('center', '서면 DIT', '/static/bubble1.jpg', 'search_recommend_1')"
+                                v-on:click="search_recommend_click('center', '서면 DIT', '/static/bubble1.jpg', '블라블라', 'search_recommend_1')"
                                 style="margin-left: 16px;margin-right: 16px;padding:7px 11px 7px;border:1px solid #ced4da;border-radius:16px;">
                                 <div class="d-flex align-items-center">
                                 <img
@@ -174,7 +175,7 @@
                             <div
                                 id="search_recommend_2"
                                 class="mb-1 search_recommend"
-                                v-on:click="search_recommend_click('center', '송도풀장', '/static/bubble1.jpg', 'search_recommend_2')"
+                                v-on:click="search_recommend_click('center', '송도풀장', '/static/bubble1.jpg', '블라블라', 'search_recommend_2')"
                                 style="margin-left: 16px;margin-right: 16px;padding:7px 11px 7px;border:1px solid #ced4da;border-radius:16px;">
                                 <div class="d-flex align-items-center">
                                 <img
@@ -188,7 +189,7 @@
                             <div
                                 id="search_recommend_3"
                                 class="mb-1 search_recommend"
-                                v-on:click="search_recommend_click('center', 'K26', '/static/bubble1.jpg', 'search_recommend_3')"
+                                v-on:click="search_recommend_click('center', 'K26', '/static/bubble1.jpg', '블라블라', 'search_recommend_3')"
                                 style="margin-left: 16px;margin-right: 16px;padding:7px 11px 7px;border:1px solid #ced4da;border-radius:16px;">
                                 <div class="d-flex align-items-center">
                                 <img
@@ -228,7 +229,7 @@
                         <div class="content mt-1">
                             <h4 class="pt-3 mb-2 content mt-0 mb-2">선택사항</h4>
                             <div class="mt-3 row ms-3 mb-2">
-                                <div class="col-3" style="display: inline-block;"><img class="mt-2" src="/static/images/assets/user_empty_u.png" width="40px" /></div>
+                                <div class="col-3" style="display: inline-block;"><img class="mt-2" src="/static/images/assets/ico_wedive_d.png" width="40px" /></div>
                                 <div class="mx-auto col-9" style="display: inline-block;">
                                     <div class="color-highlight font-12 col-4">모집 인원</div>
                                     <div class="stepper rounded-s float-start">
@@ -345,8 +346,8 @@
         
     
 
-
-    <div id="snackbar-error" class="snackbar-toast color-white bg-red-dark" data-bs-delay="3000" data-bs-autohide="true"><i class="fa fa-times me-3"></i>선택할 수 없는 날짜 입니다.</div>
+    <div id="snackbar-info" class="snackbar-toast color-white bg-yellow-dark" data-bs-delay="2000" data-bs-autohide="true"><i class="fa fa-times me-3"></i>원하시는 다이빙 타입을 선택하세요.</div>
+    <div id="snackbar-error" class="snackbar-toast color-white bg-red-dark" data-bs-delay="2000" data-bs-autohide="true"><i class="fa fa-times me-3"></i>선택할 수 없는 날짜 입니다.</div>
   </div>
 </template>
 <script>
@@ -416,6 +417,7 @@ export default {
         search_type: "",
         search_img: "",
         search_loc: "",
+        search_desc: "",
         search_adminScore: "",
         selected_id: "",
         hour_array: ["7:00", "7:30", "8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30"],
@@ -450,6 +452,18 @@ export default {
       buddy_detail: function(newVal, oldVal) {
         if (newVal != "") {
             $("#btn_next3").attr("disabled", false);
+        }
+      },
+      check_diving_scuba: function(newVal, oldVal) {
+        console.log(newVal)
+        if((this.check_diving_scuba == true || this.check_diving_free == true) && $("#search_result").hasClass("hide") == false) {
+            $("#btn_next2").attr("disabled", false);
+        }
+      },
+      check_diving_free: function(newVal, oldVal) {
+          console.log(newVal)
+        if((this.check_diving_scuba == true || this.check_diving_free == true) && $("#search_result").hasClass("hide") == false) {
+            $("#btn_next2").attr("disabled", false);
         }
       },
   },
@@ -561,15 +575,24 @@ export default {
             $("#btn_next1").attr("disabled", false);
         }
       },
-      search_recommend_click(type, name, img, target) {
+      search_recommend_click(type, name, img, desc, target) {
           this.search_img = img;
           this.search_type=type;
           this.search_loc=name;
+          this.search_desc=desc
           $("#search_typeahead").addClass("hide");
           $("#search_result").removeClass("hide");
-          $("#btn_next2").attr("disabled", false);
           $(".search_recommend").removeClass("bg-secondary2");
           $("#"+target).addClass("bg-secondary2");
+
+          if(this.check_diving_scuba == true || this.check_diving_free == true) {
+              $("#btn_next2").attr("disabled", false);
+          } else {
+            var toastData = 'snackbar-info';
+            var notificationToast = document.getElementById(toastData);
+            var notificationToast = new bootstrap.Toast(notificationToast);
+            notificationToast.show();
+          }
       },
       search_result_click() {
           $("#search_typeahead").removeClass("hide");
@@ -586,13 +609,22 @@ export default {
           this.search_img = (ev.backgroundImages && ev.backgroundImages.length>0) ? ev.backgroundImages[0].thumbnailUrl : '/static/empty.jpg';
           this.search_type=ev.type;
           this.search_loc=ev.name;
+          this.search_desc=ev.description;
           this.search_adminScore=ev.adminScore;
           this.selected_id = ev._id;
 
           
           $("#search_typeahead").addClass("hide");
           $("#search_result").removeClass("hide");
-          $("#btn_next2").attr("disabled", false);
+          if(this.check_diving_scuba == true || this.check_diving_free == true) {
+              $("#btn_next2").attr("disabled", false);
+          } else {
+            var toastData = 'snackbar-info';
+            var notificationToast = document.getElementById(toastData);
+            var notificationToast = new bootstrap.Toast(notificationToast);
+            notificationToast.show();
+          }
+
       },
       onDayClick(day) {
         var yesterday = new Date();
@@ -700,4 +732,7 @@ export default {
 .border-08 {border: 1px solid rgba(0, 0, 0, 0.08) !important;}
 .interest-check input:checked ~ label {background-color: #2c9ac3;}
 .wedive-textarea {min-height: 160px;border: 2px solid #e9e9e9;background: #f5f5f5;padding-left: 10px;padding-right: 10px;}
+.site_img:before{content:'';background:url(/static/images/assets/ico_pin0.png);width: 20px;height: 28px;position: absolute;bottom: -5px;left: 28px;background-size: cover;}
+.point_img:before{content:'';background:url(/static/images/assets/ico_pin1.png);width: 20px;height: 28px;position: absolute;bottom: -5px;left: 28px;background-size: cover;}
+.center_img:before{content:'';background:url(/static/images/assets/ico_pin2.png);width: 20px;height: 28px;position: absolute;bottom: -5px;left: 28px;background-size: cover;}
 </style>

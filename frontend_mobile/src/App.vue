@@ -81,6 +81,7 @@
 
     <div class="menu-hider"></div>
     <div id="snackbar-error" class="snackbar-toast color-white bg-red-dark" data-bs-delay="1500" data-bs-autohide="true"><i class="fa fa-times me-3"></i>로그인에 실패하였습니다.</div>
+    <div id="snackbar-success" class="snackbar-toast color-white bg-green-dark" data-bs-delay="1500" data-bs-autohide="true"><i class="fa fa-times me-3"></i>{{nickName}}님 돌아와주셨군요!</div>
   </div>
 </template>
 
@@ -94,6 +95,11 @@ export default {
     var item = ($("#menu-main").data("menu-active")) ? $("#menu-main").data("menu-active").replace("nav-","") : "";
     if (item == 'buddy' || item == 'book' || item == 'chat') {
       $("#wedive-add").removeClass("hide");
+    }
+  },
+  data() {
+    return {
+      nickName: localStorage.nickName,
     }
   },
   methods: {
@@ -142,7 +148,7 @@ export default {
             method: 'post',
             data: {
                 query: `
-                    query Query($email: String) {
+                    query Query($email: String!) {
                       getUserByEmail(email: $email) {
                         _id
                         nickName
@@ -161,6 +167,14 @@ export default {
             localStorage.userAge = result.data.data.getUserByEmail.birthAge;
             localStorage.userSex = result.data.data.getUserByEmail.gender;
             localStorage.userId = result.data.data.getUserByEmail._id;
+            this.nickName = localStorage.nickName
+            
+            var toastData = 'snackbar-success';
+            setTimeout(function() {
+              var notificationToast = document.getElementById(toastData);
+              var notificationToast = new bootstrap.Toast(notificationToast);
+              notificationToast.show();
+            },1000);
             location.reload();
           } else {
             location.href='/user_create';

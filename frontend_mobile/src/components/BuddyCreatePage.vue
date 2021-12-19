@@ -30,7 +30,7 @@
               <p :class="'font-noto color-gray mb-0 font-200' + ((userToken == null || nickName == null) ? ' opacity-40' : '')">위다이브의 전문 매니저에게 요청합니다.</p>
               <i :class="'wedive_icoset2x wedive_icoset2x_rightarrow' + ((userToken == null || nickName == null) ? ' opacity-40' : '')"></i>
             </div>
-            <img src="/static/images/assets/concierge2.png" style="position: absolute;height: 80px;bottom: 0;right: 40px;">
+            <img src="/static/images/assets/concierge2.png" style="position: absolute;height: 80px;bottom: 0;right: 40px;" :class="((userToken == null || nickName == null) ? ' opacity-40' : '')">
           </div>
         </div>
 
@@ -38,10 +38,10 @@
           <div class="mt-1">
             <div class="p-4">
               <span :class="'font-noto font-20 font-500' + ((userToken == null || nickName == null) ? ' opacity-40' : '')">직접 모집</span>
-              <p :class="'font-noto color-gray mb-0 font-200' + ((userToken == null || nickName == null) ? ' opacity-40' : '')">직접 맞춤 버디를 모집할께요.</p>
+              <p :class="'font-noto color-gray mb-0 font-200' + ((userToken == null || nickName == null) ? ' opacity-40' : '')">직접 맞춤 버디를 모집할게요.</p>
               <i :class="'wedive_icoset2x wedive_icoset2x_rightarrow' + ((userToken == null || nickName == null) ? ' opacity-40' : '')"></i>
             </div>
-            <img src="/static/images/assets/together.png" style="position: absolute;height: 80px;bottom: 6px;right: 40px;">
+            <img src="/static/images/assets/together.png" style="position: absolute;height: 80px;bottom: 6px;right: 40px;" :class="((userToken == null || nickName == null) ? ' opacity-40' : '')">
           </div>
         </div>
 
