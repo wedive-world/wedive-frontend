@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-buddy" data-menu-load=""></div>    
+    <div data-menu-active="nav-buddy"></div>
     <div class="header header-fixed header-logo-center">
         <a href="" class="header-title color ellipsis">바다 버디 모집</a>
         <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
@@ -616,6 +616,5 @@ export default {
 .form-check-label {min-width: 60px;text-align:center;}
 .btn[disabled] {pointer-events: none !important;background-image: linear-gradient(to bottom, #ccc, #ccc) !important;}
 .bg-e7e7e7 {background-color: transparent !important;}
-.border-08 {border: 1px solid rgba(0, 0, 0, 0.08) !important;}
 .interest-check input:checked ~ label {background-color: #2c9ac3;}
 </style>

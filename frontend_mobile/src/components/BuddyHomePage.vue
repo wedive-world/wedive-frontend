@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-buddy" data-menu-load=""></div>    
+    <div data-menu-active="nav-buddy"></div>
     <div class="page-content pt-2">
         <div class="card card-style hide" style="background: white;height:148px;">
             <div class="content mb-0 mt-3">
@@ -30,7 +30,7 @@
                 <h4 class="text-start pt-2 mb-0"><a href="/">따끈따끈 신규 프리다이빙<i class="wedive-txt-all wedive_right"></i></a></h4>
                 
                 
-                <div class="light-border-bottom mt-3">
+                <div v-on:click="goDiving()" class="light-border-bottom mt-3">
                     <div class="d-flex mb-3 position-relative">
                         <div class="align-self-center">
                             <img src="/static/images/point/ko/kangwon_yangyang_01.jpg" class="rounded-sm me-3" width="68">
@@ -42,7 +42,7 @@
                         <span class="chip chip-s bg-gray-light text-center font-400 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>1</span> <span class="color-shopping ms-1"><i class="far fa-user"></i>1</span></span>
                     </div>
                 </div>
-                <div class="light-border-bottom mt-3">
+                <div v-on:click="goDiving()" class="light-border-bottom mt-3">
                     <div class="d-flex mb-3 position-relative">
                         <div class="align-self-center">
                             <img src="/static/images/point/ko/jeju_bumisland_01.jpg" class="rounded-sm me-3" width="68">
@@ -54,7 +54,7 @@
                         <span class="chip chip-s bg-gray-light text-center font-400 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>1</span> <span class="color-shopping ms-1"><i class="far fa-user"></i>1</span></span>
                     </div>
                 </div>
-                <div class="light-border-bottom mt-3">
+                <div v-on:click="goDiving()" class="light-border-bottom mt-3">
                     <div class="d-flex mb-3 position-relative">
                         <div class="align-self-center">
                             <img src="/static/images/point/ko/jeju_munisland_06.jpg" class="rounded-sm me-3" width="68">
@@ -259,11 +259,8 @@ export default {
         prev_driection: true,
     }
   }, methods: {
-      call: function() {
-          console.log("call");
-      },
-      goCourse: function() {
-          location.href='/course';
+      goDiving() {
+          location.href='/diving/61bf1df29ca67571157a3f81';
       },
   }
 
@@ -279,7 +276,6 @@ export default {
 .wedive-chip i {width: auto;line-height: inherit;margin-right: 2px;}
 .light-border-bottom {border-bottom: 1px solid #dee2e6;}
 .wedive-txt-all {position: absolute;top: 20px;right: 16px;}
-.border-08 {border: 1px solid rgba(0, 0, 0, 0.08) !important;}
 .ls-n1 {letter-spacing: -1px;}
 
 @keyframes motion-updown {0% {margin-top: -20px;}20% {margin-top: 0px;}40% {margin-top: -20px;}60% {margin-top: 0px;}80% {margin-top: 0px;}100% {margin-top: 0px;}}

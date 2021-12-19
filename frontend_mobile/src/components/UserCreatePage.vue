@@ -72,8 +72,8 @@
                                     <i class="fas fa-venus-mars color-gray" style="margin-left:3px;"></i>
                                     <select id="form3" class="font-noto" required v-model="usersex">
                                         <option value="" selected disabled>성별</option>
-                                        <option value="남자">남자</option>
-                                        <option value="여자">여자</option>
+                                        <option value="m">남자</option>
+                                        <option value="f">여자</option>
                                     </select>
                                     <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
                                     <i class="fa fa-check disabled valid color-green-dark"></i>
@@ -136,9 +136,9 @@
                             <div class="mt-3">
                                 <div class="input-style no-borders has-icon validate-field mb-3 mt-2">
                                     <i class="fas fa-address-card color-gray" style="margin-left:6px;"></i>
-                                    <label for="form11" class="color-highlight bg-e7e7e7">라이센스</label>
+                                    <label for="form11" class="color-highlight bg-e7e7e7">스쿠버 라이센스</label>
                                     <select id="form11" required class="font-noto" v-model="scuba_license">
-                                        <option value="" selected disabled>라이센스</option>
+                                        <option value="" selected disabled>스쿠버 라이센스</option>
                                         <option value="PADI">PADI</option>
                                         <option value="NAUI">NAUI</option>
                                         <option value="BSAC">BSAC</option>
@@ -186,9 +186,9 @@
 
                                 <div class="input-style no-borders has-icon validate-field mb-3">
                                     <i class="fas fa-layer-group color-gray" style="margin-left:6px;"></i>
-                                    <label for="form22" class="color-highlight bg-e7e7e7">레벨</label>
+                                    <label for="form22" class="color-highlight bg-e7e7e7">스쿠버 레벨</label>
                                     <select id="form22" required class="font-noto" v-model="scuba_level">
-                                        <option value="" selected disabled>레벨</option>
+                                        <option value="" selected disabled>스쿠버 레벨</option>
                                         <option value="1">오픈워터</option>
                                         <option value="2">어드밴스드</option>
                                         <option value="3">레스큐</option>
@@ -294,9 +294,9 @@
                             <div class="mt-3">
                                 <div class="input-style no-borders has-icon validate-field mb-3">
                                     <i class="fas fa-address-card color-gray" style="margin-left:6px;"></i>
-                                    <label for="form21" class="color-highlight bg-e7e7e7">라이센스</label>
+                                    <label for="form21" class="color-highlight bg-e7e7e7">프리 라이센스</label>
                                     <select id="form21" required v-model="free_license">
-                                        <option value="" selected disabled>라이센스</option>
+                                        <option value="" selected disabled>프리 라이센스</option>
                                         <option value="PADI">PADI</option>
                                         <option value="NAUI">NAUI</option>
                                         <option value="BSAC">BSAC</option>
@@ -344,9 +344,9 @@
 
                                 <div class="input-style no-borders has-icon validate-field mb-3">
                                     <i class="fas fa-layer-group color-gray" style="margin-left:6px;"></i>
-                                    <label for="form12" class="color-highlight bg-e7e7e7">레벨</label>
+                                    <label for="form12" class="color-highlight bg-e7e7e7">프리 레벨</label>
                                     <select id="form12" required v-model="free_level">
-                                        <option value="" selected disabled>레벨</option>
+                                        <option value="" selected disabled>프리 레벨</option>
                                         <option value="1">레벨1</option>
                                         <option value="2">레벨2</option>
                                         <option value="3">레벨3</option>
@@ -435,7 +435,7 @@
                             <div class="text-center mt-2 mb-3">
                                 <img src="/static/images/assets/confetti.gif" width="50%"/>
                                 <p class="font-noto mb-1 mt-2 font-16">{{ nickname }}님, weDive에 오신것을 환영합니다.</p>
-                                <p class="font-noto color-gray"><span class="span_timer">3</span>초 후 메인페이지로 이동할께요.</p>
+                                <p class="font-noto color-gray"><span class="span_timer">3</span>초 후 이전페이지로 이동할께요.</p>
                             </div>
                         </div>
                         </div>
@@ -745,22 +745,17 @@ export default {
       },
       async next5() {
         //console.log(this.file_photo);
-        
-        localStorage.nickName = this.nickname;
-        localStorage.userAge = ((new Date()).getFullYear() - parseInt(this.userage) + 1);
-        localStorage.userSex = ((this.usersex == "남자") ? "m" : "f");
 
         
-        
         var freeBest = new Array();
-        if (this.pb_sta != null && this.pb_sta != '') freeBest.push({"key": "STA", "value": this.pb_sta});
-        if (this.pb_dyn != null && this.pb_dyn != '') freeBest.push({"key": "DYN", "value": this.pb_dyn});
-        if (this.pb_dnf != null && this.pb_dnf != '') freeBest.push({"key": "DNF", "value": this.pb_dnf});
-        if (this.pb_cwt != null && this.pb_cwt != '') freeBest.push({"key": "CWT", "value": this.pb_cwt});
-        if (this.pb_vwt != null && this.pb_vwt != '') freeBest.push({"key": "VWT", "value": this.pb_vwt});
-        if (this.pb_fim != null && this.pb_fim != '') freeBest.push({"key": "FIM", "value": this.pb_fim});
-        if (this.pb_cnf != null && this.pb_cnf != '') freeBest.push({"key": "CNF", "value": this.pb_cnf});
-        if (this.pb_nlt != null && this.pb_nlt != '') freeBest.push({"key": "NLT", "value": this.pb_nlt});
+        if (this.pb_sta != null && this.pb_sta != '') freeBest.push(["STA",this.pb_sta]);
+        if (this.pb_dyn != null && this.pb_dyn != '') freeBest.push(["DYN", this.pb_dyn]);
+        if (this.pb_dnf != null && this.pb_dnf != '') freeBest.push(["DNF", this.pb_dnf]);
+        if (this.pb_cwt != null && this.pb_cwt != '') freeBest.push(["CWT", this.pb_cwt]);
+        if (this.pb_vwt != null && this.pb_vwt != '') freeBest.push(["VWT", this.pb_vwt]);
+        if (this.pb_fim != null && this.pb_fim != '') freeBest.push(["FIM", this.pb_fim]);
+        if (this.pb_cnf != null && this.pb_cnf != '') freeBest.push(["CNF", this.pb_cnf]);
+        if (this.pb_nlt != null && this.pb_nlt != '') freeBest.push(["NLT", this.pb_nlt]);
 
         var interest_id = ["61ac9d06eac3ebfb7ac9f952", "61ac9d0beac3ebfb7ac9f955", "61ac9d18eac3ebfb7ac9f958", "6174da70a60639819c3e6ad9", "61ac9d25eac3ebfb7ac9f95b", "61a2fefa098b3785ef439cb3", "61ac9de8eac3ebfb7ac9f95e", "61ac9deceac3ebfb7ac9f961", "6174da75a60639819c3e6ae5", "61ac9e21eac3ebfb7ac9f964", "6178f02df7c3a048b4706cc8", "6198ff5eae1cc12e02c3cca0", "6178f01cf7c3a048b4706cc6", "61ac9eaeeac3ebfb7ac9f968", "61ac9eb7eac3ebfb7ac9f96b", "61780278f7c3a048b4704a85"];
         var interest_list = new Array();
@@ -779,6 +774,7 @@ export default {
                         name
                         mimeType
                         encoding
+                        thumbnailUrl
                         createdAt
                         updatedAt
                     }
@@ -793,7 +789,7 @@ export default {
             })
 
             result_img_user = await client.request(mutation, {uploadImageFile: this.file_photo,});
-            console.log(result_img_user);
+            //console.log(result_img_user);
 
 
             var updateMutation = gql`
@@ -807,15 +803,22 @@ export default {
                         mimeType
                         encoding
                         fileSize
+                        thumbnailUrl
                     }
                 }
             `;
-            
-
             var result_upload = await client.request(updateMutation, {input: {"_id": result_img_user.uploadImage._id,"name": result_img_user.name,"description": "userImage","reference": null}})
-            console.log(result_upload);
+            //console.log(result_upload);
 
+            var queryImageUrl = gql`
+                query Query($id: ID!, $width: Int) {
+                    getImageUrlById(_id: $id, width: $width)
+                }
+            `;
+            var result_url = await client.request(queryImageUrl, {"id": result_img_user.uploadImage._id,"width": 720})
 
+            localStorage.userPhoto = result_url.getImageUrlById;
+            localStorage.userThumbnail = result_img_user.uploadImage.thumbnailUrl
         }
         
         var result_img_certi = null;
@@ -841,7 +844,7 @@ export default {
             })
 
             result_img_certi = await client.request(mutation, {uploadImageFile: this.file_certificate,});
-            console.log(result_img_certi);
+            //console.log(result_img_certi);
 
 
             var updateMutation = gql`
@@ -861,13 +864,24 @@ export default {
             
 
             var result_upload = await client.request(updateMutation, {input: {"_id": result_img_certi.uploadImage._id,"description": "userCertificate","reference": null}})
-            console.log(result_upload);
+            //console.log(result_upload);
 
 
         }
         
         
-
+        var birthAge = (new Date()).getFullYear() - parseInt(this.userage) + 1;
+        var input_temp = {"uid": localStorage.uid, "authProvider": localStorage.providerId, "oauthToken": localStorage.idToken, "email": localStorage.userEmail, "nickName": this.nickname, "name": localStorage.userName, "birthAge": birthAge, "gender": this.usersex, "interests": interest_list};
+        if (this.scuba_license && this.scuba_license != '') input_temp.scubaLicenseType = this.scuba_license;
+        if (this.scuba_level && this.scuba_level != '') input_temp.scubaLicenseLevel = this.scuba_level;
+        if (this.free_license && this.free_license != '') input_temp.freeLicenseType = this.free_license;
+        if (this.free_level && this.free_level != '') input_temp.freeLicenseLevel = this.free_level;
+        if (result_img_user) input_temp.profileImages = [result_img_user.uploadImage._id];
+        if (this.scuba_log && this.scuba_log != '') input_temp.divingLog = parseInt(this.scuba_log);
+        if (freeBest && freeBest.length > 0) input_temp.freeDivingBests = freeBest;
+        if (this.instructor_phone && this.instructor_phone != '') input_temp.phoneNumber = this.instructor_phone;
+        const ipt = input_temp;
+        
         var result = await axios({
             url: 'https://api.wedives.com/graphql',
             method: 'post',
@@ -903,41 +917,23 @@ export default {
                                 _id
                             }
                             divingLog
-                            freeDivingBests {
-                            key
-                            value
-                            }
+                            freeDivingBests
                         }
                     }
                 `,
                 variables: {
-                    "input": {
-                        "scubaLicenseType": (this.scuba_license == '') ? null : this.scuba_license,
-                        "scubaLicenseLevel": parseInt(this.scuba_level),
-                        "freeLicenseType": (this.free_license == '') ? null : this.free_license,
-                        "freeLicenseLevel": parseInt(this.free_level),
-                        "uid": localStorage.uid,
-                        "authProvider": localStorage.providerId,
-                        "oauthToken": localStorage.userToken,
-                        "email": localStorage.userEmail,
-                        "profileImages": ((result_img_user == null) ? null : [result_img_user.uploadImage._id]),
-                        "nickName": this.nickname,
-                        "name": localStorage.userName,
-                        "birthAge": parseInt(localStorage.userAge),
-                        "gender": localStorage.userSex,
-                        "interests": interest_list,
-                        "divingLog": parseInt(this.scuba_log),
-                        "freeDivingBest": freeBest
-                    }
+                    "input": ipt
                 }
             }
         });
-        //"phoneNumber": this.instructor_phone,
+        //
 
-        console.log("result ================");
-        console.log(result);
-        console.log(this.instructor_phone)
+        //console.log("result ================");
+        //console.log(result);
+        //console.log(this.instructor_phone)
         localStorage.userId = result.data.data.upsertUser._id;
+        localStorage.nickName = this.nickname;
+        localStorage.userGender  = this.usersex;
 
         if (result_img_certi != null) {
             var result2 = await axios({
@@ -965,8 +961,8 @@ export default {
                     }
                 }
             });
-            console.log("result2 ================");
-            console.log(result2);
+            //console.log("result2 ================");
+            //console.log(result2);
         }
         
         
@@ -980,7 +976,7 @@ export default {
         },2000)
         setTimeout(function() {
             
-            //window.location.href="/";
+            window.location.href=(localStorage.loginUrl == null || localStorage.loginUrl == '') ? '/' : localStorage.loginUrl;
         },2100)
       },
       
@@ -988,42 +984,42 @@ export default {
             if (this.pb_sta != "") {
                 var record_type = "STA"
                 var record_val = this.pb_sta;
-                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08 wedive-label bg-white">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
+                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
             }
             if (this.pb_dyn != "") {
                 var record_type = "STA"
                 var record_val = this.pb_sta;
-                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08 wedive-label bg-white">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
+                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
             }
             if (this.pb_dnf != "") {
                 var record_type = "DNF"
                 var record_val = this.pb_dnf;
-                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08 wedive-label bg-white">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
+                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
             }
             if (this.pb_cwt != "") {
                 var record_type = "CWT"
                 var record_val = this.pb_cwt;
-                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08 wedive-label bg-white">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
+                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
             }
             if (this.pb_vwt != "") {
                 var record_type = "VWT"
                 var record_val = this.pb_vwt;
-                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08 wedive-label bg-white">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
+                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
             }
             if (this.pb_fim != "") {
                 var record_type = "FIM"
                 var record_val = this.pb_fim;
-                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08 wedive-label bg-white">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
+                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
             }
             if (this.pb_cnf != "") {
                 var record_type = "CNF"
                 var record_val = this.pb_cnf;
-                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08 wedive-label bg-white">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
+                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
             }
             if (this.pb_nlt != "") {
                 var record_type = "NLT"
                 var record_val = this.pb_nlt;
-                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08 wedive-label bg-white">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
+                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
             }
 
             
@@ -1062,7 +1058,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.border-08 {border: 1px solid rgba(0, 0, 0, 0.08) !important;}
 .border-bottom {border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;}
 .input-style.has-borders.input-style-always-active label {background-color: transparent !important;}
 select:invalid {color: #6c757d;}

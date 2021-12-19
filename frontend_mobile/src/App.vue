@@ -1,5 +1,7 @@
 <template>
   <div>
+    <!--<div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-load="">
+    </div>-->
     <div id="preloader"><div class="spinner-border color-highlight" role="status"></div></div>
     
       <div id="page">
@@ -14,9 +16,10 @@
           
           <div id="footer-bar" class="footer-bar" style="border-radius: 30px 30px 0px 0px;">
             <a href="/" id="nav-buddy"><div class="menu-ico menu-ico1"></div><span>버디</span></a>
-            <a href="/site_home" id="nav-site"><div class="menu-ico menu-ico2"></div><span>장소</span></a>
-            <a href="/book_home" id="nav-book"><div class="menu-ico menu-ico3"></div><span>로그북</span></a>
+            <a v-on:click="moveSite()" id="nav-site"><div class="menu-ico menu-ico2"></div><span>장소</span></a>
+            <!--<a href="/book_home" id="nav-book"><div class="menu-ico menu-ico3"></div><span>로그북</span></a>-->
             <a href="/chat_home" id="nav-chat"><div class="menu-ico menu-ico4"></div><span>채팅</span></a>
+            <a href="/other_home" id="nav-other"><div class="menu-ico menu-ico5"></div><span>더보기</span></a>
           </div>
         
 
@@ -26,9 +29,8 @@
             <i class="fas fa-arrow-left font-24 me-2 pt-2 hide" style="opacity: 0.6;" id="page-back" v-on:click="goBack()"></i>
             <img href="/" class="logo-image mt-n2" style="margin-right: auto;" src="/static/images/assets/logo-dark.svg" height="46"/>
             <a v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><i class="wedive_plus"></i></a>
-            <!--<a href="#" class="page-title-icon shadow-xl bg-theme color-theme show-on-theme-light" data-toggle-theme><i class="fa fa-moon"></i></a>
-            <a href="#" class="page-title-icon shadow-xl bg-theme color-theme show-on-theme-dark" data-toggle-theme><i class="fa fa-sun"></i></a>
-            <a href="#" class="page-title-icon shadow-xl bg-theme color-theme" data-menu="menu-main"><i class="fa fa-bars"></i></a>-->
+            <a v-if="$route.path=='/site_list'" href="/site_home" class="page-title-icon font-18" style="color: #858585;margin-right: 13.3333333333px;"><i class="fas fa-map-marked"></i></a>
+            <!--<a href="#" class="page-title-icon" data-menu="menu-main" :style="'background: url('+((userThumbnail) ? userThumbnail : '/static/images/assets/user_empty_'+((gender)?gender:'m')+'.png')+');background-size:cover;'"></a>-->
           </div>
           <div class="page-title-clear"></div>
 
@@ -92,17 +94,29 @@ const axios = require("axios")
 export default {
   name: 'App',
   mounted() {
-    var item = ($("#menu-main").data("menu-active")) ? $("#menu-main").data("menu-active").replace("nav-","") : "";
-    if (item == 'buddy' || item == 'book' || item == 'chat') {
-      $("#wedive-add").removeClass("hide");
+    //$("#menu-main").attr("data-menu-width", $( window ).width());
+    try {
+      var item = $("[data-menu-active]").data("menu-active").replace('nav-', '');
+      if (item == 'buddy' || item == 'book' || item == 'chat') {
+        $("#wedive-add").removeClass("hide");
+      }
+    } catch (e) {}
+    
+    if (localStorage.perferedSite == null) {
+      localStorage.perferedSite = '/site_list';
     }
   },
   data() {
     return {
       nickName: localStorage.nickName,
+      userThumbnail: localStorage.userThumbnail,
+      gender: localStorage.gender,
     }
   },
   methods: {
+    moveSite() {
+      location.href = localStorage.perferedSite;
+    },
     addItem() {
       var item = ($("#menu-main").data("menu-active")) ? $("#menu-main").data("menu-active").replace("nav-","") : "";
       switch(item) {
@@ -133,14 +147,12 @@ export default {
           const credential = GoogleAuthProvider.credentialFromResult(result);
           const token = credential.accessToken;
           const user = result.user;
-          
+
           localStorage.userName = user.hasOwnProperty('displayName') ? user.displayName : "";
-          localStorage.userEmail = user.hasOwnProperty('email') ? user.email : "";
-          localStorage.userToken = token;
-          localStorage.uid = user.hasOwnProperty('uid') ? user.uid : "";
-          localStorage.accessToken = user.hasOwnProperty('accessToken') ? user.accessToken : "";
-          localStorage.photoUrl = user.hasOwnProperty('photoUrl') ? user.photoUrl : "";
           localStorage.providerId = user.providerId;
+          localStorage.userEmail = user.hasOwnProperty('email') ? user.email : "";
+          localStorage.idToken = token;
+          localStorage.uid = user.hasOwnProperty('uid') ? user.uid : "";
           localStorage.loginAt = (new Date()).getTime();
 
           var result = await axios({
@@ -148,8 +160,8 @@ export default {
             method: 'post',
             data: {
                 query: `
-                    query Query($email: String!) {
-                      getUserByEmail(email: $email) {
+                    query Query($uid: ID!) {
+                      getUserByUid(uid: $uid) {
                         _id
                         nickName
                         birthAge
@@ -158,16 +170,16 @@ export default {
                     }
                 `,
                 variables: {
-                    "email": localStorage.userEmail
+                    "uid": localStorage.uid
                 }
             }
           });
-          if (result.data.data.getUserByEmail != null) {
-            localStorage.nickName = result.data.data.getUserByEmail.nickName;
-            localStorage.userAge = result.data.data.getUserByEmail.birthAge;
-            localStorage.userSex = result.data.data.getUserByEmail.gender;
-            localStorage.userId = result.data.data.getUserByEmail._id;
-            this.nickName = localStorage.nickName
+          if (result.data.data.getUserByUid != null) {
+            localStorage.nickName = result.data.data.getUserByUid.nickName;
+            localStorage.userId = result.data.data.getUserByUid._id;
+            localStorage.userGender = result.data.data.getUserByUid.gender;
+            this.nickName = localStorage.nickName;
+
             
             var toastData = 'snackbar-success';
             setTimeout(function() {
@@ -214,12 +226,14 @@ export default {
 #nav-site > .menu-ico {background: url('/static/images/assets/menu2_off.png');}
 #nav-book > .menu-ico {background: url('/static/images/assets/menu3_off.png');}
 #nav-chat  .menu-ico {background: url('/static/images/assets/menu4_off.png');}
+#nav-other  .menu-ico {background: url('/static/images/assets/menu5_off.png');}
 #nav-training > .menu-ico {background: url('/static/images/assets/menu5_off.png');}
 .active-nav > .menu-ico0 {background: url('/static/images/assets/menu0_on.png') !important;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;}
 .active-nav > .menu-ico1 {background: url('/static/images/assets/menu1_on.png') !important;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;}
 .active-nav > .menu-ico2 {background: url('/static/images/assets/menu2_on.png') !important;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;}
 .active-nav > .menu-ico3 {background: url('/static/images/assets/menu3_on.png') !important;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;}
 .active-nav > .menu-ico4 {background: url('/static/images/assets/menu4_on.png') !important;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;}
+.active-nav > .menu-ico5 {background: url('/static/images/assets/menu5_on.png') !important;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;}
 .ico-wedive-w {-webkit-font-smoothing: antialiased;display: grid;margin-left: calc(50% - 20px);font-style: normal;font-variant: normal;text-rendering: auto;line-height: 1;width:40px;height:40px;}
 .ico-wedive-w:before {content: "";background-image: url('/static/images/assets/ico_wedive_d.png');background-size:40px 40px;width:40px;height:40px;display:block;}
 .ico-26 {width: 26px !important; height: 26px !important;}

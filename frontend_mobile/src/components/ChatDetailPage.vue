@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-chat" data-menu-load=""></div>    
+    <div data-menu-active="nav-chat"></div>
     <div class="header header-fixed header-logo-center">
         <a href="" class="header-title color">윤장송</a>
         <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>

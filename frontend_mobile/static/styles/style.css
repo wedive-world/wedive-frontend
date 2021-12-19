@@ -1234,7 +1234,7 @@ body {
   background-color: #1d397c;
   color: #FFF !important;
 }
-
+.color-gray-nonimportant {color: gray;}
 .bg-secondary {
   background-color: #25beb2 !important;
   color: #FFF !important;
@@ -1405,6 +1405,9 @@ body {
 }
 .header-logo-center .header-icon-4 {
   right: 0px;
+}
+.header-logo-center .header-icon-5 {
+  right: 90px;
 }
 .header-logo-center .header-title {
   width: 150px;

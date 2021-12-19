@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-site" data-menu-load=""></div>
+    <div data-menu-active="nav-site"></div>
     <div class="page-content">
         <div v-if="siteData.backgroundImages == null || siteData.backgroundImages.length == 0" style="background:url(/static/empty.jpg);background-size: contain;height:250px;">
         </div>

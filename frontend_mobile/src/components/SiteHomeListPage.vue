@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-site" data-menu-load=""></div>
+    <div data-menu-active="nav-site"></div>
     <div class="page-content">
         
         <div v-on:click="goList()" class="card card-style" style="background: white;height:148px;">
@@ -267,7 +267,7 @@
 export default {
   name: 'HelloWorld',
   mounted() {
-    
+    localStorage.perferedSite = '/site_list';
     this.btn_new_html = $("#btn_new").html();
 
     if (this.$route.query.header && this.$route.query.header == 'hide') {
@@ -327,7 +327,6 @@ export default {
 .wedive-chip i {width: auto;line-height: inherit;margin-right: 3px;}
 .light-border-bottom {border-bottom: 1px solid #dee2e6;}
 .wedive-txt-all {position: absolute;top: 20px;right: 16px;}
-.border-08 {border: 1px solid rgba(0, 0, 0, 0.08) !important;}
 .ls-n1 {letter-spacing: -1px;}
 
 @keyframes motion-updown {0% {margin-top: 0px;}20% {margin-top: 10px;}40% {margin-top: 0px;}60% {margin-top: 10px;}80% {margin-top: 0px;}100% {margin-top: 0px;}}

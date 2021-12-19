@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-chat" data-menu-load=""></div>    
+    <div data-menu-active="nav-chat"></div>
     <div class="card card-style ms-0 me-0 rounded-0">
         <div class="content">
             <a href="/chat" class="d-block">

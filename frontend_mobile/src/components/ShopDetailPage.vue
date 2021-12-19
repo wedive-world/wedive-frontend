@@ -1,6 +1,6 @@
 <template>
   <div class="mb-3 pb-5">
-    <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-shopping" data-menu-load=""></div>    
+    <div data-menu-active="nav-shopping"></div>
 
     <div id="footer-bar-shop" class="d-flex" style="min-height: 52px !important;height: 52px !important;">
         <div class="me-1 speach-icon">

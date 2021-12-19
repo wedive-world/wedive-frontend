@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-buddy" data-menu-load=""></div>    
+    <div data-menu-active="nav-buddy"></div>
     <div class="header header-fixed header-logo-center">
         <a href="" class="header-title color ellipsis">버디 모집</a>
         <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
@@ -11,10 +11,10 @@
     <div class="page-content pb-3"> 
         
         <!-- card in this page format must have the class card-full to avoid seeing behind it-->
-        <div v-if="userToken == null || nickName == null" class="card card-full pb-0 mb-0 border-bottom">
+        <div v-if="idToken == null || nickName == null" class="card card-full pb-0 mb-0 border-bottom">
           <div class="mt-1 p-3 mb-0">
             <div id="div_login">
-              <p v-if="userToken == null && nickName == null" class="mb-0 font-noto">정확한 매칭을 위해서<br/>로그인 또는 회원가입을 해주세요.</p>
+              <p v-if="idToken == null && nickName == null" class="mb-0 font-noto">정확한 매칭을 위해서<br/>로그인 또는 회원가입을 해주세요.</p>
               <p v-else class="mb-0 font-noto">정확한 매칭을 위해서<br/>사용자 프로필을 등록해주세요.</p>
             </div>
             <div style="position: absolute;right:16px;top:16px;">
@@ -23,25 +23,25 @@
           </div>
         </div>
 
-        <div class="card card-style pb-0 mb-3 ms-3 me-3 mt-4 border-bottom" :data-toast="((userToken != null && nickName != null) ? '' : 'snackbar-info')">
+        <div class="card card-style pb-0 mb-3 ms-3 me-3 mt-4 border-bottom" :data-toast="((idToken != null && nickName != null) ? '' : 'snackbar-info')">
           <div class="mt-1">
             <div class="p-4">
-              <span :class="'font-noto font-20 font-500' + ((userToken == null || nickName == null) ? ' opacity-40' : '')">컨시어지</span>
-              <p :class="'font-noto color-gray mb-0 font-200' + ((userToken == null || nickName == null) ? ' opacity-40' : '')">위다이브의 전문 매니저에게 요청합니다.</p>
-              <i :class="'wedive_icoset2x wedive_icoset2x_rightarrow' + ((userToken == null || nickName == null) ? ' opacity-40' : '')"></i>
+              <span :class="'font-noto font-20 font-500' + ((idToken == null || nickName == null) ? ' opacity-40' : '')">컨시어지</span>
+              <p :class="'font-noto color-gray mb-0 font-200' + ((idToken == null || nickName == null) ? ' opacity-40' : '')">위다이브의 전문 매니저에게 요청합니다.</p>
+              <i :class="'wedive_icoset2x wedive_icoset2x_rightarrow' + ((idToken == null || nickName == null) ? ' opacity-40' : '')"></i>
             </div>
-            <img src="/static/images/assets/concierge2.png" style="position: absolute;height: 80px;bottom: 0;right: 40px;" :class="((userToken == null || nickName == null) ? ' opacity-40' : '')">
+            <img src="/static/images/assets/concierge2.png" style="position: absolute;height: 80px;bottom: 0;right: 40px;" :class="((idToken == null || nickName == null) ? ' opacity-40' : '')">
           </div>
         </div>
 
-        <div class="card card-style pb-0 mb-3 ms-3 me-3 border-bottom" :data-menu="((userToken != null && nickName != null) ? 'menu-type' : '')" :data-toast="((userToken != null && nickName != null) ? '' : 'snackbar-info')">
+        <div class="card card-style pb-0 mb-3 ms-3 me-3 border-bottom" :data-menu="((idToken != null && nickName != null) ? 'menu-type' : '')" :data-toast="((idToken != null && nickName != null) ? '' : 'snackbar-info')">
           <div class="mt-1">
             <div class="p-4">
-              <span :class="'font-noto font-20 font-500' + ((userToken == null || nickName == null) ? ' opacity-40' : '')">직접 모집</span>
-              <p :class="'font-noto color-gray mb-0 font-200' + ((userToken == null || nickName == null) ? ' opacity-40' : '')">직접 맞춤 버디를 모집할게요.</p>
-              <i :class="'wedive_icoset2x wedive_icoset2x_rightarrow' + ((userToken == null || nickName == null) ? ' opacity-40' : '')"></i>
+              <span :class="'font-noto font-20 font-500' + ((idToken == null || nickName == null) ? ' opacity-40' : '')">직접 모집</span>
+              <p :class="'font-noto color-gray mb-0 font-200' + ((idToken == null || nickName == null) ? ' opacity-40' : '')">직접 맞춤 버디를 모집할게요.</p>
+              <i :class="'wedive_icoset2x wedive_icoset2x_rightarrow' + ((idToken == null || nickName == null) ? ' opacity-40' : '')"></i>
             </div>
-            <img src="/static/images/assets/together.png" style="position: absolute;height: 80px;bottom: 6px;right: 40px;" :class="((userToken == null || nickName == null) ? ' opacity-40' : '')">
+            <img src="/static/images/assets/together.png" style="position: absolute;height: 80px;bottom: 6px;right: 40px;" :class="((idToken == null || nickName == null) ? ' opacity-40' : '')">
           </div>
         </div>
 
@@ -123,14 +123,14 @@ export default {
   },
   data () {
     return {
-        userToken: localStorage.userToken,
+        idToken: localStorage.idToken,
         nickName: localStorage.nickName,
-        login_word : (localStorage.userToken == null) ? '로그인' : '등록',
+        login_word : (localStorage.idToken == null) ? '로그인' : '등록',
     }
   }, methods: {
       login() {
         localStorage.loginUrl = window.location.pathname;
-        if (localStorage.hasOwnProperty("userToken") == false || localStorage.userToken == null) {
+        if (localStorage.hasOwnProperty("idToken") == false || localStorage.idToken == null) {
           const activeMenu = document.querySelectorAll('.menu-active');
           for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
           //Open Clicked Menu
@@ -215,7 +215,6 @@ export default {
 <style scoped>
 .border-top {border-top: 1px solid rgba(0, 0, 0, 0.08) !important}
 .border-bottom {border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important}
-.border-08 {border: 1px solid rgba(0, 0, 0, 0.08) !important;border-radius:8px;}
 .card-style i:last-child {position: absolute;top: 37%;right: 20px;}
 
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-home" data-menu-load=""></div>
+    <div data-menu-active="nav-buddy"></div>
     <a href="#" data-menu="menu-main" class="header-icon header-icon-1"><i class="fas fa-bars" style="height: 50px;width: 45px;text-align: center;line-height: 49px;font-size: 12px;color: #fff;border: none;position: absolute;z-index:99"></i></a>
 
     <div class="sch_logo_container">

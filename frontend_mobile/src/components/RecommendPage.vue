@@ -1,7 +1,5 @@
 <template>
   <div class="">
-    <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-home" data-menu-load=""></div>    
-    
        <div class="page-content pb-3"> 
         
         <!-- card in this page format must have the class card-full to avoid seeing behind it-->

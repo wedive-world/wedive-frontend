@@ -1,6 +1,5 @@
 <template>
   <div class="">
-
     <div class="header header-fixed header-logo-center">
         <a href="" class="header-title color ellipsis">프로필 등록</a>
         <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
@@ -866,7 +865,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.border-08 {border: 1px solid rgba(0, 0, 0, 0.08) !important;}
 .border-bottom {border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;}
 .input-style.has-borders.input-style-always-active label {background-color: transparent !important;}
 select:invalid {color: #6c757d;}

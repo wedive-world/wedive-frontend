@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-buddy" data-menu-load=""></div>    
+    <div data-menu-active="nav-buddy"></div>
     <div class="header header-fixed header-logo-center">
         <a href="" class="header-title color ellipsis">다이브 이벤트 만들기</a>
         <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
@@ -585,7 +585,6 @@ export default {
 
 .border-top {border-top: 1px solid rgba(0, 0, 0, 0.08) !important}
 .border-bottom {border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important}
-.border-08 {border: 1px solid rgba(0, 0, 0, 0.08) !important;}
 .pl-10px {padding-left: 10px !important;}
 .wedive-label {left: 34px !important;transform: translateX(-14px) !important;position: absolute;padding: 0px 8px !important;height: 23px;margin-top: -27px;font-size: 12px;transition: all 250ms ease;background-color: #FFF;width: auto;}
 .after-tilde:after {content: '~';position: absolute;right: -5px;top: 16px;color: gray;margin-top: -4px;}

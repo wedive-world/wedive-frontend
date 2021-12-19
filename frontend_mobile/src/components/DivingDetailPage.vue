@@ -7,7 +7,14 @@
         <a href="#" class="header-icon header-icon-4"><img src="/static/images/assets/ico_share.png" width="20"/></a>
     </div>
     
-    <div class="page-content">
+    <div :class="'page-content p-0' + (is_empty ? '' : ' hide')">
+        <div class="card mb-0" style="height: calc(100vh - 60px);display: inline-block;text-align: center;width:100%;">
+            <img src="/static/images/assets/empty_list2.jpg" width="80%" style="margin-top:100px;"/>
+            <p class="font-noto">앗! 찾을 수 없는 버디찾기 입니다.<br/>
+            <a href="/buddy_home" class="slider-next btn font-400 font-12 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3 pe-4 ps-4 mt-2">다이빙 리스트로 돌아가기</a></p>
+        </div>
+    </div>
+    <div :class="'page-content' + (!is_empty ? '' : ' hide')">
         <div v-if="locationData.backgroundImages == null || locationData.backgroundImages.length == 0" style="background:url(/static/empty.jpg);background-size: contain;height:250px;margin-top:50px;">
         </div>
         <div v-else :style="'background:url('+locationData.backgroundImages[0].url+');background-size: cover;height:250px;background-position: bottom !important;margin-top:50px;'">
@@ -31,15 +38,13 @@
         
 
     
-        
-        
         <div class="card mb-0" style="margin-top:-60px; z-index:1">
             <div class="content mt-3 row pb-3 mb-0 border-bottom" v-on:click="goUserPage(divingData.hostUser)">
                 <div class="col-6 p-0">
-                    <img class="inline-block me-2" src="/static/images/assets/user_empty_m.png" width="50" style="vertical-align: top;"/>
+                    <img class="inline-block me-2 circular_image" :src="(userThumbnail) ? userThumbnail : '/static/images/assets/user_empty_'+gender+'.png'" width="50" style="vertical-align: top;"/>
                     <div class="inline-block font-noto">
-                        <h5 class="mb-0 font-500">{{ divingData.hostUser.nickName || "" }}</h5>
-                        <p class="mb-0 font-12 color-gray">{{ divingData.hostUser.levelShow || "" }}</p>
+                        <h5 class="mb-0 font-500">{{ (divingData.hostUser && divingData.hostUser.nickName) ? divingData.hostUser.nickName : '' }}</h5>
+                        <p class="mb-0 font-12 color-gray">{{ (divingData.hostUser && divingData.hostUser.levelShow) ? divingData.hostUser.levelShow : '' }}</p>
                     </div>
                 </div>
                 <div class="col-6 p-0 text-end">
@@ -71,10 +76,12 @@
                     <div class="row mb-0 line-height-l">
                         <div class="col-3 text-center color-gray">시작일시</div>
                         <div class="col-9">{{ weDiveDateFormat(new Date(divingData.startedAt), true) }}</div>
-                        <div class="col-3 text-center color-gray">종료일시</div>
-                        <div class="col-9">{{ weDiveDateFormat(new Date(divingData.finishedAt), false) }}</div>
+                        <div v-if="showFinishedAt == false" class="col-3 text-center color-gray">종료일시</div>
+                        <div v-if="showFinishedAt == false" class="col-9">{{ weDiveDateFormat(new Date(divingData.finishedAt), false) }}</div>
                         <div class="col-3 text-center color-gray">선호사항</div>
-                        <div class="col-9">{{ divingData.interests.map((x)=>{return x.title}).join().replace(/,/gi,', ') }}</div>
+                        <div class="col-9">{{ (divingData.interests) ? divingData.interests.map((x)=>{return x.title}).join().replace(/,/gi,', ') : '' }}</div>
+                        <div class="col-3 text-center color-gray">모집인원</div>
+                        <div class="col-9">{{ (divingData.maxPeopleNumber) ? (divingData.maxPeopleNumber-divingData.participants.length-1) : '' }}명</div>
                     </div>
                 </div>
                 <br/>
@@ -82,9 +89,13 @@
             </div>
             
             <div class="content mt-0 pb-3 border-bottom">
-                <h2 class="font-15 font-700 mb-3">참석인원 ({{ divingData.participants.length }})</h2>
+                <h2 class="font-15 font-700 mb-3">참석인원 ({{ (divingData.participants) ? (divingData.participants.length+1) : '' }})</h2>
                 
                 <div class="row text-center mb-1">
+                    <div class="col-3" v-on:click="goUserPage(divingData.hostUser)">
+                        <img class="inline-block circular_image" :src="(userThumbnail) ? userThumbnail : '/static/images/assets/user_empty_'+gender+'.png'" width="50" style="vertical-align: top;"/>
+                        <p class="color-gray-dark mb-0 font-14">{{ (divingData.hostUser!=null&&divingData.hostUser.nickName!=null) ? divingData.hostUser.nickName : '비공개' }}</p>
+                    </div>
                     <div class="col-3" v-for="participant in divingData.participants" v-on:click="goUserPage(participant.user)">
                         <img class="inline-block" :src="'/static/images/assets/user_empty_'+participant.gender+'.png'" width="50" style="vertical-align: top;"/>
                         <p class="color-gray-dark mb-0 font-14">{{ (participant.user!=null&&participant.user.nickName!=null) ? participant.user.nickName : ((participant.name!=null) ? participant.name : '비공개') }}</p>
@@ -307,6 +318,14 @@ export default {
                             birth
                             gender
                         }
+                        interests {
+                            title
+                            type
+                        }
+                        maxPeopleNumber
+                        startedAt
+                        finishedAt
+                        createdAt
                     }
                 }
                 `,
@@ -321,66 +340,10 @@ export default {
                 android: (localStorage.android) ? localStorage.android : "",
             }
         });
-        console.log(result)
         
         
-        
-        next(vm => {vm.setData(result.data.data.getDivingById)});
-        /*next(vm => {vm.setData({_id: '61b47d6213f324035a6ca34e',
-    title: null,
-    description: '잠실 프리다이빙을 모집해요.\n여러분 함께해요.',
-    status: 'searchable',
-    hostUser: {
-        _id:'61b0ae4a13f324035a6baf25',
-        nickName: '짱스',
-        name: '장성환',
-        birthAge: 1985,
-        gender: 'm',
-        instructorTypes: [],
-        scubaLicenseLevel:1,
-	    freeLicenseLevel:0
-    },
-    participants: [
-        {
-            user: null,
-            name: null,
-            birth: null,
-            gender: 'm',
-            _id: '61b47d6213f324035a6ca34f'
-        },
-        {
-            user: null,
-            name: null,
-            birth: null,
-            gender: 'f',
-            _id: '61b47d6213f324035a6ca350'
-        }
-    ],
-    applicants: [],
-    interests: [{"title":"프리다이빙", "type": ""},{"title":"남자", "type": ""},{"title":"뒷풀이", "type": ""},{"title":"초보환영", "type": ""}],
-    diveSites: null,
-    divePoints: null,
-    diveCenters: [
-        {
-            _id: '6189f9d94c8a87c504b16fca',
-            name: '잠실수영장',
-            uniqueName: 'jamsil',
-            description: '잠실종합수영장 제2수영장에 위치한 다이빙 전용 수영장입니다. 서울 시내에 있어 접근이 용이합니다.',
-            backgroundImages: [
-                {_id: '61aae2e3eac3ebfb7ac9c2e6', thumbnailUrl: 'https://dwj4aa6a673st.cloudfront.net/image/resized/61b4730c13f324035a6c8b36.jpg'}
-            ],
-            adminScore: 70,
-            latitude: 37.51452599991783,
-            longitude: 127.07622881130571,
-            institutionTypes: [],
-            interests: [{type: 'priceIndex', title: '$$$'}]
-        }
-    ],
-    startedAt: '2021-12-20T20:00:00.000Z',
-    finishedAt: '2021-12-20T20:00:00.000Z',
-    images: [],
-    createdAt: '2021-12-11T10:28:50.525Z',
-    updatedAt: '2021-12-11T10:28:50.525Z',})});*/
+        var ret = (result.data && result.data.data && result.data.data.getDivingById) ? result.data.data.getDivingById : null
+        next(vm => {vm.setData(ret)});
     }
   },
   async mounted() {
@@ -411,6 +374,10 @@ export default {
         rating: 3,
         rateDescription: '나쁘지 않아요.',
         review_detail: '',
+        showFinishedAt: false,
+        gender: localStorage.userGender,
+        userThumbnail: localStorage.userThumbnail,
+        is_empty: false,
     }
   },
   methods: {
@@ -479,44 +446,56 @@ export default {
           
       },
       setData(_divingData) {
-          this.divingData = _divingData;
-          // 다이버 레벨 보여주기
-          this.divingData.hostUser.levelShow = '초보';
-          var scuba_level = ["초보", "오픈워터", "어드벤스드", "레스큐", "마스터", "강사"];
-          var free_level = ["초보", "레벨1", "레벨2", "레벨3", "레벨4", "강사"];
-          if (scuba_level > free_level) {
-            this.divingData.hostUser.levelShow = (this.divingData.hostUser.scubaLicenseLevel>0) ? "스쿠버 " + scuba_level[this.divingData.hostUser.scubaLicenseLevel] : this.divingData.hostUser.levelShow;
+          if (_divingData == null) {
+            this.is_empty = true;
           } else {
-            this.divingData.hostUser.levelShow = (this.divingData.hostUser.freeLicenseLevel>0) ? "프리 " + free_level[this.divingData.hostUser.freeLicenseLevel] : this.divingData.hostUser.levelShow;
-          }
-          this.divingData.hostUser.levelShow += " 다이버";
-          this.divingData.description = this.divingData.description.replace(/\n/gi, '<br/>');
-          this.divingData.title = '';
-          var startedAt = new Date(this.divingData.startedAt);
-          var finishedAt = new Date(this.divingData.finishedAt);
-          if (this.divingData.startedAt == this.divingData.finishedAt) {
-              this.divingData.title = startedAt.getFullYear() + "년 " + (startedAt.getMonth()+1) + "월 " + startedAt.getDate() + "일 "
-          } else {
-              this.divingData.title = startedAt.getFullYear() + "년 " + (startedAt.getMonth()+1) + "/" + startedAt.getDate() + " ~ " + (finishedAt.getMonth()+1) + "/" + finishedAt.getDate() + " "
-          }
+            console.log(_divingData)
+            this.divingData = _divingData;
+            //console.log(this.divingData)
+            /// 다이버 레벨 보여주기
+            this.divingData.hostUser.levelShow = '초보';
+            var scuba_level = ["초보", "오픈워터", "어드벤스드", "레스큐", "마스터", "강사"];
+            var free_level = ["초보", "레벨1", "레벨2", "레벨3", "레벨4", "강사"];
+            var my_s_lvl = parseInt(this.divingData.hostUser.scubaLicenseLevel);
+            var my_f_lvl = parseInt(this.divingData.hostUser.freeLicenseLevel)
+            if (my_s_lvl > my_f_lvl) {
+                this.divingData.hostUser.levelShow = (my_s_lvl>0) ? "스쿠버 " + scuba_level[my_s_lvl] : this.divingData.hostUser.levelShow;
+            } else {
+                this.divingData.hostUser.levelShow = (my_f_lvl>0) ? "프리 " + free_level[my_f_lvl] : this.divingData.hostUser.levelShow;
+            }
+            this.divingData.hostUser.levelShow += " 다이버";
+            this.divingData.description = this.divingData.description.replace(/\n/gi, '<br/>');
+            this.divingData.title = '';
+            console.log(this.divingData.startedAt);
+            var startedAt = new Date(this.divingData.startedAt);
+            var finishedAt = new Date(this.divingData.finishedAt);
+            if (this.divingData.startedAt == this.divingData.finishedAt) {
+                this.divingData.title = startedAt.getFullYear() + "년 " + (startedAt.getMonth()+1) + "월 " + startedAt.getDate() + "일 "
+            } else {
+                this.divingData.title = startedAt.getFullYear() + "년 " + (startedAt.getMonth()+1) + "/" + startedAt.getDate() + " ~ " + (finishedAt.getMonth()+1) + "/" + finishedAt.getDate() + " "
+            }
+            if (startedAt.getFullYear() == finishedAt.getFullYear() && startedAt.getMonth() == finishedAt.getMonth() && startedAt.getDate() == finishedAt.getDate()) {
+                this.showFinishedAt = true;
+            }
 
-          this.divingData.location = '';
-          if (this.divingData.diveSites && this.divingData.diveSites.length > 0) {
-              this.locationData = this.divingData.diveSites[0];
-              this.divingData.location = this.divingData.diveSites[0].name + " 사이트";
-          } else if (this.divingData.divePoints && this.divingData.divePoints.length > 0) {
-              this.locationData = this.divingData.divePoints[0];
-              this.divingData.location = this.divingData.divePoints[0].name + " 포인트";
-          } else if (this.divingData.diveCenters && this.divingData.diveCenters.length > 0) {
-              this.locationData = this.divingData.diveCenters[0];
-              this.divingData.location = this.divingData.diveCenters[0].name;
+            this.divingData.location = '';
+            if (this.divingData.diveSites && this.divingData.diveSites.length > 0) {
+                this.locationData = this.divingData.diveSites[0];
+                this.divingData.location = this.divingData.diveSites[0].name + " 사이트";
+            } else if (this.divingData.divePoints && this.divingData.divePoints.length > 0) {
+                this.locationData = this.divingData.divePoints[0];
+                this.divingData.location = this.divingData.divePoints[0].name + " 포인트";
+            } else if (this.divingData.diveCenters && this.divingData.diveCenters.length > 0) {
+                this.locationData = this.divingData.diveCenters[0];
+                this.divingData.location = this.divingData.diveCenters[0].name;
+            }
+            
+            /*_nearData.forEach(d => {
+                if (d._id != this.locationData._id) {
+                    this.nearData.push(d);
+                }
+            });*/
           }
-          
-          /*_nearData.forEach(d => {
-              if (d._id != this.locationData._id) {
-                  this.nearData.push(d);
-              }
-          });*/
           setTimeout(function() {
             init_template();
             var preloader = document.getElementById('preloader')
@@ -551,5 +530,4 @@ export default {
 .border-bottom {border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important}
 .evaluation {background-color: rgba(196,187,171,.2);justify-content: space-around;border-radius: 5px;padding:10px;}
 .wedive-textarea {min-height: 130px;border: 2px solid #e9e9e9;background: #f5f5f5;padding-left: 10px;padding-right: 10px;}
-.border-08 {border: 1px solid rgba(0, 0, 0, 0.08) !important;}
 </style>

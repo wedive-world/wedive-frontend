@@ -1,11 +1,12 @@
 <template>
   <div class="" style="height: 100%; !important">
-    <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-site" data-menu-load=""></div>
+    <div data-menu-active="nav-site"></div>
     <div class="main-header header header-fixed header-logo-center">
         <a class="" href="/" style="margin-left: 16px;"><img class="logo-image" src="/static/images/assets/logo-dark.svg" height="46" /></a>
         
         <a href="/site_list" class="header-icon header-icon-3 font-18" style="color: #858585;margin-right: 13.3333333333px;"><i class="fas fa-list"></i></a>
         <a v-on:click="searchBox()" href="#" class="header-icon header-icon-4 font-18" style="color: #858585;margin-right: 13.3333333333px;"><i class="fas fa-search"></i></a>
+        <!--<a href="#" class="header-icon header-icon-4 color-theme circular_image" data-menu="menu-main" :style="'background: url('+((userThumbnail) ? userThumbnail : '/static/images/assets/user_empty_'+((gender)?gender:'m')+'.png')+');background-size:cover;width:36px;height:36px;margin-top:7px !important;margin-right:7px;'"></a>-->
     </div>
     
 
@@ -1016,6 +1017,7 @@ export default {
             this.my_longitude = position.coords.longitude;
         });
     }
+    localStorage.perferedSite = '/site_home';
 
 
 
@@ -1234,6 +1236,8 @@ export default {
         my_latitude: 37.56425754670452,
         my_longitude: 126.9741944890715,
         nickName: localStorage.nickName,
+        userThumbnail: localStorage.userThumbnail,
+        gender: localStorage.gender,
     }
   }, 
   watch: {

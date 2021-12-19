@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-book" data-menu-load=""></div>    
+    <div data-menu-active="nav-book"></div>
     <div class="page-content text-start transform-none" style="padding-bottom: 65px;">
         <div class="card card-style ms-0 me-0 rounded-0 mb-0">
             <div class="content mt-0">

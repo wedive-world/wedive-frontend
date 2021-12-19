@@ -1,20 +1,26 @@
 <template>
   <div class="">
-    <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-site" data-menu-load=""></div>
     <div class="header header-fixed header-logo-center">
-        <a href="" class="header-title color ellipsis">프로필</a>
+        <a href="" class="header-title color ellipsis">사용자 프로필</a>
         <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
         <a href="#" class="header-icon header-icon-4"><img src="/static/images/assets/ico_share.png" width="20"/></a>
     </div>
     
+    <div :class="'page-content p-0' + (is_empty ? '' : ' hide')">
+        <div class="card mb-0" style="height: calc(100vh - 60px);display: inline-block;text-align: center;width:100%;">
+            <img src="/static/images/assets/empty_list2.jpg" width="80%" style="margin-top:100px;"/>
+            <p class="font-noto">앗! 찾을 수 없는 사용자 입니다.<br/>
+            <a href="/buddy_home" class="slider-next btn font-400 font-12 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3 pe-4 ps-4 mt-2">다이빙 리스트로 돌아가기</a></p>
+        </div>
+    </div>
+
     <div class="page-content">
-        
         <div class="card mb-0 border-bottom" style="margin-top:50px; z-index:1">
             <div class="content mt-3 pb-2 mb-0">
-                <img class="inline-block me-2" src="/static/images/assets/user_empty_m.png" width="50" style="vertical-align: top;"/>
+                <img class="inline-block me-2 circular_image" :src="(userData.profileImages && userData.profileImages.length>0) ? userData.profileImages[0].thumbnailUrl : ('/static/images/assets/user_empty_'+((userData.gender)?userData.gender:'m')+'.png')" width="50" style="vertical-align: top;"/>
                 <div class="inline-block font-noto">
-                    <h5 class="mb-0 font-500">{{ divingData.hostUser.nickName || "" }}</h5>
-                    <p class="mb-0 font-12 color-gray">{{ divingData.hostUser.levelShow || "" }}</p>
+                    <h5 class="mb-0 font-500">{{ userData.nickName }}</h5>
+                    <p class="mb-0 font-12 color-gray">{{ userData.levelShow }}</p>
                 </div>
             </div>
             <div class="row m-0">
@@ -31,7 +37,7 @@
                     <div class="inline-block text-start">
                         <div class="font-noto font-600 font-16 me-1" style="color:#cd5b3c;">18m</div>
                     </div>
-                    <img class="inline-block me-2" src="/static/images/assets/heart.png" width="30" style="vertical-align: top;"/>
+                    <img class="inline-block me-2" src="/static/images/assets/heart.png" width="26" style="vertical-align: top;"/>
                 </div>
                 <div class="progress rounded-l wedive-deep" style="height:8px">
                     <div class="progress-bar bg-heart text-start ps-3 color-white" 
@@ -45,16 +51,32 @@
 
 
 
-        <div class="card mb-0 border-bottom" style="z-index:1;">
-            <div class="content pb-3">
+        <div v-if="userData.scubaLicenseType" class="card mb-0 border-bottom" style="z-index:1;">
+            <div class="content pb-0">
                 <h2 class="font-15 font-700 mb-1">스쿠버다이빙</h2>
                 <div class="evaluation p-3" style="position: relative;">
-                    <img class="inline-block ms-2 me-4" src="/static/images/assets/certification.png" height="80" style="vertical-align: top;"/>
+                    <img class="inline-block ms-1 me-1" src="/static/images/assets/award1.png" height="80" style="vertical-align: top;"/>
                     <div class="inline-block">
-                        <p class="mb-0 font-noto font-16 color-gray mb-1">SCUBA DIVING LICENSE</p>
-                        <p class="mb-0 font-noto font-20 font-500">오픈워터 자격증</p>
+                        <p class="mb-0 font-noto font-13 color-gray mb-1">SCUBA DIVING LICENSE</p>
+                        <p class="mb-0 font-noto font-20 font-500">{{ userData.scubaLevelShow }} 자격증</p>
+                        <p class="mb-0 font-noto font-12 font-400" style="color: #c1c2c3">BY {{ userData.scubaLicenseType }}</p>
                     </div>
-                    <img src="/static/images/agency/logo_padi.svg" height="20" style="position: absolute;right: 10px; bottom:10px;"/>
+                    <img :src="(userData.scubaLicenseType)?'/static/images/agency/logo_'+userData.scubaLicenseType.toLowerCase()+'.svg':''" height="20" style="position: absolute;right: 10px; bottom:10px;"/>
+                </div>
+            </div>
+        </div>
+
+        <div v-if="userData.freeLicenseType" class="card mb-0 border-bottom" style="z-index:1;">
+            <div class="content pb-0">
+                <h2 class="font-15 font-700 mb-1">프리다이빙</h2>
+                <div class="evaluation p-3" style="position: relative;">
+                    <img class="inline-block ms-1 me-1" src="/static/images/assets/award2.png" height="80" style="vertical-align: top;"/>
+                    <div class="inline-block">
+                        <p class="mb-0 font-noto font-13 color-gray mb-1">FREE DIVING LICENSE</p>
+                        <p class="mb-0 font-noto font-20 font-500">{{ userData.freeLevelShow }} 자격증</p>
+                        <p class="mb-0 font-noto font-12 font-400" style="color: #c1c2c3">BY {{ userData.freeLicenseType }}</p>
+                    </div>
+                    <img :src="(userData.freeLicenseType)?'/static/images/agency/logo_'+userData.freeLicenseType.toLowerCase()+'.svg':''" height="20" style="position: absolute;right: 10px; bottom:10px;"/>
                 </div>
             </div>
         </div>
@@ -89,87 +111,42 @@ export default {
   name: 'HelloWorld',
   async beforeRouteEnter(to, from, next) {
     if (to.params.id != null) {
-        /*var result = await axios({
+        var result = await axios({
             url: 'https://api.wedives.com/graphql',
             method: 'post',
             data: {
                 query: `
-                query GetDivingById($id: ID!) {
-                    getDivingById(_id: $id) {
+                query GetUserById($id: ID!) {
+                    getUserById(_id: $id) {
+                        _id
+                        uid
+                        authProvider
+                        oauthToken
+                        fcmToken
+                        email
+                        emailVerified
+                        phoneNumber
+                        instructorTypes
+                        profileImages {
+                        _id
+                        thumbnailUrl
+                        }
+                        nickName
+                        name
+                        birthAge
+                        gender
+                        residence
+                        interests {
                         title
-                        description
-                        status
-                        hostUser {
-                            _id
-                            nickName
-                            scubaLicenseLevel
-                            freeLicenseLevel
-                            instructorTypes
-                            birthAge
-                            gender
+                        type
                         }
-                        diveSites {
-                            _id
-                            adminScore
-                            backgroundImages {
-                                _id
-                                thumbnailUrl
-                            }
-                            name
-                            uniqueName
-                            description
-                            latitude
-                            longitude
-                            interests {
-                                title
-                                type
-                            }
-                        }
-                        divePoints {
-                            _id
-                            adminScore
-                            backgroundImages {
-                                _id
-                                thumbnailUrl
-                            }
-                            name
-                            uniqueName
-                            description
-                            latitude
-                            longitude
-                            interests {
-                                title
-                                type
-                            }
-                        }
-                        diveCenters {
-                            _id
-                            adminScore
-                            backgroundImages {
-                                _id
-                                thumbnailUrl
-                            }
-                            name
-                            uniqueName
-                            description
-                            latitude
-                            longitude
-                            institutionTypes
-                            interests {
-                                title
-                                type
-                            }
-                        }
-                        participants {
-                            user {
-                                _id
-                                nickName
-                            }
-                            status
-                            name
-                            birth
-                            gender
-                        }
+                        divingLog
+                        freeDivingBests
+                        freeLicenseLevel
+                        freeLicenseType
+                        scubaLicenseLevel
+                        scubaLicenseType
+                        createdAt
                     }
                 }
                 `,
@@ -184,66 +161,12 @@ export default {
                 android: (localStorage.android) ? localStorage.android : "",
             }
         });
-        console.log(result)
+
+        var ret = null;
+        if (result && result.data && result.data.data && result.data.data.getUserById) {ret = result.data.data.getUserById;}
+        console.log(ret)
         
-        
-        
-        next(vm => {vm.setData(result.data.data.getDivingById)});*/
-        next(vm => {vm.setData({_id: '61b47d6213f324035a6ca34e',
-    title: null,
-    description: '잠실 프리다이빙을 모집해요.\n여러분 함께해요.',
-    status: 'searchable',
-    hostUser: {
-        _id:'61b0ae4a13f324035a6baf25',
-        nickName: '짱스',
-        name: '장성환',
-        birthAge: 1985,
-        gender: 'm',
-        instructorTypes: [],
-        scubaLicenseLevel:1,
-	    freeLicenseLevel:0
-    },
-    participants: [
-        {
-            user: null,
-            name: null,
-            birth: null,
-            gender: 'm',
-            _id: '61b47d6213f324035a6ca34f'
-        },
-        {
-            user: null,
-            name: null,
-            birth: null,
-            gender: 'f',
-            _id: '61b47d6213f324035a6ca350'
-        }
-    ],
-    applicants: [],
-    interests: [{"title":"프리다이빙", "type": ""},{"title":"남자", "type": ""},{"title":"뒷풀이", "type": ""},{"title":"초보환영", "type": ""}],
-    diveSites: null,
-    divePoints: null,
-    diveCenters: [
-        {
-            _id: '6189f9d94c8a87c504b16fca',
-            name: '잠실수영장',
-            uniqueName: 'jamsil',
-            description: '잠실종합수영장 제2수영장에 위치한 다이빙 전용 수영장입니다. 서울 시내에 있어 접근이 용이합니다.',
-            backgroundImages: [
-                {_id: '61aae2e3eac3ebfb7ac9c2e6', thumbnailUrl: 'https://dwj4aa6a673st.cloudfront.net/image/resized/61b4730c13f324035a6c8b36.jpg'}
-            ],
-            adminScore: 70,
-            latitude: 37.51452599991783,
-            longitude: 127.07622881130571,
-            institutionTypes: [],
-            interests: [{type: 'priceIndex', title: '$$$'}]
-        }
-    ],
-    startedAt: '2021-12-20T20:00:00.000Z',
-    finishedAt: '2021-12-20T20:00:00.000Z',
-    images: [],
-    createdAt: '2021-12-11T10:28:50.525Z',
-    updatedAt: '2021-12-11T10:28:50.525Z',})});
+        next(vm => {vm.setData(ret)});
     }
   },
   async mounted() {
@@ -269,11 +192,12 @@ export default {
   data () {
     return {
         map: null,
-        divingData: {},
+        userData: {},
         locationData: {},
         rating: 3,
         rateDescription: '나쁘지 않아요.',
         review_detail: '',
+        is_empty: false,
     }
   },
   methods: {
@@ -319,7 +243,6 @@ export default {
         return `${Math.floor(betweenTimeDay / 365)}년전`;
       },
       setRating(rating) {
-          //this.rating = rating;
           switch ((rating+"")) {
               case '1':
                 this.rateDescription = '매우 아쉬워요';
@@ -341,65 +264,33 @@ export default {
           }
           
       },
-      setData(_divingData) {
-          this.divingData = _divingData;
-          // 다이버 레벨 보여주기
-          this.divingData.hostUser.levelShow = '초보';
-          var scuba_level = ["초보", "오픈워터", "어드벤스드", "레스큐", "마스터", "강사"];
-          var free_level = ["초보", "레벨1", "레벨2", "레벨3", "레벨4", "강사"];
-          if (scuba_level > free_level) {
-            this.divingData.hostUser.levelShow = (this.divingData.hostUser.scubaLicenseLevel>0) ? "스쿠버 " + scuba_level[this.divingData.hostUser.scubaLicenseLevel] : this.divingData.hostUser.levelShow;
+      setData(_userData) {
+          if (_userData == null) {
+              this.is_empty = true;
           } else {
-            this.divingData.hostUser.levelShow = (this.divingData.hostUser.freeLicenseLevel>0) ? "프리 " + free_level[this.divingData.hostUser.freeLicenseLevel] : this.divingData.hostUser.levelShow;
-          }
-          this.divingData.hostUser.levelShow += " 다이버";
-          this.divingData.description = this.divingData.description.replace(/\n/gi, '<br/>');
-          this.divingData.title = '';
-          var startedAt = new Date(this.divingData.startedAt);
-          var finishedAt = new Date(this.divingData.finishedAt);
-          if (this.divingData.startedAt == this.divingData.finishedAt) {
-              this.divingData.title = startedAt.getFullYear() + "년 " + (startedAt.getMonth()+1) + "월 " + startedAt.getDate() + "일 "
-          } else {
-              this.divingData.title = startedAt.getFullYear() + "년 " + (startedAt.getMonth()+1) + "/" + startedAt.getDate() + " ~ " + (finishedAt.getMonth()+1) + "/" + finishedAt.getDate() + " "
-          }
-
-          this.divingData.location = '';
-          if (this.divingData.diveSites && this.divingData.diveSites.length > 0) {
-              this.locationData = this.divingData.diveSites[0];
-              this.divingData.location = this.divingData.diveSites[0].name + " 사이트";
-          } else if (this.divingData.divePoints && this.divingData.divePoints.length > 0) {
-              this.locationData = this.divingData.divePoints[0];
-              this.divingData.location = this.divingData.divePoints[0].name + " 포인트";
-          } else if (this.divingData.diveCenters && this.divingData.diveCenters.length > 0) {
-              this.locationData = this.divingData.diveCenters[0];
-              this.divingData.location = this.divingData.diveCenters[0].name;
-          }
-          
-          /*_nearData.forEach(d => {
-              if (d._id != this.locationData._id) {
-                  this.nearData.push(d);
-              }
-          });*/
-          setTimeout(function() {
-            init_template();
-            var preloader = document.getElementById('preloader')
-            if(preloader){preloader.classList.add('preloader-hide');}
-          }, 1000);
-      },
-      goUserPage(user) {
-          if (user && user._id) {
-              location.href = '/user/' + user._id;
+              this.userData = _userData;
+            // 다이버 레벨 보여주기
+            this.userData.levelShow = '초보';
+            var scuba_level = ["초보", "오픈워터", "어드벤스드", "레스큐", "마스터", "강사"];
+            var free_level = ["초보", "레벨1", "레벨2", "레벨3", "레벨4", "강사"];
+            var s_lvl = parseInt(this.userData.scubaLicenseLevel);
+            var f_lvl = parseInt(this.userData.freeLicenseLevel);
+            this.userData.scubaLevelShow = (s_lvl>0) ? scuba_level[s_lvl] : "";
+            this.userData.freeLevelShow = (f_lvl>0) ? free_level[f_lvl] : "";
+            if (s_lvl > f_lvl) {
+                this.userData.levelShow = (s_lvl>0) ? "스쿠버 " + scuba_level[s_lvl] : this.userData.levelShow;
+            } else {
+                this.userData.levelShow = (f_lvl>0) ? "프리 " + free_level[f_lvl] : this.userData.levelShow;
+            }
+            this.userData.levelShow += " 다이버";
+            
+            setTimeout(function() {
+                init_template();
+                var preloader = document.getElementById('preloader')
+                if(preloader){preloader.classList.add('preloader-hide');}
+            }, 1000);
           }
       },
-      goDetail(type, uniqueName) {
-          location.href = type + '/' + uniqueName;
-      },
-      call: function() {
-          console.log("call");
-      },
-      goCourse: function() {
-          location.href='/course';
-      }
   }
 
   
@@ -414,6 +305,5 @@ export default {
 .border-bottom {border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important}
 .evaluation {background-color: rgba(196,187,171,.2);justify-content: space-around;border-radius: 5px;padding:10px;}
 .wedive-textarea {min-height: 130px;border: 2px solid #e9e9e9;background: #f5f5f5;padding-left: 10px;padding-right: 10px;}
-.border-08 {border: 1px solid rgba(0, 0, 0, 0.08) !important;}
 .wedive-deep:before {content: '▼ 첫 수심 18m';position: absolute;margin-top: -20px;margin-left: 16%;color:#b4bcc8;}
 </style>
