@@ -41,10 +41,10 @@
         <div class="card mb-0" style="margin-top:-60px; z-index:1">
             <div class="content mt-3 row pb-3 mb-0 border-bottom" v-on:click="goUserPage(divingData.hostUser)">
                 <div class="col-6 p-0">
-                    <img class="inline-block me-2 circular_image" :src="(userThumbnail) ? userThumbnail : '/static/images/assets/user_empty_'+gender+'.png'" width="50" style="vertical-align: top;"/>
+                    <img class="inline-block me-2 circular_image" :src="(divingData.hostUser && divingData.hostUser.profileImages && divingData.hostUser.profileImages.length>0 && divingData.hostUser.profileImages[0].thumbnailUrl) ? divingData.hostUser.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty_'+((divingData.hostUser&&divingData.hostUser.gender)?divingData.hostUser.gender:'m')+'.png'" width="50" style="vertical-align: top;"/>
                     <div class="inline-block font-noto">
-                        <h5 class="mb-0 font-500">{{ (divingData.hostUser && divingData.hostUser.nickName) ? divingData.hostUser.nickName : '' }}</h5>
-                        <p class="mb-0 font-12 color-gray">{{ (divingData.hostUser && divingData.hostUser.levelShow) ? divingData.hostUser.levelShow : '' }}</p>
+                        <h5 class="mb-0 font-500 font-17">{{ (divingData.hostUser && divingData.hostUser.nickName) ? divingData.hostUser.nickName : '' }}</h5>
+                        <p class="mb-0 font-14 color-gray">{{ (divingData.hostUser && divingData.hostUser.levelShow) ? divingData.hostUser.levelShow : '' }}</p>
                     </div>
                 </div>
                 <div class="col-6 p-0 text-end">
@@ -93,7 +93,7 @@
                 
                 <div class="row text-center mb-1">
                     <div class="col-3" v-on:click="goUserPage(divingData.hostUser)">
-                        <img class="inline-block circular_image" :src="(userThumbnail) ? userThumbnail : '/static/images/assets/user_empty_'+gender+'.png'" width="50" style="vertical-align: top;"/>
+                        <img class="inline-block circular_image" :src="(divingData.hostUser && divingData.hostUser.profileImages && divingData.hostUser.profileImages.length>0 && divingData.hostUser.profileImages[0].thumbnailUrl) ? divingData.hostUser.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty_'+((divingData.hostUser&&divingData.hostUser.gender)?divingData.hostUser.gender:'m')+'.png'" width="50" style="vertical-align: top;"/>
                         <p class="color-gray-dark mb-0 font-14">{{ (divingData.hostUser!=null&&divingData.hostUser.nickName!=null) ? divingData.hostUser.nickName : '비공개' }}</p>
                     </div>
                     <div class="col-3" v-for="participant in divingData.participants" v-on:click="goUserPage(participant.user)">
@@ -253,6 +253,9 @@ export default {
                             scubaLicenseLevel
                             freeLicenseLevel
                             instructorTypes
+                            profileImages {
+                                thumbnailUrl
+                            }
                             birthAge
                             gender
                         }

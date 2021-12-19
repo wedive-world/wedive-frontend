@@ -33,6 +33,7 @@ import TrainingListPage from '@/components/TrainingListPage'
 import TrainingSettingPage from '@/components/TrainingSettingPage'
 import TrainingStartPage from '@/components/TrainingStartPage'
 import LogBookPage from '@/components/LogBookPage'
+import OhterPage from '@/components/OhterPage'
 
 Vue.use(Router)
 
@@ -207,6 +208,11 @@ export default new Router({
       path: '/book_home',
       name: 'LogBookPage',
       component: LogBookPage
+    },
+    {
+      path: '/other_home',
+      name: 'OhterPage',
+      component: OhterPage
     },
     
     

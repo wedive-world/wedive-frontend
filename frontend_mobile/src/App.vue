@@ -118,7 +118,7 @@ export default {
       location.href = localStorage.perferedSite;
     },
     addItem() {
-      var item = ($("#menu-main").data("menu-active")) ? $("#menu-main").data("menu-active").replace("nav-","") : "";
+      var item = $("[data-menu-active]").data("menu-active").replace('nav-', '');
       switch(item) {
         case "buddy":
           location.href="/buddy_create";
