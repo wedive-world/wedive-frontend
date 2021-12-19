@@ -16,11 +16,11 @@ require('dotenv').config();
 
 Vue.use(VCalendar);
 
-Vue.filter("makeComma", val =>{
+Vue.filter("makeComma", val => {
   return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 })
 Vue.filter("makeReference", val => {
-  return String(val).replace("https://","").replace("http://","").replace("www.","");
+  return String(val).replace("https://", "").replace("http://", "").replace("www.", "");
 })
 
 
@@ -49,14 +49,21 @@ new Vue({
 })
 
 const userAgent = navigator.userAgent.toLowerCase();
+const userAuthKey = 'userAuth';
 
 if (userAgent.indexOf('android') !== -1) {
 
-//console.log(`android connected, ${JSON.stringify(JSON.parse(Android.getUserInformation()))}`)
-localStorage.setItem("android", JSON.stringify(JSON.parse(Android.getUserInformation())));
+  const userInformation = JSON.parse(Android.getUserInformation());
 
+  console.log(`android connected, ${JSON.stringify(userInformation)}`);
+  localStorage.setItem(userAuthKey, userInformation);
 
 } else if (userAgent.indexOf('iphone') !== -1 || userAgent.indexOf('ipad') !== -1) {
-  //ios
+  
+  // console.log(`ios connected, ${JSON.stringify(JSON.parse(iOS.getUserInformation()))}`)
+  // localStorage.setItem(userAuthKey, JSON.parse(iOS.getUserInformation()));
+
 } else { // 안드로이드, IOS 가 아닌 경우 (더 조건을 추가해서 처리해도 됨)
+  console.log(`web client connected.`);
+
 }
