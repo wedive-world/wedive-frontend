@@ -200,6 +200,30 @@ export default {
             },1000);
             location.reload();
           } else {
+            // 신규 아이디를 등록해준다.
+            var input_temp = {"uid": localStorage.uid, "authProvider": localStorage.providerId, "oauthToken": localStorage.idToken, "email": localStorage.userEmail, "name": localStorage.userName};
+            const ipt = input_temp;
+            
+            var result2 = await axios({
+                url: 'https://api.wedives.com/graphql',
+                method: 'post',
+                headers: {
+                    countrycode: 'ko',
+                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                },
+                data: {
+                    query: `
+                        mutation Mutation($input: UserInput) {
+                            upsertUser(input: $input) {
+                                _id
+                            }
+                        }
+                    `,
+                    variables: {
+                        "input": ipt
+                    }
+                }
+            });
             location.href='/user_create';
           }
       }).catch((error) => {

@@ -58,7 +58,7 @@ try {
     console.log(`android connected, ${JSON.stringify(userInformation)}`);
     localStorage.setItem(userAuthKey, userInformation);
     if (userInformation.uid) localStorage.uid = userInformation.uid;
-    if (userInformation.idToken) localStorage.uid = userInformation.idToken;
+    if (userInformation.idToken) localStorage.idToken = userInformation.idToken;
     if (userInformation.email) localStorage.userEmail = userInformation.email;
     if (userInformation.languageCode) localStorage.languageCode = userInformation.languageCode;
 
