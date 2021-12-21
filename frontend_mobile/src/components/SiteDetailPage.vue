@@ -696,6 +696,10 @@ export default {
         var result = await axios({
         url: 'https://api.wedives.com/graphql',
         method: 'post',
+        headers: {
+            countrycode: 'ko',
+            idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+        },
         data: {
             query: `
             query getDiveSiteByUniqueName($uniqueName: String!) {
@@ -1328,12 +1332,6 @@ export default {
             }
 
         }
-        }, {
-        headers: {
-            countryCode: 'ko',
-            android: (localStorage.android) ? localStorage.android : "",
-            idToken: (localStorage.idToken) ? localStorage.idToken : "",
-        }
         });
 
         
@@ -1350,6 +1348,10 @@ export default {
             var result_image = await axios({
             url: 'https://api.wedives.com/graphql',
             method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
             data: {
                 query: `
                     query Query($ids: [ID], $widths: [Int]) {
@@ -1361,12 +1363,6 @@ export default {
                     widths: width_arr
                 }
 
-            }
-            }, {
-            headers: {
-                countryCode: 'ko',
-                android: (localStorage.android) ? localStorage.android : "",
-                idToken: (localStorage.idToken) ? localStorage.idToken : "",
             }
             });
             if (result_image.data.data.getImageUrlsByIds) {
@@ -1393,6 +1389,10 @@ export default {
                     var result_image = await axios({
                     url: 'https://api.wedives.com/graphql',
                     method: 'post',
+                    headers: {
+                        countrycode: 'ko',
+                        idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                    },
                     data: {
                         query: `
                             query Query($ids: [ID], $widths: [Int]) {
@@ -1404,12 +1404,6 @@ export default {
                             widths: width_arr
                         }
 
-                    }
-                    }, {
-                    headers: {
-                        countryCode: 'ko',
-                        android: (localStorage.android) ? localStorage.android : "",
-                        idToken: (localStorage.idToken) ? localStorage.idToken : "",
                     }
                     });
                     if (result_image.data.data.getImageUrlsByIds) {
@@ -1443,6 +1437,10 @@ export default {
                     var result_image = await axios({
                     url: 'https://api.wedives.com/graphql',
                     method: 'post',
+                    headers: {
+                        countrycode: 'ko',
+                        idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                    },
                     data: {
                         query: `
                             query Query($ids: [ID], $widths: [Int]) {
@@ -1454,12 +1452,6 @@ export default {
                             widths: width_arr
                         }
 
-                    }
-                    }, {
-                    headers: {
-                        countryCode: 'ko',
-                        android: (localStorage.android) ? localStorage.android : "",
-                        idToken: (localStorage.idToken) ? localStorage.idToken : "",
                     }
                     });
 
@@ -1478,6 +1470,10 @@ export default {
             result_nearby = await axios({
             url: 'https://api.wedives.com/graphql',
             method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
             data: {
                 query: `
                     query GetDiveSitesNearBy($lat1: Float!, $lon1: Float!, $lat2: Float!, $lon2: Float!) {
@@ -1501,12 +1497,6 @@ export default {
                 }
 
             }
-            }, {
-            headers: {
-                countryCode: 'ko',
-                android: (localStorage.android) ? localStorage.android : "",
-                idToken: (localStorage.idToken) ? localStorage.idToken : "",
-            }
             });
         }
         // 근처 사이트 backgroundImage
@@ -1526,6 +1516,10 @@ export default {
                         var result_image = await axios({
                         url: 'https://api.wedives.com/graphql',
                         method: 'post',
+                        headers: {
+                            countrycode: 'ko',
+                            idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                        },
                         data: {
                             query: `
                                 query Query($ids: [ID], $widths: [Int]) {
@@ -1537,12 +1531,6 @@ export default {
                                 widths: width_arr
                             }
 
-                        }
-                        }, {
-                        headers: {
-                            countryCode: 'ko',
-                            android: (localStorage.android) ? localStorage.android : "",
-                            idToken: (localStorage.idToken) ? localStorage.idToken : "",
                         }
                         });
                         if (result_image.data.data.getImageUrlsByIds) {

@@ -79,6 +79,10 @@ export default {
         var result = await axios({
             url: 'https://api.wedives.com/graphql',
             method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
             data: {
                 query: `
                 query GetUserById($id: ID!) {
@@ -120,12 +124,6 @@ export default {
                 }
 
             }
-        }, {
-        headers: {
-            countryCode: 'ko',
-            android: (localStorage.android) ? localStorage.android : "",
-            idToken: (localStorage.idToken) ? localStorage.idToken : "",
-        }
         });
 
         var ret = null;

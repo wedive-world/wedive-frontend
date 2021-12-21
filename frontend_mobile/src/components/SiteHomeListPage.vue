@@ -3,7 +3,7 @@
     <div data-menu-active="nav-site"></div>
     <div class="page-content">
         
-        <div v-on:click="goList()" class="card card-style" style="background: white;height:148px;">
+        <div v-on:click="goList()" class="card card-style hide" style="background: white;height:148px;">
             <div class="content mb-0 mt-3">
                 <img class="float-right" src="/static/images/assets/save_earth.png" style="position: absolute;z-index: 11;right: 10px;top:40px;"/>
                 <h4 class="text-start mb-1 font-15" style="padding-top:36px;">지구 구석구석 다이빙 사이트 검색</h4>
@@ -13,6 +13,18 @@
                     <input type="text" class="border-0" placeholder="37,216개의 장소가 준비되어있어요." data-search>
                 </div>
                 
+            </div>
+        </div>
+
+        <div v-on:click="goSiteMap()" class="card card-style bg-dark-dark" style="box-shadow: none;">
+            <div class="content mb-0 mt-3" style="min-height: 80px;">
+                <div class="row mb-0" style="position: relative;min-height: 80px;">
+                    <div class="col-9">
+                        <h4 class="text-start pt-2 mb-0 color-white">지도에서 한눈에</h4>
+                        <p class="text-start mb-0 color-white opacity-70">전세계 곳곳을 한눈에 여행해요.</p>
+                    </div>
+                    <img class="col-3 ps-0" src="/static/images/assets/save_earth.png" style="position:absolute;bottom:0;right:0;"/>
+                </div>
             </div>
         </div>
 
@@ -310,8 +322,11 @@ export default {
         ],
     }
   }, methods: {
+    goSiteMap: function() {
+        location.href = '/site_home';
+    },
     goList: function() {
-        location.href='/center_list'
+        location.href='/center_list';
     }
   }
 

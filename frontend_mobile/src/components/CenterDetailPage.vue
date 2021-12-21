@@ -845,6 +845,10 @@ export default {
         var result = await axios({
         url: 'https://api.wedives.com/graphql',
         method: 'post',
+        headers: {
+            countrycode: 'ko',
+            idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+        },
         data: {
             query: `
                 query GetDiveCenterByUniqueName($uniqueName: String!) {
@@ -1014,12 +1018,6 @@ export default {
             }
 
         }
-        }, {
-        headers: {
-            countryCode: 'ko',
-            android: (localStorage.android) ? localStorage.android : "",
-            idToken: (localStorage.idToken) ? localStorage.idToken : "",
-        }
         });
 
         if (result.data.data.getDiveCenterByUniqueName.backgroundImages.length > 0) {
@@ -1036,6 +1034,10 @@ export default {
                 var result_image = await axios({
                 url: 'https://api.wedives.com/graphql',
                 method: 'post',
+                headers: {
+                    countrycode: 'ko',
+                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                },
                 data: {
                     query: `
                         query Query($ids: [ID], $widths: [Int]) {
@@ -1047,10 +1049,6 @@ export default {
                         widths: width_arr
                     }
 
-                }
-                }, {
-                headers: {
-                countryCode: 'ko',
                 }
                 });
                 if (result_image.data.data.getImageUrlsByIds) {
@@ -1077,6 +1075,10 @@ export default {
                 var result_image = await axios({
                 url: 'https://api.wedives.com/graphql',
                 method: 'post',
+                headers: {
+                    countrycode: 'ko',
+                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                },
                 data: {
                     query: `
                         query Query($ids: [ID], $widths: [Int]) {
@@ -1088,10 +1090,6 @@ export default {
                         widths: width_arr
                     }
 
-                }
-                }, {
-                headers: {
-                countryCode: 'ko',
                 }
                 });
                 if (result_image.data.data.getImageUrlsByIds) {
@@ -1124,6 +1122,10 @@ export default {
                     var result_image = await axios({
                     url: 'https://api.wedives.com/graphql',
                     method: 'post',
+                    headers: {
+                        countrycode: 'ko',
+                        idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                    },
                     data: {
                         query: `
                             query Query($ids: [ID], $widths: [Int]) {
@@ -1135,10 +1137,6 @@ export default {
                             widths: width_arr
                         }
 
-                    }
-                    }, {
-                    headers: {
-                    countryCode: 'ko',
                     }
                     });
 

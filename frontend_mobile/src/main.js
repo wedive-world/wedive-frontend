@@ -55,7 +55,7 @@ try {
   if (userAgent.indexOf('android') !== -1) {
     const userInformation = JSON.parse(Android.getUserInformation());
   
-    //console.log(`android connected, ${JSON.stringify(userInformation)}`);
+    console.log(`android connected, ${JSON.stringify(userInformation)}`);
     localStorage.setItem(userAuthKey, userInformation);
     if (userInformation.uid) localStorage.uid = userInformation.uid;
     if (userInformation.idToken) localStorage.uid = userInformation.idToken;
@@ -66,6 +66,10 @@ try {
     axios({
       url: 'https://api.wedives.com/graphql',
       method: 'post',
+      headers: {
+        countrycode: 'ko',
+        idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+      },
       data: {
           query: `
               query Query($uid: ID!) {
@@ -81,13 +85,7 @@ try {
               "uid": localStorage.uid
           }
       }
-    }, {
-      headers: {
-          countryCode: 'ko',
-          android: (localStorage.android) ? localStorage.android : "",
-          idToken: (localStorage.idToken) ? localStorage.idToken : "",
-      }
-      }).then(function(result) {
+    }).then(function(result) {
       if (result.data.data.getUserByUid != null) {
         localStorage.nickName = result.data.data.getUserByUid.nickName;
         localStorage.userId = result.data.data.getUserByUid._id;

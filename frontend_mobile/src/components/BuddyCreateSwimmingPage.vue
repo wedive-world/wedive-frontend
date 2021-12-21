@@ -447,6 +447,10 @@ export default {
         var result = await axios({
             url: 'https://api.wedives.com/graphql',
             method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
             data: {
                 query: `
                     query GetDiveAllNearby($lat1: Float!, $lon1: Float!, $lat2: Float!, $lon2: Float!) {
@@ -480,12 +484,6 @@ export default {
                     "lon2": this.my_longitude+0.3
                 }
             }
-        }, {
-        headers: {
-            countryCode: 'ko',
-            android: (localStorage.android) ? localStorage.android : "",
-            idToken: (localStorage.idToken) ? localStorage.idToken : "",
-        }
         });
 
         this.nearList = result.data.data.getDiveCentersNearBy;
@@ -563,6 +561,10 @@ export default {
         var result = await axios({
             url: 'https://api.wedives.com/graphql',
             method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
             data: {
                 query: `
                     mutation Mutation($input: DivingInput) {
@@ -588,12 +590,6 @@ export default {
                     }
                 }
             }
-        }, {
-        headers: {
-            countryCode: 'ko',
-            android: (localStorage.android) ? localStorage.android : "",
-            idToken: (localStorage.idToken) ? localStorage.idToken : "",
-        }
         });
         console.log(result);
         var diving_id = result.data.data.upsertDiving._id;
@@ -721,6 +717,10 @@ export default {
         var result = await axios({
             url: 'https://api.wedives.com/graphql',
             method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
             data: {
                 query: `
                     query Query($query: String!) {
@@ -741,12 +741,6 @@ export default {
                     "query": query
                 }
             }
-        }, {
-        headers: {
-            countryCode: 'ko',
-            android: (localStorage.android) ? localStorage.android : "",
-            idToken: (localStorage.idToken) ? localStorage.idToken : "",
-        }
         });
         //result.data.data.searchDiveCentersByName.forEach(x=>result.data.data.searchDiveCentersByName)
         var result_list = new Array();

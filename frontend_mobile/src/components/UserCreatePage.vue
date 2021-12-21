@@ -780,21 +780,15 @@ export default {
                     }
                 }
             `
-            
             var client = new GraphQLClient('https://api.wedives.com/graphql',
             {
                 headers: {
-                    countryCode: "ko"
+                    countrycode: 'ko',
+                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
                 }
             })
 
-            result_img_user = await client.request(mutation, {uploadImageFile: this.file_photo,}, {
-                headers: {
-                    countryCode: 'ko',
-                    android: (localStorage.android) ? localStorage.android : "",
-                    idToken: (localStorage.idToken) ? localStorage.idToken : "",
-                }
-            });
+            result_img_user = await client.request(mutation, {uploadImageFile: this.file_photo,});
             //console.log(result_img_user);
 
 
@@ -813,13 +807,7 @@ export default {
                     }
                 }
             `;
-            var result_upload = await client.request(updateMutation, {input: {"_id": result_img_user.uploadImage._id,"name": result_img_user.name,"description": "userImage","reference": null}}, {
-                headers: {
-                    countryCode: 'ko',
-                    android: (localStorage.android) ? localStorage.android : "",
-                    idToken: (localStorage.idToken) ? localStorage.idToken : "",
-                }
-            });
+            var result_upload = await client.request(updateMutation, {input: {"_id": result_img_user.uploadImage._id,"name": result_img_user.name,"description": "userImage","reference": null}});
             //console.log(result_upload);
 
             var queryImageUrl = gql`
@@ -827,13 +815,7 @@ export default {
                     getImageUrlById(_id: $id, width: $width)
                 }
             `;
-            var result_url = await client.request(queryImageUrl, {"id": result_img_user.uploadImage._id,"width": 720}, {
-                headers: {
-                    countryCode: 'ko',
-                    android: (localStorage.android) ? localStorage.android : "",
-                    idToken: (localStorage.idToken) ? localStorage.idToken : "",
-                }
-            });
+            var result_url = await client.request(queryImageUrl, {"id": result_img_user.uploadImage._id,"width": 720});
 
             localStorage.userPhoto = result_url.getImageUrlById;
             localStorage.userThumbnail = result_img_user.uploadImage.thumbnailUrl
@@ -857,17 +839,12 @@ export default {
             var client = new GraphQLClient('https://api.wedives.com/graphql',
             {
                 headers: {
-                    countryCode: "ko"
+                    countrycode: 'ko',
+                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
                 }
             })
 
-            result_img_certi = await client.request(mutation, {uploadImageFile: this.file_certificate,}, {
-                headers: {
-                    countryCode: 'ko',
-                    android: (localStorage.android) ? localStorage.android : "",
-                    idToken: (localStorage.idToken) ? localStorage.idToken : "",
-                }
-            });
+            result_img_certi = await client.request(mutation, {uploadImageFile: this.file_certificate,});
             //console.log(result_img_certi);
 
 
@@ -887,13 +864,7 @@ export default {
             `;
             
 
-            var result_upload = await client.request(updateMutation, {input: {"_id": result_img_certi.uploadImage._id,"description": "userCertificate","reference": null}}, {
-                headers: {
-                    countryCode: 'ko',
-                    android: (localStorage.android) ? localStorage.android : "",
-                    idToken: (localStorage.idToken) ? localStorage.idToken : "",
-                }
-            });
+            var result_upload = await client.request(updateMutation, {input: {"_id": result_img_certi.uploadImage._id,"description": "userCertificate","reference": null}});
             //console.log(result_upload);
 
 
@@ -915,6 +886,10 @@ export default {
         var result = await axios({
             url: 'https://api.wedives.com/graphql',
             method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
             data: {
                 query: `
                     mutation Mutation($input: UserInput) {
@@ -955,12 +930,6 @@ export default {
                     "input": ipt
                 }
             }
-        }, {
-        headers: {
-            countryCode: 'ko',
-            android: (localStorage.android) ? localStorage.android : "",
-            idToken: (localStorage.idToken) ? localStorage.idToken : "",
-        }
         });
         //
 
@@ -975,6 +944,10 @@ export default {
             var result2 = await axios({
                 url: 'https://api.wedives.com/graphql',
                 method: 'post',
+                headers: {
+                    countrycode: 'ko',
+                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                },
                 data: {
                     query: `
                         mutation UpsertInstructorVerification($input: InstructorVerificationInput) {
@@ -996,12 +969,6 @@ export default {
                         }
                     }
                 }
-            }, {
-            headers: {
-                countryCode: 'ko',
-                android: (localStorage.android) ? localStorage.android : "",
-                idToken: (localStorage.idToken) ? localStorage.idToken : "",
-            }
             });
             //console.log("result2 ================");
             //console.log(result2);
