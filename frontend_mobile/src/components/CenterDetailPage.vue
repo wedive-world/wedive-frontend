@@ -1018,6 +1018,7 @@ export default {
         headers: {
             countryCode: 'ko',
             android: (localStorage.android) ? localStorage.android : "",
+            idToken: (localStorage.idToken) ? localStorage.idToken : "",
         }
         });
 

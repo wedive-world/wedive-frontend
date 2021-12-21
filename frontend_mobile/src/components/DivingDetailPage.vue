@@ -146,7 +146,7 @@
     
     <div id="menu-rating" 
          class="menu menu-box-modal" 
-         data-menu-height="580" 
+         data-menu-height="590" 
          data-menu-width="370">
         <div class="menu-title">
             <h4 class="text-center mt-4 pt-1 mb-2 font-noto font-19">{{ divingData.location }}<br/><p style="margin: 0px !important;font-weight: 200 !important;font-size:13px;">{{ divingData.title }}</p></h4>
@@ -337,11 +337,12 @@ export default {
                 }
 
             }
-            }, {
-            headers: {
-                countryCode: 'ko',
-                android: (localStorage.android) ? localStorage.android : "",
-            }
+        }, {
+        headers: {
+            countryCode: 'ko',
+            android: (localStorage.android) ? localStorage.android : "",
+            idToken: (localStorage.idToken) ? localStorage.idToken : "",
+        }
         });
         
         
@@ -532,5 +533,5 @@ export default {
 .inline-block {display: inline-block;}
 .border-bottom {border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important}
 .evaluation {background-color: rgba(196,187,171,.2);justify-content: space-around;border-radius: 5px;padding:10px;}
-.wedive-textarea {min-height: 130px;border: 2px solid #e9e9e9;background: #f5f5f5;padding-left: 10px;padding-right: 10px;}
+.wedive-textarea {min-height: 150px;border: 2px solid #e9e9e9;background: #f5f5f5;padding-left: 10px;padding-right: 10px;}
 </style>

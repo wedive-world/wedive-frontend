@@ -1,5 +1,6 @@
 <template>
   <div class="">
+    <div data-menu-active="nav-other"></div>
     <div class="page-content font-noto card ps-2 pe-2">
         <div class="position-relative" style="z-index:1;">
             <div class="m-3">
@@ -119,11 +120,12 @@ export default {
                 }
 
             }
-            }, {
-            headers: {
-                countryCode: 'ko',
-                android: (localStorage.android) ? localStorage.android : "",
-            }
+        }, {
+        headers: {
+            countryCode: 'ko',
+            android: (localStorage.android) ? localStorage.android : "",
+            idToken: (localStorage.idToken) ? localStorage.idToken : "",
+        }
         });
 
         var ret = null;

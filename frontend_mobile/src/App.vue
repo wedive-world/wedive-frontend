@@ -30,6 +30,7 @@
             <img href="/" class="logo-image mt-n2" style="margin-right: auto;" src="/static/images/assets/logo-dark.svg" height="46"/>
             <a v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><i class="wedive_plus"></i></a>
             <a v-if="$route.path=='/site_list'" href="/site_home" class="page-title-icon font-18" style="color: #858585;margin-right: 13.3333333333px;"><i class="fas fa-map-marked"></i></a>
+            <a v-on:click="searchItem()" id="wedive-search" class="page-title-icon font-18 hide" style="color:#858585 !important;"><i class="fas fa-search"></i></a>
             <!--<a href="#" class="page-title-icon" data-menu="menu-main" :style="'background: url('+((userThumbnail) ? userThumbnail : '/static/images/assets/user_empty_'+((gender)?gender:'m')+'.png')+');background-size:cover;'"></a>-->
           </div>
           <div class="page-title-clear"></div>
@@ -99,6 +100,9 @@ export default {
       var item = $("[data-menu-active]").data("menu-active").replace('nav-', '');
       if (item == 'buddy' || item == 'book' || item == 'chat') {
         $("#wedive-add").removeClass("hide");
+        $("#wedive-search").removeClass("hide");
+      } else if (item == 'site') {
+        $("#wedive-search").removeClass("hide");
       }
     } catch (e) {}
     
@@ -130,6 +134,9 @@ export default {
           location.href="/chat_create";
         break;
       }
+    },
+    searchItem() {
+      console.log("searchItem");
     },
     goHack: function() {
         window.history.back();
@@ -172,6 +179,12 @@ export default {
                 variables: {
                     "uid": localStorage.uid
                 }
+            }
+          }, {
+            headers: {
+                countryCode: 'ko',
+                android: (localStorage.android) ? localStorage.android : "",
+                idToken: (localStorage.idToken) ? localStorage.idToken : "",
             }
           });
           if (result.data.data.getUserByUid != null) {

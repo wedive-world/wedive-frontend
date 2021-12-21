@@ -788,7 +788,13 @@ export default {
                 }
             })
 
-            result_img_user = await client.request(mutation, {uploadImageFile: this.file_photo,});
+            result_img_user = await client.request(mutation, {uploadImageFile: this.file_photo,}, {
+                headers: {
+                    countryCode: 'ko',
+                    android: (localStorage.android) ? localStorage.android : "",
+                    idToken: (localStorage.idToken) ? localStorage.idToken : "",
+                }
+            });
             //console.log(result_img_user);
 
 
@@ -807,7 +813,13 @@ export default {
                     }
                 }
             `;
-            var result_upload = await client.request(updateMutation, {input: {"_id": result_img_user.uploadImage._id,"name": result_img_user.name,"description": "userImage","reference": null}})
+            var result_upload = await client.request(updateMutation, {input: {"_id": result_img_user.uploadImage._id,"name": result_img_user.name,"description": "userImage","reference": null}}, {
+                headers: {
+                    countryCode: 'ko',
+                    android: (localStorage.android) ? localStorage.android : "",
+                    idToken: (localStorage.idToken) ? localStorage.idToken : "",
+                }
+            });
             //console.log(result_upload);
 
             var queryImageUrl = gql`
@@ -815,7 +827,13 @@ export default {
                     getImageUrlById(_id: $id, width: $width)
                 }
             `;
-            var result_url = await client.request(queryImageUrl, {"id": result_img_user.uploadImage._id,"width": 720})
+            var result_url = await client.request(queryImageUrl, {"id": result_img_user.uploadImage._id,"width": 720}, {
+                headers: {
+                    countryCode: 'ko',
+                    android: (localStorage.android) ? localStorage.android : "",
+                    idToken: (localStorage.idToken) ? localStorage.idToken : "",
+                }
+            });
 
             localStorage.userPhoto = result_url.getImageUrlById;
             localStorage.userThumbnail = result_img_user.uploadImage.thumbnailUrl
@@ -843,7 +861,13 @@ export default {
                 }
             })
 
-            result_img_certi = await client.request(mutation, {uploadImageFile: this.file_certificate,});
+            result_img_certi = await client.request(mutation, {uploadImageFile: this.file_certificate,}, {
+                headers: {
+                    countryCode: 'ko',
+                    android: (localStorage.android) ? localStorage.android : "",
+                    idToken: (localStorage.idToken) ? localStorage.idToken : "",
+                }
+            });
             //console.log(result_img_certi);
 
 
@@ -863,7 +887,13 @@ export default {
             `;
             
 
-            var result_upload = await client.request(updateMutation, {input: {"_id": result_img_certi.uploadImage._id,"description": "userCertificate","reference": null}})
+            var result_upload = await client.request(updateMutation, {input: {"_id": result_img_certi.uploadImage._id,"description": "userCertificate","reference": null}}, {
+                headers: {
+                    countryCode: 'ko',
+                    android: (localStorage.android) ? localStorage.android : "",
+                    idToken: (localStorage.idToken) ? localStorage.idToken : "",
+                }
+            });
             //console.log(result_upload);
 
 
@@ -925,6 +955,12 @@ export default {
                     "input": ipt
                 }
             }
+        }, {
+        headers: {
+            countryCode: 'ko',
+            android: (localStorage.android) ? localStorage.android : "",
+            idToken: (localStorage.idToken) ? localStorage.idToken : "",
+        }
         });
         //
 
@@ -960,6 +996,12 @@ export default {
                         }
                     }
                 }
+            }, {
+            headers: {
+                countryCode: 'ko',
+                android: (localStorage.android) ? localStorage.android : "",
+                idToken: (localStorage.idToken) ? localStorage.idToken : "",
+            }
             });
             //console.log("result2 ================");
             //console.log(result2);

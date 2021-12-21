@@ -1332,6 +1332,7 @@ export default {
         headers: {
             countryCode: 'ko',
             android: (localStorage.android) ? localStorage.android : "",
+            idToken: (localStorage.idToken) ? localStorage.idToken : "",
         }
         });
 
@@ -1363,7 +1364,9 @@ export default {
             }
             }, {
             headers: {
-            countryCode: 'ko',
+                countryCode: 'ko',
+                android: (localStorage.android) ? localStorage.android : "",
+                idToken: (localStorage.idToken) ? localStorage.idToken : "",
             }
             });
             if (result_image.data.data.getImageUrlsByIds) {
@@ -1404,7 +1407,9 @@ export default {
                     }
                     }, {
                     headers: {
-                    countryCode: 'ko',
+                        countryCode: 'ko',
+                        android: (localStorage.android) ? localStorage.android : "",
+                        idToken: (localStorage.idToken) ? localStorage.idToken : "",
                     }
                     });
                     if (result_image.data.data.getImageUrlsByIds) {
@@ -1452,7 +1457,9 @@ export default {
                     }
                     }, {
                     headers: {
-                    countryCode: 'ko',
+                        countryCode: 'ko',
+                        android: (localStorage.android) ? localStorage.android : "",
+                        idToken: (localStorage.idToken) ? localStorage.idToken : "",
                     }
                     });
 
@@ -1496,7 +1503,9 @@ export default {
             }
             }, {
             headers: {
-            countryCode: 'ko',
+                countryCode: 'ko',
+                android: (localStorage.android) ? localStorage.android : "",
+                idToken: (localStorage.idToken) ? localStorage.idToken : "",
             }
             });
         }
@@ -1531,7 +1540,9 @@ export default {
                         }
                         }, {
                         headers: {
-                        countryCode: 'ko',
+                            countryCode: 'ko',
+                            android: (localStorage.android) ? localStorage.android : "",
+                            idToken: (localStorage.idToken) ? localStorage.idToken : "",
                         }
                         });
                         if (result_image.data.data.getImageUrlsByIds) {

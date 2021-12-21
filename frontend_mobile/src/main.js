@@ -81,7 +81,13 @@ try {
               "uid": localStorage.uid
           }
       }
-    }).then(function(result) {
+    }, {
+      headers: {
+          countryCode: 'ko',
+          android: (localStorage.android) ? localStorage.android : "",
+          idToken: (localStorage.idToken) ? localStorage.idToken : "",
+      }
+      }).then(function(result) {
       if (result.data.data.getUserByUid != null) {
         localStorage.nickName = result.data.data.getUserByUid.nickName;
         localStorage.userId = result.data.data.getUserByUid._id;

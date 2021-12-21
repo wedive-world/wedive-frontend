@@ -47,51 +47,7 @@
         </div>
 
 
-        <div class="map-filter">
-            <div v-on:click="mapFilter('category')" class="bx-filter bg-white me-2">종류</div>
-            <div id="map-item-category" class="display-block" style="display: none;">
-                <div class="bx-filter bg-gray-light color-black">스쿠버</div>
-                <div class="bx-filter bg-gray-light color-black">프리</div>
-                <div class="bx-filter bg-gray-light color-black">리브어보드</div>
-            </div>
-        </div>
-        <div class="map-filter" style="top: 170px;">
-            <div v-on:click="mapFilter('level')" class="bx-filter bg-white me-2">레벨</div>
-            <div id="map-item-level" class="display-block" style="display: none;">
-                <div class="bx-filter bg-gray-light color-black">초급</div>
-                <div class="bx-filter bg-gray-light color-black">중급</div>
-                <div class="bx-filter bg-gray-light color-black">고급</div>
-            </div>
-        </div>
-        <div class="map-filter" style="top: 220px;">
-            <div v-on:click="mapFilter('fish')" class="bx-filter bg-white me-2">어종</div>
-            <div id="map-item-fish" class="display-block" style="display: none;">
-                <div class="bx-filter bg-gray-light color-black">거북</div>
-                <div class="bx-filter bg-gray-light color-black">만타</div>
-                <div class="bx-filter bg-gray-light color-black">상어</div>
-                <div class="bx-filter bg-gray-light color-black">고래</div>
-                <div class="bx-filter bg-gray-light color-black">잭피쉬</div>
-            </div>
-        </div>
-        <div class="map-filter" style="top: 270px;">
-            <div v-on:click="mapFilter('type')" class="bx-filter bg-white me-2">타입</div>
-            <div id="map-item-type" class="display-block" style="display: none;">
-                <div class="bx-filter bg-gray-light color-black">난파선</div>
-                <div class="bx-filter bg-gray-light color-black">동굴</div>
-                <div class="bx-filter bg-gray-light color-black">해루질</div>
-                <div class="bx-filter bg-gray-light color-black">케이지</div>
-                <div class="bx-filter bg-gray-light color-black">월</div>
-                <div class="bx-filter bg-gray-light color-black">렉</div>
-            </div>
-        </div>
-        <div class="map-filter" style="top: 320px;">
-            <div v-on:click="mapFilter('exotic')" class="bx-filter bg-white me-2">이색</div>
-            <div id="map-item-exotic" class="display-block" style="display: none;">
-                <div class="bx-filter bg-gray-light color-black">세계10대</div>
-                <div class="bx-filter bg-gray-light color-black">대물</div>
-                <div class="bx-filter bg-gray-light color-black">수영장</div>
-            </div>
-        </div>
+        
         
         <div class="map-box hide">
             <a id="map_box_href" href="">
@@ -127,6 +83,308 @@
             </a>
         </div>
     </div>
+
+    <!-- Menu Fliter -->
+    <div id="menu-filter" class="menu menu-box-bottom" style="height:100%;border-radius: 0px !important;">
+        <div class="menu-title mt-n1">
+            <h2 class="pt-3 pb-3 text-center">필터를 선택하세요</h2>
+            <a href="#" class="close-menu"><i class="wedive_icoset wedive_icoset_close"></i></a>
+        </div>
+        <div class="content m-0 text-start">
+            <div class="card ms-0 me-0 rounded-0 mb-0">
+                <div class="content">
+                    <div>
+                        <label for="filter_type" class="color-highlight font-700">다이빙 종류</label>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_type1" checked>
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_type1">스쿠버 다이빙</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-air-freshener font-16 color-highlight"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_type2" checked>
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_type2">프리 다이빙</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-swimmer font-17 color-secondary"></i>
+                    </div>
+
+                    <div>
+                        <label for="filter_type" class="color-highlight font-700">센터 평점</label>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_star5">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_star5">5</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-star font-16 color-yellow-dark"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_star4">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_star4">4</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-star font-17 color-yellow-dark"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_star3">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_star3">3</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-star font-16 color-yellow-dark"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_star2">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_star2">2</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-star font-17 color-yellow-dark"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_star1">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_star1">1</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-star font-16 color-yellow-dark"></i>
+                    </div>
+
+                    <div>
+                        <label for="filter_type" class="color-highlight font-700">수중 환경</label>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_fish5">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_fish5">5</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-fish font-16 color-orange-light"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_fish4">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_fish4">4</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-fish font-17 color-orange-light"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_fish3">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_fish3">3</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-fish font-16 color-orange-light"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_fish2">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_fish2">2</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-fish font-17 color-orange-light"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_fish1">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_fish1">1</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-fish font-16 color-orange-light"></i>
+                    </div>
+
+                    <div>
+                        <label for="filter_type" class="color-highlight font-700">시야</label>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_sight5">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_sight5">5</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-eye font-16 color-gray-light-mid2"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_sight4">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_sight4">4</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-eye font-17 color-gray-light-mid2"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_sight3">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_sight3">3</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-eye font-16 color-gray-light-mid2"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_sight2">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_sight2">2</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-eye font-17 color-gray-light-mid2"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_sight1">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_sight1">1</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-eye font-16 color-gray-light-mid2"></i>
+                    </div>
+
+                    <div>
+                        <label for="filter_type" class="color-highlight font-700">다이빙 환경</label>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_env1">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_env1">케이브 포인트</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-window-restore font-17 color-red-dark"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_env2">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_env2">난파선 포인트</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-ship font-17 color-brown-dark"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_env3">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_env3">마크로 포인트</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-fish font-17 color-gray-dark"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_env4">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_env4">대물 포인트</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-fish font-17 color-blue-dark"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_env5">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_env5">월다이빙 포인트</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fa fa-bars color-brown-dark font-17"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_env6">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_env6">딥다이빙 포인트</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-ruler-vertical font-17 color-blue-light"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_env7">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_env7">먹다이빙 포인트</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-wind font-17 color-instagram"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_env8">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_env8">드리프트 포인트</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-water font-14 color-dark-dark"></i>
+                    </div>
+
+                    <div>
+                        <label for="filter_type" class="color-highlight font-700">다이빙 타이밍</label>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_time1">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_time1">야간 다이빙</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-moon font-16 color-yellow-dark"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_time2">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_time2">조류 다이빙</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-water font-17 color-green-dark"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_time3">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_time3">아이스 다이빙</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-temperature-low font-17 color-blue-dark"></i>
+                    </div>
+                </div>
+                
+                
+                <div class="content hide" id="tab-center-filter">
+                    <div class="tab-controls tabs-small tabs-rounded" data-highlight="bg-blue-dark">
+                        <a href="#" data-active data-bs-toggle="collapse" data-bs-target="#tab-general">기본</a>
+                        <!--<a href="#" data-bs-toggle="collapse" data-bs-target="#tab-level">레벨</a>-->
+                        <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-env">환경</a>
+                        <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-time">시간</a>
+                    </div>
+                    <div class="clearfix mb-3"></div>
+                    <div data-bs-parent="#tab-center-filter" class="collapse ps-2 pe-2 show" id="tab-general">
+                        <div class="list-group list-custom-small list-icon-0 check-visited">
+                            <div class="form-check icon-check">
+                                <label for="filter_type" class="color-highlight">다이빙 종류</label>
+                                <div class="form-check icon-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="check_scuba">
+                                    <label class="form-check-label" for="check_scuba">스쿠버 다이빙</label>
+                                    <i class="icon-check-1 far fa-circle color-gray-dark font-16"></i>
+                                    <i class="icon-check-2 far fa-check-circle font-16 color-highlight"></i>
+                                </div>
+                                <div class="form-check icon-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="check_free">
+                                    <label class="form-check-label" for="check_free">프리 다이빙</label>
+                                    <i class="icon-check-1 far fa-circle color-gray-dark font-16"></i>
+                                    <i class="icon-check-2 far fa-check-circle font-16 color-highlight"></i>
+                                </div>
+                            </div>
+                            <div class="input-style has-borders no-icon mb-4">
+                                <label for="filter_star" class="color-highlight">평점</label>
+                                <select id="filter_star">
+                                    <option value="0" selected>전체</option>
+                                    <option value="5">아주 좋음</option>
+                                    <option value="4">좋음</option>
+                                    <option value="3">보통</option>
+                                    <option value="2">나쁨</option>
+                                    <option value="1">아주 나쁨</option>
+                                </select>
+                            </div>
+                            <div class="input-style has-borders no-icon mb-4">
+                                <label for="filter_fish" class="color-highlight">물고기</label>
+                                <select id="filter_fish">
+                                    <option value="0" selected>전체</option>
+                                    <option value="5">아주 많음</option>
+                                    <option value="4">많음</option>
+                                    <option value="3">보통</option>
+                                    <option value="2">적음</option>
+                                    <option value="1">아주 적음</option>
+                                </select>
+                            </div>
+                            <div class="input-style has-borders no-icon mb-4">
+                                <label for="filter_sight" class="color-highlight">시야</label>
+                                <select id="filter_sight">
+                                    <option value="0" selected>전체</option>
+                                    <option value="5">아주 좋음</option>
+                                    <option value="4">좋음</option>
+                                    <option value="3">보통</option>
+                                    <option value="2">나쁨</option>
+                                    <option value="1">아주 나쁨</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div data-bs-parent="#tab-center-filter" class="collapse ps-2 pe-2" id="tab-level">
+                        <div class="list-group list-custom-small list-icon-0 wedive-filter-list">
+                            <a href="" v-on:click="selectFilter($event, '교육자')"><i class="fas fa-user-tie font-14 rounded-sm bg-green-light"></i><span>교육자</span><i class="far fa-check-circle color-highlight font-16"></i></a>
+                            <a href="" v-on:click="selectFilter($event, '초급자')"><i class="fas fa-user font-14 rounded-sm bg-blue-light"></i><span>초급자</span><i class="far fa-check-circle color-highlight font-16"></i></a>
+                            <a href="" v-on:click="selectFilter($event, '중급자')"><i class="fas fa-user-shield font-14 rounded-sm bg-red-light"></i><span>중급자</span><i class="far fa-check-circle color-highlight font-16"></i></a>
+                            <a href="" v-on:click="selectFilter($event, '고급자')"><i class="fas fa-user-clock font-14 rounded-sm bg-magenta-dark"></i><span>고급자</span><i class="far fa-check-circle color-highlight font-16"></i></a>
+                            <a href="" v-on:click="selectFilter($event, '전문가')"><i class="fas fa-user-check font-14 rounded-sm bg-brown-dark"></i><span>전문가</span><i class="far fa-check-circle color-highlight font-16"></i></a>
+                            <a href="" v-on:click="selectFilter($event, '특수기술')"><i class="fas fa-user-graduate rounded-sm bg-green-dark"></i><span>특수기술</span><i class="far fa-check-circle color-highlight font-16"></i></a>
+                        </div>
+                    </div>-->
+                    <div data-bs-parent="#tab-center-filter" class="collapse ps-2 pe-2" id="tab-env">
+                        <div class="list-group list-custom-small list-icon-0">
+                            <a href="" v-on:click="selectFilter($event, '케이브 포인트')"><i class="fas fa-window-restore rounded-sm bg-brown-dark"></i><span>케이브 포인트</span><i class="far fa-check-circle color-highlight font-16"></i></a>
+                            <a href="" v-on:click="selectFilter($event, '난파선 포인트')"><i class="fas fa-ship rounded-sm bg-red-dark"></i><span>난파선 포인트</span><i class="far fa-check-circle color-highlight font-16"></i></a>
+                            <a href="" v-on:click="selectFilter($event, '마크로 포인트')"><i class="fas fa-fish rounded-sm bg-yellow-dark"></i><span>마크로 포인트</span><i class="far fa-check-circle color-highlight font-16"></i></a>
+                            <a href="" v-on:click="selectFilter($event, '대물 포인트')"><i class="fas fa-fish rounded-sm bg-blue-dark"></i><span>대물 포인트</span><i class="far fa-check-circle color-highlight font-16"></i></a>
+                            <a href="" v-on:click="selectFilter($event, '월다이빙 포인트')"><i class="fa fa-bars rounded-sm bg-teal-dark"></i><span>월다이빙 포인트</span><i class="far fa-check-circle color-highlight font-16"></i></a>
+                            <a href="" v-on:click="selectFilter($event, '딥다이빙 포인트')"><i class="fas fa-ruler-vertical rounded-sm bg-brown-dark"></i><span>딥다이빙 포인트</span><i class="far fa-check-circle color-highlight font-16"></i></a>
+                            <a href="" v-on:click="selectFilter($event, '먹다이빙 포인트')"><i class="fas fa-wind rounded-sm bg-orange-dark"></i><span>먹다이빙 포인트</span><i class="far fa-check-circle color-highlight font-16"></i></a>
+                            <a href="" v-on:click="selectFilter($event, '드리프트 포인트')"><i class="fas fa-water font-14 rounded-sm bg-green-light"></i><span>드리프트 포인트</span><i class="far fa-check-circle color-highlight font-16"></i></a>
+                        </div>
+                    </div>
+                    <div data-bs-parent="#tab-center-filter" class="collapse ps-2 pe-2" id="tab-time">
+                        <div class="list-group list-custom-small list-icon-0">
+                            <a href="" v-on:click="selectFilter($event, '야간 다이빙')"><i class="fas fa-moon font-14 rounded-sm bg-blue-light"></i><span>야간 다이빙</span><i class="far fa-check-circle color-highlight font-16"></i></a>
+                            <a href="" v-on:click="selectFilter($event, '조류 다이빙')"><i class="fas fa-water font-14 rounded-sm bg-red-light"></i><span>조류 다이빙</span><i class="far fa-check-circle color-highlight font-16"></i></a>
+                            <a href="" v-on:click="selectFilter($event, '아이스 다이빙')"><i class="fas fa-temperature-low font-14 rounded-sm bg-magenta-dark"></i><span>아이스 다이빙</span><i class="far fa-check-circle color-highlight font-16"></i></a>
+                        </div>
+                    </div>
+                </div>    
+            </div>
+            <div style="position: absolute;width: 100%;bottom:16px;">
+                <div id="filter_list" class="ms-3 me-3 mb-3"></div>
+                <a href="#" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 ms-3 me-3">적용</a>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Menu Fliter -->
     <div id="menu-filter" class="menu menu-box-bottom" style="height:100%;border-radius: 0px !important;">
@@ -428,6 +686,8 @@
             </div>
         </div>
     </div>
+
+    <a id="btn_filter" data-menu="menu-filter" class="btn btn-m mb-3 rounded-xl font-900 shadow-s bg-dark-dark icon-filter"></a>
     <a href="/buddy_create" id="btn_new" class="btn btn-m mb-3 rounded-xl font-900 shadow-s bg-dark-dark icon-concierge"></a>
   </div>
 </template>
@@ -518,6 +778,12 @@ async function updateAll() {
                 "lat2": ne.lat(),
                 "lon2": ne.lng()
             }
+        }
+    }, {
+        headers: {
+            countryCode: 'ko',
+            android: (localStorage.android) ? localStorage.android : "",
+            idToken: (localStorage.idToken) ? localStorage.idToken : "",
         }
     });
     siteList = [];
@@ -688,6 +954,12 @@ async function updateSite() {
                 "lon2": ne.lng()
             }
         }
+    }, {
+        headers: {
+            countryCode: 'ko',
+            android: (localStorage.android) ? localStorage.android : "",
+            idToken: (localStorage.idToken) ? localStorage.idToken : "",
+        }
     });
     siteList = [];
     result.data.data.getDiveSitesNearby.forEach(item => siteList.push(item));
@@ -805,6 +1077,12 @@ async function updatePoint() {
                 "lon2": ne.lng()
             }
         }
+    }, {
+        headers: {
+            countryCode: 'ko',
+            android: (localStorage.android) ? localStorage.android : "",
+            idToken: (localStorage.idToken) ? localStorage.idToken : "",
+        }
     });
     pointList = [];
     result.data.data.getDivePointsNearBy.forEach(item => pointList.push(item));
@@ -920,6 +1198,12 @@ async function updateCenter() {
                 "lat2": ne.lat(),
                 "lon2": ne.lng()
             }
+        }
+    }, {
+        headers: {
+            countryCode: 'ko',
+            android: (localStorage.android) ? localStorage.android : "",
+            idToken: (localStorage.idToken) ? localStorage.idToken : "",
         }
     });
     centerList = [];
@@ -1327,6 +1611,7 @@ export default {
         headers: {
             countryCode: 'ko',
             android: (localStorage.android) ? localStorage.android : "",
+            idToken: (localStorage.idToken) ? localStorage.idToken : "",
         }
         });
         //result.data.data.searchDiveCentersByName.forEach(x=>result.data.data.searchDiveCentersByName)
@@ -1353,7 +1638,7 @@ export default {
   background-size: 1.5em 11em, 1.5em 11em, 2.3em 8em, 2.3em 8em, 3.5em 11em, 3.5em 11em, 100% 100%;
   background-repeat: repeat;
 }
-.map-filter {position: absolute;top: 120px;left: 10px;margin: 5px 5px 4px;}
+
 .display-block {display:inline-block;}
 .map-search {position: absolute;right: 0;top: 57px;left: 0;margin: 5px 12px 4px;border-radius:16px;background-color: white;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
 .bx {padding: 15px 14px;min-height: 125px;}
@@ -1367,6 +1652,7 @@ export default {
 .point .wedive-corner-bottom:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #396e78 !important;}
 .center .wedive-corner-bottom:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #214057 !important;}
 .icon-concierge {position: fixed;width: 58px;height: 58px;bottom: 70px;right:24px;background: url(/static/images/assets/concierge.png);background-size:contain !important;background-position-y: 8px;background-repeat: no-repeat;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
+.icon-filter {position: fixed;width: 58px;height: 58px;bottom: 140px;right:24px;background: url(/static/images/assets/filter.png);background-size:contain !important;background-position-y: 8px;background-repeat: no-repeat;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;    background-position: bottom;}
 .box-bottom {width:calc(100% - 120px);height:36px;position: absolute;right: 0;bottom: 0;display:flex;}
 .box-bottom-corner {display:inline-block;width:36px;height:36px;z-index:999;}
 .box-bottom-corner:before {content: '';position: absolute;height: 80px;width: 80px;border-radius: 100%;z-index: -1;box-shadow: 10px 10px 5px 100px #1d397c;}

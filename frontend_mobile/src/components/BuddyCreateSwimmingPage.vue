@@ -480,6 +480,12 @@ export default {
                     "lon2": this.my_longitude+0.3
                 }
             }
+        }, {
+        headers: {
+            countryCode: 'ko',
+            android: (localStorage.android) ? localStorage.android : "",
+            idToken: (localStorage.idToken) ? localStorage.idToken : "",
+        }
         });
 
         this.nearList = result.data.data.getDiveCentersNearBy;
@@ -586,6 +592,7 @@ export default {
         headers: {
             countryCode: 'ko',
             android: (localStorage.android) ? localStorage.android : "",
+            idToken: (localStorage.idToken) ? localStorage.idToken : "",
         }
         });
         console.log(result);
@@ -738,6 +745,7 @@ export default {
         headers: {
             countryCode: 'ko',
             android: (localStorage.android) ? localStorage.android : "",
+            idToken: (localStorage.idToken) ? localStorage.idToken : "",
         }
         });
         //result.data.data.searchDiveCentersByName.forEach(x=>result.data.data.searchDiveCentersByName)
