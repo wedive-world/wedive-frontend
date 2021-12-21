@@ -89,14 +89,14 @@
             </div>
             
             <div class="content mt-0 pb-3 border-bottom">
-                <h2 class="font-15 font-700 mb-3">참석인원 ({{ (divingData.participants) ? (divingData.participants.length+1) : '' }})</h2>
+                <h2 class="font-15 font-700 mb-3">참여인원 ({{ (divingData.participants.filter(member=> member.status == 'joined')) ? (divingData.participants.filter(member=> member.status == 'joined').length+1) : '' }})</h2>
                 
                 <div class="row text-center mb-1">
-                    <div class="col-3" v-on:click="goUserPage(divingData.hostUser)">
+                    <div class="col-3 owner" v-on:click="goUserPage(divingData.hostUser)" style="position: relative;">
                         <img class="inline-block circular_image" :src="(divingData.hostUser && divingData.hostUser.profileImages && divingData.hostUser.profileImages.length>0 && divingData.hostUser.profileImages[0].thumbnailUrl) ? divingData.hostUser.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty_'+((divingData.hostUser&&divingData.hostUser.gender)?divingData.hostUser.gender:'m')+'.png'" width="50" style="vertical-align: top;"/>
                         <p class="color-gray-dark mb-0 font-14">{{ (divingData.hostUser!=null&&divingData.hostUser.nickName!=null) ? divingData.hostUser.nickName : '비공개' }}</p>
                     </div>
-                    <div class="col-3" v-for="participant in divingData.participants" v-on:click="goUserPage(participant.user)">
+                    <div class="col-3" v-for="participant in divingData.participants.filter(member=> member.status == 'joined')" v-on:click="goUserPage(participant.user)">
                         <img class="inline-block" :src="'/static/images/assets/user_empty_'+participant.gender+'.png'" width="50" style="vertical-align: top;"/>
                         <p class="color-gray-dark mb-0 font-14">{{ (participant.user!=null&&participant.user.nickName!=null) ? participant.user.nickName : ((participant.name!=null) ? participant.name : '비공개') }}</p>
                     </div>
@@ -135,7 +135,7 @@
             </div>
         </div>
         <div class="flex-fill speach-input p-2">
-          <a href="#" data-menu="menu-rating" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0mb-5 font-noto">참여신청</a>
+          <a href="#" data-menu="menu-join" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0mb-5 font-noto">참여신청</a>
         </div>
     </div>
 
@@ -144,6 +144,51 @@
 
     <!-- End of Page Content--> 
     
+
+    <!-- 신청하기 팝업 -->
+    <div id="menu-join" 
+         class="menu menu-box-modal" 
+         data-menu-height="190" 
+         data-menu-width="370">
+        <div class="menu-title">
+            <h4 class="text-center mt-4 pt-1 mb-2 font-noto font-19">신청 하시겠습니까?</h4>
+            <a href="#" class="close-menu hide"><i class="fa fa-times-circle"></i></a>
+        </div>
+        <div class="me-4 ms-4" style="border-bottom: 2px solid black;"></div>
+        <div class="content mt-3">
+            <p class="mb-4 text-center font-noto">개설자가 수락하는 경우, 참여가 완료됩니다.</p>
+        </div>
+        
+        <div class="row m-0">
+            <div class="col-6 pe-1">
+                <a href="#" class="close-menu btn btn-m btn-full rounded-0 text-uppercase font-900 shadow-s bg-gray-dark">취소하기</a>
+            </div>
+            <div class="col-6 ps-1">
+                <a v-on:click="joinDiving()" class="btn btn-m btn-full rounded-0 text-uppercase font-900 shadow-s bg-black">신청하기</a>
+            </div>
+        </div>
+    </div>
+    <!-- 신청완료 팝업 -->
+    <div id="menu-join-requested" 
+         class="menu menu-box-modal" 
+         data-menu-height="190" 
+         data-menu-width="370">
+        <div class="menu-title">
+            <h4 class="text-center mt-4 pt-1 mb-2 font-noto font-19">신청 완료</h4>
+            <a href="#" class="close-menu hide"><i class="fa fa-times-circle"></i></a>
+        </div>
+        <div class="me-4 ms-4" style="border-bottom: 2px solid black;"></div>
+        <div class="content mt-3">
+            <p class="mb-4 text-center font-noto">신청이 완료되었어요.</p>
+        </div>
+        
+        <div class="row m-0">
+            <div class="col-12 pe-1">
+                <a href="#" class="close-menu btn btn-m btn-full rounded-0 text-uppercase font-900 shadow-s bg-gray-black">확인</a>
+            </div>
+        </div>
+    </div>
+    <!-- 평가하기 팝업 -->
     <div id="menu-rating" 
          class="menu menu-box-modal" 
          data-menu-height="590" 
@@ -227,6 +272,7 @@
         </div>
     </div>
     
+    <div id="snackbar-join-error" class="snackbar-toast color-white bg-red-dark" data-bs-delay="1500" data-bs-autohide="true"><i class="fa fa-times me-3"></i>에러가 발생하여 신청이 불가합니다.</div>
   </div>
 </template>
 <script>
@@ -248,11 +294,13 @@ export default {
                 query: `
                 query GetDivingById($id: ID!) {
                     getDivingById(_id: $id) {
+                        _id
                         title
                         description
                         status
                         hostUser {
                             _id
+                            uid
                             nickName
                             scubaLicenseLevel
                             freeLicenseLevel
@@ -318,6 +366,7 @@ export default {
                         participants {
                             user {
                                 _id
+                                uid
                                 nickName
                             }
                             status
@@ -383,7 +432,63 @@ export default {
     }
   },
   methods: {
+      async joinDiving() {
+          console.log(this.divingData);
+          console.log(this.divingData._id);
+          const divingId = this.divingData._id;
+          var result = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                mutation Mutation($divingId: ID!) {
+                    joinDiving(divingId: $divingId) {
+                        success
+                        reason
+                    }
+                }
+                `,
+                variables: {
+                    divingId: divingId
+                }
+
+            }
+          });
+        
+          console.log(result);
+          var ret = (result.data && result.data.data && result.data.data.joinDiving) ? result.data.data.joinDiving : null;
+          console.log(ret);
+
+          if (ret != null) {
+              //Close Existing Opened Menus
+              const activeMenu = document.querySelectorAll('.menu-active');
+              for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
+
+
+              var menuData = 'menu-join-requested';
+              document.getElementById(menuData).classList.add('menu-active');
+              document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
+          } else {
+              var toastData = 'snackbar-join-error';
+              var notificationToast = document.getElementById(toastData);
+              var notificationToast = new bootstrap.Toast(notificationToast);
+              notificationToast.show();
+
+              //Close Existing Opened Menus
+              const activeMenu = document.querySelectorAll('.menu-active');
+              for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
+          }
+      },
       showReivewModal() {
+          //Close Existing Opened Menus
+          const activeMenu = document.querySelectorAll('.menu-active');
+          for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
+          
+          //var menuData = 'menu-join';
           var menuData = 'menu-rating';
           document.getElementById(menuData).classList.add('menu-active');
           document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
@@ -451,7 +556,6 @@ export default {
           if (_divingData == null) {
             this.is_empty = true;
           } else {
-            console.log(_divingData)
             this.divingData = _divingData;
             //console.log(this.divingData)
             /// 다이버 레벨 보여주기
@@ -468,7 +572,7 @@ export default {
             this.divingData.hostUser.levelShow += " 다이버";
             this.divingData.description = this.divingData.description.replace(/\n/gi, '<br/>');
             this.divingData.title = '';
-            console.log(this.divingData.startedAt);
+            
             var startedAt = new Date(this.divingData.startedAt);
             var finishedAt = new Date(this.divingData.finishedAt);
             if (this.divingData.startedAt == this.divingData.finishedAt) {
@@ -532,4 +636,13 @@ export default {
 .border-bottom {border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important}
 .evaluation {background-color: rgba(196,187,171,.2);justify-content: space-around;border-radius: 5px;padding:10px;}
 .wedive-textarea {min-height: 150px;border: 2px solid #e9e9e9;background: #f5f5f5;padding-left: 10px;padding-right: 10px;}
+.owner:after {content: '';
+    position: absolute;
+    bottom: 20px;
+    left: 60%;
+    width: 30px;
+    height: 30px;
+    background-image: url(/static/images/assets/crown_small.png);
+    background-repeat: no-repeat;
+    background-size: contain;}
 </style>

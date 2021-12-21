@@ -95,10 +95,37 @@
         
     </div>
 
+    <!-- DM 팝업 -->
+    <div id="menu-dm" 
+         class="menu menu-box-modal" 
+         data-menu-height="190" 
+         data-menu-width="370">
+        <div class="menu-title">
+            <h4 class="text-center mt-4 pt-1 mb-2 font-noto font-19">메시지 전송</h4>
+            <a href="#" class="close-menu hide"><i class="fa fa-times-circle"></i></a>
+        </div>
+        <div class="me-4 ms-4" style="border-bottom: 2px solid black;"></div>
+        <div class="content mt-3">
+            <p class="mb-4 font-noto">메시지를 입력하세요.</p>
+            <textarea class="wedive-textarea" placeholder="메시지" v-model="dm_text"></textarea>
+        </div>
+        
+        <div class="row m-0">
+            <div class="col-6 pe-1">
+                <a href="#" class="close-menu btn btn-m btn-full rounded-0 text-uppercase font-900 shadow-s bg-gray-dark">취소하기</a>
+            </div>
+            <div class="col-6 ps-1">
+                <a v-on:click="chatUser()" class="btn btn-m btn-full rounded-0 text-uppercase font-900 shadow-s bg-black">신청하기</a>
+            </div>
+        </div>
     </div>
 
 
+
+
+    </div>
     <!-- End of Page Content--> 
+    
     
     
   </div>
@@ -197,9 +224,45 @@ export default {
         rateDescription: '나쁘지 않아요.',
         review_detail: '',
         is_empty: false,
+        dm_text: '',
     }
   },
   methods: {
+      async chatUser() {
+          /*const userId = this.userData._id;
+          
+          var result = await axios({
+            url: 'https://chat.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                mutation Mutation($userId: String!, $input: String!) {
+                    postMessageToUser(userId: $userId, input: $input) {
+                        text
+                        attachments {
+                        imageUrl
+                        audioUrl
+                        videoUrl
+                        attachmentText
+                        }
+                    }
+                }
+                `,
+                variables: {
+                    "userId": userId,
+                    "input": null
+                }
+
+            }
+        });
+        
+        
+        var ret = (result.data && result.data.data && result.data.data.getJoinedRoomList) ? result.data.data.getJoinedRoomList : null*/
+      },
       showReivewModal() {
           var menuData = 'menu-rating';
           document.getElementById(menuData).classList.add('menu-active');
@@ -267,7 +330,7 @@ export default {
           if (_userData == null) {
               this.is_empty = true;
           } else {
-              this.userData = _userData;
+            this.userData = _userData;
             // 다이버 레벨 보여주기
             this.userData.levelShow = '초보';
             var scuba_level = ["초보", "오픈워터", "어드벤스드", "레스큐", "마스터", "강사"];

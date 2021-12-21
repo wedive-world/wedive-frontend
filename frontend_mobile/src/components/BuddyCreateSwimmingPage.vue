@@ -531,10 +531,10 @@ export default {
         const buddy_detail = this.buddy_detail;
         var participants = new Array();
         for (var i=0; i<parseInt($("#num_man").val()); i++) {
-            participants.push({"user": null, "status": "joined", "name": null, "birth": null, "gender": "m"});
+            participants.push({"user": null, "status": "joined", "name": null, "birth": null, "gender": "m", "status": "joined"});
         }
         for (var i=0; i<parseInt($("#num_woman").val()); i++) {
-            participants.push({"user": null, "status": "joined", "name": null, "birth": null, "gender": "f"});
+            participants.push({"user": null, "status": "joined", "name": null, "birth": null, "gender": "f", "status": "joined"});
         }
         const parti = participants;
 

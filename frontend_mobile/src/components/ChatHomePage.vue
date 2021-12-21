@@ -162,6 +162,68 @@
 <script>
 export default {
   name: 'HelloWorld',
+  async beforeRouteEnter(to, from, next) {
+    if (to.params.id != null) {
+        var result = await axios({
+            url: 'https://chat.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                query Query {
+                    getJoinedRoomList {
+                        _id
+                        type
+                        createdAt
+                        name
+                        lastMessageAt
+                        numOfmessages
+                        canLeave
+                        readOnly
+                        chatUsers {
+                        _id
+                        active
+                        name
+                        email
+                        avatarOrigin
+                        utcOffset
+                        }
+                        owner {
+                        _id
+                        active
+                        name
+                        email
+                        avatarOrigin
+                        utcOffset
+                        }
+                        lastChatMessage {
+                        _id
+                        text
+                        attachments {
+                            _id
+                            attachmentText
+                            imageUrl
+                            audioUrl
+                            videoUrl
+                        }
+                        }
+                    }
+                }
+                `,
+                variables: {
+                }
+
+            }
+        });
+        
+        
+        var ret = (result.data && result.data.data && result.data.data.getJoinedRoomList) ? result.data.data.getJoinedRoomList : null
+        next(vm => {vm.setData(ret)});
+    }
+  },
   mounted() {
     
     //$(".page-title").hide();
@@ -191,10 +253,12 @@ export default {
   },
   data () {
     return {
-        
+        chatData: {},
     }
   }, methods: {
-    
+    setData(_chatData) {
+        this.chatData = _chatData;
+    }
   }
 
   

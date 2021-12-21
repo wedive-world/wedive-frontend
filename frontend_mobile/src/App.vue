@@ -83,8 +83,8 @@
       </div>
 
     <div class="menu-hider"></div>
-    <div id="snackbar-error" class="snackbar-toast color-white bg-red-dark" data-bs-delay="1500" data-bs-autohide="true"><i class="fa fa-times me-3"></i>로그인에 실패하였습니다.</div>
-    <div id="snackbar-success" class="snackbar-toast color-white bg-green-dark" data-bs-delay="1500" data-bs-autohide="true"><i class="fa fa-times me-3"></i>{{nickName}}님 돌아와주셨군요!</div>
+    <div id="snackbar-login-error" class="snackbar-toast color-white bg-red-dark" data-bs-delay="1500" data-bs-autohide="true"><i class="fa fa-times me-3"></i>로그인에 실패하였습니다.</div>
+    <div id="snackbar-login-success" class="snackbar-toast color-white bg-green-dark" data-bs-delay="1500" data-bs-autohide="true"><i class="fa fa-times me-3"></i>{{nickName}}님 돌아와주셨군요!</div>
   </div>
 </template>
 
@@ -192,7 +192,7 @@ export default {
             this.nickName = localStorage.nickName;
 
             
-            var toastData = 'snackbar-success';
+            var toastData = 'snackbar-login-success';
             setTimeout(function() {
               var notificationToast = document.getElementById(toastData);
               var notificationToast = new bootstrap.Toast(notificationToast);
@@ -234,7 +234,7 @@ export default {
           
           console.log(errorCode)
           console.log(errorMessage)
-          var toastData = 'snackbar-error';
+          var toastData = 'snackbar-login-error';
           var notificationToast = document.getElementById(toastData);
           var notificationToast = new bootstrap.Toast(notificationToast);
           notificationToast.show();
