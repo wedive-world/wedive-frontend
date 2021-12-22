@@ -190,7 +190,6 @@ export default {
 
         var ret = null;
         if (result && result.data && result.data.data && result.data.data.getUserById) {ret = result.data.data.getUserById;}
-        console.log(ret)
         
         next(vm => {vm.setData(ret)});
     }

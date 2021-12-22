@@ -88,7 +88,7 @@
                 <p class="color-gray-dark mt-3 mb-0 font-12">관심 2 · 조회 31</p>
             </div>
             
-            <div class="content mt-0 pb-3 border-bottom">
+            <div v-if="divingData.participants" class="content mt-0 pb-3 border-bottom">
                 <h2 class="font-15 font-700 mb-3">참여인원 ({{ (divingData.participants.filter(member=> member.status == 'joined')) ? (divingData.participants.filter(member=> member.status == 'joined').length+1) : '' }})</h2>
                 
                 <div class="row text-center mb-1">
@@ -97,8 +97,22 @@
                         <p class="color-gray-dark mb-0 font-14">{{ (divingData.hostUser!=null&&divingData.hostUser.nickName!=null) ? divingData.hostUser.nickName : '비공개' }}</p>
                     </div>
                     <div class="col-3" v-for="participant in divingData.participants.filter(member=> member.status == 'joined')" v-on:click="goUserPage(participant.user)">
-                        <img class="inline-block" :src="'/static/images/assets/user_empty_'+participant.gender+'.png'" width="50" style="vertical-align: top;"/>
+                        <img class="inline-block" :src="(participant.profileImages && participant.profileImages.length>0 && participant.profileImages[0].thumbnailUrl) ? participant.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty_'+(participant.gender ? participant.gender : 'm')+'.png'" width="50" style="vertical-align: top;"/>
                         <p class="color-gray-dark mb-0 font-14">{{ (participant.user!=null&&participant.user.nickName!=null) ? participant.user.nickName : ((participant.name!=null) ? participant.name : '비공개') }}</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div v-if="divingData.hostUser && divingData.hostUser._id == userId && divingData.participants && (divingData.participants.filter(member=> member.status == 'applied')) " class="content mt-0 pb-3 border-bottom">
+                <h2 class="font-15 font-700 mb-3">신청인원 ({{ (divingData.participants.filter(member=> member.status == 'applied').length) }})</h2>
+                
+                <div class="row text-center mb-1">
+                    <div class="col-3" v-for="participant in divingData.participants.filter(member=> member.status == 'applied')">
+                        <div v-on:click="goUserPage(participant.user)">
+                            <img class="inline-block" :src="(participant.profileImages && participant.profileImages.length>0 && participant.profileImages[0].thumbnailUrl) ? participant.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty_'+(participant.gender ? participant.gender : 'm')+'.png'" width="50" style="vertical-align: top;"/>
+                            <p class="color-gray-dark mb-0 font-14">{{ (participant.user!=null&&participant.user.nickName!=null) ? participant.user.nickName : ((participant.name!=null) ? participant.name : '비공개') }}</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -128,14 +142,15 @@
 
         </div>
         
-        <div id="footer-bar-shop" class="d-flex" style="min-height: 52px !important;height: 52px !important;">
+        <div v-if="divingData.hostUser && divingData.hostUser._id != userId" id="footer-bar-shop" class="d-flex" style="min-height: 52px !important;height: 52px !important;">
         <div class="me-1 speach-icon">
             <div style="width: 52px;height: 52px;display: inline-block;position: relative;border-right:1px solid rgba(0, 0, 0, 0.08);">
               <i class="far fa-heart font-20" style="display: block;margin-top:16px;"></i>
             </div>
         </div>
         <div class="flex-fill speach-input p-2">
-          <a href="#" data-menu="menu-join" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0mb-5 font-noto">참여신청</a>
+          <a v-if="(divingData.participants.filter(member=> (member.status == 'applied' && member._id == userId))).length > 0" href="#" class="btn btn-full font-400 rounded-s shadow-l bg-gray-dark color-white bd-w-0mb-5 font-noto">참여신청</a>
+          <a v-else href="#" data-menu="menu-join" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0mb-5 font-noto">참여신청</a>
         </div>
     </div>
 
@@ -156,7 +171,7 @@
         </div>
         <div class="me-4 ms-4" style="border-bottom: 2px solid black;"></div>
         <div class="content mt-3">
-            <p class="mb-4 text-center font-noto">개설자가 수락하는 경우, 참여가 완료됩니다.</p>
+            <p class="mb-4 text-center font-noto">개설자가 수락하는 경우, 알림으로 안내드릴께요.</p>
         </div>
         
         <div class="row m-0">
@@ -368,6 +383,9 @@ export default {
                                 _id
                                 uid
                                 nickName
+                                profileImages {
+                                    thumbnailUrl
+                                }
                             }
                             status
                             name
@@ -429,6 +447,7 @@ export default {
         gender: localStorage.userGender,
         userThumbnail: localStorage.userThumbnail,
         is_empty: false,
+        userId: localStorage.userId,
     }
   },
   methods: {

@@ -869,10 +869,39 @@ export default {
 
 
         }
+        var result_find_user = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                    query Query($uid: ID!) {
+                    getUserByUid(uid: $uid) {
+                        _id
+                        nickName
+                        birthAge
+                        gender
+                    }
+                    }
+                `,
+                variables: {
+                    "uid": localStorage.uid
+                }
+            }
+        });
         
         
         var birthAge = (new Date()).getFullYear() - parseInt(this.userage) + 1;
         var input_temp = {"uid": localStorage.uid, "authProvider": localStorage.providerId, "oauthToken": localStorage.idToken, "email": localStorage.userEmail, "nickName": this.nickname, "name": localStorage.userName, "birthAge": birthAge, "gender": this.usersex, "interests": interest_list};
+
+        if (result_find_user.data.data.getUserByUid != null ) {
+            input_temp._id = result_find_user.data.data.getUserByUid._id;
+        }
+        
+
         if (this.scuba_license && this.scuba_license != '') input_temp.scubaLicenseType = this.scuba_license;
         if (this.scuba_level && this.scuba_level != '') input_temp.scubaLicenseLevel = this.scuba_level;
         if (this.free_license && this.free_license != '') input_temp.freeLicenseType = this.free_license;

@@ -154,78 +154,89 @@ export default {
           const credential = GoogleAuthProvider.credentialFromResult(result);
           const token = credential.accessToken;
           const user = result.user;
-
-          localStorage.userName = user.hasOwnProperty('displayName') ? user.displayName : "";
-          localStorage.providerId = user.providerId;
-          localStorage.userEmail = user.hasOwnProperty('email') ? user.email : "";
-          localStorage.idToken = token;
-          localStorage.uid = user.hasOwnProperty('uid') ? user.uid : "";
-          localStorage.loginAt = (new Date()).getTime();
-
-          var result = await axios({
-            url: 'https://api.wedives.com/graphql',
-            method: 'post',
-            headers: {
-                countrycode: 'ko',
-                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-            },
-            data: {
-                query: `
-                    query Query($uid: ID!) {
-                      getUserByUid(uid: $uid) {
-                        _id
-                        nickName
-                        birthAge
-                        gender
-                      }
-                    }
-                `,
-                variables: {
-                    "uid": localStorage.uid
-                }
-            }
-          });
-          if (result.data.data.getUserByUid != null) {
-            localStorage.nickName = result.data.data.getUserByUid.nickName;
-            localStorage.userId = result.data.data.getUserByUid._id;
-            localStorage.userGender = result.data.data.getUserByUid.gender;
-            this.nickName = localStorage.nickName;
-
+          user.getIdToken(/* forceRefresh */ true).then(async function(idToken) {
+            // Send token to your backend via HTTPS
             
-            var toastData = 'snackbar-login-success';
-            setTimeout(function() {
-              var notificationToast = document.getElementById(toastData);
-              var notificationToast = new bootstrap.Toast(notificationToast);
-              notificationToast.show();
-            },1000);
-            location.reload();
-          } else {
-            // 신규 아이디를 등록해준다.
-            var input_temp = {"uid": localStorage.uid, "authProvider": localStorage.providerId, "oauthToken": localStorage.idToken, "email": localStorage.userEmail, "name": localStorage.userName};
-            const ipt = input_temp;
             
-            var result2 = await axios({
-                url: 'https://api.wedives.com/graphql',
-                method: 'post',
-                headers: {
-                    countrycode: 'ko',
-                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-                },
-                data: {
-                    query: `
-                        mutation Mutation($input: UserInput) {
-                            upsertUser(input: $input) {
-                                _id
-                            }
+            localStorage.userName = user.hasOwnProperty('displayName') ? user.displayName : "";
+            localStorage.providerId = user.providerId;
+            localStorage.userEmail = user.hasOwnProperty('email') ? user.email : "";
+            localStorage.idToken = idToken;
+            console.log(localStorage.idToken);
+            localStorage.uid = user.hasOwnProperty('uid') ? user.uid : "";
+            console.log(localStorage.uid);
+            localStorage.loginAt = (new Date()).getTime();
+
+            var result = await axios({
+              url: 'https://api.wedives.com/graphql',
+              method: 'post',
+              headers: {
+                  countrycode: 'ko',
+                  idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+              },
+              data: {
+                  query: `
+                      query Query($uid: ID!) {
+                        getUserByUid(uid: $uid) {
+                          _id
+                          nickName
+                          birthAge
+                          gender
                         }
-                    `,
-                    variables: {
-                        "input": ipt
-                    }
-                }
+                      }
+                  `,
+                  variables: {
+                      "uid": localStorage.uid
+                  }
+              }
             });
-            location.href='/user_create';
-          }
+            if (result.data.data.getUserByUid != null ) {
+              localStorage.nickName = result.data.data.getUserByUid.nickName;
+              localStorage.userId = result.data.data.getUserByUid._id;
+              localStorage.userGender = result.data.data.getUserByUid.gender;
+              this.nickName = localStorage.nickName;
+
+              
+              var toastData = 'snackbar-login-success';
+              setTimeout(function() {
+                var notificationToast = document.getElementById(toastData);
+                var notificationToast = new bootstrap.Toast(notificationToast);
+                notificationToast.show();
+              },1000);
+              location.reload();
+            } else {
+              // 신규 아이디를 등록해준다.
+              var input_temp = {"uid": localStorage.uid, "authProvider": localStorage.providerId, "oauthToken": localStorage.idToken, "email": localStorage.userEmail, "name": localStorage.userName};
+              const ipt = input_temp;
+              
+              var result2 = await axios({
+                  url: 'https://api.wedives.com/graphql',
+                  method: 'post',
+                  headers: {
+                      countrycode: 'ko',
+                      idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                  },
+                  data: {
+                      query: `
+                          mutation Mutation($input: UserInput) {
+                              upsertUser(input: $input) {
+                                  _id
+                              }
+                          }
+                      `,
+                      variables: {
+                          "input": ipt
+                      }
+                  }
+              });
+              location.href='/user_create';
+            }
+
+            
+            // ...
+          }).catch(function(error) {
+            // Handle error
+          });
       }).catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
