@@ -160,10 +160,13 @@
   </div>
 </template>
 <script>
+const axios = require("axios")
+
 export default {
   name: 'HelloWorld',
   async beforeRouteEnter(to, from, next) {
-    if (to.params.id != null) {
+    console.log("1");
+    {
         var result = await axios({
             url: 'https://chat.wedives.com/graphql',
             method: 'post',

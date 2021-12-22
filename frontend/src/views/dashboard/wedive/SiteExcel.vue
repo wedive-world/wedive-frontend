@@ -20,7 +20,7 @@
     </vue-context>
     <b-button
         v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-        v-b-modal.modal-add
+        v-b-modal.modal-add2
         variant="outline-primary"
       >
       사이트 추가
@@ -44,7 +44,34 @@
       </vue-editable-grid>
     </div>
 
+    <b-modal
+      id="modal-add"
+      title="사이트 추가"
+      ok-only
+      ok-title="Add"
+      @ok="AddSite2"
+      ref="modal"
+    >
+      <b-row>
+        <b-col
+          md="6"
+          xl="6"
+          class="mb-1"
+        >
 
+          <b-form-group
+            label="추가 갯수"
+            label-for="addCount"
+          >
+            <b-form-input
+              id="addCount"
+              v-model="addCount"
+              placeholder="추가 갯수 (숫자만 입력)"
+            />
+          </b-form-group>
+        </b-col>
+      </b-row>
+    </b-modal>
 
     <b-modal
       id="modal-add"
@@ -148,6 +175,22 @@ const selectOptionsStatus = [
   {value: 'deleted', text: 'deleted'}
 ]
 
+function generateUUID() { // Public Domain/MIT
+    var d = new Date().getTime();//Timestamp
+    var d2 = ((typeof performance !== 'undefined') && performance.now && (performance.now()*1000)) || 0;//Time in microseconds since page-load or 0 if unsupported
+    return 'xxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random() * 16;//random number between 0 and 16
+        if(d > 0){//Use timestamp until depleted
+            r = (d + r)%16 | 0;
+            d = Math.floor(d/16);
+        } else {//Use microseconds since page-load if supported
+            r = (d2 + r)%16 | 0;
+            d2 = Math.floor(d2/16);
+        }
+        return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+    });
+}
+
 const columnDefinition = [
     { sortable: true, filter: true, field: 'publishStatus', headerName: '상태', editable: true, type: 'select', selectOptions: selectOptionsStatus },
     { sortable: true, filter: true, field: 'uniqueName', headerName: 'URL', editable: true },
@@ -217,6 +260,7 @@ export default {
       sites: [],
       points: [],
       
+      addCount: 1,
       uniqueName: '',
       name: '',
       latitude: '',
@@ -369,6 +413,27 @@ export default {
           buttonsStyling: false,
         })
       }*/
+    },
+    async AddSite2() {
+      var cnt = parseInt(this.addCount);
+      for (var i=0; i<cnt; i++) {
+        var uuid = generateUUID();
+        var i_input = {uniqueName: this.uniqueName.value, name: this.name.value, latitude: parseFloat(this.latitude), longitude: parseFloat(this.longitude)};
+        try {
+          await upsertDiveSite(i_input)
+        } catch (e) {
+          this.$swal({
+            title: 'Error!',
+            text: e,
+            icon: 'error',
+            customClass: {
+              confirmButton: 'btn btn-primary',
+            },
+            buttonsStyling: false,
+          })
+        }
+      }
+      //this.$apollo.mutate({mutation: CREATE_INTEREST, variables: {interestInput: i_input}}).then((data) => {console.log(data)}).catch((error) => {console.log(error);});
     },
     async AddSite() {
       var i_input = {uniqueName: this.uniqueName.value, name: this.name.value, latitude: parseFloat(this.latitude), longitude: parseFloat(this.longitude)};
