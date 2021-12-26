@@ -10,9 +10,9 @@
     </div>
     <div v-else class="card card-style ms-0 me-0 rounded-0">
         <div class="content">
-            <a href="/chat" class="d-block">
-                <div class="p-relative d-inline-block w-60 mb-2">
-                    <div class="user-img">
+            <a v-for="chat in chatData" :href="'/chat/'+chat._id" class="d-block">
+                <div v-if="chat.chatUsers.length == 2" class="p-relative d-inline-block w-60 mb-2">
+                    <div v-for="user in chat.charUsers" v-if="user._id != uid" class="user-img">
                         <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
                             <defs>
                             <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
@@ -20,63 +20,11 @@
                                 <use xlink:href="#shapeSquircle"/>
                             </clipPath>
                             </defs>
-                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="/static/images/user/yoon.jpg"/>
+                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(user.avatarOrigin)?user.avatarOrigin:'/static/empty.jpg'"/>
                         </svg>
                     </div>
                 </div>
-                <div class="ms-2 d-inline-block v-align-top">
-                    <h5 class="font-15 font-600 mb-0">윤민혁</h5>
-                    <p class="line-height-s opacity-60 font-13">안녕하세요 화이팅해서 열심히 만들어봐요.</p>
-                </div>
-                <div class="latest">어제</div>
-            </a>
-            <div class="divider mb-2"></div>
-            <a href="/chat" class="d-block">
-                <div class="p-relative d-inline-block w-60 mb-2">
-                    <div class="user-img">
-                        <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
-                            <defs>
-                            <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
-                            <clipPath id="clipSquircle">
-                                <use xlink:href="#shapeSquircle"/>
-                            </clipPath>
-                            </defs>
-                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="/static/images/user/song.jpg"/>
-                        </svg>
-                    </div>
-                </div>
-                <div class="ms-2 d-inline-block v-align-top">
-                    <h5 class="font-15 font-600 mb-0">송현일</h5>
-                    <p class="line-height-s opacity-60 font-13">저도 진짜 열심히 할께요.<br/>다이어트도 해야할꺼같아요.</p>
-                </div>
-                <div class="latest">9월 22일</div>
-            </a>
-            <div class="divider mb-2"></div>
-            <a href="/chat" class="d-block">
-                <div class="p-relative d-inline-block w-60 mb-2">
-                    <div class="user-img">
-                        <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
-                            <defs>
-                            <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
-                            <clipPath id="clipSquircle">
-                                <use xlink:href="#shapeSquircle"/>
-                            </clipPath>
-                            </defs>
-                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="/static/images/user/jang.jpg"/>
-                        </svg>
-                    </div>
-                </div>
-                <div class="ms-2 d-inline-block v-align-top">
-                    <h5 class="font-15 font-600 mb-0">장성환</h5>
-                    <p class="line-height-s opacity-60 font-13">끝이 보입니다 화이팅</p>
-                </div>
-                <div class="latest">9월 20일</div>
-            </a>
-            <div class="divider mb-2"></div>
-            
-            
-            <a href="/chat" class="d-block">
-                <div class="p-relative d-inline-block w-60 mb-2">
+                <div v-else-if="chat.chatUsers.length == 3" class="p-relative d-inline-block w-60 mb-2">
                     <div class="user-img img-sm">
                         <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
                             <defs>
@@ -100,16 +48,7 @@
                         </svg>
                     </div>
                 </div>
-                <div class="ms-2 d-inline-block v-align-top">
-                    <h5 class="font-15 font-600 mb-0">윤장송<span class="color-gray-light-mid font-400 ms-2">3</span></h5>
-                    <p class="line-height-s opacity-60 font-13">현일아 일하자</p>
-                </div>
-                <div class="latest">오후 6:31</div>
-            </a>
-            <div class="divider mb-2"></div>
-
-            <a href="/chat" class="d-block">
-                <div class="p-relative d-inline-block w-60 mb-2">
+                <div v-else class="p-relative d-inline-block w-60 mb-2">
                     <div class="user-img img-xs">
                         <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
                             <defs>
@@ -156,6 +95,27 @@
                     </div>
                 </div>
                 <div class="ms-2 d-inline-block v-align-top">
+                    <h5 class="font-15 font-600 mb-0">장성환</h5>
+                    <p class="line-height-s opacity-60 font-13">끝이 보입니다 화이팅</p>
+                </div>
+                <div class="latest">9월 20일</div>
+            </a>
+            <div class="divider mb-2"></div>
+            
+            
+            <a href="/chat" class="d-block">
+                
+                <div class="ms-2 d-inline-block v-align-top">
+                    <h5 class="font-15 font-600 mb-0">윤장송<span class="color-gray-light-mid font-400 ms-2">3</span></h5>
+                    <p class="line-height-s opacity-60 font-13">현일아 일하자</p>
+                </div>
+                <div class="latest">오후 6:31</div>
+            </a>
+            <div class="divider mb-2"></div>
+
+            <a href="/chat" class="d-block">
+                
+                <div class="ms-2 d-inline-block v-align-top">
                     <h5 class="font-15 font-600 mb-0">위다이브<span class="color-gray-light-mid font-400 ms-2">4</span></h5>
                     <p class="line-height-s opacity-60 font-13">팀 위다이브 영원하라</p>
                 </div>
@@ -193,12 +153,12 @@ export default {
                         canLeave
                         readOnly
                         chatUsers {
-                        _id
-                        active
-                        name
-                        email
-                        avatarOrigin
-                        utcOffset
+                            _id
+                            active
+                            name
+                            email
+                            avatarOrigin
+                            utcOffset
                         }
                         owner {
                         _id
@@ -268,6 +228,7 @@ export default {
         idToken: localStorage.idToken,
         nickName: localStorage.nickName,
         login_word : (localStorage.idToken == null) ? '로그인' : '프로필 등록',
+        uid: localStorage.uid,
     }
   }, methods: {
     setData(_chatData) {

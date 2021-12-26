@@ -319,7 +319,7 @@ export default {
             }
         });
         
-        
+        this.sendText = '';
         var ret = (result.data && result.data.data && result.data.data.getJoinedRoomList) ? result.data.data.getJoinedRoomList : null
     }
   }

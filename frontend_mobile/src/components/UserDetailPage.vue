@@ -25,7 +25,7 @@
             </div>
             <div class="row m-0">
                 <div class="col-6 pe-1">
-                    <a href="#" class="btn btn-border btn-m btn-full text-uppercase font-900 border-gray-dark color-black bg-theme" style="padding: 6px 0 !important;">대화하기</a>
+                    <a v-on:click="sendDirectMessage()" class="btn btn-border btn-m btn-full text-uppercase font-900 border-gray-dark color-black bg-theme" style="padding: 6px 0 !important;">대화하기</a>
                 </div>
                 <div class="col-6 ps-1">
                     <a href="#" class="btn btn-border btn-m btn-full text-uppercase font-900 border-gray-dark color-black bg-theme" style="padding: 6px 0 !important;">평가하기</a>
@@ -227,10 +227,9 @@ export default {
     }
   },
   methods: {
-      async chatUser() {
-          /*const userId = this.userData._id;
-          
-          var result = await axios({
+      async sendDirectMessage() {
+        const message = this.sendText;
+        var result = await axios({
             url: 'https://chat.wedives.com/graphql',
             method: 'post',
             headers: {
@@ -241,26 +240,21 @@ export default {
                 query: `
                 mutation Mutation($userId: String!, $input: String!) {
                     postMessageToUser(userId: $userId, input: $input) {
+                        _id
                         text
-                        attachments {
-                        imageUrl
-                        audioUrl
-                        videoUrl
-                        attachmentText
-                        }
                     }
                 }
                 `,
                 variables: {
-                    "userId": userId,
-                    "input": null
+                    "userId": "jOdIDk2TuGe88mHscllU2sdj7p22",
+                    "input": message
                 }
 
             }
         });
         
-        
-        var ret = (result.data && result.data.data && result.data.data.getJoinedRoomList) ? result.data.data.getJoinedRoomList : null*/
+        this.sendText = '';
+        var ret = (result.data && result.data.data && result.data.data.getJoinedRoomList) ? result.data.data.getJoinedRoomList : null
       },
       showReivewModal() {
           var menuData = 'menu-rating';
