@@ -100,7 +100,6 @@ export default {
                         email
                         emailVerified
                         phoneNumber
-                        instructorTypes
                         profileImages {
                         _id
                         thumbnailUrl

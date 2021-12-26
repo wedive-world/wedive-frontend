@@ -28,10 +28,10 @@
                                 <div style="display: inline-block;">간단한 프로필을 등록해주시면,<br/>더 정확하게 버디와 관심장소를 추천해드려요.</div>
                             </div>
                             <div class="text-center mt-5 mb-3">
-                                <div id="file-upload1-back" style="width: 150px;height:150px;display: inline-block;background: #e7e7e7;position: relative;border-radius:75px;background-size:cover;">
+                                <div id="file-upload1-back" style="width: 150px;height:150px;display: inline-block;background: #c7c7c7;position: relative;border-radius:75px;background-size:cover;">
                                     <input type="file" @change="imageUserChange" id="file-upload1" class="upload-file text-center" accept="image/*" style="height: 150px;">
                                     <p class="upload-file-text" style="color: #abb7ba;position:absolute;left:40px;top:76px;">
-                                        <img id="file-upload1-img" src="/static/images/assets/icon_image.png" width="70"></img>
+                                        <img id="file-upload1-img" src="/static/images/assets/icon_image2.png" width="80"></img>
                                     </p></input>
                                 </div>
                             </div>
@@ -542,8 +542,7 @@
             <a href="#" v-on:click="addPersonalBest()" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0">추가하기</a>
         </div>
     </div>
-
-
+    
     <div id="snackbar-inputerror" class="snackbar-toast color-white bg-red-dark" data-bs-delay="3000" data-bs-autohide="true"><i class="fa fa-times me-3"></i>모든 항목을 입력해주세요.</div>
 
 
@@ -927,7 +926,6 @@ export default {
                             instructorLicenseImages {
                                 _id
                             }
-                            instructorTypes
                             scubaLicenseType
                             scubaLicenseLevel
                             freeLicenseType

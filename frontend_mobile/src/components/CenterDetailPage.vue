@@ -663,17 +663,19 @@
                 </div>
             </div>
             <div class="divider mt-2 mb-2 ms-3 me-3"></div>
-            <div class="star-area mt-4 text-center">
-                <i class="fa fa-star font-20 color-gray-light"></i>
-                <i class="fa fa-star font-20 color-gray-light"></i>
-                <i class="fa fa-star font-20 color-gray-light"></i>
-                <i class="fa fa-star font-20 color-gray-light"></i>
-                <i class="fa fa-star font-20 color-gray-light"></i>
-            </div>
-            <div class="text-center color-gray mt-2 mb-3">이 다이빙 센터는 어떠셨나요?</div>
-            <div class="me-4 ms-4" style="margin-bottom: 34px;background: rgba(58, 58, 58, 0.03);padding: 10px 20px;border-radius: 4px;">
-                <p class="mb-0" style="color: rgba(58, 58, 58, 0.6)">다른 다이버들에게 도움이 되어보세요.</p>
-                <p class="mb-0 color-highlight">지금 리뷰남기기 <i class="fas fa-chevron-right ms-1"></i></p>
+            <div data-menu="menu-review">
+                <div class="star-area mt-4 text-center">
+                    <i class="fa fa-star font-20 color-gray-light"></i>
+                    <i class="fa fa-star font-20 color-gray-light"></i>
+                    <i class="fa fa-star font-20 color-gray-light"></i>
+                    <i class="fa fa-star font-20 color-gray-light"></i>
+                    <i class="fa fa-star font-20 color-gray-light"></i>
+                </div>
+                <div class="text-center color-gray mt-2 mb-3">이 다이빙 센터는 어떠셨나요?</div>
+                <div class="me-4 ms-4" style="margin-bottom: 34px;background: rgba(58, 58, 58, 0.03);padding: 10px 20px;border-radius: 4px;">
+                    <p class="mb-0" style="color: rgba(58, 58, 58, 0.6)">다른 다이버들에게 도움이 되어보세요.</p>
+                    <p class="mb-0 color-highlight">지금 리뷰남기기 <i class="fas fa-chevron-right ms-1"></i></p>
+                </div>
             </div>
         </div>
 
@@ -832,10 +834,64 @@
         </div>
     </div>
 
+
+    <!-- 리뷰 팝업 -->
+    <div id="menu-review" 
+         class="menu menu-box-modal" 
+         data-menu-height="470" 
+         data-menu-width="370">
+        <div class="menu-title">
+            <h4 class="text-center mt-4 pt-1 mb-2 font-noto font-19">{{ centerData.name }} 리뷰</h4>
+            <a href="#" class="close-menu hide"><i class="fa fa-times-circle"></i></a>
+        </div>
+        <div class="me-4 ms-4" style="border-bottom: 2px solid black;"></div>
+        <div class="content mt-3">
+            <div class="text-center mt-3">
+                <star-rating @rating-selected="setRating" text-class="hide" :rating="3" v-bind:star-size="30" :padding="5" :rounded-corners="true" :star-points="[23,2, 14,17, 0,19, 10,34, 7,50, 23,43, 38,50, 36,34, 46,19, 31,17]" style="display: inline-block;"></star-rating>
+            </div>
+            <div class="text-center color-gray mt-1 mb-2" v-html="rateDescription"></div>
+        </div>
+        <div class="content mt-0">
+            <div>
+                <div id="file-upload1-back" style="width: 80px;height:80px;display: inline-block;background: #c7c7c7;position: relative;border-radius:75px;background-size:cover;">
+                    <input type="file" @change="addImage1" id="file-upload1" class="upload-file text-center" accept="image/*" style="height: 80px;">
+                    <p class="upload-file-text" style="color: #abb7ba;position:absolute;left:18px;top:55px;">
+                        <img id="file-upload1-img" src="/static/images/assets/icon_image2.png" width="50"></img>
+                    </p></input>
+                </div>
+                <div id="file-upload2-back" class="hide ms-2" style="width: 80px;height:80px;display: inline-block;background: #c7c7c7;position: relative;border-radius:75px;background-size:cover;">
+                    <input type="file" @change="addImage2" id="file-upload2" class="upload-file text-center" accept="image/*" style="height: 80px;">
+                    <p class="upload-file-text" style="color: #abb7ba;position:absolute;left:18px;top:55px;">
+                        <img id="file-upload2-img" src="/static/images/assets/icon_image2.png" width="50"></img>
+                    </p></input>
+                </div>
+                <div id="file-upload3-back" class="hide ms-2" style="width: 80px;height:80px;display: inline-block;background: #c7c7c7;position: relative;border-radius:75px;background-size:cover;">
+                    <input type="file" @change="addImage3" id="file-upload3" class="upload-file text-center" accept="image/*" style="height: 80px;">
+                    <p class="upload-file-text" style="color: #abb7ba;position:absolute;left:18px;top:55px;">
+                        <img id="file-upload3-img" src="/static/images/assets/icon_image2.png" width="50"></img>
+                    </p></input>
+                </div>
+            </div>
+            <div class="input-style validate-field mt-3">
+                <textarea class="wedive-textarea" placeholder="의견을 자유롭게 적어주세요." v-model="review_detail"></textarea>
+            </div>
+        </div>
+
+        <div class="row m-0">
+            <div class="col-6 pe-1">
+                <a href="#" class="close-menu btn btn-m btn-full rounded-0 text-uppercase font-900 shadow-s bg-gray-dark">취소</a>
+            </div>
+            <div class="col-6 ps-1">
+                <a href="#" class="btn btn-m btn-full rounded-0 text-uppercase font-900 shadow-s bg-black">리뷰등록</a>
+            </div>
+        </div>
+    </div>
+
     
   </div>
 </template>
 <script>
+import StarRating from 'vue-star-rating'
 const axios = require("axios")
 
 export default {
@@ -1327,6 +1383,9 @@ export default {
     }
 
   },
+  components: {
+    StarRating
+  },
   data () {
     return {
         map: null,
@@ -1337,6 +1396,9 @@ export default {
         equipt_list: ["마스크", "레귤레이터", "다이버 PC", "다이버 워치", "나침반", "수중 스쿠터", "산소탱크", "핀", "구명조끼", "나이프", "스노클링", "부츠", "잠수복 상의", "잠수복 하의", "라이트", "스쿠버 세트", "카메라", "수심계", , "게이지", "잠수복", , "풀세트", "유아장비"],
         rentalOptions: ["스킨스쿠버 세트", "스킨 세트", "마스크", "스노클", "잠수복", "오리발(핀)", "부츠", "장갑", "부츠&장갑", "웨이트&벨트", "웨이트", "스쿠버 세트", "부력조절기", "레귤레이터", "보조호흡기", "SMB", "공기통", "나이트록스", "라이트", "다이브컴퓨터", "카메라", "DPV", "조류걸이", "프리 세트", "프리 핀", "프리 마스크", "프리 스노클", "프리 잠수복", "프리 웨이트&벨트", "프리 웨이트", "바텀웨이트", "랜야드", "부이", "로프", "부이&로프", "고정부이"],
         imageCategory: ["다이빙", "교육", "센터"],
+        rating: 3,
+        rateDescription: '나쁘지 않아요.',
+        review_detail: '',
     }
   }, methods: {
       setData(_centerData) {
@@ -1346,8 +1408,59 @@ export default {
             var preloader = document.getElementById('preloader')
             if(preloader){preloader.classList.add('preloader-hide');}
           }, 1000);
+      },
+      addImage1({ target: { files = [] } }) {
+        if (!files.length) {
+          return
+        }
+        this.file_photo = files[0];
+        $("#file-upload1-back").css("background", "url(" + URL.createObjectURL(this.file_photo) + ")");
+        $("#file-upload1-back").css("background-size", "cover");
+        $("#file-upload1-img").hide();
 
-          
+        $("#file-upload2-back").removeClass("hide");
+      },
+      addImage2({ target: { files = [] } }) {
+        if (!files.length) {
+          return
+        }
+        this.file_photo = files[0];
+        $("#file-upload2-back").css("background", "url(" + URL.createObjectURL(this.file_photo) + ")");
+        $("#file-upload2-back").css("background-size", "cover");
+        $("#file-upload2-img").hide();
+
+        $("#file-upload3-back").removeClass("hide");
+      },
+      addImage3({ target: { files = [] } }) {
+        if (!files.length) {
+          return
+        }
+        this.file_photo = files[0];
+        $("#file-upload3-back").css("background", "url(" + URL.createObjectURL(this.file_photo) + ")");
+        $("#file-upload3-back").css("background-size", "cover");
+        $("#file-upload3-img").hide();
+      },
+      setRating(rating) {
+          //this.rating = rating;
+          switch ((rating+"")) {
+              case '1':
+                this.rateDescription = '매우 아쉬워요';
+              break;
+              case '2':
+                this.rateDescription = '아쉬워요';
+              break;
+              case '3':
+                this.rateDescription = '나쁘지 않아요.';
+              break;
+              case '4':
+                this.rateDescription = '만족해요!';
+              break;
+              case '5':
+                this.rateDescription = '매우 만족해요!';
+              break;
+              default:
+              break;
+          }  
       },
       goCourse: function() {
           location.href='/course';
@@ -1468,4 +1581,5 @@ export default {
 .wedive-comment-desc {padding-left: 30px;}
 .hori-line {border: 1px solid silver;width: 10px;padding: 0;margin-left: 16px;margin-top: 10px;}
 .right-icon {position: absolute;top: 10px;width: 15px;text-align: center;right: 0px;opacity: 0.3;}
+.wedive-textarea {min-height: 150px;border: 2px solid #e9e9e9;background: #f5f5f5;padding-left: 10px;padding-right: 10px;}
 </style>

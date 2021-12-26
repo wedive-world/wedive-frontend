@@ -176,7 +176,7 @@
         
         <div class="row m-0">
             <div class="col-6 pe-1">
-                <a href="#" class="close-menu btn btn-m btn-full rounded-0 text-uppercase font-900 shadow-s bg-gray-dark">취소하기</a>
+                <a href="#" class="close-menu btn btn-m btn-full rounded-0 text-uppercase font-900 shadow-s bg-gray-dark">취소</a>
             </div>
             <div class="col-6 ps-1">
                 <a v-on:click="joinDiving()" class="btn btn-m btn-full rounded-0 text-uppercase font-900 shadow-s bg-black">신청하기</a>
@@ -319,7 +319,6 @@ export default {
                             nickName
                             scubaLicenseLevel
                             freeLicenseLevel
-                            instructorTypes
                             profileImages {
                                 thumbnailUrl
                             }
