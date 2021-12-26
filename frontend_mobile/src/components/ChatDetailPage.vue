@@ -28,193 +28,38 @@
     
     <div class="card card-style ms-0 me-0 rounded-0 mt-5 mb-5" style="background-image: url(/static/images/assets/paper_back.jpg);background-size: contain; background-repeat: repeat;">
         <div class="content">
-            <div>
-                <div class="p-relative d-inline-block w-60 float-left">
-                    <div class="user-img">
-                        <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
-                            <defs>
-                            <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
-                            <clipPath id="clipSquircle">
-                                <use xlink:href="#shapeSquircle"/>
-                            </clipPath>
-                            </defs>
-                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="/static/images/user/yoon.jpg"/>
-                        </svg>
+            <div v-for="chat in chatData">
+                <div v-if="chat.author._id == uid" class="speech-left">
+                    <div class="speech-bubble bg-highlight">
+                        {{ chat.text }}
+                    </div>
+                    <span class="time">{{ chat.showAt }}</span>
+                </div>
+                <div v-else>
+                    <div class="p-relative d-inline-block w-60 float-left">
+                        <div class="user-img">
+                            <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                                <defs>
+                                <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                                <clipPath id="clipSquircle">
+                                    <use xlink:href="#shapeSquircle"/>
+                                </clipPath>
+                                </defs>
+                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(chat.author.avatarOrigin)?chat.author.avatarOrigin:'/static/empty_user.jpg'"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="speech-right">
+                        <div class="font-12 ms-1">{{ chat.author.name }}</div>
+                        <div class="speech-bubble color-black">
+                            {{ chat.text }}
+                        </div>
+                        <span class="time">{{ chat.showAt }}</span>
                     </div>
                 </div>
-                <div class="speech-right">
-                    <div class="font-12 ms-1">윤민혁</div>
-                    <div class="speech-bubble color-black">
-                        이 프로젝트는 언제 끝나나요?
-                    </div>
-                    <span class="time">오후 5:27</span>
-                </div>
+                
+                <div class="clearfix"></div>
             </div>
-            <div class="clearfix"></div>
-            <div class="speech-left">
-                <div class="speech-bubble bg-highlight">
-                    그러게
-                </div>
-                <span class="time">오후 5:28</span>
-            </div>
-            <div class="clearfix"></div>
-            <div class="speech-left">
-                <div class="speech-bubble bg-highlight">
-                    언제 끝나려나
-                </div>
-                <span class="time">오후 5:29</span>
-            </div>
-            <div class="clearfix"></div>
-            <div>
-                <div class="p-relative d-inline-block w-60 float-left">
-                    <div class="user-img">
-                        <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
-                            <defs>
-                            <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
-                            <clipPath id="clipSquircle">
-                                <use xlink:href="#shapeSquircle"/>
-                            </clipPath>
-                            </defs>
-                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="/static/images/user/song.jpg"/>
-                        </svg>
-                    </div>
-                </div>
-                <div class="speech-right">
-                    <div class="font-12 ms-1">송현일</div>
-                    <div class="speech-bubble color-black">
-                        괜찮아~ 그냥 하면 다 할 수 있어
-                    </div>
-                    <span class="time">오후 11:51</span>
-                </div>
-            </div>
-            <div class="clearfix"></div>
-            <p class="text-center mt-1 mb-2 font-11">2021년 9월 22일 (수)</p>
-            <div class="clearfix"></div>
-            <div class="speech-left">
-                <div class="speech-bubble bg-highlight">
-                    그럼 너가 열심히 쫌 해봐봐
-                </div>
-                <span class="time">오전 12:01</span>
-            </div>
-            <div class="clearfix"></div>
-            <div class="speech-left">
-                <div class="speech-bubble speach-image bg-highlight">
-                    <img class="img-fluid preload-img" src="/static/images/assets/empty.png" data-src="/static/images/diving_advanced.jpg" alt="img">
-                </div>
-                <span class="time">오전 12:05</span>
-            </div>
-            <div class="clearfix"></div>
-            <div class="speech-left bg-transparent">
-                <div class="speech-bubble speach-image">
-                    <img class="img-fluid preload-img" src="/static/images/assets/empty.png" data-src="/static/images/imogi.png" alt="img" height="120" style="object-fit: contain;">
-                </div>
-                <span class="time">오전 12:05</span>
-            </div>
-
-
-
-
-            
-            <div class="clearfix"></div>
-            <div>
-                <div class="p-relative d-inline-block w-60 float-left">
-                    <div class="user-img">
-                        <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
-                            <defs>
-                            <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
-                            <clipPath id="clipSquircle">
-                                <use xlink:href="#shapeSquircle"/>
-                            </clipPath>
-                            </defs>
-                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="/static/images/user/yoon.jpg"/>
-                        </svg>
-                    </div>
-                </div>
-                <div class="speech-right">
-                    <div class="font-12 ms-1">윤민혁</div>
-                    <div class="speech-bubble color-black">
-                        현일이형 같이 노력해봐요~
-                    </div>
-                    <span class="time">오전 12:19</span>
-                </div>
-            </div>
-            <div class="clearfix"></div>
-            <div>
-                <div class="p-relative d-inline-block w-60 float-left">
-                    <div class="user-img">
-                        <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
-                            <defs>
-                            <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
-                            <clipPath id="clipSquircle">
-                                <use xlink:href="#shapeSquircle"/>
-                            </clipPath>
-                            </defs>
-                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="/static/images/user/yoon.jpg"/>
-                        </svg>
-                    </div>
-                </div>
-                <div class="speech-right">
-                    <div class="font-12 ms-1">윤민혁</div>
-                    <div class="speech-bubble color-black">
-                        그건그렇고 채팅에 영상도 지원될까요?
-                    </div>
-                    <span class="time">오전 12:21</span>
-                </div>
-            </div>
-            <div class="clearfix"></div>
-            <div class="speech-left" style="width:260px;max-width:260px;">
-                <div class="speech-bubble speach-image bg-highlight">
-                    <iframe src='https://www.youtube.com/embed/grtqJsO_hb0' frameborder='0' allowfullscreen width="280" height="146"></iframe>
-                </div>
-            </div>
-
-            
-            <div class="clearfix"></div>
-            <div class="speech-left">
-                <div class="speech-bubble bg-highlight">
-                    당연히 다 해놨지
-                </div>
-                <span class="time">오전 12:21</span>
-            </div>
-            <div class="clearfix"></div>
-            <p class="text-center mt-1 mb-2 font-11">2021년 9월 24일 (금)</p>
-            <div>
-                <div class="p-relative d-inline-block w-60 float-left">
-                    <div class="user-img">
-                        <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
-                            <defs>
-                            <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
-                            <clipPath id="clipSquircle">
-                                <use xlink:href="#shapeSquircle"/>
-                            </clipPath>
-                            </defs>
-                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="/static/images/user/yoon.jpg"/>
-                        </svg>
-                    </div>
-                </div>
-                <div class="speech-right">
-                    <div class="font-12 ms-1">윤민혁</div>
-                    <div class="speech-bubble color-black">
-                        와 그럼 이제 현일이형이 좀 달려주면 되겠네요~ 현일이형 화이팅 입니다.
-                    </div>
-                    <span class="time">오전 12:25</span>
-                </div>
-            </div>
-            <div class="clearfix"></div>
-            <div class="speech-left">
-                <div class="speech-bubble bg-highlight">
-                    현일아 보고 있는거니?
-                </div>
-                <span class="time">오후 7:38</span>
-            </div>
-            <div class="clearfix"></div>
-            <div class="speech-left">
-                <div class="speech-bubble bg-highlight">
-                    현일아 일하자
-                </div>
-                <span class="time">오후 7:41</span>
-            </div>			
-            <div class="clearfix"></div>
             
         </div>
 
@@ -257,13 +102,28 @@
 </template>
 <script>
 const axios = require("axios")
+var today = new Date();
+function timeForToday(value) {
+    const timeValue = new Date(value);
+    const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
+    if (betweenTime < 1) return '방금전';
+    else if (betweenTime < 6) {
+        return `${betweenTime}분전`;
+    }
+    else {
+        var hour = timeValue.getHours();
+        if (hour < 12) hour = "오전 " + hour
+        else hour = "오후 " + (hour-12);
+        return hour + ":" + timeValue.getMinutes();
+    }
+ }
 
 export default {
   name: 'HelloWorld',
   async beforeRouteEnter(to, from, next) {
     if (to.params.id != null) {
         var result = await axios({
-            url: 'https://api.wedives.com/graphql',
+            url: 'https://chat.wedives.com/graphql',
             method: 'post',
             headers: {
                 countrycode: 'ko',
@@ -276,8 +136,9 @@ export default {
                         _id
                         text
                         author {
-                        name
-                        avatarOrigin
+                            _id
+                            name
+                            avatarOrigin
                         }
                         createdAt
                     }
@@ -291,9 +152,9 @@ export default {
             });
 
         var ret = null;
-        if (result && result.data && result.data.data && result.data.data.getUserById) {ret = result.data.data.getUserById;}
+        if (result && result.data && result.data.data && result.data.data.getMessagesByRoomIdSinceUpdated) {ret = result.data.data.getMessagesByRoomIdSinceUpdated;}
         
-        next(vm => {vm.setData(ret)});
+        next(vm => {vm.setData(ret, to.params.id)});
     }
   },
   mounted() {
@@ -327,10 +188,20 @@ export default {
   data () {
     return {
         sendText: '',
+        chatData: [],
+        roomId: '',
+        uid: localStorage.uid,
     }
   }, methods: {
+    setData(chatData, roomId) {
+        this.chatData = chatData;
+        this.chatData.reverse();
+        this.chatData.forEach(chat => chat.showAt = timeForToday(chat.createdAt))
+        this.roomId = roomId;
+    },
     async sendMessage() {
         const message = this.sendText;
+        const roomId = this.roomId;
         var result = await axios({
             url: 'https://chat.wedives.com/graphql',
             method: 'post',
@@ -347,15 +218,15 @@ export default {
                     }
                 `,
                 variables: {
-                    "roomId": to.params.id,
+                    "roomId": roomId,
                     "input": message
                 }
-
             }
         });
         
         this.sendText = '';
         var ret = (result.data && result.data.data && result.data.data.getJoinedRoomList) ? result.data.data.getJoinedRoomList : null
+        location.reload();
     }
   }
 

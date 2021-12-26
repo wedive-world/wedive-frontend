@@ -100,7 +100,7 @@
 
 <script>
 import  VueBottomSheet from "@webzlodimir/vue-bottom-sheet";
-import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+import { GoogleAuthProvider, getAuth, signInWithPopup, onAuthStateChanged  } from "firebase/auth";
 const axios = require("axios")
 
 export default {
@@ -164,6 +164,18 @@ export default {
     goHome: function() {
         window.location.href="/";
     },
+    getFirebaseToken() {
+      const auth = getAuth();
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          localStorage.uid = user.uid;
+          localStorage.idToken = await user.getIdToken(true);
+          console.log("get token = " + localStorage.idToken);
+        } else {
+          console.log("signed out");
+        }
+      });
+    },
     loginGoogle: function() {
       const provider = new GoogleAuthProvider();
       const auth = getAuth();
@@ -174,7 +186,7 @@ export default {
           const credential = GoogleAuthProvider.credentialFromResult(result);
           const token = credential.accessToken;
           const user = result.user;
-          var idToken = await user.getIdToken(true);
+          var idToken = await user.getIdToken(false);
           localStorage.userName = user.hasOwnProperty('displayName') ? user.displayName : "";
           localStorage.providerId = user.providerId;
           localStorage.userEmail = user.hasOwnProperty('email') ? user.email : "";
