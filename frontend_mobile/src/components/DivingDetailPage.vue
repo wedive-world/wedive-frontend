@@ -9,8 +9,8 @@
     
     <div :class="'page-content p-0' + (is_empty ? '' : ' hide')">
         <div class="card mb-0" style="height: calc(100vh - 60px);display: inline-block;text-align: center;width:100%;">
-            <img src="/static/images/assets/empty_list2.jpg" width="80%" style="margin-top:100px;"/>
-            <p class="font-noto">앗! 찾을 수 없는 버디찾기 입니다.<br/>
+            <img src="/static/images/assets/empty_list2.jpg" width="60%" style="margin-top:25%;"/>
+            <p class="font-noto color-gray">앗! 찾을 수 없는 버디찾기 입니다.<br/>
             <a href="/buddy_home" class="slider-next btn font-400 font-12 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3 pe-4 ps-4 mt-2">다이빙 리스트로 돌아가기</a></p>
         </div>
     </div>
@@ -110,7 +110,7 @@
                 <div class="row text-center mb-1">
                     <div class="col-3" v-for="participant in divingData.participants.filter(member=> member.status == 'applied')">
                         <div v-on:click="goUserPage(participant.user)">
-                            <img class="inline-block" :src="(participant.profileImages && participant.profileImages.length>0 && participant.profileImages[0].thumbnailUrl) ? participant.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty_'+(participant.gender ? participant.gender : 'm')+'.png'" width="50" style="vertical-align: top;"/>
+                            <img class="inline-block circular_image" :src="(participant.user && participant.user.profileImages && participant.user.profileImages.length>0 && participant.user.profileImages[0].thumbnailUrl) ? participant.user.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty_'+(participant.gender ? participant.gender : 'm')+'.png'" width="50" style="vertical-align: top;"/>
                             <p class="color-gray-dark mb-0 font-14">{{ (participant.user!=null&&participant.user.nickName!=null) ? participant.user.nickName : ((participant.name!=null) ? participant.name : '비공개') }}</p>
                         </div>
                     </div>

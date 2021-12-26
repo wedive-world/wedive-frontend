@@ -172,8 +172,7 @@ const axios = require("axios")
 export default {
   name: 'HelloWorld',
   async beforeRouteEnter(to, from, next) {
-    console.log("1");
-    {
+    if (localStorage.idToken) {
         var result = await axios({
             url: 'https://chat.wedives.com/graphql',
             method: 'post',
@@ -232,6 +231,8 @@ export default {
         
         var ret = (result.data && result.data.data && result.data.data.getJoinedRoomList) ? result.data.data.getJoinedRoomList : null
         next(vm => {vm.setData(ret)});
+    } else {
+        next(vm => {vm.setData(null)});
     }
   },
   mounted() {
@@ -270,7 +271,8 @@ export default {
     }
   }, methods: {
     setData(_chatData) {
-        this.chatData = _chatData;
+        if (_chatData)
+            this.chatData = _chatData;
     },
     login() {
         localStorage.loginUrl = window.location.pathname;
