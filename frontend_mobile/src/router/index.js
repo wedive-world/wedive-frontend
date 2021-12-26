@@ -165,8 +165,9 @@ export default new Router({
       component: ChatHomePage
     },
     {
-      path: '/chat',
+      path: '/chat/:id',
       name: 'ChatDetailPage',
+      props: true,
       component: ChatDetailPage
     },
     {

@@ -260,6 +260,42 @@ const axios = require("axios")
 
 export default {
   name: 'HelloWorld',
+  async beforeRouteEnter(to, from, next) {
+    if (to.params.id != null) {
+        var result = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                query GetMessagesByRoomIdSinceUpdated($roomId: String!, $updatedSince: Date) {
+                    getMessagesByRoomIdSinceUpdated(roomId: $roomId, updatedSince: $updatedSince) {
+                        _id
+                        text
+                        author {
+                        name
+                        avatarOrigin
+                        }
+                        createdAt
+                    }
+                }
+                `,
+                variables: {
+                    roomId: to.params.id
+                }
+
+            }
+            });
+
+        var ret = null;
+        if (result && result.data && result.data.data && result.data.data.getUserById) {ret = result.data.data.getUserById;}
+        
+        next(vm => {vm.setData(ret)});
+    }
+  },
   mounted() {
     $(".page-title").hide();
     $(".page-title-clear").hide();
@@ -304,15 +340,14 @@ export default {
             },
             data: {
                 query: `
-                mutation Mutation($userId: String!, $input: String!) {
-                    postMessageToUser(userId: $userId, input: $input) {
-                        _id
-                        text
+                    mutation PostMessageToRoom($roomId: String!, $input: String!) {
+                        postMessageToRoom(roomId: $roomId, input: $input) {
+                            _id
+                        }
                     }
-                }
                 `,
                 variables: {
-                    "userId": "jOdIDk2TuGe88mHscllU2sdj7p22",
+                    "roomId": to.params.id,
                     "input": message
                 }
 

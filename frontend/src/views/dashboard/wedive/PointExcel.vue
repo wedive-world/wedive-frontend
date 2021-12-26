@@ -168,7 +168,7 @@ import vSelect from 'vue-select'
 import Ripple from 'vue-ripple-directive'
 const { getAllInterests, getInterestTypes, upsertInterest, deleteInterestById } = require ('@/wedive-frontend-graphql/interest-service')
 const { upsertDivePoint, getAllDivePoints } = require('@/wedive-frontend-graphql/dive-point-service')
-const { upsertDiveSite, getAllDiveSites } = require('@/wedive-frontend-graphql/dive-site-service')
+const { getAllDiveSitesOnlyName } = require('@/wedive-frontend-graphql/dive-site-service')
 
 const selectOptionsStatus = [
   {value: 'pending', text: 'pending'},
@@ -283,7 +283,7 @@ export default {
   async beforeRouteEnter(to, from, next) {
     var interests = await getAllInterests();
     var interest_types = await getInterestTypes();
-    var sites = await getAllDiveSites();
+    var sites = await getAllDiveSitesOnlyName();
     var points = await getAllDivePoints();
     next(vm => {vm.setInterests(interests, interest_types, sites, points)});
   },

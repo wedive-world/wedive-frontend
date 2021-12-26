@@ -12,7 +12,7 @@
         <div class="content">
             <a v-for="chat in chatData" :href="'/chat/'+chat._id" class="d-block">
                 <div v-if="chat.chatUsers.length == 2" class="p-relative d-inline-block w-60 mb-2">
-                    <div v-for="user in chat.charUsers" v-if="user._id != uid" class="user-img">
+                    <div v-for="user in chat.chatUsers.filter(user=>user._id != uid)" class="user-img">
                         <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
                             <defs>
                             <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
@@ -232,8 +232,10 @@ export default {
     }
   }, methods: {
     setData(_chatData) {
-        if (_chatData)
+        if (_chatData) {
             this.chatData = _chatData;
+            console.log(this.chatData)
+        }
     },
     login() {
         localStorage.loginUrl = window.location.pathname;
