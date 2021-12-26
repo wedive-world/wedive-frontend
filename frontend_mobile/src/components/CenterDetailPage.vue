@@ -991,25 +991,25 @@ export default {
                         countryCode
                         publishStatus
                         reviews {
-                        _id
-                        targetId
-                        targetTypeName
-                        author {
-                            name
-                            email
                             _id
+                            targetId
+                            targetType
+                            author {
+                                name
+                                email
+                                _id
+                            }
+                            title
+                            content
+                            images {
+                                _id
+                                thumbnailUrl
+                            }
+                            rating
+                            reviewCount
+                            views
+                            likes
                         }
-                        title
-                        description
-                        images {
-                            _id
-                            name
-                            description
-                            reference
-                            thumbnailUrl
-                        }
-                        }
-                        reviewCount
                     }
                 }
             `,

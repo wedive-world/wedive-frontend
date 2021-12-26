@@ -312,7 +312,7 @@ export default {
                 }
                 `,
                 variables: {
-                    "userId": localStorage.userId,
+                    "userId": "jOdIDk2TuGe88mHscllU2sdj7p22",
                     "input": message
                 }
 
