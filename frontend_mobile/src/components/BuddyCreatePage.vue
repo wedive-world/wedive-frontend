@@ -34,7 +34,7 @@
           </div>
         </div>
 
-        <div class="card card-style pb-0 mb-3 ms-3 me-3 border-bottom" :data-menu="((idToken != null && nickName != null) ? 'menu-type' : '')" :data-toast="((idToken != null && nickName != null) ? '' : 'snackbar-info')">
+        <div v-on:click="openBottomSheet()" class="card card-style pb-0 mb-3 ms-3 me-3 border-bottom" :data-toast="((idToken != null && nickName != null) ? '' : 'snackbar-info')">
           <div class="mt-1">
             <div class="p-4">
               <span :class="'font-noto font-20 font-500' + ((idToken == null || nickName == null) ? ' opacity-40' : '')">직접 모집</span>
@@ -49,7 +49,29 @@
     </div>
     <!-- Page content ends here-->
         
-    
+    <vue-bottom-sheet ref="myBottomSheet">
+      <h4 class="p-4">어디로 가실까요?</h4>
+      <div class="content mt-0 row">
+        <div v-on:click="goSwimming()" class="col-4 text-center p-0">
+          <div class="m-1 border-08 pool">
+            <img class="m-4 mb-2 opacity-60" src="/static/images/assets/icon_pool.png" width="40%"/>
+            <p class="mb-4">수영장</p>
+          </div>
+        </div>
+        <div v-on:click="goSea()" class="col-4 text-center p-0">
+          <div class="m-1 border-08 sea">
+            <img class="m-4 mb-2 opacity-60" src="/static/images/assets/icon_sea.png" width="40%"/>
+            <p class="mb-4">바다</p>
+          </div>
+        </div>
+        <div v-on:click="goAbroad()" class="col-4 text-center p-0">
+          <div class="m-1 border-08 oversea">
+            <img class="m-4 mb-2 opacity-60" src="/static/images/assets/icon_oversea.png" width="40%"/>
+            <p class="mb-4">해외/리브어보드</p>
+          </div>
+        </div>
+      </div>
+    </vue-bottom-sheet>
     <!-- Menu type -->
     <div id="menu-type" class="menu menu-box-bottom rounded-half">
         <div class="menu-title mt-n1">
@@ -83,6 +105,7 @@
 </template>
 <script>
 import VueTypeaheadBootstrap from 'vue-typeahead-bootstrap';
+import  VueBottomSheet from "@webzlodimir/vue-bottom-sheet";
 import {debounce} from 'lodash';
 var schedule_status = [0, 0, 0, 0, 0];
 
@@ -112,7 +135,8 @@ export default {
     });
   },
   components: {
-    VueTypeaheadBootstrap
+    VueTypeaheadBootstrap,
+    VueBottomSheet,
   },
   created() {
     setTimeout(function() {
@@ -128,47 +152,17 @@ export default {
         login_word : (localStorage.idToken == null) ? '로그인' : '등록',
     }
   }, methods: {
+      openBottomSheet() {
+        if(this.idToken != null && this.nickName != null)
+          this.$refs.myBottomSheet.open();
+      },
+      closeBottomSheet() {
+        this.$refs.myBottomSheet.close();
+      },
       login() {
         localStorage.loginUrl = window.location.pathname;
         if (localStorage.hasOwnProperty("idToken") == false || localStorage.idToken == null) {
-          const activeMenu = document.querySelectorAll('.menu-active');
-          for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
-          //Open Clicked Menu
-          var menuData = "menu-login"
-          document.getElementById(menuData).classList.add('menu-active');
-          document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
-          //Check and Apply Effects
-          var menu = document.getElementById(menuData);
-          var menuEffect = menu.getAttribute('data-menu-effect');
-          var menuLeft = menu.classList.contains('menu-box-left');
-          var menuRight = menu.classList.contains('menu-box-right');
-          var menuTop = menu.classList.contains('menu-box-top');
-          var menuBottom = menu.classList.contains('menu-box-bottom');
-          var menuWidth = menu.offsetWidth;
-          var menuHeight = menu.offsetHeight;
-          var menuTimeout = menu.getAttribute('data-menu-hide');
-
-          if(menuTimeout){
-              setTimeout(function(){
-                  document.getElementById(menuData).classList.remove('menu-active');
-                  document.getElementsByClassName('menu-hider')[0].classList.remove('menu-active');
-              },menuTimeout)
-          }
-
-          if(menuEffect === "menu-push"){
-              var menuWidth = document.getElementById(menuData).getAttribute('data-menu-width');
-              if(menuLeft){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX("+menuWidth+"px)"}}
-              if(menuRight){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+menuWidth+"px)"}}
-              if(menuBottom){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY(-"+menuHeight+"px)"}}
-              if(menuTop){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY("+menuHeight+"px)"}}
-          }
-          if(menuEffect === "menu-parallax"){
-              var menuWidth = document.getElementById(menuData).getAttribute('data-menu-width');
-              if(menuLeft){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX("+menuWidth/10+"px)"}}
-              if(menuRight){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+menuWidth/10+"px)"}}
-              if(menuBottom){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY(-"+menuHeight/5+"px)"}}
-              if(menuTop){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY("+menuHeight/5+"px)"}}
-          }
+          this.$root.$children[0].$refs.loginBottomSheet.open();
         } else if (localStorage.hasOwnProperty("nickName") == false || localStorage.nickName == null) {
           location.href='/user_create';
         }

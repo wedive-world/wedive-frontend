@@ -67,6 +67,16 @@
       </div>
 
       <!-- Menu login -->
+      <vue-bottom-sheet ref="loginBottomSheet">
+        <div class="m-3 text-center">
+            <div class="color-primary font-noto font-20 font-600"><i class="ico ico-wedive-w color-primary ico-26" style="display: inline-block;margin:0;margin-bottom: -5px;"></i> wedive에 로그인</div>
+        </div>
+        <div class="content pt-3 row">
+              <a v-on:click="loginGoogle()" href="#" class="mb-3 rounded-xl text-start btn btn-m btn-full bg-google btn-icon font-600"><i class="fab fa-google rounded-xl font-16 text-center"></i> Google 계정으로 로그인</a>
+              <a href="#" class="mb-3 rounded-xl text-start btn btn-m btn-full bg-dark-dark btn-icon font-600"><i class="fab fa-apple rounded-xl font-16 text-center"></i> Apple 계정으로 로그인</a>
+              <a href="#" class="mb-3 rounded-xl text-start btn btn-m btn-full bg-yellow-dark btn-icon font-600"><i class="text-center rounded-xl" style="position: absolute;left: 0px;top: 0px;line-height: 43px;width: 40px;height: 100%;background-color: rgba(0, 0, 0, 0.1);"><img src="/static/images/assets/logo_kakao.png" height="16" style="vertical-align: middle;"/></i> Kakao 계정으로 로그인</a>
+          </div>
+      </vue-bottom-sheet>
       <div id="menu-login" class="menu menu-box-bottom rounded-half">
           <div class="menu-title">
               <div class="m-3 text-center">
@@ -89,6 +99,7 @@
 </template>
 
 <script>
+import  VueBottomSheet from "@webzlodimir/vue-bottom-sheet";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 const axios = require("axios")
 
@@ -117,7 +128,16 @@ export default {
       gender: localStorage.gender,
     }
   },
+  components: {
+    VueBottomSheet
+  },
   methods: {
+    openLoginBottomSheet() {
+      this.$refs.loginBottomSheet.open();
+    },
+    closeLoginBottomSheet() {
+      this.$refs.loginBottomSheet.close();
+    },
     moveSite() {
       location.href = localStorage.perferedSite;
     },
@@ -154,89 +174,82 @@ export default {
           const credential = GoogleAuthProvider.credentialFromResult(result);
           const token = credential.accessToken;
           const user = result.user;
-          user.getIdToken(/* forceRefresh */ true).then(async function(idToken) {
-            // Send token to your backend via HTTPS
-            
-            
-            localStorage.userName = user.hasOwnProperty('displayName') ? user.displayName : "";
-            localStorage.providerId = user.providerId;
-            localStorage.userEmail = user.hasOwnProperty('email') ? user.email : "";
-            localStorage.idToken = idToken;
-            console.log(localStorage.idToken);
-            localStorage.uid = user.hasOwnProperty('uid') ? user.uid : "";
-            console.log(localStorage.uid);
-            localStorage.loginAt = (new Date()).getTime();
+          var idToken = await user.getIdToken(true);
+          localStorage.userName = user.hasOwnProperty('displayName') ? user.displayName : "";
+          localStorage.providerId = user.providerId;
+          localStorage.userEmail = user.hasOwnProperty('email') ? user.email : "";
+          localStorage.idToken = idToken;
+          //console.log(localStorage.idToken);
+          localStorage.uid = user.hasOwnProperty('uid') ? user.uid : "";
+          //console.log(localStorage.uid);
+          localStorage.loginAt = (new Date()).getTime();
 
-            var result = await axios({
-              url: 'https://api.wedives.com/graphql',
-              method: 'post',
-              headers: {
-                  countrycode: 'ko',
-                  idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-              },
-              data: {
-                  query: `
-                      query Query($uid: ID!) {
-                        getUserByUid(uid: $uid) {
-                          _id
-                          nickName
-                          birthAge
-                          gender
-                        }
+          var result = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                    query Query($uid: ID!) {
+                      getUserByUid(uid: $uid) {
+                        _id
+                        nickName
+                        birthAge
+                        gender
                       }
-                  `,
-                  variables: {
-                      "uid": localStorage.uid
-                  }
-              }
-            });
-            if (result.data.data.getUserByUid != null ) {
-              localStorage.nickName = result.data.data.getUserByUid.nickName;
-              localStorage.userId = result.data.data.getUserByUid._id;
-              localStorage.userGender = result.data.data.getUserByUid.gender;
-              this.nickName = localStorage.nickName;
-
-              
-              var toastData = 'snackbar-login-success';
-              setTimeout(function() {
-                var notificationToast = document.getElementById(toastData);
-                var notificationToast = new bootstrap.Toast(notificationToast);
-                notificationToast.show();
-              },1000);
-              location.reload();
-            } else {
-              // 신규 아이디를 등록해준다.
-              var input_temp = {"uid": localStorage.uid, "authProvider": localStorage.providerId, "oauthToken": localStorage.idToken, "email": localStorage.userEmail, "name": localStorage.userName};
-              const ipt = input_temp;
-              
-              var result2 = await axios({
-                  url: 'https://api.wedives.com/graphql',
-                  method: 'post',
-                  headers: {
-                      countrycode: 'ko',
-                      idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-                  },
-                  data: {
-                      query: `
-                          mutation Mutation($input: UserInput) {
-                              upsertUser(input: $input) {
-                                  _id
-                              }
-                          }
-                      `,
-                      variables: {
-                          "input": ipt
-                      }
-                  }
-              });
-              location.href='/user_create';
+                    }
+                `,
+                variables: {
+                    "uid": localStorage.uid
+                }
             }
-
-            
-            // ...
-          }).catch(function(error) {
-            // Handle error
           });
+          if (result.data.data.getUserByUid != null ) {
+            localStorage.nickName = result.data.data.getUserByUid.nickName;
+            localStorage.userId = result.data.data.getUserByUid._id;
+            localStorage.userGender = result.data.data.getUserByUid.gender;
+            this.nickName = localStorage.nickName;
+            
+            this.$refs.loginBottomSheet.close();
+
+            var toastData = 'snackbar-login-success';
+            setTimeout(function() {
+              var notificationToast = document.getElementById(toastData);
+              var notificationToast = new bootstrap.Toast(notificationToast);
+              notificationToast.show();
+            },1000);
+            
+            location.reload();
+          } else {
+            // 신규 아이디를 등록해준다.
+            var input_temp = {"uid": localStorage.uid, "authProvider": localStorage.providerId, "oauthToken": localStorage.idToken, "email": localStorage.userEmail, "name": localStorage.userName};
+            const ipt = input_temp;
+            
+            var result2 = await axios({
+                url: 'https://api.wedives.com/graphql',
+                method: 'post',
+                headers: {
+                    countrycode: 'ko',
+                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                },
+                data: {
+                    query: `
+                        mutation Mutation($input: UserInput) {
+                            upsertUser(input: $input) {
+                                _id
+                            }
+                        }
+                    `,
+                    variables: {
+                        "input": ipt
+                    }
+                }
+            });
+            location.href='/user_create';
+          }
       }).catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;

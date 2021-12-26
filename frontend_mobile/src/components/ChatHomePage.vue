@@ -1,7 +1,14 @@
 <template>
   <div class="">
     <div data-menu-active="nav-chat"></div>
-    <div class="card card-style ms-0 me-0 rounded-0">
+    <div v-if="idToken == null || nickName == null" class="card card-style ms-0 me-0 rounded-0 text-center mb-0" style="height: calc(100vh - 58px);display:block;">
+        <img src="/static/images/assets/empty_message.jpg" width="60%" style="margin-top: 25%;" />
+        <p class="color-gray mb-2">{{ login_word }}이 필요합니다.</p>
+
+        <a v-on:click="login()" class="btn btn-m mb-3 rounded-xl text-uppercase font-500 shadow-s bg-secondary font-noto"><i class="fas fa-user-lock me-1"></i> {{ login_word }}</a>
+        
+    </div>
+    <div v-else class="card card-style ms-0 me-0 rounded-0">
         <div class="content">
             <a href="/chat" class="d-block">
                 <div class="p-relative d-inline-block w-60 mb-2">
@@ -257,11 +264,22 @@ export default {
   data () {
     return {
         chatData: {},
+        idToken: localStorage.idToken,
+        nickName: localStorage.nickName,
+        login_word : (localStorage.idToken == null) ? '로그인' : '프로필 등록',
     }
   }, methods: {
     setData(_chatData) {
         this.chatData = _chatData;
-    }
+    },
+    login() {
+        localStorage.loginUrl = window.location.pathname;
+        if (localStorage.hasOwnProperty("idToken") == false || localStorage.idToken == null) {
+          this.$root.$children[0].$refs.loginBottomSheet.open();
+        } else if (localStorage.hasOwnProperty("nickName") == false || localStorage.nickName == null) {
+          location.href='/user_create';
+        }
+    },
   }
 
   

@@ -19,9 +19,9 @@
             </div>
         </div>
         <div class="flex-fill speach-input">
-            <input type="text" class="form-control" placeholder="메시지를 입력하세요.">
+            <input type="text" class="form-control" placeholder="메시지를 입력하세요." v-model="sendText">
         </div>
-        <div class="ms-3 speach-icon" style="background: #1d397c;width:50px;">
+        <div v-on:click="sendMessage()" class="ms-3 speach-icon" style="background: #1d397c;width:50px;">
             <i class="fas fa-paper-plane color-white font-20" style="margin-top:16px;"></i>
         </div>
     </div>
@@ -256,10 +256,11 @@
   </div>
 </template>
 <script>
+const axios = require("axios")
+
 export default {
   name: 'HelloWorld',
   mounted() {
-    
     $(".page-title").hide();
     $(".page-title-clear").hide();
     document.getElementById("page-back").classList.remove("hide");
@@ -289,10 +290,38 @@ export default {
   },
   data () {
     return {
-        
+        sendText: '',
     }
   }, methods: {
-    
+    async sendMessage() {
+        const message = this.sendText;
+        var result = await axios({
+            url: 'https://chat.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                mutation Mutation($userId: String!, $input: String!) {
+                    postMessageToUser(userId: $userId, input: $input) {
+                        _id
+                        text
+                    }
+                }
+                `,
+                variables: {
+                    "userId": localStorage.userId,
+                    "input": message
+                }
+
+            }
+        });
+        
+        
+        var ret = (result.data && result.data.data && result.data.data.getJoinedRoomList) ? result.data.data.getJoinedRoomList : null
+    }
   }
 
   
