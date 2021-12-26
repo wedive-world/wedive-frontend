@@ -120,6 +120,9 @@ export default {
     if (localStorage.perferedSite == null) {
       localStorage.perferedSite = '/site_list';
     }
+    if (localStorage.tokenAt == null || (new Date().getTime() - localStorage.tokenAt) > 1800000) {
+      this.getFirebaseToken()
+    }
   },
   data() {
     return {
@@ -170,7 +173,7 @@ export default {
         if (user) {
           localStorage.uid = user.uid;
           localStorage.idToken = await user.getIdToken(true);
-          console.log("get token = " + localStorage.idToken);
+          localStorage.tokenAt = (new Date()).getTime();
         } else {
           console.log("signed out");
         }

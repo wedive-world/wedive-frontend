@@ -95,32 +95,12 @@
                     </div>
                 </div>
                 <div class="ms-2 d-inline-block v-align-top">
-                    <h5 class="font-15 font-600 mb-0">장성환</h5>
-                    <p class="line-height-s opacity-60 font-13">끝이 보입니다 화이팅</p>
+                    <h5 class="font-15 font-600 mb-0" v-html="chat.chatUsers.filter(user=>user._id != uid).map(user => {return user.name}).join()"></h5>
+                    <p class="line-height-s opacity-60 font-13">{{ chat.lastChatMessage }}</p>
                 </div>
-                <div class="latest">9월 20일</div>
+                <div class="latest">{{ chat.showedAt }}</div>
             </a>
-            <div class="divider mb-2"></div>
-            
-            
-            <a href="/chat" class="d-block">
-                
-                <div class="ms-2 d-inline-block v-align-top">
-                    <h5 class="font-15 font-600 mb-0">윤장송<span class="color-gray-light-mid font-400 ms-2">3</span></h5>
-                    <p class="line-height-s opacity-60 font-13">현일아 일하자</p>
-                </div>
-                <div class="latest">오후 6:31</div>
-            </a>
-            <div class="divider mb-2"></div>
-
-            <a href="/chat" class="d-block">
-                
-                <div class="ms-2 d-inline-block v-align-top">
-                    <h5 class="font-15 font-600 mb-0">위다이브<span class="color-gray-light-mid font-400 ms-2">4</span></h5>
-                    <p class="line-height-s opacity-60 font-13">팀 위다이브 영원하라</p>
-                </div>
-                <div class="latest">오후 6:31</div>
-            </a>
+            <div class="divider mb-0"></div>
             
         </div>
     </div>
@@ -128,11 +108,27 @@
 </template>
 <script>
 const axios = require("axios")
+import { GoogleAuthProvider, getAuth, signInWithPopup, onAuthStateChanged  } from "firebase/auth";
 
-export default {
-  name: 'HelloWorld',
-  async beforeRouteEnter(to, from, next) {
-    if (localStorage.idToken) {
+var today = new Date();
+function timeForToday(value) {
+    const timeValue = new Date(value);
+    const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
+    if (betweenTime < 1) return '방금전';
+    else if (betweenTime < 6) {
+        return `${betweenTime}분전`;
+    }
+    else {
+        var hour = timeValue.getHours();
+        if (hour < 12) hour = "오전 " + hour
+        else hour = "오후 " + (hour-12);
+        return hour + ":" + timeValue.getMinutes();
+    }
+}
+
+async function getChatRooms() {
+    var result = null;
+    try {
         var result = await axios({
             url: 'https://chat.wedives.com/graphql',
             method: 'post',
@@ -187,10 +183,30 @@ export default {
 
             }
         });
-        
-        
-        var ret = (result.data && result.data.data && result.data.data.getJoinedRoomList) ? result.data.data.getJoinedRoomList : null
-        next(vm => {vm.setData(ret)});
+    } catch(e) {}
+    return result;
+}
+export default {
+  name: 'HelloWorld',
+  async beforeRouteEnter(to, from, next) {
+    if (localStorage.idToken) {
+        var result = await getChatRooms();
+        var ret = (result && result.data && result.data.data && result.data.data.getJoinedRoomList) ? result.data.data.getJoinedRoomList : null
+        if (ret == null) {
+            const auth = getAuth();
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    localStorage.idToken = await user.getIdToken(true);
+                    result = await getChatRooms();
+                    ret = (result && result.data && result.data.data && result.data.data.getJoinedRoomList) ? result.data.data.getJoinedRoomList : null
+                    next(vm => {vm.setData(ret)});
+                } else {
+                    console.log("signed out");
+                }
+            });
+        } else {
+            next(vm => {vm.setData(ret)});
+        }
     } else {
         next(vm => {vm.setData(null)});
     }
@@ -234,7 +250,7 @@ export default {
     setData(_chatData) {
         if (_chatData) {
             this.chatData = _chatData;
-            console.log(this.chatData)
+            this.chatData.forEach(chat => chat.showedAt = timeForToday(chat.createdAt));
         }
     },
     login() {

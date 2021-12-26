@@ -26,8 +26,101 @@
         </div>
     </div>
     
-    <div class="card card-style ms-0 me-0 rounded-0 mt-5 mb-5" style="background-image: url(/static/images/assets/paper_back.jpg);background-size: contain; background-repeat: repeat;">
+    <div id="speech-content" class="card card-style ms-0 me-0 rounded-0 mt-5 mb-5" style="height: calc(100vh - 101px);width: 100vw;vertical-align: bottom;display: table-cell;padding-top: 50px;padding-bottom: 51px;">
         <div class="content">
+            <div>
+                <div class="speech-left">
+                    <div class="speech-bubble bg-highlight">
+                        안녕
+                    </div>
+                    <span class="time">aaa</span>
+                </div>
+                <div class="clearfix"></div>
+                <div class="speech-left">
+                    <div class="speech-bubble bg-highlight">
+                        안녕
+                    </div>
+                    <span class="time">aaa</span>
+                </div>
+                <div class="clearfix"></div>
+                <div class="speech-left">
+                    <div class="speech-bubble bg-highlight">
+                        안녕
+                    </div>
+                    <span class="time">aaa</span>
+                </div>
+                <div class="clearfix"></div>
+                <div class="speech-left">
+                    <div class="speech-bubble bg-highlight">
+                        안녕
+                    </div>
+                    <span class="time">aaa</span>
+                </div>
+                <div class="clearfix"></div>
+                <div class="speech-left">
+                    <div class="speech-bubble bg-highlight">
+                        안녕
+                    </div>
+                    <span class="time">aaa</span>
+                </div>
+                <div class="clearfix"></div>
+                <div class="speech-left">
+                    <div class="speech-bubble bg-highlight">
+                        안녕
+                    </div>
+                    <span class="time">aaa</span>
+                </div>
+                <div class="clearfix"></div>
+                <div class="speech-left">
+                    <div class="speech-bubble bg-highlight">
+                        안녕
+                    </div>
+                    <span class="time">aaa</span>
+                </div>
+                <div class="clearfix"></div>
+                <div class="speech-left">
+                    <div class="speech-bubble bg-highlight">
+                        안녕
+                    </div>
+                    <span class="time">aaa</span>
+                </div>
+                <div class="clearfix"></div>
+                <div class="speech-left">
+                    <div class="speech-bubble bg-highlight">
+                        안녕
+                    </div>
+                    <span class="time">aaa</span>
+                </div>
+                <div class="clearfix"></div>
+                <div class="speech-left">
+                    <div class="speech-bubble bg-highlight">
+                        안녕
+                    </div>
+                    <span class="time">aaa</span>
+                </div>
+                <div class="clearfix"></div>
+                <div class="speech-left">
+                    <div class="speech-bubble bg-highlight">
+                        안녕
+                    </div>
+                    <span class="time">aaa</span>
+                </div>
+                <div class="clearfix"></div>
+                <div class="speech-left">
+                    <div class="speech-bubble bg-highlight">
+                        안녕
+                    </div>
+                    <span class="time">aaa</span>
+                </div>
+                <div class="clearfix"></div>
+                <div class="speech-left">
+                    <div class="speech-bubble bg-highlight">
+                        안녕
+                    </div>
+                    <span class="time">aaa</span>
+                </div>
+                <div class="clearfix"></div>
+            </div>
             <div v-for="chat in chatData">
                 <div v-if="chat.author._id == uid" class="speech-left">
                     <div class="speech-bubble bg-highlight">
@@ -116,7 +209,7 @@ function timeForToday(value) {
         else hour = "오후 " + (hour-12);
         return hour + ":" + timeValue.getMinutes();
     }
- }
+}
 
 export default {
   name: 'HelloWorld',
@@ -158,6 +251,9 @@ export default {
     }
   },
   mounted() {
+    var element = document.getElementById("speech-content");
+    element.scrollTop = element.scrollHeight;
+
     $(".page-title").hide();
     $(".page-title-clear").hide();
     document.getElementById("page-back").classList.remove("hide");

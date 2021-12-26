@@ -777,30 +777,22 @@ export default {
                         reviews {
                             _id
                             targetId
-                            targetTypeName
+                            targetType
                             author {
-                                _id
                                 name
                                 email
-                                birthAge
-                                gender
-                                profileImages {
-                                    _id
-                                    name
-                                    description
-                                    reference
-                                    thumbnailUrl
-                                }
+                                _id
                             }
                             title
-                            description
+                            content
                             images {
                                 _id
-                                name
-                                description
-                                reference
                                 thumbnailUrl
                             }
+                            rating
+                            reviewCount
+                            views
+                            likes
                         }
                         reviewCount
                         searchTerms
