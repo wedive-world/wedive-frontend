@@ -20,7 +20,7 @@
     </vue-context>
     <b-button
         v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-        v-b-modal.modal-add
+        v-b-modal.modal-add2
         variant="outline-primary"
       >
       센터 추가
@@ -46,6 +46,36 @@
 
     
     
+    <b-modal
+      id="modal-add2"
+      title="센터 추가"
+      ok-only
+      ok-title="Add"
+      @ok="AddCenter2"
+      ref="modal"
+    >
+      <b-row>
+        <b-col
+          md="6"
+          xl="6"
+          class="mb-1"
+        >
+
+          <b-form-group
+            label="몇개나 추가하시겠어요?"
+            label-for="addCount"
+          >
+            <b-form-input
+              id="addCount"
+              type="number"
+              v-model="addCount"
+              placeholder="몇개나 추가하시겠어요? (숫자만 입력)"
+            />
+          </b-form-group>
+        </b-col>
+      </b-row>
+    </b-modal>
+
 
     <b-modal
       id="modal-add"
@@ -208,6 +238,21 @@ const columnDefinition = [
     { sortable: true, filter: true, field: 'memo', headerName: '메모', editable: true },
 ];
 
+function generateUUID() { // Public Domain/MIT
+    var d = new Date().getTime();//Timestamp
+    var d2 = ((typeof performance !== 'undefined') && performance.now && (performance.now()*1000)) || 0;//Time in microseconds since page-load or 0 if unsupported
+    return 'xxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random() * 16;//random number between 0 and 16
+        if(d > 0){//Use timestamp until depleted
+            r = (d + r)%16 | 0;
+            d = Math.floor(d/16);
+        } else {//Use microseconds since page-load if supported
+            r = (d2 + r)%16 | 0;
+            d2 = Math.floor(d2/16);
+        }
+        return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+    });
+}
 
 export default {
   components: {
@@ -234,7 +279,7 @@ export default {
       interest_types: [],
       centers: [],
       points: [],
-
+      addCount: 1,
       uniqueName: '',
       name: '',
       latitude: '',
@@ -304,13 +349,19 @@ export default {
         console.log(temp_list);
         var _id_list = new Array();
         for (var i=0 ; i<temp_list.length; i++) {
-          var _id2 = $event.row.rentals[i]._id;
+          var _id2 = ($event.row.rentals && $event.row.rentals[i] && $event.row.rentals[i]._id) ? $event.row.rentals[i]._id : null;
+          console.log(_id2)
           var ipt = {name: temp_list[i][0], type: ["rental"]};
+          console.log(ipt)
           ipt.unitName = temp_list[i][1];
+          console.log(ipt)
           ipt.price = parseInt(temp_list[i][2]);
+          console.log(ipt)
           if (_id2 != null) ipt._id = _id2;
+          console.log(ipt);
 
           var resultProduct = await upsertProduct(ipt);
+          console.log(resultProduct);
           _id_list.push(resultProduct.upsertProduct._id)
         }
         
@@ -322,7 +373,7 @@ export default {
         var temp_list = JSON.parse(value.replace(/\'/gi,'"'));
         var _id_list = new Array();
         for (var i=0 ; i<temp_list.length; i++) {
-          var _id2 = $event.row.tickets[i]._id;
+          var _id2 = ($event.row.tickets && $event.row.tickets[i] && $event.row.tickets[i]._id) ? $event.row.tickets[i]._id : null;
           var ipt = {name: "입장료", type: ["ticket"]};
           ipt.unitName = temp_list[i][0];
           ipt.price = parseInt(temp_list[i][1]);
@@ -410,6 +461,29 @@ export default {
           buttonsStyling: false,
         })
       }*/
+    },
+    async AddCenter2() {
+      var cnt = parseInt(this.addCount);
+      for (var i=0; i<cnt; i++) {
+        var uuid = generateUUID();
+        var i_input = {uniqueName: uuid, name: uuid, latitude: 1.1, longitude: 2.2};
+        try {
+          await upsertDiveCenter(i_input)
+        } catch (e) {
+          this.$swal({
+            title: 'Error!',
+            text: e,
+            icon: 'error',
+            customClass: {
+              confirmButton: 'btn btn-primary',
+            },
+            buttonsStyling: false,
+          })
+        }
+      }
+
+      location.reload();
+      //this.$apollo.mutate({mutation: CREATE_INTEREST, variables: {interestInput: i_input}}).then((data) => {console.log(data)}).catch((error) => {console.log(error);});
     },
     async AddCenter() {
       var i_input = {uniqueName: this.uniqueName.value, name: this.name.value, latitude: parseFloat(this.latitude), longitude: parseFloat(this.longitude)};

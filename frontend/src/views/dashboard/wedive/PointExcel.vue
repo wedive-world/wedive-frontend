@@ -285,7 +285,7 @@ export default {
     var interests = await getAllInterestsTitleType();
     var interest_types = await getInterestTypes();
     var sites = await getAllDiveSitesOnlyName();
-    var points = await getDivePoints();
+    var points = await getDivePoints({"skip": (page-1)*100});
     next(vm => {vm.setInterests(interests, interest_types, sites, points, page)});
   },
   methods: {
