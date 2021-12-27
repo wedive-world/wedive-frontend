@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div class="row m-0 mt-2">
-                <div v-on:click="sendDirectMessage()" class="col-4 pe-1">
+                <div data-menu="menu-dm" class="col-4 pe-1">
                     <span  class="btn btn-border btn-m btn-full text-uppercase font-900 border-gray-dark color-black bg-theme" style="padding: 6px 0 !important;"><img src="/static/images/assets/ico_chat.png" height="16"/> 대화하기</span>
                 </div>
                 <div v-on:click="clickLike()" class="col-4">
@@ -101,7 +101,7 @@
     <!-- DM 팝업 -->
     <div id="menu-dm" 
          class="menu menu-box-modal" 
-         data-menu-height="190" 
+         data-menu-height="300" 
          data-menu-width="370">
         <div class="menu-title">
             <h4 class="text-center mt-4 pt-1 mb-2 font-noto font-19">메시지 전송</h4>
@@ -109,16 +109,15 @@
         </div>
         <div class="me-4 ms-4" style="border-bottom: 2px solid black;"></div>
         <div class="content mt-3">
-            <p class="mb-4 font-noto">메시지를 입력하세요.</p>
-            <textarea class="wedive-textarea" placeholder="메시지" v-model="dm_text"></textarea>
+            <textarea class="wedive-textarea" placeholder="메시지를 입력하세요." v-model="dm_text"></textarea>
         </div>
         
         <div class="row m-0">
             <div class="col-6 pe-1">
-                <a href="#" class="close-menu btn btn-m btn-full rounded-0 text-uppercase font-900 shadow-s bg-gray-dark">취소하기</a>
+                <a href="#" class="close-menu btn btn-m btn-full rounded-0 text-uppercase font-900 shadow-s bg-gray-dark">취소</a>
             </div>
             <div class="col-6 ps-1">
-                <a v-on:click="chatUser()" class="btn btn-m btn-full rounded-0 text-uppercase font-900 shadow-s bg-black">신청하기</a>
+                <a v-on:click="sendDirectMessage()" class="btn btn-m btn-full rounded-0 text-uppercase font-900 shadow-s bg-black">메시지 전송</a>
             </div>
         </div>
     </div>
@@ -128,8 +127,6 @@
 
     </div>
     <!-- End of Page Content--> 
-    
-    
     
   </div>
 </template>
@@ -232,33 +229,36 @@ export default {
   },
   methods: {
       async sendDirectMessage() {
-        const message = this.sendText;
-        var result = await axios({
-            url: 'https://chat.wedives.com/graphql',
-            method: 'post',
-            headers: {
-                countrycode: 'ko',
-                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-            },
-            data: {
-                query: `
-                mutation Mutation($userId: String!, $input: String!) {
-                    postMessageToUser(userId: $userId, input: $input) {
-                        _id
-                        text
+        if (localStorage.idToken) {
+            const message = this.dm_text;
+            const userId = this.userData.uid;
+            var result = await axios({
+                url: 'https://chat.wedives.com/graphql',
+                method: 'post',
+                headers: {
+                    countrycode: 'ko',
+                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                },
+                data: {
+                    query: `
+                    mutation Mutation($userId: String!, $input: String!) {
+                        postMessageToUser(userId: $userId, input: $input) {
+                            _id
+                            text
+                        }
                     }
-                }
-                `,
-                variables: {
-                    "userId": "jOdIDk2TuGe88mHscllU2sdj7p22",
-                    "input": message
-                }
+                    `,
+                    variables: {
+                        "userId": userId,
+                        "input": message
+                    }
 
-            }
-        });
-        
-        this.sendText = '';
-        var ret = (result.data && result.data.data && result.data.data.getJoinedRoomList) ? result.data.data.getJoinedRoomList : null
+                }
+            });
+            
+            this.sendText = '';
+            var ret = (result.data && result.data.data && result.data.data.getJoinedRoomList) ? result.data.data.getJoinedRoomList : null
+        }
       },
       showReivewModal() {
           var menuData = 'menu-rating';
@@ -427,6 +427,6 @@ export default {
 .inline-block {display: inline-block;}
 .border-bottom {border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important}
 .evaluation {background-color: rgba(196,187,171,.2);justify-content: space-around;border-radius: 5px;padding:10px;}
-.wedive-textarea {min-height: 130px;border: 2px solid #e9e9e9;background: #f5f5f5;padding-left: 10px;padding-right: 10px;}
+.wedive-textarea {min-height: 130px;border: 2px solid #e9e9e9;background: #f5f5f5;padding-left: 10px;padding-right: 10px;width:100%;}
 .wedive-deep:before {content: '▼ 첫 수심 18m';position: absolute;margin-top: -20px;margin-left: 16%;color:#b4bcc8;}
 </style>
