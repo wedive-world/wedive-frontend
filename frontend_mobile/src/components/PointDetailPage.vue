@@ -424,103 +424,50 @@
             <h4 class="text-start">다이빙 로그</h4>
             <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
             <div class="divider mt-3 mb-2"></div>
-                <div class="splide single-slider slider-no-arrows slider-has-dots pb-2 mb-0 me-n2 ms-n2" id="single-slider-review">
+                <div v-if="pointData.reviews && pointData.reviews.length>0" class="splide single-slider slider-no-arrows slider-has-dots pb-2 mb-0 me-n2 ms-n2" id="single-slider-review">
                     <div class="splide__track">
                         <div class="splide__list">
-                            <div class="splide__slide pt-2">
+                            <div v-for="review in pointData.reviews" class="splide__slide pt-2">
                                 <div class="min-h-230 p-2">
                                         <div class="d-flex">
                                             <div class="flex-grow-1">
                                                 <div class="float-start">
-                                                    <h1 class="fa-2x font-900 me-2 mb-0">5.00</h1>
-                                                    <p class="font-10 mb-0 mt-n2 opacity-40 text-start">펀 다이빙</p>
+                                                    <h1 class="fa-2x font-900 me-2 mb-0">{{review.rating}}.00</h1>
+                                                    <p class="font-10 mb-0 mt-n2 opacity-40 text-start hide">펀 다이빙</p>
                                                 </div>
                                                 <span>
-                                                    <i class="fa fa-star color-yellow-dark"></i>
-                                                    <i class="fa fa-star color-yellow-dark"></i>
-                                                    <i class="fa fa-star color-yellow-dark"></i>
-                                                    <i class="fa fa-star color-yellow-dark"></i>
-                                                    <i class="fa fa-star color-yellow-dark"></i>
+                                                    <i v-for="index in review.rating" class="fa fa-star color-yellow-dark"></i>
                                                 </span>
                                                 
                                             </div>
                                             <div>
-                                                <h6 class="text-end">김성진</h6>
-                                                <p class="font-10 mb-0 mt-n2 opacity-40 text-end">2021.08.30</p>
+                                                <h6 class="text-end">{{ review.author.name }}</h6>
+                                                <p class="font-10 mb-0 mt-n2 opacity-40 text-end">{{ review.createdAt.substring(0,10).replace(/-/gi,'.') }}</p>
                                             </div>
                                         </div>
                                         <p class="review-text mt-2 mb-1">
-                                            <a href="https://t1.daumcdn.net/cfile/tistory/224C493F542D088905" data-gallery="gallery-99" class="filtr-item" title="" data-category="99">
-                                                <img src="/static/images/assets/empty.png" data-src="https://t1.daumcdn.net/cfile/tistory/224C493F542D088905" class="preload-img rounded-s shadow-m review_img" alt="방문자리뷰">
+                                            <div v-if="review.images && review.images.length>0">
+                                            <a v-for="(image,index) in review.images" v-if="index<3" :href="image.thumbnailUrl" data-gallery="gallery-99" class="filtr-item" title="" data-category="99">
+                                                <img src="/static/images/assets/empty.png" :data-src="image.thumbnailUrl" class="preload-img rounded-s shadow-m review_img" alt="방문자리뷰">
                                             </a>
-                                            나이트다이빙을 해보면 본인이 체질인지 여부를 바로 알 수 있다. 입수 후 어두운 바다가 눈앞에 펼쳐지지만 이내 모든게 밝아진다. 나이트다이빙 특유의 분위기가 가득하다. 마치 낯선 행성을 탐험하는 기분이랄까, 이국적으로 몽환적인 분위기에 한껏 취하게 된다. 함께 간 모든 사람들이 너무나도 좋아해서 힘들게 기획한만큼 보람있는 다이빙 이었다.
+                                            </div>
+                                            {{ review.content }}
                                         </p>
                                 </div>     
                             </div>
                             <div class="splide__slide">
                                 <div class="min-h-230 p-2">
-                                        <div class="d-flex">
-                                            <div class="flex-grow-1">
-                                                <div class="float-start">
-                                                    <h1 class="fa-2x font-900 me-2 mb-0">4.98</h1>
-                                                    <p class="font-10 mb-0 mt-n2 opacity-40 text-start">트레이닝</p>
-                                                </div>
-                                                <span>
-                                                    <i class="fa fa-star color-yellow-dark"></i>
-                                                    <i class="fa fa-star color-yellow-dark"></i>
-                                                    <i class="fa fa-star color-yellow-dark"></i>
-                                                    <i class="fa fa-star color-yellow-dark"></i>
-                                                    <i class="fa fa-star color-yellow-dark"></i>
-                                                </span>
-                                            </div>
-                                            <div>
-                                                <h6 class="text-end">조관우</h6>
-                                                <p class="font-10 mb-0 mt-n2 opacity-40 text-end">2021.08.27</p>
-                                            </div>
-                                        </div>
-                                        <p class="review-text mt-2 mb-1">
-                                            남애 스쿠버 리조트의 젊은 스태프들은 항상 기운이 넘치고 시원시원하고 친절하다. 고객들이 원하는 바를 하나하나 세심히 맞춰주기 위해 노력하는 스태프들 덕에 편안히 다이빙을 즐길 수 있다. 작은 동물에도 애정을 쏟고 살뜰히 보살피는 마음씀씀이가 리조트 곳곳에 베어 리조트를 찾는 다이버들의 마음도 편안하게 해준다. 편안한 마음으로 신나게 기운차게 다이빙을 다이빙을 즐길 수 있는 곳, 남애 스쿠버 리조트이다.
-                                        </p>
-                                </div>   
-                            </div>
-                            <div class="splide__slide">
-                                <div class="min-h-230 p-2">
-                                        <div class="d-flex">
-                                            <div class="flex-grow-1">
-                                                <div class="float-start">
-                                                    <h1 class="fa-2x font-900 me-2 mb-0">4.5</h1>
-                                                    <p class="font-10 mb-0 mt-n2 opacity-40 text-start">펀 다이빙</p>
-                                                </div>
-                                                <span>
-                                                    <i class="fa fa-star color-yellow-dark"></i>
-                                                    <i class="fa fa-star color-yellow-dark"></i>
-                                                    <i class="fa fa-star color-yellow-dark"></i>
-                                                    <i class="fa fa-star color-yellow-dark"></i>
-                                                    <i class="fa fa-star color-yellow-dark"></i>
-                                                </span>
-                                            </div>
-                                            <div>
-                                                <h6 class="text-end">조윤구</h6>
-                                                <p class="font-10 mb-0 mt-n2 opacity-40 text-end">2021.08.20</p>
-                                            </div>
-                                        </div>
-                                        <p class="review-text mt-2 mb-1">
-                                            <a href="http://www.uwmagazine.co.kr/news/photo/202008/895_2811_2553.jpg" data-gallery="gallery-99" class="filtr-item" title="" data-category="99">
-                                                <img src="/static/images/assets/empty.png" data-src="http://www.uwmagazine.co.kr/news/photo/202008/895_2811_2553.jpg" class="preload-img rounded-s shadow-m review_img" alt="방문자리뷰">
-                                            </a>
-                                            파고는 0.5미터 이상이였습니다. 해안 근처는 잔잔해 보였는데 5분정도 배타고 나가니 파고도 높아지고 조류도 제법 강했습니다.  무엇보다 시야가 너무 별로였습니다. 부유물들이 겨울바다 답지않게 너무 심했습니다. 영상을 보시면 아시겠지만 부유물덕에 입수해서 내려가는 속도가 느껴질만큼 많았습니다.
-                                        </p>
-                                </div>   
-                            </div>
-                            <div class="splide__slide">
-                                <div class="min-h-230 p-2">
                                         <h1 class="text-center"><i class="fas fa-pen-square fa-2x color-highlight mt-4"></i></h1>
-                                        <h1 class="text-center pt-3 font-20 mb-n1">5개 다이빙 로그</h1>
+                                        <h1 class="text-center pt-3 font-20 mb-n1">{{ pointData.reviews.length }}개 다이빙 로그</h1>
                                         <p class="text-center color-highlight font-600">더보기 <i class="fas fa-chevron-right"></i></p>
                                 </div>    
                             </div>
                         </div>
                     </div>
+                </div>
+                <div v-else class="text-center">
+                    <img src="/static/images/assets/empty_list.jpg" width="50%" />
+                    <p class="color-gray">아직 작성된 다이빙 로그가 없어요.</p>
                 </div>
             </div>
             <div class="divider mt-2 mb-2 ms-3 me-3"></div>

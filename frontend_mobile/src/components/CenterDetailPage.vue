@@ -553,113 +553,50 @@
             <h4 class="text-start">리뷰</h4>
             <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
             <div class="divider mt-3 mb-2"></div>
-                <div class="splide single-slider slider-no-arrows slider-has-dots pb-2 mb-0 me-n2 ms-n2" id="single-slider-review">
+                <div v-if="centerData.reviews && centerData.reviews.length>0" class="splide single-slider slider-no-arrows slider-has-dots pb-2 mb-0 me-n2 ms-n2" id="single-slider-review">
                     <div class="splide__track">
                         <div class="splide__list">
-                            <div class="splide__slide pt-2">
+                            <div v-for="review in centerData.reviews" class="splide__slide pt-2">
                                 <div class="min-h-230 p-2">
                                         <div class="d-flex">
                                             <div class="flex-grow-1">
                                                 <div class="float-start">
-                                                    <h1 class="fa-2x font-900 me-2 mb-0">5.00</h1>
-                                                    <p class="font-10 mb-0 mt-n2 opacity-40 text-end">보트 체험 다이빙</p>
+                                                    <h1 class="fa-2x font-900 me-2 mb-0">{{review.rating}}.00</h1>
+                                                    <p class="font-10 mb-0 mt-n2 opacity-40 text-end hide">보트 체험 다이빙</p>
                                                 </div>
                                                 <span>
-                                                    <i class="fa fa-star color-yellow-dark"></i>
-                                                    <i class="fa fa-star color-yellow-dark"></i>
-                                                    <i class="fa fa-star color-yellow-dark"></i>
-                                                    <i class="fa fa-star color-yellow-dark"></i>
-                                                    <i class="fa fa-star color-yellow-dark"></i>
+                                                    <i v-for="index in review.rating" class="fa fa-star color-yellow-dark"></i>
                                                 </span>
                                                 
                                             </div>
                                             <div>
-                                                <h6 class="text-end">김성진</h6>
-                                                <p class="font-10 mb-0 mt-n2 opacity-40 text-end">2021.08.30</p>
+                                                <h6 class="text-end">{{ review.author.name }}</h6>
+                                                <p class="font-10 mb-0 mt-n2 opacity-40 text-end">{{ review.createdAt.substring(0,10).replace(/-/gi,'.') }}</p>
                                             </div>
                                         </div>
                                         <p class="review-text mt-2 mb-1">
-                                            <a href="https://myplace-phinf.pstatic.net/20210827_62/16300643312513fe1S_JPEG/upload_07fc7f5449b8fecbeca86e655f0afce3.jpg" data-gallery="gallery-99" class="filtr-item" title="" data-category="99">
-                                                <img src="/static/images/assets/empty.png" data-src="https://search.pstatic.net/common/?autoRotate=true&amp;quality=95&amp;type=f87_87&amp;src=https%3A%2F%2Fmyplace-phinf.pstatic.net%2F20210827_62%2F16300643312513fe1S_JPEG%2Fupload_07fc7f5449b8fecbeca86e655f0afce3.jpg" class="preload-img rounded-s shadow-m review_img" alt="방문자리뷰">
+                                            <div v-if="review.images && review.images.length>0">
+                                            <a v-for="(image,index) in review.images" v-if="index<3" :href="image.thumbnailUrl" data-gallery="gallery-99" class="filtr-item" title="" data-category="99">
+                                                <img src="/static/images/assets/empty.png" :data-src="image.thumbnailUrl" class="preload-img rounded-s shadow-m review_img" alt="방문자리뷰">
                                             </a>
-                                            제주도에서 스쿠버 다이빙 할 때 항상 방문하는 버블탱크 입니다.<br/>
-                                            예약할 때 문의 드리면 친절하게 답변해 주십니다.<br/>
-                                            다이빙 할 때도 신경 많이 써 주시고<br/>
-                                            불편한 점 말씀 드리면 신속하게 해결해 주세요<br/>
-                                            렌탈 장비 관리 철저하게 하셔서<br/>
-                                            믿고 이용할 수 있어요!!
+                                            </div>
+                                            {{ review.content }}
                                         </p>
                                 </div>     
                             </div>
                             <div class="splide__slide">
                                 <div class="min-h-230 p-2">
-                                        <div class="d-flex">
-                                            <div class="flex-grow-1">
-                                                <div class="float-start">
-                                                    <h1 class="fa-2x font-900 me-2 mb-0">4.98</h1>
-                                                    <p class="font-10 mb-0 mt-n2 opacity-40 text-end">어드벤스드 코스</p>
-                                                </div>
-                                                <span>
-                                                    <i class="fa fa-star color-yellow-dark"></i>
-                                                    <i class="fa fa-star color-yellow-dark"></i>
-                                                    <i class="fa fa-star color-yellow-dark"></i>
-                                                    <i class="fa fa-star color-yellow-dark"></i>
-                                                    <i class="fa fa-star color-yellow-dark"></i>
-                                                </span>
-                                            </div>
-                                            <div>
-                                                <h6 class="text-end">조관우</h6>
-                                                <p class="font-10 mb-0 mt-n2 opacity-40 text-end">2021.08.27</p>
-                                            </div>
-                                        </div>
-                                        <p class="review-text mt-2 mb-1">
-                                            태풍이 올라와서 취소되진 않을까 걱정을 많이 했는데 잘챙겨주셔서 오픈워터 딸수 있었습니다ㅎㅎ<br/>
-                                            맑은날이 아니라 아쉬웠지만 어드밴스드 딸때는 날씨요정이 함께 해주기를 기대합니다...ㅎㅎ<br/>
-                                            잡아주신 숙소도 버블탱크 바로 앞에 있어서 넘 좋았어요.<br/>
-                                            깔끔하고 호텔사장님도 엄청 친절하셨어요ㅋ<br/>
-                                            그리고 버블탱크 샤워실에 스킨로션에 샴푸,린스,바디워시,클렌징폼, 머리끈까지 구비되어 있었습니다.<br/>
-                                            세심함에 치였슴당💕
-                                        </p>
-                                </div>   
-                            </div>
-                            <div class="splide__slide">
-                                <div class="min-h-230 p-2">
-                                        <div class="d-flex">
-                                            <div class="flex-grow-1">
-                                                <div class="float-start">
-                                                    <h1 class="fa-2x font-900 me-2 mb-0">4.5</h1>
-                                                    <p class="font-10 mb-0 mt-n2 opacity-40 text-end">섬 다이빙</p>
-                                                </div>
-                                                <span>
-                                                    <i class="fa fa-star color-yellow-dark"></i>
-                                                    <i class="fa fa-star color-yellow-dark"></i>
-                                                    <i class="fa fa-star color-yellow-dark"></i>
-                                                    <i class="fa fa-star color-yellow-dark"></i>
-                                                    <i class="fa fa-star color-yellow-dark"></i>
-                                                </span>
-                                            </div>
-                                            <div>
-                                                <h6 class="text-end">조윤구</h6>
-                                                <p class="font-10 mb-0 mt-n2 opacity-40 text-end">2021.08.20</p>
-                                            </div>
-                                        </div>
-                                        <p class="review-text mt-2 mb-1">
-                                            <a href="https://myplace-phinf.pstatic.net/20210824_287/1629760530492Jfami_JPEG/upload_b0549f411c1a65e230ea73a17359faae.jpeg" data-gallery="gallery-99" class="filtr-item" title="" data-category="99">
-                                                <img src="/static/images/assets/empty.png" data-src="https://search.pstatic.net/common/?autoRotate=true&amp;quality=95&amp;type=f87_87&amp;src=https%3A%2F%2Fmyplace-phinf.pstatic.net%2F20210824_287%2F1629760530492Jfami_JPEG%2Fupload_b0549f411c1a65e230ea73a17359faae.jpeg" class="preload-img rounded-s shadow-m review_img" alt="방문자리뷰">
-                                            </a>
-                                            강의듣는 내내 사진,동영상 많이찍어주셔서  좋았어요 !!  시설도깔끔하고  강사분들도 재밌고 친절해서 좋았습니다~  앞으로 제주도오면 많이 애용할듯! 자주자주 방문하겠습니다. 다음에 또 가면 잘알려주세요~
-                                        </p>
-                                </div>   
-                            </div>
-                            <div class="splide__slide">
-                                <div class="min-h-230 p-2">
                                         <h1 class="text-center"><i class="fas fa-pen-square fa-2x color-highlight mt-4"></i></h1>
-                                        <h1 class="text-center pt-3 font-20 mb-n1">17개 리뷰</h1>
+                                        <h1 class="text-center pt-3 font-20 mb-n1">{{ centerData.reviews.length }}개 리뷰</h1>
                                         <p class="text-center color-highlight font-600">더보기 <i class="fas fa-chevron-right"></i></p>
                                 </div>    
                             </div>
                         </div>
                     </div>
+                </div>
+                <div v-else class="text-center">
+                    <img src="/static/images/assets/empty_list.jpg" width="50%" />
+                    <p class="color-gray">아직 작성된 리뷰가 없어요.</p>
                 </div>
             </div>
             <div class="divider mt-2 mb-2 ms-3 me-3"></div>
@@ -1041,6 +978,9 @@ export default {
                                 name
                                 email
                                 _id
+                                profileImages {
+                                    thumbnailUrl
+                                }
                             }
                             title
                             content
@@ -1052,6 +992,7 @@ export default {
                             reviewCount
                             views
                             likes
+                            createdAt
                         }
                         likes
                         views

@@ -328,6 +328,10 @@ export default {
 
       var hasError = false;
       var errString = '';
+      // scores
+      if (field.includes("Score")) {
+        value = parseInt(value);
+      }
       // interests
       if (field == 'interestsTitle') {
         var temp_list = JSON.parse(value.replace(/\'/gi,'"'));
