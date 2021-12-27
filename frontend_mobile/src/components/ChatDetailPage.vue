@@ -4,12 +4,9 @@
     <div class="header header-fixed header-logo-center">
         <a href="" class="header-title color">윤장송</a>
         <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
-        <a href="#" data-menu="menu-main" class="header-icon header-icon-4"><i class="fas fa-bars"></i></a>
-        <a href="#" data-toggle-theme class="header-icon header-icon-3 show-on-theme-dark"><i class="fas fa-sun"></i></a>
-        <a href="#" data-toggle-theme class="header-icon header-icon-3 show-on-theme-light"><i class="fas fa-moon"></i></a>
     </div>
 
-    <div id="footer-bar-speach" class="d-flex" style="min-height: 52px !important;height: 52px !important;">
+    <div id="footer-bar-speach" class="d-flex" style="min-height: 52px !important;height: 52px !important;z-index: 9999;">
         <div class="me-1 speach-icon">
             
             
@@ -26,101 +23,8 @@
         </div>
     </div>
     
-    <div id="speech-content" class="card card-style ms-0 me-0 rounded-0 mt-5 mb-5" style="height: calc(100vh - 101px);width: 100vw;vertical-align: bottom;display: table-cell;padding-top: 50px;padding-bottom: 51px;">
+    <div id="speech-content" class="card card-style ms-0 me-0 rounded-0 mt-5 mb-5" style="height: calc(100vh - 101px);">
         <div class="content">
-            <div>
-                <div class="speech-left">
-                    <div class="speech-bubble bg-highlight">
-                        안녕
-                    </div>
-                    <span class="time">aaa</span>
-                </div>
-                <div class="clearfix"></div>
-                <div class="speech-left">
-                    <div class="speech-bubble bg-highlight">
-                        안녕
-                    </div>
-                    <span class="time">aaa</span>
-                </div>
-                <div class="clearfix"></div>
-                <div class="speech-left">
-                    <div class="speech-bubble bg-highlight">
-                        안녕
-                    </div>
-                    <span class="time">aaa</span>
-                </div>
-                <div class="clearfix"></div>
-                <div class="speech-left">
-                    <div class="speech-bubble bg-highlight">
-                        안녕
-                    </div>
-                    <span class="time">aaa</span>
-                </div>
-                <div class="clearfix"></div>
-                <div class="speech-left">
-                    <div class="speech-bubble bg-highlight">
-                        안녕
-                    </div>
-                    <span class="time">aaa</span>
-                </div>
-                <div class="clearfix"></div>
-                <div class="speech-left">
-                    <div class="speech-bubble bg-highlight">
-                        안녕
-                    </div>
-                    <span class="time">aaa</span>
-                </div>
-                <div class="clearfix"></div>
-                <div class="speech-left">
-                    <div class="speech-bubble bg-highlight">
-                        안녕
-                    </div>
-                    <span class="time">aaa</span>
-                </div>
-                <div class="clearfix"></div>
-                <div class="speech-left">
-                    <div class="speech-bubble bg-highlight">
-                        안녕
-                    </div>
-                    <span class="time">aaa</span>
-                </div>
-                <div class="clearfix"></div>
-                <div class="speech-left">
-                    <div class="speech-bubble bg-highlight">
-                        안녕
-                    </div>
-                    <span class="time">aaa</span>
-                </div>
-                <div class="clearfix"></div>
-                <div class="speech-left">
-                    <div class="speech-bubble bg-highlight">
-                        안녕
-                    </div>
-                    <span class="time">aaa</span>
-                </div>
-                <div class="clearfix"></div>
-                <div class="speech-left">
-                    <div class="speech-bubble bg-highlight">
-                        안녕
-                    </div>
-                    <span class="time">aaa</span>
-                </div>
-                <div class="clearfix"></div>
-                <div class="speech-left">
-                    <div class="speech-bubble bg-highlight">
-                        안녕
-                    </div>
-                    <span class="time">aaa</span>
-                </div>
-                <div class="clearfix"></div>
-                <div class="speech-left">
-                    <div class="speech-bubble bg-highlight">
-                        안녕
-                    </div>
-                    <span class="time">aaa</span>
-                </div>
-                <div class="clearfix"></div>
-            </div>
             <div v-for="chat in chatData">
                 <div v-if="chat.author._id == uid" class="speech-left">
                     <div class="speech-bubble bg-highlight">

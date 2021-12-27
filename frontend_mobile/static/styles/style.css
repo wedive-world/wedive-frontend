@@ -1267,7 +1267,7 @@ body {
 .header {
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   backdrop-filter: saturate(180%) blur(20px);
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: #eef2f1;
   position: fixed;
   top: 0px;
   left: 0px;

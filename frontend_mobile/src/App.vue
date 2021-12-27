@@ -106,22 +106,42 @@ const axios = require("axios")
 export default {
   name: 'App',
   mounted() {
-    //$("#menu-main").attr("data-menu-width", $( window ).width());
+    if (localStorage.tokenAt == null || (new Date().getTime() - localStorage.tokenAt) > 1800000) {
+      this.getFirebaseToken()
+    }
+
     try {
-      var item = $("[data-menu-active]").data("menu-active").replace('nav-', '');
-      if (item == 'buddy' || item == 'book' || item == 'chat') {
-        $("#wedive-add").removeClass("hide");
-        $("#wedive-search").removeClass("hide");
-      } else if (item == 'site') {
-        $("#wedive-search").removeClass("hide");
-      }
-    } catch (e) {}
+      const userInformation = JSON.parse(Android.getUserInformation());
+    
+      console.log(`android connected, ${JSON.stringify(userInformation)}`);
+      localStorage.setItem(userAuthKey, userInformation);
+      if (userInformation.uid) localStorage.uid = userInformation.uid;
+      if (userInformation.idToken) localStorage.idToken = userInformation.idToken;
+      if (userInformation.email) localStorage.userEmail = userInformation.email;
+      if (userInformation.languageCode) localStorage.languageCode = userInformation.languageCode;
+    }catch(e) {
+
+    }
+    
+    
+    //$("#menu-main").attr("data-menu-width", $( window ).width());
+    setTimeout(function() {
+      try {
+        var item = window.location.pathname;
+        //var item = $("[data-menu-active]").data("menu-active").replace('nav-', '');
+        //console.log(item);
+        if (item == '/' || item == '/book_home' || item == '/chat_home') {
+          $("#wedive-add").removeClass("hide");
+          $("#wedive-search").removeClass("hide");
+        } else if (item == '/site_list') {
+          $("#wedive-search").removeClass("hide");
+        }
+      } catch (e) {console.log(e)}
+    },100)
+    
     
     if (localStorage.perferedSite == null) {
       localStorage.perferedSite = '/site_list';
-    }
-    if (localStorage.tokenAt == null || (new Date().getTime() - localStorage.tokenAt) > 1800000) {
-      this.getFirebaseToken()
     }
   },
   data() {

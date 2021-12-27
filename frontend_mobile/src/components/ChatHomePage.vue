@@ -6,9 +6,12 @@
         <p class="color-gray mb-2">{{ login_word }}이 필요합니다.</p>
 
         <a v-on:click="login()" class="btn btn-m mb-3 rounded-xl text-uppercase font-500 shadow-s bg-secondary font-noto"><i class="fas fa-user-lock me-1"></i> {{ login_word }}</a>
-        
     </div>
-    <div v-else class="card card-style ms-0 me-0 rounded-0">
+    <div v-else-if="chatData.length == 0" class="card card-style ms-0 me-0 rounded-0 text-center mb-0" style="height: calc(100vh - 58px);display:block;">
+        <img src="/static/images/assets/empty_message.jpg" width="60%" style="margin-top: 25%;" />
+        <p class="color-gray mb-2">진행중인 대화가 없습니다.</p>
+    </div>
+    <div v-else class="card card-style ms-0 me-0 rounded-0 mb-0" style="min-height:calc(100vh - 101px)">
         <div class="content">
             <a v-for="chat in chatData" :href="'/chat/'+chat._id" class="d-block">
                 <div v-if="chat.chatUsers.length == 2" class="p-relative d-inline-block w-60 mb-2">
