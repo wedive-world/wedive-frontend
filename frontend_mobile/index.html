@@ -96,6 +96,10 @@ a:focus {color:white;}
 .circular_image {width: 50px;height: 50px;border-radius: 50%;overflow: hidden;background-color: white;display:inline-block;vertical-align:middle;object-fit: cover;}
 .circular_image img{width:100%;}
 .page-content {transform: initial !important;}
+.square:before {content: "";display: block;padding-top: 100%;}
+.square_inner {position: absolute;top: 0;right: 0;bottom: 0;left: 0;}
+.square_inner:before{content: "";width:16px;height:16px;background:url(/static/images/assets/icon_close_img.png);position:absolute;top:0;right:0;background-size:cover;}
+.square_inner_close {position: absolute;top: 0;right: 0;width:20px;height:20px;}
 </style>
   </head>
   <body style="max-width: 100%;overflow-x: hidden;">
@@ -103,6 +107,7 @@ a:focus {color:white;}
     <!-- built files will be auto injected -->
     <script type="text/javascript" src="/static/scripts/bootstrap.min.js"></script>
     <script type="text/javascript" src="/static/scripts/custom.js"></script>
+    <script>var file_photo = new Array();function abc(lastModified, e) {e.parentNode.parentNode.remove();file_photo.forEach(function(file,index,object) {if(file.lastModified == lastModified) object.splice(index,1);});}</script>
   </body>
   
 </html>

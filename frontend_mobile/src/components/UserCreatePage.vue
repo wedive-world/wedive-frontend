@@ -393,44 +393,14 @@
                         </div>
                         <div class="row me-0 ms-0 mb-0" style="position: absolute;bottom: 0;width:100%;padding-left:20px;padding-right:20px;">
                             <a href="#" class="col-6 slider-prev btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>
-                            <a id="btn_next4" href="#" class="col-6 slider-next btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;" v-on:click="next4()">{{ next4_word }}</a>
+                            <a id="btn_next4" href="#" class="col-6 slider-next btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;" v-on:click="next4()">완료</a>
                         </div>
                         </div>
                     </div>
 
+                    
                     <div class="splide__slide">
                         <div id="slide5" class="card card-full pb-0 mb-0 border-bottom" style="height: calc( 100vh - 56px );">
-                        <div class="content mt-1">
-                            <div class="font-noto font-400 mt-3 mb-2 d-flex" style="background: #e7e7e7;color:#5f6368;padding: 10px 16px;">
-                                <div style="background-color:#fff;display: inline-block;align-self: flex-start;border-radius: 4px;height: 32px;flex-shrink: 0;margin: 7px 16px 0 0;width: 32px;padding: 7px;"><svg style="vertical-align: baseline;fill: currentColor;"width="18" height="18" viewBox="0 0 24 24" focusable="false" class="HLbGM NMm5M"><path d="M11 7h2v2h-2zm0 4h2v6h-2z"></path><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"></path></svg></div>
-                                <div style="display: inline-block;"><font class="color-shopping">강사</font> 이신가요?<br/>무료로 강습생을 연결해드려요.</div>
-                            </div>
-
-                            <div class="input-style no-borders has-icon validate-field mb-3 mt-3">
-                                <i class="fas fa-phone-alt color-gray"></i>
-                                <input type="tel" class="form-control validate-text" id="form31" placeholder="전화번호" v-model="instructor_phone">
-                                <label for="form31" class="color-highlight">전화번호</label>
-                                <i class="fa fa-times disabled invalid color-red-dark"></i>
-                                <i class="fa fa-check disabled valid color-green-dark"></i>
-                                <em>(필수입력)</em>
-                            </div>
-                            
-                            
-                            <div id="file-upload2-back" style="border: 1px solid #abb7ba;width: 150px;height:150px;display: inline-block;background: white;position: relative;">
-                                <input type="file" @change="imageInstructorChange" id="file-upload2" class="upload-file text-center" accept="image/*" style="height: 150px;">
-                                    <p id="file-upload2-text" class="upload-file-text" style="color: #abb7ba;position:absolute;left:40px;top:80px;"><i class="fas fa-plus"></i><br/>자격증 업로드</p>
-                                </input>
-                            </div>
-                        </div>
-                        <div class="row me-0 ms-0 mb-0" style="position: absolute;bottom: 0;width:100%;padding-left:20px;padding-right:20px;">
-                            <a href="#" class="col-6 slider-prev btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>
-                            <a id="btn_next4" href="#" class="col-6 slider-next btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;" v-on:click="next5()">완료</a>
-                        </div>
-                        </div>
-                    </div>
-
-                    <div class="splide__slide">
-                        <div id="slide6" class="card card-full pb-0 mb-0 border-bottom" style="height: calc( 100vh - 56px );">
                         <div class="content mt-1" style="padding-top: 80px;">
                             <div class="text-center mt-2 mb-3">
                                 <img src="/static/images/assets/confetti.gif" width="50%"/>
@@ -552,10 +522,6 @@
 import { GraphQLClient, request, gql } from "graphql-request";
 
 const axios = require("axios")
-var file_certificate = null;
-
-
-
 export default {
   name: 'HelloWorld',
   mounted() {
@@ -596,8 +562,6 @@ export default {
     document.getElementById('slide3').style.height = height + 'px';
     document.getElementById('slide4').style.height = height + 'px';
     document.getElementById('slide5').style.height = height + 'px';
-    document.getElementById('slide6').style.height = height + 'px';
-    
   },
   components: {
     
@@ -619,9 +583,7 @@ export default {
         scuba_log: '',
         free_license: '',
         free_level: '',
-        instructor_phone: '',
         file_photo: null,
-        file_certificate: null,
         pb_sta: '',
         pb_dyn: '',
         pb_dnf: '',
@@ -647,7 +609,6 @@ export default {
         interest15: false,
         interest16: false,
         next3_word: '넘어가기',
-        next4_word: '넘어가기',
     }
   }, 
   watch: {
@@ -693,20 +654,6 @@ export default {
               this.next3_word = '다음';
           }
       },
-      free_license: function(newVal, oldVal) {
-          if (this.free_license === '' && this.free_level === '') {
-              this.next4_word = '넘어가기';
-          } else {
-              this.next4_word = '다음';
-          }
-      },
-      free_level: function(newVal, oldVal) {
-          if (this.free_license === '' && this.free_level === '') {
-              this.next4_word = '넘어가기';
-          } else {
-              this.next4_word = '다음';
-          }
-      },
   },
   methods: {
       imageUserChange({ target: { files = [] } }) {
@@ -718,31 +665,19 @@ export default {
         $("#file-upload1-back").css("background-size", "cover");
         $("#file-upload1-img").hide();
       },
-      imageInstructorChange({ target: { files = [] } }) {
-        if (!files.length) {
-          return
-        }
-        this.file_certificate = files[0];
-        $("#file-upload2-back").css("background", "url(" + URL.createObjectURL(this.file_certificate) + ")");
-        $("#file-upload2-back").css("background-size", "cover");
-        $("#file-upload2-text").hide();
-      },
       next1() {
-          $(".progress-bar").css("width", "40%");
+          $(".progress-bar").css("width", "50%");
           setTimeout(function() {
               $("#form2").focus();
           },200);
       },
       next2() {
-          $(".progress-bar").css("width", "60%");
+          $(".progress-bar").css("width", "75%");
       },
       next3() {
-          $(".progress-bar").css("width", "80%");
-      },
-      next4() {
           $(".progress-bar").css("width", "100%");
       },
-      async next5() {
+      async next4() {
         //console.log(this.file_photo);
 
         
@@ -820,54 +755,7 @@ export default {
             localStorage.userThumbnail = result_img_user.uploadImage.thumbnailUrl
         }
         
-        var result_img_certi = null;
-        if (this.file_certificate != null) {
-            var mutation = gql`
-                mutation UploadImageMutation($uploadImageFile: Upload!) {
-                    uploadImage(file: $uploadImageFile) {
-                        _id
-                        name
-                        mimeType
-                        encoding
-                        createdAt
-                        updatedAt
-                    }
-                }
-            `
-            
-            var client = new GraphQLClient('https://api.wedives.com/graphql',
-            {
-                headers: {
-                    countrycode: 'ko',
-                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-                }
-            })
-
-            result_img_certi = await client.request(mutation, {uploadImageFile: this.file_certificate,});
-            //console.log(result_img_certi);
-
-
-            var updateMutation = gql`
-                mutation Mutation($input: UpdateImageInput!) {
-                    updateImage(input: $input) {
-                        _id
-                        name
-                        description
-                        reference
-                        uploaderId
-                        mimeType
-                        encoding
-                        fileSize
-                    }
-                }
-            `;
-            
-
-            var result_upload = await client.request(updateMutation, {input: {"_id": result_img_certi.uploadImage._id,"description": "userCertificate","reference": null}});
-            //console.log(result_upload);
-
-
-        }
+        
         var result_find_user = await axios({
             url: 'https://api.wedives.com/graphql',
             method: 'post',
@@ -908,7 +796,6 @@ export default {
         if (result_img_user) input_temp.profileImages = [result_img_user.uploadImage._id];
         if (this.scuba_log && this.scuba_log != '') input_temp.divingLog = parseInt(this.scuba_log);
         if (freeBest && freeBest.length > 0) input_temp.freeDivingBests = freeBest;
-        if (this.instructor_phone && this.instructor_phone != '') input_temp.phoneNumber = this.instructor_phone;
         const ipt = input_temp;
         
         var result = await axios({
@@ -923,9 +810,6 @@ export default {
                     mutation Mutation($input: UserInput) {
                         upsertUser(input: $input) {
                             _id
-                            instructorLicenseImages {
-                                _id
-                            }
                             scubaLicenseType
                             scubaLicenseLevel
                             freeLicenseType
@@ -967,41 +851,6 @@ export default {
         localStorage.nickName = this.nickname;
         localStorage.userGender  = this.usersex;
 
-        if (result_img_certi != null) {
-            var result2 = await axios({
-                url: 'https://api.wedives.com/graphql',
-                method: 'post',
-                headers: {
-                    countrycode: 'ko',
-                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-                },
-                data: {
-                    query: `
-                        mutation UpsertInstructorVerification($input: InstructorVerificationInput) {
-                            upsertInstructorVerification(input: $input) {
-                                _id
-                                instructorType
-                                isVerified
-                                verificationReason
-                            }
-                        }
-                    `,
-                    variables: {
-                        "input": {
-                            "instructorLicenseImage": ((result_img_certi == null) ? null : result_img_certi.uploadImage._id),
-                            "instructorType": null,
-                            "isVerified": null,
-                            "verificationReason": null,
-                            "user": result.data.data.upsertUser._id
-                        }
-                    }
-                }
-            });
-            //console.log("result2 ================");
-            //console.log(result2);
-        }
-        
-        
         
 
         setTimeout(function() {

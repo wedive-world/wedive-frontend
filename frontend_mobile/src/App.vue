@@ -31,6 +31,7 @@
             <a v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><i class="wedive_plus"></i></a>
             <a v-if="$route.path=='/site_list'" href="/site_home" class="page-title-icon font-18" style="color: #858585;margin-right: 13.3333333333px;"><i class="fas fa-map-marked"></i></a>
             <a v-on:click="searchItem()" id="wedive-search" class="page-title-icon font-18 hide" style="color:#858585 !important;"><i class="fas fa-search"></i></a>
+            <a v-on:click="shareItem()" id="wedive-share" class="page-title-icon font-18 hide" style="color:#858585 !important;"><img src="/static/images/assets/ico_share.png" height="18"/></a>
             <!--<a href="#" class="page-title-icon" data-menu="menu-main" :style="'background: url('+((userThumbnail) ? userThumbnail : '/static/images/assets/user_empty_'+((gender)?gender:'m')+'.png')+');background-size:cover;'"></a>-->
           </div>
           <div class="page-title-clear"></div>
@@ -125,19 +126,27 @@ export default {
     
     
     //$("#menu-main").attr("data-menu-width", $( window ).width());
-    setTimeout(function() {
-      try {
-        var item = window.location.pathname;
-        //var item = $("[data-menu-active]").data("menu-active").replace('nav-', '');
-        //console.log(item);
-        if (item == '/' || item == '/book_home' || item == '/chat_home') {
-          $("#wedive-add").removeClass("hide");
-          $("#wedive-search").removeClass("hide");
-        } else if (item == '/site_list') {
-          $("#wedive-search").removeClass("hide");
-        }
-      } catch (e) {console.log(e)}
-    },100)
+    
+    try {
+      var item = window.location.pathname;
+      if (item == '/' || item == '/book_home' || item == '/chat_home') {
+        $("#wedive-add").removeClass("hide");
+        $("#wedive-search").removeClass("hide");
+      } else if (item == '/site_list') {
+        $("#wedive-search").removeClass("hide");
+      } else {
+        setTimeout(function() {
+          try {
+            var item_menu = $("[data-menu-active]").data("menu-active").replace('nav-', '');
+            if (item_menu == 'site') {
+              $("#wedive-share").removeClass("hide");
+            }
+          } catch(e) {}
+        },1000)
+        
+      }
+    } catch (e) {console.log(e)}
+    
     
     
     if (localStorage.perferedSite == null) {
@@ -180,6 +189,9 @@ export default {
     },
     searchItem() {
       console.log("searchItem");
+    },
+    shareItem() {
+      console.log("shareItem")
     },
     goHack: function() {
         window.history.back();

@@ -23,12 +23,15 @@
                     <p class="mb-0 font-12 color-gray">{{ userData.levelShow }}</p>
                 </div>
             </div>
-            <div class="row m-0">
-                <div class="col-6 pe-1">
-                    <a v-on:click="sendDirectMessage()" class="btn btn-border btn-m btn-full text-uppercase font-900 border-gray-dark color-black bg-theme" style="padding: 6px 0 !important;">대화하기</a>
+            <div class="row m-0 mt-2">
+                <div v-on:click="sendDirectMessage()" class="col-4 pe-1">
+                    <span  class="btn btn-border btn-m btn-full text-uppercase font-900 border-gray-dark color-black bg-theme" style="padding: 6px 0 !important;"><img src="/static/images/assets/ico_chat.png" height="16"/> 대화하기</span>
                 </div>
-                <div class="col-6 ps-1">
-                    <a href="#" class="btn btn-border btn-m btn-full text-uppercase font-900 border-gray-dark color-black bg-theme" style="padding: 6px 0 !important;">평가하기</a>
+                <div v-on:click="clickLike()" class="col-4">
+                    <span class="btn btn-border btn-m btn-full text-uppercase font-900 border-gray-dark color-black bg-theme" style="padding: 6px 0 !important;"><img :src="'/static/images/assets/'+like_img+'.png'" height="16"/> 좋아요 {{ userData.likes }}</span>
+                </div>
+                <div v-on:click="clickSubscribe()" class="col-4 ps-1">
+                    <span class="btn btn-border btn-m btn-full text-uppercase font-900 border-gray-dark color-black bg-theme" style="padding: 6px 0 !important;"><img :src="'/static/images/assets/'+subscribe_img+'.png'" height="16"/> 알림</span>
                 </div>
             </div>
             <div class="content pb-3">
@@ -223,6 +226,8 @@ export default {
         review_detail: '',
         is_empty: false,
         dm_text: '',
+        like_img: 'ico_heart',
+        subscribe_img: 'ico_subscribe',
     }
   },
   methods: {
@@ -343,6 +348,70 @@ export default {
                 var preloader = document.getElementById('preloader')
                 if(preloader){preloader.classList.add('preloader-hide');}
             }, 1000);
+          }
+      },
+      async clickLike() {
+          if (localStorage.idToken) {
+            const targetId = this.userData._id;
+            var result = await axios({
+                url: 'https://api.wedives.com/graphql',
+                method: 'post',
+                headers: {
+                    countrycode: 'ko',
+                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                },
+                data: {
+                    query: `
+                        mutation Like($targetId: ID!, $targetType: UserReactionTargetType!) {
+                            like(targetId: $targetId, targetType: $targetType) {
+                                success
+                            }
+                        }
+                    `,
+                    variables: {
+                        "targetId": targetId,
+                        "targetType": "user"
+                    }
+                }
+            });
+            if (result && result.data && result.data.data && result.data.data.like.success && result.data.data.like.success == true) {
+                this.like_img = 'ico_heart2';
+                this.userData.likes = ((this.userData.likes==null)?0:this.userData.likes)+1;
+            } else if (result && result.data && result.data.data && result.data.data.like.success && result.data.data.like.success == true) {
+                this.like_img = 'ico_heart';
+                this.userData.likes = this.userData.likes - 1;
+            }
+          }
+      },
+      async clickSubscribe() {
+          if (localStorage.idToken) {
+            const targetId = this.userData._id;
+            var result = await axios({
+                url: 'https://api.wedives.com/graphql',
+                method: 'post',
+                headers: {
+                    countrycode: 'ko',
+                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                },
+                data: {
+                    query: `
+                        mutation Subscribe($targetId: ID!, $targetType: UserReactionTargetType!) {
+                            subscribe(targetId: $targetId, targetType: $targetType) {
+                                success
+                            }
+                        }
+                    `,
+                    variables: {
+                        "targetId": targetId,
+                        "targetType": "user"
+                    }
+                }
+            });
+            if (result && result.data && result.data.data && result.data.data.subscribe.success && result.data.data.subscribe.success == true) {
+                this.subscribe_img = 'ico_subscribe2';
+            } else if (result && result.data && result.data.data && result.data.data.subscribe.success && result.data.data.subscribe.success == false) {
+                this.subscribe_img = 'ico_subscribe';
+            }
           }
       },
   }

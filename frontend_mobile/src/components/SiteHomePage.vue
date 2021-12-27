@@ -1173,7 +1173,7 @@ export default {
             //updatePoint();
             //updateCenter();
             updateAll();
-        },100)
+        },500)
         
     };
     //$(".page-title-wrapper").css("background-color", "#eef2f1");

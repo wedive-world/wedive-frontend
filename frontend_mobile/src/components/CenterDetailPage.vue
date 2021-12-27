@@ -53,19 +53,19 @@
                 <div class="divider mt-3 mb-3"></div>
                 <div class="d-flex mt-3 mb-0 text-center">
                     <div class="flex-grow-1 pd-0" style="border-right: 1px solid lightgray;">
-                    <button :href="'tel:'+centerData.phoneNumber"">
+                    <a :href="'tel:'+centerData.phoneNumber"" style="color:black;">
                         <img class="ext-img" src="/static/images/assets/ico_call.png" width="24" style="margin-top:-4px;"/>
                         <span class="font-16 font-500 font-noto">전화</span>
-                    </button>
+                    </a>
                     </div>
-                    <div class="flex-grow-1 pd-0" style="border-right: 1px solid lightgray;">
-                        <img class="ext-img" src="/static/images/assets/ico_heart.png" width="24" style="margin-top:-4px;"/>
-                        <span class="font-16 font-500 font-noto">찜 0</span>
+                    <div v-on:click="clickLike()" class="flex-grow-1 pd-0" style="border-right: 1px solid lightgray;">
+                        <img class="ext-img" :src="'/static/images/assets/' + like_img + '.png'" width="24" style="margin-top:-4px;"/>
+                        <span class="font-16 font-500 font-noto">찜 {{ centerData.likes }}</span>
                     </div>
                     
-                    <div class="flex-grow-1 pd-0" data-menu="menu-share">
-                        <img class="ext-img" src="/static/images/assets/ico_share.png" width="24" style="margin-top:-4px;"/>
-                        <span class="font-16 font-500 font-noto">공유</span>
+                    <div v-on:click="clickSubscribe()" class="flex-grow-1 pd-0">
+                        <img class="ext-img" :src="'/static/images/assets/'+subscribe_img+'.png'" width="24" style="margin-top:-4px;"/>
+                        <span class="font-16 font-500 font-noto">알림</span>
                     </div>
                     
                 </div>
@@ -241,7 +241,7 @@
                         <div class="row text-start">
                             <div class="ico_feature col-3" v-if="interest.type=='facility'" v-for="interest in centerData.interests">
                                 <i v-if="item == interest.title" v-for="(item, index) in feature_list" :class="'ico_feature'+(index+1)+' icon-service'"></i>
-                                <p class="span_feature text-center">{{ interest.title }}</p>
+                                <p class="span_feature text-center" style="line-height: 1.05;">{{ interest.title }}</p>
                             </div>
                         </div>
                         <i class="fas fa-highlighter color-blue2-dark mt-n2 right-icon"></i>
@@ -301,7 +301,7 @@
                     <div class="mt-3 text-start row" v-if="centerData.rentals && centerData.rentals.length > 0">
                         <div class="ico_equipt col-3" v-for="rental in centerData.rentals">
                             <i :class="'ico_equipt' + (rentalOptions.findIndex(x=>x==rental.name)+1) + ' icon-equiptment'"></i>
-                            <p class="span_feature text-center mb-0">{{ rental.name }}</p>
+                            <p class="span_feature text-center mb-0" style="line-height: 1.05;">{{ rental.name }}</p>
                             <p v-if="rental.price==0" class="span_feature text-center mb-0 color-gray mt-n1">무료</p>
                             <p v-else-if="rental.unitName==''" class="span_feature text-center mb-0 color-gray mt-n1">{{ rental.price | makeComma }}</p>
                             <p v-else class="span_feature text-center mb-0 color-gray mt-n1">{{ rental.price | makeComma }}/{{ rental.unitName}}</p>
@@ -362,8 +362,8 @@
             <div class="content mb-0">
                 <h4 class="text-start pt-2 mb-2">주소</h4>
                 <p class="text-start mb-3 mb-0">
-                    <a href="#" data-menu="menu-copy"><i class="far fa-copy me-2"></i>{{ centerData.geoAddress }}</a><br/>
-                    <a href="#" class="color-highlight" data-menu="menu-direction"><i class="fas fa-route me-2"></i> 공항-샵 이동방법 안내</a>
+                    <span data-menu="menu-copy"><i class="far fa-copy me-2"></i>{{ centerData.geoAddress }}</span><br/>
+                    <a href="#" class="color-highlight hide" data-menu="menu-direction"><i class="fas fa-route me-2"></i> 공항-샵 이동방법 안내</a>
                 </p>
             </div>
             <div id="map" style="height: 300px;"></div>
@@ -852,28 +852,14 @@
             <div class="text-center color-gray mt-1 mb-2" v-html="rateDescription"></div>
         </div>
         <div class="content mt-0">
-            <div>
-                <div id="file-upload1-back" style="width: 80px;height:80px;display: inline-block;background: #c7c7c7;position: relative;border-radius:75px;background-size:cover;">
-                    <input type="file" @change="addImage1" id="file-upload1" class="upload-file text-center" accept="image/*" style="height: 80px;">
-                    <p class="upload-file-text" style="color: #abb7ba;position:absolute;left:18px;top:55px;">
-                        <img id="file-upload1-img" src="/static/images/assets/icon_image2.png" width="50"></img>
-                    </p></input>
-                </div>
-                <div id="file-upload2-back" class="hide ms-2" style="width: 80px;height:80px;display: inline-block;background: #c7c7c7;position: relative;border-radius:75px;background-size:cover;">
-                    <input type="file" @change="addImage2" id="file-upload2" class="upload-file text-center" accept="image/*" style="height: 80px;">
-                    <p class="upload-file-text" style="color: #abb7ba;position:absolute;left:18px;top:55px;">
-                        <img id="file-upload2-img" src="/static/images/assets/icon_image2.png" width="50"></img>
-                    </p></input>
-                </div>
-                <div id="file-upload3-back" class="hide ms-2" style="width: 80px;height:80px;display: inline-block;background: #c7c7c7;position: relative;border-radius:75px;background-size:cover;">
-                    <input type="file" @change="addImage3" id="file-upload3" class="upload-file text-center" accept="image/*" style="height: 80px;">
-                    <p class="upload-file-text" style="color: #abb7ba;position:absolute;left:18px;top:55px;">
-                        <img id="file-upload3-img" src="/static/images/assets/icon_image2.png" width="50"></img>
-                    </p></input>
-                </div>
-            </div>
             <div class="input-style validate-field mt-3">
                 <textarea class="wedive-textarea" placeholder="의견을 자유롭게 적어주세요." v-model="review_detail"></textarea>
+            </div>
+            <div id="div_upload_photo" class="row m-0 mb-3">
+            </div>
+            <div class="mb-3 text-center p-2" style="border: 1px solid #e9e9e9;">
+                <input type="file" @change="addImage" id="" accept="image/*" style="text-indent: -999px;outline: none;width: 100%;height: 45px;color: rgba(0, 0, 0, 0) !important;">
+                <div class="upload-file-text" style="color: black;margin-top:-44px !important;margin-bottom:12px;"><img class="me-1" src="/static/images/assets/icon_camera.png" height="18"/>첨부하기</div>
             </div>
         </div>
 
@@ -882,16 +868,17 @@
                 <a href="#" class="close-menu btn btn-m btn-full rounded-0 text-uppercase font-900 shadow-s bg-gray-dark">취소</a>
             </div>
             <div class="col-6 ps-1">
-                <a href="#" class="btn btn-m btn-full rounded-0 text-uppercase font-900 shadow-s bg-black">리뷰등록</a>
+                <a v-on:click="review_send()" class="btn btn-m btn-full rounded-0 text-uppercase font-900 shadow-s bg-black">리뷰등록</a>
             </div>
         </div>
     </div>
 
-    
+    <div id="snackbar-review-success" class="snackbar-toast color-white bg-green-dark" data-bs-delay="1500" data-bs-autohide="true"><i class="fa fa-times me-3"></i>리뷰 등록이 완료되었습니다.</div>
   </div>
 </template>
 <script>
 import StarRating from 'vue-star-rating'
+import { GraphQLClient, request, gql } from "graphql-request";
 const axios = require("axios")
 
 export default {
@@ -1066,6 +1053,9 @@ export default {
                             views
                             likes
                         }
+                        likes
+                        views
+                        reviewCount
                     }
                 }
             `,
@@ -1313,21 +1303,21 @@ export default {
                     map: this.map,
                     position: {lat: this.centerData.latitude, lng: this.centerData.longitude},
                     label: {text: this.centerData.name, color: 'white', className: 'marker-position'},
-                    icon: new google.maps.MarkerImage('/static/images/assets/ico_pin1.png',null, null, null, new google.maps.Size(38,43)),
+                    icon: new google.maps.MarkerImage('/static/images/assets/ico_pin2.png',null, null, null, new google.maps.Size(38,43)),
                 });
 
-                if (false) {
-                    var position = {lat: 33.22900114645303, lng: 126.56260977136935};
-                    const title = '문섬 포인트';
-                    const star = '4.3';
-                    const img = '/static/images/point/ko/jeju_munisland_06.jpg';
+                for (var i=0; i<this.centerData.divePoints.length; i++) {
+                    var position = {lat: this.centerData.divePoints[i].latitude, lng: this.centerData.divePoints[i].longitude};
+                    const title = this.centerData.divePoints[i].name;
+                    const star = (this.centerData.divePoints[i].adminScore/20).toFixed(1);
+                    const img = (this.centerData.divePoints[i].backgroundImages && this.centerData.divePoints[i].backgroundImages.length>0) ? this.centerData.divePoints[i].backgroundImages[0].thumbnailUrl : '/static/empty.jpg';
                     
 
                     var marker_point = new google.maps.Marker({
                         map: this.map,
                         position: position,
                         label: {text: title, color: 'white', className: 'marker-position2'},
-                        icon: new google.maps.MarkerImage('/static/images/assets/ico_pin2.png',null, null, null, new google.maps.Size(38,43)),
+                        icon: new google.maps.MarkerImage('/static/images/assets/ico_pin1.png',null, null, null, new google.maps.Size(38,43)),
                     });
                     marker_point.addListener("click", () => {
                         $(".map-box").removeClass("hide");
@@ -1399,49 +1389,174 @@ export default {
         rating: 3,
         rateDescription: '나쁘지 않아요.',
         review_detail: '',
+        file_photo: [],
+        like_img: 'ico_heart',
+        subscribe_img: 'ico_subscribe',
     }
   }, methods: {
       setData(_centerData) {
-          this.centerData = _centerData;
-          setTimeout(function() {
+        this.centerData = _centerData;
+        setTimeout(function() {
             init_template();
             var preloader = document.getElementById('preloader')
             if(preloader){preloader.classList.add('preloader-hide');}
-          }, 1000);
+        }, 1000);
       },
-      addImage1({ target: { files = [] } }) {
-        if (!files.length) {
-          return
-        }
-        this.file_photo = files[0];
-        $("#file-upload1-back").css("background", "url(" + URL.createObjectURL(this.file_photo) + ")");
-        $("#file-upload1-back").css("background-size", "cover");
-        $("#file-upload1-img").hide();
+      async clickLike() {
+          if (localStorage.idToken) {
+            const targetId = this.centerData._id;
+            var result = await axios({
+                url: 'https://api.wedives.com/graphql',
+                method: 'post',
+                headers: {
+                    countrycode: 'ko',
+                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                },
+                data: {
+                    query: `
+                        mutation Like($targetId: ID!, $targetType: UserReactionTargetType!) {
+                            like(targetId: $targetId, targetType: $targetType) {
+                                success
+                            }
+                        }
+                    `,
+                    variables: {
+                        "targetId": targetId,
+                        "targetType": "diveCenter"
+                    }
+                }
+            });
+            if (result && result.data && result.data.data && result.data.data.like.success && result.data.data.like.success == true) {
+                this.like_img = 'ico_heart2';
+                this.centerData.likes = ((this.centerData.likes==null)?0:this.centerData.likes)+1;
+            } else if (result && result.data && result.data.data && result.data.data.like.success && result.data.data.like.success == false) {
+                this.like_img = 'ico_heart';
+                this.centerData.likes = this.centerData.likes-1;
+            }
+          }
+      },
+      async clickSubscribe() {
+          if (localStorage.idToken) {
+            const targetId = this.centerData._id;
+            var result = await axios({
+                url: 'https://api.wedives.com/graphql',
+                method: 'post',
+                headers: {
+                    countrycode: 'ko',
+                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                },
+                data: {
+                    query: `
+                        mutation Subscribe($targetId: ID!, $targetType: UserReactionTargetType!) {
+                            subscribe(targetId: $targetId, targetType: $targetType) {
+                                success
+                            }
+                        }
+                    `,
+                    variables: {
+                        "targetId": targetId,
+                        "targetType": "diveCenter"
+                    }
+                }
+            });
+            if (result && result.data && result.data.data && result.data.data.subscribe.success && result.data.data.subscribe.success == true) {
+                this.subscribe_img = 'ico_subscribe2';
+            } else if (result && result.data && result.data.data && result.data.data.subscribe.success && result.data.data.subscribe.success == false) {
+                this.subscribe_img = 'ico_subscribe';
+            }
+          }
+      },
+      async review_send() {
+        var _id_list = new Array();
+        for (var i=0; i<file_photo.length; i++) {
+            var mutation = gql`
+                mutation UploadImageMutation($uploadImageFile: Upload!) {
+                    uploadImage(file: $uploadImageFile) {
+                        _id
+                        name
+                        mimeType
+                        encoding
+                        thumbnailUrl
+                        createdAt
+                        updatedAt
+                    }
+                }
+            `
+            var client = new GraphQLClient('https://api.wedives.com/graphql',
+            {
+                headers: {
+                    countrycode: 'ko',
+                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                }
+            })
 
-        $("#file-upload2-back").removeClass("hide");
-      },
-      addImage2({ target: { files = [] } }) {
-        if (!files.length) {
-          return
+            var result_img = await client.request(mutation, {uploadImageFile:file_photo[i],});
+            
+            var updateMutation = gql`
+                mutation Mutation($input: UpdateImageInput!) {
+                    updateImage(input: $input) {
+                        _id
+                        name
+                        description
+                        reference
+                        uploaderId
+                        mimeType
+                        encoding
+                        fileSize
+                        thumbnailUrl
+                    }
+                }
+            `;
+            var result_upload = await client.request(updateMutation, {input: {"_id": result_img.uploadImage._id,"name": result_img.name,"description": "reviewImage","reference": null}});
+            _id_list.push(result_img.uploadImage._id);
         }
-        this.file_photo = files[0];
-        $("#file-upload2-back").css("background", "url(" + URL.createObjectURL(this.file_photo) + ")");
-        $("#file-upload2-back").css("background-size", "cover");
-        $("#file-upload2-img").hide();
+        var _input = {images: _id_list, targetId: this.centerData._id, targetType: 'diveCenter', content: this.review_detail, rating: this.rating};
+        const ipt = _input;
+        
+        var result = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                    mutation Mutation($input: ReviewInput) {
+                        upsertReview(input: $input) {
+                            _id
+                        }
+                    }
+                `,
+                variables: {
+                    "input": ipt
+                }
+            }
+        });
 
-        $("#file-upload3-back").removeClass("hide");
+        // close dialog
+        const activeMenu = document.querySelectorAll('.menu-active');
+        for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
+
+        // toast
+        var toastData = 'snackbar-review-success';
+        var notificationToast = document.getElementById(toastData);
+        var notificationToast = new bootstrap.Toast(notificationToast);
+        notificationToast.show();
       },
-      addImage3({ target: { files = [] } }) {
+      addImage({ target: { files = [] } }) {
         if (!files.length) {
-          return
+          return;
         }
-        this.file_photo = files[0];
-        $("#file-upload3-back").css("background", "url(" + URL.createObjectURL(this.file_photo) + ")");
-        $("#file-upload3-back").css("background-size", "cover");
-        $("#file-upload3-img").hide();
+        file_photo.push(files[0]);
+        $("#div_upload_photo").append('<div class="col-3 p-1 square " style="position: relative;"><div class="square_inner border-08" style="background:url('+URL.createObjectURL(files[0])+');background-size: cover;"><div class="square_inner_close" onclick="abc('+files[0].lastModified+',this);"></div></div></div>');
+        if (file_photo.length%4 == 1) {
+            var square_height = $("#div_upload_photo .square").height();
+            $("#menu-review").css("height", 470 + (square_height*(parseInt(file_photo.length/4)+1)) + "px");
+        }
       },
       setRating(rating) {
-          //this.rating = rating;
+          this.rating = rating;
           switch ((rating+"")) {
               case '1':
                 this.rateDescription = '매우 아쉬워요';

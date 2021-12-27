@@ -85,14 +85,14 @@
                 <div class="divider mt-3 mb-3"></div>
                 
                 <div class="d-flex mb-0 text-center">
-                    <div class="flex-grow-1 pd-0" style="border-right: 1px solid lightgray;">
-                        <img class="ext-img" src="/static/images/assets/ico_heart.png" width="24" style="margin-top:-4px;"/>
-                        <span class="font-16 font-500 font-noto">찜 0</span>
+                    <div v-on:click="clickLike()" class="flex-grow-1 pd-0" style="border-right: 1px solid lightgray;">
+                        <img class="ext-img" :src="'/static/images/assets/'+like_img+'.png'" width="24" style="margin-top:-4px;"/>
+                        <span class="font-16 font-500 font-noto">찜 {{ pointData.likes }}</span>
                     </div>
                     
-                    <div class="flex-grow-1 pd-0" data-menu="menu-share">
-                        <img class="ext-img" src="/static/images/assets/ico_share.png" width="24" style="margin-top:-4px;"/>
-                        <span class="font-16 font-500 font-noto">공유</span>
+                    <div v-on:click="clickSubscribe()" class="flex-grow-1 pd-0" data-menu="menu-share">
+                        <img class="ext-img" :src="'/static/images/assets/'+subscribe_img+'.png'" width="24" style="margin-top:-4px;"/>
+                        <span class="font-16 font-500 font-noto">알림</span>
                     </div>
                 </div>
 
@@ -226,7 +226,7 @@
                                         <img v-else src="/static/empty.jpg" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;">
                                     </div>
                                     <div class="" style="padding-left: 110px;">
-                                        <h4 class="font-15"> {{ center.name }} </h4>
+                                        <h4 class="font-16"> {{ center.name }} </h4>
                                         <p class="pb-0 mb-0 line-height-m ellipsis"> {{ center.description }} </p>
                                         <p class="pb-0 mb-0 mt-n1 ellipsis color-gray-light-mid">
                                             {{ (center.interests == null) ? "" : center.interests.filter(x=>x.type=='facility').map(x=>{return x.title}).join().replace(",",", ") }}&nbsp;
@@ -278,7 +278,7 @@
 
         <div class="card card-style">
             <div class="content mt-10">
-                <h4 class="text-start pt-2 mb-0">인기 다이빙 센터</h4>
+                <h4 class="text-start pt-2 mb-0">위치</h4>
             </div>
             <div id="map" style="height: 300px;"></div>
             <div class="map-box hide">
@@ -524,17 +524,19 @@
                 </div>
             </div>
             <div class="divider mt-2 mb-2 ms-3 me-3"></div>
-            <div class="star-area mt-4 text-center">
-                <i class="fa fa-star font-20 color-gray-light"></i>
-                <i class="fa fa-star font-20 color-gray-light"></i>
-                <i class="fa fa-star font-20 color-gray-light"></i>
-                <i class="fa fa-star font-20 color-gray-light"></i>
-                <i class="fa fa-star font-20 color-gray-light"></i>
-            </div>
-            <div class="text-center color-gray mt-2 mb-3">이곳을 방문해보셨나요?</div>
-            <div class="me-4 ms-4" style="margin-bottom: 34px;background: rgba(58, 58, 58, 0.03);padding: 10px 20px;border-radius: 4px;">
-                <p class="mb-0" style="color: rgba(58, 58, 58, 0.6)">다녀온 기록을 남겨보세요.</p>
-                <p class="mb-0 color-highlight">지금 로그북남기기 <i class="fas fa-chevron-right ms-1"></i></p>
+            <div data-menu="menu-review">
+                <div class="star-area mt-4 text-center">
+                    <i class="fa fa-star font-20 color-gray-light"></i>
+                    <i class="fa fa-star font-20 color-gray-light"></i>
+                    <i class="fa fa-star font-20 color-gray-light"></i>
+                    <i class="fa fa-star font-20 color-gray-light"></i>
+                    <i class="fa fa-star font-20 color-gray-light"></i>
+                </div>
+                <div class="text-center color-gray mt-2 mb-3">이곳을 방문해보셨나요?</div>
+                <div class="me-4 ms-4" style="margin-bottom: 34px;background: rgba(58, 58, 58, 0.03);padding: 10px 20px;border-radius: 4px;">
+                    <p class="mb-0" style="color: rgba(58, 58, 58, 0.6)">다녀온 기록을 남겨보세요.</p>
+                    <p class="mb-0 color-highlight">지금 로그북남기기 <i class="fas fa-chevron-right ms-1"></i></p>
+                </div>
             </div>
         </div>
 
@@ -546,11 +548,49 @@
 
 
     <!-- End of Page Content--> 
-    
+
+    <!-- 리뷰 팝업 -->
+    <div id="menu-review" 
+         class="menu menu-box-modal" 
+         data-menu-height="470" 
+         data-menu-width="370">
+        <div class="menu-title">
+            <h4 class="text-center mt-4 pt-1 mb-2 font-noto font-19">{{ pointData.name }} 로그</h4>
+            <a href="#" class="close-menu hide"><i class="fa fa-times-circle"></i></a>
+        </div>
+        <div class="me-4 ms-4" style="border-bottom: 2px solid black;"></div>
+        <div class="content mt-3">
+            <div class="text-center mt-3">
+                <star-rating @rating-selected="setRating" text-class="hide" :rating="3" v-bind:star-size="30" :padding="5" :rounded-corners="true" :star-points="[23,2, 14,17, 0,19, 10,34, 7,50, 23,43, 38,50, 36,34, 46,19, 31,17]" style="display: inline-block;"></star-rating>
+            </div>
+            <div class="text-center color-gray mt-1 mb-2" v-html="rateDescription"></div>
+        </div>
+        <div class="content mt-0">
+            <div class="input-style validate-field mt-3">
+                <textarea class="wedive-textarea" placeholder="다이빙은 어떠셨나요?" v-model="review_detail"></textarea>
+            </div>
+            <div id="div_upload_photo" class="row m-0 mb-3">
+            </div>
+            <div class="mb-3 text-center p-2" style="border: 1px solid #e9e9e9;">
+                <input type="file" @change="addImage" id="" accept="image/*" style="text-indent: -999px;outline: none;width: 100%;height: 45px;color: rgba(0, 0, 0, 0) !important;">
+                <div class="upload-file-text" style="color: black;margin-top:-44px !important;margin-bottom:12px;"><img class="me-1" src="/static/images/assets/icon_camera.png" height="18"/>첨부하기</div>
+            </div>
+        </div>
+
+        <div class="row m-0">
+            <div class="col-6 pe-1">
+                <a href="#" class="close-menu btn btn-m btn-full rounded-0 text-uppercase font-900 shadow-s bg-gray-dark">취소</a>
+            </div>
+            <div class="col-6 ps-1">
+                <a v-on:click="review_send()" class="btn btn-m btn-full rounded-0 text-uppercase font-900 shadow-s bg-black">로그등록</a>
+            </div>
+        </div>
+    </div>
     
   </div>
 </template>
 <script>
+import StarRating from 'vue-star-rating'
 const axios = require("axios")
 
 export default {
@@ -794,6 +834,8 @@ export default {
                             views
                             likes
                         }
+                        likes
+                        views
                         reviewCount
                         searchTerms
                         aliases
@@ -1111,7 +1153,7 @@ export default {
                 map: this.map,
                 position: {lat: this.pointData.diveCenters[i].latitude, lng: this.pointData.diveCenters[i].longitude},
                 label: {text: title, color: 'white', className: 'marker-position'},
-                icon: new google.maps.MarkerImage('/static/images/assets/ico_pin1_o.png',null, null, null, new google.maps.Size(38,43)),
+                icon: new google.maps.MarkerImage('/static/images/assets/ico_pin2_o.png',null, null, null, new google.maps.Size(38,43)),
             });
 
             marker_shop.addListener("click", () => {
@@ -1119,7 +1161,7 @@ export default {
                 for (var j=0; j<this.marker_list.length; j++) {
                     var _icon = this.marker_list[j].getIcon();
                     if (_icon.size.width != 38) {
-                        this.marker_list[j].setIcon(new google.maps.MarkerImage('/static/images/assets/ico_pin1_o.png', null, null, null, new google.maps.Size(38,43)));
+                        this.marker_list[j].setIcon(new google.maps.MarkerImage('/static/images/assets/ico_pin2_o.png', null, null, null, new google.maps.Size(38,43)));
                         try {
                             var _title = this.marker_list[j].getLabel().text;
                             this.marker_list[j].setLabel({text: _title, color: 'white', className: 'marker-position'});
@@ -1135,7 +1177,7 @@ export default {
                 $("#map_box_shop_href").attr("href", "/center/" + uniqueName);
                 
                 
-                marker_shop.setIcon(new google.maps.MarkerImage('/static/images/assets/ico_pin_big1.png', null, null, null, new google.maps.Size(58,66)));
+                marker_shop.setIcon(new google.maps.MarkerImage('/static/images/assets/ico_pin_big2.png', null, null, null, new google.maps.Size(58,66)));
                 marker_shop.setLabel({text: title, color: 'white', className: 'marker-position mt-86'});
                 if (this.map.getZoom() == 17) {
                     this.map.panTo(marker_shop.getPosition());
@@ -1151,7 +1193,7 @@ export default {
             for (var j=0; j<this.marker_list.length; j++) {
                 var _icon = this.marker_list[j].getIcon();
                 if (_icon.size.width != 38) {
-                    this.marker_list[j].setIcon(new google.maps.MarkerImage('/static/images/assets/ico_pin1_o.png', null, null, null, new google.maps.Size(38,43)));
+                    this.marker_list[j].setIcon(new google.maps.MarkerImage('/static/images/assets/ico_pin2_o.png', null, null, null, new google.maps.Size(38,43)));
                     var _title = this.marker_list[j].getLabel().text;
                     this.marker_list[j].setLabel({text: _title, color: 'white', className: 'marker-position'});
                 }
@@ -1165,13 +1207,16 @@ export default {
             map: this.map,
             position: {lat: this.pointData.latitude, lng: this.pointData.longitude},
             label: {text: this.pointData.name + ' 포인트', color: 'white', className: 'marker-position2'},
-            icon: new google.maps.MarkerImage('/static/images/assets/ico_pin2.png',null, null, null, new google.maps.Size(38,43)),
+            icon: new google.maps.MarkerImage('/static/images/assets/ico_pin1.png',null, null, null, new google.maps.Size(38,43)),
         });
     };
 
   },
   created() {
     
+  },
+  components: {
+    StarRating
   },
   data () {
     return {
@@ -1184,6 +1229,11 @@ export default {
         recommend_flow_word: ["매우느림", "느림", "일반적", "빠름", "매우빠름", "폭풍"],
         point_category: ["해저지형", "해저협곡", "큰 암반", "강한조류", "난파선", "가두리양식장", "마크로", "먹(Muck)", "인공어초", "블루홀", "리프다이빙", "빙하", "초대형난파선", "난파선성지", "수중조형물", "수중유적", "대물", "유네스코", "10대포인트"],
         type_category: ["월다이빙", "블랙워터다이빙", "드리프트다이빙", "아이스다이빙", "야간다이빙", "동굴다이빙", "해루질", "프리다이빙", "스노클링", "케이지다이빙", "렉다이빙", "테크니컬다이빙", "나이트록스다이빙"],
+        rating: 3,
+        rateDescription: '나쁘지 않아요.',
+        review_detail: '',
+        like_img: 'ico_heart',
+        subscribe_img: 'ico_subscribe',
     }
   }, methods: {
       setData(_pointData, _nearData) {
@@ -1224,12 +1274,181 @@ export default {
             }));
           }, 1000);
       },
-      call: function() {
-          console.log("call");
+      async clickLike() {
+          if (localStorage.idToken) {
+            const targetId = this.pointData._id;
+            var result = await axios({
+                url: 'https://api.wedives.com/graphql',
+                method: 'post',
+                headers: {
+                    countrycode: 'ko',
+                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                },
+                data: {
+                    query: `
+                        mutation Like($targetId: ID!, $targetType: UserReactionTargetType!) {
+                            like(targetId: $targetId, targetType: $targetType) {
+                                success
+                            }
+                        }
+                    `,
+                    variables: {
+                        "targetId": targetId,
+                        "targetType": "divePoint"
+                    }
+                }
+            });
+            if (result && result.data && result.data.data && result.data.data.like.success && result.data.data.like.success == true) {
+                this.like_img = 'ico_heart2';
+                this.pointData.likes = ((this.pointData.likes==null)?0:this.pointData.likes)+1;
+            } else if (result && result.data && result.data.data && result.data.data.like.success && result.data.data.like.success == false) {
+                this.like_img = 'ico_heart';
+                this.pointData.likes = this.pointData.likes-1;
+            }
+          }
       },
-      goCourse: function() {
-          location.href='/course';
-      }
+      async clickSubscribe() {
+          if (localStorage.idToken) {
+            const targetId = this.pointData._id;
+            var result = await axios({
+                url: 'https://api.wedives.com/graphql',
+                method: 'post',
+                headers: {
+                    countrycode: 'ko',
+                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                },
+                data: {
+                    query: `
+                        mutation Subscribe($targetId: ID!, $targetType: UserReactionTargetType!) {
+                            subscribe(targetId: $targetId, targetType: $targetType) {
+                                success
+                            }
+                        }
+                    `,
+                    variables: {
+                        "targetId": targetId,
+                        "targetType": "divePoint"
+                    }
+                }
+            });
+            if (result && result.data && result.data.data && result.data.data.subscribe.success && result.data.data.subscribe.success == true) {
+                this.subscribe_img = 'ico_subscribe2';
+            } else if (result && result.data && result.data.data && result.data.data.subscribe.success && result.data.data.subscribe.success == false) {
+                this.subscribe_img = 'ico_subscribe';
+            }
+          }
+      },
+      async review_send() {
+        var _id_list = new Array();
+        for (var i=0; i<file_photo.length; i++) {
+            var mutation = gql`
+                mutation UploadImageMutation($uploadImageFile: Upload!) {
+                    uploadImage(file: $uploadImageFile) {
+                        _id
+                        name
+                        mimeType
+                        encoding
+                        thumbnailUrl
+                        createdAt
+                        updatedAt
+                    }
+                }
+            `
+            var client = new GraphQLClient('https://api.wedives.com/graphql',
+            {
+                headers: {
+                    countrycode: 'ko',
+                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                }
+            })
+
+            var result_img = await client.request(mutation, {uploadImageFile:file_photo[i],});
+            
+            var updateMutation = gql`
+                mutation Mutation($input: UpdateImageInput!) {
+                    updateImage(input: $input) {
+                        _id
+                        name
+                        description
+                        reference
+                        uploaderId
+                        mimeType
+                        encoding
+                        fileSize
+                        thumbnailUrl
+                    }
+                }
+            `;
+            var result_upload = await client.request(updateMutation, {input: {"_id": result_img.uploadImage._id,"name": result_img.name,"description": "reviewImage","reference": null}});
+            _id_list.push(result_img.uploadImage._id);
+        }
+        var _input = {images: _id_list, targetId: this.pointData._id, targetType: 'divePoint', content: this.review_detail, rating: this.rating};
+        const ipt = _input;
+        
+        var result = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                    mutation Mutation($input: ReviewInput) {
+                        upsertReview(input: $input) {
+                            _id
+                        }
+                    }
+                `,
+                variables: {
+                    "input": ipt
+                }
+            }
+        });
+
+        // close dialog
+        const activeMenu = document.querySelectorAll('.menu-active');
+        for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
+
+        // toast
+        var toastData = 'snackbar-review-success';
+        var notificationToast = document.getElementById(toastData);
+        var notificationToast = new bootstrap.Toast(notificationToast);
+        notificationToast.show();
+      },
+      addImage({ target: { files = [] } }) {
+        if (!files.length) {
+          return;
+        }
+        file_photo.push(files[0]);
+        $("#div_upload_photo").append('<div class="col-3 p-1 square " style="position: relative;"><div class="square_inner border-08" style="background:url('+URL.createObjectURL(files[0])+');background-size: cover;"><div class="square_inner_close" onclick="abc('+files[0].lastModified+',this);"></div></div></div>');
+        if (file_photo.length%4 == 1) {
+            var square_height = $("#div_upload_photo .square").height();
+            $("#menu-review").css("height", 470 + (square_height*(parseInt(file_photo.length/4)+1)) + "px");
+        }
+      },
+      setRating(rating) {
+          this.rating = rating;
+          switch ((rating+"")) {
+              case '1':
+                this.rateDescription = '매우 아쉬워요';
+              break;
+              case '2':
+                this.rateDescription = '아쉬워요';
+              break;
+              case '3':
+                this.rateDescription = '나쁘지 않아요.';
+              break;
+              case '4':
+                this.rateDescription = '만족해요!';
+              break;
+              case '5':
+                this.rateDescription = '매우 만족해요!';
+              break;
+              default:
+              break;
+          }  
+      },
   }
 
   
@@ -1305,4 +1524,5 @@ export default {
 .bx {background-color: rgba(255,255,255);padding: 10px;min-height: 105px;border: 1px solid rgba(0,0,0,.1);border-radius: 10px;}
 .th-02 > th {padding: 0.2rem 0.5rem;}
 .img_pop {filter: contrast(90%) brightness(0.9);}
+.wedive-textarea {min-height: 150px;border: 2px solid #e9e9e9;background: #f5f5f5;padding-left: 10px;padding-right: 10px;}
 </style>

@@ -143,9 +143,9 @@
         </div>
         
         <div v-if="divingData.hostUser && divingData.hostUser._id != userId" id="footer-bar-shop" class="d-flex" style="min-height: 52px !important;height: 52px !important;">
-        <div class="me-1 speach-icon">
+        <div v-on:click="clickLike()" class="me-1 speach-icon">
             <div style="width: 52px;height: 52px;display: inline-block;position: relative;border-right:1px solid rgba(0, 0, 0, 0.08);">
-              <i class="far fa-heart font-20" style="display: block;margin-top:16px;"></i>
+                <img class="'inline-block me-2" :src="'/static/images/assets/'+like_img+'.png'" width="30" style="display: block;margin-top:10px;margin-left:10px;"/>
             </div>
         </div>
         <div class="flex-fill speach-input p-2">
@@ -396,6 +396,8 @@ export default {
                             type
                         }
                         maxPeopleNumber
+                        likes
+                        views
                         startedAt
                         finishedAt
                         createdAt
@@ -447,6 +449,7 @@ export default {
         userThumbnail: localStorage.userThumbnail,
         is_empty: false,
         userId: localStorage.userId,
+        like_img: 'ico_heart',
     }
   },
   methods: {
@@ -634,12 +637,39 @@ export default {
       goDetail(type, uniqueName) {
           location.href = type + '/' + uniqueName;
       },
-      call: function() {
-          console.log("call");
+      async clickLike() {
+          if (localStorage.idToken) {
+            const targetId = this.divingData._id;
+            var result = await axios({
+                url: 'https://api.wedives.com/graphql',
+                method: 'post',
+                headers: {
+                    countrycode: 'ko',
+                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                },
+                data: {
+                    query: `
+                        mutation Like($targetId: ID!, $targetType: UserReactionTargetType!) {
+                            like(targetId: $targetId, targetType: $targetType) {
+                                success
+                            }
+                        }
+                    `,
+                    variables: {
+                        "targetId": targetId,
+                        "targetType": "diving"
+                    }
+                }
+            });
+            if (result && result.data && result.data.data && result.data.data.like.success && result.data.data.like.success == true) {
+                this.like_img = 'ico_heart2';
+                this.divingData.likes = ((this.divingData.likes==null)?0:this.divingData.likes)+1;
+            } else if (result && result.data && result.data.data && result.data.data.like.success && result.data.data.like.success == true) {
+                this.like_img = 'ico_heart';
+                this.divingData.likes = this.divingData.likes-1;
+            }
+          }
       },
-      goCourse: function() {
-          location.href='/course';
-      }
   }
 
   

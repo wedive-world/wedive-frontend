@@ -73,14 +73,14 @@
                 <div class="divider mt-3 mb-3"></div>
                 
                 <div class="d-flex mb-0 text-center">
-                    <div class="flex-grow-1 pd-0" style="border-right: 1px solid lightgray;">
-                        <img class="ext-img" src="/static/images/assets/ico_heart.png" width="24" style="margin-top:-4px;"/>
-                        <span class="font-16 font-500 font-noto">찜 0</span>
+                    <div v-on:click="clickLike()" class="flex-grow-1 pd-0" style="border-right: 1px solid lightgray;">
+                        <img class="ext-img" :src="'/static/images/assets/'+like_img+'.png'" width="24" style="margin-top:-4px;"/>
+                        <span class="font-16 font-500 font-noto">찜 {{ siteData.likes }}</span>
                     </div>
                     
-                    <div class="flex-grow-1 pd-0" data-menu="menu-share">
-                        <img class="ext-img" src="/static/images/assets/ico_share.png" width="24" style="margin-top:-4px;"/>
-                        <span class="font-16 font-500 font-noto">공유</span>
+                    <div v-on:click="clickSubscribe()" class="flex-grow-1 pd-0" data-menu="menu-share">
+                        <img class="ext-img" :src="'/static/images/assets/'+subscribe_img+'.png'" width="24" style="margin-top:-4px;"/>
+                        <span class="font-16 font-500 font-noto">알림</span>
                     </div>
                 </div>
 
@@ -415,8 +415,8 @@
         
         <div class="card card-style">
             <div class="content mt-10">
-                <h4 class="text-start pt-2 mb-0">인기 포인트</h4>
-                <span class="wedive-txt-all color-gray mt-2"><img src="/static/images/assets/ico_pin2.png" width="19"/> 얕은수심&nbsp;&nbsp;<img src="/static/images/assets/ico_pin3.png" width="19"/> 깊은수심</span>
+                <h4 class="text-start pt-2 mb-0">{{ siteData.name }} 포인트</h4>
+                <span class="wedive-txt-all color-gray mt-2"><img src="/static/images/assets/ico_pin1.png" width="19"/> 얕은수심&nbsp;&nbsp;<img src="/static/images/assets/ico_pin3.png" width="19"/> 깊은수심</span>
             </div>
             <div id="map" style="height: 300px;"></div>
             <div class="map-box hide">
@@ -439,7 +439,7 @@
             </div>
         </div>
 
-        <h4 class="text-start mb-2" style="margin-left: 10px;margin-right: 10px;">근처 사이트</h4>
+        <h4 class="text-start mb-2 mt-4" style="margin-left: 10px;margin-right: 10px;">근처 사이트</h4>
         <div class="splide single-slider slider-no-arrows visible-slider slider-no-dots" id="single-slider-nearby">
             <div class="splide__track">
                 <div class="splide__list">
@@ -659,17 +659,19 @@
                 </div>
             </div>
             <div class="divider mt-2 mb-2 ms-3 me-3"></div>
-            <div class="star-area mt-4 text-center">
-                <i class="fa fa-star font-20 color-gray-light"></i>
-                <i class="fa fa-star font-20 color-gray-light"></i>
-                <i class="fa fa-star font-20 color-gray-light"></i>
-                <i class="fa fa-star font-20 color-gray-light"></i>
-                <i class="fa fa-star font-20 color-gray-light"></i>
-            </div>
-            <div class="text-center color-gray mt-2 mb-3">이곳을 방문해보셨나요?</div>
-            <div class="me-4 ms-4" style="margin-bottom: 34px;background: rgba(58, 58, 58, 0.03);padding: 10px 20px;border-radius: 4px;">
-                <p class="mb-0" style="color: rgba(58, 58, 58, 0.6)">다녀온 기록을 남겨보세요.</p>
-                <p class="mb-0 color-highlight">지금 로그북남기기 <i class="fas fa-chevron-right ms-1"></i></p>
+            <div data-menu="menu-review">
+                <div class="star-area mt-4 text-center">
+                    <i class="fa fa-star font-20 color-gray-light"></i>
+                    <i class="fa fa-star font-20 color-gray-light"></i>
+                    <i class="fa fa-star font-20 color-gray-light"></i>
+                    <i class="fa fa-star font-20 color-gray-light"></i>
+                    <i class="fa fa-star font-20 color-gray-light"></i>
+                </div>
+                <div class="text-center color-gray mt-2 mb-3">이곳을 방문해보셨나요?</div>
+                <div class="me-4 ms-4" style="margin-bottom: 34px;background: rgba(58, 58, 58, 0.03);padding: 10px 20px;border-radius: 4px;">
+                    <p class="mb-0" style="color: rgba(58, 58, 58, 0.6)">다녀온 기록을 남겨보세요.</p>
+                    <p class="mb-0 color-highlight">지금 로그북남기기 <i class="fas fa-chevron-right ms-1"></i></p>
+                </div>
             </div>
         </div>
 
@@ -682,11 +684,48 @@
 
 
     <!-- End of Page Content--> 
-    
+    <!-- 리뷰 팝업 -->
+    <div id="menu-review" 
+         class="menu menu-box-modal" 
+         data-menu-height="470" 
+         data-menu-width="370">
+        <div class="menu-title">
+            <h4 class="text-center mt-4 pt-1 mb-2 font-noto font-19">{{ siteData.name }} 로그</h4>
+            <a href="#" class="close-menu hide"><i class="fa fa-times-circle"></i></a>
+        </div>
+        <div class="me-4 ms-4" style="border-bottom: 2px solid black;"></div>
+        <div class="content mt-3">
+            <div class="text-center mt-3">
+                <star-rating @rating-selected="setRating" text-class="hide" :rating="3" v-bind:star-size="30" :padding="5" :rounded-corners="true" :star-points="[23,2, 14,17, 0,19, 10,34, 7,50, 23,43, 38,50, 36,34, 46,19, 31,17]" style="display: inline-block;"></star-rating>
+            </div>
+            <div class="text-center color-gray mt-1 mb-2" v-html="rateDescription"></div>
+        </div>
+        <div class="content mt-0">
+            <div class="input-style validate-field mt-3">
+                <textarea class="wedive-textarea" placeholder="다이빙은 어떠셨나요?" v-model="review_detail"></textarea>
+            </div>
+            <div id="div_upload_photo" class="row m-0 mb-3">
+            </div>
+            <div class="mb-3 text-center p-2" style="border: 1px solid #e9e9e9;">
+                <input type="file" @change="addImage" id="" accept="image/*" style="text-indent: -999px;outline: none;width: 100%;height: 45px;color: rgba(0, 0, 0, 0) !important;">
+                <div class="upload-file-text" style="color: black;margin-top:-44px !important;margin-bottom:12px;"><img class="me-1" src="/static/images/assets/icon_camera.png" height="18"/>첨부하기</div>
+            </div>
+        </div>
+
+        <div class="row m-0">
+            <div class="col-6 pe-1">
+                <a href="#" class="close-menu btn btn-m btn-full rounded-0 text-uppercase font-900 shadow-s bg-gray-dark">취소</a>
+            </div>
+            <div class="col-6 ps-1">
+                <a v-on:click="review_send()" class="btn btn-m btn-full rounded-0 text-uppercase font-900 shadow-s bg-black">로그등록</a>
+            </div>
+        </div>
+    </div>
     
   </div>
 </template>
 <script>
+import StarRating from 'vue-star-rating'
 const axios = require("axios")
 
 export default {
@@ -1322,8 +1361,29 @@ export default {
                 waterFlowDescription
                 eyeSightDescription
                 highlightDescription
-                createdAt
-                updatedAt
+                reviews {
+                    _id
+                    targetId
+                    targetType
+                    author {
+                        name
+                        email
+                        _id
+                    }
+                    title
+                    content
+                    images {
+                        _id
+                        thumbnailUrl
+                    }
+                    rating
+                    reviewCount
+                    views
+                    likes
+                }
+                likes
+                views
+                reviewCount
             }
             }
             `,
@@ -1647,7 +1707,7 @@ export default {
 
         this.map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: this.siteData.latitude, lng: this.siteData.longitude},
-            zoom: 12,
+            zoom: 14,
             mapTypeControl: false,
             streetViewControl: false,
             zoomControl: false,
@@ -1657,7 +1717,7 @@ export default {
         for (var i=0; i<this.siteData.divePoints.length; i++) {
             var minDepth = this.siteData.divePoints[i].minDepth;
             var _position = {lat: this.siteData.divePoints[i].latitude, lng: this.siteData.divePoints[i].longitude};
-            var _img = (minDepth < 18) ? '/static/images/assets/ico_pin2_o8.png' : '/static/images/assets/ico_pin3_o8.png';
+            var _img = (minDepth < 18) ? '/static/images/assets/ico_pin1_o8.png' : '/static/images/assets/ico_pin3_o8.png';
             const _marker_class = (minDepth < 18) ? 'marker-position2' : 'marker-position3';
 
             const title = this.siteData.divePoints[i].name;
@@ -1667,7 +1727,7 @@ export default {
             console.log(this.siteData.divePoints[i]);
             const img = (this.siteData.divePoints[i].backgroundImages&&this.siteData.divePoints[i].backgroundImages.length>0) ? this.siteData.divePoints[i].backgroundImages[0].thumbnailUrl : '/static/empty.jpg';
             const _sml_img = _img;
-            const _big_img = (minDepth < 18) ? '/static/images/assets/ico_pin_big2.png' : '/static/images/assets/ico_pin_big3.png';
+            const _big_img = (minDepth < 18) ? '/static/images/assets/ico_pin_big1.png' : '/static/images/assets/ico_pin_big3.png';
 
             const marker_point = new google.maps.Marker({
                 map: this.map,
@@ -1730,6 +1790,9 @@ export default {
   created() {
     
   },
+  components: {
+    StarRating
+  },
   data () {
     return {
         map: null,
@@ -1742,6 +1805,11 @@ export default {
         type_category: ["월다이빙", "블랙워터다이빙", "드리프트다이빙", "아이스다이빙", "야간다이빙", "동굴다이빙", "해루질", "프리다이빙", "스노클링", "케이지다이빙", "렉다이빙", "테크니컬다이빙", "나이트록스다이빙"],
         recommend_env_word: ["매우열악", "열악", "평범", "우수", "최고", "극락"],
         recommend_flow_word: ["매우느림", "느림", "일반적", "빠름", "매우빠름", "폭풍"],
+        rating: 3,
+        rateDescription: '나쁘지 않아요.',
+        review_detail: '',
+        like_img: 'ico_heart',
+        subscribe_img: 'ico_subscribe',
     }
   },
   methods: {
@@ -1758,12 +1826,181 @@ export default {
             if(preloader){preloader.classList.add('preloader-hide');}
           }, 1000);
       },
-      call: function() {
-          console.log("call");
+      async clickLike() {
+          if (localStorage.idToken) {
+            const targetId = this.siteData._id;
+            var result = await axios({
+                url: 'https://api.wedives.com/graphql',
+                method: 'post',
+                headers: {
+                    countrycode: 'ko',
+                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                },
+                data: {
+                    query: `
+                        mutation Like($targetId: ID!, $targetType: UserReactionTargetType!) {
+                            like(targetId: $targetId, targetType: $targetType) {
+                                success
+                            }
+                        }
+                    `,
+                    variables: {
+                        "targetId": targetId,
+                        "targetType": "divePoint"
+                    }
+                }
+            });
+            if (result && result.data && result.data.data && result.data.data.like.success && result.data.data.like.success == true) {
+                this.like_img = 'ico_heart2';
+                this.siteData.likes = ((this.siteData.likes==null)?0:this.siteData.likes)+1;
+            } else if (result && result.data && result.data.data && result.data.data.like.success && result.data.data.like.success == true) {
+                this.like_img = 'ico_heart';
+                this.siteData.likes = this.siteData.likes-1;
+            }
+          }
       },
-      goCourse: function() {
-          location.href='/course';
-      }
+      async clickSubscribe() {
+          if (localStorage.idToken) {
+            const targetId = this.siteData._id;
+            var result = await axios({
+                url: 'https://api.wedives.com/graphql',
+                method: 'post',
+                headers: {
+                    countrycode: 'ko',
+                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                },
+                data: {
+                    query: `
+                        mutation Subscribe($targetId: ID!, $targetType: UserReactionTargetType!) {
+                            subscribe(targetId: $targetId, targetType: $targetType) {
+                                success
+                            }
+                        }
+                    `,
+                    variables: {
+                        "targetId": targetId,
+                        "targetType": "diveSite"
+                    }
+                }
+            });
+            if (result && result.data && result.data.data && result.data.data.subscribe.success && result.data.data.subscribe.success == true) {
+                this.subscribe_img = 'ico_subscribe2';
+            } else if (result && result.data && result.data.data && result.data.data.subscribe.success && result.data.data.subscribe.success == false) {
+                this.subscribe_img = 'ico_subscribe';
+            }
+          }
+      },
+      async review_send() {
+        var _id_list = new Array();
+        for (var i=0; i<file_photo.length; i++) {
+            var mutation = gql`
+                mutation UploadImageMutation($uploadImageFile: Upload!) {
+                    uploadImage(file: $uploadImageFile) {
+                        _id
+                        name
+                        mimeType
+                        encoding
+                        thumbnailUrl
+                        createdAt
+                        updatedAt
+                    }
+                }
+            `
+            var client = new GraphQLClient('https://api.wedives.com/graphql',
+            {
+                headers: {
+                    countrycode: 'ko',
+                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                }
+            })
+
+            var result_img = await client.request(mutation, {uploadImageFile:file_photo[i],});
+            
+            var updateMutation = gql`
+                mutation Mutation($input: UpdateImageInput!) {
+                    updateImage(input: $input) {
+                        _id
+                        name
+                        description
+                        reference
+                        uploaderId
+                        mimeType
+                        encoding
+                        fileSize
+                        thumbnailUrl
+                    }
+                }
+            `;
+            var result_upload = await client.request(updateMutation, {input: {"_id": result_img.uploadImage._id,"name": result_img.name,"description": "reviewImage","reference": null}});
+            _id_list.push(result_img.uploadImage._id);
+        }
+        var _input = {images: _id_list, targetId: this.siteData._id, targetType: 'diveSite', content: this.review_detail, rating: this.rating};
+        const ipt = _input;
+        
+        var result = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                    mutation Mutation($input: ReviewInput) {
+                        upsertReview(input: $input) {
+                            _id
+                        }
+                    }
+                `,
+                variables: {
+                    "input": ipt
+                }
+            }
+        });
+
+        // close dialog
+        const activeMenu = document.querySelectorAll('.menu-active');
+        for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
+
+        // toast
+        var toastData = 'snackbar-review-success';
+        var notificationToast = document.getElementById(toastData);
+        var notificationToast = new bootstrap.Toast(notificationToast);
+        notificationToast.show();
+      },
+      addImage({ target: { files = [] } }) {
+        if (!files.length) {
+          return;
+        }
+        file_photo.push(files[0]);
+        $("#div_upload_photo").append('<div class="col-3 p-1 square " style="position: relative;"><div class="square_inner border-08" style="background:url('+URL.createObjectURL(files[0])+');background-size: cover;"><div class="square_inner_close" onclick="abc('+files[0].lastModified+',this);"></div></div></div>');
+        if (file_photo.length%4 == 1) {
+            var square_height = $("#div_upload_photo .square").height();
+            $("#menu-review").css("height", 470 + (square_height*(parseInt(file_photo.length/4)+1)) + "px");
+        }
+      },
+      setRating(rating) {
+          this.rating = rating;
+          switch ((rating+"")) {
+              case '1':
+                this.rateDescription = '매우 아쉬워요';
+              break;
+              case '2':
+                this.rateDescription = '아쉬워요';
+              break;
+              case '3':
+                this.rateDescription = '나쁘지 않아요.';
+              break;
+              case '4':
+                this.rateDescription = '만족해요!';
+              break;
+              case '5':
+                this.rateDescription = '매우 만족해요!';
+              break;
+              default:
+              break;
+          }  
+      },
   }
 
   
@@ -1841,5 +2078,6 @@ export default {
 
 .map-box {position: absolute;right: 6px;bottom: 21px;margin: 5px 5px 4px;width: 115px;}
 .bx {background-color: rgba(255,255,255);padding: 10px;min-height: 105px;border: 1px solid rgba(0,0,0,.1);border-radius: 10px;}
+.wedive-textarea {min-height: 150px;border: 2px solid #e9e9e9;background: #f5f5f5;padding-left: 10px;padding-right: 10px;}
 
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <div data-menu-active="nav-site"></div>
-    <div class="page-content">
+    <div class="page-content pt-2">
         
         <div v-on:click="goList()" class="card card-style hide" style="background: white;height:148px;">
             <div class="content mb-0 mt-3">
