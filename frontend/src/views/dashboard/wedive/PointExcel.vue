@@ -281,16 +281,15 @@ export default {
     }
   },
   async beforeRouteEnter(to, from, next) {
-    console.log(to)
-    console.log(from)
+    var page = (to.query && to.query.page) ? parseInt(to.query.page) : 1;
     var interests = await getAllInterestsTitleType();
     var interest_types = await getInterestTypes();
     var sites = await getAllDiveSitesOnlyName();
     var points = await getDivePoints();
-    next(vm => {vm.setInterests(interests, interest_types, sites, points)});
+    next(vm => {vm.setInterests(interests, interest_types, sites, points, page)});
   },
   methods: {
-    setInterests: function(interests, interest_types, sites, points) {
+    setInterests: function(interests, interest_types, sites, points, page) {
       this.interests = interests;
       this.interest_types = interest_types;
       this.interests.forEach(interest=>{if(interest.aliases) {interest.aliases_show = interest.aliases.join();}if(interest.searchTerms){interest.searchTerms_show = interest.searchTerms.join();}});
