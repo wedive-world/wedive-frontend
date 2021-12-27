@@ -166,8 +166,8 @@ import { BTable, BCard, BButton, BModal, BFormInput, BRow, BCol, BFormGroup, BFo
 import VueContext from 'vue-context'
 import vSelect from 'vue-select'
 import Ripple from 'vue-ripple-directive'
-const { getAllInterests, getInterestTypes, upsertInterest, deleteInterestById } = require ('@/wedive-frontend-graphql/interest-service')
-const { upsertDivePoint, getAllDivePoints } = require('@/wedive-frontend-graphql/dive-point-service')
+const { getAllInterestsTitleType, getInterestTypes, upsertInterest, deleteInterestById } = require ('@/wedive-frontend-graphql/interest-service')
+const { upsertDivePoint, getDivePoints } = require('@/wedive-frontend-graphql/dive-point-service')
 const { getAllDiveSitesOnlyName } = require('@/wedive-frontend-graphql/dive-site-service')
 
 const selectOptionsStatus = [
@@ -281,10 +281,12 @@ export default {
     }
   },
   async beforeRouteEnter(to, from, next) {
-    var interests = await getAllInterests();
+    console.log(to)
+    console.log(from)
+    var interests = await getAllInterestsTitleType();
     var interest_types = await getInterestTypes();
     var sites = await getAllDiveSitesOnlyName();
-    var points = await getAllDivePoints();
+    var points = await getDivePoints();
     next(vm => {vm.setInterests(interests, interest_types, sites, points)});
   },
   methods: {
@@ -294,7 +296,7 @@ export default {
       this.interests.forEach(interest=>{if(interest.aliases) {interest.aliases_show = interest.aliases.join();}if(interest.searchTerms){interest.searchTerms_show = interest.searchTerms.join();}});
 
       this.sites = sites.getAllDiveSites;
-      this.points = points.getAllDivePoints;
+      this.points = points.getDivePoints;
 
       this.points.forEach(point => {
           try {

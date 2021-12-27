@@ -156,9 +156,9 @@ import { BTable, BCard, BButton, BModal, BFormInput, BRow, BCol, BFormGroup, BFo
 import VueContext from 'vue-context'
 import vSelect from 'vue-select'
 import Ripple from 'vue-ripple-directive'
-const { getAllInterests, getInterestTypes, upsertInterest, deleteInterestById } = require ('@/wedive-frontend-graphql/interest-service')
+const { getAllInterestsTitleType, getInterestTypes, upsertInterest, deleteInterestById } = require ('@/wedive-frontend-graphql/interest-service')
 const { upsertDiveCenter, getAllDiveCenters } = require('@/wedive-frontend-graphql/dive-center-service')
-const { getAllDivePoints } = require('@/wedive-frontend-graphql/dive-point-service')
+const { getAllDivePointsUniquenameId } = require('@/wedive-frontend-graphql/dive-point-service')
 const { upsertProduct, deleteProductById } = require('@/wedive-frontend-graphql/product-service')
 
 
@@ -251,17 +251,17 @@ export default {
     }
   },
   async beforeRouteEnter(to, from, next) {
-    var interests = await getAllInterests();
+    var interests = await getAllInterestsTitleType();
     var interest_types = await getInterestTypes();
     var centers = await getAllDiveCenters();
-    var points = await getAllDivePoints();
+    var points = await getAllDivePointsUniquenameId();
     next(vm => {vm.setInterests(interests, interest_types, centers, points)});
   },
   methods: {
     setInterests: function(interests, interest_types, centers, points) {
       this.interests = interests;
       this.interest_types = interest_types;
-      this.interests.forEach(interest=>{if(interest.aliases) {interest.aliases_show = interest.aliases.join();}if(interest.searchTerms){interest.searchTerms_show = interest.searchTerms.join();}});
+      //this.interests.forEach(interest=>{if(interest.aliases) {interest.aliases_show = interest.aliases.join();}if(interest.searchTerms){interest.searchTerms_show = interest.searchTerms.join();}});
 
       this.centers = centers.getAllDiveCenters;
       this.centers.forEach(center => {center.divePointsName = center.divePoints.map(point => {return point.uniqueName})})
