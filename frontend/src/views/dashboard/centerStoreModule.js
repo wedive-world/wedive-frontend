@@ -1,6 +1,6 @@
 import axios from '@axios'
 const { upsertDiveCenter, getAllDiveCenters } = require('@/wedive-frontend-graphql/dive-center-service')
-const { getAllInterests } = require ('@/wedive-frontend-graphql/interest-service')
+const { getAllInterestsTitleType } = require ('@/wedive-frontend-graphql/interest-service')
 
 export default {
   namespaced: true,

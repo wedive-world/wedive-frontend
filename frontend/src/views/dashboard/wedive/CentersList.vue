@@ -239,8 +239,8 @@ import useCentersList from './useCentersList'
 
 import centerStoreModule from '../centerStoreModule'
 import CenterListAddNew from './CenterListAddNew.vue'
-const { getAllDivePoints } = require('@/wedive-frontend-graphql/dive-point-service')
-const { getAllInterests, getInterestTypes } = require ('@/wedive-frontend-graphql/interest-service')
+const { getAllDivePointsUniquenameId } = require('@/wedive-frontend-graphql/dive-point-service')
+const { getAllInterestsTitleType, getInterestTypes } = require ('@/wedive-frontend-graphql/interest-service')
 const { deleteDiveCenterById } = require('@/wedive-frontend-graphql/dive-center-service')
 
 export default {
@@ -380,9 +380,9 @@ export default {
     }
   },
   async beforeRouteEnter(to, from, next) {
-    var interests = await getAllInterests();
+    var interests = await getAllInterestsTitleType();
     var interest_types = await getInterestTypes();
-    var points = await getAllDivePoints();
+    var points = await getAllDivePointsUniquenameId();
     next(vm => {vm.setInterests(interests, interest_types, points)});
   },
   methods: {

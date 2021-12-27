@@ -2,15 +2,23 @@
   <b-card
     :title="center_data.name"
   >
-    <p>배경 이미지</p>
+    <h5>배경 이미지</h5>
     <vue-dropzone ref="myVueDropzone" id="dropzone" v-on:vdropzone-sending="sendingEventBackground" :options="dropzoneOptions"></vue-dropzone>
     
     <br/><br/>
-    <p style="margin-bottom:0;">이미지</p>
-    <p>(입력 시, "센터 출처" 또는 "교육 출처" 또는 "다이빙 출처" 로 표기필요) (센터1, 센터2 등은 가능)</p>
-    <vue-dropzone ref="myVueDropzone2" id="dropzone" v-on:vdropzone-sending="sendingEventImage" :options="dropzoneOptions"></vue-dropzone>
+    <h5 style="margin-bottom:0;">이미지 (센터)</h5>
+    <p>(입력 시, "XXX 출처" 로 표기필요) (띄어쓰기 앞 값은 무시 함)</p>
+    <vue-dropzone ref="myVueDropzone2" id="dropzone2" v-on:vdropzone-sending="sendingEventImage1" :options="dropzoneOptions"></vue-dropzone>
     
+    <br/><br/>
+    <h5 style="margin-bottom:0;">이미지 (다이빙)</h5>
+    <p>(입력 시, "XXX 출처" 로 표기필요) (띄어쓰기 앞 값은 무시 함)</p>
+    <vue-dropzone ref="myVueDropzone3" id="dropzone3" v-on:vdropzone-sending="sendingEventImage2" :options="dropzoneOptions"></vue-dropzone>
     
+    <br/><br/>
+    <h5 style="margin-bottom:0;">이미지 (교육)</h5>
+    <p>(입력 시, "XXX 출처" 로 표기필요) (띄어쓰기 앞 값은 무시 함)</p>
+    <vue-dropzone ref="myVueDropzone4" id="dropzone4" v-on:vdropzone-sending="sendingEventImage3" :options="dropzoneOptions"></vue-dropzone>
     
   </b-card>
 
@@ -60,7 +68,9 @@ export default {
           headers: { "My-Awesome-Header": "header value" }
       },
       initBackgroundImages: [],
-      initImages: [],
+      initImages1: [],
+      initImages2: [],
+      initImages3: [],
     }
   },
   async beforeRouteEnter(to, from, next) {
@@ -71,8 +81,14 @@ export default {
     for (var i=0; i<this.initBackgroundImages.length; i++) {
       this.$refs.myVueDropzone.manuallyAddFile(this.initBackgroundImages[i].file, this.initBackgroundImages[i].url);
     }
-    for (var i=0; i<this.initImages.length; i++) {
-      this.$refs.myVueDropzone2.manuallyAddFile(this.initImages[i].file, this.initImages[i].url);
+    for (var i=0; i<this.initImages1.length; i++) {
+      this.$refs.myVueDropzone2.manuallyAddFile(this.initImages1[i].file, this.initImages1[i].url);
+    }
+    for (var i=0; i<this.initImages2.length; i++) {
+      this.$refs.myVueDropzone3.manuallyAddFile(this.initImages2[i].file, this.initImages2[i].url);
+    }
+    for (var i=0; i<this.initImages3.length; i++) {
+      this.$refs.myVueDropzone4.manuallyAddFile(this.initImages3[i].file, this.initImages3[i].url);
     }
   },
   methods: {
@@ -88,9 +104,16 @@ export default {
       }
       if (this.center_data.images && this.center_data.images.length > 0)  {
         for (var i=0; i<this.center_data.images.length; i++) {
-          var file = { size: 123, name: this.center_data.images[i].name + "(" + this.center_data.images[i].description+ ")", type: "image/png" };
+          var file = { size: 123, name: this.center_data.images[i].name, type: "image/png" };
           var url = this.center_data.images[i].thumbnailUrl;
-          this.initImages.push({file: file, url: url});
+
+          if (this.center_data.images[i].description == '센터') {
+            this.initImages1.push({file: file, url: url});
+          } else if (this.center_data.images[i].description == '다이빙') {
+            this.initImages2.push({file: file, url: url});
+          } else if (this.center_data.images[i].description == '교육') {
+            this.initImages3.push({file: file, url: url});
+          }
         }
       }
       
@@ -100,7 +123,17 @@ export default {
       //this.centers.forEach(center => {center.rentalsName = center.rentals.map(rental => {return [rental.name,((rental.unitName==null)?'':rental.unitName),((rental.price==null)?'':rental.price)]})})
       //this.centers.forEach(center => {center.ticketsName = center.tickets.map(ticket => {return [ticket.unitName,((ticket.price==null)?'':ticket.price)]})})
     },
-    async sendingEventImage (file, xhr, formData) {
+
+    async sendingEventImage1 (file, xhr, formData) {
+      this.sendingEventImage(file, xhr, formData, "센터");
+    },
+    async sendingEventImage2 (file, xhr, formData) {
+      this.sendingEventImage(file, xhr, formData, "다이빙");
+    },
+    async sendingEventImage3 (file, xhr, formData) {
+      this.sendingEventImage(file, xhr, formData, "교육");
+    },
+    async sendingEventImage (file, xhr, formData, m_type) {
         var name = file.name;
         var split_name = name.split(" ");
         if (split_name.length < 2) {
@@ -110,10 +143,7 @@ export default {
             solid: false,
           });
         } else {
-          var description = split_name[0];
-          if (description.includes("다이빙")) description = "다이빙";
-          if (description.includes("센터")) description = "센터";
-          if (description.includes("교육")) description = "교육";
+          var description = m_type;
           var reference = split_name[1];
           if (reference.indexOf(".") > 0) {
             reference = reference.substring(0, reference.lastIndexOf("."))
