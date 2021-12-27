@@ -786,6 +786,8 @@ export default {
                         reviewCount
                         searchTerms
                         aliases
+                        isUserSubscribe
+                        isUserLike
                     }
                 }
             `,
@@ -1185,6 +1187,8 @@ export default {
   }, methods: {
       setData(_pointData, _nearData) {
           this.pointData = _pointData;
+          if (_pointData.isUserLike) this.like_img = 'ico_heart2';
+          if (_pointData.isUserSubscribe) this.subscribe_img = 'ico_subscribe2';
           _nearData.forEach(d => {
               if (d._id != this.pointData._id) {
                   this.nearData.push(d);

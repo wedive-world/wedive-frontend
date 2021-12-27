@@ -1331,6 +1331,8 @@ export default {
                 likes
                 views
                 reviewCount
+                isUserSubscribe
+                isUserLike
             }
             }
             `,
@@ -1762,6 +1764,8 @@ export default {
   methods: {
       setData(_siteData, _nearData) {
           this.siteData = _siteData;
+          if (_siteData.isUserLike) this.like_img = 'ico_heart2';
+          if (_siteData.isUserSubscribe) this.subscribe_img = 'ico_subscribe2';
           _nearData.forEach(d => {
               if (d._id != this.siteData._id) {
                   this.nearData.push(d);

@@ -3,22 +3,22 @@
     :title="center_data.name"
   >
     <h5>배경 이미지</h5>
-    <vue-dropzone ref="myVueDropzone" id="dropzone" v-on:vdropzone-sending="sendingEventBackground" :options="dropzoneOptions"></vue-dropzone>
+    <vue-dropzone ref="myVueDropzone" id="dropzone" v-on:vdropzone-removed-file="removeEventImage1" v-on:vdropzone-sending="sendingEventBackground" :options="dropzoneOptions"></vue-dropzone>
     
     <br/><br/>
     <h5 style="margin-bottom:0;">이미지 (센터)</h5>
     <p>(입력 시, "XXX 출처" 로 표기필요) (띄어쓰기 앞 값은 무시 함)</p>
-    <vue-dropzone ref="myVueDropzone2" id="dropzone2" v-on:vdropzone-sending="sendingEventImage1" :options="dropzoneOptions"></vue-dropzone>
+    <vue-dropzone ref="myVueDropzone2" id="dropzone2" v-on:vdropzone-removed-file="removeEventImage2" v-on:vdropzone-sending="sendingEventImage1" :options="dropzoneOptions"></vue-dropzone>
     
     <br/><br/>
     <h5 style="margin-bottom:0;">이미지 (다이빙)</h5>
     <p>(입력 시, "XXX 출처" 로 표기필요) (띄어쓰기 앞 값은 무시 함)</p>
-    <vue-dropzone ref="myVueDropzone3" id="dropzone3" v-on:vdropzone-sending="sendingEventImage2" :options="dropzoneOptions"></vue-dropzone>
+    <vue-dropzone ref="myVueDropzone3" id="dropzone3" v-on:vdropzone-removed-file="removeEventImage2" v-on:vdropzone-sending="sendingEventImage2" :options="dropzoneOptions"></vue-dropzone>
     
     <br/><br/>
     <h5 style="margin-bottom:0;">이미지 (교육)</h5>
     <p>(입력 시, "XXX 출처" 로 표기필요) (띄어쓰기 앞 값은 무시 함)</p>
-    <vue-dropzone ref="myVueDropzone4" id="dropzone4" v-on:vdropzone-sending="sendingEventImage3" :options="dropzoneOptions"></vue-dropzone>
+    <vue-dropzone ref="myVueDropzone4" id="dropzone4" v-on:vdropzone-removed-file="removeEventImage2" v-on:vdropzone-sending="sendingEventImage3" :options="dropzoneOptions"></vue-dropzone>
     
   </b-card>
 
@@ -65,6 +65,7 @@ export default {
       dropzoneOptions: {
           url: 'localhost/post',
           thumbnailWidth: 150,
+          addRemoveLinks: true,
           headers: { "My-Awesome-Header": "header value" }
       },
       initBackgroundImages: [],
@@ -97,14 +98,14 @@ export default {
       this.center_data = center_data.getDiveCenterByUniqueName;
       if (this.center_data.backgroundImages && this.center_data.backgroundImages.length > 0)  {
         for (var i=0; i<this.center_data.backgroundImages.length; i++) {
-          var file = { size: 123, name: this.center_data.backgroundImages[i].name, type: "image/png" };
+          var file = { size: 123, name: this.center_data.backgroundImages[i].name, type: "image/png", _id: this.center_data.backgroundImages[i]._id };
           var url = this.center_data.backgroundImages[i].thumbnailUrl;
           this.initBackgroundImages.push({file: file, url: url});
         }
       }
       if (this.center_data.images && this.center_data.images.length > 0)  {
         for (var i=0; i<this.center_data.images.length; i++) {
-          var file = { size: 123, name: this.center_data.images[i].name, type: "image/png" };
+          var file = { size: 123, name: this.center_data.images[i].name, type: "image/png", _id:this.center_data.images[i]._id };
           var url = this.center_data.images[i].thumbnailUrl;
 
           if (this.center_data.images[i].description == '센터') {
@@ -123,7 +124,36 @@ export default {
       //this.centers.forEach(center => {center.rentalsName = center.rentals.map(rental => {return [rental.name,((rental.unitName==null)?'':rental.unitName),((rental.price==null)?'':rental.price)]})})
       //this.centers.forEach(center => {center.ticketsName = center.tickets.map(ticket => {return [ticket.unitName,((ticket.price==null)?'':ticket.price)]})})
     },
-
+    async removeEventImage1 (file, error, xhr) {
+      var name = file.name;
+      var images_id_list = new Array();
+      for (var i=0; i<this.center_data.backgroundImages.length; i++) {
+        if (file._id != this.center_data.backgroundImages[i]._id)
+          images_id_list.push(this.center_data.backgroundImages[i]._id);
+      }
+      var ipt2 = {"backgroundImages": images_id_list, "_id": this.center_data._id, "uniqueName": this.center_data.uniqueName, "latitude": this.center_data.latitude, "longitude": this.center_data.longitude};
+      var result3 = await upsertDiveCenter(ipt2);
+      this.$bvToast.toast('파일명 = ' + name, {
+        title: `삭제 완료`,
+        variant: 'success',
+        solid: false,
+      });
+    },
+    async removeEventImage2 (file, error, xhr) {
+      var name = file.name;
+      var images_id_list = new Array();
+      for (var i=0; i<this.center_data.images.length; i++) {
+        if (file._id != this.center_data.images[i]._id)
+          images_id_list.push(this.center_data.images[i]._id);
+      }
+      var ipt2 = {"images": images_id_list, "_id": this.center_data._id, "uniqueName": this.center_data.uniqueName, "latitude": this.center_data.latitude, "longitude": this.center_data.longitude};
+      var result3 = await upsertDiveCenter(ipt2);
+      this.$bvToast.toast('파일명 = ' + name, {
+        title: `삭제 완료`,
+        variant: 'success',
+        solid: false,
+      });
+    },
     async sendingEventImage1 (file, xhr, formData) {
       this.sendingEventImage(file, xhr, formData, "센터");
     },
@@ -167,6 +197,7 @@ export default {
             variant: 'success',
             solid: false,
           });
+          this.center_data.images.push({_id: result.uploadImage._id})
         }
     },
     async sendingEventBackground (file, xhr, formData) {
@@ -204,7 +235,7 @@ export default {
             variant: 'success',
             solid: false,
           });
-
+          this.center_data.backgroundImages.push({_id: result.uploadImage._id})
         }
         //formData.append('paramName', 'some value or other');
     },

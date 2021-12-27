@@ -309,8 +309,8 @@
 
                     </div>
                     <div class="mt-3 text-start row" v-else>
-                        <div class="text-center"><img src="/static/images/assets/empty_list.jpg" width="60%"/></div>
-                        <div class="font-noto text-center mb-3" style="color: #717a92;">대여장비 리스트가 아직 없어요.</div>
+                        <div class="text-center"><img src="/static/images/assets/empty_equiptment.jpg" width="60%"/></div>
+                        <div class="font-noto text-center mb-3" style="color: #717a92;">장비 대여가 불가능한 센터입니다.</div>
                     </div>
                 </div>
             </div>    
@@ -997,6 +997,8 @@ export default {
                         likes
                         views
                         reviewCount
+                        isUserSubscribe
+                        isUserLike
                     }
                 }
             `,
@@ -1337,6 +1339,8 @@ export default {
   }, methods: {
       setData(_centerData) {
         this.centerData = _centerData;
+        if (_centerData.isUserLike) this.like_img = 'ico_heart2';
+        if (_centerData.isUserSubscribe) this.subscribe_img = 'ico_subscribe2';
         setTimeout(function() {
             init_template();
             var preloader = document.getElementById('preloader')
@@ -1357,7 +1361,7 @@ export default {
                     query: `
                         mutation Like($targetId: ID!, $targetType: UserReactionTargetType!) {
                             like(targetId: $targetId, targetType: $targetType) {
-                                success
+                                
                             }
                         }
                     `,
