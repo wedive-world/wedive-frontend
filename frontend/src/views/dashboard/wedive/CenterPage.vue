@@ -132,9 +132,11 @@ export default {
       var name = file.name;
       var images_id_list = new Array();
       for (var i=0; i<this.center_data.backgroundImages.length; i++) {
-        if (file._id != this.center_data.backgroundImages[i]._id)
+        if (file._id != this.center_data.backgroundImages[i]._id) {
           images_id_list.push(this.center_data.backgroundImages[i]._id);
+        } else {
           this.center_data.backgroundImages.splice(i, 1);
+        }
       }
       var ipt2 = {"backgroundImages": images_id_list, "_id": this.center_data._id, "uniqueName": this.center_data.uniqueName, "latitude": this.center_data.latitude, "longitude": this.center_data.longitude};
       var result3 = await upsertDiveCenter(ipt2);
@@ -148,9 +150,12 @@ export default {
       var name = file.name;
       var images_id_list = new Array();
       for (var i=0; i<this.center_data.images.length; i++) {
-        if (file._id != this.center_data.images[i]._id)
+        if (file._id != this.center_data.images[i]._id) {
           images_id_list.push(this.center_data.images[i]._id);
+        }
+        else {
           this.center_data.images.splice(i, 1);
+        }
       }
       var ipt2 = {"images": images_id_list, "_id": this.center_data._id, "uniqueName": this.center_data.uniqueName, "latitude": this.center_data.latitude, "longitude": this.center_data.longitude};
       var result3 = await upsertDiveCenter(ipt2);
@@ -191,11 +196,9 @@ export default {
           ipt._id = result.uploadImage._id;
           var result2 = await updateImage(ipt);
 
-          var images_id_list = new Array();
-          for ( var j=0; j<this.center_data.images.length; j++) {
-            images_id_list.push(this.center_data.images[j]._id);
-          }
+          var images_id_list = this.center_data.images.map((image)=>{return image._id});
           images_id_list.push(result.uploadImage._id);
+          this.center_data.images.push({_id: result.uploadImage._id})
           var ipt2 = {"images": images_id_list, "_id": this.center_data._id, "uniqueName": this.center_data.uniqueName, "latitude": this.center_data.latitude, "longitude": this.center_data.longitude};
           var result3 = await upsertDiveCenter(ipt2);
           this.$bvToast.toast('파일명 = ' + name, {
@@ -203,7 +206,7 @@ export default {
             variant: 'success',
             solid: false,
           });
-          this.center_data.images.push({_id: result.uploadImage._id})
+          
         }
     },
     async sendingEventBackground (file, xhr, formData) {
@@ -229,11 +232,9 @@ export default {
           //console.log(ipt);
           var result2 = await updateImage(ipt);
 
-          var images_id_list = new Array();
-          for ( var j=0; j<this.center_data.backgroundImages.length; j++) {
-            images_id_list.push(this.center_data.backgroundImages[j]._id);
-          }
+          var images_id_list = this.center_data.backgroundImages.map((image)=>{return image._id});
           images_id_list.push(result.uploadImage._id);
+          this.center_data.backgroundImages.push({_id: result.uploadImage._id})
           var ipt2 = {"backgroundImages": images_id_list, "_id": this.center_data._id, "uniqueName": this.center_data.uniqueName, "latitude": this.center_data.latitude, "longitude": this.center_data.longitude};
           var result3 = await upsertDiveCenter(ipt2);
           this.$bvToast.toast('파일명 = ' + name, {
@@ -241,7 +242,7 @@ export default {
             variant: 'success',
             solid: false,
           });
-          this.center_data.backgroundImages.push({_id: result.uploadImage._id})
+          
         }
         //formData.append('paramName', 'some value or other');
     },

@@ -2,7 +2,7 @@
   <div class="">
     <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-site" data-menu-load=""></div>
     <div class="header header-fixed header-logo-center">
-        <a href="" class="header-title color ellipsis">{{ divingData.title }}{{ divingData.location }}</a>
+        <a href="" class="header-title color ellipsis">{{ divingData.title }} {{ divingData.location }}</a>
         <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
         <a href="#" class="header-icon header-icon-4"><img src="/static/images/assets/ico_share.png" width="20"/></a>
     </div>
@@ -68,7 +68,7 @@
                 </div>
             </div>
             <div class="content mt-4 pb-3 border-bottom">
-                <h2 class="font-18 font-700 mb-0">{{ divingData.title }}{{ divingData.locaiton }}</h2>
+                <h2 class="font-18 font-700 mb-0">{{ divingData.title }} {{ divingData.locaiton }}</h2>
                 <p class="color-gray-dark mb-0 font-12">{{ timeForToday(divingData.createdAt) }}</p>
                 <p class="color-gray mt-4 mb-4 font-14" v-html="divingData.description"></p>
                 
@@ -79,7 +79,7 @@
                         <div v-if="showFinishedAt == false" class="col-3 text-center color-gray">종료일시</div>
                         <div v-if="showFinishedAt == false" class="col-9">{{ weDiveDateFormat(new Date(divingData.finishedAt), false) }}</div>
                         <div class="col-3 text-center color-gray">선호사항</div>
-                        <div class="col-9">{{ (divingData.interests) ? divingData.interests.map((x)=>{return x.title}).join().replace(/,/gi,', ') : '' }}</div>
+                        <div class="col-9">{{ (divingData.interests) ? divingData.interests.map((x)=>{return x.title}).join().replace(/,/gi,', ') : '없음' }}</div>
                         <div class="col-3 text-center color-gray">모집인원</div>
                         <div class="col-9">{{ (divingData.maxPeopleNumber) ? (divingData.maxPeopleNumber-divingData.participants.length-1) : '' }}명</div>
                     </div>
@@ -108,11 +108,19 @@
                 <h2 class="font-15 font-700 mb-3">신청인원 ({{ (divingData.participants.filter(member=> member.status == 'applied').length) }})</h2>
                 
                 <div class="row text-center mb-1">
-                    <div class="col-3" v-for="participant in divingData.participants.filter(member=> member.status == 'applied')">
+                    <div class="col-3 p-0" v-for="participant in divingData.participants.filter(member=> member.status == 'applied')">
                         <div v-on:click="goUserPage(participant.user)">
                             <img class="inline-block circular_image" :src="(participant.user && participant.user.profileImages && participant.user.profileImages.length>0 && participant.user.profileImages[0].thumbnailUrl) ? participant.user.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty_'+(participant.gender ? participant.gender : 'm')+'.png'" width="50" style="vertical-align: top;"/>
                             <p class="color-gray-dark mb-0 font-14">{{ (participant.user!=null&&participant.user.nickName!=null) ? participant.user.nickName : ((participant.name!=null) ? participant.name : '비공개') }}</p>
                         </div>
+                        <a data-menu="menu-approval" v-on:click="setUser(participant)" class="btn btn-sm rounded-1 text-uppercase font-900 shadow-s bg-black" style="padding: 4px 6px !important;">승인/거절</a>
+                    </div>
+                    <div class="col-3 p-0" v-for="participant in divingData.participants.filter(member=> member.status == 'applied')">
+                        <div v-on:click="goUserPage(participant.user)">
+                            <img class="inline-block circular_image" :src="(participant.user && participant.user.profileImages && participant.user.profileImages.length>0 && participant.user.profileImages[0].thumbnailUrl) ? participant.user.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty_'+(participant.gender ? participant.gender : 'm')+'.png'" width="50" style="vertical-align: top;"/>
+                            <p class="color-gray-dark mb-0 font-14">{{ (participant.user!=null&&participant.user.nickName!=null) ? participant.user.nickName : ((participant.name!=null) ? participant.name : '비공개') }}</p>
+                        </div>
+                        <a data-menu="menu-approval" class="btn btn-sm rounded-1 text-uppercase font-900 shadow-s bg-black" style="padding: 4px 6px !important;">승인/거절</a>
                     </div>
                 </div>
             </div>
@@ -159,6 +167,29 @@
 
     <!-- End of Page Content--> 
     
+    <!-- 신청하기 팝업 -->
+    <div id="menu-approval" 
+         class="menu menu-box-modal" 
+         data-menu-height="190" 
+         data-menu-width="370">
+        <div class="menu-title">
+            <h4 class="text-center mt-4 pt-1 mb-2 font-noto font-19">{{ requester.name }}님을 승인 하시겠습니까?</h4>
+            <a href="#" class="close-menu hide"><i class="fa fa-times-circle"></i></a>
+        </div>
+        <div class="me-4 ms-4" style="border-bottom: 2px solid black;"></div>
+        <div class="content mt-3">
+            <p class="mb-4 text-center font-noto">승인 시, 자동으로 채팅방에 초대됩니다.</p>
+        </div>
+        
+        <div class="row m-0">
+            <div class="col-6 pe-1">
+                <a v-on:click="reject()" href="#" class="close-menu btn btn-m btn-full rounded-0 text-uppercase font-900 shadow-s bg-gray-dark">거절</a>
+            </div>
+            <div class="col-6 ps-1">
+                <a v-on:click="approve()" class="btn btn-m btn-full rounded-0 text-uppercase font-900 shadow-s bg-black">승인</a>
+            </div>
+        </div>
+    </div>
 
     <!-- 신청하기 팝업 -->
     <div id="menu-join" 
@@ -198,8 +229,8 @@
         </div>
         
         <div class="row m-0">
-            <div class="col-12 pe-1">
-                <a href="#" class="close-menu btn btn-m btn-full rounded-0 text-uppercase font-900 shadow-s bg-gray-black">확인</a>
+            <div class="col-12 pe-3 ps-3">
+                <a class="close-menu btn btn-m btn-full rounded-0 text-uppercase font-900 shadow-s bg-black">확인</a>
             </div>
         </div>
     </div>
@@ -455,9 +486,59 @@ export default {
         subscribe_img: 'icon_subscribe',
         idToken: localStorage.idToken,
         nickName: localStorage.nickName,
+        requester: '',
     }
   },
   methods: {
+      setUser(participant) {
+          //console.log(participant);
+          this.requester = participant;
+      },
+      async approve() {
+          this.divingData.participants.forEach(participant => {
+              if (participant.user._id == this.requester.user._id) {
+
+              }
+          });
+          var result = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                    mutation Mutation($input: DivingInput) {
+                        upsertDiving(input: $input) {
+                            _id
+                        }
+                    }
+                `,
+                variables: {
+                    "input": {
+                        "description": buddy_detail,
+                        "status": "searchable",
+                        "type": diving_type,
+                        "hostUser": localStorage.userId,
+                        "participants": parti,
+                        "maxPeopleNumber": (num_recruit + parti.length + 1),
+                        "interests": inter,
+                        "diveSites": null,
+                        "divePoints": null,
+                        "diveCenters": center_id,
+                        "startedAt": s_date,
+                        "finishedAt": s_date,
+                    }
+                }
+            }
+          });
+          console.log(result);
+          var diving_id = result.data.data.upsertDiving._id;
+      },
+      reject() {
+          console.log("reject");
+      },
       async joinDiving() {
           console.log(this.divingData);
           console.log(this.divingData._id);
@@ -494,10 +575,12 @@ export default {
               const activeMenu = document.querySelectorAll('.menu-active');
               for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
 
-
-              var menuData = 'menu-join-requested';
-              document.getElementById(menuData).classList.add('menu-active');
-              document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
+              setTimeout(function() {
+                var menuData = 'menu-join-requested';
+                document.getElementById(menuData).classList.add('menu-active');
+                document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
+              },500);
+              
           } else {
               var toastData = 'snackbar-join-error';
               var notificationToast = document.getElementById(toastData);

@@ -1,35 +1,28 @@
 <template>
   <div class="">
     <div data-menu-active="nav-site"></div>
-    <div class="page-content text-start transform-none" style="padding-bottom: 65px;">
-        
+    <div class="header header-fixed header-logo-center">
+        <a href="" class="header-title color ellipsis">나의 버디찾기</a>
+        <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
+    </div>
+
+    <div class="page-content transform-none" style="margin-top: 50px;">
         <div class="card card-style ms-0 me-0 rounded-0 mb-0">
-            <div class="content mt-0">
-                <div class="color-highlight font-12 mb-2">
-                    <i class="fas fa-location-arrow"></i> 제주도 근처의 다이빙 센터 입니다.
-                </div>
+            <div class="content mt-3">
                 <div v-for="diving in divingData">
                     <div class="map-box">
-                        <a href="/diving/" + diving._id>
-                            <div class="bx">
+                        <a :href="'/diving/' + diving._id">
+                            <div :class="'bx position-relative' + ((diving.status == 'divingComplete') ? ' opacity-40':'')">
                                 <div class="justify-content-center mb-0 text-start">
-                                    <div v-if="diving.showPoint && diving.showPoint.backgroundImages" class="" style="float: left;position: relative;width: 95px; height:95px;">
-                                        <img v-bind:src="diving.showPoint.backgroundImages.thumbnailUrl" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;">
+                                    <div v-if="diving.locationData && diving.locationData.backgroundImages" class="" style="float: left;position: relative;width: 95px; height:95px;">
+                                        <img v-bind:src="diving.locationData.backgroundImages.thumbnailUrl" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;">
                                     </div>
                                     <div class="" style="padding-left: 110px;">
-                                        <h4 class="font-15">{{ divingData.title }} {{ divingData.location }}</h4>
-                                        <p class="pb-0 mb-0 line-height-m ellipsis">  </p>
-                                        <p class="pb-0 mb-0 mt-n1 ellipsis color-gray-light-mid">
-                                            {{ timeForToday(diving.createdAt) }}
-                                        </p>
-                                        <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
-                                            <span>  </span>
-                                            &nbsp;<font class="color-gray-light">|</font>&nbsp;
-                                            <img src="/static/images/agency/logo_padi.svg" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
-                                            &nbsp;<font class="color-gray-light">|</font>&nbsp;
-                                            <span v-for="i in 2">￦</span>
-                                        </p>
+                                        <h4 class="font-15">{{ diving.title }}</h4>
+                                        <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> {{ diving.location }}</p>
+                                        <p class="pb-0 mb-0 mt-n1 ellipsis color-gray-light-mid">등록 : {{ timeForToday(diving.createdAt) }}</p>
                                     </div>
+                                    <span class="chip chip-s bg-gray-light text-center font-400 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>1</span> <span class="color-shopping ms-1"><i class="far fa-user"></i>1</span></span>
                                 </div>
                             </div>
                         </a>
@@ -118,6 +111,7 @@ export default {
                         createdAt
                         views
                         likes
+                        _id
                     }
                 }
                 `,
@@ -134,11 +128,9 @@ export default {
     }
   },
   mounted() {
-    if (this.$route.query.header && this.$route.query.header == 'hide') {
-      $(".page-title").hide();
-      $(".page-title-clear").hide();
-      $(".header-fixed").hide();
-    }
+    $(".page-title").hide();
+    $(".page-title-clear").hide();
+    $(".header-auto-show").hide();
     if (this.$route.query.footer && this.$route.query.footer == 'hide') {
       $("#footer-bar").hide();
     }
@@ -156,35 +148,41 @@ export default {
   methods: {
       setData(_divingData) {
           this.divingData = _divingData;
-          this.divingData.forEach(diving => {
-            diving.showPoint = {};
-            if (diving.diveSite.length > 0) diving.showPoint = diving.diveSite[0];
-            if (diving.divePoint.length > 0) diving.showPoint = diving.divePoint[0];
-            if (diving.diveCenter.length > 0) diving.showPoint = diving.diveCenter[0];
+          //console.log(this.divingData);
+          this.divingData.sort(function(a, b) {
+            return new Date(b.startedAt) - new Date(a.startedAt);
           });
+          var now = new Date();
+          this.divingData.forEach(diving => {
 
-            var startedAt = new Date(this.divingData.startedAt);
-            var finishedAt = new Date(this.divingData.finishedAt);
-            if (this.divingData.startedAt == this.divingData.finishedAt) {
-                this.divingData.title = startedAt.getFullYear() + "년 " + (startedAt.getMonth()+1) + "월 " + startedAt.getDate() + "일 "
+            var startedAt = new Date(diving.startedAt);
+            var finishedAt = new Date(diving.finishedAt);
+            if (diving.startedAt == diving.finishedAt) {
+                diving.title = (startedAt.getMonth()+1) + "월 " + startedAt.getDate() + "일 "
             } else {
-                this.divingData.title = startedAt.getFullYear() + "년 " + (startedAt.getMonth()+1) + "/" + startedAt.getDate() + " ~ " + (finishedAt.getMonth()+1) + "/" + finishedAt.getDate() + " "
+                diving.title = (startedAt.getMonth()+1) + "/" + startedAt.getDate() + " ~ " + (finishedAt.getMonth()+1) + "/" + finishedAt.getDate() + " "
             }
             if (startedAt.getFullYear() == finishedAt.getFullYear() && startedAt.getMonth() == finishedAt.getMonth() && startedAt.getDate() == finishedAt.getDate()) {
-                this.showFinishedAt = true;
+                diving.showFinishedAt = true;
             }
 
-            this.divingData.location = '';
-            if (this.divingData.diveSites && this.divingData.diveSites.length > 0) {
-                this.locationData = this.divingData.diveSites[0];
-                this.divingData.location = this.divingData.diveSites[0].name + " 사이트";
-            } else if (this.divingData.divePoints && this.divingData.divePoints.length > 0) {
-                this.locationData = this.divingData.divePoints[0];
-                this.divingData.location = this.divingData.divePoints[0].name + " 포인트";
-            } else if (this.divingData.diveCenters && this.divingData.diveCenters.length > 0) {
-                this.locationData = this.divingData.diveCenters[0];
-                this.divingData.location = this.divingData.diveCenters[0].name;
+            if (startedAt < now) {
+                diving.status = 'divingComplete';
             }
+
+            diving.location = '';
+            diving.locationData = {};
+            if (diving.diveSites && diving.diveSites.length > 0) {
+                diving.locationData = diving.diveSites[0];
+                diving.location = diving.diveSites[0].name + " 사이트";
+            } else if (diving.divePoints && diving.divePoints.length > 0) {
+                diving.locationData = diving.divePoints[0];
+                diving.location = diving.divePoints[0].name + " 포인트";
+            } else if (diving.diveCenters && diving.diveCenters.length > 0) {
+                diving.locationData = diving.diveCenters[0];
+                diving.location = diving.diveCenters[0].name;
+            }
+          });
       },
       timeForToday(value) {
         const today = new Date();
@@ -217,6 +215,7 @@ export default {
 
 
 <style scoped>
-
-
+.wedive-chip {font-family: 'Noto Sans Korean';border-radius:6px !important;padding: 0 8px;margin:0 !important;position:absolute;right:0px;top:20px;}
+.wedive-chip i {width: auto;line-height: inherit;margin-right: 2px;}
+.position-relative {position: relative;}
 </style>
