@@ -85,12 +85,12 @@
                 <div class="divider mt-3 mb-3"></div>
                 
                 <div class="d-flex mb-0 text-center">
-                    <div v-on:click="clickLike()" class="flex-grow-1 pd-0" style="border-right: 1px solid lightgray;">
+                    <div v-on:click="clickLike()" :class="'flex-grow-1 pd-0' + ((idToken == null || nickName == null) ? ' opacity-40' : '')" style="border-right: 1px solid lightgray;">
                         <img class="ext-img" :src="'/static/images/assets/'+like_img+'.png'" width="24" style="margin-top:-4px;"/>
                         <span class="font-16 font-500 font-noto">찜 {{ pointData.likes }}</span>
                     </div>
                     
-                    <div v-on:click="clickSubscribe()" class="flex-grow-1 pd-0" data-menu="menu-share">
+                    <div v-on:click="clickSubscribe()" :class="'flex-grow-1 pd-0' + ((idToken == null || nickName == null) ? ' opacity-40' : '')">
                         <img class="ext-img" :src="'/static/images/assets/'+subscribe_img+'.png'" width="24" style="margin-top:-4px;"/>
                         <span class="font-16 font-500 font-noto">알림</span>
                     </div>
@@ -471,7 +471,7 @@
                 </div>
             </div>
             <div class="divider mt-2 mb-2 ms-3 me-3"></div>
-            <div data-menu="menu-review">
+            <div v-on:click="login()" :data-menu="((idToken == null || nickName == null) ? '' : 'menu-review')" :class="((idToken == null || nickName == null) ? 'opacity-40' : '')">
                 <div class="star-area mt-4 text-center">
                     <i class="fa fa-star font-20 color-gray-light"></i>
                     <i class="fa fa-star font-20 color-gray-light"></i>
@@ -1183,6 +1183,8 @@ export default {
         review_detail: '',
         like_img: 'ico_heart',
         subscribe_img: 'ico_subscribe',
+        idToken: localStorage.idToken,
+        nickName: localStorage.nickName,
     }
   }, methods: {
       setData(_pointData, _nearData) {
@@ -1226,7 +1228,7 @@ export default {
           }, 1000);
       },
       async clickLike() {
-          if (localStorage.idToken) {
+          if (localStorage.idToken && localStorage.nickName) {
             const targetId = this.pointData._id;
             var result = await axios({
                 url: 'https://api.wedives.com/graphql',
@@ -1238,9 +1240,7 @@ export default {
                 data: {
                     query: `
                         mutation Like($targetId: ID!, $targetType: UserReactionTargetType!) {
-                            like(targetId: $targetId, targetType: $targetType) {
-                                success
-                            }
+                            like(targetId: $targetId, targetType: $targetType)
                         }
                     `,
                     variables: {
@@ -1249,17 +1249,19 @@ export default {
                     }
                 }
             });
-            if (result && result.data && result.data.data && result.data.data.like.success && result.data.data.like.success == true) {
+            if (result && result.data && result.data.data && result.data.data.like == true) {
                 this.like_img = 'ico_heart2';
                 this.pointData.likes = ((this.pointData.likes==null)?0:this.pointData.likes)+1;
-            } else if (result && result.data && result.data.data && result.data.data.like.success && result.data.data.like.success == false) {
+            } else if (result && result.data && result.data.data && result.data.data.like == false) {
                 this.like_img = 'ico_heart';
                 this.pointData.likes = this.pointData.likes-1;
             }
+          } else {
+              this.login();
           }
       },
       async clickSubscribe() {
-          if (localStorage.idToken) {
+          if (localStorage.idToken && localStorage.nickName) {
             const targetId = this.pointData._id;
             var result = await axios({
                 url: 'https://api.wedives.com/graphql',
@@ -1271,9 +1273,7 @@ export default {
                 data: {
                     query: `
                         mutation Subscribe($targetId: ID!, $targetType: UserReactionTargetType!) {
-                            subscribe(targetId: $targetId, targetType: $targetType) {
-                                success
-                            }
+                            subscribe(targetId: $targetId, targetType: $targetType)
                         }
                     `,
                     variables: {
@@ -1282,11 +1282,13 @@ export default {
                     }
                 }
             });
-            if (result && result.data && result.data.data && result.data.data.subscribe.success && result.data.data.subscribe.success == true) {
+            if (result && result.data && result.data.data && result.data.data.subscribe == true) {
                 this.subscribe_img = 'ico_subscribe2';
-            } else if (result && result.data && result.data.data && result.data.data.subscribe.success && result.data.data.subscribe.success == false) {
+            } else if (result && result.data && result.data.data && result.data.data.subscribe == false) {
                 this.subscribe_img = 'ico_subscribe';
             }
+          } else {
+              this.login();
           }
       },
       async review_send() {
@@ -1399,6 +1401,14 @@ export default {
               default:
               break;
           }  
+      },
+      login() {
+        localStorage.loginUrl = window.location.pathname;
+        if (localStorage.hasOwnProperty("idToken") == false || localStorage.idToken == null) {
+          this.$root.$children[0].$refs.loginBottomSheet.open();
+        } else if (localStorage.hasOwnProperty("nickName") == false || localStorage.nickName == null) {
+          location.href='/user_create';
+        }
       },
   }
 

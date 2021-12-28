@@ -130,6 +130,7 @@ export default {
       for (var i=0; i<this.center_data.backgroundImages.length; i++) {
         if (file._id != this.center_data.backgroundImages[i]._id)
           images_id_list.push(this.center_data.backgroundImages[i]._id);
+          this.center_data.backgroundImages.splice(i, 1);
       }
       var ipt2 = {"backgroundImages": images_id_list, "_id": this.center_data._id, "uniqueName": this.center_data.uniqueName, "latitude": this.center_data.latitude, "longitude": this.center_data.longitude};
       var result3 = await upsertDiveCenter(ipt2);
@@ -145,6 +146,7 @@ export default {
       for (var i=0; i<this.center_data.images.length; i++) {
         if (file._id != this.center_data.images[i]._id)
           images_id_list.push(this.center_data.images[i]._id);
+          this.center_data.images.splice(i, 1);
       }
       var ipt2 = {"images": images_id_list, "_id": this.center_data._id, "uniqueName": this.center_data.uniqueName, "latitude": this.center_data.latitude, "longitude": this.center_data.longitude};
       var result3 = await upsertDiveCenter(ipt2);

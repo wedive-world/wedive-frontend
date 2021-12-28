@@ -177,6 +177,8 @@ export default {
                         scubaLicenseLevel
                         scubaLicenseType
                         createdAt
+                        isUserLike
+                        isUserSubscribe
                     }
                 }
                 `,
@@ -330,6 +332,8 @@ export default {
           } else {
             this.userData = _userData;
             // 다이버 레벨 보여주기
+            if (_userData.isUserLike) this.like_img = 'ico_heart2';
+            if (_userData.isUserSubscribe) this.subscribe_img = 'ico_subscribe2';
             this.userData.levelShow = '초보';
             var scuba_level = ["초보", "오픈워터", "어드벤스드", "레스큐", "마스터", "강사"];
             var free_level = ["초보", "레벨1", "레벨2", "레벨3", "레벨4", "강사"];
@@ -364,9 +368,7 @@ export default {
                 data: {
                     query: `
                         mutation Like($targetId: ID!, $targetType: UserReactionTargetType!) {
-                            like(targetId: $targetId, targetType: $targetType) {
-                                success
-                            }
+                            like(targetId: $targetId, targetType: $targetType)
                         }
                     `,
                     variables: {
@@ -375,10 +377,10 @@ export default {
                     }
                 }
             });
-            if (result && result.data && result.data.data && result.data.data.like.success && result.data.data.like.success == true) {
+            if (result && result.data && result.data.data && result.data.data.like == true) {
                 this.like_img = 'ico_heart2';
                 this.userData.likes = ((this.userData.likes==null)?0:this.userData.likes)+1;
-            } else if (result && result.data && result.data.data && result.data.data.like.success && result.data.data.like.success == true) {
+            } else if (result && result.data && result.data.data && result.data.data.like == false) {
                 this.like_img = 'ico_heart';
                 this.userData.likes = this.userData.likes - 1;
             }
@@ -397,9 +399,7 @@ export default {
                 data: {
                     query: `
                         mutation Subscribe($targetId: ID!, $targetType: UserReactionTargetType!) {
-                            subscribe(targetId: $targetId, targetType: $targetType) {
-                                success
-                            }
+                            subscribe(targetId: $targetId, targetType: $targetType)
                         }
                     `,
                     variables: {
@@ -408,9 +408,9 @@ export default {
                     }
                 }
             });
-            if (result && result.data && result.data.data && result.data.data.subscribe.success && result.data.data.subscribe.success == true) {
+            if (result && result.data && result.data.data && result.data.data.subscribe == true) {
                 this.subscribe_img = 'ico_subscribe2';
-            } else if (result && result.data && result.data.data && result.data.data.subscribe.success && result.data.data.subscribe.success == false) {
+            } else if (result && result.data && result.data.data && result.data.data.subscribe == false) {
                 this.subscribe_img = 'ico_subscribe';
             }
           }

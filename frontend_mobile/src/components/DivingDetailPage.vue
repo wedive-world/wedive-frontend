@@ -85,7 +85,7 @@
                     </div>
                 </div>
                 <br/>
-                <p class="color-gray-dark mt-3 mb-0 font-12">관심 2 · 조회 31</p>
+                <p class="color-gray-dark mt-3 mb-0 font-12">관심 {{ divingData.likes || 0 }} · 조회 {{ divingData.views || 0 }}</p>
             </div>
             
             <div v-if="divingData.participants" class="content mt-0 pb-3 border-bottom">
@@ -143,13 +143,13 @@
         </div>
         
         <div v-if="divingData.hostUser && divingData.hostUser._id != userId" id="footer-bar-shop" class="d-flex" style="min-height: 52px !important;height: 52px !important;">
-        <div v-on:click="clickLike()" class="me-1 speach-icon">
+        <div v-on:click="clickLike()" :class="'me-1 speach-icon' + ((idToken == null || nickName == null) ? ' opacity-40' : '')">
             <div style="width: 52px;height: 52px;display: inline-block;position: relative;border-right:1px solid rgba(0, 0, 0, 0.08);">
                 <img class="'inline-block me-2" :src="'/static/images/assets/'+like_img+'.png'" width="30" style="display: block;margin-top:10px;margin-left:10px;"/>
             </div>
         </div>
         <div class="flex-fill speach-input p-2">
-          <a v-if="(divingData.participants.filter(member=> (member.status == 'applied' && member._id == userId))).length > 0" href="#" class="btn btn-full font-400 rounded-s shadow-l bg-gray-dark color-white bd-w-0mb-5 font-noto">참여신청</a>
+          <a v-if="(divingData.participants.filter(member=> (member.status == 'applied' && member._id == userId))).length > 0" v-on:click="login()" class="btn btn-full font-400 rounded-s shadow-l bg-gray-dark color-white bd-w-0mb-5 font-noto">참여신청</a>
           <a v-else href="#" data-menu="menu-join" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0mb-5 font-noto">참여신청</a>
         </div>
     </div>
@@ -401,6 +401,8 @@ export default {
                         startedAt
                         finishedAt
                         createdAt
+                        isUserSubscribe
+                        isUserLike
                     }
                 }
                 `,
@@ -450,6 +452,9 @@ export default {
         is_empty: false,
         userId: localStorage.userId,
         like_img: 'ico_heart',
+        subscribe_img: 'icon_subscribe',
+        idToken: localStorage.idToken,
+        nickName: localStorage.nickName,
     }
   },
   methods: {
@@ -578,6 +583,8 @@ export default {
             this.is_empty = true;
           } else {
             this.divingData = _divingData;
+            if (_divingData.isUserLike) this.like_img = 'ico_heart2';
+            if (_divingData.isUserSubscribe) this.subscribe_img = 'ico_subscribe2';
             //console.log(this.divingData)
             /// 다이버 레벨 보여주기
             this.divingData.hostUser.levelShow = '초보';
@@ -630,15 +637,19 @@ export default {
           }, 1000);
       },
       goUserPage(user) {
-          if (user && user._id) {
-              location.href = '/user/' + user._id;
+          if (localStorage.idToken && localStorage.nickName) {
+              if (user && user._id) {
+                  location.href = '/user/' + user._id;
+              }
+          } else if (user != null) {
+              this.login();
           }
       },
       goDetail(type, uniqueName) {
           location.href = type + '/' + uniqueName;
       },
       async clickLike() {
-          if (localStorage.idToken) {
+          if (localStorage.idToken && localStorage.nickName) {
             const targetId = this.divingData._id;
             var result = await axios({
                 url: 'https://api.wedives.com/graphql',
@@ -650,9 +661,7 @@ export default {
                 data: {
                     query: `
                         mutation Like($targetId: ID!, $targetType: UserReactionTargetType!) {
-                            like(targetId: $targetId, targetType: $targetType) {
-                                success
-                            }
+                            like(targetId: $targetId, targetType: $targetType)
                         }
                     `,
                     variables: {
@@ -661,14 +670,24 @@ export default {
                     }
                 }
             });
-            if (result && result.data && result.data.data && result.data.data.like.success && result.data.data.like.success == true) {
+            if (result && result.data && result.data.data && result.data.data.like == true) {
                 this.like_img = 'ico_heart2';
                 this.divingData.likes = ((this.divingData.likes==null)?0:this.divingData.likes)+1;
-            } else if (result && result.data && result.data.data && result.data.data.like.success && result.data.data.like.success == true) {
+            } else if (result && result.data && result.data.data && result.data.data.like == false) {
                 this.like_img = 'ico_heart';
                 this.divingData.likes = this.divingData.likes-1;
             }
+          } else {
+              this.login();
           }
+      },
+      login() {
+        localStorage.loginUrl = window.location.pathname;
+        if (localStorage.hasOwnProperty("idToken") == false || localStorage.idToken == null) {
+          this.$root.$children[0].$refs.loginBottomSheet.open();
+        } else if (localStorage.hasOwnProperty("nickName") == false || localStorage.nickName == null) {
+          location.href='/user_create';
+        }
       },
   }
 

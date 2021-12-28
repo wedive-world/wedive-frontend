@@ -1,7 +1,12 @@
 <template>
   <div class="">
     <div data-menu-active="nav-other"></div>
-    <div class="page-content font-noto card ps-2 pe-2">
+    <div :class="'page-content font-noto card text-center' + ((idToken && nickName)?' hide':'')" style="height: calc(100vh - 101px);display:block;">
+        <img src="/static/images/assets/empty_login.jpg" width="60%" style="margin-top:25%;"/>
+        <p class="color-gray mt-2">{{ login_word }}이 필요한 페이지 입니다.</p>
+        <a v-on:click="login()" class="btn btn-m mb-3 rounded-xl text-uppercase font-500 shadow-s bg-secondary font-noto"><i class="fas fa-user-lock me-1"></i> {{ login_word }}</a>
+    </div>
+    <div :class="'page-content font-noto card ps-2 pe-2'+((idToken && nickName)?'':' hide')">
         <div class="position-relative" style="z-index:1;">
             <div class="m-3">
                 <h2 class="font-18 font-600 mb-0">나의 설정</h2>
@@ -32,11 +37,11 @@
                 <h2 class="font-15 font-300 mb-0"><img src="/static/images/assets/other_interest.png" height="30" /><span class="ms-2 vertical-m">나의 관심 장소</span><i class="wedive-txt-all wedive_right" style="top:22px;"></i></h2>
             </div>
         </div>
-        <div class="position-relative" style="z-index:1;">
+        <a href="/my_diving" class="position-relative" style="z-index:1;">
             <div class="content pb-0">
                 <h2 class="font-15 font-300 mb-0"><img src="/static/images/assets/other_diving.png" height="30" /><span class="ms-2 vertical-m">나의 버디찾기</span><i class="wedive-txt-all wedive_right" style="top:22px;"></i></h2>
             </div>
-        </div>
+        </a>
         <div class="position-relative" style="z-index:1;">
             <div class="content pb-0">
                 <h2 class="font-15 font-300 mb-0"><img src="/static/images/assets/other_review.png" height="30" /><span class="ms-2 vertical-m">나의 리뷰</span><i class="wedive-txt-all wedive_right" style="top:22px;"></i></h2>
@@ -165,6 +170,9 @@ export default {
   },
   data () {
     return {
+        login_word : (localStorage.idToken == null) ? '로그인' : '프로필 등록',
+        idToken: localStorage.idToken,
+        nickName: localStorage.nickName,
     }
   },
   methods: {

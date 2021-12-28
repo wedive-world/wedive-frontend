@@ -34,6 +34,7 @@ import TrainingSettingPage from '@/components/TrainingSettingPage'
 import TrainingStartPage from '@/components/TrainingStartPage'
 import LogBookPage from '@/components/LogBookPage'
 import OhterPage from '@/components/OhterPage'
+import MyDivingPage from '@/components/MyDivingPage'
 
 Vue.use(Router)
 
@@ -214,6 +215,11 @@ export default new Router({
       path: '/other_home',
       name: 'OhterPage',
       component: OhterPage
+    },
+    {
+      path: '/my_diving',
+      name: 'MyDivingPage',
+      component: MyDivingPage
     },
     
     
