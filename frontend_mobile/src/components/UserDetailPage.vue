@@ -187,12 +187,35 @@ export default {
                 }
 
             }
+        });
+        if (localStorage.idToken) {
+            await axios({
+                url: 'https://api.wedives.com/graphql',
+                method: 'post',
+                headers: {
+                    countrycode: 'ko',
+                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                },
+                data: {
+                    query: `
+                    mutation Mutation($targetId: ID!, $targetType: UserReactionTargetType!) {
+                        view(targetId: $targetId, targetType: $targetType)
+                    }
+                    `,
+                    variables: {
+                        "targetId": to.params.id,
+                        "targetType": "user"
+                    }
+                }
             });
+        }
 
         var ret = null;
         if (result && result.data && result.data.data && result.data.data.getUserById) {ret = result.data.data.getUserById;}
         
         next(vm => {vm.setData(ret)});
+    } else {
+        location.href = "/";
     }
   },
   async mounted() {

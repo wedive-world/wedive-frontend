@@ -2,7 +2,7 @@
   <div class="">
     <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-site" data-menu-load=""></div>
     <div class="header header-fixed header-logo-center">
-        <a href="" class="header-title color ellipsis">{{ divingData.title }} 다이빙</a>
+        <a href="" class="header-title color ellipsis">{{ divingData.title }}</a>
         <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
         <a href="#" class="header-icon header-icon-4"><img src="/static/images/assets/ico_share.png" width="20"/></a>
     </div>
@@ -15,10 +15,42 @@
         </div>
     </div>
     <div :class="'page-content' + (!is_empty ? '' : ' hide')">
-        <div v-if="locationData.backgroundImages == null || locationData.backgroundImages.length == 0" style="background:url(/static/empty.jpg);background-size: contain;height:250px;margin-top:50px;">
+
+
+        <div v-if="locationData[0] == null || locationData[0].backgroundImages == null || locationData[0].backgroundImages.length == 0" style="background:url(/static/empty.jpg);background-size: contain;height:250px;">
         </div>
-        <div v-else :style="'background:url('+locationData.backgroundImages[0].url+');background-size: cover;height:250px;background-position: bottom !important;margin-top:50px;'">
+        <div v-else style="min-height:250px;height:250px;max-height:250px;">
+            <div class="splide single-slider cover-slider slider-no-arrows slider-has-dots" id="cover-slider-1" data-card-height="250" style="position:relative;">
+                <div class="splide__track">
+                    <div class="splide__list">
+                        <div class="splide__slide" v-if="locationData[0].backgroundImages == null || locationData[0].backgroundImages.length == 0">
+                            <div id="background_img_null" data-card-height="250" class="card rounded-0 mb-0" style="background: url(/static/empty.jpg);background-size: contain !important;">
+                                
+                            </div>
+                        </div>
+                        <div class="splide__slide" v-for="(image, index) in locationData[0].backgroundImages">
+                            <div data-card-height="250" :class="'card rounded-0 mb-0 background_img_' + index" v-bind:style="'background: url('+image.url+');background-size: cover !important;'">
+                                <div class="wedive-source">{{ image.reference | makeReference }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="cover-slider-temp" :style="'background:url('+locationData[0].backgroundImages[0].url+');background-size: cover;height:250px;background-position: bottom;position:absolute;width:100%;top:50px;'">
+            </div>
         </div>
+
+
+        <!--<div v-if="locationData[0] && locationData[0].backgroundImages == null || locationData[0] && locationData[0].backgroundImages.length > 0" :style="'background:url('+locationData[0].backgroundImages[0].thumbnailUrl+');background-size: cover;height:250px;margin-top:50px;'">
+        </div>
+        <div v-else-if="locationData[0]" style="background:url(/static/empty.jpg);background-size: cover;height:250px;background-position: bottom !important;margin-top:50px;">
+        </div>-->
+        
+        
+        
+        
+        
+        
         <!--<div class="splide single-slider cover-slider slider-no-arrows" id="cover-slider-1" data-card-height="250">
             <div class="splide__track">
                 <div class="splide__list">
@@ -38,7 +70,7 @@
         
 
     
-        <div class="card mb-0" style="margin-top:-60px; z-index:1">
+        <div class="card mb-0" style="z-index:1">
             <div class="content mt-3 row pb-3 mb-0 border-bottom" v-on:click="goUserPage(divingData.hostUser)">
                 <div class="col-6 p-0">
                     <img class="inline-block me-2 circular_image" :src="(divingData.hostUser && divingData.hostUser.profileImages && divingData.hostUser.profileImages.length>0 && divingData.hostUser.profileImages[0].thumbnailUrl) ? divingData.hostUser.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty_'+((divingData.hostUser&&divingData.hostUser.gender)?divingData.hostUser.gender:'m')+'.png'" width="50" style="vertical-align: top;"/>
@@ -70,10 +102,10 @@
             <div v-if="divingData.status == 'divingComplete'" class="content mt-4 pt-2 pb-2 font-noto font-14 text-center" style="color:#cd5b3c;border: 2px solid #cd5b3c;">
                 종료된 다이빙 이벤트 입니다.
             </div>
-            <div class="content mt-4 pb-3 border-bottom">
-                <h2 class="font-18 font-700 mb-0">{{ divingData.title }} 다이빙</h2>
-                <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> {{ divingData.locaiton }}</p>
-                <p class="color-gray-dark mb-0 font-12">{{ timeForToday(divingData.createdAt) }}</p>
+            <div class="content mt-4 pb-3 border-bottom" style="position:relative;">
+                <h2 class="font-18 font-700 mb-0">{{ divingData.title }}</h2>
+                <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> {{ divingData.location }}</p>
+                <p class="color-gray-dark mb-0 font-12" style="position: absolute;right: 0px;top: 0;">{{ timeForToday(divingData.createdAt) }} 모집시작</p>
                 <p class="color-gray mt-4 mb-4 font-14" v-html="divingData.description"></p>
                 
                 <div class="evaluation">
@@ -89,7 +121,7 @@
                     </div>
                 </div>
                 <br/>
-                <p class="color-gray-dark mt-3 mb-0 font-12">관심 {{ divingData.likes || 0 }} · 조회 {{ divingData.views || 0 }}</p>
+                <p class="color-gray-dark mb-0 font-12">관심 {{ divingData.likes || 0 }} · 조회 {{ divingData.views || 0 }}</p>
             </div>
             
             <div v-if="divingData.participants" class="content mt-0 pb-3 border-bottom">
@@ -136,22 +168,22 @@
             <div class="content mt-0 pb-3 border-bottom">
                 <h2 class="font-15 font-700 mb-2">다이빙 장소</h2>
                 
-                <div v-for="center in divingData.diveCenters" class="evaluation" style="min-height: 115px;" v-on:click="goDetail('center', center.uniqueName)">
-                    <img :src="center.backgroundImages[0].thumbnailUrl" class="rounded-s mx-auto me-3" width="95" height="95" style="float: left;position: relative;"/>
+                <div v-for="location in locationData" class="evaluation" style="min-height: 115px;" v-on:click="goDetail(location.type, location.uniqueName)">
+                    <img :src="location.backgroundImages[0].thumbnailUrl" class="rounded-s mx-auto me-3" width="95" height="95" style="float: left;position: relative;"/>
                     <div style="padding-left:110px;">
-                        <h2 class="font-16 mb-2 font-600">{{ center.name }}</h2>
-                        <p class="color-gray mb-2 line-height-s ellipsis" style="display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;white-space: unset;">{{ center.description }}</p>
+                        <h2 class="font-16 mb-2 font-600">{{ location.name }}</h2>
+                        <p class="color-gray mb-2 line-height-s ellipsis" style="display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;white-space: unset;">{{ location.description }}</p>
                         <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
-                            <span> {{ (center.adminScore/20).toFixed(1) }} </span>
+                            <span> {{ (location.adminScore/20).toFixed(1) }} </span>
                             &nbsp;<font class="color-gray-light">|</font>&nbsp;
-                            <span v-if="center.institutionTypes && center.institutionTypes.length > 0"><img v-if="insti in center.institutionTypes" class="ext-img" :src="'/static/images/agency/logo_'+insti.toLowerCase()+'.svg'" height="14" />&nbsp;&nbsp;<font class="color-gray-light">|</font>&nbsp;&nbsp;</span>
-                            <span v-if="interest.type=='priceIndex'" v-for="interest in center.interests" style="letter-spacing: -2px;">{{interest.title.replace(/\$/gi, '￦')}}</span>
+                            <span v-if="location.institutionTypes && location.institutionTypes.length > 0"><span v-for="(insti,index) in location.institutionTypes" v-if="index < 4"><img class="ext-img" :src="'/static/images/agency/logo_'+insti.toLowerCase()+'.svg'" height="17" style="padding-bottom: 1px;" /><span v-if="index != (location.institutionTypes.length-1)">&nbsp;&nbsp;</span></span>&nbsp;<font class="color-gray-light">|</font>&nbsp;</span>
+                            <span v-if="interest.type=='priceIndex'" v-for="interest in location.interests" style="letter-spacing: -2px;">{{interest.title.replace(/\$/gi, '￦')}}</span>
                         </p>
                     </div>
                 </div>
             </div>
 
-            <div :class="'content mt-0 pb-3 border-bottom' + ((divingData.status=='publicEnded' || divingData.status=='divingComplete')? ' opacity-40' : '')" >
+            <div :class="'content mt-0 pb-3 border-bottom' + ((divingData.status=='publicEnded' || divingData.status=='divingComplete' || divingData.hostUser && divingData.hostUser._id == userId)? ' opacity-40' : '')" >
                 <h2 class="font-15 font-700 mb-1">이 게시글 신고하기</h2>
             </div>
 
@@ -166,11 +198,12 @@
             </div>
             <div class="flex-fill speach-input p-2">
             <a v-if="divingData.status == 'publicEnded'|| divingData.status=='divingComplete'" class="btn btn-full font-400 rounded-s shadow-l bg-gray-dark color-white bd-w-0mb-5 font-noto">모집종료된 이벤트</a>
-            <a v-else-if="(divingData.participants.filter(member=> (member.user._id == userId))).length > 0" v-on:click="login()" class="btn btn-full font-400 rounded-s shadow-l bg-gray-dark color-white bd-w-0mb-5 font-noto">참여신청</a>
+            <a v-else-if="idToken == null || nickName == null" v-on:click="login()" class="btn btn-full font-400 rounded-s shadow-l bg-gray-dark color-white bd-w-0mb-5 font-noto">참여신청</a>
+            <a v-else-if="(divingData.participants.filter(member=> (member.user && member.user._id == userId))).length > 0" class="btn btn-full font-400 rounded-s shadow-l bg-gray-dark color-white bd-w-0mb-5 font-noto">참여 승인 대기중</a>
             <a v-else href="#" data-menu="menu-join" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0mb-5 font-noto">참여신청</a>
             </div>
         </div>
-        <div v-else id="footer-bar-shop" class="d-flex" style="min-height: 52px !important;height: 52px !important;">
+        <div v-else-if="divingData.hostUser && divingData.hostUser._id == userId" id="footer-bar-shop" class="d-flex" style="min-height: 52px !important;height: 52px !important;">
             <div class="me-1 speach-icon opacity-40">
                 <div style="width: 52px;height: 52px;display: inline-block;position: relative;border-right:1px solid rgba(0, 0, 0, 0.08);">
                     <img class="'inline-block me-2" src="/static/images/assets/ico_heart.png" width="30" style="display: block;margin-top:10px;margin-left:10px;"/>
@@ -304,7 +337,7 @@
          data-menu-height="590" 
          data-menu-width="370">
         <div class="menu-title">
-            <h4 class="text-center mt-4 pt-1 mb-2 font-noto font-19">{{ divingData.location }}<br/><p style="margin: 0px !important;font-weight: 200 !important;font-size:13px;">{{ divingData.title }} 다이빙</p></h4>
+            <h4 class="text-center mt-4 pt-1 mb-2 font-noto font-19">{{ divingData.location }}<br/><p style="margin: 0px !important;font-weight: 200 !important;font-size:13px;">{{ divingData.title }}</p></h4>
             <a href="#" class="close-menu hide"><i class="fa fa-times-circle"></i></a>
         </div>
         <div class="me-4 ms-4" style="border-bottom: 2px solid black;"></div>
@@ -409,6 +442,7 @@ export default {
                         title
                         description
                         status
+                        type
                         hostUser {
                             _id
                             uid
@@ -426,6 +460,7 @@ export default {
                             adminScore
                             backgroundImages {
                                 _id
+                                reference
                                 thumbnailUrl
                             }
                             name
@@ -443,6 +478,7 @@ export default {
                             adminScore
                             backgroundImages {
                                 _id
+                                reference
                                 thumbnailUrl
                             }
                             name
@@ -460,6 +496,7 @@ export default {
                             adminScore
                             backgroundImages {
                                 _id
+                                reference
                                 thumbnailUrl
                             }
                             name
@@ -508,10 +545,82 @@ export default {
 
             }
         });
+
+        if ((result.data && result.data.data && result.data.data.getDivingById)) {
+            var diveLocations = null;
+            if (result.data.data.getDivingById.diveSites != null && result.data.data.getDivingById.diveSites.length > 0) {
+                diveLocations = result.data.data.getDivingById.diveSites[0];
+            }
+            else if (diveLocations == null && result.data.data.getDivingById.divePoints != null && result.data.data.getDivingById.divePoints.length > 0) {
+                diveLocations = result.data.data.getDivingById.divePoints[0];
+            }
+            else if (diveLocations == null && result.data.data.getDivingById.diveCenters != null && result.data.data.getDivingById.diveCenters.length > 0) {
+                diveLocations = result.data.data.getDivingById.diveCenters[0];
+            }
+            if (diveLocations != null) {
+                var id_arr = [];
+                var width_arr = [];
+                for (var i=0; i<diveLocations.backgroundImages.length; i++) {
+                    id_arr.push(diveLocations.backgroundImages[i]._id);
+                    width_arr.push(720);
+                }
+                if (id_arr.length > 0) {
+                    var result_image = await axios({
+                    url: 'https://api.wedives.com/graphql',
+                    method: 'post',
+                    headers: {
+                        countrycode: 'ko',
+                        idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                    },
+                    data: {
+                        query: `
+                            query Query($ids: [ID], $widths: [Int]) {
+                                getImageUrlsByIds(_ids: $ids, widths: $widths)
+                            }
+                        `,
+                        variables: {
+                            ids: id_arr,
+                            widths: width_arr
+                        }
+
+                    }
+                    });
+                    if (result_image.data.data.getImageUrlsByIds) {
+                        for (var i=0; i<result_image.data.data.getImageUrlsByIds.length; i++) {
+                            diveLocations.backgroundImages[i].url = result_image.data.data.getImageUrlsByIds[i];
+                        }
+                    }
+                }
+            }
+        }
+
+        if (localStorage.idToken) {
+            await axios({
+                url: 'https://api.wedives.com/graphql',
+                method: 'post',
+                headers: {
+                    countrycode: 'ko',
+                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                },
+                data: {
+                    query: `
+                    mutation Mutation($targetId: ID!, $targetType: UserReactionTargetType!) {
+                        view(targetId: $targetId, targetType: $targetType)
+                    }
+                    `,
+                    variables: {
+                        "targetId": to.params.id,
+                        "targetType": "diving"
+                    }
+                }
+            });
+        }
         
         
         var ret = (result.data && result.data.data && result.data.data.getDivingById) ? result.data.data.getDivingById : null
         next(vm => {vm.setData(ret)});
+    } else {
+        location.href = "/";
     }
   },
   async mounted() {
@@ -530,6 +639,13 @@ export default {
         $("#footer-bar").hide();
     }
 
+
+    setTimeout(function() {
+        $("#cover-slider-temp").animate({opacity: "0"}, 1200);
+    },1000);
+    setTimeout(function() {
+        $("#cover-slider-temp").css("display", "none");
+    },2500);
   },
   components: {
     StarRating
@@ -538,7 +654,7 @@ export default {
     return {
         map: null,
         divingData: {},
-        locationData: {},
+        locationData: [],
         rating: 3,
         rateDescription: '나쁘지 않아요.',
         review_detail: '',
@@ -867,25 +983,47 @@ export default {
             var startedAt = new Date(this.divingData.startedAt);
             var finishedAt = new Date(this.divingData.finishedAt);
             if (this.divingData.startedAt == this.divingData.finishedAt) {
-                this.divingData.title = startedAt.getFullYear() + "년 " + (startedAt.getMonth()+1) + "월 " + startedAt.getDate() + "일 "
+                this.divingData.title = (startedAt.getMonth()+1) + "월 " + startedAt.getDate() + "일 "
             } else {
-                this.divingData.title = startedAt.getFullYear() + "년 " + (startedAt.getMonth()+1) + "/" + startedAt.getDate() + " ~ " + (finishedAt.getMonth()+1) + "/" + finishedAt.getDate() + " "
+                this.divingData.title = (startedAt.getMonth()+1) + "/" + startedAt.getDate() + " ~ " + (finishedAt.getMonth()+1) + "/" + finishedAt.getDate() + " "
             }
+            var cnt = 0;
+            if (this.divingData.type) {
+                this.divingData.type.forEach(_type => {
+                    if (cnt > 0) this.divingData.title += ", ";
+                    this.divingData.title += (_type == 'scubaDiving') ? '스쿠버' : '프리';
+                    cnt++;
+                });
+            }
+            this.divingData.title += ' 다이빙';
+            
             if (startedAt.getFullYear() == finishedAt.getFullYear() && startedAt.getMonth() == finishedAt.getMonth() && startedAt.getDate() == finishedAt.getDate()) {
                 this.showFinishedAt = true;
             }
 
             this.divingData.location = '';
             if (this.divingData.diveSites && this.divingData.diveSites.length > 0) {
-                this.locationData = this.divingData.diveSites[0];
+                this.divingData.diveSites.forEach(x => {
+                    x.type = 'site';
+                    this.locationData.push(x);
+                });
                 this.divingData.location = this.divingData.diveSites[0].name + " 사이트";
-            } else if (this.divingData.divePoints && this.divingData.divePoints.length > 0) {
-                this.locationData = this.divingData.divePoints[0];
+            }
+            if (this.divingData.divePoints && this.divingData.divePoints.length > 0) {
+                this.divingData.divePoints.forEach(x => {
+                    x.type = 'point';
+                    this.locationData.push(x);
+                });
                 this.divingData.location = this.divingData.divePoints[0].name + " 포인트";
-            } else if (this.divingData.diveCenters && this.divingData.diveCenters.length > 0) {
-                this.locationData = this.divingData.diveCenters[0];
+            } 
+            if (this.divingData.diveCenters && this.divingData.diveCenters.length > 0) {
+                this.divingData.diveCenters.forEach(x => {
+                    x.type = 'center';
+                    this.locationData.push(x);
+                });
                 this.divingData.location = this.divingData.diveCenters[0].name;
             }
+            
             
             /*_nearData.forEach(d => {
                 if (d._id != this.locationData._id) {

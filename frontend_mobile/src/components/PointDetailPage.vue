@@ -4,24 +4,26 @@
     <div class="page-content">
         <div v-if="pointData.backgroundImages == null || pointData.backgroundImages.length == 0" style="background:url(/static/empty.jpg);background-size: contain;height:250px;">
         </div>
-        <div v-else :style="'background:url('+pointData.backgroundImages[0].url+');background-size: cover;height:250px;background-position: bottom;'">
-        </div>
-        <!--<div class="splide single-slider cover-slider slider-no-arrows slider-has-dots" id="cover-slider-1" data-card-height="250">
-            <div class="splide__track">
-                <div class="splide__list">
-                    <div class="splide__slide" v-if="pointData.backgroundImages == null || pointData.backgroundImages.length == 0">
-                        <div id="background_img_null" data-card-height="250" class="card rounded-0 mb-0" style="background: url(/static/empty.jpg);background-size: contain !important;">
-                            
+        <div v-else style="min-height:250px;height:250px;max-height:250px;">
+            <div class="splide single-slider cover-slider slider-no-arrows slider-has-dots" id="cover-slider-1" data-card-height="250">
+                <div class="splide__track">
+                    <div class="splide__list">
+                        <div class="splide__slide" v-if="pointData.backgroundImages == null || pointData.backgroundImages.length == 0">
+                            <div id="background_img_null" data-card-height="250" class="card rounded-0 mb-0" style="background: url(/static/empty.jpg);background-size: contain !important;">
+                                
+                            </div>
                         </div>
-                    </div>
-                    <div class="splide__slide" v-for="(image, index) in pointData.backgroundImages">
-                        <div data-card-height="250" :class="'card rounded-0 mb-0 background_img_' + index" v-bind:style="'background: url('+image.url+');background-size: cover !important;'">
-                            
+                        <div class="splide__slide" v-for="(image, index) in pointData.backgroundImages">
+                            <div data-card-height="250" :class="'card rounded-0 mb-0 background_img_' + index" v-bind:style="'background: url('+image.url+');background-position: bottom;background-size: cover !important;height:250px;'">
+                                <div class="wedive-source" style="bottom:50px;">{{ image.reference | makeReference }}</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>-->
+            <div id="cover-slider-temp" :style="'background:url('+pointData.backgroundImages[0].url+');background-size: cover;height:250px;background-position: bottom;position:absolute;width:100%;top:58px;'">
+            </div>
+        </div>
         
 
     
@@ -39,7 +41,7 @@
                             <div class="star-area text-start ms-3" style="height: 30px;">
                                 <span class="font-14 me-2 color-gray" style="float: left;padding-top:2px;">환경</span>
                                 <div class="wedive-fish-back">
-                                    <div class="wedive-fish-front" v-bind:style="'width:'+pointData.waterEnvironmentScore+'%'">
+                                    <div class="wedive-fish-front" v-bind:style="'width:'+(pointData.waterEnvironmentScore-5)+'%'">
                                     </div>
                                     <span class="wedive-score-number">{{ (pointData.waterEnvironmentScore/20).toFixed(1) }}</span>
                                 </div>
@@ -47,7 +49,7 @@
                             <div class="star-area mt-1 text-start ms-3" style="height: 30px;">
                                 <span class="font-14 me-2 color-gray" style="float: left;padding-top:2px;">유속</span>
                                 <div class="wedive-wave-back">
-                                    <div class="wedive-wave-front" v-bind:style="'width:'+pointData.flowRateScore+'%'">
+                                    <div class="wedive-wave-front" v-bind:style="'width:'+(pointData.flowRateScore-5)+'%'">
                                     </div>
                                     <span class="wedive-score-number">{{ (pointData.flowRateScore/20).toFixed(1) }}</span>
                                 </div>
@@ -55,7 +57,7 @@
                             <div class="star-area mt-1 text-start ms-3" style="height: 30px;">
                                 <span class="font-14 me-2 color-gray" style="float: left;padding-top:2px;">시야</span>
                                 <div class="wedive-eye-back">
-                                    <div class="wedive-eye-front" v-bind:style="'width:'+pointData.eyeSightScore+'%'">
+                                    <div class="wedive-eye-front" v-bind:style="'width:'+(pointData.eyeSightScore-5)+'%'">
                                     </div>
                                     <span class="wedive-score-number">{{ (pointData.eyeSightScore/20).toFixed(1) }}</span>
                                 </div>
@@ -262,7 +264,7 @@
                 </div>
                 <div class="content m-0">
                     <div class="gallery-views gallery-view-2">
-                        <a v-for="image in pointData.images" data-gallery="gallery-1" :href="image.url" title="" style="position: relative;" class="square-rect">
+                        <a v-for="image in pointData.images" data-gallery="gallery-1" :href="image.url" :title="image.reference" style="position: relative;" class="square-rect">
                             <img src="/static/images/assets/empty.png" :data-src="image.url" class="rounded-m preload-img shadow-l img-fluid" alt="img" style="padding: 0px;">
                             <div class="wedive-source mx-140">{{ image.reference | makeReference }}</div>
                             <div class="caption pt-0 mb-2 ms-3">
@@ -335,53 +337,9 @@
 
         <div class="card card-style">
             <div class="content mb-2" id="tab-group-index">
-                <h4 class="text-start pt-2 mb-2">스쿠버 지수</h4>
-                <div class="tab-controls tabs-small tabs-rounded" data-highlight="bg-highlight">
-                    <a href="#" data-active data-bs-toggle="collapse" data-bs-target="#tab-realtime">실시간 지수</a>
-                    <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-monthly">월별 수온</a>
-                </div>
-                <div class="clearfix mb-4"></div>
-                <div data-bs-parent="#tab-group-index" class="collapse show" id="tab-realtime">
+                <h4 class="text-start pt-2 mb-2">월별 수온</h4>
+                <div>
                     <table class="table table-borderless text-center rounded-sm shadow-l mt-3" style="overflow: hidden;">
-                        <thead>
-                            <tr class="bg-secondary th-02">
-                                <th scope="col" class="color-white font-12">날짜</th>
-                                <th scope="col" class="color-white font-12">파고</th>
-                                <th scope="col" class="color-white font-12">유속</th>
-                                <th scope="col" class="color-white font-12">수온</th>
-                                <th scope="col" class="color-white font-12">스쿠버</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th class="font-12" scope="row">09/11</th>
-                                <td class="font-12">0.1~0.3</td>
-                                <td class="font-12">0.4~1.0</td>
-                                <td class="font-12">22~23</td>
-                                <td class="color-blue-dark font-12">보통</td>
-                            </tr>
-                            <tr>
-                                <th class="font-12" scope="row">09/12</th>
-                                <td class="font-12">0.2~0.3</td>
-                                <td class="font-12">0.4~0.8</td>
-                                <td class="font-12">23~24</td>
-                                <td class="color-green-dark font-12">좋음</td>
-                            </tr>
-                            <tr>
-                                <th class="font-12" scope="row">09/13</th>
-                                <td class="color-red-dark font-12">0.7~0.9</td>
-                                <td class="color-red-dark font-12">0.6~1.2</td>
-                                <td class="font-12">24</td>
-                                <td class="color-red-dark font-12">나쁨</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="text-end">
-                        <img class="me-1 mb-3" height="20" src="/static/images/assets/logo-kaoh.svg" />
-                    </div>
-                </div>
-                <div data-bs-parent="#tab-group-index" class="collapse" id="tab-monthly">
-                    <table v-if="pointData.diveSite != null" class="table table-borderless text-center rounded-sm shadow-l mt-3" style="overflow: hidden;">
                         <thead>
                             <tr class="bg-secondary th-02">
                                 <th scope="col" class="color-white font-12">월</th>
@@ -391,24 +349,79 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="border-bottom" v-for="index in 12">
-                                <th class="font-12" scope="row">{{ index }}월</th>
-                                <td class="font-12 color-gray">1.1ºC / 2.2ºC</td>
-                                <td v-for="month in pointData.diveSite['month' + index]" v-if="month.type=='climate'" class="font-12">
-                                    <img v-if="month.title=='sunny'" class="me-2" src="/static/images/assets/weather_sunny.svg" width="20" height="20"/>
-                                    <img v-else-if="month.title=='cloudy'" class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>
-                                    <img v-else-if="month.title=='rain'" class="me-2" src="/static/images/assets/weather_showers.svg" width="20" height="20"/>
-                                    <img v-else-if="month.title=='heavyRain'" class="me-2" src="/static/images/assets/weather_heavy_rain.svg" width="20" height="20"/>
-                                    2.1ºC
-                                </td>
-                                <td v-for="month in pointData.diveSite['month' + index]" v-if="month.type=='popularity'">
-                                    <img v-if="month.title=='unrecommended'" class="img_pop" src="/static/images/assets/icon_popularity_01.svg" width="32" height="32"/>
-                                    <img v-if="month.title=='soso'" class="img_pop" src="/static/images/assets/icon_popularity_02.svg" width="32" height="32"/>
-                                    <img v-if="month.title=='popular'" class="img_pop" src="/static/images/assets/icon_popularity_03.svg" width="32" height="32"/>
-                                </td>
+                            <tr class="border-bottom">
+                                <th class="font-12" scope="row">1월</th>
+                                <td class="font-12 color-gray">5.2ºC / 12.3ºC</td>
+                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>8.8ºC</td>
+                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_01.svg" width="32" height="32"/></td>
                             </tr>
-
-                        </tbody>                        
+                            <tr class="border-bottom">
+                                <th class="font-12" scope="row">2월</th>
+                                <td class="font-12 color-gray">3.4ºC / 9.8ºC</td>
+                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>6.6ºC</td>
+                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_01.svg" width="32" height="32"/></td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <th class="font-12" scope="row">3월</th>
+                                <td class="font-12 color-gray">3.2ºC / 9.4ºC</td>
+                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>6.3ºC</td>
+                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_01.svg" width="32" height="32"/></td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <th class="font-12" scope="row">4월</th>
+                                <td class="font-12 color-gray">7.0ºC / 13.3ºC</td>
+                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>10.2ºC</td>
+                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_01.svg" width="32" height="32"/></td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <th class="font-12" scope="row">5월</th>
+                                <td class="font-12 color-gray">10.5ºC / 17.8ºC</td>
+                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>14.6ºC</td>
+                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_01.svg" width="32" height="32"/></td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <th class="font-12" scope="row">6월</th>
+                                <td class="font-12 color-gray">15.1ºC / 23.4ºC</td>
+                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>19.2ºC</td>
+                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_02.svg" width="32" height="32"/></td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <th class="font-12" scope="row">7월</th>
+                                <td class="font-12 color-gray">19.9ºC / 24.4ºC</td>
+                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_heavy_rain.svg" width="20" height="20"/>22.2ºC</td>
+                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_02.svg" width="32" height="32"/></td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <th class="font-12" scope="row">8월</th>
+                                <td class="font-12 color-gray">21.3ºC / 26.0ºC</td>
+                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_showers.svg" width="20" height="20"/>23.7ºC</td>
+                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_02.svg" width="32" height="32"/></td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <th class="font-12" scope="row">9월</th>
+                                <td class="font-12 color-gray">18.6ºC / 24.1ºC</td>
+                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_sunny.svg" width="20" height="20"/>21.4ºC</td>
+                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_02.svg" width="32" height="32"/></td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <th class="font-12" scope="row">10월</th>
+                                <td class="font-12 color-gray">14.9ºC / 21.6ºC</td>
+                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>18.2ºC</td>
+                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_02.svg" width="32" height="32"/></td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <th class="font-12" scope="row">11월</th>
+                                <td class="font-12 color-gray">10.8ºC / 17.6ºC</td>
+                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>14.2ºC</td>
+                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_01.svg" width="32" height="32"/></td>
+                            </tr>
+                            <tr>
+                                <th class="font-12" scope="row">12월</th>
+                                <td class="font-12 color-gray">6.4ºC / 13.8ºC</td>
+                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>10.1ºC</td>
+                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_01.svg" width="32" height="32"/></td>
+                            </tr>
+                        </tbody>
                     </table>
                     <div class="text-end">
                         <img class="me-1 mb-3" height="20" src="/static/images/assets/logo-kma.svg" />
@@ -797,6 +810,27 @@ export default {
 
         }
         });
+        if (localStorage.idToken) {
+            await axios({
+                url: 'https://api.wedives.com/graphql',
+                method: 'post',
+                headers: {
+                    countrycode: 'ko',
+                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                },
+                data: {
+                    query: `
+                    mutation Mutation($targetId: ID!, $targetType: UserReactionTargetType!) {
+                        view(targetId: $targetId, targetType: $targetType)
+                    }
+                    `,
+                    variables: {
+                        "targetId": to.params.id,
+                        "targetType": "divePoint"
+                    }
+                }
+            });
+        }
         
         
         if (result.data.data.getDivePointByUniqueName.backgroundImages.length > 0) {
@@ -979,6 +1013,8 @@ export default {
             preload:true,
         });*/
         next(vm => {vm.setData(result.data.data.getDivePointByUniqueName, result_nearby.data.data.getDivePointsNearBy)});
+    } else {
+        location.href = "/";
     }
   },
   async mounted() {
@@ -1159,6 +1195,13 @@ export default {
             icon: new google.maps.MarkerImage('/static/images/assets/ico_pin1.png',null, null, null, new google.maps.Size(38,43)),
         });
     };
+
+    setTimeout(function() {
+        $("#cover-slider-temp").animate({opacity: "0"}, 1200);
+    },1000);
+    setTimeout(function() {
+        $("#cover-slider-temp").css("display", "none");
+    },2500);
 
   },
   created() {

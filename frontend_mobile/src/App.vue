@@ -101,13 +101,13 @@
 
 <script>
 import  VueBottomSheet from "@webzlodimir/vue-bottom-sheet";
-import { GoogleAuthProvider, getAuth, signInWithPopup, onAuthStateChanged  } from "firebase/auth";
+import { GoogleAuthProvider, getAuth, signInWithPopup, onAuthStateChanged, onIdTokenChanged  } from "firebase/auth";
 const axios = require("axios")
 
 export default {
   name: 'App',
   mounted() {
-    if (localStorage.tokenAt == null || (new Date().getTime() - localStorage.tokenAt) > 1800000) {
+    if (localStorage.tokenAt == null || (new Date().getTime() - localStorage.tokenAt) > 600000) {
       this.getFirebaseToken()
     }
 
@@ -139,6 +139,7 @@ export default {
           try {
             var item_menu = $("[data-menu-active]").data("menu-active").replace('nav-', '');
             if (item_menu == 'site') {
+              $("#wedive-share").fadeIn(1000);
               $("#wedive-share").removeClass("hide");
             }
           } catch(e) {}
@@ -201,10 +202,19 @@ export default {
     },
     getFirebaseToken() {
       const auth = getAuth();
+      onIdTokenChanged(auth, async (user) => {
+        if (user) {
+          localStorage.uid = user.uid;
+          localStorage.idToken = await user.getIdToken(false);
+          localStorage.tokenAt = (new Date()).getTime();
+        } else {
+          console.log("signed out");
+        }
+      });
       onAuthStateChanged(auth, async (user) => {
         if (user) {
           localStorage.uid = user.uid;
-          localStorage.idToken = await user.getIdToken(true);
+          localStorage.idToken = await user.getIdToken(false);
           localStorage.tokenAt = (new Date()).getTime();
         } else {
           console.log("signed out");
