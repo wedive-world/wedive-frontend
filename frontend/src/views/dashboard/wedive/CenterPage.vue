@@ -80,16 +80,20 @@ export default {
   },
   mounted() {
     for (var i=0; i<this.initBackgroundImages.length; i++) {
-      this.$refs.myVueDropzone.manuallyAddFile(this.initBackgroundImages[i].file, this.initBackgroundImages[i].url);
+      if (this.initBackgroundImages[i].url != null)
+        this.$refs.myVueDropzone.manuallyAddFile(this.initBackgroundImages[i].file, this.initBackgroundImages[i].url);
     }
     for (var i=0; i<this.initImages1.length; i++) {
-      this.$refs.myVueDropzone2.manuallyAddFile(this.initImages1[i].file, this.initImages1[i].url);
+      if (this.initImages1[i].url != null)
+        this.$refs.myVueDropzone2.manuallyAddFile(this.initImages1[i].file, this.initImages1[i].url);
     }
     for (var i=0; i<this.initImages2.length; i++) {
-      this.$refs.myVueDropzone3.manuallyAddFile(this.initImages2[i].file, this.initImages2[i].url);
+      if (this.initImages2[i].url != null)
+        this.$refs.myVueDropzone3.manuallyAddFile(this.initImages2[i].file, this.initImages2[i].url);
     }
     for (var i=0; i<this.initImages3.length; i++) {
-      this.$refs.myVueDropzone4.manuallyAddFile(this.initImages3[i].file, this.initImages3[i].url);
+      if (this.initImages3[i].url != null)
+        this.$refs.myVueDropzone4.manuallyAddFile(this.initImages3[i].file, this.initImages3[i].url);
     }
   },
   methods: {
