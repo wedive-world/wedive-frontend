@@ -252,13 +252,12 @@
             </div>
         </div>
 
-        <div class="card card-style" style="background: #28344e;height:240px;">
+        <div class="card card-style" style="height:240px;background:url(/static/images/assets/whale.gif);background-size:cover;">
             <div class="content mb-0 mt-3">
-                <h4 class="color-white text-start pt-1 mb-0">혹동고래 보신분?</h4>
-                <p class="color-white mb-1">인기 대물 포인트 28곳</p>
-                <p class="color-white mb-0 opacity-60 ls-n1">#자연의 신비&nbsp;&nbsp;#버킷리스트</p>
-                <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
-                <img class="float-right" src="/static/images/assets/whale.png" />
+                <h4 class="text-start pt-1 mb-0">혹동고래 보신분?</h4>
+                <p class="mb-0 opacity-60 ls-n1">#자연의 신비&nbsp;&nbsp;#버킷리스트</p>
+                <a class="font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;filter:invert(1)"></i></a>
+                
             </div>
         </div>
 

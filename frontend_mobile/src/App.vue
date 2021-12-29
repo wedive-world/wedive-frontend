@@ -100,14 +100,14 @@
 </template>
 
 <script>
-import  VueBottomSheet from "@webzlodimir/vue-bottom-sheet";
+import VueBottomSheet from "@webzlodimir/vue-bottom-sheet";
 import { GoogleAuthProvider, getAuth, signInWithPopup, onAuthStateChanged, onIdTokenChanged  } from "firebase/auth";
 const axios = require("axios")
 
 export default {
   name: 'App',
   mounted() {
-    if (localStorage.tokenAt == null || (new Date().getTime() - localStorage.tokenAt) > 600000) {
+    if (localStorage.tokenAt == null || (new Date().getTime() - localStorage.tokenAt) > 100000) {
       this.getFirebaseToken()
     }
 

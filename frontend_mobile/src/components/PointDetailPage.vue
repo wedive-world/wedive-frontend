@@ -832,7 +832,9 @@ export default {
                 }
             });
         }
-        
+        if (result.data.error && result.data.error.length > 0) {
+            location.reload();
+        }
         
         if (result.data.data.getDivePointByUniqueName.backgroundImages.length > 0) {
             for (var i=0; i<result.data.data.getDivePointByUniqueName.backgroundImages.length; i++) {

@@ -48,7 +48,7 @@
                     <!--<span class="info" style="margin-bottom:3px;margin-top:3px;"><i class="icon_question font-12">별점 안내</i></span>-->
                 </div>
                 <div style="margin-top:8px;"><span>최근리뷰 {{ (centerData.reviewCount)?centerData.reviewCount:'0' }}</span>&nbsp;<font class="color-gray-light">|</font>&nbsp;
-                <span v-if="centerData.institutionTypes && centerData.institutionTypes.length > 0"><span v-for="(insti,index) in centerData.institutionTypes" v-if="index < 6"><img class="ext-img" :src="'/static/images/agency/logo_'+insti.toLowerCase()+'.svg'" height="17" style="padding-bottom: 1px;" /><span v-if="index != (centerData.institutionTypes.length-1)">&nbsp;&nbsp;</span></span>&nbsp;<font class="color-gray-light">|</font>&nbsp;</span>
+                <span v-if="centerData.institutionTypes && centerData.institutionTypes.length > 0"><span v-for="(insti,index) in centerData.institutionTypes" v-if="index < 6" v-on:click="openInstitutionBottomSheet()"><img class="ext-img" :src="'/static/images/agency/logo_'+insti.toLowerCase()+'.svg'" height="17" style="padding-bottom: 1px;" /><span v-if="index != (centerData.institutionTypes.length-1)">&nbsp;&nbsp;</span></span>&nbsp;<font class="color-gray-light">|</font>&nbsp;</span>
                 <span v-if="interest.type=='priceIndex'" v-for="interest in centerData.interests" style="letter-spacing: -2px;">{{interest.title.replace(/\$/gi, '￦')}}</span>
                 <!--<span class="badge font-10 bg-fade-gray-dark">PADI 공식</span>-->
                 </div>
@@ -297,7 +297,7 @@
                 <div data-bs-parent="#tab-group-2" class="collapse px-2" id="tab-time">
                     <div class="mt-3" v-if="centerData.openingHours && centerData.openingHours.length > 0">
                         <div v-for="opening in centerData.openingHours" class="row mb-0" style="position: relative;">
-                            <div v-if="opening[0].includes('>')" class="timeline-deco" style="padding: 0;left: 16px;"></div>
+                            <div v-if="opening[0].includes('>')" class="timeline-deco" style="padding: 0;left: 16px;background-color: rgba(0, 0, 0, 1);"></div>
                             <hr v-if="opening[0].includes('>')" class="hori-line">
                             <h5 v-if="opening[0].includes('>')" class="col-6 text-start font-13 font-400 mb-0" style="width: calc(50% - 26px);">{{ opening[0].replace('>','') }}</h5>
                             <h5 v-else class="col-6 text-start font-13 font-400 mb-0">{{ opening[0] }}</h5>
@@ -664,7 +664,7 @@
                             <div class="splide__slide" style="width:220px !important;">
                                 <div class="card card-style card-nearby mb-0" style="background: url(/static/images/assets/song.jpg);background-size:contain;" data-card-height="250" data-card-width="200">
                                     <div class="card-top px-3 py-3">
-                                        <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-red-dark"></i></a>
+                                        <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-gray-light"></i></a>
                                     </div>
                                 </div>
                                 <div class="mt-0 px-3 py-3">
@@ -679,7 +679,7 @@
                             <div class="splide__slide" style="width:220px !important;">
                                 <div class="card card-style card-nearby mb-0" style="background: url(/static/images/assets/lee.jpg);background-size:contain;" data-card-height="250" data-card-width="200">
                                     <div class="card-top px-3 py-3">
-                                        <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-red-dark"></i></a>
+                                        <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-gray-light"></i></a>
                                     </div>
                                 </div>
                                 <div class="mt-0 px-3 py-3">
@@ -960,10 +960,31 @@
         </div>
     </div>
 
+    <!-- Bottom institution -->
+    <vue-bottom-sheet ref="institutionBottomSheet">
+        <div class="m-3 text-center">
+            <div class="color-primary font-noto font-20 font-600">AIDA</div>
+        </div>
+        <div class="content row mt-0 mb-0" style="display:inline-block;">
+              <img src="/static/images/agency/logo_aida.svg" style="width:110px;float:left;padding-top:8px;padding-bottom:8px;border: 1px solid lightgray;margin-right:16px;"/>
+              AIDA는 1992년 설립된 세계 프리다이빙 호흡참기 대회의 규칙을 제정하고 기록을 관리하는 기구입니다. 공식 세계기록 관리 뿐만 아니라 교육 등에 대한 국제 표준을 관리하는 역할도 하고 있습니다.
+              <table class="table table-borderless text-center rounded-3 shadow-sm mt-1 font-noto border-08">
+                <tr class="border-bottom pt-1 pb-1"><th class="font-500" style="background: rgba(196, 187, 171, 0.2);">레벨 1</th><td class="text-start ps-2">8m CWT, 1'15" STA, 25m DYN</td></tr>
+                <tr class="border-bottom pt-1 pb-1"><th class="font-500" style="background: rgba(196, 187, 171, 0.2);">레벨 2</th><td class="text-start ps-2">16m CWT, 2' STA, 40m DYN</td></tr>
+                <tr class="border-bottom pt-1 pb-1"><th class="font-500" style="background: rgba(196, 187, 171, 0.2);">레벨 3</th><td class="text-start ps-2">24m CWT, 2'45" STA, 55m DYN</td></tr>
+                <tr class="border-bottom pt-1 pb-1"><th class="font-500" style="background: rgba(196, 187, 171, 0.2);">레벨 4</th><td class="text-start ps-2">32m CWT, 3'30" STA, 70m DYN</td></tr>
+                <tr class="border-bottom pt-1 pb-1"><th class="font-500" style="background: rgba(196, 187, 171, 0.2);">AIDA 강사</th><td class="text-start ps-2">AIDA 레벨 3까지 강습 가능</td></tr>
+                <tr class="border-bottom pt-1 pb-1"><th class="font-500" style="background: rgba(196, 187, 171, 0.2);">AIDA 마스터</th><td class="text-start ps-2">AIDA 레벨 4까지 강습 가능</td></tr>
+                <tr class="border-bottom pt-1 pb-1"><th class="font-500" style="background: rgba(196, 187, 171, 0.2);">AIDA 트레이너</th><td class="text-start ps-2">모든 AIDA 레벨 및 강사 강습 가능</td></tr>
+              </table>
+        </div>
+    </vue-bottom-sheet>
+
     <div id="snackbar-review-success" class="snackbar-toast color-white bg-green-dark" data-bs-delay="1500" data-bs-autohide="true"><i class="fa fa-times me-3"></i>리뷰 등록이 완료되었습니다.</div>
   </div>
 </template>
 <script>
+import  VueBottomSheet from "@webzlodimir/vue-bottom-sheet";
 import StarRating from 'vue-star-rating'
 import { GraphQLClient, request, gql } from "graphql-request";
 const axios = require("axios")
@@ -1158,6 +1179,9 @@ export default {
 
         }
         });
+        if (result.data.error && result.data.error.length > 0) {
+            location.reload();
+        }
         if (localStorage.idToken) {
             await axios({
                 url: 'https://api.wedives.com/graphql',
@@ -1179,7 +1203,7 @@ export default {
                 }
             });
         }
-
+        
         if (result.data.data.getDiveCenterByUniqueName.backgroundImages.length > 0) {
             for (var i=0; i<result.data.data.getDiveCenterByUniqueName.backgroundImages.length; i++) {
                 result.data.data.getDiveCenterByUniqueName.backgroundImages[i].url = '/static/empty.jpg';
@@ -1496,7 +1520,8 @@ export default {
 
   },
   components: {
-    StarRating
+    StarRating,
+    VueBottomSheet,
   },
   data () {
     return {
@@ -1508,7 +1533,7 @@ export default {
         equipt_list: ["마스크", "레귤레이터", "다이버 PC", "다이버 워치", "나침반", "수중 스쿠터", "산소탱크", "핀", "구명조끼", "나이프", "스노클링", "부츠", "잠수복 상의", "잠수복 하의", "라이트", "스쿠버 세트", "카메라", "수심계", , "게이지", "잠수복", , "풀세트", "유아장비"],
         rentalOptions: ["스킨스쿠버 세트", "스킨 세트", "마스크", "스노클", "잠수복", "오리발(핀)", "부츠", "장갑", "부츠&장갑", "웨이트&벨트", "웨이트", "스쿠버 세트", "부력조절기", "레귤레이터", "보조호흡기", "SMB", "공기통", "나이트록스", "라이트", "다이브컴퓨터", "카메라", "DPV", "조류걸이", "프리 세트", "프리 핀", "프리 마스크", "프리 스노클", "프리 잠수복", "프리 웨이트&벨트", "프리 웨이트", "바텀웨이트", "랜야드", "부이", "로프", "부이&로프", "고정부이"],
         imageCategory: ["다이빙", "교육", "센터"],
-        enteranceScuba: {"5": "강사 동반 입장가능 (그 외 불가)", "4": "마스터 다이버 이상 버디입장 가능", "3": "레스큐 이상 버디입장 가능", "2": "어드밴스 다이버 이상 버디입장 가능", "1": "오픈워터 다이버 이상 버디입장 가능", "0": "누구나 버디입장 가능"},
+        enteranceScuba: {"5": "강사 동반 입장가능 (그 외 불가)", "4": "마스터 이상 버디입장 가능", "3": "레스큐 이상 버디입장 가능", "2": "어드밴스 이상 버디입장 가능", "1": "오픈워터 이상 버디입장 가능", "0": "누구나 버디입장 가능"},
         enteranceFree: {"5": "강사 동반 입장가능 (그 외 불가)", "4": "레벨4 이상 버디입장 가능", "3": "레벨3 이상 버디입장 가능", "2": "레벨2 이상 버디입장 가능", "1": "레벨1 이상 버디입장 가능", "0": "누구나 버디입장 가능"},
         rating: 3,
         rateDescription: '나쁘지 않아요.',
@@ -1529,6 +1554,12 @@ export default {
             var preloader = document.getElementById('preloader')
             if(preloader){preloader.classList.add('preloader-hide');}
         }, 1000);
+      },
+      openInstitutionBottomSheet() {
+            this.$refs.institutionBottomSheet.open();
+      },
+      closeInstitutionBottomSheet() {
+            this.$refs.institutionBottomSheet.close();
       },
       async clickLike() {
           if (localStorage.idToken && localStorage.nickName) {
@@ -1853,7 +1884,7 @@ export default {
 .square-rect > img {position: absolute;width: 100%;height: 100%;left: 0;padding:4px;object-fit: cover;}
 .wedive-comment-number {float: left;position: relative;width: 20px;}
 .wedive-comment-desc {padding-left: 30px;}
-.hori-line {border: 1px solid silver;width: 10px;padding: 0;margin-left: 16px;margin-top: 10px;}
+.hori-line {width: 10px;padding: 0;margin-left: 16px;margin-top: 10px;opacity: 1 !important;}
 .right-icon {position: absolute;top: 10px;width: 15px;text-align: center;right: 0px;opacity: 0.3;}
 .wedive-textarea {min-height: 150px;border: 2px solid #e9e9e9;background: #f5f5f5;padding-left: 10px;padding-right: 10px;}
 </style>
