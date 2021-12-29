@@ -157,6 +157,26 @@
                 });
             }
 
+            var instructorSlider = document.querySelectorAll('.instructor-slider');
+            if(instructorSlider.length) {
+                instructorSlider.forEach(function(e){
+                    setTimeout(function(e) {
+                        var single = new Splide( '#'+e.id, {
+                            type:'loop',
+                            autoplay:true,
+                            interval:4000,
+                            autoWidth: true,
+                            perPage: 1,
+                        }).mount();
+                        var sliderNext = document.querySelectorAll('.slider-next');
+                        var sliderPrev = document.querySelectorAll('.slider-prev');
+                        sliderNext.forEach(el => el.addEventListener('click', el => {single.go('>');}));
+                        sliderPrev.forEach(el => el.addEventListener('click', el => {single.go('<');}));
+                    },100, e);
+                    
+                });
+            }
+
             var doubleSlider = document.querySelectorAll('.double-slider');
             if(doubleSlider.length){
                 doubleSlider.forEach(function(e){

@@ -43,7 +43,7 @@
                         <div class="star-area text-start ms-3" style="height: 30px;">
                             <span class="font-14 me-2 color-gray" style="float: left;padding-top:2px;">환경</span>
                             <div class="wedive-fish-back">
-                                <div class="wedive-fish-front" :style="'width:'+(siteData.waterEnvironmentScore-5)+'%;'">
+                                <div class="wedive-fish-front" :style="'width:'+(siteData.waterEnvironmentScore-3)+'%;'">
                                 </div>
                                 <span class="wedive-score-number">{{ (siteData.waterEnvironmentScore/20).toFixed(1) }}</span>
                             </div>
@@ -51,7 +51,7 @@
                         <div class="star-area mt-1 text-start ms-3" style="height: 30px;">
                             <span class="font-14 me-2 color-gray" style="float: left;padding-top:2px;">유속</span>
                             <div class="wedive-wave-back">
-                                <div class="wedive-wave-front" :style="'width:'+(siteData.flowRateScore-5)+'%;'">
+                                <div class="wedive-wave-front" :style="'width:'+(siteData.flowRateScore-3)+'%;'">
                                 </div>
                                 <span class="wedive-score-number">{{ (siteData.flowRateScore/20).toFixed(1) }}</span>
                             </div>
@@ -59,7 +59,7 @@
                         <div class="star-area mt-1 text-start ms-3" style="height: 30px;">
                             <span class="font-14 me-2 color-gray" style="float: left;padding-top:2px;">시야</span>
                             <div class="wedive-eye-back">
-                                <div class="wedive-eye-front" :style="'width:'+(siteData.eyeSightScore-5)+'%;'">
+                                <div class="wedive-eye-front" :style="'width:'+(siteData.eyeSightScore-3)+'%;'">
                                 </div>
                                 <span class="wedive-score-number">{{ (siteData.eyeSightScore/20).toFixed(1) }}</span>
                             </div>
@@ -592,7 +592,7 @@
                                             </div>
                                             <div>
                                                 <h6 class="text-end">{{ review.author.name }}</h6>
-                                                <p class="font-10 mb-0 mt-n2 opacity-40 text-end">{{ review.createdAt ? review.createdAt.substring(0,10).replace(/-/gi,'.') : '' }}</p>
+                                                <p class="font-10 mb-0 mt-n2 opacity-40 text-end">{{ review.createdAt ? timeForToday(review.createdAt) : '' }}</p>
                                             </div>
                                         </div>
                                         <p class="review-text mt-2 mb-1">
@@ -1342,6 +1342,7 @@ export default {
                     reviewCount
                     views
                     likes
+                    createdAt
                 }
                 likes
                 views
@@ -2006,6 +2007,28 @@ export default {
         } else if (localStorage.hasOwnProperty("nickName") == false || localStorage.nickName == null) {
           location.href='/user_create';
         }
+      },
+      timeForToday(value) {
+        const today = new Date();
+        const timeValue = new Date(value);
+
+        const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
+        if (betweenTime < 1) return '방금전';
+        if (betweenTime < 60) {
+            return `${betweenTime}분전`;
+        }
+
+        const betweenTimeHour = Math.floor(betweenTime / 60);
+        if (betweenTimeHour < 24) {
+            return `${betweenTimeHour}시간전`;
+        }
+
+        const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
+        if (betweenTimeDay < 365) {
+            return `${betweenTimeDay}일전`;
+        }
+
+        return `${Math.floor(betweenTimeDay / 365)}년전`;
       },
   }
 

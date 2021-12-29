@@ -35,7 +35,7 @@
                 <h2 class="font-20 font-700 mb-1 mt-1">{{ centerData.name }}</h2>
                 <p class="text-start color-gray m-0" style="line-height: 1.5;">{{ centerData.description }}</p>
                 <div class="wedive-star-back">
-                  <div class="wedive-star-front" v-bind:style="'width:'+(centerData.adminScore-5)+'%'">
+                  <div class="wedive-star-front" v-bind:style="'width:'+(centerData.adminScore-3)+'%'">
                   </div>
                   <span class="wedive-star-number">{{ (centerData.adminScore/20).toFixed(1) }}</span>
                 </div>
@@ -229,61 +229,70 @@
                 
                 <div data-bs-parent="#tab-group-2" class="collapse text-start px-2 show" id="tab-info">
                     <div class="line-height-l pb-3 mt-2 light-border-bottom" v-if="centerData.tickets && centerData.tickets.length > 0" style="position: relative;">
-                        <strong class="small-title">입장료</strong>
-                        <div class="">
-                            <div v-for="ticket in centerData.tickets" class="row mb-0">
-                                <h5 class="col-6 text-start font-13 font-400">{{ ticket.unitName }}</h5>
-                                <p class="col-6 mb-2 text-end">{{ ticket.price | makeComma }}</p>
-                            </div>
+                        <strong class="small-title"><i class="fas fa-money-bill-alt color-blue2-dark me-1"></i> 입장료 / 입장정보</strong>
+                        <div>
+                            <table class="table table-borderless text-center rounded-3 shadow-sm mt-1 font-noto border-08" style="overflow: hidden;">
+                                <tr v-for="ticket in centerData.tickets" class="border-bottom">
+                                    <th class="pt-2 pb-2 font-400" style="background: rgba(196,187,171,.2);" width="96">{{ ticket.unitName }}</th>
+                                    <td class="text-start p-2">{{ ticket.price | makeComma }}</td>
+                                </tr>
+                            </table>
                         </div>
-                        <i class="fas fa-money-bill-alt color-blue2-dark mt-n2 right-icon"></i>
+                        <div>
+                            <table class="table table-borderless text-center rounded-3 shadow-sm mt-1 font-noto border-08" style="overflow: hidden;">
+                                <tr class="border-bottom">
+                                    <th class="pt-2 pb-2 font-400" style="background: rgba(196,187,171,.2);" width="96">스쿠버 다이빙</th>
+                                    <td v-if="centerData.divingType.includes('scubaDiving')" class="text-start p-2">{{ enteranceScuba[centerData.enteranceLevelScuba] }}</td>
+                                    <td v-else class="text-start p-2" style="color:#cd5b3c;">불가</td>
+                                </tr>
+                                <tr>
+                                    <th class="pt-2 pb-2 font-400" style="background: rgba(196,187,171,.2);" width="96">프리 다이빙</th>
+                                    <td v-if="centerData.divingType.includes('freeDiving')" class="text-start p-2">{{ enteranceFree[centerData.enteranceLevelFree] }}</td>
+                                    <td v-else class="text-start p-2" style="color:#cd5b3c;">불가</td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
-
                     <div class="line-height-l pb-3 mt-2 light-border-bottom" style="position: relative;">
-                        <strong class="small-title">시설 정보</strong>
+                        <strong class="small-title"><i class="fas fa-highlighter color-blue2-dark me-1"></i> 시설 정보</strong>
                         <div class="row text-start">
                             <div class="ico_feature col-3" v-if="interest.type=='facility'" v-for="interest in centerData.interests">
                                 <i v-if="item == interest.title" v-for="(item, index) in feature_list" :class="'ico_feature'+(index+1)+' icon-service'"></i>
                                 <p class="span_feature text-center" style="line-height: 1.05;">{{ interest.title }}</p>
                             </div>
                         </div>
-                        <i class="fas fa-highlighter color-blue2-dark mt-n2 right-icon"></i>
                     </div>
                     
-                    <div class="vcard-field line-height-l pb-3 mt-4">
-                        <strong>결제 방법</strong>
+                    <div class="line-height-l pb-3 mt-2 light-border-bottom" style="position: relative;">
+                        <strong class="small-title"><i class="fas fa-credit-card color-blue2-dark me-1"></i> 결제 방법</strong>
                         <ul class="wedive-ul ps-0">
                             <li v-if="interest.type=='payment'" v-for="interest in centerData.interests" class="col-md-6">{{interest.title}}</li>
                         </ul>
-                        <i class="fas fa-credit-card color-blue2-dark mt-n2"></i>
                     </div>
 
-                    <div class="vcard-field line-height-l pb-3 mt-3 hide">
-                        <strong>사이트 까지 거리</strong>
+                    <div class="line-height-l pb-3 mt-2 light-border-bottom hide" style="position: relative;">
+                        <strong class="small-title">사이트 까지 거리</strong>
                         20km 이상 소요
-                        <i class="fa fa-map-marker color-blue2-dark mt-n2"></i>
+                        <i class="fa fa-map-marker color-blue2-dark me-1"></i>
                     </div>
 
-                    <div class="vcard-field line-height-l pb-3 mt-3 hide">
-                        <strong>직원수</strong>
+                    <div class="line-height-l pb-3 mt-2 light-border-bottom hide" style="position: relative;">
+                        <strong class="small-title">직원수</strong>
                         <div class="row mb-0">
                             <div class="col-6 text-start font-13">다이브 마스터</div>
                             <p class="col-6 mb-0 text-end">2</p>
                             <div class="col-6 text-start font-13">오픈워터 강사</div>
                             <p class="col-6 mb-0 text-end">6</p>
                         </div>
-                        <i class="fas fa-user-tie color-blue2-dark mt-n2"></i>
+                        <i class="fas fa-user-tie color-blue2-dark me-1"></i>
                     </div>
 
-                    <div class="vcard-field line-height-l pb-0 mt-3 bd-b-w-0">
-                        <strong>지원 언어</strong>
+                    <div class="line-height-l pb-3 mt-2 light-border-bottom" style="position: relative;">
+                        <strong class="small-title"><i class="fas fa-language color-blue2-dark me-1"></i> 지원 언어</strong>
                         <ul class="wedive-ul ps-0">
                             <li v-if="interest.type=='language'" v-for="interest in centerData.interests" class="col-md-6">{{interest.title}}</li>
                         </ul>
-                        <i class="fas fa-language color-blue2-dark mt-n2"></i>
                     </div>
-
-                    
                 </div>
                 <div data-bs-parent="#tab-group-2" class="collapse px-2" id="tab-time">
                     <div class="mt-3" v-if="centerData.openingHours && centerData.openingHours.length > 0">
@@ -644,6 +653,50 @@
             </div>
         </div>
 
+        <div class="card card-style">
+            <div class="content">
+            <h4 class="text-start">강사 (2)</h4>
+            <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
+            <div class="divider mt-3 mb-2"></div>
+                <div class="splide instructor-slider slider-no-arrows slider-no-dots" id="single-slider-instructor">
+                    <div class="splide__track">
+                        <div class="splide__list">
+                            <div class="splide__slide" style="width:220px !important;">
+                                <div class="card card-style card-nearby mb-0" style="background: url(/static/images/assets/song.jpg);background-size:contain;" data-card-height="250" data-card-width="200">
+                                    <div class="card-top px-3 py-3">
+                                        <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-red-dark"></i></a>
+                                    </div>
+                                </div>
+                                <div class="mt-0 px-3 py-3">
+                                    <h4 class="color-black font-18 font-600">송현일 프리 강사</h4>
+                                    <div class="d-flex">
+                                        <div class="align-self-center" style="max-width: 100%;">
+                                            <p class="font-12 opacity-70 font-600 color-black nearby_desc mb-0" style="max-width: 100%;">SSI 프리다이빙 강사<br/>생활스포츠지도사 1급 (다이빙)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="splide__slide" style="width:220px !important;">
+                                <div class="card card-style card-nearby mb-0" style="background: url(/static/images/assets/lee.jpg);background-size:contain;" data-card-height="250" data-card-width="200">
+                                    <div class="card-top px-3 py-3">
+                                        <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-red-dark"></i></a>
+                                    </div>
+                                </div>
+                                <div class="mt-0 px-3 py-3">
+                                    <h4 class="color-black font-18 font-600">이진주 스쿠버 강사</h4>
+                                    <div class="d-flex">
+                                        <div class="align-self-center" style="max-width: 100%;">
+                                            <p class="font-12 opacity-70 font-600 color-black nearby_desc mb-0" style="max-width: 100%;">PADI 스쿠버다이빙 강사<br/>2018 대한민국 아마추어 스쿠버 대상</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="card card-style">
             <div class="content">
@@ -668,7 +721,7 @@
                                             </div>
                                             <div>
                                                 <h6 class="text-end">{{ review.author.name }}</h6>
-                                                <p class="font-10 mb-0 mt-n2 opacity-40 text-end">{{ review.createdAt.substring(0,10).replace(/-/gi,'.') }}</p>
+                                                <p class="font-10 mb-0 mt-n2 opacity-40 text-end">{{ review.createdAt ? timeForToday(review.createdAt) : '' }}</p>
                                             </div>
                                         </div>
                                         <p class="review-text mt-2 mb-1">
@@ -1455,6 +1508,8 @@ export default {
         equipt_list: ["마스크", "레귤레이터", "다이버 PC", "다이버 워치", "나침반", "수중 스쿠터", "산소탱크", "핀", "구명조끼", "나이프", "스노클링", "부츠", "잠수복 상의", "잠수복 하의", "라이트", "스쿠버 세트", "카메라", "수심계", , "게이지", "잠수복", , "풀세트", "유아장비"],
         rentalOptions: ["스킨스쿠버 세트", "스킨 세트", "마스크", "스노클", "잠수복", "오리발(핀)", "부츠", "장갑", "부츠&장갑", "웨이트&벨트", "웨이트", "스쿠버 세트", "부력조절기", "레귤레이터", "보조호흡기", "SMB", "공기통", "나이트록스", "라이트", "다이브컴퓨터", "카메라", "DPV", "조류걸이", "프리 세트", "프리 핀", "프리 마스크", "프리 스노클", "프리 잠수복", "프리 웨이트&벨트", "프리 웨이트", "바텀웨이트", "랜야드", "부이", "로프", "부이&로프", "고정부이"],
         imageCategory: ["다이빙", "교육", "센터"],
+        enteranceScuba: {"5": "강사 동반 입장가능 (그 외 불가)", "4": "마스터 다이버 이상 버디입장 가능", "3": "레스큐 이상 버디입장 가능", "2": "어드밴스 다이버 이상 버디입장 가능", "1": "오픈워터 다이버 이상 버디입장 가능", "0": "누구나 버디입장 가능"},
+        enteranceFree: {"5": "강사 동반 입장가능 (그 외 불가)", "4": "레벨4 이상 버디입장 가능", "3": "레벨3 이상 버디입장 가능", "2": "레벨2 이상 버디입장 가능", "1": "레벨1 이상 버디입장 가능", "0": "누구나 버디입장 가능"},
         rating: 3,
         rateDescription: '나쁘지 않아요.',
         review_detail: '',
@@ -1668,6 +1723,28 @@ export default {
         } else if (localStorage.hasOwnProperty("nickName") == false || localStorage.nickName == null) {
           location.href='/user_create';
         }
+      },
+      timeForToday(value) {
+        const today = new Date();
+        const timeValue = new Date(value);
+
+        const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
+        if (betweenTime < 1) return '방금전';
+        if (betweenTime < 60) {
+            return `${betweenTime}분전`;
+        }
+
+        const betweenTimeHour = Math.floor(betweenTime / 60);
+        if (betweenTimeHour < 24) {
+            return `${betweenTimeHour}시간전`;
+        }
+
+        const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
+        if (betweenTimeDay < 365) {
+            return `${betweenTimeDay}일전`;
+        }
+
+        return `${Math.floor(betweenTimeDay / 365)}년전`;
       },
   }
 
