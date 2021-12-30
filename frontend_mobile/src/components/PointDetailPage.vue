@@ -5,7 +5,7 @@
         <div v-if="pointData.backgroundImages == null || pointData.backgroundImages.length == 0" style="background:url(/static/empty.jpg);background-size: contain;height:250px;">
         </div>
         <div v-else style="min-height:250px;height:250px;max-height:250px;">
-            <div class="splide single-slider cover-slider slider-no-arrows slider-has-dots" id="cover-slider-1" data-card-height="250">
+            <div class="splide single-slider cover-slider slider-no-arrows slider-no-dots" id="cover-slider-1" data-card-height="250">
                 <div class="splide__track">
                     <div class="splide__list">
                         <div class="splide__slide" v-if="pointData.backgroundImages == null || pointData.backgroundImages.length == 0">
@@ -14,14 +14,14 @@
                             </div>
                         </div>
                         <div class="splide__slide" v-for="(image, index) in pointData.backgroundImages">
-                            <div data-card-height="250" :class="'card rounded-0 mb-0 background_img_' + index" v-bind:style="'background: url('+image.url+');background-position: bottom;background-size: cover !important;height:250px;'">
+                            <div data-card-height="250" :class="'card rounded-0 mb-0 background_img_' + index" v-bind:style="'background: url('+image.url+');background-size: cover !important;height:250px;'">
                                 <div class="wedive-source" style="bottom:50px;">{{ image.reference | makeReference }}</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div id="cover-slider-temp" :style="'background:url('+pointData.backgroundImages[0].url+');background-size: cover;height:250px;background-position: bottom;position:absolute;width:100%;top:58px;'">
+            <div id="cover-slider-temp" :style="'background:url('+pointData.backgroundImages[0].url+');background-size: cover;height:250px;background-position: center;position:absolute;width:100%;top:58px;'">
             </div>
         </div>
         
@@ -237,7 +237,7 @@
                                             <span> {{ (center.adminScore/20).toFixed(1) }} </span>
                                             &nbsp;<font class="color-gray-light">|</font>&nbsp;
                                             <span v-if="center.institutionTypes && center.institutionTypes.length > 0"><img v-if="insti in center.institutionTypes" class="ext-img" :src="'/static/images/agency/logo_'+insti.toLowerCase()+'.svg'" height="14" />&nbsp;&nbsp;<font class="color-gray-light">|</font>&nbsp;&nbsp;</span>
-                                            <span v-if="interest.type=='priceIndex'" v-for="interest in center.interests" style="letter-spacing: -2px;">{{interest.title.replace(/\$/gi, '￦')}}</span>
+                                            <span v-if="interest.type=='priceIndex'" v-for="interest in center.interests" class="color-gray">{{interest.title.replace(/\$/gi, '₩')}}</span>
                                         </p>
                                     </div>
                                 </div>
@@ -485,15 +485,14 @@
             </div>
             <div class="divider mt-2 mb-2 ms-3 me-3"></div>
             <div v-on:click="login()" :data-menu="((idToken == null || nickName == null) ? '' : 'menu-review')" :class="((idToken == null || nickName == null) ? 'opacity-40' : '')">
-                <div class="star-area mt-4 text-center">
+                <div class="star-area mt-4 text-center" style="letter-spacing: -2px;">
                     <i class="fa fa-star font-20 color-gray-light"></i>
                     <i class="fa fa-star font-20 color-gray-light"></i>
                     <i class="fa fa-star font-20 color-gray-light"></i>
                     <i class="fa fa-star font-20 color-gray-light"></i>
                     <i class="fa fa-star font-20 color-gray-light"></i>
                 </div>
-                <div class="text-center color-gray mt-2 mb-3">이곳을 방문해보셨나요?</div>
-                <div class="me-4 ms-4" style="margin-bottom: 34px;background: rgba(58, 58, 58, 0.03);padding: 10px 20px;border-radius: 4px;">
+                <div class="me-4 ms-4 mt-1" style="margin-bottom: 34px;background: rgba(58, 58, 58, 0.03);padding: 10px 20px;border-radius: 4px;">
                     <p class="mb-0" style="color: rgba(58, 58, 58, 0.6)">다녀온 기록을 남겨보세요.</p>
                     <p class="mb-0 color-highlight">지금 로그북남기기 <i class="fas fa-chevron-right ms-1"></i></p>
                 </div>
@@ -515,13 +514,13 @@
          data-menu-height="470" 
          data-menu-width="370">
         <div class="menu-title">
-            <h4 class="text-center mt-4 pt-1 mb-2 font-noto font-19">{{ pointData.name }} 로그</h4>
+            <h4 class="text-center mt-4 pt-1 mb-2 font-noto font-19">{{ pointData.name }} 다이빙 로그</h4>
             <a href="#" class="close-menu hide"><i class="fa fa-times-circle"></i></a>
         </div>
         <div class="me-4 ms-4" style="border-bottom: 2px solid black;"></div>
         <div class="content mt-3">
             <div class="text-center mt-3">
-                <star-rating @rating-selected="setRating" text-class="hide" :rating="3" v-bind:star-size="30" :padding="5" :rounded-corners="true" :star-points="[23,2, 14,17, 0,19, 10,34, 7,50, 23,43, 38,50, 36,34, 46,19, 31,17]" style="display: inline-block;"></star-rating>
+                <star-rating @rating-selected="setRating" text-class="hide" :rating="rating" v-bind:star-size="30" :padding="5" :rounded-corners="true" :star-points="[23,2, 14,17, 0,19, 10,34, 7,50, 23,43, 38,50, 36,34, 46,19, 31,17]" style="display: inline-block;"></star-rating>
             </div>
             <div class="text-center color-gray mt-1 mb-2" v-html="rateDescription"></div>
         </div>
@@ -1224,8 +1223,8 @@ export default {
         recommend_flow_word: ["매우느림", "느림", "일반적", "빠름", "매우빠름", "폭풍"],
         point_category: ["해저지형", "해저협곡", "큰 암반", "강한조류", "난파선", "가두리양식장", "마크로", "먹(Muck)", "인공어초", "블루홀", "리프다이빙", "빙하", "초대형난파선", "난파선성지", "수중조형물", "수중유적", "대물", "유네스코", "10대포인트"],
         type_category: ["월다이빙", "블랙워터다이빙", "드리프트다이빙", "아이스다이빙", "야간다이빙", "동굴다이빙", "해루질", "프리다이빙", "스노클링", "케이지다이빙", "렉다이빙", "테크니컬다이빙", "나이트록스다이빙"],
-        rating: 3,
-        rateDescription: '나쁘지 않아요.',
+        rating: 5,
+        rateDescription: '매우 만족해요!',
         review_detail: '',
         like_img: 'ico_heart',
         subscribe_img: 'ico_subscribe',

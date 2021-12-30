@@ -538,7 +538,7 @@ async function updateAll() {
 
                 const institutionTypes = (k==2) ? (allList[i].institutionTypes) : null;
                 var priceIdxs = (k==2) ? (allList[i].interests.filter(x=>x.type=='priceIndex')) : null;
-                const price_index = (priceIdxs && priceIdxs.length>0) ? priceIdxs[0].title.replace(/\$/gi, '￦') : '';
+                const price_index = (priceIdxs && priceIdxs.length>0) ? priceIdxs[0].title.replace(/\$/gi, '₩') : '';
                 const m_type = allList_item[k];
                 const _k = k;
 
@@ -926,7 +926,7 @@ async function updateCenter() {
             const _id = centerList[i]._id;
             const institutionTypes = centerList[i].institutionTypes;
             var priceIdxs = centerList[i].interests.filter(x=>x.type=='priceIndex');
-            const price_index = (priceIdxs && priceIdxs.length>0) ? priceIdxs[0].title.replace(/\$/gi, '￦') : '';
+            const price_index = (priceIdxs && priceIdxs.length>0) ? priceIdxs[0].title.replace(/\$/gi, '₩') : '';
 
             const marker_shop = new google.maps.Marker({
                 map: map,

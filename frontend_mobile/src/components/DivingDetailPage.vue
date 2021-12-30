@@ -14,13 +14,12 @@
             <a href="/buddy_home" class="slider-next btn font-400 font-12 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3 pe-4 ps-4 mt-2">다이빙 리스트로 돌아가기</a></p>
         </div>
     </div>
-    <div :class="'page-content' + (!is_empty ? '' : ' hide')">
-
+    <div :class="'page-content' + (!is_empty ? '' : ' hide')" style="margin-top:50px;">
 
         <div v-if="locationData[0] == null || locationData[0].backgroundImages == null || locationData[0].backgroundImages.length == 0" style="background:url(/static/empty.jpg);background-size: contain;height:250px;">
         </div>
         <div v-else style="min-height:250px;height:250px;max-height:250px;">
-            <div class="splide single-slider cover-slider slider-no-arrows slider-has-dots" id="cover-slider-1" data-card-height="250" style="position:relative;">
+            <div class="splide single-slider cover-slider slider-no-arrows slider-no-dots" id="cover-slider-1" data-card-height="250" style="position:relative;">
                 <div class="splide__track">
                     <div class="splide__list">
                         <div class="splide__slide" v-if="locationData[0].backgroundImages == null || locationData[0].backgroundImages.length == 0">
@@ -36,7 +35,7 @@
                     </div>
                 </div>
             </div>
-            <div id="cover-slider-temp" :style="'background:url('+locationData[0].backgroundImages[0].url+');background-size: cover;height:250px;background-position: bottom;position:absolute;width:100%;top:50px;'">
+            <div id="cover-slider-temp" :style="'background:url('+locationData[0].backgroundImages[0].url+');background-size: cover;height:250px;background-position: center;position:absolute;width:100%;top:0px;'">
             </div>
         </div>
 
@@ -70,7 +69,7 @@
         
 
     
-        <div class="card mb-0" style="z-index:1">
+        <div class="card mb-0" style="z-index:1;">
             <div class="content mt-3 row pb-3 mb-0 border-bottom" v-on:click="goUserPage(divingData.hostUser)">
                 <div class="col-6 p-0">
                     <img class="inline-block me-2 circular_image" :src="(divingData.hostUser && divingData.hostUser.profileImages && divingData.hostUser.profileImages.length>0 && divingData.hostUser.profileImages[0].thumbnailUrl) ? divingData.hostUser.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty_'+((divingData.hostUser&&divingData.hostUser.gender)?divingData.hostUser.gender:'m')+'.png'" width="50" style="vertical-align: top;"/>
@@ -124,39 +123,49 @@
                 <p class="color-gray-dark mb-0 font-12">관심 {{ divingData.likes || 0 }} · 조회 {{ divingData.views || 0 }}</p>
             </div>
             
-            <div v-if="divingData.participants" class="content mt-0 pb-3 border-bottom">
-                <h2 class="font-15 font-700 mb-3">참여인원 ({{ (divingData.participants.filter(member=> member.status == 'joined')) ? (divingData.participants.filter(member=> member.status == 'joined').length+1) : '' }})</h2>
+            <div v-if="divingData.participants" class="content mt-0 pb-3">
+                <h2 class="font-15 font-700 mb-2">참여인원 ({{ (divingData.participants.filter(member=> member.status == 'joined')) ? (divingData.participants.filter(member=> member.status == 'joined').length+1) : '' }})</h2>
                 
-                <div class="row text-center mb-1">
-                    <div class="col-3 owner" v-on:click="goUserPage(divingData.hostUser)" style="position: relative;">
+                <div class="">
+                    <div class="owner border-bottom pt-2 pb-2" v-on:click="goUserPage(divingData.hostUser)" style="position: relative;">
                         <img class="inline-block circular_image" :src="(divingData.hostUser && divingData.hostUser.profileImages && divingData.hostUser.profileImages.length>0 && divingData.hostUser.profileImages[0].thumbnailUrl) ? divingData.hostUser.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty_'+((divingData.hostUser&&divingData.hostUser.gender)?divingData.hostUser.gender:'m')+'.png'" width="50" style="vertical-align: top;"/>
-                        <p class="color-gray-dark mb-0 font-14">{{ (divingData.hostUser!=null&&divingData.hostUser.nickName!=null) ? divingData.hostUser.nickName : '비공개' }}</p>
+                        <div class="inline-block font-noto ms-3">
+                            <h5 class="mb-0 font-500 font-17">{{ (divingData.hostUser!=null&&divingData.hostUser.nickName!=null) ? divingData.hostUser.nickName : ((divingData.hostUser.name!=null) ? divingData.hostUser.name : '비공개') }}</h5>
+                            <p class="mb-0 font-14 color-gray">{{ (divingData.hostUser && divingData.hostUser.levelShow) ? divingData.hostUser.levelShow : '' }}</p>
+                        </div>
                     </div>
-                    <div class="col-3" v-for="participant in divingData.participants.filter(member=> member.status == 'joined')" v-on:click="goUserPage(participant.user)">
-                        <img class="inline-block circular_image" :src="(participant.user && participant.user.profileImages && participant.user.profileImages.length>0 && participant.user.profileImages[0].thumbnailUrl) ? participant.user.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty_'+(participant.gender ? participant.gender : 'm')+'.png'" width="50" style="vertical-align: top;"/>
-                        <p class="color-gray-dark mb-0 font-14">{{ (participant.user!=null&&participant.user.nickName!=null) ? participant.user.nickName : ((participant.name!=null) ? participant.name : '비공개') }}</p>
+                    <div class="border-bottom pt-2 pb-2 position-relative" v-for="participant in divingData.participants.filter(member=> member.status == 'joined')">
+                        <div v-on:click="goUserPage(participant.user)">
+                            <img class="inline-block circular_image" :src="(participant.user && participant.user.profileImages && participant.user.profileImages.length>0 && participant.user.profileImages[0].thumbnailUrl) ? participant.user.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty_'+(participant.gender ? participant.gender : 'm')+'.png'" width="50" style="vertical-align: top;"/>
+                            <div class="inline-block font-noto ms-3">
+                                <h5 class="mb-0 font-500 font-17">{{ (participant.user!=null&&participant.user.nickName!=null) ? participant.user.nickName : ((participant.name!=null) ? participant.name : '비공개') }}</h5>
+                                <p class="mb-0 font-14 color-gray">{{ (participant.levelShow) ? participant.levelShow : '' }}</p>
+                            </div>
+                        </div>
+                        <span v-if="participant.user!=null" v-on:click="chatUser(participant.user)" data-menu="menu-dm" class="chip chip-s bg-gray-light text-center font-400 wedive-chip">채팅</span>
                     </div>
                 </div>
             </div>
 
 
-            <div v-if="divingData.hostUser && divingData.hostUser._id == userId && divingData.participants && (divingData.participants.filter(member=> member.status == 'applied')) " class="content mt-0 pb-3 border-bottom">
+            <div v-if="divingData.hostUser && divingData.hostUser._id == userId && divingData.participants && (divingData.participants.filter(member=> member.status == 'applied')) " class="content mt-0 pb-3">
                 <h2 class="font-15 font-700 mb-3">신청인원 ({{ (divingData.participants.filter(member=> member.status == 'applied').length) }})</h2>
                 
-                <div v-if="divingData.participants.filter(member=> member.status == 'applied').length > 0" class="row text-center mb-1">
-                    <div class="col-3 p-0" v-for="participant in divingData.participants.filter(member=> member.status == 'applied')">
-                        <div v-on:click="goUserPage(participant.user)">
-                            <img class="inline-block circular_image" :src="(participant.user && participant.user.profileImages && participant.user.profileImages.length>0 && participant.user.profileImages[0].thumbnailUrl) ? participant.user.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty_'+(participant.gender ? participant.gender : 'm')+'.png'" width="50" style="vertical-align: top;"/>
-                            <p class="color-gray-dark mb-0 font-14">{{ (participant.user!=null&&participant.user.nickName!=null) ? participant.user.nickName : ((participant.name!=null) ? participant.name : '비공개') }}</p>
+                <div v-if="divingData.participants.filter(member=> member.status == 'applied').length > 0" class="mb-1">
+                    <div class="p-0" v-for="participant in divingData.participants.filter(member=> member.status == 'applied')">
+                        <div class="border-bottom pt-2 pb-2 position-relative">
+                            <div v-on:click="goUserPage(participant.user)">
+                                <img class="inline-block circular_image" :src="(participant.user && participant.user.profileImages && participant.user.profileImages.length>0 && participant.user.profileImages[0].thumbnailUrl) ? participant.user.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty_'+(participant.gender ? participant.gender : 'm')+'.png'" width="50" style="vertical-align: top;"/>
+                                <div class="inline-block font-noto ms-3">
+                                    <h5 class="mb-0 font-500 font-17">{{ (participant.user!=null&&participant.user.nickName!=null) ? participant.user.nickName : ((participant.name!=null) ? participant.name : '비공개') }}</h5>
+                                    <p class="mb-0 font-14 color-gray">{{ (participant.levelShow) ? participant.levelShow : '' }}</p>
+                                </div>
+                            </div>
+                            <span v-if="participant.user!=null" v-on:click="chatUser(participant.user)" data-menu="menu-dm" class="chip chip-s bg-gray-light text-center font-400 wedive-chip">채팅</span>
+                            <span data-menu="menu-approval" v-on:click="setUser(participant)" class="chip chip-s bg-gray-light text-center font-400 wedive-chip2">승인/거절</span>
+                            <!--<p class="color-gray-dark mb-0 font-14">{{ (participant.user!=null&&participant.user.nickName!=null) ? participant.user.nickName : ((participant.name!=null) ? participant.name : '비공개') }}</p>-->
                         </div>
-                        <a data-menu="menu-approval" v-on:click="setUser(participant)" class="btn btn-sm rounded-1 text-uppercase font-900 shadow-s bg-black" style="padding: 4px 6px !important;">승인/거절</a>
-                    </div>
-                    <div class="col-3 p-0" v-for="participant in divingData.participants.filter(member=> member.status == 'applied')">
-                        <div v-on:click="goUserPage(participant.user)">
-                            <img class="inline-block circular_image" :src="(participant.user && participant.user.profileImages && participant.user.profileImages.length>0 && participant.user.profileImages[0].thumbnailUrl) ? participant.user.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty_'+(participant.gender ? participant.gender : 'm')+'.png'" width="50" style="vertical-align: top;"/>
-                            <p class="color-gray-dark mb-0 font-14">{{ (participant.user!=null&&participant.user.nickName!=null) ? participant.user.nickName : ((participant.name!=null) ? participant.name : '비공개') }}</p>
-                        </div>
-                        <a data-menu="menu-approval" class="btn btn-sm rounded-1 text-uppercase font-900 shadow-s bg-black" style="padding: 4px 6px !important;">승인/거절</a>
+                        <!--<a data-menu="menu-approval" v-on:click="setUser(participant)" class="btn btn-sm rounded-1 text-uppercase font-900 shadow-s bg-black" style="padding: 4px 6px !important;">승인/거절</a>-->
                     </div>
                 </div>
                 <div v-else class="text-center">
@@ -177,7 +186,7 @@
                             <span> {{ (location.adminScore/20).toFixed(1) }} </span>
                             &nbsp;<font class="color-gray-light">|</font>&nbsp;
                             <span v-if="location.institutionTypes && location.institutionTypes.length > 0"><span v-for="(insti,index) in location.institutionTypes" v-if="index < 4"><img class="ext-img" :src="'/static/images/agency/logo_'+insti.toLowerCase()+'.svg'" height="17" style="padding-bottom: 1px;" /><span v-if="index != (location.institutionTypes.length-1)">&nbsp;&nbsp;</span></span>&nbsp;<font class="color-gray-light">|</font>&nbsp;</span>
-                            <span v-if="interest.type=='priceIndex'" v-for="interest in location.interests" style="letter-spacing: -2px;">{{interest.title.replace(/\$/gi, '￦')}}</span>
+                            <span v-if="interest.type=='priceIndex'" v-for="interest in location.interests" class="color-gray">{{interest.title.replace(/\$/gi, '₩')}}</span>
                         </p>
                     </div>
                 </div>
@@ -236,11 +245,14 @@
         </div>
         
         <div class="row m-0">
-            <div class="col-6 pe-1">
-                <a v-on:click="reject()" href="#" class="close-menu btn btn-m btn-full rounded-0 text-uppercase font-900 shadow-s bg-gray-dark">거절</a>
-            </div>
-            <div class="col-6 ps-1">
+            <div class="col-4 pe-1">
                 <a v-on:click="approve()" class="btn btn-m btn-full rounded-0 text-uppercase font-900 shadow-s bg-black">승인</a>
+            </div>
+            <div class="col-4 pe-1 ps-1">
+                <a v-on:click="reject()" href="#" class="close-menu btn btn-m btn-full rounded-0 text-uppercase font-900 shadow-s bg-dark">거절</a>
+            </div>
+            <div class="col-4 ps-1">
+                <a href="#" class="close-menu btn btn-m btn-full rounded-0 text-uppercase font-900 shadow-s bg-gray-dark">닫기</a>
             </div>
         </div>
     </div>
@@ -414,6 +426,30 @@
             </div>
         </div>
     </div>
+
+    <!-- DM 팝업 -->
+    <div id="menu-dm" 
+         class="menu menu-box-modal" 
+         data-menu-height="300" 
+         data-menu-width="370">
+        <div class="menu-title">
+            <h4 class="text-center mt-4 pt-1 mb-2 font-noto font-19">메시지 전송 ({{ message_receiver_nickname }}님)</h4>
+            <a href="#" class="close-menu hide"><i class="fa fa-times-circle"></i></a>
+        </div>
+        <div class="me-4 ms-4" style="border-bottom: 2px solid black;"></div>
+        <div class="content mt-3">
+            <textarea class="wedive-textarea" placeholder="메시지를 입력하세요." v-model="dm_text"></textarea>
+        </div>
+        
+        <div class="row m-0">
+            <div class="col-6 pe-1">
+                <a href="#" class="close-menu btn btn-m btn-full rounded-0 text-uppercase font-900 shadow-s bg-gray-dark">취소</a>
+            </div>
+            <div class="col-6 ps-1">
+                <a v-on:click="sendDirectMessage()" class="btn btn-m btn-full rounded-0 text-uppercase font-900 shadow-s bg-black">메시지 전송</a>
+            </div>
+        </div>
+    </div>
     
     <div id="snackbar-join-error" class="snackbar-toast color-white bg-red-dark" data-bs-delay="1500" data-bs-autohide="true"><i class="fa fa-times me-3"></i>에러가 발생하여 신청이 불가합니다.</div>
     <div id="snackbar-request-error" class="snackbar-toast color-white bg-red-dark" data-bs-delay="1500" data-bs-autohide="true"><i class="fa fa-times me-3"></i>에러가 발생하여 {{ request_result }}이 되지 않았습니다.</div>
@@ -518,6 +554,8 @@ export default {
                                 profileImages {
                                     thumbnailUrl
                                 }
+                                scubaLicenseLevel
+                                freeLicenseLevel
                             }
                             status
                             name
@@ -669,6 +707,8 @@ export default {
         nickName: localStorage.nickName,
         requester: '',
         request_result: '',
+        dm_text: '',
+        message_receiver_nickname: '',
     }
   },
   methods: {
@@ -969,14 +1009,39 @@ export default {
             this.divingData.hostUser.levelShow = '초보';
             var scuba_level = ["초보", "오픈워터", "어드벤스드", "레스큐", "마스터", "강사"];
             var free_level = ["초보", "레벨1", "레벨2", "레벨3", "레벨4", "강사"];
-            var my_s_lvl = parseInt(this.divingData.hostUser.scubaLicenseLevel);
-            var my_f_lvl = parseInt(this.divingData.hostUser.freeLicenseLevel)
-            if (my_s_lvl > my_f_lvl) {
-                this.divingData.hostUser.levelShow = (my_s_lvl>0) ? "스쿠버 " + scuba_level[my_s_lvl] : this.divingData.hostUser.levelShow;
-            } else {
-                this.divingData.hostUser.levelShow = (my_f_lvl>0) ? "프리 " + free_level[my_f_lvl] : this.divingData.hostUser.levelShow;
+            {
+                var my_s_lvl = parseInt((this.divingData.hostUser.scubaLicenseLevel)?this.divingData.hostUser.scubaLicenseLevel:"0");
+                var my_f_lvl = parseInt((this.divingData.hostUser.freeLicenseLevel)?this.divingData.hostUser.freeLicenseLevel:"0")
+                if (my_s_lvl > my_f_lvl) {
+                    this.divingData.hostUser.levelShow = (my_s_lvl>0) ? "스쿠버 " + scuba_level[my_s_lvl] : this.divingData.hostUser.levelShow;
+                } else {
+                    this.divingData.hostUser.levelShow = (my_f_lvl>0) ? "프리 " + free_level[my_f_lvl] : this.divingData.hostUser.levelShow;
+                }
+                this.divingData.hostUser.levelShow += " 다이버";
             }
-            this.divingData.hostUser.levelShow += " 다이버";
+            {
+                this.divingData.participants.forEach(participant => {
+                    participant.levelShow = '비공개';
+                    if (participant.user != null) {
+                        if (participant.user.scubaLicenseLevel == null && participant.user.freeLicenseLevel == null) {
+                            participant.levelShow = '초보 다이버';
+                        } else {
+                            var my_s_lvl = parseInt((participant.user.scubaLicenseLevel)?participant.user.scubaLicenseLevel:"0");
+                            var my_f_lvl = parseInt((participant.user.freeLicenseLevel)?participant.user.freeLicenseLevel:"0")
+                            if (my_s_lvl > my_f_lvl) {
+                                participant.levelShow = (my_s_lvl>0) ? "스쿠버 " + scuba_level[my_s_lvl] + " 다이버": participant.levelShow;
+                            } else {
+                                participant.levelShow = (my_f_lvl>0) ? "프리 " + free_level[my_f_lvl] + " 다이버": participant.levelShow;
+                            }
+                        }
+                        
+                    }
+                    
+                });
+            }
+            
+            
+            
             this.divingData.description = this.divingData.description.replace(/\n/gi, '<br/>');
             this.divingData.title = '';
             
@@ -1090,6 +1155,10 @@ export default {
           location.href='/user_create';
         }
       },
+      async chatUser(user) {
+          this.message_receiver_nickname = user.nickName
+          console.log(user);
+      }
   }
 
   
@@ -1103,14 +1172,9 @@ export default {
 .inline-block {display: inline-block;}
 .border-bottom {border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important}
 .evaluation {background-color: rgba(196,187,171,.2);justify-content: space-around;border-radius: 5px;padding:10px;}
-.wedive-textarea {min-height: 150px;border: 2px solid #e9e9e9;background: #f5f5f5;padding-left: 10px;padding-right: 10px;}
-.owner:after {content: '';
-    position: absolute;
-    bottom: 20px;
-    left: 60%;
-    width: 30px;
-    height: 30px;
-    background-image: url(/static/images/assets/crown_small.png);
-    background-repeat: no-repeat;
-    background-size: contain;}
+.wedive-textarea {min-height: 150px;border: 2px solid #e9e9e9;background: #f5f5f5;padding-left: 10px;padding-right: 10px;width:100%;}
+.owner:after {content: '';position: absolute;bottom: 6px;left: 34px;width: 30px;height: 30px;background-image: url(/static/images/assets/crown_small.png);background-repeat: no-repeat;background-size: contain;}
+.wedive-chip {font-family: 'Noto Sans Korean';border-radius:6px !important;padding: 2px 12px;margin:0 !important;position:absolute;right:10px;bottom:20px;color:black !important;}
+.wedive-chip2 {font-family: 'Noto Sans Korean';border-radius:6px !important;padding: 2px 12px;margin:0 !important;position:absolute;right:70px;bottom:20px;color:black !important;}
+.position-relative {position: relative;}
 </style>

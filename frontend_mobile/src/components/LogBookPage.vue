@@ -45,7 +45,7 @@
                                             &nbsp;<font class="color-gray-light">|</font>&nbsp;
                                             <img src="/static/images/agency/logo_padi.svg" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
                                             &nbsp;<font class="color-gray-light">|</font>&nbsp;
-                                            <span v-for="i in center.price_index">￦</span>
+                                            <span v-for="i in center.price_index" class="color-gray">₩</span>
                                         </p>
                                     </div>
                                 </div>

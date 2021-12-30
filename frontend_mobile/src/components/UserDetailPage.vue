@@ -25,7 +25,7 @@
             </div>
             <div v-if="userData._id != user_id" class="row m-0 mt-2">
                 <div data-menu="menu-dm" class="col-4 pe-1">
-                    <span  class="btn btn-border btn-m btn-full text-uppercase font-900 border-gray-dark color-black bg-theme" style="padding: 6px 0 !important;"><img src="/static/images/assets/ico_chat.png" height="16"/> 대화하기</span>
+                    <span class="btn btn-border btn-m btn-full text-uppercase font-900 border-gray-dark color-black bg-theme" style="padding: 6px 0 !important;"><img src="/static/images/assets/ico_chat.png" height="16"/> 대화하기</span>
                 </div>
                 <div v-on:click="clickLike()" class="col-4">
                     <span class="btn btn-border btn-m btn-full text-uppercase font-900 border-gray-dark color-black bg-theme" style="padding: 6px 0 !important;"><img :src="'/static/images/assets/'+like_img+'.png'" height="16"/> 좋아요 {{ userData.likes }}</span>

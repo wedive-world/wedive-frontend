@@ -14,15 +14,18 @@
                         <a :href="'/diving/' + diving._id">
                             <div :class="'bx position-relative' + ((diving.status == 'divingComplete') ? ' opacity-40':'')">
                                 <div class="justify-content-center mb-0 text-start">
-                                    <div v-if="diving.locationData && diving.locationData.backgroundImages" class="" style="float: left;position: relative;width: 95px; height:95px;">
-                                        <img v-bind:src="diving.locationData.backgroundImages.thumbnailUrl" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;">
+                                    <div v-if="diving.locationData && diving.locationData.backgroundImages && diving.locationData.backgroundImages.length>0" class="" style="float: left;position: relative;width: 75px; height:75px;">
+                                        <img v-bind:src="diving.locationData.backgroundImages[0].thumbnailUrl" class="rounded-s mx-auto" width="75" height="75" style="object-fit: cover;">
                                     </div>
-                                    <div class="" style="padding-left: 110px;">
+                                    <div class="" style="padding-left: 90px;">
                                         <h4 class="font-15">{{ diving.title }}</h4>
                                         <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> {{ diving.location }}</p>
                                         <p class="pb-0 mb-0 mt-n1 ellipsis color-gray-light-mid">등록 : {{ timeForToday(diving.createdAt) }}</p>
                                     </div>
-                                    <span class="chip chip-s bg-gray-light text-center font-400 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>1</span> <span class="color-shopping ms-1"><i class="far fa-user"></i>1</span></span>
+                                    <span class="chip chip-s bg-gray-light text-center font-400 wedive-chip">
+                                        <span class="color-highlight"><i class="far fa-user"></i>{{ diving.participants.filter(parti=>parti.gender=='m'&&parti.status=='joined').length + (userGender=='m' ? 1:0) }}</span>
+                                        <span class="color-shopping ms-1"><i class="far fa-user"></i>{{ diving.participants.filter(parti=>parti.gender=='f'&&parti.status=='joined').length + (userGender=='f' ? 1:0) }}</span>
+                                    </span>
                                 </div>
                             </div>
                         </a>
@@ -103,6 +106,7 @@ export default {
                             gender
                         }
                         name
+                        gender
                         status
                         }
                         maxPeopleNumber
@@ -143,6 +147,7 @@ export default {
   data () {
     return {
         divingData: [],
+        userGender: localStorage.userGender,
     }
   },
   methods: {
@@ -162,6 +167,8 @@ export default {
             } else {
                 diving.title = (startedAt.getMonth()+1) + "/" + startedAt.getDate() + " ~ " + (finishedAt.getMonth()+1) + "/" + finishedAt.getDate() + " "
             }
+            diving.title += (diving.type.join().replace(/scubaDiving/gi,"스쿠버").replace(/freeDiving/gi,"프리").replace(/,/gi, "/") + " 다이빙");
+            
             if (startedAt.getFullYear() == finishedAt.getFullYear() && startedAt.getMonth() == finishedAt.getMonth() && startedAt.getDate() == finishedAt.getDate()) {
                 diving.showFinishedAt = true;
             }
@@ -215,7 +222,7 @@ export default {
 
 
 <style scoped>
-.wedive-chip {font-family: 'Noto Sans Korean';border-radius:6px !important;padding: 0 8px;margin:0 !important;position:absolute;right:0px;top:20px;}
+.wedive-chip {font-family: 'Noto Sans Korean';border-radius:6px !important;padding: 0 8px;margin:0 !important;position:absolute;right:0px;bottom:0px;}
 .wedive-chip i {width: auto;line-height: inherit;margin-right: 2px;}
 .position-relative {position: relative;}
 </style>

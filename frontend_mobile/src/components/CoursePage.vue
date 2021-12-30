@@ -429,7 +429,7 @@
                             <h4 class="font-13 mb-n1 font-400">숙박 연계 호텔 1인실 (1인 기준)</h4>
                         </div>
                         <div class="ms-auto">
-                            <h3 class="font-15 mb-n1">￦25,000<!--<sup class="opacity-30">.99</sup>--></h3>
+                            <h3 class="font-15 mb-n1">₩25,000<!--<sup class="opacity-30">.99</sup>--></h3>
                         </div>
                     </div>
                 </div>
@@ -448,7 +448,7 @@
                             <h4 class="font-13 mb-n1 font-400">숙박 연계 호텔 다인실 (1인 기준)</h4>
                         </div>
                         <div class="ms-auto">
-                            <h3 class="font-15 mb-n1">￦20,000</h3>
+                            <h3 class="font-15 mb-n1">₩20,000</h3>
                         </div>
                     </div>
                 </div>
@@ -468,7 +468,7 @@
                             <h4 class="font-13 mb-n1 font-400">풀세트 (부력조절기, 호흡기, 스킨세트)</h4>
                         </div>
                         <div class="ms-auto">
-                            <h3 class="font-15 mb-n1">￦30,000</h3>
+                            <h3 class="font-15 mb-n1">₩30,000</h3>
                         </div>
                     </div>
                 </div>
@@ -487,7 +487,7 @@
                             <h4 class="font-13 mb-n1 font-400">스쿠버세트 (부력조절기, 호흡기)</h4>
                         </div>
                         <div class="ms-auto">
-                            <h3 class="font-15 mb-n1">￦30,000</h3>
+                            <h3 class="font-15 mb-n1">₩30,000</h3>
                         </div>
                     </div>
                 </div>
@@ -506,7 +506,7 @@
                             <h4 class="font-13 mb-n1 font-400">스킨세트 (슈트, 마스크, 핀, 부츠, 후드)</h4>
                         </div>
                         <div class="ms-auto">
-                            <h3 class="font-15 mb-n1">￦20,000</h3>
+                            <h3 class="font-15 mb-n1">₩20,000</h3>
                         </div>
                     </div>
                 </div>
@@ -541,7 +541,7 @@
                         <div class="clearfix"></div>
                     </div>
                 </div>
-                <p class="col-4 mb-2 text-end font-900">￦160,000</p>
+                <p class="col-4 mb-2 text-end font-900">₩160,000</p>
             </div>
             <a href="#" v-on:click="reserve_finish()" data-toast="snackbar-confirm" data-menu="menu-reserve"class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-2" >예약하기</a>
             

@@ -249,7 +249,8 @@ export default {
         login_word : (localStorage.idToken == null) ? '로그인' : '프로필 등록',
         uid: localStorage.uid,
     }
-  }, methods: {
+  }, 
+  methods: {
     setData(_chatData) {
         if (_chatData) {
             this.chatData = _chatData;
@@ -257,6 +258,7 @@ export default {
         }
     },
     login() {
+        console.log("aa");
         localStorage.loginUrl = window.location.pathname;
         if (localStorage.hasOwnProperty("idToken") == false || localStorage.idToken == null) {
           this.$root.$children[0].$refs.loginBottomSheet.open();

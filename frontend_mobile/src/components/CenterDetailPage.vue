@@ -5,7 +5,7 @@
         <div v-if="centerData.backgroundImages == null || centerData.backgroundImages.length == 0" style="background:url(/static/empty.jpg);background-size: contain;height:250px;">
         </div>
         <div v-else style="min-height:250px;height:250px;max-height:250px;">
-            <div class="splide single-slider cover-slider slider-no-arrows slider-has-dots" id="cover-slider-1" data-card-height="250" style="position:relative;">
+            <div class="splide single-slider cover-slider slider-no-arrows slider-no-dots" id="cover-slider-1" data-card-height="250" style="position:relative;">
                 <div class="splide__track">
                     <div class="splide__list">
                         <div class="splide__slide" v-if="centerData.backgroundImages == null || centerData.backgroundImages.length == 0">
@@ -21,7 +21,7 @@
                     </div>
                 </div>
             </div>
-            <div id="cover-slider-temp" :style="'background:url('+centerData.backgroundImages[0].url+');background-size: cover;height:250px;background-position: bottom;position:absolute;width:100%;top:58px;'">
+            <div id="cover-slider-temp" :style="'background:url('+centerData.backgroundImages[0].url+');background-size: cover;height:250px;background-position: center;position:absolute;width:100%;top:58px;'">
             </div>
         </div>
         
@@ -49,7 +49,7 @@
                 </div>
                 <div style="margin-top:8px;"><span>최근리뷰 {{ (centerData.reviewCount)?centerData.reviewCount:'0' }}</span>&nbsp;<font class="color-gray-light">|</font>&nbsp;
                 <span v-if="centerData.institutionTypes && centerData.institutionTypes.length > 0"><span v-for="(insti,index) in centerData.institutionTypes" v-if="index < 6" v-on:click="openInstitutionBottomSheet()"><img class="ext-img" :src="'/static/images/agency/logo_'+insti.toLowerCase()+'.svg'" height="17" style="padding-bottom: 1px;" /><span v-if="index != (centerData.institutionTypes.length-1)">&nbsp;&nbsp;</span></span>&nbsp;<font class="color-gray-light">|</font>&nbsp;</span>
-                <span v-if="interest.type=='priceIndex'" v-for="interest in centerData.interests" style="letter-spacing: -2px;">{{interest.title.replace(/\$/gi, '￦')}}</span>
+                <span v-if="interest.type=='priceIndex'" v-for="interest in centerData.interests" class="color-gray">{{interest.title.replace(/\$/gi, '₩')}}</span>
                 <!--<span class="badge font-10 bg-fade-gray-dark">PADI 공식</span>-->
                 </div>
 
@@ -114,7 +114,7 @@
                             <p class="color-highlight font-11" v-else>&nbsp;</p>
                         </div>
                         <div class="ms-auto ps-3 align-self-center text-end">
-                            <h2 class="font-15 mb-n1">￦{{ education.price | makeComma}}</h2>
+                            <h2 class="font-15 mb-n1">₩{{ education.price | makeComma}}</h2>
                             <p class="color-highlight font-10">{{ education.unitName }}</p>
                         </div>
                     </div>
@@ -129,7 +129,7 @@
                             <p class="color-highlight font-11">가이드/탱크/간식</p>
                         </div>
                         <div class="ms-auto ps-3 align-self-center text-end">
-                            <h2 class="font-15 mb-n1">￦50,000</h2>
+                            <h2 class="font-15 mb-n1">₩50,000</h2>
                             <p class="color-highlight font-10">1세션</p>
                         </div>
                     </div>
@@ -142,7 +142,7 @@
                             <p class="color-highlight font-11">가이드/탱크/간식</p>
                         </div>
                         <div class="ms-auto ps-3 align-self-center text-end">
-                            <h2 class="font-15 mb-n1">￦70,000</h2>
+                            <h2 class="font-15 mb-n1">₩70,000</h2>
                             <p class="color-highlight font-10">1세션</p>
                         </div>
                     </div>
@@ -155,7 +155,7 @@
                             <p class="color-highlight font-11">가이드/탱크/간식</p>
                         </div>
                         <div class="ms-auto ps-3 align-self-center text-end">
-                            <h2 class="font-15 mb-n1">￦40,000</h2>
+                            <h2 class="font-15 mb-n1">₩40,000</h2>
                             <p class="color-highlight font-10">1세션</p>
                         </div>
                     </div>
@@ -168,7 +168,7 @@
                             <p class="color-highlight font-11">가이드/탱크/간식</p>
                         </div>
                         <div class="ms-auto ps-3 align-self-center text-end">
-                            <h2 class="font-15 mb-n1">￦80,000</h2>
+                            <h2 class="font-15 mb-n1">₩80,000</h2>
                             <p class="color-highlight font-10">1세션</p>
                         </div>
                     </div>
@@ -181,7 +181,7 @@
                             <p class="color-highlight font-11">가이드/탱크/간식</p>
                         </div>
                         <div class="ms-auto ps-3 align-self-center text-end">
-                            <h2 class="font-15 mb-n1">￦60,000</h2>
+                            <h2 class="font-15 mb-n1">₩60,000</h2>
                             <p class="color-highlight font-10">1세션</p>
                         </div>
                     </div>
@@ -196,7 +196,7 @@
                             <p class="color-highlight font-11">렌탈/입장/사진</p>
                         </div>
                         <div class="ms-auto ps-3 align-self-center text-end">
-                            <h2 class="font-15 mb-n1">￦100,000</h2>
+                            <h2 class="font-15 mb-n1">₩100,000</h2>
                             <p class="color-highlight font-10">오전 반일</p>
                         </div>
                     </div>
@@ -209,7 +209,7 @@
                             <p class="color-highlight font-11">렌탈/보트/사진</p>
                         </div>
                         <div class="ms-auto ps-3 align-self-center text-end">
-                            <h2 class="font-15 mb-n1">￦130,000</h2>
+                            <h2 class="font-15 mb-n1">₩130,000</h2>
                             <p class="color-highlight font-10">오전 반일</p>
                         </div>
                     </div>
@@ -296,8 +296,8 @@
                 </div>
                 <div data-bs-parent="#tab-group-2" class="collapse px-2" id="tab-time">
                     <div class="mt-3" v-if="centerData.openingHours && centerData.openingHours.length > 0">
-                        <div v-for="opening in centerData.openingHours" class="row mb-0" style="position: relative;">
-                            <div v-if="opening[0].includes('>')" class="timeline-deco" style="padding: 0;left: 16px;background-color: rgba(0, 0, 0, 1);"></div>
+                        <div v-for="(opening,index) in centerData.openingHours" class="row mb-0" style="position: relative;">
+                            <div v-if="opening[0].includes('>')" :class="'timeline-deco'+((centerData.openingHours[(index+1)]==null || (centerData.openingHours[(index+1)] && centerData.openingHours[(index+1)][0].includes('>')==false)) ? ' deco-end': '')" style="padding: 0;left: 16px;background-color: rgba(0, 0, 0, 1);"></div>
                             <hr v-if="opening[0].includes('>')" class="hori-line">
                             <h5 v-if="opening[0].includes('>')" class="col-6 text-start font-13 font-400 mb-0" style="width: calc(50% - 26px);">{{ opening[0].replace('>','') }}</h5>
                             <h5 v-else class="col-6 text-start font-13 font-400 mb-0">{{ opening[0] }}</h5>
@@ -655,7 +655,7 @@
 
         <div class="card card-style">
             <div class="content">
-            <h4 class="text-start">강사 (2)</h4>
+            <h4 class="text-start">이 지역의 활동강사 (2)</h4>
             <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
             <div class="divider mt-3 mb-2"></div>
                 <div class="splide instructor-slider slider-no-arrows slider-no-dots" id="single-slider-instructor">
@@ -663,6 +663,8 @@
                         <div class="splide__list">
                             <div class="splide__slide" style="width:220px !important;">
                                 <div class="card card-style card-nearby mb-0" style="background: url(/static/images/assets/song.jpg);background-size:contain;" data-card-height="250" data-card-width="200">
+                                    <svg style="width:60px;margin-top:-6px;filter:opacity(.3)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M128 80v380c0 3.3 3.8 5.2 6.4 3.2l116.8-92c2.9-2.1 6.8-2.1 9.6 0l116.8 92c2.6 2 6.4.1 6.4-3.2V80c0-17.7-14.3-32-32-32H160c-17.7 0-32 14.3-32 32z"/></svg>
+                                    <span class="font-noto color-white" style="position:absolute;left:17px;top:8px;">추천</span>
                                     <div class="card-top px-3 py-3">
                                         <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-gray-light"></i></a>
                                     </div>
@@ -751,15 +753,14 @@
             </div>
             <div class="divider mt-2 mb-2 ms-3 me-3"></div>
             <div v-on:click="login()" :data-menu="((idToken == null || nickName == null) ? '' : 'menu-review')" :class="((idToken == null || nickName == null) ? 'opacity-40' : '')">
-                <div class="star-area mt-4 text-center">
+                <div class="star-area mt-4 text-center" style="letter-spacing: -2px;">
                     <i class="fa fa-star font-20 color-gray-light"></i>
                     <i class="fa fa-star font-20 color-gray-light"></i>
                     <i class="fa fa-star font-20 color-gray-light"></i>
                     <i class="fa fa-star font-20 color-gray-light"></i>
                     <i class="fa fa-star font-20 color-gray-light"></i>
                 </div>
-                <div class="text-center color-gray mt-2 mb-3">이 다이빙 센터는 어떠셨나요?</div>
-                <div class="me-4 ms-4" style="margin-bottom: 34px;background: rgba(58, 58, 58, 0.03);padding: 10px 20px;border-radius: 4px;">
+                <div class="me-4 ms-4 mt-1" style="margin-bottom: 34px;background: rgba(58, 58, 58, 0.03);padding: 10px 20px;border-radius: 4px;">
                     <p class="mb-0" style="color: rgba(58, 58, 58, 0.6)">다른 다이버들에게 도움이 되어보세요.</p>
                     <p class="mb-0 color-highlight">지금 리뷰남기기 <i class="fas fa-chevron-right ms-1"></i></p>
                 </div>
@@ -934,7 +935,7 @@
         <div class="me-4 ms-4" style="border-bottom: 2px solid black;"></div>
         <div class="content mt-3">
             <div class="text-center mt-3">
-                <star-rating @rating-selected="setRating" text-class="hide" :rating="3" v-bind:star-size="30" :padding="5" :rounded-corners="true" :star-points="[23,2, 14,17, 0,19, 10,34, 7,50, 23,43, 38,50, 36,34, 46,19, 31,17]" style="display: inline-block;"></star-rating>
+                <star-rating @rating-selected="setRating" text-class="hide" :rating="rating" v-bind:star-size="30" :padding="5" :rounded-corners="true" :star-points="[23,2, 14,17, 0,19, 10,34, 7,50, 23,43, 38,50, 36,34, 46,19, 31,17]" style="display: inline-block;"></star-rating>
             </div>
             <div class="text-center color-gray mt-1 mb-2" v-html="rateDescription"></div>
         </div>
@@ -1535,8 +1536,8 @@ export default {
         imageCategory: ["다이빙", "교육", "센터"],
         enteranceScuba: {"5": "강사 동반 입장가능 (그 외 불가)", "4": "마스터 이상 버디입장 가능", "3": "레스큐 이상 버디입장 가능", "2": "어드밴스 이상 버디입장 가능", "1": "오픈워터 이상 버디입장 가능", "0": "누구나 버디입장 가능"},
         enteranceFree: {"5": "강사 동반 입장가능 (그 외 불가)", "4": "레벨4 이상 버디입장 가능", "3": "레벨3 이상 버디입장 가능", "2": "레벨2 이상 버디입장 가능", "1": "레벨1 이상 버디입장 가능", "0": "누구나 버디입장 가능"},
-        rating: 3,
-        rateDescription: '나쁘지 않아요.',
+        rating: 5,
+        rateDescription: '매우 만족해요!',
         review_detail: '',
         file_photo: [],
         like_img: 'ico_heart',
@@ -1887,4 +1888,5 @@ export default {
 .hori-line {width: 10px;padding: 0;margin-left: 16px;margin-top: 10px;opacity: 1 !important;}
 .right-icon {position: absolute;top: 10px;width: 15px;text-align: center;right: 0px;opacity: 0.3;}
 .wedive-textarea {min-height: 150px;border: 2px solid #e9e9e9;background: #f5f5f5;padding-left: 10px;padding-right: 10px;}
+.deco-end {height: 10px !important;}
 </style>

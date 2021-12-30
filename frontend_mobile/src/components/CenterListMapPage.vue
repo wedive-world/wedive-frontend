@@ -495,7 +495,7 @@ export default {
                 $("#map_box_shop_star").text(star);
                 //map_box_shop_fed
                 
-                $("#map_box_shop_price").text("￦".repeat(price_index));
+                $("#map_box_shop_price").text("₩".repeat(price_index));
                 $("#map_box_shop_feature").text(feature);
                 $("#map_box_shop_img").attr("src", img);
                 

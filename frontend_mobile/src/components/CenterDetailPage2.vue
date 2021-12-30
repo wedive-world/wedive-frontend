@@ -45,7 +45,7 @@
                     <span class="service font-12">서비스 4.2</span>
                     <!--<span class="info" style="margin-bottom:3px;margin-top:3px;"><i class="icon_question font-12">별점 안내</i></span>-->
                 </div>
-                <div style="margin-top:8px;"><span>최근리뷰 32</span>&nbsp;&nbsp;<font class="color-gray-light">|</font>&nbsp;&nbsp;<img class="ext-img" src="/static/images/agency/logo_padi.svg" width="48" />&nbsp;&nbsp;<font class="color-gray-light">|</font>&nbsp;&nbsp;<span>￦￦</span>
+                <div style="margin-top:8px;"><span>최근리뷰 32</span>&nbsp;&nbsp;<font class="color-gray-light">|</font>&nbsp;&nbsp;<img class="ext-img" src="/static/images/agency/logo_padi.svg" width="48" />&nbsp;&nbsp;<font class="color-gray-light">|</font>&nbsp;&nbsp;<span>₩₩</span>
                 <!--<span class="badge font-10 bg-fade-gray-dark">PADI 공식</span>-->
                 </div>
 
@@ -115,7 +115,7 @@
                             <p class="color-highlight font-11">자격증/렌탈/숙박/중식</p>
                         </div>
                         <div class="ms-auto ps-3 align-self-center text-end">
-                            <h2 class="font-15 mb-n1">￦550,000</h2>
+                            <h2 class="font-15 mb-n1">₩550,000</h2>
                             <p class="color-highlight font-10">3일 전일</p>
                         </div>
                     </div>
@@ -128,7 +128,7 @@
                             <p class="color-highlight font-11">자격증/렌탈/숙박/중식</p>
                         </div>
                         <div class="ms-auto ps-3 align-self-center text-end">
-                            <h2 class="font-15 mb-n1">￦500,000</h2>
+                            <h2 class="font-15 mb-n1">₩500,000</h2>
                             <p class="color-highlight font-10">2일 전일</p>
                         </div>
                     </div>
@@ -141,7 +141,7 @@
                             <p class="color-highlight font-11">자격증/렌탈/숙박/중식</p>
                         </div>
                         <div class="ms-auto ps-3 align-self-center text-end">
-                            <h2 class="font-15 mb-n1">￦950,000</h2>
+                            <h2 class="font-15 mb-n1">₩950,000</h2>
                             <p class="color-highlight font-10">5일 전일</p>
                         </div>
                     </div>
@@ -154,7 +154,7 @@
                             <p class="color-highlight font-11">자격증/렌탈/숙박/중식</p>
                         </div>
                         <div class="ms-auto ps-3 align-self-center text-end">
-                            <h2 class="font-15 mb-n1">￦300,000</h2>
+                            <h2 class="font-15 mb-n1">₩300,000</h2>
                             <p class="color-highlight font-10">2일 전일</p>
                         </div>
                     </div>
@@ -167,7 +167,7 @@
                             <p class="color-highlight font-11">자격증/렌탈/숙박/중식</p>
                         </div>
                         <div class="ms-auto ps-3 align-self-center text-end">
-                            <h2 class="font-15 mb-n1">￦650,000</h2>
+                            <h2 class="font-15 mb-n1">₩650,000</h2>
                             <p class="color-highlight font-10">3일 전일</p>
                         </div>
                     </div>
@@ -180,7 +180,7 @@
                             <p class="color-highlight font-11">자격증/렌탈/숙박/중식</p>
                         </div>
                         <div class="ms-auto ps-3 align-self-center text-end">
-                            <h2 class="font-15 mb-n1">￦1,350,000</h2>
+                            <h2 class="font-15 mb-n1">₩1,350,000</h2>
                             <p class="color-highlight font-10">5일 전일</p>
                         </div>
                     </div>
@@ -195,7 +195,7 @@
                             <p class="color-highlight font-11">가이드/탱크/간식</p>
                         </div>
                         <div class="ms-auto ps-3 align-self-center text-end">
-                            <h2 class="font-15 mb-n1">￦50,000</h2>
+                            <h2 class="font-15 mb-n1">₩50,000</h2>
                             <p class="color-highlight font-10">1세션</p>
                         </div>
                     </div>
@@ -208,7 +208,7 @@
                             <p class="color-highlight font-11">가이드/탱크/간식</p>
                         </div>
                         <div class="ms-auto ps-3 align-self-center text-end">
-                            <h2 class="font-15 mb-n1">￦70,000</h2>
+                            <h2 class="font-15 mb-n1">₩70,000</h2>
                             <p class="color-highlight font-10">1세션</p>
                         </div>
                     </div>
@@ -221,7 +221,7 @@
                             <p class="color-highlight font-11">가이드/탱크/간식</p>
                         </div>
                         <div class="ms-auto ps-3 align-self-center text-end">
-                            <h2 class="font-15 mb-n1">￦40,000</h2>
+                            <h2 class="font-15 mb-n1">₩40,000</h2>
                             <p class="color-highlight font-10">1세션</p>
                         </div>
                     </div>
@@ -234,7 +234,7 @@
                             <p class="color-highlight font-11">가이드/탱크/간식</p>
                         </div>
                         <div class="ms-auto ps-3 align-self-center text-end">
-                            <h2 class="font-15 mb-n1">￦80,000</h2>
+                            <h2 class="font-15 mb-n1">₩80,000</h2>
                             <p class="color-highlight font-10">1세션</p>
                         </div>
                     </div>
@@ -247,7 +247,7 @@
                             <p class="color-highlight font-11">가이드/탱크/간식</p>
                         </div>
                         <div class="ms-auto ps-3 align-self-center text-end">
-                            <h2 class="font-15 mb-n1">￦60,000</h2>
+                            <h2 class="font-15 mb-n1">₩60,000</h2>
                             <p class="color-highlight font-10">1세션</p>
                         </div>
                     </div>
@@ -262,7 +262,7 @@
                             <p class="color-highlight font-11">렌탈/입장/사진</p>
                         </div>
                         <div class="ms-auto ps-3 align-self-center text-end">
-                            <h2 class="font-15 mb-n1">￦100,000</h2>
+                            <h2 class="font-15 mb-n1">₩100,000</h2>
                             <p class="color-highlight font-10">오전 반일</p>
                         </div>
                     </div>
@@ -275,7 +275,7 @@
                             <p class="color-highlight font-11">렌탈/보트/사진</p>
                         </div>
                         <div class="ms-auto ps-3 align-self-center text-end">
-                            <h2 class="font-15 mb-n1">￦130,000</h2>
+                            <h2 class="font-15 mb-n1">₩130,000</h2>
                             <p class="color-highlight font-10">오전 반일</p>
                         </div>
                     </div>

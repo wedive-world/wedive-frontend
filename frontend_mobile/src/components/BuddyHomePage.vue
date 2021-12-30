@@ -71,10 +71,10 @@
             </div>
         </div>
 
-        <div class="card card-style" style="background: #9bd1f4;">
-            <div class="content mb-0 mt-3">
-                <h4 class="text-start pt-1 mb-2">얼마 남지 않은 다이빙 D-7<i class="wedive-txt-all wedive_right"></i></h4>
-                <div class="text-center"><img class="mt-n1 p-4" src="/static/images/assets/hourglass.png"/></div>
+        <div class="card card-style" style="background: #56abf7;">
+            <div class="content mb-0 mt-3 me-0">
+                <h4 class="text-start pt-1 mb-2" style="background: #56abf7;position: relative;">얼마 남지 않은 다이빙 D-7</h4><i class="wedive-txt-all wedive_right"></i>
+                <div class="text-end"><img class="mt-n3 mb-n1" src="/static/images/assets/calendar.gif" width="80%"/></div>
             </div>
         </div>
 
@@ -140,10 +140,10 @@
             </div>
         </div>
 
-        <div class="card card-style" style="background: #5f9b75;">
+        <div class="card card-style" style="background: #dbdbdb;">
             <div class="content mb-0 mt-3">
-                <h4 class="text-start pt-2 mb-1 font-600 color-white"><i class="fas fa-map-marker-alt me-2"></i>내 주변 다이빙<i class="wedive-txt-all wedive_right"></i></h4>
-                <div style="text-align:center;"><img class="mt-n3" src="/static/images/assets/magnifying.png"/></div>
+                <h4 class="text-start pt-2 mb-1 font-600 color-black"><i class="fas fa-map-marker-alt me-2"></i>내 주변 다이빙<i class="wedive-txt-all wedive_right"></i></h4>
+                <div style="text-align:center;"><img class="" src="/static/images/assets/nearby.gif" width="80%"/></div>
             </div>
         </div>
 
@@ -188,11 +188,11 @@
             </div>
         </div>
 
-        <div class="card card-style" style="background: #e8b8db;">
+        <div class="card card-style" style="background: #83adec;">
             <div class="content mb-0 mt-3">
                 <h4 class="text-start pt-2 mb-0 font-600"><i class="fas fa-camera me-2"></i>수중 촬영 다이빙<i class="wedive-txt-all wedive_right"></i></h4>
                 <p class="mb-0 opacity-60 ls-n1">#인스타 사진&nbsp;&nbsp;#인생 한컷</p>
-                <div class="text-center"><img class="mt-0 mb-3" src="/static/images/assets/actioncam.png"/></div>
+                <div class="text-center"><img class="mt-n1" src="/static/images/assets/camera.gif" width="80%"/></div>
             </div>
         </div>
 

@@ -137,13 +137,11 @@
         </div>
 
 
-        <div class="card card-style" style="background: #f086a2;">
-            <div class="content mb-0 mt-3">
+        <div class="card card-style" style="background: url(/static/images/assets/camera1.gif);background-size:cover;height:270px;">
+            <div class="content mb-0 mt-3 me-0">
                 <h4 class="text-start pt-2 mb-0 font-600"><i class="fas fa-camera me-2"></i>사진 찍기 좋은 사이트</h4>
-                <p class="mb-1">37개의 다이빙 사이트</p>
                 <p class="mb-0 opacity-60 ls-n1">#인생샷&nbsp;&nbsp;#인스타를 평정하다</p>
                 <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
-                <img class=" mt-n4 float-right" src="/static/images/assets/camera.png" style="margin-right: 16px;margin-bottom:16px;"/>
             </div>
         </div>
 
@@ -187,13 +185,12 @@
         </div>
 
 
-        <div class="card card-style" style="background: #beb8b1;">
+        <div class="card card-style" style="background: #d7d7d7;">
             <div class="content mb-0 mt-3">
-                <h4 class="color-white text-start pt-1 mb-0">실내 수영장 포인트</h4>
-                <p class="color-white mb-1">첫 트레이닝은 수영장에서</p>
-                <p class="color-white mb-0 opacity-60 ls-n1">#차근차근&nbsp;&nbsp;#날씨무관</p>
-                <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
-                <img class="mt-n2 mb-2 float-right" src="/static/images/assets/pool.png" width="240"/>
+                <h4 class="color-black text-start pt-1 mb-0">실내 수영장 포인트</h4>
+                <p class="color-black mb-0 opacity-60 ls-n1">#차근차근&nbsp;&nbsp;#날씨무관</p>
+                <a class="color-black font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;filter:brightness(0)"></i></a>
+                <img class="mt-n2 float-right" src="/static/images/assets/pool.gif" width="240"/>
             </div>
         </div>
 
@@ -224,7 +221,7 @@
                                             &nbsp;<font class="color-gray-light">|</font>&nbsp;
                                             <img src="/static/images/agency/logo_padi.svg" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
                                             &nbsp;<font class="color-gray-light">|</font>&nbsp;
-                                            <span v-for="i in center.price_index">￦</span>
+                                            <span v-for="i in center.price_index" class="color-gray">₩</span>
                                         </p>
                                     </div>
                                 </div>
