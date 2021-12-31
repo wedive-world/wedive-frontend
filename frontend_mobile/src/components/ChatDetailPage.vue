@@ -6,8 +6,12 @@
         <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
     </div>
 
-    <div id="footer-bar-speach" style="z-index: 9999;background: black;display: table;width: 100%;">
-        <div class="d-flex" style="min-height: 52px;height: 52px;max-height:134px;">
+    <div id="footer-bar-speach" style="z-index: 9999;display: table;width: 100%;">
+        <div :class="(is_emoji_clicked?'':'hide')" style="background:#00000066;height:100px;">
+            <i v-on:click="is_emoji_clicked=false;emoji_url='';sendDisable=true;" class="wedive_icoset2x wedive_icoset2x_close" style="position:absolute;right:10px;top:10px;"/>
+            <img :src="'/static/images/emoji/' + emoji_url" style="width:80px;margin-top:10px;"/>
+        </div>
+        <div class="d-flex" style="min-height: 52px;height: 52px;max-height:134px;background: black;">
             <div class="me-1 speach-icon">
                 <div style="width: 45px;display: inline-block;position: relative;">
                     <!--<input type="file" id="file-upload" class="upload-file text-center" accept="image/*" style="width:32px;">-->
@@ -18,7 +22,7 @@
             <div class="flex-fill speach-input">
                 <textarea 
                     id="textarea-input"
-                    @focus="resize"
+                    @focus="resizeFocus"
                     @keyup="resize"
                     ref="textarea"
                     type="text"
@@ -42,18 +46,18 @@
                 <div style=""></div>
             </div>
             <div class="row pe-3 ps-3 m-0">
-                <div class="col-3 p-3"><img src="/static/images/emoji/basic/01.gif" width="100%" /></div>
-                <div class="col-3 p-3"><img src="/static/images/emoji/basic/02.gif" width="100%" /></div>
-                <div class="col-3 p-3"><img src="/static/images/emoji/basic/03.gif" width="100%" /></div>
-                <div class="col-3 p-3"><img src="/static/images/emoji/basic/04.gif" width="100%" /></div>
-                <div class="col-3 p-3"><img src="/static/images/emoji/basic/05.gif" width="100%" /></div>
-                <div class="col-3 p-3"><img src="/static/images/emoji/basic/06.gif" width="100%" /></div>
-                <div class="col-3 p-3"><img src="/static/images/emoji/basic/07.gif" width="100%" /></div>
-                <div class="col-3 p-3"><img src="/static/images/emoji/basic/08.gif" width="100%" /></div>
-                <div class="col-3 p-3"><img src="/static/images/emoji/basic/09.gif" width="100%" /></div>
-                <div class="col-3 p-3"><img src="/static/images/emoji/basic/10.gif" width="100%" /></div>
-                <div class="col-3 p-3"><img src="/static/images/emoji/basic/11.gif" width="100%" /></div>
-                <div class="col-3 p-3"><img src="/static/images/emoji/basic/12.gif" width="100%" /></div>
+                <div v-on:click="is_emoji_clicked=true;emoji_url='basic/01.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/01.gif" width="100%" /></div>
+                <div v-on:click="is_emoji_clicked=true;emoji_url='basic/02.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/02.gif" width="100%" /></div>
+                <div v-on:click="is_emoji_clicked=true;emoji_url='basic/03.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/03.gif" width="100%" /></div>
+                <div v-on:click="is_emoji_clicked=true;emoji_url='basic/04.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/04.gif" width="100%" /></div>
+                <div v-on:click="is_emoji_clicked=true;emoji_url='basic/05.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/05.gif" width="100%" /></div>
+                <div v-on:click="is_emoji_clicked=true;emoji_url='basic/06.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/06.gif" width="100%" /></div>
+                <div v-on:click="is_emoji_clicked=true;emoji_url='basic/07.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/07.gif" width="100%" /></div>
+                <div v-on:click="is_emoji_clicked=true;emoji_url='basic/08.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/08.gif" width="100%" /></div>
+                <div v-on:click="is_emoji_clicked=true;emoji_url='basic/09.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/09.gif" width="100%" /></div>
+                <div v-on:click="is_emoji_clicked=true;emoji_url='basic/10.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/10.gif" width="100%" /></div>
+                <div v-on:click="is_emoji_clicked=true;emoji_url='basic/11.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/11.gif" width="100%" /></div>
+                <div v-on:click="is_emoji_clicked=true;emoji_url='basic/12.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/12.gif" width="100%" /></div>
             </div>
         </div>
     </div>
@@ -202,9 +206,6 @@ export default {
   },
   watch: {
       sendText: function(newVal, oldVal) {
-        if (newVal != "") {
-            hideKeyboard();
-        }
         if (newVal.replace(/ /gi, "") == "") {
             this.sendDisable = true;
         } else {
@@ -213,7 +214,9 @@ export default {
       },
       is_emoji: function(newVal, oldVal) {
           if (newVal) {
-              hideKeyboard();
+              setTimeout(function() {
+                hideKeyboard();
+              },100)
           }
       }
   },
@@ -256,6 +259,8 @@ export default {
         roomId: '',
         uid: localStorage.uid,
         is_emoji: false,
+        is_emoji_clicked: false,
+        emoji_url: '',
     }
   }, methods: {
     setData(chatData, roomId) {
@@ -300,9 +305,14 @@ export default {
         for (var i=0; i<10; i++)
             textarea.style.height = textarea.scrollHeight - 4 + 'px';
         $("#footer-bar-speach").height((parseInt(textarea.style.height.replace("px",""))+12) + "px")
-        
-
     },
+    resizeFocus() {
+        const { textarea } = this.$refs;
+        for (var i=0; i<10; i++)
+            textarea.style.height = textarea.scrollHeight - 4 + 'px';
+        $("#footer-bar-speach").height((parseInt(textarea.style.height.replace("px",""))+12) + "px")
+        this.is_emoji = false;
+    }
   }
 
   
