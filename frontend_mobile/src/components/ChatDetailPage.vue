@@ -17,6 +17,7 @@
             </div>
             <div class="flex-fill speach-input">
                 <textarea 
+                    id="textarea-input"
                     @focus="resize"
                     @keyup="resize"
                     ref="textarea"
@@ -30,7 +31,7 @@
             <div v-on:click="is_emoji = !is_emoji" style="width: 26px;display: inline-block;position: relative;">
                     <img src="/static/images/assets/chat_icon_emoji.png" style="width:24px;margin-top:13px;margin-left:8px;"/>
                 </div>
-            <div v-on:click="sendMessage()" class="ms-3 speach-icon" style="background: #1d397c;width:50px;">
+            <div v-on:click="sendMessage()" class="ms-3 speach-icon" :style="(sendDisable?'background: #7C7C7C;width:50px;':'background: #1d397c;width:50px;')">
                 <i class="fas fa-paper-plane color-white font-20" style="margin-top:16px;"></i>
             </div>
         </div>
@@ -76,7 +77,7 @@
                                     <use xlink:href="#shapeSquircle"/>
                                 </clipPath>
                                 </defs>
-                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(chat.author.avatarOrigin)?chat.author.avatarOrigin:'/static/empty_user.jpg'"/>
+                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(chat.author.avatarOrigin)?chat.author.avatarOrigin:'/static/assets/images/chat.gif'"/>
                             </svg>
                         </div>
                     </div>
@@ -148,6 +149,17 @@ function timeForToday(value) {
         return hour + ":" + timeValue.getMinutes();
     }
 }
+function hideKeyboard() {
+    var element = $("#textarea-input");
+    element.attr('readonly', 'readonly'); // Force keyboard to hide on input field.
+    element.attr('disabled', 'true'); // Force keyboard to hide on textarea field.
+    setTimeout(function() {
+        element.blur();  //actually close the keyboard
+        // Remove readonly attribute after keyboard is hidden.
+        element.removeAttr('readonly');
+        element.removeAttr('disabled');
+    }, 100);
+}
 
 export default {
   name: 'HelloWorld',
@@ -188,6 +200,23 @@ export default {
         next(vm => {vm.setData(ret, to.params.id)});
     }
   },
+  watch: {
+      sendText: function(newVal, oldVal) {
+        if (newVal != "") {
+            hideKeyboard();
+        }
+        if (newVal.replace(/ /gi, "") == "") {
+            this.sendDisable = true;
+        } else {
+            this.sendDisable = false;
+        }
+      },
+      is_emoji: function(newVal, oldVal) {
+          if (newVal) {
+              hideKeyboard();
+          }
+      }
+  },
   mounted() {
     var element = document.getElementById("speech-content");
     element.scrollTop = element.scrollHeight;
@@ -222,6 +251,7 @@ export default {
   data () {
     return {
         sendText: '',
+        sendDisable: true,
         chatData: [],
         roomId: '',
         uid: localStorage.uid,
@@ -235,33 +265,35 @@ export default {
         this.roomId = roomId;
     },
     async sendMessage() {
-        const message = this.sendText;
-        const roomId = this.roomId;
-        var result = await axios({
-            url: 'https://chat.wedives.com/graphql',
-            method: 'post',
-            headers: {
-                countrycode: 'ko',
-                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-            },
-            data: {
-                query: `
-                    mutation PostMessageToRoom($roomId: String!, $input: String!) {
-                        postMessageToRoom(roomId: $roomId, input: $input) {
-                            _id
+        if (this.sendDisable == false) {
+            const message = this.sendText;
+            const roomId = this.roomId;
+            var result = await axios({
+                url: 'https://chat.wedives.com/graphql',
+                method: 'post',
+                headers: {
+                    countrycode: 'ko',
+                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                },
+                data: {
+                    query: `
+                        mutation PostMessageToRoom($roomId: String!, $input: String!) {
+                            postMessageToRoom(roomId: $roomId, input: $input) {
+                                _id
+                            }
                         }
+                    `,
+                    variables: {
+                        "roomId": roomId,
+                        "input": message
                     }
-                `,
-                variables: {
-                    "roomId": roomId,
-                    "input": message
                 }
-            }
-        });
-        
-        this.sendText = '';
-        var ret = (result.data && result.data.data && result.data.data.getJoinedRoomList) ? result.data.data.getJoinedRoomList : null
-        location.reload();
+            });
+            
+            this.sendText = '';
+            var ret = (result.data && result.data.data && result.data.data.getJoinedRoomList) ? result.data.data.getJoinedRoomList : null
+            location.reload();
+        }
     },
     resize() {
         const { textarea } = this.$refs;
