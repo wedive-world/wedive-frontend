@@ -12,8 +12,8 @@
         <p class="color-gray mb-2">진행중인 대화가 없습니다.</p>
     </div>
     <div v-else class="card card-style ms-0 me-0 rounded-0 mb-0" style="min-height:calc(100vh - 101px)">
-        <div class="content">
-            <a v-for="chat in chatData" :href="'/chat/'+chat._id" class="d-block">
+        <div class="content mt-0 mb-0">
+            <a v-for="chat in chatData" :href="'/chat/'+chat._id" class="d-block border-bottom pt-2">
                 <div v-if="chat.chatUsers.length == 2" class="p-relative d-inline-block w-60 mb-2">
                     <div v-for="user in chat.chatUsers.filter(user=>user._id != uid)" class="user-img">
                         <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
@@ -23,7 +23,7 @@
                                 <use xlink:href="#shapeSquircle"/>
                             </clipPath>
                             </defs>
-                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(user.avatarOrigin)?user.avatarOrigin:'/static/empty_user.jpg'"/>
+                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(user.avatarOrigin)?user.avatarOrigin:'/static/images/assets/chat.gif'"/>
                         </svg>
                     </div>
                 </div>
@@ -103,7 +103,7 @@
                 </div>
                 <div class="latest">{{ chat.showedAt }}</div>
             </a>
-            <div class="divider mb-0"></div>
+            
             
         </div>
     </div>

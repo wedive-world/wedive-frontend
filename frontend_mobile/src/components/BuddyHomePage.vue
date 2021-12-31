@@ -15,14 +15,14 @@
             </div>
         </div>
 
-        <div class="card card-style bg-dark-dark" style="box-shadow: none;">
+        <div class="card card-style" style="box-shadow: none;background: #181818;">
             <div class="content mb-0 mt-3" style="min-height: 80px;">
                 <div class="row mb-0" style="position: relative;min-height: 80px;">
                     <div class="col-9">
                         <h4 class="text-start pt-2 mb-0 color-white">위다이브 컨시어지</h4>
                         <p class="text-start mb-0 color-white opacity-70">전문 매니저가 버디를 매칭해드려요.</p>
                     </div>
-                    <img class="col-3 ps-0" src="/static/images/assets/concierge.png" style="position:absolute;bottom:0;right:0;"/>
+                    <img class="ps-0" src="/static/images/assets/concierge.gif" style="position:absolute;bottom:0;right:0;max-width:90px;width:90px;"/>
                 </div>
             </div>
         </div>
@@ -223,7 +223,7 @@
 
         
         <div data-menu-load="/static/menu-footer.html"></div>
-        <a href="/buddy_create" id="btn_new" class="btn btn-m mb-3 rounded-xl font-900 shadow-s bg-dark-dark icon-concierge"></a>
+        <a href="/buddy_create" id="btn_new" class="btn btn-m mb-3 rounded-xl font-900 shadow-s icon-concierge" style="background-color: #181818;"></a>
     </div>
     
 
@@ -285,6 +285,6 @@ export default {
 
 .movebox {animation: motion-updown 3s linear 0s infinite alternate; margin-top: 0;-webkit-animation: motion-updown 3s linear 0s infinite alternate; margin-top: 0;}
 .chip span {line-height: 24px !important;}
-.icon-concierge {position: fixed;width: 58px;height: 58px;bottom: 70px;right:24px;background-size:cover;background: url(/static/images/assets/concierge.png);background-size:cover !important;background-position-y: 8px;background-repeat: no-repeat;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
+.icon-concierge {position: fixed;width: 58px;height: 58px;bottom: 70px;right:24px;background-size:cover;background: url(/static/images/assets/concierge.gif);background-size:cover !important;background-position-y: 8px;background-repeat: no-repeat;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
 .position-relative {position: relative;}
 </style>

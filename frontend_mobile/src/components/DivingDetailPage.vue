@@ -769,6 +769,7 @@ export default {
           var _partis = JSON.parse(JSON.stringify(this.divingData.participants));
           _partis.forEach(_parti => {
               if (_parti.user != null && _parti.user._id) {
+                  delete _parti.levelShow;
                   var _id = _parti.user._id;
                   _parti.user = _id;
               }
@@ -828,6 +829,7 @@ export default {
           var _partis = JSON.parse(JSON.stringify(this.divingData.participants));
           _partis.forEach(_parti => {
               if (_parti.user != null && _parti.user._id) {
+                  delete _parti.levelShow;
                   var _id = _parti.user._id;
                   _parti.user = _id;
               }

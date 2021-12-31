@@ -16,7 +16,7 @@
             </div>
         </div>
 
-        <div v-on:click="goSiteMap()" class="card card-style bg-dark-dark" style="box-shadow: none;">
+        <div v-on:click="goSiteMap()" class="card card-style" style="box-shadow: none;background: #181818;">
             <div class="content mb-0 mt-3" style="min-height: 80px;">
                 <div class="row mb-0" style="position: relative;min-height: 80px;">
                     <div class="col-9">
