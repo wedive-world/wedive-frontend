@@ -6,20 +6,54 @@
         <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
     </div>
 
-    <div id="footer-bar-speach" class="d-flex" style="min-height: 52px !important;height: 52px !important;z-index: 9999;">
-        <div class="me-1 speach-icon">
-            
-            
-            <div style="width: 45px;display: inline-block;position: relative;">
-                <input type="file" id="file-upload" class="upload-file text-center" accept="image/*" style="width:32px;">
-                <p class="upload-file-text bg-gray-dark" style="color: #abb7ba;position:absolute;width:32px;height:32px;margin-top:-2px;left:8px;border-radius:16px;"><i class="fas fa-image pt-2 font-16"></i></p>
+    <div id="footer-bar-speach" style="z-index: 9999;background: black;display: table;width: 100%;">
+        <div class="d-flex" style="min-height: 52px;height: 52px;max-height:134px;">
+            <div class="me-1 speach-icon">
+                <div style="width: 45px;display: inline-block;position: relative;">
+                    <!--<input type="file" id="file-upload" class="upload-file text-center" accept="image/*" style="width:32px;">-->
+                    <!--<p class="upload-file-text bg-gray-dark" style="color: #abb7ba;position:absolute;width:32px;height:32px;margin-top:-2px;left:8px;border-radius:16px;"><i class="fas fa-image pt-2 font-16"></i></p>-->
+                    <img src="/static/images/assets/chat_icon_plus.png" style="width:22px;margin-top:14px;margin-left:4px;"/>
+                </div>
+            </div>
+            <div class="flex-fill speach-input">
+                <textarea 
+                    @focus="resize"
+                    @keyup="resize"
+                    ref="textarea"
+                    type="text"
+                    rows="1"
+                    class="form-control"
+                    placeholder="메시지를 입력하세요."
+                    v-model="sendText"
+                    style="border-radius:16px;margin-top:6px;background: #303440;color:white;max-height:122px;" />
+            </div>
+            <div v-on:click="is_emoji = !is_emoji" style="width: 26px;display: inline-block;position: relative;">
+                    <img src="/static/images/assets/chat_icon_emoji.png" style="width:24px;margin-top:13px;margin-left:8px;"/>
+                </div>
+            <div v-on:click="sendMessage()" class="ms-3 speach-icon" style="background: #1d397c;width:50px;">
+                <i class="fas fa-paper-plane color-white font-20" style="margin-top:16px;"></i>
             </div>
         </div>
-        <div class="flex-fill speach-input">
-            <input type="text" class="form-control" placeholder="메시지를 입력하세요." v-model="sendText">
-        </div>
-        <div v-on:click="sendMessage()" class="ms-3 speach-icon" style="background: #1d397c;width:50px;">
-            <i class="fas fa-paper-plane color-white font-20" style="margin-top:16px;"></i>
+        <div :class="'' + (is_emoji?'':' hide')" style="max-height:300px;background: #303440;overflow-y: auto;">
+            <div class="d-flex" style="height:36px;border-bottom:1px solid #88888880;">
+                <div style="border-right: 1px solid #88888880;width:60px;background:#ffffff30;"><img src="/static/images/emoji/basic/emoji.png" style="width:28px;margin-top:2px;"/></div>
+                <div style="border-right: 1px solid #88888880;width:60px;"><img src="/static/images/emoji/wedive/emoji.png" style="width:28px;margin-top:2px;"/></div>
+                <div style=""></div>
+            </div>
+            <div class="row pe-3 ps-3 m-0">
+                <div class="col-3 p-3"><img src="/static/images/emoji/basic/01.gif" width="100%" /></div>
+                <div class="col-3 p-3"><img src="/static/images/emoji/basic/02.gif" width="100%" /></div>
+                <div class="col-3 p-3"><img src="/static/images/emoji/basic/03.gif" width="100%" /></div>
+                <div class="col-3 p-3"><img src="/static/images/emoji/basic/04.gif" width="100%" /></div>
+                <div class="col-3 p-3"><img src="/static/images/emoji/basic/05.gif" width="100%" /></div>
+                <div class="col-3 p-3"><img src="/static/images/emoji/basic/06.gif" width="100%" /></div>
+                <div class="col-3 p-3"><img src="/static/images/emoji/basic/07.gif" width="100%" /></div>
+                <div class="col-3 p-3"><img src="/static/images/emoji/basic/08.gif" width="100%" /></div>
+                <div class="col-3 p-3"><img src="/static/images/emoji/basic/09.gif" width="100%" /></div>
+                <div class="col-3 p-3"><img src="/static/images/emoji/basic/10.gif" width="100%" /></div>
+                <div class="col-3 p-3"><img src="/static/images/emoji/basic/11.gif" width="100%" /></div>
+                <div class="col-3 p-3"><img src="/static/images/emoji/basic/12.gif" width="100%" /></div>
+            </div>
         </div>
     </div>
     
@@ -191,6 +225,7 @@ export default {
         chatData: [],
         roomId: '',
         uid: localStorage.uid,
+        is_emoji: false,
     }
   }, methods: {
     setData(chatData, roomId) {
@@ -227,7 +262,15 @@ export default {
         this.sendText = '';
         var ret = (result.data && result.data.data && result.data.data.getJoinedRoomList) ? result.data.data.getJoinedRoomList : null
         location.reload();
-    }
+    },
+    resize() {
+        const { textarea } = this.$refs;
+        for (var i=0; i<10; i++)
+            textarea.style.height = textarea.scrollHeight - 4 + 'px';
+        $("#footer-bar-speach").height((parseInt(textarea.style.height.replace("px",""))+12) + "px")
+        
+
+    },
   }
 
   
@@ -342,5 +385,5 @@ color: #1d397c ;
 }
 .img-fluid {min-width: 180px;max-height: 120px;object-fit: cover;}
 .speech-right>.time {margin-top: -32px;float: right;margin-right: -54px;font-size: 11px;color: #b4bcc8;}
-.speech-left>.time {margin-top: -32px;float: left;margin-left: -58px;font-size: 11px;color: #b4bcc8;}
+.speech-left>.time {margin-top: -32px;float: left;margin-left: -52px;font-size: 11px;color: #b4bcc8;}
 </style>

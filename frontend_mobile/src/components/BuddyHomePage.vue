@@ -22,7 +22,7 @@
                         <h4 class="text-start pt-2 mb-0 color-white">위다이브 컨시어지 <i class="fas fa-concierge-bell ms-1"></i></h4>
                         <p class="text-start mb-0 color-white opacity-70">전문 매니저가 버디를 매칭해드려요.</p>
                     </div>
-                    <img class="ps-0" src="/static/images/assets/concierge.gif" style="position:absolute;bottom:0;right:0;max-width:90px;width:90px;"/>
+                    <img class="ps-0" src="/static/images/assets/concierge.gif" style="position:absolute;bottom:0;right:0;max-width:96px;width:96px;margin-bottom:-8px;"/>
                 </div>
             </div>
         </div>
