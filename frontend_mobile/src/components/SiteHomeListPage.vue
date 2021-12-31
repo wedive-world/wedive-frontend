@@ -16,14 +16,14 @@
             </div>
         </div>
 
-        <div v-on:click="goSiteMap()" class="card card-style" style="box-shadow: none;background: #181818;">
+        <div v-on:click="goSiteMap()" class="card card-style" style="box-shadow: none;background-image: linear-gradient(45deg, #35415f, #181818 70%);">
             <div class="content mb-0 mt-3" style="min-height: 80px;">
                 <div class="row mb-0" style="position: relative;min-height: 80px;">
                     <div class="col-9">
                         <h4 class="text-start pt-2 mb-0 color-white">지도에서 한눈에</h4>
                         <p class="text-start mb-0 color-white opacity-70">전세계 곳곳을 한눈에 여행해요.</p>
                     </div>
-                    <img class="col-3 ps-0" src="/static/images/assets/save_earth.png" style="position:absolute;bottom:0;right:0;"/>
+                    <img class="col-3 ps-0" src="/static/images/assets/earth_low.gif" style="position:absolute;bottom:0;right:0;max-width:90px;width:90px;"/>
                 </div>
             </div>
         </div>

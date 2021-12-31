@@ -15,11 +15,11 @@
             </div>
         </div>
 
-        <div class="card card-style" style="box-shadow: none;background: #181818;">
+        <div class="card card-style" style="box-shadow: none;background-image: linear-gradient(45deg, #35415f, #181818 70%);">
             <div class="content mb-0 mt-3" style="min-height: 80px;">
                 <div class="row mb-0" style="position: relative;min-height: 80px;">
                     <div class="col-9">
-                        <h4 class="text-start pt-2 mb-0 color-white">위다이브 컨시어지</h4>
+                        <h4 class="text-start pt-2 mb-0 color-white">위다이브 컨시어지 <i class="fas fa-concierge-bell ms-1"></i></h4>
                         <p class="text-start mb-0 color-white opacity-70">전문 매니저가 버디를 매칭해드려요.</p>
                     </div>
                     <img class="ps-0" src="/static/images/assets/concierge.gif" style="position:absolute;bottom:0;right:0;max-width:90px;width:90px;"/>
@@ -38,7 +38,8 @@
                             <img src="/static/images/point/ko/kangwon_yangyang_01.jpg" class="rounded-sm me-3" width="68">
                         </div>
                         <div class="text-start align-self-center">
-                            <h2 class="font-17 line-height-s mt-2 mb-1">09.25(토) ~ 09.26(일)</h2>
+                            <h2 class="font-17 line-height-s mt-2 mb-0">09.25(토) ~ 09.26(일)</h2>
+                            <p class="color-gray font-13 mb-0 ellipsis font-noto">스쿠버 다이빙</p>
                             <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 하우스리프 포인트</p>
                         </div>
                         <span class="chip chip-s bg-gray-light text-center font-400 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>1</span> <span class="color-shopping ms-1"><i class="far fa-user"></i>1</span></span>
@@ -50,7 +51,8 @@
                             <img src="/static/images/point/ko/jeju_bumisland_01.jpg" class="rounded-sm me-3" width="68">
                         </div>
                         <div class="text-start align-self-center">
-                            <h2 class="font-17 line-height-s mt-2 mb-1">09.22(수) ~ 09.25(토)</h2>
+                            <h2 class="font-17 line-height-s mt-2 mb-0">09.22(수) ~ 09.25(토)</h2>
+                            <p class="color-gray font-13 mb-0 ellipsis font-noto">스쿠버, 프리 다이빙</p>
                             <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 문섬 포인트</p>
                         </div>
                         <span class="chip chip-s bg-gray-light text-center font-400 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>1</span> <span class="color-shopping ms-1"><i class="far fa-user"></i>1</span></span>
@@ -62,7 +64,8 @@
                             <img src="/static/images/point/ko/jeju_munisland_06.jpg" class="rounded-sm me-3" width="68">
                         </div>
                         <div class="text-start align-self-center">
-                            <h2 class="font-17 line-height-s mt-2 mb-1">09.20(월) ~ 09.25(토)</h2>
+                            <h2 class="font-17 line-height-s mt-2 mb-0">09.20(월) ~ 09.25(토)</h2>
+                            <p class="color-gray font-13 mb-0 ellipsis font-noto">프리 다이빙</p>
                             <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 문섬포인트</p>
                         </div>
                         <span class="chip chip-s bg-gray-light text-center font-400 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>1</span> <span class="color-shopping ms-1"><i class="far fa-user"></i>1</span></span>
@@ -200,6 +203,8 @@
             <div class="content mb-0 mt-3">
                 <h4 class="color-white text-start pt-1 mb-0">뒷풀이 포함 이벤트<i class="wedive-txt-all wedive_right"></i></h4>
                 <p class="color-white mb-0 opacity-60 ls-n1">#맥주인생&nbsp;&nbsp;#좋은사람</p>
+                <img style="position:absolute;bottom:0;left:20%;height:90%;" src="/static/images/assets/fireworks.gif"/>
+                <img style="position:absolute;bottom:0;left:0;height:70%;" src="/static/images/assets/fireworks2.gif"/>
                 <img class="mt-n2 mb-4 float-right" src="/static/images/assets/beer.png" />
             </div>
         </div>
@@ -274,7 +279,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.wedive-chip {font-family: 'Noto Sans Korean';border-radius:6px !important;padding: 0 8px;margin:0 !important;position:absolute;right:0px;top:20px;}
+.wedive-chip {font-family: 'Noto Sans Korean';border-radius:6px !important;padding: 0 8px;margin:0 !important;position:absolute;right:0px;bottom:0px;}
 .wedive-chip i {width: auto;line-height: inherit;margin-right: 2px;}
 .light-border-bottom {border-bottom: 1px solid #dee2e6;}
 .wedive-txt-all {position: absolute;top: 20px;right: 16px;}

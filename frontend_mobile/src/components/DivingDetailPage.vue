@@ -74,8 +74,8 @@
                 <div class="col-6 p-0">
                     <img class="inline-block me-2 circular_image" :src="(divingData.hostUser && divingData.hostUser.profileImages && divingData.hostUser.profileImages.length>0 && divingData.hostUser.profileImages[0].thumbnailUrl) ? divingData.hostUser.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty_'+((divingData.hostUser&&divingData.hostUser.gender)?divingData.hostUser.gender:'m')+'.png'" width="50" style="vertical-align: top;"/>
                     <div class="inline-block font-noto">
-                        <h5 class="mb-0 font-500 font-17">{{ (divingData.hostUser && divingData.hostUser.nickName) ? divingData.hostUser.nickName : '' }}</h5>
-                        <p class="mb-0 font-14 color-gray">{{ (divingData.hostUser && divingData.hostUser.levelShow) ? divingData.hostUser.levelShow : '' }}</p>
+                        <h5 class="mb-0 font-500 font-15">{{ (divingData.hostUser && divingData.hostUser.nickName) ? divingData.hostUser.nickName : '' }}</h5>
+                        <p class="mb-0 font-13 color-gray">{{ (divingData.hostUser && divingData.hostUser.levelShow) ? divingData.hostUser.levelShow : '' }}</p>
                     </div>
                 </div>
                 <div class="col-6 p-0 text-end">
@@ -124,13 +124,13 @@
             </div>
             
             <div v-if="divingData.participants" class="content mt-0 pb-3">
-                <h2 class="font-15 font-700 mb-2">참여인원 ({{ (divingData.participants.filter(member=> member.status == 'joined')) ? (divingData.participants.filter(member=> member.status == 'joined').length+1) : '' }})</h2>
+                <h2 class="font-18 font-700 mb-2">참여인원 ({{ (divingData.participants.filter(member=> member.status == 'joined')) ? (divingData.participants.filter(member=> member.status == 'joined').length+1) : '' }})</h2>
                 
                 <div class="">
                     <div class="owner border-bottom pt-2 pb-2" v-on:click="goUserPage(divingData.hostUser)" style="position: relative;">
                         <img class="inline-block circular_image" :src="(divingData.hostUser && divingData.hostUser.profileImages && divingData.hostUser.profileImages.length>0 && divingData.hostUser.profileImages[0].thumbnailUrl) ? divingData.hostUser.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty_'+((divingData.hostUser&&divingData.hostUser.gender)?divingData.hostUser.gender:'m')+'.png'" width="50" style="vertical-align: top;"/>
                         <div class="inline-block font-noto ms-3">
-                            <h5 class="mb-0 font-500 font-17">{{ (divingData.hostUser!=null&&divingData.hostUser.nickName!=null) ? divingData.hostUser.nickName : ((divingData.hostUser.name!=null) ? divingData.hostUser.name : '비공개') }}</h5>
+                            <h5 class="mb-0 font-500 font-15">{{ (divingData.hostUser!=null&&divingData.hostUser.nickName!=null) ? divingData.hostUser.nickName : ((divingData.hostUser.name!=null) ? divingData.hostUser.name : '비공개') }}</h5>
                             <p class="mb-0 font-14 color-gray">{{ (divingData.hostUser && divingData.hostUser.levelShow) ? divingData.hostUser.levelShow : '' }}</p>
                         </div>
                     </div>
@@ -138,7 +138,7 @@
                         <div v-on:click="goUserPage(participant.user)">
                             <img class="inline-block circular_image" :src="(participant.user && participant.user.profileImages && participant.user.profileImages.length>0 && participant.user.profileImages[0].thumbnailUrl) ? participant.user.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty_'+(participant.gender ? participant.gender : 'm')+'.png'" width="50" style="vertical-align: top;"/>
                             <div class="inline-block font-noto ms-3">
-                                <h5 class="mb-0 font-500 font-17">{{ (participant.user!=null&&participant.user.nickName!=null) ? participant.user.nickName : ((participant.name!=null) ? participant.name : '비공개') }}</h5>
+                                <h5 class="mb-0 font-500 font-15">{{ (participant.user!=null&&participant.user.nickName!=null) ? participant.user.nickName : ((participant.name!=null) ? participant.name : '비공개') }}</h5>
                                 <p class="mb-0 font-14 color-gray">{{ (participant.levelShow) ? participant.levelShow : '' }}</p>
                             </div>
                         </div>
@@ -157,8 +157,8 @@
                             <div v-on:click="goUserPage(participant.user)">
                                 <img class="inline-block circular_image" :src="(participant.user && participant.user.profileImages && participant.user.profileImages.length>0 && participant.user.profileImages[0].thumbnailUrl) ? participant.user.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty_'+(participant.gender ? participant.gender : 'm')+'.png'" width="50" style="vertical-align: top;"/>
                                 <div class="inline-block font-noto ms-3">
-                                    <h5 class="mb-0 font-500 font-17">{{ (participant.user!=null&&participant.user.nickName!=null) ? participant.user.nickName : ((participant.name!=null) ? participant.name : '비공개') }}</h5>
-                                    <p class="mb-0 font-14 color-gray">{{ (participant.levelShow) ? participant.levelShow : '' }}</p>
+                                    <h5 class="mb-0 font-500 font-15">{{ (participant.user!=null&&participant.user.nickName!=null) ? participant.user.nickName : ((participant.name!=null) ? participant.name : '비공개') }}</h5>
+                                    <p class="mb-0 font-13 color-gray">{{ (participant.levelShow) ? participant.levelShow : '' }}</p>
                                 </div>
                             </div>
                             <span v-if="participant.user!=null" v-on:click="chatUser(participant.user)" data-menu="menu-dm" class="chip chip-s bg-gray-light text-center font-400 wedive-chip">채팅</span>
@@ -175,7 +175,7 @@
             </div>
 
             <div class="content mt-0 pb-3 border-bottom">
-                <h2 class="font-15 font-700 mb-2">다이빙 장소</h2>
+                <h2 class="font-18 font-700 mb-2">다이빙 장소</h2>
                 
                 <div v-for="location in locationData" class="evaluation" style="min-height: 115px;" v-on:click="goDetail(location.type, location.uniqueName)">
                     <img :src="location.backgroundImages[0].thumbnailUrl" class="rounded-s mx-auto me-3" width="95" height="95" style="float: left;position: relative;"/>
@@ -1171,11 +1171,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.inline-block {display: inline-block;}
+.inline-block {display: inline-block !important;}
 .border-bottom {border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important}
 .evaluation {background-color: rgba(196,187,171,.2);justify-content: space-around;border-radius: 5px;padding:10px;}
 .wedive-textarea {min-height: 150px;border: 2px solid #e9e9e9;background: #f5f5f5;padding-left: 10px;padding-right: 10px;width:100%;}
-.owner:after {content: '';position: absolute;bottom: 6px;left: 34px;width: 30px;height: 30px;background-image: url(/static/images/assets/crown_small.png);background-repeat: no-repeat;background-size: contain;}
+.owner:after {content: '';position: absolute;bottom: 6px;left: 34px;width: 22px;height: 22px;background-image: url(/static/images/assets/crown_s.png);background-repeat: no-repeat;background-size: contain;}
 .wedive-chip {font-family: 'Noto Sans Korean';border-radius:6px !important;padding: 2px 12px;margin:0 !important;position:absolute;right:10px;bottom:20px;color:black !important;}
 .wedive-chip2 {font-family: 'Noto Sans Korean';border-radius:6px !important;padding: 2px 12px;margin:0 !important;position:absolute;right:70px;bottom:20px;color:black !important;}
 .position-relative {position: relative;}
