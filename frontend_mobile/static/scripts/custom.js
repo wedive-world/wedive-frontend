@@ -212,7 +212,6 @@
         var topicSlider = document.querySelectorAll('.topic-slider');
         if(topicSlider.length){
              var topic = new Splide( '.topic-slider', {
-                type:'loop',
                 autoplay:false,
                 padding: {
                     left   :'15px',

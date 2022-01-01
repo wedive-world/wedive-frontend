@@ -7,41 +7,118 @@
                 <div class="splide topic-slider slider-no-arrows slider-no-dots mb-1 border-bottom">
                     <div class="splide__track tab-controls tabs-small">
                         <div class="splide__list" style="min-height:50px;">
-                            <h5 class="splide__slide color-theme mt-3 text-center font-500" data-active data-bs-toggle="collapse" data-bs-target="#tab-log1"><img src="/static/images/assets/ico_wedive_d.png" style="width:20px;" class="me-1" />위다이브</h5>
-                            <h5 class="splide__slide color-theme mt-3 text-center font-500" data-bs-toggle="collapse" data-bs-target="#tab-log2">스쿠버</h5>
-                            <h5 class="splide__slide color-theme mt-3 text-center font-500" data-bs-toggle="collapse" data-bs-target="#tab-log3">프리</h5>
+                            <h5 class="splide__slide color-theme mt-3 text-center font-500 font-14 font-noto" data-active data-bs-toggle="collapse" data-bs-target="#tab-log1"><img src="/static/images/assets/ico_wedive_d.png" style="width:20px;" class="me-1" />위다이브</h5>
+                            <h5 class="splide__slide color-theme mt-3 text-center font-500 font-14 font-noto" data-bs-toggle="collapse" data-bs-target="#tab-log2">스쿠버</h5>
+                            <h5 class="splide__slide color-theme mt-3 text-center font-500 font-14 font-noto" data-bs-toggle="collapse" data-bs-target="#tab-log3">프리</h5>
+                            <h5 class="splide__slide color-theme mt-3 text-center font-500 font-14 font-noto" data-bs-toggle="collapse" data-bs-target="#tab-log4">윤장송 동호회</h5>
+                            <h5 class="splide__slide color-theme mt-3 text-center font-500 font-14 font-noto" data-bs-toggle="collapse" data-bs-target="#tab-log4">짱짱맨 동호회</h5>
                         </div>
                     </div>
                 </div>
 
 
-                <div data-bs-parent="#tab-group-1" class="content collapse show" id="tab-log1" style="min-height: 100vh">
-                    <div v-for="center in center_list" class="map-box" style="display: grid;">
-                        <a href="/center">
-                            <div class="bx">
-                                <div class="justify-content-center mb-0 text-start">
-                                    <div class="" style="float: left;position: relative;width: 95px; height:95px;">
-                                        <img v-bind:src="center.img" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;">
-                                    </div>
-                                    <div class="" style="padding-left: 110px;">
-                                        <h4 class="font-15"> {{center.title}} </h4>
-                                        <p class="pb-0 mb-0 line-height-m ellipsis"> {{center.desc}} </p>
-                                        <p class="pb-0 mb-0 mt-n1 ellipsis color-gray-light-mid">
-                                            {{center.feature}}
-                                        </p>
-                                        <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
-                                            <span> {{center.star}} </span>
-                                            &nbsp;<font class="color-gray-light">|</font>&nbsp;
-                                            <img src="/static/images/agency/logo_padi.svg" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
-                                            &nbsp;<font class="color-gray-light">|</font>&nbsp;
-                                            <span v-for="i in center.price_index" class="color-gray">₩</span>
-                                        </p>
-                                    </div>
-                                </div>
+                <div data-bs-parent="#tab-group-1" class="collapse show" id="tab-log1" style="min-height: 100vh">
+                    <div class="p-3">
+                        <div style="position:relative;">
+                            <img class="inline-block me-2 circular_image" src="/static/images/assets/user_empty_m.png" style="vertical-align: top;width:40px;height:40px;"/>
+                            <div class="inline-block font-noto">
+                                <h5 class="mb-0 font-500 font-15">짱스</h5>
+                                <p class="mb-0 mt-n1 font-13 color-gray">초보 다이버</p>
                             </div>
-                        </a>
+                            <p class="color-gray-dark mb-0 font-12" style="position: absolute;right: 0px;top: 0;">10분 전</p>
+                        </div>
+                        <div class="mt-1">
+                            <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 잠실 수영장</p>
+                        </div>
+                        <div class="mt-3">
+                            오랫만에 다이빙을 왔는데 정말정말 재미있네요.<br/>코시국에 이만한 힐링이 없어요.<br/>다들 새해 복 많이 받으세요~
+                        </div>
                     </div>
-                    <div class="divider mt-3 mb-3"></div>
+                    <div class="p-3">
+                        <div class="mt-1">
+                            <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#힐링</span>
+                            <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#새해</span>
+                            <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#다이빙</span>
+                        </div>
+                        <div class="mt-4 mb-3">
+                            <img src="/static/images/assets/ico_heart.png" width="22" class="me-1" style="margin-top:-1px;"/><span class="font-14 font-noto">1</span>
+                            &nbsp;&nbsp;
+                            <img src="/static/images/assets/ico_chat.png" width="22" class="me-1" style="margin-top:-1px;"/><span class="font-14 font-noto">1</span>
+                        </div>
+                    </div>
+                    <div class="divider mb-0" style="height:12px;border-top: 1px solid #88888840"></div>
+
+                    <div class="p-3">
+                        <div style="position:relative;">
+                            <img class="inline-block me-2 circular_image" src="/static/images/assets/user_empty_m.png" style="vertical-align: top;width:40px;height:40px;"/>
+                            <div class="inline-block font-noto">
+                                <h5 class="mb-0 font-500 font-15">짱스</h5>
+                                <p class="mb-0 mt-n1 font-13 color-gray">초보 다이버</p>
+                            </div>
+                            <p class="color-gray-dark mb-0 font-12" style="position: absolute;right: 0px;top: 0;">1일 전</p>
+                        </div>
+                        <div class="mt-1">
+                            <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 문섬 포인트</p>
+                        </div>
+                        <div class="mt-3">
+                            오랫만에 다이빙을 왔는데 정말정말 재미있네요.<br/>코시국에 이만한 힐링이 없어요.<br/>다들 새해 복 많이 받으세요~<br/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <img class="col-12" src="https://fg.startupbridgeva.com/f/m3h/TOb/0kN/9OiKsk0MTnPMjkpw6CwyrDA0jAjOTUxKTc7NVsvqyAdAA.jpg" style="width:100%;"/>
+                    </div>
+                    <div class="p-3">
+                        <div class="mt-1">
+                            <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#힐링</span>
+                            <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#새해</span>
+                            <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#다이빙</span>
+                        </div>
+                        <div class="mt-4 mb-3">
+                            <img src="/static/images/assets/ico_heart.png" width="22" class="me-1" style="margin-top:-1px;"/><span class="font-14 font-noto">6</span>
+                            &nbsp;&nbsp;
+                            <img src="/static/images/assets/ico_chat.png" width="22" class="me-1" style="margin-top:-1px;"/><span class="font-14 font-noto">20</span>
+                        </div>
+                    </div>
+                    <div class="divider mb-0" style="height:12px;border-top: 1px solid #88888840"></div>
+                    
+                    <div class="p-3">
+                        <div style="position:relative;">
+                            <img class="inline-block me-2 circular_image" src="/static/images/assets/user_empty_m.png" style="vertical-align: top;width:40px;height:40px;"/>
+                            <div class="inline-block font-noto">
+                                <h5 class="mb-0 font-500 font-15">짱스</h5>
+                                <p class="mb-0 mt-n1 font-13 color-gray">초보 다이버</p>
+                            </div>
+                            <p class="color-gray-dark mb-0 font-12" style="position: absolute;right: 0px;top: 0;">1일 전</p>
+                        </div>
+                        <div class="mt-1">
+                            <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i>제주 사이트</p>
+                        </div>
+                        <div class="mt-3">
+                            오랫만에 다이빙을 왔는데 정말정말 재미있네요.<br/>코시국에 이만한 힐링이 없어요.<br/>다들 새해 복 많이 받으세요~<br/>
+                        </div>
+                    </div>
+                    <div class="square_image inline-block">
+                        <img src="https://d2mgzmtdeipcjp.cloudfront.net/files/good_contents/2020/06/09/15916682888292.png" style="object-fit: cover;"/>
+                    </div>
+                    <div class="square_image inline-block" style="float: right;">
+                        <img src="https://d2mgzmtdeipcjp.cloudfront.net/files/good_contents/2020/06/09/15916682352190.png" style="object-fit: cover;"/>
+                        <!--<img class="col-4 p-0" src="https://d2mgzmtdeipcjp.cloudfront.net/files/good_contents/2020/06/09/15916681023733.png"/>-->
+                    </div>
+                    <div class="p-3">
+                        <div class="mt-1">
+                            <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#힐링</span>
+                            <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#새해</span>
+                            <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#다이빙</span>
+                        </div>
+                        <div class="mt-4 mb-3">
+                            <img src="/static/images/assets/ico_heart.png" width="22" class="me-1" style="margin-top:-1px;"/><span class="font-14 font-noto">6</span>
+                            &nbsp;&nbsp;
+                            <img src="/static/images/assets/ico_chat.png" width="22" class="me-1" style="margin-top:-1px;"/><span class="font-14 font-noto">20</span>
+                        </div>
+                    </div>
+                    <div class="divider mb-0" style="height:12px;border-top: 1px solid #88888840"></div>
+                    
+                    
                 </div>
 
 
@@ -118,6 +195,7 @@ export default {
 
 
 <style scoped>
+.inline-block {display: inline-block !important;}
 .transform-none {transform: inherit !important;};
 .splide__slide h5 {text-align:center;padding: 8px 0;}
 </style>

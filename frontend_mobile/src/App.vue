@@ -17,7 +17,7 @@
           <div id="footer-bar" class="footer-bar" style="border-radius: 30px 30px 0px 0px;">
             <a href="/" id="nav-buddy"><div class="menu-ico menu-ico1"></div><span>버디</span></a>
             <a v-on:click="moveSite()" id="nav-site"><div class="menu-ico menu-ico2"></div><span>장소</span></a>
-            <!--<a href="/book_home" id="nav-book"><div class="menu-ico menu-ico3"></div><span>로그북</span></a>-->
+            <a href="/book_home" id="nav-book"><div class="menu-ico menu-ico3"></div><span>로그북</span></a>
             <a href="/chat_home" id="nav-chat"><div class="menu-ico menu-ico4"></div><span>채팅</span></a>
             <a href="/other_home" id="nav-other"><div class="menu-ico menu-ico5"></div><span>더보기</span></a>
           </div>
