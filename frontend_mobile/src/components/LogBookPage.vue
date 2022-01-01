@@ -198,4 +198,5 @@ export default {
 .inline-block {display: inline-block !important;}
 .transform-none {transform: inherit !important;};
 .splide__slide h5 {text-align:center;padding: 8px 0;}
+.splide__list > .is-visible:not(.collapsed) {border-bottom: 3px solid black !important;}
 </style>
