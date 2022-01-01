@@ -58,19 +58,18 @@
                     <div class="flex-grow-1 pd-0" style="border-right: 1px solid lightgray;">
                     <a :href="'tel:'+centerData.phoneNumber"" style="color:black;">
                         <img class="ext-img" src="/static/images/assets/ico_call.png" width="24" style="margin-top:-4px;"/>
-                        <span class="font-16 font-500 font-noto">전화</span>
+                        <span class="font-16 font-500 font-noto"></span>
                     </a>
                     </div>
                     <div v-on:click="clickLike()" :class="'flex-grow-1 pd-0'+((idToken == null || nickName == null) ? ' opacity-40' : '')" style="border-right: 1px solid lightgray;">
                         <img class="ext-img" :src="'/static/images/assets/' + like_img + '.png'" width="24" style="margin-top:-4px;"/>
-                        <span class="font-16 font-500 font-noto">찜 {{ centerData.likes }}</span>
+                        <span class="font-16 font-500 font-noto">{{ centerData.likes }}</span>
                     </div>
                     
-                    <div v-on:click="clickSubscribe()" :class="'flex-grow-1 pd-0'+((idToken == null || nickName == null) ? ' opacity-40' : '')">
+                    <div data-menu="menu-subscribe" :class="'flex-grow-1 pd-0'+((idToken == null || nickName == null) ? ' opacity-40' : '')">
                         <img class="ext-img" :src="'/static/images/assets/'+subscribe_img+'.png'" width="24" style="margin-top:-4px;"/>
-                        <span class="font-16 font-500 font-noto">알림</span>
+                        <span class="font-16 font-500 font-noto"></span>
                     </div>
-                    
                 </div>
             </div>
         </div>
@@ -919,6 +918,114 @@
             <i class="fas fa-car mr-2"></i> 제주공항 <i class="fas fa-arrow-right"></i> 버블탱크 하차<br/>
             <i class="far fa-clock mr-2"></i> 1시간 소요<br/>
             </p>
+        </div>
+    </div>
+
+    <!-- 구독 팝업 -->
+    <div id="menu-subscribe" 
+         class="menu menu-box-modal" 
+         data-menu-height="470" 
+         data-menu-width="370">
+        <div class="menu-title">
+            <h4 class="text-center mt-4 pt-1 mb-2 font-noto font-19">{{ centerData.name }} 알림</h4>
+            <a href="#" class="close-menu hide"><i class="fa fa-times-circle"></i></a>
+        </div>
+        <div class="me-4 ms-4" style="border-bottom: 2px solid black;"></div>
+        <div class="content mt-3">
+            <div class="wedive-select" style="max-height: 294px;overflow-y: auto;">
+                <div v-on:click="clickSelect" class="wedive-select-border" style="border-radius:12px;padding:8px;">
+                    <div class="form-check icon-check">
+                        <label class="form-check-label font-noto font-14 font-500"><i class="far fa-circle font-20" style="display: block;"></i>
+                            프리다이빙 알림</label>
+                    </div>
+                    <div class="row mb-0 font-noto" style="margin-left:30px;">
+                        <div class="col-6 mt-2 color-gray p-0">
+                            <span>일</span>
+                            <span class="emphasis">월</span>
+                            <span class="emphasis">화</span>
+                            <span class="emphasis">수</span>
+                            <span>목</span>
+                            <span>금</span>
+                            <span>토</span>
+                        </div>
+                        <div class="col-6 p-0 text-end" style="margin-top: 10px;padding-right:18px !important;">
+                            <span class="chip-normal">오전</span>
+                            <span class="chip-emphasis">오후</span>
+                            <span class="chip-normal">저녁</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div v-on:click="clickSelect" class="wedive-select-border" style="border-radius:12px;padding:8px;">
+                    <div class="form-check icon-check">
+                        <label class="form-check-label font-noto font-14 font-500"><i class="far fa-circle font-20" style="display: block;"></i>
+                            블라블라 다른이름</label>
+                    </div>
+                    <div class="row mb-0 font-noto" style="margin-left:30px;">
+                        <div class="col-6 mt-2 color-gray p-0">
+                            <span>일</span>
+                            <span class="emphasis">월</span>
+                            <span class="emphasis">화</span>
+                            <span class="emphasis">수</span>
+                            <span>목</span>
+                            <span>금</span>
+                            <span>토</span>
+                        </div>
+                        <div class="col-6 p-0 text-end" style="margin-top: 10px;padding-right:18px !important;">
+                            <span class="chip-emphasis">오전</span>
+                            <span class="chip-emphasis">오후</span>
+                            <span class="chip-emphasis">저녁</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div v-on:click="clickSelect" class="wedive-select-border" style="border-radius:12px;padding:8px;">
+                    <div class="form-check icon-check">
+                        <label class="form-check-label font-noto font-14 font-500"><i class="far fa-circle font-20" style="display: block;"></i> 
+                            서울지역 알림</label>
+                    </div>
+                    <div class="row mb-0 font-noto" style="margin-left:30px;">
+                        <div class="col-6 mt-2 color-highlight font-500 p-0">
+                            <span>1/21(월) ~ 1/23(수)</span>
+                        </div>
+                        <div class="col-6 p-0 text-end" style="margin-top: 10px;padding-right:18px !important;">
+                            <span class="chip-normal">오전</span>
+                            <span class="chip-emphasis">오후</span>
+                            <span class="chip-normal">저녁</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div v-on:click="clickSelect" class="wedive-select-border" style="border-radius:12px;padding:8px;">
+                    <div class="form-check icon-check">
+                        <label class="form-check-label font-noto font-14 font-500"><i class="far fa-circle font-20" style="display: block;"></i> 
+                            동남아 여행 알림</label>
+                    </div>
+                    <div class="row mb-0 font-noto" style="margin-left:30px;">
+                        <div class="col-6 mt-2 color-highlight font-500 p-0">
+                            <span>1/21(월) ~ 1/23(수)</span>
+                        </div>
+                        <div class="col-6 p-0 text-end" style="margin-top: 10px;padding-right:18px !important;">
+                            <span class="chip-normal">오전</span>
+                            <span class="chip-emphasis">오후</span>
+                            <span class="chip-normal">저녁</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center font-noto font-500 font-15" style="color: #858585;">
+            <i class="wedive_plus"></i> 알림 일정 추가
+        </div>
+
+        <div class="row m-0 mt-3">
+            <div class="col-6 pe-1">
+                <a href="#" class="close-menu btn btn-m btn-full rounded-0 text-uppercase font-900 shadow-s bg-gray-dark">취소</a>
+            </div>
+            <div class="col-6 ps-1">
+                <a v-on:click="review_send()" class="btn btn-m btn-full rounded-0 text-uppercase font-900 shadow-s bg-black">알림 설정</a>
+            </div>
         </div>
     </div>
 
@@ -1778,6 +1885,19 @@ export default {
 
         return `${Math.floor(betweenTimeDay / 365)}년전`;
       },
+      clickSelect(event) {
+          $(".wedive-select-border").each((index, item) => {
+              if (item.classList.contains("active")) {
+                  item.classList.remove("active");
+                  item.children[0].children[0].children[0].classList.add("fa-circle");
+                  item.children[0].children[0].children[0].classList.remove("fa-check-circle")
+              }
+          })
+          event.currentTarget.classList.toggle("active");
+
+          event.currentTarget.children[0].children[0].children[0].classList.toggle("fa-circle");
+          event.currentTarget.children[0].children[0].children[0].classList.toggle("fa-check-circle")
+      },
   }
 
   
@@ -1889,4 +2009,17 @@ export default {
 .right-icon {position: absolute;top: 10px;width: 15px;text-align: center;right: 0px;opacity: 0.3;}
 .wedive-textarea {min-height: 150px;border: 2px solid #e9e9e9;background: #f5f5f5;padding-left: 10px;padding-right: 10px;}
 .deco-end {height: 10px !important;}
+.emphasis {text-emphasis-style: circle;
+  text-emphasis-position: over left;
+  -webkit-text-emphasis-style: circle;
+  -webkit-text-emphasis-position: over;
+  color: #1d397c ;
+  font-weight:500;}
+.wedive-select-border {margin-bottom:10px;}
+.wedive-select > .wedive-select-border {border: 2px solid lightgray;}
+.wedive-select > .active {border: 2px solid #2c9bc3;}
+.wedive-select i {color: lightgray;}
+.wedive-select .active i {color: #2c9bc3;}
+.chip-normal {padding:3px 8px;background:lightgray;border-radius:4px;color:gray;}
+.chip-emphasis {padding:3px 8px;background:#1d397c ;border-radius:4px;color:#ddd;}
 </style>

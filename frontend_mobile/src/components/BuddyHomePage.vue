@@ -37,12 +37,16 @@
                         <div class="align-self-center">
                             <img src="/static/images/point/ko/kangwon_yangyang_01.jpg" class="rounded-sm me-3" width="68">
                         </div>
-                        <div class="text-start align-self-center">
-                            <h2 class="font-17 line-height-s mt-2 mb-0">09.25(토) ~ 09.26(일)</h2>
-                            <p class="color-gray font-13 mb-0 ellipsis font-noto">스쿠버 다이빙</p>
-                            <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 하우스리프 포인트</p>
+                        <div class="text-start align-self-center font-noto">
+                            <h2 class="font-16 line-height-s mt-2 mb-0 font-500">여자끼리 떠나는 제주여행</h2>
+                            <p class="color-gray font-13 mb-0 ellipsis">09.25(토) ~ 09.26(일)</p>
+                            <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> 하우스리프 포인트 (프리)</p>
                         </div>
-                        <span class="chip chip-s bg-gray-light text-center font-400 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>1</span> <span class="color-shopping ms-1"><i class="far fa-user"></i>1</span></span>
+                        <span class="chip chip-s bg-gray-light text-center font-400 wedive-chip color-black">
+                            <i class="far fa-user"></i>
+                            <span class="color-highlight" style="margin-right:2px;">1</span>/
+                            <span class="color-shopping">1</span>
+                        </span>
                     </div>
                 </div>
                 <div v-on:click="goDiving()" class="light-border-bottom mt-3">
@@ -50,12 +54,16 @@
                         <div class="align-self-center">
                             <img src="/static/images/point/ko/jeju_bumisland_01.jpg" class="rounded-sm me-3" width="68">
                         </div>
-                        <div class="text-start align-self-center">
-                            <h2 class="font-17 line-height-s mt-2 mb-0">09.22(수) ~ 09.25(토)</h2>
-                            <p class="color-gray font-13 mb-0 ellipsis font-noto">스쿠버, 프리 다이빙</p>
-                            <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 문섬 포인트</p>
+                        <div class="text-start align-self-center font-noto">
+                            <h2 class="font-16 line-height-s mt-2 mb-0 font-500">가요가요 우리모두 가요</h2>
+                            <p class="color-gray font-13 mb-0 ellipsis">09.22(수) ~ 09.25(토)</p>
+                            <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> 문섬 포인트 (스쿠버, 프리)</p>
                         </div>
-                        <span class="chip chip-s bg-gray-light text-center font-400 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>1</span> <span class="color-shopping ms-1"><i class="far fa-user"></i>1</span></span>
+                        <span class="chip chip-s bg-gray-light text-center font-400 wedive-chip color-black">
+                            <i class="far fa-user"></i>
+                            <span class="color-highlight" style="margin-right:2px;">1</span>/
+                            <span class="color-shopping">1</span>
+                        </span>
                     </div>
                 </div>
                 <div v-on:click="goDiving()" class="light-border-bottom mt-3">
@@ -63,12 +71,16 @@
                         <div class="align-self-center">
                             <img src="/static/images/point/ko/jeju_munisland_06.jpg" class="rounded-sm me-3" width="68">
                         </div>
-                        <div class="text-start align-self-center">
-                            <h2 class="font-17 line-height-s mt-2 mb-0">09.20(월) ~ 09.25(토)</h2>
-                            <p class="color-gray font-13 mb-0 ellipsis font-noto">프리 다이빙</p>
-                            <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 문섬포인트</p>
+                        <div class="text-start align-self-center font-noto">
+                            <h2 class="font-16 line-height-s mt-2 mb-0 font-500">제주도 가실분 급구</h2>
+                            <p class="color-gray font-13 mb-0 ellipsis">09.20(월) ~ 09.25(토)</p>
+                            <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> 문섬포인트 (스쿠버)</p>
                         </div>
-                        <span class="chip chip-s bg-gray-light text-center font-400 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>1</span> <span class="color-shopping ms-1"><i class="far fa-user"></i>1</span></span>
+                        <span class="chip chip-s bg-gray-light text-center font-400 wedive-chip color-black">
+                            <i class="far fa-user"></i>
+                            <span class="color-highlight" style="margin-right:2px;">1</span>/
+                            <span class="color-shopping">1</span>
+                        </span>
                     </div>
                 </div>
             </div>

@@ -89,12 +89,12 @@
                 <div class="d-flex mb-0 text-center">
                     <div v-on:click="clickLike()" :class="'flex-grow-1 pd-0' + ((idToken == null || nickName == null) ? ' opacity-40' : '')" style="border-right: 1px solid lightgray;">
                         <img class="ext-img" :src="'/static/images/assets/'+like_img+'.png'" width="24" style="margin-top:-4px;"/>
-                        <span class="font-16 font-500 font-noto">찜 {{ pointData.likes }}</span>
+                        <span class="font-16 font-500 font-noto">{{ pointData.likes }}</span>
                     </div>
                     
                     <div v-on:click="clickSubscribe()" :class="'flex-grow-1 pd-0' + ((idToken == null || nickName == null) ? ' opacity-40' : '')">
                         <img class="ext-img" :src="'/static/images/assets/'+subscribe_img+'.png'" width="24" style="margin-top:-4px;"/>
-                        <span class="font-16 font-500 font-noto">알림</span>
+                        <span class="font-16 font-500 font-noto"></span>
                     </div>
                 </div>
 
