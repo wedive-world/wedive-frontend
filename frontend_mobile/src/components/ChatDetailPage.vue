@@ -62,7 +62,7 @@
         </div>
     </div>
     
-    <div id="speech-content" class="card card-style ms-0 me-0 rounded-0 mt-5 mb-5" style="height: calc(100vh - 101px);overflow-y: auto;">
+    <div v-on:click="speechContentClick()" id="speech-content" class="card card-style ms-0 me-0 rounded-0 mt-5 mb-5" style="height: calc(100vh - 101px);overflow-y: auto;">
         <div class="content">
             <div v-for="chat in chatData">
                 <div v-if="chat.text.includes('[[') && chat.text.includes(']]')" class="chat-left">
@@ -72,7 +72,7 @@
                     <span class="time">{{ chat.showAt }}</span>
                 </div>
                 <div v-else-if="emoji_regex.test(chat.text) && chat.text.length == 2" class="chat-left">
-                    <div style="font-size:90px;height:100px;padding-top:50px;">
+                    <div style="font-size:80px;height:100px;padding-top:50px;display:block;">
                         {{ chat.text }}
                     </div>
                     <span class="time">{{ chat.showAt }}</span>
@@ -356,6 +356,9 @@ export default {
             textarea.style.height = textarea.scrollHeight - 4 + 'px';
         $("#footer-bar-speach").height((parseInt(textarea.style.height.replace("px",""))+12) + "px")
         this.is_emoji = false;
+    },
+    speechContentClick() {
+        if (this.is_emoji) this.is_emoji = false;
     }
   }
 
