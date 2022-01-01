@@ -3,31 +3,20 @@
     <div data-menu-active="nav-book"></div>
     <div class="page-content text-start transform-none" style="padding-bottom: 65px;">
         <div class="card card-style ms-0 me-0 rounded-0 mb-0">
-            <div class="content mt-0">
-                <div class="splide topic-slider slider-no-arrows slider-no-dots mb-1">
-                    <div class="splide__track">
-                        <div class="splide__list">
-                            <div class="splide__slide">
-                                <h5 class="tab-item"><a href="#" class="color-theme">대한민국</a></h5>
-                            </div>
-                            <div class="splide__slide">
-                                <h5 class="tab-item"><a href="#" class="color-theme">스쿠버</a></h5>
-                            </div>
-                            <div class="splide__slide">
-                                <h5 class="tab-item"><a href="#" class="color-theme">프리</a></h5>
-                            </div>
-                            <div class="splide__slide">
-                                <h5 class="tab-item"><a href="#" class="color-theme">동호회1</a></h5>
-                            </div>
-                            <div class="splide__slide">
-                                <h5 class="tab-item"><a href="#" class="color-theme">동호회2</a></h5>
-                            </div>
+            <div class="" id="tab-group-1">
+                <div class="splide topic-slider slider-no-arrows slider-no-dots mb-1 border-bottom">
+                    <div class="splide__track tab-controls tabs-small">
+                        <div class="splide__list" style="min-height:50px;">
+                            <h5 class="splide__slide color-theme mt-3 text-center font-500" data-active data-bs-toggle="collapse" data-bs-target="#tab-log1"><img src="/static/images/assets/ico_wedive_d.png" style="width:20px;" class="me-1" />위다이브</h5>
+                            <h5 class="splide__slide color-theme mt-3 text-center font-500" data-bs-toggle="collapse" data-bs-target="#tab-log2">스쿠버</h5>
+                            <h5 class="splide__slide color-theme mt-3 text-center font-500" data-bs-toggle="collapse" data-bs-target="#tab-log3">프리</h5>
                         </div>
                     </div>
                 </div>
 
-                <div v-for="center in center_list">
-                    <div class="map-box">
+
+                <div data-bs-parent="#tab-group-1" class="content collapse show" id="tab-log1" style="min-height: 100vh">
+                    <div v-for="center in center_list" class="map-box" style="display: grid;">
                         <a href="/center">
                             <div class="bx">
                                 <div class="justify-content-center mb-0 text-start">
@@ -53,6 +42,15 @@
                         </a>
                     </div>
                     <div class="divider mt-3 mb-3"></div>
+                </div>
+
+
+                <div data-bs-parent="#tab-group-1" class="content collapse" id="tab-log2" style="min-height: 100vh">
+                    asdfg
+                </div>
+
+                <div data-bs-parent="#tab-group-1" class="content collapse" id="tab-log3" style="min-height: 100vh">
+                    aaaaaa
                 </div>
                 
                 
@@ -83,6 +81,9 @@ export default {
     if (this.$route.query.footer && this.$route.query.footer == 'hide') {
       $("#footer-bar").hide();
     }
+    setTimeout(function() {
+        $(".splide__list h5:not(.is-active)").addClass("collapsed")
+    },500);
   },
   created() {
     setTimeout(function() {
@@ -118,7 +119,5 @@ export default {
 
 <style scoped>
 .transform-none {transform: inherit !important;};
-.is-active {border-bottom: 3px solid black;}
 .splide__slide h5 {text-align:center;padding: 8px 0;}
-
 </style>

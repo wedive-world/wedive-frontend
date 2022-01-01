@@ -29,6 +29,7 @@
             <i class="fas fa-arrow-left font-24 me-2 pt-2 hide" style="opacity: 0.6;" id="page-back" v-on:click="goBack()"></i>
             <img href="/" class="logo-image mt-n2" style="margin-right: auto;" src="/static/images/assets/logo-dark.svg" height="46"/>
             <a v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_write.png" width="28"></a>
+            <a v-on:click="addItem()" id="wedive-group" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_group.png" width="34"></a>
             <a v-if="$route.path=='/site_list'" href="/site_home" class="page-title-icon font-18" style="color: #858585;margin-right: 13.3333333333px;"><img src="/static/images/assets/icon_map2.png" width="30"></a>
             <a v-on:click="searchItem()" id="wedive-search" class="page-title-icon font-18 hide" style="color:#858585 !important;"><img src="/static/images/assets/icon_search.png" width="28"></a>
             <a v-on:click="shareItem()" id="wedive-share" class="page-title-icon font-18 hide" style="color:#858585 !important;"><img src="/static/images/assets/ico_share.png" height="22"/></a>
@@ -129,9 +130,12 @@ export default {
     
     try {
       var item = window.location.pathname;
-      if (item == '/' || item == '/book_home' || item == '/chat_home') {
+      if (item == '/' || item == '/chat_home') {
         $("#wedive-add").removeClass("hide");
         $("#wedive-search").removeClass("hide");
+      } else if (item == '/book_home') {
+        $("#wedive-add").removeClass("hide");
+        $("#wedive-group").removeClass("hide");
       } else if (item == '/site_list') {
         $("#wedive-search").removeClass("hide");
       } else {
