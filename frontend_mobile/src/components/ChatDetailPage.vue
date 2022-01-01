@@ -62,7 +62,7 @@
         </div>
     </div>
     
-    <div v-on:click="speechContentClick()" id="speech-content" class="card card-style ms-0 me-0 rounded-0 mt-5 mb-5" style="height: calc(100vh - 101px);overflow-y: auto;">
+    <div v-on:click="speechContentClick()" id="speech-content" class="card card-style ms-0 me-0 rounded-0" style="height: calc(100vh - 101px);overflow-y: auto;margin-top:50px;margin-bottom:0;">
         <div class="content">
             <div v-for="chat in chatData">
                 <div v-if="chat.text.includes('[[') && chat.text.includes(']]')" class="chat-left">
@@ -161,8 +161,10 @@ function timeForToday(value) {
     else {
         var hour = timeValue.getHours();
         if (hour < 12) hour = "오전 " + hour
+        else if(hour == 12) hour = "오후 " + hour;
         else hour = "오후 " + (hour-12);
-        return hour + ":" + timeValue.getMinutes();
+        var minute = timeValue.getMinutes();
+        return hour + ":" + ((minute<10) ? "0"+minute : minute);
     }
 }
 function hideKeyboard() {

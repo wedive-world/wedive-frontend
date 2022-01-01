@@ -267,7 +267,6 @@ export default {
   data () {
     return {
         map: null,
-        oldScroll: 0,
         prev_driection: true,
         lastScrollPosition: 0,
     }

@@ -4,8 +4,8 @@
     <div class="main-header header header-fixed header-logo-center">
         <a class="" href="/" style="margin-left: 16px;"><img class="logo-image" src="/static/images/assets/logo-dark.svg" height="46" /></a>
         
-        <a href="/site_list" class="header-icon header-icon-3 font-18" style="color: #858585;margin-right: 13.3333333333px;"><i class="fas fa-list"></i></a>
-        <a v-on:click="searchBox()" href="#" class="header-icon header-icon-4 font-18" style="color: #858585;margin-right: 13.3333333333px;"><i class="fas fa-search"></i></a>
+        <a href="/site_list" class="header-icon header-icon-3 font-20" style="margin-right: 13.3333333333px;"><i class="fas fa-list"></i></a>
+        <a v-on:click="searchBox()" href="#" class="header-icon header-icon-4" style="margin-right: 13.3333333333px;"><img src="/static/images/assets/icon_search.png" width="28"></a>
         <!--<a href="#" class="header-icon header-icon-4 color-theme circular_image" data-menu="menu-main" :style="'background: url('+((userThumbnail) ? userThumbnail : '/static/images/assets/user_empty_'+((gender)?gender:'m')+'.png')+');background-size:cover;width:36px;height:36px;margin-top:7px !important;margin-right:7px;'"></a>-->
     </div>
     
