@@ -261,6 +261,7 @@
         
         
         <div data-menu-load="/static/menu-footer.html"></div>
+        <a href="/buddy_create" id="btn_new" :class="'btn btn-m mb-3 rounded-xl font-900 shadow-s icon-concierge'" style="background-color: #181818;"></a>
     </div>
     
 
@@ -276,8 +277,7 @@ export default {
   name: 'HelloWorld',
   mounted() {
     localStorage.perferedSite = '/site_list';
-    this.btn_new_html = $("#btn_new").html();
-
+    
     if (this.$route.query.header && this.$route.query.header == 'hide') {
       $(".page-title").hide();
       $(".page-title-clear").hide();
@@ -286,6 +286,10 @@ export default {
     if (this.$route.query.footer && this.$route.query.footer == 'hide') {
       $("#footer-bar").hide();
     }
+    $("#btn_new").hide();
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.handleScroll);
   },
   created() {
     setTimeout(function() {
@@ -293,12 +297,15 @@ export default {
         var preloader = document.getElementById('preloader')
         if(preloader){preloader.classList.add('preloader-hide');}
     }, 500);
+    window.addEventListener('scroll', this.handleScroll);
   },
   destroyed () {
     
   },
   data () {
     return {
+        prev_driection: true,
+        lastScrollPosition: 0,
         center_list : [
             {title: "버블탱크 스쿠버다이빙", desc: "제주 남부에 위치한 PADI 5star 다이빙센터", star: 3.8, price_index: 2, feature: "덕다이빙, 케이브, 난파선, 드리프트", img: '/static/images/shop1/diving/test1.jpg', position: {lat: 33.24134444312815, lng: 126.56484940647604}},
             {title: "다이브 투게더리조트", desc: "한줄설명1", star: 4.8, price_index: 2, feature: "덕다이빙, 케이브", img: '/static/images/shop1/diving/test2.jpg', position: {lat: 33.241633952501715, lng: 126.56456092676112}},
@@ -323,7 +330,20 @@ export default {
     },
     goList: function() {
         location.href='/center_list';
-    }
+    },
+    handleScroll (event) {
+        const currentScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+        if (currentScrollPosition < 0) { 
+            return
+        } 
+        if ((currentScrollPosition < this.lastScrollPosition) == false && this.prev_driection == true) {
+            $("#btn_new").show(500);
+        } else if ((currentScrollPosition < this.lastScrollPosition) == true && this.prev_driection == false) {
+            $("#btn_new").hide(300);
+        }
+        this.prev_driection = currentScrollPosition < this.lastScrollPosition;
+        this.lastScrollPosition = currentScrollPosition;
+    },
   }
 
   
@@ -352,4 +372,5 @@ export default {
 .movebox3 {position:absolute;white-space: nowrap;left:-100px;padding-top:50px;opacity:.5;animation: motion-endtoend 30s linear infinite;-webkit-animation: motion-endtoend 30s linear infinite;}
 .nearby_desc {font-family: 'Noto Sans Korean' !important;font-weight:200;overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;line-height: 1.4;}
 .card-nearby {margin-left: 10px;background-size: cover !important;}
+.icon-concierge {position: fixed;width: 58px;height: 58px;bottom: 70px;right:24px;background-size:cover;background: url(/static/images/assets/concierge.gif);background-size:cover !important;background-position-y: 8px;background-repeat: no-repeat;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
 </style>
