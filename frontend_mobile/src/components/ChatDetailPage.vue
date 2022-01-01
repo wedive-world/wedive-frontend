@@ -62,26 +62,29 @@
         </div>
     </div>
     
-    <div v-on:click="speechContentClick()" id="speech-content" class="card card-style ms-0 me-0 rounded-0" style="height: calc(100vh - 101px);overflow-y: auto;margin-top:50px;margin-bottom:0;">
+    <div v-on:click="speechContentClick()" id="speech-content" class="card card-style ms-0 me-0 rounded-0" style="height: calc(100vh - 50px);overflow-y: auto;margin-top:50px;padding-bottom:50px;">
         <div class="content">
             <div v-for="chat in chatData">
-                <div v-if="chat.text.includes('[[') && chat.text.includes(']]')" class="chat-left">
-                    <div class="">
-                        <img :src="'/static/images/emoji/' + (chat.text.replace('[[','').replace(']]',''))" style="max-width:100px;"/>
+                <div v-if="chat.author._id == uid">
+                    <div v-if="chat.text.includes('[[') && chat.text.includes(']]')" class="chat-left">
+                        <div class="">
+                            <img :src="'/static/images/emoji/' + (chat.text.replace('[[','').replace(']]',''))" style="max-width:100px;"/>
+                        </div>
+                        <span class="time">{{ chat.showAt }}</span>
                     </div>
-                    <span class="time">{{ chat.showAt }}</span>
-                </div>
-                <div v-else-if="emoji_regex.test(chat.text) && chat.text.length == 2" class="chat-left">
-                    <div style="font-size:80px;height:100px;padding-top:50px;display:block;">
-                        {{ chat.text }}
+                    <div v-else-if="emoji_regex.test(chat.text) && chat.text.length == 2" class="chat-left">
+                        <div style="font-size:80px;height:100px;padding-top:30px;display:block;">
+                            {{ chat.text }}
+                        </div>
+                        <span class="time">{{ chat.showAt }}</span>
                     </div>
-                    <span class="time">{{ chat.showAt }}</span>
-                </div>
-                <div v-else-if="chat.author._id == uid" class="speech-left">
-                    <div class="speech-bubble bg-highlight">
-                        {{ chat.text }}
+                    <div v-else class="speech-left">
+                        <div class="speech-bubble bg-highlight">
+                            {{ chat.text }}
+                        </div>
+                        <span class="time">{{ chat.showAt }}</span>
                     </div>
-                    <span class="time">{{ chat.showAt }}</span>
+                    
                 </div>
                 <div v-else>
                     <div class="p-relative d-inline-block w-60 float-left">
@@ -97,16 +100,58 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="speech-right">
-                        <div class="font-12 ms-1">{{ chat.author.name }}</div>
-                        <div class="speech-bubble color-black">
+                    <div v-if="chat.text.includes('[[') && chat.text.includes(']]')" class="chat-right">
+                        <div class="">
+                            <img :src="'/static/images/emoji/' + (chat.text.replace('[[','').replace(']]',''))" style="max-width:100px;"/>
+                        </div>
+                        <span class="time">{{ chat.showAt }}</span>
+                    </div>
+                    <div v-else-if="emoji_regex.test(chat.text) && chat.text.length == 2" class="chat-right">
+                        <div style="font-size:80px;height:100px;padding-top:30px;display:block;">
                             {{ chat.text }}
                         </div>
                         <span class="time">{{ chat.showAt }}</span>
                     </div>
+                    <div v-else>
+                        <div class="speech-right">
+                            <div class="font-12 ms-1">{{ chat.author.name }}</div>
+                            <div class="speech-bubble color-black">
+                                {{ chat.text }}
+                            </div>
+                            <span class="time">{{ chat.showAt }}</span>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="clearfix"></div>
+            </div>
+
+            <div>
+                <div class="p-relative d-inline-block w-60 float-left">
+                    <div class="user-img">
+                        <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                            <defs>
+                            <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                            <clipPath id="clipSquircle">
+                                <use xlink:href="#shapeSquircle"/>
+                            </clipPath>
+                            </defs>
+                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="/static/images/assets/chat.gif"/>
+                        </svg>
+                    </div>
+                </div>
+                <div>
+                    <div class="speech-right" style="max-width: 220px;">
+                        <div class="font-12 ms-1">테스트</div>
+                        <div class="speech-bubble color-black">
+                            <div class="font-noto font-600 font-16 mb-3"># 잠실 수영장</div>
+                            <div class="ellipsis" style="display: -webkit-box;-webkit-line-clamp: 5;-webkit-box-orient: vertical;white-space: unset;"><img src="https://dwj4aa6a673st.cloudfront.net/image/resized/61cc75254bbd6cd4fa6eee62.jpg" width="60" height="60" class="rounded-s me-3" style="float:left;position: relative;">잠실종합수영장 제2수영장에 위치한 다이빙 전용 수영장입니다. 서울 시내에 있어 접근이 용이합니다.</div>
+
+                            <div class="mt-3 font-noto" style="display: block;background: white;border-radius:8px;padding:6px 12px;margin-bottom:4px;">자세히 보러가기<i class="wedive_icoset wedive_icoset_rightarrow" style="float:right;margin-top:4px;"></i></div>
+                        </div>
+                        <span class="time">오전 11:00</span>
+                    </div>
+                </div>
             </div>
             
         </div>
@@ -463,7 +508,7 @@ position:absolute;
 margin-left:-4px;
 margin-top: 26px;
 transform: rotate(70deg);
-color: #dee2e6;
+color: #e5eef5;
 }
 .speech-left:before {
 font-family: "Font Awesome 5 Free";
