@@ -62,11 +62,11 @@
         </div>
     </div>
     
-    <div id="speech-content" class="card card-style ms-0 me-0 rounded-0 mt-5 mb-5" style="height: calc(100vh - 101px);">
+    <div id="speech-content" class="card card-style ms-0 me-0 rounded-0 mt-5 mb-5" style="height: calc(100vh - 101px);overflow-y: auto;">
         <div class="content">
             <div v-for="chat in chatData">
                 <div v-if="chat.author._id == uid" class="speech-left">
-                    <div class="speech-bubble bg-highlight">
+                    <div :class="(chat.text.includes('[[') && chat.text.includes(']]')) ? '' : 'speech-bubble bg-highlight'">
                         {{ chat.text }}
                     </div>
                     <span class="time">{{ chat.showAt }}</span>
@@ -81,7 +81,7 @@
                                     <use xlink:href="#shapeSquircle"/>
                                 </clipPath>
                                 </defs>
-                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(chat.author.avatarOrigin)?chat.author.avatarOrigin:'/static/assets/images/chat.gif'"/>
+                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(chat.author.avatarOrigin)?chat.author.avatarOrigin:'/static/images/assets/chat.gif'"/>
                             </svg>
                         </div>
                     </div>
@@ -271,33 +271,64 @@ export default {
     },
     async sendMessage() {
         if (this.sendDisable == false) {
-            const message = this.sendText;
-            const roomId = this.roomId;
-            var result = await axios({
-                url: 'https://chat.wedives.com/graphql',
-                method: 'post',
-                headers: {
-                    countrycode: 'ko',
-                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-                },
-                data: {
-                    query: `
-                        mutation PostMessageToRoom($roomId: String!, $input: String!) {
-                            postMessageToRoom(roomId: $roomId, input: $input) {
-                                _id
+            if (this.is_emoji_clicked) {
+                const message = "[[" + this.emoji_url + "]]";
+                const roomId = this.roomId;
+                var result = await axios({
+                    url: 'https://chat.wedives.com/graphql',
+                    method: 'post',
+                    headers: {
+                        countrycode: 'ko',
+                        idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                    },
+                    data: {
+                        query: `
+                            mutation PostMessageToRoom($roomId: String!, $input: String!) {
+                                postMessageToRoom(roomId: $roomId, input: $input) {
+                                    _id
+                                }
                             }
+                        `,
+                        variables: {
+                            "roomId": roomId,
+                            "input": message
                         }
-                    `,
-                    variables: {
-                        "roomId": roomId,
-                        "input": message
                     }
-                }
-            });
-            
-            this.sendText = '';
-            var ret = (result.data && result.data.data && result.data.data.getJoinedRoomList) ? result.data.data.getJoinedRoomList : null
-            location.reload();
+                });
+                
+                this.sendText = '';
+                var ret = (result.data && result.data.data && result.data.data.getJoinedRoomList) ? result.data.data.getJoinedRoomList : null
+            }
+
+            if (this.sendText != "") {
+                const message = this.sendText;
+                const roomId = this.roomId;
+                var result = await axios({
+                    url: 'https://chat.wedives.com/graphql',
+                    method: 'post',
+                    headers: {
+                        countrycode: 'ko',
+                        idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                    },
+                    data: {
+                        query: `
+                            mutation PostMessageToRoom($roomId: String!, $input: String!) {
+                                postMessageToRoom(roomId: $roomId, input: $input) {
+                                    _id
+                                }
+                            }
+                        `,
+                        variables: {
+                            "roomId": roomId,
+                            "input": message
+                        }
+                    }
+                });
+                
+                this.sendText = '';
+                var ret = (result.data && result.data.data && result.data.data.getJoinedRoomList) ? result.data.data.getJoinedRoomList : null
+            }
+            //location.reload();
         }
     },
     resize() {

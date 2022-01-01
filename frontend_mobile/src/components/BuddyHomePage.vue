@@ -77,7 +77,7 @@
         <div class="card card-style" style="background: #56abf7;">
             <div class="content mb-0 mt-3 me-0">
                 <h4 class="text-start pt-1 mb-2" style="background: #56abf7;position: relative;">얼마 남지 않은 다이빙 D-7</h4><i class="wedive-txt-all wedive_right"></i>
-                <div class="text-end"><img class="mt-n3 mb-n1" src="/static/images/assets/calendar.gif" width="80%"/></div>
+                <div class="text-end"><img class="" src="/static/images/assets/calendar.gif" width="80%"/></div>
             </div>
         </div>
 
@@ -228,7 +228,7 @@
 
         
         <div data-menu-load="/static/menu-footer.html"></div>
-        <a href="/buddy_create" id="btn_new" class="btn btn-m mb-3 rounded-xl font-900 shadow-s icon-concierge" style="background-color: #181818;"></a>
+        <a href="/buddy_create" id="btn_new" :class="'btn btn-m mb-3 rounded-xl font-900 shadow-s icon-concierge'" style="background-color: #181818;"></a>
     </div>
     
 
@@ -251,6 +251,10 @@ export default {
     if (this.$route.query.footer && this.$route.query.footer == 'hide') {
       $("#footer-bar").hide();
     }
+    $("#btn_new").hide();
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.handleScroll);
   },
   created() {
     setTimeout(function() {
@@ -258,17 +262,32 @@ export default {
         var preloader = document.getElementById('preloader')
         if(preloader){preloader.classList.add('preloader-hide');}
     }, 500);
+    window.addEventListener('scroll', this.handleScroll);
   },
   data () {
     return {
         map: null,
         oldScroll: 0,
         prev_driection: true,
+        lastScrollPosition: 0,
     }
   }, methods: {
       goDiving() {
           location.href='/diving/61bf1df29ca67571157a3f81';
       },
+      handleScroll (event) {
+        const currentScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+        if (currentScrollPosition < 0) { 
+            return
+        } 
+        if ((currentScrollPosition < this.lastScrollPosition) == false && this.prev_driection == true) {
+            $("#btn_new").show(500);
+        } else if ((currentScrollPosition < this.lastScrollPosition) == true && this.prev_driection == false) {
+            $("#btn_new").hide(300);
+        }
+        this.prev_driection = currentScrollPosition < this.lastScrollPosition;
+        this.lastScrollPosition = currentScrollPosition;
+      }
   }
 
   
