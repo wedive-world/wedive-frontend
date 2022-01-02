@@ -6,25 +6,31 @@
         <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
     </div>
 
-    <div class="page-content transform-none" style="margin-top: 50px;">
-        <div class="card card-style ms-0 me-0 rounded-0 mb-0">
-            <div class="content mt-3">
+    <div class="page-content transform-none" style="margin-top: 50px;padding:0;">
+        <div class="card card-style ms-0 me-0 rounded-0 mb-0" style="height: calc(100vh - 50px)">
+            <div v-if="divingData.length == 0" class="text-center">
+                <img src="/static/images/assets/empty_list2.jpg" width="60%" style="margin-top:25%;" />
+                <p class="color-gray-light-mid">앗! 아직 버디찾기를 한번도 해보지 않으셨네요!</p>
+                <a href="/buddy_create" class="btn btn-m mb-3 rounded-xl text-uppercase font-500 shadow-s bg-secondary font-noto"> 버디찾기 생성 </a>
+            </div>
+            <div v-else class="content mt-3">
                 <div v-for="diving in divingData">
                     <div class="map-box">
                         <a :href="'/diving/' + diving._id">
                             <div :class="'bx position-relative' + ((diving.status == 'divingComplete') ? ' opacity-40':'')">
-                                <div class="justify-content-center mb-0 text-start">
-                                    <div v-if="diving.locationData && diving.locationData.backgroundImages && diving.locationData.backgroundImages.length>0" class="" style="float: left;position: relative;width: 75px; height:75px;">
-                                        <img v-bind:src="diving.locationData.backgroundImages[0].thumbnailUrl" class="rounded-s mx-auto" width="75" height="75" style="object-fit: cover;">
+                                <div class="justify-content-center mb-0 text-start font-noto">
+                                    <div v-if="diving.locationData && diving.locationData.backgroundImages && diving.locationData.backgroundImages.length>0" class="" style="float: left;position: relative;width: 68px; height:68px;">
+                                        <img v-bind:src="diving.locationData.backgroundImages[0].thumbnailUrl" class="rounded-s mx-auto" width="68" height="68" style="object-fit: cover;">
                                     </div>
-                                    <div class="" style="padding-left: 90px;">
-                                        <h4 class="font-15">{{ diving.title }}</h4>
-                                        <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> {{ diving.location }}</p>
-                                        <p class="pb-0 mb-0 mt-n1 ellipsis color-gray-light-mid">등록 : {{ timeForToday(diving.createdAt) }}</p>
+                                    <div class="" style="padding-left: 82px;">
+                                        <h4 class="mb-0 font-16 font-500">{{ diving.title }}</h4>
+                                        <p class="font-13 pb-0 mb-0 mt-n1 ellipsis color-gray">{{ diving.showAt }} ({{ diving.typeShow }})</p>
+                                        <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> {{ diving.location }}</p>
                                     </div>
-                                    <span class="chip chip-s bg-gray-light text-center font-400 wedive-chip">
-                                        <span class="color-highlight"><i class="far fa-user"></i>{{ diving.participants.filter(parti=>parti.gender=='m'&&parti.status=='joined').length + (userGender=='m' ? 1:0) }}</span>
-                                        <span class="color-shopping ms-1"><i class="far fa-user"></i>{{ diving.participants.filter(parti=>parti.gender=='f'&&parti.status=='joined').length + (userGender=='f' ? 1:0) }}</span>
+                                    <span class="chip chip-s bg-gray-light text-center font-400 wedive-chip color-black">
+                                        <i class="far fa-user"></i>
+                                        <span class="color-highlight" style="margin-right:2px;">{{ diving.participants.filter(parti=>parti.gender=='m'&&parti.status=='joined').length + (userGender=='m' ? 1:0) }}</span>/
+                                        <span class="color-shopping">{{ diving.participants.filter(parti=>parti.gender=='f'&&parti.status=='joined').length + (userGender=='f' ? 1:0) }}</span>
                                     </span>
                                 </div>
                             </div>
@@ -93,6 +99,7 @@ export default {
                         adminScore
                         }
                         _id
+                        title
                         description
                         status
                         type
@@ -153,7 +160,6 @@ export default {
   methods: {
       setData(_divingData) {
           this.divingData = _divingData;
-          //console.log(this.divingData);
           this.divingData.sort(function(a, b) {
             return new Date(b.startedAt) - new Date(a.startedAt);
           });
@@ -163,11 +169,11 @@ export default {
             var startedAt = new Date(diving.startedAt);
             var finishedAt = new Date(diving.finishedAt);
             if (diving.startedAt == diving.finishedAt) {
-                diving.title = (startedAt.getMonth()+1) + "월 " + startedAt.getDate() + "일 "
+                diving.showAt = (startedAt.getMonth()+1) + "월 " + startedAt.getDate() + "일"
             } else {
-                diving.title = (startedAt.getMonth()+1) + "/" + startedAt.getDate() + " ~ " + (finishedAt.getMonth()+1) + "/" + finishedAt.getDate() + " "
+                diving.showAt = (startedAt.getMonth()+1) + "/" + startedAt.getDate() + " ~ " + (finishedAt.getMonth()+1) + "/" + finishedAt.getDate() + ""
             }
-            diving.title += (diving.type.join().replace(/scubaDiving/gi,"스쿠버").replace(/freeDiving/gi,"프리").replace(/,/gi, "/") + " 다이빙");
+            diving.typeShow = (diving.type.join().replace(/scubaDiving/gi,"스쿠버").replace(/freeDiving/gi,"프리").replace(/,/gi, "/"));
             
             if (startedAt.getFullYear() == finishedAt.getFullYear() && startedAt.getMonth() == finishedAt.getMonth() && startedAt.getDate() == finishedAt.getDate()) {
                 diving.showFinishedAt = true;

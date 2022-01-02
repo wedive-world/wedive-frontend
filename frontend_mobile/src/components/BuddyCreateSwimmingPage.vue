@@ -128,9 +128,9 @@
                                         :src="(data.backgroundImages && data.backgroundImages.length>0) ? data.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'"
                                         style="width: 40px; height: 40px;" />
                                     </div>
-                                    <span v-if="data.type == 'site'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + htmlText + ' 사이트</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 164px);position: fixed;margin-top:-4px;\'>' + data.description+'</span>'"></span>
-                                    <span v-else-if="data.type == 'point'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + htmlText + ' 포인트</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 164px);position: fixed;margin-top:-4px;\'>' + data.description+'</span>'"></span>
-                                    <span v-else-if="data.type == 'center'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + htmlText + '</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 164px);position: fixed;margin-top:-4px;\'>' + data.description+'</span>'"></span>
+                                    <span v-if="data.type == 'site'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + htmlText + ' 사이트</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + data.description+'</span>'"></span>
+                                    <span v-else-if="data.type == 'point'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + htmlText + ' 포인트</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + data.description+'</span>'"></span>
+                                    <span v-else-if="data.type == 'center'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + htmlText + '</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + data.description+'</span>'"></span>
                                     
                                     </div>
                                 </template>
@@ -139,7 +139,7 @@
                                 id="search_result" 
                                 class="hide bg-secondary2" 
                                 v-on:click="search_result_click()"
-                                style="margin-left: 16px;margin-right: 16px;padding:7px 11px 7px;border:1px solid #ced4da;border-radius:16px;">
+                                style="margin-left: 16px;margin-right: 16px;padding:16px;;border:1px solid #ced4da;border-radius:16px;">
                                 <div class="d-flex align-items-center" style="position:relative !important;">
                                 <div :class="''+search_type + '_img'">
                                 <img
@@ -147,9 +147,9 @@
                                     :src="search_img"
                                     style="width: 40px; height: 40px;" />
                                 </div>
-                                <span v-if="search_type == 'site'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + search_loc + ' 사이트</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(search_adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 136px);position: fixed;margin-top:-4px;\'>' + search_desc+'</span>'"></span>
-                                <span v-else-if="search_type == 'point'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + search_loc + ' 포인트</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(search_adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 136px);position: fixed;margin-top:-4px;\'>' + search_desc+'</span>'"></span>
-                                <span v-else-if="search_type == 'center'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + search_loc + '</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(search_adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 136px);position: fixed;margin-top:-4px;\'>' + search_desc+'</span>'"></span>
+                                <span v-if="search_type == 'site'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + search_loc + ' 사이트</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(search_adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + search_desc+'</span>'"></span>
+                                <span v-else-if="search_type == 'point'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + search_loc + ' 포인트</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(search_adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + search_desc+'</span>'"></span>
+                                <span v-else-if="search_type == 'center'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + search_loc + '</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(search_adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + search_desc+'</span>'"></span>
                                 
                                 </div>
                             </div>
@@ -190,8 +190,9 @@
                     <div class="splide__slide">
                         <div id="slide3" class="card card-full pb-0 mb-0 border-bottom" style="height: calc( 100vh - 56px );">
                         <div class="content mt-1">
-                            <h4 class="pt-3 mb-2 content mt-0 mb-2">모집 내용을 입력해주세요.</h4>
+                            <h4 class="pt-3 mb-2 content mt-0 mb-2">모집 상세 입력</h4>
                             <div class="input-style validate-field mb-3 mt-4 me-3 ms-3">
+                                <textarea id="form6" rows="1" class="wedive-textarea2" placeholder="제목을 입력하세요." v-model="buddy_title"></textarea>
                                 <textarea id="form7" class="wedive-textarea" placeholder="이곳에 모집상세를 작성해보세요." v-model="buddy_detail"></textarea>
                             </div>
                             
@@ -407,6 +408,7 @@ export default {
         collapse1_showed: true,
         day_show: "",
         hour_show: "",
+        buddy_title: "",
         buddy_detail: "",
         search_type: "",
         search_img: "",
@@ -496,19 +498,34 @@ export default {
         });
         
       },
-      buddy_detail: function(newVal, oldVal) {
-        if (newVal != "") {
+      buddy_title: function(newVal, oldVal) {
+          if (this.buddy_title != "" && this.buddy_detail != "") {
             $("#btn_next3").attr("disabled", false);
-        }
+          }
+          else if (this.buddy_title == "" || this.buddy_detail == "") {
+              $("#btn_next3").attr("disabled", true);
+          }
+      },
+      buddy_detail: function(newVal, oldVal) {
+          if (this.buddy_title != "" && this.buddy_detail != "") {
+            $("#btn_next3").attr("disabled", false);
+          }
+          else if (this.buddy_title == "" || this.buddy_detail == "") {
+              $("#btn_next3").attr("disabled", true);
+          }
       },
       check_diving_scuba: function(newVal, oldVal) {
         if((this.check_diving_scuba == true || this.check_diving_free == true) && $("#search_result").hasClass("hide") == false) {
             $("#btn_next2").attr("disabled", false);
+        } else if((this.check_diving_scuba == false && this.check_diving_free == false) || $("#search_result").hasClass("hide") == true) {
+            $("#btn_next2").attr("disabled", true);
         }
       },
       check_diving_free: function(newVal, oldVal) {
         if((this.check_diving_scuba == true || this.check_diving_free == true) && $("#search_result").hasClass("hide") == false) {
             $("#btn_next2").attr("disabled", false);
+        } else if((this.check_diving_scuba == false && this.check_diving_free == false) || $("#search_result").hasClass("hide") == true) {
+            $("#btn_next2").attr("disabled", true);
         }
       },
   },
@@ -519,7 +536,7 @@ export default {
       next2() {
           $(".progress-bar").css("width", "75%");
           setTimeout(function() {
-              $("#form7").focus();
+              $("#form6").focus();
           },200);
       },
       next3() {
@@ -528,6 +545,7 @@ export default {
       async next4() {
         var _s_date = this.selectedDate.year + "-" + (this.selectedDate.month<10?"0"+this.selectedDate.month:this.selectedDate.month) + "-" + (this.selectedDate.day<10?"0"+this.selectedDate.day:this.selectedDate.day) + " " + this.hour_show + ":00";
         const s_date = new Date(_s_date).toISOString();
+        const buddy_title = this.buddy_title;
         const buddy_detail = this.buddy_detail;
         var participants = new Array();
         for (var i=0; i<parseInt($("#num_man").val()); i++) {
@@ -575,6 +593,7 @@ export default {
                 `,
                 variables: {
                     "input": {
+                        "title": buddy_title,
                         "description": buddy_detail,
                         "status": "searchable",
                         "type": diving_type,
@@ -637,6 +656,8 @@ export default {
           $("#search_recommend_1").removeClass("bg-secondary2");
           $("#search_recommend_2").removeClass("bg-secondary2");
           $("#search_recommend_3").removeClass("bg-secondary2");
+
+          $("#btn_next2").attr("disabled", true);
       },
       enableNext2(ev) {
           console.log(ev);
@@ -766,7 +787,10 @@ export default {
 .bg-e7e7e7 {background-color: transparent !important;}
 .interest-check input:checked ~ label {background-color: #2c9ac3;}
 .wedive-textarea {min-height: 160px;border: 2px solid #e9e9e9;background: #f5f5f5;padding-left: 10px;padding-right: 10px;}
+.wedive-textarea2 {max-height: 45px;min-height: 45px;border: 2px solid #e9e9e9;background: #f5f5f5;padding-left: 10px;padding-right: 10px;}
+.wedive-input {border: 2px solid #e9e9e9;background: #f5f5f5;padding: 0 10px;margin-bottom: 10px;width:100%;}
 .site_img:before{content:'';background:url(/static/images/assets/ico_pin0.png);width: 20px;height: 28px;position: absolute;bottom: -5px;left: 28px;background-size: cover;}
 .point_img:before{content:'';background:url(/static/images/assets/ico_pin1.png);width: 20px;height: 28px;position: absolute;bottom: -5px;left: 28px;background-size: cover;}
 .center_img:before{content:'';background:url(/static/images/assets/ico_pin2.png);width: 20px;height: 28px;position: absolute;bottom: -5px;left: 28px;background-size: cover;}
+
 </style>
