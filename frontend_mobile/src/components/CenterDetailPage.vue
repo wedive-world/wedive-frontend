@@ -47,7 +47,7 @@
                     <span class="service font-12">서비스 {{ (centerData.serviceScore/20).toFixed(1) }}</span>
                     <!--<span class="info" style="margin-bottom:3px;margin-top:3px;"><i class="icon_question font-12">별점 안내</i></span>-->
                 </div>
-                <div style="margin-top:8px;"><span>최근리뷰 {{ (centerData.reviewCount)?centerData.reviewCount:'0' }}</span>&nbsp;<font class="color-gray-light">|</font>&nbsp;
+                <div style="margin-top:8px;"><span class="font-600"><img class="ext-img" src="/static/images/assets/ico_chat.png" width="18"/> {{ (centerData.reviewCount)?centerData.reviewCount:'0' }}</span>&nbsp;<font class="color-gray-light">|</font>&nbsp;
                 <span v-if="centerData.institutionTypes && centerData.institutionTypes.length > 0"><span v-for="(insti,index) in centerData.institutionTypes" v-if="index < 6" v-on:click="openInstitutionBottomSheet()"><img class="ext-img" :src="'/static/images/agency/logo_'+insti.toLowerCase()+'.svg'" height="17" style="padding-bottom: 1px;" /><span v-if="index != (centerData.institutionTypes.length-1)">&nbsp;&nbsp;</span></span>&nbsp;<font class="color-gray-light">|</font>&nbsp;</span>
                 <span v-if="interest.type=='priceIndex'" v-for="interest in centerData.interests" class="color-gray">{{interest.title.replace(/\$/gi, '₩')}}</span>
                 <!--<span class="badge font-10 bg-fade-gray-dark">PADI 공식</span>-->
@@ -230,7 +230,7 @@
                     <div class="line-height-l pb-3 mt-2 light-border-bottom" v-if="centerData.tickets && centerData.tickets.length > 0" style="position: relative;">
                         <strong class="small-title"><i class="fas fa-money-bill-alt color-blue2-dark me-1"></i> 입장료 / 입장정보</strong>
                         <div>
-                            <table class="table table-borderless text-center rounded-3 shadow-sm mt-1 font-noto border-08" style="overflow: hidden;">
+                            <table class="table table-borderless text-center rounded-3 shadow-sm mt-1 font-noto" style="border-collapse: collapse;outline: 1px solid rgba(0, 0, 0, 0.08);overflow: hidden;">
                                 <tr v-for="ticket in centerData.tickets" class="border-bottom">
                                     <th class="pt-2 pb-2 font-400" style="background: rgba(196,187,171,.2);" width="96">{{ ticket.unitName }}</th>
                                     <td class="text-start p-2">{{ ticket.price | makeComma }}</td>
@@ -238,7 +238,7 @@
                             </table>
                         </div>
                         <div>
-                            <table class="table table-borderless text-center rounded-3 shadow-sm mt-1 font-noto border-08" style="overflow: hidden;">
+                            <table class="table table-borderless text-center rounded-3 shadow-sm mt-1 font-noto" style="border-collapse: collapse;outline: 1px solid rgba(0, 0, 0, 0.08);overflow: hidden;">
                                 <tr class="border-bottom">
                                     <th class="pt-2 pb-2 font-400" style="background: rgba(196,187,171,.2);" width="96">스쿠버 다이빙</th>
                                     <td v-if="centerData.divingType.includes('scubaDiving')" class="text-start p-2">{{ enteranceScuba[centerData.enteranceLevelScuba] }}</td>
@@ -929,16 +929,23 @@
         <div class="menu-title">
             <h4 class="text-center mt-4 pt-1 mb-2 font-noto font-19">{{ centerData.name }} 알림</h4>
             <a href="#" class="close-menu hide"><i class="fa fa-times-circle"></i></a>
+            <div class="text-center color-gray-light-mid mb-1">
+                <i class="wedive_icoset wedive_icoset_info me-1"></i> 원하는 일정에 알림을 추가할 수 있어요.
+            </div>
         </div>
         <div class="me-4 ms-4" style="border-bottom: 2px solid black;"></div>
         <div class="content mt-3">
-            <div class="wedive-select" style="max-height: 294px;overflow-y: auto;">
-                <div v-on:click="clickSelect" class="wedive-select-border" style="border-radius:12px;padding:8px;">
+            <div class="wedive-select" style="min-height:250px;max-height: 250px;overflow-y: auto;">
+                <div class="text-center">
+                    <img src="/static/images/assets/empty_schedule2.jpg" width="85%" class="mt-2"/>
+                    <p class="color-gray-light-mid">등록된 알림 일정이 없어요.</p>
+                </div>
+                <!--<div v-on:click="clickSelect" class="wedive-select-border">
                     <div class="form-check icon-check">
                         <label class="form-check-label font-noto font-14 font-500"><i class="far fa-circle font-20" style="display: block;"></i>
-                            프리다이빙 알림</label>
+                            나만의 월화수 알림</label>
                     </div>
-                    <div class="row mb-0 font-noto" style="margin-left:30px;">
+                    <div class="row mb-0 font-noto" style="margin:0 8px;">
                         <div class="col-6 mt-2 color-gray p-0">
                             <span>일</span>
                             <span class="emphasis">월</span>
@@ -948,7 +955,7 @@
                             <span>금</span>
                             <span>토</span>
                         </div>
-                        <div class="col-6 p-0 text-end" style="margin-top: 10px;padding-right:18px !important;">
+                        <div class="col-6 p-0 text-end" style="margin-top: 10px;">
                             <span class="chip-normal">오전</span>
                             <span class="chip-emphasis">오후</span>
                             <span class="chip-normal">저녁</span>
@@ -956,12 +963,12 @@
                     </div>
                 </div>
 
-                <div v-on:click="clickSelect" class="wedive-select-border" style="border-radius:12px;padding:8px;">
+                <div v-on:click="clickSelect" class="wedive-select-border">
                     <div class="form-check icon-check">
                         <label class="form-check-label font-noto font-14 font-500"><i class="far fa-circle font-20" style="display: block;"></i>
                             블라블라 다른이름</label>
                     </div>
-                    <div class="row mb-0 font-noto" style="margin-left:30px;">
+                    <div class="row mb-0 font-noto" style="margin:0 8px;">
                         <div class="col-6 mt-2 color-gray p-0">
                             <span>일</span>
                             <span class="emphasis">월</span>
@@ -971,7 +978,7 @@
                             <span>금</span>
                             <span>토</span>
                         </div>
-                        <div class="col-6 p-0 text-end" style="margin-top: 10px;padding-right:18px !important;">
+                        <div class="col-6 p-0 text-end" style="margin-top: 10px;">
                             <span class="chip-emphasis">오전</span>
                             <span class="chip-emphasis">오후</span>
                             <span class="chip-emphasis">저녁</span>
@@ -979,16 +986,16 @@
                     </div>
                 </div>
 
-                <div v-on:click="clickSelect" class="wedive-select-border" style="border-radius:12px;padding:8px;">
+                <div v-on:click="clickSelect" class="wedive-select-border">
                     <div class="form-check icon-check">
                         <label class="form-check-label font-noto font-14 font-500"><i class="far fa-circle font-20" style="display: block;"></i> 
                             서울지역 알림</label>
                     </div>
-                    <div class="row mb-0 font-noto" style="margin-left:30px;">
+                    <div class="row mb-0 font-noto" style="margin:0 8px;">
                         <div class="col-6 mt-2 color-highlight font-500 p-0">
                             <span>1/21(월) ~ 1/23(수)</span>
                         </div>
-                        <div class="col-6 p-0 text-end" style="margin-top: 10px;padding-right:18px !important;">
+                        <div class="col-6 p-0 text-end" style="margin-top: 10px;">
                             <span class="chip-normal">오전</span>
                             <span class="chip-emphasis">오후</span>
                             <span class="chip-normal">저녁</span>
@@ -996,27 +1003,27 @@
                     </div>
                 </div>
 
-                <div v-on:click="clickSelect" class="wedive-select-border" style="border-radius:12px;padding:8px;">
+                <div v-on:click="clickSelect" class="wedive-select-border">
                     <div class="form-check icon-check">
                         <label class="form-check-label font-noto font-14 font-500"><i class="far fa-circle font-20" style="display: block;"></i> 
                             동남아 여행 알림</label>
                     </div>
-                    <div class="row mb-0 font-noto" style="margin-left:30px;">
+                    <div class="row mb-0 font-noto" style="margin:0 8px;">
                         <div class="col-6 mt-2 color-highlight font-500 p-0">
                             <span>1/21(월) ~ 1/23(수)</span>
                         </div>
-                        <div class="col-6 p-0 text-end" style="margin-top: 10px;padding-right:18px !important;">
+                        <div class="col-6 p-0 text-end" style="margin-top: 10px;">
                             <span class="chip-normal">오전</span>
                             <span class="chip-emphasis">오후</span>
                             <span class="chip-normal">저녁</span>
                         </div>
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
 
-        <div class="text-center font-noto font-500 font-15" style="color: #858585;">
-            <i class="wedive_plus"></i> 알림 일정 추가
+        <div class="text-center font-noto font-500 font-15 mt-3">
+            <i class="wedive_plus me-1" style="filter:brightness(0);"></i> 알림 일정 추가
         </div>
 
         <div class="row m-0 mt-3">
@@ -2015,11 +2022,12 @@ export default {
   -webkit-text-emphasis-position: over;
   color: #1d397c ;
   font-weight:500;}
-.wedive-select-border {margin-bottom:10px;}
+.wedive-select-border {border-radius:12px;padding:8px;margin:2px 12px 10px 12px;}
 .wedive-select > .wedive-select-border {border: 2px solid lightgray;}
 .wedive-select > .active {border: 2px solid #2c9bc3;}
 .wedive-select i {color: lightgray;}
 .wedive-select .active i {color: #2c9bc3;}
 .chip-normal {padding:3px 8px;background:lightgray;border-radius:4px;color:gray;}
 .chip-emphasis {padding:3px 8px;background:#1d397c ;border-radius:4px;color:#ddd;}
+.border-bottom {border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important}
 </style>

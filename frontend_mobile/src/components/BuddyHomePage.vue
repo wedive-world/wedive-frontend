@@ -15,18 +15,43 @@
             </div>
         </div>
 
-        <div class="card card-style" style="box-shadow: none;background-image: linear-gradient(45deg, #35415f, #181818 70%);">
-            <div class="content mb-0 mt-3" style="min-height: 80px;">
-                <div class="row mb-0" style="position: relative;min-height: 80px;">
-                    <div class="col-9">
-                        <h4 class="text-start pt-2 mb-0 color-white">위다이브 컨시어지 <i class="fas fa-concierge-bell ms-1"></i></h4>
-                        <p class="text-start mb-0 color-white opacity-70">전문 매니저가 버디를 매칭해드려요.</p>
+
+        <div class="splide wedive-slider slider-no-arrows slider-no-dots" id="main-slider">
+            <div class="splide__track">
+                <div class="splide__list">
+
+                    <div class="splide__slide">
+                        <div class="card card-style" style="box-shadow: none;background-image: linear-gradient(45deg, #35415f, #181818 70%);">
+                            <div class="content mb-0 mt-3" style="min-height: 80px;">
+                                <div class="row mb-0" style="position: relative;min-height: 80px;">
+                                    <div class="col-9">
+                                        <h4 class="text-start pt-2 mb-0 color-white">위다이브 컨시어지 <i class="fas fa-concierge-bell ms-1"></i></h4>
+                                        <p class="text-start mb-0 color-white opacity-70">전문 매니저가 버디를 매칭해드려요.</p>
+                                    </div>
+                                    <img class="ps-0" src="/static/images/assets/concierge.gif" style="position:absolute;bottom:0;right:0;max-width:96px;width:96px;margin-bottom:-8px;"/>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <img class="ps-0" src="/static/images/assets/concierge.gif" style="position:absolute;bottom:0;right:0;max-width:96px;width:96px;margin-bottom:-8px;"/>
+                    <div class="splide__slide">
+                        <div class="card card-style" style="box-shadow: none;background: #494949;">
+                            <div class="mb-0" style="min-height: 96px;background:url(/static/images/assets/onoff1.gif);background-size: 154px 96px;background-repeat:no-repeat;background-position-x:right;">
+                                <div class="mb-0" style="position: relative;">
+                                    <div style="margin-top:16px;margin-left:15px;">
+                                        <h4 class="text-start pt-2 mb-0 color-white">로그인</h4>
+                                        <p class="text-start mb-0 color-white opacity-70">특별한 다이빙 서비스를 누려보세요.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
                 </div>
             </div>
         </div>
 
+        
         <div class="card card-style">
             <div class="content mb-0 mt-3">
                 <h4 class="text-start pt-2 mb-0"><a href="/">따끈따끈 신규 프리다이빙<i class="wedive-txt-all wedive_right"></i></a></h4>

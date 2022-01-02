@@ -113,7 +113,7 @@
                     <div class="splide single-slider slider-no-arrows slider-has-dots pb-4 mb-0" id="single-slider-info">
                         <div class="splide__track">
                             <div class="splide__list pt-n3">
-                                <div class="splide__slide">
+                                <div v-if="siteData.visitTimeDescription != ''" class="splide__slide">
                                     <div class="min-h-160 p-2">
                                         <div class="mt-2">
                                             <h1 class="text-center mb-0"><i class="fas fa-calendar-alt font-30 color-highlight"></i></h1>
@@ -124,7 +124,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="splide__slide">
+                                <div v-if="siteData.waterTemperatureDescription != ''" class="splide__slide">
                                     <div class="min-h-160 p-2">
                                         <div class="mt-2">
                                             <h1 class="text-center mb-0"><i class="fas fa-temperature-high font-30 color-highlight"></i></h1>
@@ -135,7 +135,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="splide__slide">
+                                <div v-if="siteData.deepDescription != ''" class="splide__slide">
                                     <div class="min-h-190 p-2">
                                         <div class="mt-2">
                                             <h1 class="text-center mb-0"><i class="fas fa-level-down-alt font-30 color-highlight"></i></h1>
@@ -146,7 +146,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="splide__slide">
+                                <div v-if="siteData.waterFlowDescription != ''" class="splide__slide">
                                     <div class="min-h-160 p-2">
                                         <div class="mt-2">
                                             <h1 class="text-center mb-0"><i class="fas fa-water font-30 color-highlight"></i></h1>
@@ -157,7 +157,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="splide__slide">
+                                <div v-if="siteData.eyeSightDescription != ''" class="splide__slide">
                                     <div class="min-h-160 p-2">
                                         <div class="mt-2">
                                             <h1 class="text-center mb-0"><i class="fas fa-eye font-30 color-highlight"></i></h1>
@@ -168,7 +168,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="splide__slide">
+                                <div v-if="siteData.highlightDescription != ''" class="splide__slide">
                                     <div class="min-h-160 p-2">
                                         <div class="mt-2">
                                             <h1 class="text-center mb-0"><i class="fas fa-highlighter font-30 color-highlight"></i></h1>
