@@ -1616,6 +1616,7 @@ export default {
                 });
             };
         }
+        
         setTimeout(function() {
             $("#cover-slider-temp").animate({opacity: "0"}, 1200);
         },1000);
@@ -1632,7 +1633,12 @@ export default {
     if (this.$route.query.footer && this.$route.query.footer == 'hide') {
         $("#footer-bar").hide();
     }
-
+  },
+  created() {
+      window.addEventListener('beforeunload', this.beforeunload)
+  },
+  beforeDestroy () {
+    document.removeEventListener("beforeunload", this.beforeunload);
   },
   components: {
     StarRating,
@@ -1905,6 +1911,14 @@ export default {
           event.currentTarget.children[0].children[0].children[0].classList.toggle("fa-circle");
           event.currentTarget.children[0].children[0].children[0].classList.toggle("fa-check-circle")
       },
+      beforeunload(e) {
+        if ($(".goverlay").length > 0) {
+            $(".gclose").click();
+            e.preventDefault();
+            e.returnValue = '';
+            return false;
+        }
+      }
   }
 
   
