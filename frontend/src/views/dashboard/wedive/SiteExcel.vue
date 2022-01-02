@@ -45,7 +45,7 @@
     </div>
 
     <b-modal
-      id="modal-add"
+      id="modal-add2"
       title="사이트 추가"
       ok-only
       ok-title="Add"
@@ -422,7 +422,8 @@ export default {
       var cnt = parseInt(this.addCount);
       for (var i=0; i<cnt; i++) {
         var uuid = generateUUID();
-        var i_input = {uniqueName: this.uniqueName.value, name: this.name.value, latitude: parseFloat(this.latitude), longitude: parseFloat(this.longitude)};
+        //var i_input = {uniqueName: this.uniqueName.value, name: this.name.value, latitude: parseFloat(this.latitude), longitude: parseFloat(this.longitude)};
+        var i_input = {uniqueName: uuid, name: uuid, latitude: 1.1, longitude: 2.2};
         try {
           await upsertDiveSite(i_input)
         } catch (e) {
@@ -437,6 +438,15 @@ export default {
           })
         }
       }
+      this.$swal({
+        title: '완료',
+        text: '추가가 완료되었습니다.',
+        icon: 'success',
+        customClass: {
+          confirmButton: 'btn btn-primary',
+        },
+        buttonsStyling: false,
+      })
       //this.$apollo.mutate({mutation: CREATE_INTEREST, variables: {interestInput: i_input}}).then((data) => {console.log(data)}).catch((error) => {console.log(error);});
     },
     async AddSite() {

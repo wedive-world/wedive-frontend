@@ -1649,13 +1649,13 @@ export default {
         map: null,
         marker_list: [],
         centerData: {},
-        feature_list: ["외국어가능", "샤워가능", "룸서비스", "늦은 퇴실", "컨시어지", "주차", "주방", "남녀화장실", "24시업무", "비지니스", "장애인편의", "세탁서비스", "금연실", "아이돌봄", "반려동물", "WIFI", "공항셔틀", "피트니스", "도미토리", "감압챔버", "픽업", "", "전용보트", "아쿠아리움", "나이트록스", "DPV", "무료렌탈"],
+        feature_list: ["외국어가능", "샤워가능", "룸서비스", "늦은 퇴실", "컨시어지", "주차", "주방", "남녀화장실", "24시업무", "비지니스", "장애인편의", "세탁서비스", "금연실", "아이돌봄", "반려동물", "WIFI", "공항셔틀", "피트니스", "도미토리", "감압챔버", "픽업", "", "전용보트", "아쿠아리움", "나이트록스", "DPV", "무료렌탈", "강의실", "수건제공", "유료샤워", "딥수영장", "장비렌탈불가", "스튜디오", "국제규격"],
         pay_list: ["현금", "VISA", "MasterCard", "UnionPay", "JCB", "American Express", "Discover card", "PAYCO", "Kakao Pay", "Naver Pay"],
         equipt_list: ["마스크", "레귤레이터", "다이버 PC", "다이버 워치", "나침반", "수중 스쿠터", "산소탱크", "핀", "구명조끼", "나이프", "스노클링", "부츠", "잠수복 상의", "잠수복 하의", "라이트", "스쿠버 세트", "카메라", "수심계", , "게이지", "잠수복", , "풀세트", "유아장비"],
-        rentalOptions: ["스킨스쿠버 세트", "스킨 세트", "마스크", "스노클", "잠수복", "오리발(핀)", "부츠", "장갑", "부츠&장갑", "웨이트&벨트", "웨이트", "스쿠버 세트", "부력조절기", "레귤레이터", "보조호흡기", "SMB", "공기통", "나이트록스", "라이트", "다이브컴퓨터", "카메라", "DPV", "조류걸이", "프리 세트", "프리 핀", "프리 마스크", "프리 스노클", "프리 잠수복", "프리 웨이트&벨트", "프리 웨이트", "바텀웨이트", "랜야드", "부이", "로프", "부이&로프", "고정부이"],
+        rentalOptions: ["스킨스쿠바 풀세트", "스킨 풀세트", "마스크", "스노클", "잠수복", "오리발", "부츠", "장갑", "부츠&장갑", "웨이트&벨트", "웨이트", "스쿠버 세트", "BCD", "호흡기", "보조호흡기", "SMB", "공기통", "나이트록스", "라이트", "컴퓨터", "카메라", "DPV", "조류걸이", "프리 풀세트", "프리 핀", "프리 마스크", "프리 스노클", "프리 잠수복", "프리벨트", "프리웨이트", "바텀웨이트", "랜야드", "부이", "로프", "부이&로프", "고정부이", "사이드마운트", "더블탱크", "아르곤탱크", "재호흡기", "공기충전", "옥토퍼스", "마스크&스노클", "후드", "나이프", "랜턴", "텍렌턴", "잠수복(숏)", "잠수복(원피스)", "프리 마스크&스노클", "모노핀", "탐침봉", "나침반", "다이빙풀", "머메이드"],
         imageCategory: ["다이빙", "교육", "센터"],
-        enteranceScuba: {"5": "강사 동반 입장가능 (그 외 불가)", "4": "마스터 이상 버디입장 가능", "3": "레스큐 이상 버디입장 가능", "2": "어드밴스 이상 버디입장 가능", "1": "오픈워터 이상 버디입장 가능", "0": "누구나 버디입장 가능"},
-        enteranceFree: {"5": "강사 동반 입장가능 (그 외 불가)", "4": "레벨4 이상 버디입장 가능", "3": "레벨3 이상 버디입장 가능", "2": "레벨2 이상 버디입장 가능", "1": "레벨1 이상 버디입장 가능", "0": "누구나 버디입장 가능"},
+        enteranceScuba: {"5": "강사 동반 입장 (그 외 불가)", "4": "마스터 이상 버디입장 가능", "3": "레스큐 이상 버디입장 가능", "2": "어드밴스 이상 버디입장 가능", "1": "오픈워터 이상 버디입장 가능", "0": "누구나 버디입장 가능"},
+        enteranceFree: {"5": "강사 동반 입장 (그 외 불가)", "4": "레벨4 이상 버디입장 가능", "3": "레벨3 이상 버디입장 가능", "2": "레벨2 이상 버디입장 가능", "1": "레벨1 이상 버디입장 가능", "0": "누구나 버디입장 가능"},
         rating: 5,
         rateDescription: '매우 만족해요!',
         review_detail: '',
@@ -1958,7 +1958,7 @@ export default {
 .ico_feature20 {width: 44px;height: 40px;background-position: -45px -108px;}
 .ico_feature21 {width: 44px;height: 40px;background-position: -90px -108px;}
 .ico_feature22 {width: 44px;height: 40px;background-position: -135px -108px;}
-.ico_feature23 {width: 44px;height: 40px;background-position: -180px -108px;}
+.ico_feature23 {width: 44px;height: 40px;background-position: -180px -111px;}
 .ico_feature24 {width: 44px;height: 40px;background-position: -225px -108px;}
 .ico_feature25 {width: 44px;height: 40px;background-position: 0px -156px;}
 .ico_feature26 {width: 44px;height: 40px;background-position: -45px -156px;}
@@ -1966,8 +1966,16 @@ export default {
 .ico_feature28 {width: 44px;height: 40px;background-position: -135px -156px;}
 .ico_feature29 {width: 44px;height: 40px;background-position: -180px -156px;}
 .ico_feature30 {width: 44px;height: 40px;background-position: -225px -156px;}
+.ico_feature31 {width: 44px;height: 40px;background-position: 0px -196px;}
+.ico_feature32 {width: 44px;height: 40px;background-position: -45px -196px;}
+.ico_feature33 {width: 44px;height: 40px;background-position: -90px -196px;}
+.ico_feature34 {width: 44px;height: 40px;background-position: -135px -196px;}
+.ico_feature35 {width: 44px;height: 40px;background-position: -180px -196px;}
+.ico_feature36 {width: 44px;height: 40px;background-position: -225px -196px;}
 
-.icon-service {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/assets/wedive_service2.png);background-repeat: no-repeat;-webkit-background-size: 270px 200px;background-size: 270px 200px;}
+
+
+.icon-service {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/assets/wedive_service2.png);background-repeat: no-repeat;-webkit-background-size: 270px 270px;background-size: 270px 270px;}
 
 .ico_equipt {}
 .ico_equipt1 {width: 60px;height: 63px;background-position: 0px 3px;}
@@ -2007,7 +2015,44 @@ export default {
 .ico_equipt35 {width: 60px;height: 63px;background-position: -224px -280px;}
 .ico_equipt36 {width: 60px;height: 63px;background-position: -280px -280px;}
 
-.icon-equiptment {overflow: hidden;display: block;margin-left: 3px;background-image: url(/static/images/assets/wedive_equiptment2.png);background-repeat: no-repeat;-webkit-background-size: 335px 350px;background-size: 335px 350px;}
+
+.ico_equipt37 {width: 60px;height: 63px;background-position: 0px -336px;}
+.ico_equipt38 {width: 60px;height: 63px;background-position: -60px -336px;}
+.ico_equipt39 {width: 60px;height: 63px;background-position: -112px -336px;}
+.ico_equipt40 {width: 60px;height: 63px;background-position: -168px -336px;}
+.ico_equipt41 {width: 60px;height: 63px;background-position: -224px -336px;}
+.ico_equipt42 {width: 60px;height: 63px;background-position: -280px -336px;}
+
+.ico_equipt43 {width: 60px;height: 63px;background-position: 0px -398px;}
+.ico_equipt44 {width: 60px;height: 63px;background-position: -60px -397px;}
+.ico_equipt45 {width: 60px;height: 63px;background-position: -112px -398px;}
+.ico_equipt46 {width: 60px;height: 63px;background-position: -168px -398px;}
+.ico_equipt47 {width: 60px;height: 63px;background-position: -224px -398px;}
+.ico_equipt48 {width: 60px;height: 63px;background-position: -280px -398px;}
+
+.ico_equipt49 {width: 60px;height: 63px;background-position: 0px -466px;}
+.ico_equipt50 {width: 60px;height: 63px;background-position: -58px -466px;}
+.ico_equipt51 {width: 60px;height: 63px;background-position: -112px -466px;}
+.ico_equipt52 {width: 60px;height: 63px;background-position: -168px -466px;}
+.ico_equipt53 {width: 60px;height: 63px;background-position: -224px -466px;}
+.ico_equipt54 {width: 60px;height: 63px;background-position: -280px -466px;}
+
+.ico_equipt55 {width: 60px;height: 63px;background-position: 0px -525px}
+.ico_equipt56 {width: 60px;height: 63px;background-position: -58px -525px;}
+.ico_equipt57 {width: 60px;height: 63px;background-position: -112px -525px;}
+.ico_equipt58 {width: 60px;height: 63px;background-position: -168px -525px;}
+.ico_equipt59 {width: 60px;height: 63px;background-position: -224px -525px;}
+.ico_equipt60 {width: 60px;height: 63px;background-position: -280px -525px;}
+
+.ico_equipt61 {width: 60px;height: 63px;background-position: 0px -560px;}
+.ico_equipt62 {width: 60px;height: 63px;background-position: -58px -560px;}
+.ico_equipt63 {width: 60px;height: 63px;background-position: -112px -560px;}
+.ico_equipt64 {width: 60px;height: 63px;background-position: -168px -560px;}
+.ico_equipt65 {width: 60px;height: 63px;background-position: -224px -560px;}
+.ico_equipt66 {width: 60px;height: 63px;background-position: -280px -560px;}
+
+
+.icon-equiptment {overflow: hidden;display: block;margin-left: 3px;background-image: url(/static/images/assets/wedive_equiptment2.png);background-repeat: no-repeat;-webkit-background-size: 335px 585px;background-size: 335px 585px;}
 
 .wedive-ul {width: 100%;list-style:none;display: inline-block;margin-bottom: 0;padding-left: 5px !important;padding-right: 5px !important;}
 .wedive-ul > li {float: left;width: 50%;}

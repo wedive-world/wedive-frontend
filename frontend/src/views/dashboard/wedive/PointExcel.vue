@@ -367,7 +367,7 @@ export default {
         var temp = this.sites.filter(site=>site.uniqueName == value);
         if (temp.length > 0) {
             value = temp[0]._id;
-            field = 'diveSite';
+            field = 'diveSiteId';
         }
         else {
             errString = temp + ' 값을 site에서 찾을 수 없습니다.';
@@ -454,6 +454,15 @@ export default {
           })
         }
       }
+      this.$swal({
+        title: '완료',
+        text: '추가가 완료되었습니다.',
+        icon: 'success',
+        customClass: {
+          confirmButton: 'btn btn-primary',
+        },
+        buttonsStyling: false,
+      })
     },
     async AddPoint() {
       var i_input = {uniqueName: this.uniqueName.value, name: this.name.value, latitude: parseFloat(this.latitude), longitude: parseFloat(this.longitude)};

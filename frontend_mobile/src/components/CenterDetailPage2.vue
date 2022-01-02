@@ -369,6 +369,16 @@
                                 <i class="ico_feature18 icon-service"></i>
                                 <p class="span_feature text-center">피트니스</p>
                             </div>
+
+                            <div v-for="n in 17" class="ico_feature col-3">
+                                <i :class="'ico_feature'+(n+18)+' icon-service'"></i>
+                                <p class="span_feature text-center">시설{{n}}</p>
+                            </div>
+
+
+                            
+                            
+                            
                         </div>
                     </div>
                     
@@ -586,6 +596,11 @@
                         <div class="ico_equipt col-3">
                             <i class="ico_equipt36 icon-equiptment"></i>
                             <p class="span_feature text-center">로프</p>
+                        </div>
+                        
+                        <div v-for="n in 19" class="ico_equipt col-3">
+                            <i :class="'ico_equipt' + (n+36) + ' icon-equiptment'"></i>
+                            <p class="span_feature text-center">장비 {{n}}</p>
                         </div>
                         
                     </div>
@@ -1365,7 +1380,6 @@ export default {
 .evaluation>span .icon_question {display: inline-block;position: relative;top: 1px;display: block;width: 18px;height: 18px;background-size: 18px 18px;background-repeat: no-repeat;background-image: url(/static/images/question.png);text-indent: -9999px;}
 
 .span_feature {width:66px;}
-.ico_feature {}
 .ico_feature1 {width: 44px;height: 40px;background-position: 0px 0px;}
 .ico_feature2 {width: 44px;height: 40px;background-position: -45px 0px;}
 .ico_feature3 {width: 44px;height: 40px;background-position: -90px 0px;}
@@ -1384,8 +1398,28 @@ export default {
 .ico_feature16 {width: 44px;height: 40px;background-position: -135px -72px;}
 .ico_feature17 {width: 44px;height: 40px;background-position: -180px -72px;}
 .ico_feature18 {width: 44px;height: 40px;background-position: -225px -72px;}
+.ico_feature19 {width: 44px;height: 40px;background-position: 0px -108px;}
+.ico_feature20 {width: 44px;height: 40px;background-position: -45px -108px;}
+.ico_feature21 {width: 44px;height: 40px;background-position: -90px -108px;}
+.ico_feature22 {width: 44px;height: 40px;background-position: -135px -108px;}
+.ico_feature23 {width: 44px;height: 40px;background-position: -180px -108px;}
+.ico_feature24 {width: 44px;height: 40px;background-position: -225px -108px;}
+.ico_feature25 {width: 44px;height: 40px;background-position: 0px -156px;}
+.ico_feature26 {width: 44px;height: 40px;background-position: -45px -156px;}
+.ico_feature27 {width: 44px;height: 40px;background-position: -90px -156px;}
+.ico_feature28 {width: 44px;height: 40px;background-position: -135px -156px;}
+.ico_feature29 {width: 44px;height: 40px;background-position: -180px -156px;}
+.ico_feature30 {width: 44px;height: 40px;background-position: -225px -156px;}
+.ico_feature31 {width: 44px;height: 40px;background-position: 0px -196px;}
+.ico_feature32 {width: 44px;height: 40px;background-position: -45px -196px;}
+.ico_feature33 {width: 44px;height: 40px;background-position: -90px -196px;}
+.ico_feature34 {width: 44px;height: 40px;background-position: -135px -196px;}
+.ico_feature35 {width: 44px;height: 40px;background-position: -180px -196px;}
+.ico_feature36 {width: 44px;height: 40px;background-position: -225px -196px;}
 
-.icon-service {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/wedive_service2.png);background-repeat: no-repeat;-webkit-background-size: 270px 200px;background-size: 270px 200px;}
+
+
+.icon-service {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/assets/wedive_service2.png);background-repeat: no-repeat;-webkit-background-size: 270px 270px;background-size: 270px 270px;}
 
 .ico_equipt {}
 .ico_equipt1 {width: 60px;height: 63px;background-position: 0px 3px;}
@@ -1424,7 +1458,45 @@ export default {
 .ico_equipt34 {width: 60px;height: 63px;background-position: -168px -280px;}
 .ico_equipt35 {width: 60px;height: 63px;background-position: -224px -280px;}
 .ico_equipt36 {width: 60px;height: 63px;background-position: -280px -280px;}
-.icon-equiptment {overflow: hidden;display: block;margin-left: 3px;background-image: url(/static/images/assets/wedive_equiptment2.png);background-repeat: no-repeat;-webkit-background-size: 335px 350px;background-size: 335px 350px;}
+
+
+.ico_equipt37 {width: 60px;height: 63px;background-position: 0px -336px;}
+.ico_equipt38 {width: 60px;height: 63px;background-position: -60px -336px;}
+.ico_equipt39 {width: 60px;height: 63px;background-position: -112px -336px;}
+.ico_equipt40 {width: 60px;height: 63px;background-position: -168px -336px;}
+.ico_equipt41 {width: 60px;height: 63px;background-position: -224px -336px;}
+.ico_equipt42 {width: 60px;height: 63px;background-position: -280px -336px;}
+
+.ico_equipt43 {width: 60px;height: 63px;background-position: 0px -398px;}
+.ico_equipt44 {width: 60px;height: 63px;background-position: -60px -397px;}
+.ico_equipt45 {width: 60px;height: 63px;background-position: -112px -398px;}
+.ico_equipt46 {width: 60px;height: 63px;background-position: -168px -398px;}
+.ico_equipt47 {width: 60px;height: 63px;background-position: -224px -398px;}
+.ico_equipt48 {width: 60px;height: 63px;background-position: -280px -398px;}
+
+.ico_equipt49 {width: 60px;height: 63px;background-position: 0px -466px;}
+.ico_equipt50 {width: 60px;height: 63px;background-position: -58px -466px;}
+.ico_equipt51 {width: 60px;height: 63px;background-position: -112px -466px;}
+.ico_equipt52 {width: 60px;height: 63px;background-position: -168px -466px;}
+.ico_equipt53 {width: 60px;height: 63px;background-position: -224px -466px;}
+.ico_equipt54 {width: 60px;height: 63px;background-position: -280px -466px;}
+
+.ico_equipt55 {width: 60px;height: 63px;background-position: 0px -525px}
+.ico_equipt56 {width: 60px;height: 63px;background-position: -58px -525px;}
+.ico_equipt57 {width: 60px;height: 63px;background-position: -112px -525px;}
+.ico_equipt58 {width: 60px;height: 63px;background-position: -168px -525px;}
+.ico_equipt59 {width: 60px;height: 63px;background-position: -224px -525px;}
+.ico_equipt60 {width: 60px;height: 63px;background-position: -280px -525px;}
+
+.ico_equipt61 {width: 60px;height: 63px;background-position: 0px -560px;}
+.ico_equipt62 {width: 60px;height: 63px;background-position: -58px -560px;}
+.ico_equipt63 {width: 60px;height: 63px;background-position: -112px -560px;}
+.ico_equipt64 {width: 60px;height: 63px;background-position: -168px -560px;}
+.ico_equipt65 {width: 60px;height: 63px;background-position: -224px -560px;}
+.ico_equipt66 {width: 60px;height: 63px;background-position: -280px -560px;}
+
+
+.icon-equiptment {overflow: hidden;display: block;margin-left: 3px;background-image: url(/static/images/assets/wedive_equiptment2.png);background-repeat: no-repeat;-webkit-background-size: 335px 585px;background-size: 335px 585px;}
 
 .wedive-ul {width: 100%;list-style:none;display: inline-block;margin-bottom: 0;padding-left: 5px !important;padding-right: 5px !important;}
 .wedive-ul > li {float: left;width: 50%;}

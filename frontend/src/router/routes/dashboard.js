@@ -45,6 +45,12 @@ export default [
     props: true,
     component: () => import('@/views/dashboard/wedive/CenterPage.vue'),
   },
+  {
+    path: '/dashboard/site/:id',
+    name: 'dashboard-site-detail',
+    props: true,
+    component: () => import('@/views/dashboard/wedive/SitePage.vue'),
+  },
   
   
 ]
