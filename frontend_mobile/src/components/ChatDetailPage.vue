@@ -194,7 +194,10 @@
   </div>
 </template>
 <script>
+import gql from 'graphql-tag'
 const axios = require("axios")
+
+
 var today = new Date();
 function timeForToday(value) {
     const timeValue = new Date(value);
@@ -228,7 +231,7 @@ export default {
   name: 'HelloWorld',
   async beforeRouteEnter(to, from, next) {
     if (to.params.id != null) {
-        var result = await axios({
+        /*var result = await axios({
             url: 'https://chat.wedives.com/graphql',
             method: 'post',
             headers: {
@@ -256,8 +259,9 @@ export default {
 
             }
             });
-
+        */
         var ret = null;
+        var result = null
         if (result && result.data && result.data.data && result.data.data.getMessagesByRoomIdSinceUpdated) {ret = result.data.data.getMessagesByRoomIdSinceUpdated;}
         
         next(vm => {vm.setData(ret, to.params.id)});
@@ -284,6 +288,41 @@ export default {
           }
       }
   },
+  apollo: {
+    $subscribe: {
+        subscribeRoomMessage: {
+            query: gql`
+                subscription Subscription($roomId: String!) {
+                    subscribeRoomMessage(roomId: $roomId) {
+                        _id
+                        text
+                        author {
+                        name
+                        avatarOrigin
+                        createdAt
+                        }
+                        attachments {
+                        attachmentText
+                        imageUrl
+                        audioUrl
+                        videoUrl
+                        }
+                        createdAt
+                    }
+                }
+            `,
+            variables () {
+                return {
+                    roomId: 'LNaKzPP2jFTdeu6oMwLbB42HJpvLvGXL3B'
+                }
+            },
+            result ({ data }) {
+                console.log(data)
+            },
+
+        }
+    }
+  },
   mounted() {
     var element = document.getElementById("speech-content");
     element.scrollTop = element.scrollHeight;
@@ -306,6 +345,42 @@ export default {
         $('#speech-content').scrollTop($('#speech-content')[0].scrollHeight);
     },200);
     
+
+
+
+
+
+
+
+
+
+
+    /*var client = new GraphQLClient('https://chat.wedives.com/graphql',
+    {
+        headers: {
+            countrycode: 'ko',
+            idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+        }
+    });
+    var subscription = gql`
+        subscription Subscription($roomId: String!) {
+            subscribeRoomMessage(roomId: $roomId) {
+                text
+                author {
+                name
+                avatarOrigin
+                }
+                attachments {
+                imageUrl
+                audioUrl
+                videoUrl
+                attachmentText
+                }
+                createdAt
+            }
+        }
+    `
+    result_img_user = await client.request(subscription, {roomId: this.roomId,});*/
   },
   components: {
     
@@ -337,8 +412,10 @@ export default {
   }, methods: {
     setData(chatData, roomId) {
         this.chatData = chatData;
-        this.chatData.reverse();
-        this.chatData.forEach(chat => chat.showAt = timeForToday(chat.createdAt))
+        if (chatData) {
+            this.chatData.reverse();
+            this.chatData.forEach(chat => chat.showAt = timeForToday(chat.createdAt))
+        }
         this.roomId = roomId;
     },
     keyboardShowHandler(event) {

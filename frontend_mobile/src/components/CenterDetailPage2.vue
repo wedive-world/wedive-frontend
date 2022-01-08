@@ -1402,7 +1402,7 @@ export default {
 .ico_feature20 {width: 44px;height: 40px;background-position: -45px -108px;}
 .ico_feature21 {width: 44px;height: 40px;background-position: -90px -108px;}
 .ico_feature22 {width: 44px;height: 40px;background-position: -135px -108px;}
-.ico_feature23 {width: 44px;height: 40px;background-position: -180px -108px;}
+.ico_feature23 {width: 44px;height: 40px;background-position: -180px -111px;}
 .ico_feature24 {width: 44px;height: 40px;background-position: -225px -108px;}
 .ico_feature25 {width: 44px;height: 40px;background-position: 0px -156px;}
 .ico_feature26 {width: 44px;height: 40px;background-position: -45px -156px;}

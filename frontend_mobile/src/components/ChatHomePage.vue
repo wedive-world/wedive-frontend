@@ -7,14 +7,14 @@
 
         <a v-on:click="login()" class="btn btn-m mb-3 rounded-xl text-uppercase font-500 shadow-s bg-secondary font-noto"><i class="fas fa-user-lock me-1"></i> {{ login_word }}</a>
     </div>
-    <div v-else-if="chatData.length == 0" class="card card-style ms-0 me-0 rounded-0 text-center mb-0" style="height: calc(100vh - 58px);display:block;">
+    <div v-else-if="getJoinedRoomList.length == 0" class="card card-style ms-0 me-0 rounded-0 text-center mb-0" style="height: calc(100vh - 58px);display:block;">
         <img src="/static/images/assets/empty_message.jpg" width="60%" style="margin-top: 25%;" />
         <p class="color-gray mb-2">진행중인 대화가 없습니다.</p>
     </div>
     <div v-else class="card card-style ms-0 me-0 rounded-0 mb-0" style="min-height:calc(100vh - 101px)">
         <div class="content mt-0 mb-0">
-            <a v-for="chat in chatData" :href="'/chat/'+chat._id" class="d-block border-bottom pt-2">
-                <div v-if="chat.chatUsers.length == 2" class="p-relative d-inline-block w-60 mb-2">
+            <a v-for="chat in getJoinedRoomList" :href="'/chat/'+chat._id" class="d-block border-bottom pt-2">
+                <div v-if="chat.usersCount == 2" class="p-relative d-inline-block w-60 mb-2">
                     <div v-for="user in chat.chatUsers.filter(user=>user._id != uid)" class="user-img">
                         <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
                             <defs>
@@ -27,7 +27,7 @@
                         </svg>
                     </div>
                 </div>
-                <div v-else-if="chat.chatUsers.length == 3" class="p-relative d-inline-block w-60 mb-2">
+                <div v-else-if="chat.usersCount == 3" class="p-relative d-inline-block w-60 mb-2">
                     <div class="user-img img-sm">
                         <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
                             <defs>
@@ -99,9 +99,9 @@
                 </div>
                 <div class="ms-2 d-inline-block v-align-top">
                     <h5 class="font-15 font-600 mb-0" v-html="chat.chatUsers.filter(user=>user._id != uid).map(user => {return user.name}).join()"></h5>
-                    <p class="line-height-s opacity-60 font-13">{{ chat.lastChatMessage }}</p>
+                    <p class="line-height-s opacity-60 font-13">{{ (chat.lastChatMessage && chat.lastChatMessage.text)?(chat.lastChatMessage.text.includes('[[')&&chat.lastChatMessage.text.includes(']]')?'이모티콘':chat.lastChatMessage.text): ''}}</p>
                 </div>
-                <div class="latest">{{ chat.showedAt }}</div>
+                <div class="latest">{{ timeForToday(chat.createdAt) }}</div>
             </a>
             
             
@@ -111,23 +111,10 @@
 </template>
 <script>
 const axios = require("axios")
+import gql from 'graphql-tag'
 import { GoogleAuthProvider, getAuth, signInWithPopup, onAuthStateChanged  } from "firebase/auth";
 
 var today = new Date();
-function timeForToday(value) {
-    const timeValue = new Date(value);
-    const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
-    if (betweenTime < 1) return '방금전';
-    else if (betweenTime < 6) {
-        return `${betweenTime}분전`;
-    }
-    else {
-        var hour = timeValue.getHours();
-        if (hour < 12) hour = "오전 " + hour
-        else hour = "오후 " + (hour-12);
-        return hour + ":" + timeValue.getMinutes();
-    }
-}
 
 async function getChatRooms() {
     var result = null;
@@ -141,42 +128,31 @@ async function getChatRooms() {
             },
             data: {
                 query: `
-                query Query {
+                query GetJoinedRoomList {
                     getJoinedRoomList {
                         _id
                         type
-                        createdAt
                         name
                         lastMessageAt
                         numOfmessages
-                        canLeave
-                        readOnly
+                        unread
+                        createdAt
                         chatUsers {
-                            _id
-                            active
-                            name
-                            email
-                            avatarOrigin
-                            utcOffset
-                        }
-                        owner {
                         _id
-                        active
                         name
-                        email
                         avatarOrigin
-                        utcOffset
+                        }
+                        usersCount
+                        owner {
+                        name
+                        avatarOrigin
                         }
                         lastChatMessage {
-                        _id
                         text
-                        attachments {
-                            _id
-                            attachmentText
-                            imageUrl
-                            audioUrl
-                            videoUrl
+                        author {
+                            name
                         }
+                        createdAt
                         }
                     }
                 }
@@ -191,34 +167,7 @@ async function getChatRooms() {
 }
 export default {
   name: 'HelloWorld',
-  async beforeRouteEnter(to, from, next) {
-    if (localStorage.idToken) {
-        var result = await getChatRooms();
-        var ret = (result && result.data && result.data.data && result.data.data.getJoinedRoomList) ? result.data.data.getJoinedRoomList : null
-        if (ret == null) {
-            const auth = getAuth();
-            onAuthStateChanged(auth, async (user) => {
-                if (user) {
-                    localStorage.idToken = await user.getIdToken(true);
-                    result = await getChatRooms();
-                    ret = (result && result.data && result.data.data && result.data.data.getJoinedRoomList) ? result.data.data.getJoinedRoomList : null
-                    next(vm => {vm.setData(ret)});
-                } else {
-                    console.log("signed out");
-                }
-            });
-        } else {
-            next(vm => {vm.setData(ret)});
-        }
-    } else {
-        next(vm => {vm.setData(null)});
-    }
-  },
-  mounted() {
-    
-    //$(".page-title").hide();
-    //$(".page-title-clear").hide();
-
+  async mounted() {
     if (this.$route.query.header && this.$route.query.header == 'hide') {
       $(".page-title").hide();
       $(".page-title-clear").hide();
@@ -229,7 +178,6 @@ export default {
     }
   },
   components: {
-    
   },
   created() {
     setTimeout(function() {
@@ -243,18 +191,58 @@ export default {
   },
   data () {
     return {
-        chatData: {},
+        getJoinedRoomList: [],
         idToken: localStorage.idToken,
         nickName: localStorage.nickName,
         login_word : (localStorage.idToken == null) ? '로그인' : '프로필 등록',
         uid: localStorage.uid,
     }
   }, 
+  apollo: {
+      getJoinedRoomList: gql `
+        query {
+            getJoinedRoomList {
+                _id
+                type
+                name
+                lastMessageAt
+                numOfmessages
+                unread
+                createdAt
+                chatUsers {
+                _id
+                name
+                avatarOrigin
+                }
+                usersCount
+                owner {
+                name
+                avatarOrigin
+                }
+                lastChatMessage {
+                text
+                author {
+                    name
+                }
+                createdAt
+                }
+            }
+        }
+        `,
+  },
   methods: {
-    setData(_chatData) {
-        if (_chatData) {
-            this.chatData = _chatData;
-            this.chatData.forEach(chat => chat.showedAt = timeForToday(chat.createdAt));
+    timeForToday(value) {
+        const timeValue = new Date(value);
+        const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
+        if (betweenTime < 1) return '방금전';
+        else if (betweenTime < 6) {
+            return `${betweenTime}분전`;
+        }
+        else {
+            var hour = timeValue.getHours();
+            if (hour < 12) hour = "오전 " + hour
+            else hour = "오후 " + (hour-12);
+            return hour + ":" + timeValue.getMinutes();
         }
     },
     login() {
