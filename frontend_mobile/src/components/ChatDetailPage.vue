@@ -2,16 +2,16 @@
   <div class="">
     <div data-menu-active="nav-chat"></div>
     <div class="header header-fixed header-logo-center">
-        <a href="" class="header-title color">윤장송</a>
+        <a href="" class="header-title color">{{ getJoinedRoomList.filter(x=>x._id==roomId).length > 0 ? getJoinedRoomList.filter(x=>x._id==roomId)[0].name : ''|| '' }}</a>
         <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
     </div>
 
-    <div id="footer-bar-speach" style="z-index: 9999;display: table;width: 100%;">
+    <div id="footer-bar-speach" style="z-index: 9999;display: table;width: 100%;background: black;">
         <div :class="(is_emoji_clicked?'':'hide')" style="background:#00000066;height:100px;">
             <i v-on:click="is_emoji_clicked=false;emoji_url='';sendDisable=true;" class="wedive_icoset2x wedive_icoset2x_close" style="position:absolute;right:10px;top:10px;"/>
             <img :src="'/static/images/emoji/' + emoji_url" style="width:80px;margin-top:10px;"/>
         </div>
-        <div class="d-flex" style="min-height: 52px;height: 52px;max-height:134px;background: black;">
+        <div class="d-flex" style="min-height: 52px;height: 52px;max-height:134px;">
             <div class="me-1 speach-icon">
                 <div style="width: 45px;display: inline-block;position: relative;">
                     <!--<input type="file" id="file-upload" class="upload-file text-center" accept="image/*" style="width:32px;">-->
@@ -66,9 +66,9 @@
         <div class="content">
             <div v-for="chat in getMessagesByRoomId">
                 <div v-if="chat && chat.author && chat.author._id == uid">
-                    <div v-if="chat.text.includes('[[') && chat.text.includes(']]')" class="chat-left">
+                    <div v-if="chat.text.includes('[[') && chat.text.includes(']]') && chat.text.includes('emoji|')" class="chat-left">
                         <div class="">
-                            <img :src="'/static/images/emoji/' + (chat.text.replace('[[','').replace(']]',''))" style="max-width:100px;"/>
+                            <img :src="'/static/images/emoji/' + (chat.text.replace('[[','').replace(']]','').split('|')[1])" style="max-width:100px;"/>
                         </div>
                         <span class="time">{{ timeForToday(chat.createdAt) }}</span>
                     </div>
@@ -100,9 +100,9 @@
                             </svg>
                         </div>
                     </div>
-                    <div v-if="chat.text.includes('[[') && chat.text.includes(']]')" class="chat-right">
+                    <div v-if="chat.text.includes('[[') && chat.text.includes(']]') && chat.text.includes('emoji|')" class="chat-right">
                         <div class="">
-                            <img :src="'/static/images/emoji/' + (chat.text.replace('[[','').replace(']]',''))" style="max-width:100px;"/>
+                            <img :src="'/static/images/emoji/' + (chat.text.replace('[[','').replace(']]','').split('|')[1])" style="max-width:100px;"/>
                         </div>
                         <span class="time">{{ timeForToday(chat.createdAt) }}</span>
                     </div>
@@ -126,7 +126,7 @@
                 <div class="clearfix"></div>
             </div>
 
-            <div>
+            <div class="hide">
                 <div class="p-relative d-inline-block w-60 float-left">
                     <div class="user-img">
                         <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
@@ -234,12 +234,17 @@ export default {
             this.sendDisable = false;
         }
       },
+      getMessagesByRoomId: function(newVal, oldVal) {
+          setTimeout(function() {
+              console.log("1")
+              $('#speech-content').scrollTop($('#speech-content')[0].scrollHeight);
+          },10)
+      },
       is_emoji: function(newVal, oldVal) {
           if (newVal) {
               $('#speech-content').css("height", (this.speechContentHeight-300) + "px")
               setTimeout(function() {
                 hideKeyboard();
-                console.log("aa")
                 $('#speech-content').scrollTop($('#speech-content')[0].scrollHeight);
               },100)
           } else {
@@ -248,6 +253,36 @@ export default {
       }
   },
   apollo: {
+    getJoinedRoomList: gql `
+        query {
+            getJoinedRoomList {
+                _id
+                type
+                name
+                lastMessageAt
+                numOfmessages
+                unread
+                createdAt
+                chatUsers {
+                _id
+                name
+                avatarOrigin
+                }
+                usersCount
+                owner {
+                name
+                avatarOrigin
+                }
+                lastChatMessage {
+                text
+                author {
+                    name
+                }
+                createdAt
+                }
+            }
+        }
+    `,
     getMessagesByRoomId: {
         query: gql`query GetMessagesByRoomId($roomId: String!, $skip: Int, $limit: Int) {
             getMessagesByRoomId(roomId: $roomId, skip: $skip, limit: $limit) {
@@ -316,9 +351,6 @@ export default {
     },
   },
   mounted() {
-    var element = document.getElementById("speech-content");
-    element.scrollTop = element.scrollHeight;
-
     $(".page-title").hide();
     $(".page-title-clear").hide();
     document.getElementById("page-back").classList.remove("hide");
@@ -335,9 +367,13 @@ export default {
     this.speechContentHeight = $("#speech-content").height();
     setTimeout(function() {
         $('#speech-content').scrollTop($('#speech-content')[0].scrollHeight);
+        //var element = document.getElementById("speech-content");
+        //element.scrollTop = element.scrollHeight;
     },200);
     
     //console.log(this.$apollo.queries.chats.observer.lastResult.data.getMessagesByRoomId);
+
+    console.log(this.getJoinedRoomList);
   },
   components: {
     
@@ -358,6 +394,7 @@ export default {
         sendText: '',
         sendDisable: true,        
         getMessagesByRoomId: [],
+        getJoinedRoomList: [],
         roomId: '',
         uid: localStorage.uid,
         is_emoji: false,
@@ -378,9 +415,9 @@ export default {
         }
         const timeValue = new Date(value);
         const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
-        if (betweenTime < 1) return '방금전 ';
+        if (betweenTime < 1) return '방금전';
         else if (betweenTime < 6) {
-            return `${betweenTime}분전 `;
+            return `${betweenTime}분전`;
         }
         else {
             var hour = timeValue.getHours();
@@ -397,7 +434,7 @@ export default {
     async sendMessage() {
         if (this.sendDisable == false) {
             if (this.is_emoji_clicked) {
-                const message = "[[" + this.emoji_url + "]]";
+                const message = "[[emoji|" + this.emoji_url + "]]";
                 const roomId = this.roomId;
                 var result = await axios({
                     url: 'https://chat.wedives.com/graphql',
@@ -419,7 +456,7 @@ export default {
                         }
                     }
                 });
-                
+                this.is_emoji_clicked = false;
                 this.sendText = '';
                 var ret = (result.data && result.data.data && result.data.data.getJoinedRoomList) ? result.data.data.getJoinedRoomList : null
             }
@@ -458,7 +495,9 @@ export default {
         const { textarea } = this.$refs;
         for (var i=0; i<10; i++)
             textarea.style.height = textarea.scrollHeight - 4 + 'px';
-        $("#footer-bar-speach").height((parseInt(textarea.style.height.replace("px",""))+12) + "px")
+        var hei = parseInt(textarea.style.height.replace("px",""))+12;
+        if (hei < 141)
+            $("#footer-bar-speach").height(hei + "px")
     },
     resizeFocus() {
         const { textarea } = this.$refs;

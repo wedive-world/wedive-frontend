@@ -99,7 +99,7 @@
                 </div>
                 <div class="ms-2 d-inline-block v-align-top">
                     <h5 class="font-15 font-600 mb-0" v-html="chat.chatUsers.filter(user=>user._id != uid).map(user => {return user.name}).join()"></h5>
-                    <p class="line-height-s opacity-60 font-13">{{ (chat.lastChatMessage && chat.lastChatMessage.text)?(chat.lastChatMessage.text.includes('[[')&&chat.lastChatMessage.text.includes(']]')?'이모티콘':chat.lastChatMessage.text): ''}}</p>
+                    <p class="line-height-s opacity-60 font-13">{{ (chat.lastChatMessage && chat.lastChatMessage.text)?(chat.lastChatMessage.text.includes('[[')&&chat.lastChatMessage.text.includes(']]')&&chat.lastChatMessage.text.includes('emoji|')?'이모티콘':chat.lastChatMessage.text): ''}}</p>
                 </div>
                 <div class="latest">{{ timeForToday(chat.createdAt) }}</div>
             </a>
