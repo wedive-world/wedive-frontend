@@ -64,25 +64,25 @@
     
     <div v-on:click="speechContentClick()" id="speech-content" class="card card-style ms-0 me-0 rounded-0" style="height: calc(100vh - 50px);overflow-y: auto;margin-top:50px;padding-bottom:50px;">
         <div class="content">
-            <div v-for="chat in chatData">
-                <div v-if="chat.author._id == uid">
+            <div v-for="chat in getMessagesByRoomId">
+                <div v-if="chat && chat.author && chat.author._id == uid">
                     <div v-if="chat.text.includes('[[') && chat.text.includes(']]')" class="chat-left">
                         <div class="">
                             <img :src="'/static/images/emoji/' + (chat.text.replace('[[','').replace(']]',''))" style="max-width:100px;"/>
                         </div>
-                        <span class="time">{{ chat.showAt }}</span>
+                        <span class="time">{{ timeForToday(chat.createdAt) }}</span>
                     </div>
                     <div v-else-if="emoji_regex.test(chat.text) && chat.text.length == 2" class="chat-left">
                         <div style="font-size:80px;height:100px;padding-top:30px;display:block;">
                             {{ chat.text }}
                         </div>
-                        <span class="time">{{ chat.showAt }}</span>
+                        <span class="time">{{ timeForToday(chat.createdAt) }}</span>
                     </div>
                     <div v-else class="speech-left">
                         <div class="speech-bubble bg-highlight">
                             {{ chat.text }}
                         </div>
-                        <span class="time">{{ chat.showAt }}</span>
+                        <span class="time">{{ timeForToday(chat.createdAt) }}</span>
                     </div>
                     
                 </div>
@@ -104,13 +104,13 @@
                         <div class="">
                             <img :src="'/static/images/emoji/' + (chat.text.replace('[[','').replace(']]',''))" style="max-width:100px;"/>
                         </div>
-                        <span class="time">{{ chat.showAt }}</span>
+                        <span class="time">{{ timeForToday(chat.createdAt) }}</span>
                     </div>
                     <div v-else-if="emoji_regex.test(chat.text) && chat.text.length == 2" class="chat-right">
                         <div style="font-size:80px;height:100px;padding-top:30px;display:block;">
                             {{ chat.text }}
                         </div>
-                        <span class="time">{{ chat.showAt }}</span>
+                        <span class="time">{{ timeForToday(chat.createdAt) }}</span>
                     </div>
                     <div v-else>
                         <div class="speech-right">
@@ -118,7 +118,7 @@
                             <div class="speech-bubble color-black">
                                 {{ chat.text }}
                             </div>
-                            <span class="time">{{ chat.showAt }}</span>
+                            <span class="time">{{ timeForToday(chat.createdAt) }}</span>
                         </div>
                     </div>
                 </div>
@@ -198,23 +198,15 @@ import gql from 'graphql-tag'
 const axios = require("axios")
 
 
+
+
+
+
+
+
+
 var today = new Date();
-function timeForToday(value) {
-    const timeValue = new Date(value);
-    const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
-    if (betweenTime < 1) return '방금전';
-    else if (betweenTime < 6) {
-        return `${betweenTime}분전`;
-    }
-    else {
-        var hour = timeValue.getHours();
-        if (hour < 12) hour = "오전 " + hour
-        else if(hour == 12) hour = "오후 " + hour;
-        else hour = "오후 " + (hour-12);
-        var minute = timeValue.getMinutes();
-        return hour + ":" + ((minute<10) ? "0"+minute : minute);
-    }
-}
+
 function hideKeyboard() {
     var element = $("#textarea-input");
     element.attr('readonly', 'readonly'); // Force keyboard to hide on input field.
@@ -231,40 +223,7 @@ export default {
   name: 'HelloWorld',
   async beforeRouteEnter(to, from, next) {
     if (to.params.id != null) {
-        /*var result = await axios({
-            url: 'https://chat.wedives.com/graphql',
-            method: 'post',
-            headers: {
-                countrycode: 'ko',
-                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-            },
-            data: {
-                query: `
-                query GetMessagesByRoomIdSinceUpdated($roomId: String!, $updatedSince: Date) {
-                    getMessagesByRoomIdSinceUpdated(roomId: $roomId, updatedSince: $updatedSince) {
-                        _id
-                        text
-                        author {
-                            _id
-                            name
-                            avatarOrigin
-                        }
-                        createdAt
-                    }
-                }
-                `,
-                variables: {
-                    roomId: to.params.id
-                }
-
-            }
-            });
-        */
-        var ret = null;
-        var result = null
-        if (result && result.data && result.data.data && result.data.data.getMessagesByRoomIdSinceUpdated) {ret = result.data.data.getMessagesByRoomIdSinceUpdated;}
-        
-        next(vm => {vm.setData(ret, to.params.id)});
+        next(vm => {vm.setData(to.params.id)});
     }
   },
   watch: {
@@ -289,39 +248,72 @@ export default {
       }
   },
   apollo: {
-    $subscribe: {
-        subscribeRoomMessage: {
-            query: gql`
-                subscription Subscription($roomId: String!) {
-                    subscribeRoomMessage(roomId: $roomId) {
-                        _id
-                        text
-                        author {
-                        name
-                        avatarOrigin
-                        createdAt
-                        }
-                        attachments {
-                        attachmentText
-                        imageUrl
-                        audioUrl
-                        videoUrl
-                        }
-                        createdAt
-                    }
+    getMessagesByRoomId: {
+        query: gql`query GetMessagesByRoomId($roomId: String!, $skip: Int, $limit: Int) {
+            getMessagesByRoomId(roomId: $roomId, skip: $skip, limit: $limit) {
+                _id
+                text
+                author {
+                _id
+                name
+                avatarOrigin
                 }
-            `,
+                attachments {
+                attachmentText
+                imageUrl
+                audioUrl
+                videoUrl
+                }
+                createdAt
+            }
+        }`,
+        variables () {
+            return {
+                skip: 0,
+                limit: 100,
+                roomId: this.roomId
+            }
+        },
+        result ({ data }) {
+        },
+        subscribeToMore: {
+            document: gql`subscription Subscription($roomIds: [String]!) {
+                subscribeRoomMessage(roomIds: $roomIds) {
+                    _id
+                    text
+                    author {
+                    _id
+                    name
+                    avatarOrigin
+                    }
+                    attachments {
+                    attachmentText
+                    imageUrl
+                    audioUrl
+                    videoUrl
+                    }
+                    createdAt
+                }
+            }`,
             variables () {
                 return {
-                    roomId: 'LNaKzPP2jFTdeu6oMwLbB42HJpvLvGXL3B'
+                    roomIds: [this.roomId]
                 }
             },
-            result ({ data }) {
-                console.log(data)
+            updateQuery: (previousResult, { subscriptionData }) => {
+                if (previousResult.getMessagesByRoomId.find(chat => chat._id === subscriptionData.data.subscribeRoomMessage._id)) {
+                    return previousResult
+                }
+                return {
+                    getMessagesByRoomId: [
+                        ...previousResult.getMessagesByRoomId,
+                        subscriptionData.data.subscribeRoomMessage,
+                    ],
+                }
             },
-
         }
-    }
+        
+    },
   },
   mounted() {
     var element = document.getElementById("speech-content");
@@ -345,42 +337,7 @@ export default {
         $('#speech-content').scrollTop($('#speech-content')[0].scrollHeight);
     },200);
     
-
-
-
-
-
-
-
-
-
-
-    /*var client = new GraphQLClient('https://chat.wedives.com/graphql',
-    {
-        headers: {
-            countrycode: 'ko',
-            idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-        }
-    });
-    var subscription = gql`
-        subscription Subscription($roomId: String!) {
-            subscribeRoomMessage(roomId: $roomId) {
-                text
-                author {
-                name
-                avatarOrigin
-                }
-                attachments {
-                imageUrl
-                audioUrl
-                videoUrl
-                attachmentText
-                }
-                createdAt
-            }
-        }
-    `
-    result_img_user = await client.request(subscription, {roomId: this.roomId,});*/
+    //console.log(this.$apollo.queries.chats.observer.lastResult.data.getMessagesByRoomId);
   },
   components: {
     
@@ -399,8 +356,8 @@ export default {
   data () {
     return {
         sendText: '',
-        sendDisable: true,
-        chatData: [],
+        sendDisable: true,        
+        getMessagesByRoomId: [],
         roomId: '',
         uid: localStorage.uid,
         is_emoji: false,
@@ -410,13 +367,29 @@ export default {
         speechContentHeight: 0,
     }
   }, methods: {
-    setData(chatData, roomId) {
-        this.chatData = chatData;
-        if (chatData) {
-            this.chatData.reverse();
-            this.chatData.forEach(chat => chat.showAt = timeForToday(chat.createdAt))
-        }
+    setData(roomId) {
         this.roomId = roomId;
+    },
+    timeForToday(value) {
+        if (typeof(value) == 'object') {
+            var _time = new Date(value.$date);
+            console.log(_time);
+            value = _time.toISOString();
+        }
+        const timeValue = new Date(value);
+        const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
+        if (betweenTime < 1) return '방금전 ';
+        else if (betweenTime < 6) {
+            return `${betweenTime}분전 `;
+        }
+        else {
+            var hour = timeValue.getHours();
+            if (hour < 12) hour = "오전 " + hour
+            else if(hour == 12) hour = "오후 " + hour;
+            else hour = "오후 " + (hour-12);
+            var minute = timeValue.getMinutes();
+            return hour + ":" + ((minute<10) ? "0"+minute : minute);
+        }
     },
     keyboardShowHandler(event) {
         $('#speech-content').scrollTop($('#speech-content')[0].scrollHeight);
@@ -430,7 +403,6 @@ export default {
                     url: 'https://chat.wedives.com/graphql',
                     method: 'post',
                     headers: {
-                        countrycode: 'ko',
                         idtoken: (localStorage.idToken) ? localStorage.idToken : "",
                     },
                     data: {
@@ -480,7 +452,6 @@ export default {
                 this.sendText = '';
                 var ret = (result.data && result.data.data && result.data.data.getJoinedRoomList) ? result.data.data.getJoinedRoomList : null
             }
-            location.reload();
         }
     },
     resize() {

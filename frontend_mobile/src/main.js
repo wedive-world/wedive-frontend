@@ -8,10 +8,12 @@ import VueScrollPicker from "vue-scroll-picker"
 import VCalendar from 'v-calendar';
 import { initializeApp } from 'firebase/app';
 
-import ApolloClient, { InMemoryCache } from 'apollo-boost'
-import { HttpLink } from 'apollo-link-http'
 
-// for apollo subscription
+// for apollo graphql
+//import ApolloClient, { InMemoryCache } from 'apollo-boost'
+import { ApolloClient } from 'apollo-client'
+import { InMemoryCache } from 'apollo-cache-inmemory'
+import { HttpLink } from 'apollo-link-http'
 import { split } from 'apollo-link'
 import { WebSocketLink } from 'apollo-link-ws'
 import { getMainDefinition } from 'apollo-utilities'
@@ -19,40 +21,76 @@ import { getMainDefinition } from 'apollo-utilities'
 import VueApollo from 'vue-apollo'
 
 
-const httpLink = new HttpLink({
-  // You should use an absolute URL here
-  uri: 'http://chat.wedives.com/graphql',
+var _apolloClient = null;
+const GRAPHQL_URL = process.env.VUE_APP_API_PATH || 'https://chat.wedives.com/graphql'
+if (window.location.pathname.indexOf('/chat/') == 0) {
+  const httpLink = new HttpLink({
+    // You should use an absolute URL here
+    uri: GRAPHQL_URL,
+    headers: {
+      countryCode: "ko",
+      idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+    },
+  })
+  
+  // Create the subscription websocket link
+  const wsLink = new WebSocketLink({
+    uri: 'wss://chat.wedives.com/graphql',
+    options: {
+      reconnect: true,
+      connectionParams: {
+        "content-type": "application/json",
+          countryCode: "ko",
+          idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+        
+      },
+    }
+  })
+  
+  const link1 = split(
+    // split based on operation type
+    ({ query }) => {
+      const definition = getMainDefinition(query)
+      return definition.kind === 'OperationDefinition' &&
+        definition.operation === 'subscription'
+    },
+    wsLink,
+    httpLink
+  )
+  
+  // Create the apollo client
+  _apolloClient = new ApolloClient({
+    link: link1,
+    cache: new InMemoryCache(),
+    connectToDevTools: true,
+  })
+} else if (window.location.pathname.indexOf('/chat') == 0) {
+  const httpLink = new HttpLink({
+    // You should use an absolute URL here
+    uri: GRAPHQL_URL,
+    headers: {
+      countryCode: "ko",
+      idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+    },
+  })
+  
+  // Create the apollo client
+  _apolloClient = new ApolloClient({
+    link: httpLink,
+    cache: new InMemoryCache(),
+  })
+
+  
+}
+const apolloClient = _apolloClient
+Vue.use(VueApollo)
+
+const apolloProvider = new VueApollo({
+  defaultClient: apolloClient,
 })
 
-// Create the subscription websocket link
-const wsLink = new WebSocketLink({
-  uri: 'wss://chat.wedives.com/graphql',
-  options: {
-    reconnect: true,
-  },
-})
 
-const link = split(
-  // split based on operation type
-  ({ query }) => {
-    const definition = getMainDefinition(query)
-    return definition.kind === 'OperationDefinition' &&
-      definition.operation === 'subscription'
-  },
-  wsLink,
-  httpLink
-)
 
-// Create the apollo client
-const apolloClient = new ApolloClient({
-  link,
-  cache: new InMemoryCache(),
-  connectToDevTools: true,
-  headers: {
-    countryCode: "ko",
-    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-  }
-})
 
 
 
@@ -74,22 +112,6 @@ Vue.filter("makeReference", val => {
 })
 
 
-/*const GRAPHQL_URL = process.env.VUE_APP_API_PATH || 'https://chat.wedives.com/graphql'
-const apolloClient = new ApolloClient({
-  uri: GRAPHQL_URL,
-  cache: new InMemoryCache(),
-  headers: {
-    countryCode: "ko",
-    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-  }
-})*/
-
-
-Vue.use(VueApollo)
-
-const apolloProvider = new VueApollo({
-  defaultClient: apolloClient,
-})
 
 /*
 console.log(`==============================Env Information==============================`)
@@ -167,7 +189,7 @@ try {
     // localStorage.setItem(userAuthKey, JSON.parse(iOS.getUserInformation()));
   
   } else { // 안드로이드, IOS 가 아닌 경우 (더 조건을 추가해서 처리해도 됨)
-    console.log(`web client connected.`);
+    //console.log(`web client connected.`);
   
   }
 } catch(e) {
