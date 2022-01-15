@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div v-if="userData._id != user_id" class="row m-0 mt-1 ps-2 pe-2">
-                <div data-menu="menu-dm" class="col-4 p-1">
+                <div v-on:click="clickChat()" class="col-4 p-1">
                     <span class="btn btn-border btn-m btn-full text-uppercase font-900 border-gray-dark color-black bg-theme" style="padding: 8px 0 !important;"><img src="/static/images/assets/ico_chat.png" height="16"/> 채팅</span>
                 </div>
                 <div v-on:click="clickLike()" class="col-4 p-1">
@@ -376,6 +376,75 @@ export default {
                 var preloader = document.getElementById('preloader')
                 if(preloader){preloader.classList.add('preloader-hide');}
             }, 1000);
+          }
+      },
+      async clickChat() {
+          if (localStorage.idToken) {
+            var result = await axios({
+                url: 'https://chat.wedives.com/graphql',
+                method: 'post',
+                headers: {
+                    countrycode: 'ko',
+                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                },
+                data: {
+                    query: `
+                    query {
+                        getJoinedRoomList {
+                            _id
+                            type
+                            chatUsers {
+                                _id
+                                name
+                            }
+                        }
+                    }
+                    `,
+                    variables: {
+                    }
+
+                }
+            });
+
+            var roomList = result.data.data.getJoinedRoomList;
+            const userId = this.userData.uid;
+            roomList.forEach(room => {
+                if (room.type=='direct') {
+                    var chatroom = room.chatUsers.filter(user => user._id == userId);
+                    if (chatroom.length > 0) {
+                        console.log(room)
+                        location.href = '/chat/' + room._id;
+                    }
+                }
+            });
+
+
+
+            // 없는경우,
+            console.log("aa");
+                
+            /*var result = await axios({
+                url: 'https://chat.wedives.com/graphql',
+                method: 'post',
+                headers: {
+                    countrycode: 'ko',
+                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                },
+                data: {
+                    query: `
+                    mutation Mutation($name: String!, $description: String!) {
+                        createRoom(name: $name, description: $description) {
+                            _id
+                        }
+                    }
+                    `,
+                    variables: {
+                        "name": userId,
+                        "description": ''
+                    }
+
+                }
+            });*/
           }
       },
       async clickLike() {

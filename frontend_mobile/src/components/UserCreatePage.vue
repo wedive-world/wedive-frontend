@@ -866,6 +866,8 @@ export default {
       },
       
       addPersonalBest: function() {
+            $("#div_personal_best").html('');
+            
             if (this.pb_sta != "") {
                 var record_type = "STA"
                 var record_val = this.pb_sta;

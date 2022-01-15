@@ -10,9 +10,9 @@
 
     <div class="page-content pb-3"> 
         <div class="text-center mt-3 mb-3">
-            <div style="border: 1px solid #abb7ba;width: 150px;height:150px;display: inline-block;background: white;position: relative;">
-                <input type="file" id="file-upload" class="upload-file text-center" accept="image/*" style="height: 150px;">
-                <p class="upload-file-text" style="color: #abb7ba;position:absolute;left:40px;top:76px;"><img src="/static/images/assets/icon_image2.png" height="80" style="filter: brightness(.7);"/></p>
+            <div :style="'border: 1px solid #abb7ba;width: 152px;height:152px;display: inline-block;position: relative;' + ((userData.profileImages && userData.profileImages.length > 0) ? 'background:url('+userData.profileImages[0].thumbnailUrl+');background-size: cover;' : '')">
+                <input type="file" id="file-upload" :class="'upload-file text-center' + ((userData.profileImages && userData.profileImages.length > 0) ? ' opacity-0': '')" accept="image/*" style="height: 150px;background: white;">
+                <p :class="'upload-file-text' + ((userData.profileImages && userData.profileImages.length > 0) ? ' opacity-0': '')" style="color: #abb7ba;position:absolute;left:40px;top:76px;"><img src="/static/images/assets/icon_image2.png" height="80" style="filter: brightness(.7);"/></p>
             </div>
         </div>
         <!-- card in this page format must have the class card-full to avoid seeing behind it-->
@@ -34,18 +34,10 @@
             <div class="mt-2">
                 <div class="input-style no-borders has-icon validate-field mb-3">
                     <i class="fas fa-id-card-alt color-gray"></i>
-                    <input type="name" class="form-control validate-name" id="form1" placeholder="닉네임" v-model="nickName">
+                    <input type="name" class="form-control validate-name" id="form1" placeholder="닉네임" v-model="userData.nickName">
                     <label for="form1" class="color-highlight">닉네임</label>
                     <i class="fa fa-times disabled invalid color-red-dark"></i>
                     <i class="fa fa-check disabled valid color-green-dark"></i>
-                </div>
-                <div class="input-style no-borders has-icon validate-field mb-3 hide">
-                    <i class="fa fa-user color-gray"></i>
-                    <input type="name" class="form-control validate-name" id="form7" placeholder="전화번호" v-model="phoneNumber">
-                    <label for="form7" class="color-highlight">전화번호</label>
-                    <i class="fa fa-times disabled invalid color-red-dark"></i>
-                    <i class="fa fa-check disabled valid color-green-dark"></i>
-                    <em>(필수입력)</em>
                 </div>
                 <div class="input-style no-borders has-icon validate-field mb-3">
                     <i class="fas fa-user-clock color-gray"></i>
@@ -57,7 +49,7 @@
                 <div class="input-style no-borders has-icon validate-field mb-3">
                     <i class="fas fa-venus-mars color-gray"></i>
                     <label for="form5" class="color-highlight">성별</label>
-                    <select id="form5" required v-model="gender">
+                    <select id="form5" required v-model="userData.gender">
                         <option value="" selected disabled>성별</option>
                         <option value="m">남자</option>
                         <option value="f">여자</option>
@@ -96,7 +88,7 @@
                     <div class="input-style no-borders has-icon validate-field mb-3">
                         <i class="fas fa-address-card color-gray"></i>
                         <label for="form11" class="color-highlight">스쿠버 라이센스</label>
-                        <select id="form11" required>
+                        <select id="form11" required v-model="userData.scubaLicenseType">
                             <option value="" selected disabled>스쿠버 라이센스</option>
                             <option value="PADI">PADI</option>
                             <option value="NAUI">NAUI</option>
@@ -147,14 +139,14 @@
                     <div class="input-style no-borders has-icon validate-field mb-3">
                         <i class="fas fa-layer-group color-gray"></i>
                         <label for="form22" class="color-highlight">스쿠버 레벨</label>
-                        <select id="form22" required>
+                        <select id="form22" required v-model="userData.scubaLicenseLevel">
                             <option value="" selected disabled>스쿠버 레벨</option>
-                            <option value="오픈워터">오픈워터</option>
-                            <option value="어드밴스드">어드밴스드</option>
-                            <option value="레스큐">레스큐</option>
-                            <option value="마스터">마스터</option>
-                            <option value="강사">강사</option>
-                            <option value="없음">없음</option>
+                            <option value="1">오픈워터</option>
+                            <option value="2">어드밴스드</option>
+                            <option value="3">레스큐</option>
+                            <option value="4">마스터</option>
+                            <option value="5">강사</option>
+                            <option value="0">없음</option>
                         </select>
                         <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
                         <i class="fa fa-check disabled valid color-green-dark"></i>
@@ -165,7 +157,7 @@
                     <div class="input-style no-borders has-icon validate-field mb-3">
                         <i class="fas fa-clipboard-check color-gray"></i>
                         <label for="form23" class="color-highlight">다이빙 로그</label>
-                        <select id="form23" required>
+                        <select id="form23" required v-model="userData.divingLog">
                             <option value="" selected disabled>다이빙 로그</option>
                             <option value="10">~10</option>
                             <option value="30">~30</option>
@@ -185,19 +177,19 @@
                     <div class="mb-0 mt-5 pt-2">
                         <label class="wediev-label pb-1 color-highlight ms-2" style="margin-top:-26px;">선호사항</label>
                         <div class="form-check interest-check">
-                        <input v-on:click="interest6=!interest6;" class="form-check-input" type="checkbox" value="" id="check_scuba1">
+                        <input v-on:click="interest6=!interest6;" class="form-check-input" type="checkbox" :checked="(interest6)?'checked':'false'" value="" id="check_scuba1">
                         <label class="form-check-label rounded-xl border-08" for="check_scuba1">대물포인트</label>
                         <i class="fas fa-fish color-white font-17"></i>
                         <i class="fas fa-fish font-17 color-highlight"></i>
                         </div>
                         <div class="form-check interest-check">
-                        <input v-on:click="interest6=!interest7;" class="form-check-input" type="checkbox" value="" id="check_scuba2">
+                        <input v-on:click="interest6=!interest7;" class="form-check-input" type="checkbox" :checked="(interest7)?'checked':'false'" value="" id="check_scuba2">
                         <label class="form-check-label rounded-xl border-08" for="check_scuba2">이색포인트</label>
                         <i class="fas fa-grin-stars color-white font-17"></i>
                         <i class="fas fa-grin-stars font-17 color-highlight"></i>
                         </div>
                         <div class="form-check interest-check">
-                        <input v-on:click="interest8=!interest8;" class="form-check-input" type="checkbox" value="" id="check_scuba3">
+                        <input v-on:click="interest8=!interest8;" class="form-check-input" type="checkbox" value="" :checked="(interest8)?'checked':'false'" id="check_scuba3">
                         <label class="form-check-label rounded-xl border-08" for="check_scuba3">수중촬영</label>
                         <i class="fas fa-camera-retro color-white font-17"></i>
                         <i class="fas fa-camera-retro font-17 color-highlight"></i>
@@ -268,7 +260,7 @@
                     <div class="input-style no-borders has-icon validate-field mb-3">
                         <i class="fas fa-address-card color-gray"></i>
                         <label for="form21" class="color-highlight">프리 라이센스</label>
-                        <select id="form21" required>
+                        <select id="form21" required v-model="userData.freeLicenseType">
                             <option value="" selected disabled>프리 라이센스</option>
                             <option value="PADI">PADI</option>
                             <option value="NAUI">NAUI</option>
@@ -319,14 +311,14 @@
                     <div class="input-style no-borders has-icon validate-field mb-3">
                         <i class="fas fa-layer-group color-gray"></i>
                         <label for="form12" class="color-highlight">프리 레벨</label>
-                        <select id="form12" required>
+                        <select id="form12" required v-model="userData.freeLicenseLevel">
                             <option value="" selected disabled>프리 레벨</option>
-                            <option value="레벨1">레벨1</option>
-                            <option value="레벨2">레벨2</option>
-                            <option value="레벨3">레벨3</option>
-                            <option value="레벨4">레벨4</option>
-                            <option value="강사">강사</option>
-                            <option value="없음">없음</option>
+                            <option value="1">레벨1</option>
+                            <option value="2">레벨2</option>
+                            <option value="3">레벨3</option>
+                            <option value="4">레벨4</option>
+                            <option value="5">강사</option>
+                            <option value="0">없음</option>
                         </select>
                         <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
                         <i class="fa fa-check disabled valid color-green-dark"></i>
@@ -431,31 +423,31 @@
                 <div class="mb-0 mt-4 pt-2">
                     <label class="wediev-label pb-1 color-highlight ms-2" style="margin-top:-26px;">공통 선호사항</label>
                     <div class="form-check interest-check">
-                    <input v-on:click="interest1=!interest1;" class="form-check-input" type="checkbox" id="check_general1">
+                    <input v-on:click="interest1=!interest1;" class="form-check-input" type="checkbox" :checked="(interest1)?'checked':'false'" id="check_general1">
                     <label class="form-check-label rounded-xl border-08" for="check_general1">국내투어</label>
                     <i class="fas fa-caravan color-white font-17"></i>
                     <i class="fas fa-caravan font-17 color-highlight"></i>
                     </div>
                     <div class="form-check interest-check">
-                    <input v-on:click="interest2=!interest2;" class="form-check-input" type="checkbox" value="" id="check_general2">
+                    <input v-on:click="interest2=!interest2;" class="form-check-input" type="checkbox" :checked="(interest2)?'checked':'false'" value="" id="check_general2">
                     <label class="form-check-label rounded-xl border-08" for="check_general2">해외투어</label>
                     <i class="fas fa-globe-americas color-white font-17"></i>
                     <i class="fas fa-globe-americas font-17 color-highlight"></i>
                     </div>
                     <div class="form-check interest-check">
-                    <input v-on:click="interest3=!interest3;" class="form-check-input" type="checkbox" value="" id="check_general3">
+                    <input v-on:click="interest3=!interest3;" class="form-check-input" type="checkbox" :checked="(interest3)?'checked':'false'" value="" id="check_general3">
                     <label class="form-check-label rounded-xl border-08" for="check_general3">수중정화</label>
                     <i class="fas fa-broom color-white font-17"></i>
                     <i class="fas fa-broom font-17 color-highlight"></i>
                     </div>
                     <div class="form-check interest-check">
-                    <input v-on:click="interest4=!interest4;" class="form-check-input" type="checkbox" value="" id="check_general4">
+                    <input v-on:click="interest4=!interest4;" class="form-check-input" type="checkbox" :checked="(interest4)?'checked':'false'" value="" id="check_general4">
                     <label class="form-check-label rounded-xl border-08" for="check_general4">뒷풀이</label>
                     <i class="fas fa-beer color-white font-17"></i>
                     <i class="fas fa-beer font-17 color-highlight"></i>
                     </div>
                     <div class="form-check interest-check">
-                    <input v-on:click="interest5=!interest5;" class="form-check-input" type="checkbox" value="" id="check_general5">
+                    <input v-on:click="interest5=!interest5;" class="form-check-input" type="checkbox" :checked="(interest5)?'checked':'false'" value="" id="check_general5">
                     <label class="form-check-label rounded-xl border-08" for="check_general5">동호회</label>
                     <i class="fas fa-users color-white font-17"></i>
                     <i class="fas fa-users font-17 color-highlight"></i>
@@ -466,7 +458,7 @@
                 
             </div>
 
-            <a href="#" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 ms-3 me-3 mb-5">수정</a>
+            <a v-on:click="updateUser" href="#" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 ms-3 me-3 mb-5">수정</a>
                 
         </div>
 
@@ -480,43 +472,88 @@
     <div id="menu-personal-best" 
          class="menu menu-box-modal rounded-m bg-theme" 
          data-menu-width="350"
-         data-menu-height="300">
+         data-menu-height="380">
         <div class="menu-title p-2">
             <h1 class="font-600 font-18">Personal Best 추가</h1>
             <a href="#" class="close-menu"><i class="wedive_icoset wedive_icoset_close"></i></a>
         </div>
         
         <div class="content">
+            <div class="row">
+                <div class="col-6">
+                    <div class="text-start input-style has-icon no-borders mb-1">
+                        <i class="fa fa-record-vinyl color-gray font-14"></i>
+                        <label for="form_pb_sta" class="color-highlight bg-e7e7e7">STA (숨참기)</label>
+                        <input type="number" class="form-control font-noto" id="form_pb_sta" placeholder="STA (숨참기)" v-model="pb_sta">
+                        <i class="fa fa-check disabled valid color-green-dark"></i>
+                        <i class="fa fa-check disabled invalid color-red-dark"></i>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="text-start input-style has-icon no-borders mb-1">
+                        <i class="fa fa-record-vinyl color-gray font-14"></i>
+                        <label for="form_pb_dyn" class="color-highlight bg-e7e7e7">DYN (핀잠영)</label>
+                        <input type="number" class="form-control font-noto" id="form_pb_dyn" placeholder="DYN (핀잠영)" v-model="pb_dyn">
+                        <i class="fa fa-check disabled valid color-green-dark"></i>
+                        <i class="fa fa-check disabled invalid color-red-dark"></i>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="text-start input-style has-icon no-borders mb-1">
+                        <i class="fa fa-record-vinyl color-gray font-14"></i>
+                        <label for="form_pb_dnf" class="color-highlight bg-e7e7e7">DNF (맨발 잠영)</label>
+                        <input type="number" class="form-control font-noto" id="form_pb_dnf" placeholder="DNF (맨발 잠영)" v-model="pb_dnf">
+                        <i class="fa fa-check disabled valid color-green-dark"></i>
+                        <i class="fa fa-check disabled invalid color-red-dark"></i>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="text-start input-style has-icon no-borders mb-1">
+                        <i class="fa fa-record-vinyl color-gray font-14"></i>
+                        <label for="form_pb_cwt" class="color-highlight bg-e7e7e7">CWT (고정 웨이트)</label>
+                        <input type="number" class="form-control font-noto" id="form_pb_cwt" placeholder="CWT (고정 웨이트)" v-model="pb_cwt">
+                        <i class="fa fa-check disabled valid color-green-dark"></i>
+                        <i class="fa fa-check disabled invalid color-red-dark"></i>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="text-start input-style has-icon no-borders mb-1">
+                        <i class="fa fa-record-vinyl color-gray font-14"></i>
+                        <label for="form_pb_vwt" class="color-highlight bg-e7e7e7">VWT (가변 웨이트)</label>
+                        <input type="number" class="form-control font-noto" id="form_pb_vwt" placeholder="VWT (가변 웨이트)" v-model="pb_vwt">
+                        <i class="fa fa-check disabled valid color-green-dark"></i>
+                        <i class="fa fa-check disabled invalid color-red-dark"></i>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="text-start input-style has-icon no-borders mb-1">
+                        <i class="fa fa-record-vinyl color-gray font-14"></i>
+                        <label for="form_pb_fim" class="color-highlight bg-e7e7e7">FIM (프리 이머전)</label>
+                        <input type="number" class="form-control font-noto" id="form_pb_fim" placeholder="FIM (프리 이머전)" v-model="pb_fim">
+                        <i class="fa fa-check disabled valid color-green-dark"></i>
+                        <i class="fa fa-check disabled invalid color-red-dark"></i>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="text-start input-style has-icon no-borders mb-1">
+                        <i class="fa fa-record-vinyl color-gray font-14"></i>
+                        <label for="form_pb_cnf" class="color-highlight bg-e7e7e7">CNF (맨발 잠수)</label>
+                        <input type="number" class="form-control font-noto" id="form_pb_cnf" placeholder="CNF (맨발 잠수)" v-model="pb_cnf">
+                        <i class="fa fa-check disabled valid color-green-dark"></i>
+                        <i class="fa fa-check disabled invalid color-red-dark"></i>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="text-start input-style has-icon no-borders mb-1">
+                        <i class="fa fa-record-vinyl color-gray font-14"></i>
+                        <label for="form_pb_nlt" class="color-highlight bg-e7e7e7">NLT (무제한 잠수)</label>
+                        <input type="number" class="form-control font-noto" id="form_pb_nlt" placeholder="NLT (무제한 잠수)" v-model="pb_nlt">
+                        <i class="fa fa-check disabled valid color-green-dark"></i>
+                        <i class="fa fa-check disabled invalid color-red-dark"></i>
+                    </div>
+                </div>
+            </div>
             
-            <div class="input-style no-borders has-icon validate-field mb-3">
-                <i class="fas fa-record-vinyl color-gray"></i>
-                <label for="form_pb" class="color-highlight">Personal Best</label>
-                <select id="form_pb" required>
-                    <option value="" selected disabled>Personal Best</option>
-                    <option value="STA">STA (숨참기)</option>
-                    <option value="DYN">DYN (핀잠영)</option>
-                    <option value="DNF">DNF (맨발 잠영)</option>
-                    <option value="CWT">CWT (고정 웨이트)</option>
-                    <option value="VWT">VWT (가변 웨이트)</option>
-                    <option value="FIM">FIM (프리 이머전)</option>
-                    <option value="CNF">CNF (맨발 잠수)</option>
-                    <option value="NLT">NLT (무제한 잠수)</option>
-                </select>
-                <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
-                <i class="fa fa-check disabled valid color-green-dark"></i>
-                <i class="fa fa-check disabled invalid color-red-dark"></i>
-                <em></em>
-            </div>
-
-
-            <div class="input-style no-borders has-icon validate-field mb-3">
-                <i class="fas fa-clipboard color-gray"></i>
-                <input type="number" class="form-control validate-number" id="form_record" placeholder="기록">
-                <label for="form_record" class="color-highlight">기록</label>
-                <i class="fa fa-times disabled invalid color-red-dark"></i>
-                <i class="fa fa-check disabled valid color-green-dark"></i>
-                <em id="em_pb_record">(단위, 미터)</em>
-            </div>
             
             <a href="#" v-on:click="addPersonalBest()" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0">추가하기</a>
         </div>
@@ -531,10 +568,67 @@
 <script>
 import VueTypeaheadBootstrap from 'vue-typeahead-bootstrap';
 import {debounce} from 'lodash';
+const axios = require("axios")
 var schedule_status = [0, 0, 0, 0, 0];
 
 export default {
   name: 'HelloWorld',
+  async beforeRouteEnter(to, from, next) {
+
+    var result = await axios({
+        url: 'https://api.wedives.com/graphql',
+        method: 'post',
+        headers: {
+            countrycode: 'ko',
+            idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+        },
+        data: {
+            query: `
+            query GetUserById($id: ID!) {
+                getUserById(_id: $id) {
+                    _id
+                    uid
+                    authProvider
+                    oauthToken
+                    fcmToken
+                    email
+                    phoneNumber
+                    profileImages {
+                        _id
+                        thumbnailUrl
+                    }
+                    nickName
+                    name
+                    birthAge
+                    gender
+                    residence
+                    interests {
+                        _id
+                        title
+                        type
+                    }
+                    divingLog
+                    freeDivingBests
+                    freeLicenseLevel
+                    freeLicenseType
+                    scubaLicenseLevel
+                    scubaLicenseType
+                }
+            }
+            `,
+            variables: {
+                id: localStorage.userId
+            }
+
+        }
+    });
+    
+
+    var ret = null;
+    if (result && result.data && result.data.data && result.data.data.getUserById) {ret = result.data.data.getUserById;}
+    
+    next(vm => {vm.setData(ret)});
+  },
   mounted() {
     
     $(".page-title").hide();
@@ -576,10 +670,19 @@ export default {
   },
   data () {
     return {
+        userData: null,
         nickName: '',
         age: '',
         gender: '',
         phoneNumber: '',
+        pb_sta: '',
+        pb_dyn: '',
+        pb_dnf: '',
+        pb_cwt: '',
+        pb_vwt: '',
+        pb_fim: '',
+        pb_cnf: '',
+        pb_nlt: '',
         interest1: false,
         interest2: false,
         interest3: false,
@@ -596,30 +699,169 @@ export default {
         interest14: false,
         interest15: false,
         interest16: false,
+        interest_id: ["61ac9d06eac3ebfb7ac9f952", "61ac9d0beac3ebfb7ac9f955", "61ac9d18eac3ebfb7ac9f958", "6174da70a60639819c3e6ad9", "61ac9d25eac3ebfb7ac9f95b", "61a2fefa098b3785ef439cb3", "61ac9de8eac3ebfb7ac9f95e", "61ac9deceac3ebfb7ac9f961", "6174da75a60639819c3e6ae5", "61ac9e21eac3ebfb7ac9f964", "6178f02df7c3a048b4706cc8", "6198ff5eae1cc12e02c3cca0", "6178f01cf7c3a048b4706cc6", "61ac9eaeeac3ebfb7ac9f968", "61ac9eb7eac3ebfb7ac9f96b", "61780278f7c3a048b4704a85"],
     }
   }, methods: {
+      setData(userData) {
+          this.userData = userData;
+          this.age = ((new Date()).getFullYear()) - userData.birthAge + 1
+          this.userData.interests.forEach(interest => {
+              console.log(interest._id)
+              console.log(this.interest_id.indexOf(interest._id))
+              this["interest" + (this.interest_id.indexOf(interest._id)+1)] = true;
+          });
+          this.userData.freeDivingBests.forEach(freeDivingBest => {
+              var record_type = freeDivingBest[0];
+              var record_val = freeDivingBest[1];
+              if (freeDivingBest[0] == 'STA') {this.pb_sta = freeDivingBest[1];}
+              else if (freeDivingBest[0] == 'DYN') {this.pb_dyn = freeDivingBest[1];}
+              else if (freeDivingBest[0] == 'DNF') {this.pb_dnf = freeDivingBest[1];}
+              else if (freeDivingBest[0] == 'CWT') {this.pb_cwt = freeDivingBest[1];}
+              else if (freeDivingBest[0] == 'VWT') {this.pb_vwt = freeDivingBest[1];}
+              else if (freeDivingBest[0] == 'FIM') {this.pb_fim = freeDivingBest[1];}
+              else if (freeDivingBest[0] == 'CNF') {this.pb_cnf = freeDivingBest[1];}
+              else if (freeDivingBest[0] == 'NLT') {this.pb_nlt = freeDivingBest[1];}
+              
+              setTimeout(function(record_type, record_val) {
+                  $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
+              },100, record_type, record_val);
+              
+          });
+          
+      },
+      async updateUser() {
+        var freeBest = new Array();
+        if (this.pb_sta != null && this.pb_sta != '') freeBest.push(["STA",this.pb_sta]);
+        if (this.pb_dyn != null && this.pb_dyn != '') freeBest.push(["DYN", this.pb_dyn]);
+        if (this.pb_dnf != null && this.pb_dnf != '') freeBest.push(["DNF", this.pb_dnf]);
+        if (this.pb_cwt != null && this.pb_cwt != '') freeBest.push(["CWT", this.pb_cwt]);
+        if (this.pb_vwt != null && this.pb_vwt != '') freeBest.push(["VWT", this.pb_vwt]);
+        if (this.pb_fim != null && this.pb_fim != '') freeBest.push(["FIM", this.pb_fim]);
+        if (this.pb_cnf != null && this.pb_cnf != '') freeBest.push(["CNF", this.pb_cnf]);
+        if (this.pb_nlt != null && this.pb_nlt != '') freeBest.push(["NLT", this.pb_nlt]);
+
+        var interest_id = ["61ac9d06eac3ebfb7ac9f952", "61ac9d0beac3ebfb7ac9f955", "61ac9d18eac3ebfb7ac9f958", "6174da70a60639819c3e6ad9", "61ac9d25eac3ebfb7ac9f95b", "61a2fefa098b3785ef439cb3", "61ac9de8eac3ebfb7ac9f95e", "61ac9deceac3ebfb7ac9f961", "6174da75a60639819c3e6ae5", "61ac9e21eac3ebfb7ac9f964", "6178f02df7c3a048b4706cc8", "6198ff5eae1cc12e02c3cca0", "6178f01cf7c3a048b4706cc6", "61ac9eaeeac3ebfb7ac9f968", "61ac9eb7eac3ebfb7ac9f96b", "61780278f7c3a048b4704a85"];
+        var interest_list = new Array();
+        for (var i=0; i<15; i++) {
+            if (this['interest'+(i+1)] == true) {
+                interest_list.push(interest_id[i]);
+            }
+        }
+
+        var _userData = JSON.parse(JSON.stringify(this.userData));
+        _userData.interests = [];
+        _userData.interests = interest_list;
+        _userData.freeDivingBests = [];
+        _userData.freeDivingBests = freeBest;
+        
+        _userData.birthAge = (new Date()).getFullYear() - this.age + 1;
+        
+        // 이미지
+        var img_list = new Array();
+        _userData.profileImages.forEach(img => {img_list.push(img._id)});
+
+        _userData.profileImages = [];
+        _userData.profileImages = img_list;
+
+        // 이미지가 교체되면 이곳에서 업로드를 해야합니다.
+
+        // upsertUser //
+        var result = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                    mutation Mutation($input: UserInput) {
+                        upsertUser(input: $input) {
+                            _id
+                            scubaLicenseType
+                            scubaLicenseLevel
+                            freeLicenseType
+                            freeLicenseLevel
+                            uid
+                            authProvider
+                            oauthToken
+                            email
+                            phoneNumber
+                            phoneNumberVerified
+                            profileImages {
+                                _id
+                            }
+                            nickName
+                            name
+                            birthAge
+                            gender
+                            residence
+                            interests {
+                                _id
+                            }
+                            divingLog
+                            freeDivingBests
+                        }
+                    }
+                `,
+                variables: {
+                    "input": _userData
+                }
+            }
+        });
+        console.log(result);
+      },
       show_scuba_label: function() {
           document.getElementById('scuba_label').classList.remove('hide')
       },
       addPersonalBest: function() {
-            var record_type = $('#form_pb').val();
-            var record_val = $("#form_record").val();
-
-            if (record_type == null || record_val == '') {
-                var toastData = 'snackbar-inputerror';
-                var notificationToast = document.getElementById(toastData);
-                var notificationToast = new bootstrap.Toast(notificationToast);
-                notificationToast.show();
-            } else {
-                $('#form_pb').val('');
-                $("#form_record").val('');
-                
-                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08 wedive-label">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-16 color-highlight"></i></div>');
-                const activeMenu = document.querySelectorAll('.menu-active');
-                for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
-                for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+0+"px)"}
+            $("#div_personal_best").html('');
+            if (this.pb_sta != "") {
+                var record_type = "STA"
+                var record_val = this.pb_sta;
+                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
             }
-      }
+            if (this.pb_dyn != "") {
+                var record_type = "STA"
+                var record_val = this.pb_sta;
+                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
+            }
+            if (this.pb_dnf != "") {
+                var record_type = "DNF"
+                var record_val = this.pb_dnf;
+                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
+            }
+            if (this.pb_cwt != "") {
+                var record_type = "CWT"
+                var record_val = this.pb_cwt;
+                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
+            }
+            if (this.pb_vwt != "") {
+                var record_type = "VWT"
+                var record_val = this.pb_vwt;
+                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
+            }
+            if (this.pb_fim != "") {
+                var record_type = "FIM"
+                var record_val = this.pb_fim;
+                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
+            }
+            if (this.pb_cnf != "") {
+                var record_type = "CNF"
+                var record_val = this.pb_cnf;
+                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
+            }
+            if (this.pb_nlt != "") {
+                var record_type = "NLT"
+                var record_val = this.pb_nlt;
+                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
+            }
+
+            
+            const activeMenu = document.querySelectorAll('.menu-active');
+            for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
+            
+      },
   }
 
   

@@ -107,7 +107,6 @@
                             <vue-typeahead-bootstrap
                                 id="search_typeahead"
                                 class="wedive-search content mb-0  me-3 ms-3 mt-2"
-                                style="padding-left: 12px; padding-right: 12px;"
                                 v-model="query"
                                 :data="users"
                                 :serializer="item => item.name"
@@ -118,7 +117,7 @@
                                 placeholder="지역명, 수영장"
                                 inputClass="special-input-class"
                                 :disabledValues="(selecteduser ? [selecteduser.name] : [])"
-                                @input="lookupUser2"
+                                @input="lookupLocation"
                                 >
                                 <template slot="suggestion" slot-scope="{ data, htmlText }">
                                     <div class="d-flex align-items-center" style="position:relative !important;">
@@ -164,7 +163,7 @@
                                 :id="'search_recommend_'+index"
                                 class="mb-1 search_recommend"
                                 v-on:click="search_recommend_click(item._id, item.type, item.name, ((item.backgroundImages && item.backgroundImages.length>0) ? item.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'), item.description, 'search_recommend_'+index)"
-                                style="margin-left: 16px;margin-right: 16px;padding:7px 11px 7px;border:1px solid #ced4da;border-radius:16px;">
+                                style="margin-left: 16px;margin-right: 16px;padding:12px 16px;border:1px solid #ced4da;border-radius:16px;">
                                 <div class="d-flex align-items-center" style="position:relative !important;">
                                 <div :class="''+item.type + '_img'">
                                     <img
@@ -172,9 +171,9 @@
                                         :src="(item.backgroundImages && item.backgroundImages.length>0) ? item.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'"
                                         style="width: 40px; height: 40px;" />
                                 </div>
-                                <span v-if="item.type == 'site'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + item.name + ' 사이트</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(item.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis color-gray-nonimportant\' style=\'width: calc(100% - 136px);position: fixed;margin-top: -4px;\'>' + item.description+'</span>'"></span>
-                                <span v-else-if="item.type == 'point'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + item.name + ' 포인트</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(item.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis color-gray-nonimportant\' style=\'width: calc(100% - 136px);position: fixed;margin-top: -4px;\'>' + item.description+'</span>'"></span>
-                                <span v-else-if="item.type == 'center'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + item.name + '</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(item.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis color-gray-nonimportant\' style=\'width: calc(100% - 136px);position: fixed;margin-top: -4px;\'>' + item.description+'</span>'"></span>
+                                <span v-if="item.type == 'site'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + item.name + ' 사이트</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(item.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 144px);position: fixed;margin-top: -4px;\'>' + item.description+'</span>'"></span>
+                                <span v-else-if="item.type == 'point'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + item.name + ' 포인트</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(item.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 144px);position: fixed;margin-top: -4px;\'>' + item.description+'</span>'"></span>
+                                <span v-else-if="item.type == 'center'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + item.name + '</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(item.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 144px);position: fixed;margin-top: -4px;\'>' + item.description+'</span>'"></span>
                                 </div>
                             </div>
                             
@@ -700,39 +699,7 @@ export default {
             $("#btn_next1").attr("disabled", false);
         }
       },
-      lookupUser: debounce(function(){
-        // in practice this action should be debounced
-        fetch(`https://api.github.com/search/users?q=${this.query}`)
-          .then(response => {
-            return response.json();
-          })
-          .then(data => {
-            this.users = data.items;
-          })
-      }, 500),
-      async lookupUser2() {
-          /*
-          searchDiveSitesByName(query: $query) {
-                            _id
-                            uniqueName
-                            name
-                            description
-                            adminScore
-                            backgroundImages {
-                                thumbnailUrl
-                            }
-                        }
-                        searchDivePointsByName(query: $query) {
-                            _id
-                            uniqueName
-                            name
-                            description
-                            adminScore
-                            backgroundImages {
-                                thumbnailUrl
-                            }
-                        }
-          */
+      async lookupLocation() {
         this.users = [];
         const query = this.query;
         var result = await axios({
@@ -792,5 +759,5 @@ export default {
 .site_img:before{content:'';background:url(/static/images/assets/ico_pin0.png);width: 20px;height: 28px;position: absolute;bottom: -5px;left: 28px;background-size: cover;}
 .point_img:before{content:'';background:url(/static/images/assets/ico_pin1.png);width: 20px;height: 28px;position: absolute;bottom: -5px;left: 28px;background-size: cover;}
 .center_img:before{content:'';background:url(/static/images/assets/ico_pin2.png);width: 20px;height: 28px;position: absolute;bottom: -5px;left: 28px;background-size: cover;}
-
+.bg-secondary2>.d-flex>span>.color-gray-nonimportant{color: white !important;}
 </style>

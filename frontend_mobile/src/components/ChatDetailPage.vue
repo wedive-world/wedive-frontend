@@ -2,7 +2,7 @@
   <div class="">
     <div data-menu-active="nav-chat"></div>
     <div class="header header-fixed header-logo-center">
-        <a href="" class="header-title color">{{ getJoinedRoomList.filter(x=>x._id==roomId).length > 0 ? getJoinedRoomList.filter(x=>x._id==roomId)[0].name : ''|| '' }}</a>
+        <a href="" class="header-title color ellipsis">{{ roomName || '' }}</a>
         <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
     </div>
 
@@ -62,9 +62,9 @@
         </div>
     </div>
     
-    <div v-on:click="speechContentClick()" id="speech-content" class="card card-style ms-0 me-0 rounded-0" style="height: calc(100vh - 50px);overflow-y: auto;margin-top:50px;padding-bottom:50px;">
+    <div v-on:click="speechContentClick()" v-on:scroll="handleScroll" id="speech-content" class="card card-style ms-0 me-0 rounded-0" style="height: calc(100vh - 50px);overflow-y: auto;margin-top:50px;padding-bottom:50px;">
         <div class="content">
-            <div v-for="chat in getMessagesByRoomId">
+            <div v-for="(chat, index) in getMessagesByRoomId">
                 <div v-if="chat && chat.author && chat.author._id == uid">
                     <div v-if="chat.text.includes('[[') && chat.text.includes(']]') && chat.text.includes('emoji|')" class="chat-left">
                         <div class="">
@@ -124,6 +124,7 @@
                 </div>
                 
                 <div class="clearfix"></div>
+                <p v-if="(getJoinedRoomList.filter(x=>x._id==roomId).length > 0 ? getJoinedRoomList.filter(x=>x._id==roomId)[0].unread : 0 || 0) > 0 && (getJoinedRoomList.filter(x=>x._id==roomId)[0].unread == (getMessagesByRoomId.length - index - 1))" class="text-center mb-0 font-11 color-gray">여기까지 읽었습니다.</p>
             </div>
 
             <div class="hide">
@@ -235,10 +236,17 @@ export default {
         }
       },
       getMessagesByRoomId: function(newVal, oldVal) {
-          setTimeout(function() {
-              console.log("1")
-              $('#speech-content').scrollTop($('#speech-content')[0].scrollHeight);
-          },10)
+          if (oldVal.length == 0) {
+              setTimeout(function() {
+                $('#speech-content').scrollTop($('#speech-content')[0].scrollHeight);
+              },10)
+          } else {
+              const prev_height = this.prev_height;
+              
+              setTimeout(function() {
+                $('#speech-content').scrollTop($('#speech-content')[0].scrollHeight - prev_height);
+              },10)
+          }
       },
       is_emoji: function(newVal, oldVal) {
           if (newVal) {
@@ -253,36 +261,46 @@ export default {
       }
   },
   apollo: {
-    getJoinedRoomList: gql `
-        query {
-            getJoinedRoomList {
-                _id
-                type
-                name
-                lastMessageAt
-                numOfmessages
-                unread
-                createdAt
-                chatUsers {
-                _id
-                name
-                avatarOrigin
-                }
-                usersCount
-                owner {
-                name
-                avatarOrigin
-                }
-                lastChatMessage {
-                text
-                author {
+    getJoinedRoomList: {
+        query: gql `
+            query {
+                getJoinedRoomList {
+                    _id
+                    type
                     name
-                }
-                createdAt
+                    lastMessageAt
+                    numOfmessages
+                    unread
+                    createdAt
+                    chatUsers {
+                    _id
+                    name
+                    avatarOrigin
+                    }
+                    usersCount
+                    owner {
+                    name
+                    avatarOrigin
+                    }
+                    lastChatMessage {
+                    text
+                    author {
+                        name
+                    }
+                    createdAt
+                    }
                 }
             }
-        }
-    `,
+        `,
+        result ({ data }) {
+            try {
+                var roomInfo = this.getJoinedRoomList.filter(x=>x._id==this.roomId)[0];
+                this.roomName = roomInfo.type == 'direct' ? roomInfo.chatUsers.filter(user => user._id != localStorage.uid)[0].name : roomInfo.name;
+            } catch(e) {
+                console.log(e)
+            }
+        },
+    },
     getMessagesByRoomId: {
         query: gql`query GetMessagesByRoomId($roomId: String!, $skip: Int, $limit: Int) {
             getMessagesByRoomId(roomId: $roomId, skip: $skip, limit: $limit) {
@@ -305,7 +323,7 @@ export default {
         variables () {
             return {
                 skip: 0,
-                limit: 100,
+                limit: this.limit,
                 roomId: this.roomId
             }
         },
@@ -370,10 +388,18 @@ export default {
         //var element = document.getElementById("speech-content");
         //element.scrollTop = element.scrollHeight;
     },200);
-    
+
     //console.log(this.$apollo.queries.chats.observer.lastResult.data.getMessagesByRoomId);
 
-    console.log(this.getJoinedRoomList);
+    /*$("#speech-content").scroll(function () {
+        var position = $("#speech-content").scrollTop();
+        console.log(position);
+        if (position == 0) {
+            console.log("showMore")
+            this.showMore();
+            //this.skip += this.limit;
+        }
+    }); */
   },
   components: {
     
@@ -383,7 +409,9 @@ export default {
         init_template();
         var preloader = document.getElementById('preloader')
         if(preloader){preloader.classList.add('preloader-hide');}
+        
     }, 500);
+    
     window.addEventListener('native.showkeyboard', this.keyboardShowHandler);
   },
   destroyed () {
@@ -396,6 +424,10 @@ export default {
         getMessagesByRoomId: [],
         getJoinedRoomList: [],
         roomId: '',
+        roomName: '',
+        skip: 0,
+        limit: 50,
+        prev_height: 0,
         uid: localStorage.uid,
         is_emoji: false,
         is_emoji_clicked: false,
@@ -406,11 +438,60 @@ export default {
   }, methods: {
     setData(roomId) {
         this.roomId = roomId;
+        this.markRead();
+    },
+    handleScroll(e) {
+        if (e.target.scrollTop == 0) {
+            this.skip += this.limit;
+            this.prev_height = $('#speech-content')[0].scrollHeight;
+            
+            this.$apollo.queries.getMessagesByRoomId.fetchMore({
+                // New variables
+                variables: {
+                    skip: this.skip,
+                    limit: this.limit,
+                    roomId: this.roomId
+                },
+                // Transform the previous result with new data
+                updateQuery: (previousResult, { fetchMoreResult }) => {
+                    
+                    //this.skip += this.limit;
+                    
+                    return {
+                        getMessagesByRoomId: [
+                            ...fetchMoreResult.getMessagesByRoomId,
+                            ...previousResult.getMessagesByRoomId,
+                        ],
+                    }
+                },
+            });
+        }
+    },
+    markRead() {
+        this.$apollo.mutate({
+            // Query
+            mutation: gql`mutation Mutation($roomId: String!) {
+                        markRead(roomId: $roomId) {
+                            success
+                        }
+                    }`,
+            // Parameters
+            variables: {
+                roomId: this.roomId,
+            },
+        }).then((data) => {
+            // Result
+            //console.log(data)
+        }).catch((error) => {
+            // Error
+            console.error(error)
+            // We restore the initial user input
+        })
     },
     timeForToday(value) {
         if (typeof(value) == 'object') {
             var _time = new Date(value.$date);
-            console.log(_time);
+            //console.log(_time);
             value = _time.toISOString();
         }
         const timeValue = new Date(value);
@@ -429,6 +510,7 @@ export default {
         }
     },
     keyboardShowHandler(event) {
+        //console.log("keyboardShowHandler")
         $('#speech-content').scrollTop($('#speech-content')[0].scrollHeight);
     },
     async sendMessage() {
