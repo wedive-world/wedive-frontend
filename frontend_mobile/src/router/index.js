@@ -25,6 +25,7 @@ import DivingDetailPage from '@/components/DivingDetailPage'
 import UserDetailPage from '@/components/UserDetailPage'
 import ChatHomePage from '@/components/ChatHomePage'
 import ChatDetailPage from '@/components/ChatDetailPage'
+import ChatDummyPage from '@/components/ChatDummyPage'
 import ShopHomePage from '@/components/ShopHomePage'
 import ShopDetailPage from '@/components/ShopDetailPage'
 import StaticPage from '@/components/StaticPage'
@@ -170,6 +171,11 @@ export default new Router({
       name: 'ChatDetailPage',
       props: true,
       component: ChatDetailPage
+    },
+    {
+      path: '/chat',
+      name: 'ChatDummyPage',
+      component: ChatDummyPage
     },
     {
       path: '/shop_home',

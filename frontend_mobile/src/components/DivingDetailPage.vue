@@ -1009,7 +1009,7 @@ export default {
             //console.log(this.divingData)
             /// 다이버 레벨 보여주기
             this.divingData.hostUser.levelShow = '초보';
-            var scuba_level = ["초보", "오픈워터", "어드벤스드", "레스큐", "마스터", "강사"];
+            var scuba_level = ["초보", "오픈워터", "어드벤스드", "레스큐", "마스터", "강사", "위다이브 컨시어지"];
             var free_level = ["초보", "레벨1", "레벨2", "레벨3", "레벨4", "강사"];
             {
                 var my_s_lvl = parseInt((this.divingData.hostUser.scubaLicenseLevel)?this.divingData.hostUser.scubaLicenseLevel:"0");
@@ -1020,6 +1020,7 @@ export default {
                     this.divingData.hostUser.levelShow = (my_f_lvl>0) ? "프리 " + free_level[my_f_lvl] : this.divingData.hostUser.levelShow;
                 }
                 this.divingData.hostUser.levelShow += " 다이버";
+                if(my_s_lvl>5) this.divingData.hostUser.levelShow = scuba_level[my_s_lvl];
             }
             {
                 this.divingData.participants.forEach(participant => {

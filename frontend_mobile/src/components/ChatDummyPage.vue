@@ -6,15 +6,14 @@
         <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
     </div>
 
-    <div id="footer-bar-speach" style="z-index: 9999;display: table;width: 100%;">
+    <div id="footer-bar-speach" style="z-index: 9999;display: table;width: 100%;background: black;">
         <div :class="(is_emoji_clicked?'':'hide')" style="background:#00000066;height:100px;">
             <i v-on:click="is_emoji_clicked=false;emoji_url='';sendDisable=true;" class="wedive_icoset2x wedive_icoset2x_close" style="position:absolute;right:10px;top:10px;"/>
             <img :src="'/static/images/emoji/' + emoji_url" style="width:80px;margin-top:10px;"/>
         </div>
-        <div style="min-height: 52px;height: 52px;max-height:134px;background: black;">
-            <div class="d-flex" style="background:black;min-height: 52px;">
+        <div class="d-flex" style="min-height: 52px;height: 52px;max-height:134px;">
             <div class="me-1 speach-icon">
-                <div v-on:click="is_attach = ! is_attach;is_emoji=false;" style="width: 45px;display: inline-block;position: relative;">
+                <div style="width: 45px;display: inline-block;position: relative;">
                     <!--<input type="file" id="file-upload" class="upload-file text-center" accept="image/*" style="width:32px;">-->
                     <!--<p class="upload-file-text bg-gray-dark" style="color: #abb7ba;position:absolute;width:32px;height:32px;margin-top:-2px;left:8px;border-radius:16px;"><i class="fas fa-image pt-2 font-16"></i></p>-->
                     <img src="/static/images/assets/chat_icon_plus.png" style="width:22px;margin-top:14px;margin-left:4px;"/>
@@ -33,57 +32,33 @@
                     v-model="sendText"
                     style="border-radius:16px;margin-top:6px;background: #303440;color:white;max-height:122px;" />
             </div>
-            <div v-on:click="is_emoji = !is_emoji;is_attach=false;" style="width: 26px;display: inline-block;position: relative;">
+            <div v-on:click="is_emoji = !is_emoji" style="width: 26px;display: inline-block;position: relative;">
                     <img src="/static/images/assets/chat_icon_emoji.png" style="width:24px;margin-top:13px;margin-left:8px;"/>
                 </div>
             <div v-on:click="sendMessage()" class="ms-3 speach-icon" :style="(sendDisable?'background: #7C7C7C;width:50px;':'background: #1d397c;width:50px;')">
                 <i class="fas fa-paper-plane color-white font-20" style="margin-top:16px;"></i>
             </div>
-            </div>
-        </div>
-        <div :class="'' + (is_attach?'':' hide')" style="min-height:150px;max-height:150px;background: #303440;overflow-y: auto;">
-            <div class="row mb-0 p-3">
-                <div class="col-3 text-center"><div style="width:52px;height:52px;background:green;border-radius:26px;display: inline-block;"><i class="fas fa-image color-white font-30" style="margin-top: 11px;"></i></div><p class="mb-0 color-white">사진</p></div>
-                <div class="col-3 text-center"><div style="width:52px;height:52px;background:orange;border-radius:26px;display: inline-block;"><i class="fas fa-map-marker-alt color-white font-30" style="margin-top: 11px;"></i></div><p class="mb-0 color-white">장소</p></div>
-                <div class="col-3 text-center"><div style="width:52px;height:52px;background:deeppink;border-radius:26px;display: inline-block;"><i class="fas fa-user-friends color-white font-28" style="margin-top: 11px;"></i></div><p class="mb-0 color-white">버디</p></div>
-            </div>
         </div>
         <div :class="'' + (is_emoji?'':' hide')" style="max-height:300px;background: #303440;overflow-y: auto;">
-            <div class="" id="tab-group-1">
-                <div class="tab-controls tabs-small" data-highlight="bg-highlight" style="height:36px;border-bottom:1px solid #88888840;display: -webkit-box;">
-                    <a href="#" data-active data-bs-toggle="collapse" data-bs-target="#tab-1ab" style="padding: 0px 24px;display:table-cell;"><img src="/static/images/emoji/basic/emoji.png" style="width:28px;margin-top:1px;"/></a>
-                    <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-2ab" style="padding: 0px 24px;display:table-cell;"><img src="/static/images/emoji/wedive/emoji.png" style="width:28px;margin-top:1px;"/></a>
-                    <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-3ab" style="padding: 0px 24px;display:table-cell;">123</a>
-                </div>
-
-                <div data-bs-parent="#tab-group-1" class="collapse show row pe-3 ps-3 m-0" id="tab-1ab" style="max-height:264px;min-height:264px;overflow-y: auto;background: #303440;position:relative;;">
-                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/01.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/01.gif" width="100%" /></div>
-                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/02.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/02.gif" width="100%" /></div>
-                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/03.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/03.gif" width="100%" /></div>
-                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/04.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/04.gif" width="100%" /></div>
-                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/05.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/05.gif" width="100%" /></div>
-                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/06.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/06.gif" width="100%" /></div>
-                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/07.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/07.gif" width="100%" /></div>
-                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/08.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/08.gif" width="100%" /></div>
-                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/09.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/09.gif" width="100%" /></div>
-                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/10.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/10.gif" width="100%" /></div>
-                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/11.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/11.gif" width="100%" /></div>
-                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/12.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/12.gif" width="100%" /></div>
-                </div>
-                <div data-bs-parent="#tab-group-1" class="collapse row pe-3 ps-3 m-0" id="tab-2ab" style="max-height:264px;min-height:264px;overflow-y: auto;background: #303440;position:relative;">
-                    
-                </div>
-                <div data-bs-parent="#tab-group-1" class="collapse row pe-3 ps-3 m-0" id="tab-3ab" style="max-height:264px;min-height:264px;overflow-y: auto;background: #303440;position:relative;">
-                    
-                </div>
+            <div class="d-flex" style="height:36px;border-bottom:1px solid #88888880;">
+                <div style="border-right: 1px solid #88888880;width:60px;background:#ffffff30;"><img src="/static/images/emoji/basic/emoji.png" style="width:28px;margin-top:2px;"/></div>
+                <div style="border-right: 1px solid #88888880;width:60px;"><img src="/static/images/emoji/wedive/emoji.png" style="width:28px;margin-top:2px;"/></div>
+                <div style=""></div>
             </div>
-
-
-
-
-
-
-
+            <div class="row pe-3 ps-3 m-0">
+                <div v-on:click="is_emoji_clicked=true;emoji_url='basic/01.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/01.gif" width="100%" /></div>
+                <div v-on:click="is_emoji_clicked=true;emoji_url='basic/02.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/02.gif" width="100%" /></div>
+                <div v-on:click="is_emoji_clicked=true;emoji_url='basic/03.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/03.gif" width="100%" /></div>
+                <div v-on:click="is_emoji_clicked=true;emoji_url='basic/04.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/04.gif" width="100%" /></div>
+                <div v-on:click="is_emoji_clicked=true;emoji_url='basic/05.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/05.gif" width="100%" /></div>
+                <div v-on:click="is_emoji_clicked=true;emoji_url='basic/06.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/06.gif" width="100%" /></div>
+                <div v-on:click="is_emoji_clicked=true;emoji_url='basic/07.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/07.gif" width="100%" /></div>
+                <div v-on:click="is_emoji_clicked=true;emoji_url='basic/08.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/08.gif" width="100%" /></div>
+                <div v-on:click="is_emoji_clicked=true;emoji_url='basic/09.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/09.gif" width="100%" /></div>
+                <div v-on:click="is_emoji_clicked=true;emoji_url='basic/10.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/10.gif" width="100%" /></div>
+                <div v-on:click="is_emoji_clicked=true;emoji_url='basic/11.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/11.gif" width="100%" /></div>
+                <div v-on:click="is_emoji_clicked=true;emoji_url='basic/12.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/12.gif" width="100%" /></div>
+            </div>
         </div>
     </div>
     
@@ -247,11 +222,6 @@ function hideKeyboard() {
 
 export default {
   name: 'HelloWorld',
-  async beforeRouteEnter(to, from, next) {
-    if (to.params.id != null) {
-        next(vm => {vm.setData(to.params.id)});
-    }
-  },
   watch: {
       sendText: function(newVal, oldVal) {
         if (newVal.replace(/ /gi, "") == "") {
@@ -284,114 +254,6 @@ export default {
               $('#speech-content').css("height", (this.speechContentHeight) + "px")
           }
       }
-  },
-  apollo: {
-    getJoinedRoomList: {
-        query: gql `
-            query {
-                getJoinedRoomList {
-                    _id
-                    type
-                    name
-                    lastMessageAt
-                    numOfmessages
-                    unread
-                    createdAt
-                    chatUsers {
-                    _id
-                    name
-                    avatarOrigin
-                    }
-                    usersCount
-                    owner {
-                    name
-                    avatarOrigin
-                    }
-                    lastChatMessage {
-                    text
-                    author {
-                        name
-                    }
-                    createdAt
-                    }
-                }
-            }
-        `,
-        result ({ data }) {
-            try {
-                var roomInfo = this.getJoinedRoomList.filter(x=>x._id==this.roomId)[0];
-                this.roomName = roomInfo.type == 'direct' ? roomInfo.chatUsers.filter(user => user._id != localStorage.uid)[0].name : roomInfo.name;
-            } catch(e) {
-                console.log(e)
-            }
-        },
-    },
-    getMessagesByRoomId: {
-        query: gql`query GetMessagesByRoomId($roomId: String!, $skip: Int, $limit: Int) {
-            getMessagesByRoomId(roomId: $roomId, skip: $skip, limit: $limit) {
-                _id
-                text
-                author {
-                _id
-                name
-                avatarOrigin
-                }
-                attachments {
-                attachmentText
-                imageUrl
-                audioUrl
-                videoUrl
-                }
-                createdAt
-            }
-        }`,
-        variables () {
-            return {
-                skip: 0,
-                limit: this.limit,
-                roomId: this.roomId
-            }
-        },
-        result ({ data }) {
-        },
-        subscribeToMore: {
-            document: gql`subscription Subscription($roomIds: [String]!) {
-                subscribeRoomMessage(roomIds: $roomIds) {
-                    _id
-                    text
-                    author {
-                    _id
-                    name
-                    avatarOrigin
-                    }
-                    attachments {
-                    attachmentText
-                    imageUrl
-                    audioUrl
-                    videoUrl
-                    }
-                    createdAt
-                }
-            }`,
-            variables () {
-                return {
-                    roomIds: [this.roomId]
-                }
-            },
-            updateQuery: (previousResult, { subscriptionData }) => {
-                if (previousResult.getMessagesByRoomId.find(chat => chat._id === subscriptionData.data.subscribeRoomMessage._id)) {
-                    return previousResult
-                }
-                return {
-                    getMessagesByRoomId: [
-                        ...previousResult.getMessagesByRoomId,
-                        subscriptionData.data.subscribeRoomMessage,
-                    ],
-                }
-            },
-        }
-        
-    },
   },
   mounted() {
     $(".page-title").hide();
@@ -449,22 +311,38 @@ export default {
         getMessagesByRoomId: [],
         getJoinedRoomList: [],
         roomId: '',
-        roomName: '',
+        roomName: localStorage.chatName,
         skip: 0,
         limit: 50,
         prev_height: 0,
         uid: localStorage.uid,
         is_emoji: false,
         is_emoji_clicked: false,
-        is_attach: false,
         emoji_url: '',
         emoji_regex: /(?:[\u2700-\u27bf]|(?:\ud83c[\udde6-\uddff]){2}|[\ud800-\udbff][\udc00-\udfff]|[\u0023-\u0039]\ufe0f?\u20e3|\u3299|\u3297|\u303d|\u3030|\u24c2|\ud83c[\udd70-\udd71]|\ud83c[\udd7e-\udd7f]|\ud83c\udd8e|\ud83c[\udd91-\udd9a]|\ud83c[\udde6-\uddff]|\ud83c[\ude01-\ude02]|\ud83c\ude1a|\ud83c\ude2f|\ud83c[\ude32-\ude3a]|\ud83c[\ude50-\ude51]|\u203c|\u2049|[\u25aa-\u25ab]|\u25b6|\u25c0|[\u25fb-\u25fe]|\u00a9|\u00ae|\u2122|\u2139|\ud83c\udc04|[\u2600-\u26FF]|\u2b05|\u2b06|\u2b07|\u2b1b|\u2b1c|\u2b50|\u2b55|\u231a|\u231b|\u2328|\u23cf|[\u23e9-\u23f3]|[\u23f8-\u23fa]|\ud83c\udccf|\u2934|\u2935|[\u2190-\u21ff])/g,
         speechContentHeight: 0,
     }
   }, methods: {
-    setData(roomId) {
-        this.roomId = roomId;
-        this.markRead();
+    timeForToday(value) {
+        if (typeof(value) == 'object') {
+            var _time = new Date(value.$date);
+            //console.log(_time);
+            value = _time.toISOString();
+        }
+        const timeValue = new Date(value);
+        const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
+        if (betweenTime < 1) return '방금전';
+        else if (betweenTime < 6) {
+            return `${betweenTime}분전`;
+        }
+        else {
+            var hour = timeValue.getHours();
+            if (hour < 12) hour = "오전 " + hour
+            else if(hour == 12) hour = "오후 " + hour;
+            else hour = "오후 " + (hour-12);
+            var minute = timeValue.getMinutes();
+            return hour + ":" + ((minute<10) ? "0"+minute : minute);
+        }
     },
     handleScroll(e) {
         if (e.target.scrollTop == 0) {
@@ -491,48 +369,6 @@ export default {
                     }
                 },
             });
-        }
-    },
-    markRead() {
-        this.$apollo.mutate({
-            // Query
-            mutation: gql`mutation Mutation($roomId: String!) {
-                        markRead(roomId: $roomId) {
-                            success
-                        }
-                    }`,
-            // Parameters
-            variables: {
-                roomId: this.roomId,
-            },
-        }).then((data) => {
-            // Result
-            //console.log(data)
-        }).catch((error) => {
-            // Error
-            console.error(error)
-            // We restore the initial user input
-        })
-    },
-    timeForToday(value) {
-        if (typeof(value) == 'object') {
-            var _time = new Date(value.$date);
-            //console.log(_time);
-            value = _time.toISOString();
-        }
-        const timeValue = new Date(value);
-        const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
-        if (betweenTime < 1) return '방금전';
-        else if (betweenTime < 6) {
-            return `${betweenTime}분전`;
-        }
-        else {
-            var hour = timeValue.getHours();
-            if (hour < 12) hour = "오전 " + hour
-            else if(hour == 12) hour = "오후 " + hour;
-            else hour = "오후 " + (hour-12);
-            var minute = timeValue.getMinutes();
-            return hour + ":" + ((minute<10) ? "0"+minute : minute);
         }
     },
     keyboardShowHandler(event) {
@@ -604,22 +440,15 @@ export default {
         for (var i=0; i<10; i++)
             textarea.style.height = textarea.scrollHeight - 4 + 'px';
         var hei = parseInt(textarea.style.height.replace("px",""))+12;
-        if (hei < 141) {
+        if (hei < 141)
             $("#footer-bar-speach").height(hei + "px")
-            $("#footer-bar-speach .d-flex").height(hei + "px")
-        }
     },
     resizeFocus() {
         const { textarea } = this.$refs;
         for (var i=0; i<10; i++)
             textarea.style.height = textarea.scrollHeight - 4 + 'px';
-        var hei = (parseInt(textarea.style.height.replace("px",""))+12);
-        if (hei < 141) {
-            $("#footer-bar-speach").height(hei + "px")
-            $("#footer-bar-speach .d-flex").height(hei + "px")
-        }
+        $("#footer-bar-speach").height((parseInt(textarea.style.height.replace("px",""))+12) + "px")
         this.is_emoji = false;
-        this.is_attach = false;
     },
     speechContentClick() {
         if (this.is_emoji) this.is_emoji = false;
@@ -742,5 +571,4 @@ color: #1d397c ;
 .chat-left {max-width: 200px;
     float: right;
     border-bottom-right-radius: 0px !important;}
-.tab-controls a {background-color: #FFFFFF88;}
 </style>

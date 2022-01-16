@@ -358,7 +358,7 @@ export default {
             if (_userData.isUserLike) this.like_img = 'ico_heart2';
             if (_userData.isUserSubscribe) this.subscribe_img = 'ico_subscribe2';
             this.userData.levelShow = '초보';
-            var scuba_level = ["초보", "오픈워터", "어드벤스드", "레스큐", "마스터", "강사"];
+            var scuba_level = ["초보", "오픈워터", "어드벤스드", "레스큐", "마스터", "강사", "위다이브 컨시어지"];
             var free_level = ["초보", "레벨1", "레벨2", "레벨3", "레벨4", "강사"];
             var s_lvl = parseInt(this.userData.scubaLicenseLevel);
             var f_lvl = parseInt(this.userData.freeLicenseLevel);
@@ -370,6 +370,7 @@ export default {
                 this.userData.levelShow = (f_lvl>0) ? "프리 " + free_level[f_lvl] : this.userData.levelShow;
             }
             this.userData.levelShow += " 다이버";
+            if(my_s_lvl>5) this.userData.levelShow = scuba_level[my_s_lvl];
             
             setTimeout(function() {
                 init_template();

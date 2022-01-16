@@ -33,7 +33,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="splide__slide">
+                    <div v-if="nickName==null && idToken == null" v-on:click="login" class="splide__slide">
                         <div class="card card-style" style="box-shadow: none;background: #494949;">
                             <div class="mb-0" style="min-height: 96px;background:url(/static/images/assets/onoff1.gif);background-size: 154px 96px;background-repeat:no-repeat;background-position-x:right;">
                                 <div class="mb-0" style="position: relative;">
@@ -306,6 +306,8 @@ export default {
         map: null,
         prev_driection: true,
         lastScrollPosition: 0,
+        idToken: localStorage.idToken,
+        nickName: localStorage.nickName,
     }
   }, methods: {
       goDiving() {
@@ -323,7 +325,15 @@ export default {
         }
         this.prev_driection = currentScrollPosition < this.lastScrollPosition;
         this.lastScrollPosition = currentScrollPosition;
-      }
+      },
+      login() {
+        localStorage.loginUrl = window.location.pathname;
+        if (localStorage.hasOwnProperty("idToken") == false || localStorage.idToken == null) {
+          this.$root.$children[0].$refs.loginBottomSheet.open();
+        } else if (localStorage.hasOwnProperty("nickName") == false || localStorage.nickName == null) {
+          location.href='/user_create';
+        }
+      },
   }
 
   

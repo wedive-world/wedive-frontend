@@ -291,7 +291,7 @@ export default {
     },
     getDiverLevel(freeLicenseLevel, scubaLicenseLevel) {
         var levelShow = '초보';
-        var scuba_level = ["초보", "오픈워터", "어드벤스드", "레스큐", "마스터", "강사"];
+        var scuba_level = ["초보", "오픈워터", "어드벤스드", "레스큐", "마스터", "강사", "위다이브 컨시어지"];
         var free_level = ["초보", "레벨1", "레벨2", "레벨3", "레벨4", "강사"];
 
         var my_s_lvl = parseInt((scubaLicenseLevel)?scubaLicenseLevel:"0");
@@ -302,11 +302,13 @@ export default {
             levelShow = (my_f_lvl>0) ? "프리 " + free_level[my_f_lvl] : levelShow;
         }
         levelShow += " 다이버";
+        if(my_s_lvl>5) levelShow = scuba_level[my_s_lvl];
         
         return levelShow;
     },
     enableNext2(ev) {
-        this.chatSelectedList.push(ev);
+        if (this.chatSelectedList.filter(li => li._id == ev._id).length == 0)
+            this.chatSelectedList.push(ev);
     },
     removeChatSelected(user) {
         for (var i=0; i<this.chatSelectedList.length; i++) {
@@ -337,6 +339,12 @@ export default {
                 }
             })
             // 없는경우, 더미로 하나 만든다.
+            localStorage.chatType = 'direct';
+            var chatUids = new Array();
+            chatUids.push(this.chatSelectedList[0].uid);
+            localStorage.chatUids = JSON.stringify(chatUids);
+            localStorage.chatName = this.chatSelectedList[0].nickName;
+            location.href = '/chat'
         }
     },
     async lookupUser() {
