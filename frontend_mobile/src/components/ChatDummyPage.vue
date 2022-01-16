@@ -6,14 +6,19 @@
         <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
     </div>
 
-    <div id="footer-bar-speach" style="z-index: 9999;display: table;width: 100%;background: black;">
+    <div id="footer-bar-speach" style="z-index: 9999;display: table;width: 100%;">
         <div :class="(is_emoji_clicked?'':'hide')" style="background:#00000066;height:100px;">
             <i v-on:click="is_emoji_clicked=false;emoji_url='';sendDisable=true;" class="wedive_icoset2x wedive_icoset2x_close" style="position:absolute;right:10px;top:10px;"/>
             <img :src="'/static/images/emoji/' + emoji_url" style="width:80px;margin-top:10px;"/>
         </div>
-        <div class="d-flex" style="min-height: 52px;height: 52px;max-height:134px;">
+        <div :class="(is_image_attached?'':'hide')" style="background:#00000066;height:100px;text-align:left;padding:0 16px;">
+            <i v-on:click="is_image_attached=false;sendDisable=true;file_photo=[];file_photo_url=[];" class="wedive_icoset2x wedive_icoset2x_close" style="position:absolute;right:10px;top:10px;"/>
+            <div v-for="(photo, index) in file_photo_url" v-on:click="removeImage(index)" class="wedive-image-attach" :style="'background:url(' + photo + ');'"><span class="wedive-image-index font-noto font-600 font-12">{{ (index+1) }}</span></div>
+        </div>
+        <div style="min-height: 52px;height: 52px;max-height:134px;background: black;">
+            <div class="d-flex" style="background:black;min-height: 52px;">
             <div class="me-1 speach-icon">
-                <div style="width: 45px;display: inline-block;position: relative;">
+                <div v-on:click="is_attach = ! is_attach;is_emoji=false;" style="width: 45px;display: inline-block;position: relative;">
                     <!--<input type="file" id="file-upload" class="upload-file text-center" accept="image/*" style="width:32px;">-->
                     <!--<p class="upload-file-text bg-gray-dark" style="color: #abb7ba;position:absolute;width:32px;height:32px;margin-top:-2px;left:8px;border-radius:16px;"><i class="fas fa-image pt-2 font-16"></i></p>-->
                     <img src="/static/images/assets/chat_icon_plus.png" style="width:22px;margin-top:14px;margin-left:4px;"/>
@@ -32,33 +37,57 @@
                     v-model="sendText"
                     style="border-radius:16px;margin-top:6px;background: #303440;color:white;max-height:122px;" />
             </div>
-            <div v-on:click="is_emoji = !is_emoji" style="width: 26px;display: inline-block;position: relative;">
+            <div v-on:click="is_emoji = !is_emoji;is_attach=false;" style="width: 26px;display: inline-block;position: relative;">
                     <img src="/static/images/assets/chat_icon_emoji.png" style="width:24px;margin-top:13px;margin-left:8px;"/>
                 </div>
             <div v-on:click="sendMessage()" class="ms-3 speach-icon" :style="(sendDisable?'background: #7C7C7C;width:50px;':'background: #1d397c;width:50px;')">
                 <i class="fas fa-paper-plane color-white font-20" style="margin-top:16px;"></i>
             </div>
+            </div>
+        </div>
+        <div :class="'' + (is_attach?'':' hide')" style="min-height:150px;max-height:150px;background: #303440;overflow-y: auto;">
+            <div class="row mb-0 p-3">
+                <div class="col-3 text-center hide" style="position:relative;"><div style="width:52px;height:52px;background:green;border-radius:26px;display: inline-block;"><i class="fas fa-image color-white font-28" style="margin-top: 13px;"></i></div><p class="mb-0 color-white">사진</p><input type="file" @change="imageUserChange" id="file-upload" class="upload-file text-center opacity-0" accept="image/*" style="height: 76px;position: absolute;left:0;top:0;"></div>
+                <div class="col-3 text-center" data-menu="location-add"><div style="width:52px;height:52px;background:orange;border-radius:26px;display: inline-block;"><i class="fas fa-map-marker-alt color-white font-28" style="margin-top: 13px;"></i></div><p class="mb-0 color-white">장소</p></div>
+                <div class="col-3 text-center"><div style="width:52px;height:52px;background:deeppink;border-radius:26px;display: inline-block;"><i class="fas fa-user-friends color-white font-26" style="margin-top: 13px;"></i></div><p class="mb-0 color-white">버디</p></div>
+            </div>
         </div>
         <div :class="'' + (is_emoji?'':' hide')" style="max-height:300px;background: #303440;overflow-y: auto;">
-            <div class="d-flex" style="height:36px;border-bottom:1px solid #88888880;">
-                <div style="border-right: 1px solid #88888880;width:60px;background:#ffffff30;"><img src="/static/images/emoji/basic/emoji.png" style="width:28px;margin-top:2px;"/></div>
-                <div style="border-right: 1px solid #88888880;width:60px;"><img src="/static/images/emoji/wedive/emoji.png" style="width:28px;margin-top:2px;"/></div>
-                <div style=""></div>
+            <div class="" id="tab-group-1">
+                <div class="tab-controls tabs-small" data-highlight="bg-highlight" style="height:36px;border-bottom:1px solid #88888840;display: -webkit-box;">
+                    <a href="#" data-active data-bs-toggle="collapse" data-bs-target="#tab-1ab" style="padding: 0px 24px;display:table-cell;"><img src="/static/images/emoji/basic/emoji.png" style="width:28px;margin-top:1px;"/></a>
+                    <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-2ab" style="padding: 0px 24px;display:table-cell;"><img src="/static/images/emoji/wedive/emoji.png" style="width:28px;margin-top:1px;"/></a>
+                    <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-3ab" style="padding: 0px 24px;display:table-cell;">123</a>
+                </div>
+
+                <div data-bs-parent="#tab-group-1" class="collapse show row pe-3 ps-3 m-0" id="tab-1ab" style="max-height:264px;min-height:264px;overflow-y: auto;background: #303440;position:relative;;">
+                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/01.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/01.gif" width="100%" /></div>
+                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/02.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/02.gif" width="100%" /></div>
+                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/03.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/03.gif" width="100%" /></div>
+                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/04.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/04.gif" width="100%" /></div>
+                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/05.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/05.gif" width="100%" /></div>
+                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/06.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/06.gif" width="100%" /></div>
+                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/07.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/07.gif" width="100%" /></div>
+                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/08.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/08.gif" width="100%" /></div>
+                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/09.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/09.gif" width="100%" /></div>
+                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/10.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/10.gif" width="100%" /></div>
+                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/11.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/11.gif" width="100%" /></div>
+                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/12.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/12.gif" width="100%" /></div>
+                </div>
+                <div data-bs-parent="#tab-group-1" class="collapse row pe-3 ps-3 m-0" id="tab-2ab" style="max-height:264px;min-height:264px;overflow-y: auto;background: #303440;position:relative;">
+                    
+                </div>
+                <div data-bs-parent="#tab-group-1" class="collapse row pe-3 ps-3 m-0" id="tab-3ab" style="max-height:264px;min-height:264px;overflow-y: auto;background: #303440;position:relative;">
+                    
+                </div>
             </div>
-            <div class="row pe-3 ps-3 m-0">
-                <div v-on:click="is_emoji_clicked=true;emoji_url='basic/01.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/01.gif" width="100%" /></div>
-                <div v-on:click="is_emoji_clicked=true;emoji_url='basic/02.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/02.gif" width="100%" /></div>
-                <div v-on:click="is_emoji_clicked=true;emoji_url='basic/03.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/03.gif" width="100%" /></div>
-                <div v-on:click="is_emoji_clicked=true;emoji_url='basic/04.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/04.gif" width="100%" /></div>
-                <div v-on:click="is_emoji_clicked=true;emoji_url='basic/05.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/05.gif" width="100%" /></div>
-                <div v-on:click="is_emoji_clicked=true;emoji_url='basic/06.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/06.gif" width="100%" /></div>
-                <div v-on:click="is_emoji_clicked=true;emoji_url='basic/07.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/07.gif" width="100%" /></div>
-                <div v-on:click="is_emoji_clicked=true;emoji_url='basic/08.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/08.gif" width="100%" /></div>
-                <div v-on:click="is_emoji_clicked=true;emoji_url='basic/09.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/09.gif" width="100%" /></div>
-                <div v-on:click="is_emoji_clicked=true;emoji_url='basic/10.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/10.gif" width="100%" /></div>
-                <div v-on:click="is_emoji_clicked=true;emoji_url='basic/11.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/11.gif" width="100%" /></div>
-                <div v-on:click="is_emoji_clicked=true;emoji_url='basic/12.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/12.gif" width="100%" /></div>
-            </div>
+
+
+
+
+
+
+
         </div>
     </div>
     
@@ -77,6 +106,15 @@
                             {{ chat.text }}
                         </div>
                         <span class="time">{{ timeForToday(chat.createdAt) }}</span>
+                    </div>
+                    <div v-else-if="chat.text.includes('[[') && chat.text.includes(']]') && (chat.text.includes('center|') || chat.text.includes('point|') || chat.text.includes('site|'))" class="speech-left">
+                            <div class="speech-bubble bg-highlight">
+                                <div class="font-noto font-600 font-16 mb-3"># {{ chat.text.split('|')[2] }}</div>
+                                <div class="ellipsis" style="display: -webkit-box;-webkit-line-clamp: 5;-webkit-box-orient: vertical;white-space: unset;"><img :src="chat.text.split('|')[4].replace(']]','')" width="60" height="60" class="rounded-s me-3" style="float:left;position: relative;">{{ chat.text.split('|')[3] }}</div>
+
+                                <a :href="'/'+chat.text.split('|')[0].replace('[[','')+'/'+chat.text.split('|')[1]" class="mt-3 font-noto" style="display: block;background: white;border-radius:8px;padding:6px 12px;margin-bottom:4px;color:black;">자세히 보러가기<i class="wedive_icoset wedive_icoset_rightarrow" style="float:right;margin-top:4px;"></i></a>
+                            </div>
+                            <span class="time">{{ timeForToday(chat.createdAt) }}</span>
                     </div>
                     <div v-else class="speech-left">
                         <div class="speech-bubble bg-highlight">
@@ -111,6 +149,17 @@
                             {{ chat.text }}
                         </div>
                         <span class="time">{{ timeForToday(chat.createdAt) }}</span>
+                    </div>
+                    <div v-else-if="chat.text.includes('[[') && chat.text.includes(']]') && (chat.text.includes('center|') || chat.text.includes('point|') || chat.text.includes('site|'))" class="chat-right">
+                        <div class="speech-right" style="max-width: 220px;">
+                            <div class="speech-bubble color-black">
+                                <div class="font-noto font-600 font-16 mb-3"># {{ chat.text.split('|')[2] }}</div>
+                                <div class="ellipsis" style="display: -webkit-box;-webkit-line-clamp: 5;-webkit-box-orient: vertical;white-space: unset;"><img :src="chat.text.split('|')[4].replace(']]','')" width="60" height="60" class="rounded-s me-3" style="float:left;position: relative;">{{ chat.text.split('|')[3] }}</div>
+
+                                <a :href="'/'+chat.text.split('|')[0].replace('[[','')+'/'+chat.text.split('|')[1]" class="mt-3 font-noto" style="display: block;background: white;border-radius:8px;padding:6px 12px;margin-bottom:4px;">자세히 보러가기<i class="wedive_icoset wedive_icoset_rightarrow" style="float:right;margin-top:4px;"></i></a>
+                            </div>
+                            <span class="time">{{ timeForToday(chat.createdAt) }}</span>
+                        </div>
                     </div>
                     <div v-else>
                         <div class="speech-right">
@@ -192,10 +241,79 @@
             </a>  
         </div>
     </div>
+
+
+    <div id="location-add" 
+         class="menu menu-box-bottom menu-box-bottom-full rounded-0" 
+         data-menu-width="cover"
+         data-menu-height="cover"
+         style="margin-bottom: 0;z-index: 9999;">
+        
+        <div class="card rounded-0 bg-2" data-card-height="50">
+            <div class="card-top p-2">
+                <a v-on:click="selectedlocation=null;query='';" href="#" class="close-menu icon icon-s rounded-l bg-theme color-theme "><i class="fa fa-arrow-left"></i></a>
+                <a v-on:click="sendLocation" href="#" :class="'float-end icon icon-s rounded-l bg-theme me-3 mt-2 font-noto font-16 ' + ((locationSelectedList.length==0) ? 'color-gray' : 'color-theme')"><span v-if="locationSelectedList.length> 0" class="color-highlight font-600 me-2">{{locationSelectedList.length}}</span>확인</a>
+                <a href="" class="header-title color font-noto font-16">장소 전달</a>
+            </div>
+        </div>
+        
+        <div class="card rounded-0 content">
+            <vue-typeahead-bootstrap
+                id="search_typeahead"
+                class="wedive-search"
+                v-model="query"
+                :data="locations"
+                :serializer="item => item.name"
+                :screen-reader-text-serializer="item => `${item.name}`"
+                highlightClass="special-highlight-class"
+                @hit="selectedlocation = $event;enableNext2($event);"
+                :minMatchingChars="1"
+                placeholder="사이트, 포인트, 센터"
+                inputClass="special-input-class"
+                @input="lookupLocation"
+                >
+                <template slot="suggestion" slot-scope="{ data, htmlText }">
+                    <div class="d-flex align-items-center" style="position:relative !important;">
+                    <div style="">
+                        <div
+                        :class="'wedive-img-rect rounded-s me-3 '+data.type+'-tag'"
+                        :style="'background:url('+((data.backgroundImages && data.backgroundImages.length>0) ? data.backgroundImages[0].thumbnailUrl : '/static/empty.jpg')+')'">
+                        </div>
+                    </div>
+                    <span class="ml-4" style="">
+                        <p class="font-noto font-16 mb-0">{{ data.name }}</p>
+                        <p class="font-13 mb-0 color-gray ellipsis" style="max-width: calc(100vw - 124px)">{{ data.description }}</p>
+                    </span>
+                    
+                    </div>
+                </template>
+            </vue-typeahead-bootstrap>
+            <div class="m-2">
+                <div v-for="location in locationSelectedList" class=" border-bottom pt-2 pb-2">
+                    <div class="d-flex align-items-center" style="position:relative !important;">
+                        <div class="">
+                            <div
+                            :class="'wedive-img-rect rounded-s me-3 '+location.type+'-tag'"
+                            :style="'background:url('+((location.backgroundImages && location.backgroundImages.length>0) ? location.backgroundImages[0].thumbnailUrl : '/static/empty.jpg')+')'">
+                            </div>
+                        </div>
+                        <span class="ml-4" style="">
+                            <p class="font-noto font-16 mb-0">{{ location.name }}</p>
+                            <p class="font-13 mb-0 color-gray ellipsis" style="max-width: calc(100vw - 144px)">{{ location.description }}</p>
+                        </span>
+                        <i v-on:click="removeLocationSelected(location)" class="wedive_icoset wedive_icoset_close" style="position: absolute;right:0px;margin:8px;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
   </div>
 </template>
 <script>
 import gql from 'graphql-tag'
+import VueTypeaheadBootstrap from 'vue-typeahead-bootstrap';
 const axios = require("axios")
 
 
@@ -253,7 +371,18 @@ export default {
           } else {
               $('#speech-content').css("height", (this.speechContentHeight) + "px")
           }
-      }
+      },
+      is_attach: function(newVal, oldVal) {
+          if (newVal) {
+              $('#speech-content').css("height", (this.speechContentHeight-150) + "px")
+              setTimeout(function() {
+                hideKeyboard();
+                $('#speech-content').scrollTop($('#speech-content')[0].scrollHeight);
+              },100)
+          } else {
+              $('#speech-content').css("height", (this.speechContentHeight) + "px")
+          }
+      },
   },
   mounted() {
     $(".page-title").hide();
@@ -289,7 +418,7 @@ export default {
     }); */
   },
   components: {
-    
+    VueTypeaheadBootstrap,
   },
   created() {
     setTimeout(function() {
@@ -306,6 +435,10 @@ export default {
   },
   data () {
     return {
+        query: '',
+        selectedlocation: null,
+        locations: [],
+        locationSelectedList: [],
         sendText: '',
         sendDisable: true,        
         getMessagesByRoomId: [],
@@ -318,30 +451,178 @@ export default {
         uid: localStorage.uid,
         is_emoji: false,
         is_emoji_clicked: false,
+        is_image_attached: false,
+        file_photo: [],
+        file_photo_url: [],
+        is_attach: false,
         emoji_url: '',
         emoji_regex: /(?:[\u2700-\u27bf]|(?:\ud83c[\udde6-\uddff]){2}|[\ud800-\udbff][\udc00-\udfff]|[\u0023-\u0039]\ufe0f?\u20e3|\u3299|\u3297|\u303d|\u3030|\u24c2|\ud83c[\udd70-\udd71]|\ud83c[\udd7e-\udd7f]|\ud83c\udd8e|\ud83c[\udd91-\udd9a]|\ud83c[\udde6-\uddff]|\ud83c[\ude01-\ude02]|\ud83c\ude1a|\ud83c\ude2f|\ud83c[\ude32-\ude3a]|\ud83c[\ude50-\ude51]|\u203c|\u2049|[\u25aa-\u25ab]|\u25b6|\u25c0|[\u25fb-\u25fe]|\u00a9|\u00ae|\u2122|\u2139|\ud83c\udc04|[\u2600-\u26FF]|\u2b05|\u2b06|\u2b07|\u2b1b|\u2b1c|\u2b50|\u2b55|\u231a|\u231b|\u2328|\u23cf|[\u23e9-\u23f3]|[\u23f8-\u23fa]|\ud83c\udccf|\u2934|\u2935|[\u2190-\u21ff])/g,
         speechContentHeight: 0,
     }
   }, methods: {
-    timeForToday(value) {
-        if (typeof(value) == 'object') {
-            var _time = new Date(value.$date);
-            //console.log(_time);
-            value = _time.toISOString();
+    async sendLocation() {
+        if (this.locationSelectedList.length == 0) {
+            return;
+        } else {
+            // progress bar
+            var preloader = document.getElementById('preloader')
+            if(preloader){
+                preloader.classList.remove('preloader-hide');
+                preloader.classList.add('opacity-50');
+            }
+
+            // send message
+            for (var i=0; i<this.locationSelectedList.length; i++) {
+                //console.log(this.locationSelectedList[i])
+                var bg_img = (this.locationSelectedList[i].backgroundImages && this.locationSelectedList[i].backgroundImages.length > 0 ) ? this.locationSelectedList[i].backgroundImages[0].thumbnailUrl : '/static/empty.jpg';
+                const message = '[['+this.locationSelectedList[i].type+'|'+this.locationSelectedList[i].uniqueName+'|'+this.locationSelectedList[i].name+'|'+this.locationSelectedList[i].description+'|'+bg_img+']]';
+                const userId = JSON.parse(localStorage.chatUids)[0];                
+                
+                var result = await axios({
+                    url: 'https://chat.wedives.com/graphql',
+                    method: 'post',
+                    headers: {
+                        countrycode: 'ko',
+                        idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                    },
+                    data: {
+                        query: `
+                        mutation Mutation($userId: String!, $input: String!) {
+                            postMessageToUser(userId: $userId, input: $input) {
+                                _id
+                                text
+                                chatRoom {
+                                _id
+                                }
+                            }
+                        }
+                        `,
+                        variables: {
+                            "userId": userId,
+                            "input": message
+                        }
+
+                    }
+                });
+
+                
+                
+                this.sendText = '';
+                var ret = (result.data && result.data.data && result.data.data.getJoinedRoomList) ? result.data.data.getJoinedRoomList : null
+                if (ret != null) {
+                    delete localStorage.chatUids;
+                    delete localStorage.chatType;
+                    delete localStorage.chatName;
+                    location.href = '/chat/' + ret.chatRoom._id;
+                }
+            }
+            if(preloader){
+                preloader.classList.remove('opacity-50');
+                preloader.classList.add('preloader-hide');
+            }
+            const activeMenu = document.querySelectorAll('.menu-active');
+            for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
         }
-        const timeValue = new Date(value);
-        const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
-        if (betweenTime < 1) return '방금전';
-        else if (betweenTime < 6) {
-            return `${betweenTime}분전`;
+    },
+    removeLocationSelected(location) {
+        for (var i=0; i<this.locationSelectedList.length; i++) {
+            var x = this.locationSelectedList[i];
+            if (x._id == location._id) {
+                this.locationSelectedList.splice(i, 1);
+                break;
+            }
         }
-        else {
-            var hour = timeValue.getHours();
-            if (hour < 12) hour = "오전 " + hour
-            else if(hour == 12) hour = "오후 " + hour;
-            else hour = "오후 " + (hour-12);
-            var minute = timeValue.getMinutes();
-            return hour + ":" + ((minute<10) ? "0"+minute : minute);
+    },
+    enableNext2(ev) {
+        if (this.locationSelectedList.filter(li => li._id == ev._id).length == 0)
+            this.locationSelectedList.push(ev);
+    },
+    async lookupLocation() {
+        this.locations = [];
+        const query = this.query;
+        var result = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                    query Query($query: String!) {
+                        searchDiveCentersByName(query: $query) {
+                            _id
+                            uniqueName
+                            name
+                            description
+                            divingType
+                            adminScore
+                            latitude
+                            longitude
+                            backgroundImages {
+                                thumbnailUrl
+                            }
+                        }
+                        searchDivePointsByName(query: $query) {
+                            _id
+                            uniqueName
+                            name
+                            description
+                            adminScore
+                            latitude
+                            longitude
+                            backgroundImages {
+                                thumbnailUrl
+                            }
+                        }
+                        searchDiveSitesByName(query: $query) {
+                            _id
+                            uniqueName
+                            name
+                            description
+                            adminScore
+                            latitude
+                            longitude
+                            backgroundImages {
+                                thumbnailUrl
+                            }
+                        }
+                    }
+                `,
+                variables: {
+                    "query": query
+                }
+            }
+        });
+        //result.data.data.searchDiveCentersByName.forEach(x=>result.data.data.searchDiveCentersByName)
+        var result_list = new Array();
+        if (result.data.data.searchDiveSitesByName) result.data.data.searchDiveSitesByName.forEach(x=>{x.type='site';result_list.push(x)});
+        if (result.data.data.searchDivePointsByName) result.data.data.searchDivePointsByName.forEach(x=>{x.type='point';result_list.push(x)});
+        if (result.data.data.searchDiveCentersByName) result.data.data.searchDiveCentersByName.forEach(x=>{x.type='center';result_list.push(x)});
+        this.locations = result_list;
+    },
+    imageUserChange({ target: { files = [] } }) {
+        if (!files.length) {
+          return
+        }
+        this.is_image_attached = true;
+        this.file_photo.push(files[0]);
+        this.file_photo_url.push(URL.createObjectURL(files[0]));
+
+        this.sendDisable=false;
+
+        //$("#file-upload1-back").css("background", "url(" + URL.createObjectURL(this.file_photo) + ")");
+        //$("#file-upload1-back").css("background-size", "cover");
+        //$("#file-upload1-img").hide();
+    },
+    removeImage(idx) {
+        console.log(this.file_photo.length +"/" + idx);
+        this.file_photo.splice(idx, 1);
+        this.file_photo_url.splice(idx, 1);
+        if (this.file_photo.length == 0) {
+            this.is_image_attached = false;
+            this.file_photo = [];
+            this.file_photo_url = [];
         }
     },
     handleScroll(e) {
@@ -371,43 +652,39 @@ export default {
             });
         }
     },
+    timeForToday(value) {
+        if (typeof(value) == 'object') {
+            var _time = new Date(value.$date);
+            //console.log(_time);
+            value = _time.toISOString();
+        }
+        const timeValue = new Date(value);
+        const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
+        if (betweenTime < 1) return '방금전';
+        else if (betweenTime < 6) {
+            return `${betweenTime}분전`;
+        }
+        else {
+            var hour = timeValue.getHours();
+            if (hour < 12) hour = "오전 " + hour
+            else if(hour == 12) hour = "오후 " + hour;
+            else hour = "오후 " + (hour-12);
+            var minute = timeValue.getMinutes();
+            return hour + ":" + ((minute<10) ? "0"+minute : minute);
+        }
+    },
     keyboardShowHandler(event) {
         //console.log("keyboardShowHandler")
         $('#speech-content').scrollTop($('#speech-content')[0].scrollHeight);
     },
     async sendMessage() {
         if (this.sendDisable == false) {
+            var ret = null;
+            // 01. 이모지
             if (this.is_emoji_clicked) {
                 const message = "[[emoji|" + this.emoji_url + "]]";
-                const roomId = this.roomId;
-                var result = await axios({
-                    url: 'https://chat.wedives.com/graphql',
-                    method: 'post',
-                    headers: {
-                        idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-                    },
-                    data: {
-                        query: `
-                            mutation PostMessageToRoom($roomId: String!, $input: String!) {
-                                postMessageToRoom(roomId: $roomId, input: $input) {
-                                    _id
-                                }
-                            }
-                        `,
-                        variables: {
-                            "roomId": roomId,
-                            "input": message
-                        }
-                    }
-                });
-                this.is_emoji_clicked = false;
-                this.sendText = '';
-                var ret = (result.data && result.data.data && result.data.data.getJoinedRoomList) ? result.data.data.getJoinedRoomList : null
-            }
+                const userId = JSON.parse(localStorage.chatUids)[0];
 
-            if (this.sendText != "") {
-                const message = this.sendText;
-                const roomId = this.roomId;
                 var result = await axios({
                     url: 'https://chat.wedives.com/graphql',
                     method: 'post',
@@ -417,21 +694,130 @@ export default {
                     },
                     data: {
                         query: `
-                            mutation PostMessageToRoom($roomId: String!, $input: String!) {
-                                postMessageToRoom(roomId: $roomId, input: $input) {
-                                    _id
+                        mutation Mutation($userId: String!, $input: String!) {
+                            postMessageToUser(userId: $userId, input: $input) {
+                                _id
+                                text
+                                chatRoom {
+                                _id
                                 }
                             }
+                        }
                         `,
                         variables: {
-                            "roomId": roomId,
+                            "userId": userId,
                             "input": message
                         }
+
                     }
                 });
                 
+                
+                this.is_emoji_clicked = false;
                 this.sendText = '';
-                var ret = (result.data && result.data.data && result.data.data.getJoinedRoomList) ? result.data.data.getJoinedRoomList : null
+                ret = (result.data && result.data.data && result.data.data.postMessageToUser) ? result.data.data.postMessageToUser : null;
+            }
+            // 02. 이미지
+            if (this.is_image_attached) {
+                // 아직 미구현 --> 이걸 채팅서버에 업로드 하는걸로 변경해야합니다.
+                for (var i=0; i<file_photo.length; i++) {
+                    var file = file_pohto[i];
+                    var result_img_user = null;
+                    if (file != null) {
+                        var mutation = gql`
+                            mutation UploadImageMutation($uploadImageFile: Upload!) {
+                                uploadImage(file: $uploadImageFile) {
+                                    _id
+                                    name
+                                    mimeType
+                                    encoding
+                                    thumbnailUrl
+                                    createdAt
+                                    updatedAt
+                                }
+                            }
+                        `
+                        var client = new GraphQLClient('https://api.wedives.com/graphql',
+                        {
+                            headers: {
+                                countrycode: 'ko',
+                                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                            }
+                        })
+
+                        result_img_user = await client.request(mutation, {uploadImageFile: file,});
+                        //console.log(result_img_user);
+
+
+                        var updateMutation = gql`
+                            mutation Mutation($input: UpdateImageInput!) {
+                                updateImage(input: $input) {
+                                    _id
+                                    name
+                                    description
+                                    reference
+                                    uploaderId
+                                    mimeType
+                                    encoding
+                                    fileSize
+                                    thumbnailUrl
+                                }
+                            }
+                        `;
+                        var result_upload = await client.request(updateMutation, {input: {"_id": result_img_user.uploadImage._id,"name": result_img_user.name,"description": "userImage","reference": null}});
+                        //console.log(result_upload);
+
+                        var queryImageUrl = gql`
+                            query Query($id: ID!, $width: Int) {
+                                getImageUrlById(_id: $id, width: $width)
+                            }
+                        `;
+                        var result_url = await client.request(queryImageUrl, {"id": result_img_user.uploadImage._id,"width": 720});
+                    }
+                }
+            }
+            
+            // 03. 텍스트
+            if (this.sendText != "") {
+                const message = this.sendText;
+                const userId = JSON.parse(localStorage.chatUids)[0];
+
+                var result = await axios({
+                    url: 'https://chat.wedives.com/graphql',
+                    method: 'post',
+                    headers: {
+                        countrycode: 'ko',
+                        idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                    },
+                    data: {
+                        query: `
+                        mutation Mutation($userId: String!, $input: String!) {
+                            postMessageToUser(userId: $userId, input: $input) {
+                                _id
+                                text
+                                chatRoom {
+                                _id
+                                }
+                            }
+                        }
+                        `,
+                        variables: {
+                            "userId": userId,
+                            "input": message
+                        }
+
+                    }
+                });
+                
+                
+                this.sendText = '';
+                ret = (result.data && result.data.data && result.data.data.postMessageToUser) ? result.data.data.postMessageToUser : null
+            }
+            if (ret != null) {
+                delete localStorage.chatUids;
+                delete localStorage.chatType;
+                delete localStorage.chatName;
+                location.href = '/chat/' + ret.chatRoom._id;
             }
         }
     },
@@ -440,18 +826,26 @@ export default {
         for (var i=0; i<10; i++)
             textarea.style.height = textarea.scrollHeight - 4 + 'px';
         var hei = parseInt(textarea.style.height.replace("px",""))+12;
-        if (hei < 141)
+        if (hei < 141) {
             $("#footer-bar-speach").height(hei + "px")
+            $("#footer-bar-speach .d-flex").height(hei + "px")
+        }
     },
     resizeFocus() {
         const { textarea } = this.$refs;
         for (var i=0; i<10; i++)
             textarea.style.height = textarea.scrollHeight - 4 + 'px';
-        $("#footer-bar-speach").height((parseInt(textarea.style.height.replace("px",""))+12) + "px")
+        var hei = (parseInt(textarea.style.height.replace("px",""))+12);
+        if (hei < 141) {
+            $("#footer-bar-speach").height(hei + "px")
+            $("#footer-bar-speach .d-flex").height(hei + "px")
+        }
         this.is_emoji = false;
+        this.is_attach = false;
     },
     speechContentClick() {
-        if (this.is_emoji) this.is_emoji = false;
+        this.is_emoji = false;
+        this.is_attach = false;
     }
   }
 
@@ -571,4 +965,12 @@ color: #1d397c ;
 .chat-left {max-width: 200px;
     float: right;
     border-bottom-right-radius: 0px !important;}
+.tab-controls a {background-color: #FFFFFF88;}
+.wedive-image-attach {width:80px;height:80px;margin-top:10px;margin-right:10px;display:inline-block;background-size:cover !important;border: 3px solid #fedb0f;position:relative;}
+.wedive-image-index {position:absolute;right:4px;top:4px;color:black;background:#fedb0f;width:22px;height:22px;border-radius:11px;text-align:center;}
+.wedive-img-rect {position:relative;width: 50px; height: 50px;background-size:cover !important;background-position: center !important;}
+
+.site-tag:before {content: '';width: 0px;height: 0px;border-bottom: 16px solid #3f474c;border-left: 16px solid rgba(0,0,0,0);position: absolute;bottom: 0;right: 0;}
+.point-tag:before {content: '';width: 0px;height: 0px;border-bottom: 16px solid #3cb5a0;border-left: 16px solid rgba(0,0,0,0);position: absolute;bottom: 0;right: 0;}
+.center-tag:before {content: '';width: 0px;height: 0px;border-bottom: 16px solid #4687c1;border-left: 16px solid rgba(0,0,0,0);position: absolute;bottom: 0;right: 0;}
 </style>

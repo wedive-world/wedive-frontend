@@ -195,6 +195,7 @@ const columnDefinition = [
     { sortable: true, filter: true, field: 'publishStatus', headerName: '상태', editable: true, type: 'select', selectOptions: selectOptionsStatus },
     { sortable: true, filter: true, field: 'uniqueName', headerName: 'URL', editable: true },
     { sortable: true, filter: true, field: 'name', headerName: '이름', editable: true},
+    { sortable: true, filter: true, field: 'divingType', headerName: '타입', editable: true },
     { sortable: true, filter: true, field: 'description', headerName: '한줄설명', editable: true },
     
     { sortable: true, filter: true, field: 'latitude', headerName: '위도', editable: true },

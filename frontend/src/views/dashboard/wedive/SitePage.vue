@@ -144,7 +144,7 @@ export default {
           images_id_list.push(result.uploadImage._id);
           this.site_data.images.push({_id: result.uploadImage._id})
           var ipt2 = {"images": images_id_list, "_id": this.site_data._id, "uniqueName": this.site_data.uniqueName, "latitude": this.site_data.latitude, "longitude": this.site_data.longitude};
-          var result3 = await upsertDiveCenter(ipt2);
+          var result3 = await upsertDiveSite(ipt2);
           this.$bvToast.toast('파일명 = ' + name, {
             title: `업로드 완료`,
             variant: 'success',
@@ -180,7 +180,7 @@ export default {
           images_id_list.push(result.uploadImage._id);
           this.site_data.backgroundImages.push({_id: result.uploadImage._id})
           var ipt2 = {"backgroundImages": images_id_list, "_id": this.site_data._id, "uniqueName": this.site_data.uniqueName, "latitude": this.site_data.latitude, "longitude": this.site_data.longitude};
-          var result3 = await upsertDiveCenter(ipt2);
+          var result3 = await upsertDiveSite(ipt2);
           this.$bvToast.toast('파일명 = ' + name, {
             title: `업로드 완료`,
             variant: 'success',

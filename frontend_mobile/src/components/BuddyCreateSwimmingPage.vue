@@ -121,7 +121,7 @@
                                 >
                                 <template slot="suggestion" slot-scope="{ data, htmlText }">
                                     <div class="d-flex align-items-center" style="position:relative !important;">
-                                    <div :class="''+data.type + '_img'">
+                                    <div :class="''+data.type + '-tag'" style="position:relative;">
                                         <img
                                         class="rounded-s me-3"
                                         :src="(data.backgroundImages && data.backgroundImages.length>0) ? data.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'"
@@ -140,7 +140,7 @@
                                 v-on:click="search_result_click()"
                                 style="margin-left: 16px;margin-right: 16px;padding:16px;;border:1px solid #ced4da;border-radius:16px;">
                                 <div class="d-flex align-items-center" style="position:relative !important;">
-                                <div :class="''+search_type + '_img'">
+                                <div :class="''+search_type + '-tag'" style="position:relative;">
                                 <img
                                     class="rounded-s me-3"
                                     :src="search_img"
@@ -165,7 +165,7 @@
                                 v-on:click="search_recommend_click(item._id, item.type, item.name, ((item.backgroundImages && item.backgroundImages.length>0) ? item.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'), item.description, 'search_recommend_'+index)"
                                 style="margin-left: 16px;margin-right: 16px;padding:12px 16px;border:1px solid #ced4da;border-radius:16px;">
                                 <div class="d-flex align-items-center" style="position:relative !important;">
-                                <div :class="''+item.type + '_img'">
+                                <div :class="''+item.type + '-tag'" style="position:relative;">
                                     <img
                                         class="rounded-s me-3"
                                         :src="(item.backgroundImages && item.backgroundImages.length>0) ? item.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'"
@@ -760,4 +760,8 @@ export default {
 .point_img:before{content:'';background:url(/static/images/assets/ico_pin1.png);width: 20px;height: 28px;position: absolute;bottom: -5px;left: 28px;background-size: cover;}
 .center_img:before{content:'';background:url(/static/images/assets/ico_pin2.png);width: 20px;height: 28px;position: absolute;bottom: -5px;left: 28px;background-size: cover;}
 .bg-secondary2>.d-flex>span>.color-gray-nonimportant{color: white !important;}
+
+.site-tag:before {content: '';width: 0px;height: 0px;border-bottom: 16px solid #3f474c;border-left: 16px solid rgba(0,0,0,0);position: absolute;bottom: 0;right: 16px;}
+.point-tag:before {content: '';width: 0px;height: 0px;border-bottom: 16px solid #3cb5a0;border-left: 16px solid rgba(0,0,0,0);position: absolute;bottom: 0;right: 16px;}
+.center-tag:before {content: '';width: 0px;height: 0px;border-bottom: 16px solid #4687c1;border-left: 16px solid rgba(0,0,0,0);position: absolute;bottom: 0;right: 16px;}
 </style>

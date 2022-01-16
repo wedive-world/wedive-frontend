@@ -394,6 +394,7 @@
 <script>
 import VueTypeaheadBootstrap from 'vue-typeahead-bootstrap';
 import {debounce} from 'lodash';
+
 const axios = require("axios")
 
 var map = null;
@@ -614,6 +615,9 @@ async function updateAll() {
             }
         }
     }
+
+    //new MarkerClusterer({ markerList, map });
+
 }
 
 async function updateSite() {
@@ -1009,6 +1013,9 @@ export default {
     let script = document.createElement('script');
     script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCWu8Fw-h-f1t8Sp3I7R3l_Ukr24HunXQM';
     document.body.appendChild(script);
+    //let script2 = document.createElement('script');
+    //script2.src = 'https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js';
+    //document.body.appendChild(script2);
     script.onload = () => {
         const night_style = [
             { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
@@ -1343,9 +1350,9 @@ export default {
 .wedive-corner {position: absolute;width: 30px;height: 30px;overflow: hidden;z-index:999;}
 .wedive-corner:after {content: '';position: absolute;height: 200%;width: 200%;border-radius: 100%;z-index: -1;box-shadow: 10px 10px 5px 100px #eef2f1;}
 .wedive-corner-bottom {left:-16px;bottom:0;width:16px;height:16px;}
-.site .wedive-corner-bottom:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #4b4e52 !important;}
-.point .wedive-corner-bottom:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #396e78 !important;}
-.center .wedive-corner-bottom:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #214057 !important;}
+.site .wedive-corner-bottom:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #31373b !important;}
+.point .wedive-corner-bottom:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #308f7f !important;}
+.center .wedive-corner-bottom:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #376a97 !important;}
 .icon-concierge {position: fixed;width: 58px;height: 58px;bottom: 70px;right:24px;background: url(/static/images/assets/concierge.gif);background-size:contain !important;background-position-y: 8px;background-repeat: no-repeat;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
 .icon-filter {position: fixed;width: 58px;height: 58px;bottom: 140px;right:24px;background: url(/static/images/assets/filter2.png);background-size:contain !important;background-position-y: 8px;background-repeat: no-repeat;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;background-position: bottom;}
 .box-bottom {width:calc(100% - 120px);height:36px;position: absolute;right: 0;bottom: 0;display:flex;}
@@ -1358,7 +1365,7 @@ export default {
 .bx-search input {border-width: 0 !important;}
 .bx-search > div > div {display: contents;}
 .main-header {background:#eef2f1;}
-.site .box-bottom-area {background-color: #5f6368;}
-.point .box-bottom-area {background-color: #498c99;}
-.center .box-bottom-area {background-color: #2a526f;}
+.site .box-bottom-area {background-color: #3f474c;}
+.point .box-bottom-area {background-color: #3cb5a0;}
+.center .box-bottom-area {background-color: #4687c1;}
 </style>
