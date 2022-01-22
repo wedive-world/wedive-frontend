@@ -482,10 +482,12 @@ async function updateAll() {
             `,
             variables: {
                 "limit": 50,
-                "lat1": sw.lat(),
-                "lng1": sw.lng(),
-                "lat2": ne.lat(),
-                "lng2": ne.lng()
+                "searchParams": {
+                    "lat1": sw.lat(),
+                    "lng1": sw.lng(),
+                    "lat2": ne.lat(),
+                    "lng2": ne.lng()
+                }
             }
         }
     });
