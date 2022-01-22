@@ -29,7 +29,7 @@
                     placeholder="사이트, 포인트, 센터 (수영장)"
                     inputClass="special-input-class"
                     :disabledValues="(selecteduser ? [selecteduser.name] : [])"
-                    @input="lookupUser2"
+                    @input="lookupUser3"
                     >
                     <template slot="suggestion" slot-scope="{ data, htmlText }">
                         <div class="d-flex align-items-center">
@@ -421,67 +421,58 @@ async function updateAll() {
         },
         data: {
             query: `
-                query GetDiveAllNearby($lat1: Float!, $lon1: Float!, $lat2: Float!, $lon2: Float!) {
-                    getDiveSitesNearby(lat1: $lat1, lon1: $lon1, lat2: $lat2, lon2: $lon2) {
-                        _id
-                        name
-                        uniqueName
-                        description
-                        highlightDescription
-                        adminScore
+                query SearchPlaces($searchParams: SearchParams, $limit: Int) {
+                    searchPlaces(searchParams: $searchParams, limit: $limit) {
+                        ... on DiveCenter {
+                            _id
+                            uniqueName
+                            name
+                            description
+                            divingType
+                            adminScore
+                            latitude
+                            longitude
+                            backgroundImages {
+                                thumbnailUrl
+                            }
+                        }
+                        ... on DiveSite {
+                            _id
+                            uniqueName
+                            name
+                            description
+                            adminScore
+                            latitude
+                            longitude
+                            backgroundImages {
+                                thumbnailUrl
+                            }
+                        }
+                        ... on DivePoint {
+                            _id
+                            uniqueName
+                            name
+                            description
+                            adminScore
+                            latitude
+                            longitude
+                            backgroundImages {
+                                thumbnailUrl
+                            }
+                        }
+                        address
                         latitude
                         longitude
-                        eyeSightScore
-                        flowRateScore
-                        waterEnvironmentScore
-                        backgroundImages {
-                            thumbnailUrl
-                        }
-                    }
-                    getDivePointsNearBy(lat1: $lat1, lon1: $lon1, lat2: $lat2, lon2: $lon2) {
-                        _id
-                        name
-                        uniqueName
-                        description
-                        highlightDescription
-                        adminScore
-                        latitude
-                        longitude
-                        flowRateScore
-                        waterEnvironmentScore
-                        eyeSightScore
-                        backgroundImages {
-                        thumbnailUrl
-                        }
-                    }
-                    getDiveCentersNearBy(lat1: $lat1, lon1: $lon1, lat2: $lat2, lon2: $lon2) {
-                        _id
-                        name
-                        uniqueName
-                        description
-                        adminScore
-                        latitude
-                        longitude
-                        viewScore
-                        educationScore
-                        facilityScore
-                        serviceScore
-                        institutionTypes
-                        backgroundImages {
-                            thumbnailUrl
-                        }
-                        interests {
-                            title
-                            type
-                        }
+                        countryCode
                     }
                 }
             `,
             variables: {
+                "limit": 50,
                 "lat1": sw.lat(),
-                "lon1": sw.lng(),
+                "lng1": sw.lng(),
                 "lat2": ne.lat(),
-                "lon2": ne.lng()
+                "lng2": ne.lng()
             }
         }
     });
@@ -1313,6 +1304,76 @@ export default {
                 `,
                 variables: {
                     "query": query
+                }
+            }
+        });
+        //result.data.data.searchDiveCentersByName.forEach(x=>result.data.data.searchDiveCentersByName)
+        var result_list = new Array();
+        if (result.data.data.searchDiveSitesByName) result.data.data.searchDiveSitesByName.forEach(x=>{x.type='site';result_list.push(x)});
+        if (result.data.data.searchDivePointsByName) result.data.data.searchDivePointsByName.forEach(x=>{x.type='point';result_list.push(x)});
+        if (result.data.data.searchDiveCentersByName) result.data.data.searchDiveCentersByName.forEach(x=>{x.type='center';result_list.push(x)});
+        this.users = result_list;
+      },
+      async lookupUser3() {
+        this.users = [];
+        const query = this.query;
+        var result = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                    query SearchPlaces($searchParams: SearchParams, $limit: Int) {
+                        searchPlaces(searchParams: $searchParams, limit: $limit) {
+                            ... on DiveCenter {
+                                _id
+                                uniqueName
+                                name
+                                description
+                                divingType
+                                adminScore
+                                latitude
+                                longitude
+                                backgroundImages {
+                                    thumbnailUrl
+                                }
+                            }
+                            ... on DiveSite {
+                                _id
+                                uniqueName
+                                name
+                                description
+                                adminScore
+                                latitude
+                                longitude
+                                backgroundImages {
+                                    thumbnailUrl
+                                }
+                            }
+                            ... on DivePoint {
+                                _id
+                                uniqueName
+                                name
+                                description
+                                adminScore
+                                latitude
+                                longitude
+                                backgroundImages {
+                                    thumbnailUrl
+                                }
+                            }
+                            address
+                            latitude
+                            longitude
+                            countryCode
+                        }
+                    }
+                `,
+                variables: {
+                    "limit": 100,
                 }
             }
         });

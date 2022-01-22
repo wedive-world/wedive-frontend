@@ -150,7 +150,7 @@
                 <h4 class="text-start pt-2 mb-1 font-600"><i class="fas fa-plane me-2"></i>전세계 10대 포인트</h4>
                 <p class="mb-0">한눈에 살펴보는 10대 포인트</p>
                 <a class="font-12 wedive-txt-all">모두보기</a>
-                <img class="float-right mt-n3" src="/static/images/assets/earth.gif" width="300" style="margin-right: -20px;margin-bottom:-30px;margin-top:-10px;"/>
+                <img class="float-right mt-n3" src="/static/images/assets/earth.gif" style="margin-right: -20px;margin-bottom:-30px;margin-top:-60px !important;max-height:300px;"/>
             </div>
         </div>
 
