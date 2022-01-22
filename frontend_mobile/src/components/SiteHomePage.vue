@@ -423,6 +423,7 @@ async function updateAll() {
             query: `
                 query SearchPlaces($searchParams: SearchParams, $limit: Int) {
                     searchPlaces(searchParams: $searchParams, limit: $limit) {
+                        __typename
                         ... on DiveCenter {
                             _id
                             uniqueName
@@ -434,6 +435,10 @@ async function updateAll() {
                             longitude
                             backgroundImages {
                                 thumbnailUrl
+                            }
+                            interests {
+                                title
+                                type
                             }
                         }
                         ... on DiveSite {
@@ -447,6 +452,10 @@ async function updateAll() {
                             backgroundImages {
                                 thumbnailUrl
                             }
+                            interests {
+                                title
+                                type
+                            }
                         }
                         ... on DivePoint {
                             _id
@@ -458,6 +467,10 @@ async function updateAll() {
                             longitude
                             backgroundImages {
                                 thumbnailUrl
+                            }
+                            interests {
+                                title
+                                type
                             }
                         }
                         address
@@ -477,14 +490,21 @@ async function updateAll() {
         }
     });
     siteList = [];
-    if (result.data.data.getDiveSitesNearby)
-        result.data.data.getDiveSitesNearby.forEach(item => siteList.push(item));
     pointList = [];
-    if (result.data.data.getDivePointsNearBy)
-        result.data.data.getDivePointsNearBy.forEach(item => pointList.push(item));
     centerList = [];
-    if (result.data.data.getDiveCentersNearBy)
-        result.data.data.getDiveCentersNearBy.forEach(item => centerList.push(item));
+    console.log(result.data.data.searchPlaces);
+    result.data.data.searchPlaces.filter(place => place.__typename == 'DiveSite').forEach(item => siteList.push(item));
+    result.data.data.searchPlaces.filter(place => place.__typename == 'DivePoint').forEach(item => pointList.push(item));
+    result.data.data.searchPlaces.filter(place => place.__typename == 'DiveCenter').forEach(item => centerList.push(item));
+
+    //if (result.data.data.getDiveSitesNearby)
+    //    result.data.data.getDiveSitesNearby.forEach(item => siteList.push(item));
+    //pointList = [];
+    //if (result.data.data.getDivePointsNearBy)
+    //    result.data.data.getDivePointsNearBy.forEach(item => pointList.push(item));
+    //centerList = [];
+    //if (result.data.data.getDiveCentersNearBy)
+    //    result.data.data.getDiveCentersNearBy.forEach(item => centerList.push(item));
     // 필요 없는 그린 마커를 모두 삭제한다.
     var zoomLevel = map.getZoom();
     for (var i = 0; i < markerList.length; i++ ) {
