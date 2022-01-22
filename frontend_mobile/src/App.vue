@@ -139,15 +139,15 @@ export default {
       } else if (item == '/site_list') {
         $("#wedive-search").removeClass("hide");
       } else {
-        setTimeout(function() {
+        setTimeout(function(item) {
           try {
             var item_menu = $("[data-menu-active]").data("menu-active").replace('nav-', '');
-            if (item_menu == 'site') {
+            if (item_menu == 'site' && item != '/site_search') {
               $("#wedive-share").fadeIn(1000);
               $("#wedive-share").removeClass("hide");
             }
           } catch(e) {}
-        },1000)
+        },1000, item)
         
       }
     } catch (e) {console.log(e)}
@@ -228,6 +228,10 @@ export default {
       }
     },
     searchItem() {
+      var item = window.location.pathname;
+      if (item == '/site_list') {
+        location.href='/site_search';
+      }
       console.log("searchItem");
     },
     shareItem() {

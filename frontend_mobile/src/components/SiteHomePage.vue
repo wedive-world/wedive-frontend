@@ -89,57 +89,79 @@
     <!-- Menu Fliter -->
     <div id="menu-filter" class="menu menu-box-bottom" style="height:100%;border-radius: 0px !important;">
         <div class="menu-title mt-n1">
-            <h2 class="pt-3 pb-3 text-center">필터를 선택하세요</h2>
+            <h2 class="pt-3 pb-3 mb-0 text-center">필터를 선택하세요</h2>
             <a href="#" class="close-menu"><i class="wedive_icoset wedive_icoset_close"></i></a>
         </div>
-        <div class="content m-0 text-start">
+        <div class="content m-0 text-start" style="height:calc(100vh - 125px);">
             <div class="card card-style ms-0 me-0 rounded-0 mb-0">
                 <div class="content">
+                    <div>
+                        <label for="filter_type" class="color-highlight font-700">타입</label>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_cate1" v-model="check_cate1">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_cate1">사이트</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-map-marker font-16 color-highlight"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_cate2" v-model="check_cate2">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_cate2">포인트</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-map-pin font-17 color-highlight"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_cate3" v-model="check_cate3">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_cate3">센터 (수영장)</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-store font-17 color-highlight"></i>
+                    </div>
+
                     <div>
                         <label for="filter_type" class="color-highlight font-700">다이빙 종류</label>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_type1" checked>
+                        <input class="form-check-input" type="checkbox" value="" id="check_type1" v-model="check_type1">
                         <label class="form-check-label shadow-xl rounded-xl" for="check_type1">스쿠버 다이빙</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
-                        <i class="fas fa-air-freshener font-16 color-highlight"></i>
+                        <i class="fas fas fa-mask font-16 color-highlight"></i>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_type2" checked>
+                        <input class="form-check-input" type="checkbox" value="" id="check_type2" v-model="check_type2">
                         <label class="form-check-label shadow-xl rounded-xl" for="check_type2">프리 다이빙</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
                         <i class="fas fa-swimmer font-17 color-secondary"></i>
                     </div>
 
                     <div>
-                        <label for="filter_type" class="color-highlight font-700">센터 평점</label>
+                        <label for="filter_type" class="color-highlight font-700">총 평점</label>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_star5">
+                        <input class="form-check-input" type="checkbox" value="" id="check_star5" v-model="check_star5" v-on:click="check_star1=false;check_star2=false;check_star3=false;check_star4=false;">
                         <label class="form-check-label shadow-xl rounded-xl" for="check_star5">5</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
                         <i class="fas fa-star font-16 color-yellow-dark"></i>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_star4">
+                        <input class="form-check-input" type="checkbox" value="" id="check_star4" v-model="check_star4" v-on:click="check_star5=!check_star4;check_star1=false;check_star2=false;check_star3=false;">
                         <label class="form-check-label shadow-xl rounded-xl" for="check_star4">4</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
                         <i class="fas fa-star font-17 color-yellow-dark"></i>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_star3">
+                        <input class="form-check-input" type="checkbox" value="" id="check_star3" v-model="check_star3" v-on:click="check_star4=!check_star3;check_star5=!check_star3;check_star1=false;check_star2=false;">
                         <label class="form-check-label shadow-xl rounded-xl" for="check_star3">3</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
                         <i class="fas fa-star font-16 color-yellow-dark"></i>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_star2">
+                        <input class="form-check-input" type="checkbox" value="" id="check_star2" v-model="check_star2" v-on:click="check_star3=!check_star2;check_star4=!check_star2;check_star5=!check_star2;check_star1=false;">
                         <label class="form-check-label shadow-xl rounded-xl" for="check_star2">2</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
                         <i class="fas fa-star font-17 color-yellow-dark"></i>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_star1">
+                        <input class="form-check-input" type="checkbox" value="" id="check_star1" v-model="check_star1" v-on:click="check_star2=!check_star1;check_star3=!check_star1;check_star4=!check_star1;check_star5=!check_star1;">
                         <label class="form-check-label shadow-xl rounded-xl" for="check_star1">1</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
                         <i class="fas fa-star font-16 color-yellow-dark"></i>
@@ -149,31 +171,31 @@
                         <label for="filter_type" class="color-highlight font-700">수중 환경</label>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_fish5">
+                        <input class="form-check-input" type="checkbox" value="" id="check_fish5" v-model="check_fish5" v-on:click="check_fish1=false;check_fish2=false;check_fish3=false;check_fish4=false;">
                         <label class="form-check-label shadow-xl rounded-xl" for="check_fish5">5</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
                         <i class="fas fa-fish font-16 color-orange-light"></i>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_fish4">
+                        <input class="form-check-input" type="checkbox" value="" id="check_fish4" v-model="check_fish4" v-on:click="check_fish5=!check_fish4;check_fish1=false;check_fish2=false;check_fish3=false;">
                         <label class="form-check-label shadow-xl rounded-xl" for="check_fish4">4</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
                         <i class="fas fa-fish font-17 color-orange-light"></i>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_fish3">
+                        <input class="form-check-input" type="checkbox" value="" id="check_fish3" v-model="check_fish3" v-on:click="check_fish4=!check_fish3;check_fish5=!check_fish3;check_fish1=false;check_fish2=false;">
                         <label class="form-check-label shadow-xl rounded-xl" for="check_fish3">3</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
                         <i class="fas fa-fish font-16 color-orange-light"></i>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_fish2">
+                        <input class="form-check-input" type="checkbox" value="" id="check_fish2" v-model="check_fish2" v-on:click="check_fish3=!check_fish2;check_fish4=!check_fish2;check_fish5=!check_fish2;check_fish1=false;">
                         <label class="form-check-label shadow-xl rounded-xl" for="check_fish2">2</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
                         <i class="fas fa-fish font-17 color-orange-light"></i>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_fish1">
+                        <input class="form-check-input" type="checkbox" value="" id="check_fish1" v-model="check_fish1" v-on:click="check_fish2=!check_fish1;check_fish3=!check_fish1;check_fish4=!check_fish1;check_fish5=!check_fish1;">
                         <label class="form-check-label shadow-xl rounded-xl" for="check_fish1">1</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
                         <i class="fas fa-fish font-16 color-orange-light"></i>
@@ -183,31 +205,31 @@
                         <label for="filter_type" class="color-highlight font-700">시야</label>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_sight5">
+                        <input class="form-check-input" type="checkbox" value="" id="check_sight5" v-model="check_sight5" v-on:click="check_sight1=false;check_sight2=false;check_sight3=false;check_sight4=false;">
                         <label class="form-check-label shadow-xl rounded-xl" for="check_sight5">5</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
                         <i class="fas fa-eye font-16 color-gray-light-mid2"></i>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_sight4">
+                        <input class="form-check-input" type="checkbox" value="" id="check_sight4" v-model="check_sight4" v-on:click="check_sight5=!check_sight4;check_sight1=false;check_sight2=false;check_sight3=false;">
                         <label class="form-check-label shadow-xl rounded-xl" for="check_sight4">4</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
                         <i class="fas fa-eye font-17 color-gray-light-mid2"></i>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_sight3">
+                        <input class="form-check-input" type="checkbox" value="" id="check_sight3" v-model="check_sight3" v-on:click="check_sight4=!check_sight3;check_sight5=!check_sight3;check_sight1=false;check_sight2=false;">
                         <label class="form-check-label shadow-xl rounded-xl" for="check_sight3">3</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
                         <i class="fas fa-eye font-16 color-gray-light-mid2"></i>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_sight2">
+                        <input class="form-check-input" type="checkbox" value="" id="check_sight2" v-model="check_sight2" v-on:click="check_sight3=!check_sight2;check_sight4=!check_sight2;check_sight5=!check_sight2;check_sight1=false;">
                         <label class="form-check-label shadow-xl rounded-xl" for="check_sight2">2</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
                         <i class="fas fa-eye font-17 color-gray-light-mid2"></i>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_sight1">
+                        <input class="form-check-input" type="checkbox" value="" id="check_sight1" v-model="check_sight1" v-on:click="check_sight2=!check_sight1;check_sight3=!check_sight1;check_sight4=!check_sight1;check_sight5=!check_sight1;">
                         <label class="form-check-label shadow-xl rounded-xl" for="check_sight1">1</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
                         <i class="fas fa-eye font-16 color-gray-light-mid2"></i>
@@ -217,172 +239,84 @@
                         <label for="filter_type" class="color-highlight font-700">다이빙 환경</label>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_env1">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_env1">케이브 포인트</label>
-                        <i class="fa fa-check-circle color-white font-18"></i>
-                        <i class="fas fa-window-restore font-17 color-red-dark"></i>
-                    </div>
-                    <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_env2">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_env2">난파선 포인트</label>
+                        <input class="form-check-input" type="checkbox" value="" id="check_env1" v-model="check_env1">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_env1">난파선</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
                         <i class="fas fa-ship font-17 color-brown-dark"></i>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_env3">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_env3">마크로 포인트</label>
+                        <input class="form-check-input" type="checkbox" value="" id="check_env2" v-model="check_env2">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_env2">초대형 난파선</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-ship font-17 color-blue-dark"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_env3" v-model="check_env3">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_env3">마크로</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
                         <i class="fas fa-fish font-17 color-gray-dark"></i>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_env4">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_env4">대물 포인트</label>
+                        <input class="form-check-input" type="checkbox" value="" id="check_env4" v-model="check_env4">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_env4">대물</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
                         <i class="fas fa-fish font-17 color-blue-dark"></i>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_env5">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_env5">월다이빙 포인트</label>
+                        <input class="form-check-input" type="checkbox" value="" id="check_env5" v-model="check_env5">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_env5">가두리 양식장</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
-                        <i class="fa fa-bars color-brown-dark font-17"></i>
+                        <i class="fab fa-buffer font-17 color-gray-dark"></i>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_env6">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_env6">딥다이빙 포인트</label>
+                        <input class="form-check-input" type="checkbox" value="" id="check_env6" v-model="check_env6">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_env6">수중 조형물</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
-                        <i class="fas fa-ruler-vertical font-17 color-blue-light"></i>
-                    </div>
-                    <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_env7">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_env7">먹다이빙 포인트</label>
-                        <i class="fa fa-check-circle color-white font-18"></i>
-                        <i class="fas fa-wind font-17 color-instagram"></i>
-                    </div>
-                    <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_env8">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_env8">드리프트 포인트</label>
-                        <i class="fa fa-check-circle color-white font-18"></i>
-                        <i class="fas fa-water font-14 color-dark-dark"></i>
+                        <i class="fab fa-sourcetree font-17 color-blue-light"></i>
                     </div>
 
+
                     <div>
-                        <label for="filter_type" class="color-highlight font-700">다이빙 타이밍</label>
+                        <label for="filter_type" class="color-highlight font-700">다이빙 종류</label>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_time1">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_time1">야간 다이빙</label>
+                        <input class="form-check-input" type="checkbox" value="" id="check_point1" v-model="check_point1">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_point1">동굴다이빙</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
-                        <i class="fas fa-moon font-16 color-yellow-dark"></i>
+                        <i class="fas fa-archway font-17 color-magenta-dark"></i>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_time2">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_time2">조류 다이빙</label>
+                        <input class="form-check-input" type="checkbox" value="" id="check_point2" v-model="check_point2">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_point2">월다이빙</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
-                        <i class="fas fa-water font-17 color-green-dark"></i>
+                        <i class="fas fa-window-restore font-17 color-green-dark"></i>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_time3">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_time3">아이스 다이빙</label>
+                        <input class="form-check-input" type="checkbox" value="" id="check_point3" v-model="check_point3">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_point3">해루질</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
-                        <i class="fas fa-temperature-low font-17 color-blue-dark"></i>
+                        <i class="fas fa-slash font-17 color-yellow-dark"></i>
                     </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_point4" v-model="check_point4">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_point4">케이지다이빙</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-align-center font-17 color-instagram"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_point5" v-model="check_point5">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_point5">나이트록스</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-cube font-17 color-dark-dark"></i>
+                    </div>
+
                 </div>
                 
-                
-                <div class="content hide" id="tab-center-filter">
-                    <div class="tab-controls tabs-small tabs-rounded" data-highlight="bg-blue-dark">
-                        <a href="#" data-active data-bs-toggle="collapse" data-bs-target="#tab-general">기본</a>
-                        <!--<a href="#" data-bs-toggle="collapse" data-bs-target="#tab-level">레벨</a>-->
-                        <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-env">환경</a>
-                        <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-time">시간</a>
-                    </div>
-                    <div class="clearfix mb-3"></div>
-                    <div data-bs-parent="#tab-center-filter" class="collapse ps-2 pe-2 show" id="tab-general">
-                        <div class="list-group list-custom-small list-icon-0 check-visited">
-                            <div class="form-check icon-check">
-                                <label for="filter_type" class="color-highlight">다이빙 종류</label>
-                                <div class="form-check icon-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="check_scuba">
-                                    <label class="form-check-label" for="check_scuba">스쿠버 다이빙</label>
-                                    <i class="icon-check-1 far fa-circle color-gray-dark font-16"></i>
-                                    <i class="icon-check-2 far fa-check-circle font-16 color-highlight"></i>
-                                </div>
-                                <div class="form-check icon-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="check_free">
-                                    <label class="form-check-label" for="check_free">프리 다이빙</label>
-                                    <i class="icon-check-1 far fa-circle color-gray-dark font-16"></i>
-                                    <i class="icon-check-2 far fa-check-circle font-16 color-highlight"></i>
-                                </div>
-                            </div>
-                            <div class="input-style has-borders no-icon mb-4">
-                                <label for="filter_star" class="color-highlight">평점</label>
-                                <select id="filter_star">
-                                    <option value="0" selected>전체</option>
-                                    <option value="5">아주 좋음</option>
-                                    <option value="4">좋음</option>
-                                    <option value="3">보통</option>
-                                    <option value="2">나쁨</option>
-                                    <option value="1">아주 나쁨</option>
-                                </select>
-                            </div>
-                            <div class="input-style has-borders no-icon mb-4">
-                                <label for="filter_fish" class="color-highlight">물고기</label>
-                                <select id="filter_fish">
-                                    <option value="0" selected>전체</option>
-                                    <option value="5">아주 많음</option>
-                                    <option value="4">많음</option>
-                                    <option value="3">보통</option>
-                                    <option value="2">적음</option>
-                                    <option value="1">아주 적음</option>
-                                </select>
-                            </div>
-                            <div class="input-style has-borders no-icon mb-4">
-                                <label for="filter_sight" class="color-highlight">시야</label>
-                                <select id="filter_sight">
-                                    <option value="0" selected>전체</option>
-                                    <option value="5">아주 좋음</option>
-                                    <option value="4">좋음</option>
-                                    <option value="3">보통</option>
-                                    <option value="2">나쁨</option>
-                                    <option value="1">아주 나쁨</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <!--<div data-bs-parent="#tab-center-filter" class="collapse ps-2 pe-2" id="tab-level">
-                        <div class="list-group list-custom-small list-icon-0 wedive-filter-list">
-                            <a href="" v-on:click="selectFilter($event, '교육자')"><i class="fas fa-user-tie font-14 rounded-sm bg-green-light"></i><span>교육자</span><i class="far fa-check-circle color-highlight font-16"></i></a>
-                            <a href="" v-on:click="selectFilter($event, '초급자')"><i class="fas fa-user font-14 rounded-sm bg-blue-light"></i><span>초급자</span><i class="far fa-check-circle color-highlight font-16"></i></a>
-                            <a href="" v-on:click="selectFilter($event, '중급자')"><i class="fas fa-user-shield font-14 rounded-sm bg-red-light"></i><span>중급자</span><i class="far fa-check-circle color-highlight font-16"></i></a>
-                            <a href="" v-on:click="selectFilter($event, '고급자')"><i class="fas fa-user-clock font-14 rounded-sm bg-magenta-dark"></i><span>고급자</span><i class="far fa-check-circle color-highlight font-16"></i></a>
-                            <a href="" v-on:click="selectFilter($event, '전문가')"><i class="fas fa-user-check font-14 rounded-sm bg-brown-dark"></i><span>전문가</span><i class="far fa-check-circle color-highlight font-16"></i></a>
-                            <a href="" v-on:click="selectFilter($event, '특수기술')"><i class="fas fa-user-graduate rounded-sm bg-green-dark"></i><span>특수기술</span><i class="far fa-check-circle color-highlight font-16"></i></a>
-                        </div>
-                    </div>-->
-                    <div data-bs-parent="#tab-center-filter" class="collapse ps-2 pe-2" id="tab-env">
-                        <div class="list-group list-custom-small list-icon-0">
-                            <a href="" v-on:click="selectFilter($event, '케이브 포인트')"><i class="fas fa-window-restore rounded-sm bg-brown-dark"></i><span>케이브 포인트</span><i class="far fa-check-circle color-highlight font-16"></i></a>
-                            <a href="" v-on:click="selectFilter($event, '난파선 포인트')"><i class="fas fa-ship rounded-sm bg-red-dark"></i><span>난파선 포인트</span><i class="far fa-check-circle color-highlight font-16"></i></a>
-                            <a href="" v-on:click="selectFilter($event, '마크로 포인트')"><i class="fas fa-fish rounded-sm bg-yellow-dark"></i><span>마크로 포인트</span><i class="far fa-check-circle color-highlight font-16"></i></a>
-                            <a href="" v-on:click="selectFilter($event, '대물 포인트')"><i class="fas fa-fish rounded-sm bg-blue-dark"></i><span>대물 포인트</span><i class="far fa-check-circle color-highlight font-16"></i></a>
-                            <a href="" v-on:click="selectFilter($event, '월다이빙 포인트')"><i class="fa fa-bars rounded-sm bg-teal-dark"></i><span>월다이빙 포인트</span><i class="far fa-check-circle color-highlight font-16"></i></a>
-                            <a href="" v-on:click="selectFilter($event, '딥다이빙 포인트')"><i class="fas fa-ruler-vertical rounded-sm bg-brown-dark"></i><span>딥다이빙 포인트</span><i class="far fa-check-circle color-highlight font-16"></i></a>
-                            <a href="" v-on:click="selectFilter($event, '먹다이빙 포인트')"><i class="fas fa-wind rounded-sm bg-orange-dark"></i><span>먹다이빙 포인트</span><i class="far fa-check-circle color-highlight font-16"></i></a>
-                            <a href="" v-on:click="selectFilter($event, '드리프트 포인트')"><i class="fas fa-water font-14 rounded-sm bg-green-light"></i><span>드리프트 포인트</span><i class="far fa-check-circle color-highlight font-16"></i></a>
-                        </div>
-                    </div>
-                    <div data-bs-parent="#tab-center-filter" class="collapse ps-2 pe-2" id="tab-time">
-                        <div class="list-group list-custom-small list-icon-0">
-                            <a href="" v-on:click="selectFilter($event, '야간 다이빙')"><i class="fas fa-moon font-14 rounded-sm bg-blue-light"></i><span>야간 다이빙</span><i class="far fa-check-circle color-highlight font-16"></i></a>
-                            <a href="" v-on:click="selectFilter($event, '조류 다이빙')"><i class="fas fa-water font-14 rounded-sm bg-red-light"></i><span>조류 다이빙</span><i class="far fa-check-circle color-highlight font-16"></i></a>
-                            <a href="" v-on:click="selectFilter($event, '아이스 다이빙')"><i class="fas fa-temperature-low font-14 rounded-sm bg-magenta-dark"></i><span>아이스 다이빙</span><i class="far fa-check-circle color-highlight font-16"></i></a>
-                        </div>
-                    </div>
-                </div>    
+                   
             </div>
             <div style="position: absolute;width: 100%;bottom:16px;">
                 <div id="filter_list" class="ms-3 me-3 mb-3"></div>
-                <a href="#" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 ms-3 me-3">적용</a>
+                <a v-on:click="submit_filter" href="#" class="close-menu btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 ms-3 me-3">적용</a>
             </div>
         </div>
     </div>
@@ -404,13 +338,24 @@ var selecteduser = null;
 var siteList = new Array();
 var pointList = new Array();
 var centerList = new Array();
-
+var searchParams = {};
+var check_cate1 = true;
+var check_cate2 = true;
+var check_cate3 = true;
 
 async function updateAll() {
     var bounds = map.getBounds();
     var sw = bounds.getSouthWest();
     var ne = bounds.getNorthEast();
-    
+
+    var _searchParams = JSON.parse(JSON.stringify(searchParams));
+    _searchParams.lat1 = sw.lat();
+    _searchParams.lng1 = sw.lng();
+    _searchParams.lat2 = ne.lat();
+    _searchParams.lng2 = ne.lng();
+    if (_searchParams.adminScore) _searchParams.adminScore *= 20;
+    if (_searchParams.waterEnvironmentScore) _searchParams.waterEnvironmentScore *= 20;
+    if (_searchParams.eyeSightScore) _searchParams.eyeSightScore *= 20;
     
     var result = await axios({
         url: 'https://api.wedives.com/graphql',
@@ -423,8 +368,40 @@ async function updateAll() {
             query: `
                 query SearchPlaces($searchParams: SearchParams, $limit: Int) {
                     searchPlaces(searchParams: $searchParams, limit: $limit) {
-                        __typename
-                        ... on DiveCenter {
+                        __typename`+
+                        ((check_cate1) ? `... on DiveSite {
+                            _id
+                            uniqueName
+                            name
+                            description
+                            adminScore
+                            latitude
+                            longitude
+                            backgroundImages {
+                                thumbnailUrl
+                            }
+                            interests {
+                                title
+                                type
+                            }
+                        }` : ``)+
+                        ((check_cate2) ? `... on DivePoint {
+                            _id
+                            uniqueName
+                            name
+                            description
+                            adminScore
+                            latitude
+                            longitude
+                            backgroundImages {
+                                thumbnailUrl
+                            }
+                            interests {
+                                title
+                                type
+                            }
+                        }` : ``)+
+                        ((check_cate3) ? `... on DiveCenter {
                             _id
                             uniqueName
                             name
@@ -433,6 +410,7 @@ async function updateAll() {
                             adminScore
                             latitude
                             longitude
+                            institutionTypes
                             backgroundImages {
                                 thumbnailUrl
                             }
@@ -440,39 +418,8 @@ async function updateAll() {
                                 title
                                 type
                             }
-                        }
-                        ... on DiveSite {
-                            _id
-                            uniqueName
-                            name
-                            description
-                            adminScore
-                            latitude
-                            longitude
-                            backgroundImages {
-                                thumbnailUrl
-                            }
-                            interests {
-                                title
-                                type
-                            }
-                        }
-                        ... on DivePoint {
-                            _id
-                            uniqueName
-                            name
-                            description
-                            adminScore
-                            latitude
-                            longitude
-                            backgroundImages {
-                                thumbnailUrl
-                            }
-                            interests {
-                                title
-                                type
-                            }
-                        }
+                        }` : ``)+
+                        `
                         address
                         latitude
                         longitude
@@ -482,35 +429,23 @@ async function updateAll() {
             `,
             variables: {
                 "limit": 50,
-                "searchParams": {
-                    "lat1": sw.lat(),
-                    "lng1": sw.lng(),
-                    "lat2": ne.lat(),
-                    "lng2": ne.lng()
-                }
+                "searchParams": _searchParams,
             }
         }
     });
     siteList = [];
     pointList = [];
     centerList = [];
-    console.log(result.data.data.searchPlaces);
-    result.data.data.searchPlaces.filter(place => place.__typename == 'DiveSite').forEach(item => siteList.push(item));
-    result.data.data.searchPlaces.filter(place => place.__typename == 'DivePoint').forEach(item => pointList.push(item));
-    result.data.data.searchPlaces.filter(place => place.__typename == 'DiveCenter').forEach(item => centerList.push(item));
-
-    //if (result.data.data.getDiveSitesNearby)
-    //    result.data.data.getDiveSitesNearby.forEach(item => siteList.push(item));
-    //pointList = [];
-    //if (result.data.data.getDivePointsNearBy)
-    //    result.data.data.getDivePointsNearBy.forEach(item => pointList.push(item));
-    //centerList = [];
-    //if (result.data.data.getDiveCentersNearBy)
-    //    result.data.data.getDiveCentersNearBy.forEach(item => centerList.push(item));
+    if (result.data.data.searchPlaces) {
+        result.data.data.searchPlaces.filter(place => place.__typename == 'DiveSite').forEach(item => siteList.push(item));
+        result.data.data.searchPlaces.filter(place => place.__typename == 'DivePoint').forEach(item => pointList.push(item));
+        result.data.data.searchPlaces.filter(place => place.__typename == 'DiveCenter').forEach(item => centerList.push(item));
+    }
+    
     // 필요 없는 그린 마커를 모두 삭제한다.
     var zoomLevel = map.getZoom();
     for (var i = 0; i < markerList.length; i++ ) {
-        if ((siteList.filter(x=>x._id == markerList[i]._id).length == 0 && pointList.filter(x=>x._id == markerList[i]._id).length == 0 && centerList.filter(x=>x._id == markerList[i]._id).length == 0) || (zoomLevel>12 && markerList[i].type == 'site')) {
+        if ((siteList && siteList.filter(x=>x._id == markerList[i]._id).length == 0 && pointList && pointList.filter(x=>x._id == markerList[i]._id).length == 0 && centerList && centerList.filter(x=>x._id == markerList[i]._id).length == 0) || (zoomLevel>12 && markerList[i].type == 'site')) {
             markerList[i].setMap(null);
             markerList.splice(i, 1);
         }
@@ -522,7 +457,7 @@ async function updateAll() {
             }
         } else {
             var label_color = (markerList[i].type=='site') ? '#5f6368' : ((markerList[i].type=='point') ? '#498c99' : '#2a526f')
-            var label_text = markerList[i].title + ((markerList[i].type=='site')?' 사이트' : ((markerList[i].type=='point') ? ' 포인트': ''));
+            var label_text = markerList[i].title + ((markerList[i].type=='site')?' 사이트' : ((markerList[i].type=='point') ? '': ''));
             markerList[i].setLabel({ color: label_color, fontWeight: 'bold', fontSize: '14px', className: 'wedive-label', text: label_text });
             if (selecteduser != null && selecteduser._id == markerList[i]._id) {
                 new google.maps.event.trigger( markerList[i], 'click' );
@@ -534,12 +469,12 @@ async function updateAll() {
     // 새롭게 마커를 그려준다.
     var allList_item = ["site", "point", "center"];
     for (var k=0; k<3; k++) {
-        var allList = null;
-        if (k == 0) {if (zoomLevel > 12)allList = []; else allList = siteList;}
-        else if (k == 1) allList = pointList;
-        else if (k == 2) allList = centerList;
+        var allList = [];
+        if (k == 0 && check_cate1) {if (zoomLevel > 12)allList = []; else allList = siteList;}
+        else if (k == 1 && check_cate2) allList = pointList;
+        else if (k == 2 && check_cate3) allList = centerList;
         for (var i=0; i<allList.length; i++) {
-            if (markerList.filter(x=>x._id == allList[i]._id).length == 0) {
+            if (markerList && markerList.filter(x=>x._id == allList[i]._id).length == 0) {
                 const img_path = (allList[i].adminScore > 40) ? '/static/images/assets/ico_pin'+k+'.png' : '/static/images/assets/ico_pin_small'+k+'.png'
                 const img = (allList[i].backgroundImages && allList[i].backgroundImages.length>0) ? allList[i].backgroundImages[0].thumbnailUrl : '/static/empty.jpg';
                 const img_size = new google.maps.Size(38,43);
@@ -551,12 +486,13 @@ async function updateAll() {
                 const _id = allList[i]._id;
 
                 const institutionTypes = (k==2) ? (allList[i].institutionTypes) : null;
-                var priceIdxs = (k==2) ? (allList[i].interests.filter(x=>x.type=='priceIndex')) : null;
-                const price_index = (priceIdxs && priceIdxs.length>0) ? priceIdxs[0].title.replace(/\$/gi, '₩') : '';
+                var priceIdxs = (k==2 && allList[i].interests) ? (allList[i].interests.filter(x=>x.type=='priceIndex')) : null;
+                const price_index = (priceIdxs && priceIdxs.length>0 && priceIdxs[0].title) ? priceIdxs[0].title.replace(/\$/gi, '₩') : '';
+                const institution_types = (k==2 && allList[i].institutionTypes) ? (allList[i].institutionTypes) : null;
                 const m_type = allList_item[k];
                 const _k = k;
 
-                const label_text = (zoomLevel < 9) ? ' ' : (title + ((k==0)?' 사이트':((k==1)?' 포인트':'')));
+                const label_text = (zoomLevel < 9) ? ' ' : (title + ((k==0)?' 사이트':((k==1)?'':'')));
                 const label_color = (k==0) ? '#5f6368' : ((k==1) ? '#498c99' : '#2a526f');
                 
                 const marker_shop = new google.maps.Marker({
@@ -585,7 +521,7 @@ async function updateAll() {
                         }
                     }
 
-                    $("#map_box_shop_name").text(title + (k==0?' 사이트':(k==1?' 포인트':'')));
+                    $("#map_box_shop_name").text(title + (k==0?' 사이트':(k==1?'':'')));
                     $("#map_box_shop_desc").text(desc);
                     $("#map_box_shop_star").text(star);
                     $("#map_box_href").attr("href", "/" + m_type + "/" + uniqueName);
@@ -606,8 +542,8 @@ async function updateAll() {
                     if (price_index && price_index != '') {
                         $("#map_box_price").removeClass("hide");
                         $("#map_box_price_index").text(price_index);
+                        
                     }
-                    
                     
                     marker_shop.setIcon(new google.maps.MarkerImage('/static/images/assets/ico_pin_big'+_k+'.png', null, null, null, new google.maps.Size(58,66)));
                     map.panTo(marker_shop.getPosition());
@@ -679,7 +615,7 @@ async function updateSite() {
     result.data.data.getDiveSitesNearby.forEach(item => siteList.push(item));
     // 필요 없는 그린 마커를 모두 삭제한다.
     for (var i = 0; i < markerList.length; i++ ) {
-        if (siteList.filter(x=>x._id == markerList[i]._id).length == 0 && pointList.filter(x=>x._id == markerList[i]._id).length == 0 && centerList.filter(x=>x._id == markerList[i]._id).length == 0) {
+        if (siteList && siteList.filter(x=>x._id == markerList[i]._id).length == 0 && pointList && pointList.filter(x=>x._id == markerList[i]._id).length == 0 && centerList && centerList.filter(x=>x._id == markerList[i]._id).length == 0) {
             markerList[i].setMap(null);
             markerList.splice(i, 1);
         } else if (map.getZoom() < 9) {
@@ -689,7 +625,7 @@ async function updateSite() {
     
     // 새롭게 마커를 그려준다.
     for (var i=0; i<siteList.length; i++) {
-        if (markerList.filter(x=>x._id == siteList[i]._id).length == 0) {
+        if (markerList && markerList.filter(x=>x._id == siteList[i]._id).length == 0) {
             const img_path = (siteList[i].adminScore > 40) ? '/static/images/assets/ico_pin0.png' : '/static/images/assets/ico_pin_small0.png'
             const img = (siteList[i].backgroundImages && siteList[i].backgroundImages.length>0) ? siteList[i].backgroundImages[0].thumbnailUrl : '/static/empty.jpg';
             const img_size = new google.maps.Size(38,43);
@@ -700,7 +636,7 @@ async function updateSite() {
             const price_index = '';
             const position = {lat: siteList[i].latitude, lng: siteList[i].longitude};
             const _id = siteList[i]._id;
-            const label_text = (map.getZoom() < 9) ? '' : (title + ((k==0)?' 사이트':((k==1)?' 포인트':'')));
+            const label_text = (map.getZoom() < 9) ? '' : (title + ((k==0)?' 사이트':((k==1)?'':'')));
             
 
             const marker_shop = new google.maps.Marker({
@@ -801,7 +737,7 @@ async function updatePoint() {
     result.data.data.getDivePointsNearBy.forEach(item => pointList.push(item));
     // 필요 없는 그린 마커를 모두 삭제한다.
     for (var i = 0; i < markerList.length; i++ ) {
-        if (pointList.filter(x=>x._id == markerList[i]._id).length == 0) {
+        if (pointList && pointList.filter(x=>x._id == markerList[i]._id).length == 0) {
             markerList[i].setMap(null);
             markerList.splice(i, 1);
         }
@@ -809,7 +745,7 @@ async function updatePoint() {
     
     // 새롭게 마커를 그려준다.
     for (var i=0; i<pointList.length; i++) {
-        if (markerList.filter(x=>x._id == pointList[i]._id).length == 0) {
+        if (markerList && markerList.filter(x=>x._id == pointList[i]._id).length == 0) {
             const img_path = (pointList[i].adminScore > 40) ? '/static/images/assets/ico_pin2.png' : '/static/images/assets/ico_pin_small2.png'
             const img = (pointList[i].backgroundImages && pointList[i].backgroundImages.length>0) ? pointList[i].backgroundImages[0].thumbnailUrl : '/static/empty.jpg';
             const img_size = new google.maps.Size(38,43);
@@ -842,7 +778,7 @@ async function updatePoint() {
                     }
                 }
 
-                $("#map_box_shop_name").text(title + " 포인트");
+                $("#map_box_shop_name").text(title);
                 $("#map_box_shop_desc").text(desc);
                 $("#map_box_shop_star").text(star);
                 $("#map_box_href").attr("href", "/point/" + uniqueName);
@@ -899,7 +835,6 @@ async function updateCenter() {
                         educationScore
                         facilityScore
                         serviceScore
-                        institutionTypes
                         backgroundImages {
                             thumbnailUrl
                         }
@@ -922,7 +857,7 @@ async function updateCenter() {
     result.data.data.getDiveCentersNearBy.forEach(item => centerList.push(item));
     // 필요 없는 그린 마커를 모두 삭제한다.
     for (var i = 0; i < markerList.length; i++ ) {
-        if (centerList.filter(x=>x._id == markerList[i]._id).length == 0) {
+        if (centerList && centerList.filter(x=>x._id == markerList[i]._id).length == 0) {
             markerList[i].setMap(null);
             markerList.splice(i, 1);
         }
@@ -931,7 +866,7 @@ async function updateCenter() {
     
     // 새롭게 마커를 그려준다.
     for (var i=0; i<centerList.length; i++) {
-        if (markerList.filter(x=>x._id == centerList[i]._id).length == 0) {
+        if (markerList && markerList.filter(x=>x._id == centerList[i]._id).length == 0) {
             const img_path = (centerList[i].adminScore > 40) ? '/static/images/assets/ico_pin1.png' : '/static/images/assets/ico_pin_small1.png'
             const img = (centerList[i].backgroundImages && centerList[i].backgroundImages.length>0) ? centerList[i].backgroundImages[0].thumbnailUrl : '/static/empty.jpg';
             const img_size = new google.maps.Size(38,43);
@@ -942,7 +877,7 @@ async function updateCenter() {
             const position = {lat: centerList[i].latitude, lng: centerList[i].longitude};
             const _id = centerList[i]._id;
             const institutionTypes = centerList[i].institutionTypes;
-            var priceIdxs = centerList[i].interests.filter(x=>x.type=='priceIndex');
+            var priceIdxs = (centerList[i].interests) ? centerList[i].interests.filter(x=>x.type=='priceIndex') : null;
             const price_index = (priceIdxs && priceIdxs.length>0) ? priceIdxs[0].title.replace(/\$/gi, '₩') : '';
 
             const marker_shop = new google.maps.Marker({
@@ -1145,6 +1080,13 @@ export default {
 
         
         map.addListener("click", (e) => {
+            for (var j=0; j<markerList.length; j++) {
+                var _icon = markerList[j].getIcon();
+                if (_icon.size.width != 38) {
+                    markerList[j].setIcon(new google.maps.MarkerImage(markerList[j].img_path, null, null, null, new google.maps.Size(38,43)));
+                }
+            }
+
             $(".map-box").addClass("hide");
             $("#btn_new").removeClass("hide");
             $("#btn_filter").removeClass("hide");
@@ -1239,6 +1181,37 @@ export default {
         nickName: localStorage.nickName,
         userThumbnail: localStorage.userThumbnail,
         gender: localStorage.gender,
+        check_star1: false,
+        check_star2: false,
+        check_star3: false,
+        check_star4: false,
+        check_star5: false,
+        check_fish1: false,
+        check_fish2: false,
+        check_fish3: false,
+        check_fish4: false,
+        check_fish5: false,
+        check_sight1: false,
+        check_sight2: false,
+        check_sight3: false,
+        check_sight4: false,
+        check_sight5: false,
+        check_cate1: true,
+        check_cate2: true,
+        check_cate3: true,
+        check_type1: false,
+        check_type2: false,
+        check_env1: false,
+        check_env2: false,
+        check_env3: false,
+        check_env4: false,
+        check_env5: false,
+        check_env6: false,
+        check_point1: false,
+        check_point2: false,
+        check_point3: false,
+        check_point4: false,
+        check_point5: false,
     }
   }, 
   watch: {
@@ -1246,9 +1219,84 @@ export default {
         if (map && this.my_latitude) {
             map.setCenter({lat: this.my_latitude, lng: this.my_longitude});
         }
-      }
+      },
+      check_cate1: function(newVal, oldVal) {
+        check_cate1 = newVal;
+      },
+      check_cate2: function(newVal, oldVal) {
+        check_cate2 = newVal;
+      },
+      check_cate3: function(newVal, oldVal) {
+        check_cate3 = newVal;
+      },
   },
   methods: {
+      submit_filter() {
+        // admin Score
+        for (var i=1; i<6; i++) {
+            if (this["check_star"+i] == true) {
+                searchParams.adminScore = i
+                break;
+            }
+        }
+
+        // env Score
+        for (var i=1; i<6; i++) {
+            if (this["check_fish"+i] == true) {
+                searchParams.waterEnvironmentScore = i
+                break;
+            }
+        }
+
+        // sight Score
+        for (var i=1; i<6; i++) {
+            if (this["check_sight"+i] == true) {
+                searchParams.eyeSightScore = i
+                break;
+            }
+        }
+
+        if (this.check_type1 == true) {
+            if (searchParams.divingTypes == null)
+                searchParams.divingTypes = [];
+            searchParams.divingTypes.push("scubaDiving")
+        }
+        if (this.check_type2 == true) {
+            if (searchParams.divingTypes == null)
+                searchParams.divingTypes = [];
+            searchParams.divingTypes.push("freeDiving")
+        }
+
+        // 다이빙 환경
+        var interest_env_list = ["617806f5f7c3a048b4704cde","61990d34ae1cc12e02c3cd0e","6178f01cf7c3a048b4706cc6","61a2fefa098b3785ef439cb3","61780725f7c3a048b4704ce2","619a6aa77b2668ca7778e722"];
+        for (var i=1; i<7; i++) {
+            if (this["check_env"+i] == true) {
+                if (searchParams.interests == null)
+                    searchParams.interests = [];
+                searchParams.interests.push(interest_env_list[(i-1)]);
+            }
+        }
+
+        // 다이빙 종류
+        var interest_type_list = ["61780259f7c3a048b4704a82","6176374df7c3a048b4704782","61780278f7c3a048b4704a85","61780715f7c3a048b4704ce0","6198ff69ae1cc12e02c3cca3"];
+        for (var i=1; i<6; i++) {
+            if (this["check_point"+i] == true) {
+                if (searchParams.interests == null)
+                    searchParams.interests = [];
+                searchParams.interests.push(interest_type_list[(i-1)]);
+            }
+        }
+
+        siteList = [];
+        pointList = [];
+        centerList = [];
+        for (var i = (markerList.length-1); i >=0 ; i-- ) {
+            markerList[i].setMap(null);
+            markerList.splice(i, 1);
+        }
+        
+        updateAll();
+      },
       enableNext2(ev) {
           selecteduser = ev;
           if (map.getZoom() < 10)
@@ -1272,70 +1320,6 @@ export default {
             $(".bx-search input").focus();
         },200)
       },
-      async lookupUser2() {
-        this.users = [];
-        const query = this.query;
-        var result = await axios({
-            url: 'https://api.wedives.com/graphql',
-            method: 'post',
-            headers: {
-                countrycode: 'ko',
-                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-            },
-            data: {
-                query: `
-                    query Query($query: String!) {
-                        searchDiveCentersByName(query: $query) {
-                            _id
-                            uniqueName
-                            name
-                            description
-                            divingType
-                            adminScore
-                            latitude
-                            longitude
-                            backgroundImages {
-                                thumbnailUrl
-                            }
-                        }
-                        searchDivePointsByName(query: $query) {
-                            _id
-                            uniqueName
-                            name
-                            description
-                            adminScore
-                            latitude
-                            longitude
-                            backgroundImages {
-                                thumbnailUrl
-                            }
-                        }
-                        searchDiveSitesByName(query: $query) {
-                            _id
-                            uniqueName
-                            name
-                            description
-                            adminScore
-                            latitude
-                            longitude
-                            backgroundImages {
-                                thumbnailUrl
-                            }
-                        }
-                    }
-                `,
-                variables: {
-                    "query": query
-                }
-            }
-        });
-        //result.data.data.searchDiveCentersByName.forEach(x=>result.data.data.searchDiveCentersByName)
-        var result_list = new Array();
-        if (result.data.data.searchDiveSitesByName) result.data.data.searchDiveSitesByName.forEach(x=>{x.type='site';result_list.push(x)});
-        if (result.data.data.searchDivePointsByName) result.data.data.searchDivePointsByName.forEach(x=>{x.type='point';result_list.push(x)});
-        if (result.data.data.searchDiveCentersByName) result.data.data.searchDiveCentersByName.forEach(x=>{x.type='center';result_list.push(x)});
-        this.users = result_list;
-      },
       async lookupUser3() {
         this.users = [];
         const query = this.query;
@@ -1350,6 +1334,7 @@ export default {
                 query: `
                     query SearchPlaces($searchParams: SearchParams, $limit: Int) {
                         searchPlaces(searchParams: $searchParams, limit: $limit) {
+                            __typename
                             ... on DiveCenter {
                                 _id
                                 uniqueName
@@ -1396,14 +1381,22 @@ export default {
                 `,
                 variables: {
                     "limit": 100,
+                    "searchParams": {
+                        "query": query
+                    }
                 }
             }
         });
         //result.data.data.searchDiveCentersByName.forEach(x=>result.data.data.searchDiveCentersByName)
         var result_list = new Array();
-        if (result.data.data.searchDiveSitesByName) result.data.data.searchDiveSitesByName.forEach(x=>{x.type='site';result_list.push(x)});
-        if (result.data.data.searchDivePointsByName) result.data.data.searchDivePointsByName.forEach(x=>{x.type='point';result_list.push(x)});
-        if (result.data.data.searchDiveCentersByName) result.data.data.searchDiveCentersByName.forEach(x=>{x.type='center';result_list.push(x)});
+        if (result.data.data.searchPlaces) {
+            result.data.data.searchPlaces.filter(place => place.__typename == 'DiveSite').forEach(item => {item.type='site';result_list.push(item)});
+            result.data.data.searchPlaces.filter(place => place.__typename == 'DivePoint').forEach(item => {item.type='point';result_list.push(item)});
+            result.data.data.searchPlaces.filter(place => place.__typename == 'DiveCenter').forEach(item => {item.type='center';result_list.push(item)});
+        }
+        //if (result.data.data.searchDiveSitesByName) result.data.data.searchDiveSitesByName.forEach(x=>{x.type='site';result_list.push(x)});
+        //if (result.data.data.searchDivePointsByName) result.data.data.searchDivePointsByName.forEach(x=>{x.type='point';result_list.push(x)});
+        //if (result.data.data.searchDiveCentersByName) result.data.data.searchDiveCentersByName.forEach(x=>{x.type='center';result_list.push(x)});
         this.users = result_list;
       },
   }

@@ -13,7 +13,7 @@ import UserCreatePage from '@/components/UserCreatePage'
 import CenterHomePage from '@/components/CenterHomePage'
 import CenterDetailPage from '@/components/CenterDetailPage'
 import CenterDetailPage2 from '@/components/CenterDetailPage2'
-import CenterListPage from '@/components/CenterListPage'
+import SiteSearchPage from '@/components/SiteSearchPage'
 import CenterListMapPage from '@/components/CenterListMapPage'
 import CoursePage from '@/components/CoursePage'
 import SiteHomePage from '@/components/SiteHomePage'
@@ -108,9 +108,9 @@ export default new Router({
       component: CenterDetailPage2
     },
     {
-      path: '/center_list',
-      name: 'CenterListPage',
-      component: CenterListPage
+      path: '/site_search',
+      name: 'SiteSearchPage',
+      component: SiteSearchPage
     },
     {
       path: '/center_map',
