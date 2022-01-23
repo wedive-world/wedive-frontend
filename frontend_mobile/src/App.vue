@@ -224,6 +224,10 @@ export default {
               if(menuBottom){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY(-"+menuHeight/5+"px)"}}
               if(menuTop){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY("+menuHeight/5+"px)"}}
           }
+
+          setTimeout(function() {
+            $("#search_typeahead > .input-group > input").focus();
+          }, 500);
         break;
       }
     },

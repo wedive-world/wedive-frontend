@@ -58,7 +58,7 @@
                         </div>
                         
                         <div class="" style="padding-left: 110px;">
-                            <h4 id="map_box_shop_name" class="mb-0"></h4>
+                            <span id="map_box_cate" class="map_box_cate"></span><span id="map_box_shop_name" class="font-18 font-600 mb-0"></span>
                             <p id="map_box_shop_desc" class="pb-0 mb-0 line-height-m ellipsis"></p>
                             <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>&nbsp;
                                 <span id="map_box_shop_star"></span>
@@ -74,7 +74,10 @@
                             <div class="box-bottom">
                                 <div class="wedive-corner wedive-corner-bottom"></div>
                                 <div class="box-bottom-area color-white row" style="box-shadow: inset 0px 0px 5px rgb(0 0 0 / 50%);">
-                                    <a href="" class="col-4 text-center box-bottom-item">컨시어지</a><a href="" class="col-4 text-center box-bottom-item">버디찾기</a><a href="" class="col-4 text-center box-bottom-item">강사찾기</a>
+                                    <a href="" class="col-3 text-center box-bottom-item">컨시어지</a>
+                                    <a href="" class="col-3 text-center box-bottom-item">버디</a>
+                                    <a href="" class="col-3 text-center box-bottom-item">강사</a>
+                                    <a href="" class="col-3 text-center box-bottom-item">라운지</a>
                                 </div>
                             </div>
                         </div>
@@ -89,12 +92,12 @@
     <!-- Menu Fliter -->
     <div id="menu-filter" class="menu menu-box-bottom" style="height:100%;border-radius: 0px !important;">
         <div class="menu-title mt-n1">
-            <h2 class="pt-3 pb-3 mb-0 text-center">필터를 선택하세요</h2>
+            <h2 class="pt-3 pb-3 mb-0 text-center">필터 선택</h2>
             <a href="#" class="close-menu"><i class="wedive_icoset wedive_icoset_close"></i></a>
         </div>
-        <div class="content m-0 text-start" style="height:calc(100vh - 125px);">
+        <div class="content m-0 text-start" style="min-height:calc(100vh - 125px);">
             <div class="card card-style ms-0 me-0 rounded-0 mb-0">
-                <div class="content">
+                <div class="content mt-1">
                     <div>
                         <label for="filter_type" class="color-highlight font-700">타입</label>
                     </div>
@@ -137,66 +140,43 @@
                         <label for="filter_type" class="color-highlight font-700">총 평점</label>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_star5" v-model="check_star5" v-on:click="check_star1=false;check_star2=false;check_star3=false;check_star4=false;">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_star5">5</label>
+                        <input class="form-check-input" type="checkbox" value="" id="check_star90" v-model="check_star90" v-on:click="check_star70=false;check_star80=false;">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_star90">4.5</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
                         <i class="fas fa-star font-16 color-yellow-dark"></i>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_star4" v-model="check_star4" v-on:click="check_star5=!check_star4;check_star1=false;check_star2=false;check_star3=false;">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_star4">4</label>
+                        <input class="form-check-input" type="checkbox" value="" id="check_star80" v-model="check_star80" v-on:click="check_star90=!check_star80;check_star70=false;">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_star80">4.0</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
                         <i class="fas fa-star font-17 color-yellow-dark"></i>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_star3" v-model="check_star3" v-on:click="check_star4=!check_star3;check_star5=!check_star3;check_star1=false;check_star2=false;">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_star3">3</label>
+                        <input class="form-check-input" type="checkbox" value="" id="check_star70" v-model="check_star70" v-on:click="check_star90=!check_star70;check_star80=!check_star70;">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_star70">3.5</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
                         <i class="fas fa-star font-16 color-yellow-dark"></i>
                     </div>
-                    <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_star2" v-model="check_star2" v-on:click="check_star3=!check_star2;check_star4=!check_star2;check_star5=!check_star2;check_star1=false;">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_star2">2</label>
-                        <i class="fa fa-check-circle color-white font-18"></i>
-                        <i class="fas fa-star font-17 color-yellow-dark"></i>
-                    </div>
-                    <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_star1" v-model="check_star1" v-on:click="check_star2=!check_star1;check_star3=!check_star1;check_star4=!check_star1;check_star5=!check_star1;">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_star1">1</label>
-                        <i class="fa fa-check-circle color-white font-18"></i>
-                        <i class="fas fa-star font-16 color-yellow-dark"></i>
-                    </div>
+                    
 
                     <div>
                         <label for="filter_type" class="color-highlight font-700">수중 환경</label>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_fish5" v-model="check_fish5" v-on:click="check_fish1=false;check_fish2=false;check_fish3=false;check_fish4=false;">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_fish5">5</label>
+                        <input class="form-check-input" type="checkbox" value="" id="check_fish90" v-model="check_fish90" v-on:click="check_fish80=false;check_fish70=false;">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_fish90">4.5</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
                         <i class="fas fa-fish font-16 color-orange-light"></i>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_fish4" v-model="check_fish4" v-on:click="check_fish5=!check_fish4;check_fish1=false;check_fish2=false;check_fish3=false;">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_fish4">4</label>
+                        <input class="form-check-input" type="checkbox" value="" id="check_fish80" v-model="check_fish80" v-on:click="check_fish90=!check_fish80;check_fish70=false;">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_fish80">4.0</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
                         <i class="fas fa-fish font-17 color-orange-light"></i>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_fish3" v-model="check_fish3" v-on:click="check_fish4=!check_fish3;check_fish5=!check_fish3;check_fish1=false;check_fish2=false;">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_fish3">3</label>
-                        <i class="fa fa-check-circle color-white font-18"></i>
-                        <i class="fas fa-fish font-16 color-orange-light"></i>
-                    </div>
-                    <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_fish2" v-model="check_fish2" v-on:click="check_fish3=!check_fish2;check_fish4=!check_fish2;check_fish5=!check_fish2;check_fish1=false;">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_fish2">2</label>
-                        <i class="fa fa-check-circle color-white font-18"></i>
-                        <i class="fas fa-fish font-17 color-orange-light"></i>
-                    </div>
-                    <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_fish1" v-model="check_fish1" v-on:click="check_fish2=!check_fish1;check_fish3=!check_fish1;check_fish4=!check_fish1;check_fish5=!check_fish1;">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_fish1">1</label>
+                        <input class="form-check-input" type="checkbox" value="" id="check_fish70" v-model="check_fish70" v-on:click="check_fish90=!check_fish70;check_fish80=!check_fish70;">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_fish70">3.5</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
                         <i class="fas fa-fish font-16 color-orange-light"></i>
                     </div>
@@ -205,36 +185,24 @@
                         <label for="filter_type" class="color-highlight font-700">시야</label>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_sight5" v-model="check_sight5" v-on:click="check_sight1=false;check_sight2=false;check_sight3=false;check_sight4=false;">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_sight5">5</label>
+                        <input class="form-check-input" type="checkbox" value="" id="check_sight90" v-model="check_sight90" v-on:click="check_sight80=false;check_sight70=false;">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_sight90">4.5</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
                         <i class="fas fa-eye font-16 color-gray-light-mid2"></i>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_sight4" v-model="check_sight4" v-on:click="check_sight5=!check_sight4;check_sight1=false;check_sight2=false;check_sight3=false;">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_sight4">4</label>
+                        <input class="form-check-input" type="checkbox" value="" id="check_sight80" v-model="check_sight80" v-on:click="check_sight90=!check_sight80;check_sight70=false;">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_sight80">4.0</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
                         <i class="fas fa-eye font-17 color-gray-light-mid2"></i>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_sight3" v-model="check_sight3" v-on:click="check_sight4=!check_sight3;check_sight5=!check_sight3;check_sight1=false;check_sight2=false;">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_sight3">3</label>
+                        <input class="form-check-input" type="checkbox" value="" id="check_sight70" v-model="check_sight70" v-on:click="check_sight90=!check_sight70;check_sight80=!check_sight70;">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_sight70">3.5</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
                         <i class="fas fa-eye font-16 color-gray-light-mid2"></i>
                     </div>
-                    <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_sight2" v-model="check_sight2" v-on:click="check_sight3=!check_sight2;check_sight4=!check_sight2;check_sight5=!check_sight2;check_sight1=false;">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_sight2">2</label>
-                        <i class="fa fa-check-circle color-white font-18"></i>
-                        <i class="fas fa-eye font-17 color-gray-light-mid2"></i>
-                    </div>
-                    <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_sight1" v-model="check_sight1" v-on:click="check_sight2=!check_sight1;check_sight3=!check_sight1;check_sight4=!check_sight1;check_sight5=!check_sight1;">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_sight1">1</label>
-                        <i class="fa fa-check-circle color-white font-18"></i>
-                        <i class="fas fa-eye font-16 color-gray-light-mid2"></i>
-                    </div>
-
+                    
                     <div>
                         <label for="filter_type" class="color-highlight font-700">다이빙 환경</label>
                     </div>
@@ -353,9 +321,6 @@ async function updateAll() {
     _searchParams.lng1 = sw.lng();
     _searchParams.lat2 = ne.lat();
     _searchParams.lng2 = ne.lng();
-    if (_searchParams.adminScore) _searchParams.adminScore *= 20;
-    if (_searchParams.waterEnvironmentScore) _searchParams.waterEnvironmentScore *= 20;
-    if (_searchParams.eyeSightScore) _searchParams.eyeSightScore *= 20;
     
     var result = await axios({
         url: 'https://api.wedives.com/graphql',
@@ -468,6 +433,7 @@ async function updateAll() {
     
     // 새롭게 마커를 그려준다.
     var allList_item = ["site", "point", "center"];
+    var allList_cate = ["사이트", "포인트", "센터"];
     for (var k=0; k<3; k++) {
         var allList = [];
         if (k == 0 && check_cate1) {if (zoomLevel > 12)allList = []; else allList = siteList;}
@@ -490,6 +456,7 @@ async function updateAll() {
                 const price_index = (priceIdxs && priceIdxs.length>0 && priceIdxs[0].title) ? priceIdxs[0].title.replace(/\$/gi, '₩') : '';
                 const institution_types = (k==2 && allList[i].institutionTypes) ? (allList[i].institutionTypes) : null;
                 const m_type = allList_item[k];
+                const m_cate = allList_cate[k];
                 const _k = k;
 
                 const label_text = (zoomLevel < 9) ? ' ' : (title + ((k==0)?' 사이트':((k==1)?'':'')));
@@ -528,6 +495,10 @@ async function updateAll() {
                     
                     $(".box-bottom").removeClass('site').removeClass('point').removeClass('center');
                     $(".box-bottom").addClass(m_type)
+
+                    $(".map_box_cate").parent().addClass(m_type);
+                    $(".map_box_cate").text(m_cate);
+                    
 
                     if ($("#map_box_agency").hasClass("hide") == false) $("#map_box_agency").addClass("hide");
                     if ($("#map_box_price").hasClass("hide") == false) $("#map_box_price").addClass("hide");
@@ -569,376 +540,6 @@ async function updateAll() {
 
 }
 
-async function updateSite() {
-    var bounds = map.getBounds();
-    var sw = bounds.getSouthWest();
-    var ne = bounds.getNorthEast();
-    
-    
-    var result = await axios({
-        url: 'https://api.wedives.com/graphql',
-        method: 'post',
-        headers: {
-            countrycode: 'ko',
-            idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-        },
-        data: {
-            query: `
-                query GetDiveSitesNearby($lat1: Float!, $lon1: Float!, $lat2: Float!, $lon2: Float!) {
-                    getDiveSitesNearby(lat1: $lat1, lon1: $lon1, lat2: $lat2, lon2: $lon2) {
-                        _id
-                        name
-                        uniqueName
-                        description
-                        highlightDescription
-                        adminScore
-                        latitude
-                        longitude
-                        eyeSightScore
-                        flowRateScore
-                        waterEnvironmentScore
-                        backgroundImages {
-                            thumbnailUrl
-                        }
-                    }
-                }
-            `,
-            variables: {
-                "lat1": sw.lat(),
-                "lon1": sw.lng(),
-                "lat2": ne.lat(),
-                "lon2": ne.lng()
-            }
-        }
-    });
-    siteList = [];
-    result.data.data.getDiveSitesNearby.forEach(item => siteList.push(item));
-    // 필요 없는 그린 마커를 모두 삭제한다.
-    for (var i = 0; i < markerList.length; i++ ) {
-        if (siteList && siteList.filter(x=>x._id == markerList[i]._id).length == 0 && pointList && pointList.filter(x=>x._id == markerList[i]._id).length == 0 && centerList && centerList.filter(x=>x._id == markerList[i]._id).length == 0) {
-            markerList[i].setMap(null);
-            markerList.splice(i, 1);
-        } else if (map.getZoom() < 9) {
-            markerList[i].setLabel("");
-        }
-    }
-    
-    // 새롭게 마커를 그려준다.
-    for (var i=0; i<siteList.length; i++) {
-        if (markerList && markerList.filter(x=>x._id == siteList[i]._id).length == 0) {
-            const img_path = (siteList[i].adminScore > 40) ? '/static/images/assets/ico_pin0.png' : '/static/images/assets/ico_pin_small0.png'
-            const img = (siteList[i].backgroundImages && siteList[i].backgroundImages.length>0) ? siteList[i].backgroundImages[0].thumbnailUrl : '/static/empty.jpg';
-            const img_size = new google.maps.Size(38,43);
-            const title = siteList[i].name;
-            const uniqueName = siteList[i].uniqueName;
-            const desc = siteList[i].description;
-            const star = (siteList[i].adminScore/20).toFixed(1);
-            const price_index = '';
-            const position = {lat: siteList[i].latitude, lng: siteList[i].longitude};
-            const _id = siteList[i]._id;
-            const label_text = (map.getZoom() < 9) ? '' : (title + ((k==0)?' 사이트':((k==1)?'':'')));
-            
-
-            const marker_shop = new google.maps.Marker({
-                map: map,
-                position: position,
-                icon: new google.maps.MarkerImage(img_path, null, null, null, img_size),
-                label: { color: '#5f6368', fontWeight: 'bold', fontSize: '14px', className: 'wedive-label', text: label_text },
-                img_path: img_path,
-                star: star,
-                title: title,
-                _id: _id,
-                type: 'site',
-            });
-            marker_shop.addListener("click", () => {
-                $(".map-box").removeClass("hide");
-                $("#btn_new").addClass("hide");
-                $("#btn_filter").addClass("hide");
-                for (var j=0; j<markerList.length; j++) {
-                    var _icon = markerList[j].getIcon();
-                    if (_icon.size.width != 38) {
-                        markerList[j].setIcon(new google.maps.MarkerImage(markerList[j].img_path, null, null, null, new google.maps.Size(38,43)));
-                    }
-                }
-
-                $("#map_box_shop_name").text(title + " 사이트");
-                $("#map_box_shop_desc").text(desc);
-                $("#map_box_shop_star").text(star);
-                $("#map_box_href").attr("href", "/site/" + uniqueName);
-                
-                $(".box-bottom").removeClass('site').removeClass('point').removeClass('center');
-                $(".box-bottom").addClass('site')
-
-                if ($("#map_box_agency").hasClass("hide") == false) $("#map_box_agency").addClass("hide");
-                if ($("#map_box_price").hasClass("hide") == false) $("#map_box_price").addClass("hide");
-                
-                $("#map_box_shop_feature").text('');
-                $("#map_box_shop_img").attr("src", img);
-                
-                
-                marker_shop.setIcon(new google.maps.MarkerImage('/static/images/assets/ico_pin_big0.png', null, null, null, new google.maps.Size(58,66)));
-                map.panTo(marker_shop.getPosition());
-                /*if (map.getZoom() == 18) {
-                    map.panTo(marker_shop.getPosition());
-                } else {
-                    map.setZoom(18);
-                    map.setCenter(marker_shop.getPosition());
-                }*/
-            });
-            
-            markerList.push(marker_shop);
-        }
-    }
-}
-
-async function updatePoint() {
-    var bounds = map.getBounds();
-    var sw = bounds.getSouthWest();
-    var ne = bounds.getNorthEast();
-    
-    
-    var result = await axios({
-        url: 'https://api.wedives.com/graphql',
-        method: 'post',
-        headers: {
-            countrycode: 'ko',
-            idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-        },
-        data: {
-            query: `
-                query GetDivePointsNearBy($lat1: Float!, $lon1: Float!, $lat2: Float!, $lon2: Float!) {
-                    getDivePointsNearBy(lat1: $lat1, lon1: $lon1, lat2: $lat2, lon2: $lon2) {
-                        _id
-                        name
-                        uniqueName
-                        description
-                        highlightDescription
-                        adminScore
-                        latitude
-                        longitude
-                        flowRateScore
-                        waterEnvironmentScore
-                        eyeSightScore
-                        backgroundImages {
-                        thumbnailUrl
-                        }
-                    }
-                }
-            `,
-            variables: {
-                "lat1": sw.lat(),
-                "lon1": sw.lng(),
-                "lat2": ne.lat(),
-                "lon2": ne.lng()
-            }
-        }
-    });
-    pointList = [];
-    result.data.data.getDivePointsNearBy.forEach(item => pointList.push(item));
-    // 필요 없는 그린 마커를 모두 삭제한다.
-    for (var i = 0; i < markerList.length; i++ ) {
-        if (pointList && pointList.filter(x=>x._id == markerList[i]._id).length == 0) {
-            markerList[i].setMap(null);
-            markerList.splice(i, 1);
-        }
-    }
-    
-    // 새롭게 마커를 그려준다.
-    for (var i=0; i<pointList.length; i++) {
-        if (markerList && markerList.filter(x=>x._id == pointList[i]._id).length == 0) {
-            const img_path = (pointList[i].adminScore > 40) ? '/static/images/assets/ico_pin2.png' : '/static/images/assets/ico_pin_small2.png'
-            const img = (pointList[i].backgroundImages && pointList[i].backgroundImages.length>0) ? pointList[i].backgroundImages[0].thumbnailUrl : '/static/empty.jpg';
-            const img_size = new google.maps.Size(38,43);
-            const title = pointList[i].name;
-            const uniqueName = pointList[i].uniqueName;
-            const desc = pointList[i].description;
-            const star = (pointList[i].adminScore/20).toFixed(1);
-            const price_index = '';
-            const position = {lat: pointList[i].latitude, lng: pointList[i].longitude};
-            const _id = pointList[i]._id;
-
-            const marker_shop = new google.maps.Marker({
-                map: map,
-                position: position,
-                icon: new google.maps.MarkerImage(img_path, null, null, null, img_size),
-                img_path: img_path,
-                star: star,
-                title: title,
-                _id: _id,
-                type: 'point',
-            });
-            marker_shop.addListener("click", () => {
-                $(".map-box").removeClass("hide");
-                $("#btn_new").addClass("hide");
-                $("#btn_filter").addClass("hide");
-                for (var j=0; j<markerList.length; j++) {
-                    var _icon = markerList[j].getIcon();
-                    if (_icon.size.width != 38) {
-                        markerList[j].setIcon(new google.maps.MarkerImage(markerList[j].img_path, null, null, null, new google.maps.Size(38,43)));
-                    }
-                }
-
-                $("#map_box_shop_name").text(title);
-                $("#map_box_shop_desc").text(desc);
-                $("#map_box_shop_star").text(star);
-                $("#map_box_href").attr("href", "/point/" + uniqueName);
-                
-                $(".box-bottom").removeClass('site').removeClass('point').removeClass('center');
-                $(".box-bottom").addClass('point');
-
-                if ($("#map_box_agency").hasClass("hide") == false) $("#map_box_agency").addClass("hide");
-                if ($("#map_box_price").hasClass("hide") == false) $("#map_box_price").addClass("hide");
-                
-                $("#map_box_shop_feature").text('');
-                $("#map_box_shop_img").attr("src", img);
-                
-                
-                marker_shop.setIcon(new google.maps.MarkerImage('/static/images/assets/ico_pin_big2.png', null, null, null, new google.maps.Size(58,66)));
-                map.panTo(marker_shop.getPosition());
-                /*if (map.getZoom() == 18) {
-                    map.panTo(marker_shop.getPosition());
-                } else {
-                    map.setZoom(18);
-                    map.setCenter(marker_shop.getPosition());
-                }*/
-            });
-            
-            markerList.push(marker_shop);
-        }
-    }
-}
-async function updateCenter() {
-    var bounds = map.getBounds();
-    var sw = bounds.getSouthWest();
-    var ne = bounds.getNorthEast();
-    
-    
-    var result = await axios({
-        url: 'https://api.wedives.com/graphql',
-        method: 'post',
-        headers: {
-            countrycode: 'ko',
-            idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-        },
-        data: {
-            query: `
-                query GetDiveCentersNearBy($lat1: Float!, $lon1: Float!, $lat2: Float!, $lon2: Float!) {
-                    getDiveCentersNearBy(lat1: $lat1, lon1: $lon1, lat2: $lat2, lon2: $lon2) {
-                        _id
-                        name
-                        uniqueName
-                        description
-                        adminScore
-                        latitude
-                        longitude
-                        viewScore
-                        educationScore
-                        facilityScore
-                        serviceScore
-                        backgroundImages {
-                            thumbnailUrl
-                        }
-                        interests {
-                            title
-                            type
-                        }
-                    }
-                }
-            `,
-            variables: {
-                "lat1": sw.lat(),
-                "lon1": sw.lng(),
-                "lat2": ne.lat(),
-                "lon2": ne.lng()
-            }
-        }
-    });
-    centerList = [];
-    result.data.data.getDiveCentersNearBy.forEach(item => centerList.push(item));
-    // 필요 없는 그린 마커를 모두 삭제한다.
-    for (var i = 0; i < markerList.length; i++ ) {
-        if (centerList && centerList.filter(x=>x._id == markerList[i]._id).length == 0) {
-            markerList[i].setMap(null);
-            markerList.splice(i, 1);
-        }
-    }
-    
-    
-    // 새롭게 마커를 그려준다.
-    for (var i=0; i<centerList.length; i++) {
-        if (markerList && markerList.filter(x=>x._id == centerList[i]._id).length == 0) {
-            const img_path = (centerList[i].adminScore > 40) ? '/static/images/assets/ico_pin1.png' : '/static/images/assets/ico_pin_small1.png'
-            const img = (centerList[i].backgroundImages && centerList[i].backgroundImages.length>0) ? centerList[i].backgroundImages[0].thumbnailUrl : '/static/empty.jpg';
-            const img_size = new google.maps.Size(38,43);
-            const title = centerList[i].name;
-            const uniqueName = centerList[i].uniqueName;
-            const desc = centerList[i].description;
-            const star = (centerList[i].adminScore/20).toFixed(1);
-            const position = {lat: centerList[i].latitude, lng: centerList[i].longitude};
-            const _id = centerList[i]._id;
-            const institutionTypes = centerList[i].institutionTypes;
-            var priceIdxs = (centerList[i].interests) ? centerList[i].interests.filter(x=>x.type=='priceIndex') : null;
-            const price_index = (priceIdxs && priceIdxs.length>0) ? priceIdxs[0].title.replace(/\$/gi, '₩') : '';
-
-            const marker_shop = new google.maps.Marker({
-                map: map,
-                position: position,
-                icon: new google.maps.MarkerImage(img_path, null, null, null, img_size),
-                img_path: img_path,
-                star: star,
-                title: title,
-                _id: _id,
-                type: 'center',
-                institutionTypes: institutionTypes,
-            });
-            marker_shop.addListener("click", () => {
-                $(".map-box").removeClass("hide");
-                $("#btn_new").addClass("hide");
-                $("#btn_filter").addClass("hide");
-                for (var j=0; j<markerList.length; j++) {
-                    var _icon = markerList[j].getIcon();
-                    if (_icon.size.width != 38) {
-                        markerList[j].setIcon(new google.maps.MarkerImage(markerList[j].img_path, null, null, null, new google.maps.Size(38,43)));
-                    }
-                }
-
-                $("#map_box_shop_name").text(title);
-                $("#map_box_shop_desc").text(desc);
-                $("#map_box_shop_star").text(star);
-                $("#map_box_href").attr("href", "/center/" + uniqueName);
-                
-                $(".box-bottom").removeClass('site').removeClass('point').removeClass('center');
-                $(".box-bottom").addClass('center')
-                
-                $("#map_box_shop_feature").text('');
-                $("#map_box_shop_img").attr("src", img);
-
-                if ($("#map_box_agency").hasClass("hide") == false) $("#map_box_agency").addClass("hide");
-                if (institutionTypes && institutionTypes.length > 0) {
-                    $("#map_box_agency").removeClass("hide");
-                    $("#map_box_agency_img").attr("src", '/static/images/agency/logo_'+institutionTypes[0].toLowerCase()+'.svg');
-                }
-                if ($("#map_box_price").hasClass("hide") == false) $("#map_box_price").addClass("hide");
-                if (price_index != '') {
-                    $("#map_box_price").removeClass("hide");
-                    $("#map_box_price_index").text(price_index);
-                }
-                
-                
-                marker_shop.setIcon(new google.maps.MarkerImage('/static/images/assets/ico_pin_big1.png', null, null, null, new google.maps.Size(58,66)));
-                map.panTo(marker_shop.getPosition());
-                /*if (map.getZoom() == 18) {
-                    map.panTo(marker_shop.getPosition());
-                } else {
-                    map.setZoom(18);
-                    map.setCenter(marker_shop.getPosition());
-                }*/
-            });
-            
-            markerList.push(marker_shop);
-        }
-    }
-}
 export default {
   name: 'HelloWorld',
   mounted() {
@@ -1181,21 +782,15 @@ export default {
         nickName: localStorage.nickName,
         userThumbnail: localStorage.userThumbnail,
         gender: localStorage.gender,
-        check_star1: false,
-        check_star2: false,
-        check_star3: false,
-        check_star4: false,
-        check_star5: false,
-        check_fish1: false,
-        check_fish2: false,
-        check_fish3: false,
-        check_fish4: false,
-        check_fish5: false,
-        check_sight1: false,
-        check_sight2: false,
-        check_sight3: false,
-        check_sight4: false,
-        check_sight5: false,
+        check_star70: false,
+        check_star80: false,
+        check_star90: false,
+        check_fish70: false,
+        check_fish80: false,
+        check_fish90: false,
+        check_sight70: false,
+        check_sight80: false,
+        check_sight90: false,
         check_cate1: true,
         check_cate2: true,
         check_cate3: true,
@@ -1232,26 +827,27 @@ export default {
   },
   methods: {
       submit_filter() {
+        searchParams = {};
         // admin Score
-        for (var i=1; i<6; i++) {
-            if (this["check_star"+i] == true) {
-                searchParams.adminScore = i
+        for (var i=0; i<3; i++) {
+            if (this["check_star"+(i*10+70)] == true) {
+                searchParams.adminScore = (i*10+70);
                 break;
             }
         }
 
         // env Score
         for (var i=1; i<6; i++) {
-            if (this["check_fish"+i] == true) {
-                searchParams.waterEnvironmentScore = i
+            if (this["check_fish"+(i*10+70)] == true) {
+                searchParams.waterEnvironmentScore = (i*10+70);
                 break;
             }
         }
 
         // sight Score
         for (var i=1; i<6; i++) {
-            if (this["check_sight"+i] == true) {
-                searchParams.eyeSightScore = i
+            if (this["check_sight"+(i*10+70)] == true) {
+                searchParams.eyeSightScore = (i*10+70);
                 break;
             }
         }
@@ -1444,4 +1040,10 @@ export default {
 .site .box-bottom-area {background-color: #3f474c;}
 .point .box-bottom-area {background-color: #3cb5a0;}
 .center .box-bottom-area {background-color: #4687c1;}
+
+.map_box_cate {padding: 2px 6px;margin-bottom:2px;margin-right:6px;border-radius:4px;}
+.site .map_box_cate {border: 1px solid #3f474c;color:#3f474c}
+.point .map_box_cate {border: 1px solid #3cb5a0;color:#3cb5a0}
+.center .map_box_cate {border: 1px solid #4687c1;color:#4687c1}
+
 </style>

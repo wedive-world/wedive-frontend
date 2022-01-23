@@ -25,13 +25,13 @@
             </div>
             <div v-if="userData._id != user_id" class="row m-0 mt-1 ps-2 pe-2">
                 <div v-on:click="clickChat()" class="col-4 p-1">
-                    <span class="btn btn-border btn-m btn-full text-uppercase font-900 border-gray-dark color-black bg-theme" style="padding: 8px 0 !important;"><img src="/static/images/assets/ico_chat.png" height="16"/> 채팅</span>
+                    <span class="btn btn-border btn-m btn-full text-uppercase font-900 border-gray-dark color-black bg-theme" style="padding: 8px 0 !important;"><img src="/static/images/assets/ico_chat.png" height="20"/></span>
                 </div>
                 <div v-on:click="clickLike()" class="col-4 p-1">
-                    <span class="btn btn-border btn-m btn-full text-uppercase font-900 border-gray-dark color-black bg-theme" style="padding: 8px 0 !important;"><img :src="'/static/images/assets/'+like_img+'.png'" height="16"/> 좋아요 {{ userData.likes }}</span>
+                    <span class="btn btn-border btn-m btn-full text-uppercase font-900 border-gray-dark color-black bg-theme" style="padding: 8px 0 !important;"><img :src="'/static/images/assets/'+like_img+'.png'" height="20"/>{{ userData.likes }}</span>
                 </div>
                 <div v-on:click="clickSubscribe()" class="col-4 p-1">
-                    <span class="btn btn-border btn-m btn-full text-uppercase font-900 border-gray-dark color-black bg-theme" style="padding: 8px 0 !important;"><img :src="'/static/images/assets/'+subscribe_img+'.png'" height="16"/> 알림</span>
+                    <span class="btn btn-border btn-m btn-full text-uppercase font-900 border-gray-dark color-black bg-theme" style="padding: 8px 0 !important;"><img :src="'/static/images/assets/'+subscribe_img+'.png'" height="20"/></span>
                 </div>
             </div>
             <div class="content pb-3">
@@ -370,7 +370,7 @@ export default {
                 this.userData.levelShow = (f_lvl>0) ? "프리 " + free_level[f_lvl] : this.userData.levelShow;
             }
             this.userData.levelShow += " 다이버";
-            if(my_s_lvl>5) this.userData.levelShow = scuba_level[my_s_lvl];
+            if(s_lvl>5) this.userData.levelShow = scuba_level[s_lvl];
             
             setTimeout(function() {
                 init_template();

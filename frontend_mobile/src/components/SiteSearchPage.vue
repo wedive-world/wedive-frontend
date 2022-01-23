@@ -9,6 +9,7 @@
         <div class="card card-style ms-0 me-0 rounded-0 mb-0">
             <div class="p-3">
                 <vue-typeahead-bootstrap
+                    id="input_query"
                     v-model="query"
                     class="wedive-search disable-search-result"
                     :data="users"
@@ -26,7 +27,7 @@
                 </vue-typeahead-bootstrap>
                 
             </div>
-            <div class="content mt-0 mb-0" style="height: calc(100vh - 208px);">
+            <div class="content mt-0 mb-0" style="min-height: calc(100vh - 208px);padding-bottom:40px;">
                 <div v-for="item in users">
                     <div class="map-box">
                         <a :href="'/' + ((item.__typename=='DiveSite') ? 'site' : (item.__typename=='DivePoint') ? 'point' : 'center') + '/' + item.uniqueName">
@@ -36,14 +37,14 @@
                                     <div :class="item.__typename + '-tag'" style="float: left;position: relative;width: 75px; height:75px;">
                                         <img v-bind:src="(item.backgroundImages && item.backgroundImages.length>0) ? item.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'" class="rounded-s mx-auto" width="75" height="75" style="object-fit: cover;">
                                     </div>
-                                    <div class="" style="padding-left: 90px;">
-                                        <h4 class="font-15 pb-0"> {{item.name}} </h4>
-                                        <p class="pb-0 mb-0 line-height-m ellipsis"> {{item.description}} </p>
+                                    <div :class="item.__typename" style="padding-left: 90px;">
+                                        <span class="map_box_cate">{{ ((item.__typename=='DiveSite')? '사이트' : (item.__typename=='DivePoint')? '포인트' : '센터') }}</span><span class="font-18 pb-0 font-600"> {{item.name}} </span>
+                                        <p class="pb-0 mb-0 line-height-m ellipsis"> {{ (item.description == '') ? '&nbsp;' : item.description }} </p>
                                         <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
                                             <span> {{(item.adminScore/20).toFixed(1)}} </span>
                                             &nbsp;<font class="color-gray-light">|</font>&nbsp;
                                             <span v-if="item.institutionTypes && item.institutionTypes.length > 0"><span v-for="(insti,index) in item.institutionTypes" v-if="index < 2" v-on:click="openInstitutionBottomSheet()"><img class="ext-img" :src="'/static/images/agency/logo_'+insti.toLowerCase()+'.svg'" height="17" style="padding-bottom: 1px;filter: grayscale(100%) contrast(0.5);" /><span v-if="index != (item.institutionTypes.length-1)">&nbsp;&nbsp;</span></span>&nbsp;<font class="color-gray-light">|</font>&nbsp;</span>
-                                            <span v-if="item.interests && item.interests.filter(x=>x.type=='priceIndex')">{{ item.interests.filter(x=>x.type=='priceIndex')[0].title.replace(/\$/gi, '₩') }}</span>
+                                            <span v-if="item.interests && item.interests.filter(x=>x.type=='priceIndex') != null && item.interests.filter(x=>x.type=='priceIndex').length > 0">{{ item.interests.filter(x=>x.type=='priceIndex')[0].title.replace(/\$/gi, '₩') }}</span>
                                         </p>
                                     </div>
                                 </div>
@@ -91,66 +92,43 @@
                         <label for="filter_type" class="color-highlight font-700">총 평점</label>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_star5" v-model="check_star5" v-on:click="check_star1=false;check_star2=false;check_star3=false;check_star4=false;">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_star5">5</label>
+                        <input class="form-check-input" type="checkbox" value="" id="check_star90" v-model="check_star90" v-on:click="check_star70=false;check_star80=false;">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_star90">4.5</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
                         <i class="fas fa-star font-16 color-yellow-dark"></i>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_star4" v-model="check_star4" v-on:click="check_star5=!check_star4;check_star1=false;check_star2=false;check_star3=false;">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_star4">4</label>
+                        <input class="form-check-input" type="checkbox" value="" id="check_star80" v-model="check_star80" v-on:click="check_star90=!check_star80;check_star70=false;">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_star80">4.0</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
                         <i class="fas fa-star font-17 color-yellow-dark"></i>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_star3" v-model="check_star3" v-on:click="check_star4=!check_star3;check_star5=!check_star3;check_star1=false;check_star2=false;">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_star3">3</label>
+                        <input class="form-check-input" type="checkbox" value="" id="check_star70" v-model="check_star70" v-on:click="check_star90=!check_star70;check_star80=!check_star70;">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_star70">3.5</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
                         <i class="fas fa-star font-16 color-yellow-dark"></i>
                     </div>
-                    <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_star2" v-model="check_star2" v-on:click="check_star3=!check_star2;check_star4=!check_star2;check_star5=!check_star2;check_star1=false;">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_star2">2</label>
-                        <i class="fa fa-check-circle color-white font-18"></i>
-                        <i class="fas fa-star font-17 color-yellow-dark"></i>
-                    </div>
-                    <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_star1" v-model="check_star1" v-on:click="check_star2=!check_star1;check_star3=!check_star1;check_star4=!check_star1;check_star5=!check_star1;">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_star1">1</label>
-                        <i class="fa fa-check-circle color-white font-18"></i>
-                        <i class="fas fa-star font-16 color-yellow-dark"></i>
-                    </div>
+                    
 
                     <div>
                         <label for="filter_type" class="color-highlight font-700">수중 환경</label>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_fish5" v-model="check_fish5" v-on:click="check_fish1=false;check_fish2=false;check_fish3=false;check_fish4=false;">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_fish5">5</label>
+                        <input class="form-check-input" type="checkbox" value="" id="check_fish90" v-model="check_fish90" v-on:click="check_fish80=false;check_fish70=false;">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_fish90">4.5</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
                         <i class="fas fa-fish font-16 color-orange-light"></i>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_fish4" v-model="check_fish4" v-on:click="check_fish5=!check_fish4;check_fish1=false;check_fish2=false;check_fish3=false;">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_fish4">4</label>
+                        <input class="form-check-input" type="checkbox" value="" id="check_fish80" v-model="check_fish80" v-on:click="check_fish90=!check_fish80;check_fish70=false;">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_fish80">4.0</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
                         <i class="fas fa-fish font-17 color-orange-light"></i>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_fish3" v-model="check_fish3" v-on:click="check_fish4=!check_fish3;check_fish5=!check_fish3;check_fish1=false;check_fish2=false;">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_fish3">3</label>
-                        <i class="fa fa-check-circle color-white font-18"></i>
-                        <i class="fas fa-fish font-16 color-orange-light"></i>
-                    </div>
-                    <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_fish2" v-model="check_fish2" v-on:click="check_fish3=!check_fish2;check_fish4=!check_fish2;check_fish5=!check_fish2;check_fish1=false;">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_fish2">2</label>
-                        <i class="fa fa-check-circle color-white font-18"></i>
-                        <i class="fas fa-fish font-17 color-orange-light"></i>
-                    </div>
-                    <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_fish1" v-model="check_fish1" v-on:click="check_fish2=!check_fish1;check_fish3=!check_fish1;check_fish4=!check_fish1;check_fish5=!check_fish1;">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_fish1">1</label>
+                        <input class="form-check-input" type="checkbox" value="" id="check_fish70" v-model="check_fish70" v-on:click="check_fish90=!check_fish70;check_fish80=!check_fish70;">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_fish70">3.5</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
                         <i class="fas fa-fish font-16 color-orange-light"></i>
                     </div>
@@ -159,35 +137,24 @@
                         <label for="filter_type" class="color-highlight font-700">시야</label>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_sight5" v-model="check_sight5" v-on:click="check_sight1=false;check_sight2=false;check_sight3=false;check_sight4=false;">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_sight5">5</label>
+                        <input class="form-check-input" type="checkbox" value="" id="check_sight90" v-model="check_sight90" v-on:click="check_sight80=false;check_sight70=false;">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_sight90">4.5</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
                         <i class="fas fa-eye font-16 color-gray-light-mid2"></i>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_sight4" v-model="check_sight4" v-on:click="check_sight5=!check_sight4;check_sight1=false;check_sight2=false;check_sight3=false;">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_sight4">4</label>
+                        <input class="form-check-input" type="checkbox" value="" id="check_sight80" v-model="check_sight80" v-on:click="check_sight90=!check_sight80;check_sight70=false;">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_sight80">4.0</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
                         <i class="fas fa-eye font-17 color-gray-light-mid2"></i>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_sight3" v-model="check_sight3" v-on:click="check_sight4=!check_sight3;check_sight5=!check_sight3;check_sight1=false;check_sight2=false;">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_sight3">3</label>
+                        <input class="form-check-input" type="checkbox" value="" id="check_sight70" v-model="check_sight70" v-on:click="check_sight90=!check_sight70;check_sight80=!check_sight70;">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_sight70">3.5</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
                         <i class="fas fa-eye font-16 color-gray-light-mid2"></i>
                     </div>
-                    <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_sight2" v-model="check_sight2" v-on:click="check_sight3=!check_sight2;check_sight4=!check_sight2;check_sight5=!check_sight2;check_sight1=false;">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_sight2">2</label>
-                        <i class="fa fa-check-circle color-white font-18"></i>
-                        <i class="fas fa-eye font-17 color-gray-light-mid2"></i>
-                    </div>
-                    <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_sight1" v-model="check_sight1" v-on:click="check_sight2=!check_sight1;check_sight3=!check_sight1;check_sight4=!check_sight1;check_sight5=!check_sight1;">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_sight1">1</label>
-                        <i class="fa fa-check-circle color-white font-18"></i>
-                        <i class="fas fa-eye font-16 color-gray-light-mid2"></i>
-                    </div>
+
 
                     <div>
                         <label for="filter_type" class="color-highlight font-700">다이빙 환경</label>
@@ -291,26 +258,27 @@ export default {
   
   methods: {
       submit_filter() {
+        searchParams = {};
         // admin Score
-        for (var i=1; i<6; i++) {
-            if (this["check_star"+i] == true) {
-                searchParams.adminScore = i
+        for (var i=0; i<3; i++) {
+            if (this["check_star"+(i*10+70)] == true) {
+                searchParams.adminScore = (i*10+70);
                 break;
             }
         }
 
         // env Score
         for (var i=1; i<6; i++) {
-            if (this["check_fish"+i] == true) {
-                searchParams.waterEnvironmentScore = i
+            if (this["check_fish"+(i*10+70)] == true) {
+                searchParams.waterEnvironmentScore = (i*10+70);
                 break;
             }
         }
 
         // sight Score
         for (var i=1; i<6; i++) {
-            if (this["check_sight"+i] == true) {
-                searchParams.eyeSightScore = i
+            if (this["check_sight"+(i*10+70)] == true) {
+                searchParams.eyeSightScore = (i*10+70);
                 break;
             }
         }
@@ -447,7 +415,6 @@ export default {
       },
   },
   mounted() {
-    
     if (this.$route.query.header && this.$route.query.header == 'hide') {
       $(".page-title").hide();
       $(".page-title-clear").hide();
@@ -456,6 +423,9 @@ export default {
     if (this.$route.query.footer && this.$route.query.footer == 'hide') {
       $("#footer-bar").hide();
     }
+    setTimeout(function() {
+        $("#input_query > .input-group > input").focus();
+    },500);
   },
   created() {
     setTimeout(function() {
@@ -469,21 +439,15 @@ export default {
         query: '',
         selecteduser: null,
         users: [],
-        check_star1: false,
-        check_star2: false,
-        check_star3: false,
-        check_star4: false,
-        check_star5: false,
-        check_fish1: false,
-        check_fish2: false,
-        check_fish3: false,
-        check_fish4: false,
-        check_fish5: false,
-        check_sight1: false,
-        check_sight2: false,
-        check_sight3: false,
-        check_sight4: false,
-        check_sight5: false,
+        check_star70: false,
+        check_star80: false,
+        check_star90: false,
+        check_fish70: false,
+        check_fish80: false,
+        check_fish90: false,
+        check_sight70: false,
+        check_sight80: false,
+        check_sight90: false,
         check_cate1: true,
         check_cate2: true,
         check_cate3: true,
@@ -534,4 +498,10 @@ export default {
 .DiveSite-tag:before {content: '';width: 0px;height: 0px;border-bottom: 16px solid #3f474c;border-left: 16px solid rgba(0,0,0,0);position: absolute;bottom: 0;right: 0px;}
 .DivePoint-tag:before {content: '';width: 0px;height: 0px;border-bottom: 16px solid #3cb5a0;border-left: 16px solid rgba(0,0,0,0);position: absolute;bottom: 0;right: 0px;}
 .DiveCenter-tag:before {content: '';width: 0px;height: 0px;border-bottom: 16px solid #4687c1;border-left: 16px solid rgba(0,0,0,0);position: absolute;bottom: 0;right: 0px;}
+
+.map_box_cate {padding: 2px 6px;margin-bottom:2px;margin-right:6px;border-radius:4px;}
+.DiveSite .map_box_cate {border: 1px solid #3f474c;color:#3f474c}
+.DivePoint .map_box_cate {border: 1px solid #3cb5a0;color:#3cb5a0}
+.DiveCenter .map_box_cate {border: 1px solid #4687c1;color:#4687c1}
+
 </style>
