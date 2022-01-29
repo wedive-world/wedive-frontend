@@ -95,7 +95,7 @@
                             <div class="ms-3 me-3 mb-2">
                                 <div class="form-check interest-check">
                                     <input class="form-check-input" type="checkbox" value="" id="check_diving_scuba">
-                                    <label class="form-check-label rounded-xl border-08" for="check_diving_scuba" style="border-radius: 17px 0 0 17px !important;">스쿠버 다이빙</label>
+                                    <label class="form-check-label rounded-xl border-08" for="check_diving_scuba" style="border-radius: 17px 0 0 17px !important;">스쿠바 다이빙</label>
                                     <i class="fas fa-ship color-white font-18"></i>
                                     <i class="fas fa-ship font-16 color-highlight"></i>
                                 </div>
@@ -597,7 +597,7 @@ export default {
         this.users = [
             {"id": "region_ko_jeju", "type": "region", "name_ko": "제주도", name_en: "Jeju island", "img_url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0c/bf/d2/56/photo1jpg.jpg?w=100&h=100&s=1"},
             {"id": "region_ko_wooljin", "type": "region", "name_ko": "울진", name_en: "Wooljin", "img_url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/01/5a/31/a0/sunrise-peak-seongsan.jpg?w=100&h=100&s=1"},
-            {"id": "center_ko_jeju_bubbletank", "type": "center", "name_ko": "제주 버블탱크 스쿠버다이빙", name_en: "Bubble tank", "img_url": "/static/bubble2.jpg"},
+            {"id": "center_ko_jeju_bubbletank", "type": "center", "name_ko": "제주 버블탱크 스쿠바다이빙", name_en: "Bubble tank", "img_url": "/static/bubble2.jpg"},
             {"id": "point_ko_jeju_munisland", "type": "point", "name_ko": "제주도 문섬", name_en: "Mun island", "img_url": "https://api.cdn.visitjeju.net/photomng/imgpath/201907/31/07c1996d-4374-4e77-b353-300d01783718.jpg"},
         ];
       }, 500),

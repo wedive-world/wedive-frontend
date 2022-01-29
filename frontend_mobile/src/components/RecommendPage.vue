@@ -16,7 +16,7 @@
                     <div style="background: url(https://www.mallawatours.com/img/places/kalpitiya/2.jpg)" class="rounded-m wedive-photo-select p-0" v-on:click="select_recommed($event, 'scuba')">
                         <div class="card-overlay bg-gradient"></div>
                         <input class="form-check-input" type="checkbox" value="">
-                        <div class="exp"><span class="color-white">스쿠버다이빙</span></div>
+                        <div class="exp"><span class="color-white">스쿠바다이빙</span></div>
                     </div>
                 </div>
                 <div class="col-4 p-1">

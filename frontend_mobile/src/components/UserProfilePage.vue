@@ -75,7 +75,7 @@
                      aria-expanded="false" 
                      aria-controls="collapse1">
                     <div class="pt-1">
-                        <h4 class="pt-3 mb-2">스쿠버다이빙 정보</h4>
+                        <h4 class="pt-3 mb-2">스쿠바다이빙 정보</h4>
                     </div>
                     <div class="ms-auto me-4 pe-2 mt-2">
                         <div class="custom-control ios-switch">
@@ -87,9 +87,9 @@
                 <div class="collapse" id="collapse1">
                     <div class="input-style no-borders has-icon validate-field mb-3">
                         <i class="fas fa-address-card color-gray"></i>
-                        <label for="form11" class="color-highlight">스쿠버 라이센스</label>
+                        <label for="form11" class="color-highlight">스쿠바 라이센스</label>
                         <select id="form11" required v-model="userData.scubaLicenseType">
-                            <option value="" selected disabled>스쿠버 라이센스</option>
+                            <option value="" selected disabled>스쿠바 라이센스</option>
                             <option value="PADI">PADI</option>
                             <option value="NAUI">NAUI</option>
                             <option value="BSAC">BSAC</option>
@@ -138,9 +138,9 @@
 
                     <div class="input-style no-borders has-icon validate-field mb-3">
                         <i class="fas fa-layer-group color-gray"></i>
-                        <label for="form22" class="color-highlight">스쿠버 레벨</label>
+                        <label for="form22" class="color-highlight">스쿠바 레벨</label>
                         <select id="form22" required v-model="userData.scubaLicenseLevel">
-                            <option value="" selected disabled>스쿠버 레벨</option>
+                            <option value="" selected disabled>스쿠바 레벨</option>
                             <option value="1">오픈워터</option>
                             <option value="2">어드밴스드</option>
                             <option value="3">레스큐</option>

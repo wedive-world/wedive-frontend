@@ -8,12 +8,12 @@
                 <h2 class="cover_title color-white" style="">
                 프리다이빙<br/>
                 vs<br/>
-                스쿠버다이빙
+                스쿠바다이빙
                 </h2>
             </div>
         </div>
 
-        <p class="p-4 mb-0">&nbsp;&nbsp;형형색색의 물고기와 산호초, 내 옆을 지나가는 거북이, 만화 속에서만 보이던 니모 물고기까지 바다는 모두에게 환상을 가지고 있는 곳일지도 모른다. 최근 해양스포츠에 대한 관심이 높아지면서 스쿠버다이빙과 프리다이빙에 대한 관심 또한 날이 갈수록 증대되고 있다. 스쿠버다이빙과 프리다이빙의 차이점에 대해 알아보도록 하자.</p>
+        <p class="p-4 mb-0">&nbsp;&nbsp;형형색색의 물고기와 산호초, 내 옆을 지나가는 거북이, 만화 속에서만 보이던 니모 물고기까지 바다는 모두에게 환상을 가지고 있는 곳일지도 모른다. 최근 해양스포츠에 대한 관심이 높아지면서 스쿠바다이빙과 프리다이빙에 대한 관심 또한 날이 갈수록 증대되고 있다. 스쿠바다이빙과 프리다이빙의 차이점에 대해 알아보도록 하자.</p>
         
 
         <div class="p-4 mb-0">
@@ -36,20 +36,20 @@
             <img class="col-6 ps-1 pe-0" src="https://mblogthumb-phinf.pstatic.net/MjAxODA3MjBfNTYg/MDAxNTMyMDUxNzg3ODIz.DkExSZU43B-00RMmR9HSeL5LM3C1w7hSNXauemQm2mQg.MZFYESnPVlZxtEHii8G0V9ZmLgkaIoH5vFO84ET2WQsg.JPEG.zauin/I-5-migliori-tratti-di-mare-dove-fare-snorkeling-e-immersioni-in-Calabria.jpg?type=w800"/>
         </div>
         <div class="p-4 mb-0">
-            <p>&nbsp;&nbsp;마스크(물안경), 스노클(공기대롱), 슈트(잠수복), 핀(오리발) 그리고 웨이트(중량물) 물 위에 떠서 물속을 구경하다가 필요하면 물속으로 잠수해서 들어 가는 것이다. 스쿠버다이빙과 가장 큰 차이는 공기의 공급인데 스킨다이빙은 자신의 호흡만 사용한다. 해녀와 거의 같은 장비를 사용하고 움직임도 같다.</p>
+            <p>&nbsp;&nbsp;마스크(물안경), 스노클(공기대롱), 슈트(잠수복), 핀(오리발) 그리고 웨이트(중량물) 물 위에 떠서 물속을 구경하다가 필요하면 물속으로 잠수해서 들어 가는 것이다. 스쿠바다이빙과 가장 큰 차이는 공기의 공급인데 스킨다이빙은 자신의 호흡만 사용한다. 해녀와 거의 같은 장비를 사용하고 움직임도 같다.</p>
         </div>
 
 
         <div class="p-4 mb-0">
-            <h5 class="wedive-static-title">스쿠버다이빙</h5>
+            <h5 class="wedive-static-title">스쿠바다이빙</h5>
         </div>
         <div class="row mb-0">
             <img class="col-6 pe-1 ps-0" src="https://i1.wp.com/blog.padi.com/wp-content/uploads/2015/02/2divers-underwater.jpeg?resize=640%2C427&ssl=1"/>
             <img class="col-6 ps-1 pe-0" src="https://t3.daumcdn.net/thumb/R720x0/?fname=http://t1.daumcdn.net/brunch/service/user/44wc/image/ST2VdhqrwhuTL3eXTIZtjf8cD3o"/>
         </div>
         <div class="p-4 mb-0">
-            <p>&nbsp;&nbsp;스킨 장비에 물속에서 숨을 쉬기 위한 장비가 추가된다. 공기통, 레귤레이터 1단계, 2단계(주호흡기), 옥토퍼스(보조 호흡기) 등 가장 큰 차이점은 외부(신체의 외부)로부터 공기를 공급 받는다는 점이 특징이다. 기본적인 교육을 받아 자격증을 취득해야 활동이 가능하다. 스킨다이빙과 스쿠버 다이빙을 합해서 '스킨스쿠버'라 부른다.</p>
-            <a href="/point" class="color-highlight">대표 스쿠버 다이빙 포인트 보러가기 <i class="fas fa-chevron-right ms-1"></i></a>
+            <p>&nbsp;&nbsp;스킨 장비에 물속에서 숨을 쉬기 위한 장비가 추가된다. 공기통, 레귤레이터 1단계, 2단계(주호흡기), 옥토퍼스(보조 호흡기) 등 가장 큰 차이점은 외부(신체의 외부)로부터 공기를 공급 받는다는 점이 특징이다. 기본적인 교육을 받아 자격증을 취득해야 활동이 가능하다. 스킨다이빙과 스쿠바 다이빙을 합해서 '스킨스쿠바'라 부른다.</p>
+            <a href="/point" class="color-highlight">대표 스쿠바 다이빙 포인트 보러가기 <i class="fas fa-chevron-right ms-1"></i></a>
         </div>
 
 
@@ -61,7 +61,7 @@
             <img class="col-6 ps-1 pe-0" src="https://hips.hearstapps.com/amv-prod-gp.s3.amazonaws.com/gearpatrol/wp-content/uploads/2019/05/Everything-You-Need-to-Start-Free-Diving-Gear-Patrol-lead-full.jpg"/>
         </div>
         <div class="p-4 mb-0">
-            <p>&nbsp;&nbsp;프리다이빙은 스킨다이빙과 장비는 거의 같다. 다만 그 목적에서 차이가 나는데, 스킨다이빙과 스쿠버다이빙은 레저활동인 반면, 프리다이빙은 스포츠라는 점이다. 규칙이 있고 경쟁이 있는 기록도전 경기이다. 누가 더 깊이, 더 멀리, 더 오래를 다투는 세계 대회도 있는 엄연한 스포츠이다. (다만, 아직 올림픽 종목은 아니다.)</p>
+            <p>&nbsp;&nbsp;프리다이빙은 스킨다이빙과 장비는 거의 같다. 다만 그 목적에서 차이가 나는데, 스킨다이빙과 스쿠바다이빙은 레저활동인 반면, 프리다이빙은 스포츠라는 점이다. 규칙이 있고 경쟁이 있는 기록도전 경기이다. 누가 더 깊이, 더 멀리, 더 오래를 다투는 세계 대회도 있는 엄연한 스포츠이다. (다만, 아직 올림픽 종목은 아니다.)</p>
             <a href="/center_list" class="color-highlight">프리다이빙 가능 수영장 보러가기 <i class="fas fa-chevron-right ms-1"></i></a>
         </div>
 

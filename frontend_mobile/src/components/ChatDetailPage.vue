@@ -60,12 +60,19 @@
         <div :class="'' + (is_emoji?'':' hide')" style="max-height:300px;background: #303440;overflow-y: auto;">
             <div class="" id="tab-group-1">
                 <div class="tab-controls tabs-small" data-highlight="bg-highlight" style="height:36px;border-bottom:1px solid #88888840;display: -webkit-box;">
-                    <a href="#" data-active data-bs-toggle="collapse" data-bs-target="#tab-1ab" style="padding: 0px 24px;display:table-cell;"><img src="/static/images/emoji/basic/emoji.png" style="width:28px;margin-top:1px;"/></a>
-                    <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-2ab" style="padding: 0px 24px;display:table-cell;"><img src="/static/images/emoji/wedive/emoji.png" style="width:28px;margin-top:1px;"/></a>
-                    <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-3ab" style="padding: 0px 24px;display:table-cell;">123</a>
+                    <a href="#" data-active data-bs-toggle="collapse" data-bs-target="#tab-2ab" style="padding: 0px 24px;display:table-cell;"><img src="/static/images/emoji/wedive/emoji.png" style="width:28px;margin-top:1px;"/></a>
+                    <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-1ab" style="padding: 0px 24px;display:table-cell;"><img src="/static/images/emoji/basic/emoji.png" style="width:28px;margin-top:1px;"/></a>
                 </div>
 
-                <div data-bs-parent="#tab-group-1" class="collapse show row pe-3 ps-3 m-0" id="tab-1ab" style="max-height:264px;min-height:264px;overflow-y: auto;background: #303440;position:relative;;">
+                <div data-bs-parent="#tab-group-1" class="collapse show row p-3 m-0" id="tab-1ab" style="max-height:264px;min-height:264px;overflow-y: auto;background: #303440;position:relative;">
+                    <div v-on:click="is_emoji_clicked=true;emoji_url='wedive/01.gif';sendDisable=false;" class="col-3 ps-2 pe-2"><img src="/static/images/emoji/wedive/01.gif" width="100%" /></div>
+                    <div v-on:click="is_emoji_clicked=true;emoji_url='wedive/02.gif';sendDisable=false;" class="col-3 ps-2 pe-2"><img src="/static/images/emoji/wedive/02.gif" width="100%" /></div>
+                    <div v-on:click="is_emoji_clicked=true;emoji_url='wedive/03.gif';sendDisable=false;" class="col-3 ps-2 pe-2"><img src="/static/images/emoji/wedive/03.gif" width="100%" /></div>
+                    <div v-on:click="is_emoji_clicked=true;emoji_url='wedive/04.gif';sendDisable=false;" class="col-3 ps-2 pe-2"><img src="/static/images/emoji/wedive/04.gif" width="100%" /></div>
+                    <div v-on:click="is_emoji_clicked=true;emoji_url='wedive/05.gif';sendDisable=false;" class="col-3 ps-2 pe-2"><img src="/static/images/emoji/wedive/05.gif" width="100%" /></div>
+                    <div v-on:click="is_emoji_clicked=true;emoji_url='wedive/06.gif';sendDisable=false;" class="col-3 ps-2 pe-2"><img src="/static/images/emoji/wedive/06.gif" width="100%" /></div>
+                </div>
+                <div data-bs-parent="#tab-group-1" class="collapse row pe-3 ps-3 m-0" id="tab-2ab" style="max-height:264px;min-height:264px;overflow-y: auto;background: #303440;position:relative;;">
                     <div v-on:click="is_emoji_clicked=true;emoji_url='basic/01.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/01.gif" width="100%" /></div>
                     <div v-on:click="is_emoji_clicked=true;emoji_url='basic/02.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/02.gif" width="100%" /></div>
                     <div v-on:click="is_emoji_clicked=true;emoji_url='basic/03.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/03.gif" width="100%" /></div>
@@ -78,9 +85,6 @@
                     <div v-on:click="is_emoji_clicked=true;emoji_url='basic/10.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/10.gif" width="100%" /></div>
                     <div v-on:click="is_emoji_clicked=true;emoji_url='basic/11.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/11.gif" width="100%" /></div>
                     <div v-on:click="is_emoji_clicked=true;emoji_url='basic/12.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/12.gif" width="100%" /></div>
-                </div>
-                <div data-bs-parent="#tab-group-1" class="collapse row pe-3 ps-3 m-0" id="tab-2ab" style="max-height:264px;min-height:264px;overflow-y: auto;background: #303440;position:relative;">
-                    
                 </div>
                 <div data-bs-parent="#tab-group-1" class="collapse row pe-3 ps-3 m-0" id="tab-3ab" style="max-height:264px;min-height:264px;overflow-y: auto;background: #303440;position:relative;">
                     

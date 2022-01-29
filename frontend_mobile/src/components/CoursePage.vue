@@ -39,7 +39,7 @@
                 </div>
                 <div class="collapse" id="whatis">
                     <div class="list-group ps-3 txt_box">
-                        &nbsp;라이센스가 없어도 수영을 못해도 남녀노소 누구나 스쿠버다이빙을 즐기실 수 있는 체험 프로그램입니다. 사전교육과 더불어 전문강사와 1:1로 진행하기 때문에 안전하게 다이빙을 체험할 수 있습니다.
+                        &nbsp;라이센스가 없어도 수영을 못해도 남녀노소 누구나 스쿠바다이빙을 즐기실 수 있는 체험 프로그램입니다. 사전교육과 더불어 전문강사와 1:1로 진행하기 때문에 안전하게 다이빙을 체험할 수 있습니다.
                     </div>
                 </div>
                 
@@ -135,7 +135,7 @@
                                 <i class="fas fa-swimmer bg-pinterest shadow-l timeline-icon"></i>
                                 <div class="timeline-item-content rounded-sm">
                                     <h5 class="font-300 font-13">
-                                        장비 착용 후 수면에서 스쿠버교육
+                                        장비 착용 후 수면에서 스쿠바교육
                                     </h5>
                                     <img data-src="/static/images/diving_exp4.jpg" alt="img" src="/static/images/diving_exp4.jpg" class="preload-img rounded-s img-fluid">
                                 </div>
@@ -484,7 +484,7 @@
                             </div>
                         </div>
                         <div class="ms-4">
-                            <h4 class="font-13 mb-n1 font-400">스쿠버세트 (부력조절기, 호흡기)</h4>
+                            <h4 class="font-13 mb-n1 font-400">스쿠바세트 (부력조절기, 호흡기)</h4>
                         </div>
                         <div class="ms-auto">
                             <h3 class="font-15 mb-n1">₩30,000</h3>

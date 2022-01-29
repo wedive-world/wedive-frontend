@@ -190,7 +190,7 @@ export default {
             this.userData.scubaLevelShow = (s_lvl>0) ? scuba_level[s_lvl] : "";
             this.userData.freeLevelShow = (f_lvl>0) ? free_level[f_lvl] : "";
             if (s_lvl > f_lvl) {
-                this.userData.levelShow = (s_lvl>0) ? "스쿠버 " + scuba_level[s_lvl] : this.userData.levelShow;
+                this.userData.levelShow = (s_lvl>0) ? "스쿠바 " + scuba_level[s_lvl] : this.userData.levelShow;
             } else {
                 this.userData.levelShow = (f_lvl>0) ? "프리 " + free_level[f_lvl] : this.userData.levelShow;
             }

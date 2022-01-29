@@ -91,7 +91,7 @@
                             <div class="ms-3 me-3 mb-2">
                                 <div class="form-check interest-check">
                                     <input class="form-check-input" type="checkbox" value="" id="check_diving_scuba" v-model="check_diving_scuba">
-                                    <label class="form-check-label rounded-xl border-08" for="check_diving_scuba" style="border-radius: 17px 0 0 17px !important;">스쿠버 다이빙</label>
+                                    <label class="form-check-label rounded-xl border-08" for="check_diving_scuba" style="border-radius: 17px 0 0 17px !important;">스쿠바 다이빙</label>
                                     <i class="fas fa-ship color-white font-18"></i>
                                     <i class="fas fa-ship font-16 color-highlight"></i>
                                 </div>

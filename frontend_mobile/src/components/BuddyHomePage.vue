@@ -82,7 +82,7 @@
                         <div class="text-start align-self-center font-noto">
                             <h2 class="font-16 line-height-s mt-2 mb-0 font-500">가요가요 우리모두 가요</h2>
                             <p class="color-gray font-13 mb-0 ellipsis">09.22(수) ~ 09.25(토)</p>
-                            <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> 문섬 포인트 (스쿠버, 프리)</p>
+                            <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> 문섬 포인트 (스쿠바, 프리)</p>
                         </div>
                         <span class="chip chip-s bg-gray-light text-center font-400 wedive-chip color-black">
                             <i class="far fa-user"></i>
@@ -99,7 +99,7 @@
                         <div class="text-start align-self-center font-noto">
                             <h2 class="font-16 line-height-s mt-2 mb-0 font-500">제주도 가실분 급구</h2>
                             <p class="color-gray font-13 mb-0 ellipsis">09.20(월) ~ 09.25(토)</p>
-                            <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> 문섬포인트 (스쿠버)</p>
+                            <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> 문섬포인트 (스쿠바)</p>
                         </div>
                         <span class="chip chip-s bg-gray-light text-center font-400 wedive-chip color-black">
                             <i class="far fa-user"></i>

@@ -1015,7 +1015,7 @@ export default {
                 var my_s_lvl = parseInt((this.divingData.hostUser.scubaLicenseLevel)?this.divingData.hostUser.scubaLicenseLevel:"0");
                 var my_f_lvl = parseInt((this.divingData.hostUser.freeLicenseLevel)?this.divingData.hostUser.freeLicenseLevel:"0")
                 if (my_s_lvl > my_f_lvl) {
-                    this.divingData.hostUser.levelShow = (my_s_lvl>0) ? "스쿠버 " + scuba_level[my_s_lvl] : this.divingData.hostUser.levelShow;
+                    this.divingData.hostUser.levelShow = (my_s_lvl>0) ? "스쿠바 " + scuba_level[my_s_lvl] : this.divingData.hostUser.levelShow;
                 } else {
                     this.divingData.hostUser.levelShow = (my_f_lvl>0) ? "프리 " + free_level[my_f_lvl] : this.divingData.hostUser.levelShow;
                 }
@@ -1032,7 +1032,7 @@ export default {
                             var my_s_lvl = parseInt((participant.user.scubaLicenseLevel)?participant.user.scubaLicenseLevel:"0");
                             var my_f_lvl = parseInt((participant.user.freeLicenseLevel)?participant.user.freeLicenseLevel:"0")
                             if (my_s_lvl > my_f_lvl) {
-                                participant.levelShow = (my_s_lvl>0) ? "스쿠버 " + scuba_level[my_s_lvl] + " 다이버": participant.levelShow;
+                                participant.levelShow = (my_s_lvl>0) ? "스쿠바 " + scuba_level[my_s_lvl] + " 다이버": participant.levelShow;
                             } else {
                                 participant.levelShow = (my_f_lvl>0) ? "프리 " + free_level[my_f_lvl] + " 다이버": participant.levelShow;
                             }
@@ -1059,7 +1059,7 @@ export default {
             if (this.divingData.type) {
                 this.divingData.type.forEach(_type => {
                     if (cnt > 0) this.divingData.title += ", ";
-                    this.divingData.title += (_type == 'scubaDiving') ? '스쿠버' : '프리';
+                    this.divingData.title += (_type == 'scubaDiving') ? '스쿠바' : '프리';
                     cnt++;
                 });
             }

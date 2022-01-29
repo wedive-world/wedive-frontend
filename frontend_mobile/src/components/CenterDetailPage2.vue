@@ -30,7 +30,7 @@
         
         <div class="card card-style" style="margin-top:-60px; z-index:1">
             <div class="content text-center mt-4">
-                <h2 class="font-20 font-700 mb-0 mt-1">버블탱크 스쿠버다이빙</h2>
+                <h2 class="font-20 font-700 mb-0 mt-1">버블탱크 스쿠바다이빙</h2>
                 <p class="color-gray m-0">제주 남부에 위치한 PADI 5star 다이빙센터</p>
                 <div class="wedive-star-back">
                   <div class="wedive-star-front" style="width:76%">
@@ -99,7 +99,7 @@
         <div class="card card-style">
             <div class="content mb-0 mt-3" id="tab-group-1">
                 <div class="tab-controls tabs-small tabs-rounded" data-highlight="bg-highlight">
-                    <a href="#" data-active data-bs-toggle="collapse" data-bs-target="#tab-1ab">스쿠버 교육</a>
+                    <a href="#" data-active data-bs-toggle="collapse" data-bs-target="#tab-1ab">스쿠바 교육</a>
                     <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-2ab">펀 다이빙</a>
                     <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-3ab">체험 다이빙</a>
                 </div>
@@ -450,7 +450,7 @@
 
                         <div class="ico_equipt col-3">
                             <i class="ico_equipt1 icon-equiptment"></i>
-                            <p class="span_feature text-center">스킨스쿠버</p>
+                            <p class="span_feature text-center">스킨스쿠바</p>
                         </div>
                         <div class="ico_equipt col-3">
                             <i class="ico_equipt2 icon-equiptment"></i>
@@ -483,7 +483,7 @@
                         </div>
                         <div class="ico_equipt col-3">
                             <i class="ico_equipt9 icon-equiptment"></i>
-                            <p class="span_feature text-center">스쿠버 세트</p>
+                            <p class="span_feature text-center">스쿠바 세트</p>
                         </div>
                         <div class="ico_equipt col-3">
                             <i class="ico_equipt10 icon-equiptment"></i>
@@ -734,7 +734,7 @@
 
         <div class="card card-style">
             <div class="content mb-2" id="tab-group-index">
-                <h4 class="text-start pt-2 mb-2">스쿠버 지수</h4>
+                <h4 class="text-start pt-2 mb-2">스쿠바 지수</h4>
                 <div class="tab-controls tabs-small tabs-rounded" data-highlight="bg-highlight">
                     <a href="#" data-active data-bs-toggle="collapse" data-bs-target="#tab-realtime">실시간 지수</a>
                     <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-monthly">월별 수온</a>
@@ -748,7 +748,7 @@
                                 <th scope="col" class="color-white font-12">파고</th>
                                 <th scope="col" class="color-white font-12">유속</th>
                                 <th scope="col" class="color-white font-12">수온</th>
-                                <th scope="col" class="color-white font-12">스쿠버</th>
+                                <th scope="col" class="color-white font-12">스쿠바</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -906,7 +906,7 @@
                                             <a href="https://myplace-phinf.pstatic.net/20210827_62/16300643312513fe1S_JPEG/upload_07fc7f5449b8fecbeca86e655f0afce3.jpg" data-gallery="gallery-99" class="filtr-item" title="" data-category="99">
                                                 <img src="/static/images/empty.png" data-src="https://search.pstatic.net/common/?autoRotate=true&amp;quality=95&amp;type=f87_87&amp;src=https%3A%2F%2Fmyplace-phinf.pstatic.net%2F20210827_62%2F16300643312513fe1S_JPEG%2Fupload_07fc7f5449b8fecbeca86e655f0afce3.jpg" class="preload-img rounded-s shadow-m review_img" alt="방문자리뷰">
                                             </a>
-                                            제주도에서 스쿠버 다이빙 할 때 항상 방문하는 버블탱크 입니다.<br/>
+                                            제주도에서 스쿠바 다이빙 할 때 항상 방문하는 버블탱크 입니다.<br/>
                                             예약할 때 문의 드리면 친절하게 답변해 주십니다.<br/>
                                             다이빙 할 때도 신경 많이 써 주시고<br/>
                                             불편한 점 말씀 드리면 신속하게 해결해 주세요<br/>
@@ -1028,7 +1028,7 @@
                     </div>
                 </div>
                 <p class="review-text mt-3">
-                    제주도에서 스쿠버 다이빙 할 때 항상 방문하는 버블탱크 입니다.<br/>
+                    제주도에서 스쿠바 다이빙 할 때 항상 방문하는 버블탱크 입니다.<br/>
                     예약할 때 문의 드리면 친절하게 답변해 주십니다.<br/>
                     다이빙 할 때도 신경 많이 써 주시고<br/>
                     불편한 점 말씀 드리면 신속하게 해결해 주세요<br/>
@@ -1263,7 +1263,7 @@ export default {
         var marker_shop = new google.maps.Marker({
             map: this.map,
             position: {lat: 33.24134444312815, lng: 126.56484940647604},
-            label: {text: '버블탱크 스쿠버다이빙', color: 'white', className: 'marker-position'},
+            label: {text: '버블탱크 스쿠바다이빙', color: 'white', className: 'marker-position'},
             icon: new google.maps.MarkerImage('/static/images/ico_pin1.png',null, null, null, new google.maps.Size(38,43)),
         });
 

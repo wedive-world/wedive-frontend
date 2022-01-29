@@ -173,7 +173,7 @@ export default {
             } else {
                 diving.showAt = (startedAt.getMonth()+1) + "/" + startedAt.getDate() + " ~ " + (finishedAt.getMonth()+1) + "/" + finishedAt.getDate() + ""
             }
-            diving.typeShow = (diving.type.join().replace(/scubaDiving/gi,"스쿠버").replace(/freeDiving/gi,"프리").replace(/,/gi, "/"));
+            diving.typeShow = (diving.type.join().replace(/scubaDiving/gi,"스쿠바").replace(/freeDiving/gi,"프리").replace(/,/gi, "/"));
             
             if (startedAt.getFullYear() == finishedAt.getFullYear() && startedAt.getMonth() == finishedAt.getMonth() && startedAt.getDate() == finishedAt.getDate()) {
                 diving.showFinishedAt = true;

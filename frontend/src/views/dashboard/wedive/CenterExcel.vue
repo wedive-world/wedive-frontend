@@ -222,7 +222,7 @@ const columnDefinition = [
     { sortable: true, filter: true, field: 'geoAddress', headerName: '주소', editable: true },
     { sortable: true, filter: true, field: 'webPageUrl', headerName: '홈페이지', editable: true },
     { sortable: true, filter: true, field: 'enteranceLevelFree', headerName: '입장레벨 (프리)', editable: true },
-    { sortable: true, filter: true, field: 'enteranceLevelScuba', headerName: '입장레벨 (스쿠버)', editable: true },
+    { sortable: true, filter: true, field: 'enteranceLevelScuba', headerName: '입장레벨 (스쿠바)', editable: true },
 
     { sortable: true, filter: true, field: 'wediveComments', headerName: '위다이브 코멘트', editable: true },
     { sortable: true, filter: true, field: 'aliases', headerName: '동의어 (별명)', editable: true },

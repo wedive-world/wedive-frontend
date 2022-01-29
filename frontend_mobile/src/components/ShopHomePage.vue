@@ -84,7 +84,7 @@
         <div class="tab-controls tabs-small tabs-rounded" data-highlight="bg-highlight">
             <a href="#" data-active data-bs-toggle="collapse" data-bs-target="#tab-1" style="border-radius:0;padding:3px 0px;">투데이</a>
             <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-2" style="border-radius:0;padding:3px 0px;">프리다이빙</a>
-            <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-3" style="border-radius:0;padding:3px 0px;">스쿠버다이빙</a>
+            <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-3" style="border-radius:0;padding:3px 0px;">스쿠바다이빙</a>
             <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-4" style="border-radius:0;padding:3px 0px;">핫딜</a>
         </div>
         <div class="splide topic-slider slider-no-arrows slider-no-dots " id="topic-slider-1">

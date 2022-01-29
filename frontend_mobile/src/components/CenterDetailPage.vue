@@ -240,7 +240,7 @@
                         <div>
                             <table class="table table-borderless text-center rounded-3 shadow-sm mt-1 font-noto" style="border-collapse: collapse;outline: 1px solid rgba(0, 0, 0, 0.08);overflow: hidden;">
                                 <tr class="border-bottom">
-                                    <th class="pt-2 pb-2 font-400" style="background: rgba(196,187,171,.2);" width="96">스쿠버 다이빙</th>
+                                    <th class="pt-2 pb-2 font-400" style="background: rgba(196,187,171,.2);" width="96">스쿠바 다이빙</th>
                                     <td v-if="centerData.divingType.includes('scubaDiving')" class="text-start p-2">{{ enteranceScuba[centerData.enteranceLevelScuba] }}</td>
                                     <td v-else class="text-start p-2" style="color:#cd5b3c;">불가</td>
                                 </tr>
@@ -421,7 +421,7 @@
 
         <!--<div class="card card-style">
             <div class="content mb-2" id="tab-group-index">
-                <h4 class="text-start pt-2 mb-2">스쿠버 지수</h4>
+                <h4 class="text-start pt-2 mb-2">스쿠바 지수</h4>
                 <div class="tab-controls tabs-small tabs-rounded" data-highlight="bg-highlight">
                     <a href="#" data-active data-bs-toggle="collapse" data-bs-target="#tab-realtime">실시간 지수</a>
                     <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-monthly">월별 수온</a>
@@ -435,7 +435,7 @@
                                 <th scope="col" class="color-white font-12">파고</th>
                                 <th scope="col" class="color-white font-12">유속</th>
                                 <th scope="col" class="color-white font-12">수온</th>
-                                <th scope="col" class="color-white font-12">스쿠버</th>
+                                <th scope="col" class="color-white font-12">스쿠바</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -684,10 +684,10 @@
                                     </div>
                                 </div>
                                 <div class="mt-0 px-3 py-3">
-                                    <h4 class="color-black font-18 font-600">이진주 스쿠버 강사</h4>
+                                    <h4 class="color-black font-18 font-600">이진주 스쿠바 강사</h4>
                                     <div class="d-flex">
                                         <div class="align-self-center" style="max-width: 100%;">
-                                            <p class="font-12 opacity-70 font-600 color-black nearby_desc mb-0" style="max-width: 100%;">PADI 스쿠버다이빙 강사<br/>2018 대한민국 아마추어 스쿠버 대상</p>
+                                            <p class="font-12 opacity-70 font-600 color-black nearby_desc mb-0" style="max-width: 100%;">PADI 스쿠바다이빙 강사<br/>2018 대한민국 아마추어 스쿠바 대상</p>
                                         </div>
                                     </div>
                                 </div>
@@ -793,7 +793,7 @@
                     </div>
                 </div>
                 <p class="review-text mt-3">
-                    제주도에서 스쿠버 다이빙 할 때 항상 방문하는 버블탱크 입니다.<br/>
+                    제주도에서 스쿠바 다이빙 할 때 항상 방문하는 버블탱크 입니다.<br/>
                     예약할 때 문의 드리면 친절하게 답변해 주십니다.<br/>
                     다이빙 할 때도 신경 많이 써 주시고<br/>
                     불편한 점 말씀 드리면 신속하게 해결해 주세요<br/>
@@ -1649,7 +1649,7 @@ export default {
         map: null,
         marker_list: [],
         centerData: {},
-        feature_list: ["외국어가능", "샤워가능", "룸서비스", "늦은 퇴실", "컨시어지", "주차", "주방", "남녀화장실", "24시업무", "비지니스", "장애인편의", "세탁서비스", "금연실", "아이돌봄", "반려동물", "WIFI", "공항셔틀", "피트니스", "도미토리", "감압챔버", "픽업", "", "전용보트", "아쿠아리움", "나이트록스", "DPV", "무료렌탈", "강의실", "수건제공", "유료샤워", "딥수영장", "장비렌탈불가", "스튜디오", "국제규격"],
+        feature_list: ["외국어가능", "샤워가능", "룸서비스", "늦은 퇴실", "컨시어지", "주차", "주방", "남녀화장실", "24시업무", "비지니스", "장애인편의", "세탁서비스", "금연실", "아이돌봄", "반려동물", "WIFI", "공항셔틀", "피트니스", "도미토리", "감압챔버", "픽업", "일부장비", "전용보트", "아쿠아리움", "나이트록스", "DPV", "무료렌탈", "강의실", "수건제공", "유료샤워", "딥수영장", "장비렌탈불가", "스튜디오", "국제규격"],
         pay_list: ["현금", "VISA", "MasterCard", "UnionPay", "JCB", "American Express", "Discover card", "PAYCO", "Kakao Pay", "Naver Pay"],
         equipt_list: ["마스크", "레귤레이터", "다이버 PC", "다이버 워치", "나침반", "수중 스쿠터", "산소탱크", "핀", "구명조끼", "나이프", "스노클링", "부츠", "잠수복 상의", "잠수복 하의", "라이트", "스쿠버 세트", "카메라", "수심계", , "게이지", "잠수복", , "풀세트", "유아장비"],
         rentalOptions: ["스킨스쿠바 풀세트", "스킨 풀세트", "마스크", "스노클", "잠수복", "오리발", "부츠", "장갑", "부츠&장갑", "웨이트&벨트", "웨이트", "스쿠버 세트", "BCD", "호흡기", "보조호흡기", "SMB", "공기통", "나이트록스", "라이트", "컴퓨터", "카메라", "DPV", "조류걸이", "프리 풀세트", "프리 핀", "프리 마스크", "프리 스노클", "프리 잠수복", "프리벨트", "프리웨이트", "바텀웨이트", "랜야드", "부이", "로프", "부이&로프", "고정부이", "사이드마운트", "더블탱크", "아르곤탱크", "재호흡기", "공기충전", "옥토퍼스", "마스크&스노클", "후드", "나이프", "랜턴", "텍렌턴", "잠수복(숏)", "잠수복(원피스)", "프리 마스크&스노클", "모노핀", "탐침봉", "나침반", "다이빙풀", "머메이드"],

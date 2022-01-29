@@ -173,6 +173,7 @@ const { getAllInterests, getInterestTypes, upsertInterest, deleteInterestById } 
 
 
 const columnDefinition = [
+    { sortable: true, filter: false, field: '_id', headerName: 'id', editable: false },
     { sortable: true, filter: true, field: 'title', headerName: '관심내용', editable: true },
     { sortable: true, filter: true, field: 'type', headerName: '타입', editable: true},
     { sortable: true, filter: true, field: 'aliases_show', headerName: '동의어', editable: true },

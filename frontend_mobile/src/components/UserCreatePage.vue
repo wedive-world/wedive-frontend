@@ -130,15 +130,15 @@
                         <div class="content mt-1">
                             <div class="font-noto font-400 mt-3 mb-2 d-flex" style="background: #e7e7e7;color:#5f6368;padding: 10px 16px;">
                                 <div style="background-color:#fff;display: inline-block;align-self: flex-start;border-radius: 4px;height: 32px;flex-shrink: 0;margin: 7px 16px 0 0;width: 32px;padding: 7px;"><svg style="vertical-align: baseline;fill: currentColor;"width="18" height="18" viewBox="0 0 24 24" focusable="false" class="HLbGM NMm5M"><path d="M11 7h2v2h-2zm0 4h2v6h-2z"></path><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"></path></svg></div>
-                                <div style="display: inline-block;"><font class="color-primary font-14">{{nickname}}</font>님, <font class="color-shopping font-14">스쿠버 다이빙</font> 해보셨나요?<br/>정보가 없으면 다음을 클릭해주세요.</div>
+                                <div style="display: inline-block;"><font class="color-primary font-14">{{nickname}}</font>님, <font class="color-shopping font-14">스쿠바 다이빙</font> 해보셨나요?<br/>정보가 없으면 다음을 클릭해주세요.</div>
                             </div>
 
                             <div class="mt-3">
                                 <div class="input-style no-borders has-icon validate-field mb-3 mt-2">
                                     <i class="fas fa-address-card color-gray" style="margin-left:6px;"></i>
-                                    <label for="form11" class="color-highlight bg-e7e7e7">스쿠버 라이센스</label>
+                                    <label for="form11" class="color-highlight bg-e7e7e7">스쿠바 라이센스</label>
                                     <select id="form11" required class="font-noto" v-model="scuba_license">
-                                        <option value="" selected disabled>스쿠버 라이센스</option>
+                                        <option value="" selected disabled>스쿠바 라이센스</option>
                                         <option value="PADI">PADI</option>
                                         <option value="NAUI">NAUI</option>
                                         <option value="BSAC">BSAC</option>
@@ -186,9 +186,9 @@
 
                                 <div class="input-style no-borders has-icon validate-field mb-3">
                                     <i class="fas fa-layer-group color-gray" style="margin-left:6px;"></i>
-                                    <label for="form22" class="color-highlight bg-e7e7e7">스쿠버 레벨</label>
+                                    <label for="form22" class="color-highlight bg-e7e7e7">스쿠바 레벨</label>
                                     <select id="form22" required class="font-noto" v-model="scuba_level">
-                                        <option value="" selected disabled>스쿠버 레벨</option>
+                                        <option value="" selected disabled>스쿠바 레벨</option>
                                         <option value="1">오픈워터</option>
                                         <option value="2">어드밴스드</option>
                                         <option value="3">레스큐</option>

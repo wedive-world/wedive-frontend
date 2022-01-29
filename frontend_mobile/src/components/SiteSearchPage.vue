@@ -77,7 +77,7 @@
                     </div>
                     <div class="form-check interest-check">
                         <input class="form-check-input" type="checkbox" value="" id="check_type1" v-model="check_type1">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_type1">스쿠버 다이빙</label>
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_type1">스쿠바 다이빙</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
                         <i class="fas fas fa-mask font-16 color-highlight"></i>
                     </div>
@@ -167,68 +167,66 @@
                     </div>
                     <div class="form-check interest-check">
                         <input class="form-check-input" type="checkbox" value="" id="check_env2" v-model="check_env2">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_env2">초대형 난파선</label>
-                        <i class="fa fa-check-circle color-white font-18"></i>
-                        <i class="fas fa-ship font-17 color-blue-dark"></i>
-                    </div>
-                    <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_env3" v-model="check_env3">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_env3">마크로</label>
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_env2">마크로</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
                         <i class="fas fa-fish font-17 color-gray-dark"></i>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_env4" v-model="check_env4">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_env4">대물</label>
+                        <input class="form-check-input" type="checkbox" value="" id="check_env3" v-model="check_env3">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_env3">대물</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
                         <i class="fas fa-fish font-17 color-blue-dark"></i>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_env5" v-model="check_env5">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_env5">가두리 양식장</label>
+                        <input class="form-check-input" type="checkbox" value="" id="check_env4" v-model="check_env4">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_env4">이색 포인트</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
                         <i class="fab fa-buffer font-17 color-gray-dark"></i>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_env6" v-model="check_env6">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_env6">수중 조형물</label>
+                        <input class="form-check-input" type="checkbox" value="" id="check_env5" v-model="check_env5">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_env5">시력=시야</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
-                        <i class="fab fa-sourcetree font-17 color-blue-light"></i>
-                    </div>
-
-
-                    <div>
-                        <label for="filter_type" class="color-highlight font-700">다이빙 종류</label>
+                        <i class="fas fa-eye font-17 color-blue-light"></i>
                     </div>
                     <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_point1" v-model="check_point1">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_point1">동굴다이빙</label>
+                        <input class="form-check-input" type="checkbox" value="" id="check_env6" v-model="check_env6">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_env6">월드클래스</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
-                        <i class="fas fa-archway font-17 color-magenta-dark"></i>
+                        <i class="fas fa-medal font-17 color-teal-dark"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_env7" v-model="check_env7">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_env7">듀공,물개,거북이</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-fish font-17 color-red-dark"></i>
+                    </div>
+
+
+                    
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_point1" v-model="check_point1">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_point1">리브어보드</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fa-anchor font-17 color-magenta-dark"></i>
                     </div>
                     <div class="form-check interest-check">
                         <input class="form-check-input" type="checkbox" value="" id="check_point2" v-model="check_point2">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_point2">월다이빙</label>
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_point2">해저지형탐험</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
-                        <i class="fas fa-window-restore font-17 color-green-dark"></i>
+                        <i class="fas fa-mountain font-17 color-green-dark"></i>
                     </div>
                     <div class="form-check interest-check">
                         <input class="form-check-input" type="checkbox" value="" id="check_point3" v-model="check_point3">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_point3">해루질</label>
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_point3">프리다이버 집결지</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
-                        <i class="fas fa-slash font-17 color-yellow-dark"></i>
+                        <i class="fas fa-map-marker font-17 color-yellow-dark"></i>
                     </div>
                     <div class="form-check interest-check">
                         <input class="form-check-input" type="checkbox" value="" id="check_point4" v-model="check_point4">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_point4">케이지다이빙</label>
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_point4">드리프트 다이빙</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
-                        <i class="fas fa-align-center font-17 color-instagram"></i>
-                    </div>
-                    <div class="form-check interest-check">
-                        <input class="form-check-input" type="checkbox" value="" id="check_point5" v-model="check_point5">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_point5">나이트록스</label>
-                        <i class="fa fa-check-circle color-white font-18"></i>
-                        <i class="fas fa-cube font-17 color-dark-dark"></i>
+                        <i class="fas fa-water font-17 color-instagram"></i>
                     </div>
 
                 </div>
@@ -295,22 +293,26 @@ export default {
         }
 
         // 다이빙 환경
-        var interest_env_list = ["617806f5f7c3a048b4704cde","61990d34ae1cc12e02c3cd0e","6178f01cf7c3a048b4706cc6","61a2fefa098b3785ef439cb3","61780725f7c3a048b4704ce2","619a6aa77b2668ca7778e722"];
-        for (var i=1; i<7; i++) {
+        var interest_env_list = {"1": ["61990d68ae1cc12e02c3cd11","61990d34ae1cc12e02c3cd0e"], "2": ["61dd64859815533e8906ba88"], "3": ["61dd64a69815533e8906ba94","61a2fefa098b3785ef439cb3","61d4398c85923732bbf43f34","61d539d74d981dc13e870736"], "4": ["61ac9de8eac3ebfb7ac9f95e","61d539b44d981dc13e870733","61780725f7c3a048b4704ce2","61780715f7c3a048b4704ce0","619a6aa77b2668ca7778e722","619a6abb7b2668ca7778e725","6176377ef7c3a048b4704785"], "5": ["61dd64b59815533e8906ba97"], "6": ["61abfc1ceac3ebfb7ac9f84e","61abfbfeeac3ebfb7ac9f84b"], "7": ["61763aa7f7c3a048b47047ac","61763a77f7c3a048b47047a8","6198fdf7ae1cc12e02c3cc7d"]};
+        for (var i=1; i<8; i++) {
             if (this["check_env"+i] == true) {
                 if (searchParams.interests == null)
                     searchParams.interests = [];
-                searchParams.interests.push(interest_env_list[(i-1)]);
+                for (var j=0; j<interest_env_list[(i+"")].length; j++) {
+                    searchParams.interests.push(interest_env_list[(i+"")][j]);
+                }
             }
         }
 
         // 다이빙 종류
-        var interest_type_list = ["61780259f7c3a048b4704a82","6176374df7c3a048b4704782","61780278f7c3a048b4704a85","61780715f7c3a048b4704ce0","6198ff69ae1cc12e02c3cca3"];
-        for (var i=1; i<6; i++) {
+        var interest_type_list = {"1": ["6174da75a60639819c3e6ae5"], "2": ["61f0f11f260f98aa0c452ae2","6198fd3eae1cc12e02c3cc75","6178021ff7c3a048b4704a7a","61780228f7c3a048b4704a7c"], "3": ["61dd659a9815533e8906baa2"], "4": ["61763794f7c3a048b4704789"]}
+        for (var i=1; i<5; i++) {
             if (this["check_point"+i] == true) {
                 if (searchParams.interests == null)
                     searchParams.interests = [];
-                searchParams.interests.push(interest_type_list[(i-1)]);
+                for (var j=0; j<interest_type_list[(i+"")].length; j++) {
+                    searchParams.interests.push(interest_type_list[(i+"")][j]);
+                }
             }
         }
 
@@ -459,11 +461,11 @@ export default {
         check_env4: false,
         check_env5: false,
         check_env6: false,
+        check_env7: false,
         check_point1: false,
         check_point2: false,
         check_point3: false,
         check_point4: false,
-        check_point5: false,
     }
   }
 

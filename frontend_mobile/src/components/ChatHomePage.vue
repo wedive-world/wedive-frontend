@@ -299,7 +299,7 @@ export default {
         var my_s_lvl = parseInt((scubaLicenseLevel)?scubaLicenseLevel:"0");
         var my_f_lvl = parseInt((freeLicenseLevel)?freeLicenseLevel:"0")
         if (my_s_lvl > my_f_lvl) {
-            levelShow = (my_s_lvl>0) ? "스쿠버 " + scuba_level[my_s_lvl] : levelShow;
+            levelShow = (my_s_lvl>0) ? "스쿠바 " + scuba_level[my_s_lvl] : levelShow;
         } else {
             levelShow = (my_f_lvl>0) ? "프리 " + free_level[my_f_lvl] : levelShow;
         }

@@ -352,7 +352,7 @@
           
 
           <hr>
-          <h4 class="mt-3">스쿠버 지수</h4>
+          <h4 class="mt-3">스쿠바 지수</h4>
 
           <!-- Scuba Index -->
           <validation-provider

@@ -56,7 +56,7 @@
 
         <div v-if="userData.scubaLicenseType" class="card mb-0 border-bottom" style="z-index:1;">
             <div class="content pb-0">
-                <h2 class="font-15 font-700 mb-1">스쿠버다이빙</h2>
+                <h2 class="font-15 font-700 mb-1">스쿠바다이빙</h2>
                 <div class="evaluation p-3" style="position: relative;">
                     <img class="inline-block ms-1 me-1" src="/static/images/assets/award1.png" height="80" style="vertical-align: top;"/>
                     <div class="inline-block">
@@ -94,7 +94,7 @@
                 <h2 class="font-15 font-700 mb-0">게스트 참여횟수 20회</h2>
             </div>
         </div>
-        
+        <svg class="map-wrapper" id="map-wrapper" height="370" width="100%"></svg>
         
     </div>
 
@@ -132,7 +132,10 @@
 </template>
 <script>
 import StarRating from 'vue-star-rating'
+import { select, json, geoPath, geoNaturalEarth1, zoom, geoMercator } from 'd3';
+import { feature } from 'topojson';
 const axios = require("axios")
+
 
 export default {
   name: 'HelloWorld',
@@ -233,7 +236,7 @@ export default {
     if (this.$route.query.footer && this.$route.query.footer == 'hide') {
         $("#footer-bar").hide();
     }
-
+    this.drawMap();
   },
   components: {
     StarRating
@@ -251,9 +254,48 @@ export default {
         like_img: 'ico_heart',
         subscribe_img: 'ico_subscribe',
         user_id: localStorage.userId,
+
+        
     }
   },
   methods: {
+      async drawMap() {
+        const divWidth = document.getElementById("map-wrapper").clientWidth;
+        const svg = select('.map-wrapper').append('svg').attr('width', divWidth).attr('height', 370);
+        const g = svg.append('g');
+        const projection = geoMercator().center([0,20]).scale(60).translate([ divWidth/2, 370/2 ])
+        const pathGenerator = geoPath().projection(projection);
+
+        var geo_data = await axios.get('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json');
+        //var geo_data = await axios.get('https://unpkg.com/visionscarto-world-atlas/world/50m_land.geojson');
+        var data = geo_data.data;
+        {
+            // Convert topoJSON to geoJSON
+            const countries = feature(data, data.objects.countries);
+
+            // Join data and draw svg path
+            svg
+            .selectAll('path')
+            .data(countries.features)
+            .enter()
+            .append('path')
+            .attr('d', pathGenerator)
+            .attr("fill", "#b8b8b8")
+            .style("stroke", "none")
+            .style("opacity", .3)
+            .append('title') // Add a tooltop
+            .text(d => d.properties.name);
+        }
+        // Panning and zooming
+        svg.call(
+            zoom().on('zoom', ({ transform }) => {
+                console.log(transform)
+                g.attr('transform', transform);
+            })
+        );
+        
+
+      },
       async sendDirectMessage() {
         if (localStorage.idToken) {
             const message = this.dm_text;
@@ -365,7 +407,7 @@ export default {
             this.userData.scubaLevelShow = (s_lvl>0) ? scuba_level[s_lvl] : "";
             this.userData.freeLevelShow = (f_lvl>0) ? free_level[f_lvl] : "";
             if (s_lvl > f_lvl) {
-                this.userData.levelShow = (s_lvl>0) ? "스쿠버 " + scuba_level[s_lvl] : this.userData.levelShow;
+                this.userData.levelShow = (s_lvl>0) ? "스쿠바 " + scuba_level[s_lvl] : this.userData.levelShow;
             } else {
                 this.userData.levelShow = (f_lvl>0) ? "프리 " + free_level[f_lvl] : this.userData.levelShow;
             }
@@ -523,4 +565,12 @@ export default {
 .evaluation {background-color: rgba(196,187,171,.2);justify-content: space-around;border-radius: 5px;padding:10px;}
 .wedive-textarea {min-height: 130px;border: 2px solid #e9e9e9;background: #f5f5f5;padding-left: 10px;padding-right: 10px;width:100%;}
 .wedive-deep:before {content: '▼ 첫 수심 18m';position: absolute;margin-top: -20px;margin-left: 16%;color:#b4bcc8;}
+
+.state {
+  fill: #ccc;
+  stroke: #fff;
+}
+.state:hover {
+  fill: steelblue;
+}
 </style>

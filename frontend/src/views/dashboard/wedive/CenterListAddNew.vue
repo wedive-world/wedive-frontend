@@ -424,14 +424,14 @@
 
           <b-row>
             <b-col md="6" class="">
-              <!-- 스쿠버 최소 입장 레벨 -->
+              <!-- 스쿠바 최소 입장 레벨 -->
               <validation-provider
                 #default="validationContext"
                 name="enteranceLevelScuba"
                 rules="required"
               >
                 <b-form-group
-                  label="최소 입장레벨 (스쿠버)"
+                  label="최소 입장레벨 (스쿠바)"
                   label-for="enteranceLevelScuba"
                   :state="getValidationState(validationContext)"
                 >
@@ -608,7 +608,7 @@
                             :id="'tickets_unitName_'+index"
                             type="text"
                             v-model="item.unitName"
-                            placeholder="주말 (스쿠버)"
+                            placeholder="주말 (스쿠바)"
                         />
                       </b-form-group>
                     </b-col>
@@ -1277,7 +1277,7 @@
           
 
           <hr>
-          <h4 class="mt-3">스쿠버 지수</h4>
+          <h4 class="mt-3">스쿠바 지수</h4>
 
           <!-- Scuba Index -->
           <validation-provider
