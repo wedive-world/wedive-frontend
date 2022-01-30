@@ -20,7 +20,7 @@
             <div class="splide__track">
                 <div class="splide__list">
 
-                    <div class="splide__slide">
+                    <div v-on:click="concierge" class="splide__slide">
                         <div class="card card-style" style="box-shadow: none;background-image: linear-gradient(45deg, #35415f, #181818 70%);">
                             <div class="content mb-0 mt-3" style="min-height: 80px;">
                                 <div class="row mb-0" style="position: relative;min-height: 80px;">
@@ -276,6 +276,7 @@
   </div>
 </template>
 <script>
+const axios = require("axios")
 
 export default {
   name: 'HelloWorld',
@@ -332,6 +333,71 @@ export default {
           this.$root.$children[0].$refs.loginBottomSheet.open();
         } else if (localStorage.hasOwnProperty("nickName") == false || localStorage.nickName == null) {
           location.href='/user_create';
+        }
+      },
+      async concierge() {
+        if (localStorage.idToken) {
+            var result = await axios({
+                url: 'https://chat.wedives.com/graphql',
+                method: 'post',
+                headers: {
+                    countrycode: 'ko',
+                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                },
+                data: {
+                    query: `
+                        query {
+                            getJoinedRoomList {
+                                _id
+                                type
+                                name
+                                lastMessageAt
+                                numOfmessages
+                                unread
+                                createdAt
+                                chatUsers {
+                                _id
+                                name
+                                avatarOrigin
+                                }
+                                usersCount
+                                owner {
+                                name
+                                avatarOrigin
+                                }
+                                lastChatMessage {
+                                text
+                                author {
+                                    name
+                                }
+                                createdAt
+                                }
+                            }
+                        }
+                    `
+                }
+            });
+            
+            var concierge_uid = "RuOiMt9YUTbRUJQTrXv4cWMEimr2";
+            // 개설된 채팅이 있는지 확인한다.
+            var go_flag = false;
+            result.data.data.getJoinedRoomList.forEach(room => {
+                if (room.type == 'direct' && room.chatUsers.filter(u=>u._id == concierge_uid).length > 0) {
+                    go_flag = true;
+                    location.href = '/chat/' + room._id;
+                }
+            })
+            if (go_flag == false) {
+                // 없는경우, 더미로 하나 만든다.
+                localStorage.chatType = 'direct';
+                var chatUids = new Array();
+                chatUids.push(concierge_uid);
+                localStorage.chatUids = JSON.stringify(chatUids);
+                localStorage.chatName = "WeDive";
+                location.href = '/chat'
+            }
+        } else { // 로그인
+            this.login();
         }
       },
   }

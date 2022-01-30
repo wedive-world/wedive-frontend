@@ -14,7 +14,20 @@
     <div v-else class="card card-style ms-0 me-0 rounded-0 mb-0" style="min-height:calc(100vh - 101px)">
         <div class="content mt-0 mb-0">
             <a v-for="chat in getJoinedRoomList" :href="'/chat/'+chat._id" class="d-block border-bottom pt-2" style="position:relative;">
-                <div v-if="chat.usersCount == 1" class="p-relative d-inline-block w-60 mb-2">
+                <div v-if="chat.usersCount == 0 && chat.owner" class="p-relative d-inline-block w-60 mb-2">
+                    <div class="user-img">
+                        <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                            <defs>
+                            <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                            <clipPath id="clipSquircle">
+                                <use xlink:href="#shapeSquircle"/>
+                            </clipPath>
+                            </defs>
+                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(chat.owner.avatarOrigin)?chat.owner.avatarOrigin:'/static/images/assets/chat.gif'"/>
+                        </svg>
+                    </div>
+                </div>
+                <div v-else-if="chat.usersCount == 1" class="p-relative d-inline-block w-60 mb-2">
                     <div v-for="user in chat.chatUsers" class="user-img">
                         <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
                             <defs>
@@ -257,6 +270,7 @@ export default {
                 }
                 usersCount
                 owner {
+                _id
                 name
                 avatarOrigin
                 }
@@ -311,6 +325,9 @@ export default {
     enableNext2(ev) {
         if (this.chatSelectedList.filter(li => li._id == ev._id).length == 0)
             this.chatSelectedList.push(ev);
+        setTimeout(function() {
+            $("#search_typeahead > .input-group > input").val('')
+        }, 300);
     },
     removeChatSelected(user) {
         for (var i=0; i<this.chatSelectedList.length; i++) {

@@ -81,7 +81,7 @@
                 <div class="col-6 p-0 text-end">
                     <div>
                         <div class="inline-block text-start" style="width: 60px;">
-                            <div class="font-10 color-gray mt-n1">매너수심</div>
+                            <div class="font-10 color-gray mt-n1" id="maner_deep">매너수심</div>
                             <div class="font-noto font-600 mt-n2" style="color:#cd5b3c;">18m</div>
                         </div>
                         <img class="inline-block me-2" src="/static/images/assets/heart.png" width="30" style="vertical-align: top;"/>
@@ -127,12 +127,15 @@
                 <h2 class="font-18 font-700 mb-2">참여인원 ({{ (divingData.participants.filter(member=> member.status == 'joined')) ? (divingData.participants.filter(member=> member.status == 'joined').length+1) : '' }})</h2>
                 
                 <div class="">
-                    <div class="owner border-bottom pt-2 pb-2" v-on:click="goUserPage(divingData.hostUser)" style="position: relative;">
-                        <img class="inline-block circular_image" :src="(divingData.hostUser && divingData.hostUser.profileImages && divingData.hostUser.profileImages.length>0 && divingData.hostUser.profileImages[0].thumbnailUrl) ? divingData.hostUser.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty_'+((divingData.hostUser&&divingData.hostUser.gender)?divingData.hostUser.gender:'m')+'.png'" width="50" style="vertical-align: top;"/>
-                        <div class="inline-block font-noto ms-3">
-                            <h5 class="mb-0 font-500 font-15">{{ (divingData.hostUser!=null&&divingData.hostUser.nickName!=null) ? divingData.hostUser.nickName : ((divingData.hostUser.name!=null) ? divingData.hostUser.name : '비공개') }}</h5>
-                            <p class="mb-0 font-14 color-gray">{{ (divingData.hostUser && divingData.hostUser.levelShow) ? divingData.hostUser.levelShow : '' }}</p>
+                    <div class="owner border-bottom pt-2 pb-2 position-relative" style="position: relative;">
+                        <div v-on:click="goUserPage(divingData.hostUser)">
+                            <img class="inline-block circular_image" :src="(divingData.hostUser && divingData.hostUser.profileImages && divingData.hostUser.profileImages.length>0 && divingData.hostUser.profileImages[0].thumbnailUrl) ? divingData.hostUser.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty_'+((divingData.hostUser&&divingData.hostUser.gender)?divingData.hostUser.gender:'m')+'.png'" width="50" style="vertical-align: top;"/>
+                            <div class="inline-block font-noto ms-3">
+                                <h5 class="mb-0 font-500 font-15">{{ (divingData.hostUser!=null&&divingData.hostUser.nickName!=null) ? divingData.hostUser.nickName : ((divingData.hostUser.name!=null) ? divingData.hostUser.name : '비공개') }}</h5>
+                                <p class="mb-0 font-14 color-gray">{{ (divingData.hostUser && divingData.hostUser.levelShow) ? divingData.hostUser.levelShow : '' }}</p>
+                            </div>
                         </div>
+                        <span id="owner_chat" v-if="divingData.hostUser!=null" v-on:click="chatUser(divingData.hostUser)" class="chip chip-s bg-gray-light text-center font-400 wedive-chip">채팅</span>
                     </div>
                     <div class="border-bottom pt-2 pb-2 position-relative" v-for="participant in divingData.participants.filter(member=> member.status == 'joined')">
                         <div v-on:click="goUserPage(participant.user)">
@@ -142,7 +145,7 @@
                                 <p class="mb-0 font-14 color-gray">{{ (participant.levelShow) ? participant.levelShow : '' }}</p>
                             </div>
                         </div>
-                        <span v-if="participant.user!=null" v-on:click="chatUser(participant.user)" data-menu="menu-dm" class="chip chip-s bg-gray-light text-center font-400 wedive-chip">채팅</span>
+                        <span v-if="participant.user!=null" v-on:click="chatUser(participant.user)" class="chip chip-s bg-gray-light text-center font-400 wedive-chip">채팅</span>
                     </div>
                 </div>
             </div>
@@ -459,6 +462,25 @@
 import StarRating from 'vue-star-rating'
 const axios = require("axios")
 
+var tour_list = [{"type": "id", "name": "owner_chat", "position": "left", "title": "궁금한점을 물어보세요."}, {"type": "id", "name": "maner_deep", "position": "top", "title": "개설자의 매너로, 18m에서 시작해요."}];
+
+function myCallback()
+{
+    var random_idx = Math.floor(Math.random() * (tour_list.length * 3));
+    if (random_idx < tour_list.length && $(((tour_list[random_idx].type == 'class') ? '.' : '#') + tour_list[random_idx].name).hasClass('hide') == false) {
+        $(((tour_list[random_idx].type == 'class') ? '.' : '#') + tour_list[random_idx].name).tooltip({
+            delay: 7000,
+            placement: tour_list[random_idx].position,
+            title: tour_list[random_idx].title,
+            html: true
+        });
+        $(((tour_list[random_idx].type == 'class') ? '.' : '#') + tour_list[random_idx].name).tooltip('show');
+        setTimeout(function(selector) {
+            $(selector).tooltip('hide');
+        },7000, (((tour_list[random_idx].type == 'class') ? '.' : '#') + tour_list[random_idx].name))
+    }
+}
+
 export default {
   name: 'HelloWorld',
   async beforeRouteEnter(to, from, next) {
@@ -662,6 +684,8 @@ export default {
     }
   },
   async mounted() {
+    var intervalID = setInterval(myCallback, 7000);
+
     $(".page-title").hide();
     $(".page-title-clear").hide();
     $(".header-auto-show").hide();
@@ -1159,8 +1183,66 @@ export default {
         }
       },
       async chatUser(user) {
-          this.message_receiver_nickname = user.nickName
-          console.log(user);
+          //this.message_receiver_nickname = user.nickName
+          //data-menu="menu-dm" 
+            var result = await axios({
+                url: 'https://chat.wedives.com/graphql',
+                method: 'post',
+                headers: {
+                    countrycode: 'ko',
+                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                },
+                data: {
+                    query: `
+                        query {
+                            getJoinedRoomList {
+                                _id
+                                type
+                                name
+                                lastMessageAt
+                                numOfmessages
+                                unread
+                                createdAt
+                                chatUsers {
+                                _id
+                                name
+                                avatarOrigin
+                                }
+                                usersCount
+                                owner {
+                                name
+                                avatarOrigin
+                                }
+                                lastChatMessage {
+                                text
+                                author {
+                                    name
+                                }
+                                createdAt
+                                }
+                            }
+                        }
+                    `
+                }
+            });
+            
+            // 개설된 채팅이 있는지 확인한다.
+            var go_flag = false;
+            result.data.data.getJoinedRoomList.forEach(room => {
+                if (room.type == 'direct' && room.chatUsers.filter(u=>u._id == user.uid).length > 0) {
+                    go_flag = true;
+                    location.href = '/chat/' + room._id;
+                }
+            })
+            if (go_flag == false) {
+                // 없는경우, 더미로 하나 만든다.
+                localStorage.chatType = 'direct';
+                var chatUids = new Array();
+                chatUids.push(user.uid);
+                localStorage.chatUids = JSON.stringify(chatUids);
+                localStorage.chatName = user.nickName;
+                location.href = '/chat'
+            }
       }
   }
 

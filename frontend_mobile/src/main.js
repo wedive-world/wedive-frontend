@@ -23,7 +23,7 @@ import VueApollo from 'vue-apollo'
 
 var _apolloClient = null;
 const GRAPHQL_URL = process.env.VUE_APP_API_PATH || 'https://chat.wedives.com/graphql'
-if (window.location.pathname.indexOf('/chat/') == 0) {
+if (window.location.pathname.indexOf('/chat/') == 0 || window.location.pathname.indexOf('/diving/') == 0) {
   const httpLink = new HttpLink({
     // You should use an absolute URL here
     uri: GRAPHQL_URL,

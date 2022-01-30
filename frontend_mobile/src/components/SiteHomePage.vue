@@ -288,7 +288,7 @@
     </div>
 
     <a id="btn_filter" data-menu="menu-filter" class="btn btn-m mb-3 rounded-xl font-900 shadow-s icon-filter" style="background-color: #181818;"></a>
-    <a href="/buddy_create" id="btn_new" class="btn btn-m mb-3 rounded-xl font-900 shadow-s icon-concierge" style="background-color: #181818;"></a>
+    <a v-on:click="concierge" id="btn_new" class="btn btn-m mb-3 rounded-xl font-900 shadow-s icon-concierge" style="background-color: #181818;"></a>
   </div>
 </template>
 <script>
@@ -543,7 +543,6 @@ async function updateAll() {
 function myCallback()
 {
     var random_idx = Math.floor(Math.random() * (tour_list.length * 3));
-    console.log(random_idx)
     if (random_idx < tour_list.length && $(((tour_list[random_idx].type == 'class') ? '.' : '#') + tour_list[random_idx].name).hasClass('hide') == false) {
         $(((tour_list[random_idx].type == 'class') ? '.' : '#') + tour_list[random_idx].name).tooltip({
             delay: 7000,
@@ -1019,6 +1018,79 @@ export default {
         //if (result.data.data.searchDivePointsByName) result.data.data.searchDivePointsByName.forEach(x=>{x.type='point';result_list.push(x)});
         //if (result.data.data.searchDiveCentersByName) result.data.data.searchDiveCentersByName.forEach(x=>{x.type='center';result_list.push(x)});
         this.users = result_list;
+      },
+      login() {
+        localStorage.loginUrl = window.location.pathname;
+        if (localStorage.hasOwnProperty("idToken") == false || localStorage.idToken == null) {
+          this.$root.$children[0].$refs.loginBottomSheet.open();
+        } else if (localStorage.hasOwnProperty("nickName") == false || localStorage.nickName == null) {
+          location.href='/user_create';
+        }
+      },
+      async concierge() {
+        if (localStorage.idToken) {
+            var result = await axios({
+                url: 'https://chat.wedives.com/graphql',
+                method: 'post',
+                headers: {
+                    countrycode: 'ko',
+                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                },
+                data: {
+                    query: `
+                        query {
+                            getJoinedRoomList {
+                                _id
+                                type
+                                name
+                                lastMessageAt
+                                numOfmessages
+                                unread
+                                createdAt
+                                chatUsers {
+                                _id
+                                name
+                                avatarOrigin
+                                }
+                                usersCount
+                                owner {
+                                name
+                                avatarOrigin
+                                }
+                                lastChatMessage {
+                                text
+                                author {
+                                    name
+                                }
+                                createdAt
+                                }
+                            }
+                        }
+                    `
+                }
+            });
+            
+            var concierge_uid = "RuOiMt9YUTbRUJQTrXv4cWMEimr2";
+            // 개설된 채팅이 있는지 확인한다.
+            var go_flag = false;
+            result.data.data.getJoinedRoomList.forEach(room => {
+                if (room.type == 'direct' && room.chatUsers.filter(u=>u._id == concierge_uid).length > 0) {
+                    go_flag = true;
+                    location.href = '/chat/' + room._id;
+                }
+            })
+            if (go_flag == false) {
+                // 없는경우, 더미로 하나 만든다.
+                localStorage.chatType = 'direct';
+                var chatUids = new Array();
+                chatUids.push(concierge_uid);
+                localStorage.chatUids = JSON.stringify(chatUids);
+                localStorage.chatName = "WeDive";
+                location.href = '/chat'
+            }
+        } else { // 로그인
+            this.login();
+        }
       },
   }
 

@@ -4,6 +4,7 @@
     <div class="header header-fixed header-logo-center">
         <a href="" class="header-title color ellipsis">{{ roomName || '' }}</a>
         <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
+        <a data-menu="menu-main-right" class="header-icon header-icon-4"><i class="fas fa-bars"></i></a>
 
         <div :class="'font-noto' + (is_concierge ? '' : ' hide')" style="margin-top: 50px;height:90px;background:rgb(24, 24, 24);border-bottom:1px solid lightgray;padding:14px;">
             <p class="mb-0 font-16 font-600 color-white"><i class="fas fa-concierge-bell me-1"></i> 띠링띠링</p>
@@ -319,6 +320,139 @@
         </div>
     </div>
 
+    <div id="menu-main-right" class="menu menu-box-right rounded-0" data-menu-width="280">
+        <div class="pt-1 pb-1 ps-3 pe-3">
+            <div class="font-600">대화상대</div>
+            <div v-if="getJoinedRoomList.filter(x=>x._id==roomId).length > 0">
+                <div v-for="user in getJoinedRoomList.filter(x=>x._id==roomId)[0].chatUsers" class="pt-1 pb-1">
+                    <svg class="svg-profile user-img user-img-small" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                        <defs>
+                        <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                        <clipPath id="clipSquircle">
+                            <use xlink:href="#shapeSquircle"/>
+                        </clipPath>
+                        </defs>
+                        <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(user.avatarOrigin)?user.avatarOrigin:'/static/images/assets/chat.gif'"/>
+                    </svg>
+                    <div class="ms-2 d-inline-block v-align-top">
+                        <span v-if="user._id == uid" style="display: inline-block;padding: 1px 6px;background: #e1e2e3;border-radius: 6px;">나</span>
+                        <h5 style="display: inline-block;" class="font-15 font-600 mb-0 mt-2">{{ user.name }}</h5>
+                    </div>
+                </div>
+            </div>
+
+
+            <div v-on:click="invite" class="pt-1 pb-1">
+                <svg class="svg-profile user-img user-img-small" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                    <defs>
+                    <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                    <clipPath id="clipSquircle">
+                        <use xlink:href="#shapeSquircle"/>
+                    </clipPath>
+                    </defs>
+                    <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="/static/images/assets/ico_plus.png"/>
+                </svg>
+                <div class="ms-2 d-inline-block v-align-top">
+                    <h5 class="font-15 font-600 mb-0 mt-2">대화상대 초대</h5>
+                </div>
+            </div>
+        </div>
+
+        <div class="ps-1 pe-1" style="width: 100%; height:40px;background: #00000015;border-top: 1px solid lightgray;position: absolute;bottom: 52px;">
+            <img data-menu="menu-leaveroom" src="/static/images/assets/ico_exit.png" width="24" height="24" style="margin: 8px;" />
+        </div>
+    </div>
+    
+    <div id="chat-add" 
+         class="menu menu-box-bottom menu-box-bottom-full rounded-0" 
+         data-menu-width="cover"
+         data-menu-height="cover"
+         style="margin-bottom: 0;">
+        
+        <div class="card rounded-0 bg-2" data-card-height="50">
+            <div class="card-top p-2">
+                <a v-on:click="chatSelectedList = [];selecteduser=null;query='';" href="#" class="close-menu icon icon-s rounded-l bg-theme color-theme "><i class="fa fa-arrow-left"></i></a>
+                <a v-on:click="inviteChat" href="#" :class="'float-end icon icon-s rounded-l bg-theme me-3 mt-2 font-noto font-16 ' + ((chatSelectedList.length==0) ? 'color-gray' : 'color-theme')"><span v-if="chatSelectedList.length> 0" class="color-highlight font-600 me-2">{{chatSelectedList.length}}</span>확인</a>
+                <a href="" class="header-title color font-noto font-16">대화상대 초대</a>
+            </div>
+        </div>
+        
+        <div class="card rounded-0 content">
+            <vue-typeahead-bootstrap
+                id="search_user"
+                class="wedive-search"
+                v-model="query"
+                :data="users"
+                :serializer="item => item.nickName"
+                :screen-reader-text-serializer="item => `${item.nickName}`"
+                highlightClass="special-highlight-class"
+                @hit="selecteduser = $event;enableNextUser($event);"
+                :minMatchingChars="1"
+                placeholder="사용자 닉네임"
+                inputClass="special-input-class"
+                @input="lookupUser"
+                >
+                <template slot="suggestion" slot-scope="{ data, htmlText }">
+                    <div class="d-flex align-items-center" style="position:relative !important;">
+                    <div class="">
+                        <img
+                        class="rounded-s me-3"
+                        :src="(data.profileImages && data.profileImages.length>0) ? data.profileImages[0].thumbnailUrl : '/static/images/assets/chat.gif'"
+                        style="width: 50px; height: 50px;object-fit:cover;" />
+                    </div>
+                    <span class="ml-4" style="">
+                        <p class="font-noto font-16 mb-0">{{ data.nickName }}</p>
+                        <p class="font-13 mb-0 color-gray">{{ getDiverLevel(data.freeLicenseLevel, data.scubaLicenseLevel) }}</p>
+                    </span>
+                    
+                    </div>
+                </template>
+            </vue-typeahead-bootstrap>
+            <div class="m-2">
+                <div v-for="user in chatSelectedList" class=" border-bottom pt-2 pb-2">
+                    <div class="d-flex align-items-center" style="position:relative !important;">
+                        <div class="">
+                            <img
+                            class="rounded-s me-3"
+                            :src="(user.profileImages && user.profileImages.length>0) ? user.profileImages[0].thumbnailUrl : '/static/images/assets/chat.gif'"
+                            style="width: 50px; height: 50px;object-fit:cover;" />
+                        </div>
+                        <span class="ml-4" style="">
+                            <p class="font-noto font-16 mb-0">{{ user.nickName }}</p>
+                            <p class="font-13 mb-0 color-gray">{{ getDiverLevel(user.freeLicenseLevel, user.scubaLicenseLevel) }}</p>
+                        </span>
+                        <i v-on:click="removeChatSelected(user)" class="wedive_icoset wedive_icoset_close" style="position: absolute;right:0px;margin:8px;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+
+    <div id="menu-leaveroom" 
+         class="menu menu-box-modal" 
+         data-menu-height="260" 
+         data-menu-width="370">
+        <div class="menu-title">
+            <h4 class="text-center mt-4 pt-1 mb-2 font-noto font-19">채팅방 나가기</h4>
+            <a href="#" class="close-menu hide"><i class="fa fa-times-circle"></i></a>
+        </div>
+        <div class="me-4 ms-4" style="border-bottom: 2px solid black;"></div>
+        <div class="content" style="margin: 20px 12px !important;">
+            채팅방에서 나가기를 하면 대화 내용 및 채팅목록에서 모두 삭제되고, 더이상 채팅내용을 확인할 수 없게 됩니다. 필요한 경우 나가기 전에 백업해주세요.<br/>채팅방에서 나가시겠습니까?
+        </div>
+        
+        <div class="row m-0">
+            <div class="col-6 pe-1">
+                <a href="#" class="close-menu btn btn-m btn-full rounded-0 text-uppercase font-900 shadow-s bg-gray-dark">취소</a>
+            </div>
+            <div class="col-6 ps-1">
+                <a v-on:click="leaveRoom" class="btn btn-m btn-full rounded-0 text-uppercase font-900 shadow-s bg-black">나가기</a>
+            </div>
+        </div>
+    </div>
+
 
   </div>
 </template>
@@ -586,11 +720,146 @@ export default {
         emoji_regex: /(?:[\u2700-\u27bf]|(?:\ud83c[\udde6-\uddff]){2}|[\ud800-\udbff][\udc00-\udfff]|[\u0023-\u0039]\ufe0f?\u20e3|\u3299|\u3297|\u303d|\u3030|\u24c2|\ud83c[\udd70-\udd71]|\ud83c[\udd7e-\udd7f]|\ud83c\udd8e|\ud83c[\udd91-\udd9a]|\ud83c[\udde6-\uddff]|\ud83c[\ude01-\ude02]|\ud83c\ude1a|\ud83c\ude2f|\ud83c[\ude32-\ude3a]|\ud83c[\ude50-\ude51]|\u203c|\u2049|[\u25aa-\u25ab]|\u25b6|\u25c0|[\u25fb-\u25fe]|\u00a9|\u00ae|\u2122|\u2139|\ud83c\udc04|[\u2600-\u26FF]|\u2b05|\u2b06|\u2b07|\u2b1b|\u2b1c|\u2b50|\u2b55|\u231a|\u231b|\u2328|\u23cf|[\u23e9-\u23f3]|[\u23f8-\u23fa]|\ud83c\udccf|\u2934|\u2935|[\u2190-\u21ff])/g,
         speechContentHeight: 0,
         is_concierge: false,
+        selecteduser: null,
+        users: [],
+        chatSelectedList: [],
     }
   }, methods: {
     setData(roomId) {
         this.roomId = roomId;
         this.markRead();
+    },
+    invite() {
+        var menuData = "chat-add";
+        document.getElementById(menuData).classList.add('menu-active');
+        document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
+
+        
+        var menu = document.getElementById(menuData);
+        var menuEffect = menu.getAttribute('data-menu-effect');
+        var menuLeft = menu.classList.contains('menu-box-left');
+        var menuRight = menu.classList.contains('menu-box-right');
+        var menuTop = menu.classList.contains('menu-box-top');
+        var menuBottom = menu.classList.contains('menu-box-bottom');
+        var menuWidth = menu.offsetWidth;
+        var menuHeight = menu.offsetHeight;
+        var menuTimeout = menu.getAttribute('data-menu-hide');
+
+        if(menuTimeout){
+            setTimeout(function(){
+                document.getElementById(menuData).classList.remove('menu-active');
+                document.getElementsByClassName('menu-hider')[0].classList.remove('menu-active');
+            },menuTimeout)
+        }
+
+        if(menuEffect === "menu-push"){
+            var menuWidth = document.getElementById(menuData).getAttribute('data-menu-width');
+            if(menuLeft){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX("+menuWidth+"px)"}}
+            if(menuRight){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+menuWidth+"px)"}}
+            if(menuBottom){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY(-"+menuHeight+"px)"}}
+            if(menuTop){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY("+menuHeight+"px)"}}
+        }
+        if(menuEffect === "menu-parallax"){
+            var menuWidth = document.getElementById(menuData).getAttribute('data-menu-width');
+            if(menuLeft){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX("+menuWidth/10+"px)"}}
+            if(menuRight){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+menuWidth/10+"px)"}}
+            if(menuBottom){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY(-"+menuHeight/5+"px)"}}
+            if(menuTop){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY("+menuHeight/5+"px)"}}
+        }
+
+        setTimeout(function() {
+        $("#search_user > .input-group > input").focus();
+        }, 500);
+    },
+    leaveRoom() {
+        /*this.$apollo.mutate({
+            // Query
+            mutation: gql`mutation LeaveRoom($roomId: String!) {
+                leaveRoom(roomId: $roomId) {
+                    success
+                }
+            }`,
+            // Parameters
+            variables: {
+                roomId: this.roomId
+            },
+        }).then((data) => {
+            // Result
+            location.href="/chat_home"
+            }
+        }).catch((error) => {
+            // Error
+            console.error(error)
+            // We restore the initial user input
+        })*/
+    },
+    inviteChat() {
+        for (var i=0; i<this.chatSelectedList.length; i++) {
+            const uid = this.chatSelectedList[i].uid;
+            const _flag = (i == (this.chatSelectedList.length-1));
+            this.$apollo.mutate({
+                // Query
+                mutation: gql`mutation Mutation($roomId: String!, $uid: String!) {
+                    invite(roomId: $roomId, uid: $uid) {
+                        success
+                    }
+                }`,
+                // Parameters
+                variables: {
+                    roomId: this.roomId,
+                    uid: uid
+                },
+            }).then((data) => {
+                // Result
+                if (_flag) {
+                    location.reload();
+                }
+            }).catch((error) => {
+                // Error
+                console.error(error)
+                // We restore the initial user input
+            })
+        }
+    },
+    async lookupUser() {
+        this.users = [];
+        const query = this.query;
+        var result = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                    query FindUserByNickName($nickName: String!) {
+                        findUserByNickName(nickName: $nickName) {
+                            uid
+                            profileImages {
+                            thumbnailUrl
+                            }
+                            email
+                            scubaLicenseLevel
+                            freeLicenseLevel
+                            nickName
+                        }
+                    }
+                `,
+                variables: {
+                    "nickName": query
+                }
+            }
+        });
+        // 자기 자신은 검색이 안되게 한다.
+        var _users = result.data.data.findUserByNickName;
+        for (var i=0; i<_users.length; i++) {
+            if (_users[i].uid == localStorage.uid) {
+                _users.splice(i, 1);
+                break;
+            }
+        }
+        this.users = _users;
     },
     async sendLocation() {
         if (this.locationSelectedList.length == 0) {
@@ -651,9 +920,43 @@ export default {
             }
         }
     },
+    getDiverLevel(freeLicenseLevel, scubaLicenseLevel) {
+        var levelShow = '초보';
+        var scuba_level = ["초보", "오픈워터", "어드벤스드", "레스큐", "마스터", "강사", "위다이브 컨시어지"];
+        var free_level = ["초보", "레벨1", "레벨2", "레벨3", "레벨4", "강사"];
+
+        var my_s_lvl = parseInt((scubaLicenseLevel)?scubaLicenseLevel:"0");
+        var my_f_lvl = parseInt((freeLicenseLevel)?freeLicenseLevel:"0")
+        if (my_s_lvl > my_f_lvl) {
+            levelShow = (my_s_lvl>0) ? "스쿠바 " + scuba_level[my_s_lvl] : levelShow;
+        } else {
+            levelShow = (my_f_lvl>0) ? "프리 " + free_level[my_f_lvl] : levelShow;
+        }
+        levelShow += " 다이버";
+        if(my_s_lvl>5) levelShow = scuba_level[my_s_lvl];
+        
+        return levelShow;
+    },
     enableNext2(ev) {
         if (this.locationSelectedList.filter(li => li._id == ev._id).length == 0)
             this.locationSelectedList.push(ev);
+    },
+    enableNextUser(ev) {
+        if (this.chatSelectedList.filter(li => li.uid == ev.uid).length == 0) {
+            this.chatSelectedList.push(ev);
+        }
+        setTimeout(function() {
+            $("#search_user > .input-group > input").val('')
+        }, 300);
+    },
+    removeChatSelected(user) {
+        for (var i=0; i<this.chatSelectedList.length; i++) {
+            var x = this.chatSelectedList[i];
+            if (x._id == user._id) {
+                this.chatSelectedList.splice(i, 1);
+                break;
+            }
+        }
     },
     async lookupLocation() {
         this.locations = [];
@@ -990,7 +1293,10 @@ export default {
   left: 20px;
 }
 
-
+.user-img-small {
+    width: 40px !important;
+    height: 40px !important;
+}
 
 .user-img {
   position: relative;
