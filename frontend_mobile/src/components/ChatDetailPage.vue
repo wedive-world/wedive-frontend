@@ -104,7 +104,8 @@
         <div class="content">
             <div v-for="(chat, index) in getMessagesByRoomId">
                 <div v-if="chat && chat.author && chat.author._id == uid">
-                    <div v-if="chat.text.includes('[[') && chat.text.includes(']]') && chat.text.includes('emoji|')" class="chat-left">
+                    <div v-if="chat.text==''" class="hide"></div>
+                    <div v-else-if="chat.text.includes('[[') && chat.text.includes(']]') && chat.text.includes('emoji|')" class="chat-left">
                         <div class="">
                             <img :src="'/static/images/emoji/' + (chat.text.replace('[[','').replace(']]','').split('|')[1])" style="max-width:100px;"/>
                         </div>

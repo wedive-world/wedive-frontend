@@ -14,7 +14,7 @@
         </div>
     </div>
 
-    <div class="page-content">
+    <div class="page-content pb-0">
         <div class="card mb-0 border-bottom" style="margin-top:50px; z-index:1">
             <div class="content mt-3 pb-2 mb-0">
                 <img class="inline-block me-2 circular_image" :src="(userData.profileImages && userData.profileImages.length>0) ? userData.profileImages[0].thumbnailUrl : ('/static/images/assets/user_empty_'+((userData.gender)?userData.gender:'m')+'.png')" width="50" style="vertical-align: top;"/>
@@ -94,7 +94,7 @@
                 <h2 class="font-15 font-700 mb-0">게스트 참여횟수 20회</h2>
             </div>
         </div>
-        <svg class="map-wrapper" id="map-wrapper" height="370" width="100%"></svg>
+        <div id="map"></div>
         
     </div>
 
@@ -132,10 +132,8 @@
 </template>
 <script>
 import StarRating from 'vue-star-rating'
-import { select, json, geoPath, geoNaturalEarth1, zoom, geoMercator } from 'd3';
-import { feature } from 'topojson';
 const axios = require("axios")
-
+const cities = [{ 'code': 'OTT', 'city': 'OTTAWA', 'country': 'CANADA', 'lat': '23.10', 'lon': '120.34' }, { 'code': 'BSB', 'city': 'BRASILIA', 'country': 'BRAZIL', 'lat': '-32.85', 'lon': '133.30' }, { 'code': 'DEL', 'city': 'DELHI', 'country': 'INDIA', 'lat': '4.71', 'lon': '-127.57' }, { 'code': 'CMX', 'city': 'CIDADE DO MÉXICO', 'country': 'MÉXICO', 'lat': '0.42', 'lon': '93.19' }, { 'code': 'SID', 'city': 'SIDNEY', 'country': 'AUSTRALIA', 'lat': '-48.38', 'lon': '-71.71' }, { 'code': 'TOK', 'city': 'TOQUIO', 'country': 'JAPÃO', 'lat': '17.34', 'lon': '-81.73' }, { 'code': 'CCA', 'city': 'CIDADE DO CABO', 'country': 'AFRICA DO SUL', 'lat': '-43.20', 'lon': '-171.97' }, { 'code': 'CMP', 'city': 'CAMPO GRANDE', 'country': 'BRASIL', 'lat': '-36.15', 'lon': '130.72' }, { 'code': 'PAR', 'city': 'PARIS', 'country': 'FRANÇA', 'lat': '22.19', 'lon': '174.27' }, { 'code': 'NOY', 'city': 'NOVA YORK', 'country': 'USA', 'lat': '11.23', 'lon': '112.96' }]
 
 export default {
   name: 'HelloWorld',
@@ -222,6 +220,24 @@ export default {
     }
   },
   async mounted() {
+    let script = document.createElement('script')
+    script.onload = () => {
+        this.drawMap();
+        const zoom = d3.zoom()
+                        .scaleExtent([0.1, 10]) //zoom limit
+                        .on('zoom', () => {
+                            this.g.style('stroke-width', `${1.5 / d3.event.transform.k}px`)
+                            this.g.attr('transform', d3.event.transform) // updated for d3 v4
+                        })
+
+                    this.svg.call(zoom)
+                        .call(zoom.transform, d3.zoomIdentity.translate(0, 0).scale(0.46)) //initial size
+                        .append('svg:g')
+                        .attr('transform', 'translate(100,50) scale(.5,.5)');
+    }
+    script.setAttribute('src', 'https://d3js.org/d3.v4.min.js')
+    document.head.appendChild(script);
+
     $(".page-title").hide();
     $(".page-title-clear").hide();
     $(".header-auto-show").hide();
@@ -236,7 +252,8 @@ export default {
     if (this.$route.query.footer && this.$route.query.footer == 'hide') {
         $("#footer-bar").hide();
     }
-    this.drawMap();
+    
+
   },
   components: {
     StarRating
@@ -255,47 +272,71 @@ export default {
         subscribe_img: 'ico_subscribe',
         user_id: localStorage.userId,
 
-        
+        background: 'https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg',
+        width: 960,
+        height: 300,
+        start_x: null,
+        start_y: null,
+        projection: null,
+        scale: 200,
+        svg: null,
+        path: null,
+        g: null,
+        drag_handler: null,
     }
   },
   methods: {
       async drawMap() {
-        const divWidth = document.getElementById("map-wrapper").clientWidth;
-        const svg = select('.map-wrapper').append('svg').attr('width', divWidth).attr('height', 370);
-        const g = svg.append('g');
-        const projection = geoMercator().center([0,20]).scale(60).translate([ divWidth/2, 370/2 ])
-        const pathGenerator = geoPath().projection(projection);
+        const divWidth = document.getElementById("map").clientWidth;
 
-        var geo_data = await axios.get('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json');
-        //var geo_data = await axios.get('https://unpkg.com/visionscarto-world-atlas/world/50m_land.geojson');
-        var data = geo_data.data;
-        {
-            // Convert topoJSON to geoJSON
-            const countries = feature(data, data.objects.countries);
-
-            // Join data and draw svg path
-            svg
-            .selectAll('path')
-            .data(countries.features)
-            .enter()
+        this.projection = d3.geoMercator()
+            .center([0, 5])
+            .scale(this.scale)
+            .rotate([-180, 0])
+        this.svg = d3.select('#map').append('svg:svg')
+            .attr('width', divWidth)
+            .attr('height', this.height)
+        this.path = d3.geoPath()
+            .projection(this.projection),
+        this.g = this.svg.append('g')
+        this.g.append('image')
+            .attr('xlink:href', this.background)
             .append('path')
-            .attr('d', pathGenerator)
-            .attr("fill", "#b8b8b8")
-            .style("stroke", "none")
-            .style("opacity", .3)
-            .append('title') // Add a tooltop
-            .text(d => d.properties.name);
-        }
-        // Panning and zooming
-        svg.call(
-            zoom().on('zoom', ({ transform }) => {
-                console.log(transform)
-                g.attr('transform', transform);
-            })
-        );
-        
+            .attr('d', this.path)
+
+        this.request()
 
       },
+      request() {
+            const app = this,
+                circles = this.g.selectAll('circle')
+                    .data(cities)
+                    .enter()
+                    .append('a')
+                    .attr('xlink:href', d => `https://www.google.com/search?q=${d.city}`)
+                    .append('circle')
+                    .attr('cx', d => this.projection([d.lon, d.lat])[0])
+                    .attr('cy', d => this.projection([d.lon, d.lat])[1])
+                    .attr('r', 5)
+                    .style('fill', 'red')
+
+            this.drag_handler = d3.drag()
+                .on('start', this.drag_start)
+                .on('drag', (d, i, a) => this.drag_drag(d, i, a))
+
+            this.drag_handler(circles)
+        },
+        drag_start() {
+            this.start_x = +d3.event.x
+            this.start_y = +d3.event.y
+        },
+        drag_drag(d, i, a) {
+            console.log(
+                'lon x lat', this.projection.invert([d3.event.x, d3.event.y])
+            )
+            d3.select(a[i])
+                .attr('cx', d.x = d3.event.x).attr('cy', d.y = d3.event.y)
+        },
       async sendDirectMessage() {
         if (localStorage.idToken) {
             const message = this.dm_text;
