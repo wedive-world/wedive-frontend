@@ -461,7 +461,7 @@ export default {
             init_template();
             var preloader = document.getElementById('preloader')
             if(preloader){preloader.classList.add('preloader-hide');}
-        }, 1000);
+          }, 1000);
       },
       async clickChat() {
           if (localStorage.idToken) {
