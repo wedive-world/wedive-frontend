@@ -10,9 +10,9 @@
 
     <div class="page-content pb-3"> 
         <div class="text-center mt-3 mb-3">
-            <div id="file-upload1-back" :style="'border: 1px solid #abb7ba;width: 152px;height:152px;display: inline-block;position: relative;' + ((userData.profileImages && userData.profileImages.length > 0) ? 'background:url('+userData.profileImages[0].thumbnailUrl+');background-size: cover;' : '')">
-                <input type="file" @change="imageUserChange" id="file-upload" :class="'upload-file text-center' + ((userData.profileImages && userData.profileImages.length > 0) ? ' opacity-0': '')" accept="image/*" style="height: 150px;background: white;">
-                <p id="file-upload1-img" :class="'upload-file-text' + ((userData.profileImages && userData.profileImages.length > 0) ? ' opacity-0': '')" style="color: #abb7ba;position:absolute;left:40px;top:76px;"><img src="/static/images/assets/icon_image2.png" height="80" style="filter: brightness(.7);"/></p>
+            <div id="file-upload1-back" :style="'border: 1px solid #abb7ba;width: 152px;height:152px;display: inline-block;position: relative;' + ((userData && userData.profileImages && userData.profileImages.length > 0) ? 'background:url('+userData.profileImages[0].thumbnailUrl+');background-size: cover;' : '')">
+                <input type="file" @change="imageUserChange" id="file-upload" :class="'upload-file text-center' + ((userData && userData.profileImages && userData.profileImages.length > 0) ? ' opacity-0': '')" accept="image/*" style="height: 150px;background: white;">
+                <p id="file-upload1-img" :class="'upload-file-text' + ((userData && userData.profileImages && userData.profileImages.length > 0) ? ' opacity-0': '')" style="color: #abb7ba;position:absolute;left:40px;top:76px;"><img src="/static/images/assets/icon_image2.png" height="80" style="filter: brightness(.7);"/></p>
             </div>
         </div>
         <!-- card in this page format must have the class card-full to avoid seeing behind it-->

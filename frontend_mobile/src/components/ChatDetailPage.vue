@@ -4,13 +4,14 @@
     <div class="header header-fixed header-logo-center">
         <a href="" class="header-title color ellipsis">{{ roomName || '' }}</a>
         <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
-    </div>
-    <div :class="'font-noto' + (is_concierge ? '' : ' hide')" style="margin-top: 50px;height:90px;background:lightyellow;border-bottom:1px solid lightgray;padding:14px;">
-        <p class="mb-0 font-16 font-600" >위다이브 컨시어지 <i class="fas fa-concierge-bell ms-1"></i></p>
-        <p class="mb-0 font-14 opacity-80" style="line-height:1.3;">버디매칭, 장소추천,<br/>다이빙 예약을 도와드립니다.</p>
-        <img src="/static/images/assets/concierge_work.gif" style="height:74px;width:99px;position:absolute;right:14px;top:8px;;-webkit-mask-image: -webkit-radial-gradient(center, white, black);border-radius: 16px;"/>
-    </div>
 
+        <div :class="'font-noto' + (is_concierge ? '' : ' hide')" style="margin-top: 50px;height:90px;background:rgb(24, 24, 24);border-bottom:1px solid lightgray;padding:14px;">
+            <p class="mb-0 font-16 font-600 color-white"><i class="fas fa-concierge-bell me-1"></i> 띠링띠링</p>
+            <p class="mb-0 font-14 opacity-80 color-white" style="line-height:1.3;">버디매칭, 장소추천,<br/>다이빙 예약을 도와드립니다.</p>
+            <img src="/static/images/assets/concierge.gif" style="height:74px;width:74px;position:absolute;right:14px;top:58px;-webkit-mask-image: -webkit-radial-gradient(center, white, black);border-radius: 16px;"/>
+        </div>
+    </div>
+    
     <div id="footer-bar-speach" style="z-index: 9999;display: table;width: 100%;">
         <div :class="(is_emoji_clicked?'':'hide')" style="background:#00000066;height:100px;">
             <i v-on:click="is_emoji_clicked=false;emoji_url='';sendDisable=true;" class="wedive_icoset2x wedive_icoset2x_close" style="position:absolute;right:10px;top:10px;"/>
@@ -60,8 +61,8 @@
         <div :class="'' + (is_emoji?'':' hide')" style="max-height:300px;background: #303440;overflow-y: auto;">
             <div class="" id="tab-group-1">
                 <div class="tab-controls tabs-small" data-highlight="bg-highlight" style="height:36px;border-bottom:1px solid #88888840;display: -webkit-box;">
-                    <a href="#" data-active data-bs-toggle="collapse" data-bs-target="#tab-2ab" style="padding: 0px 24px;display:table-cell;"><img src="/static/images/emoji/wedive/emoji.png" style="width:28px;margin-top:1px;"/></a>
-                    <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-1ab" style="padding: 0px 24px;display:table-cell;"><img src="/static/images/emoji/basic/emoji.png" style="width:28px;margin-top:1px;"/></a>
+                    <a href="#" data-active data-bs-toggle="collapse" data-bs-target="#tab-1ab" style="padding: 0px 24px;display:table-cell;"><img src="/static/images/emoji/wedive/emoji.png" style="width:28px;margin-top:1px;"/></a>
+                    <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-2ab" style="padding: 0px 24px;display:table-cell;"><img src="/static/images/emoji/basic/emoji.png" style="width:28px;margin-top:1px;"/></a>
                 </div>
 
                 <div data-bs-parent="#tab-group-1" class="collapse show row p-3 m-0" id="tab-1ab" style="max-height:264px;min-height:264px;overflow-y: auto;background: #303440;position:relative;">
@@ -100,7 +101,7 @@
         </div>
     </div>
     
-    <div v-on:click="speechContentClick()" v-on:scroll="handleScroll" id="speech-content" class="card card-style ms-0 me-0 rounded-0" :style="'height: calc(100vh - 50px);overflow-y: auto;margin-top:'+(is_concierge?'0':'50')+'px;padding-bottom:50px;'">
+    <div v-on:click="speechContentClick()" v-on:scroll="handleScroll" id="speech-content" class="card card-style ms-0 me-0 rounded-0" :style="'height: calc(100vh - 50px);overflow-y: auto;padding-top:'+(is_concierge?'130':'50')+'px;padding-bottom:50px;'">
         <div class="content">
             <div v-for="(chat, index) in getMessagesByRoomId">
                 <div v-if="chat && chat.author && chat.author._id == uid">

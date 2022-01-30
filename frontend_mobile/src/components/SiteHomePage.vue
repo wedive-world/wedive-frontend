@@ -295,6 +295,8 @@
 import VueTypeaheadBootstrap from 'vue-typeahead-bootstrap';
 import {debounce} from 'lodash';
 
+var tour_list = [{"type": "class", "name": "header-icon-3", "position": "bottom", "title": "장소 리스트로 확인"}, {"type": "id", "name": "btn_filter", "position": "left", "title": "필터를 선택해보세요."}, {"type": "id", "name": "btn_new", "position": "left", "title": "컨시어지에게 장소 추천받기"}];
+
 const axios = require("axios")
 
 var map = null;
@@ -538,9 +540,30 @@ async function updateAll() {
 
 }
 
+function myCallback()
+{
+    var random_idx = Math.floor(Math.random() * (tour_list.length * 3));
+    console.log(random_idx)
+    if (random_idx < tour_list.length && $(((tour_list[random_idx].type == 'class') ? '.' : '#') + tour_list[random_idx].name).hasClass('hide') == false) {
+        $(((tour_list[random_idx].type == 'class') ? '.' : '#') + tour_list[random_idx].name).tooltip({
+            delay: 7000,
+            placement: tour_list[random_idx].position,
+            title: tour_list[random_idx].title,
+            html: true
+        });
+        $(((tour_list[random_idx].type == 'class') ? '.' : '#') + tour_list[random_idx].name).tooltip('show');
+        setTimeout(function(selector) {
+            $(selector).tooltip('hide');
+        },7000, (((tour_list[random_idx].type == 'class') ? '.' : '#') + tour_list[random_idx].name))
+    }
+}
+
+
 export default {
   name: 'HelloWorld',
   mounted() {
+    var intervalID = setInterval(myCallback, 7000);
+
     // get Geo location
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(position => {

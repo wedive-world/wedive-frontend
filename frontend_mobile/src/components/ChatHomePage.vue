@@ -3,7 +3,7 @@
     <div data-menu-active="nav-chat"></div>
     <div v-if="idToken == null || nickName == null" class="card card-style ms-0 me-0 rounded-0 text-center mb-0" style="height: calc(100vh - 58px);display:block;">
         <img src="/static/images/assets/empty_message.jpg" width="60%" style="margin-top: 25%;" />
-        <p class="color-gray mb-2">{{ login_word }}이 필요합니다.</p>
+        <p class="color-gray mt-2">{{ login_word }}이 필요합니다.</p>
 
         <a v-on:click="login()" class="btn btn-m mb-3 rounded-xl text-uppercase font-500 shadow-s bg-secondary font-noto"><i class="fas fa-user-lock me-1"></i> {{ login_word }}</a>
     </div>
@@ -335,18 +335,22 @@ export default {
         }
         else if (this.chatSelectedList.length == 1) {
             // 개설된 채팅이 있는지 확인한다.
+            var go_flag = false;
             this.getJoinedRoomList.forEach(room => {
                 if (room.type == 'direct' && room.chatUsers.filter(u=>u._id == this.chatSelectedList[0].uid).length > 0) {
+                    go_flag = true;
                     location.href = '/chat/' + room._id;
                 }
             })
-            // 없는경우, 더미로 하나 만든다.
-            localStorage.chatType = 'direct';
-            var chatUids = new Array();
-            chatUids.push(this.chatSelectedList[0].uid);
-            localStorage.chatUids = JSON.stringify(chatUids);
-            localStorage.chatName = this.chatSelectedList[0].nickName;
-            location.href = '/chat'
+            if (go_flag == false) {
+                // 없는경우, 더미로 하나 만든다.
+                localStorage.chatType = 'direct';
+                var chatUids = new Array();
+                chatUids.push(this.chatSelectedList[0].uid);
+                localStorage.chatUids = JSON.stringify(chatUids);
+                localStorage.chatName = this.chatSelectedList[0].nickName;
+                location.href = '/chat'
+            }
         }
     },
     async lookupUser() {

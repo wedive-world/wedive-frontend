@@ -14,7 +14,7 @@
         </div>
     </div>
 
-    <div class="page-content pb-0">
+    <div :class="'page-content pb-0' + (is_empty ? ' hide' : ' ')">
         <div class="card mb-0 border-bottom" style="margin-top:50px; z-index:1">
             <div class="content mt-3 pb-2 mb-0">
                 <img class="inline-block me-2 circular_image" :src="(userData.profileImages && userData.profileImages.length>0) ? userData.profileImages[0].thumbnailUrl : ('/static/images/assets/user_empty_'+((userData.gender)?userData.gender:'m')+'.png')" width="50" style="vertical-align: top;"/>
@@ -455,12 +455,13 @@ export default {
             this.userData.levelShow += " 다이버";
             if(s_lvl>5) this.userData.levelShow = scuba_level[s_lvl];
             
-            setTimeout(function() {
-                init_template();
-                var preloader = document.getElementById('preloader')
-                if(preloader){preloader.classList.add('preloader-hide');}
-            }, 1000);
+            
           }
+          setTimeout(function() {
+            init_template();
+            var preloader = document.getElementById('preloader')
+            if(preloader){preloader.classList.add('preloader-hide');}
+        }, 1000);
       },
       async clickChat() {
           if (localStorage.idToken) {
