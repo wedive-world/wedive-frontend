@@ -21,6 +21,7 @@ import SiteHomeListPage from '@/components/SiteHomeListPage'
 import SiteDetailPage from '@/components/SiteDetailPage'
 import PointDetailPage from '@/components/PointDetailPage'
 import PointDetailPage2 from '@/components/PointDetailPage2'
+import DivingSearchPage from '@/components/DivingSearchPage'
 import DivingDetailPage from '@/components/DivingDetailPage'
 import UserDetailPage from '@/components/UserDetailPage'
 import ChatHomePage from '@/components/ChatHomePage'
@@ -148,6 +149,11 @@ export default new Router({
       path: '/point2',
       name: 'PointDetailPage2',
       component: PointDetailPage2
+    },
+    {
+      path: '/diving_search',
+      name: 'DivingSearchPage',
+      component: DivingSearchPage
     },
     {
       path: '/diving/:id',

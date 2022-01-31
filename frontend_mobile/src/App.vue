@@ -236,6 +236,9 @@ export default {
       if (item == '/site_list') {
         location.href='/site_search';
       }
+      if (item == '/') {
+        location.href='/diving_search';
+      }
       console.log("searchItem");
     },
     shareItem() {
