@@ -165,8 +165,10 @@ import { BTable, BCard, BButton, BModal, BFormInput, BRow, BCol, BFormGroup, BFo
 import VueContext from 'vue-context'
 import vSelect from 'vue-select'
 import Ripple from 'vue-ripple-directive'
+
 const { getAllInterests, getInterestTypes, upsertInterest, deleteInterestById } = require ('@/wedive-frontend-graphql/interest-service')
 const { upsertDiveSite, getAllDiveSites } = require('@/wedive-frontend-graphql/dive-site-service')
+const { upsertHighlight, deleteHighlightById } = require('@/wedive-frontend-graphql/highlight-service')
 
 const selectOptionsStatus = [
   {value: 'pending', text: 'pending'},
@@ -200,6 +202,8 @@ const columnDefinition = [
     
     { sortable: true, filter: true, field: 'latitude', headerName: '위도', editable: true },
     { sortable: true, filter: true, field: 'longitude', headerName: '경도', editable: true },
+    { sortable: true, filter: true, field: 'highlightDescs', headerName: '하이라이트 (/구분)', editable: true },
+    { sortable: true, filter: true, field: 'youtubeVideoIds', headerName: '유튜브 영상', editable: true },
     { sortable: true, filter: true, field: 'adminScore', headerName: '총점', editable: true },
 
     { sortable: true, filter: true, field: 'visitTimeDescription', headerName: '방문시기', editable: true },
@@ -229,7 +233,7 @@ const columnDefinition = [
     { sortable: true, filter: true, field: 'month12Title', headerName: '12월', editable: true },
 
 
-    { sortable: true, filter: true, field: 'youtubeVideoIds', headerName: '유튜브 영상', editable: true },
+    
     { sortable: true, filter: true, field: 'referenceUrls', headerName: '참고 사이트', editable: true },
     { sortable: true, filter: true, field: 'memo', headerName: '메모', editable: true },
 ];
@@ -281,10 +285,10 @@ export default {
     var interests = await getAllInterests();
     var interest_types = await getInterestTypes();
     var sites = await getAllDiveSites();
-    next(vm => {vm.setInterests(interests, interest_types, sites)});
+    next(vm => {vm.setSites(interests, interest_types, sites)});
   },
   methods: {
-    setInterests: function(interests, interest_types, sites) {
+    setSites: function(interests, interest_types, sites) {
       this.interests = interests;
       this.interest_types = interest_types;
       this.interests.forEach(interest=>{if(interest.aliases) {interest.aliases_show = interest.aliases.join();}if(interest.searchTerms){interest.searchTerms_show = interest.searchTerms.join();}});
@@ -297,9 +301,15 @@ export default {
       for (var i=1 ; i<13; i++) {
           this.sites.forEach(site => {site['month'+i+'Title'] = site['month'+i].map(interest => {return interest.title})})
       }
+      this.sites.forEach(site => {site.highlightDescs = site.highlights.map(highlight => {return highlight.description}).join().replace(/,/gi,"/")});
     },
     async cellUpdated($event) {
-      console.log($event);
+      var appLoading = document.getElementById('loading-bg')
+      if (appLoading) {
+        appLoading.style.display = 'block'
+        appLoading.style.position = 'relative'
+      }
+      //console.log($event);
       var _id = $event.row._id;
       var uniqueName = $event.row.uniqueName;
       var latitude = parseFloat($event.row.latitude);
@@ -346,17 +356,37 @@ export default {
         field = month;
       }
 
-      //divingSite
-      if (field == 'diveSiteName') {
-        var temp = this.sites.filter(site=>site.uniqueName == value);
-        if (temp.length > 0) {
-            value = temp[0]._id;
-            field = 'diveSite';
+
+      // highlights
+      if (field == 'highlightDescs') {
+        var temp_list = value.replace(/ \//gi,'/').replace(/\/ /gi,'/').split('/');
+        var highlight_ids = new Array();
+        for (var i=0; i<temp_list.length; i++) {
+          var upsert_item = {};
+          //if (i < $event.row.highlights.length) {
+            //upsert_item._id = $event.row.highlights[i]._id;
+          //}
+          upsert_item.name = $event.row.name + " highlight " + (i+1);
+          upsert_item.description = temp_list[i];
+          try {
+            var result = await upsertHighlight(upsert_item);
+            //console.log(result)
+            highlight_ids.push(result.upsertHighlight._id);
+          } catch(e) {
+            this.$swal({
+              title: 'Error!',
+              text: e,
+              icon: 'error',
+              customClass: {
+                confirmButton: 'btn btn-primary',
+              },
+              buttonsStyling: false,
+            });
+          }
         }
-        else {
-            errString = temp + ' 값을 site에서 찾을 수 없습니다.';
-            hasError = true;
-        }
+        //console.log(highlight_ids)
+        value = highlight_ids;
+        field = 'highlights';
       }
       
 
@@ -418,6 +448,10 @@ export default {
           buttonsStyling: false,
         })
       }*/
+      if (appLoading) {
+        appLoading.style.display = 'none'
+        appLoading.style.position = 'fixed'
+      }
     },
     async AddSite2() {
       var cnt = parseInt(this.addCount);
