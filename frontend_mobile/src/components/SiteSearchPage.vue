@@ -574,7 +574,6 @@ export default {
         if(preloader){
             preloader.classList.remove('opacity-50');
             preloader.classList.add('preloader-hide');
-            
         }
       },
   },
