@@ -109,7 +109,8 @@
                     <div v-if="chat.text==''" class="hide"></div>
                     <div v-else-if="chat.text.includes('[[') && chat.text.includes(']]') && chat.text.includes('emoji|')" class="chat-left">
                         <div class="">
-                            <img :src="'/static/images/emoji/' + (chat.text.replace('[[','').replace(']]','').split('|')[1])" style="max-width:100px;"/>
+                            <img v-if="(chat.text.replace('[[','').replace(']]','').split('|')[1]) == 'basic'" :src="'/static/images/emoji/' + (chat.text.replace('[[','').replace(']]','').split('|')[1])" style="max-width:100px;"/>
+                            <img v-else :src="'/static/images/emoji/' + (chat.text.replace('[[','').replace(']]','').split('|')[1])" style="max-width:120px;"/>
                         </div>
                         <span class="time">{{ timeForToday(chat.createdAt) }}</span>
                     </div>

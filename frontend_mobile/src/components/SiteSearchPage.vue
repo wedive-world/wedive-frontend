@@ -53,9 +53,6 @@
                     </div>
                     <div class="divider mt-3 mb-3"></div>
                 </div>
-                
-                
-                
             </div>
             
         </div>
@@ -241,6 +238,69 @@
     </div>
 
 
+
+    <div id="search-suggestion" 
+         class="menu menu-box-bottom menu-box-bottom-full rounded-0" 
+         data-menu-width="cover"
+         data-menu-height="cover"
+         style="margin-bottom: 0;">
+        
+        <div class="card rounded-0 bg-2" data-card-height="50" style="margin-bottom: 24px;">
+            <div class="card-top p-2">
+                <a v-on:click="chatSelectedList = [];selecteduser=null;query='';" href="#" class="close-menu icon icon-s rounded-l bg-theme color-theme "><i class="fa fa-arrow-left"></i></a>
+                <a href="" class="header-title color font-noto font-16">검색</a>
+            </div>
+        </div>
+        
+        <div class="card rounded-0 content">
+            <vue-typeahead-bootstrap
+                id="suggestion_typeahead"
+                class="wedive-search disable-search-result"
+                v-model="query_place"
+                :data="places"
+                :serializer="item => item"
+                :screen-reader-text-serializer="item => `${item}`"
+                highlightClass="special-highlight-class"
+                @hit="selecteduser = $event;enableNext2($event);"
+                :minMatchingChars="1"
+                placeholder="사이트, 포인트, 센터 (수영장)"
+                inputClass="special-input-class"
+                @input="lookupPlace"
+                >
+                <!--<template slot="suggestion" slot-scope="{ data, htmlText }">
+                    <div class="d-flex align-items-center" style="position:relative !important;">
+                    <div class="">
+                        <img
+                        class="rounded-s me-3"
+                        :src="(data.profileImages && data.profileImages.length>0) ? data.profileImages[0].thumbnailUrl : '/static/images/assets/chat.gif'"
+                        style="width: 50px; height: 50px;object-fit:cover;" />
+                    </div>
+                    <span class="ml-4" style="">
+                        <p class="font-noto font-16 mb-0">{{ data.nickName }}</p>
+                        <p class="font-13 mb-0 color-gray">{{ getDiverLevel(data.freeLicenseLevel, data.scubaLicenseLevel) }}</p>
+                    </span>
+                    
+                    </div>
+                </template>-->
+            </vue-typeahead-bootstrap>
+            <div class="content mt-0 mb-0" style="min-height: calc(100vh - 208px);padding-top:8px;padding-bottom:40px;">
+                <div v-for="item in places">
+                    <div class="map-box">
+                        <a v-on:click="selectSuggestion(item)">
+                            <div class="bx">
+                                <div class="justify-content-center mb-0 text-start" style="padding-top: 2px;">
+                                    <i class="fas fa-search font-16 pe-2 color-gray"></i>
+                                    <span class="pb-0 mb-0 line-height-m ellipsis"> {{ item }} </span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="divider mt-3 mb-3"></div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
   </div>
 </template>
 <script>
@@ -251,10 +311,100 @@ var searchParams = {};
 export default {
   name: 'HelloWorld',
   watch: {
-      
+      query: function(newVal, oldVal) {
+        if(localStorage.suggestionFlag && localStorage.suggestionFlag == '1') {
+            localStorage.suggestionFlag = '0';
+            console.log("lookupUser3");
+            this.lookupUser3();
+        } else {
+            this.openSuggestion();
+            this.query_place = JSON.parse(JSON.stringify(this.query)) + "";
+            setTimeout(function() {
+                $("#suggestion_typeahead > .input-group > input").focus();
+            }, 200)
+        }
+      },
   },
   
   methods: {
+      async lookupPlace() {
+        console.log("this.query_place = " + this.query_place);
+        if (this.query_place == '') {
+            this.places = [];
+        } else {
+            if (this.suggestions.length > 0) {
+                this.places = this.suggestions.filter(x => (x && x.includes(this.query_place)));
+            } else {
+                var headers = (localStorage.idToken) ? {countrycode: 'ko', idtoken: localStorage.idToken} : {countrycode: 'ko'};
+                var result = await axios({
+                    url: 'https://api.wedives.com/graphql',
+                    method: 'post',
+                    headers: headers,
+                    data: {
+                    query: `
+                        query Query($query: String!) {
+                           findSearchSuggestions(query: $query)
+                        }
+                        `,
+                        variables: {
+                            "query": this.query_place
+                        }
+                    }
+                });
+                if (result.data.data.findSearchSuggestions) {
+                    this.places = result.data.data.findSearchSuggestions;
+                }
+            }
+        }
+      },
+      removeSuggestSelected() {
+          console.log("removeSuggestSelected")
+      },
+      selectSuggestion(item) {
+          localStorage.suggestionFlag = '1';
+          this.query = item;
+          document.getElementById("search-suggestion").classList.remove('menu-active');
+          document.getElementsByClassName('menu-hider')[0].classList.remove('menu-active');
+          this.places = [];
+      },
+      openSuggestion() {
+            var menuData = "search-suggestion";
+            document.getElementById(menuData).classList.add('menu-active');
+            document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
+
+            
+            var menu = document.getElementById(menuData);
+            var menuEffect = menu.getAttribute('data-menu-effect');
+            var menuLeft = menu.classList.contains('menu-box-left');
+            var menuRight = menu.classList.contains('menu-box-right');
+            var menuTop = menu.classList.contains('menu-box-top');
+            var menuBottom = menu.classList.contains('menu-box-bottom');
+            var menuWidth = menu.offsetWidth;
+            var menuHeight = menu.offsetHeight;
+            var menuTimeout = menu.getAttribute('data-menu-hide');
+
+            if(menuTimeout){
+                setTimeout(function(){
+                    document.getElementById(menuData).classList.remove('menu-active');
+                    document.getElementsByClassName('menu-hider')[0].classList.remove('menu-active');
+                },menuTimeout)
+            }
+
+            if(menuEffect === "menu-push"){
+                var menuWidth = document.getElementById(menuData).getAttribute('data-menu-width');
+                if(menuLeft){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX("+menuWidth+"px)"}}
+                if(menuRight){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+menuWidth+"px)"}}
+                if(menuBottom){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY(-"+menuHeight+"px)"}}
+                if(menuTop){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY("+menuHeight+"px)"}}
+            }
+            if(menuEffect === "menu-parallax"){
+                var menuWidth = document.getElementById(menuData).getAttribute('data-menu-width');
+                if(menuLeft){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX("+menuWidth/10+"px)"}}
+                if(menuRight){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+menuWidth/10+"px)"}}
+                if(menuBottom){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY(-"+menuHeight/5+"px)"}}
+                if(menuTop){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY("+menuHeight/5+"px)"}}
+            }
+      },
       submit_filter() {
         searchParams = {};
         // admin Score
@@ -319,6 +469,12 @@ export default {
         
       },
       async lookupUser3() {
+        // progress bar
+        var preloader = document.getElementById('preloader')
+        if(preloader){
+            preloader.classList.remove('preloader-hide');
+            preloader.classList.add('opacity-50');
+        }
         this.users = [];
         var query = this.query;
         var _searchParams = JSON.parse(JSON.stringify(searchParams));
@@ -398,7 +554,7 @@ export default {
                 }
                 `,
                 variables: {
-                    "limit": 100,
+                    "limit": 10,
                     "searchParams": _searchParams
                 }
             }
@@ -414,6 +570,12 @@ export default {
         //if (result.data.data.searchDivePointsByName) result.data.data.searchDivePointsByName.forEach(x=>{x.type='point';result_list.push(x)});
         //if (result.data.data.searchDiveCentersByName) result.data.data.searchDiveCentersByName.forEach(x=>{x.type='center';result_list.push(x)});
         this.users = result_list;
+
+        if(preloader){
+            preloader.classList.remove('opacity-50');
+            preloader.classList.add('preloader-hide');
+            
+        }
       },
   },
   mounted() {
@@ -428,6 +590,15 @@ export default {
     setTimeout(function() {
         $("#input_query > .input-group > input").focus();
     },500);
+
+
+
+    ////////////
+    this.openSuggestion();
+
+    setTimeout(function() {
+        $("#suggestion_typeahead > .input-group > input").focus();
+    }, 500);
   },
   created() {
     setTimeout(function() {
@@ -439,8 +610,10 @@ export default {
   data () {
     return {
         query: '',
+        query_place: '',
         selecteduser: null,
         users: [],
+        places: [],
         check_star70: false,
         check_star80: false,
         check_star90: false,
@@ -466,6 +639,8 @@ export default {
         check_point2: false,
         check_point3: false,
         check_point4: false,
+        suggestSelectedList: [],
+        suggestions : (localStorage.suggestion ? JSON.parse(localStorage.suggestion) : []),
     }
   }
 

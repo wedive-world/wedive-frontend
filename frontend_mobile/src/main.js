@@ -140,7 +140,35 @@ new Vue({
 
 const userAgent = navigator.userAgent.toLowerCase();
 const userAuthKey = 'userAuth';
+var axios = require("axios");
 
+// searchSuggestion
+var currentTime = (new Date()).getTime();
+if (localStorage.suggestionDate == null) {
+  localStorage.suggestionDate = currentTime - 86400010;
+}
+var headers = (localStorage.idToken) ? {countrycode: 'ko', idtoken: localStorage.idToken} : {countrycode: 'ko'};
+if (currentTime - parseInt(localStorage.suggestionDate) > 86400000) {
+  axios({
+    url: 'https://api.wedives.com/graphql',
+    method: 'post',
+    headers: headers,
+    data: {
+        query: `
+            query Query {
+              getAllSearchSuggestions
+            }
+        `
+    }
+  }).then(function(result) {
+    localStorage.suggestionDate = currentTime;
+    if (result.data.data.getAllSearchSuggestions != null) {
+      localStorage.suggestion = JSON.stringify(result.data.data.getAllSearchSuggestions);
+    }
+  })
+}
+
+// Android
 try {
   if (userAgent.indexOf('android') !== -1) {
     const userInformation = JSON.parse(Android.getUserInformation());
@@ -152,7 +180,7 @@ try {
     if (userInformation.email) localStorage.userEmail = userInformation.email;
     if (userInformation.languageCode) localStorage.languageCode = userInformation.languageCode;
 
-    var axios = require("axios");
+    //var axios = require("axios");
     axios({
       url: 'https://api.wedives.com/graphql',
       method: 'post',
