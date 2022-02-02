@@ -33,6 +33,10 @@ export default [
         title: 'Center Excel',
         route: 'dashboard-center2',
       },
+      {
+        title: 'Recommendation',
+        route: 'dashboard-recommendation',
+      },
     ],
   },
 ]

@@ -19,6 +19,7 @@
                 
                 
                 <vue-typeahead-bootstrap
+                    id="search_typeahead"
                     v-model="query"
                     :data="users"
                     :serializer="item => item.name"
@@ -26,6 +27,8 @@
                     highlightClass="special-highlight-class"
                     @hit="selecteduser = $event;enableNext2($event);"
                     :minMatchingChars="2"
+                    :showAllResults="true"
+                    :maxMatches="30"
                     placeholder="사이트, 포인트, 센터 (수영장)"
                     inputClass="special-input-class"
                     @input="lookupUser3"
@@ -92,7 +95,7 @@
     <div id="menu-filter" class="menu menu-box-bottom" style="height:100%;border-radius: 0px !important;">
         <div class="menu-title mt-n1">
             <h2 class="pt-3 pb-3 mb-0 text-center">필터 선택</h2>
-            <a href="#" class="close-menu"><i class="wedive_icoset wedive_icoset_close"></i></a>
+            <a href="#" v-on:click="tour_flag=true;" class="close-menu"><i class="wedive_icoset wedive_icoset_close"></i></a>
         </div>
         <div class="content m-0 text-start" style="min-height:calc(100vh - 125px);">
             <div class="card card-style ms-0 me-0 rounded-0 mb-0">
@@ -287,7 +290,54 @@
         </div>
     </div>
 
-    <a id="btn_filter" data-menu="menu-filter" class="btn btn-m mb-3 rounded-xl font-900 shadow-s icon-filter" style="background-color: #181818;"></a>
+    <div id="search-suggestion" 
+         class="menu menu-box-bottom menu-box-bottom-full rounded-0" 
+         data-menu-width="cover"
+         data-menu-height="cover"
+         style="margin-bottom: 0;">
+        
+        <div class="card rounded-0 bg-2" data-card-height="50" style="margin-bottom: 24px;">
+            <div class="card-top p-2">
+                <a v-on:click="chatSelectedList = [];selecteduser=null;query='';" href="#" class="close-menu icon icon-s rounded-l bg-theme color-theme "><i class="fa fa-arrow-left"></i></a>
+                <a href="" class="header-title color font-noto font-16">검색</a>
+            </div>
+        </div>
+        
+        <div class="card rounded-0 content">
+            <vue-typeahead-bootstrap
+                id="suggestion_typeahead"
+                class="wedive-search disable-search-result"
+                v-model="query_place"
+                :data="places"
+                :serializer="item => item"
+                :screen-reader-text-serializer="item => `${item}`"
+                highlightClass="special-highlight-class"
+                @hit="selecteduser = $event;enableNext2($event);"
+                :minMatchingChars="1"
+                placeholder="사이트, 포인트, 센터 (수영장)"
+                inputClass="special-input-class"
+                @input="lookupPlace"
+                >
+            </vue-typeahead-bootstrap>
+            <div class="content mt-0 mb-0" style="min-height: calc(100vh - 208px);padding-top:8px;padding-bottom:40px;">
+                <div v-for="item in places">
+                    <div class="">
+                        <a v-on:click="selectSuggestion(item)">
+                            <div class="">
+                                <div class="justify-content-center mb-0 text-start" style="padding-top: 2px;">
+                                    <i class="fas fa-search font-16 pe-2 color-gray"></i>
+                                    <span class="pb-0 mb-0 line-height-m ellipsis"> {{ item }} </span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="divider mt-3 mb-3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a id="btn_filter" data-menu="menu-filter" v-on:click="tour_flag=false;" class="btn btn-m mb-3 rounded-xl font-900 shadow-s icon-filter" style="background-color: #181818;"></a>
     <a v-on:click="concierge" id="btn_new" class="btn btn-m mb-3 rounded-xl font-900 shadow-s icon-concierge" style="background-color: #181818;"></a>
   </div>
 </template>
@@ -310,6 +360,8 @@ var searchParams = {};
 var check_cate1 = true;
 var check_cate2 = true;
 var check_cate3 = true;
+
+var tour_flag = true;
 
 async function updateAll() {
     var bounds = map.getBounds();
@@ -393,7 +445,7 @@ async function updateAll() {
                 }
             `,
             variables: {
-                "limit": 50,
+                "limit": 10,
                 "searchParams": _searchParams,
             }
         }
@@ -542,18 +594,20 @@ async function updateAll() {
 
 function myCallback()
 {
-    var random_idx = Math.floor(Math.random() * (tour_list.length * 3));
-    if (random_idx < tour_list.length && $(((tour_list[random_idx].type == 'class') ? '.' : '#') + tour_list[random_idx].name).hasClass('hide') == false) {
-        $(((tour_list[random_idx].type == 'class') ? '.' : '#') + tour_list[random_idx].name).tooltip({
-            delay: 7000,
-            placement: tour_list[random_idx].position,
-            title: tour_list[random_idx].title,
-            html: true
-        });
-        $(((tour_list[random_idx].type == 'class') ? '.' : '#') + tour_list[random_idx].name).tooltip('show');
-        setTimeout(function(selector) {
-            $(selector).tooltip('hide');
-        },7000, (((tour_list[random_idx].type == 'class') ? '.' : '#') + tour_list[random_idx].name))
+    if (tour_flag) {
+        var random_idx = Math.floor(Math.random() * (tour_list.length * 3));
+        if (random_idx < tour_list.length && $(((tour_list[random_idx].type == 'class') ? '.' : '#') + tour_list[random_idx].name).hasClass('hide') == false) {
+            $(((tour_list[random_idx].type == 'class') ? '.' : '#') + tour_list[random_idx].name).tooltip({
+                delay: 7000,
+                placement: tour_list[random_idx].position,
+                title: tour_list[random_idx].title,
+                html: true
+            });
+            $(((tour_list[random_idx].type == 'class') ? '.' : '#') + tour_list[random_idx].name).tooltip('show');
+            setTimeout(function(selector) {
+                $(selector).tooltip('hide');
+            },7000, (((tour_list[random_idx].type == 'class') ? '.' : '#') + tour_list[random_idx].name))
+        }
     }
 }
 
@@ -794,9 +848,11 @@ export default {
   data () {
     return {
         query: '',
+        query_place: '',
         selecteduser: null,
         btn_new_html: '',
         users: [],
+        places: [],
         my_latitude: 37.56425754670452,
         my_longitude: 126.9741944890715,
         nickName: localStorage.nickName,
@@ -827,6 +883,8 @@ export default {
         check_point2: false,
         check_point3: false,
         check_point4: false,
+        suggestions : (localStorage.suggestion ? JSON.parse(localStorage.suggestion) : []),
+        tour_flag: true,
     }
   }, 
   watch: {
@@ -844,9 +902,109 @@ export default {
       check_cate3: function(newVal, oldVal) {
         check_cate3 = newVal;
       },
+      query: function(newVal, oldVal) {
+        if(localStorage.suggestionFlag && localStorage.suggestionFlag == '1') {
+            localStorage.suggestionFlag = '0';
+            
+            this.lookupUser3();
+        } else {
+            this.openSuggestion();
+            this.query_place = JSON.parse(JSON.stringify(this.query)) + "";
+            setTimeout(function() {
+                $("#suggestion_typeahead > .input-group > input").focus();
+            }, 200)
+        }
+      },
+      tour_flag: function(newVal, oldVal) {
+        tour_flag = newVal;
+      },
   },
   methods: {
+      async lookupPlace() {
+        //console.log("this.query_place = " + this.query_place);
+        if (this.query_place == '') {
+            this.places = [];
+        } else {
+            if (this.suggestions.length > 0) {
+                this.places = this.suggestions.filter(x => (x && x.includes(this.query_place)));
+            } else {
+                var headers = (localStorage.idToken) ? {countrycode: 'ko', idtoken: localStorage.idToken} : {countrycode: 'ko'};
+                var result = await axios({
+                    url: 'https://api.wedives.com/graphql',
+                    method: 'post',
+                    headers: headers,
+                    data: {
+                    query: `
+                        query Query($query: String!) {
+                           findSearchSuggestions(query: $query)
+                        }
+                        `,
+                        variables: {
+                            "query": this.query_place
+                        }
+                    }
+                });
+                if (result.data.data.findSearchSuggestions) {
+                    this.places = result.data.data.findSearchSuggestions;
+                }
+            }
+        }
+      },
+      removeSuggestSelected() {
+          //console.log("removeSuggestSelected")
+      },
+      selectSuggestion(item) {
+          localStorage.suggestionFlag = '1';
+          this.query = item;
+          document.getElementById("search-suggestion").classList.remove('menu-active');
+          document.getElementsByClassName('menu-hider')[0].classList.remove('menu-active');
+          this.places = [];
+          tour_flag = true;
+          setTimeout(function() {
+            $("#search_typeahead > .input-group > input").focus();
+          }, 200)
+      },
+      openSuggestion() {
+            tour_flag = false;
+            var menuData = "search-suggestion";
+            document.getElementById(menuData).classList.add('menu-active');
+            document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
+
+            
+            var menu = document.getElementById(menuData);
+            var menuEffect = menu.getAttribute('data-menu-effect');
+            var menuLeft = menu.classList.contains('menu-box-left');
+            var menuRight = menu.classList.contains('menu-box-right');
+            var menuTop = menu.classList.contains('menu-box-top');
+            var menuBottom = menu.classList.contains('menu-box-bottom');
+            var menuWidth = menu.offsetWidth;
+            var menuHeight = menu.offsetHeight;
+            var menuTimeout = menu.getAttribute('data-menu-hide');
+
+            if(menuTimeout){
+                setTimeout(function(){
+                    document.getElementById(menuData).classList.remove('menu-active');
+                    document.getElementsByClassName('menu-hider')[0].classList.remove('menu-active');
+                },menuTimeout)
+            }
+
+            if(menuEffect === "menu-push"){
+                var menuWidth = document.getElementById(menuData).getAttribute('data-menu-width');
+                if(menuLeft){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX("+menuWidth+"px)"}}
+                if(menuRight){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+menuWidth+"px)"}}
+                if(menuBottom){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY(-"+menuHeight+"px)"}}
+                if(menuTop){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY("+menuHeight+"px)"}}
+            }
+            if(menuEffect === "menu-parallax"){
+                var menuWidth = document.getElementById(menuData).getAttribute('data-menu-width');
+                if(menuLeft){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX("+menuWidth/10+"px)"}}
+                if(menuRight){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+menuWidth/10+"px)"}}
+                if(menuBottom){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY(-"+menuHeight/5+"px)"}}
+                if(menuTop){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY("+menuHeight/5+"px)"}}
+            }
+      },
       submit_filter() {
+        tour_flag = true;
         searchParams = {};
         // admin Score
         for (var i=0; i<3; i++) {
@@ -1000,7 +1158,7 @@ export default {
                     }
                 `,
                 variables: {
-                    "limit": 100,
+                    "limit": 10,
                     "searchParams": {
                         "query": query
                     }

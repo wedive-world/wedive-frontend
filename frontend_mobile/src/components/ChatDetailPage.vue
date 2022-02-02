@@ -138,7 +138,7 @@
                     
                 </div>
                 <div v-else>
-                    <div class="p-relative d-inline-block w-60 float-left">
+                    <div v-on:click="goUserDetail(chat.author)" class="p-relative d-inline-block w-60 float-left">
                         <div class="user-img">
                             <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
                                 <defs>
@@ -1266,6 +1266,33 @@ export default {
     speechContentClick() {
         this.is_emoji = false;
         this.is_attach = false;
+    },
+    async goUserDetail(user) {
+        if (user && user._id) {
+            var result = await axios({
+                url: 'https://api.wedives.com/graphql',
+                method: 'post',
+                headers: {
+                    countrycode: 'ko',
+                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                },
+                data: {
+                    query: `
+                        query GetUserByUid($uid: ID!) {
+                            getUserByUid(uid: $uid) {
+                                _id
+                            }
+                        }
+                    `,
+                    variables: {
+                        "uid": user._id
+                    }
+                }
+            });
+            // 자기 자신은 검색이 안되게 한다.
+            var user_info = result.data.data.getUserByUid;
+            location.href = '/user/' + user_info._id;
+        }
     }
   }
 

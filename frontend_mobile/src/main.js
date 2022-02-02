@@ -163,7 +163,21 @@ if (currentTime - parseInt(localStorage.suggestionDate) > 86400000) {
   }).then(function(result) {
     localStorage.suggestionDate = currentTime;
     if (result.data.data.getAllSearchSuggestions != null) {
-      localStorage.suggestion = JSON.stringify(result.data.data.getAllSearchSuggestions);
+      var tmp_list = result.data.data.getAllSearchSuggestions;
+      var tmp_result = new Array();
+      tmp_list.forEach(x => {
+        if (x == null || x == '') {
+          // skip
+        } else if (x.length == 10 && /^[a-z0-9][a-z0-9]*$/.test(x)) {
+          // skip
+        } else if (x.replace(/\$/gi, '') == '') {
+          // skip
+        } else {
+          tmp_result.push(x);
+        }
+      });
+      console.log(tmp_result)
+      localStorage.suggestion = JSON.stringify(tmp_result);
     }
   })
 }

@@ -36,7 +36,7 @@
                 <h2 class="font-20 font-700 mb-0 mt-1">{{ siteData.name }} 사이트</h2>
                 <h2 class="wedive-score">{{ (siteData.adminScore/20).toFixed(1) }}</h2>
                 <span class="wedive-score-desc">{{ recommend_word[parseInt(siteData.adminScore/20)] }}</span>
-                <p class="color-gray m-0"><i class="fas fa-map-marked-alt" ></i> 대한민국, 강원도</p>
+                <p class="color-gray m-0"><i class="fas fa-map-marked-alt" ></i> {{ siteData.address }}</p>
                 
                 <div class="evaluation d-flex mt-3">
                     <div class="flex-grow-1">

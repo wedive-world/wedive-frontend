@@ -267,21 +267,6 @@
                 inputClass="special-input-class"
                 @input="lookupPlace"
                 >
-                <!--<template slot="suggestion" slot-scope="{ data, htmlText }">
-                    <div class="d-flex align-items-center" style="position:relative !important;">
-                    <div class="">
-                        <img
-                        class="rounded-s me-3"
-                        :src="(data.profileImages && data.profileImages.length>0) ? data.profileImages[0].thumbnailUrl : '/static/images/assets/chat.gif'"
-                        style="width: 50px; height: 50px;object-fit:cover;" />
-                    </div>
-                    <span class="ml-4" style="">
-                        <p class="font-noto font-16 mb-0">{{ data.nickName }}</p>
-                        <p class="font-13 mb-0 color-gray">{{ getDiverLevel(data.freeLicenseLevel, data.scubaLicenseLevel) }}</p>
-                    </span>
-                    
-                    </div>
-                </template>-->
             </vue-typeahead-bootstrap>
             <div class="content mt-0 mb-0" style="min-height: calc(100vh - 208px);padding-top:8px;padding-bottom:40px;">
                 <div v-for="item in places">
@@ -299,8 +284,8 @@
                 </div>
             </div>
         </div>
-        
     </div>
+    
   </div>
 </template>
 <script>
@@ -314,7 +299,7 @@ export default {
       query: function(newVal, oldVal) {
         if(localStorage.suggestionFlag && localStorage.suggestionFlag == '1') {
             localStorage.suggestionFlag = '0';
-            console.log("lookupUser3");
+            
             this.lookupUser3();
         } else {
             this.openSuggestion();
@@ -328,7 +313,7 @@ export default {
   
   methods: {
       async lookupPlace() {
-        console.log("this.query_place = " + this.query_place);
+        //console.log("this.query_place = " + this.query_place);
         if (this.query_place == '') {
             this.places = [];
         } else {
@@ -358,7 +343,7 @@ export default {
         }
       },
       removeSuggestSelected() {
-          console.log("removeSuggestSelected")
+          //console.log("removeSuggestSelected")
       },
       selectSuggestion(item) {
           localStorage.suggestionFlag = '1';

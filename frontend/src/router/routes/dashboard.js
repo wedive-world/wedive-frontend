@@ -25,6 +25,11 @@ export default [
     component: () => import('@/views/dashboard/wedive/InterestAdd.vue'),
   },
   {
+    path: '/dashboard/recommendation',
+    name: 'dashboard-recommendation',
+    component: () => import('@/views/dashboard/wedive/RecommendationsList.vue'),
+  },
+  {
     path: '/dashboard/site2',
     name: 'dashboard-site2',
     component: () => import('@/views/dashboard/wedive/SiteExcel.vue'),

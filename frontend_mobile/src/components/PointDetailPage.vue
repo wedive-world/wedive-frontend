@@ -32,7 +32,7 @@
                 <h2 class="font-20 font-700 mb-0 mt-1">{{ pointData.name }} 포인트</h2>
                 <h2 class="wedive-score">{{ (pointData.adminScore/20).toFixed(1) }}</h2>
                 <span class="wedive-score-desc">{{ recommend_word[parseInt(pointData.adminScore/20)] }}</span>
-                <p class="color-gray m-0"><i class="fas fa-map-marked-alt" ></i> 대한민국, 제주도, 서귀포 사이트</p>
+                <p class="color-gray m-0"><i class="fas fa-map-marked-alt" ></i> {{ pointData.address }}</p>
                 
 
                 <div class="evaluation mt-3">
