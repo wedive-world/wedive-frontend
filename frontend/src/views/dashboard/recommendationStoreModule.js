@@ -7,7 +7,7 @@ export default {
   getters: {},
   mutations: {},
   actions: {
-    fetchRecommendation(ctx, queryParams) {
+    fetchRecommendations(ctx, queryParams) {
       return new Promise((resolve, reject) => {
         getAllRecommendations()
         .then(response => {
