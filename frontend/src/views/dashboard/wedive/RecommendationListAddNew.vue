@@ -1,7 +1,7 @@
 <template>
   <b-sidebar
-    id="add-new-recommenation-sidebar"
-    :visible="isAddNewRecommenationSidebarActive"
+    id="add-new-recommendation-sidebar"
+    :visible="isAddNewRecommendationSidebarActive"
     bg-variant="white"
     sidebar-class="sidebar-lg"
     shadow
@@ -9,13 +9,13 @@
     no-header
     right
     @hidden="resetForm"
-    @change="(val) => $emit('update:is-add-new-recommenation-sidebar-active', val)"
+    @change="(val) => $emit('update:is-add-new-recommendation-sidebar-active', val)"
   >
     <template #default="{ hide }">
       <!-- Header -->
       <div class="d-flex justify-content-between align-items-center content-sidebar-header px-2 py-1">
         <h5 class="mb-0">
-          Add New Recommenation
+          Add New Recommendation
         </h5>
 
         <feather-icon
@@ -38,24 +38,24 @@
           @submit.prevent="handleSubmit(onSubmit)"
           @reset.prevent="resetForm"
         >
-          <h4>현재상태</h4>
+          <h4>추천타입</h4>
           <!-- Status -->
           <validation-provider
             #default="validationContext"
-            name="publishStatus"
+            name="recommendationType"
             rules="required"
           >
             <b-form-group
-              label="상태선택"
-              label-for="publishStatus"
+              label="타입선택"
+              label-for="recommendationType"
               :state="getValidationState(validationContext)"
             >
               <v-select
-                v-model="recommenationData.publishStatus"
+                v-model="recommendationData.recommendationType"
                 :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
-                :options="statusOptions"
+                :options="recommendationType"
                 :clearable="false"
-                input-id="publishStatus"
+                input-id="recommendationType"
               />
               <b-form-invalid-feedback :state="getValidationState(validationContext)">
                 {{ validationContext.errors[0] }}
@@ -65,25 +65,421 @@
           
           <hr>
           <h4 class="mt-3">기본정보</h4>
-          <!-- URL -->
+          <!-- title -->
           <validation-provider
             #default="validationContext"
-            name="URL"
+            name="title"
             rules="required"
           >
             <b-form-group
-              label="URL"
-              label-for="url"
+              label="title"
+              label-for="title"
             >
               <b-form-input
-                id="url"
-                v-model="recommenationData.uniqueName"
+                id="title"
+                v-model="recommendationData.title"
                 autofocus
                 :state="getValidationState(validationContext)"
                 trim
-                placeholder="yangyang"
+                placeholder="제목"
               />
 
+              <b-form-invalid-feedback>
+                {{ validationContext.errors[0] }}
+              </b-form-invalid-feedback>
+            </b-form-group>
+          </validation-provider>
+
+          <!-- description -->
+          <validation-provider
+            #default="validationContext"
+            name="description"
+          >
+            <b-form-group
+              label="description"
+              label-for="description"
+            >
+              <b-form-input
+                id="description"
+                v-model="recommendationData.description"
+                autofocus
+                :state="getValidationState(validationContext)"
+                trim
+                placeholder="설명을 입력하세요."
+              />
+
+              <b-form-invalid-feedback>
+                {{ validationContext.errors[0] }}
+              </b-form-invalid-feedback>
+            </b-form-group>
+          </validation-provider>
+
+          <!-- cssStyle -->
+          <validation-provider
+            #default="validationContext"
+            name="cssStyle"
+          >
+            <b-form-group
+              label="cssStyle"
+              label-for="cssStyle"
+            >
+              <b-form-input
+                id="cssStyle"
+                v-model="recommendationData.cssStyle"
+                autofocus
+                :state="getValidationState(validationContext)"
+                trim
+                placeholder="cssStyle을 입력하세요."
+              />
+
+              <b-form-invalid-feedback>
+                {{ validationContext.errors[0] }}
+              </b-form-invalid-feedback>
+            </b-form-group>
+          </validation-provider>
+
+          <!-- previewCount -->
+          <validation-provider
+            #default="validationContext"
+            name="previewCount"
+            rules="required"
+          >
+            <b-form-group
+              label="previewCount"
+              label-for="previewCount"
+            >
+              <b-form-input
+                id="previewCount"
+                v-model="recommendationData.previewCount"
+                autofocus
+                :state="getValidationState(validationContext)"
+                type="number"
+                trim
+                placeholder="previewCount을 입력하세요."
+              />
+
+              <b-form-invalid-feedback>
+                {{ validationContext.errors[0] }}
+              </b-form-invalid-feedback>
+            </b-form-group>
+          </validation-provider>
+
+          <h4 class="mt-3">관심사항</h4>
+          <b-row
+            class="mb-1"
+          >
+            <b-col md="2" class="pr-0">
+              전체
+            </b-col>
+            <b-col md="10">
+              <v-select
+                v-model="interestSelectedTotal"
+                :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
+                multiple
+                label="title"
+                :options="interestData"
+              >
+              <template slot="option" slot-scope="option">
+                {{ option.title }} ({{option.type}})
+              </template>
+              </v-select>
+            </b-col>
+          </b-row>
+
+
+          <h4 class="mt-3">Arguments</h4>
+          <validation-provider
+            #default="validationContext"
+            name="arguments"
+            rules="required"
+          >
+            <b-form-group
+            >
+              <draggable :list="argumentItems" group="argumentItems" @start="drag=true" @end="drag=false">
+                <div v-for="(item, index) in argumentItems" style="cursor: move" :key="index">
+                  <!-- Row Loop -->
+                  <b-row
+                    :id="'arguments'+index"
+                    :key="'arguments'+index"
+                    ref="argumentRow"
+                    >
+
+                    <!-- Video ID -->
+                    <b-col md="11" class="pr-0">
+                        <b-form-group
+                        label="argument"
+                        :label-for="'argument'+index"
+                        >
+                        <b-form-input
+                            :id="'argument'+index"
+                            type="text"
+                            v-model="argumentItems[index]"
+                            placeholder="11자리 입력"
+                        />
+                        </b-form-group>
+                    </b-col>
+
+                    <!-- Remove Button -->
+                    <b-col
+                        md="1"
+                        class="mb-50"
+                    >
+                        <b-button
+                        variant="flat-danger"
+                        class="mt-0 mt-md-2 pl-0 pr-0"
+                        @click="argumentRemoveItem(index)"
+                        >
+                        <feather-icon
+                            icon="XIcon"
+                            class="mr-25"
+                        />
+                        </b-button>
+                    </b-col>
+                    <b-col cols="12">
+                        <hr class="mt-0" style="border-top: 1px dashed #ebe9f1 !important;">
+                    </b-col>
+                  </b-row>
+                </div>
+              </draggable>
+              <b-button
+                v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+                variant="flat-primary"
+                @click="argumentRepeateAgain"
+                >
+                <feather-icon
+                    icon="PlusIcon"
+                    class="mr-25"
+                />
+                <span>Add New argument</span>
+              </b-button>
+              <b-form-invalid-feedback>
+                {{ validationContext.errors[0] }}
+              </b-form-invalid-feedback>
+            </b-form-group>
+          </validation-provider>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <h4 class="mt-3">배경 이미지</h4>
+
+          <validation-provider
+            #default="validationContext"
+            name="backgroundImages"
+            rules="required"
+          >
+            <b-form-group
+            >
+              <draggable :list="backgroundItems" group="backgroundItems" @start="drag=true" @end="drag=false">
+                <div v-for="(item, index) in backgroundItems" style="cursor: move" :key="index">
+                  <!-- Row Loop -->
+                  <b-row
+                    :id="item.id"
+                    :key="item.id"
+                    ref="row"
+                    >
+
+                    <!-- File -->
+                    <b-col md="4" class="pr-0">
+                        <b-form-group
+                        label="파일"
+                        :label-for="'backgroundImages' + index"
+                        >
+                        <b-form-file
+                            :id="'backgroundImages' + index"
+                            v-model="item.file"
+                            placeholder="Choose or drop"
+                            drop-placeholder="Drop here"
+                            accept=".jpg,.jpeg,.png"
+                        />
+                        </b-form-group>
+                    </b-col>
+
+                    <!-- File Reference -->
+                    <b-col md="3" class="pr-0">
+                        <b-form-group
+                        label="출처"
+                        :label-for="'backgroundImagesRef'+index"
+                        >
+                        <b-form-input
+                            :id="'backgroundImagesRef'+index"
+                            v-model="item.reference"
+                            type="text"
+                            placeholder=""
+                        />
+                        </b-form-group>
+                    </b-col>
+
+                    <!-- File Name -->
+                    <b-col md="4" class="pr-0">
+                        <b-form-group
+                        label="이름"
+                        :label-for="'backgroundImagesName'+index"
+                        >
+                        <b-form-input
+                            :id="'backgroundImagesName'+index"
+                            v-model="item.description"
+                            type="text"
+                            placeholder=""
+                        />
+                        </b-form-group>
+                    </b-col>
+
+                  
+
+                    <!-- Remove Button -->
+                    <b-col
+                        md="1"
+                        class="mb-50"
+                    >
+                        <b-button
+                        variant="flat-danger"
+                        class="mt-0 mt-md-2 pl-0 pr-0"
+                        @click="backgroundRemoveItem(index)"
+                        >
+                        <feather-icon
+                            icon="XIcon"
+                            class="mr-25"
+                        />
+                        </b-button>
+                    </b-col>
+                    <b-col cols="12">
+                        <hr class="mt-0" style="border-top: 1px dashed #ebe9f1 !important;">
+                    </b-col>
+                  </b-row>
+                </div>
+              </draggable>
+              <b-button
+                v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+                variant="flat-primary"
+                @click="backgroundRepeateAgain"
+                >
+                <feather-icon
+                    icon="PlusIcon"
+                    class="mr-25"
+                />
+                <span>Add New Background Image</span>
+              </b-button>
+              <b-form-invalid-feedback>
+                {{ validationContext.errors[0] }}
+              </b-form-invalid-feedback>
+            </b-form-group>
+          </validation-provider>
+
+
+
+
+
+          <h4 class="mt-3">내용 이미지</h4>
+
+          <validation-provider
+            #default="validationContext"
+            name="images"
+            rules="required"
+          >
+            <b-form-group
+            >
+              <draggable :list="imageItems" group="imageItems" @start="drag=true" @end="drag=false">
+                <div v-for="(item, index) in imageItems" style="cursor: move" :key="index">
+                  <!-- Row Loop -->
+                  <b-row
+                    :id="item.id"
+                    :key="item.id"
+                    ref="row"
+                    >
+
+                    <!-- File -->
+                    <b-col md="4" class="pr-0">
+                        <b-form-group
+                        label="파일"
+                        :label-for="'images' + index"
+                        >
+                        <b-form-file
+                            :id="'images' + index"
+                            v-model="item.file"
+                            placeholder="Choose or drop"
+                            drop-placeholder="Drop here"
+                            accept=".jpg,.jpeg,.png"
+                        />
+                        </b-form-group>
+                    </b-col>
+
+                    <!-- File Reference -->
+                    <b-col md="3" class="pr-0">
+                        <b-form-group
+                        label="출처"
+                        :label-for="'imagesRef'+index"
+                        >
+                        <b-form-input
+                            :id="'imagesRef'+index"
+                            v-model="item.reference"
+                            type="text"
+                            placeholder=""
+                        />
+                        </b-form-group>
+                    </b-col>
+
+                    <!-- File Name -->
+                    <b-col md="4" class="pr-0">
+                        <b-form-group
+                        label="이름"
+                        :label-for="'imagesName'+index"
+                        >
+                        <b-form-input
+                            :id="'imagesName'+index"
+                            v-model="item.description"
+                            type="text"
+                            placeholder=""
+                        />
+                        </b-form-group>
+                    </b-col>
+
+                  
+
+                    <!-- Remove Button -->
+                    <b-col
+                        md="1"
+                        class="mb-50"
+                    >
+                        <b-button
+                        variant="flat-danger"
+                        class="mt-0 mt-md-2 pl-0 pr-0"
+                        @click="imageRemoveItem(index)"
+                        >
+                        <feather-icon
+                            icon="XIcon"
+                            class="mr-25"
+                        />
+                        </b-button>
+                    </b-col>
+                    <b-col cols="12">
+                        <hr class="mt-0" style="border-top: 1px dashed #ebe9f1 !important;">
+                    </b-col>
+                  </b-row>
+                </div>
+              </draggable>
+              <b-button
+                v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+                variant="flat-primary"
+                @click="imageRepeateAgain"
+                >
+                <feather-icon
+                    icon="PlusIcon"
+                    class="mr-25"
+                />
+                <span>Add New Image</span>
+              </b-button>
               <b-form-invalid-feedback>
                 {{ validationContext.errors[0] }}
               </b-form-invalid-feedback>
@@ -134,56 +530,22 @@ import Ripple from 'vue-ripple-directive'
 import vSelect from 'vue-select'
 import draggable from 'vuedraggable'
 import store from '@/store'
-const { upsertRcommenation } = require('@/wedive-frontend-graphql/recommendation-service')
+const { upsertRecommendation } = require('@/wedive-frontend-graphql/recommendation-service')
 const { uploadSingleImage, updateImage, getImageUrl } = require('@/wedive-frontend-graphql/image-service')
 const { upsertHighlight, deleteHighlightById } = require('@/wedive-frontend-graphql/highlight-service')
 
 const enumPopularity = ["nothing", "unrecommended", "soso", "popular"];
 const enumClimate = ["nothing", "sunny", "cloudy", "rain", "heavyRain"];
-const blankRecommenationData = {
+const blankRecommendationData = {
   _id: null,
-  address: '',
-  latitude: '',
-  longitude: '',
-  countryCode: 'kr',
-  name: '',
-  uniqueName: '',
+  title: '',
   description: '',
+  cssStyle: '',
+  previewCount: 0,
   images: [],
   backgroundImages: [],
-  youtubeVideoIds: [],
-  referenceUrls: [],
-  memo: '',
-  publishStatus: 'inactive',
-  month1: [],
-  month2: [],
-  month3: [],
-  month4: [],
-  month5: [],
-  month6: [],
-  month7: [],
-  month8: [],
-  month9: [],
-  month10: [],
-  month11: [],
-  month12: [],
-  waterTemperatureScore: 0,
-  adminScore: 70,
-  visitTimeDescription: '',
-  waterTemperatureDescription: '',
-  deepDescription: '',
-  waterFlowDescription: '',
-  eyeSightDescription: '',
-  highlightDescription: '',
-  highlights: [],
-  
-  
-  
-  
-  scubaIndex: '',
-  seaTemperature: '',
-  monthlyPopular: [0, 2, 1, 1, 1, 2, 3, 3, 3, 3, 2, 1, 1],
-  monthlyWeather: [0, 2, 2, 2, 2, 2, 2, 1, 3, 3, 2, 2, 2],
+  arguements: [],
+  recommendationType: 'new',
 };
 
 
@@ -211,11 +573,11 @@ export default {
     Ripple,
   },
   model: {
-    prop: 'isAddNewRecommenationSidebarActive',
-    event: 'update:is-add-new-recommenation-sidebar-active',
+    prop: 'isAddNewRecommendationSidebarActive',
+    event: 'update:is-add-new-recommendation-sidebar-active',
   },
   props: {
-    isAddNewRecommenationSidebarActive: {
+    isAddNewRecommendationSidebarActive: {
       type: Boolean,
       required: true,
     },
@@ -227,7 +589,7 @@ export default {
       type: Array,
       required: true,
     },
-    /*recommenationData: {
+    /*recommendationData: {
       type: Object,
       required: true,
     },*/
@@ -237,12 +599,11 @@ export default {
       interest_types: [],
       required,
       alphaNum,
-      statusOptions: ['pending', 'active', 'inactive', 'deleted',],
-      khoaOptions : ['동명항', '남애항', '강문해변', '오산항', '울릉도', '월포해수욕장', '구조리해수욕장', '미조도', '거문도', '홍도', '제주-성산일출봉', '제주-어멍(북부)', '제주-문섬'],
-      seaTempOptions: ['강릉 (강원도)/kang-neung', '속초 (강원도)/sogcho', '동해 (강원도)/tonghae', '인천/incheon', '고양 (왜있지)/goyang', '안산 (경기도)/ansan', '화성 (경기도)/hwaseong', '포항/hoko', '울산/ulsan', '부산/busan', '진해 (창원)/chinhae', '마산/masan', '거제/kyosai', '여수/reisui', '순천/sunchun', '군산 (전라북도)/kunsan', '목포 (전라남도)/moppo', '신안 (전라남도)/sinan', '태안 (충청남도)/taesal-li', '제주-어영(북서부)/gaigeturi', '제주-제주시(북부)/jeju'],
+      recommendationType: ['interest', 'new', 'onePersonLeft', 'custom', 'search', 'nearBy',],
       backgroundItems: [],
+      imageItems: [],
       highlightItems: [],
-      youtubeItems: [],
+      argumentItems: [],
       referenceItems: [],
       interestSelectedTotal: [],
       interestSelected: [],
@@ -250,16 +611,16 @@ export default {
     }
   },
   setup(props, { emit }) {
-    const recommenationData = JSON.parse(JSON.stringify(blankRecommenationData))
-    const resetRecommenationData = () => {
-      //recommenationData = JSON.parse(JSON.stringify(blankRecommenationData))
+    const recommendationData = JSON.parse(JSON.stringify(blankRecommendationData))
+    const resetRecommendationData = () => {
+      //recommendationData = JSON.parse(JSON.stringify(blankRecommendationData))
     }
 
     const onSubmit = () => {
-      /*store.dispatch('app-recommenation/addRecommenation', recommenationData)
+      /*store.dispatch('app-recommendation/addRecommendation', recommendationData)
         .then(() => {
           emit('refetch-data')
-          emit('update:is-add-new-recommenation-sidebar-active', false)
+          emit('update:is-add-new-recommendation-sidebar-active', false)
         })*/
     }
 
@@ -267,10 +628,10 @@ export default {
       refFormObserver,
       getValidationState,
       resetForm,
-    } = formValidation(resetRecommenationData)
+    } = formValidation(resetRecommendationData)
 
     return {
-      recommenationData,
+      recommendationData,
       onSubmit,
 
       refFormObserver,
@@ -279,23 +640,23 @@ export default {
     }
   },
   methods: {
-    setRecommenationData: function(_data) {
-      this.recommenationData = JSON.parse(JSON.stringify(blankRecommenationData));
+    setRecommendationData: function(_data) {
+      this.recommendationData = JSON.parse(JSON.stringify(blankRecommendationData));
       this.backgroundItems = [];
       this.highlightItems = [];
-      this.youtubeItems = [];
+      this.argumentItems = [];
       this.referenceItems = [];
 
 
-      for (var key in this.recommenationData) {
+      for (var key in this.recommendationData) {
         if (_data[key]) {
           if (key.includes('month')) {
             if (_data[key] != null) {
               _data[key].map((item, index) => {
                 if (item.type == 'climate') {
-                  this.recommenationData.monthlyWeather[index+1] = enumClimate.findIndex((climate) => climate === item.title);
+                  this.recommendationData.monthlyWeather[index+1] = enumClimate.findIndex((climate) => climate === item.title);
                 } else if (item.type == 'popularity') {
-                  this.recommenationData.monthlyPopular[index+1] = enumPopularity.findIndex((popularity) => popularity === item.title)
+                  this.recommendationData.monthlyPopular[index+1] = enumPopularity.findIndex((popularity) => popularity === item.title)
                 }
               })
             }
@@ -307,11 +668,11 @@ export default {
             _data[key].forEach(highlight=>{
               this.highlightItems.push(highlight);
             });
-            this.recommenationData[key] = _data[key];
-          } else if (key == 'youtubeVideoIds') {
+            this.recommendationData[key] = _data[key];
+          } else if (key == 'argumentIds') {
             if (_data[key]) {
-              _data[key].map(youtube=>{
-                this.youtubeItems.push(youtube);
+              _data[key].map(argument=>{
+                this.argumentItems.push(argument);
               });
             }
           } else if (key == 'referenceUrls') {
@@ -321,7 +682,7 @@ export default {
               });
             }
           } else {
-            this.recommenationData[key] = _data[key];
+            this.recommendationData[key] = _data[key];
           }
         }
       }
@@ -353,10 +714,10 @@ export default {
           for (var j=0; j<_data["month"+i].length; j++) {
             var _id = _data["month"+i][j]._id;
             if (popularity_id_list.hasOwnProperty(_id)) {
-              this.recommenationData.monthlyPopular[i] = popularity_id_list[_id];
+              this.recommendationData.monthlyPopular[i] = popularity_id_list[_id];
             }
             if (climate_id_list.hasOwnProperty(_id)) {
-              this.recommenationData.monthlyWeather[i] = climate_id_list[_id];
+              this.recommendationData.monthlyWeather[i] = climate_id_list[_id];
             }
           }
         }
@@ -383,37 +744,26 @@ export default {
       }
       this.backgroundItems.splice(index, 1);
     },
-    highlightRepeateAgain() {
-      this.highlightItems.push({name: "", description: "", images: []});
+    imageRepeateAgain() {
+      this.imageItems.push({reference: "", description: "", file: null});
     },
-    async highlightRemoveItem(index) {
-      var id = this.highlightItems[index]._id;
-      if (id != null) {
-        var result = await deleteHighlightById(id);
-      }
-      this.highlightItems.splice(index, 1);
-    },
-
-
-    highlightImageRepeateAgain(index) {
-      this.highlightItems[index].images.push({reference: "", description: "", file: null});
-    },
-    async highlightImageRemoveItem(index, index2) {
-      var id = this.highlightItems[index].images[index2]._id;
+    async imageRemoveItem(index) {
+      var id = this.imageItems[index]._id;
       if (id != null) {
         // jjangs 여기 구현 필요
         //var result = await deleteImageById(id);
         //console.log(result);
       }
-      var id = this.highlightItems[index].images.splice(index2, 1);      
+      this.imageItems.splice(index, 1);
     },
+    
 
 
-    youtubeRepeateAgain() {
-      this.youtubeItems.push('');
+    argumentRepeateAgain() {
+      this.argumentItems.push('');
     },
-    youtubeRemoveItem(index) {
-      this.youtubeItems.splice(index, 1)
+    argumentRemoveItem(index) {
+      this.argumentItems.splice(index, 1)
     },
     referenceRepeateAgain() {
       this.referenceItems.push('');
@@ -430,54 +780,12 @@ export default {
           this.$swal.showLoading();
         }
       });
-      var _recommenationData = JSON.parse(JSON.stringify(this.recommenationData));
-      if (_recommenationData.latitude == '' || _recommenationData.longitude == '') {
-        this.$swal({
-          title: 'Error!',
-          text: 'Please input latitude and longitude!!',
-          icon: 'error',
-          customClass: {
-            confirmButton: 'btn btn-primary',
-          },
-          buttonsStyling: false,
-        })
-        return false;
-      }
-      _recommenationData.latitude = parseFloat(_recommenationData.latitude);
-      _recommenationData.longitude = parseFloat(_recommenationData.longitude);
-
-
-      // 하이라이트
-      {
-        _recommenationData.highlights = [];
-        for (var i=0; i<this.highlightItems.length; i++) {
-          var highlight_id_list = [];
-          for (var j=0; j<this.highlightItems[i].images.length; j++) {
-            if (this.highlightItems[i].images[j].file != null) {
-              var result = await uploadSingleImage(this.highlightItems[i].images[j].file);
-              this.highlightItems[i].images[j]._id = result.uploadImage._id;
-              this.highlightItems[i].images[j].name = this.highlightItems[i].images[j].file.name;
-            }
-            delete this.highlightItems[i].images[j].file;
-            this.highlightItems[i].images[j].uploaderId = 'apneaofficer';
-            var result2 = await updateImage(this.highlightItems[i].images[j]);
-            highlight_id_list.push(result2.updateImage._id);
-          }
-          // delete images
-          delete this.highlightItems[i].images;
-          this.highlightItems[i].images = [];
-          for (var j=0; j<highlight_id_list.length; j++) {
-            this.highlightItems[i].images.push(highlight_id_list[j]);
-          }
-          // add highlight
-          var result = await upsertHighlight(this.highlightItems[i]);
-          _recommenationData.highlights.push(result.upsertHighlight._id);
-        }
-      }
+      var _recommendationData = JSON.parse(JSON.stringify(this.recommendationData));
+      
       
       // 백그라운드 이미지
       {
-        _recommenationData.backgroundImages = [];
+        _recommendationData.backgroundImages = [];
         for (var i=0; i<this.backgroundItems.length; i++) {
           // Upload Image first
           if (this.backgroundItems[i].file != null) {
@@ -489,83 +797,46 @@ export default {
           delete this.backgroundItems[i].file;
           this.backgroundItems[i].uploaderId = 'apneaofficer';
           var result2 = await updateImage(this.backgroundItems[i]);
-          _recommenationData.backgroundImages.push(result2.updateImage._id);
+          _recommendationData.backgroundImages.push(result2.updateImage._id);
         }
       }
 
-      // 월별 인기도 및 날씨 정보 입력
+
+      // 이미지
       {
-        var popular_id = this.interestData.filter(interest=>interest.type=='popularity' && interest.title=='popular')[0]._id
-        var soso_id = this.interestData.filter(interest=>interest.type=='popularity' && interest.title=='soso')[0]._id
-        var unrecommended_id = this.interestData.filter(interest=>interest.type=='popularity' && interest.title=='unrecommended')[0]._id
-        var popularity_id_list = {popular_id: popular_id, soso_id: soso_id, unrecommended_id: unrecommended_id};
-
-        var sunny_id = this.interestData.filter(interest=>interest.type=='climate' && interest.title=='sunny')[0]._id
-        var cloudy_id = this.interestData.filter(interest=>interest.type=='climate' && interest.title=='cloudy')[0]._id
-        var rain_id = this.interestData.filter(interest=>interest.type=='climate' && interest.title=='rain')[0]._id
-        var heavyRain_id = this.interestData.filter(interest=>interest.type=='climate' && interest.title=='heavyRain')[0]._id
-        var climate_id_list = {sunny_id: sunny_id, cloudy_id: cloudy_id, rain_id: rain_id, heavyRain_id: heavyRain_id};
-        var arr_popularity_climate = [popular_id, soso_id, unrecommended_id, sunny_id, cloudy_id, rain_id, heavyRain_id];
-
-        for (var i=1; i<13; i++) {
-          var _id_list = [];
-          for (var j=0; j<_recommenationData["month" + i].length; j++) {
-            if (typeof(_recommenationData["month" + i][j] == 'object')) {
-              if (arr_popularity_climate.includes(_recommenationData["month" + i][j]._id) == false)
-                _id_list.push(_recommenationData["month" + i][j]._id);
-            }
+        _recommendationData.images = [];
+        for (var i=0; i<this.imageItems.length; i++) {
+          // Upload Image first
+          if (this.imageItems[i].file != null) {
+            var result = await uploadSingleImage(this.imageItems[i].file);
+            this.imageItems[i]._id = result.uploadImage._id;
+            this.imageItems[i].name = this.imageItems[i].file.name;
           }
-          delete _recommenationData["month" + i];
-          _recommenationData["month" + i] = _id_list;
+          
+          delete this.imageItems[i].file;
+          this.imageItems[i].uploaderId = 'apneaofficer';
+          var result2 = await updateImage(this.imageItems[i]);
+          _recommendationData.images.push(result2.updateImage._id);
         }
-
-        _recommenationData.latitude = parseFloat(_recommenationData.latitude);
-        _recommenationData.longitude = parseFloat(_recommenationData.longitude);
-        
-
-        _recommenationData.monthlyPopular.map((pop, index) => {
-          if (pop != 0) { // skip 0
-            _recommenationData["month"+index].push(popularity_id_list[enumPopularity[pop]+'_id'])
-          }
-        })
-
-        _recommenationData.monthlyWeather.map((cli, index) => {
-          if (cli != 0) { // skip 0
-            _recommenationData["month"+index].push(climate_id_list[enumClimate[cli]+'_id'])
-          }
-        })
       }
+
       
       // 전체 인터레스트 입력
-      _recommenationData.interests = [];
+      _recommendationData.interests = [];
       this.interestSelectedTotal.map(interest => {
-        _recommenationData.interests.push(interest._id);
+        _recommendationData.interests.push(interest._id);
       })
 
-      // youtubeVideoIds
-      _recommenationData.youtubeVideoIds = [];
-      for (var i=0; i<this.youtubeItems.length; i++) {
-        _recommenationData.youtubeVideoIds.push(this.youtubeItems[i]);
+      // argumentVideoIds
+      _recommendationData.argumentVideoIds = [];
+      for (var i=0; i<this.argumentItems.length; i++) {
+        _recommendationData.argumentVideoIds.push(this.argumentItems[i]);
       }
-
-      // referenceUrls
-      _recommenationData.referenceUrls = [];
-      for (var i=0; i<this.referenceItems.length; i++) {
-        _recommenationData.referenceUrls.push(this.referenceItems[i]);
-      }
+      if (_recommendationData._id == null) delete _recommendationData._id;
       
-
-      if (_recommenationData._id == null) delete _recommenationData._id;
-      delete _recommenationData.scubaIndex;
-      delete _recommenationData.seaTemperature;
-
-      delete _recommenationData.monthlyPopular;
-      delete _recommenationData.monthlyWeather;
-
-      
+      console.log(_recommendationData);
       try {
-        _recommenationData.adminScore = parseInt(_recommenationData.adminScore);
-        await upsertRecommenation(_recommenationData);
+        await upsertRecommendation(_recommendationData);
       } catch (e) {
         this.$swal({
           title: 'Error!',
@@ -578,10 +849,10 @@ export default {
         })
       }
       
-      this.$emit('update:is-add-new-recommenation-sidebar-active', false)
-      this.recommenationData = JSON.parse(JSON.stringify(blankRecommenationData));
+      this.$emit('update:is-add-new-recommendation-sidebar-active', false)
+      this.recommendationData = JSON.parse(JSON.stringify(blankRecommendationData));
 
-      location.reload();
+      //location.reload();
     },
   },
 }
@@ -590,7 +861,7 @@ export default {
 <style lang="scss">
 @import '@core/scss/vue/libs/vue-select.scss';
 
-#add-new-recommenation-sidebar {
+#add-new-recommendation-sidebar {
   .vs__dropdown-menu {
     max-height: 200px !important;
   }
