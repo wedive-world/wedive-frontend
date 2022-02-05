@@ -1081,7 +1081,7 @@
             <div class="color-primary font-noto font-20 font-600">{{ this.open_insti }}</div>
         </div>
         <div class="content row mt-0 mb-0" style="display:inline-block;">
-            <div id="institutionBottomSheetContent"></div>
+            <div id="institutionBottomSheetContent" style="min-height:250px;"></div>
         </div>
     </vue-bottom-sheet>
 
@@ -1672,13 +1672,14 @@ export default {
             this.open_insti = insti;
 
             var menuLoad = '/static/images/agency/'+(this.open_insti ? this.open_insti.toLowerCase().replace('/','_'): 'empty')+'.html';
+            console.log(menuLoad);
             var institutionBottomSheetContent = document.getElementById('institutionBottomSheetContent');
             console.log(menuLoad);
             fetch(menuLoad)
             .then(data => data.text())
             .then(html => institutionBottomSheetContent.innerHTML = html)
             .then(data => {
-                if (data.indexOf("<img") == 0) {
+                if (data.indexOf("<a") == 0) {
                     this.$refs.institutionBottomSheet.open();
                     $('[data-toggle="tooltip"]').tooltip()
                 } else {
