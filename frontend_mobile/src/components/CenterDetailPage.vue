@@ -33,6 +33,7 @@
         <div class="card card-style" style="margin-top:-40px; z-index:1">
             <div class="content text-center mt-4">
                 <h2 class="font-20 font-700 mb-1 mt-1">{{ centerData.name }}</h2>
+                <span data-container="body" data-toggle="tooltip" data-placement="top" title="STA(Static Apnea) : 수면에서 숨참기">1'15" STA</span>
                 <p class="text-start color-gray m-0" style="line-height: 1.5;">{{ centerData.description }}</p>
                 <div class="wedive-star-back">
                   <div class="wedive-star-front" v-bind:style="'width:'+(centerData.adminScore-3)+'%'">
@@ -1083,14 +1084,12 @@
         <div class="content row mt-0 mb-0" style="display:inline-block;">
               <img src="/static/images/agency/logo_aida.svg" style="width:110px;float:left;padding-top:8px;padding-bottom:8px;border: 1px solid lightgray;margin-right:16px;"/>
               AIDA는 1992년 설립된 세계 프리다이빙 호흡참기 대회의 규칙을 제정하고 기록을 관리하는 기구입니다. 공식 세계기록 관리 뿐만 아니라 교육 등에 대한 국제 표준을 관리하는 역할도 하고 있습니다.
+              <h5 class="p-0 mt-2 font-14">[ 프리다이빙 레벨 ]</h5>
               <table class="table table-borderless text-center rounded-3 shadow-sm mt-1 font-noto border-08">
-                <tr class="border-bottom pt-1 pb-1"><th class="font-500" style="background: rgba(196, 187, 171, 0.2);">레벨 1</th><td class="text-start ps-2">8m CWT, 1'15" STA, 25m DYN</td></tr>
+                <tr class="border-bottom pt-1 pb-1"><th class="font-500" style="background: rgba(196, 187, 171, 0.2);">레벨 1</th><td class="text-start ps-2">8m CWT, <span data-toggle="tooltip" data-placement="top" title="STA(Static Apnea) : 수면에서 숨참기">1'15" STA</span>, 25m DYN</td></tr>
                 <tr class="border-bottom pt-1 pb-1"><th class="font-500" style="background: rgba(196, 187, 171, 0.2);">레벨 2</th><td class="text-start ps-2">16m CWT, 2' STA, 40m DYN</td></tr>
                 <tr class="border-bottom pt-1 pb-1"><th class="font-500" style="background: rgba(196, 187, 171, 0.2);">레벨 3</th><td class="text-start ps-2">24m CWT, 2'45" STA, 55m DYN</td></tr>
                 <tr class="border-bottom pt-1 pb-1"><th class="font-500" style="background: rgba(196, 187, 171, 0.2);">레벨 4</th><td class="text-start ps-2">32m CWT, 3'30" STA, 70m DYN</td></tr>
-                <tr class="border-bottom pt-1 pb-1"><th class="font-500" style="background: rgba(196, 187, 171, 0.2);">AIDA 강사</th><td class="text-start ps-2">AIDA 레벨 3까지 강습 가능</td></tr>
-                <tr class="border-bottom pt-1 pb-1"><th class="font-500" style="background: rgba(196, 187, 171, 0.2);">AIDA 마스터</th><td class="text-start ps-2">AIDA 레벨 4까지 강습 가능</td></tr>
-                <tr class="border-bottom pt-1 pb-1"><th class="font-500" style="background: rgba(196, 187, 171, 0.2);">AIDA 트레이너</th><td class="text-start ps-2">모든 AIDA 레벨 및 강사 강습 가능</td></tr>
               </table>
         </div>
     </vue-bottom-sheet>

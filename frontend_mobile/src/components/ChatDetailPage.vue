@@ -105,7 +105,7 @@
     <div v-on:click="speechContentClick()" v-on:scroll="handleScroll" id="speech-content" class="card card-style ms-0 me-0 rounded-0" :style="'height: calc(100vh - 50px);overflow-y: auto;padding-top:'+(is_concierge?'130':'50')+'px;padding-bottom:50px;'">
         <div class="content">
             <div v-for="(chat, index) in getMessagesByRoomId">
-                <div v-if="chat && chat.author && chat.author._id == uid">
+                <div v-if="chat && chat.author && chat.author.uid == uid">
                     <div v-if="chat.text==''" class="hide"></div>
                     <div v-else-if="chat.text.includes('[[') && chat.text.includes(']]') && chat.text.includes('emoji|')" class="chat-left">
                         <div class="">
@@ -336,7 +336,7 @@
                         <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(user.avatarOrigin)?user.avatarOrigin:'/static/images/assets/chat.gif'"/>
                     </svg>
                     <div class="ms-2 d-inline-block v-align-top">
-                        <span v-if="user._id == uid" style="display: inline-block;padding: 1px 6px;background: #e1e2e3;border-radius: 6px;">나</span>
+                        <span v-if="user.uid == uid" style="display: inline-block;padding: 1px 6px;background: #e1e2e3;border-radius: 6px;">나</span>
                         <h5 style="display: inline-block;" class="font-15 font-600 mb-0 mt-2">{{ user.name }}</h5>
                     </div>
                 </div>
@@ -549,6 +549,7 @@ export default {
                     createdAt
                     chatUsers {
                     _id
+                    uid
                     name
                     avatarOrigin
                     }
@@ -570,8 +571,8 @@ export default {
         result ({ data }) {
             try {
                 var roomInfo = this.getJoinedRoomList.filter(x=>x._id==this.roomId)[0];
-                this.roomName = roomInfo.type == 'direct' ? roomInfo.chatUsers.filter(user => user._id != localStorage.uid)[0].name : roomInfo.name;
-                if (roomInfo.type == 'direct' && roomInfo.chatUsers.filter(user => user._id != localStorage.uid)[0]._id == 'RuOiMt9YUTbRUJQTrXv4cWMEimr2') {
+                this.roomName = roomInfo.type == 'direct' ? roomInfo.chatUsers.filter(user => user.uid != localStorage.uid)[0].name : roomInfo.name;
+                if (roomInfo.type == 'direct' && roomInfo.chatUsers.filter(user => user.uid != localStorage.uid)[0].uid == 'RuOiMt9YUTbRUJQTrXv4cWMEimr2') {
                     this.is_concierge = true;
                 }
             } catch(e) {
@@ -585,6 +586,7 @@ export default {
                 _id
                 text
                 author {
+                uid
                 _id
                 name
                 avatarOrigin
@@ -613,6 +615,7 @@ export default {
                     _id
                     text
                     author {
+                    uid
                     _id
                     name
                     avatarOrigin
@@ -953,7 +956,7 @@ export default {
     removeChatSelected(user) {
         for (var i=0; i<this.chatSelectedList.length; i++) {
             var x = this.chatSelectedList[i];
-            if (x._id == user._id) {
+            if (x.uid == user.uid) {
                 this.chatSelectedList.splice(i, 1);
                 break;
             }
@@ -1268,7 +1271,7 @@ export default {
         this.is_attach = false;
     },
     async goUserDetail(user) {
-        if (user && user._id) {
+        if (user && user.uid) {
             var result = await axios({
                 url: 'https://api.wedives.com/graphql',
                 method: 'post',
@@ -1285,7 +1288,7 @@ export default {
                         }
                     `,
                     variables: {
-                        "uid": user._id
+                        "uid": user.uid
                     }
                 }
             });

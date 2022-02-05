@@ -14,7 +14,7 @@
     <div v-else class="card card-style ms-0 me-0 rounded-0 mb-0" style="min-height:calc(100vh - 101px)">
         <div class="content mt-0 mb-0">
             <a v-for="chat in getJoinedRoomList" :href="'/chat/'+chat._id" class="d-block border-bottom pt-2" style="position:relative;">
-                <div v-if="chat.usersCount == 0 && chat.owner" class="p-relative d-inline-block w-60 mb-2">
+                <div v-if="chat.chatUsers && chat.chatUsers.length == 0 && chat.owner" class="p-relative d-inline-block w-60 mb-2">
                     <div class="user-img">
                         <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
                             <defs>
@@ -41,7 +41,7 @@
                     </div>
                 </div>
                 <div v-else-if="chat.usersCount == 2" class="p-relative d-inline-block w-60 mb-2">
-                    <div v-for="user in chat.chatUsers.filter(user=>user._id != uid)" class="user-img">
+                    <div v-for="user in chat.chatUsers.filter(user=>user.uid != uid)" class="user-img">
                         <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
                             <defs>
                             <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
@@ -124,7 +124,8 @@
                     </div>
                 </div>
                 <div class="ms-2 d-inline-block v-align-top">
-                    <h5 class="font-15 font-600 mb-0" v-html="chat.chatUsers.filter(user=>user._id != uid).map(user => {return user.name}).join()"></h5>
+                    <h5 v-if="chat.chatUsers && chat.chatUsers.length == 0 && chat.owner" class="font-15 font-600 mb-0" v-html="chat.owner.name"></h5>
+                    <h5 v-else class="font-15 font-600 mb-0" v-html="chat.chatUsers.filter(user=>user.uid != uid).map(user => {return user.name}).join()"></h5>
                     <p class="line-height-s opacity-60 font-13 ellipsis2" style="max-width: calc(100vw - 172px);">
                         {{ (chat.lastChatMessage && chat.lastChatMessage.text)?(chat.lastChatMessage.text.includes('[[')&&chat.lastChatMessage.text.includes(']]')?((chat.lastChatMessage.text.includes('emoji|'))?'이모티콘':((chat.lastChatMessage.text.includes('center|')||chat.lastChatMessage.text.includes('point|')||chat.lastChatMessage.text.includes('site|'))?chat.lastChatMessage.text.split('|')[2]:'')):chat.lastChatMessage.text): ''}}
                     </p>
@@ -265,6 +266,7 @@ export default {
                 createdAt
                 chatUsers {
                 _id
+                uid
                 name
                 avatarOrigin
                 }
@@ -323,7 +325,7 @@ export default {
         return levelShow;
     },
     enableNext2(ev) {
-        if (this.chatSelectedList.filter(li => li._id == ev._id).length == 0)
+        if (this.chatSelectedList.filter(li => li.uid == ev.uid).length == 0)
             this.chatSelectedList.push(ev);
         setTimeout(function() {
             $("#search_typeahead > .input-group > input").val('')
@@ -332,7 +334,7 @@ export default {
     removeChatSelected(user) {
         for (var i=0; i<this.chatSelectedList.length; i++) {
             var x = this.chatSelectedList[i];
-            if (x._id == user._id) {
+            if (x.uid == user.uid) {
                 this.chatSelectedList.splice(i, 1);
                 break;
             }
@@ -354,7 +356,7 @@ export default {
             // 개설된 채팅이 있는지 확인한다.
             var go_flag = false;
             this.getJoinedRoomList.forEach(room => {
-                if (room.type == 'direct' && room.chatUsers.filter(u=>u._id == this.chatSelectedList[0].uid).length > 0) {
+                if (room.type == 'direct' && room.chatUsers.filter(u=>u.uid == this.chatSelectedList[0].uid).length > 0) {
                     go_flag = true;
                     location.href = '/chat/' + room._id;
                 }

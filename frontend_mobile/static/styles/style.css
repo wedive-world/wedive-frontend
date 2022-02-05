@@ -4502,6 +4502,7 @@ button:focus {
 
 .tooltip {
   font-size: 13px;
+  z-index: 99999;
 }
 
 code {
