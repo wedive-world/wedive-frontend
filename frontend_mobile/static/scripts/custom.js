@@ -1319,7 +1319,7 @@
         }
 
         //Calling Functions Required After External Menus are Loaded
-        /*
+        
         var dataMenuLoad = document.querySelectorAll('[data-menu-load]')
         dataMenuLoad.forEach(function(e){
             var menuLoad = e.getAttribute('data-menu-load')
@@ -1340,7 +1340,7 @@
                     }
                 },500);
             })
-        })*/
+        })
 
         //Detecting Mobile OS
         let isMobile = {
