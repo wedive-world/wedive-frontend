@@ -1671,7 +1671,7 @@ export default {
       openInstitutionBottomSheet(insti) {
             this.open_insti = insti;
 
-            var menuLoad = '/static/images/agency/'+(this.open_insti ? this.open_insti.toLowerCase(): 'empty')+'.html';
+            var menuLoad = '/static/images/agency/'+(this.open_insti ? this.open_insti.toLowerCase().replace('/','_'): 'empty')+'.html';
             var institutionBottomSheetContent = document.getElementById('institutionBottomSheetContent');
             console.log(menuLoad);
             fetch(menuLoad)
