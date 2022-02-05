@@ -1618,6 +1618,7 @@ export default {
         
         setTimeout(function() {
             $("#cover-slider-temp").animate({opacity: "0"}, 1200);
+            $('[data-toggle="tooltip"]').tooltip();
         },1000);
         setTimeout(function() {
             $("#cover-slider-temp").css("display", "none");

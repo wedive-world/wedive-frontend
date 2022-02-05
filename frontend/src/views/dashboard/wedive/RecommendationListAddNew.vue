@@ -544,7 +544,7 @@ const blankRecommendationData = {
   previewCount: 0,
   images: [],
   backgroundImages: [],
-  arguements: [],
+  arguments: [],
   recommendationType: 'new',
 };
 
@@ -827,15 +827,16 @@ export default {
         _recommendationData.interests.push(interest._id);
       })
 
-      // argumentVideoIds
-      _recommendationData.argumentVideoIds = [];
+      // arguments
+      _recommendationData.arguments = [];
       for (var i=0; i<this.argumentItems.length; i++) {
-        _recommendationData.argumentVideoIds.push(this.argumentItems[i]);
+        _recommendationData.arguments.push(this.argumentItems[i]);
       }
       if (_recommendationData._id == null) delete _recommendationData._id;
       
       console.log(_recommendationData);
       try {
+        _recommendationData.previewCount = parseInt(_recommendationData.previewCount);
         await upsertRecommendation(_recommendationData);
       } catch (e) {
         this.$swal({
