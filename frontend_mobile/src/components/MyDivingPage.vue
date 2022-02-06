@@ -142,9 +142,7 @@ export default {
     $(".page-title").hide();
     $(".page-title-clear").hide();
     $(".header-auto-show").hide();
-    if (this.$route.query.footer && this.$route.query.footer == 'hide') {
-      $("#footer-bar").hide();
-    }
+    $("#footer-bar").hide();
     setTimeout(function() {
         init_template();
         var preloader = document.getElementById('preloader')

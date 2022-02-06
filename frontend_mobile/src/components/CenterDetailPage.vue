@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <div data-menu-active="nav-site"></div>
-    <div class="page-content">
+    <div class="page-content pb-0">
         <div v-if="centerData.backgroundImages == null || centerData.backgroundImages.length == 0" style="background:url(/static/empty.jpg);background-size: contain;height:250px;">
         </div>
         <div v-else style="min-height:250px;height:250px;max-height:250px;">
@@ -1060,7 +1060,7 @@
             <div id="div_upload_photo" class="row m-0 mb-3">
             </div>
             <div class="mb-3 text-center p-2" style="border: 1px solid #e9e9e9;">
-                <input type="file" @change="addImage" id="" accept="image/*" style="text-indent: -999px;outline: none;width: 100%;height: 45px;color: rgba(0, 0, 0, 0) !important;">
+                <input type="file" @change="addImage" id="" accept=".jpg, .png" style="text-indent: -999px;outline: none;width: 100%;height: 45px;color: rgba(0, 0, 0, 0) !important;">
                 <div class="upload-file-text" style="color: black;margin-top:-44px !important;margin-bottom:12px;"><img class="me-1" src="/static/images/assets/icon_camera.png" height="18"/>첨부하기</div>
             </div>
         </div>
@@ -1621,9 +1621,7 @@ export default {
         $(".page-title-clear").hide();
         $(".header-fixed").hide();
     }
-    if (this.$route.query.footer && this.$route.query.footer == 'hide') {
-        $("#footer-bar").hide();
-    }
+    $("#footer-bar").hide();
   },
   created() {
       window.addEventListener('beforeunload', this.beforeunload)

@@ -11,7 +11,7 @@
     <div class="page-content pb-3"> 
         <div class="text-center mt-3 mb-3">
             <div id="file-upload1-back" :style="'border: 1px solid #abb7ba;width: 152px;height:152px;display: inline-block;position: relative;' + ((userData && userData.profileImages && userData.profileImages.length > 0) ? 'background:url('+userData.profileImages[0].thumbnailUrl+');background-size: cover;' : '')">
-                <input type="file" @change="imageUserChange" id="file-upload" :class="'upload-file text-center' + ((userData && userData.profileImages && userData.profileImages.length > 0) ? ' opacity-0': '')" accept="image/*" style="height: 150px;background: white;">
+                <input type="file" @change="imageUserChange" id="file-upload" :class="'upload-file text-center' + ((userData && userData.profileImages && userData.profileImages.length > 0) ? ' opacity-0': '')" accept=".jpg, .png" style="height: 150px;background: white;">
                 <p id="file-upload1-img" :class="'upload-file-text' + ((userData && userData.profileImages && userData.profileImages.length > 0) ? ' opacity-0': '')" style="color: #abb7ba;position:absolute;left:40px;top:76px;"><img src="/static/images/assets/icon_image2.png" height="80" style="filter: brightness(.7);"/></p>
             </div>
         </div>
@@ -416,7 +416,7 @@
                     </div>
                     
                     <div style="border: 1px solid #abb7ba;width: 150px;height:150px;display: inline-block;background: white;position: relative;">
-                        <input type="file" id="file-upload2" class="upload-file text-center" accept="image/*" style="height: 150px;">
+                        <input type="file" id="file-upload2" class="upload-file text-center" accept=".jpg, .png" style="height: 150px;">
                         <p class="upload-file-text" style="color: #abb7ba;position:absolute;left:40px;top:80px;"><i class="fas fa-plus"></i><br/>자격증 업로드</p></input>
                     </div>
                 </div>
@@ -577,8 +577,8 @@
 
 
     <div id="snackbar-inputerror" class="snackbar-toast color-white bg-red-dark" data-bs-delay="3000" data-bs-autohide="true"><i class="fa fa-times me-3"></i>모든 항목을 입력해주세요.</div>
-
-
+    <div id="snackbar-info" class="snackbar-toast color-white bg-yellow-dark" data-bs-delay="2000" data-bs-autohide="true"><i class="fa fa-times me-3"></i>수정이 완료되었습니다.</div>
+    
   </div>
 </template>
 <script>
@@ -671,9 +671,7 @@ export default {
       $(".page-title-clear").hide();
       $(".header-fixed").hide();
     }
-    if (this.$route.query.footer && this.$route.query.footer == 'hide') {
-      $("#footer-bar").hide();
-    }
+    $("#footer-bar").hide();
   },
   components: {
     VueTypeaheadBootstrap
@@ -904,6 +902,10 @@ export default {
             preloader.classList.remove('opacity-50');
             preloader.classList.add('preloader-hide');
         }
+        var toastData = 'snackbar-info';
+        var notificationToast = document.getElementById(toastData);
+        var notificationToast = new bootstrap.Toast(notificationToast);
+        notificationToast.show();
       },
       show_scuba_label: function() {
           document.getElementById('scuba_label').classList.remove('hide')

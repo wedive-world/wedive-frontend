@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <div data-menu-active="nav-site"></div>
-    <div class="page-content text-start transform-none" style="padding-bottom: 65px;">
+    <div class="page-content text-start transform-none" style="padding-bottom: 0px;">
         <div class="wedive-action text-center" style="z-index: 99;">
             <button data-menu="menu-filter" class="action-filter"><span>필터</span></button>
             <a href="/site_home" class="action-map"><span>지도</span></a>
@@ -27,7 +27,7 @@
                 </vue-typeahead-bootstrap>
                 
             </div>
-            <div class="content mt-0 mb-0" style="min-height: calc(100vh - 208px);padding-bottom:40px;">
+            <div class="content mt-0 mb-0" style="min-height: calc(100vh - 143px);padding-bottom:40px;">
                 <div v-for="item in users">
                     <div class="map-box">
                         <a :href="'/' + ((item.__typename=='DiveSite') ? 'site' : (item.__typename=='DivePoint') ? 'point' : 'center') + '/' + item.uniqueName">
@@ -576,9 +576,7 @@ export default {
       $(".page-title-clear").hide();
       $(".header-fixed").hide();
     }
-    if (this.$route.query.footer && this.$route.query.footer == 'hide') {
-      $("#footer-bar").hide();
-    }
+    $("#footer-bar").hide();
     setTimeout(function() {
         $("#input_query > .input-group > input").focus();
     },500);

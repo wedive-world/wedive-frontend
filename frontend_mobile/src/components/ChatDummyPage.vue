@@ -19,7 +19,7 @@
             <div class="d-flex" style="background:black;min-height: 52px;">
             <div class="me-1 speach-icon">
                 <div v-on:click="is_attach = ! is_attach;is_emoji=false;" style="width: 45px;display: inline-block;position: relative;">
-                    <!--<input type="file" id="file-upload" class="upload-file text-center" accept="image/*" style="width:32px;">-->
+                    <!--<input type="file" id="file-upload" class="upload-file text-center" accept=".jpg, .png" style="width:32px;">-->
                     <!--<p class="upload-file-text bg-gray-dark" style="color: #abb7ba;position:absolute;width:32px;height:32px;margin-top:-2px;left:8px;border-radius:16px;"><i class="fas fa-image pt-2 font-16"></i></p>-->
                     <img src="/static/images/assets/chat_icon_plus.png" style="width:22px;margin-top:14px;margin-left:4px;"/>
                 </div>
@@ -47,7 +47,7 @@
         </div>
         <div :class="'' + (is_attach?'':' hide')" style="min-height:150px;max-height:150px;background: #303440;overflow-y: auto;">
             <div class="row mb-0 p-3">
-                <div class="col-3 text-center hide" style="position:relative;"><div style="width:52px;height:52px;background:green;border-radius:26px;display: inline-block;"><i class="fas fa-image color-white font-28" style="margin-top: 13px;"></i></div><p class="mb-0 color-white">사진</p><input type="file" @change="imageUserChange" id="file-upload" class="upload-file text-center opacity-0" accept="image/*" style="height: 76px;position: absolute;left:0;top:0;"></div>
+                <div class="col-3 text-center hide" style="position:relative;"><div style="width:52px;height:52px;background:green;border-radius:26px;display: inline-block;"><i class="fas fa-image color-white font-28" style="margin-top: 13px;"></i></div><p class="mb-0 color-white">사진</p><input type="file" @change="imageUserChange" id="file-upload" class="upload-file text-center opacity-0" accept=".jpg, .png" style="height: 76px;position: absolute;left:0;top:0;"></div>
                 <div class="col-3 text-center" data-menu="location-add"><div style="width:52px;height:52px;background:orange;border-radius:26px;display: inline-block;"><i class="fas fa-map-marker-alt color-white font-28" style="margin-top: 13px;"></i></div><p class="mb-0 color-white">장소</p></div>
                 <div class="col-3 text-center"><div style="width:52px;height:52px;background:deeppink;border-radius:26px;display: inline-block;"><i class="fas fa-user-friends color-white font-26" style="margin-top: 13px;"></i></div><p class="mb-0 color-white">버디</p></div>
             </div>
@@ -134,7 +134,7 @@
                                     <use xlink:href="#shapeSquircle"/>
                                 </clipPath>
                                 </defs>
-                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(chat.author.avatarOrigin)?chat.author.avatarOrigin:'/static/images/assets/chat.gif'"/>
+                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(chat.author.avatarOrigin)?chat.author.avatarOrigin:'/static/images/assets/user_empty.png'"/>
                             </svg>
                         </div>
                     </div>
@@ -186,7 +186,7 @@
                                 <use xlink:href="#shapeSquircle"/>
                             </clipPath>
                             </defs>
-                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="/static/images/assets/chat.gif"/>
+                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="/static/images/assets/user_empty.png"/>
                         </svg>
                     </div>
                 </div>

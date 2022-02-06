@@ -23,7 +23,7 @@
                                 <use xlink:href="#shapeSquircle"/>
                             </clipPath>
                             </defs>
-                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(chat.owner.avatarOrigin)?chat.owner.avatarOrigin:'/static/images/assets/chat.gif'"/>
+                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(chat.owner.avatarOrigin)?chat.owner.avatarOrigin:'/static/images/assets/user_empty.png'"/>
                         </svg>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
                                 <use xlink:href="#shapeSquircle"/>
                             </clipPath>
                             </defs>
-                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(user.avatarOrigin)?user.avatarOrigin:'/static/images/assets/chat.gif'"/>
+                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(user.avatarOrigin)?user.avatarOrigin:'/static/images/assets/user_empty.png'"/>
                         </svg>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                                 <use xlink:href="#shapeSquircle"/>
                             </clipPath>
                             </defs>
-                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(user.avatarOrigin)?user.avatarOrigin:'/static/images/assets/chat.gif'"/>
+                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(user.avatarOrigin)?user.avatarOrigin:'/static/images/assets/user_empty.png'"/>
                         </svg>
                     </div>
                 </div>
@@ -174,7 +174,7 @@
                     <div class="">
                         <img
                         class="rounded-s me-3"
-                        :src="(data.profileImages && data.profileImages.length>0) ? data.profileImages[0].thumbnailUrl : '/static/images/assets/chat.gif'"
+                        :src="(data.profileImages && data.profileImages.length>0) ? data.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty.png'"
                         style="width: 50px; height: 50px;object-fit:cover;" />
                     </div>
                     <span class="ml-4" style="">
@@ -191,7 +191,7 @@
                         <div class="">
                             <img
                             class="rounded-s me-3"
-                            :src="(user.profileImages && user.profileImages.length>0) ? user.profileImages[0].thumbnailUrl : '/static/images/assets/chat.gif'"
+                            :src="(user.profileImages && user.profileImages.length>0) ? user.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty.png'"
                             style="width: 50px; height: 50px;object-fit:cover;" />
                         </div>
                         <span class="ml-4" style="">
@@ -254,38 +254,47 @@ export default {
     }
   }, 
   apollo: {
-      getJoinedRoomList: gql `
-        query {
-            getJoinedRoomList {
-                _id
-                type
-                name
-                lastMessageAt
-                numOfmessages
-                unread
-                createdAt
-                chatUsers {
-                _id
-                uid
-                name
-                avatarOrigin
-                }
-                usersCount
-                owner {
-                _id
-                name
-                avatarOrigin
-                }
-                lastChatMessage {
-                text
-                author {
+      getJoinedRoomList: {
+          query:gql `
+            query {
+                getJoinedRoomList {
+                    _id
+                    type
                     name
-                }
-                createdAt
+                    lastMessageAt
+                    numOfmessages
+                    unread
+                    createdAt
+                    chatUsers {
+                    _id
+                    uid
+                    name
+                    avatarOrigin
+                    }
+                    usersCount
+                    owner {
+                    _id
+                    name
+                    avatarOrigin
+                    }
+                    lastChatMessage {
+                    text
+                    author {
+                        name
+                    }
+                    createdAt
+                    }
                 }
             }
-        }
-        `,
+          `,
+          result ({ data, loading, networkStatus }) {
+            data.getJoinedRoomList.sort(function(a, b) {
+                var a_create_at = (a.lastChatMessage && a.lastChatMessage.createdAt) ? a.lastChatMessage.createdAt : "2000-01-01T00:00:00.000Z";
+                var b_create_at = (b.lastChatMessage && b.lastChatMessage.createdAt) ? b.lastChatMessage.createdAt : "2000-01-01T00:00:00.000Z";
+                return (a_create_at>b_create_at ? -1 : 1);
+            });
+          },
+      }
   },
   methods: {
     timeForToday(value) {

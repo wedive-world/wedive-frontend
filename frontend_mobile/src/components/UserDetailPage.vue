@@ -17,7 +17,12 @@
     <div :class="'page-content pb-0' + (is_empty ? ' hide' : ' ')">
         <div class="card mb-0 border-bottom" style="margin-top:50px; z-index:1">
             <div class="content mt-3 pb-2 mb-0">
-                <img class="inline-block me-2 circular_image" :src="(userData.profileImages && userData.profileImages.length>0) ? userData.profileImages[0].thumbnailUrl : ('/static/images/assets/user_empty_'+((userData.gender)?userData.gender:'m')+'.png')" width="50" style="vertical-align: top;"/>
+                <div class="gallery gallery-filter inline-block" style="width:66px;height:45px;">
+                    <a :href="(userData.profileImages && userData.profileImages.length>0) ? userData.profileImages[0].thumbnailUrl : ('/static/images/assets/user_empty_'+((userData.gender)?userData.gender:'m')+'.png')" data-gallery="gallery-image" class="center_image filtr-item" :title="userData.nickName" data-category="user" style="width:60px;height:60px;">
+                        <img class="circular_image" :src="(userData.profileImages && userData.profileImages.length>0) ? userData.profileImages[0].thumbnailUrl : ('/static/images/assets/user_empty_'+((userData.gender)?userData.gender:'m')+'.png')" width="50" style="vertical-align: top;"/>
+                    </a>
+                </div>
+                
                 <div class="inline-block font-noto">
                     <h5 class="mb-0 font-500">{{ userData.nickName }}</h5>
                     <p class="mb-0 font-12 color-gray">{{ userData.levelShow }}</p>
@@ -189,6 +194,32 @@ export default {
 
             }
         });
+        if (result && result.data && result.data.data && result.data.data.getUserById) {
+            var _id = (result.data.data.getUserById.profileImages && result.data.data.getUserById.profileImages.length > 0) ? result.data.data.getUserById.profileImages[0]._id : '';
+            var result_image = await axios({
+                url: 'https://api.wedives.com/graphql',
+                method: 'post',
+                headers: {
+                    countrycode: 'ko',
+                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                },
+                data: {
+                    query: `
+                        query Query($ids: [ID], $widths: [Int]) {
+                            getImageUrlsByIds(_ids: $ids, widths: $widths)
+                        }
+                    `,
+                    variables: {
+                        ids: [_id],
+                        widths: [720]
+                    }
+
+                }
+                });
+                if (result_image.data.data.getImageUrlsByIds) {
+                    result.data.data.getUserById.profileImages[0].thumbnailUrl = result_image.data.data.getImageUrlsByIds[0]
+                }
+        }
         if (localStorage.idToken) {
             await axios({
                 url: 'https://api.wedives.com/graphql',
@@ -249,9 +280,12 @@ export default {
         $(".page-title-clear").hide();
         $(".header-fixed").hide();
     }
-    if (this.$route.query.footer && this.$route.query.footer == 'hide') {
-        $("#footer-bar").hide();
-    }
+    $("#footer-bar").hide();
+    setTimeout(function() {
+        $(".gallery-filter").css("width", "66px");
+        $(".gallery-filter").css("height", "45px");
+        $(".gallery-filter").css("display", "inline-block");
+    },1500);
     
 
   },
@@ -286,6 +320,35 @@ export default {
     }
   },
   methods: {
+      async viewUserImage(profileImages) {
+          if ($("#userProfileImage").hasClass("large-image") == false) {
+            var _id = (profileImages && profileImages.length > 0) ? profileImages[0]._id : '';
+            var result_image = await axios({
+                url: 'https://api.wedives.com/graphql',
+                method: 'post',
+                headers: {
+                    countrycode: 'ko',
+                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                },
+                data: {
+                    query: `
+                        query Query($ids: [ID], $widths: [Int]) {
+                            getImageUrlsByIds(_ids: $ids, widths: $widths)
+                        }
+                    `,
+                    variables: {
+                        ids: [_id],
+                        widths: [720]
+                    }
+
+                }
+                });
+                if (result_image.data.data.getImageUrlsByIds) {
+                    $("#userProfileImage").attr("src", result_image.data.data.getImageUrlsByIds[0]);
+                    $("#userProfileImage").addClass("large-image");
+                }
+          }
+      },
       async drawMap() {
         const divWidth = document.getElementById("map").clientWidth;
 
@@ -480,6 +543,7 @@ export default {
                             type
                             chatUsers {
                                 _id
+                                uid
                                 name
                             }
                         }
@@ -495,7 +559,7 @@ export default {
             const userId = this.userData.uid;
             roomList.forEach(room => {
                 if (room.type=='direct') {
-                    var chatroom = room.chatUsers.filter(user => user._id == userId);
+                    var chatroom = room.chatUsers.filter(user => user.uid == userId);
                     if (chatroom.length > 0) {
                         console.log(room)
                         location.href = '/chat/' + room._id;

@@ -697,10 +697,8 @@ export default {
         $(".page-title-clear").hide();
         $(".header-fixed").hide();
     }
-    if (this.$route.query.footer && this.$route.query.footer == 'hide') {
-        $("#footer-bar").hide();
-    }
-
+    $("#footer-bar").hide();
+    
 
     setTimeout(function() {
         $("#cover-slider-temp").animate({opacity: "0"}, 1200);

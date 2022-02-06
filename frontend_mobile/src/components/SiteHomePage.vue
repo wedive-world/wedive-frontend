@@ -475,7 +475,7 @@ async function updateAll() {
             }
         } else {
             var label_color = (markerList[i].type=='site') ? '#5f6368' : ((markerList[i].type=='point') ? '#498c99' : '#2a526f')
-            var label_text = markerList[i].title + ((markerList[i].type=='site')?' 사이트' : ((markerList[i].type=='point') ? '': ''));
+            var label_text = markerList[i].title + ((markerList[i].type=='site')?'' : ((markerList[i].type=='point') ? '': ''));
             markerList[i].setLabel({ color: label_color, fontWeight: 'bold', fontSize: '14px', className: 'wedive-label', text: label_text });
             if (selecteduser != null && selecteduser._id == markerList[i]._id) {
                 new google.maps.event.trigger( markerList[i], 'click' );
@@ -512,7 +512,7 @@ async function updateAll() {
                 const m_cate = allList_cate[k];
                 const _k = k;
 
-                const label_text = (zoomLevel < 9) ? ' ' : (title + ((k==0)?' 사이트':((k==1)?'':'')));
+                const label_text = (zoomLevel < 9) ? ' ' : (title + ((k==0)?'':((k==1)?'':'')));
                 const label_color = (k==0) ? '#5f6368' : ((k==1) ? '#498c99' : '#2a526f');
                 
                 const marker_shop = new google.maps.Marker({
@@ -541,7 +541,7 @@ async function updateAll() {
                         }
                     }
 
-                    $("#map_box_shop_name").text(title + (k==0?' 사이트':(k==1?'':'')));
+                    $("#map_box_shop_name").text(title + (k==0?'':(k==1?'':'')));
                     $("#map_box_shop_desc").text(desc);
                     $("#map_box_shop_star").text(star);
                     $("#map_box_href").attr("href", "/" + m_type + "/" + uniqueName);

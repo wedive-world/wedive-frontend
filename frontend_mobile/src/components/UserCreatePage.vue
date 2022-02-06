@@ -29,7 +29,7 @@
                             </div>
                             <div class="text-center mt-5 mb-3">
                                 <div id="file-upload1-back" style="width: 150px;height:150px;display: inline-block;background: #c7c7c7;position: relative;border-radius:75px;background-size:cover;">
-                                    <input type="file" @change="imageUserChange" id="file-upload1" class="upload-file text-center" accept="image/*" style="height: 150px;">
+                                    <input type="file" @change="imageUserChange" id="file-upload1" class="upload-file text-center" accept=".jpg, .png" style="height: 150px;">
                                     <p class="upload-file-text" style="color: #abb7ba;position:absolute;left:40px;top:76px;">
                                         <img id="file-upload1-img" src="/static/images/assets/icon_image2.png" width="80"></img>
                                     </p></input>
@@ -551,10 +551,8 @@ export default {
       $(".page-title-clear").hide();
       $(".header-fixed").hide();
     }
-    if (this.$route.query.footer && this.$route.query.footer == 'hide') {
-      $("#footer-bar").hide();
-    }
-
+    $("#footer-bar").hide();
+    
     var body = document.body, html = document.documentElement;
     var height = Math.min(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight) - 56;
     document.getElementById('slide1').style.height = height + 'px';
