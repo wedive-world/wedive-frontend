@@ -33,7 +33,7 @@
         
         <div class="card card-style" style="margin-top:-40px; z-index:1">
             <div class="content text-center mt-4">
-                <h2 class="font-20 font-700 mb-0 mt-1">{{ siteData.name }} 사이트</h2>
+                <h2 class="font-20 font-700 mb-0 mt-1">{{ siteData.name }}</h2>
                 <h2 class="wedive-score">{{ (siteData.adminScore/20).toFixed(1) }}</h2>
                 <span class="wedive-score-desc">{{ recommend_word[parseInt(siteData.adminScore/20)] }}</span>
                 <p class="color-gray m-0"><i class="fas fa-map-marked-alt" ></i> {{ siteData.address }}</p>
@@ -49,7 +49,7 @@
                             </div>
                         </div>
                         <div class="star-area mt-1 text-start ms-3" style="height: 30px;">
-                            <span class="font-14 me-2 color-gray" style="float: left;padding-top:2px;">유속</span>
+                            <span class="font-14 me-2 color-gray" style="float: left;padding-top:2px;">조류</span>
                             <div class="wedive-wave-back">
                                 <div class="wedive-wave-front" :style="'width:'+(siteData.flowRateScore-3)+'%;'">
                                 </div>
@@ -99,7 +99,11 @@
                     <i class="ico ico-wedive-w -circle color-primary scale-box fa-4x"></i>
                 </div>
                 <h4 class="text-center pt-2 mb-2">where is here?</h4>
-                <div v-if="siteData.interests && siteData.interests.filter(x=>x.type=='divingPointEnvironment'||x.type=='divingType').length>0" class="row text-start txt_box2 m-0">
+                <div v-if="siteData.interests && siteData.interests.filter(x=>x.type=='divingPointEnvironment'||x.type=='divingType'||x.type=='award').length>0" class="row text-start txt_box2 m-0">
+                    <div v-for="interest in siteData.interests.filter(x=>x.type=='award')" class="ico_feature col-3">
+                        <i :class="'ico_feature'+(award_category.findIndex(x=>x==interest.title)+1)+' icon-award'"></i>
+                        <p class="span_feature text-center">{{ interest.title }}</p>
+                    </div>
                     <div v-for="interest in siteData.interests.filter(x=>x.type=='divingPointEnvironment')" class="ico_feature col-3">
                         <i :class="'ico_feature'+(point_category.findIndex(x=>x==interest.title)+1)+' icon-point'"></i>
                         <p class="span_feature text-center">{{ interest.title }}</p>
@@ -225,82 +229,85 @@
         <div v-if="siteData.highlights && siteData.highlights.length>0" class="card card-style">
             <div class="content">
                 <h4 class="text-start pt-2 mb-2">하이라이트</h4>
-                <div>
-                    <div style="display: inline-block;width: 30px; height: 30px; fill: rgb(0, 0, 0);"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path d="M 10 9 C 6.132813 9 3 12.132813 3 16 L 3 34 C 3 37.867188 6.132813 41 10 41 L 40 41 C 43.867188 41 47 37.867188 47 34 L 47 16 C 47 12.132813 43.867188 9 40 9 Z M 10 11 L 40 11 C 42.757813 11 45 13.242188 45 16 L 45 34 C 45 36.757813 42.757813 39 40 39 L 10 39 C 7.242188 39 5 36.757813 5 34 L 5 16 C 5 13.242188 7.242188 11 10 11 Z M 24.53125 17.15625 C 24.101563 19.554688 22.398438 20.070313 20 20.15625 L 20 21.6875 L 24.125 21.6875 L 24.125 32.90625 L 26 32.90625 L 26 17.15625 Z"></path></svg></div>
-                    {{ siteData.highlights[0].description }}
-                    <a v-if="siteData.highlights[0].images && siteData.highlights[0].images.length>0" href="#" class="row m-0 mb-2"> 
-                        <div class="col-6 ps-0 pe-1">
-                            <div class="card rounded-sm mb-2">
-                                <a class="" data-gallery="'gallery-highlight" :href="siteData.highlights[0].images[0].url" title="">
-                                    <img src="/static/images/assets/empty.png" :data-src="siteData.highlights[0].images[0].url" class="preload-img img-fluid rounded-s" :alt="siteData.highlights[0].images[0].name" style="height: 80px;">
-                                    <div class="wedive-source mx-140">{{ siteData.highlights[0].images[0].reference | makeReference }}</div>
-                                </a>
-                            </div>
-                            <div v-if="siteData.highlights[0].images.length>1" class="card rounded-sm mb-0">
-                                <a class="" data-gallery="'gallery-highlight" :href="siteData.highlights[0].images[1].url" title="">
-                                    <img src="/static/images/assets/empty.png" :data-src="siteData.highlights[0].images[1].url" class="preload-img img-fluid rounded-s" :alt="siteData.highlights[0].images[1].name" style="height: 80px;">
-                                    <div class="wedive-source mx-140">{{ siteData.highlights[0].images[1].reference | makeReference }}</div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-6 ps-1 pe-0">
-                            <div v-if="siteData.highlights[0].images.length>2" class="card rounded-sm mb-0">
-                                <a class="" data-gallery="'gallery-highlight" :href="siteData.highlights[0].images[2].url" title="">
-                                    <img src="/static/images/assets/empty.png" :data-src="siteData.highlights[0].images[2].url" class="preload-img img-fluid rounded-s" :alt="siteData.highlights[0].images[2].name" style="height: 170px;">
-                                    <div class="wedive-source mx-140">{{ siteData.highlights[0].images[2].reference | makeReference }}</div>
-                                </a>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                
-                
-                <div v-if="siteData.highlights.length>1" class="mt-4">
-                    <div style="display: inline-block;width: 30px; height: 30px; fill: rgb(0, 0, 0);"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path d="M 10 9 C 6.132813 9 3 12.132813 3 16 L 3 34 C 3 37.867188 6.132813 41 10 41 L 40 41 C 43.867188 41 47 37.867188 47 34 L 47 16 C 47 12.132813 43.867188 9 40 9 Z M 10 11 L 40 11 C 42.757813 11 45 13.242188 45 16 L 45 34 C 45 36.757813 42.757813 39 40 39 L 10 39 C 7.242188 39 5 36.757813 5 34 L 5 16 C 5 13.242188 7.242188 11 10 11 Z M 25.03125 17 C 20.410156 17 19.976563 20.902344 20.0625 22.71875 L 21.96875 22.71875 C 21.96875 22.199219 22.121094 18.71875 25.03125 18.71875 C 27.769531 18.71875 28.125 21.160156 28.125 21.59375 C 28.125 26.4375 19.65625 26.253906 19.65625 33 L 29.90625 33 L 29.90625 31.28125 L 21.78125 31.28125 C 22.210938 27.734375 30 27.042969 30 21.59375 C 30 20.816406 29.652344 17 25.03125 17 Z"></path></svg></div>
-                    {{ siteData.highlights[1].description }}
-                
-                    <div v-if="siteData.highlights[1].images && siteData.highlights[1].images.length>0" class="row m-0 text-center row-cols-3 mb-1" style="margin-left: -4px !important; margin-rigth: -4px !important;">
-                        <a class="col square-rect" data-gallery="'gallery-highlight" :href="siteData.highlights[1].images[0].url" title="">
-                            <img src="/static/images/assets/empty.png" :data-src="siteData.highlights[1].images[0].url" class="preload-img img-fluid rounded-s" :alt="siteData.highlights[1].images[0].name">
-                            <div class="wedive-source mx-80">{{ siteData.highlights[1].images[0].reference | makeReference }}</div>
-                        </a>
-                        <a v-if="siteData.highlights[1].images.length>1" class="col square-rect" data-gallery="'gallery-highlight" :href="siteData.highlights[1].images[1].url" title="">
-                            <img src="/static/images/assets/empty.png" :data-src="siteData.highlights[1].images[1].url" class="preload-img img-fluid rounded-s" :alt="siteData.highlights[1].images[1].name">
-                            <div class="wedive-source mx-80">{{ siteData.highlights[1].images[1].reference | makeReference }}</div>
-                        </a>
-                        <a v-if="siteData.highlights[1].images.length>2" class="col square-rect" data-gallery="'gallery-highlight" :href="siteData.highlights[1].images[2].url" title="">
-                            <img src="/static/images/assets/empty.png" :data-src="siteData.highlights[1].images[2].url" class="preload-img img-fluid rounded-s" :alt="siteData.highlights[1].images[2].name">
-                            <div class="wedive-source mx-80">{{ siteData.highlights[1].images[2].reference | makeReference }}</div>
-                        </a>
-                    </div>
-
-                    <div v-if="siteData.highlights.length>2" class="mt-4">
-                        <div style="display: inline-block;width: 30px; height: 30px; fill: rgb(0, 0, 0);"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path d="M 10 9 C 6.132813 9 3 12.132813 3 16 L 3 34 C 3 37.867188 6.132813 41 10 41 L 40 41 C 43.867188 41 47 37.867188 47 34 L 47 16 C 47 12.132813 43.867188 9 40 9 Z M 10 11 L 40 11 C 42.757813 11 45 13.242188 45 16 L 45 34 C 45 36.757813 42.757813 39 40 39 L 10 39 C 7.242188 39 5 36.757813 5 34 L 5 16 C 5 13.242188 7.242188 11 10 11 Z M 25.21875 17 C 20.789063 17 20.398438 21.023438 20.375 22 L 22.25 22 C 22.277344 21.324219 22.582031 18.6875 25.21875 18.6875 C 27.6875 18.6875 28.03125 20.398438 28.03125 21.25 C 28.03125 21.675781 27.785156 23.8125 25.0625 23.8125 L 24.28125 23.8125 L 24.28125 25.4375 C 24.621094 25.351563 24.980469 25.34375 25.40625 25.34375 C 25.832031 25.34375 28.71875 25.417969 28.71875 28.3125 C 28.71875 31.121094 25.738281 31.375 25.3125 31.375 C 23.804688 31.375 22.054688 30.46875 22 28 L 20.125 28 C 20.140625 29.226563 20.511719 33 25.3125 33 C 26.25 33 30.6875 32.730469 30.6875 28.21875 C 30.6875 25.410156 28.8125 24.578125 27.875 24.40625 L 27.875 24.3125 C 28.472656 23.972656 30 22.941406 30 21.15625 C 30 20.476563 29.816406 17 25.21875 17 Z"></path></svg></div>
-                        {{ siteData.highlights[2].description }}
-                        <a v-if="siteData.highlights[2].images && siteData.highlights[2].images.length>0" href="#" class="row m-0 mb-2"> 
+                <div v-for="(highlight, highIdx) in siteData.highlights">
+                    <div v-if="(highIdx%3)==0" :class="highIdx==0 ? '' : 'mt-4'">
+                        <span style="padding: 1px 8px;border: 2px solid black;border-radius:5px;">{{ highIdx + 1 }}</span><span class="font-noto font-14 ms-1">{{ highlight.description }}</span>
+                        <div v-if="highlight.images && highlight.images.length>2" class="row m-0 mb-2"> 
                             <div class="col-6 ps-0 pe-1">
-                                <div class="card rounded-sm mb-0">
-                                    <a class="" data-gallery="'gallery-highlight" :href="siteData.highlights[2].images[0].url" title="">
-                                        <img src="/static/images/assets/empty.png" :data-src="siteData.highlights[2].images[0].url" class="preload-img img-fluid rounded-s" :alt="siteData.highlights[2].images[0].name" style="height: 170px;">
-                                        <div class="wedive-source mx-140">{{ siteData.highlights[2].images[0].reference | makeReference }}</div>
+                                <div class="card rounded-sm mb-2">
+                                    <a class="" data-gallery="'gallery-highlight" :href="highlight.images[0].url" :title="highlight.images[0].reference">
+                                        <img src="/static/images/assets/empty.png" :data-src="highlight.images[0].url" class="preload-img img-fluid rounded-s" :alt="highlight.images[0].name" style="height: 80px;">
+                                        <div class="wedive-source mx-140">{{ highlight.images[0].reference | makeReference }}</div>
+                                    </a>
+                                </div>
+                                <div v-if="highlight.images.length>1" class="card rounded-sm mb-0">
+                                    <a class="" data-gallery="'gallery-highlight" :href="highlight.images[1].url" :title="highlight.images[1].reference">
+                                        <img src="/static/images/assets/empty.png" :data-src="highlight.images[1].url" class="preload-img img-fluid rounded-s" :alt="highlight.images[1].name" style="height: 80px;">
+                                        <div class="wedive-source mx-140">{{ highlight.images[1].reference | makeReference }}</div>
                                     </a>
                                 </div>
                             </div>
                             <div class="col-6 ps-1 pe-0">
-                                <div v-if="siteData.highlights[2].images.length>1" class="card rounded-sm mb-2">
-                                    <a class="" data-gallery="'gallery-highlight" :href="siteData.highlights[2].images[1].url" title="">
-                                        <img src="/static/images/assets/empty.png" :data-src="siteData.highlights[2].images[1].url" class="preload-img img-fluid rounded-s" :alt="siteData.highlights[2].images[1].name" style="height: 80px;">
-                                        <div class="wedive-source mx-140">{{ siteData.highlights[2].images[1].reference | makeReference }}</div>
-                                    </a>
-                                </div>
-                                <div v-if="siteData.highlights[2].images.length>2" class="card rounded-sm mb-0">
-                                    <a class="" data-gallery="'gallery-highlight" :href="siteData.highlights[2].images[2].url" title="">
-                                        <img src="/static/images/assets/empty.png" :data-src="siteData.highlights[2].images[2].url" class="preload-img img-fluid rounded-s" :alt="siteData.highlights[2].images[2].name" style="height: 80px;">
-                                        <div class="wedive-source mx-140">{{ siteData.highlights[2].images[2].reference | makeReference }}</div>
+                                <div v-if="highlight.images.length>2" class="card rounded-sm mb-0">
+                                    <a class="" data-gallery="'gallery-highlight" :href="highlight.images[2].url" :title="highlight.images[2].reference">
+                                        <img src="/static/images/assets/empty.png" :data-src="highlight.images[2].url" class="preload-img img-fluid rounded-s" :alt="highlight.images[2].name" style="height: 170px;">
+                                        <div class="wedive-source mx-140">{{ highlight.images[2].reference | makeReference }}</div>
                                     </a>
                                 </div>
                             </div>
-                        </a>
+                        </div>
+                        <div v-else class="row m-0 mb-2"> 
+                            <a v-for="image in highlight.images" class="col square-rect" data-gallery="'gallery-highlight" :href="image.url" :title="image.reference" style="max-height:calc(50vw - 23px);min-height:calc(50vw - 23px);">
+                                <img src="/static/images/assets/empty.png" :data-src="image.url" class="preload-img img-fluid rounded-s" :alt="image.name">
+                                <div class="wedive-source mx-80">{{ image.reference | makeReference }}</div>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    
+                    <div v-else-if="(highIdx%3)==1" class="mt-4">
+                        <span style="padding: 1px 8px;border: 2px solid black;border-radius:5px;">{{ highIdx + 1 }}</span><span class="font-noto font-14 ms-1">{{ highlight.description }}</span>
+                    
+                        <div v-if="highlight.images && highlight.images.length>0" class="row m-0 text-center mb-1" style="margin-left: -4px !important; margin-rigth: -4px !important;">
+                            <a v-for="image in highlight.images" class="col square-rect" data-gallery="'gallery-highlight" :href="image.url" :title="image.reference" style="max-height:calc(50vw - 23px);">
+                                <img src="/static/images/assets/empty.png" :data-src="image.url" class="preload-img img-fluid rounded-s" :alt="image.name">
+                                <div class="wedive-source mx-80">{{ image.reference | makeReference }}</div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div v-else class="mt-4">
+                        <span style="padding: 1px 8px;border: 2px solid black;border-radius:5px;">{{ highIdx + 1 }}</span><span class="font-noto font-14 ms-1">{{ highlight.description }}</span>
+                        <div v-if="highlight.images && highlight.images.length>2" class="row m-0 mb-2"> 
+                            <div class="col-6 ps-0 pe-1">
+                                <div class="card rounded-sm mb-0">
+                                    <a class="" data-gallery="'gallery-highlight" :href="highlight.images[0].url" :title="highlight.images[0].reference">
+                                        <img src="/static/images/assets/empty.png" :data-src="highlight.images[0].url" class="preload-img img-fluid rounded-s" :alt="highlight.images[0].name" style="height: 170px;">
+                                        <div class="wedive-source mx-140">{{ highlight.images[0].reference | makeReference }}</div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-6 ps-1 pe-0">
+                                <div v-if="highlight.images.length>1" class="card rounded-sm mb-2">
+                                    <a class="" data-gallery="'gallery-highlight" :href="highlight.images[1].url" :title="highlight.images[1].reference">
+                                        <img src="/static/images/assets/empty.png" :data-src="highlight.images[1].url" class="preload-img img-fluid rounded-s" :alt="highlight.images[1].name" style="height: 80px;">
+                                        <div class="wedive-source mx-140">{{ highlight.images[1].reference | makeReference }}</div>
+                                    </a>
+                                </div>
+                                <div v-if="highlight.images.length>2" class="card rounded-sm mb-0">
+                                    <a class="" data-gallery="'gallery-highlight" :href="highlight.images[2].url" :title="highlight.images[2].reference">
+                                        <img src="/static/images/assets/empty.png" :data-src="highlight.images[2].url" class="preload-img img-fluid rounded-s" :alt="highlight.images[2].name" style="height: 80px;">
+                                        <div class="wedive-source mx-140">{{ highlight.images[2].reference | makeReference }}</div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div v-else class="row m-0 mb-2"> 
+                            <a v-for="image in highlight.images" class="col square-rect" data-gallery="'gallery-highlight" :href="image.url" :title="image.reference" style="max-height:calc(50vw - 23px);min-height:calc(50vw - 23px);">
+                                <img src="/static/images/assets/empty.png" :data-src="image.url" class="preload-img img-fluid rounded-s" :alt="image.name">
+                                <div class="wedive-source mx-80">{{ image.reference | makeReference }}</div>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -454,7 +461,7 @@
                                 <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-red-dark"></i></a>
                             </div>
                             <div class="card-bottom px-3 py-3">
-                                <h4 class="color-white font-18 font-600">{{ near.name }} 사이트</h4>
+                                <h4 class="color-white font-18 font-600">{{ near.name }}</h4>
                                 <div class="divider bg-white opacity-20 mb-1"></div>
                                 <div class="d-flex">
                                     <div class="align-self-center" style="max-width: 100%;">
@@ -1797,8 +1804,9 @@ export default {
         marker_list: [],
         marker_img_list: [],
         recommend_word: ["비추천", "낮음", "일반적", "좋음", "최고", "완벽함"],
-        point_category: ["해저지형", "해저협곡", "큰 암반", "강한조류", "난파선", "가두리양식장", "마크로", "먹(Muck)", "인공어초", "블루홀", "리프다이빙", "빙하", "초대형난파선", "난파선성지", "수중조형물", "수중유적", "대물", "유네스코", "10대포인트"],
-        type_category: ["월다이빙", "블랙워터다이빙", "드리프트다이빙", "아이스다이빙", "야간다이빙", "동굴다이빙", "해루질", "프리다이빙", "스노클링", "케이지다이빙", "렉다이빙", "테크니컬다이빙", "나이트록스다이빙"],
+        award_category: ["10대포인트", "난파선성지", "대물천국", "베스트동굴다이빙", "베스트드리프트다이빙", "베스트렉다이빙", "베스트마크로", "베스트볼거리", "베스트비치다이빙", "베스트월다이빙", "시력=시야", "유네스코", "인생샷포인트", "프리다이버집결지", "해양박물관"],
+        point_category: ["해저지형", "해저협곡", "큰 암반", "강한조류", "난파선", "가두리양식장", "마크로", "먹(Muck)", "인공어초", "블루홀", "리프다이빙", "빙하", "초대형난파선", "난파선성지", "수중조형물", "수중유적", "대물", "유네스코", "국내우수", "배리어리프", "블루케이브"],
+        type_category: ["월다이빙", "블랙워터다이빙", "드리프트다이빙", "아이스다이빙", "야간다이빙", "동굴다이빙", "해루질", "프리다이빙", "스노클링", "케이지다이빙", "렉다이빙", "테크니컬다이빙", "나이트록스다이빙", "먹다이빙", "블루워터다이빙", "비치다이빙", "스쿠버다이빙", "이색다이빙"],
         recommend_env_word: ["매우열악", "열악", "평범", "우수", "최고", "극락"],
         recommend_flow_word: ["매우느림", "느림", "일반적", "빠름", "매우빠름", "폭풍"],
         rating: 5,
@@ -2081,6 +2089,7 @@ export default {
 
 .icon-point {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/assets/wedive_point.png);background-repeat: no-repeat;-webkit-background-size: 270px 200px;background-size: 270px 200px;}
 .icon-type {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/assets/wedive_type.png);background-repeat: no-repeat;-webkit-background-size: 270px 118px;background-size: 270px 118px;}
+.icon-award {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/assets/wedive_award.png);background-repeat: no-repeat;-webkit-background-size: 270px 200px;background-size: 270px 200px;}
 
 .wedive-ul {width: 100%;list-style:none;display: inline-block;margin-bottom: 0;padding-left: 5px !important;padding-right: 5px !important;}
 .wedive-ul > li {float: left;width: 50%;}

@@ -29,7 +29,7 @@
     
         <div class="card card-style" style="margin-top:-40px; z-index:1">
             <div class="content text-center mt-4">
-                <h2 class="font-20 font-700 mb-0 mt-1">{{ pointData.name }} 포인트</h2>
+                <h2 class="font-20 font-700 mb-0 mt-1">{{ pointData.name }}</h2>
                 <h2 class="wedive-score">{{ (pointData.adminScore/20).toFixed(1) }}</h2>
                 <span class="wedive-score-desc">{{ recommend_word[parseInt(pointData.adminScore/20)] }}</span>
                 <p class="color-gray m-0"><i class="fas fa-map-marked-alt" ></i> {{ pointData.address }}</p>
@@ -47,7 +47,7 @@
                                 </div>
                             </div>
                             <div class="star-area mt-1 text-start ms-3" style="height: 30px;">
-                                <span class="font-14 me-2 color-gray" style="float: left;padding-top:2px;">유속</span>
+                                <span class="font-14 me-2 color-gray" style="float: left;padding-top:2px;">조류</span>
                                 <div class="wedive-wave-back">
                                     <div class="wedive-wave-front" v-bind:style="'width:'+(pointData.flowRateScore-3)+'%'">
                                     </div>
@@ -315,7 +315,7 @@
                                 <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-red-dark"></i></a>
                             </div>
                             <div class="card-bottom px-3 py-3">
-                                <h4 class="color-white font-18 font-600">{{ near.name }} 포인트</h4>
+                                <h4 class="color-white font-18 font-600">{{ near.name }}</h4>
                                 <div class="divider bg-white opacity-20 mb-1"></div>
                                 <div class="d-flex">
                                     <div class="align-self-center" style="max-width: 100%;">

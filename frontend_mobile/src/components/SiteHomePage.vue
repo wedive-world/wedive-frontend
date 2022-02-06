@@ -317,6 +317,7 @@
                 placeholder="사이트, 포인트, 센터 (수영장)"
                 inputClass="special-input-class"
                 @input="lookupPlace"
+                @keyup.enter="handleFire"
                 >
             </vue-typeahead-bootstrap>
             <div class="content mt-0 mb-0" style="min-height: calc(100vh - 208px);padding-top:8px;padding-bottom:40px;">
@@ -903,6 +904,7 @@ export default {
         check_cate3 = newVal;
       },
       query: function(newVal, oldVal) {
+        //console.log(newVal + "/" + localStorage.suggestionFlag);
         if(localStorage.suggestionFlag && localStorage.suggestionFlag == '1') {
             localStorage.suggestionFlag = '0';
             
@@ -956,6 +958,17 @@ export default {
       selectSuggestion(item) {
           localStorage.suggestionFlag = '1';
           this.query = item;
+          document.getElementById("search-suggestion").classList.remove('menu-active');
+          document.getElementsByClassName('menu-hider')[0].classList.remove('menu-active');
+          this.places = [];
+          tour_flag = true;
+          setTimeout(function() {
+            $("#search_typeahead > .input-group > input").focus();
+          }, 200)
+      },
+      handleFire() {
+          localStorage.suggestionFlag = '1';
+          this.query = (JSON.parse(JSON.stringify(this.query_place))+"");
           document.getElementById("search-suggestion").classList.remove('menu-active');
           document.getElementsByClassName('menu-hider')[0].classList.remove('menu-active');
           this.places = [];
@@ -1076,6 +1089,8 @@ export default {
         updateAll();
       },
       enableNext2(ev) {
+          //console.log(ev);
+          localStorage.suggestionFlag = '1';
           selecteduser = ev;
           if (map.getZoom() < 10)
             map.setZoom(10);

@@ -266,6 +266,7 @@
                 placeholder="사이트, 포인트, 센터 (수영장)"
                 inputClass="special-input-class"
                 @input="lookupPlace"
+                @keyup.enter="handleFire"
                 >
             </vue-typeahead-bootstrap>
             <div class="content mt-0 mb-0" style="min-height: calc(100vh - 208px);padding-top:8px;padding-bottom:40px;">
@@ -348,6 +349,13 @@ export default {
       selectSuggestion(item) {
           localStorage.suggestionFlag = '1';
           this.query = item;
+          document.getElementById("search-suggestion").classList.remove('menu-active');
+          document.getElementsByClassName('menu-hider')[0].classList.remove('menu-active');
+          this.places = [];
+      },
+      handleFire() {
+          localStorage.suggestionFlag = '1';
+          this.query = (JSON.parse(JSON.stringify(this.query_place))+"");
           document.getElementById("search-suggestion").classList.remove('menu-active');
           document.getElementsByClassName('menu-hider')[0].classList.remove('menu-active');
           this.places = [];

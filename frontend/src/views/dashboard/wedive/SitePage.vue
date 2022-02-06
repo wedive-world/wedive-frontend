@@ -25,7 +25,7 @@
 
   <b-card>
     <div v-for="(highlight, index) in site_data.highlights">
-      <h5>하이라이트 {{ (index+1) }}</h5>
+      <h5>하이라이트 {{ (index+1) }} ({{ highlight.description }})</h5>
       <vue-dropzone ref="highlightRef" :id="'dropzone_highlight'+index" v-on:vdropzone-mounted="highlightmounted(index)" v-on:vdropzone-removed-file="(file, error, xhr) => removeHighlightImage(file, error, xhr, index, highlight.name)" v-on:vdropzone-sending="(file, xhr, formData) => sendingEventHightlight(file, xhr, formData, index)" :options="dropzoneOptions"></vue-dropzone>
     </div>
   </b-card>
@@ -291,7 +291,7 @@ export default {
         // reference 추가를 위해 생성
         this.highlightImageReference.push({thumbnailUrl: result2.updateImage.thumbnailUrl, _id: result2.updateImage._id, reference: "", name: file_name});
 
-        var images_id_list = this.site_data.backgroundImages.map((image)=>{return image._id});
+        var images_id_list = this.site_data.highlights[index].images.map((image)=>{return image._id});
         images_id_list.push(result.uploadImage._id);
 
         // 하이라이트 info

@@ -165,10 +165,10 @@
                                 </div>
                             </div>
                             <span v-if="participant.user!=null" v-on:click="chatUser(participant.user)" data-menu="menu-dm" class="chip chip-s bg-gray-light text-center font-400 wedive-chip">채팅</span>
-                            <span data-menu="menu-approval" v-on:click="setUser(participant)" class="chip chip-s bg-gray-light text-center font-400 wedive-chip2">승인/거절</span>
+                            <span data-menu="menu-approval" v-on:click="setUser(participant)" class="chip chip-s bg-gray-light text-center font-400 wedive-chip2">승인</span>
                             <!--<p class="color-gray-dark mb-0 font-14">{{ (participant.user!=null&&participant.user.nickName!=null) ? participant.user.nickName : ((participant.name!=null) ? participant.name : '비공개') }}</p>-->
                         </div>
-                        <!--<a data-menu="menu-approval" v-on:click="setUser(participant)" class="btn btn-sm rounded-1 text-uppercase font-900 shadow-s bg-black" style="padding: 4px 6px !important;">승인/거절</a>-->
+                        <!--<a data-menu="menu-approval" v-on:click="setUser(participant)" class="btn btn-sm rounded-1 text-uppercase font-900 shadow-s bg-black" style="padding: 4px 6px !important;">승인</a>-->
                     </div>
                 </div>
                 <div v-else class="text-center">
@@ -248,13 +248,13 @@
         </div>
         
         <div class="row m-0">
-            <div class="col-4 pe-1">
+            <div class="col-6 pe-1">
                 <a v-on:click="approve()" class="btn btn-m btn-full rounded-0 text-uppercase font-900 shadow-s bg-black">승인</a>
             </div>
-            <div class="col-4 pe-1 ps-1">
+            <!--<div class="col-4 pe-1 ps-1">
                 <a v-on:click="reject()" href="#" class="close-menu btn btn-m btn-full rounded-0 text-uppercase font-900 shadow-s bg-dark">거절</a>
-            </div>
-            <div class="col-4 ps-1">
+            </div>-->
+            <div class="col-6 ps-1">
                 <a href="#" class="close-menu btn btn-m btn-full rounded-0 text-uppercase font-900 shadow-s bg-gray-dark">닫기</a>
             </div>
         </div>
