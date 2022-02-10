@@ -291,12 +291,18 @@ export default {
         // reference 추가를 위해 생성
         this.highlightImageReference.push({thumbnailUrl: result2.updateImage.thumbnailUrl, _id: result2.updateImage._id, reference: "", name: file_name});
 
+        if (this.site_data.highlights[index].images == null) {
+          this.site_data.highlights[index].images = [];
+        }
+
         var images_id_list = this.site_data.highlights[index].images.map((image)=>{return image._id});
         images_id_list.push(result.uploadImage._id);
+        this.site_data.highlights[index].images.push({_id:result.uploadImage._id});
 
         // 하이라이트 info
         var ipt2 = {"name": this.site_data.highlights[index].name, images: images_id_list};
         var result3 = await upsertHighlight(ipt2);
+
         this.$bvToast.toast('파일명 = ' + file_name, {
           title: `업로드 완료`,
           variant: 'success',
