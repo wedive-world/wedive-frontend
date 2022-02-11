@@ -74,6 +74,11 @@ const { upsertProduct, deleteProductById } = require('@/wedive-frontend-graphql/
 const { uploadSingleImage, updateImage, getImageUrl } = require('@/wedive-frontend-graphql/image-service')
 const { upsertHighlight, deleteHighlightById } = require('@/wedive-frontend-graphql/highlight-service')
 
+function sleep(ms) {
+  const wakeUpTime = Date.now() + ms;
+  while (Date.now() < wakeUpTime) {}
+}
+
 export default {
   components: {
     BCard,
@@ -206,9 +211,10 @@ export default {
       const uniqueName = this.site_data.uniqueName;
       const latitude = this.site_data.latitude;
       const longitude = this.site_data.longitude;
+      const bvToast = this.$bvToast;
       this.$swal({
         title: '삭제하시겠습니까?',
-        text: e,
+        text: "",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
@@ -218,7 +224,7 @@ export default {
         if (res.isConfirmed) {
             var ipt2 = {"backgroundImages": _images_id_list, "_id": _id, "uniqueName": uniqueName, "latitude": latitude, "longitude": longitude};
             var result3 = await upsertDiveSite(ipt2);
-            this.$bvToast.toast('파일명 = ' + name, {
+            bvToast.toast('파일명 = ' + name, {
               title: `삭제 완료`,
               variant: 'success',
               solid: false,
@@ -337,10 +343,15 @@ export default {
         //console.log(ipt);
         var result2 = await updateImage(ipt);
 
+        await sleep(1000);
+
 
         // reference 추가를 위해 생성
         this.highlightImageReference.push({thumbnailUrl: result2.updateImage.thumbnailUrl, _id: result2.updateImage._id, reference: "", name: name});
 
+        if (this.site_data.backgroundImages == null) {
+          this.site_data.backgroundImages = [];
+        }
 
         var images_id_list = this.site_data.backgroundImages.map((image)=>{return image._id});
         images_id_list.push(result.uploadImage._id);
