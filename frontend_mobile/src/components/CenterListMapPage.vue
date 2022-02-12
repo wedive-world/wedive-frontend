@@ -520,7 +520,7 @@ export default {
         
         
     };
-    //$(".page-title-wrapper").css("background-color", "#eef2f1");
+    //$(".page-title-wrapper").css("background-color", "#eff5fb");
     //$(".page-title-wrapper").css("height", "58px");
     //$(".page-title-wrapper").css("width", "100%");
     //$(".page-title-wrapper").css("z-index", "980");

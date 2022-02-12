@@ -569,7 +569,7 @@
                     elem.style.backgroundColor = 'white';
                 });
                 document.querySelectorAll('.page-title-wrapper').forEach((elem, index)=> {
-                    elem.style.backgroundColor = '#eef2f1';
+                    elem.style.backgroundColor = '#eff5fb';
                 });
                 for(let i = 0; i < toggleDark.length; i++){toggleDark[i].checked=false};
                 localStorage.setItem(pwaName+'-Theme', 'light-mode');

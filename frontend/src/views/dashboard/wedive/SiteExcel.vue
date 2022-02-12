@@ -205,6 +205,9 @@ const columnDefinition = [
     { sortable: true, filter: true, field: 'highlightDescs', headerName: '하이라이트 (/구분)', editable: true },
     { sortable: true, filter: true, field: 'youtubeVideoIds', headerName: '유튜브 영상', editable: true },
     { sortable: true, filter: true, field: 'adminScore', headerName: '총점', editable: true },
+    { sortable: true, filter: true, field: 'waterEnvironmentScore', headerName: '환경', editable: true },
+    { sortable: true, filter: true, field: 'flowRateScore', headerName: '조류', editable: true },
+    { sortable: true, filter: true, field: 'eyeSightScore', headerName: '시야', editable: true },
 
     { sortable: true, filter: true, field: 'visitTimeDescription', headerName: '방문시기', editable: true },
     { sortable: true, filter: true, field: 'waterTemperatureDescription', headerName: '수온 설명', editable: true },

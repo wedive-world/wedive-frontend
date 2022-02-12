@@ -124,7 +124,8 @@
                     </div>
                 </div>
                 <div class="ms-2 d-inline-block v-align-top">
-                    <h5 v-if="chat.chatUsers && chat.chatUsers.length == 0 && chat.owner" class="font-15 font-600 mb-0" v-html="chat.owner.name"></h5>
+                    <span v-if="chat.type=='channel'" style="color:#77777780"><img src="/static/images/assets/ico_users.png" style="height: 15px;width: 15px;margin-bottom: 4px;margin-right:3px;display:inline-block;"/>{{ chat.chatUsers.length + 1 }}</span>
+                    <h5 v-if="chat.chatUsers && chat.chatUsers.length == 0 && chat.owner" class="font-15 font-600 mb-0" v-html="chat.owner.name" style="display:inline-block;"></h5>
                     <h5 v-else class="font-15 font-600 mb-0" v-html="chat.chatUsers.filter(user=>user.uid != uid).map(user => {return user.name}).join()"></h5>
                     <p class="line-height-s opacity-60 font-13 ellipsis2" style="max-width: calc(100vw - 172px);">
                         {{ (chat.lastChatMessage && chat.lastChatMessage.text)?(chat.lastChatMessage.text.includes('[[')&&chat.lastChatMessage.text.includes(']]')?((chat.lastChatMessage.text.includes('emoji|'))?'이모티콘':((chat.lastChatMessage.text.includes('center|')||chat.lastChatMessage.text.includes('point|')||chat.lastChatMessage.text.includes('site|'))?chat.lastChatMessage.text.split('|')[2]:'')):chat.lastChatMessage.text): ''}}

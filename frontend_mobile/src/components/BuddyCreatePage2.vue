@@ -72,7 +72,7 @@
 
 
 
-              <div class="card card-full border-top mb-0" style="background: #eef2f1;height:16px;">
+              <div class="card card-full border-top mb-0" style="background: #eff5fb;height:16px;">
               </div>
 
 
@@ -179,7 +179,7 @@
 
 
 
-              <div class="card card-full border-top mb-2" style="background: #eef2f1;height:16px;">
+              <div class="card card-full border-top mb-2" style="background: #eff5fb;height:16px;">
               </div>
 
 

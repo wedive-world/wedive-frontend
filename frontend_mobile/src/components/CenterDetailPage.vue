@@ -66,7 +66,7 @@
                         <span class="font-16 font-500 font-noto">{{ centerData.likes }}</span>
                     </div>
                     
-                    <div data-menu="menu-subscribe" :class="'flex-grow-1 pd-0'+((idToken == null || nickName == null) ? ' opacity-40' : '')">
+                    <div v-on:click="clickSubscribe()" :class="'flex-grow-1 pd-0'+((idToken == null || nickName == null) ? ' opacity-40' : '')">
                         <img class="ext-img" :src="'/static/images/assets/'+subscribe_img+'.png'" width="24" style="margin-top:-4px;"/>
                         <span class="font-16 font-500 font-noto"></span>
                     </div>
@@ -1089,7 +1089,7 @@
   </div>
 </template>
 <script>
-import  VueBottomSheet from "@webzlodimir/vue-bottom-sheet";
+import VueBottomSheet from "@webzlodimir/vue-bottom-sheet";
 import StarRating from 'vue-star-rating'
 import { GraphQLClient, request, gql } from "graphql-request";
 const axios = require("axios")

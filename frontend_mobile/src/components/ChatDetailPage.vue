@@ -514,24 +514,24 @@ export default {
       },
       is_emoji: function(newVal, oldVal) {
           if (newVal) {
-              $('#speech-content').css("height", (this.speechContentHeight-300) + "px")
+              $('#speech-content').css("height", (this.speechContentHeight-200) + "px")
               setTimeout(function() {
                 hideKeyboard();
                 $('#speech-content').scrollTop($('#speech-content')[0].scrollHeight);
               },100)
           } else {
-              $('#speech-content').css("height", (this.speechContentHeight) + "px")
+              $('#speech-content').css("height", (this.speechContentHeight+100) + "px")
           }
       },
       is_attach: function(newVal, oldVal) {
           if (newVal) {
-              $('#speech-content').css("height", (this.speechContentHeight-150) + "px")
+              $('#speech-content').css("height", (this.speechContentHeight-50) + "px")
               setTimeout(function() {
                 hideKeyboard();
                 $('#speech-content').scrollTop($('#speech-content')[0].scrollHeight);
               },100)
           } else {
-              $('#speech-content').css("height", (this.speechContentHeight) + "px")
+              $('#speech-content').css("height", (this.speechContentHeight+100) + "px")
           }
       },
   },

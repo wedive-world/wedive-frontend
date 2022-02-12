@@ -1,25 +1,11 @@
 <template>
   <div class="">
     <div data-menu-active="nav-buddy"></div>
+
     <div class="page-content pt-2">
-        <div class="card card-style hide" style="background: white;height:148px;">
-            <div class="content mb-0 mt-3">
-                <img class="float-right" src="/static/images/assets/search.png" width="80" style="position: absolute;z-index: 11;right: 30px;top:10px;"/>
-                <h4 class="text-start mb-1 font-15" style="padding-top:36px;">원하는 다이빙을 빠르게 검색</h4>
-
-                <div class="search-box search-dark border-08 bg-theme rounded-sm" style="position: absolute;width: calc(100% - 30px);z-index: 99;">
-                    <i class="fa fa-search" style="padding: 0px 15px 0px 15px;"></i>
-                    <input type="text" class="border-0" placeholder="328개의 다이빙이 기다리고 있습니다." data-search>
-                </div>
-                
-            </div>
-        </div>
-
-
         <div class="splide wedive-slider slider-no-arrows slider-no-dots" id="main-slider">
             <div class="splide__track">
                 <div class="splide__list">
-
                     <div v-on:click="concierge" class="splide__slide">
                         <div class="card card-style" style="box-shadow: none;background-image: linear-gradient(45deg, #35415f, #181818 70%);">
                             <div class="content mb-0 mt-3" style="min-height: 80px;">
@@ -91,7 +77,7 @@
                         </span>
                     </div>
                 </div>
-                <div v-on:click="goDiving()" class="light-border-bottom mt-3">
+                <div v-on:click="goDiving()" class="mt-3">
                     <div class="d-flex mb-3 position-relative">
                         <div class="align-self-center">
                             <img src="/static/images/point/ko/jeju_munisland_06.jpg" class="rounded-sm me-3" width="68">
@@ -134,7 +120,7 @@
                         <span class="chip chip-s bg-gray-light text-center font-400 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>1</span> <span class="color-shopping ms-1"><i class="far fa-user"></i>5</span></span>
                     </div>
                 </div>
-                <div class="light-border-bottom mt-3">
+                <div class="mt-3">
                     <div class="d-flex mb-3 position-relative">
                         <div class="align-self-center">
                             <img src="/static/images/point/ko/jeju_bumisland_01.jpg" class="rounded-sm me-3" width="68">
@@ -165,7 +151,7 @@
                         <span class="chip chip-s bg-gray-light text-center font-400 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>1</span> <span class="color-shopping ms-1"><i class="far fa-user"></i>1</span></span>
                     </div>
                 </div>
-                <div class="light-border-bottom mt-3">
+                <div class="mt-3">
                     <div class="d-flex mb-3 position-relative">
                         <div class="align-self-center">
                             <img src="/static/images/point/ko/jeju_bumisland_01.jpg" class="rounded-sm me-3" width="68">
@@ -203,7 +189,7 @@
                         <span class="chip chip-s bg-gray-light text-center font-400 wedive-chip"><span class="color-highlight"><i class="far fa-user"></i>1</span> <span class="color-shopping ms-1"><i class="far fa-user"></i>1</span></span>
                     </div>
                 </div>
-                <div class="light-border-bottom mt-3">
+                <div class="mt-3">
                     <div class="d-flex mb-3 position-relative">
                         <div class="align-self-center">
                             <img src="/static/images/point/ko/jeju_bumisland_01.jpg" class="rounded-sm me-3" width="68">
@@ -265,10 +251,9 @@
 
         
         <div data-menu-load="/static/menu-footer.html"></div>
-        <a href="/buddy_create" id="btn_new" :class="'btn btn-m mb-3 rounded-xl font-900 shadow-s icon-concierge'" style="background-color: #181818;"></a>
+        <a v-on:click="concierge" id="btn_new" :class="'btn btn-m mb-3 rounded-xl font-900 shadow-s icon-concierge'" style="background-color: #181818;"></a>
     </div>
     
-
     
     <!-- End of Page Content--> 
     
@@ -276,7 +261,8 @@
   </div>
 </template>
 <script>
-const axios = require("axios")
+const axios = require("axios");
+
 
 export default {
   name: 'HelloWorld',
@@ -290,9 +276,13 @@ export default {
       $("#footer-bar").hide();
     }
     $("#btn_new").hide();
+
   },
   beforeDestroy() {
     window.removeEventListener('scroll', this.handleScroll);
+  },
+  components: {
+      
   },
   created() {
     setTimeout(function() {
@@ -357,6 +347,7 @@ export default {
                                 createdAt
                                 chatUsers {
                                 _id
+                                uid
                                 name
                                 avatarOrigin
                                 }
@@ -382,7 +373,7 @@ export default {
             // 개설된 채팅이 있는지 확인한다.
             var go_flag = false;
             result.data.data.getJoinedRoomList.forEach(room => {
-                if (room.type == 'direct' && room.chatUsers.filter(u=>u._id == concierge_uid).length > 0) {
+                if (room.type == 'direct' && room.chatUsers.filter(u=>u.uid == concierge_uid).length > 0) {
                     go_flag = true;
                     location.href = '/chat/' + room._id;
                 }

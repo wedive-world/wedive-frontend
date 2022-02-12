@@ -814,7 +814,7 @@ export default {
         },500)
         
     };
-    //$(".page-title-wrapper").css("background-color", "#eef2f1");
+    //$(".page-title-wrapper").css("background-color", "#eff5fb");
     //$(".page-title-wrapper").css("height", "58px");
     //$(".page-title-wrapper").css("width", "100%");
     //$(".page-title-wrapper").css("z-index", "980");
@@ -1222,6 +1222,7 @@ export default {
                                 createdAt
                                 chatUsers {
                                 _id
+                                uid
                                 name
                                 avatarOrigin
                                 }
@@ -1247,7 +1248,7 @@ export default {
             // 개설된 채팅이 있는지 확인한다.
             var go_flag = false;
             result.data.data.getJoinedRoomList.forEach(room => {
-                if (room.type == 'direct' && room.chatUsers.filter(u=>u._id == concierge_uid).length > 0) {
+                if (room.type == 'direct' && room.chatUsers.filter(u=>u.uid == concierge_uid).length > 0) {
                     go_flag = true;
                     location.href = '/chat/' + room._id;
                 }
@@ -1290,7 +1291,7 @@ export default {
 .bx-filter {border: 1px solid rgba(0,0,0,.1);padding: 8px 4px;display:inline-block;}
 
 .wedive-corner {position: absolute;width: 30px;height: 30px;overflow: hidden;z-index:999;}
-.wedive-corner:after {content: '';position: absolute;height: 200%;width: 200%;border-radius: 100%;z-index: -1;box-shadow: 10px 10px 5px 100px #eef2f1;}
+.wedive-corner:after {content: '';position: absolute;height: 200%;width: 200%;border-radius: 100%;z-index: -1;box-shadow: 10px 10px 5px 100px #eff5fb;}
 .wedive-corner-bottom {left:-16px;bottom:0;width:16px;height:16px;}
 .site .wedive-corner-bottom:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #31373b !important;}
 .point .wedive-corner-bottom:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #308f7f !important;}
@@ -1306,7 +1307,7 @@ export default {
 .header-bottom-round {osition: absolute;top: 50px;left: 0px;right: 0px;height:30px;}
 .bx-search input {border-width: 0 !important;}
 .bx-search > div > div {display: contents;}
-.main-header {background:#eef2f1;}
+.main-header {background:#eff5fb;}
 .site .box-bottom-area {background-color: #3f474c;}
 .point .box-bottom-area {background-color: #3cb5a0;}
 .center .box-bottom-area {background-color: #4687c1;}

@@ -5,7 +5,7 @@ body {
   font-family: "Roboto", sans-serif !important;
   line-height: 24px !important;
   color: #000 !important;
-  background-color: #eef2f1;
+  background-color: #eff5fb;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -1267,7 +1267,7 @@ body {
 .header {
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   backdrop-filter: saturate(180%) blur(20px);
-  background-color: #eef2f1;
+  background-color: #eff5fb;
   position: fixed;
   top: 0px;
   left: 0px;
@@ -1869,7 +1869,7 @@ body {
 }
 
 .menu-bg {
-  background-color: #eef2f1;
+  background-color: #eff5fb;
 }
 
 .menu-hider {
@@ -3553,7 +3553,7 @@ button {
   margin: 0px 10px 16px 10px;
   border-radius: 20px;
   border: none;
-  box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.1);
+  //box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.1);
 }
 .card-style .card-body {
   padding: 15px;
