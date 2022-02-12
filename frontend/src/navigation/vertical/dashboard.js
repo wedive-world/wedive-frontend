@@ -40,6 +40,10 @@ export default [
         title: 'Recommendation',
         route: 'dashboard-recommendation',
       },
+      {
+        title: 'Find buddy',
+        route: 'dashboard-diving2',
+      },
     ],
   },
 ]

@@ -14,8 +14,8 @@ export default function useRecommendationsList() {
 
   // Table Handlers
   const tableColumns = [
-    { key: 'uniqueName', sortable: true },
-    { key: 'name', sortable: true },
+    { key: '_id', sortable: true },
+    { key: 'title', sortable: true },
     { key: 'countryCode', sortable: true },
     { key: 'publishStatus', sortable: true },
     { key: 'actions' },

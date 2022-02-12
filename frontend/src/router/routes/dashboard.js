@@ -56,6 +56,11 @@ export default [
     props: true,
     component: () => import('@/views/dashboard/wedive/SitePage.vue'),
   },
+  {
+    path: '/dashboard/diving2',
+    name: 'dashboard-diving2',
+    component: () => import('@/views/dashboard/wedive/DivingExcel.vue'),
+  },
   
   
 ]

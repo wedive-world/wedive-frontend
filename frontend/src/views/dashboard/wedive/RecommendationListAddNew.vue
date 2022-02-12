@@ -602,7 +602,6 @@ export default {
       recommendationType: ['interest', 'new', 'onePersonLeft', 'custom', 'search', 'nearBy',],
       backgroundItems: [],
       imageItems: [],
-      highlightItems: [],
       argumentItems: [],
       referenceItems: [],
       interestSelectedTotal: [],
@@ -643,7 +642,6 @@ export default {
     setRecommendationData: function(_data) {
       this.recommendationData = JSON.parse(JSON.stringify(blankRecommendationData));
       this.backgroundItems = [];
-      this.highlightItems = [];
       this.argumentItems = [];
       this.referenceItems = [];
 
@@ -664,23 +662,6 @@ export default {
             _data[key].forEach(image=>{
               this.backgroundItems.push(image)
             });
-          } else if (key == 'highlights') {
-            _data[key].forEach(highlight=>{
-              this.highlightItems.push(highlight);
-            });
-            this.recommendationData[key] = _data[key];
-          } else if (key == 'argumentIds') {
-            if (_data[key]) {
-              _data[key].map(argument=>{
-                this.argumentItems.push(argument);
-              });
-            }
-          } else if (key == 'referenceUrls') {
-            if (_data[key]) {
-              _data[key].map(reference=>{
-                this.referenceItems.push(reference);
-              });
-            }
           } else {
             this.recommendationData[key] = _data[key];
           }
@@ -690,38 +671,6 @@ export default {
       this.submitText = 'Update';
 
 
-      // 인기도 및 날씨정보
-      {
-        var popular_id = this.interestData.filter(interest=>interest.type=='popularity' && interest.title=='popular')[0]._id
-        var soso_id = this.interestData.filter(interest=>interest.type=='popularity' && interest.title=='soso')[0]._id
-        var unrecommended_id = this.interestData.filter(interest=>interest.type=='popularity' && interest.title=='unrecommended')[0]._id
-        var popularity_id_list = {};
-        popularity_id_list[popular_id] = 3;
-        popularity_id_list[soso_id] = 2;
-        popularity_id_list[unrecommended_id] = 1;
-
-        var sunny_id = this.interestData.filter(interest=>interest.type=='climate' && interest.title=='sunny')[0]._id
-        var cloudy_id = this.interestData.filter(interest=>interest.type=='climate' && interest.title=='cloudy')[0]._id
-        var rain_id = this.interestData.filter(interest=>interest.type=='climate' && interest.title=='rain')[0]._id
-        var heavyRain_id = this.interestData.filter(interest=>interest.type=='climate' && interest.title=='heavyRain')[0]._id
-        var climate_id_list = {};
-        climate_id_list[sunny_id] = 1;
-        climate_id_list[cloudy_id] = 2;
-        climate_id_list[rain_id] = 3;
-        climate_id_list[heavyRain_id] = 4;
-        
-        for (var i=1; i<13; i++) {
-          for (var j=0; j<_data["month"+i].length; j++) {
-            var _id = _data["month"+i][j]._id;
-            if (popularity_id_list.hasOwnProperty(_id)) {
-              this.recommendationData.monthlyPopular[i] = popularity_id_list[_id];
-            }
-            if (climate_id_list.hasOwnProperty(_id)) {
-              this.recommendationData.monthlyWeather[i] = climate_id_list[_id];
-            }
-          }
-        }
-      }
 
       // 전체 인터레스트
       {
@@ -853,7 +802,7 @@ export default {
       this.$emit('update:is-add-new-recommendation-sidebar-active', false)
       this.recommendationData = JSON.parse(JSON.stringify(blankRecommendationData));
 
-      //location.reload();
+      location.reload();
     },
   },
 }
