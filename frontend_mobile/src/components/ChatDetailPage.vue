@@ -776,7 +776,7 @@ export default {
         }, 500);
     },
     leaveRoom() {
-        /*this.$apollo.mutate({
+        this.$apollo.mutate({
             // Query
             mutation: gql`mutation LeaveRoom($roomId: String!) {
                 leaveRoom(roomId: $roomId) {
@@ -789,13 +789,13 @@ export default {
             },
         }).then((data) => {
             // Result
-            location.href="/chat_home"
-            }
+            //location.href="/chat_home"
+            //}
         }).catch((error) => {
             // Error
             console.error(error)
             // We restore the initial user input
-        })*/
+        })
     },
     inviteChat() {
         for (var i=0; i<this.chatSelectedList.length; i++) {
@@ -816,7 +816,7 @@ export default {
             }).then((data) => {
                 // Result
                 if (_flag) {
-                    location.reload();
+                    //location.reload();
                 }
             }).catch((error) => {
                 // Error

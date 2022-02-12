@@ -8,3 +8,12 @@ var lightbox = GLightbox({
     dragAutoSnap:true,
     preload:true,
 });
+lightbox.on('open', () => {
+    // Do something
+    window.localStorage.isShowImage="1";
+});
+
+lightbox.once('close', () => {
+    // Do something just one time
+    window.localStorage.isShowImage="0";
+});

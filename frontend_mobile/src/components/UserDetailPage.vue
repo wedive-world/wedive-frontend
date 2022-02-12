@@ -91,12 +91,12 @@
 
         <div class="card mb-0 border-bottom" style="z-index:1;">
             <div class="content pb-0">
-                <h2 class="font-15 font-700 mb-0">호스트 참여횟수 1회</h2>
+                <h2 class="font-15 font-700 mb-0">호스트 참여횟수 {{ userData.divingHostCount }}회</h2>
             </div>
         </div>
         <div class="card mb-0 border-bottom" style="z-index:1;">
             <div class="content pb-0">
-                <h2 class="font-15 font-700 mb-0">게스트 참여횟수 20회</h2>
+                <h2 class="font-15 font-700 mb-0">게스트 참여횟수 {{ userData.divingParticipantCount }}회</h2>
             </div>
         </div>
         <div id="map"></div>
@@ -157,6 +157,7 @@ export default {
                     getUserById(_id: $id) {
                         _id
                         uid
+                        divingHistoryLocations
                         authProvider
                         oauthToken
                         fcmToken
@@ -182,9 +183,15 @@ export default {
                         freeLicenseType
                         scubaLicenseLevel
                         scubaLicenseType
+                        divingHostCount
+                        divingParticipantCount
                         createdAt
                         isUserLike
+                        isUserDislike
                         isUserSubscribe
+                        views
+                        likes
+                        dislikes
                     }
                 }
                 `,
