@@ -364,6 +364,18 @@ var check_cate3 = true;
 
 var tour_flag = true;
 
+function hideKeyboard() {
+    var element = $("#textarea-input");
+    element.attr('readonly', 'readonly'); // Force keyboard to hide on input field.
+    element.attr('disabled', 'true'); // Force keyboard to hide on textarea field.
+    setTimeout(function() {
+        element.blur();  //actually close the keyboard
+        // Remove readonly attribute after keyboard is hidden.
+        element.removeAttr('readonly');
+        element.removeAttr('disabled');
+    }, 100);
+}
+
 async function updateAll() {
     var bounds = map.getBounds();
     var sw = bounds.getSouthWest();
@@ -826,8 +838,9 @@ export default {
     var height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
     document.getElementById('map').style.height = height + 'px';
 
+    $(".page-title").hide();
     if (this.$route.query.header && this.$route.query.header == 'hide') {
-      $(".page-title").hide();
+      //$(".page-title").hide();
       $(".page-title-clear").hide();
       $(".header-fixed").hide();
     }
@@ -1092,6 +1105,7 @@ export default {
           //console.log(ev);
           localStorage.suggestionFlag = '1';
           selecteduser = ev;
+          hideKeyboard()
           if (map.getZoom() < 10)
             map.setZoom(10);
           setTimeout(function(lat, lng) {

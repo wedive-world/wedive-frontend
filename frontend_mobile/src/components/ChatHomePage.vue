@@ -1,144 +1,117 @@
 <template>
   <div class="">
     <div data-menu-active="nav-chat"></div>
-    <div v-if="idToken == null || nickName == null" class="card card-style ms-0 me-0 rounded-0 text-center mb-0" style="height: calc(100vh - 58px);display:block;">
-        <img src="/static/images/assets/empty_message.jpg" width="60%" style="margin-top: 25%;" />
-        <p class="color-gray mt-2">{{ login_word }}이 필요합니다.</p>
+    <pull-to :top-load-method="refresh" @top-state-change="stateChange" :top-config="TOP_DEFAULT_CONFIG" :is-bottom-bounce="false" :is-top-bounce="scrollTop == 0">
+    <template slot="top-block" slot-scope="props">
+      <div :class="'top-load-wrapper opacity-50' + (props.state === 'loaded-done' ? ' fadeout' : '')">
+        <i class="font-18 fas"
+             :class="{
+                'fa-arrow-down': props.state === 'pull',
+                'fa-arrow-down': props.state === 'trigger',
+                'fa-spinner': props.state === 'loading',
+                'fa-check': props.state === 'loaded-done'
+             }"
+             aria-hidden="true">
+        </i>
+        {{ props.stateText }}
+      </div>
+    </template>
+    <div>
+        <div v-if="idToken == null || nickName == null" class="card card-style ms-0 me-0 rounded-0 text-center mb-0" style="height: calc(100vh - 58px);display:block;">
+            <img src="/static/images/assets/empty_message.jpg" width="60%" style="margin-top: 25%;" />
+            <p class="color-gray mt-2">{{ login_word }}이 필요합니다.</p>
 
-        <a v-on:click="login()" class="btn btn-m mb-3 rounded-xl text-uppercase font-500 shadow-s bg-secondary font-noto"><i class="fas fa-user-lock me-1"></i> {{ login_word }}</a>
-    </div>
-    <div v-else-if="getJoinedRoomList.length == 0" class="card card-style ms-0 me-0 rounded-0 text-center mb-0" style="height: calc(100vh - 58px);display:block;">
-        <img src="/static/images/assets/empty_message.jpg" width="60%" style="margin-top: 25%;" />
-        <p class="color-gray mb-2">진행중인 대화가 없습니다.</p>
-    </div>
-    <div v-else class="card card-style ms-0 me-0 rounded-0 mb-0" style="min-height:calc(100vh - 101px)">
-        <div class="content mt-0 mb-0">
-            <a v-for="chat in getJoinedRoomList" :href="'/chat/'+chat._id" class="d-block border-bottom pt-2" style="position:relative;">
-                <div v-if="chat.chatUsers && chat.chatUsers.length == 0 && chat.owner" class="p-relative d-inline-block w-60 mb-2">
-                    <div class="user-img">
-                        <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
-                            <defs>
-                            <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
-                            <clipPath id="clipSquircle">
-                                <use xlink:href="#shapeSquircle"/>
-                            </clipPath>
-                            </defs>
-                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(chat.owner.avatarOrigin)?chat.owner.avatarOrigin:'/static/images/assets/user_empty.png'"/>
-                        </svg>
+            <a v-on:click="login()" class="btn btn-m mb-3 rounded-xl text-uppercase font-500 shadow-s bg-secondary font-noto"><i class="fas fa-user-lock me-1"></i> {{ login_word }}</a>
+        </div>
+        <div v-else-if="getJoinedRoomList.length == 0" class="card card-style ms-0 me-0 rounded-0 text-center mb-0" style="height: calc(100vh - 58px);display:block;">
+            <img src="/static/images/assets/empty_message.jpg" width="60%" style="margin-top: 25%;" />
+            <p class="color-gray mb-2">진행중인 대화가 없습니다.</p>
+        </div>
+        <div v-else class="card card-style ms-0 me-0 rounded-0 mb-0" style="min-height:calc(100vh - 101px)">
+            <div class="content mt-0 mb-0">
+                <a v-for="chat in getJoinedRoomList" :href="'/chat/'+chat._id" class="d-block border-bottom pt-2" style="position:relative;">
+                    <div v-if="chat.chatUsers && chat.chatUsers.length == 0 && chat.owner" class="p-relative d-inline-block w-60 mb-2">
+                        <div class="user-img">
+                            <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                                <defs>
+                                <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                                <clipPath id="clipSquircle">
+                                    <use xlink:href="#shapeSquircle"/>
+                                </clipPath>
+                                </defs>
+                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(chat.owner.avatarOrigin)?chat.owner.avatarOrigin:'/static/images/assets/user_empty.png'"/>
+                            </svg>
+                        </div>
                     </div>
-                </div>
-                <div v-else-if="chat.usersCount == 1" class="p-relative d-inline-block w-60 mb-2">
-                    <div v-for="user in chat.chatUsers" class="user-img">
-                        <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
-                            <defs>
-                            <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
-                            <clipPath id="clipSquircle">
-                                <use xlink:href="#shapeSquircle"/>
-                            </clipPath>
-                            </defs>
-                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(user.avatarOrigin)?user.avatarOrigin:'/static/images/assets/user_empty.png'"/>
-                        </svg>
+                    <div v-else-if="chat.usersCount == 1" class="p-relative d-inline-block w-60 mb-2">
+                        <div v-for="user in chat.chatUsers" class="user-img">
+                            <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                                <defs>
+                                <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                                <clipPath id="clipSquircle">
+                                    <use xlink:href="#shapeSquircle"/>
+                                </clipPath>
+                                </defs>
+                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(user.avatarOrigin)?user.avatarOrigin:'/static/images/assets/user_empty.png'"/>
+                            </svg>
+                        </div>
                     </div>
-                </div>
-                <div v-else-if="chat.usersCount == 2" class="p-relative d-inline-block w-60 mb-2">
-                    <div v-for="user in chat.chatUsers.filter(user=>user.uid != uid)" class="user-img">
-                        <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
-                            <defs>
-                            <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
-                            <clipPath id="clipSquircle">
-                                <use xlink:href="#shapeSquircle"/>
-                            </clipPath>
-                            </defs>
-                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(user.avatarOrigin)?user.avatarOrigin:'/static/images/assets/user_empty.png'"/>
-                        </svg>
+                    <div v-else-if="chat.usersCount == 2" class="p-relative d-inline-block w-60 mb-2">
+                        <div v-for="user in chat.chatUsers.filter(user=>user.uid != uid)" class="user-img">
+                            <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                                <defs>
+                                <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                                <clipPath id="clipSquircle">
+                                    <use xlink:href="#shapeSquircle"/>
+                                </clipPath>
+                                </defs>
+                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(user.avatarOrigin)?user.avatarOrigin:'/static/images/assets/user_empty.png'"/>
+                            </svg>
+                        </div>
                     </div>
-                </div>
-                <div v-else-if="chat.usersCount == 3" class="p-relative d-inline-block w-60 mb-2">
-                    <div class="user-img img-sm">
-                        <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
-                            <defs>
-                            <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
-                            <clipPath id="clipSquircle">
-                                <use xlink:href="#shapeSquircle"/>
-                            </clipPath>
-                            </defs>
-                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="/static/images/user/jang.jpg"/>
-                        </svg>
+                    <div v-else-if="chat.usersCount == 3" class="p-relative d-inline-block w-60 mb-2">
+                        <div v-for="(user,index) in chat.chatUsers.filter(user=>user.uid != uid)" :class="'user-img img-sm' + (index==1 ? ' img-sm-rb' : '')">
+                            <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                                <defs>
+                                <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                                <clipPath id="clipSquircle">
+                                    <use xlink:href="#shapeSquircle"/>
+                                </clipPath>
+                                </defs>
+                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(user.avatarOrigin)?user.avatarOrigin:'/static/images/assets/user_empty.png'"/>
+                            </svg>
+                        </div>
                     </div>
-                    <div class="user-img img-sm img-sm-rb">
-                        <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
-                            <defs>
-                            <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
-                            <clipPath id="clipSquircle">
-                                <use xlink:href="#shapeSquircle"/>
-                            </clipPath>
-                            </defs>
-                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="/static/images/user/song.jpg"/>
-                        </svg>
+                    <div v-else-if="chat.usersCount > 3" class="p-relative d-inline-block w-60 mb-2">
+                        <div v-for="(user,index) in chat.chatUsers.filter(user=>user.uid != uid)" :class="'user-img img-xs' + (index == 1 ? ' img-xs-rt' : index == 2 ? ' img-xs-lb' : index == 3 ? ' img-xs-rb' : '')">
+                            <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                                <defs>
+                                <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                                <clipPath id="clipSquircle">
+                                    <use xlink:href="#shapeSquircle"/>
+                                </clipPath>
+                                </defs>
+                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(user.avatarOrigin)?user.avatarOrigin:'/static/images/assets/user_empty.png'"/>
+                            </svg>
+                        </div>
                     </div>
-                </div>
-                <div v-else-if="chat.usersCount > 3" class="p-relative d-inline-block w-60 mb-2">
-                    <div class="user-img img-xs">
-                        <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
-                            <defs>
-                            <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
-                            <clipPath id="clipSquircle">
-                                <use xlink:href="#shapeSquircle"/>
-                            </clipPath>
-                            </defs>
-                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="/static/images/user/jang.jpg"/>
-                        </svg>
+                    <div class="ms-2 d-inline-block v-align-top">
+                        <span v-if="chat.type=='channel'" style="color:#77777780;display:inline-block;"><img src="/static/images/assets/ico_users.png" style="height: 15px;width: 15px;margin-bottom: 4px;margin-right:3px;"/>{{ chat.chatUsers.length }}</span>
+                        <h5 v-if="chat.chatUsers && chat.chatUsers.length == 0 && chat.owner" class="font-15 font-600 mb-0" v-html="chat.owner.name" style="display:inline-block;"></h5>
+                        <h5 v-else class="font-15 font-600 mb-0" v-html="chat.chatUsers.filter(user=>user.uid != uid).map(user => {return user.name}).join()" style="display:inline-block;"></h5>
+                        <p class="line-height-s opacity-60 font-13 ellipsis2" style="max-width: calc(100vw - 172px);">
+                            {{ (chat.lastChatMessage && chat.lastChatMessage.text)?(chat.lastChatMessage.text.includes('[[')&&chat.lastChatMessage.text.includes(']]')?((chat.lastChatMessage.text.includes('emoji|'))?'이모티콘':((chat.lastChatMessage.text.includes('center|')||chat.lastChatMessage.text.includes('point|')||chat.lastChatMessage.text.includes('site|'))?chat.lastChatMessage.text.split('|')[2]:'')):chat.lastChatMessage.text): ''}}
+                        </p>
                     </div>
-                    <div class="user-img img-xs img-xs-rt">
-                        <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
-                            <defs>
-                            <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
-                            <clipPath id="clipSquircle">
-                                <use xlink:href="#shapeSquircle"/>
-                            </clipPath>
-                            </defs>
-                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="/static/images/user/yoon.jpg"/>
-                        </svg>
-                    </div>
-                    <div class="user-img img-xs img-xs-lb">
-                        <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
-                            <defs>
-                            <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
-                            <clipPath id="clipSquircle">
-                                <use xlink:href="#shapeSquircle"/>
-                            </clipPath>
-                            </defs>
-                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="/static/images/user/song.jpg"/>
-                        </svg>
-                    </div>
-                    <div class="user-img img-xs img-xs-rb">
-                        <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
-                            <defs>
-                            <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
-                            <clipPath id="clipSquircle">
-                                <use xlink:href="#shapeSquircle"/>
-                            </clipPath>
-                            </defs>
-                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="/static/images/assets/ico_wedive_d.png"/>
-                        </svg>
-                    </div>
-                </div>
-                <div class="ms-2 d-inline-block v-align-top">
-                    <span v-if="chat.type=='channel'" style="color:#77777780"><img src="/static/images/assets/ico_users.png" style="height: 15px;width: 15px;margin-bottom: 4px;margin-right:3px;display:inline-block;"/>{{ chat.chatUsers.length + 1 }}</span>
-                    <h5 v-if="chat.chatUsers && chat.chatUsers.length == 0 && chat.owner" class="font-15 font-600 mb-0" v-html="chat.owner.name" style="display:inline-block;"></h5>
-                    <h5 v-else class="font-15 font-600 mb-0" v-html="chat.chatUsers.filter(user=>user.uid != uid).map(user => {return user.name}).join()"></h5>
-                    <p class="line-height-s opacity-60 font-13 ellipsis2" style="max-width: calc(100vw - 172px);">
-                        {{ (chat.lastChatMessage && chat.lastChatMessage.text)?(chat.lastChatMessage.text.includes('[[')&&chat.lastChatMessage.text.includes(']]')?((chat.lastChatMessage.text.includes('emoji|'))?'이모티콘':((chat.lastChatMessage.text.includes('center|')||chat.lastChatMessage.text.includes('point|')||chat.lastChatMessage.text.includes('site|'))?chat.lastChatMessage.text.split('|')[2]:'')):chat.lastChatMessage.text): ''}}
-                    </p>
-                </div>
-                <div class="latest">{{ chat.lastChatMessage ? timeForToday(chat.lastChatMessage.createdAt) :  timeForToday(chat.createdAt)}}</div>
-                <div v-if="chat.unread > 0" class="unread">{{ (chat.unread>999) ? 999 : chat.unread }}</div>
-            </a>
-            
-            
+                    <div class="latest">{{ chat.lastChatMessage ? timeForToday(chat.lastChatMessage.createdAt) :  timeForToday(chat.createdAt)}}</div>
+                    <div v-if="chat.unread > 0" class="unread">{{ (chat.unread>999) ? 999 : chat.unread }}</div>
+                </a>
+                
+                
+            </div>
         </div>
     </div>
-
+    </pull-to>
 
 
     <div id="chat-add" 
@@ -213,6 +186,7 @@ const axios = require("axios")
 import gql from 'graphql-tag'
 import { GoogleAuthProvider, getAuth, signInWithPopup, onAuthStateChanged  } from "firebase/auth";
 import VueTypeaheadBootstrap from 'vue-typeahead-bootstrap';
+import PullTo from 'vue-pull-to'
 
 var today = new Date();
 
@@ -230,6 +204,7 @@ export default {
   },
   components: {
       VueTypeaheadBootstrap,
+      PullTo,
   },
   created() {
     setTimeout(function() {
@@ -237,9 +212,10 @@ export default {
         var preloader = document.getElementById('preloader')
         if(preloader){preloader.classList.add('preloader-hide');}
     }, 500);
+    window.addEventListener('scroll', this.handleScroll);
   },
-  destroyed () {
-    
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.handleScroll);
   },
   data () {
     return {
@@ -252,6 +228,17 @@ export default {
         selecteduser: null,
         users: [],
         chatSelectedList: [],
+        scrollTop: 0,
+        TOP_DEFAULT_CONFIG: {
+            pullText: '당겨서 새로고침', // The text is displayed when you pull down
+            triggerText: '업데이트', // The text that appears when the trigger distance is pulled down
+            loadingText: '로딩중...', // The text in the load
+            doneText: '새로고침 완료', // Load the finished text
+            failText: '실패', // Load failed text
+            loadedStayTime: 400, // Time to stay after loading ms
+            stayDistance: 50, // Trigger the distance after the refresh
+            triggerDistance: 70 // Pull down the trigger to trigger the distance
+        },
     }
   }, 
   apollo: {
@@ -422,6 +409,29 @@ export default {
         }
         this.users = _users;
       },
+      async refresh(loaded) {
+        if ($(document).scrollTop() == 0) {
+            setTimeout(function() {
+                loaded('done')
+            },1000);
+        } else {
+            console.log("1")
+            loaded('done')
+            return false;
+        }
+      },
+      stateChange(state) {
+        if (state === 'pull' || state === 'trigger') {
+            this.iconLink = '#fa-arrow-down';
+        } else if (state === 'loading') {
+            this.iconLink = '#fa-spinner';
+        } else if (state === 'loaded-done') {
+            this.iconLink = '#fa-check';
+        }
+      },
+      handleScroll (event) {
+        this.scrollTop = $(document).scrollTop();
+      },
   }
 
   
@@ -489,4 +499,11 @@ export default {
 .d-block {display:block;}
 .ellipsis2 {overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;}
 .unread {font-size: 11px;color: #b4bcc8;position: absolute;right: 0;top: 30px;background:#ff5160;color:white;padding:0px 9px;border-radius:22px;font-weight:bold;}
+
+.top-load-wrapper {line-height: 10px;text-align: center;}
+.fa-arrow-down {transition: .2s;transform: rotate(180deg);}
+.fa-spinner {transform: rotate(0deg);animation-name: loading;animation-duration: 3s;animation-iteration-count: infinite;animation-direction: alternate;}
+.fadeout {animation-name: fadeout50;animation-duration: 1s;animation-iteration-count:1;}
+@keyframes loading{from {transform: rotate(0deg);}to {transform: rotate(360deg);}}
+@keyframes fadeout50 {from {opacity: 0.5;}to {opacity: 0;}}
 </style>

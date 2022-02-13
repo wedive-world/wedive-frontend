@@ -2,6 +2,21 @@
   <div class="">
     <div data-menu-active="nav-buddy"></div>
 
+    <pull-to :top-load-method="refresh" @top-state-change="stateChange" :top-config="TOP_DEFAULT_CONFIG" :is-bottom-bounce="false" :is-top-bounce="scrollTop == 0">
+    <template slot="top-block" slot-scope="props">
+      <div :class="'top-load-wrapper opacity-50' + (props.state === 'loaded-done' ? ' fadeout' : '')">
+        <i class="font-18 fas"
+             :class="{
+                'fa-arrow-down': props.state === 'pull',
+                'fa-arrow-down': props.state === 'trigger',
+                'fa-spinner': props.state === 'loading',
+                'fa-check': props.state === 'loaded-done'
+             }"
+             aria-hidden="true">
+        </i>
+        {{ props.stateText }}
+      </div>
+    </template>
     <div class="page-content pt-2">
         <div class="splide wedive-slider slider-no-arrows slider-no-dots" id="main-slider">
             <div class="splide__track">
@@ -251,16 +266,17 @@
 
         
         <div data-menu-load="/static/menu-footer.html"></div>
-        <a v-on:click="concierge" id="btn_new" :class="'btn btn-m mb-3 rounded-xl font-900 shadow-s icon-concierge'" style="background-color: #181818;"></a>
     </div>
     
-    
+    </pull-to>
+    <a v-on:click="concierge" id="btn_new" :class="'btn btn-m mb-3 rounded-xl font-900 shadow-s icon-concierge'" style="background-color: #181818;"></a>
     <!-- End of Page Content--> 
     
     
   </div>
 </template>
 <script>
+import PullTo from 'vue-pull-to'
 const axios = require("axios");
 
 
@@ -281,9 +297,6 @@ export default {
   beforeDestroy() {
     window.removeEventListener('scroll', this.handleScroll);
   },
-  components: {
-      
-  },
   created() {
     setTimeout(function() {
         init_template();
@@ -299,12 +312,48 @@ export default {
         lastScrollPosition: 0,
         idToken: localStorage.idToken,
         nickName: localStorage.nickName,
+        scrollTop: 0,
+        TOP_DEFAULT_CONFIG: {
+            pullText: '당겨서 새로고침', // The text is displayed when you pull down
+            triggerText: '업데이트', // The text that appears when the trigger distance is pulled down
+            loadingText: '로딩중...', // The text in the load
+            doneText: '새로고침 완료', // Load the finished text
+            failText: '실패', // Load failed text
+            loadedStayTime: 400, // Time to stay after loading ms
+            stayDistance: 50, // Trigger the distance after the refresh
+            triggerDistance: 70 // Pull down the trigger to trigger the distance
+        },
     }
-  }, methods: {
+  }, 
+  components: {
+    PullTo,
+  },
+  methods: {
+      async refresh(loaded) {
+        if ($(document).scrollTop() == 0) {
+            setTimeout(function() {
+                loaded('done')
+            },1000);
+        } else {
+            console.log("1")
+            loaded('done')
+            return false;
+        }
+      },
+      stateChange(state) {
+        if (state === 'pull' || state === 'trigger') {
+            this.iconLink = '#fa-arrow-down';
+        } else if (state === 'loading') {
+            this.iconLink = '#fa-spinner';
+        } else if (state === 'loaded-done') {
+            this.iconLink = '#fa-check';
+        }
+      },
       goDiving() {
           location.href='/diving/61bf1df29ca67571157a3f81';
       },
       handleScroll (event) {
+        this.scrollTop = $(document).scrollTop();
         const currentScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
         if (currentScrollPosition < 0) { 
             return
@@ -414,4 +463,11 @@ export default {
 .chip span {line-height: 24px !important;}
 .icon-concierge {position: fixed;width: 58px;height: 58px;bottom: 70px;right:24px;background-size:cover;background: url(/static/images/assets/concierge.gif);background-size:cover !important;background-position-y: 8px;background-repeat: no-repeat;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
 .position-relative {position: relative;}
+
+.top-load-wrapper {line-height: 10px;text-align: center;}
+.fa-arrow-down {transition: .2s;transform: rotate(180deg);}
+.fa-spinner {transform: rotate(0deg);animation-name: loading;animation-duration: 3s;animation-iteration-count: infinite;animation-direction: alternate;}
+.fadeout {animation-name: fadeout50;animation-duration: 1s;animation-iteration-count:1;}
+@keyframes loading{from {transform: rotate(0deg);}to {transform: rotate(360deg);}}
+@keyframes fadeout50 {from {opacity: 0.5;}to {opacity: 0;}}
 </style>

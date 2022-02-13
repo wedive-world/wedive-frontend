@@ -28,19 +28,20 @@
           <div class="page-title page-title-fixed ps-3">
             <i class="fas fa-arrow-left font-24 me-2 pt-2 hide" style="opacity: 0.6;" id="page-back" v-on:click="goBack()"></i>
             <img href="/" class="logo-image mt-n2" style="margin-right: auto;" src="/static/images/assets/logo-dark.svg" height="46"/>
-            <a v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_write.png" width="28"></a>
-            <a v-on:click="addItem()" id="wedive-group" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_group.png" width="34"></a>
-            <a v-if="$route.path=='/site_list'" href="/site_home" class="page-title-icon font-18" style="color: #858585;margin-right: 13.3333333333px;"><img src="/static/images/assets/icon_map2.png" width="30"></a>
-            <a v-on:click="searchItem()" id="wedive-search" class="page-title-icon font-18 hide" style="color:#858585 !important;"><img src="/static/images/assets/icon_search.png" width="28"></a>
+            <a v-if="pathname == '/'" v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_buddy_new.png" width="32"></a>
+            <a v-if="pathname == '/chat_home'" v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_chat_new.png" width="32"></a>
+            <a v-if="pathname == '/book_home'" v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_book_new.png" width="30"></a>
+            <a v-else v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_write.png" width="28"></a>
+            <a v-on:click="addItem()" id="wedive-group" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_setting_fill.png" width="30"></a>
+            <a v-if="$route.path=='/site_list'" href="/site_home" class="page-title-icon font-18" style="color: #858585;margin-right: 13.3333333333px;"><img src="/static/images/assets/icon_map_fill.png" width="30"></a>
+            <a v-on:click="searchItem()" id="wedive-search" class="page-title-icon font-18 hide" style="color:#858585 !important;"><img src="/static/images/assets/icon_search_fill.png" width="32"></a>
             <a v-on:click="shareItem()" id="wedive-share" class="page-title-icon font-18 hide" style="color:#858585 !important;"><img src="/static/images/assets/ico_share.png" height="22"/></a>
             <!--<a href="#" class="page-title-icon" data-menu="menu-main" :style="'background: url('+((userThumbnail) ? userThumbnail : '/static/images/assets/user_empty_'+((gender)?gender:'m')+'.png')+');background-size:cover;'"></a>-->
           </div>
           <div class="page-title-clear"></div>
 
-          <pull-to v-if="pathname != '/site_home'" :top-load-method="refresh" @top-state-change="stateChange" :top-config="TOP_DEFAULT_CONFIG" :is-bottom-bounce="false" :is-top-bounce="scrollTop == 0">
-              <router-view/>
-          </pull-to>
-          <router-view v-else/>
+          
+          <router-view/>
           
           
           
@@ -105,7 +106,6 @@
 </template>
 
 <script>
-import PullTo from 'vue-pull-to'
 import VueBottomSheet from "@webzlodimir/vue-bottom-sheet";
 import { GoogleAuthProvider, getAuth, signInWithPopup, onAuthStateChanged, onIdTokenChanged  } from "firebase/auth";
 const axios = require("axios")
@@ -147,7 +147,7 @@ export default {
         setTimeout(function(item) {
           try {
             var item_menu = $("[data-menu-active]").data("menu-active").replace('nav-', '');
-            if (item_menu == 'site' && item != '/site_search') {
+            if (item_menu == 'site' && item != '/site_search' && item != '/site_home') {
               $("#wedive-share").fadeIn(1000);
               $("#wedive-share").removeClass("hide");
             }
@@ -164,70 +164,23 @@ export default {
     }
   },
   created() {
-    window.addEventListener('scroll', this.handleScroll);
+    
   },
   destroyed() {
-    window.removeEventListener('scroll', this.handleScroll);
+    
   },
   data() {
     return {
-      pathname: location.pathname,
-      scrollTop: 0,
       nickName: localStorage.nickName,
       userThumbnail: localStorage.userThumbnail,
       gender: localStorage.gender,
-      TOP_DEFAULT_CONFIG: {
-        pullText: '당겨서 새로고침', // The text is displayed when you pull down
-        triggerText: '업데이트', // The text that appears when the trigger distance is pulled down
-        loadingText: '로딩중...', // The text in the load
-        doneText: '새로고침 완료', // Load the finished text
-        failText: '실패', // Load failed text
-        loadedStayTime: 400, // Time to stay after loading ms
-        stayDistance: 50, // Trigger the distance after the refresh
-        triggerDistance: 70 // Pull down the trigger to trigger the distance
-      },
-      BOTTOM_DEFAULT_CONFIG: {
-        pullText: '',
-        triggerText: '',
-        loadingText: '',
-        doneText: '',
-        failText: '',
-        loadedStayTime: 400,
-        stayDistance: 50,
-        triggerDistance: 70
-      },
-
+      pathname: window.location.pathname,
     }
   },
   components: {
     VueBottomSheet,
-    PullTo,
   },
   methods: {
-    handleScroll(event) {
-      this.scrollTop = $(document).scrollTop();
-    },
-    async refresh(loaded) {
-      if ($(document).scrollTop() == 0) {
-        setTimeout(function() {
-            loaded('done')
-        },1000);
-      } else {
-        console.log("1")
-        loaded('done')
-        return false;
-      }
-      
-    },
-    stateChange(state) {
-      if (state === 'pull' || state === 'trigger') {
-        this.iconLink = '#icon-arrow-bottom';
-      } else if (state === 'loading') {
-        this.iconLink = '#icon-loading';
-      } else if (state === 'loaded-done') {
-        this.iconLink = '#icon-finish';
-      }
-    },
     openLoginBottomSheet() {
       this.$refs.loginBottomSheet.open();
     },

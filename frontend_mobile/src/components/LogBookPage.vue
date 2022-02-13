@@ -1,6 +1,22 @@
 <template>
   <div class="">
     <div data-menu-active="nav-book"></div>
+
+    <pull-to :top-load-method="refresh" @top-state-change="stateChange" :top-config="TOP_DEFAULT_CONFIG" :is-bottom-bounce="false" :is-top-bounce="scrollTop == 0">
+    <template slot="top-block" slot-scope="props">
+      <div :class="'top-load-wrapper opacity-50' + (props.state === 'loaded-done' ? ' fadeout' : '')">
+        <i class="font-18 fas"
+             :class="{
+                'fa-arrow-down': props.state === 'pull',
+                'fa-arrow-down': props.state === 'trigger',
+                'fa-spinner': props.state === 'loading',
+                'fa-check': props.state === 'loaded-done'
+             }"
+             aria-hidden="true">
+        </i>
+        {{ props.stateText }}
+      </div>
+    </template>
     <div class="page-content text-start transform-none" style="padding-bottom: 65px;">
         <div class="card card-style ms-0 me-0 rounded-0 mb-0">
             <div class="" id="tab-group-1">
@@ -137,19 +153,44 @@
         </div>
     
     </div>
-    
+    </pull-to>
     
   </div>
 </template>
 <script>
+import PullTo from 'vue-pull-to'
 
 export default {
   name: 'HelloWorld',
+  components: {
+    PullTo,
+  },
   methods: {
-      
+      async refresh(loaded) {
+        if ($(document).scrollTop() == 0) {
+            setTimeout(function() {
+                loaded('done')
+            },1000);
+        } else {
+            console.log("1")
+            loaded('done')
+            return false;
+        }
+      },
+      stateChange(state) {
+        if (state === 'pull' || state === 'trigger') {
+            this.iconLink = '#fa-arrow-down';
+        } else if (state === 'loading') {
+            this.iconLink = '#fa-spinner';
+        } else if (state === 'loaded-done') {
+            this.iconLink = '#fa-check';
+        }
+      },
+      handleScroll (event) {
+        this.scrollTop = $(document).scrollTop();
+      },
   },
   mounted() {
-    
     if (this.$route.query.header && this.$route.query.header == 'hide') {
       $(".page-title").hide();
       $(".page-title-clear").hide();
@@ -168,9 +209,24 @@ export default {
         var preloader = document.getElementById('preloader')
         if(preloader){preloader.classList.add('preloader-hide');}
     }, 500);
+    window.addEventListener('scroll', this.handleScroll);
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.handleScroll);
   },
   data () {
     return {
+        scrollTop: 0,
+        TOP_DEFAULT_CONFIG: {
+            pullText: '당겨서 새로고침', // The text is displayed when you pull down
+            triggerText: '업데이트', // The text that appears when the trigger distance is pulled down
+            loadingText: '로딩중...', // The text in the load
+            doneText: '새로고침 완료', // Load the finished text
+            failText: '실패', // Load failed text
+            loadedStayTime: 400, // Time to stay after loading ms
+            stayDistance: 50, // Trigger the distance after the refresh
+            triggerDistance: 70 // Pull down the trigger to trigger the distance
+        },
         center_list : [
             {title: "버블탱크 스쿠바다이빙", desc: "제주 남부에 위치한 PADI 5star 다이빙센터", star: 3.8, price_index: 2, feature: "덕다이빙, 케이브, 난파선, 드리프트", img: '/static/images/shop1/diving/test1.jpg', position: {lat: 33.24134444312815, lng: 126.56484940647604}},
             {title: "다이브 투게더리조트", desc: "한줄설명1", star: 4.8, price_index: 2, feature: "덕다이빙, 케이브", img: '/static/images/shop1/diving/test2.jpg', position: {lat: 33.241633952501715, lng: 126.56456092676112}},
@@ -199,4 +255,11 @@ export default {
 .transform-none {transform: inherit !important;};
 .splide__slide h5 {text-align:center;padding: 8px 0;}
 .splide__list > .is-visible:not(.collapsed) {border-bottom: 3px solid #1d397c !important;}
+
+.top-load-wrapper {line-height: 10px;text-align: center;}
+.fa-arrow-down {transition: .2s;transform: rotate(180deg);}
+.fa-spinner {transform: rotate(0deg);animation-name: loading;animation-duration: 3s;animation-iteration-count: infinite;animation-direction: alternate;}
+.fadeout {animation-name: fadeout50;animation-duration: 1s;animation-iteration-count:1;}
+@keyframes loading{from {transform: rotate(0deg);}to {transform: rotate(360deg);}}
+@keyframes fadeout50 {from {opacity: 0.5;}to {opacity: 0;}}
 </style>

@@ -1,8 +1,22 @@
 <template>
   <div class="">
     <div data-menu-active="nav-site"></div>
+
+    <pull-to :top-load-method="refresh" @top-state-change="stateChange" :top-config="TOP_DEFAULT_CONFIG" :is-bottom-bounce="false" :is-top-bounce="scrollTop == 0">
+    <template slot="top-block" slot-scope="props">
+      <div :class="'top-load-wrapper opacity-50' + (props.state === 'loaded-done' ? ' fadeout' : '')">
+        <i class="font-18 fas"
+             :class="{
+                'fa-arrow-down': props.state === 'trigger',
+                'fa-spinner': props.state === 'loading',
+                'fa-check': props.state === 'loaded-done'
+             }"
+             aria-hidden="true">
+        </i>
+        {{ props.stateText }}
+      </div>
+    </template>
     <div class="page-content pt-2">
-        
         <div v-on:click="goList()" class="card card-style hide" style="background: white;height:148px;">
             <div class="content mb-0 mt-3">
                 <img class="float-right" src="/static/images/assets/save_earth.png" style="position: absolute;z-index: 11;right: 10px;top:40px;"/>
@@ -261,17 +275,17 @@
         
         
         <div data-menu-load="/static/menu-footer.html"></div>
-        <a v-on:click="concierge" id="btn_new" :class="'btn btn-m mb-3 rounded-xl font-900 shadow-s icon-concierge'" style="background-color: #181818;"></a>
     </div>
-    
+    </pull-to>
 
 
     <!-- End of Page Content--> 
-    
+    <a v-on:click="concierge" id="btn_new" :class="'btn btn-m mb-3 rounded-xl font-900 shadow-s icon-concierge'" style="background-color: #181818;"></a>
     
   </div>
 </template>
 <script>
+import PullTo from 'vue-pull-to'
 const axios = require("axios")
 
 export default {
@@ -324,8 +338,43 @@ export default {
             {title: "속초 사이트", desc: "일반적으로 모래바닥으로 구성된 동해안과는 다르게 속초의 바다는 암석형태가 많이 있습니다. 덕분에 이곳에서 다이빙을 한다면 다양한 볼거리를 마주할 수 있습니다.", img: "https://i.ytimg.com/vi/xSJ4YSt3SRI/maxresdefault.jpg", star: 3.9},
             {title: "강릉 사이트", desc: "대한민국 최대 규모의 난파선 다이빙 포인트인 스텔라 난파선 포인트가 위치한 사이트 입니다. 더불어 강원도 3대 미항으로 꼽히는 삼곡항이 있는 등 아름다운 다이빙 사이트 입니다.", img: "http://www.uwmagazine.co.kr/news/photo/202003/368_1869_1729.jpg", star: 3.9},
         ],
+        scrollTop: 0,
+        TOP_DEFAULT_CONFIG: {
+            pullText: '당겨서 새로고침', // The text is displayed when you pull down
+            triggerText: '업데이트', // The text that appears when the trigger distance is pulled down
+            loadingText: '로딩중...', // The text in the load
+            doneText: '새로고침 완료', // Load the finished text
+            failText: '실패', // Load failed text
+            loadedStayTime: 400, // Time to stay after loading ms
+            stayDistance: 50, // Trigger the distance after the refresh
+            triggerDistance: 70 // Pull down the trigger to trigger the distance
+        },
     }
-  }, methods: {
+  }, 
+  components: {
+    PullTo,
+  },
+  methods: {
+    async refresh(loaded) {
+      if ($(document).scrollTop() == 0) {
+        setTimeout(function() {
+            loaded('done')
+        },1000);
+      } else {
+        console.log("1")
+        loaded('done')
+        return false;
+      }
+    },
+    stateChange(state) {
+        if (state === 'pull' || state === 'trigger') {
+            this.iconLink = '#fa-arrow-down';
+        } else if (state === 'loading') {
+            this.iconLink = '#fa-spinner';
+        } else if (state === 'loaded-done') {
+            this.iconLink = '#fa-check';
+        }
+    },
     goSiteMap: function() {
         location.href = '/site_home';
     },
@@ -333,6 +382,7 @@ export default {
         location.href='/center_list';
     },
     handleScroll (event) {
+        this.scrollTop = $(document).scrollTop();
         const currentScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
         if (currentScrollPosition < 0) { 
             return
@@ -447,4 +497,11 @@ export default {
 .nearby_desc {font-family: 'Noto Sans Korean' !important;font-weight:200;overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;line-height: 1.4;}
 .card-nearby {margin-left: 10px;background-size: cover !important;}
 .icon-concierge {position: fixed;width: 58px;height: 58px;bottom: 70px;right:24px;background-size:cover;background: url(/static/images/assets/concierge.gif);background-size:cover !important;background-position-y: 8px;background-repeat: no-repeat;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
+
+.top-load-wrapper {line-height: 10px;text-align: center;}
+.fa-arrow-down {transition: .2s;transform: rotate(180deg);}
+.fa-spinner {transform: rotate(0deg);animation-name: loading;animation-duration: 3s;animation-iteration-count: infinite;animation-direction: alternate;}
+.fadeout {animation-name: fadeout50;animation-duration: 1s;animation-iteration-count:1;}
+@keyframes loading{from {transform: rotate(0deg);}to {transform: rotate(360deg);}}
+@keyframes fadeout50 {from {opacity: 0.5;}to {opacity: 0;}}
 </style>
