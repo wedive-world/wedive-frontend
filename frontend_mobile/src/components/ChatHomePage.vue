@@ -28,7 +28,7 @@
             <p class="color-gray mb-2">진행중인 대화가 없습니다.</p>
         </div>
         <div v-else class="card card-style ms-0 me-0 rounded-0 mb-0" style="min-height:calc(100vh - 101px)">
-            <div class="content mt-0 mb-0">
+            <div class="content mt-0 mb-0" style="padding-bottom:80px;">
                 <a v-for="chat in getJoinedRoomList" :href="'/chat/'+chat._id" class="d-block border-bottom pt-2" style="position:relative;">
                     <div v-if="chat.chatUsers && chat.chatUsers.length == 0 && chat.owner" class="p-relative d-inline-block w-60 mb-2">
                         <div class="user-img">
@@ -98,7 +98,8 @@
                     <div class="ms-2 d-inline-block v-align-top">
                         <span v-if="chat.type=='channel'" style="color:#77777780;display:inline-block;"><img src="/static/images/assets/ico_users.png" style="height: 15px;width: 15px;margin-bottom: 4px;margin-right:3px;"/>{{ chat.chatUsers.length }}</span>
                         <h5 v-if="chat.chatUsers && chat.chatUsers.length == 0 && chat.owner" class="font-15 font-600 mb-0" v-html="chat.owner.name" style="display:inline-block;"></h5>
-                        <h5 v-else class="font-15 font-600 mb-0" v-html="chat.chatUsers.filter(user=>user.uid != uid).map(user => {return user.name}).join()" style="display:inline-block;"></h5>
+                        <h5 v-else-if="chat.type=='channel' && chat.title != null && chat.title != ''" class="font-15 font-600 mb-0 ellipsis" v-html="chat.title" style="display:inline-block;max-width: calc(100vw - 190px);"></h5>
+                        <h5 v-else class="font-15 font-600 mb-0 ellipsis" v-html="chat.chatUsers.filter(user=>user.uid != uid).map(user => {return user.name}).join()" style="display:inline-block;max-width: calc(100vw - 190px);"></h5>
                         <p class="line-height-s opacity-60 font-13 ellipsis2" style="max-width: calc(100vw - 172px);">
                             {{ (chat.lastChatMessage && chat.lastChatMessage.text)?(chat.lastChatMessage.text.includes('[[')&&chat.lastChatMessage.text.includes(']]')?((chat.lastChatMessage.text.includes('emoji|'))?'이모티콘':((chat.lastChatMessage.text.includes('center|')||chat.lastChatMessage.text.includes('point|')||chat.lastChatMessage.text.includes('site|'))?chat.lastChatMessage.text.split('|')[2]:'')):chat.lastChatMessage.text): ''}}
                         </p>
@@ -246,31 +247,35 @@ export default {
           query:gql `
             query {
                 getJoinedRoomList {
+                    lastChatMessage {
+                    text
+                    author {
+                        _id
+                        uid
+                        name
+                        avatarOrigin
+                    }
+                    createdAt
+                    }
                     _id
+                    title
                     type
-                    name
                     lastMessageAt
                     numOfmessages
                     unread
                     createdAt
                     chatUsers {
                     _id
-                    uid
                     name
+                    uid
                     avatarOrigin
                     }
                     usersCount
                     owner {
                     _id
+                    uid
                     name
                     avatarOrigin
-                    }
-                    lastChatMessage {
-                    text
-                    author {
-                        name
-                    }
-                    createdAt
                     }
                 }
             }
@@ -294,7 +299,7 @@ export default {
         }
         else if (today.getMonth() == timeValue.getMonth() && today.getDate() == timeValue.getDate()) {
             var hour = timeValue.getHours();
-            if (hour < 12) hour = "오전 " + hour
+            if (hour < 13) hour = "오전 " + hour
             else hour = "오후 " + (hour-12);
             return hour + ":" + timeValue.getMinutes();
         }

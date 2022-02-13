@@ -546,12 +546,35 @@ export default {
                     query: `
                     query {
                         getJoinedRoomList {
-                            _id
-                            type
-                            chatUsers {
+                            lastChatMessage {
+                            text
+                            author {
                                 _id
                                 uid
                                 name
+                                avatarOrigin
+                            }
+                            createdAt
+                            }
+                            _id
+                            title
+                            type
+                            lastMessageAt
+                            numOfmessages
+                            unread
+                            createdAt
+                            chatUsers {
+                            _id
+                            name
+                            uid
+                            avatarOrigin
+                            }
+                            usersCount
+                            owner {
+                            _id
+                            uid
+                            name
+                            avatarOrigin
                             }
                         }
                     }

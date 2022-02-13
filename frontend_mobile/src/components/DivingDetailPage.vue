@@ -1194,9 +1194,19 @@ export default {
                     query: `
                         query {
                             getJoinedRoomList {
+                                lastChatMessage {
+                                text
+                                author {
+                                    _id
+                                    uid
+                                    name
+                                    avatarOrigin
+                                }
+                                createdAt
+                                }
                                 _id
+                                title
                                 type
-                                name
                                 lastMessageAt
                                 numOfmessages
                                 unread
@@ -1204,19 +1214,15 @@ export default {
                                 chatUsers {
                                 _id
                                 name
+                                uid
                                 avatarOrigin
                                 }
                                 usersCount
                                 owner {
+                                _id
+                                uid
                                 name
                                 avatarOrigin
-                                }
-                                lastChatMessage {
-                                text
-                                author {
-                                    name
-                                }
-                                createdAt
                                 }
                             }
                         }
