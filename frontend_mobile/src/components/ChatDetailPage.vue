@@ -104,89 +104,106 @@
     
     <div v-on:click="speechContentClick()" v-on:scroll="handleScroll" id="speech-content" class="card card-style ms-0 me-0 rounded-0" :style="'height: calc(100vh - 50px);overflow-y: auto;padding-top:'+(is_concierge?'130':'50')+'px;padding-bottom:50px;'">
         <div class="content">
-            <div v-for="(chat, index) in getMessagesByRoomId">
-                <div v-if="chat && chat.author && chat.author.uid == uid">
-                    <div v-if="chat.text==''" class="hide"></div>
-                    <div v-else-if="chat.text.includes('[[') && chat.text.includes(']]') && chat.text.includes('emoji|')" class="chat-left">
-                        <div class="">
-                            <img v-if="(chat.text.replace('[[','').replace(']]','').split('|')[1]) == 'basic'" :src="'/static/images/emoji/' + (chat.text.replace('[[','').replace(']]','').split('|')[1])" style="max-width:100px;"/>
-                            <img v-else :src="'/static/images/emoji/' + (chat.text.replace('[[','').replace(']]','').split('|')[1])" style="max-width:120px;"/>
-                        </div>
-                        <span class="time">{{ timeForToday(chat.createdAt) }}</span>
-                    </div>
-                    <div v-else-if="emoji_regex.test(chat.text) && chat.text.length == 2" class="chat-left">
-                        <div style="font-size:80px;height:100px;padding-top:30px;display:block;">
-                            {{ chat.text }}
-                        </div>
-                        <span class="time">{{ timeForToday(chat.createdAt) }}</span>
-                    </div>
-                    <div v-else-if="chat.text.includes('[[') && chat.text.includes(']]') && (chat.text.includes('center|') || chat.text.includes('point|') || chat.text.includes('site|'))" class="speech-left">
-                            <div class="speech-bubble bg-highlight">
-                                <div class="font-noto font-600 font-16 mb-3"># {{ chat.text.split('|')[2] }}</div>
-                                <div class="ellipsis" style="display: -webkit-box;-webkit-line-clamp: 5;-webkit-box-orient: vertical;white-space: unset;"><img :src="chat.text.split('|')[4].replace(']]','')" width="60" height="60" class="rounded-s me-3" style="float:left;position: relative;">{{ chat.text.split('|')[3] }}</div>
-
-                                <a :href="'/'+chat.text.split('|')[0].replace('[[','')+'/'+chat.text.split('|')[1]" class="mt-3 font-noto" style="display: block;background: white;border-radius:8px;padding:6px 12px;margin-bottom:4px;color:black;">자세히 보러가기<i class="wedive_icoset wedive_icoset_rightarrow" style="float:right;margin-top:4px;"></i></a>
-                            </div>
-                            <span class="time">{{ timeForToday(chat.createdAt) }}</span>
-                    </div>
-                    <div v-else class="speech-left">
-                        <div class="speech-bubble bg-highlight">
-                            {{ chat.text }}
-                        </div>
-                        <span class="time">{{ timeForToday(chat.createdAt) }}</span>
-                    </div>
-                    
-                </div>
-                <div v-else>
-                    <div v-on:click="goUserDetail(chat.author)" class="p-relative d-inline-block w-60 float-left">
-                        <div class="user-img">
-                            <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
-                                <defs>
-                                <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
-                                <clipPath id="clipSquircle">
-                                    <use xlink:href="#shapeSquircle"/>
-                                </clipPath>
-                                </defs>
-                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(chat.author.avatarOrigin)?chat.author.avatarOrigin:'/static/images/assets/user_empty.png'"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div v-if="chat.text.includes('[[') && chat.text.includes(']]') && chat.text.includes('emoji|')" class="chat-right">
-                        <div class="">
-                            <img :src="'/static/images/emoji/' + (chat.text.replace('[[','').replace(']]','').split('|')[1])" style="max-width:100px;"/>
-                        </div>
-                        <span class="time">{{ timeForToday(chat.createdAt) }}</span>
-                    </div>
-                    <div v-else-if="emoji_regex.test(chat.text) && chat.text.length == 2" class="chat-right">
-                        <div style="font-size:80px;height:100px;padding-top:30px;display:block;">
-                            {{ chat.text }}
-                        </div>
-                        <span class="time">{{ timeForToday(chat.createdAt) }}</span>
-                    </div>
-                    <div v-else-if="chat.text.includes('[[') && chat.text.includes(']]') && (chat.text.includes('center|') || chat.text.includes('point|') || chat.text.includes('site|'))" class="chat-right">
-                        <div class="speech-right" style="max-width: 220px;">
-                            <div class="speech-bubble color-black">
-                                <div class="font-noto font-600 font-16 mb-3"># {{ chat.text.split('|')[2] }}</div>
-                                <div class="ellipsis" style="display: -webkit-box;-webkit-line-clamp: 5;-webkit-box-orient: vertical;white-space: unset;"><img :src="chat.text.split('|')[4].replace(']]','')" width="60" height="60" class="rounded-s me-3" style="float:left;position: relative;">{{ chat.text.split('|')[3] }}</div>
-
-                                <a :href="'/'+chat.text.split('|')[0].replace('[[','')+'/'+chat.text.split('|')[1]" class="mt-3 font-noto" style="display: block;background: white;border-radius:8px;padding:6px 12px;margin-bottom:4px;">자세히 보러가기<i class="wedive_icoset wedive_icoset_rightarrow" style="float:right;margin-top:4px;"></i></a>
+            <div v-for="(chat, index) in getChannelHistories">
+                <div v-if="chat.type == 'message'">
+                    <div v-if="chat && chat.author && chat.author.uid == uid">
+                        <div v-if="chat.text==''" class="hide"></div>
+                        <div v-else-if="chat.text.includes('[[') && chat.text.includes(']]') && chat.text.includes('emoji|')" class="chat-left">
+                            <div class="">
+                                <img v-if="(chat.text.replace('[[','').replace(']]','').split('|')[1]) == 'basic'" :src="'/static/images/emoji/' + (chat.text.replace('[[','').replace(']]','').split('|')[1])" style="max-width:100px;"/>
+                                <img v-else :src="'/static/images/emoji/' + (chat.text.replace('[[','').replace(']]','').split('|')[1])" style="max-width:120px;"/>
                             </div>
                             <span class="time">{{ timeForToday(chat.createdAt) }}</span>
                         </div>
-                    </div>
-                    <div v-else>
-                        <div class="speech-right">
-                            <div class="font-12 ms-1">{{ chat.author.name }}</div>
-                            <div class="speech-bubble color-black">
+                        <div v-else-if="emoji_regex.test(chat.text) && chat.text.length == 2" class="chat-left">
+                            <div style="font-size:80px;height:100px;padding-top:30px;display:block;">
                                 {{ chat.text }}
                             </div>
                             <span class="time">{{ timeForToday(chat.createdAt) }}</span>
                         </div>
+                        <div v-else-if="chat.text.includes('[[') && chat.text.includes(']]') && (chat.text.includes('center|') || chat.text.includes('point|') || chat.text.includes('site|'))" class="speech-left">
+                                <div class="speech-bubble bg-highlight">
+                                    <div class="font-noto font-600 font-16 mb-3"># {{ chat.text.split('|')[2] }}</div>
+                                    <div class="ellipsis" style="display: -webkit-box;-webkit-line-clamp: 5;-webkit-box-orient: vertical;white-space: unset;"><img :src="chat.text.split('|')[4].replace(']]','')" width="60" height="60" class="rounded-s me-3" style="float:left;position: relative;">{{ chat.text.split('|')[3] }}</div>
+
+                                    <a :href="'/'+chat.text.split('|')[0].replace('[[','')+'/'+chat.text.split('|')[1]" class="mt-3 font-noto" style="display: block;background: white;border-radius:8px;padding:6px 12px;margin-bottom:4px;color:black;">자세히 보러가기<i class="wedive_icoset wedive_icoset_rightarrow" style="float:right;margin-top:4px;"></i></a>
+                                </div>
+                                <span class="time">{{ timeForToday(chat.createdAt) }}</span>
+                        </div>
+                        <div v-else class="speech-left">
+                            <div class="speech-bubble bg-highlight">
+                                {{ chat.text }}
+                            </div>
+                            <span class="time">{{ timeForToday(chat.createdAt) }}</span>
+                        </div>
+                        
                     </div>
+                    <div v-else>
+                        <div v-on:click="goUserDetail(chat.author)" class="p-relative d-inline-block w-60 float-left">
+                            <div class="user-img">
+                                <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                                    <defs>
+                                    <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                                    <clipPath id="clipSquircle">
+                                        <use xlink:href="#shapeSquircle"/>
+                                    </clipPath>
+                                    </defs>
+                                    <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(chat.author.avatarOrigin)?chat.author.avatarOrigin:'/static/images/assets/user_empty.png'"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div v-if="chat.text.includes('[[') && chat.text.includes(']]') && chat.text.includes('emoji|')" class="chat-right">
+                            <div class="">
+                                <img :src="'/static/images/emoji/' + (chat.text.replace('[[','').replace(']]','').split('|')[1])" style="max-width:100px;"/>
+                            </div>
+                            <span class="time">{{ timeForToday(chat.createdAt) }}</span>
+                        </div>
+                        <div v-else-if="emoji_regex.test(chat.text) && chat.text.length == 2" class="chat-right">
+                            <div style="font-size:80px;height:100px;padding-top:30px;display:block;">
+                                {{ chat.text }}
+                            </div>
+                            <span class="time">{{ timeForToday(chat.createdAt) }}</span>
+                        </div>
+                        <div v-else-if="chat.text.includes('[[') && chat.text.includes(']]') && (chat.text.includes('center|') || chat.text.includes('point|') || chat.text.includes('site|'))" class="chat-right">
+                            <div class="speech-right" style="max-width: 220px;">
+                                <div class="speech-bubble color-black">
+                                    <div class="font-noto font-600 font-16 mb-3"># {{ chat.text.split('|')[2] }}</div>
+                                    <div class="ellipsis" style="display: -webkit-box;-webkit-line-clamp: 5;-webkit-box-orient: vertical;white-space: unset;"><img :src="chat.text.split('|')[4].replace(']]','')" width="60" height="60" class="rounded-s me-3" style="float:left;position: relative;">{{ chat.text.split('|')[3] }}</div>
+
+                                    <a :href="'/'+chat.text.split('|')[0].replace('[[','')+'/'+chat.text.split('|')[1]" class="mt-3 font-noto" style="display: block;background: white;border-radius:8px;padding:6px 12px;margin-bottom:4px;">자세히 보러가기<i class="wedive_icoset wedive_icoset_rightarrow" style="float:right;margin-top:4px;"></i></a>
+                                </div>
+                                <span class="time">{{ timeForToday(chat.createdAt) }}</span>
+                            </div>
+                        </div>
+                        <div v-else>
+                            <div class="speech-right">
+                                <div class="font-12 ms-1">{{ chat.author.name }}</div>
+                                <div class="speech-bubble color-black">
+                                    {{ chat.text }}
+                                </div>
+                                <span class="time">{{ timeForToday(chat.createdAt) }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div v-else-if="chat.type == 'roomTitleChanged' && chat.text != ''">
+                    <p class="text-center mb-0 font-11" style="color: #939dac;">대화 제목을 {{ chat.text }}로 변경하였습니다.</p>
+                </div>
+                <div v-else-if="chat.type == 'userInvited' && chat.text != ''">
+                    <p class="text-center mb-0 font-11" style="color: #939dac;">{{ chat.text }}님을 초대하였습니다.</p>
+                </div>
+                <div v-else-if="chat.type == 'userJoined' && chat.text != ''">
+                    <p class="text-center mb-0 font-11" style="color: #939dac;">{{ chat.text }}님이 합류하였습니다.</p>
+                </div>
+                <div v-else-if="chat.type == 'userLeaved' && chat.text != ''">
+                    <p class="text-center mb-0 font-11" style="color: #939dac;">{{ chat.text }}님이 나갔습니다.</p>
+                </div>
+                <div v-else-if="chat.type == 'userKicked' && chat.text != ''">
+                    <p class="text-center mb-0 font-11" style="color: #939dac;">{{ chat.text }}님을 내보냈습니다.</p>
                 </div>
                 
                 <div class="clearfix"></div>
-                <p v-if="(getJoinedRoomList.filter(x=>x._id==roomId).length > 0 ? getJoinedRoomList.filter(x=>x._id==roomId)[0].unread : 0 || 0) > 0 && (getJoinedRoomList.filter(x=>x._id==roomId)[0].unread == (getMessagesByRoomId.length - index - 1))" class="text-center mb-0 font-11 color-gray">여기까지 읽었습니다.</p>
+                <p v-if="(getJoinedRoomList.filter(x=>x._id==roomId).length > 0 ? getJoinedRoomList.filter(x=>x._id==roomId)[0].unread : 0 || 0) > 0 && (getJoinedRoomList.filter(x=>x._id==roomId)[0].unread == (getChannelHistories.length - index - 1))" class="text-center mb-0 font-11 color-gray">여기까지 읽었습니다.</p>
             </div>
 
             <div class="hide">
@@ -323,7 +340,14 @@
 
     <div id="menu-main-right" class="menu menu-box-right rounded-0" data-menu-width="280">
         <div class="pt-1 pb-1 ps-3 pe-3">
-            <div class="font-600">대화상대</div>
+            <div v-if="roomInfo && roomInfo.type == 'channel' && roomInfo.owner && roomInfo.owner.uid == uid" class="wedive-search row">
+                <div class="font-600">대화 제목</div>
+                <div class="input-group col-9" style="width: 75%;">
+                    <input class="form-control" v-model="changeTitle"/>
+                </div>
+                <a v-on:click="setTitle()" class="btn btn-m btn-full mb-3 rounded-xs text-uppercase font-900 shadow-s bg-dark-dark col-3" style="width: 21%;padding: 13px 8px !important;border-radius: 8px !important;">변경</a>
+            </div>
+            <div class="font-600">대화 상대</div>
             <div v-if="getJoinedRoomList.filter(x=>x._id==roomId).length > 0">
                 <div v-for="user in getJoinedRoomList.filter(x=>x._id==roomId)[0].chatUsers" class="pt-1 pb-1">
                     <svg class="svg-profile user-img user-img-small" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
@@ -384,8 +408,8 @@
                 class="wedive-search"
                 v-model="query"
                 :data="users"
-                :serializer="item => item.nickName"
-                :screen-reader-text-serializer="item => `${item.nickName}`"
+                :serializer="item => item.name"
+                :screen-reader-text-serializer="item => `${item.name}`"
                 highlightClass="special-highlight-class"
                 @hit="selecteduser = $event;enableNextUser($event);"
                 :minMatchingChars="1"
@@ -402,7 +426,7 @@
                         style="width: 50px; height: 50px;object-fit:cover;" />
                     </div>
                     <span class="ml-4" style="">
-                        <p class="font-noto font-16 mb-0">{{ data.nickName }}</p>
+                        <p class="font-noto font-16 mb-0">{{ data.name }}</p>
                         <p class="font-13 mb-0 color-gray">{{ getDiverLevel(data.freeLicenseLevel, data.scubaLicenseLevel) }}</p>
                     </span>
                     
@@ -419,8 +443,8 @@
                             style="width: 50px; height: 50px;object-fit:cover;" />
                         </div>
                         <span class="ml-4" style="">
-                            <p class="font-noto font-16 mb-0">{{ user.nickName }}</p>
-                            <p class="font-13 mb-0 color-gray">{{ getDiverLevel(user.freeLicenseLevel, user.scubaLicenseLevel) }}</p>
+                            <p class="font-noto font-16 mb-0">{{ user.name }}</p>
+                            <p class="font-13 mb-0 color-gray hide">{{ getDiverLevel(user.freeLicenseLevel, user.scubaLicenseLevel) }}</p>
                         </span>
                         <i v-on:click="removeChatSelected(user)" class="wedive_icoset wedive_icoset_close" style="position: absolute;right:0px;margin:8px;"></i>
                     </div>
@@ -454,7 +478,8 @@
         </div>
     </div>
 
-
+    <div id="snackbar-success" class="snackbar-toast color-white bg-green-dark" data-bs-delay="2000" data-bs-autohide="true"><i class="fa fa-times me-3"></i>대화 제목을 변경했어요.</div>
+    <div id="snackbar-error" class="snackbar-toast color-white bg-red-dark" data-bs-delay="2000" data-bs-autohide="true"><i class="fa fa-times me-3"></i>에러가 발생하여 제목을 변경하지 못했습니다.</div>
   </div>
 </template>
 <script>
@@ -488,7 +513,55 @@ export default {
   name: 'HelloWorld',
   async beforeRouteEnter(to, from, next) {
     if (to.params.id != null) {
-        next(vm => {vm.setData(to.params.id)});
+        var result = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                query GetDivingByChatRoomId($chatRoomId: String!) {
+                    getDivingByChatRoomId(chatRoomId: $chatRoomId) {
+                        diveCenters {
+                        name
+                        uniqueName
+                        description
+                        adminScore
+                        }
+                        divePoints {
+                        name
+                        uniqueName
+                        description
+                        adminScore
+                        }
+                        diveSites {
+                        name
+                        uniqueName
+                        description
+                        adminScore
+                        }
+                        title
+                        description
+                        status
+                        type
+                        startedAt
+                        finishedAt
+                    }
+                }
+                `,
+                variables: {
+                    chatRoomId: to.params.id
+                }
+
+            }
+        });
+        var divingInfo = null;
+        if ((result.data && result.data.data && result.data.data.getDivingByChatRoomId)) {
+            divingInfo = result.data.data.getDivingByChatRoomId;
+        }
+        next(vm => {vm.setData(to.params.id, divingInfo)});
     }
   },
   watch: {
@@ -499,7 +572,7 @@ export default {
             this.sendDisable = false;
         }
       },
-      getMessagesByRoomId: function(newVal, oldVal) {
+      getChannelHistories: function(newVal, oldVal) {
           if (oldVal.length == 0) {
               setTimeout(function() {
                 $('#speech-content').scrollTop($('#speech-content')[0].scrollHeight);
@@ -575,9 +648,10 @@ export default {
         `,
         result ({ data }) {
             try {
-                var roomInfo = this.getJoinedRoomList.filter(x=>x._id==this.roomId)[0];
-                this.roomName = roomInfo.type == 'direct' ? roomInfo.chatUsers.filter(user => user.uid != localStorage.uid)[0].name : roomInfo.name;
-                if (roomInfo.type == 'direct' && roomInfo.chatUsers.filter(user => user.uid != localStorage.uid)[0].uid == 'RuOiMt9YUTbRUJQTrXv4cWMEimr2') {
+                this.roomInfo = this.getJoinedRoomList.filter(x=>x._id==this.roomId)[0];
+                this.changeTitle = this.roomInfo.title;
+                this.roomName = this.roomInfo.type == 'direct' ? this.roomInfo.chatUsers.filter(user => user.uid != localStorage.uid)[0].name : (this.roomInfo.title == null ? '' : this.roomInfo.title);
+                if (this.roomInfo.type == 'direct' && this.roomInfo.chatUsers.filter(user => user.uid != localStorage.uid)[0].uid == 'RuOiMt9YUTbRUJQTrXv4cWMEimr2') {
                     this.is_concierge = true;
                 }
             } catch(e) {
@@ -585,18 +659,20 @@ export default {
             }
         },
     },
-    getMessagesByRoomId: {
-        query: gql`query GetMessagesByRoomId($roomId: String!, $skip: Int, $limit: Int) {
-            getMessagesByRoomId(roomId: $roomId, skip: $skip, limit: $limit) {
+    getChannelHistories: {
+        query: gql`query Query($roomId: String!, $skip: Int, $limit: Int) {
+            getChannelHistories(roomId: $roomId, skip: $skip, limit: $limit) {
                 _id
                 text
                 author {
-                uid
                 _id
+                uid
                 name
                 avatarOrigin
                 }
+                type
                 attachments {
+                _id
                 attachmentText
                 imageUrl
                 audioUrl
@@ -613,6 +689,8 @@ export default {
             }
         },
         result ({ data }) {
+            //console.log(data.getChannelHistories);
+            //data.getChannelHistories.reverse();
         },
         subscribeToMore: {
             document: gql`subscription Subscription($roomIds: [String]!) {
@@ -640,12 +718,12 @@ export default {
                 }
             },
             updateQuery: (previousResult, { subscriptionData }) => {
-                if (previousResult.getMessagesByRoomId.find(chat => chat._id === subscriptionData.data.subscribeRoomMessage._id)) {
+                if (previousResult.getChannelHistories.find(chat => chat._id === subscriptionData.data.subscribeRoomMessage._id)) {
                     return previousResult
                 }
                 return {
-                    getMessagesByRoomId: [
-                        ...previousResult.getMessagesByRoomId,
+                    getChannelHistories: [
+                        ...previousResult.getChannelHistories,
                         subscriptionData.data.subscribeRoomMessage,
                     ],
                 }
@@ -675,7 +753,7 @@ export default {
         //element.scrollTop = element.scrollHeight;
     },200);
 
-    //console.log(this.$apollo.queries.chats.observer.lastResult.data.getMessagesByRoomId);
+    //console.log(this.$apollo.queries.chats.observer.lastResult.data.getChannelHistories);
 
     /*$("#speech-content").scroll(function () {
         var position = $("#speech-content").scrollTop();
@@ -711,7 +789,7 @@ export default {
         locationSelectedList: [],
         sendText: '',
         sendDisable: true,        
-        getMessagesByRoomId: [],
+        getChannelHistories: [],
         getJoinedRoomList: [],
         roomId: '',
         roomName: '',
@@ -732,10 +810,15 @@ export default {
         selecteduser: null,
         users: [],
         chatSelectedList: [],
+        roomInfo: {},
+        changeTitle: '',
+        divingInfo: {},
     }
   }, methods: {
-    setData(roomId) {
+    setData(roomId, divingInfo) {
         this.roomId = roomId;
+        this.divingInfo = divingInfo;
+        console.log(divingInfo);
         this.markRead();
     },
     invite() {
@@ -780,6 +863,47 @@ export default {
         $("#search_user > .input-group > input").focus();
         }, 500);
     },
+    setTitle() {
+        this.$apollo.mutate({
+            // Query
+            mutation: gql`mutation Mutation($roomId: String!, $title: String!) {
+                setRoomTitle(roomId: $roomId, title: $title) {
+                    success
+                }
+            }`,
+            // Parameters
+            variables: {
+                roomId: this.roomId,
+                title: this.changeTitle
+            },
+        }).then((data) => {
+            // Result
+            var toastData = 'snackbar-error';
+            if (data.data.setRoomTitle.success) {
+                this.roomInfo.title = this.changeTitle;
+                toastData = 'snackbar-success';
+            }var notificationToast = document.getElementById(toastData);
+            var notificationToast = new bootstrap.Toast(notificationToast);
+            notificationToast.show();
+
+
+            const activeMenu = document.querySelectorAll('.menu-active');
+            for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
+
+            try {
+                Android.vibrate()
+            } catch (e) {
+                
+            }
+            
+            //location.href="/chat_home"
+            //}
+        }).catch((error) => {
+            // Error
+            console.error(error)
+            // We restore the initial user input
+        })
+    },
     leaveRoom() {
         this.$apollo.mutate({
             // Query
@@ -808,11 +932,13 @@ export default {
             const _flag = (i == (this.chatSelectedList.length-1));
             this.$apollo.mutate({
                 // Query
-                mutation: gql`mutation Mutation($roomId: String!, $uid: String!) {
-                    invite(roomId: $roomId, uid: $uid) {
-                        success
+                mutation: gql`
+                    mutation Mutation($roomId: String!, $userId: String!) {
+                        invite(roomId: $roomId, userId: $userId) {
+                            success
+                        }
                     }
-                }`,
+                `,
                 // Parameters
                 variables: {
                     roomId: this.roomId,
@@ -821,7 +947,7 @@ export default {
             }).then((data) => {
                 // Result
                 if (_flag) {
-                    //location.reload();
+                    location.reload();
                 }
             }).catch((error) => {
                 // Error
@@ -834,7 +960,7 @@ export default {
         this.users = [];
         const query = this.query;
         var result = await axios({
-            url: 'https://api.wedives.com/graphql',
+            url: 'https://chat.wedives.com/graphql',
             method: 'post',
             headers: {
                 countrycode: 'ko',
@@ -846,13 +972,8 @@ export default {
                         findUserByNickName(nickName: $nickName) {
                             _id
                             uid
-                            profileImages {
-                            thumbnailUrl
-                            }
-                            email
-                            scubaLicenseLevel
-                            freeLicenseLevel
-                            nickName
+                            name
+                            avatarOrigin
                         }
                     }
                 `,
@@ -1061,7 +1182,7 @@ export default {
             this.skip += this.limit;
             this.prev_height = $('#speech-content')[0].scrollHeight;
             
-            this.$apollo.queries.getMessagesByRoomId.fetchMore({
+            this.$apollo.queries.getChannelHistories.fetchMore({
                 // New variables
                 variables: {
                     skip: this.skip,
@@ -1074,9 +1195,9 @@ export default {
                     //this.skip += this.limit;
                     
                     return {
-                        getMessagesByRoomId: [
-                            ...fetchMoreResult.getMessagesByRoomId,
-                            ...previousResult.getMessagesByRoomId,
+                        getChannelHistories: [
+                            ...fetchMoreResult.getChannelHistories,
+                            ...previousResult.getChannelHistories,
                         ],
                     }
                 },

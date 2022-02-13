@@ -1571,7 +1571,7 @@ body {
   position: fixed;
   left: 0px;
   right: 0px;
-  z-index: 9999;
+  z-index: 101;
 }
 
 .page-title-over {

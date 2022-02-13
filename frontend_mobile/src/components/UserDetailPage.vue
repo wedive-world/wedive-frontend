@@ -138,7 +138,7 @@
 <script>
 import StarRating from 'vue-star-rating'
 const axios = require("axios")
-const cities = [{ 'code': 'OTT', 'city': 'OTTAWA', 'country': 'CANADA', 'lat': '23.10', 'lon': '120.34' }, { 'code': 'BSB', 'city': 'BRASILIA', 'country': 'BRAZIL', 'lat': '-32.85', 'lon': '133.30' }, { 'code': 'DEL', 'city': 'DELHI', 'country': 'INDIA', 'lat': '4.71', 'lon': '-127.57' }, { 'code': 'CMX', 'city': 'CIDADE DO MÉXICO', 'country': 'MÉXICO', 'lat': '0.42', 'lon': '93.19' }, { 'code': 'SID', 'city': 'SIDNEY', 'country': 'AUSTRALIA', 'lat': '-48.38', 'lon': '-71.71' }, { 'code': 'TOK', 'city': 'TOQUIO', 'country': 'JAPÃO', 'lat': '17.34', 'lon': '-81.73' }, { 'code': 'CCA', 'city': 'CIDADE DO CABO', 'country': 'AFRICA DO SUL', 'lat': '-43.20', 'lon': '-171.97' }, { 'code': 'CMP', 'city': 'CAMPO GRANDE', 'country': 'BRASIL', 'lat': '-36.15', 'lon': '130.72' }, { 'code': 'PAR', 'city': 'PARIS', 'country': 'FRANÇA', 'lat': '22.19', 'lon': '174.27' }, { 'code': 'NOY', 'city': 'NOVA YORK', 'country': 'USA', 'lat': '11.23', 'lon': '112.96' }]
+//const cities = [{ 'code': 'OTT', 'city': 'OTTAWA', 'country': 'CANADA', 'lat': '23.10', 'lon': '120.34' }, { 'code': 'BSB', 'city': 'BRASILIA', 'country': 'BRAZIL', 'lat': '-32.85', 'lon': '133.30' }, { 'code': 'DEL', 'city': 'DELHI', 'country': 'INDIA', 'lat': '4.71', 'lon': '-127.57' }, { 'code': 'CMX', 'city': 'CIDADE DO MÉXICO', 'country': 'MÉXICO', 'lat': '0.42', 'lon': '93.19' }, { 'code': 'SID', 'city': 'SIDNEY', 'country': 'AUSTRALIA', 'lat': '-48.38', 'lon': '-71.71' }, { 'code': 'TOK', 'city': 'TOQUIO', 'country': 'JAPÃO', 'lat': '17.34', 'lon': '-81.73' }, { 'code': 'CCA', 'city': 'CIDADE DO CABO', 'country': 'AFRICA DO SUL', 'lat': '-43.20', 'lon': '-171.97' }, { 'code': 'CMP', 'city': 'CAMPO GRANDE', 'country': 'BRASIL', 'lat': '-36.15', 'lon': '130.72' }, { 'code': 'PAR', 'city': 'PARIS', 'country': 'FRANÇA', 'lat': '22.19', 'lon': '174.27' }, { 'code': 'NOY', 'city': 'NOVA YORK', 'country': 'USA', 'lat': '11.23', 'lon': '112.96' }]
 
 export default {
   name: 'HelloWorld',
@@ -380,7 +380,7 @@ export default {
       request() {
             const app = this,
                 circles = this.g.selectAll('circle')
-                    .data(cities)
+                    .data(this.userData.divingHistoryLocations)
                     .enter()
                     .append('a')
                     .attr('xlink:href', d => `https://www.google.com/search?q=${d.city}`)
@@ -524,8 +524,16 @@ export default {
             }
             this.userData.levelShow += " 다이버";
             if(s_lvl>5) this.userData.levelShow = scuba_level[s_lvl];
+
+            // divingHistoryLocations 중복제거
+            var temp_arr = new Array();
+            this.userData.divingHistoryLocations.forEach(x => {if (x.length > 1) temp_arr.push(x[0] + "/" + x[1])});
+            var set = new Set(temp_arr);
+            var uniqueArr = [...set];
+            var temp_arr2 = new Array();
             
-            
+            uniqueArr.forEach(x => {var tmp = x.split("/");temp_arr2.push({ 'country': '', 'lat': tmp[1], 'lon': tmp[0] })});
+            this.userData.divingHistoryLocations = temp_arr2;
           }
           setTimeout(function() {
             init_template();

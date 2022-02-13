@@ -96,11 +96,13 @@
                         </div>
                     </div>
                     <div class="ms-2 d-inline-block v-align-top">
-                        <span v-if="chat.type=='channel'" style="color:#77777780;display:inline-block;"><img src="/static/images/assets/ico_users.png" style="height: 15px;width: 15px;margin-bottom: 4px;margin-right:3px;"/>{{ chat.chatUsers.length }}</span>
-                        <h5 v-if="chat.chatUsers && chat.chatUsers.length == 0 && chat.owner" class="font-15 font-600 mb-0" v-html="chat.owner.name" style="display:inline-block;"></h5>
-                        <h5 v-else-if="chat.type=='channel' && chat.title != null && chat.title != ''" class="font-15 font-600 mb-0 ellipsis" v-html="chat.title" style="display:inline-block;max-width: calc(100vw - 190px);"></h5>
-                        <h5 v-else class="font-15 font-600 mb-0 ellipsis" v-html="chat.chatUsers.filter(user=>user.uid != uid).map(user => {return user.name}).join()" style="display:inline-block;max-width: calc(100vw - 190px);"></h5>
-                        <p class="line-height-s opacity-60 font-13 ellipsis2" style="max-width: calc(100vw - 172px);">
+                        <div>
+                            <span v-if="chat.type=='channel'" style="color:#77777780;position:fixed;"><img src="/static/images/assets/ico_users.png" style="height: 15px;width: 15px;margin-bottom: 4px;margin-right:3px;"/>{{ chat.chatUsers.length }}</span>
+                            <h5 v-if="chat.type=='channel'" class="font-15 font-600 mb-0 ellipsis" v-html="(chat.title == null || chat.title == '') ? '&nbsp' : chat.title" style="margin-left:34px;max-width: calc(100vw - 190px);"></h5>
+                            <h5 v-else-if="chat.chatUsers && chat.chatUsers.length == 0 && chat.owner" class="font-15 font-600 mb-0" v-html="chat.owner.name"></h5>
+                            <h5 v-else class="font-15 font-600 mb-0 ellipsis" v-html="chat.chatUsers.filter(user=>user.uid != uid).map(user => {return user.name}).join()" style="max-width: calc(100vw - 190px);"></h5>
+                        </div>
+                        <p class="line-height-s opacity-60 font-13 ellipsis2" style="max-width: calc(100vw - 172px);margin-top:8px;">
                             {{ (chat.lastChatMessage && chat.lastChatMessage.text)?(chat.lastChatMessage.text.includes('[[')&&chat.lastChatMessage.text.includes(']]')?((chat.lastChatMessage.text.includes('emoji|'))?'이모티콘':((chat.lastChatMessage.text.includes('center|')||chat.lastChatMessage.text.includes('point|')||chat.lastChatMessage.text.includes('site|'))?chat.lastChatMessage.text.split('|')[2]:'')):chat.lastChatMessage.text): ''}}
                         </p>
                     </div>
@@ -282,8 +284,8 @@ export default {
           `,
           result ({ data, loading, networkStatus }) {
             data.getJoinedRoomList.sort(function(a, b) {
-                var a_create_at = (a.lastChatMessage && a.lastChatMessage.createdAt) ? a.lastChatMessage.createdAt : "2000-01-01T00:00:00.000Z";
-                var b_create_at = (b.lastChatMessage && b.lastChatMessage.createdAt) ? b.lastChatMessage.createdAt : "2000-01-01T00:00:00.000Z";
+                var a_create_at = (a.lastChatMessage && a.lastChatMessage.createdAt) ? a.lastChatMessage.createdAt : a.createdAt;
+                var b_create_at = (b.lastChatMessage && b.lastChatMessage.createdAt) ? b.lastChatMessage.createdAt : b.createdAt;
                 return (a_create_at>b_create_at ? -1 : 1);
             });
           },

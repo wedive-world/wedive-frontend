@@ -164,6 +164,122 @@
             </b-form-group>
           </validation-provider>
 
+
+
+          <!-- 검색어 -->
+          <validation-provider
+            #default="validationContext"
+            name="searchParamsQuery"
+          >
+            <b-form-group
+              label="검색어"
+              label-for="searchParamsQuery"
+            >
+              <b-form-input
+                id="Query"
+                v-model="recommendationData.searchParams.query"
+                autofocus
+                :state="getValidationState(validationContext)"
+                trim
+                placeholder="검색어 입력"
+              />
+
+              <b-form-invalid-feedback>
+                {{ validationContext.errors[0] }}
+              </b-form-invalid-feedback>
+            </b-form-group>
+          </validation-provider>
+
+          <!-- 좌표1 -->
+          <validation-provider
+            #default="validationContext"
+            name="searchParamsLocation1"
+          >
+            <b-form-group
+              label="좌표1"
+              label-for="searchParamsLocation1"
+            >
+            <b-row>
+            <b-col
+              md="6"
+              class=""
+            >
+              <b-form-input
+                id="Query"
+                v-model="recommendationData.searchParams.lat1"
+                autofocus
+                :state="getValidationState(validationContext)"
+                trim
+                placeholder="위도1"
+              />
+            </b-col>
+            <b-col
+              md="6"
+              class=""
+            >
+              <b-form-input
+                id="Query"
+                v-model="recommendationData.searchParams.lng1"
+                autofocus
+                :state="getValidationState(validationContext)"
+                trim
+                placeholder="경도1"
+              />
+            </b-col>
+            </b-row>
+
+              <b-form-invalid-feedback>
+                {{ validationContext.errors[0] }}
+              </b-form-invalid-feedback>
+            </b-form-group>
+          </validation-provider>
+
+          <!-- 좌표2 -->
+          <validation-provider
+            #default="validationContext"
+            name="searchParamsLocation2"
+          >
+            <b-form-group
+              label="좌표2"
+              label-for="searchParamsLocation2"
+            >
+            <b-row>
+            <b-col
+              md="6"
+              class=""
+            >
+              <b-form-input
+                id="Query"
+                v-model="recommendationData.searchParams.lat2"
+                autofocus
+                :state="getValidationState(validationContext)"
+                trim
+                placeholder="위도2"
+              />
+            </b-col>
+            <b-col
+              md="6"
+              class=""
+            >
+              <b-form-input
+                id="Query"
+                v-model="recommendationData.searchParams.lng2"
+                autofocus
+                :state="getValidationState(validationContext)"
+                trim
+                placeholder="경도2"
+              />
+            </b-col>
+            </b-row>
+
+              <b-form-invalid-feedback>
+                {{ validationContext.errors[0] }}
+              </b-form-invalid-feedback>
+            </b-form-group>
+          </validation-provider>
+
+
+
           <h4 class="mt-3">관심사항</h4>
           <b-row
             class="mb-1"
@@ -546,6 +662,13 @@ const blankRecommendationData = {
   backgroundImages: [],
   arguments: [],
   recommendationType: 'new',
+  searchParams: {
+    query: '',
+    lat1: null,
+    lng1: null,
+    lat2: null,
+    lng2: null,
+  },
 };
 
 
@@ -767,6 +890,20 @@ export default {
           var result2 = await updateImage(this.imageItems[i]);
           _recommendationData.images.push(result2.updateImage._id);
         }
+      }
+
+      // searchParams
+      if (_recommendationData.searchParams.lat1 == null) {
+        delete _recommendationData.searchParams.lat1;
+      }
+      if (_recommendationData.searchParams.lng1 == null) {
+        delete _recommendationData.searchParams.lng1;
+      }
+      if (_recommendationData.searchParams.lat2 == null) {
+        delete _recommendationData.searchParams.lat2;
+      }
+      if (_recommendationData.searchParams.lng2 == null) {
+        delete _recommendationData.searchParams.lng2;
       }
 
       
