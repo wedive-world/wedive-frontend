@@ -28,14 +28,14 @@
           <div class="page-title page-title-fixed ps-3">
             <i class="fas fa-arrow-left font-24 me-2 pt-2 hide" style="opacity: 0.6;" id="page-back" v-on:click="goBack()"></i>
             <img href="/" class="logo-image" style="margin-right: auto;" src="/static/images/assets/logo-gray.svg" height="42"/>
-            <a v-if="pathname == '/'" v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_buddy_new.png" width="30"></a>
-            <a v-else-if="pathname == '/chat_home'" v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_chat_new.png" width="28"></a>
-            <a v-else-if="pathname == '/book_home'" v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_book_new.png" width="28"></a>
-            <a v-else v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_write.png" width="26"></a>
-            <a v-on:click="addItem()" id="wedive-group" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_setting_fill.png" width="28"></a>
-            <a v-if="$route.path=='/site_list'" href="/site_home" class="page-title-icon font-18" style="color: #858585;margin-right: 13.3333333333px;"><img src="/static/images/assets/icon_map_fill.png" width="28"></a>
-            <a v-on:click="searchItem()" id="wedive-search" class="page-title-icon font-18 hide" style="color:#858585 !important;"><img src="/static/images/assets/icon_search_fill.png" width="30"></a>
-            <a v-on:click="shareItem()" id="wedive-share" class="page-title-icon font-18 hide" style="color:#858585 !important;"><img src="/static/images/assets/icon_share_fill.png" height="26"/></a>
+            <a v-if="pathname == '/'" v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_buddy_new.png" width="28"></a>
+            <a v-else-if="pathname == '/chat_home'" v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_chat_new.png" width="26"></a>
+            <a v-else-if="pathname == '/book_home'" v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_book_new.png" width="26"></a>
+            <a v-else v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_write.png" width="24"></a>
+            <a v-on:click="addItem()" id="wedive-group" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_setting_fill.png" width="26"></a>
+            <a v-if="$route.path=='/site_list'" href="/site_home" class="page-title-icon font-18" style="color: #858585;margin-right: 13.3333333333px;"><img src="/static/images/assets/icon_map_fill.png" width="26"></a>
+            <a v-on:click="searchItem()" id="wedive-search" class="page-title-icon font-18 hide" style="color:#858585 !important;"><img src="/static/images/assets/icon_search_fill.png" width="28"></a>
+            <a v-on:click="shareItem()" id="wedive-share" class="page-title-icon font-18 hide" style="color:#858585 !important;"><img src="/static/images/assets/icon_share_fill.png" height="24"/></a>
             <!--<a href="#" class="page-title-icon" data-menu="menu-main" :style="'background: url('+((userThumbnail) ? userThumbnail : '/static/images/assets/user_empty_'+((gender)?gender:'m')+'.png')+');background-size:cover;'"></a>-->
           </div>
           <div class="page-title-clear"></div>
