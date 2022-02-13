@@ -416,11 +416,9 @@ export default {
       },
       async refresh(loaded) {
         if ($(document).scrollTop() == 0) {
-            setTimeout(function() {
-                loaded('done')
-            },1000);
+            await this.$apollo.queries.getJoinedRoomList.refetch()
+            loaded('done')
         } else {
-            console.log("1")
             loaded('done')
             return false;
         }

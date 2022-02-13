@@ -7,7 +7,7 @@
       <div id="page">
           
           <div class="header header-auto-show header-fixed header-logo-center">
-              <a class="header-title" href="/"><img class="logo-image" src="/static/images/assets/logo-gray2.svg" height="38" /></a>
+              <a class="header-title" href="/"><img class="logo-image" src="/static/images/assets/logo-gray.svg" height="42" /></a>
               <!--<a href="#" data-menu="menu-main" class="header-icon header-icon-1"><i class="fas fa-bars"></i></a>
               <a href="#" data-toggle-theme class="header-icon header-icon-4 show-on-theme-dark"><i class="fas fa-sun"></i></a>
               <a href="#" data-toggle-theme class="header-icon header-icon-4 show-on-theme-light"><i class="fas fa-moon"></i></a>-->
@@ -27,7 +27,7 @@
           </div>
           <div class="page-title page-title-fixed ps-3">
             <i class="fas fa-arrow-left font-24 me-2 pt-2 hide" style="opacity: 0.6;" id="page-back" v-on:click="goBack()"></i>
-            <img href="/" class="logo-image" style="margin-right: auto;" src="/static/images/assets/logo-gray2.svg" height="38"/>
+            <img href="/" class="logo-image" style="margin-right: auto;" src="/static/images/assets/logo-gray.svg" height="42"/>
             <a v-if="pathname == '/'" v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_buddy_new.png" width="30"></a>
             <a v-else-if="pathname == '/chat_home'" v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_chat_new.png" width="28"></a>
             <a v-else-if="pathname == '/book_home'" v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_book_new.png" width="28"></a>

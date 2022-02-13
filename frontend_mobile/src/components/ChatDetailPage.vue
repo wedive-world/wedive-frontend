@@ -804,7 +804,7 @@ export default {
     },
     inviteChat() {
         for (var i=0; i<this.chatSelectedList.length; i++) {
-            const uid = this.chatSelectedList[i].uid;
+            const userId = this.chatSelectedList[i]._id;
             const _flag = (i == (this.chatSelectedList.length-1));
             this.$apollo.mutate({
                 // Query
@@ -816,7 +816,7 @@ export default {
                 // Parameters
                 variables: {
                     roomId: this.roomId,
-                    uid: uid
+                    userId: userId
                 },
             }).then((data) => {
                 // Result
@@ -844,6 +844,7 @@ export default {
                 query: `
                     query FindUserByNickName($nickName: String!) {
                         findUserByNickName(nickName: $nickName) {
+                            _id
                             uid
                             profileImages {
                             thumbnailUrl

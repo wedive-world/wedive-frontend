@@ -2,7 +2,7 @@
   <div class="" style="height: 100%; !important">
     <div data-menu-active="nav-site"></div>
     <div class="main-header header header-fixed header-logo-center" style="height: 58px !important;">
-        <a class="" href="/" style="margin-left: 16px;"><img class="logo-image" src="/static/images/assets/logo-gray2.svg" height="38" style="margin-top:8px;"/></a>
+        <a class="" href="/" style="margin-left: 16px;"><img class="logo-image" src="/static/images/assets/logo-gray.svg" height="42" style="margin-top:8px;"/></a>
         
         <a href="/site_list" class="header-icon header-icon-3" style="margin-right: 18px;"><img src="/static/images/assets/icon_list_fill.png" width="28" style="margin-top: 12px;"/></i></a>
         <a v-on:click="searchBox()" href="#" class="header-icon header-icon-4" style="margin-right: 11px;"><img src="/static/images/assets/icon_search_fill.png" width="30" style="margin-top: 12px;"/></a>
