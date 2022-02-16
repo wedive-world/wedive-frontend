@@ -13,7 +13,7 @@
                     <i class="fas fa-calendar" style="margin-top: -3px;color: gray;"></i>
                 </div>
             </div>
-            <div class="p-3">
+            <div class="p-3" style="min-height:calc(100vh - 58px);">
                 <vue-typeahead-bootstrap
                     id="input_query"
                     v-model="query"
@@ -27,12 +27,28 @@
                     placeholder="사이트, 포인트, 센터 (수영장)"
                     inputClass="special-input-class"
                     :disabledValues="[(selecteduser ? [selecteduser.name] : [])]"
-                    @input="lookupUser3"
+                    @input="lookupLocation"
+                    style="width: 80%;display:inline-block;"
                     >
+                    <template slot="suggestion" slot-scope="{ data, htmlText }">
+                        <div class="d-flex align-items-center" style="position:relative !important;">
+                        <div :class="''+data.type + '-tag'" style="position:relative;">
+                            <img
+                            class="rounded-s me-3"
+                            :src="(data.backgroundImages && data.backgroundImages.length>0) ? data.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'"
+                            style="width: 40px; height: 40px;" />
+                        </div>
+                        <span v-if="data.type == 'site'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + htmlText + ' 사이트</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + data.description+'</span>'"></span>
+                        <span v-else-if="data.type == 'point'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + htmlText + ' 포인트</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + data.description+'</span>'"></span>
+                        <span v-else-if="data.type == 'center'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + htmlText + '</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + data.description+'</span>'"></span>
+                        
+                        </div>
+                    </template>
                 </vue-typeahead-bootstrap>
+                <a v-on:click="triggerSearch()" class="btn btn-m btn-full rounded-xs text-uppercase font-900 shadow-s bg-dark-dark col-3" style="width: 18%;padding: 13px 8px !important;border-radius: 8px !important;display:inline-block;margin-bottom:1px;">검색</a>
                 
             </div>
-            <div class="content mt-0 mb-0" style="min-height: calc(100vh - 143px);padding-bottom:40px;">
+            <!--<div class="content mt-0 mb-0" style="min-height: calc(100vh - 143px);padding-bottom:40px;">
                 <div v-for="item in users">
                     <div class="map-box">
                         <a :href="'/' + ((item.__typename=='DiveSite') ? 'site' : (item.__typename=='DivePoint') ? 'point' : 'center') + '/' + item.uniqueName">
@@ -58,7 +74,7 @@
                     </div>
                     <div class="divider mt-3 mb-3"></div>
                 </div>
-            </div>
+            </div>-->
             
         </div>
     
@@ -167,12 +183,18 @@ export default {
         // Insert weekend attribute
     },
   },
+  components: {
+    VueTypeaheadBootstrap,
+  },
   watch: {
       query: function(newVal, oldVal) {
-        console.log(localStorage.suggestionFlag);
         if(localStorage.suggestionFlag && localStorage.suggestionFlag == '1') {
             localStorage.suggestionFlag = '0';
-            this.lookupUser3();
+            //this.lookupPlace();
+            //this.lookupLocation();
+            //setTimeout(function() {
+                //$("#input_query > .input-group > input").focus();
+            //},200);
         } else {
             this.query_place = JSON.parse(JSON.stringify(this.query)) + "";
             this.openSuggestion();
@@ -184,6 +206,111 @@ export default {
   },
   
   methods: {
+      async triggerSearch() {
+          var _searchParams = {};
+          if (this.schedule_from != '일정 없음') _searchParams.startedAt = new Date(this.schedule_from + " 00:00:00");
+          if (this.schedule_to != '일정 없음') _searchParams.finishedAt = new Date(this.schedule_to + " 00:00:00");
+          if (this.query) _searchParams.query = this.query;
+          var result = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+            query: `
+                query SearchDivings($searchParams: SearchParams, $limit: Int) {
+                    searchDivings(searchParams: $searchParams, limit: $limit) {
+                        __typename
+                        ... on DiveSite {
+                            _id
+                            uniqueName
+                            name
+                            description
+                            adminScore
+                            latitude
+                            longitude
+                            backgroundImages {
+                                thumbnailUrl
+                            }
+                        }
+                        ... on DivePoint {
+                            _id
+                            uniqueName
+                            name
+                            description
+                            adminScore
+                            latitude
+                            longitude
+                            backgroundImages {
+                                thumbnailUrl
+                            }
+                        }
+                        ... on DiveCenter {
+                            _id
+                            uniqueName
+                            name
+                            description
+                            divingType
+                            adminScore
+                            latitude
+                            longitude
+                            institutionTypes
+                            backgroundImages {
+                                thumbnailUrl
+                            }
+                        }
+                        title
+                        description
+                        _id
+                        status
+                        type
+                        startedAt
+                        finishedAt
+                        interests {
+                        title
+                        type
+                        }
+                    }
+                }
+                `,
+                variables: {
+                    "limit": 10,
+                    "searchParams": _searchParams
+                }
+            }
+        });
+        //result.data.data.searchDiveCentersByName.forEach(x=>result.data.data.searchDiveCentersByName)
+        var result_list = new Array();
+        if (result.data.data.searchPlaces) {
+            result.data.data.searchPlaces.filter(place => place.__typename == 'DiveSite').forEach(item => {item.type='site';result_list.push(item)});
+            result.data.data.searchPlaces.filter(place => place.__typename == 'DivePoint').forEach(item => {item.type='point';result_list.push(item)});
+            result.data.data.searchPlaces.filter(place => place.__typename == 'DiveCenter').forEach(item => {item.type='center';result_list.push(item)});
+        }
+      },
+      enableNext2(ev) {
+          console.log(ev);
+          this.search_img = (ev.backgroundImages && ev.backgroundImages.length>0) ? ev.backgroundImages[0].thumbnailUrl : '/static/empty.jpg';
+          this.search_type=ev.type;
+          this.search_loc=ev.name;
+          this.search_desc=ev.description;
+          this.search_adminScore=ev.adminScore;
+          this.selected_id = ev._id;
+
+          
+          $("#search_typeahead").addClass("hide");
+          $("#search_result").removeClass("hide");
+          if(this.check_diving_scuba == true || this.check_diving_free == true) {
+              $("#btn_next2").attr("disabled", false);
+          } else {
+            //var toastData = 'snackbar-info';
+            //var notificationToast = document.getElementById(toastData);
+            //var notificationToast = new bootstrap.Toast(notificationToast);
+            //notificationToast.show();
+          }
+
+      },
       async lookupPlace() {
         //console.log("this.query_place = " + this.query_place);
         if (this.query_place == '') {
@@ -315,9 +442,9 @@ export default {
                 if(menuTop){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY("+menuHeight/5+"px)"}}
             }
       },
-      async lookupUser3() {
+      async lookupLocation() {
         // progress bar
-        var preloader = document.getElementById('preloader')
+        /*var preloader = document.getElementById('preloader')
         if(preloader){
             preloader.classList.remove('preloader-hide');
             preloader.classList.add('opacity-50');
@@ -419,7 +546,7 @@ export default {
         if(preloader){
             preloader.classList.remove('opacity-50');
             preloader.classList.add('preloader-hide');
-        }
+        }*/
       },
   },
   mounted() {

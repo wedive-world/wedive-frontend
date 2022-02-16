@@ -13,6 +13,7 @@ import UserCreatePage from '@/components/UserCreatePage'
 import CenterHomePage from '@/components/CenterHomePage'
 import CenterDetailPage from '@/components/CenterDetailPage'
 import CenterDetailPage2 from '@/components/CenterDetailPage2'
+import ReviewAllPage from '@/components/ReviewAllPage'
 import SiteSearchPage from '@/components/SiteSearchPage'
 import CenterListMapPage from '@/components/CenterListMapPage'
 import CoursePage from '@/components/CoursePage'
@@ -36,6 +37,7 @@ import TrainingSettingPage from '@/components/TrainingSettingPage'
 import TrainingStartPage from '@/components/TrainingStartPage'
 import LogBookPage from '@/components/LogBookPage'
 import OhterPage from '@/components/OhterPage'
+import NotificationPage from '@/components/NotificationPage'
 import MyDivingPage from '@/components/MyDivingPage'
 
 Vue.use(Router)
@@ -107,6 +109,12 @@ export default new Router({
       path: '/center2',
       name: 'CenterDetailPage2',
       component: CenterDetailPage2
+    },
+    {
+      path: '/review/:id',
+      name: 'ReviewAllPage',
+      props: true,
+      component: ReviewAllPage
     },
     {
       path: '/site_search',
@@ -227,6 +235,11 @@ export default new Router({
       path: '/other_home',
       name: 'OhterPage',
       component: OhterPage
+    },
+    {
+      path: '/notification',
+      name: 'NotificationPage',
+      component: NotificationPage
     },
     {
       path: '/my_diving',

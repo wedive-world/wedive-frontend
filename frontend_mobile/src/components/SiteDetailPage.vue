@@ -579,7 +579,7 @@
         <div class="card card-style">
             <div class="content">
             <h4 class="text-start">다이빙 로그</h4>
-            <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
+            <a :href="'/review/'+siteData._id" class="color-highlight font-12 wedive-txt-all">모두보기</a>
             <div class="divider mt-3 mb-2"></div>
                 <div v-if="siteData.reviews && siteData.reviews.length>0" class="splide single-slider slider-no-arrows slider-has-dots pb-2 mb-0 me-n2 ms-n2" id="single-slider-review">
                     <div class="splide__track">

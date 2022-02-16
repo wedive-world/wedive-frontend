@@ -700,6 +700,12 @@ export default {
         }
       },
       async lookupLocation() {
+        // progress bar
+        var preloader = document.getElementById('preloader')
+        if(preloader){
+            preloader.classList.remove('preloader-hide');
+            preloader.classList.add('opacity-50');
+        }
         this.users = [];
         const query = this.query;
         var result = await axios({
@@ -736,6 +742,10 @@ export default {
         if (result.data.data.searchDivePointsByName) result.data.data.searchDivePointsByName.forEach(x=>{x.type='point';result_list.push(x)});
         if (result.data.data.searchDiveCentersByName) result.data.data.searchDiveCentersByName.forEach(x=>{x.type='center';result_list.push(x)});
         this.users = result_list;
+        if(preloader){
+            preloader.classList.remove('opacity-50');
+            preloader.classList.add('preloader-hide');
+        }
       },
       
   }
