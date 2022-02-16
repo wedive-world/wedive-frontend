@@ -36,6 +36,7 @@
             <a v-if="$route.path=='/site_list'" href="/site_home" class="page-title-icon font-18" style="color: #858585;margin-right: 13.3333333333px;"><img src="/static/images/assets/icon_map_fill.png" width="26"></a>
             <a v-on:click="searchItem()" id="wedive-search" class="page-title-icon font-18 hide" style="color:#858585 !important;"><img src="/static/images/assets/icon_search_fill.png" width="28"></a>
             <a v-on:click="shareItem()" id="wedive-share" class="page-title-icon font-18 hide" style="color:#858585 !important;"><img src="/static/images/assets/icon_share_fill.png" height="24"/></a>
+            <a v-on:click="notificationItem()" id="wedive-noti" class="page-title-icon font-18 hide" style="color:#858585 !important;"><img src="/static/images/assets/icon_notification.png" width="28"></a>
             <!--<a href="#" class="page-title-icon" data-menu="menu-main" :style="'background: url('+((userThumbnail) ? userThumbnail : '/static/images/assets/user_empty_'+((gender)?gender:'m')+'.png')+');background-size:cover;'"></a>-->
           </div>
           <div class="page-title-clear"></div>
@@ -138,11 +139,16 @@ export default {
       if (item == '/' || item == '/chat_home') {
         $("#wedive-add").removeClass("hide");
         $("#wedive-search").removeClass("hide");
+        $("#wedive-noti").removeClass("hide");
       } else if (item == '/book_home') {
         $("#wedive-add").removeClass("hide");
         $("#wedive-group").removeClass("hide");
+        $("#wedive-noti").removeClass("hide");
       } else if (item == '/site_list') {
         $("#wedive-search").removeClass("hide");
+        $("#wedive-noti").removeClass("hide");
+      } else if (item == '/other_home') {
+        $("#wedive-noti").removeClass("hide");
       } else {
         setTimeout(function(item) {
           try {

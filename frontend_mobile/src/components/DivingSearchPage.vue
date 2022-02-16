@@ -4,11 +4,13 @@
     <div class="page-content text-start transform-none" style="padding-bottom: 0px;">
         <div class="card card-style ms-0 me-0 rounded-0 mb-0">
             <div data-menu="schedule-suggestion" class="row p-3 wedive-search" style="margin: 0;padding: 10px 6px !important;">
-                <div class="col-6 input-group" style="width: 50%;">
-                    <input class="form-control" disabled="disabled"/>
+                <div class="col-6 input-group wedive-calendar-input" style="width: 50%;">
+                    <input class="form-control" disabled="disabled" style="border-radius: 8px;padding-left: 36px;" v-model="schedule_from"/>
+                    <i class="fas fa-calendar" style="margin-top: -3px;color: gray;"></i>
                 </div>
-                <div class="col-6 input-group" style="width: 50%;">
-                    <input class="form-control" disabled="disabled"/>
+                <div class="col-6 input-group wedive-calendar-input before-at" style="width: 50%;">
+                    <input class="form-control" disabled="disabled" style="border-radius: 8px;padding-left: 36px;" v-model="schedule_to"/>
+                    <i class="fas fa-calendar" style="margin-top: -3px;color: gray;"></i>
                 </div>
             </div>
             <div class="p-3">
@@ -27,7 +29,6 @@
                     :disabledValues="[(selecteduser ? [selecteduser.name] : [])]"
                     @input="lookupUser3"
                     >
-                    
                 </vue-typeahead-bootstrap>
                 
             </div>
@@ -93,7 +94,7 @@
             </v-date-picker>
 
             <div style="position: absolute;bottom: 0;width:100%;">
-                <a class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 ms-1 me-1 mb-3" style="height: 46px;padding-top: 10px;" v-on:click="selectSchedule()" disabled="disabled">선택</a>
+                <a id="btn_schedule" class="close-menu btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 ms-1 me-1 mb-3" style="height: 46px;padding-top: 10px;" disabled="disabled">선택</a>
             </div>
         </div>
     </div>
@@ -145,6 +146,7 @@
         </div>
     </div>
     
+    <div id="snackbar-info" class="snackbar-toast color-white bg-yellow-dark" data-bs-delay="2000" data-bs-autohide="true" style="z-index: 999;"><i class="fa fa-times me-3"></i>필요 시 종료일을 선택하세요.</div>
   </div>
 </template>
 <script>
@@ -152,17 +154,28 @@ import VueTypeaheadBootstrap from 'vue-typeahead-bootstrap';
 const axios = require("axios")
 var searchParams = {};
 
+function getWediveDate(date) {
+    return ((date.getMonth()+1)<10 ? "0"+(date.getMonth()+1) : (date.getMonth()+1)) + "/" + (date.getDate() < 10 ? "0"+date.getDate() : date.getDate()) +"/" + date.getFullYear();
+}
+
+
 export default {
   name: 'HelloWorld',
+  computed: {
+    attributes() {
+        // Insert today's attribute
+        // Insert weekend attribute
+    },
+  },
   watch: {
       query: function(newVal, oldVal) {
+        console.log(localStorage.suggestionFlag);
         if(localStorage.suggestionFlag && localStorage.suggestionFlag == '1') {
             localStorage.suggestionFlag = '0';
-            
             this.lookupUser3();
         } else {
-            this.openSuggestion();
             this.query_place = JSON.parse(JSON.stringify(this.query)) + "";
+            this.openSuggestion();
             setTimeout(function() {
                 $("#suggestion_typeahead > .input-group > input").focus();
             }, 200)
@@ -218,11 +231,59 @@ export default {
           document.getElementsByClassName('menu-hider')[0].classList.remove('menu-active');
           this.places = [];
       },
+      onRangeClick(range) {
+          if (range) {
+            console.log(range.start.getTime());
+            console.log(range.end.getTime());
+            if (range.start.getTime() == range.end.getTime()) {
+                var toastData = 'snackbar-info';
+                var notificationToast = document.getElementById(toastData);
+                var notificationToast = new bootstrap.Toast(notificationToast);
+                notificationToast.show();
+            }
+            try {
+                this.selectedRange.start = new Date(range.start.getTime());
+                this.selectedRange.end = new Date(range.end.getTime());
+                this.schedule_from = getWediveDate(this.selectedRange.start);
+                this.schedule_to = getWediveDate(this.selectedRange.end);
+                $("#btn_schedule").attr("disabled", false);
+            } catch(e) {console.log(e)}
+          }
+      },
+      onDayClick(day) {
+          var yesterday = new Date();
+          yesterday.setDate(yesterday.getDate()-1);
+          if (new Date(day.id) < yesterday) {
+            var toastData = 'snackbar-error';
+            var notificationToast = document.getElementById(toastData);
+            var notificationToast = new bootstrap.Toast(notificationToast);
+            notificationToast.show();
+            if (this.rangeToggle == 0) this.rangeToggle = 1;
+            else this.rangeToggle = 0;
+          } else {
+                if (this.rangeToggle == 0) {
+                        this.rangeToggle = 1;
+                        var toastData = 'snackbar-info';
+                        var notificationToast = document.getElementById(toastData);
+                        var notificationToast = new bootstrap.Toast(notificationToast);
+                        notificationToast.show();
+                } else if (this.rangeToggle == 1) {
+                    this.rangeToggle = 0;
+                    
+                    this.day_show = (this.selectedRange.start.getMonth()+1) + "." + this.selectedRange.start.getDate() + " (" + weekday_ko[this.selectedRange.start.getDay()] + ") ~ " + (this.selectedRange.end.getMonth()+1) + "." + this.selectedRange.end.getDate() + " (" + weekday_ko[this.selectedRange.end.getDay()] + ")";
+                    $("#collapse1_area").click();
+                    $("#collapse2_area").click();
+                    
+                    if (this.day_show != "" && this.hour_show != "") {
+                        $("#btn_next1").attr("disabled", false);
+                    }
+                }
+          }
+      },
       openSuggestion() {
             var menuData = "search-suggestion";
             document.getElementById(menuData).classList.add('menu-active');
             document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
-
             
             var menu = document.getElementById(menuData);
             var menuEffect = menu.getAttribute('data-menu-effect');
@@ -233,14 +294,12 @@ export default {
             var menuWidth = menu.offsetWidth;
             var menuHeight = menu.offsetHeight;
             var menuTimeout = menu.getAttribute('data-menu-hide');
-
             if(menuTimeout){
                 setTimeout(function(){
                     document.getElementById(menuData).classList.remove('menu-active');
                     document.getElementsByClassName('menu-hider')[0].classList.remove('menu-active');
                 },menuTimeout)
             }
-
             if(menuEffect === "menu-push"){
                 var menuWidth = document.getElementById(menuData).getAttribute('data-menu-width');
                 if(menuLeft){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX("+menuWidth+"px)"}}
@@ -271,7 +330,6 @@ export default {
         if (_searchParams.eyeSightScore) _searchParams.eyeSightScore *= 20;
         _searchParams.query = query;
         
-
         var result = await axios({
             url: 'https://api.wedives.com/graphql',
             method: 'post',
@@ -358,7 +416,6 @@ export default {
         //if (result.data.data.searchDivePointsByName) result.data.data.searchDivePointsByName.forEach(x=>{x.type='point';result_list.push(x)});
         //if (result.data.data.searchDiveCentersByName) result.data.data.searchDiveCentersByName.forEach(x=>{x.type='center';result_list.push(x)});
         this.users = result_list;
-
         if(preloader){
             preloader.classList.remove('opacity-50');
             preloader.classList.add('preloader-hide');
@@ -375,15 +432,6 @@ export default {
     setTimeout(function() {
         $("#input_query > .input-group > input").focus();
     },500);
-
-
-
-    ////////////
-    this.openSuggestion();
-
-    setTimeout(function() {
-        $("#suggestion_typeahead > .input-group > input").focus();
-    }, 500);
   },
   created() {
     setTimeout(function() {
@@ -399,45 +447,38 @@ export default {
         selecteduser: null,
         users: [],
         places: [],
-        check_star70: false,
-        check_star80: false,
-        check_star90: false,
-        check_fish70: false,
-        check_fish80: false,
-        check_fish90: false,
-        check_sight70: false,
-        check_sight80: false,
-        check_sight90: false,
-        check_cate1: true,
-        check_cate2: true,
-        check_cate3: true,
-        check_type1: false,
-        check_type2: false,
-        check_env1: false,
-        check_env2: false,
-        check_env3: false,
-        check_env4: false,
-        check_env5: false,
-        check_env6: false,
-        check_env7: false,
-        check_point1: false,
-        check_point2: false,
-        check_point3: false,
-        check_point4: false,
         suggestSelectedList: [],
         suggestions : (localStorage.suggestion ? JSON.parse(localStorage.suggestion) : []),
+        selectedDay: null,
+        selectedRange: {},
+        schedule_from: '일정 없음',
+        schedule_to: '일정 없음',
+        theme: {
+            container: {
+            light: 'light-container-class',  // Classes to apply for light mode
+            dark: 'dark-container-class',  // Classes to apply for dark mode
+            }
+        },
+        selectAttribute: {
+            highlight: {
+                backgroundColor: '#08A14A', // green
+                borderColor: '#067B39',
+                borderWidth: '2px',
+                borderStyle: 'solid'
+            },
+            contentStyle: {
+                color: 'white'
+            },
+            // Don't need the date here
+        },
     }
   }
-
   
 }
-
-
 </script>
 
 
 <style scoped>
-
 #menu_condition:before {width: 12px;height: 13px;background-position: 0px 0px;content: '';margin-right: 5px;vertical-align: -1px;}
 #menu_condition.on:before {width: 12px;height: 13px;background-position: -10px 0px;content: '';margin-right: 5px;vertical-align: -1px;}
 #menu_sort:before {width: 14px;height: 11px;background-position: -35px 0px;content: '';margin-right: 5px;}
@@ -446,8 +487,6 @@ export default {
 #menu_map.on:before {width: 14px;height: 11px;background-position: -235px 0px;content: '';margin-right: 5px;}
 .center_list_tab {position: relative;display: block;padding-top: 2px;text-align: center;line-height: 38px;background-color: #f7f7f9;color: #333;font-size: 15px;width: 100%;border-left: 1px solid #eaeaec;}
 .center_menu {justify-content: space-around;border-top: 1px solid #e1e4e7;border-bottom: 1px solid #e1e4e7;}
-
-
 .wedive-action {position: fixed;background-color: #1d397c;height:36px;border-radius: 18px;left: 50%!important;bottom: 90px;-webkit-box-shadow: 3px 2px 6px 0 rgb(0 0 0 / 20%);box-shadow: 3px 2px 6px 0 rgb(0 0 0 / 20%);-webkit-transform: translateX(-50%);transform: translateX(-50%);}
 .wedive-action:before {display: block;clear: both;content: "";position: absolute;top: 9px;left: 50%;width: 1px;height: 16px;background-color: #fff;}
 .action-filter {display: block;float: left;width: 84px;height: 35px;font-size: 14px;color: #d1d2d3;line-height: 35px;}
@@ -456,14 +495,14 @@ export default {
 .action-map:before {clear: both;content: "";display: inline-block;margin-right: 6px;width: 14px;height: 14px;background-size: 14px 14px;background-repeat: no-repeat;background-image: url(/static/images/assets/icon_map.png);text-indent: -9999px;vertical-align: middle;}
 #filter_list {white-space: nowrap;overflow-x: scroll;height: 32px;}
 .transform-none {transform: inherit !important;};
-
 .DiveSite-tag:before {content: '';width: 0px;height: 0px;border-bottom: 16px solid #3f474c;border-left: 16px solid rgba(0,0,0,0);position: absolute;bottom: 0;right: 0px;}
 .DivePoint-tag:before {content: '';width: 0px;height: 0px;border-bottom: 16px solid #3cb5a0;border-left: 16px solid rgba(0,0,0,0);position: absolute;bottom: 0;right: 0px;}
 .DiveCenter-tag:before {content: '';width: 0px;height: 0px;border-bottom: 16px solid #4687c1;border-left: 16px solid rgba(0,0,0,0);position: absolute;bottom: 0;right: 0px;}
-
+.wedive-calendar-input  i {position: absolute;left: 0px;line-height: 52px;padding: 0px 15px 0px 30px;}
+.before-at:before {content: '~';position:absolute;left:3px;top:3px;left: -2px;top: 10px;color: gray;}
+.btn[disabled="disabled"] {pointer-events: none !important;background-image: linear-gradient(to bottom, #ccc, #ccc) !important;}
 .map_box_cate {padding: 2px 6px;margin-bottom:2px;margin-right:6px;border-radius:4px;}
 .DiveSite .map_box_cate {border: 1px solid #3f474c;color:#3f474c}
 .DivePoint .map_box_cate {border: 1px solid #3cb5a0;color:#3cb5a0}
 .DiveCenter .map_box_cate {border: 1px solid #4687c1;color:#4687c1}
-
 </style>
