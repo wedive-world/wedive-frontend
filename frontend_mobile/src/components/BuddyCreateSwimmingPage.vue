@@ -596,7 +596,6 @@ export default {
                         "description": buddy_detail,
                         "status": "searchable",
                         "type": diving_type,
-                        "hostUser": localStorage.userId,
                         "participants": parti,
                         "maxPeopleNumber": (num_recruit + parti.length + 1),
                         "interests": inter,

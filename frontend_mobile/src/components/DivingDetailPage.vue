@@ -125,7 +125,7 @@
             
             <div v-if="divingData.participants" class="content mt-0 pb-3">
                 <h2 class="font-18 font-700 mb-2">참여인원 ({{ (divingData.participants.filter(member=> member.status == 'joined')) ? (divingData.participants.filter(member=> member.status == 'joined').length+1) : '' }})</h2>
-                
+                <span v-if="divingData.chatRoomId != null" v-on:click="goChatRoom(divingData.chatRoomId)" class="chip chip-s bg-gray-light text-center font-400 wedive-chip" style="position: unset;width: 100%;">단체 채팅방 이동</span>
                 <div class="">
                     <div class="owner border-bottom pt-2 pb-2 position-relative" style="position: relative;">
                         <div v-on:click="goUserPage(divingData.hostUser)">
@@ -135,7 +135,7 @@
                                 <p class="mb-0 font-14 color-gray">{{ (divingData.hostUser && divingData.hostUser.levelShow) ? divingData.hostUser.levelShow : '' }}</p>
                             </div>
                         </div>
-                        <span id="owner_chat" v-if="divingData.hostUser!=null" v-on:click="chatUser(divingData.hostUser)" class="chip chip-s bg-gray-light text-center font-400 wedive-chip">채팅</span>
+                        <span id="owner_chat" v-if="divingData.hostUser!=null && divingData.hostUser.uid != uid" v-on:click="chatUser(divingData.hostUser)" class="chip chip-s bg-gray-light text-center font-400 wedive-chip">채팅</span>
                     </div>
                     <div class="border-bottom pt-2 pb-2 position-relative" v-for="participant in divingData.participants.filter(member=> member.status == 'joined')">
                         <div v-on:click="goUserPage(participant.user)">
@@ -152,7 +152,7 @@
 
 
             <div v-if="divingData.hostUser && divingData.hostUser._id == userId && divingData.participants && (divingData.participants.filter(member=> member.status == 'applied')) " class="content mt-0 pb-3">
-                <h2 class="font-15 font-700 mb-3">신청인원 ({{ (divingData.participants.filter(member=> member.status == 'applied').length) }})</h2>
+                <h2 class="font-18 font-700 mb-3">신청인원 ({{ (divingData.participants.filter(member=> member.status == 'applied').length) }})</h2>
                 
                 <div v-if="divingData.participants.filter(member=> member.status == 'applied').length > 0" class="mb-1">
                     <div class="p-0" v-for="participant in divingData.participants.filter(member=> member.status == 'applied')">
@@ -211,7 +211,8 @@
             <div class="flex-fill speach-input p-2">
             <a v-if="divingData.status == 'publicEnded'|| divingData.status=='divingComplete'" class="btn btn-full font-400 rounded-s shadow-l bg-gray-dark color-white bd-w-0mb-5 font-noto">모집종료된 이벤트</a>
             <a v-else-if="idToken == null || nickName == null" v-on:click="login()" class="btn btn-full font-400 rounded-s shadow-l bg-gray-dark color-white bd-w-0mb-5 font-noto">참여신청</a>
-            <a v-else-if="(divingData.participants.filter(member=> (member.user && member.user._id == userId))).length > 0" class="btn btn-full font-400 rounded-s shadow-l bg-gray-dark color-white bd-w-0mb-5 font-noto">참여 승인 대기중</a>
+            <a v-else-if="(divingData.participants.filter(member=> (member.user && member.user._id == userId && member.status == 'applied'))).length > 0" class="btn btn-full font-400 rounded-s shadow-l bg-gray-dark color-white bd-w-0mb-5 font-noto">참여 승인 대기중</a>
+            <a v-else-if="(divingData.participants.filter(member=> (member.user && member.user._id == userId && member.status == 'joined'))).length > 0" class="btn btn-full font-400 rounded-s shadow-l bg-gray-dark color-white bd-w-0mb-5 font-noto">참여 완료</a>
             <a v-else href="#" data-menu="menu-join" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0mb-5 font-noto">참여신청</a>
             </div>
         </div>
@@ -501,6 +502,7 @@ export default {
                         description
                         status
                         type
+                        chatRoomId
                         hostUser {
                             _id
                             uid
@@ -731,9 +733,16 @@ export default {
         request_result: '',
         dm_text: '',
         message_receiver_nickname: '',
+        uid: localStorage.uid,
     }
   },
   methods: {
+      goChatRoom(chatRoomId) {
+          location.href = '/chat/' + chatRoomId;
+      },
+      reload() {
+          //location.reload();
+      },
       setUser(participant) {
           //console.log(participant);
           this.requester = participant;
@@ -799,7 +808,6 @@ export default {
           const partis = _partis;
           
           const _id = this.divingData._id;
-          const host_user = this.divingData.hostUser._id;
           var result = await axios({
             url: 'https://api.wedives.com/graphql',
             method: 'post',
@@ -818,8 +826,7 @@ export default {
                 variables: {
                     "input": {
                         "participants": partis,
-                        "_id": _id,
-                        "hostUser": host_user
+                        "_id": _id
                     }
                 }
             }
@@ -859,7 +866,6 @@ export default {
           const partis = _partis;
           
           const _id = this.divingData._id;
-          const host_user = this.divingData.hostUser._id;
           var result = await axios({
             url: 'https://api.wedives.com/graphql',
             method: 'post',
@@ -878,8 +884,7 @@ export default {
                 variables: {
                     "input": {
                         "participants": partis,
-                        "_id": _id,
-                        "hostUser": host_user
+                        "_id": _id
                     }
                 }
             }
@@ -1068,24 +1073,24 @@ export default {
             
             
             this.divingData.description = this.divingData.description.replace(/\n/gi, '<br/>');
-            this.divingData.title = '';
+            //this.divingData.title = '';
             
             var startedAt = new Date(this.divingData.startedAt);
             var finishedAt = new Date(this.divingData.finishedAt);
-            if (this.divingData.startedAt == this.divingData.finishedAt) {
-                this.divingData.title = (startedAt.getMonth()+1) + "월 " + startedAt.getDate() + "일 "
-            } else {
-                this.divingData.title = (startedAt.getMonth()+1) + "/" + startedAt.getDate() + " ~ " + (finishedAt.getMonth()+1) + "/" + finishedAt.getDate() + " "
-            }
-            var cnt = 0;
-            if (this.divingData.type) {
-                this.divingData.type.forEach(_type => {
-                    if (cnt > 0) this.divingData.title += ", ";
-                    this.divingData.title += (_type == 'scubaDiving') ? '스쿠바' : '프리';
-                    cnt++;
-                });
-            }
-            this.divingData.title += ' 다이빙';
+            //if (this.divingData.startedAt == this.divingData.finishedAt) {
+                //this.divingData.title = (startedAt.getMonth()+1) + "월 " + startedAt.getDate() + "일 "
+            //} else {
+                //this.divingData.title = (startedAt.getMonth()+1) + "/" + startedAt.getDate() + " ~ " + (finishedAt.getMonth()+1) + "/" + finishedAt.getDate() + " "
+            //}
+            //var cnt = 0;
+            //if (this.divingData.type) {
+                //this.divingData.type.forEach(_type => {
+                    //if (cnt > 0) this.divingData.title += ", ";
+                    //this.divingData.title += (_type == 'scubaDiving') ? '스쿠바' : '프리';
+                    //cnt++;
+                //});
+            //}
+            //this.divingData.title += ' 다이빙';
             
             if (startedAt.getFullYear() == finishedAt.getFullYear() && startedAt.getMonth() == finishedAt.getMonth() && startedAt.getDate() == finishedAt.getDate()) {
                 this.showFinishedAt = true;

@@ -42,26 +42,55 @@
           <!-- Status -->
           <validation-provider
             #default="validationContext"
-            name="recommendationType"
+            name="type"
             rules="required"
           >
             <b-form-group
               label="타입선택"
-              label-for="recommendationType"
+              label-for="type"
               :state="getValidationState(validationContext)"
             >
               <v-select
-                v-model="recommendationData.recommendationType"
+                v-model="recommendationData.type"
                 :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
-                :options="recommendationType"
+                :options="type"
                 :clearable="false"
-                input-id="recommendationType"
+                input-id="type"
               />
               <b-form-invalid-feedback :state="getValidationState(validationContext)">
                 {{ validationContext.errors[0] }}
               </b-form-invalid-feedback>
             </b-form-group>
           </validation-provider>
+
+
+
+          
+          <!-- Status -->
+          <validation-provider
+            #default="validationContext"
+            name="targetType"
+            rules="required"
+          >
+            <b-form-group
+              label="타겟 타입선택"
+              label-for="targetType"
+              :state="getValidationState(validationContext)"
+            >
+              <v-select
+                v-model="recommendationData.targetType"
+                :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
+                :options="targetType"
+                :clearable="false"
+                input-id="targetType"
+              />
+              <b-form-invalid-feedback :state="getValidationState(validationContext)">
+                {{ validationContext.errors[0] }}
+              </b-form-invalid-feedback>
+            </b-form-group>
+          </validation-provider>
+
+          
           
           <hr>
           <h4 class="mt-3">기본정보</h4>
@@ -661,7 +690,8 @@ const blankRecommendationData = {
   images: [],
   backgroundImages: [],
   arguments: [],
-  recommendationType: 'new',
+  type: 'new',
+  targetType: 'diving',
   searchParams: {
     query: '',
     lat1: null,
@@ -722,7 +752,8 @@ export default {
       interest_types: [],
       required,
       alphaNum,
-      recommendationType: ['interest', 'new', 'onePersonLeft', 'custom', 'search', 'nearBy',],
+      type: ['interest', 'new', 'onePersonLeft', 'custom', 'search', 'nearBy',],
+      targetType: ['diving', 'diveSite', 'divePoint', 'diveCenter', 'instructorProfile'],
       backgroundItems: [],
       imageItems: [],
       argumentItems: [],

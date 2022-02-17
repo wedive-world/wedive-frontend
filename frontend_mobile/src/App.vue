@@ -28,7 +28,7 @@
           <div class="page-title page-title-fixed ps-3">
             <i class="fas fa-arrow-left font-24 me-2 pt-2 hide" style="opacity: 0.6;" id="page-back" v-on:click="goBack()"></i>
             <img href="/" class="logo-image" style="margin-right: auto;" src="/static/images/assets/logo-gray.svg" height="42"/>
-            <a v-on:click="notificationItem()" id="wedive-noti" class="page-title-icon font-18 hide" style="color:#858585 !important;"><img src="/static/images/assets/icon_notification.png" width="28"></a>
+            <a href="/notification" id="wedive-noti" :class="'page-title-icon font-18 hide' + (notiData && notiData.length > 0 && notiData[0].read != null && notiData[0].read == false ? ' has-notification' : '')" style="color:#858585 !important;"><img src="/static/images/assets/icon_notification.png" width="28"></a>
             <a v-if="pathname == '/'" v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_buddy_new.png" width="28"></a>
             <a v-else-if="pathname == '/chat_home'" v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_chat_new.png" width="26"></a>
             <a v-else-if="pathname == '/book_home'" v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_book_new.png" width="24"></a>
@@ -73,6 +73,33 @@
           </div>  
           
       </div>
+
+      <vue-bottom-sheet ref="createBottomSheet">
+        <div class="text-center">
+          <div class="color-primary font-noto font-20 font-600"> 버디 모집</div>
+          <p class="mb-2 color-gray">어디로 가실까요?</p>
+        </div>
+        <div class="content mt-0 row">
+          <div v-on:click="goSwimming()" class="col-4 text-center p-0">
+            <div class="m-1 border-08 pool">
+              <img class="m-4 mb-2 opacity-60" src="/static/images/assets/icon_pool.png" width="40%"/>
+              <p class="mb-4">수영장</p>
+            </div>
+          </div>
+          <div v-on:click="goSea()" class="col-4 text-center p-0">
+            <div class="m-1 border-08 sea">
+              <img class="m-4 mb-2 opacity-60" src="/static/images/assets/icon_sea.png" width="40%"/>
+              <p class="mb-4">바다</p>
+            </div>
+          </div>
+          <div v-on:click="goAbroad()" class="col-4 text-center p-0">
+            <div class="m-1 border-08 oversea">
+              <img class="m-4 mb-2 opacity-60" src="/static/images/assets/icon_oversea.png" width="40%"/>
+              <p class="mb-4">해외/리브어보드</p>
+            </div>
+          </div>
+        </div>
+      </vue-bottom-sheet>
 
       <!-- Menu login -->
       <vue-bottom-sheet ref="loginBottomSheet">
@@ -169,24 +196,95 @@ export default {
       localStorage.perferedSite = '/site_list';
     }
   },
-  created() {
-    
+  async created() {
+    var noti = null;
+    var now = (new Date()).getTime();
+    if (localStorage.idToken != null && (localStorage.notiAt == null || (localStorage.notiAt && (now - parseInt(localStorage.notiAt) > 3600000)))) {
+        var result = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                query GetNotifications($skip: Int, $limit: Int) {
+                  getNotifications(skip: $skip, limit: $limit) {
+                      read
+                  }
+                }
+                `,
+                variables: {
+                    limit: 1,
+                    skip: 0
+                }
+
+            }
+        });
+        if ((result.data && result.data.data && result.data.data.getNotifications)) {
+            this.notiData = result.data.data.getNotifications;
+            localStorage.notiAt = now;
+            localStorage.notiData = JSON.stringify(this.notiData);
+        }
+    } else if (localStorage.notiData && localStorage.notiData != '') {
+      this.notiData = JSON.parse(localStorage.notiData);
+    }
   },
   destroyed() {
     
   },
   data() {
     return {
+      idToken: localStorage.idToken,
       nickName: localStorage.nickName,
       userThumbnail: localStorage.userThumbnail,
       gender: localStorage.gender,
       pathname: window.location.pathname,
+      notiData: null,
     }
   },
   components: {
     VueBottomSheet,
   },
   methods: {
+    openCreateSheet() {
+      if(this.idToken != null && this.nickName != null)
+        this.$refs.createBottomSheet.open();
+      else
+        this.$refs.loginBottomSheet.open();
+    },
+    closeCreateSheet() {
+      this.$refs.createBottomSheet.close();
+    },
+    goSwimming() {
+      $(".pool").css("background", "#2c9ac3");
+      $(".pool img").css("-webkit-filter", "invert(100%)");
+      $(".pool img").css("filter", "invert(100%)");
+      $(".pool p").css("color", "white");
+      setTimeout(function() {
+        location.href='/buddy_swimming';
+      }, 30);
+    },
+    goSea() {
+      console.log("sea")
+      $(".sea").css("background", "#2c9ac3");
+      $(".sea img").css("-webkit-filter", "invert(100%)");
+      $(".sea img").css("filter", "invert(100%)");
+      $(".sea p").css("color", "white");
+      setTimeout(function() {
+        location.href='/buddy_sea';
+      }, 30);
+    },
+    goAbroad() {
+      $(".oversea").css("background", "#2c9ac3");
+      $(".oversea img").css("-webkit-filter", "invert(100%)");
+      $(".oversea img").css("filter", "invert(100%)");
+      $(".oversea p").css("color", "white");
+      setTimeout(function() {
+        location.href='/buddy_abroad';
+      }, 30);
+    },
     openLoginBottomSheet() {
       this.$refs.loginBottomSheet.open();
     },
@@ -200,7 +298,7 @@ export default {
       var item = $("[data-menu-active]").data("menu-active").replace('nav-', '');
       switch(item) {
         case "buddy":
-          location.href="/buddy_create";
+          this.openCreateSheet()
         break;
         case "book":
           location.href="/book_create";
@@ -422,4 +520,5 @@ export default {
 .ico-wedive-w:before {content: "";background-image: url('/static/images/assets/ico_wedive_d.png');background-size:40px 40px;width:40px;height:40px;display:block;}
 .ico-26 {width: 26px !important; height: 26px !important;}
 .ico-26:before {background-size: 26px 26px !important;width: 26px !important;height: 26px !important;}
+.has-notification:before {content: '●';color: #ff5160;position:absolute;top:0;font-size:5px;margin-top: -9px;margin-left: 20px;}
 </style>

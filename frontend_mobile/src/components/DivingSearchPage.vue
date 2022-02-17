@@ -13,7 +13,7 @@
                     <i class="fas fa-calendar" style="margin-top: -3px;color: gray;"></i>
                 </div>
             </div>
-            <div class="p-3" style="min-height:calc(100vh - 58px);">
+            <div class="p-3">
                 <vue-typeahead-bootstrap
                     id="input_query"
                     v-model="query"
@@ -48,33 +48,25 @@
                 <a v-on:click="triggerSearch()" class="btn btn-m btn-full rounded-xs text-uppercase font-900 shadow-s bg-dark-dark col-3" style="width: 18%;padding: 13px 8px !important;border-radius: 8px !important;display:inline-block;margin-bottom:1px;">검색</a>
                 
             </div>
-            <!--<div class="content mt-0 mb-0" style="min-height: calc(100vh - 143px);padding-bottom:40px;">
-                <div v-for="item in users">
-                    <div class="map-box">
-                        <a :href="'/' + ((item.__typename=='DiveSite') ? 'site' : (item.__typename=='DivePoint') ? 'point' : 'center') + '/' + item.uniqueName">
-                        
-                            <div class="bx">
-                                <div class="justify-content-center mb-0 text-start">
-                                    <div :class="item.__typename + '-tag'" style="float: left;position: relative;width: 75px; height:75px;">
-                                        <img v-bind:src="(item.backgroundImages && item.backgroundImages.length>0) ? item.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'" class="rounded-s mx-auto" width="75" height="75" style="object-fit: cover;">
-                                    </div>
-                                    <div :class="item.__typename" style="padding-left: 90px;">
-                                        <span class="map_box_cate">{{ ((item.__typename=='DiveSite')? '사이트' : (item.__typename=='DivePoint')? '포인트' : '센터') }}</span><span class="font-18 pb-0 font-600"> {{item.name}} </span>
-                                        <p class="pb-0 mb-0 line-height-m ellipsis"> {{ (item.description == '') ? '&nbsp;' : item.description }} </p>
-                                        <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
-                                            <span> {{(item.adminScore/20).toFixed(1)}} </span>
-                                            &nbsp;<font class="color-gray-light">|</font>&nbsp;
-                                            <span v-if="item.institutionTypes && item.institutionTypes.length > 0"><span v-for="(insti,index) in item.institutionTypes" v-if="index < 2" v-on:click="openInstitutionBottomSheet()"><img class="ext-img" :src="'/static/images/agency/logo_'+insti.toLowerCase()+'.svg'" height="17" style="padding-bottom: 1px;filter: grayscale(100%) contrast(0.5);" /><span v-if="index != (item.institutionTypes.length-1)">&nbsp;&nbsp;</span></span>&nbsp;<font class="color-gray-light">|</font>&nbsp;</span>
-                                            <span v-if="item.interests && item.interests.filter(x=>x.type=='priceIndex') != null && item.interests.filter(x=>x.type=='priceIndex').length > 0">{{ item.interests.filter(x=>x.type=='priceIndex')[0].title.replace(/\$/gi, '₩') }}</span>
-                                        </p>
-                                    </div>
-                                </div>
+            
+            
+            <div class="content mt-0 mb-0" style="min-height: calc(100vh - 143px);padding-bottom:40px;">
+                <div v-for="item in searchDivings">
+                    <div v-on:click="goDiving(item)" :class="'light-border-bottom mt-3' + (item.status == 'searchable' ? '' : ' opacity-50')">
+                        <div class="d-flex mb-3 position-relative">
+                            <div class="align-self-center">
+                                <img :src="(item.diveLocation && item.diveLocation.length > 0 && item.diveLocation[0].backgroundImages && item.diveLocation[0].backgroundImages.length > 0) ? item.diveLocation[0].backgroundImages[0].thumbnailUrl : '/static/empty.jpg'" class="rounded-sm me-3" width="68">
                             </div>
-                        </a>
+                            <div class="text-start align-self-center font-noto">
+                                <h2 class="font-16 line-height-s mt-2 mb-0 font-500">{{ item.title }}</h2>
+                                <p class="color-gray font-13 mb-0 ellipsis">{{ wediveDate(item.startedAt) }} ~ {{ wediveDate(item.finishedAt) }}</p>
+                                <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> {{ (item.diveLocation && item.diveLocation.length > 0) ? item.diveLocation[0].name : '' }} ({{ wediveDivingType(item.type) }})</p>
+                            </div>
+                            <span class="chip chip-s bg-gray-light text-center font-400 wedive-chip color-black">{{ (item.participants.filter(x=>x.status=='joined').length+1) }}/{{ item.maxPeopleNumber }}</span>
+                        </div>
                     </div>
-                    <div class="divider mt-3 mb-3"></div>
                 </div>
-            </div>-->
+            </div>
             
         </div>
     
@@ -174,7 +166,6 @@ function getWediveDate(date) {
     return ((date.getMonth()+1)<10 ? "0"+(date.getMonth()+1) : (date.getMonth()+1)) + "/" + (date.getDate() < 10 ? "0"+date.getDate() : date.getDate()) +"/" + date.getFullYear();
 }
 
-
 export default {
   name: 'HelloWorld',
   computed: {
@@ -206,10 +197,28 @@ export default {
   },
   
   methods: {
+      goDiving(item) {
+          console.log(item);
+      },
+      wediveDate(_val) {
+          var val = new Date(_val);
+          var dayList = ["일", "월", "화", "수", "목", "금", "토"];
+          return ((val.getMonth()+1) < 10 ? "0" + (val.getMonth()+1) : (val.getMonth()+1)) + "." + (val.getDate()<10 ? "0" + val.getDate():val.getDate()) + "(" + dayList[val.getDay()] + ")";
+      },
+      wediveDivingType(val) {
+          return val.join().replace('freeDiving', '프리').replace('scubaDiving', '스쿠버');
+      },
       async triggerSearch() {
+          // progress bar
+          var preloader = document.getElementById('preloader')
+          if(preloader){
+            preloader.classList.remove('preloader-hide');
+            preloader.classList.add('opacity-50');
+          }
           var _searchParams = {};
           if (this.schedule_from != '일정 없음') _searchParams.startedAt = new Date(this.schedule_from + " 00:00:00");
-          if (this.schedule_to != '일정 없음') _searchParams.finishedAt = new Date(this.schedule_to + " 00:00:00");
+          else { _searchParams.startedAt = new Date() }
+          if (this.schedule_to != '일정 없음') _searchParams.finishedAt = new Date(this.schedule_to + " 23:59:59");
           if (this.query) _searchParams.query = this.query;
           var result = await axios({
             url: 'https://api.wedives.com/graphql',
@@ -222,41 +231,23 @@ export default {
             query: `
                 query SearchDivings($searchParams: SearchParams, $limit: Int) {
                     searchDivings(searchParams: $searchParams, limit: $limit) {
-                        __typename
-                        ... on DiveSite {
-                            _id
-                            uniqueName
+                        diveSites {
                             name
-                            description
-                            adminScore
-                            latitude
-                            longitude
+                            uniqueName
                             backgroundImages {
                                 thumbnailUrl
                             }
                         }
-                        ... on DivePoint {
-                            _id
-                            uniqueName
+                        divePoints {
                             name
-                            description
-                            adminScore
-                            latitude
-                            longitude
+                            uniqueName
                             backgroundImages {
                                 thumbnailUrl
                             }
                         }
-                        ... on DiveCenter {
-                            _id
-                            uniqueName
+                        diveCenters {
                             name
-                            description
-                            divingType
-                            adminScore
-                            latitude
-                            longitude
-                            institutionTypes
+                            uniqueName
                             backgroundImages {
                                 thumbnailUrl
                             }
@@ -269,8 +260,15 @@ export default {
                         startedAt
                         finishedAt
                         interests {
-                        title
-                        type
+                            title
+                            type
+                        }
+                        maxPeopleNumber
+                        participants {
+                            name
+                            birth
+                            gender
+                            status
                         }
                     }
                 }
@@ -283,10 +281,19 @@ export default {
         });
         //result.data.data.searchDiveCentersByName.forEach(x=>result.data.data.searchDiveCentersByName)
         var result_list = new Array();
-        if (result.data.data.searchPlaces) {
-            result.data.data.searchPlaces.filter(place => place.__typename == 'DiveSite').forEach(item => {item.type='site';result_list.push(item)});
-            result.data.data.searchPlaces.filter(place => place.__typename == 'DivePoint').forEach(item => {item.type='point';result_list.push(item)});
-            result.data.data.searchPlaces.filter(place => place.__typename == 'DiveCenter').forEach(item => {item.type='center';result_list.push(item)});
+        if (result.data.data.searchDivings) {
+            this.searchDivings = [];
+            result.data.data.searchDivings.forEach(x => {
+                x.diveLocation = [];
+                x.diveSites.forEach(y => {y.type = 'site';x.diveLocation.push(y)});
+                x.divePoints.forEach(y => {y.type = 'point';x.diveLocation.push(y)});
+                x.diveCenters.forEach(y => {y.type = 'center';x.diveLocation.push(y)});
+                this.searchDivings.push(x);
+            })
+        }
+        if(preloader){
+            preloader.classList.remove('opacity-50');
+            preloader.classList.add('preloader-hide');
         }
       },
       enableNext2(ev) {
@@ -574,6 +581,7 @@ export default {
         selecteduser: null,
         users: [],
         places: [],
+        searchDivings: [],
         suggestSelectedList: [],
         suggestions : (localStorage.suggestion ? JSON.parse(localStorage.suggestion) : []),
         selectedDay: null,
@@ -632,4 +640,9 @@ export default {
 .DiveSite .map_box_cate {border: 1px solid #3f474c;color:#3f474c}
 .DivePoint .map_box_cate {border: 1px solid #3cb5a0;color:#3cb5a0}
 .DiveCenter .map_box_cate {border: 1px solid #4687c1;color:#4687c1}
+
+
+.wedive-chip {font-family: 'Noto Sans Korean';border-radius:6px !important;padding: 0 8px;margin:0 !important;position:absolute;right:0px;bottom:0px;}
+.wedive-chip i {width: auto;line-height: inherit;margin-right: 2px;}
+.light-border-bottom {border-bottom: 1px solid #dee2e6;}
 </style>

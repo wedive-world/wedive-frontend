@@ -1538,7 +1538,7 @@ export default {
 
                 this.map = new google.maps.Map(document.getElementById('map'), {
                     center: {lat: this.centerData.latitude, lng: this.centerData.longitude},
-                    zoom: 13,
+                    zoom: 8,
                     mapTypeControl: false,
                     streetViewControl: false,
                     zoomControl: false,

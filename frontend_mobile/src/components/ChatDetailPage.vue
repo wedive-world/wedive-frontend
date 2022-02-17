@@ -6,12 +6,28 @@
         <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
         <a data-menu="menu-main-right" class="header-icon header-icon-4"><i class="fas fa-bars"></i></a>
 
-        <div :class="'font-noto' + (is_concierge ? '' : ' hide')" style="margin-top: 50px;height:90px;background:rgb(24, 24, 24);border-bottom:1px solid lightgray;padding:14px;">
+        <div v-if="is_concierge" class="font-noto" style="margin-top: 50px;height:90px;background:rgb(24, 24, 24);border-bottom:1px solid lightgray;padding:14px;">
             <p class="mb-0 font-16 font-600 color-white"><i class="fas fa-concierge-bell me-1"></i> 띠링띠링</p>
             <p class="mb-0 font-14 opacity-80 color-white" style="line-height:1.3;">버디매칭, 장소추천,<br/>다이빙 예약을 도와드립니다.</p>
             <img src="/static/images/assets/concierge.gif" style="height:74px;width:74px;position:absolute;right:14px;top:58px;-webkit-mask-image: -webkit-radial-gradient(center, white, black);border-radius: 16px;"/>
         </div>
+
+        <div v-if="divingInfo" class="font-noto" style="margin-top: 50px;height:90px;border-bottom:1px solid lightgray;padding:14px;">
+            <p class="mb-0 font-16 font-600"><i class="fas fa-swimmer me-1"></i> {{ divingInfo.title }}</p>
+            <p class="mb-0 font-14 opacity-80 ellipsis" style="line-height:1.3;max-width: calc(100vw - 118px) !important;">{{ divingInfo.description }}</p>
+
+            <p class="color-highlight font-13 mb-0 ellipsis" style="max-width: calc(100vw - 118px) !important;">
+                <i class="wedive_icoset wedive_icoset_marker"></i>
+                {{ divingInfo.diveLocation && divingInfo.diveLocation.length > 0 ? divingInfo.diveLocation[0].name : '' }}
+                <i class="far fa-calendar ms-2"></i>
+                {{ wediveDate(divingInfo.startedAt) }}
+            </p>
+
+            <img :src="(divingInfo.diveLocation && divingInfo.diveLocation.length > 0 && divingInfo.diveLocation[0].backgroundImages && divingInfo.diveLocation[0].backgroundImages.length > 0) ? divingInfo.diveLocation[0].backgroundImages[0].thumbnailUrl : '/static/empty.jpg'" style="height:74px;width:74px;position:absolute;right:14px;top:58px;-webkit-mask-image: -webkit-radial-gradient(center, white, black);border-radius: 16px;"/>
+        </div>
     </div>
+
+    
     
     <div id="footer-bar-speach" style="z-index: 9999;display: table;width: 100%;">
         <div :class="(is_emoji_clicked?'':'hide')" style="background:#00000066;height:100px;">
@@ -102,7 +118,7 @@
         </div>
     </div>
     
-    <div v-on:click="speechContentClick()" v-on:scroll="handleScroll" id="speech-content" class="card card-style ms-0 me-0 rounded-0" :style="'height: calc(100vh - 50px);overflow-y: auto;padding-top:'+(is_concierge?'130':'50')+'px;padding-bottom:50px;'">
+    <div v-on:click="speechContentClick()" v-on:scroll="handleScroll" id="speech-content" class="card card-style ms-0 me-0 rounded-0" :style="'height: calc(100vh - 50px);overflow-y: auto;padding-top:'+(is_concierge || divingInfo?'130':'50')+'px;padding-bottom:50px;'">
         <div class="content">
             <div v-for="(chat, index) in getChannelHistories">
                 <div v-if="chat.type == 'message'">
@@ -524,23 +540,33 @@ export default {
                 query: `
                 query GetDivingByChatRoomId($chatRoomId: String!) {
                     getDivingByChatRoomId(chatRoomId: $chatRoomId) {
+                        _id
                         diveCenters {
-                        name
-                        uniqueName
-                        description
-                        adminScore
+                            name
+                            uniqueName
+                            description
+                            adminScore
+                            backgroundImages {
+                                thumbnailUrl
+                            }
                         }
                         divePoints {
-                        name
-                        uniqueName
-                        description
-                        adminScore
+                            name
+                            uniqueName
+                            description
+                            adminScore
+                            backgroundImages {
+                                thumbnailUrl
+                            }
                         }
                         diveSites {
-                        name
-                        uniqueName
-                        description
-                        adminScore
+                            name
+                            uniqueName
+                            description
+                            adminScore
+                            backgroundImages {
+                                thumbnailUrl
+                            }
                         }
                         title
                         description
@@ -812,14 +838,25 @@ export default {
         chatSelectedList: [],
         roomInfo: {},
         changeTitle: '',
-        divingInfo: {},
+        divingInfo: null,
     }
-  }, methods: {
+  }, 
+  methods: {
     setData(roomId, divingInfo) {
         this.roomId = roomId;
         this.divingInfo = divingInfo;
-        console.log(divingInfo);
+        if (this.divingInfo != null) {
+            this.divingInfo.diveLocation = [];
+            this.divingInfo.diveSites.forEach(y => {y.type = 'site';this.divingInfo.diveLocation.push(y)});
+            this.divingInfo.divePoints.forEach(y => {y.type = 'point';this.divingInfo.diveLocation.push(y)});
+            this.divingInfo.diveCenters.forEach(y => {y.type = 'center';this.divingInfo.diveLocation.push(y)});
+        }
         this.markRead();
+    },
+    wediveDate(_val) {
+        var val = new Date(_val);
+        var dayList = ["일", "월", "화", "수", "목", "금", "토"];
+        return ((val.getMonth()+1) < 10 ? "0" + (val.getMonth()+1) : (val.getMonth()+1)) + "." + (val.getDate()<10 ? "0" + val.getDate():val.getDate()) + "(" + dayList[val.getDay()] + ")";
     },
     invite() {
         var menuData = "chat-add";

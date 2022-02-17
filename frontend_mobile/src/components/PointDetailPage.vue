@@ -1119,7 +1119,7 @@ export default {
 
         this.map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: this.pointData.latitude, lng: this.pointData.longitude},
-            zoom: 14,
+            zoom: 8,
             mapTypeControl: false,
             streetViewControl: false,
             zoomControl: false,
@@ -1164,10 +1164,10 @@ export default {
                 
                 marker_shop.setIcon(new google.maps.MarkerImage('/static/images/assets/ico_pin_big2.png', null, null, null, new google.maps.Size(58,66)));
                 marker_shop.setLabel({text: title, color: 'white', className: 'marker-position mt-86'});
-                if (this.map.getZoom() == 17) {
+                if (this.map.getZoom() == 8) {
                     this.map.panTo(marker_shop.getPosition());
                 } else {
-                    this.map.setZoom(17);
+                    this.map.setZoom(8);
                     this.map.setCenter(marker_shop.getPosition());
                 }
             });

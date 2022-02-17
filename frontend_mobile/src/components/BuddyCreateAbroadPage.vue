@@ -1,12 +1,9 @@
 <template>
   <div class="">
-  <div data-menu-active="nav-buddy"></div>
+    <div data-menu-active="nav-buddy"></div>
     <div class="header header-fixed header-logo-center">
-        <a href="" class="header-title color ellipsis">해외 버디 모집</a>
+        <a href="" class="header-title color ellipsis">해외/리브어보드 모집</a>
         <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
-        <a href="#" data-menu="menu-main" class="header-icon header-icon-4"><i class="fas fa-bars"></i></a>
-        <a href="#" data-toggle-theme class="header-icon header-icon-3 show-on-theme-dark"><i class="fas fa-sun"></i></a>
-        <a href="#" data-toggle-theme class="header-icon header-icon-3 show-on-theme-light"><i class="fas fa-moon"></i></a>
     </div>
     
     <div class="card card-clear" data-card-height="80"></div>
@@ -36,7 +33,7 @@
                                     v-on:click="collapse1()"
                                     >
                                     <div class="">
-                                        <h4 class="pt-3 mb-2 content mt-0 mb-2">여행 일정</h4>
+                                        <h4 class="pt-3 mb-2 content mt-0 mb-2">모집일정</h4>
                                         <h4 class="pt-3 mb-2 content mt-0 mb-2 font-300 color-secondary" style="position: absolute;right: 0px;top: 4px;">{{ day_show }}</h4>
                                     </div>
                                     
@@ -70,7 +67,7 @@
                                     v-on:click="collapse2()"
                                     >
                                     <div class="">
-                                        <h4 class="pt-3 mb-2 content mt-0 mb-2">출발시간</h4>
+                                        <h4 class="pt-3 mb-2 content mt-0 mb-2">시간</h4>
                                         <h4 class="pt-3 mb-2 content mt-0 mb-2 font-300 color-secondary" style="position: absolute;right: 0px;top: 4px;">{{hour_show}}</h4>
                                     </div>
                                     
@@ -84,10 +81,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
-
-                            
                         </div>
                         <div style="position: absolute;bottom: 0;width:100%;">
                             <a id="btn_next1" href="#" class="slider-next btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 ms-3 me-3 mb-3" style="height: 46px;padding-top: 10px;" disabled="disabled" v-on:click="next1()">다음</a>
@@ -100,13 +93,13 @@
                             <h4 class="pt-3 mb-2 content mt-0 mb-2">어떤 다이빙을 원하시나요?</h4>
                             <div class="ms-3 me-3 mb-2">
                                 <div class="form-check interest-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="check_diving_scuba">
+                                    <input class="form-check-input" type="checkbox" value="" id="check_diving_scuba" v-model="check_diving_scuba">
                                     <label class="form-check-label rounded-xl border-08" for="check_diving_scuba" style="border-radius: 17px 0 0 17px !important;">스쿠바 다이빙</label>
                                     <i class="fas fa-ship color-white font-18"></i>
                                     <i class="fas fa-ship font-16 color-highlight"></i>
                                 </div>
                                 <div class="form-check interest-check" style="margin-left: -28px;">
-                                    <input class="form-check-input" type="checkbox" value="" id="check_diving_free">
+                                    <input class="form-check-input" type="checkbox" value="" id="check_diving_free" v-model="check_diving_free">
                                     <label class="form-check-label rounded-xl border-08" for="check_diving_free" style="border-radius: 0 17px 17px 0 !important;">프리 다이빙</label>
                                     <i class="fas fa-swimmer color-white font-18"></i>
                                     <i class="fas fa-swimmer font-16 color-highlight"></i>
@@ -117,31 +110,31 @@
                             <vue-typeahead-bootstrap
                                 id="search_typeahead"
                                 class="wedive-search content mb-0  me-3 ms-3 mt-2"
-                                style="padding-left: 12px; padding-right: 12px;"
                                 v-model="query"
                                 :data="users"
-                                :serializer="item => item.name_ko"
-                                :screen-reader-text-serializer="item => `${item.name_ko}`"
+                                :serializer="item => item.name"
+                                :screen-reader-text-serializer="item => `${item.name}`"
                                 highlightClass="special-highlight-class"
                                 @hit="selecteduser = $event;enableNext2($event);"
                                 :minMatchingChars="2"
-                                placeholder="국가명, 지역명, 포인트명, 센터명"
+                                placeholder="지역명, 사이트명"
                                 inputClass="special-input-class"
-                                :disabledValues="(selecteduser ? [selecteduser.name_ko] : [])"
-                                @input="lookupUser2"
+                                :disabledValues="(selecteduser ? [selecteduser.name] : [])"
+                                @input="lookupLocation"
+                                :showAllResults="true"
                                 >
                                 <template slot="suggestion" slot-scope="{ data, htmlText }">
-                                    <div class="d-flex align-items-center">
-                                    <img
-                                        class="rounded-s me-2"
-                                        :src="data.img_url"
+                                    <div class="d-flex align-items-center" style="position:relative !important;">
+                                    <div :class="''+data.__typename + '-tag'" style="position:relative;">
+                                        <img
+                                        class="rounded-s me-3"
+                                        :src="(data.backgroundImages && data.backgroundImages.length>0) ? data.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'"
                                         style="width: 40px; height: 40px;" />
+                                    </div>
+                                    <span v-if="data.__typename == 'DiveSite'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + htmlText + ' 사이트</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + (data.description ? data.description : '')+'</span>'"></span>
+                                    <span v-else-if="data.__typename == 'DivePoint'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + htmlText + ' 포인트</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + (data.description ? data.description : '')+'</span>'"></span>
+                                    <span v-else-if="data.__typename == 'DiveCenter'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + htmlText + '</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + (data.description ? data.description : '')+'</span>'"></span>
                                     
-                                    
-                                    
-                                    <span v-if="data.type == 'region'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-marked-alt\'></i> 장소</span><br/>' + htmlText"></span>
-                                    <span v-else-if="data.type == 'point'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-pin\'></i> 다이빙 포인트</span><br/>' + htmlText"></span>
-                                    <span v-else-if="data.type == 'center'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-store\'></i> 다이빙 센터</span><br/>' + htmlText"></span>
                                     </div>
                                 </template>
                             </vue-typeahead-bootstrap>
@@ -149,72 +142,47 @@
                                 id="search_result" 
                                 class="hide bg-secondary2" 
                                 v-on:click="search_result_click()"
-                                style="margin-left: 16px;margin-right: 16px;padding:7px 11px 7px;border:1px solid #ced4da;border-radius:16px;">
-                                <div class="d-flex align-items-center">
+                                style="margin-left: 16px;margin-right: 16px;padding:16px;;border:1px solid #ced4da;border-radius:16px;">
+                                <div class="d-flex align-items-center" style="position:relative !important;">
+                                <div :class="''+search_type + '-tag'" style="position:relative;">
                                 <img
-                                    class="rounded-s me-2"
+                                    class="rounded-s me-3"
                                     :src="search_img"
                                     style="width: 40px; height: 40px;" />
+                                </div>
+                                <span v-if="search_type == 'DiveSite'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + search_loc + ' 사이트</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(search_adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + (search_desc ? search_desc : '')+'</span>'"></span>
+                                <span v-else-if="search_type == 'DivePoint'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + search_loc + ' 포인트</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(search_adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + (search_desc ? search_desc : '')+'</span>'"></span>
+                                <span v-else-if="search_type == 'DiveCenter'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + search_loc + '</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(search_adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + (search_desc ? search_desc : '')+'</span>'"></span>
                                 
-                                <span v-if="search_type == 'region'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-marked-alt\'></i> 장소</span><br/>' + search_loc"></span>
-                                <span v-else-if="search_type == 'point'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-pin\'></i> 다이빙 포인트</span><br/>' + search_loc"></span>
-                                <span v-else-if="search_type == 'center'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-store\'></i> 다이빙 센터</span><br/>' + search_loc"></span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="content mt-1">
-                            <label class="color-highlight font-12 me-3 ms-3">이곳은 어떠세요?</label>
-
+                        <div v-if="nearList.length>0" class="content mt-1">
+                            <label class="font-12 me-3 ms-3" style="color: #b4bcc8"><i class="wedive_icoset wedive_icoset_info me-1"/>추천 장소</label>
+                            
                             <div
-                                id="search_recommend_1"
+                                v-for="(item, index) in nearList"
+                                v-if="index < 3"
+                                :id="'search_recommend_'+index"
                                 class="mb-1 search_recommend"
-                                v-on:click="search_recommend_click('center', '서면 DIT', '/static/bubble1.jpg', 'search_recommend_1')"
-                                style="margin-left: 16px;margin-right: 16px;padding:7px 11px 7px;border:1px solid #ced4da;border-radius:16px;">
-                                <div class="d-flex align-items-center">
-                                <img
-                                    class="rounded-s me-2"
-                                    src="/static/bubble1.jpg"
-                                    style="width: 40px; height: 40px;" />
-                                
-                                <span v-if="'center' == 'region'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-marked-alt\'></i> 장소</span><br/>제주도'"></span>
-                                <span v-else-if="'center' == 'point'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-pin\'></i> 다이빙 포인트</span><br/>' + search_loc"></span>
-                                <span v-else-if="'center' == 'center'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-store\'></i> 다이빙 센터</span><br/>서면 DIT'"></span>
+                                v-on:click="search_recommend_click(item._id, item.type, item.name, ((item.backgroundImages && item.backgroundImages.length>0) ? item.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'), item.description, 'search_recommend_'+index)"
+                                style="margin-left: 16px;margin-right: 16px;padding:12px 16px;border:1px solid #ced4da;border-radius:16px;">
+                                <div class="d-flex align-items-center" style="position:relative !important;">
+                                <div :class="''+item.type + '-tag'" style="position:relative;">
+                                    <img
+                                        class="rounded-s me-3"
+                                        :src="(item.backgroundImages && item.backgroundImages.length>0) ? item.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'"
+                                        style="width: 40px; height: 40px;" />
+                                </div>
+                                <span v-if="item.type == 'site'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + item.name + ' 사이트</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(item.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 144px);position: fixed;margin-top: -4px;\'>' + (item.description ? item.description : '')+'</span>'"></span>
+                                <span v-else-if="item.type == 'point'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + item.name + ' 포인트</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(item.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 144px);position: fixed;margin-top: -4px;\'>' + (item.description ? item.description : '')+'</span>'"></span>
+                                <span v-else-if="item.type == 'center'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + item.name + '</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(item.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 144px);position: fixed;margin-top: -4px;\'>' + (item.description ? item.description : '')+'</span>'"></span>
                                 </div>
                             </div>
-                            <div
-                                id="search_recommend_2"
-                                class="mb-1 search_recommend"
-                                v-on:click="search_recommend_click('center', '송도풀장', '/static/bubble1.jpg', 'search_recommend_2')"
-                                style="margin-left: 16px;margin-right: 16px;padding:7px 11px 7px;border:1px solid #ced4da;border-radius:16px;">
-                                <div class="d-flex align-items-center">
-                                <img
-                                    class="rounded-s me-2"
-                                    src="/static/bubble1.jpg"
-                                    style="width: 40px; height: 40px;" />
-                                
-                                <span v-if="'center' == 'region'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-marked-alt\'></i> 장소</span><br/>제주도'"></span>
-                                <span v-else-if="'center' == 'point'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-pin\'></i> 다이빙 포인트</span><br/>' + search_loc"></span>
-                                <span v-else-if="'center' == 'center'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-store\'></i> 다이빙 센터</span><br/>송도풀장'"></span>
-                                </div>
-                            </div>
-                            <div
-                                id="search_recommend_3"
-                                class="mb-1 search_recommend"
-                                v-on:click="search_recommend_click('center', 'K26', '/static/bubble1.jpg', 'search_recommend_3')"
-                                style="margin-left: 16px;margin-right: 16px;padding:7px 11px 7px;border:1px solid #ced4da;border-radius:16px;">
-                                <div class="d-flex align-items-center">
-                                <img
-                                    class="rounded-s me-2"
-                                    src="/static/bubble1.jpg"
-                                    style="width: 40px; height: 40px;" />
-                                
-                                <span v-if="'center' == 'region'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-marked-alt\'></i> 장소</span><br/>제주도'"></span>
-                                <span v-else-if="'center' == 'point'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-map-pin\'></i> 다이빙 포인트</span><br/>' + search_loc"></span>
-                                <span v-else-if="'center' == 'center'" class="ml-4" v-html="'<span class=\'txt_search_sub\'><i class=\'fas fa-store\'></i> 다이빙 센터</span><br/>K26'"></span>
-                                </div>
-                            </div>
+                            
                         </div>
+                        
                         
                         <div class="row me-0 ms-0 mb-0" style="position: absolute;bottom: 0;width:100%;padding-left:20px;padding-right:20px;">
                             <a href="#" class="col-6 slider-prev btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>
@@ -225,11 +193,10 @@
                     <div class="splide__slide">
                         <div id="slide3" class="card card-full pb-0 mb-0 border-bottom" style="height: calc( 100vh - 56px );">
                         <div class="content mt-1">
-                            <h4 class="pt-3 mb-2 content mt-0 mb-2">모집 내용을 입력해주세요.</h4>
-                            <div class="input-style no-borders has-icon validate-field mb-3 mt-4 me-3 ms-3">
-                                <i class="fas fa-pen-alt color-gray"></i>
-                                <textarea id="form7" placeholder="이곳에 모집상세를 작성해보세요." v-model="buddy_detail"></textarea>
-                                <label for="form7" class="color-highlight">상세정보</label>
+                            <h4 class="pt-3 mb-2 content mt-0 mb-2">모집 상세 입력</h4>
+                            <div class="input-style validate-field mb-3 mt-4 me-3 ms-3">
+                                <textarea id="form6" rows="1" class="wedive-textarea2" placeholder="제목을 입력하세요." v-model="buddy_title"></textarea>
+                                <textarea id="form7" class="wedive-textarea" placeholder="이곳에 모집상세를 작성해보세요." v-model="buddy_detail"></textarea>
                             </div>
                             
                         </div>
@@ -244,12 +211,12 @@
                         <div class="content mt-1">
                             <h4 class="pt-3 mb-2 content mt-0 mb-2">선택사항</h4>
                             <div class="mt-3 row ms-3 mb-2">
-                                <div class="col-3" style="display: inline-block;"><img class="mt-2" src="/static/images/assets/ico_unknown.png" width="40px" /></div>
+                                <div class="col-3" style="display: inline-block;"><img class="mt-2" src="/static/images/assets/ico_wedive_d.png" width="40px" /></div>
                                 <div class="mx-auto col-9" style="display: inline-block;">
                                     <div class="color-highlight font-12 col-4">모집 인원</div>
                                     <div class="stepper rounded-s float-start">
                                     <a href="#" class="stepper-sub"><i class="fa fa-minus color-theme opacity-40"></i></a>
-                                    <input type="number" min="1" max="99" value="3">
+                                    <input type="number" min="1" max="99" value="3" id="num_recruit">
                                     <a href="#" class="stepper-add"><i class="fa fa-plus color-theme opacity-40"></i></a>
                                     </div>
                                     <div class="clearfix"></div>
@@ -257,12 +224,12 @@
                             </div>
 
                             <div class="mt-1 row ms-3 mb-2">
-                                <div class="col-3" style="display: inline-block;"><img class="mt-2" src="/static/images/assets/ico_man.png" width="40px" /></div>
+                                <div class="col-3" style="display: inline-block;"><img class="mt-2" src="/static/images/assets/user_empty_m.png" width="40px" /></div>
                                 <div class="mx-auto col-9" style="display: inline-block;">
                                     <div class="color-secondary font-12">참여 남성</div>
                                     <div class="stepper rounded-s float-start">
                                     <a href="#" class="stepper-sub"><i class="fa fa-minus color-theme opacity-40"></i></a>
-                                    <input type="number" min="1" max="99" value="0">
+                                    <input type="number" min="1" max="99" value="0" id="num_man">
                                     <a href="#" class="stepper-add"><i class="fa fa-plus color-theme opacity-40"></i></a>
                                     </div>
                                     <div class="clearfix"></div>
@@ -270,12 +237,12 @@
                             </div>
 
                             <div class="mt-1 row ms-3">
-                                <div class="col-3" style="display: inline-block;"><img class="mt-2" src="/static/images/assets/ico_woman.png" width="40px" /></div>
+                                <div class="col-3" style="display: inline-block;"><img class="mt-2" src="/static/images/assets/user_empty_f.png" width="40px" /></div>
                                 <div class="mx-auto col-9" style="display: inline-block;">
                                     <div class="color-secondary font-12">참여 여성</div>
                                     <div class="stepper rounded-s float-start">
                                     <a href="#" class="stepper-sub"><i class="fa fa-minus color-theme opacity-40"></i></a>
-                                    <input type="number" min="1" max="99" value="0">
+                                    <input type="number" min="1" max="99" value="0" id="num_woman">
                                     <a href="#" class="stepper-add"><i class="fa fa-plus color-theme opacity-40"></i></a>
                                     </div>
                                     <div class="clearfix"></div>
@@ -286,25 +253,25 @@
                                 <label class="color-highlight font-12">선호사항</label>
                                 <div>
                                 <div class="form-check interest-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="check_gender1">
+                                    <input class="form-check-input" type="checkbox" value="" id="check_gender1" v-model="check_gender1">
                                     <label class="form-check-label rounded-xl border-08" for="check_gender1">무관</label>
                                     <i class="fas fa-user color-white font-18"></i>
                                     <i class="fas fa-user font-16 color-highlight"></i>
                                 </div>
                                 <div class="form-check interest-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="check_gender2">
+                                    <input class="form-check-input" type="checkbox" value="" id="check_gender2" v-model="check_gender2">
                                     <label class="form-check-label rounded-xl border-08" for="check_gender2">남자</label>
                                     <i class="fas fa-male color-white font-18"></i>
                                     <i class="fas fa-male font-16 color-highlight"></i>
                                 </div>
                                 <div class="form-check interest-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="check_gender3">
+                                    <input class="form-check-input" type="checkbox" value="" id="check_gender3" v-model="check_gender3">
                                     <label class="form-check-label rounded-xl border-08" for="check_gender3">여자</label>
                                     <i class="fas fa-female color-white font-18"></i>
                                     <i class="fas fa-female font-16 color-highlight"></i>
                                 </div>
                                 <div class="form-check interest-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="check_gender4">
+                                    <input class="form-check-input" type="checkbox" value="" id="check_gender4" v-model="check_gender4">
                                     <label class="form-check-label rounded-xl border-08" for="check_gender4">커플</label>
                                     <i class="fas fa-user-friends color-white font-18"></i>
                                     <i class="fas fa-user-friends font-16 color-highlight"></i>
@@ -313,34 +280,22 @@
 
                                 <div>
                                 <div class="form-check interest-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="check_amity1">
+                                    <input class="form-check-input" type="checkbox" value="" id="check_amity1" v-model="check_amity1">
                                     <label class="form-check-label rounded-xl border-08" for="check_amity1">뒷풀이</label>
                                     <i class="fas fa-beer color-white font-18"></i>
                                     <i class="fas fa-beer font-16 color-highlight"></i>
                                 </div>
                                 <div class="form-check interest-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="check_env4">
-                                    <label class="form-check-label rounded-xl border-08" for="check_env4">센터확정</label>
-                                    <i class="fas fa-store color-white font-18"></i>
-                                    <i class="fas fa-store font-17 color-highlight"></i>
-                                </div>
-                                <div class="form-check interest-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="check_diving2">
-                                    <label class="form-check-label rounded-xl border-08" for="check_diving2">초보환영</label>
+                                    <input class="form-check-input" type="checkbox" value="" id="check_amity2" v-model="check_amity2">
+                                    <label class="form-check-label rounded-xl border-08" for="check_amity2">초보환영</label>
                                     <i class="fas fa-baby color-white font-18"></i>
                                     <i class="fas fa-baby font-16 color-highlight"></i>
                                 </div>
                                 <div class="form-check interest-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="check_diving3">
-                                    <label class="form-check-label rounded-xl border-08" for="check_diving3">상급레벨</label>
+                                    <input class="form-check-input" type="checkbox" value="" id="check_amity3" v-model="check_amity3">
+                                    <label class="form-check-label rounded-xl border-08" for="check_amity3">상급레벨</label>
                                     <i class="fas fa-user-graduate color-white font-18"></i>
                                     <i class="fas fa-user-graduate font-16 color-highlight"></i>
-                                </div>
-                                <div class="form-check interest-check hide">
-                                    <input class="form-check-input" type="checkbox" value="" id="check_amity2">
-                                    <label class="form-check-label rounded-xl border-08" for="check_amity2">식사 함께</label>
-                                    <i class="fas fa-utensils color-white font-18"></i>
-                                    <i class="fas fa-utensils font-17 color-highlight"></i>
                                 </div>
                                 </div>
                             </div>
@@ -354,11 +309,14 @@
                     <div class="splide__slide">
                         <div id="slide5" class="card card-full pb-0 mb-0 border-bottom" style="height: calc( 100vh - 56px );">
                         <div class="content mt-1">
-                            <div class="text-center mt-2 mb-3">
-                                <img src="/static/images/assets/search.gif"/>
-                                <p class="font-noto mb-1 mt-2 font-16">세상에서 가장 빠르게 다이빙 버디를 찾아드려요.</p>
-                                <p class="font-noto color-gray"><span class="span_timer">3</span>초 후 리스트로 이동할께요.</p>
+                            <div class="text-center mt-4 mb-3">
+                                <img src="/static/images/assets/search.gif" width="40%" class="m-5"/>
+                                <h4 class="font-noto mb-1 mt-n2 font-500 font-20" style="line-height: 1.4;">버디모집 등록이<br/>완료되었습니다.</h4>
+                                <p class="font-noto mb-1 mt-3 font-300 font-14 color-gray">다른 다이버가 신청하는 경우, 승인을 해주세요.</p>
                             </div>
+                        </div>
+                        <div class="row me-0 ms-0 mb-0" style="position: absolute;bottom: 0;width:100%;padding-left:20px;padding-right:20px;">
+                            <a href="/" class="btn_next5 col-12 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;">확인</a>
                         </div>
                         </div>
                     </div>
@@ -366,26 +324,33 @@
             </div>
         </div>
 
-
-
-
     </div>
     <!-- Page content ends here-->
         
     
-
     <div id="snackbar-info" class="snackbar-toast color-white bg-green-dark" data-bs-delay="1500" data-bs-autohide="true"><i class="fa fa-times me-3"></i>종료일을 추가로 선택하세요.</div>
+    <div id="snackbar-info2" class="snackbar-toast color-white bg-green-dark" data-bs-delay="1500" data-bs-autohide="true"><i class="fa fa-times me-3"></i>다이빙 타입을 선택하세요.</div>
     <div id="snackbar-error" class="snackbar-toast color-white bg-red-dark" data-bs-delay="1500" data-bs-autohide="true"><i class="fa fa-times me-3"></i>선택할 수 없는 날짜 입니다.</div>
   </div>
 </template>
 <script>
 import VueTypeaheadBootstrap from 'vue-typeahead-bootstrap';
 import {debounce} from 'lodash';
-var weekday_ko = ["", "일", "월", "화", "수", "목", "금", "토"];
+const axios = require("axios")
 
+var weekday_ko = ["", "일", "월", "화", "수", "목", "금", "토"];
+function getDistanceFromLatLonInKm(lat1,lng1,lat2,lng2) { function deg2rad(deg) { return deg * (Math.PI/180) } var R = 6371; var dLat = deg2rad(lat2-lat1); var dLon = deg2rad(lng2-lng1); var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2); var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); var d = R * c; return d; }
 export default {
-  name: 'HelloWorld',
+  name: 'BuddySwimming',
   mounted() {
+    // get Geo location
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => {
+            this.my_latitude = position.coords.latitude;
+            this.my_longitude = position.coords.longitude;
+        });
+    }
+
     document.getElementById("footer-bar").classList.add("hide");
     
     $(".page-title").hide();
@@ -420,20 +385,41 @@ export default {
   },
   data () {
     return {
+        my_latitude: null,
+        my_longitude: null,
+
+        check_diving_scuba: false,
+        check_diving_free: false,
+        
+        check_gender1: false,
+        check_gender2: false,
+        check_gender3: false,
+        check_gender4: false,
+
+        check_amity1: false,
+        check_amity2: false,
+        check_amity3: false,
+
         query: '',
         selecteduser: null,
         users: [],
+        nearList: [],
+
         selectedDay: null,
         selectedRange: {},
         rangeToggle: 0,
         collapse1_showed: true,
         day_show: "",
         hour_show: "",
-        hour_array: ["7:00", "7:30", "8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30"],
+        buddy_title: "",
         buddy_detail: "",
         search_type: "",
         search_img: "",
         search_loc: "",
+        search_desc: "",
+        search_adminScore: "",
+        selected_id: "",
+        hour_array: ["7:00", "7:30", "8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30"],
         theme: {
             container: {
             light: 'light-container-class',  // Classes to apply for light mode
@@ -462,9 +448,84 @@ export default {
     },
   },
   watch: {
-      buddy_detail: function(newVal, oldVal) {
-        if (newVal != "") {
+      my_latitude: async function(newVal, oldVal) {
+        var result = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                    query GetDiveAllNearby($lat1: Float!, $lon1: Float!, $lat2: Float!, $lon2: Float!) {
+                        getDiveSitesNearby(lat1: $lat1, lon1: $lon1, lat2: $lat2, lon2: $lon2) {
+                            _id
+                            name
+                            uniqueName
+                            description
+                            waterTemperatureScore
+                            eyeSightScore
+                            adminScore
+                            latitude
+                            longitude
+                            backgroundImages {
+                                thumbnailUrl
+                            }
+                            interests {
+                                title
+                                type
+                            }
+                        }
+                    }
+                `,
+                variables: {
+                    "lat1": this.my_latitude-1.7,
+                    "lon1": this.my_longitude-1.7,
+                    "lat2": this.my_latitude+1.7,
+                    "lon2": this.my_longitude+1.7
+                }
+            }
+        });
+
+        this.nearList = result.data.data.getDiveSitesNearby;
+        this.nearList.forEach(center => {
+            center.distance = getDistanceFromLatLonInKm(this.my_latitude, this.my_longitude, center.latitude, center.longitude);
+            center.type = 'center';
+        })
+        this.nearList.sort(function(a, b) {
+            return a.distance - b.distance;
+        });
+        
+      },
+      buddy_title: function(newVal, oldVal) {
+          if (this.buddy_title != "" && this.buddy_detail != "") {
             $("#btn_next3").attr("disabled", false);
+          }
+          else if (this.buddy_title == "" || this.buddy_detail == "") {
+              $("#btn_next3").attr("disabled", true);
+          }
+      },
+      buddy_detail: function(newVal, oldVal) {
+          if (this.buddy_title != "" && this.buddy_detail != "") {
+            $("#btn_next3").attr("disabled", false);
+          }
+          else if (this.buddy_title == "" || this.buddy_detail == "") {
+              $("#btn_next3").attr("disabled", true);
+          }
+      },
+      check_diving_scuba: function(newVal, oldVal) {
+        if((this.check_diving_scuba == true || this.check_diving_free == true) && $("#search_result").hasClass("hide") == false) {
+            $("#btn_next2").attr("disabled", false);
+        } else if((this.check_diving_scuba == false && this.check_diving_free == false) || $("#search_result").hasClass("hide") == true) {
+            $("#btn_next2").attr("disabled", true);
+        }
+      },
+      check_diving_free: function(newVal, oldVal) {
+        if((this.check_diving_scuba == true || this.check_diving_free == true) && $("#search_result").hasClass("hide") == false) {
+            $("#btn_next2").attr("disabled", false);
+        } else if((this.check_diving_scuba == false && this.check_diving_free == false) || $("#search_result").hasClass("hide") == true) {
+            $("#btn_next2").attr("disabled", true);
         }
       },
   },
@@ -475,23 +536,84 @@ export default {
       next2() {
           $(".progress-bar").css("width", "75%");
           setTimeout(function() {
-              $("#form7").focus();
+              $("#form6").focus();
           },200);
       },
       next3() {
           $(".progress-bar").css("width", "100%");
       },
-      next4() {
-          setTimeout(function() {
-              $(".span_timer").text("2");
-          },1000)
-          setTimeout(function() {
-              $(".span_timer").text("1");
-          },2000)
-          setTimeout(function() {
-              $(".span_timer").text("0");
-              window.location.href="/buddy_home";
-          },3000)
+      async next4() {
+        var _s_date = this.selectedRange.start.getFullYear() + "-" + ((this.selectedRange.start.getMonth()+1)<10?"0"+(this.selectedRange.start.getMonth()+1):(this.selectedRange.start.getMonth()+1)) + "-" + (this.selectedRange.start.getDate()<10?"0"+this.selectedRange.start.getDate():this.selectedRange.start.getDate()) + " " + this.hour_show + ":00";
+        const s_date = new Date(_s_date).toISOString();
+        const e_date = this.selectedRange.end.toISOString();
+
+        const buddy_title = this.buddy_title;
+        const buddy_detail = this.buddy_detail;
+        var participants = new Array();
+        for (var i=0; i<parseInt($("#num_man").val()); i++) {
+            participants.push({"user": null, "status": "joined", "name": null, "birth": null, "gender": "m", "status": "joined"});
+        }
+        for (var i=0; i<parseInt($("#num_woman").val()); i++) {
+            participants.push({"user": null, "status": "joined", "name": null, "birth": null, "gender": "f", "status": "joined"});
+        }
+        const parti = participants;
+
+
+        const center_id = this.selected_id;
+
+
+        var interests = new Array();
+        if (this.check_gender1) interests.push("6174da5da60639819c3e6ac7");
+        if (this.check_gender2) interests.push("6174da5ea60639819c3e6ac9");
+        if (this.check_gender3) interests.push("6174da5fa60639819c3e6acb");
+        if (this.check_gender4) interests.push("6174da60a60639819c3e6acd");
+        if (this.check_amity1) interests.push("6174da70a60639819c3e6ad9");
+        if (this.check_amity2) interests.push("61b45bb413f324035a6c86bc");
+        if (this.check_amity3) interests.push("61b45bb913f324035a6c86bf");
+        const inter = interests;
+        var _type = new Array();
+        if (this.check_diving_scuba) _type.push("scubaDiving")
+        if (this.check_diving_free) _type.push("freeDiving")
+        const diving_type = _type;
+        const num_recruit = parseInt($("#num_recruit").val());
+        console.log(num_recruit);
+
+        var result = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                    mutation Mutation($input: DivingInput) {
+                        upsertDiving(input: $input) {
+                            _id
+                        }
+                    }
+                `,
+                variables: {
+                    "input": {
+                        "title": buddy_title,
+                        "description": buddy_detail,
+                        "status": "searchable",
+                        "type": diving_type,
+                        "participants": parti,
+                        "maxPeopleNumber": (num_recruit + parti.length + 1),
+                        "interests": inter,
+                        "diveSites": center_id,
+                        "divePoints": null,
+                        "diveCenters": null,
+                        "startedAt": s_date,
+                        "finishedAt": e_date,
+                    }
+                }
+            }
+        });
+        console.log(result);
+        var diving_id = result.data.data.upsertDiving._id;
+        $(".btn_next5").attr("href", ("/diving/" + diving_id));
       },
       collapse1() {
         $("#collapse2_area").click();
@@ -506,15 +628,25 @@ export default {
             $("#btn_next1").attr("disabled", false);
         }
       },
-      search_recommend_click(type, name, img, target) {
+      search_recommend_click(_id, type, name, img, desc, target) {
+          this.selected_id = _id;
           this.search_img = img;
           this.search_type=type;
           this.search_loc=name;
+          this.search_desc=desc
           $("#search_typeahead").addClass("hide");
           $("#search_result").removeClass("hide");
-          $("#btn_next2").attr("disabled", false);
           $(".search_recommend").removeClass("bg-secondary2");
           $("#"+target).addClass("bg-secondary2");
+
+          if(this.check_diving_scuba == true || this.check_diving_free == true) {
+              $("#btn_next2").attr("disabled", false);
+          } else {
+            var toastData = 'snackbar-info2';
+            var notificationToast = document.getElementById(toastData);
+            var notificationToast = new bootstrap.Toast(notificationToast);
+            notificationToast.show();
+          }
       },
       search_result_click() {
           $("#search_typeahead").removeClass("hide");
@@ -525,14 +657,29 @@ export default {
           $("#search_recommend_1").removeClass("bg-secondary2");
           $("#search_recommend_2").removeClass("bg-secondary2");
           $("#search_recommend_3").removeClass("bg-secondary2");
+
+          $("#btn_next2").attr("disabled", true);
       },
       enableNext2(ev) {
-          this.search_img = ev.img_url;
-          this.search_type=ev.type;
-          this.search_loc=ev.name_ko;
+          this.search_img = (ev.backgroundImages && ev.backgroundImages.length>0) ? ev.backgroundImages[0].thumbnailUrl : '/static/empty.jpg';
+          this.search_type=ev.__typename;
+          this.search_loc=ev.name;
+          this.search_desc=ev.description;
+          this.search_adminScore=ev.adminScore;
+          this.selected_id = ev._id;
+
+          
           $("#search_typeahead").addClass("hide");
           $("#search_result").removeClass("hide");
-          $("#btn_next2").attr("disabled", false);
+          if(this.check_diving_scuba == true || this.check_diving_free == true) {
+              $("#btn_next2").attr("disabled", false);
+          } else {
+            var toastData = 'snackbar-info2';
+            var notificationToast = document.getElementById(toastData);
+            var notificationToast = new bootstrap.Toast(notificationToast);
+            notificationToast.show();
+          }
+
       },
       onRangeClick(range) {
           try {
@@ -570,24 +717,81 @@ export default {
                 }
           }
       },
-      lookupUser: debounce(function(){
-        // in practice this action should be debounced
-        fetch(`https://api.github.com/search/users?q=${this.query}`)
-          .then(response => {
-            return response.json();
-          })
-          .then(data => {
-            this.users = data.items;
-          })
-      }, 500),
-      lookupUser2: debounce(function(){
-        this.users = [
-            {"id": "region_ko_jeju", "type": "region", "name_ko": "제주도", name_en: "Jeju island", "img_url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0c/bf/d2/56/photo1jpg.jpg?w=100&h=100&s=1"},
-            {"id": "region_ko_wooljin", "type": "region", "name_ko": "울진", name_en: "Wooljin", "img_url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/01/5a/31/a0/sunrise-peak-seongsan.jpg?w=100&h=100&s=1"},
-            {"id": "center_ko_jeju_bubbletank", "type": "center", "name_ko": "제주 버블탱크 스쿠바다이빙", name_en: "Bubble tank", "img_url": "/static/bubble2.jpg"},
-            {"id": "point_ko_jeju_munisland", "type": "point", "name_ko": "제주도 문섬", name_en: "Mun island", "img_url": "https://api.cdn.visitjeju.net/photomng/imgpath/201907/31/07c1996d-4374-4e77-b353-300d01783718.jpg"},
-        ];
-      }, 500),
+      async lookupLocation() {
+        // progress bar
+        var preloader = document.getElementById('preloader')
+        if(preloader){
+            preloader.classList.remove('preloader-hide');
+            preloader.classList.add('opacity-50');
+        }
+        this.users = [];
+        const query = this.query;
+        var result = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                    query SearchPlaces($searchParams: SearchParams, $limit: Int) {
+                    searchPlaces(searchParams: $searchParams, limit: $limit) {
+                        __typename
+                        ... on DiveSite {
+                            _id
+                            uniqueName
+                            name
+                            description
+                            adminScore
+                            latitude
+                            longitude
+                            backgroundImages {
+                                thumbnailUrl
+                            }
+                            interests {
+                                title
+                                type
+                            }
+                        }
+                        ... on DivePoint {
+                            _id
+                            uniqueName
+                            name
+                            description
+                            adminScore
+                            latitude
+                            longitude
+                            backgroundImages {
+                                thumbnailUrl
+                            }
+                            interests {
+                                title
+                                type
+                            }
+                        }
+                        address
+                        latitude
+                        longitude
+                        countryCode
+                    }
+                }
+                `,
+                variables: {
+                    "limit": 10,
+                    "searchParams": {query: query}
+                }
+            }
+        });
+        //result.data.data.searchDiveCentersByName.forEach(x=>result.data.data.searchDiveCentersByName)
+        if (result.data.data.searchPlaces) {
+            this.users = result.data.data.searchPlaces;
+        }
+        if(preloader){
+            preloader.classList.remove('opacity-50');
+            preloader.classList.add('preloader-hide');
+        }
+      },
       
   }
 
@@ -604,4 +808,15 @@ export default {
 .btn[disabled] {pointer-events: none !important;background-image: linear-gradient(to bottom, #ccc, #ccc) !important;}
 .bg-e7e7e7 {background-color: transparent !important;}
 .interest-check input:checked ~ label {background-color: #2c9ac3;}
+.wedive-textarea {min-height: 160px;border: 2px solid #e9e9e9;background: #f5f5f5;padding-left: 10px;padding-right: 10px;}
+.wedive-textarea2 {max-height: 45px;min-height: 45px;border: 2px solid #e9e9e9;background: #f5f5f5;padding-left: 10px;padding-right: 10px;}
+.wedive-input {border: 2px solid #e9e9e9;background: #f5f5f5;padding: 0 10px;margin-bottom: 10px;width:100%;}
+.site_img:before{content:'';background:url(/static/images/assets/ico_pin0.png);width: 20px;height: 28px;position: absolute;bottom: -5px;left: 28px;background-size: cover;}
+.point_img:before{content:'';background:url(/static/images/assets/ico_pin1.png);width: 20px;height: 28px;position: absolute;bottom: -5px;left: 28px;background-size: cover;}
+.center_img:before{content:'';background:url(/static/images/assets/ico_pin2.png);width: 20px;height: 28px;position: absolute;bottom: -5px;left: 28px;background-size: cover;}
+.bg-secondary2>.d-flex>span>.color-gray-nonimportant{color: white !important;}
+
+.DiveSite-tag:before {content: '';width: 0px;height: 0px;border-bottom: 16px solid #3f474c;border-left: 16px solid rgba(0,0,0,0);position: absolute;bottom: 0;right: 16px;}
+.DivePoint-tag:before {content: '';width: 0px;height: 0px;border-bottom: 16px solid #3cb5a0;border-left: 16px solid rgba(0,0,0,0);position: absolute;bottom: 0;right: 16px;}
+.DiveCenter-tag:before {content: '';width: 0px;height: 0px;border-bottom: 16px solid #4687c1;border-left: 16px solid rgba(0,0,0,0);position: absolute;bottom: 0;right: 16px;}
 </style>

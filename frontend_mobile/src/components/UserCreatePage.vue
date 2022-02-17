@@ -17,7 +17,7 @@
                     aria-valuemax="100">
             </div>
         </div>
-        <div class="splide single-slider slider-no-arrows" id="single-slider-1" data-splide='{"autoplay":false, "drag": false, "lazyLoad": "nearby", "preloadPages": 6, "pagination": false}'>
+        <div class="splide user-slider slider-no-arrows" id="single-slider-1" data-splide='{"autoplay":false, "drag": false, "lazyLoad": "nearby", "preloadPages": 6, "pagination": false}'>
             <div class="splide__track">
                 <div class="splide__list">
                     <div class="splide__slide">
@@ -120,8 +120,8 @@
                         </div>
 
                         <div class="row me-0 ms-0 mb-0" style="position: absolute;bottom: 0;width:100%;padding-left:20px;padding-right:20px;">
-                            <a href="#" class="col-6 slider-prev btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>
-                            <a id="btn_next2" href="#" class="col-6 slider-next btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;" disabled="disabled" v-on:click="next2()">다음</a>
+                            <a v-on:click="prev2()" class="col-6 slider-prev btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>
+                            <a id="btn_next2" href="#" class="col-6 slider-next btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3 gonext" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;" disabled="disabled" v-on:click="next2()">다음</a>
                         </div>
                         </div>
                     </div>
@@ -279,7 +279,7 @@
                         </div>
                         <div class="row me-0 ms-0 mb-0" style="position: absolute;bottom: 0;width:100%;padding-left:20px;padding-right:20px;">
                             <a href="#" class="col-6 slider-prev btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>
-                            <a id="btn_next3" href="#" class="col-6 slider-next btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;" v-on:click="next3()">{{ next3_word }}</a>
+                            <a id="btn_next3" href="#" class="col-6 slider-next btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3 gonext" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;" v-on:click="next3()">{{ next3_word }}</a>
                         </div>
                         </div>
                     </div>
@@ -393,7 +393,7 @@
                         </div>
                         <div class="row me-0 ms-0 mb-0" style="position: absolute;bottom: 0;width:100%;padding-left:20px;padding-right:20px;">
                             <a href="#" class="col-6 slider-prev btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>
-                            <a id="btn_next4" href="#" class="col-6 slider-next btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;" v-on:click="next4()">완료</a>
+                            <a id="btn_next4" href="#" class="col-6 slider-next btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3 gonext" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;" v-on:click="next4()">완료</a>
                         </div>
                         </div>
                     </div>
@@ -514,6 +514,7 @@
     </div>
     
     <div id="snackbar-inputerror" class="snackbar-toast color-white bg-red-dark" data-bs-delay="3000" data-bs-autohide="true"><i class="fa fa-times me-3"></i>모든 항목을 입력해주세요.</div>
+    <div id="snackbar-nicknameerror" class="snackbar-toast color-white bg-red-dark" data-bs-delay="3000" data-bs-autohide="true"><i class="fa fa-times me-3"></i>이미 사용중인 닉네임 입니다.</div>
 
 
   </div>
@@ -663,11 +664,48 @@ export default {
         $("#file-upload1-back").css("background-size", "cover");
         $("#file-upload1-img").hide();
       },
-      next1() {
-          $(".progress-bar").css("width", "50%");
-          setTimeout(function() {
-              $("#form2").focus();
-          },200);
+      async next1() {
+          const nickName = this.nickname;
+          var result = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                query Query($nickName: String!) {
+                    getUserByNickName(nickName: $nickName) {
+                        email
+                    }
+                }
+                `,
+                variables: {
+                    nickName: nickName
+                }
+
+            }
+        });
+        
+
+        if (result && result.data && result.data.data) {
+            if (result.data.data.getUserByNickName == null) {
+                $("#btn_next1").addClass("gonext");
+                $(".progress-bar").css("width", "50%");
+                setTimeout(function() {
+                    $("#form2").focus();
+                },200);
+            } else {
+                var toastData = 'snackbar-nicknameerror';
+                var notificationToast = document.getElementById(toastData);
+                var notificationToast = new bootstrap.Toast(notificationToast);
+                notificationToast.show();
+            }
+        }
+      },
+      prev2() {
+          $("#btn_next1").removeClass("gonext");
       },
       next2() {
           $(".progress-bar").css("width", "75%");
