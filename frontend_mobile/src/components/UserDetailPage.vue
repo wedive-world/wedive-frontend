@@ -306,7 +306,6 @@ export default {
         locationData: {},
         rating: 3,
         rateDescription: '나쁘지 않아요.',
-        review_detail: '',
         is_empty: false,
         dm_text: '',
         like_img: 'ico_heart',

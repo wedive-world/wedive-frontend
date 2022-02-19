@@ -542,6 +542,11 @@ export default {
           $(".progress-bar").css("width", "100%");
       },
       async next4() {
+        var preloader = document.getElementById('preloader')
+        if(preloader){
+            preloader.classList.remove('preloader-hide');
+            preloader.classList.add('opacity-50');
+        }
         var _s_date = this.selectedDate.year + "-" + (this.selectedDate.month<10?"0"+this.selectedDate.month:this.selectedDate.month) + "-" + (this.selectedDate.day<10?"0"+this.selectedDate.day:this.selectedDate.day) + " " + this.hour_show + ":00";
         const s_date = new Date(_s_date).toISOString();
         const buddy_title = this.buddy_title;
@@ -608,7 +613,15 @@ export default {
                 }
             }
         });
-        console.log(result);
+        try {
+            Android.vibrate()
+        } catch (e) {
+            
+        }
+        if(preloader){
+            preloader.classList.remove('opacity-50');
+            preloader.classList.add('preloader-hide');
+        }
         var diving_id = result.data.data.upsertDiving._id;
         $(".btn_next5").attr("href", ("/diving/" + diving_id));
       },

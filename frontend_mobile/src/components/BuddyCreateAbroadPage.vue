@@ -543,6 +543,11 @@ export default {
           $(".progress-bar").css("width", "100%");
       },
       async next4() {
+        var preloader = document.getElementById('preloader')
+        if(preloader){
+            preloader.classList.remove('preloader-hide');
+            preloader.classList.add('opacity-50');
+        }
         var _s_date = this.selectedRange.start.getFullYear() + "-" + ((this.selectedRange.start.getMonth()+1)<10?"0"+(this.selectedRange.start.getMonth()+1):(this.selectedRange.start.getMonth()+1)) + "-" + (this.selectedRange.start.getDate()<10?"0"+this.selectedRange.start.getDate():this.selectedRange.start.getDate()) + " " + this.hour_show + ":00";
         const s_date = new Date(_s_date).toISOString();
         const e_date = this.selectedRange.end.toISOString();
@@ -576,7 +581,7 @@ export default {
         if (this.check_diving_free) _type.push("freeDiving")
         const diving_type = _type;
         const num_recruit = parseInt($("#num_recruit").val());
-        console.log(num_recruit);
+        //console.log(num_recruit);
 
         var result = await axios({
             url: 'https://api.wedives.com/graphql',
@@ -611,7 +616,15 @@ export default {
                 }
             }
         });
-        console.log(result);
+        try {
+            Android.vibrate()
+        } catch (e) {
+            
+        }
+        if(preloader){
+            preloader.classList.remove('opacity-50');
+            preloader.classList.add('preloader-hide');
+        }
         var diving_id = result.data.data.upsertDiving._id;
         $(".btn_next5").attr("href", ("/diving/" + diving_id));
       },

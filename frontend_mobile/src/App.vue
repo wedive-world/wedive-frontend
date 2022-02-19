@@ -301,7 +301,42 @@ export default {
           this.openCreateSheet()
         break;
         case "book":
-          location.href="/book_create";
+          var menuData = "book-add";
+          document.getElementById(menuData).classList.add('menu-active');
+          document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
+
+          
+          var menu = document.getElementById(menuData);
+          var menuEffect = menu.getAttribute('data-menu-effect');
+          var menuLeft = menu.classList.contains('menu-box-left');
+          var menuRight = menu.classList.contains('menu-box-right');
+          var menuTop = menu.classList.contains('menu-box-top');
+          var menuBottom = menu.classList.contains('menu-box-bottom');
+          var menuWidth = menu.offsetWidth;
+          var menuHeight = menu.offsetHeight;
+          var menuTimeout = menu.getAttribute('data-menu-hide');
+
+          if(menuTimeout){
+              setTimeout(function(){
+                  document.getElementById(menuData).classList.remove('menu-active');
+                  document.getElementsByClassName('menu-hider')[0].classList.remove('menu-active');
+              },menuTimeout)
+          }
+
+          if(menuEffect === "menu-push"){
+              var menuWidth = document.getElementById(menuData).getAttribute('data-menu-width');
+              if(menuLeft){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX("+menuWidth+"px)"}}
+              if(menuRight){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+menuWidth+"px)"}}
+              if(menuBottom){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY(-"+menuHeight+"px)"}}
+              if(menuTop){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY("+menuHeight+"px)"}}
+          }
+          if(menuEffect === "menu-parallax"){
+              var menuWidth = document.getElementById(menuData).getAttribute('data-menu-width');
+              if(menuLeft){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX("+menuWidth/10+"px)"}}
+              if(menuRight){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+menuWidth/10+"px)"}}
+              if(menuBottom){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY(-"+menuHeight/5+"px)"}}
+              if(menuTop){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY("+menuHeight/5+"px)"}}
+          }
         break;
         case "chat":
           var menuData = "chat-add";

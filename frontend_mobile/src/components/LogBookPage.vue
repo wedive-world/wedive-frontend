@@ -154,6 +154,49 @@
     
     </div>
     </pull-to>
+
+
+
+    <div id="book-add" 
+         class="menu menu-box-bottom menu-box-bottom-full rounded-0" 
+         data-menu-width="cover"
+         data-menu-height="cover"
+         style="margin-bottom: 0;">
+        
+        <div class="card rounded-0 bg-2" data-card-height="50">
+            <div class="card-top p-2">
+                <a href="#" class="close-menu icon icon-s rounded-l bg-theme color-theme "><i class="fa fa-arrow-left"></i></a>
+                <a v-on:click="createBook" href="#" :class="'float-end icon icon-s rounded-l bg-theme me-3 mt-2 font-noto font-16 ' + ((isWritten==0) ? 'color-gray' : 'color-theme')">확인</a>
+                <a href="" class="header-title color font-noto font-16">로그 작성</a>
+            </div>
+        </div>
+        
+        <div class="card rounded-0">
+            <div class="content mt-0">
+                <div class="input-style no-borders no-icon mb-4" style="margin-right:10px;margin-left:10px;">
+                    <select id="formType" v-model="subjectType">
+                        <option value="default" disabled selected>주제를 선택해주세요</option>
+                        <option value="agenda">로그북</option>
+                        <option value="question">질문</option>
+                    </select>
+                    <span><i class="fa fa-chevron-down"></i></span>
+                    <i class="fa fa-check disabled valid color-green-dark"></i>
+                    <i class="fa fa-check disabled invalid color-red-dark"></i>
+                    <em></em>
+                </div>
+                <div class="input-style validate-field mt-3">
+                    <textarea class="wedive-textarea" placeholder="의견을 자유롭게 적어주세요." v-model="review_detail"></textarea>
+                </div>
+                <div id="div_upload_photo" class="row m-0 mb-3">
+                </div>
+                <div class="mb-3 text-center p-2" style="border: 1px solid #e9e9e9;">
+                    <input type="file" @change="addImage" id="" accept=".jpg, .png" style="text-indent: -999px;outline: none;width: 100%;height: 45px;color: rgba(0, 0, 0, 0) !important;">
+                    <div class="upload-file-text" style="color: black;margin-top:-44px !important;margin-bottom:12px;"><img class="me-1" src="/static/images/assets/icon_camera.png" height="18"/>첨부하기</div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
     
   </div>
 </template>
@@ -166,6 +209,135 @@ export default {
     PullTo,
   },
   methods: {
+      addImage({ target: { files = [] } }) {
+        if (!files.length) {
+          return;
+        }
+        file_photo.push(files[0]);
+        $("#div_upload_photo").append('<div class="col-3 p-1 square " style="position: relative;"><div class="square_inner border-08" style="background:url('+URL.createObjectURL(files[0])+');background-size: cover;"><div class="square_inner_close" onclick="abc('+files[0].lastModified+',this);"></div></div></div>');
+        if (file_photo.length%4 == 1) {
+            var square_height = $("#div_upload_photo .square").height();
+            $("#menu-review").css("height", 470 + (square_height*(parseInt(file_photo.length/4)+1)) + "px");
+        }
+      },
+      async createBook() {
+            var preloader = document.getElementById('preloader')
+            if(preloader){
+                preloader.classList.remove('preloader-hide');
+                preloader.classList.add('opacity-50');
+            }
+            var _id_list = new Array();
+            for (var i=0; i<file_photo.length; i++) {
+                var mutation = gql`
+                    mutation UploadImageMutation($uploadImageFile: Upload!) {
+                        uploadImage(file: $uploadImageFile) {
+                            _id
+                            name
+                            mimeType
+                            encoding
+                            thumbnailUrl
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `
+                var client = new GraphQLClient('https://api.wedives.com/graphql',
+                {
+                    headers: {
+                        countrycode: 'ko',
+                        idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                    }
+                })
+
+                var result_img = await client.request(mutation, {uploadImageFile:file_photo[i],});
+                
+                var updateMutation = gql`
+                    mutation Mutation($input: UpdateImageInput!) {
+                        updateImage(input: $input) {
+                            _id
+                            name
+                            description
+                            reference
+                            uploaderId
+                            mimeType
+                            encoding
+                            fileSize
+                            thumbnailUrl
+                        }
+                    }
+                `;
+                var result_upload = await client.request(updateMutation, {input: {"_id": result_img.uploadImage._id,"name": result_img.name,"description": "reviewImage","reference": null}});
+                _id_list.push(result_img.uploadImage._id);
+            }
+            var _input = {type: this.subjectType, contnet: this.review_detail, images: _id_list};
+            const ipt = _input;
+
+            
+          var _input = {type: "va"}
+          var result = await axios({
+                url: 'https://api.wedives.com/graphql',
+                method: 'post',
+                headers: {
+                    countrycode: 'ko',
+                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                },
+                data: {
+                    query: `
+                        mutation Mutation($input: AgendaInput) {
+                            upsertAgenda(input: $input) {
+                                _id
+                                type
+                                author {
+                                uid
+                                _id
+                                nickName
+                                birthAge
+                                gender
+                                profileImages {
+                                    thumbnailUrl
+                                }
+                                }
+                                languageCode
+                                title
+                                content
+                                createdAt
+                                updatedAt
+                                images {
+                                _id
+                                thumbnailUrl
+                                }
+                                reviews {
+                                _id
+                                content
+                                createdAt
+                                author {
+                                    _id
+                                    uid
+                                    nickName
+                                    gender
+                                    profileImages {
+                                    thumbnailUrl
+                                    }
+                                }
+                                }
+                            }
+                        }
+                    `,
+                    variables: {
+                        "input": ipt
+                    }
+                }
+            });
+            try {
+                Android.vibrate()
+            } catch (e) {
+                
+            }
+            if(preloader){
+                preloader.classList.remove('opacity-50');
+                preloader.classList.add('preloader-hide');
+            }
+      },
       async refresh(loaded) {
         if ($(document).scrollTop() == 0) {
             setTimeout(function() {
@@ -216,7 +388,11 @@ export default {
   },
   data () {
     return {
+        isWritten: 0,
         scrollTop: 0,
+        review_detail: '',
+        file_photo: [],
+        subjectType: 'default',
         TOP_DEFAULT_CONFIG: {
             pullText: '당겨서 새로고침', // The text is displayed when you pull down
             triggerText: '업데이트', // The text that appears when the trigger distance is pulled down
@@ -262,4 +438,6 @@ export default {
 .fadeout {animation-name: fadeout50;animation-duration: 1s;animation-iteration-count:1;}
 @keyframes loading{from {transform: rotate(0deg);}to {transform: rotate(360deg);}}
 @keyframes fadeout50 {from {opacity: 0.5;}to {opacity: 0;}}
+
+.wedive-textarea {min-height: 150px;padding-left: 10px;padding-right: 10px;}
 </style>
