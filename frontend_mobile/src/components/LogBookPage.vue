@@ -201,12 +201,23 @@
   </div>
 </template>
 <script>
+import gql from 'graphql-tag'
 import PullTo from 'vue-pull-to'
+const axios = require("axios")
 
 export default {
   name: 'HelloWorld',
   components: {
     PullTo,
+  },
+  watch: {
+      review_detail: function(newVal, oldVal) {
+          if (newVal != '') {
+              this.isWritten = 1;
+          } else {
+              this.isWritten = 0;
+          }
+      },
   },
   methods: {
       addImage({ target: { files = [] } }) {
@@ -269,7 +280,7 @@ export default {
                 var result_upload = await client.request(updateMutation, {input: {"_id": result_img.uploadImage._id,"name": result_img.name,"description": "reviewImage","reference": null}});
                 _id_list.push(result_img.uploadImage._id);
             }
-            var _input = {type: this.subjectType, contnet: this.review_detail, images: _id_list};
+            var _input = {type: this.subjectType, content: this.review_detail, images: _id_list};
             const ipt = _input;
 
             
@@ -337,6 +348,8 @@ export default {
                 preloader.classList.remove('opacity-50');
                 preloader.classList.add('preloader-hide');
             }
+            const activeMenu = document.querySelectorAll('.menu-active');
+            for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
       },
       async refresh(loaded) {
         if ($(document).scrollTop() == 0) {

@@ -10,10 +10,18 @@ var lightbox = GLightbox({
 });
 lightbox.on('open', () => {
     // Do something
-    window.localStorage.isShowImage="1";
+    try {
+        Android.setNeedToGoBack(true);
+    } catch(e) {
+
+    }
 });
 
 lightbox.once('close', () => {
     // Do something just one time
-    window.localStorage.isShowImage="0";
+    try {
+        Android.setNeedToGoBack(false);
+    } catch(e) {
+
+    }
 });

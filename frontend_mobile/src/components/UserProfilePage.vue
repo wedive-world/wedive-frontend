@@ -601,8 +601,8 @@ export default {
         },
         data: {
             query: `
-            query GetUserById($id: ID!) {
-                getUserById(_id: $id) {
+            query GetCurrentUser {
+                getCurrentUser {
                     _id
                     uid
                     authProvider
@@ -632,17 +632,14 @@ export default {
                     scubaLicenseType
                 }
             }
-            `,
-            variables: {
-                id: localStorage.userId
-            }
+            `
 
         }
     });
     
 
     var ret = null;
-    if (result && result.data && result.data.data && result.data.data.getUserById) {ret = result.data.data.getUserById;}
+    if (result && result.data && result.data.data && result.data.data.getCurrentUser) {ret = result.data.data.getCurrentUser;}
     
     next(vm => {vm.setData(ret)});
   },

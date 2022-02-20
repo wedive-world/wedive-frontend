@@ -365,15 +365,15 @@
             </div>
             <div class="font-600">대화 상대</div>
             <div v-if="getJoinedRoomList.filter(x=>x._id==roomId).length > 0">
-                <div v-for="user in getJoinedRoomList.filter(x=>x._id==roomId)[0].chatUsers" class="pt-1 pb-1">
+                <div v-for="(user, index) in getJoinedRoomList.filter(x=>x._id==roomId)[0].chatUsers" class="pt-1 pb-1">
                     <svg class="svg-profile user-img user-img-small" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
                         <defs>
-                        <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
-                        <clipPath id="clipSquircle">
-                            <use xlink:href="#shapeSquircle"/>
+                        <path :id="'shapeSquircle'+index" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                        <clipPath :id="'clipSquircle'+index">
+                            <use :xlink:href="'#shapeSquircle'+index"/>
                         </clipPath>
                         </defs>
-                        <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(user.avatarOrigin)?user.avatarOrigin:'/static/images/assets/user_empty.png'"/>
+                        <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" :clip-path="'url(#clipSquircle'+index+')'" :xlink:href="(user.avatarOrigin)?user.avatarOrigin:'/static/images/assets/user_empty.png'"/>
                     </svg>
                     <div class="ms-2 d-inline-block v-align-top">
                         <span v-if="user.uid == uid" style="display: inline-block;padding: 1px 6px;background: #e1e2e3;border-radius: 6px;">나</span>
@@ -382,21 +382,21 @@
                 </div>
             </div>
 
-
             <div v-on:click="invite" class="pt-1 pb-1">
                 <svg class="svg-profile user-img user-img-small" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
                     <defs>
-                    <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
-                    <clipPath id="clipSquircle">
-                        <use xlink:href="#shapeSquircle"/>
+                    <path id="shapeSquircle00" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                    <clipPath id="clipSquircle00">
+                        <use xlink:href="#shapeSquircle00"/>
                     </clipPath>
                     </defs>
-                    <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="/static/images/assets/ico_plus.png"/>
+                    <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle00)" xlink:href="/static/images/assets/ico_plus.png"/>
                 </svg>
                 <div class="ms-2 d-inline-block v-align-top">
                     <h5 class="font-15 font-600 mb-0 mt-2">대화상대 초대</h5>
                 </div>
             </div>
+
         </div>
 
         <div class="ps-1 pe-1" style="width: 100%; height:40px;background: #00000015;border-top: 1px solid lightgray;position: absolute;bottom: 52px;">
@@ -942,26 +942,49 @@ export default {
         })
     },
     leaveRoom() {
-        this.$apollo.mutate({
-            // Query
-            mutation: gql`mutation LeaveRoom($roomId: String!) {
-                leaveRoom(roomId: $roomId) {
-                    success
-                }
-            }`,
-            // Parameters
-            variables: {
-                roomId: this.roomId
-            },
-        }).then((data) => {
-            // Result
-            //location.href="/chat_home"
-            //}
-        }).catch((error) => {
-            // Error
-            console.error(error)
-            // We restore the initial user input
-        })
+        if (this.roomInfo.owner.uid == this.uid) {
+            this.$apollo.mutate({
+                // Query
+                mutation: gql`mutation DeleteRoom($roomId: String!) {
+                    deleteRoom(roomId: $roomId) {
+                        success
+                    }
+                }`,
+                // Parameters
+                variables: {
+                    roomId: this.roomId
+                },
+            }).then((data) => {
+                // Result
+                location.href="/chat_home"
+                //}
+            }).catch((error) => {
+                // Error)
+                console.error(error)
+                // We restore the initial user input
+            })
+        } else {
+            this.$apollo.mutate({
+                // Query
+                mutation: gql`mutation LeaveRoom($roomId: String!) {
+                    leaveRoom(roomId: $roomId) {
+                        success
+                    }
+                }`,
+                // Parameters
+                variables: {
+                    roomId: this.roomId
+                },
+            }).then((data) => {
+                // Result
+                location.href="/chat_home"
+                //}
+            }).catch((error) => {
+                // Error
+                console.error(error)
+                // We restore the initial user input
+            })
+        }
     },
     inviteChat() {
         for (var i=0; i<this.chatSelectedList.length; i++) {
