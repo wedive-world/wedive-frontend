@@ -85,7 +85,7 @@ export default new Router({
       component: BuddyHomePage
     },
     {
-      path: '/user',
+      path: '/user/my',
       name: 'UserProfilePage',
       component: UserProfilePage
     },
@@ -187,7 +187,7 @@ export default new Router({
       component: ChatDetailPage
     },
     {
-      path: '/chat',
+      path: '/chat/create',
       name: 'ChatDummyPage',
       component: ChatDummyPage
     },

@@ -427,7 +427,7 @@ export default {
                 chatUids.push(concierge_uid);
                 localStorage.chatUids = JSON.stringify(chatUids);
                 localStorage.chatName = "WeDive";
-                location.href = '/chat'
+                location.href = '/chat/create'
             }
         } else { // 로그인
             this.login();

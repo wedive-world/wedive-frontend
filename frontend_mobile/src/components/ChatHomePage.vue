@@ -372,7 +372,7 @@ export default {
                 chatUids.push(this.chatSelectedList[0].uid);
                 localStorage.chatUids = JSON.stringify(chatUids);
                 localStorage.chatName = this.chatSelectedList[0].nickName;
-                location.href = '/chat'
+                location.href = '/chat/create'
             }
         }
     },

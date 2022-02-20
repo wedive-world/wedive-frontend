@@ -1250,7 +1250,7 @@ export default {
                 chatUids.push(user.uid);
                 localStorage.chatUids = JSON.stringify(chatUids);
                 localStorage.chatName = user.nickName;
-                location.href = '/chat'
+                location.href = '/chat/create'
             }
       }
   }
