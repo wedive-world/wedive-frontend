@@ -368,21 +368,22 @@ export default {
         this.path = d3.geoPath()
             .projection(this.projection),
         this.g = this.svg.append('g')
+
         this.g.append('image')
             .attr('xlink:href', this.background)
             .append('path')
             .attr('d', this.path)
-
         this.request()
 
       },
       request() {
+            console.log(this.userData.divingHistoryLocations);
             const app = this,
                 circles = this.g.selectAll('circle')
                     .data(this.userData.divingHistoryLocations)
                     .enter()
                     .append('a')
-                    .attr('xlink:href', d => `https://www.google.com/search?q=${d.city}`)
+                    .attr('xlink:href', d => `https://www.google.com/search?q=${d.country}`)
                     .append('circle')
                     .attr('cx', d => this.projection([d.lon, d.lat])[0])
                     .attr('cy', d => this.projection([d.lon, d.lat])[1])
@@ -529,9 +530,10 @@ export default {
             this.userData.divingHistoryLocations.forEach(x => {if (x.length > 1) temp_arr.push(x[0] + "/" + x[1])});
             var set = new Set(temp_arr);
             var uniqueArr = [...set];
-            var temp_arr2 = new Array();
+            var temp_arr2 = new Array(); 
             
-            uniqueArr.forEach(x => {var tmp = x.split("/");temp_arr2.push({ 'country': '', 'lat': tmp[1], 'lon': tmp[0] })});
+            
+            uniqueArr.forEach(x => {var tmp = x.split("/");var lat = (-934.98706532366 + (53.49 * parseFloat(tmp[0])))/56.143819846822;var lng = (6903.1396614152 - (106.225 * parseFloat(tmp[1])))/97.194178186786;temp_arr2.push({ 'country': '', 'lon': lng.toFixed(5), 'lat': lat.toFixed(5) })});
             this.userData.divingHistoryLocations = temp_arr2;
           }
           setTimeout(function() {

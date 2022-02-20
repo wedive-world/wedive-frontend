@@ -35,7 +35,7 @@ import TrainingPage from '@/components/TrainingPage'
 import TrainingListPage from '@/components/TrainingListPage'
 import TrainingSettingPage from '@/components/TrainingSettingPage'
 import TrainingStartPage from '@/components/TrainingStartPage'
-import LogBookPage from '@/components/LogBookPage'
+import ForumPage from '@/components/ForumPage'
 import OhterPage from '@/components/OhterPage'
 import NotificationPage from '@/components/NotificationPage'
 import MyDivingPage from '@/components/MyDivingPage'
@@ -227,9 +227,9 @@ export default new Router({
       component: TrainingStartPage
     },
     {
-      path: '/book_home',
-      name: 'LogBookPage',
-      component: LogBookPage
+      path: '/forum_home',
+      name: 'ForumPage',
+      component: ForumPage
     },
     {
       path: '/other_home',

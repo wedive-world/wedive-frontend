@@ -23,7 +23,8 @@ import VueApollo from 'vue-apollo'
 
 var _apolloClient = null;
 const GRAPHQL_URL = process.env.VUE_APP_API_PATH || 'https://chat.wedives.com/graphql'
-if (window.location.pathname.indexOf('/chat/') == 0 || window.location.pathname.indexOf('/diving/') == 0) {
+const GRAPHQL_API_URL = process.env.VUE_APP_API_PATH || 'https://api.wedives.com/graphql'
+if (window.location.pathname.indexOf('/chat/') == 0) {
   const httpLink = new HttpLink({
     // You should use an absolute URL here
     uri: GRAPHQL_URL,
@@ -64,7 +65,7 @@ if (window.location.pathname.indexOf('/chat/') == 0 || window.location.pathname.
     cache: new InMemoryCache(),
     connectToDevTools: true,
   })
-} else if (window.location.pathname.indexOf('/chat') == 0) {
+} else if (window.location.pathname.indexOf('/chat') == 0 || window.location.pathname.indexOf('/diving/') == 0) {
   const httpLink = new HttpLink({
     // You should use an absolute URL here
     uri: GRAPHQL_URL,
@@ -79,8 +80,21 @@ if (window.location.pathname.indexOf('/chat/') == 0 || window.location.pathname.
     link: httpLink,
     cache: new InMemoryCache(),
   })
-
+} else if (window.location.pathname.indexOf('/site_list') == 0) {
+  const httpLink = new HttpLink({
+    // You should use an absolute URL here
+    uri: GRAPHQL_API_URL,
+    headers: {
+      countryCode: "ko",
+      idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+    },
+  })
   
+  // Create the apollo client
+  _apolloClient = new ApolloClient({
+    link: httpLink,
+    cache: new InMemoryCache(),
+  })
 }
 const apolloClient = _apolloClient
 Vue.use(VueApollo)

@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <div data-menu-active="nav-book"></div>
+    <div data-menu-active="nav-forum"></div>
 
     <pull-to :top-load-method="refresh" @top-state-change="stateChange" :top-config="TOP_DEFAULT_CONFIG" :is-bottom-bounce="false" :is-top-bounce="scrollTop == 0">
     <template slot="top-block" slot-scope="props">
@@ -156,8 +156,7 @@
     </pull-to>
 
 
-
-    <div id="book-add" 
+    <div id="forum-add" 
          class="menu menu-box-bottom menu-box-bottom-full rounded-0" 
          data-menu-width="cover"
          data-menu-height="cover"
@@ -166,7 +165,33 @@
         <div class="card rounded-0 bg-2" data-card-height="50">
             <div class="card-top p-2">
                 <a href="#" class="close-menu icon icon-s rounded-l bg-theme color-theme "><i class="fa fa-arrow-left"></i></a>
-                <a v-on:click="createBook" href="#" :class="'float-end icon icon-s rounded-l bg-theme me-3 mt-2 font-noto font-16 ' + ((isWritten==0) ? 'color-gray' : 'color-theme')">확인</a>
+                <a v-on:click="createForum" href="#" :class="'float-end icon icon-s rounded-l bg-theme me-3 mt-2 font-noto font-16 ' + ((isForumWritten==0) ? 'color-gray' : 'color-theme')">확인</a>
+                <a href="" class="header-title color font-noto font-16">신규 포럼 생성</a>
+            </div>
+        </div>
+        
+        <div class="card rounded-0">
+            <div class="content mt-0">
+                <div class="input-style no-borders no-icon mb-4" style="margin-right:10px;margin-left:10px;">
+                    <input class="form-control" placeholder="새로운 포럼 제목 (동호회 제목)" v-model="forum_add_title">
+                </div>
+                <div class="input-style validate-field mt-3">
+                    <textarea class="wedive-textarea" placeholder="어떤 포럼인지 설명을 적어주세요." v-model="forum_add_description"></textarea>
+                </div>
+            </div>
+        </div>    
+    </div>
+
+    <div id="agenda-add" 
+         class="menu menu-box-bottom menu-box-bottom-full rounded-0" 
+         data-menu-width="cover"
+         data-menu-height="cover"
+         style="margin-bottom: 0;">
+        
+        <div class="card rounded-0 bg-2" data-card-height="50">
+            <div class="card-top p-2">
+                <a href="#" class="close-menu icon icon-s rounded-l bg-theme color-theme "><i class="fa fa-arrow-left"></i></a>
+                <a v-on:click="createAgenda" href="#" :class="'float-end icon icon-s rounded-l bg-theme me-3 mt-2 font-noto font-16 ' + ((isWritten==0) ? 'color-gray' : 'color-theme')">확인</a>
                 <a href="" class="header-title color font-noto font-16">로그 작성</a>
             </div>
         </div>
@@ -218,6 +243,20 @@ export default {
               this.isWritten = 0;
           }
       },
+      forum_add_title: function(newVal, oldVal) {
+          if (this.forum_add_title != '' && this.forum_add_description != '') {
+              this.isForumWritten = 1;
+          } else {
+              this.isForumWritten = 0;
+          }
+      },
+      forum_add_description: function(newVal, oldVal) {
+          if (this.forum_add_title != '' && this.forum_add_description != '') {
+              this.isForumWritten = 1;
+          } else {
+              this.isForumWritten = 0;
+          }
+      },
   },
   methods: {
       addImage({ target: { files = [] } }) {
@@ -231,7 +270,49 @@ export default {
             $("#menu-review").css("height", 470 + (square_height*(parseInt(file_photo.length/4)+1)) + "px");
         }
       },
-      async createBook() {
+      async createForum() {
+            var preloader = document.getElementById('preloader')
+            if(preloader){
+                preloader.classList.remove('preloader-hide');
+                preloader.classList.add('opacity-50');
+            }
+
+            var ipt = {name: this.forum_add_title, description: this.forum_add_description}
+            var result = await axios({
+                url: 'https://api.wedives.com/graphql',
+                method: 'post',
+                headers: {
+                    countrycode: 'ko',
+                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                },
+                data: {
+                    query: `
+                        mutation Mutation($input: ForumInput) {
+                            upsertForum(input: $input) {
+                                _id
+                                name
+                                description
+                            }
+                        }
+                    `,
+                    variables: {
+                        "input": ipt
+                    }
+                }
+            });
+            try {
+                Android.vibrate()
+            } catch (e) {
+                
+            }
+            if(preloader){
+                preloader.classList.remove('opacity-50');
+                preloader.classList.add('preloader-hide');
+            }
+            const activeMenu = document.querySelectorAll('.menu-active');
+            for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
+      },
+      async createAgenda() {
             var preloader = document.getElementById('preloader')
             if(preloader){
                 preloader.classList.remove('preloader-hide');
@@ -283,8 +364,6 @@ export default {
             var _input = {type: this.subjectType, content: this.review_detail, images: _id_list};
             const ipt = _input;
 
-            
-          var _input = {type: "va"}
           var result = await axios({
                 url: 'https://api.wedives.com/graphql',
                 method: 'post',
@@ -402,10 +481,13 @@ export default {
   data () {
     return {
         isWritten: 0,
+        isForumWritten: 0,
         scrollTop: 0,
         review_detail: '',
         file_photo: [],
         subjectType: 'default',
+        forum_add_title: '',
+        forum_add_description: '',
         TOP_DEFAULT_CONFIG: {
             pullText: '당겨서 새로고침', // The text is displayed when you pull down
             triggerText: '업데이트', // The text that appears when the trigger distance is pulled down

@@ -17,7 +17,7 @@
           <div id="footer-bar" class="footer-bar" style="border-radius: 30px 30px 0px 0px;">
             <a href="/" id="nav-buddy"><div class="menu-ico menu-ico1"></div><span>버디</span></a>
             <a v-on:click="moveSite()" id="nav-site"><div class="menu-ico menu-ico2"></div><span>장소</span></a>
-            <a href="/book_home" id="nav-book"><div class="menu-ico menu-ico3"></div><span>로그북</span></a>
+            <a href="/forum_home" id="nav-forum"><div class="menu-ico menu-ico3"></div><span>포럼</span></a>
             <a href="/chat_home" id="nav-chat"><div class="menu-ico menu-ico4"></div><span>채팅</span></a>
             <a href="/other_home" id="nav-other"><div class="menu-ico menu-ico5"></div><span>더보기</span></a>
           </div>
@@ -31,9 +31,9 @@
             <a href="/notification" id="wedive-noti" :class="'page-title-icon font-18 hide' + (notiData && notiData.length > 0 && notiData[0].read != null && notiData[0].read == false ? ' has-notification' : '')" style="color:#858585 !important;"><img src="/static/images/assets/icon_notification.png" width="28"></a>
             <a v-if="pathname == '/'" v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_buddy_new.png" width="28"></a>
             <a v-else-if="pathname == '/chat_home'" v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_chat_new.png" width="26"></a>
-            <a v-else-if="pathname == '/book_home'" v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_book_new.png" width="24"></a>
+            <a v-else-if="pathname == '/forum_home'" v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_book_new.png" width="24"></a>
             <a v-else v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_write.png" width="24"></a>
-            <a v-on:click="addItem()" id="wedive-group" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_setting_fill.png" width="26"></a>
+            <a v-on:click="settingForum()" id="wedive-group" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_setting_fill.png" width="26"></a>
             <a v-if="$route.path=='/site_list'" href="/site_home" class="page-title-icon font-18" style="color: #858585;margin-right: 13.3333333333px;"><img src="/static/images/assets/icon_map_fill.png" width="26"></a>
             <a v-on:click="searchItem()" id="wedive-search" class="page-title-icon font-18 hide" style="color:#858585 !important;"><img src="/static/images/assets/icon_search_fill.png" width="28"></a>
             <a v-on:click="shareItem()" id="wedive-share" class="page-title-icon font-18 hide" style="color:#858585 !important;"><img src="/static/images/assets/icon_share_fill.png" height="24"/></a>
@@ -167,7 +167,7 @@ export default {
         $("#wedive-add").removeClass("hide");
         $("#wedive-search").removeClass("hide");
         $("#wedive-noti").removeClass("hide");
-      } else if (item == '/book_home') {
+      } else if (item == '/forum_home') {
         $("#wedive-add").removeClass("hide");
         $("#wedive-group").removeClass("hide");
         $("#wedive-noti").removeClass("hide");
@@ -294,14 +294,52 @@ export default {
     moveSite() {
       location.href = localStorage.perferedSite;
     },
+    settingForum() {
+      var menuData = "forum-add";
+      document.getElementById(menuData).classList.add('menu-active');
+      document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
+
+      
+      var menu = document.getElementById(menuData);
+      var menuEffect = menu.getAttribute('data-menu-effect');
+      var menuLeft = menu.classList.contains('menu-box-left');
+      var menuRight = menu.classList.contains('menu-box-right');
+      var menuTop = menu.classList.contains('menu-box-top');
+      var menuBottom = menu.classList.contains('menu-box-bottom');
+      var menuWidth = menu.offsetWidth;
+      var menuHeight = menu.offsetHeight;
+      var menuTimeout = menu.getAttribute('data-menu-hide');
+
+      if(menuTimeout){
+          setTimeout(function(){
+              document.getElementById(menuData).classList.remove('menu-active');
+              document.getElementsByClassName('menu-hider')[0].classList.remove('menu-active');
+          },menuTimeout)
+      }
+
+      if(menuEffect === "menu-push"){
+          var menuWidth = document.getElementById(menuData).getAttribute('data-menu-width');
+          if(menuLeft){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX("+menuWidth+"px)"}}
+          if(menuRight){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+menuWidth+"px)"}}
+          if(menuBottom){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY(-"+menuHeight+"px)"}}
+          if(menuTop){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY("+menuHeight+"px)"}}
+      }
+      if(menuEffect === "menu-parallax"){
+          var menuWidth = document.getElementById(menuData).getAttribute('data-menu-width');
+          if(menuLeft){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX("+menuWidth/10+"px)"}}
+          if(menuRight){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+menuWidth/10+"px)"}}
+          if(menuBottom){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY(-"+menuHeight/5+"px)"}}
+          if(menuTop){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY("+menuHeight/5+"px)"}}
+      }
+    },
     addItem() {
       var item = $("[data-menu-active]").data("menu-active").replace('nav-', '');
       switch(item) {
         case "buddy":
           this.openCreateSheet()
         break;
-        case "book":
-          var menuData = "book-add";
+        case "forum":
+          var menuData = "agenda-add";
           document.getElementById(menuData).classList.add('menu-active');
           document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
 

@@ -120,7 +120,7 @@
 
         <div class="card card-style">
             <div class="content mb-0 mt-3">
-                <h4 class="text-start pt-2 mb-0">지금 인기있는 사이트</h4>
+                <h4 class="text-start pt-2 mb-0">{{ getUserRecommendationsByTargetType[1] ? getUserRecommendationsByTargetType[1].title : '' }}</h4>
                 <p class="mb-3 color-gray-light-mid">52개의 사이트 인기 유지중</p>
                 <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
                 
@@ -285,6 +285,7 @@
   </div>
 </template>
 <script>
+import gql from 'graphql-tag'
 import PullTo from 'vue-pull-to'
 const axios = require("axios")
 
@@ -319,6 +320,7 @@ export default {
   },
   data () {
     return {
+        getUserRecommendationsByTargetType: [],
         prev_driection: true,
         lastScrollPosition: 0,
         center_list : [
@@ -351,6 +353,93 @@ export default {
         },
     }
   }, 
+  apollo: {
+    getUserRecommendationsByTargetType: {
+        query: gql`query Query($targetType: RecommendationTargetType) {
+            getUserRecommendationsByTargetType(targetType: $targetType) {
+                title
+                description
+                previewCount
+                cssStyle
+                type
+                targetType
+                previews {
+                ... on Diving {
+                    diveCenters {
+                    name
+                    uniqueName
+                    description
+                    adminScore
+                    backgroundImages {
+                        thumbnailUrl
+                    }
+                    }
+                    divePoints {
+                    name
+                    uniqueName
+                    description
+                    adminScore
+                    backgroundImages {
+                        thumbnailUrl
+                    }
+                    }
+                    diveSites {
+                    name
+                    uniqueName
+                    description
+                    adminScore
+                    backgroundImages {
+                        thumbnailUrl
+                    }
+                    }
+                }
+                ... on DiveSite {
+                    name
+                    uniqueName
+                    description
+                    adminScore
+                    backgroundImages {
+                    thumbnailUrl
+                    }
+                }
+                ... on DivePoint {
+                    name
+                    uniqueName
+                    description
+                    adminScore
+                    backgroundImages {
+                    thumbnailUrl
+                    }
+                }
+                ... on DiveCenter {
+                    name
+                    uniqueName
+                    description
+                    adminScore
+                    backgroundImages {
+                    thumbnailUrl
+                    }
+                }
+                ... on Instructor {
+                    _id
+                    gender
+                    profileImages {
+                    _id
+                    thumbnailUrl
+                    }
+                    careers
+                    introduction
+                }
+                }
+            }
+        }`,
+        variables () {
+            return {
+                targetType: "diveSite"
+            }
+        }
+    },
+  },
   components: {
     PullTo,
   },
@@ -468,7 +557,7 @@ export default {
                 chatUids.push(concierge_uid);
                 localStorage.chatUids = JSON.stringify(chatUids);
                 localStorage.chatName = "WeDive";
-                location.href = '/chat'
+                location.href = '/chat/create'
             }
         } else { // 로그인
             this.login();
