@@ -109,18 +109,19 @@
         
 
         <div v-for="recommendation in getUserRecommendationsByTargetType">
-            <div v-if="recommendation.previewCount == 0" class="card card-style" :style="recommendation.cssStyle">
+            <div v-if="recommendation.previewCount == 0" class="card card-style" :style="recommendation.cssStyle.includes('|') ? recommendation.cssStyle.split('|')[0] : recommendation.cssStyle">
                 <div class="content mb-0 mt-3 me-0">
                     <h4 class="text-start pt-2 mb-0 font-600" v-html="recommendation.title"></h4>
-                    <p class="mb-0 opacity-60 ls-n1">{{ recommendation.description }}</p>
+                    <p class="mb-0 opacity-60 ls-n1">{{ recommendation.description ? recommendation.description : '' }}</p>
                     <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
+                    <img v-if="recommendation.cssStyle.includes('|')" :class="recommendation.cssStyle.split('|')[2]" :src="'/static/images/assets/' + recommendation.cssStyle.split('|')[1]" style="padding-bottom:16px;max-height:200px;"/>
                 </div>
             </div>
 
             <div v-else class="card card-style">
                 <div class="content mb-0 mt-3">
                     <h4 class="text-start pt-2 mb-0">{{ recommendation.title }}</h4>
-                    <p class="mb-3 color-gray-light-mid">52개의 사이트 인기 유지중</p>
+                    <p class="mb-3 color-gray-light-mid">{{ recommendation.description ? recommendation.description : '' }}</p>
                     <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
                     
                     <div v-for="(site,index) in recommendation.previews.filter(x=>x.__typename == 'DiveSite')">
@@ -267,7 +268,6 @@
         </div>
         -->
         
-        
         <div data-menu-load="/static/menu-footer.html"></div>
     </div>
     </pull-to>
@@ -317,23 +317,6 @@ export default {
         getUserRecommendationsByTargetType: [],
         prev_driection: true,
         lastScrollPosition: 0,
-        center_list : [
-            {title: "버블탱크 스쿠바다이빙", desc: "제주 남부에 위치한 PADI 5star 다이빙센터", star: 3.8, price_index: 2, feature: "덕다이빙, 케이브, 난파선, 드리프트", img: '/static/images/shop1/diving/test1.jpg', position: {lat: 33.24134444312815, lng: 126.56484940647604}},
-            {title: "다이브 투게더리조트", desc: "한줄설명1", star: 4.8, price_index: 2, feature: "덕다이빙, 케이브", img: '/static/images/shop1/diving/test2.jpg', position: {lat: 33.241633952501715, lng: 126.56456092676112}},
-            {title: "태평양 다이빙스쿨", desc: "블라블라", star: 3.1, price_index: 3, feature: "난파선, 드리프트", img: '/static/images/shop1/diving/test3.jpg', position: {lat: 33.24030993345755, lng: 126.56472966827262}},
-            {title: "쿨다이브", desc: "뭐라적지", star: 2.8, price_index: 2, feature: "드리프트", img: '/static/images/shop1/diving/test4.jpg', position: {lat: 33.241266401158086, lng: 126.56278906254684}},
-            {title: "스플래시 리조트", desc: "이곳에 설명이", star: 4.2, price_index: 4, feature: "난파선, 드리프트", img: '/static/images/shop1/diving/test5.jpg', position: {lat: 33.24245948959435, lng: 126.5633415608148}},
-            {title: "제주 블루샤크다이빙", desc: "ㅁㄴㅇㄹㄴㄷㅁㅈㄷㄻㄴㄷㄹㄷㅁㄴㄻㄴㄷㄻㄴㄷㄻㄴㄷㄹ", star: 3.9, price_index: 2, feature: "난파선", img: '/static/images/shop1/diving/test6.jpg', position: {lat: 33.24380026488202, lng: 126.56288927674295}},
-            {title: "잠수타기 다이브클럽", desc: "ㅁㄷㄴㄻㄴㄷㄻㄴㄷㄻㄴㄷㄻㄴㄷㄻㄴㄹㄷㅁㄷㄴㄻㄷㄴㄻㄴㄻㄴㄷㄹㄷㅁㄴㄹ", star: 4.1, price_index: 2, feature: "난파선, 드리프트", img: '/static/images/shop1/diving/test7.jpg', position: {lat: 33.24194725508795, lng: 126.5616725869943}},
-            {title: "홀리데이 다이빙 코리아", desc: "히히", star: 4.2, price_index: 3, feature: "덕다이빙, 케이브, 난파선, 드리프트", img: '/static/images/shop1/diving/test8.jpg', position: {lat: 33.24088391439924, lng: 126.5628795809329}},
-            {title: "천지연40", desc: "헬로", star: 4.3, price_index: 2, feature: "난파선, 드리프트", img: '/static/images/shop1/diving/test9.jpg', position: {lat: 33.242485636047576, lng: 126.5623109526933}},
-            {title: "언더더씨 스쿠바다이빙", desc: "방가워", star: 4.7, price_index: 2, feature: "덕다이빙, 케이브", img: '/static/images/shop1/diving/test10.jpg', position: {lat: 33.244246055136834, lng: 126.5671937429616}}
-        ],
-        site_list: [
-            {title: "고성 사이트", "desc": "대한민국 3대 포인트가 위치한 사이트로 강원도 지역에서 가장 유명한 사이트 입니다. 특히 수중 금강산이라고 불리는 낙산대기 포인트와 개복치를 볼 수 있는 마이산 포인트 등이 유명합니다.", "img": "http://www.outdoornews.co.kr/news/photo/201402/13021_40743_1032.jpg", star: 3.8},
-            {title: "속초 사이트", desc: "일반적으로 모래바닥으로 구성된 동해안과는 다르게 속초의 바다는 암석형태가 많이 있습니다. 덕분에 이곳에서 다이빙을 한다면 다양한 볼거리를 마주할 수 있습니다.", img: "https://i.ytimg.com/vi/xSJ4YSt3SRI/maxresdefault.jpg", star: 3.9},
-            {title: "강릉 사이트", desc: "대한민국 최대 규모의 난파선 다이빙 포인트인 스텔라 난파선 포인트가 위치한 사이트 입니다. 더불어 강원도 3대 미항으로 꼽히는 삼곡항이 있는 등 아름다운 다이빙 사이트 입니다.", img: "http://www.uwmagazine.co.kr/news/photo/202003/368_1869_1729.jpg", star: 3.9},
-        ],
         scrollTop: 0,
         TOP_DEFAULT_CONFIG: {
             pullText: '당겨서 새로고침', // The text is displayed when you pull down
@@ -594,4 +577,5 @@ export default {
 .fadeout {animation-name: fadeout50;animation-duration: 1s;animation-iteration-count:1;}
 @keyframes loading{from {transform: rotate(0deg);}to {transform: rotate(360deg);}}
 @keyframes fadeout50 {from {opacity: 0.5;}to {opacity: 0;}}
+
 </style>
