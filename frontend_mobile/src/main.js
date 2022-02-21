@@ -12,7 +12,7 @@ import { initializeApp } from 'firebase/app';
 // for apollo graphql
 //import ApolloClient, { InMemoryCache } from 'apollo-boost'
 import { ApolloClient } from 'apollo-client'
-import { InMemoryCache } from 'apollo-cache-inmemory'
+import { InMemoryCache, IntrospectionFragmentMatcher } from 'apollo-cache-inmemory'
 import { HttpLink } from 'apollo-link-http'
 import { split } from 'apollo-link'
 import { WebSocketLink } from 'apollo-link-ws'
@@ -93,7 +93,7 @@ if (window.location.pathname.indexOf('/chat/') == 0) {
   // Create the apollo client
   _apolloClient = new ApolloClient({
     link: httpLink,
-    cache: new InMemoryCache(),
+    cache: new InMemoryCache()
   })
 }
 const apolloClient = _apolloClient

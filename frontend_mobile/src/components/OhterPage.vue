@@ -12,7 +12,7 @@
                 <h2 class="font-18 font-600 mb-0">나의 설정</h2>
             </div>
         </div>
-        <a href="/user" class="position-relative" style="z-index:1;">
+        <a href="/user/my" class="position-relative" style="z-index:1;">
             <div class="content pb-0">
                 <h2 class="font-15 font-300 mb-0"><img src="/static/images/assets/other_user.png" height="30" /><span class="ms-2 vertical-m">내 프로필</span><i class="wedive-txt-all wedive_right" style="top:22px;"></i></h2>
             </div>

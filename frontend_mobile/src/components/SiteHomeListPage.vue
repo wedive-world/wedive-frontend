@@ -106,6 +106,51 @@
         </div>
 
         
+        
+
+        <div v-for="recommendation in getUserRecommendationsByTargetType">
+            <div v-if="recommendation.previewCount == 0" class="card card-style" :style="recommendation.cssStyle">
+                <div class="content mb-0 mt-3 me-0">
+                    <h4 class="text-start pt-2 mb-0 font-600" v-html="recommendation.title"></h4>
+                    <p class="mb-0 opacity-60 ls-n1">{{ recommendation.description }}</p>
+                    <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
+                </div>
+            </div>
+
+            <div v-else class="card card-style">
+                <div class="content mb-0 mt-3">
+                    <h4 class="text-start pt-2 mb-0">{{ recommendation.title }}</h4>
+                    <p class="mb-3 color-gray-light-mid">52개의 사이트 인기 유지중</p>
+                    <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
+                    
+                    <div v-for="(site,index) in recommendation.previews.filter(x=>x.__typename == 'DiveSite')">
+                        <div class="map-box">
+                            <a href="/site/gosung">
+                                <div class="bx">
+                                    <div class="justify-content-center mb-0 text-start">
+                                        <div class="" style="float: left;position: relative;width: 95px; height:95px;">
+                                            <img v-bind:src="(site.backgroundImages && site.backgroundImages.length > 0) ? site.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;">
+                                        </div>
+                                        <div class="" style="padding-left: 110px;">
+                                            <h4 class="font-15"> {{site.name}} </h4>
+                                            <p class="pb-0 mb-0 line-height-m nearby_desc"> {{site.description}} </p>
+                                            
+                                            <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
+                                                <span> {{(site.adminScore/20).toFixed(1)}} </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="divider mt-3 mb-3"></div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <!--
         <div class="card card-style " style="background-image: url(/static/images/assets/autumn_back.jpg);background-size: cover;background-repeat: no-repeat;">
             <div class="content mb-0 mt-3">
                 <h4 class="color-white text-start pt-1 mb-0">지금 떠나기 좋은 다이빙 포인트</h4>
@@ -117,76 +162,25 @@
             </div>
         </div>
 
-
         <div class="card card-style">
             <div class="content mb-0 mt-3">
-                <h4 class="text-start pt-2 mb-0">{{ getUserRecommendationsByTargetType[1] ? getUserRecommendationsByTargetType[1].title : '' }}</h4>
-                <p class="mb-3 color-gray-light-mid">52개의 사이트 인기 유지중</p>
+                <h4 class="text-start pt-2 mb-0">{{ getUserRecommendationsByTargetType[3].title}}</h4>
+                <p class="mb-3 color-gray-light-mid">{{ getUserRecommendationsByTargetType[3].description }}</p>
                 <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
                 
-                <div v-for="(site,index) in site_list">
+                <div v-for="(site,index) in getUserRecommendationsByTargetType[3].previews.filter(x=>x.__typename == 'DiveSite')">
                     <div class="map-box">
                         <a href="/site/gosung">
                             <div class="bx">
                                 <div class="justify-content-center mb-0 text-start">
                                     <div class="" style="float: left;position: relative;width: 95px; height:95px;">
-                                        <img v-bind:src="site.img" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;">
+                                        <img v-bind:src="(site.backgroundImages && site.backgroundImages.length > 0) ? site.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;">
                                     </div>
                                     <div class="" style="padding-left: 110px;">
-                                        <h4 class="font-15"> {{site.title}} </h4>
-                                        <p class="pb-0 mb-0 line-height-m nearby_desc"> {{site.desc}} </p>
-                                        
+                                        <h4 class="font-15"> {{site.name}} </h4>
+                                        <p class="pb-0 mb-0 line-height-m nearby_desc"> {{site.description}} </p>
                                         <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
-                                            <span> {{site.star}} </span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="divider mt-3 mb-3"></div>
-                </div>
-                
-            </div>
-        </div>
-
-
-        <div class="card card-style" style="background: url(/static/images/assets/camera1.gif);background-size:cover;height:270px;">
-            <div class="content mb-0 mt-3 me-0">
-                <h4 class="text-start pt-2 mb-0 font-600"><i class="fas fa-camera me-2"></i>사진 찍기 좋은 사이트</h4>
-                <p class="mb-0 opacity-60 ls-n1">#인생샷&nbsp;&nbsp;#인스타를 평정하다</p>
-                <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
-            </div>
-        </div>
-
-        <div class="card card-style" style="background: #badefc;">
-            <div class="content mb-0 mt-3">
-                <h4 class="text-start pt-2 mb-1 font-600"><i class="fas fa-plane me-2"></i>전세계 10대 포인트</h4>
-                <p class="mb-0">한눈에 살펴보는 10대 포인트</p>
-                <a class="font-12 wedive-txt-all">모두보기</a>
-                <img class="float-right mt-n3" src="/static/images/assets/earth.gif" style="margin-right: -20px;margin-bottom:-30px;margin-top:-60px !important;max-height:300px;"/>
-            </div>
-        </div>
-
-        <div class="card card-style">
-            <div class="content mb-0 mt-3">
-                <h4 class="text-start pt-2 mb-0">이색 다이빙 포인트</h4>
-                <p class="mb-3 color-gray-light-mid">난파선 등 171개의 이색 포인트</p>
-                <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
-                
-                <div v-for="(site,index) in site_list">
-                    <div class="map-box">
-                        <a href="/site/gosung">
-                            <div class="bx">
-                                <div class="justify-content-center mb-0 text-start">
-                                    <div class="" style="float: left;position: relative;width: 95px; height:95px;">
-                                        <img v-bind:src="site.img" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;">
-                                    </div>
-                                    <div class="" style="padding-left: 110px;">
-                                        <h4 class="font-15"> {{site.title}} </h4>
-                                        <p class="pb-0 mb-0 line-height-m nearby_desc"> {{site.desc}} </p>
-                                        <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
-                                            <span> {{site.star}} </span>
+                                            <span> {{ (site.adminScore/20).toFixed(1) }} </span>
                                         </p>
                                     </div>
                                 </div>
@@ -271,7 +265,7 @@
                 
             </div>
         </div>
-
+        -->
         
         
         <div data-menu-load="/static/menu-footer.html"></div>
@@ -437,7 +431,8 @@ export default {
             return {
                 targetType: "diveSite"
             }
-        }
+        },
+        fetchPolicy: 'no-cache'
     },
   },
   components: {
@@ -446,9 +441,9 @@ export default {
   methods: {
     async refresh(loaded) {
       if ($(document).scrollTop() == 0) {
-        setTimeout(function() {
-            loaded('done')
-        },1000);
+          await this.$apollo.queries.getUserRecommendationsByTargetType.refetch()
+          loaded('done')
+        
       } else {
         console.log("1")
         loaded('done')

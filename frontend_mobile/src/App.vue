@@ -579,7 +579,7 @@ export default {
 #nav-home > .menu-ico {background: url('/static/images/assets/menu0_off.png');}
 #nav-buddy > .menu-ico {background: url('/static/images/assets/menu1_off.png');}
 #nav-site > .menu-ico {background: url('/static/images/assets/menu2_off.png');}
-#nav-book > .menu-ico {background: url('/static/images/assets/menu3_off.png');}
+#nav-forum > .menu-ico {background: url('/static/images/assets/menu3_off.png');}
 #nav-chat  .menu-ico {background: url('/static/images/assets/menu4_off.png');}
 #nav-other  .menu-ico {background: url('/static/images/assets/menu5_off.png');}
 #nav-training > .menu-ico {background: url('/static/images/assets/menu5_off.png');}
