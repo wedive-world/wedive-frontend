@@ -42,83 +42,19 @@
             </div>
         </div>
 
-        <h4 class="text-start mb-2" style="margin-left: 10px;margin-right: 10px;">최근 살펴본 사이트</h4>
-        <div class="splide single-slider slider-no-arrows visible-slider slider-no-dots" id="single-slider-latest">
-            <div class="splide__track">
-                <div class="splide__list">
-                    <div class="splide__slide">
-                        <div class="card card-style card-nearby" style="background: url(http://www.outdoornews.co.kr/news/photo/201402/13021_40743_1032.jpg)" data-card-height="260">
-                            <div class="card-top px-3 py-3">
-                                <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-red-dark"></i></a>
-                            </div>
-                            <div class="card-bottom px-3 py-3">
-                                <h4 class="color-white font-18 font-600">고성 사이트</h4>
-                                <div class="divider bg-white opacity-20 mb-1"></div>
-                                <div class="d-flex">
-                                    <div class="align-self-center" style="max-width: 100%;">
-                                        <p class="font-11 opacity-70 font-600 color-white nearby_desc mb-0" style="max-width: 100%;">대한민국 3대 포인트가 위치한 사이트로 강원도 지역에서 가장 유명한 사이트 입니다. 특히 수중 금강산이라고 불리는 낙산대기 포인트와 개복치를 볼 수 있는 마이산 포인트 등이 유명합니다.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-overlay bg-gradient opacity-30"></div>
-                            <div class="card-overlay bg-gradient"></div>
-                        </div>
-                    </div>
-                    <div class="splide__slide">
-                        <div class="card card-style card-nearby" style="background: url(https://i.ytimg.com/vi/xSJ4YSt3SRI/maxresdefault.jpg)" data-card-height="260">
-                            <div class="card-top px-3 py-3">
-                                <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-gray-light"></i></a>
-                            </div>
-                            <div class="card-bottom px-3 py-3">
-                                <h4 class="color-white font-18 font-600">속초 사이트</h4>
-                                <div class="divider bg-white opacity-20 mb-1"></div>
-                                <div class="d-flex">
-                                    <div class="align-self-center" style="max-width: 100%;">
-                                        <p class="font-11 opacity-70 font-600 color-white nearby_desc mb-0" style="max-width: 100%;">일반적으로 모래바닥으로 구성된 동해안과는 다르게 속초의 바다는 암석형태가 많이 있습니다. 덕분에 이곳에서 다이빙을 한다면 다양한 볼거리를 마주할 수 있습니다.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-overlay bg-gradient opacity-30"></div>
-                            <div class="card-overlay bg-gradient"></div>
-                        </div>
-                    </div>
-                    <div class="splide__slide">
-                        <div class="card card-style card-nearby" style="background: url(http://www.uwmagazine.co.kr/news/photo/202003/368_1869_1729.jpg)" data-card-height="260">
-                            <div class="card-top px-3 py-3">
-                                <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-gray-light"></i></a>
-                            </div>
-                            <div class="card-bottom px-3 py-3">
-                                <h4 class="color-white font-18 font-600">강릉 사이트</h4>
-                                <div class="divider bg-white opacity-20 mb-1"></div>
-                                <div class="d-flex">
-                                    <div class="align-self-center" style="max-width: 100%;">
-                                        <p class="font-11 opacity-70 font-600 color-white nearby_desc mb-0" style="max-width: 100%;">대한민국 최대 규모의 난파선 다이빙 포인트인 스텔라 난파선 포인트가 위치한 사이트 입니다. 더불어 강원도 3대 미항으로 꼽히는 삼곡항이 있는 등 아름다운 다이빙 사이트 입니다.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-overlay bg-gradient opacity-30"></div>
-                            <div class="card-overlay bg-gradient"></div>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-
-        
         
 
         <div v-for="recommendation in getUserRecommendationsByTargetType">
             <div v-if="recommendation.previewCount == 0" class="card card-style" :style="recommendation.cssStyle.includes('|') ? recommendation.cssStyle.split('|')[0] : recommendation.cssStyle">
-                <div class="content mb-0 mt-3 me-0">
-                    <h4 class="text-start pt-2 mb-0 font-600" v-html="recommendation.title"></h4>
+                <div :class="'content mb-0 mt-3 me-0' + (recommendation.className ? ' ' + recommendation.className : '')">
+                    <h4 class="text-start mb-0 font-600" v-html="recommendation.title"></h4>
                     <p class="mb-0 opacity-60 ls-n1">{{ recommendation.description ? recommendation.description : '' }}</p>
-                    <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
+                    <a class="font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;filter:brightness(0)"></i></a>
                     <img v-if="recommendation.cssStyle.includes('|')" :class="recommendation.cssStyle.split('|')[2]" :src="'/static/images/assets/' + recommendation.cssStyle.split('|')[1]" style="padding-bottom:16px;max-height:200px;"/>
                 </div>
             </div>
 
-            <div v-else class="card card-style">
+            <div v-else-if="recommendation.previewCount == 3" class="card card-style">
                 <div class="content mb-0 mt-3">
                     <h4 class="text-start pt-2 mb-0">{{ recommendation.title }}</h4>
                     <p class="mb-3 color-gray-light-mid">{{ recommendation.description ? recommendation.description : '' }}</p>
@@ -126,15 +62,15 @@
                     
                     <div v-for="(site,index) in recommendation.previews.filter(x=>x.__typename == 'DiveSite')">
                         <div class="map-box">
-                            <a href="/site/gosung">
+                            <a :href="'/site/' + site.uniqueName">
                                 <div class="bx">
                                     <div class="justify-content-center mb-0 text-start">
                                         <div class="" style="float: left;position: relative;width: 95px; height:95px;">
                                             <img v-bind:src="(site.backgroundImages && site.backgroundImages.length > 0) ? site.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;">
                                         </div>
                                         <div class="" style="padding-left: 110px;">
-                                            <h4 class="font-15"> {{site.name}} </h4>
-                                            <p class="pb-0 mb-0 line-height-m nearby_desc"> {{site.description}} </p>
+                                            <h4 class="font-15"> {{ site.name }} </h4>
+                                            <p class="pb-0 mb-0 line-height-m nearby_desc"> {{ site.description }} </p>
                                             
                                             <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
                                                 <span> {{(site.adminScore/20).toFixed(1)}} </span>
@@ -147,6 +83,37 @@
                         <div class="divider mt-3 mb-3"></div>
                     </div>
                     
+                </div>
+            </div>
+            <div v-else>
+                <h4 class="text-start mb-1" style="margin-left: 10px;margin-right: 10px;">{{ recommendation.title }}</h4>
+                <p v-if="recommendation.description" class="mb-2 color-gray-light-mid" style="margin-left: 10px;margin-right: 10px;">{{ recommendation.description }}</p>
+                <div class="splide single-slider slider-no-arrows visible-slider slider-no-dots" id="single-slider-latest">
+                    <div class="splide__track">
+                        <div class="splide__list">
+                            <div v-for="(site, index) in recommendation.previews.filter(x=>x.__typename == 'DiveSite')" class="splide__slide">
+                                <a :href="'/site/' + site.uniqueName">
+                                    <div class="card card-style card-nearby" :style="'background: url('+((site.backgroundImages && site.backgroundImages.length > 0) ? site.backgroundImages[0].thumbnailUrl : '/static/empty.jpg')+')'" data-card-height="260">
+                                        <div class="card-top px-3 py-3">
+                                            <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-red-dark"></i></a>
+                                        </div>
+                                        <div class="card-bottom px-3 py-3">
+                                            <h4 class="color-white font-18 font-600">{{ site.name }}</h4>
+                                            <div class="divider bg-white opacity-20 mb-1"></div>
+                                            <div class="d-flex">
+                                                <div class="align-self-center" style="max-width: 100%;">
+                                                    <p class="font-11 opacity-70 font-600 color-white nearby_desc mb-0" style="max-width: 100%;">{{ site.description }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-overlay bg-gradient opacity-30"></div>
+                                        <div class="card-overlay bg-gradient"></div>
+                                    </div>
+                                </a>
+                            </div>
+                            
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -338,6 +305,7 @@ export default {
                 description
                 previewCount
                 cssStyle
+                className
                 type
                 targetType
                 previews {
@@ -376,6 +344,7 @@ export default {
                     description
                     adminScore
                     backgroundImages {
+                    _id
                     thumbnailUrl
                     }
                 }
@@ -385,6 +354,7 @@ export default {
                     description
                     adminScore
                     backgroundImages {
+                    _id
                     thumbnailUrl
                     }
                 }
@@ -394,6 +364,7 @@ export default {
                     description
                     adminScore
                     backgroundImages {
+                    _id
                     thumbnailUrl
                     }
                 }
@@ -414,6 +385,51 @@ export default {
             return {
                 targetType: "diveSite"
             }
+        },
+        async result () {
+            var id_arr = new Array();
+            var width_arr = new Array();
+            this.getUserRecommendationsByTargetType.filter(x=>x.previewCount > 3).forEach(x => {
+                x.previews.forEach(y => {
+                    if (y.backgroundImages.length > 0) {
+                        id_arr.push(y.backgroundImages[0]._id);
+                        width_arr.push(720);
+                    }
+                });
+            });
+            var result_image = await axios({
+                url: 'https://api.wedives.com/graphql',
+                method: 'post',
+                headers: {
+                    countrycode: 'ko',
+                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                },
+                data: {
+                    query: `
+                        query Query($ids: [ID], $widths: [Int]) {
+                            getImageUrlsByIds(_ids: $ids, widths: $widths)
+                        }
+                    `,
+                    variables: {
+                        ids: id_arr,
+                        widths: width_arr
+                    }
+
+                }
+            });
+            if (result_image.data.data.getImageUrlsByIds) {
+                var cnt = 0;
+                this.getUserRecommendationsByTargetType.filter(x=>x.previewCount > 3).forEach(x => {
+                    x.previews.forEach(y => {
+                        if (y.backgroundImages.length > 0) {
+                            y.backgroundImages[0].thumbnailUrl = result_image.data.data.getImageUrlsByIds[cnt];
+                            cnt++;
+                        }
+                    });
+                });
+                //console.log(result_image.data.data.getImageUrlsByIds);
+            }
+            
         },
         fetchPolicy: 'no-cache'
     },
@@ -578,4 +594,8 @@ export default {
 @keyframes loading{from {transform: rotate(0deg);}to {transform: rotate(360deg);}}
 @keyframes fadeout50 {from {opacity: 0.5;}to {opacity: 0;}}
 
+.card-white > h4 {color: white}
+.card-white > p {color: white !important;}
+.card-white .wedive-txt-all {color: white;}
+.card-white > a > i {filter: brightness(100) !important;}
 </style>

@@ -167,6 +167,30 @@
             </b-form-group>
           </validation-provider>
 
+          <!-- className -->
+          <validation-provider
+            #default="validationContext"
+            name="className"
+          >
+            <b-form-group
+              label="className"
+              label-for="className"
+            >
+              <b-form-input
+                id="className"
+                v-model="recommendationData.className"
+                autofocus
+                :state="getValidationState(validationContext)"
+                trim
+                placeholder="className 입력하세요."
+              />
+
+              <b-form-invalid-feedback>
+                {{ validationContext.errors[0] }}
+              </b-form-invalid-feedback>
+            </b-form-group>
+          </validation-provider>
+
           <!-- previewCount -->
           <validation-provider
             #default="validationContext"
@@ -686,6 +710,7 @@ const blankRecommendationData = {
   title: '',
   description: '',
   cssStyle: '',
+  className: '',
   previewCount: 0,
   images: [],
   backgroundImages: [],
