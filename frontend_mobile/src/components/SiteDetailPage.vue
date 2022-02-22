@@ -9,12 +9,12 @@
                 <div class="splide__track">
                     <div class="splide__list">
                         <div class="splide__slide" v-if="siteData.backgroundImages == null || siteData.backgroundImages.length == 0">
-                            <div id="background_img_null" data-card-height="250" class="card rounded-0 mb-0" style="background: url(/static/empty.jpg);background-size: contain !important;">
+                            <div id="background_img_null" data-card-height="250" class="card rounded-0 mb-0" style="background: url(/static/empty.jpg);background-position: center !important;background-size: contain !important;">
                                 
                             </div>
                         </div>
                         <div class="splide__slide" v-for="(image, index) in siteData.backgroundImages">
-                            <div data-card-height="250" :class="'card rounded-0 mb-0 background_img_' + index" v-bind:style="'background: url('+image.url+');background-size: cover !important;'">
+                            <div data-card-height="250" :class="'card rounded-0 mb-0 background_img_' + index" v-bind:style="'background: url('+image.url+');background-size: cover !important;background-position: center !important;'">
                                 <div class="wedive-source" style="bottom:50px;">{{ image.reference | makeReference }}</div>
                             </div>
                         </div>

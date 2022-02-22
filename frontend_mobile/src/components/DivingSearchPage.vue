@@ -198,7 +198,7 @@ export default {
   
   methods: {
       goDiving(item) {
-          console.log(item);
+          location.href = '/diving/' + item._id;
       },
       wediveDate(_val) {
           var val = new Date(_val);

@@ -723,6 +723,7 @@ export default {
                 subscribeRoomMessage(roomIds: $roomIds) {
                     _id
                     text
+                    type
                     author {
                     uid
                     _id
