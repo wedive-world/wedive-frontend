@@ -88,7 +88,7 @@
             <div v-else>
                 <h4 class="text-start mb-1" style="margin-left: 10px;margin-right: 10px;">{{ recommendation.title }}</h4>
                 <p v-if="recommendation.description" class="mb-2 color-gray-light-mid" style="margin-left: 10px;margin-right: 10px;">{{ recommendation.description }}</p>
-                <div class="splide single-slider slider-no-arrows visible-slider slider-no-dots" id="single-slider-latest">
+                <div class="splide single-slider-site slider-no-arrows visible-slider slider-no-dots" :id="'single-slider-'+recommendation._id" style="height:276px;">
                     <div class="splide__track">
                         <div class="splide__list">
                             <div v-for="(site, index) in recommendation.previews.filter(x=>x.__typename == 'DiveSite')" class="splide__slide">
@@ -301,6 +301,7 @@ export default {
     getUserRecommendationsByTargetType: {
         query: gql`query Query($targetType: RecommendationTargetType) {
             getUserRecommendationsByTargetType(targetType: $targetType) {
+                _id
                 title
                 description
                 previewCount
@@ -429,7 +430,69 @@ export default {
                 });
                 //console.log(result_image.data.data.getImageUrlsByIds);
             }
-            
+            var splide = document.getElementsByClassName('splide');
+            if(splide.length){
+                var singleSlider = document.querySelectorAll('.single-slider-site');
+                if(singleSlider.length) {
+                    singleSlider.forEach(function(e){
+                        //setTimeout(function(e) {
+                            var single = new Splide( '#'+e.id, {
+                                type:'loop',
+                                autoplay:true,
+                                interval:4000,
+                                perPage: 1,
+                            }).mount();
+                            var sliderNext = document.querySelectorAll('.slider-next');
+                            var sliderPrev = document.querySelectorAll('.slider-prev');
+                            sliderNext.forEach(el => el.addEventListener('click', el => {single.go('>');}));
+                            sliderPrev.forEach(el => el.addEventListener('click', el => {single.go('<');}));
+                        //},100, e);
+                        
+                    });
+                }
+                //Card Extender
+                const cards = document.getElementsByClassName('card');
+                function card_extender(){
+                    var headerHeight, footerHeight, headerOnPage;
+                    var headerOnPage = document.querySelectorAll('.header:not(.header-transparent)')[0];
+                    var footerOnPage = document.querySelectorAll('#footer-bar')[0];
+
+                    headerOnPage ? headerHeight = document.querySelectorAll('.header')[0].offsetHeight : headerHeight = 0
+                    footerOnPage ? footerHeight = document.querySelectorAll('#footer-bar')[0].offsetHeight : footerHeight = 0
+
+                    for (let i = 0; i < cards.length; i++) {
+                        if(cards[i].getAttribute('data-card-height') === "cover"){
+                            if (window.matchMedia('(display-mode: fullscreen)').matches) {var windowHeight = window.outerHeight;}
+                            if (!window.matchMedia('(display-mode: fullscreen)').matches) {var windowHeight = window.innerHeight;}
+                            var coverHeight = windowHeight - headerHeight - footerHeight + 'px';
+                        }
+                        if(cards[i].getAttribute('data-card-height') === "cover-card"){
+                            var windowHeight = window.outerHeight;
+                            var coverHeight = windowHeight - 275 + 'px';
+                            cards[i].style.height =  coverHeight
+                        }
+                        if(cards[i].getAttribute('data-card-height') === "cover-full"){
+                            if (window.matchMedia('(display-mode: fullscreen)').matches) {var windowHeight = window.outerHeight;}
+                            if (!window.matchMedia('(display-mode: fullscreen)').matches) {var windowHeight = window.innerHeight;}
+                            var coverHeight = windowHeight + 'px';
+                            cards[i].style.height =  coverHeight
+                        }
+                        if(cards[i].hasAttribute('data-card-height')){
+                            var getHeight = cards[i].getAttribute('data-card-height');
+                            cards[i].style.height= getHeight +'px';
+                            if(getHeight === "cover"){
+                                var totalHeight = getHeight
+                                cards[i].style.height =  coverHeight
+                            }
+                        }
+                    }
+                }
+
+                if(cards.length){
+                    card_extender();
+                    window.addEventListener("resize", card_extender);
+                }
+            }
         },
         fetchPolicy: 'no-cache'
     },
