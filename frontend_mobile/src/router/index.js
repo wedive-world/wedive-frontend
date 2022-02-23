@@ -117,7 +117,7 @@ export default new Router({
       component: ReviewAllPage
     },
     {
-      path: '/site_search',
+      path: '/site/search',
       name: 'SiteSearchPage',
       component: SiteSearchPage
     },
@@ -159,9 +159,14 @@ export default new Router({
       component: PointDetailPage2
     },
     {
-      path: '/diving_search',
+      path: '/diving/search',
       name: 'DivingSearchPage',
       component: DivingSearchPage
+    },
+    {
+      path: '/diving/my',
+      name: 'MyDivingPage',
+      component: MyDivingPage
     },
     {
       path: '/diving/:id',
@@ -241,11 +246,7 @@ export default new Router({
       name: 'NotificationPage',
       component: NotificationPage
     },
-    {
-      path: '/my_diving',
-      name: 'MyDivingPage',
-      component: MyDivingPage
-    },
+    
     
     
   ],

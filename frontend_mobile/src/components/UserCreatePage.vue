@@ -552,7 +552,6 @@ export default {
       $(".page-title-clear").hide();
       $(".header-fixed").hide();
     }
-    $("#footer-bar").hide();
     
     var body = document.body, html = document.documentElement;
     var height = Math.min(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight) - 56;

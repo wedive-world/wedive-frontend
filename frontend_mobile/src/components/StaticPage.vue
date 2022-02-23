@@ -87,7 +87,6 @@ export default {
     
     $(".page-title").hide();
     $(".page-title-clear").hide();
-    $("#footer-bar").hide();
 
     if (this.$route.query.header && this.$route.query.header == 'hide') {
       $(".page-title").hide();

@@ -44,21 +44,20 @@
 
         
 
-        <div v-for="recommendation in getUserRecommendationsByTargetType">
+        <div v-for="(recommendation,rec_idx) in getUserRecommendationsByTargetType">
             <div v-if="recommendation.previewCount == 0" class="card card-style" :style="recommendation.cssStyle.includes('|') ? recommendation.cssStyle.split('|')[0] : recommendation.cssStyle">
                 <div :class="'content mb-0 mt-3 me-0' + (recommendation.className ? ' ' + recommendation.className : '')">
-                    <h4 class="text-start mb-0 font-600" v-html="recommendation.title"></h4>
+                    <h4 class="text-start mb-0 font-600" v-html="recommendation.title"></h4><i class="wedive-txt-all wedive_right"></i>
                     <p class="mb-0 opacity-60 ls-n1">{{ recommendation.description ? recommendation.description : '' }}</p>
-                    <a class="font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;filter:brightness(0)"></i></a>
+                    
                     <img v-if="recommendation.cssStyle.includes('|')" :class="recommendation.cssStyle.split('|')[2]" :src="'/static/images/assets/' + recommendation.cssStyle.split('|')[1]" style="padding-bottom:16px;max-height:200px;"/>
                 </div>
             </div>
 
             <div v-else-if="recommendation.previewCount == 3" class="card card-style">
                 <div class="content mb-0 mt-3">
-                    <h4 class="text-start pt-2 mb-0">{{ recommendation.title }}</h4>
+                    <h4 class="text-start mb-0">{{ recommendation.title }}<i class="wedive-txt-all wedive_right"></i></h4>
                     <p class="mb-3 color-gray-light-mid">{{ recommendation.description ? recommendation.description : '' }}</p>
-                    <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
                     
                     <div v-for="(site,index) in recommendation.previews.filter(x=>x.__typename == 'DiveSite')">
                         <div class="map-box">
@@ -70,7 +69,7 @@
                                         </div>
                                         <div class="" style="padding-left: 110px;">
                                             <h4 class="font-15"> {{ site.name }} </h4>
-                                            <p class="pb-0 mb-0 line-height-m nearby_desc"> {{ site.description }} </p>
+                                            <p class="pb-0 mb-0 nearby_desc"> {{ site.description }} </p>
                                             
                                             <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
                                                 <span> {{(site.adminScore/20).toFixed(1)}} </span>
@@ -86,8 +85,8 @@
                 </div>
             </div>
             <div v-else>
-                <h4 class="text-start mb-1" style="margin-left: 10px;margin-right: 10px;">{{ recommendation.title }}</h4>
-                <p v-if="recommendation.description" class="mb-2 color-gray-light-mid" style="margin-left: 10px;margin-right: 10px;">{{ recommendation.description }}</p>
+                <h4 :class="'text-start mb-0' + (rec_idx==0 ? '' : ' mt-4')" style="margin-left: 14px;margin-right: 14px;position:relative;">{{ recommendation.title }}<i class="wedive-txt-all wedive_right" style="top:3px !important;"></i></h4>
+                <p v-if="recommendation.description" class="mb-2 color-gray-light-mid" style="margin-left: 14px;margin-right: 14px;margin-top:-2px;">{{ recommendation.description }}</p>
                 <div class="splide single-slider-site slider-no-arrows visible-slider slider-no-dots" :id="'single-slider-'+recommendation._id" style="height:276px;">
                     <div class="splide__track">
                         <div class="splide__list">
@@ -522,10 +521,10 @@ export default {
         }
     },
     goSiteMap: function() {
-        location.href = '/site_home';
+        location.href = '/site_home' + location.search;
     },
     goList: function() {
-        location.href='/center_list';
+        location.href='/center_list' + location.search;
     },
     handleScroll (event) {
         this.scrollTop = $(document).scrollTop();
@@ -646,7 +645,7 @@ export default {
 .movebox {animation: motion-leftright 3s linear 0s infinite alternate; margin-top: 0;-webkit-animation: motion-leftright 3s linear 0s infinite alternate; margin-top: 0;}
 .movebox2 {position:absolute;white-space: nowrap;left:-100px;padding-top:5px;opacity:.5;animation: motion-endtoend 20s linear infinite;-webkit-animation: motion-endtoend 20s linear infinite;}
 .movebox3 {position:absolute;white-space: nowrap;left:-100px;padding-top:50px;opacity:.5;animation: motion-endtoend 30s linear infinite;-webkit-animation: motion-endtoend 30s linear infinite;}
-.nearby_desc {font-family: 'Noto Sans Korean' !important;font-weight:200;overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;line-height: 1.4;}
+.nearby_desc {font-family: 'Noto Sans Korean' !important;font-weight:200;overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;line-height: 1.4;}
 .card-nearby {margin-left: 10px;background-size: cover !important;}
 .icon-concierge {position: fixed;width: 58px;height: 58px;bottom: 70px;right:24px;background-size:cover;background: url(/static/images/assets/concierge.gif);background-size:cover !important;background-position-y: 8px;background-repeat: no-repeat;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
 
@@ -659,6 +658,5 @@ export default {
 
 .card-white > h4 {color: white}
 .card-white > p {color: white !important;}
-.card-white .wedive-txt-all {color: white;}
-.card-white > a > i {filter: brightness(100) !important;}
+.card-white .wedive-txt-all {color: white;filter: brightness(100) !important;}
 </style>

@@ -4,7 +4,7 @@
     <div class="main-header header header-fixed header-logo-center" style="height: 58px !important;">
         <a class="" href="/" style="margin-left: 16px;"><img class="logo-image" src="/static/images/assets/logo-gray.svg" height="42" style="margin-top:8px;"/></a>
         
-        <a href="/site_list" class="header-icon header-icon-3" style="margin-right: 18px;"><img src="/static/images/assets/icon_list_fill.png" width="26" style="margin-top: 12px;"/></i></a>
+        <a v-on:click="move('/site_list')" class="header-icon header-icon-3" style="margin-right: 18px;"><img src="/static/images/assets/icon_list_fill.png" width="26" style="margin-top: 12px;"/></i></a>
         <a v-on:click="searchBox()" href="#" class="header-icon header-icon-4" style="margin-right: 11px;"><img src="/static/images/assets/icon_search_fill.png" width="28" style="margin-top: 12px;"/></a>
         <!--<a href="#" class="header-icon header-icon-4 color-theme circular_image" data-menu="menu-main" :style="'background: url('+((userThumbnail) ? userThumbnail : '/static/images/assets/user_empty_'+((gender)?gender:'m')+'.png')+');background-size:cover;width:36px;height:36px;margin-top:7px !important;margin-right:7px;'"></a>-->
     </div>
@@ -935,6 +935,9 @@ export default {
       },
   },
   methods: {
+      move(loc) {
+          location.href = loc + location.search;
+      },
       async lookupPlace() {
         //console.log("this.query_place = " + this.query_place);
         if (this.query_place == '') {

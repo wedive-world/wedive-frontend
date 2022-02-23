@@ -41,7 +41,7 @@
                             <div class="star-area text-start ms-3" style="height: 30px;">
                                 <span class="font-14 me-2 color-gray" style="float: left;padding-top:2px;">환경</span>
                                 <div class="wedive-fish-back">
-                                    <div class="wedive-fish-front" v-bind:style="'width:'+(pointData.waterEnvironmentScore-3)+'%'">
+                                    <div class="wedive-fish-front" v-bind:style="'width:'+(pointData.waterEnvironmentScore > 3 ? pointData.waterEnvironmentScore-3 : 0)+'%'">
                                     </div>
                                     <span class="wedive-score-number">{{ (pointData.waterEnvironmentScore/20).toFixed(1) }}</span>
                                 </div>
@@ -49,7 +49,7 @@
                             <div class="star-area mt-1 text-start ms-3" style="height: 30px;">
                                 <span class="font-14 me-2 color-gray" style="float: left;padding-top:2px;">조류</span>
                                 <div class="wedive-wave-back">
-                                    <div class="wedive-wave-front" v-bind:style="'width:'+(pointData.flowRateScore-3)+'%'">
+                                    <div class="wedive-wave-front" v-bind:style="'width:'+(pointData.flowRateScore > 3 ? pointData.flowRateScore-3 : 0)+'%'">
                                     </div>
                                     <span class="wedive-score-number">{{ (pointData.flowRateScore/20).toFixed(1) }}</span>
                                 </div>
@@ -57,7 +57,7 @@
                             <div class="star-area mt-1 text-start ms-3" style="height: 30px;">
                                 <span class="font-14 me-2 color-gray" style="float: left;padding-top:2px;">시야</span>
                                 <div class="wedive-eye-back">
-                                    <div class="wedive-eye-front" v-bind:style="'width:'+(pointData.eyeSightScore-3)+'%'">
+                                    <div class="wedive-eye-front" v-bind:style="'width:'+(pointData.eyeSightScore > 3 ? pointData.eyeSightScore-3 : 0)+'%'">
                                     </div>
                                     <span class="wedive-score-number">{{ (pointData.eyeSightScore/20).toFixed(1) }}</span>
                                 </div>
@@ -205,7 +205,7 @@
         <div class="card card-style" v-if="pointData.youtubeVideoIds && pointData.youtubeVideoIds.length > 0">
             <div class="content mb-4 pb-2">
                 <h4 class="text-start pt-2 mb-2">YouTube 소개</h4>
-                <div v-for="youtube in pointData.youtubeVideoIds" class="responsive-iframe" style="-border-radius: 16px;-moz-border-radius: 16px;border-radius: 16px;">
+                <div v-for="(youtube,index) in pointData.youtubeVideoIds" :class="'responsive-iframe' + (index>0 ? ' mt-3' : '')" style="-border-radius: 16px;-moz-border-radius: 16px;border-radius: 16px;">
                     <iframe v-bind:src="'https://www.youtube.com/embed/'+youtube" frameborder='0' allowfullscreen></iframe>
                 </div>
             </div>
@@ -1026,7 +1026,7 @@ export default {
         $(".page-title-clear").hide();
         $(".header-fixed").hide();
     }
-    $("#footer-bar").hide();
+    
     
     
     
@@ -1490,7 +1490,7 @@ export default {
 .evaluation>span.info {padding-left: 11px;border-left: 1px solid #c4bbab;}
 .evaluation>span .icon_question {display: inline-block;position: relative;top: 1px;display: block;width: 18px;height: 18px;background-size: 18px 18px;background-repeat: no-repeat;background-image: url(/static/images/assets/question.png);text-indent: -9999px;}
 
-.span_feature {width:66px;}
+.span_feature {width:66px;line-height:1.2;}
 .ico_feature {}
 .ico_feature1 {width: 44px;height: 40px;background-position: 0px 0px;}
 .ico_feature2 {width: 44px;height: 40px;background-position: -45px 0px;}

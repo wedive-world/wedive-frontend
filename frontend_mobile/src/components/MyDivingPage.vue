@@ -142,7 +142,6 @@ export default {
     $(".page-title").hide();
     $(".page-title-clear").hide();
     $(".header-auto-show").hide();
-    $("#footer-bar").hide();
     setTimeout(function() {
         init_template();
         var preloader = document.getElementById('preloader')

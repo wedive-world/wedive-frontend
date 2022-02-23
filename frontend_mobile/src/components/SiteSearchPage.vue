@@ -576,7 +576,6 @@ export default {
       $(".page-title-clear").hide();
       $(".header-fixed").hide();
     }
-    $("#footer-bar").hide();
     setTimeout(function() {
         $("#input_query > .input-group > input").focus();
     },500);

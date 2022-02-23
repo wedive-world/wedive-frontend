@@ -43,7 +43,7 @@
                         <div class="star-area text-start ms-3" style="height: 30px;">
                             <span class="font-14 me-2 color-gray" style="float: left;padding-top:2px;">환경</span>
                             <div class="wedive-fish-back">
-                                <div class="wedive-fish-front" :style="'width:'+(siteData.waterEnvironmentScore-3)+'%;'">
+                                <div class="wedive-fish-front" :style="'width:'+(siteData.waterEnvironmentScore>3 ? siteData.waterEnvironmentScore-3:0)+'%;'">
                                 </div>
                                 <span class="wedive-score-number">{{ (siteData.waterEnvironmentScore/20).toFixed(1) }}</span>
                             </div>
@@ -51,7 +51,7 @@
                         <div class="star-area mt-1 text-start ms-3" style="height: 30px;">
                             <span class="font-14 me-2 color-gray" style="float: left;padding-top:2px;">조류</span>
                             <div class="wedive-wave-back">
-                                <div class="wedive-wave-front" :style="'width:'+(siteData.flowRateScore-3)+'%;'">
+                                <div class="wedive-wave-front" :style="'width:'+(siteData.flowRateScore>3 ? siteData.flowRateScore-3: 0)+'%;'">
                                 </div>
                                 <span class="wedive-score-number">{{ (siteData.flowRateScore/20).toFixed(1) }}</span>
                             </div>
@@ -59,7 +59,7 @@
                         <div class="star-area mt-1 text-start ms-3" style="height: 30px;">
                             <span class="font-14 me-2 color-gray" style="float: left;padding-top:2px;">시야</span>
                             <div class="wedive-eye-back">
-                                <div class="wedive-eye-front" :style="'width:'+(siteData.eyeSightScore-3)+'%;'">
+                                <div class="wedive-eye-front" :style="'width:'+(siteData.eyeSightScore > 3 ? siteData.eyeSightScore-3 : 0)+'%;'">
                                 </div>
                                 <span class="wedive-score-number">{{ (siteData.eyeSightScore/20).toFixed(1) }}</span>
                             </div>
@@ -415,7 +415,7 @@
         <div class="card card-style" v-if="siteData.youtubeVideoIds && siteData.youtubeVideoIds.length > 0">
             <div class="content mb-4 pb-2">
                 <h4 class="text-start pt-2 mb-2">YouTube 소개</h4>
-                <div v-for="youtube in siteData.youtubeVideoIds" class="responsive-iframe" style="-border-radius: 16px;-moz-border-radius: 16px;border-radius: 16px;">
+                <div v-for="(youtube,index) in siteData.youtubeVideoIds" :class="'responsive-iframe' + (index>0 ? ' mt-3':'')" style="-border-radius: 16px;-moz-border-radius: 16px;border-radius: 16px;">
                     <iframe v-bind:src="'https://www.youtube.com/embed/'+youtube" frameborder='0' allowfullscreen></iframe>
                 </div>
             </div>
@@ -450,37 +450,39 @@
             </div>
         </div>
 
-        <h4 class="text-start mb-2 mt-4" style="margin-left: 10px;margin-right: 10px;">근처 사이트</h4>
-        <div class="splide single-slider slider-no-arrows visible-slider slider-no-dots" id="single-slider-nearby">
-            <div class="splide__track">
-                <div class="splide__list">
-                    <div v-for="near in nearData" class="splide__slide">
-                        <div class="card card-style card-nearby" :style="'background: url('+((near.backgroundImages!=null&&near.backgroundImages[0]!=null) ? near.backgroundImages[0].url : '/static/empty.jpg')+')'" data-card-height="260">
-                        
-                            <div class="card-top px-3 py-3">
-                                <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-red-dark"></i></a>
-                            </div>
-                            <div class="card-bottom px-3 py-3">
-                                <h4 class="color-white font-18 font-600">{{ near.name }}</h4>
-                                <div class="divider bg-white opacity-20 mb-1"></div>
-                                <div class="d-flex">
-                                    <div class="align-self-center" style="max-width: 100%;">
-                                        <p class="font-11 opacity-70 font-600 color-white nearby_desc mb-0" style="max-width: 100%;">{{ near.description }}</p>
+        <div v-if="nearData && nearData.length > 0">
+            <h4 class="text-start mb-2 mt-4" style="margin-left: 10px;margin-right: 10px;">근처 사이트</h4>
+            <div class="splide single-slider slider-no-arrows visible-slider slider-no-dots" id="single-slider-nearby">
+                <div class="splide__track">
+                    <div class="splide__list">
+                        <div v-for="near in nearData" class="splide__slide">
+                            <div class="card card-style card-nearby" :style="'background: url('+((near.backgroundImages!=null&&near.backgroundImages[0]!=null) ? near.backgroundImages[0].url : '/static/empty.jpg')+')'" data-card-height="260">
+                            
+                                <div class="card-top px-3 py-3">
+                                    <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-red-dark"></i></a>
+                                </div>
+                                <div class="card-bottom px-3 py-3">
+                                    <h4 class="color-white font-18 font-600">{{ near.name }}</h4>
+                                    <div class="divider bg-white opacity-20 mb-1"></div>
+                                    <div class="d-flex">
+                                        <div class="align-self-center" style="max-width: 100%;">
+                                            <p class="font-11 opacity-70 font-600 color-white nearby_desc mb-0" style="max-width: 100%;">{{ near.description }}</p>
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="card-overlay bg-gradient opacity-30"></div>
+                                <div class="card-overlay bg-gradient"></div>
                             </div>
-                            <div class="card-overlay bg-gradient opacity-30"></div>
-                            <div class="card-overlay bg-gradient"></div>
                         </div>
+                        
+                        
                     </div>
-                    
-                    
                 </div>
             </div>
         </div>
         
 
-        <div class="card card-style">
+        <div class="card card-style hide">
             <div class="content mb-2" id="tab-group-index">
                 <h4 class="text-start pt-2 mb-2">월별 수온</h4>
                 <div>
@@ -1603,13 +1605,11 @@ export default {
     }
   },
   async mounted() {
-    
     if (this.$route.query.header && this.$route.query.header == 'hide') {
         $(".page-title").hide();
         $(".page-title-clear").hide();
         $(".header-fixed").hide();
     }
-    $("#footer-bar").hide();
     
     
     let script = document.createElement('script');
@@ -2052,7 +2052,7 @@ export default {
 .evaluation>span.info {padding-left: 11px;border-left: 1px solid #c4bbab;}
 .evaluation>span .icon_question {display: inline-block;position: relative;top: 1px;display: block;width: 18px;height: 18px;background-size: 18px 18px;background-repeat: no-repeat;background-image: url(/static/images/assets/question.png);text-indent: -9999px;}
 
-.span_feature {width:66px;}
+.span_feature {width:66px;line-height:1.2;}
 .ico_feature {}
 .ico_feature1 {width: 44px;height: 40px;background-position: 0px 0px;}
 .ico_feature2 {width: 44px;height: 40px;background-position: -45px 0px;}

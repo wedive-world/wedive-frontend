@@ -14,7 +14,7 @@
           </div>
 
           
-          <div id="footer-bar" class="footer-bar" style="border-radius: 30px 30px 0px 0px;">
+          <div v-if="footer_list.includes(pathname)" id="footer-bar" class="footer-bar" style="border-radius: 30px 30px 0px 0px;">
             <a href="/" id="nav-buddy"><div class="menu-ico menu-ico1"></div><span>버디</span></a>
             <a v-on:click="moveSite()" id="nav-site"><div class="menu-ico menu-ico2"></div><span>장소</span></a>
             <a href="/forum_home" id="nav-forum"><div class="menu-ico menu-ico3"></div><span>포럼</span></a>
@@ -34,7 +34,7 @@
             <a v-else-if="pathname == '/forum_home'" v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_book_new.png" width="24"></a>
             <a v-else v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_write.png" width="24"></a>
             <a v-on:click="settingForum()" id="wedive-group" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_setting_fill.png" width="26"></a>
-            <a v-if="$route.path=='/site_list'" href="/site_home" class="page-title-icon font-18" style="color: #858585;margin-right: 13.3333333333px;"><img src="/static/images/assets/icon_map_fill.png" width="26"></a>
+            <a v-if="$route.path=='/site_list'" v-on:click="move('/site_home')" class="page-title-icon font-18" style="color: #858585;margin-right: 13.3333333333px;"><img src="/static/images/assets/icon_map_fill.png" width="26"></a>
             <a v-on:click="searchItem()" id="wedive-search" class="page-title-icon font-18 hide" style="color:#858585 !important;"><img src="/static/images/assets/icon_search_fill.png" width="28"></a>
             <a v-on:click="shareItem()" id="wedive-share" class="page-title-icon font-18 hide" style="color:#858585 !important;"><img src="/static/images/assets/icon_share_fill.png" height="24"/></a>
             <!--<a href="#" class="page-title-icon" data-menu="menu-main" :style="'background: url('+((userThumbnail) ? userThumbnail : '/static/images/assets/user_empty_'+((gender)?gender:'m')+'.png')+');background-size:cover;'"></a>-->
@@ -180,7 +180,7 @@ export default {
         setTimeout(function(item) {
           try {
             var item_menu = $("[data-menu-active]").data("menu-active").replace('nav-', '');
-            if (item_menu == 'site' && item != '/site_search' && item != '/site_home' && item != '/diving_search') {
+            if (item_menu == 'site' && item != '/site/search' && item != '/site_home' && item != '/diving/search') {
               $("#wedive-share").fadeIn(1000);
               $("#wedive-share").removeClass("hide");
             }
@@ -242,12 +242,16 @@ export default {
       gender: localStorage.gender,
       pathname: window.location.pathname,
       notiData: null,
+      footer_list: ['/', '/site_list', '/site_home', '/forum_home', '/chat_home', '/other_home']
     }
   },
   components: {
     VueBottomSheet,
   },
   methods: {
+    move(loc) {
+      location.href = loc + location.search;
+    },
     openCreateSheet() {
       if(this.idToken != null && this.nickName != null)
         this.$refs.createBottomSheet.open();
@@ -292,7 +296,7 @@ export default {
       this.$refs.loginBottomSheet.close();
     },
     moveSite() {
-      location.href = localStorage.perferedSite;
+      location.href = localStorage.perferedSite + location.search;
     },
     settingForum() {
       var menuData = "forum-add";
@@ -423,10 +427,10 @@ export default {
     searchItem() {
       var item = window.location.pathname;
       if (item == '/site_list') {
-        location.href='/site_search';
+        location.href='/site/search';
       }
       if (item == '/') {
-        location.href='/diving_search';
+        location.href='/diving/search';
       }
       console.log("searchItem");
     },

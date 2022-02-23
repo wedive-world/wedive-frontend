@@ -35,7 +35,7 @@
                 <h2 class="font-20 font-700 mb-1 mt-1">{{ centerData.name }}</h2>
                 <p class="text-start color-gray m-0" style="line-height: 1.5;">{{ centerData.description }}</p>
                 <div class="wedive-star-back">
-                  <div class="wedive-star-front" v-bind:style="'width:'+(centerData.adminScore-3)+'%'">
+                  <div class="wedive-star-front" v-bind:style="'width:'+(centerData.adminScore > 3 ? centerData.adminScore-3 : 0)+'%'">
                   </div>
                   <span class="wedive-star-number">{{ (centerData.adminScore/20).toFixed(1) }}</span>
                 </div>
@@ -1621,7 +1621,7 @@ export default {
         $(".page-title-clear").hide();
         $(".header-fixed").hide();
     }
-    $("#footer-bar").hide();
+    
   },
   created() {
       window.addEventListener('beforeunload', this.beforeunload)
@@ -1951,7 +1951,7 @@ export default {
 .evaluation>span.info {padding-left: 11px;border-left: 1px solid #c4bbab;}
 .evaluation>span .icon_question {display: inline-block;position: relative;top: 1px;display: block;width: 18px;height: 18px;background-size: 18px 18px;background-repeat: no-repeat;background-image: url(/static/images/assets/question.png);text-indent: -9999px;}
 
-.span_feature {width:66px;}
+.span_feature {width:66px;line-height:1.2;}
 .ico_feature {}
 .ico_feature1 {width: 44px;height: 40px;background-position: 0px 0px;}
 .ico_feature2 {width: 44px;height: 40px;background-position: -45px 0px;}

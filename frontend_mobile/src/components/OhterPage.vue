@@ -37,7 +37,7 @@
                 <h2 class="font-15 font-300 mb-0"><img src="/static/images/assets/other_interest.png" height="30" /><span class="ms-2 vertical-m">나의 관심 장소</span><i class="wedive-txt-all wedive_right" style="top:22px;"></i></h2>
             </div>
         </div>
-        <a href="/my_diving" class="position-relative" style="z-index:1;">
+        <a href="/diving/my" class="position-relative" style="z-index:1;">
             <div class="content pb-0">
                 <h2 class="font-15 font-300 mb-0"><img src="/static/images/assets/other_diving.png" height="30" /><span class="ms-2 vertical-m">나의 버디찾기</span><i class="wedive-txt-all wedive_right" style="top:22px;"></i></h2>
             </div>

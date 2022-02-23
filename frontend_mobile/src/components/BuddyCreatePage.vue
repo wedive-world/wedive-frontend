@@ -121,7 +121,6 @@ export default {
       $(".page-title-clear").hide();
       $(".header-fixed").hide();
     }
-    $("#footer-bar").hide();
     
     $("#check_nodate").change(function(){
       $(this).toggleClass("checked");

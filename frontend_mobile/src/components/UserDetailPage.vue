@@ -287,7 +287,6 @@ export default {
         $(".page-title-clear").hide();
         $(".header-fixed").hide();
     }
-    $("#footer-bar").hide();
     setTimeout(function() {
         $(".gallery-filter").css("width", "66px");
         $(".gallery-filter").css("height", "45px");

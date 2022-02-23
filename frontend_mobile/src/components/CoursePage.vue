@@ -568,7 +568,6 @@ export default {
       $(".page-title-clear").hide();
       $(".header-fixed").hide();
     }
-    $("#footer-bar").hide();
   },
   created() {
     setTimeout(function() {
