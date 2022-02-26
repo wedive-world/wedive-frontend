@@ -1087,14 +1087,14 @@ export default {
                     x.type = 'site';
                     this.locationData.push(x);
                 });
-                this.divingData.location = this.divingData.diveSites[0].name + " 사이트";
+                this.divingData.location = this.divingData.diveSites[0].name + "";
             }
             if (this.divingData.divePoints && this.divingData.divePoints.length > 0) {
                 this.divingData.divePoints.forEach(x => {
                     x.type = 'point';
                     this.locationData.push(x);
                 });
-                this.divingData.location = this.divingData.divePoints[0].name + " 포인트";
+                this.divingData.location = this.divingData.divePoints[0].name + "";
             } 
             if (this.divingData.diveCenters && this.divingData.diveCenters.length > 0) {
                 this.divingData.diveCenters.forEach(x => {
