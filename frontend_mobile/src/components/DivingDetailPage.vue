@@ -461,7 +461,7 @@
 </template>
 <script>
 import StarRating from 'vue-star-rating'
-const axios = require("axios")
+const axios = require("axios");
 
 var tour_list = [{"type": "id", "name": "owner_chat", "position": "left", "title": "궁금한점을 물어보세요."}, {"type": "id", "name": "maner_deep", "position": "top", "title": "개설자의 매너로, 18m에서 시작해요."}];
 
@@ -691,7 +691,6 @@ export default {
     $(".page-title").hide();
     $(".page-title-clear").hide();
     $(".header-auto-show").hide();
-    document.getElementById("footer-bar").classList.add("hide");
     $("body").css("background-color", "white");
     
     if (this.$route.query.header && this.$route.query.header == 'hide') {

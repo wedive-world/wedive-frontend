@@ -264,6 +264,7 @@
   </div>
 </template>
 <script>
+import gql from 'graphql-tag'
 import PullTo from 'vue-pull-to'
 const axios = require("axios");
 
@@ -295,7 +296,7 @@ export default {
   },
   data () {
     return {
-        map: null,
+        getUserRecommendationsByTargetType: [],
         prev_driection: true,
         lastScrollPosition: 0,
         idToken: localStorage.idToken,
@@ -312,7 +313,208 @@ export default {
             triggerDistance: 70 // Pull down the trigger to trigger the distance
         },
     }
-  }, 
+  },
+  apollo: {
+    getUserRecommendationsByTargetType: {
+        query: gql`query Query($targetType: RecommendationTargetType) {
+            getUserRecommendationsByTargetType(targetType: $targetType) {
+                _id
+                title
+                description
+                previewCount
+                cssStyle
+                className
+                type
+                targetType
+                previews {
+                ... on Diving {
+                    diveCenters {
+                    name
+                    uniqueName
+                    description
+                    adminScore
+                    backgroundImages {
+                        thumbnailUrl
+                    }
+                    }
+                    divePoints {
+                    name
+                    uniqueName
+                    description
+                    adminScore
+                    backgroundImages {
+                        thumbnailUrl
+                    }
+                    }
+                    diveSites {
+                    name
+                    uniqueName
+                    description
+                    adminScore
+                    backgroundImages {
+                        thumbnailUrl
+                    }
+                    }
+                }
+                ... on DiveSite {
+                    _id
+                    name
+                    uniqueName
+                    description
+                    adminScore
+                    backgroundImages {
+                    _id
+                    thumbnailUrl
+                    }
+                }
+                ... on DivePoint {
+                    name
+                    uniqueName
+                    description
+                    adminScore
+                    backgroundImages {
+                    _id
+                    thumbnailUrl
+                    }
+                }
+                ... on DiveCenter {
+                    name
+                    uniqueName
+                    description
+                    adminScore
+                    backgroundImages {
+                    _id
+                    thumbnailUrl
+                    }
+                }
+                ... on Instructor {
+                    _id
+                    gender
+                    profileImages {
+                    _id
+                    thumbnailUrl
+                    }
+                    careers
+                    introduction
+                }
+                }
+            }
+        }`,
+        variables () {
+            return {
+                targetType: "diving"
+            }
+        },
+        async result () {
+            var id_arr = new Array();
+            var width_arr = new Array();
+            this.getUserRecommendationsByTargetType.filter(x=>x.previewCount > 3).forEach(x => {
+                x.previews.forEach(y => {
+                    if (y.backgroundImages.length > 0) {
+                        id_arr.push(y.backgroundImages[0]._id);
+                        width_arr.push(720);
+                    }
+                });
+            });
+            var result_image = await axios({
+                url: 'https://api.wedives.com/graphql',
+                method: 'post',
+                headers: {
+                    countrycode: 'ko',
+                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                },
+                data: {
+                    query: `
+                        query Query($ids: [ID], $widths: [Int]) {
+                            getImageUrlsByIds(_ids: $ids, widths: $widths)
+                        }
+                    `,
+                    variables: {
+                        ids: id_arr,
+                        widths: width_arr
+                    }
+
+                }
+            });
+            if (result_image.data.data.getImageUrlsByIds) {
+                var cnt = 0;
+                this.getUserRecommendationsByTargetType.filter(x=>x.previewCount > 3).forEach(x => {
+                    x.previews.forEach(y => {
+                        if (y.backgroundImages.length > 0) {
+                            y.backgroundImages[0].thumbnailUrl = result_image.data.data.getImageUrlsByIds[cnt];
+                            cnt++;
+                        }
+                    });
+                });
+                //console.log(result_image.data.data.getImageUrlsByIds);
+            }
+            var splide = document.getElementsByClassName('splide');
+            if(splide.length){
+                var singleSlider = document.querySelectorAll('.single-slider-site');
+                if(singleSlider.length) {
+                    singleSlider.forEach(function(e){
+                        //setTimeout(function(e) {
+                            var single = new Splide( '#'+e.id, {
+                                type:'loop',
+                                autoplay:true,
+                                interval:4000,
+                                perPage: 1,
+                            }).mount();
+                            var sliderNext = document.querySelectorAll('.slider-next');
+                            var sliderPrev = document.querySelectorAll('.slider-prev');
+                            sliderNext.forEach(el => el.addEventListener('click', el => {single.go('>');}));
+                            sliderPrev.forEach(el => el.addEventListener('click', el => {single.go('<');}));
+                        //},100, e);
+                        
+                    });
+                }
+                //Card Extender
+                const cards = document.getElementsByClassName('card');
+                function card_extender(){
+                    var headerHeight, footerHeight, headerOnPage;
+                    var headerOnPage = document.querySelectorAll('.header:not(.header-transparent)')[0];
+                    var footerOnPage = document.querySelectorAll('#footer-bar')[0];
+
+                    headerOnPage ? headerHeight = document.querySelectorAll('.header')[0].offsetHeight : headerHeight = 0
+                    footerOnPage ? footerHeight = document.querySelectorAll('#footer-bar')[0].offsetHeight : footerHeight = 0
+
+                    for (let i = 0; i < cards.length; i++) {
+                        if(cards[i].getAttribute('data-card-height') === "cover"){
+                            if (window.matchMedia('(display-mode: fullscreen)').matches) {var windowHeight = window.outerHeight;}
+                            if (!window.matchMedia('(display-mode: fullscreen)').matches) {var windowHeight = window.innerHeight;}
+                            var coverHeight = windowHeight - headerHeight - footerHeight + 'px';
+                        }
+                        if(cards[i].getAttribute('data-card-height') === "cover-card"){
+                            var windowHeight = window.outerHeight;
+                            var coverHeight = windowHeight - 275 + 'px';
+                            cards[i].style.height =  coverHeight
+                        }
+                        if(cards[i].getAttribute('data-card-height') === "cover-full"){
+                            if (window.matchMedia('(display-mode: fullscreen)').matches) {var windowHeight = window.outerHeight;}
+                            if (!window.matchMedia('(display-mode: fullscreen)').matches) {var windowHeight = window.innerHeight;}
+                            var coverHeight = windowHeight + 'px';
+                            cards[i].style.height =  coverHeight
+                        }
+                        if(cards[i].hasAttribute('data-card-height')){
+                            var getHeight = cards[i].getAttribute('data-card-height');
+                            cards[i].style.height= getHeight +'px';
+                            if(getHeight === "cover"){
+                                var totalHeight = getHeight
+                                cards[i].style.height =  coverHeight
+                            }
+                        }
+                    }
+                }
+
+                if(cards.length){
+                    card_extender();
+                    window.addEventListener("resize", card_extender);
+                }
+            }
+        },
+        fetchPolicy: 'no-cache'
+    },
+  },
   components: {
     PullTo,
   },

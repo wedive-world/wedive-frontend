@@ -11,37 +11,13 @@
         <p class="color-gray mt-2">{{ login_word }}이 필요한 페이지 입니다.</p>
         <a v-on:click="login()" class="btn btn-m mb-3 rounded-xl text-uppercase font-500 shadow-s bg-secondary font-noto"><i class="fas fa-user-lock me-1"></i> {{ login_word }}</a>
     </div>
-    <div :class="'page-content' + ((idToken && nickName)?'':' hide')">
-        <div class="card card-style">
-            <div class="content mb-0 mt-3">
-                <div v-for="(noti,index) in notiData">
-                    <div class="map-box">
-                        <a href="/center/k26">
-                            <div class="bx">
-                                <div class="justify-content-center mb-0 text-start">
-                                    <div class="" style="float: left;position: relative;width: 95px; height:95px;">
-                                        <img v-bind:src="noti.img" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;">
-                                    </div>
-                                    <div class="" style="padding-left: 110px;">
-                                        <h4 class="font-15"> {{noti.title}} </h4>
-                                        <p class="pb-0 mb-0 line-height-m ellipsis"> {{noti.desc}} </p>
-                                        <p class="pb-0 mb-0 mt-n1 ellipsis color-gray-light-mid">
-                                            {{noti.feature}}
-                                        </p>
-                                        <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
-                                            <span> {{noti.star}} </span>
-                                            &nbsp;<font class="color-gray-light">|</font>&nbsp;
-                                            <img src="/static/images/agency/logo_padi.svg" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
-                                            &nbsp;<font class="color-gray-light">|</font>&nbsp;
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="divider mt-3 mb-3"></div>
+    <div :class="'page-content pb-0' + ((idToken && nickName)?'':' hide')">
+        <div class="card mb-0" style="margin-top:50px;min-height: calc(100vh - 50px);">
+            <div v-for="(noti,index) in notiData" v-if="noti.title">
+                <div v-on:click="clickNoti(noti)" class="pt-3 pb-3 pe-4 ps-4 border-bottom">
+                    <h4 class="font-13"><i :class="'me-1 '+notiClass[noti.event]"></i><span class="opacity-70"> {{noti.title}} </span></h4>
+                    <p class="font-15 mb-0 me-3 ms-3" style="line-height:1.3"> {{noti.message}} </p>
                 </div>
-                
             </div>
         </div>
 
@@ -51,11 +27,10 @@
 
     <!-- End of Page Content--> 
     
-    
   </div>
 </template>
 <script>
-const axios = require("axios")
+const axios = require("axios");
 
 export default {
   name: 'HelloWorld',
@@ -69,9 +44,32 @@ export default {
         },
         data: {
             query: `
-            query GetNotifications($skip: Int, $limit: Int) {
+            query Query($skip: Int, $limit: Int) {
                 getNotifications(skip: $skip, limit: $limit) {
                     _id
+                    targetId
+                    targetType
+                    subjectType
+                    subject {
+                    ... on Diving {
+                        _id
+                    }
+                    ... on DiveSite {
+                        _id
+                    }
+                    ... on DivePoint {
+                        _id
+                    }
+                    ... on DiveCenter {
+                        _id
+                    }
+                    ... on Instructor {
+                        _id
+                    }
+                    ... on User {
+                        _id
+                    }
+                    }
                     title
                     message
                     event
@@ -121,10 +119,40 @@ export default {
         login_word : (localStorage.idToken == null) ? '로그인' : '프로필 등록',
         idToken: localStorage.idToken,
         nickName: localStorage.nickName,
+        notiClass: {"onParticipantJoined": "fas fa-user-friends color-highlight", "onParticipantAccepted": "fas fa-glass-cheers color-twitter", "onDivingPreparation": "fas fa-clock color-whatsapp", "onDivingPublicEnded": "fas fa-calendar color-shopping", "onDivingComplete": "fas fa-check-square color-shopping", "onDivingCreatedInDiveCenter": "fas fa-swimming-pool color-secondary", "onDivingCreatedInDivePoint": "fas fa-fish color-secondary", "onDivingCreatedInDiveSite": "fas fa-fish color-secondary", "onDivingCreatedByInstructor": "fas fa-users color-secondary"},
     }
-  }, methods: {
+  }, 
+  methods: {
     setData(notiData) {
         this.notiData = notiData;
+    },
+    async clickNoti(noti) {
+        var result = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                    mutation Mutation($notificationId: ID!) {
+                        read(notificationId: $notificationId) {
+                            success
+                        }
+                    }
+                `,
+                variables: {
+                    "notificationId": noti._id
+                }
+            }
+          });
+          if (result.data && result.data.data && result.data.data.read && result.data.data.read.success == false) {
+              console.log("READ RESULT ERR >>");
+              console.log(result);
+          }
+          var type_to_url = {"diving": "diving", "user": "user", "instructor": "instructor", "diveSite": "site", "divePoint": "point", "diveCenter": "center"};
+          location.href = type_to_url[noti.subjectType] + "/" + noti.subject._id;
     },
   }
 

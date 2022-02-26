@@ -1278,11 +1278,11 @@ export default {
         }
     },
     keyboardShowHandler(event) {
-        $("#snackbar-debug").text(JSON.parse(event))
+        /*$("#snackbar-debug").text(JSON.parse(event))
         var toastData = 'snackbar-debug';
         var notificationToast = document.getElementById(toastData);
         var notificationToast = new bootstrap.Toast(notificationToast);
-        notificationToast.show();
+        notificationToast.show();*/
         //console.log("keyboardShowHandler")
         $('#speech-content').scrollTop($('#speech-content')[0].scrollHeight);
     },

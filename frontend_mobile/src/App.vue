@@ -28,7 +28,7 @@
           <div class="page-title page-title-fixed ps-3">
             <i class="fas fa-arrow-left font-24 me-2 pt-2 hide" style="opacity: 0.6;" id="page-back" v-on:click="goBack()"></i>
             <img href="/" class="logo-image" style="margin-right: auto;" src="/static/images/assets/logo-gray.svg" height="42"/>
-            <a href="/notification" id="wedive-noti" :class="'page-title-icon font-18 hide' + (notiData && notiData.length > 0 && notiData[0].read != null && notiData[0].read == false ? ' has-notification' : '')" style="color:#858585 !important;"><img src="/static/images/assets/icon_notification.png" width="28"></a>
+            <a v-on:click="goNoti()" id="wedive-noti" :class="'page-title-icon font-18 hide' + (notiData && notiData.length > 0 && notiData[0].read != null && notiData[0].read == false ? ' has-notification' : '')" style="color:#858585 !important;"><img src="/static/images/assets/icon_notification.png" width="28"></a>
             <a v-if="pathname == '/'" v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_buddy_new.png" width="28"></a>
             <a v-else-if="pathname == '/chat_home'" v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_chat_new.png" width="26"></a>
             <a v-else-if="pathname == '/forum_home'" v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_book_new.png" width="24"></a>
@@ -249,6 +249,12 @@ export default {
     VueBottomSheet,
   },
   methods: {
+    goNoti() {
+      if(this.idToken != null && this.nickName != null)
+        location.href = '/notification';
+      else
+        this.$refs.loginBottomSheet.open();
+    },
     move(loc) {
       location.href = loc + location.search;
     },
