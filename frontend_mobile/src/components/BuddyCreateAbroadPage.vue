@@ -794,6 +794,22 @@ export default {
                                 type
                             }
                         }
+                        ... on DiveCenter {
+                            _id
+                            uniqueName
+                            name
+                            description
+                            adminScore
+                            latitude
+                            longitude
+                            backgroundImages {
+                                thumbnailUrl
+                            }
+                            interests {
+                                title
+                                type
+                            }
+                        }
                         address
                         latitude
                         longitude

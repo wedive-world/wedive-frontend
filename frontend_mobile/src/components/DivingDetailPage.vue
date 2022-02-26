@@ -142,7 +142,7 @@
                             <img class="inline-block circular_image" :src="(participant.user && participant.user.profileImages && participant.user.profileImages.length>0 && participant.user.profileImages[0].thumbnailUrl) ? participant.user.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty_'+(participant.gender ? participant.gender : 'm')+'.png'" width="50" style="vertical-align: top;"/>
                             <div class="inline-block font-noto ms-3">
                                 <h5 class="mb-0 font-500 font-15">{{ (participant.user!=null&&participant.user.nickName!=null) ? participant.user.nickName : ((participant.name!=null) ? participant.name : '비공개') }}</h5>
-                                <p class="mb-0 font-14 color-gray">{{ (participant.levelShow) ? participant.levelShow : '' }}</p>
+                                <p class="mb-0 font-14 color-gray ellipsis" style="max-width: calc(100vw - 170px);">{{ (participant.levelShow) ? participant.levelShow : '' }}</p>
                             </div>
                         </div>
                         <span v-if="participant.user!=null" v-on:click="chatUser(participant.user)" class="chip chip-s bg-gray-light text-center font-400 wedive-chip">채팅</span>
@@ -161,7 +161,7 @@
                                 <img class="inline-block circular_image" :src="(participant.user && participant.user.profileImages && participant.user.profileImages.length>0 && participant.user.profileImages[0].thumbnailUrl) ? participant.user.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty_'+(participant.gender ? participant.gender : 'm')+'.png'" width="50" style="vertical-align: top;"/>
                                 <div class="inline-block font-noto ms-3">
                                     <h5 class="mb-0 font-500 font-15">{{ (participant.user!=null&&participant.user.nickName!=null) ? participant.user.nickName : ((participant.name!=null) ? participant.name : '비공개') }}</h5>
-                                    <p class="mb-0 font-13 color-gray">{{ (participant.levelShow) ? participant.levelShow : '' }}</p>
+                                    <p class="mb-0 font-13 color-gray ellipsis" style="max-width: calc(100vw - 220px);">{{ (participant.levelShow) ? participant.levelShow : '' }}</p>
                                 </div>
                             </div>
                             <span v-if="participant.user!=null" v-on:click="chatUser(participant.user)" data-menu="menu-dm" class="chip chip-s bg-gray-light text-center font-400 wedive-chip">채팅</span>
@@ -791,22 +791,8 @@ export default {
           }
       },
       async approve() {
-          this.divingData.participants.forEach(participant => {
-              if (participant.user._id == this.requester.user._id) {
-                participant.status = 'joined';
-              }
-          });
-          var _partis = JSON.parse(JSON.stringify(this.divingData.participants));
-          _partis.forEach(_parti => {
-              if (_parti.user != null && _parti.user._id) {
-                  delete _parti.levelShow;
-                  var _id = _parti.user._id;
-                  _parti.user = _id;
-              }
-          });
-          const partis = _partis;
-          
-          const _id = this.divingData._id;
+          const diving_id = this.divingData._id;
+          const user_id = this.requester.user._id;
           var result = await axios({
             url: 'https://api.wedives.com/graphql',
             method: 'post',
@@ -816,16 +802,16 @@ export default {
             },
             data: {
                 query: `
-                    mutation Mutation($input: DivingInput) {
-                        upsertDiving(input: $input) {
-                            _id
+                    mutation Mutation($divingId: ID!, $userId: ID!) {
+                        acceptParticipant(divingId: $divingId, userId: $userId) {
+                            success
                         }
                     }
                 `,
                 variables: {
                     "input": {
-                        "participants": partis,
-                        "_id": _id
+                        "userId": user_id,
+                        "divingId": diving_id
                     }
                 }
             }
@@ -1268,6 +1254,6 @@ export default {
 .wedive-textarea {min-height: 150px;border: 2px solid #e9e9e9;background: #f5f5f5;padding-left: 10px;padding-right: 10px;width:100%;}
 .owner:after {content: '';position: absolute;bottom: 6px;left: 34px;width: 22px;height: 22px;background-image: url(/static/images/assets/crown_s.png);background-repeat: no-repeat;background-size: contain;}
 .wedive-chip {font-family: 'Noto Sans Korean';border-radius:6px !important;padding: 2px 12px;margin:0 !important;position:absolute;right:10px;bottom:20px;color:black !important;}
-.wedive-chip2 {font-family: 'Noto Sans Korean';border-radius:6px !important;padding: 2px 12px;margin:0 !important;position:absolute;right:70px;bottom:20px;color:black !important;}
+.wedive-chip2 {font-family: 'Noto Sans Korean';border-radius:6px !important;padding: 2px 12px;margin:0 !important;position:absolute;right:64px;bottom:20px;color:black !important;}
 .position-relative {position: relative;}
 </style>
