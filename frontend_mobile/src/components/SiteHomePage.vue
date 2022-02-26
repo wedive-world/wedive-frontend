@@ -945,7 +945,8 @@ export default {
         } else {
             if (this.suggestions.length > 0) {
                 this.places = this.suggestions.filter(x => (x && x.includes(this.query_place)));
-            } else {
+            }
+            if (this.suggestions.length == 0 || this.places == 0) {
                 var headers = (localStorage.idToken) ? {countrycode: 'ko', idtoken: localStorage.idToken} : {countrycode: 'ko'};
                 var result = await axios({
                     url: 'https://api.wedives.com/graphql',

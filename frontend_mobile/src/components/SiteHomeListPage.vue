@@ -61,7 +61,7 @@
                     
                     <div v-for="(site,index) in recommendation.previews.filter(x=>x.__typename == 'DiveSite')">
                         <div class="map-box">
-                            <a :href="'/site/' + site.uniqueName">
+                            <a v-on:click="movePreview(site)">
                                 <div class="bx">
                                     <div class="justify-content-center mb-0 text-start">
                                         <div class="" style="float: left;position: relative;width: 95px; height:95px;">
@@ -118,101 +118,6 @@
         </div>
 
         <!--
-        <div class="card card-style " style="background-image: url(/static/images/assets/autumn_back.jpg);background-size: cover;background-repeat: no-repeat;">
-            <div class="content mb-0 mt-3">
-                <h4 class="color-white text-start pt-1 mb-0">지금 떠나기 좋은 다이빙 포인트</h4>
-                <p class="mb-1 color-gray-light">19개 포인트가 기다리고 있어요.</p>
-                <p class="color-white mb-0 opacity-60 ls-n1">#가을&nbsp;&nbsp;#다이빙의 계절</p>
-                <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
-                <img class="mt-n2 float-left" src="/static/images/assets/smartwatch.png" style="margin-left:-20px;padding-top:20px;padding-bottom:16px;"/>
-                <div class="card-overlay bg-gradient-reverse opacity-60" style="z-index: -1;"></div>
-            </div>
-        </div>
-
-        <div class="card card-style">
-            <div class="content mb-0 mt-3">
-                <h4 class="text-start pt-2 mb-0">{{ getUserRecommendationsByTargetType[3].title}}</h4>
-                <p class="mb-3 color-gray-light-mid">{{ getUserRecommendationsByTargetType[3].description }}</p>
-                <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
-                
-                <div v-for="(site,index) in getUserRecommendationsByTargetType[3].previews.filter(x=>x.__typename == 'DiveSite')">
-                    <div class="map-box">
-                        <a href="/site/gosung">
-                            <div class="bx">
-                                <div class="justify-content-center mb-0 text-start">
-                                    <div class="" style="float: left;position: relative;width: 95px; height:95px;">
-                                        <img v-bind:src="(site.backgroundImages && site.backgroundImages.length > 0) ? site.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;">
-                                    </div>
-                                    <div class="" style="padding-left: 110px;">
-                                        <h4 class="font-15"> {{site.name}} </h4>
-                                        <p class="pb-0 mb-0 line-height-m nearby_desc"> {{site.description}} </p>
-                                        <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
-                                            <span> {{ (site.adminScore/20).toFixed(1) }} </span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="divider mt-3 mb-3"></div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="card card-style" style="background: #d7d7d7;">
-            <div class="content mb-0 mt-3">
-                <h4 class="color-black text-start pt-1 mb-0">실내 수영장 포인트</h4>
-                <p class="color-black mb-0 opacity-60 ls-n1">#차근차근&nbsp;&nbsp;#날씨무관</p>
-                <a class="color-black font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;filter:brightness(0)"></i></a>
-                <img class="mt-n2 float-right" src="/static/images/assets/pool.gif" width="240"/>
-            </div>
-        </div>
-
-        
-
-        <div class="card card-style">
-            <div class="content mb-0 mt-3">
-                <h4 class="text-start pt-2 mb-0 color-primary"><img src="/static/images/assets/ico_wedive_d.png" width="30" />위다이브 추천</h4>
-                <p class="mb-3 color-gray-light-mid">38개의 다이빙 센터</p>
-                <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
-                
-                <div v-for="(center,index) in center_list" v-if="index>2 && index<5">
-                    <div class="map-box">
-                        <a href="/site/gosung">
-                            <div class="bx">
-                                <div class="justify-content-center mb-0 text-start">
-                                    <div class="" style="float: left;position: relative;width: 95px; height:95px;">
-                                        <img v-bind:src="center.img" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;">
-                                    </div>
-                                    <div class="" style="padding-left: 110px;">
-                                        <h4 class="font-15"> {{center.title}} </h4>
-                                        <p class="pb-0 mb-0 line-height-m ellipsis"> {{center.desc}} </p>
-                                        <p class="pb-0 mb-0 mt-n1 ellipsis color-gray-light-mid">
-                                            {{center.feature}}
-                                        </p>
-                                        <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
-                                            <span> {{center.star}} </span>
-                                            &nbsp;<font class="color-gray-light">|</font>&nbsp;
-                                            <img src="/static/images/agency/logo_padi.svg" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
-                                            &nbsp;<font class="color-gray-light">|</font>&nbsp;
-                                            <span v-for="i in center.price_index" class="color-gray">₩</span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="divider mt-3 mb-3"></div>
-                </div>
-            </div>
-        </div>
-
-        
-
-        
-        
-
         <div class="card card-style" style="background: #2885df;">
             <div class="content mb-0 mt-3">
                 <h4 class="color-white text-start pt-1 mb-1">환상의 시간, 리브어보드</h4>
@@ -224,14 +129,6 @@
             </div>
         </div>
 
-        <div class="card card-style" style="height:240px;background:url(/static/images/assets/whale.gif);background-size:cover;">
-            <div class="content mb-0 mt-3">
-                <h4 class="text-start pt-1 mb-0">혹동고래 보신분?</h4>
-                <p class="mb-0 opacity-60 ls-n1">#자연의 신비&nbsp;&nbsp;#버킷리스트</p>
-                <a class="font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;filter:invert(1)"></i></a>
-                
-            </div>
-        </div>
         -->
         
         <div data-menu-load="/static/menu-footer.html"></div>
@@ -339,6 +236,7 @@ export default {
                     }
                 }
                 ... on DiveSite {
+                    _id
                     name
                     uniqueName
                     description
@@ -500,6 +398,30 @@ export default {
     PullTo,
   },
   methods: {
+    async movePreview(item) {
+        var dic_type1 = {"DiveSite": "diveSite", "DivePoint": "divePoint", "DiveCenter": "diveCenter", "Diving": "diving", "User": "user", "Review": "review", "Forum": "forum", "Recommendation": "recommendation"};
+        await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                mutation Mutation($targetId: ID!, $targetType: UserReactionTargetType!) {
+                    view(targetId: $targetId, targetType: $targetType)
+                }
+                `,
+                variables: {
+                    "targetId": item._id,
+                    "targetType": dic_type1[item.__typename]
+                }
+            }
+        });
+        var dic_type2 = {"DiveSite": "site", "DivePoint": "point", "DiveCenter": "center", "Diving": "diving", "User": "user", "Review": "review", "Forum": "forum", "Recommendation": "recommendation"};
+        location.href = '/' + dic_type2[item.__typename] + '/' + item.uniqueName;
+    },
     async refresh(loaded) {
       if ($(document).scrollTop() == 0) {
           await this.$apollo.queries.getUserRecommendationsByTargetType.refetch()

@@ -2,7 +2,7 @@
   <div class="">
     <div data-menu-active="nav-chat"></div>
     <div class="header header-fixed header-logo-center">
-        <a href="" class="header-title color ellipsis">{{ roomName || '' }}</a>
+        <a href="" class="header-title color ellipsis">{{ (getChatRoomInfo && getChatRoomInfo.chatRoom ? getChatRoomInfo.chatRoom.title : '') }}</a>
         <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
         <a data-menu="menu-main-right" class="header-icon header-icon-4"><i class="fas fa-bars"></i></a>
 
@@ -120,7 +120,7 @@
     
     <div v-on:click="speechContentClick()" v-on:scroll="handleScroll" id="speech-content" class="card card-style ms-0 me-0 rounded-0" :style="'height: calc(100vh - 50px);overflow-y: auto;padding-top:'+(is_concierge || divingInfo?'130':'50')+'px;padding-bottom:50px;'">
         <div class="content">
-            <div v-for="(chat, index) in getChannelHistories">
+            <div v-for="(chat, index) in getChatRoomInfo.chatMessages">
                 <div v-if="chat.type == 'message'">
                     <div v-if="chat && chat.author && chat.author.uid == uid">
                         <div v-if="chat.text==''" class="hide"></div>
@@ -206,20 +206,21 @@
                     <p class="text-center mb-0 font-11" style="color: #939dac;">대화 제목을 {{ chat.text }}로 변경하였습니다.</p>
                 </div>
                 <div v-else-if="chat.type == 'userInvited' && chat.text != ''">
-                    <p class="text-center mb-0 font-11" style="color: #939dac;">{{ chat.text }}님을 초대하였습니다.</p>
+                    <p class="text-center mb-0 font-11" style="color: #939dac;">{{ chat.author.name }}님을 초대하였습니다.</p>
                 </div>
                 <div v-else-if="chat.type == 'userJoined' && chat.text != ''">
-                    <p class="text-center mb-0 font-11" style="color: #939dac;">{{ chat.text }}님이 합류하였습니다.</p>
+                    <p class="text-center mb-0 font-11" style="color: #939dac;">{{ chat.author.name }}님이 합류하였습니다.</p>
                 </div>
                 <div v-else-if="chat.type == 'userLeaved' && chat.text != ''">
-                    <p class="text-center mb-0 font-11" style="color: #939dac;">{{ chat.text }}님이 나갔습니다.</p>
+                    <p class="text-center mb-0 font-11" style="color: #939dac;">{{ chat.author.name }}님이 나갔습니다.</p>
                 </div>
                 <div v-else-if="chat.type == 'userKicked' && chat.text != ''">
-                    <p class="text-center mb-0 font-11" style="color: #939dac;">{{ chat.text }}님을 내보냈습니다.</p>
+                    <p class="text-center mb-0 font-11" style="color: #939dac;">{{ chat.author.name }}님을 내보냈습니다.</p>
                 </div>
                 
                 <div class="clearfix"></div>
-                <p v-if="(getJoinedRoomList.filter(x=>x._id==roomId).length > 0 ? getJoinedRoomList.filter(x=>x._id==roomId)[0].unread : 0 || 0) > 0 && (getJoinedRoomList.filter(x=>x._id==roomId)[0].unread == (getChannelHistories.length - index - 1))" class="text-center mb-0 font-11 color-gray">여기까지 읽었습니다.</p>
+                
+                <p v-if="(getChatRoomInfo.chatRoom.unread || 0) > 0 && (getChatRoomInfo.chatRoom.unread == (getChatRoomInfo.chatMessages.length - index - 1))" class="text-center mb-0 font-11 color-gray">여기까지 읽었습니다.</p>
             </div>
 
             <div class="hide">
@@ -364,8 +365,8 @@
                 <a v-on:click="setTitle()" class="btn btn-m btn-full mb-3 rounded-xs text-uppercase font-900 shadow-s bg-dark-dark col-3" style="width: 21%;padding: 13px 8px !important;border-radius: 8px !important;">변경</a>
             </div>
             <div class="font-600">대화 상대</div>
-            <div v-if="getJoinedRoomList.filter(x=>x._id==roomId).length > 0">
-                <div v-for="(user, index) in getJoinedRoomList.filter(x=>x._id==roomId)[0].chatUsers" class="pt-1 pb-1">
+            <div v-if="getChatRoomInfo && getChatRoomInfo.chatRoom && getChatRoomInfo.chatRoom.chatUsers">
+                <div v-for="(user, index) in getChatRoomInfo.chatRoom.chatUsers" class="pt-1 pb-1">
                     <svg class="svg-profile user-img user-img-small" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
                         <defs>
                         <path :id="'shapeSquircle'+index" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
@@ -493,7 +494,7 @@
             </div>
         </div>
     </div>
-
+    <div id="snackbar-debug" class="snackbar-toast color-white bg-yellow-dark" data-bs-delay="2000" data-bs-autohide="true"><i class="fa fa-times me-3"></i></div>
     <div id="snackbar-success" class="snackbar-toast color-white bg-green-dark" data-bs-delay="2000" data-bs-autohide="true"><i class="fa fa-times me-3"></i>대화 제목을 변경했어요.</div>
     <div id="snackbar-error" class="snackbar-toast color-white bg-red-dark" data-bs-delay="2000" data-bs-autohide="true"><i class="fa fa-times me-3"></i>에러가 발생하여 제목을 변경하지 못했습니다.</div>
   </div>
@@ -598,7 +599,7 @@ export default {
             this.sendDisable = false;
         }
       },
-      getChannelHistories: function(newVal, oldVal) {
+      getChatRoomInfo: function(newVal, oldVal) {
           if (oldVal.length == 0) {
               setTimeout(function() {
                 $('#speech-content').scrollTop($('#speech-content')[0].scrollHeight);
@@ -635,76 +636,41 @@ export default {
       },
   },
   apollo: {
-    getJoinedRoomList: {
-        query: gql `
-            query {
-                getJoinedRoomList {
-                    lastChatMessage {
-                    text
-                    author {
-                        _id
-                        uid
-                        name
-                        avatarOrigin
-                    }
-                    createdAt
-                    }
-                    _id
-                    title
-                    type
-                    lastMessageAt
-                    numOfmessages
-                    unread
-                    createdAt
-                    chatUsers {
-                    _id
-                    name
-                    uid
-                    avatarOrigin
-                    }
-                    usersCount
-                    owner {
-                    _id
-                    uid
-                    name
-                    avatarOrigin
-                    }
-                }
-            }
-        `,
-        result ({ data }) {
-            try {
-                this.roomInfo = this.getJoinedRoomList.filter(x=>x._id==this.roomId)[0];
-                this.changeTitle = this.roomInfo.title;
-                this.roomName = this.roomInfo.type == 'direct' ? this.roomInfo.chatUsers.filter(user => user.uid != localStorage.uid)[0].name : (this.roomInfo.title == null ? '' : this.roomInfo.title);
-                if (this.roomInfo.type == 'direct' && this.roomInfo.chatUsers.filter(user => user.uid != localStorage.uid)[0].uid == 'RuOiMt9YUTbRUJQTrXv4cWMEimr2') {
-                    this.is_concierge = true;
-                }
-            } catch(e) {
-                console.log(e)
-            }
-        },
-    },
-    getChannelHistories: {
+    getChatRoomInfo: {
         query: gql`query Query($roomId: String!, $skip: Int, $limit: Int) {
-            getChannelHistories(roomId: $roomId, skip: $skip, limit: $limit) {
+            getChatRoomInfo(roomId: $roomId, skip: $skip, limit: $limit) {
+                chatMessages {
                 _id
                 text
-                author {
-                _id
-                uid
-                name
-                avatarOrigin
-                }
                 type
                 attachments {
-                _id
-                attachmentText
-                imageUrl
-                audioUrl
-                videoUrl
+                    attachmentText
+                    imageUrl
+                    audioUrl
+                    videoUrl
+                    _id
                 }
                 createdAt
+                author {
+                    _id
+                    name
+                    uid
+                    avatarOrigin
+                }
+                }
+                roomId
+                chatRoom {
+                unread
+                title
+                _id
+                type
+                chatUsers {
+                    avatarOrigin
+                    _id
+                    uid
+                    name
+                }
+                }
             }
         }`,
         variables () {
@@ -715,8 +681,8 @@ export default {
             }
         },
         result ({ data }) {
-            //console.log(data.getChannelHistories);
-            //data.getChannelHistories.reverse();
+            //console.log(data.getChatRoomInfo);
+            //data.getChatRoomInfo.reverse();
         },
         subscribeToMore: {
             document: gql`subscription Subscription($roomIds: [String]!) {
@@ -745,14 +711,19 @@ export default {
                 }
             },
             updateQuery: (previousResult, { subscriptionData }) => {
-                if (previousResult.getChannelHistories.find(chat => chat._id === subscriptionData.data.subscribeRoomMessage._id)) {
+                if (previousResult.getChatRoomInfo.chatMessages.find(chat => chat._id === subscriptionData.data.subscribeRoomMessage._id)) {
                     return previousResult
                 }
                 return {
-                    getChannelHistories: [
-                        ...previousResult.getChannelHistories,
-                        subscriptionData.data.subscribeRoomMessage,
-                    ],
+                    getChatRoomInfo: {
+                        roomId: previousResult.getChatRoomInfo.roomId,
+                        chatRoom: previousResult.getChatRoomInfo.chatRoom,
+                        __typename: previousResult.getChatRoomInfo.__typename,
+                        chatMessages: [
+                            ...previousResult.getChatRoomInfo.chatMessages || [],
+                            subscriptionData.data.subscribeRoomMessage || [],
+                        ]
+                    },
                 }
             },
         }
@@ -776,7 +747,7 @@ export default {
         //element.scrollTop = element.scrollHeight;
     },200);
 
-    //console.log(this.$apollo.queries.chats.observer.lastResult.data.getChannelHistories);
+    //console.log(this.$apollo.queries.chats.observer.lastResult.data.getChatRoomInfo);
 
     /*$("#speech-content").scroll(function () {
         var position = $("#speech-content").scrollTop();
@@ -812,12 +783,10 @@ export default {
         locationSelectedList: [],
         sendText: '',
         sendDisable: true,        
-        getChannelHistories: [],
-        getJoinedRoomList: [],
+        getChatRoomInfo: [],
         roomId: '',
-        roomName: '',
         skip: 0,
-        limit: 50,
+        limit: 20,
         prev_height: 0,
         uid: localStorage.uid,
         is_emoji: false,
@@ -1089,7 +1058,6 @@ export default {
                 });
                 
                 this.sendText = '';
-                var ret = (result.data && result.data.data && result.data.data.getJoinedRoomList) ? result.data.data.getJoinedRoomList : null
             }
             if(preloader){
                 preloader.classList.remove('opacity-50');
@@ -1239,7 +1207,7 @@ export default {
             this.skip += this.limit;
             this.prev_height = $('#speech-content')[0].scrollHeight;
             
-            this.$apollo.queries.getChannelHistories.fetchMore({
+            this.$apollo.queries.getChatRoomInfo.fetchMore({
                 // New variables
                 variables: {
                     skip: this.skip,
@@ -1250,12 +1218,18 @@ export default {
                 updateQuery: (previousResult, { fetchMoreResult }) => {
                     
                     //this.skip += this.limit;
-                    
+                    //console.log(previousResult.getChatRoomInfo.chatMessages)
+                    //console.log(fetchMoreResult.getChatRoomInfo.chatMessages)
                     return {
-                        getChannelHistories: [
-                            ...fetchMoreResult.getChannelHistories,
-                            ...previousResult.getChannelHistories,
-                        ],
+                        getChatRoomInfo: {
+                            roomId: previousResult.getChatRoomInfo.roomId,
+                            chatRoom: previousResult.getChatRoomInfo.chatRoom,
+                            __typename: previousResult.getChatRoomInfo.__typename,
+                            chatMessages: [
+                                ...fetchMoreResult.getChatRoomInfo.chatMessages || [],
+                                ...previousResult.getChatRoomInfo.chatMessages || [],
+                            ]
+                        },
                     }
                 },
             });
@@ -1304,6 +1278,11 @@ export default {
         }
     },
     keyboardShowHandler(event) {
+        $("#snackbar-debug").text(JSON.parse(event))
+        var toastData = 'snackbar-debug';
+        var notificationToast = document.getElementById(toastData);
+        var notificationToast = new bootstrap.Toast(notificationToast);
+        notificationToast.show();
         //console.log("keyboardShowHandler")
         $('#speech-content').scrollTop($('#speech-content')[0].scrollHeight);
     },
@@ -1335,7 +1314,6 @@ export default {
                 });
                 this.is_emoji_clicked = false;
                 this.sendText = '';
-                var ret = (result.data && result.data.data && result.data.data.getJoinedRoomList) ? result.data.data.getJoinedRoomList : null
             }
             // 02. 이미지
             if (this.is_image_attached) {
@@ -1424,7 +1402,6 @@ export default {
                 });
                 
                 this.sendText = '';
-                var ret = (result.data && result.data.data && result.data.data.getJoinedRoomList) ? result.data.data.getJoinedRoomList : null
             }
         }
     },

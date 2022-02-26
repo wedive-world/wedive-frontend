@@ -41,9 +41,8 @@ if (window.location.pathname.indexOf('/chat/') == 0) {
       reconnect: true,
       connectionParams: {
         "content-type": "application/json",
-          countryCode: "ko",
-          idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-        
+        countryCode: "ko",
+        idtoken: (localStorage.idToken) ? localStorage.idToken : "",
       },
     }
   })

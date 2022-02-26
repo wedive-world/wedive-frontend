@@ -265,6 +265,10 @@ export default {
                     lastMessageAt
                     numOfmessages
                     unread
+                    divingInfo {
+                    title
+                    daysLeft
+                    }
                     createdAt
                     chatUsers {
                     _id

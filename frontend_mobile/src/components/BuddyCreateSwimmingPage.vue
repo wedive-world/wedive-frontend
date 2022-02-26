@@ -73,7 +73,7 @@
                                     <div class="p-2 row">
                                         <div class="form-check interest-check col-3" v-for="(hour,index) in hour_array" style="width: 25%;margin-left:0px;margin-right:0px;padding-left:calc(var(--bs-gutter-x) * .5);">
                                             <input class="form-check-input" type="radio" name="check_hour" value="" :id="'check_hour'+index">
-                                            <label class="form-check-label rounded-xl" :for="'check_hour'+index" style="padding-left:12px;" v-on:click="setHour(index)">{{hour}}</label>
+                                            <label :class="'form-check-label rounded-xl' + (selectedDate && selectedDate.isToday && wediveHourCheck(now, hour) ? ' vc-text-gray-400' : '')" :for="'check_hour'+index" style="padding-left:12px;" v-on:click="setHour(index)">{{hour}}</label>
                                         </div>
                                     </div>
                                 </div>
@@ -350,8 +350,6 @@ export default {
         });
     }
 
-    document.getElementById("footer-bar").classList.add("hide");
-    
     $(".page-title").hide();
     $(".page-title-clear").hide();
     
@@ -415,6 +413,7 @@ export default {
         search_desc: "",
         search_adminScore: "",
         selected_id: "",
+        now: new Date(),
         hour_array: ["7:00", "7:30", "8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30"],
         theme: {
             container: {
@@ -529,6 +528,13 @@ export default {
       },
   },
   methods: {
+      wediveHourCheck(now, hour) {
+          var now_time = ((now.getHours() < 10 ? '0' + now.getHours() : now.getHours()) + ':' + (now.getMinutes() < 10 ? '0' + now.getMinutes() : now.getMinutes()));
+          if (hour.length == 4) {
+              hour = "0" + hour;
+          }
+          return (hour < now_time)
+      },
       next1() {
           $(".progress-bar").css("width", "50%");
       },
@@ -702,6 +708,7 @@ export default {
             notificationToast.show();
         } else {
             this.selectedDate = day;
+            this.now = new Date();
             this.day_show = day.month + "." + day.day + " (" + weekday_ko[day.weekdayPosition] + ")";
             $("#collapse1_area").click();
             $("#collapse2_area").click();

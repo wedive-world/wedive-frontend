@@ -76,7 +76,7 @@
                                     <div class="p-2 row">
                                         <div class="form-check interest-check col-3" v-for="(hour,index) in hour_array" style="width: 25%;margin-left:0px;margin-right:0px;padding-left:calc(var(--bs-gutter-x) * .5);">
                                             <input class="form-check-input" type="radio" name="check_hour" value="" :id="'check_hour'+index">
-                                            <label class="form-check-label rounded-xl" :for="'check_hour'+index" style="padding-left:12px;" v-on:click="setHour(index)">{{hour}}</label>
+                                            <label :class="'form-check-label rounded-xl' + (wediveHourCheck(now, hour) ? ' vc-text-gray-400' : '')" :for="'check_hour'+index" style="padding-left:12px;" v-on:click="setHour(index)">{{hour}}</label>
                                         </div>
                                     </div>
                                 </div>
@@ -338,7 +338,7 @@ import VueTypeaheadBootstrap from 'vue-typeahead-bootstrap';
 import {debounce} from 'lodash';
 const axios = require("axios")
 
-var weekday_ko = ["", "일", "월", "화", "수", "목", "금", "토"];
+var weekday_ko = ["일", "월", "화", "수", "목", "금", "토"];
 function getDistanceFromLatLonInKm(lat1,lng1,lat2,lng2) { function deg2rad(deg) { return deg * (Math.PI/180) } var R = 6371; var dLat = deg2rad(lat2-lat1); var dLon = deg2rad(lng2-lng1); var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2); var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); var d = R * c; return d; }
 export default {
   name: 'BuddySwimming',
@@ -351,8 +351,6 @@ export default {
         });
     }
 
-    document.getElementById("footer-bar").classList.add("hide");
-    
     $(".page-title").hide();
     $(".page-title-clear").hide();
     
@@ -419,6 +417,7 @@ export default {
         search_desc: "",
         search_adminScore: "",
         selected_id: "",
+        now: new Date(),
         hour_array: ["7:00", "7:30", "8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30"],
         theme: {
             container: {
@@ -530,6 +529,17 @@ export default {
       },
   },
   methods: {
+      wediveHourCheck(now, hour) {
+          if (this.selectedRange && this.selectedRange.start && now.toDateString() == this.selectedRange.start.toDateString()) {
+            var now_time = ((now.getHours() < 10 ? '0' + now.getHours() : now.getHours()) + ':' + (now.getMinutes() < 10 ? '0' + now.getMinutes() : now.getMinutes()));
+            if (hour.length == 4) {
+                hour = "0" + hour;
+            }
+            return (hour < now_time)
+          } else {
+            return false;
+          }
+      },
       next1() {
           $(".progress-bar").css("width", "50%");
       },
@@ -644,7 +654,7 @@ export default {
       search_recommend_click(_id, type, name, img, desc, target) {
           this.selected_id = _id;
           this.search_img = img;
-          this.search_type=type;
+          this.search_type=(type == 'site' ? 'DiveSite' : type == 'point' ? 'DivePoint' : 'DiveCenter');
           this.search_loc=name;
           this.search_desc=desc
           $("#search_typeahead").addClass("hide");
@@ -698,6 +708,7 @@ export default {
           try {
               this.selectedRange.start = new Date(range.start.getTime());
               this.selectedRange.end = new Date(range.end.getTime());
+              this.now = new Date();
           } catch(e) {}
       },
       onDayClick(day) {
