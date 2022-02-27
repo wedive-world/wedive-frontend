@@ -157,7 +157,7 @@
 
 
     <div id="forum-add" 
-         class="menu menu-box-bottom menu-box-bottom-full rounded-0" 
+         class="menu menu-box-modal rounded-0" 
          data-menu-width="cover"
          data-menu-height="cover"
          style="margin-bottom: 0;">
@@ -183,7 +183,7 @@
     </div>
 
     <div id="agenda-add" 
-         class="menu menu-box-bottom menu-box-bottom-full rounded-0" 
+         class="menu menu-box-modal rounded-0" 
          data-menu-width="cover"
          data-menu-height="cover"
          style="margin-bottom: 0;">
@@ -301,7 +301,8 @@ export default {
                 }
             });
             try {
-                Android.vibrate()
+                Android.vibrate();
+                window.navigator.vibrate(20);
             } catch (e) {
                 
             }
@@ -419,7 +420,8 @@ export default {
                 }
             });
             try {
-                Android.vibrate()
+                Android.vibrate();
+                window.navigator.vibrate(20);
             } catch (e) {
                 
             }

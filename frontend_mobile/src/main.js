@@ -79,7 +79,7 @@ if (window.location.pathname.indexOf('/chat/') == 0) {
     link: httpLink,
     cache: new InMemoryCache(),
   })
-} else if (window.location.pathname == '/site_list' || window.location.pathname == '/' || window.location.pathname == '/notification') {
+} else if (window.location.pathname == '/site_list' || window.location.pathname == '/' || window.location.pathname == '/notification' || window.location.pathname == '/other/subscribe') {
   const httpLink = new HttpLink({
     // You should use an absolute URL here
     uri: GRAPHQL_API_URL,

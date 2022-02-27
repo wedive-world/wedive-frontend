@@ -628,7 +628,8 @@ export default {
             }
         });
         try {
-            Android.vibrate()
+            Android.vibrate();
+            window.navigator.vibrate(20);
         } catch (e) {
             
         }

@@ -38,7 +38,9 @@ import TrainingStartPage from '@/components/TrainingStartPage'
 import ForumPage from '@/components/ForumPage'
 import OhterPage from '@/components/OhterPage'
 import NotificationPage from '@/components/NotificationPage'
-import MyDivingPage from '@/components/MyDivingPage'
+import OtherDivingPage from '@/components/OtherDivingPage'
+import OtherSubscribePage from '@/components/OtherSubscribePage'
+import OtherNotiPage from '@/components/OtherNotiPage'
 
 Vue.use(Router)
 
@@ -165,8 +167,18 @@ export default new Router({
     },
     {
       path: '/diving/my',
-      name: 'MyDivingPage',
-      component: MyDivingPage
+      name: 'OtherDivingPage',
+      component: OtherDivingPage
+    },
+    {
+      path: '/other/subscribe',
+      name: 'OtherSubscribePage',
+      component: OtherSubscribePage
+    },
+    {
+      path: '/other/noti',
+      name: 'OtherNotiPage',
+      component: OtherNotiPage
     },
     {
       path: '/diving/:id',

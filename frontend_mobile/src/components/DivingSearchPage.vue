@@ -75,7 +75,7 @@
     
 
     <div id="schedule-suggestion" 
-         class="menu menu-box-bottom menu-box-bottom-full rounded-0" 
+         class="menu menu-box-modal rounded-0" 
          data-menu-width="cover"
          data-menu-height="cover"
          style="margin-bottom: 0;">
@@ -107,7 +107,7 @@
         </div>
     </div>
     <div id="search-suggestion" 
-         class="menu menu-box-bottom menu-box-bottom-full rounded-0" 
+         class="menu menu-box-modal rounded-0" 
          data-menu-width="cover"
          data-menu-height="cover"
          style="margin-bottom: 0;">

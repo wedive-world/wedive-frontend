@@ -291,7 +291,7 @@
 
 
     <div id="location-add" 
-         class="menu menu-box-bottom menu-box-bottom-full rounded-0" 
+         class="menu menu-box-modal rounded-0" 
          data-menu-width="cover"
          data-menu-height="cover"
          style="margin-bottom: 0;z-index: 9999;">
@@ -406,7 +406,7 @@
     </div>
     
     <div id="chat-add" 
-         class="menu menu-box-bottom menu-box-bottom-full rounded-0" 
+         class="menu menu-box-modal rounded-0" 
          data-menu-width="cover"
          data-menu-height="cover"
          style="margin-bottom: 0;">
@@ -894,7 +894,8 @@ export default {
             for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
 
             try {
-                Android.vibrate()
+                Android.vibrate();
+                window.navigator.vibrate(20);
             } catch (e) {
                 
             }

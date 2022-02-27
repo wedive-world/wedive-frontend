@@ -17,42 +17,42 @@
                 <h2 class="font-15 font-300 mb-0"><img src="/static/images/assets/other_user.png" height="30" /><span class="ms-2 vertical-m">내 프로필</span><i class="wedive-txt-all wedive_right" style="top:22px;"></i></h2>
             </div>
         </a>
-        <div class="position-relative border-bottom" style="z-index:1;">
+        <a href="/other/noti"  class="position-relative border-bottom" style="z-index:1;">
             <div class="content pb-0">
                 <h2 class="font-15 font-300 mb-0"><img src="/static/images/assets/other_alarm.png" height="30" /><span class="ms-2 vertical-m">알림 설정</span><i class="wedive-txt-all wedive_right" style="top:22px;"></i></h2>
             </div>
-        </div>
+        </a>
         <div class="position-relative" style="z-index:1;">
             <div class="m-3">
                 <h2 class="font-18 font-600 mb-0">서비스</h2>
             </div>
         </div>
-        <div class="position-relative" style="z-index:1;">
+        <a href="/other/subscribe" class="position-relative" style="z-index:1;">
             <div class="content pb-0">
                 <h2 class="font-15 font-300 mb-0"><img src="/static/images/assets/other_alarm2.png" height="30" /><span class="ms-2 vertical-m">나의 구독 장소</span><i class="wedive-txt-all wedive_right" style="top:22px;"></i></h2>
             </div>
-        </div>
-        <div class="position-relative" style="z-index:1;">
+        </a>
+        <a href="/other/subscribe" class="position-relative" style="z-index:1;">
             <div class="content pb-0">
                 <h2 class="font-15 font-300 mb-0"><img src="/static/images/assets/other_interest.png" height="30" /><span class="ms-2 vertical-m">나의 관심 장소</span><i class="wedive-txt-all wedive_right" style="top:22px;"></i></h2>
             </div>
-        </div>
+        </a>
         <a href="/diving/my" class="position-relative" style="z-index:1;">
             <div class="content pb-0">
                 <h2 class="font-15 font-300 mb-0"><img src="/static/images/assets/other_diving.png" height="30" /><span class="ms-2 vertical-m">나의 버디찾기</span><i class="wedive-txt-all wedive_right" style="top:22px;"></i></h2>
             </div>
         </a>
-        <div class="position-relative" style="z-index:1;">
+        <div class="position-relative border-bottom" style="z-index:1;">
             <div class="content pb-0">
                 <h2 class="font-15 font-300 mb-0"><img src="/static/images/assets/other_review.png" height="30" /><span class="ms-2 vertical-m">나의 리뷰</span><i class="wedive-txt-all wedive_right" style="top:22px;"></i></h2>
             </div>
         </div>
-        <div class="position-relative" style="z-index:1;">
+        <div class="position-relative hide" style="z-index:1;">
             <div class="content pb-0">
                 <h2 class="font-15 font-300 mb-0"><img src="/static/images/assets/other_coupon.png" height="30" /><span class="ms-2 vertical-m">쿠폰</span><i class="wedive-txt-all wedive_right" style="top:22px;"></i></h2>
             </div>
         </div>
-        <div class="position-relative border-bottom" style="z-index:1;">
+        <div class="position-relative hide" style="z-index:1;">
             <div class="content pb-0">
                 <h2 class="font-15 font-300 mb-0"><img src="/static/images/assets/other_bill.png" height="30" /><span class="ms-2 vertical-m">영수증</span><i class="wedive-txt-all wedive_right" style="top:22px;"></i></h2>
             </div>
