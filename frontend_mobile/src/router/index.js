@@ -41,6 +41,7 @@ import NotificationPage from '@/components/NotificationPage'
 import OtherDivingPage from '@/components/OtherDivingPage'
 import OtherSubscribePage from '@/components/OtherSubscribePage'
 import OtherNotiPage from '@/components/OtherNotiPage'
+import OtherPrivacyPage from '@/components/OtherPrivacyPage'
 
 Vue.use(Router)
 
@@ -179,6 +180,11 @@ export default new Router({
       path: '/other/noti',
       name: 'OtherNotiPage',
       component: OtherNotiPage
+    },
+    {
+      path: '/other/privacy',
+      name: 'OtherPrivacyPage',
+      component: OtherPrivacyPage
     },
     {
       path: '/diving/:id',

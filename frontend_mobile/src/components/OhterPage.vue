@@ -62,16 +62,16 @@
                 <h2 class="font-18 font-600 mb-0">약관 및 정책</h2>
             </div>
         </div>
-        <div class="position-relative" style="z-index:1;">
+        <a href="/other/terms" class="position-relative" style="z-index:1;">
             <div class="content pb-0">
                 <h2 class="font-15 font-300 mb-0"><img src="/static/images/assets/other_terms.png" height="30" /><span class="ms-2 vertical-m">이용약관</span><i class="wedive-txt-all wedive_right" style="top:22px;"></i></h2>
             </div>
-        </div>
-        <div class="position-relative" style="z-index:1;">
+        </a>
+        <a href="/other/privacy" class="position-relative" style="z-index:1;">
             <div class="content pb-0">
                 <h2 class="font-15 font-300 mb-0"><img src="/static/images/assets/other_privacy.png" height="30" /><span class="ms-2 vertical-m">개인정보 처리 방침</span><i class="wedive-txt-all wedive_right" style="top:22px;"></i></h2>
             </div>
-        </div>
+        </a>
         
         
     </div>

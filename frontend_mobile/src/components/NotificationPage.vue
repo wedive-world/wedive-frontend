@@ -56,7 +56,6 @@ const axios = require("axios");
 export default {
   name: 'HelloWorld',
   mounted() {
-    console.log("a")
     $(".page-title").hide();
     $(".page-title-clear").hide();
 

@@ -107,7 +107,6 @@ export default {
     }
   },
   mounted() {
-    console.log("a")
     $(".page-title").hide();
     $(".page-title-clear").hide();
     
