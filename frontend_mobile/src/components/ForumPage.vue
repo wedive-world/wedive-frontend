@@ -20,20 +20,33 @@
     <div class="page-content text-start transform-none" style="padding-bottom: 65px;">
         <div class="card card-style ms-0 me-0 rounded-0 mb-0">
             <div class="" id="tab-group-1">
-                <div class="splide topic-slider slider-no-arrows slider-no-dots mb-1 border-bottom">
-                    <div class="splide__track tab-controls tabs-small">
-                        <div class="splide__list" style="min-height:50px;">
-                            <h5 class="splide__slide color-theme mt-3 text-center font-500 font-14 font-noto" data-active data-bs-toggle="collapse" data-bs-target="#tab-log1"><img src="/static/images/assets/ico_wedive_d.png" style="width:20px;" class="me-1" />위다이브</h5>
-                            <h5 class="splide__slide color-theme mt-3 text-center font-500 font-14 font-noto" data-bs-toggle="collapse" data-bs-target="#tab-log2">스쿠바</h5>
-                            <h5 class="splide__slide color-theme mt-3 text-center font-500 font-14 font-noto" data-bs-toggle="collapse" data-bs-target="#tab-log3">프리</h5>
-                            <h5 class="splide__slide color-theme mt-3 text-center font-500 font-14 font-noto" data-bs-toggle="collapse" data-bs-target="#tab-log4">윤장송 동호회</h5>
-                            <h5 class="splide__slide color-theme mt-3 text-center font-500 font-14 font-noto" data-bs-toggle="collapse" data-bs-target="#tab-log4">짱짱맨 동호회</h5>
-                        </div>
-                    </div>
-                </div>
+                
+                
+                <swiper
+                    class="swiper"
+                    :options="swiperOption"
+                >
+                    <swiper-slide>Slide 1</swiper-slide><swiper-slide>Slide 2</swiper-slide
+                    ><swiper-slide>Slide 3</swiper-slide><swiper-slide>Slide 4</swiper-slide
+                    ><swiper-slide>Slide 5</swiper-slide><swiper-slide>Slide 6</swiper-slide
+                    ><swiper-slide>Slide 7</swiper-slide><swiper-slide>Slide 8</swiper-slide
+                    ><swiper-slide>Slide 9</swiper-slide>
+
+                    <div class="swiper-pagination" slot="pagination"></div>
+                </swiper>
+                
 
 
-                <div data-bs-parent="#tab-group-1" class="collapse show" id="tab-log1" style="min-height: 100vh">
+                <!--<swiper
+                    ref="mySwiper"
+                    :slides-per-view="3"
+                    :space-between="50"
+                    @slideChange="onSlideChange"
+                >
+                <swiper-slide
+                    :key="0"
+                    :virtualIndex="0">
+                <div>
                     <div class="p-3">
                         <div style="position:relative;">
                             <img class="inline-block me-2 circular_image" src="/static/images/assets/user_empty_m.png" style="vertical-align: top;width:40px;height:40px;"/>
@@ -118,7 +131,6 @@
                     </div>
                     <div class="square_image inline-block" style="float: right;">
                         <img src="https://d2mgzmtdeipcjp.cloudfront.net/files/good_contents/2020/06/09/15916682352190.png" style="object-fit: cover;"/>
-                        <!--<img class="col-4 p-0" src="https://d2mgzmtdeipcjp.cloudfront.net/files/good_contents/2020/06/09/15916681023733.png"/>-->
                     </div>
                     <div class="p-3">
                         <div class="mt-1">
@@ -136,16 +148,53 @@
                     
                     
                 </div>
-
-
-                <div data-bs-parent="#tab-group-1" class="content collapse" id="tab-log2" style="min-height: 100vh">
-                    asdfg
+                </swiper-slide>
+                <swiper-slide
+                    :key="1"
+                    :virtualIndex="1">
+                <div>
+                    <div class="p-3">
+                        <div style="position:relative;">
+                            <img class="inline-block me-2 circular_image" src="/static/images/assets/user_empty_m.png" style="vertical-align: top;width:40px;height:40px;"/>
+                            <div class="inline-block font-noto">
+                                <h5 class="mb-0 font-500 font-15">짱스</h5>
+                                <p class="mb-0 mt-n1 font-13 color-gray">초보 다이버</p>
+                            </div>
+                            <p class="color-gray-dark mb-0 font-12" style="position: absolute;right: 0px;top: 0;">10분 전</p>
+                        </div>
+                        <div class="mt-1">
+                            <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 잠실 수영장</p>
+                        </div>
+                        <div class="mt-3">
+                            오랫만에 다이빙을 왔는데 정말정말 재미있네요.<br/>코시국에 이만한 힐링이 없어요.<br/>다들 새해 복 많이 받으세요~
+                        </div>
+                    </div>
                 </div>
-
-                <div data-bs-parent="#tab-group-1" class="content collapse" id="tab-log3" style="min-height: 100vh">
-                    aaaaaa
+                </swiper-slide>
+                <swiper-slide
+                    :key="2"
+                    :virtualIndex="2">
+                <div>
+                    <div class="p-3">
+                        <div style="position:relative;">
+                            <img class="inline-block me-2 circular_image" src="/static/images/assets/user_empty_m.png" style="vertical-align: top;width:40px;height:40px;"/>
+                            <div class="inline-block font-noto">
+                                <h5 class="mb-0 font-500 font-15">짱스</h5>
+                                <p class="mb-0 mt-n1 font-13 color-gray">초보 다이버</p>
+                            </div>
+                            <p class="color-gray-dark mb-0 font-12" style="position: absolute;right: 0px;top: 0;">10분 전</p>
+                        </div>
+                        <div class="mt-1">
+                            <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 잠실 수영장</p>
+                        </div>
+                        <div class="mt-3">
+                            오랫만에 다이빙을 왔는데 정말정말 재미있네요.<br/>코시국에 이만한 힐링이 없어요.<br/>다들 새해 복 많이 받으세요~
+                        </div>
+                    </div>
                 </div>
-                
+                </swiper-slide>
+                </swiper>
+                -->
                 
                 
             </div>
@@ -226,6 +275,9 @@
   </div>
 </template>
 <script>
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+import 'swiper/css/swiper.css'
+
 import gql from 'graphql-tag'
 import PullTo from 'vue-pull-to'
 const axios = require("axios")
@@ -234,6 +286,8 @@ export default {
   name: 'HelloWorld',
   components: {
     PullTo,
+    Swiper,
+    SwiperSlide,
   },
   watch: {
       review_detail: function(newVal, oldVal) {
@@ -259,6 +313,11 @@ export default {
       },
   },
   methods: {
+      onSlideChange() {
+          //$(".splide__list").removeAttr("data-active");
+          //$("#splide__list" + this.swiper.activeIndex).addAttr("data-active");
+          console.log("a")
+      },
       addImage({ target: { files = [] } }) {
         if (!files.length) {
           return;
@@ -480,8 +539,24 @@ export default {
   beforeDestroy() {
     window.removeEventListener('scroll', this.handleScroll);
   },
+  computed: {
+    swiper() {
+        return this.$refs.mySwiper.swiper;
+    }
+  },
   data () {
     return {
+        swiperOption: {
+            slidesPerView: 4,
+            spaceBetween: 30,
+            pagination: {
+                el: '.swiper-pagination'
+            },
+            //slidesOffsetBefore: 130, // slidesOffsetBefore는 첫번째 슬라이드의 시작점에 대한 변경할 때 사용
+            //slidesOffsetAfter: 130, // slidesOffsetAfter는 마지막 슬라이드 시작점 + 마지막 슬라이드 너비에 해당하는 위치의 변경이 필요할 때 사용
+            centeredSlides: true,
+            
+        },
         isWritten: 0,
         isForumWritten: 0,
         scrollTop: 0,
@@ -537,4 +612,5 @@ export default {
 @keyframes fadeout50 {from {opacity: 0.5;}to {opacity: 0;}}
 
 .wedive-textarea {min-height: 150px;padding-left: 10px;padding-right: 10px;}
+
 </style>
