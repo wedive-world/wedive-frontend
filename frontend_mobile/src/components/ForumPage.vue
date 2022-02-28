@@ -2,26 +2,9 @@
   <div class="">
     <div data-menu-active="nav-forum"></div>
 
-    <pull-to :top-load-method="refresh" @top-state-change="stateChange" :top-config="TOP_DEFAULT_CONFIG" :is-bottom-bounce="false" :is-top-bounce="scrollTop == 0">
-    <template slot="top-block" slot-scope="props">
-      <div :class="'top-load-wrapper opacity-50' + (props.state === 'loaded-done' ? ' fadeout' : '')">
-        <i class="font-18 fas"
-             :class="{
-                'fa-arrow-down': props.state === 'pull',
-                'fa-arrow-down': props.state === 'trigger',
-                'fa-spinner': props.state === 'loading',
-                'fa-check': props.state === 'loaded-done'
-             }"
-             aria-hidden="true">
-        </i>
-        {{ props.stateText }}
-      </div>
-    </template>
     <div class="page-content text-start transform-none" style="padding-bottom: 65px;">
         <div class="card card-style ms-0 me-0 rounded-0 mb-0">
-            <div class="" id="tab-group-1">
-                
-                
+            <div class="" id="tab-forum" style="background-color: #eff5fb;border-bottom:3px solid #d7dce0;">
                 <swiper
                     ref="tabSwiper"
                     class="swiper wedive-swiper"
@@ -37,8 +20,8 @@
                     
                     <div class="swiper-pagination" slot="pagination"></div>
                 </swiper>
-                
-
+            </div>
+            <div>
                 <swiper
                     ref="contentSwiper"
                     class="wedive-content-swiper"
@@ -47,152 +30,200 @@
                 <swiper-slide
                     :key="0"
                     :virtualIndex="0">
-                <div>
-                    <div class="p-3">
-                        <div style="position:relative;">
-                            <img class="inline-block me-2 circular_image" src="/static/images/assets/user_empty_m.png" style="vertical-align: top;width:40px;height:40px;"/>
-                            <div class="inline-block font-noto">
-                                <h5 class="mb-0 font-500 font-15">짱스</h5>
-                                <p class="mb-0 mt-n1 font-13 color-gray">초보 다이버</p>
+                <pull-to :top-load-method="refresh" @top-state-change="stateChange" :top-config="TOP_DEFAULT_CONFIG" :is-bottom-bounce="false" :is-top-bounce="scrollTop == 0">
+                    <template slot="top-block" slot-scope="props">
+                    <div :class="'top-load-wrapper opacity-50' + (props.state === 'loaded-done' ? ' fadeout' : '')">
+                        <i class="font-18 fas"
+                            :class="{
+                                'fa-arrow-down': props.state === 'pull',
+                                'fa-arrow-down': props.state === 'trigger',
+                                'fa-spinner': props.state === 'loading',
+                                'fa-check': props.state === 'loaded-done'
+                            }"
+                            aria-hidden="true">
+                        </i>
+                        {{ props.stateText }}
+                    </div>
+                    </template>
+                        <div class="pb-5">
+                            <div class="p-3">
+                                <div style="position:relative;">
+                                    <img class="inline-block me-2 circular_image" src="/static/images/assets/user_empty_m.png" style="vertical-align: top;width:40px;height:40px;"/>
+                                    <div class="inline-block font-noto">
+                                        <h5 class="mb-0 font-500 font-15">짱스</h5>
+                                        <p class="mb-0 mt-n1 font-13 color-gray">초보 다이버</p>
+                                    </div>
+                                    <p class="color-gray-dark mb-0 font-12" style="position: absolute;right: 0px;top: 0;">10분 전</p>
+                                </div>
+                                <div class="mt-1">
+                                    <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 잠실 수영장</p>
+                                </div>
+                                <div class="mt-3">
+                                    오랫만에 다이빙을 왔는데 정말정말 재미있네요.<br/>코시국에 이만한 힐링이 없어요.<br/>다들 새해 복 많이 받으세요~
+                                </div>
                             </div>
-                            <p class="color-gray-dark mb-0 font-12" style="position: absolute;right: 0px;top: 0;">10분 전</p>
-                        </div>
-                        <div class="mt-1">
-                            <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 잠실 수영장</p>
-                        </div>
-                        <div class="mt-3">
-                            오랫만에 다이빙을 왔는데 정말정말 재미있네요.<br/>코시국에 이만한 힐링이 없어요.<br/>다들 새해 복 많이 받으세요~
-                        </div>
-                    </div>
-                    <div class="p-3">
-                        <div class="mt-1">
-                            <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#힐링</span>
-                            <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#새해</span>
-                            <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#다이빙</span>
-                        </div>
-                        <div class="mt-4 mb-3">
-                            <img src="/static/images/assets/ico_heart.png" width="22" class="me-1" style="margin-top:-1px;"/><span class="font-14 font-noto">1</span>
-                            &nbsp;&nbsp;
-                            <img src="/static/images/assets/ico_chat.png" width="22" class="me-1" style="margin-top:-1px;"/><span class="font-14 font-noto">1</span>
-                        </div>
-                    </div>
-                    <div class="divider mb-0" style="height:12px;border-top: 1px solid #88888840"></div>
+                            <div class="p-3">
+                                <div class="mt-1">
+                                    <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#힐링</span>
+                                    <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#새해</span>
+                                    <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#다이빙</span>
+                                </div>
+                                <div class="mt-4 mb-3">
+                                    <img src="/static/images/assets/ico_heart.png" width="22" class="me-1" style="margin-top:-1px;"/><span class="font-14 font-noto">1</span>
+                                    &nbsp;&nbsp;
+                                    <img src="/static/images/assets/ico_chat.png" width="22" class="me-1" style="margin-top:-1px;"/><span class="font-14 font-noto">1</span>
+                                </div>
+                            </div>
+                            <div class="divider mb-0" style="height:12px;border-top: 1px solid #88888840"></div>
 
-                    <div class="p-3">
-                        <div style="position:relative;">
-                            <img class="inline-block me-2 circular_image" src="/static/images/assets/user_empty_m.png" style="vertical-align: top;width:40px;height:40px;"/>
-                            <div class="inline-block font-noto">
-                                <h5 class="mb-0 font-500 font-15">짱스</h5>
-                                <p class="mb-0 mt-n1 font-13 color-gray">초보 다이버</p>
+                            <div class="p-3">
+                                <div style="position:relative;">
+                                    <img class="inline-block me-2 circular_image" src="/static/images/assets/user_empty_m.png" style="vertical-align: top;width:40px;height:40px;"/>
+                                    <div class="inline-block font-noto">
+                                        <h5 class="mb-0 font-500 font-15">짱스</h5>
+                                        <p class="mb-0 mt-n1 font-13 color-gray">초보 다이버</p>
+                                    </div>
+                                    <p class="color-gray-dark mb-0 font-12" style="position: absolute;right: 0px;top: 0;">1일 전</p>
+                                </div>
+                                <div class="mt-1">
+                                    <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 문섬 포인트</p>
+                                </div>
+                                <div class="mt-3">
+                                    오랫만에 다이빙을 왔는데 정말정말 재미있네요.<br/>코시국에 이만한 힐링이 없어요.<br/>다들 새해 복 많이 받으세요~<br/>
+                                </div>
                             </div>
-                            <p class="color-gray-dark mb-0 font-12" style="position: absolute;right: 0px;top: 0;">1일 전</p>
-                        </div>
-                        <div class="mt-1">
-                            <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 문섬 포인트</p>
-                        </div>
-                        <div class="mt-3">
-                            오랫만에 다이빙을 왔는데 정말정말 재미있네요.<br/>코시국에 이만한 힐링이 없어요.<br/>다들 새해 복 많이 받으세요~<br/>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <img class="col-12" src="https://fg.startupbridgeva.com/f/m3h/TOb/0kN/9OiKsk0MTnPMjkpw6CwyrDA0jAjOTUxKTc7NVsvqyAdAA.jpg" style="width:100%;"/>
-                    </div>
-                    <div class="p-3">
-                        <div class="mt-1">
-                            <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#힐링</span>
-                            <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#새해</span>
-                            <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#다이빙</span>
-                        </div>
-                        <div class="mt-4 mb-3">
-                            <img src="/static/images/assets/ico_heart.png" width="22" class="me-1" style="margin-top:-1px;"/><span class="font-14 font-noto">6</span>
-                            &nbsp;&nbsp;
-                            <img src="/static/images/assets/ico_chat.png" width="22" class="me-1" style="margin-top:-1px;"/><span class="font-14 font-noto">20</span>
-                        </div>
-                    </div>
-                    <div class="divider mb-0" style="height:12px;border-top: 1px solid #88888840"></div>
-                    
-                    <div class="p-3">
-                        <div style="position:relative;">
-                            <img class="inline-block me-2 circular_image" src="/static/images/assets/user_empty_m.png" style="vertical-align: top;width:40px;height:40px;"/>
-                            <div class="inline-block font-noto">
-                                <h5 class="mb-0 font-500 font-15">짱스</h5>
-                                <p class="mb-0 mt-n1 font-13 color-gray">초보 다이버</p>
+                            <div class="row">
+                                <img class="col-12" src="https://fg.startupbridgeva.com/f/m3h/TOb/0kN/9OiKsk0MTnPMjkpw6CwyrDA0jAjOTUxKTc7NVsvqyAdAA.jpg" style="width:100%;"/>
                             </div>
-                            <p class="color-gray-dark mb-0 font-12" style="position: absolute;right: 0px;top: 0;">1일 전</p>
+                            <div class="p-3">
+                                <div class="mt-1">
+                                    <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#힐링</span>
+                                    <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#새해</span>
+                                    <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#다이빙</span>
+                                </div>
+                                <div class="mt-4 mb-3">
+                                    <img src="/static/images/assets/ico_heart.png" width="22" class="me-1" style="margin-top:-1px;"/><span class="font-14 font-noto">6</span>
+                                    &nbsp;&nbsp;
+                                    <img src="/static/images/assets/ico_chat.png" width="22" class="me-1" style="margin-top:-1px;"/><span class="font-14 font-noto">20</span>
+                                </div>
+                            </div>
+                            <div class="divider mb-0" style="height:12px;border-top: 1px solid #88888840"></div>
+                            
+                            <div class="p-3">
+                                <div style="position:relative;">
+                                    <img class="inline-block me-2 circular_image" src="/static/images/assets/user_empty_m.png" style="vertical-align: top;width:40px;height:40px;"/>
+                                    <div class="inline-block font-noto">
+                                        <h5 class="mb-0 font-500 font-15">짱스</h5>
+                                        <p class="mb-0 mt-n1 font-13 color-gray">초보 다이버</p>
+                                    </div>
+                                    <p class="color-gray-dark mb-0 font-12" style="position: absolute;right: 0px;top: 0;">1일 전</p>
+                                </div>
+                                <div class="mt-1">
+                                    <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i>제주 사이트</p>
+                                </div>
+                                <div class="mt-3">
+                                    오랫만에 다이빙을 왔는데 정말정말 재미있네요.<br/>코시국에 이만한 힐링이 없어요.<br/>다들 새해 복 많이 받으세요~<br/>
+                                </div>
+                            </div>
+                            <div class="square_image inline-block">
+                                <img src="https://d2mgzmtdeipcjp.cloudfront.net/files/good_contents/2020/06/09/15916682888292.png" style="object-fit: cover;"/>
+                            </div>
+                            <div class="square_image inline-block" style="float: right;">
+                                <img src="https://d2mgzmtdeipcjp.cloudfront.net/files/good_contents/2020/06/09/15916682352190.png" style="object-fit: cover;"/>
+                            </div>
+                            <div class="p-3">
+                                <div class="mt-1">
+                                    <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#힐링</span>
+                                    <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#새해</span>
+                                    <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#다이빙</span>
+                                </div>
+                                <div class="mt-4 mb-3">
+                                    <img src="/static/images/assets/ico_heart.png" width="22" class="me-1" style="margin-top:-1px;"/><span class="font-14 font-noto">6</span>
+                                    &nbsp;&nbsp;
+                                    <img src="/static/images/assets/ico_chat.png" width="22" class="me-1" style="margin-top:-1px;"/><span class="font-14 font-noto">20</span>
+                                </div>
+                            </div>
+                            <div class="divider mb-0" style="height:12px;border-top: 1px solid #88888840"></div>
+                            
+                            
                         </div>
-                        <div class="mt-1">
-                            <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i>제주 사이트</p>
-                        </div>
-                        <div class="mt-3">
-                            오랫만에 다이빙을 왔는데 정말정말 재미있네요.<br/>코시국에 이만한 힐링이 없어요.<br/>다들 새해 복 많이 받으세요~<br/>
-                        </div>
-                    </div>
-                    <div class="square_image inline-block">
-                        <img src="https://d2mgzmtdeipcjp.cloudfront.net/files/good_contents/2020/06/09/15916682888292.png" style="object-fit: cover;"/>
-                    </div>
-                    <div class="square_image inline-block" style="float: right;">
-                        <img src="https://d2mgzmtdeipcjp.cloudfront.net/files/good_contents/2020/06/09/15916682352190.png" style="object-fit: cover;"/>
-                    </div>
-                    <div class="p-3">
-                        <div class="mt-1">
-                            <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#힐링</span>
-                            <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#새해</span>
-                            <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#다이빙</span>
-                        </div>
-                        <div class="mt-4 mb-3">
-                            <img src="/static/images/assets/ico_heart.png" width="22" class="me-1" style="margin-top:-1px;"/><span class="font-14 font-noto">6</span>
-                            &nbsp;&nbsp;
-                            <img src="/static/images/assets/ico_chat.png" width="22" class="me-1" style="margin-top:-1px;"/><span class="font-14 font-noto">20</span>
-                        </div>
-                    </div>
-                    <div class="divider mb-0" style="height:12px;border-top: 1px solid #88888840"></div>
-                    
-                    
-                </div>
+                    </pull-to>
                 </swiper-slide>
                 <swiper-slide
                     :key="1"
                     :virtualIndex="1">
-                <div>
-                    <div class="p-3">
-                        <div style="position:relative;">
-                            <img class="inline-block me-2 circular_image" src="/static/images/assets/user_empty_m.png" style="vertical-align: top;width:40px;height:40px;"/>
-                            <div class="inline-block font-noto">
-                                <h5 class="mb-0 font-500 font-15">짱스</h5>
-                                <p class="mb-0 mt-n1 font-13 color-gray">초보 다이버</p>
-                            </div>
-                            <p class="color-gray-dark mb-0 font-12" style="position: absolute;right: 0px;top: 0;">10분 전</p>
-                        </div>
-                        <div class="mt-1">
-                            <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 잠실 수영장</p>
-                        </div>
-                        <div class="mt-3">
-                            오랫만에 다이빙을 왔는데 정말정말 재미있네요.<br/>코시국에 이만한 힐링이 없어요.<br/>다들 새해 복 많이 받으세요~
-                        </div>
+                <pull-to :top-load-method="refresh" @top-state-change="stateChange" :top-config="TOP_DEFAULT_CONFIG" :is-bottom-bounce="false" :is-top-bounce="scrollTop == 0">
+                    <template slot="top-block" slot-scope="props">
+                    <div :class="'top-load-wrapper opacity-50' + (props.state === 'loaded-done' ? ' fadeout' : '')">
+                        <i class="font-18 fas"
+                            :class="{
+                                'fa-arrow-down': props.state === 'pull',
+                                'fa-arrow-down': props.state === 'trigger',
+                                'fa-spinner': props.state === 'loading',
+                                'fa-check': props.state === 'loaded-done'
+                            }"
+                            aria-hidden="true">
+                        </i>
+                        {{ props.stateText }}
                     </div>
-                </div>
+                    </template>
+                        <div class="pb-5">
+                            <div class="p-3">
+                                <div style="position:relative;">
+                                    <img class="inline-block me-2 circular_image" src="/static/images/assets/user_empty_m.png" style="vertical-align: top;width:40px;height:40px;"/>
+                                    <div class="inline-block font-noto">
+                                        <h5 class="mb-0 font-500 font-15">짱스</h5>
+                                        <p class="mb-0 mt-n1 font-13 color-gray">초보 다이버</p>
+                                    </div>
+                                    <p class="color-gray-dark mb-0 font-12" style="position: absolute;right: 0px;top: 0;">10분 전</p>
+                                </div>
+                                <div class="mt-1">
+                                    <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 잠실 수영장</p>
+                                </div>
+                                <div class="mt-3">
+                                    오랫만에 다이빙을 왔는데 정말정말 재미있네요.<br/>코시국에 이만한 힐링이 없어요.<br/>다들 새해 복 많이 받으세요~
+                                </div>
+                            </div>
+                        </div>
+                    </pull-to>
                 </swiper-slide>
                 <swiper-slide
                     :key="2"
                     :virtualIndex="2">
-                <div>
-                    <div class="p-3">
-                        <div style="position:relative;">
-                            <img class="inline-block me-2 circular_image" src="/static/images/assets/user_empty_m.png" style="vertical-align: top;width:40px;height:40px;"/>
-                            <div class="inline-block font-noto">
-                                <h5 class="mb-0 font-500 font-15">짱스</h5>
-                                <p class="mb-0 mt-n1 font-13 color-gray">초보 다이버</p>
-                            </div>
-                            <p class="color-gray-dark mb-0 font-12" style="position: absolute;right: 0px;top: 0;">10분 전</p>
-                        </div>
-                        <div class="mt-1">
-                            <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 잠실 수영장</p>
-                        </div>
-                        <div class="mt-3">
-                            오랫만에 다이빙을 왔는데 정말정말 재미있네요.<br/>코시국에 이만한 힐링이 없어요.<br/>다들 새해 복 많이 받으세요~
-                        </div>
+                <pull-to :top-load-method="refresh" @top-state-change="stateChange" :top-config="TOP_DEFAULT_CONFIG" :is-bottom-bounce="false" :is-top-bounce="scrollTop == 0">
+                    <template slot="top-block" slot-scope="props">
+                    <div :class="'top-load-wrapper opacity-50' + (props.state === 'loaded-done' ? ' fadeout' : '')">
+                        <i class="font-18 fas"
+                            :class="{
+                                'fa-arrow-down': props.state === 'pull',
+                                'fa-arrow-down': props.state === 'trigger',
+                                'fa-spinner': props.state === 'loading',
+                                'fa-check': props.state === 'loaded-done'
+                            }"
+                            aria-hidden="true">
+                        </i>
+                        {{ props.stateText }}
                     </div>
-                </div>
+                    </template>
+                        <div class="pb-5">
+                            <div class="p-3">
+                                <div style="position:relative;">
+                                    <img class="inline-block me-2 circular_image" src="/static/images/assets/user_empty_m.png" style="vertical-align: top;width:40px;height:40px;"/>
+                                    <div class="inline-block font-noto">
+                                        <h5 class="mb-0 font-500 font-15">짱스</h5>
+                                        <p class="mb-0 mt-n1 font-13 color-gray">초보 다이버</p>
+                                    </div>
+                                    <p class="color-gray-dark mb-0 font-12" style="position: absolute;right: 0px;top: 0;">10분 전</p>
+                                </div>
+                                <div class="mt-1">
+                                    <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 잠실 수영장</p>
+                                </div>
+                                <div class="mt-3">
+                                    오랫만에 다이빙을 왔는데 정말정말 재미있네요.<br/>코시국에 이만한 힐링이 없어요.<br/>다들 새해 복 많이 받으세요~
+                                </div>
+                            </div>
+                        </div>
+                    </pull-to>
                 </swiper-slide>
                 </swiper>
                 
@@ -203,7 +234,6 @@
         </div>
     
     </div>
-    </pull-to>
 
 
     <div id="forum-add" 
@@ -564,8 +594,8 @@ export default {
   data () {
     return {
         swiperOption: {
-            slidesPerView: 4,
-            spaceBetween: 30,
+            slidesPerView: 3.7,
+            spaceBetween: 5,
             //pagination: {
             //    el: '.swiper-pagination'
             //},

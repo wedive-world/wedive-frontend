@@ -32,7 +32,7 @@
                 <h2 class="font-20 font-700 mb-0 mt-1">{{ pointData.name }}</h2>
                 <h2 class="wedive-score">{{ (pointData.adminScore/20).toFixed(1) }}</h2>
                 <span class="wedive-score-desc">{{ recommend_word[parseInt(pointData.adminScore/20)] }}</span>
-                <p class="color-gray m-0"><i class="fas fa-map-marked-alt" ></i> {{ pointData.address }}</p>
+                <p class="color-gray m-0 ellipsis" style="max-width: calc(100vw - 130px);display: inline-block;"><i class="fas fa-map-marked-alt" ></i> {{ pointData.address }}</p>
                 
 
                 <div class="evaluation mt-3">
