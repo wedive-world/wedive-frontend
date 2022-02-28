@@ -809,16 +809,14 @@ export default {
                     }
                 `,
                 variables: {
-                    "input": {
-                        "userId": user_id,
-                        "divingId": diving_id
-                    }
+                    "userId": user_id,
+                    "divingId": diving_id
                 }
             }
           });
           
           this.request_result = "승인";
-          if (result.data && result.data.data && result.data.data.upsertDiving) {
+          if (result.data && result.data.data && result.data.data.acceptParticipant) {
               const activeMenu = document.querySelectorAll('.menu-active');
               for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
 

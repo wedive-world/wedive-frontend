@@ -195,6 +195,13 @@ export default {
     if (localStorage.perferedSite == null) {
       localStorage.perferedSite = '/site_list';
     }
+
+    window.onpopstate = history.onpushstate = function(e) {
+      if(window.location.href.split('/').pop().indexOf('modal')===-1){
+        window.localStorage.gclose = "1";
+        $(".gclose").eq(0).click();
+      }
+    }
   },
   async created() {
     var noti = null;

@@ -9,19 +9,13 @@ var lightbox = GLightbox({
     preload:true,
 });
 lightbox.on('open', () => {
-    // Do something
-    try {
-        Android.setNeedToGoBack(true);
-    } catch(e) {
-
-    }
+    window.history.pushState({}, 'modal', '/modal');
 });
 
 lightbox.once('close', () => {
-    // Do something just one time
-    try {
-        Android.setNeedToGoBack(false);
-    } catch(e) {
-
+    if (window.localStorage.gclose == "1") {
+        window.localStorage.gclose = '0';
+    } else {
+        window.history.back(); 
     }
 });

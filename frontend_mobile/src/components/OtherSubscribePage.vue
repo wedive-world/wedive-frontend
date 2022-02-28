@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <div class="header header-fixed header-logo-center">
-        <a href="" class="header-title color ellipsis">나의 구독장소</a>
+        <a href="" class="header-title color ellipsis">나의 구독 장소</a>
         <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
     </div>
     <div data-menu-active="nav-other"></div>
@@ -29,14 +29,47 @@
             </div>
         </template>
         <div class="card mb-0" style="min-height: calc(100vh - 50px);">
-            <div v-for="(subscribe,index) in getUserSubsciption">
-                <div v-on:click="clickSubscribe(subscribe)" class="pt-3 pb-3 pe-4 ps-4 border-bottom">
-                    <div v-if="diving.locationData && diving.locationData.backgroundImages && diving.locationData.backgroundImages.length>0" class="" style="float: left;position: relative;width: 68px; height:68px;">
-                        <img v-bind:src="diving.locationData.backgroundImages[0].thumbnailUrl" class="rounded-s mx-auto" width="68" height="68" style="object-fit: cover;">
+            <div v-for="site in getUserSubsciption.diveSites">
+                <div v-on:click="clickEvent(site, 'site')" class="pt-3 pb-3 pe-4 ps-4 border-bottom">
+                    <div v-if="site.backgroundImages && site.backgroundImages.length>0" class="" style="float: left;position: relative;width: 68px; height:68px;">
+                        <img v-bind:src="site.backgroundImages[0].thumbnailUrl" class="rounded-s mx-auto" width="68" height="68" style="object-fit: cover;">
                     </div>
                     <div class="" style="padding-left: 82px;">
-                        <h4 class="mb-0 font-16 font-500">{{ subscribe.name }}</h4>
-                        <p class="font-13 pb-0 mb-0 mt-n1 ellipsis color-gray">{{ subscribe.description }}</p>
+                        <h4 class="mb-2 font-16 font-600">{{ site.name }}</h4>
+                        <p class="font-13 pb-0 mb-0 mt-n1 ellipsis2 color-gray" style="line-height: 1.3;">{{ site.description }}</p>
+                    </div>
+                </div>
+            </div>
+            <div v-for="point in getUserSubsciption.divepoints">
+                <div v-on:click="clickEvent(point, 'point')" class="pt-3 pb-3 pe-4 ps-4 border-bottom">
+                    <div v-if="point.backgroundImages && point.backgroundImages.length>0" class="" style="float: left;position: relative;width: 68px; height:68px;">
+                        <img v-bind:src="point.backgroundImages[0].thumbnailUrl" class="rounded-s mx-auto" width="68" height="68" style="object-fit: cover;">
+                    </div>
+                    <div class="" style="padding-left: 82px;">
+                        <h4 class="mb-2 font-16 font-600">{{ point.name }}</h4>
+                        <p class="font-13 pb-0 mb-0 mt-n1 ellipsis2 color-gray" style="line-height: 1.3;">{{ point.description }}</p>
+                    </div>
+                </div>
+            </div>
+            <div v-for="center in getUserSubsciption.diveCenters">
+                <div v-on:click="clickEvent(center, 'center')" class="pt-3 pb-3 pe-4 ps-4 border-bottom">
+                    <div v-if="center.backgroundImages && center.backgroundImages.length>0" class="" style="float: left;position: relative;width: 68px; height:68px;">
+                        <img v-bind:src="center.backgroundImages[0].thumbnailUrl" class="rounded-s mx-auto" width="68" height="68" style="object-fit: cover;">
+                    </div>
+                    <div class="" style="padding-left: 82px;">
+                        <h4 class="mb-2 font-16 font-600">{{ center.name }}</h4>
+                        <p class="font-13 pb-0 mb-0 mt-n1 ellipsis2 color-gray" style="line-height: 1.3;">{{ center.description }}</p>
+                    </div>
+                </div>
+            </div>
+            <div v-for="diving in getUserSubsciption.divings">
+                <div v-on:click="clickEvent(diving, 'diving')" class="pt-3 pb-3 pe-4 ps-4 border-bottom">
+                    <div v-if="diving.backgroundImages && diving.backgroundImages.length>0" class="" style="float: left;position: relative;width: 68px; height:68px;">
+                        <img v-bind:src="diving.backgroundImages[0].thumbnailUrl" class="rounded-s mx-auto" width="68" height="68" style="object-fit: cover;">
+                    </div>
+                    <div class="" style="padding-left: 82px;">
+                        <h4 class="mb-2 font-16 font-600">{{ diving.name }}</h4>
+                        <p class="font-13 pb-0 mb-0 mt-n1 ellipsis2 color-gray" style="line-height: 1.3;">{{ diving.description }}</p>
                     </div>
                 </div>
             </div>
@@ -109,18 +142,27 @@ export default {
                     uniqueName
                     description
                     adminScore
+                    backgroundImages{
+                        thumbnailUrl
+                    }
                     }
                     divePoints {
                     name
                     uniqueName
                     description
                     adminScore
+                    backgroundImages{
+                        thumbnailUrl
+                    }
                     }
                     diveSites {
                     name
                     uniqueName
                     description
                     adminScore
+                    backgroundImages{
+                        thumbnailUrl
+                    }
                     }
                     divings {
                     _id
@@ -154,6 +196,9 @@ export default {
     PullTo,
   },
   methods: {
+    clickEvent(item, type) {
+        location.href = '/' + type + '/' + item.uniqueName;
+    },
     async refresh(loaded) {
         if ($(document).scrollTop() == 0) {
           await this.$apollo.queries.getUserSubsciption.refetch()

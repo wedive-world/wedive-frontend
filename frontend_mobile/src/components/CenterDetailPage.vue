@@ -1624,10 +1624,10 @@ export default {
     
   },
   created() {
-      window.addEventListener('beforeunload', this.beforeunload)
+      
   },
   beforeDestroy () {
-    document.removeEventListener("beforeunload", this.beforeunload);
+    
   },
   components: {
     StarRating,
@@ -1927,14 +1927,6 @@ export default {
 
           event.currentTarget.children[0].children[0].children[0].classList.toggle("fa-circle");
           event.currentTarget.children[0].children[0].children[0].classList.toggle("fa-check-circle")
-      },
-      beforeunload(e) {
-        if ($(".goverlay").length > 0) {
-            $(".gclose").click();
-            e.preventDefault();
-            e.returnValue = '';
-            return false;
-        }
       }
   }
 
