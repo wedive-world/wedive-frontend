@@ -23,24 +23,25 @@
                 
                 
                 <swiper
-                    class="swiper"
+                    ref="tabSwiper"
+                    class="swiper wedive-swiper"
                     :options="swiperOption"
+                    @slideChange="tabSlideChange"
                 >
-                    <swiper-slide>Slide 1</swiper-slide><swiper-slide>Slide 2</swiper-slide
-                    ><swiper-slide>Slide 3</swiper-slide><swiper-slide>Slide 4</swiper-slide
-                    ><swiper-slide>Slide 5</swiper-slide><swiper-slide>Slide 6</swiper-slide
-                    ><swiper-slide>Slide 7</swiper-slide><swiper-slide>Slide 8</swiper-slide
-                    ><swiper-slide>Slide 9</swiper-slide>
-
+                    <swiper-slide>My 포럼</swiper-slide>
+                    <swiper-slide>다이빙</swiper-slide>
+                    <swiper-slide>동호회</swiper-slide>
+                    <swiper-slide>쇼핑</swiper-slide>
+                    <swiper-slide>트레이닝</swiper-slide>
+                    <swiper-slide>뉴스</swiper-slide>
+                    
                     <div class="swiper-pagination" slot="pagination"></div>
                 </swiper>
                 
 
-
-                <!--<swiper
-                    ref="mySwiper"
-                    :slides-per-view="3"
-                    :space-between="50"
+                <swiper
+                    ref="contentSwiper"
+                    class="wedive-content-swiper"
                     @slideChange="onSlideChange"
                 >
                 <swiper-slide
@@ -194,7 +195,7 @@
                 </div>
                 </swiper-slide>
                 </swiper>
-                -->
+                
                 
                 
             </div>
@@ -313,10 +314,15 @@ export default {
       },
   },
   methods: {
+      tabSlideChange() {
+          this.contentSwiper.slideTo(this.tabSwiper.activeIndex);
+          var height = $(".wedive-content-swiper .swiper-wrapper .swiper-slide-active").height();
+          $(".wedive-content-swiper").eq(0).css("max-height", height);
+      },
       onSlideChange() {
-          //$(".splide__list").removeAttr("data-active");
-          //$("#splide__list" + this.swiper.activeIndex).addAttr("data-active");
-          console.log("a")
+          this.tabSwiper.slideTo(this.contentSwiper.activeIndex);
+          var height = $(".wedive-content-swiper .swiper-wrapper .swiper-slide-active").height();
+          $(".wedive-content-swiper").eq(0).css("max-height", height);
       },
       addImage({ target: { files = [] } }) {
         if (!files.length) {
@@ -540,8 +546,19 @@ export default {
     window.removeEventListener('scroll', this.handleScroll);
   },
   computed: {
-    swiper() {
-        return this.$refs.mySwiper.swiper;
+    tabSwiper() {
+        if (this.$refs.tabSwiper.hasOwnProperty("swiper")){
+            return this.$refs.tabSwiper.swiper;
+        } else {
+            return this.$refs.tabSwiper.$swiper;
+        }
+    },
+    contentSwiper() {
+        if (this.$refs.tabSwiper.hasOwnProperty("swiper")){
+            return this.$refs.contentSwiper.swiper;
+        } else {
+            return this.$refs.contentSwiper.$swiper;
+        }
     }
   },
   data () {
@@ -549,10 +566,10 @@ export default {
         swiperOption: {
             slidesPerView: 4,
             spaceBetween: 30,
-            pagination: {
-                el: '.swiper-pagination'
-            },
-            //slidesOffsetBefore: 130, // slidesOffsetBefore는 첫번째 슬라이드의 시작점에 대한 변경할 때 사용
+            //pagination: {
+            //    el: '.swiper-pagination'
+            //},
+            slidesOffsetBefore: 16, // slidesOffsetBefore는 첫번째 슬라이드의 시작점에 대한 변경할 때 사용
             //slidesOffsetAfter: 130, // slidesOffsetAfter는 마지막 슬라이드 시작점 + 마지막 슬라이드 너비에 해당하는 위치의 변경이 필요할 때 사용
             centeredSlides: true,
             
@@ -613,4 +630,8 @@ export default {
 
 .wedive-textarea {min-height: 150px;padding-left: 10px;padding-right: 10px;}
 
+.wedive-swiper {min-height: 46px;padding-top: 10px;}
+
+.wedive-swiper > .swiper-wrapper > .swiper-slide {font-size:16px;color:#c1c2c3;font-family: 'Noto Sans Korean';font-weight:600;}
+.wedive-swiper > .swiper-wrapper > .swiper-slide-active {font-size:20px;color:black;}
 </style>
