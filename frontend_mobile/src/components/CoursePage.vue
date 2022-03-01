@@ -360,32 +360,32 @@
                 </div>
                 <div class="my-n1">
                     <div class="gallery-views gallery-view-1">
-                        <a data-gallery="gallery-1" href="/static/images/shop1/diving/test1.jpg" title="Vynil and Typerwritter">
-                            <div style="background-image: url(/static/images/shop1/diving/test1.jpg);" class="rounded-m preload-img shadow-l img-fluid square-img" ></div>
+                        <a data-gallery="gallery-1" href="/static/empty.jpg" title="Vynil and Typerwritter">
+                            <div style="background-image: url(/static/empty.jpg);" class="rounded-m preload-img shadow-l img-fluid square-img" ></div>
                             <div class="caption"></div>
                         </a>
-                        <a data-gallery="gallery-1" href="/static/images/shop1/diving/test2.jpg" title="Fruit Cookie Pie">
-                            <div style="background-image: url(/static/images/shop1/diving/test2.jpg);" class="rounded-m preload-img shadow-l img-fluid square-img" ></div>
+                        <a data-gallery="gallery-1" href="/static/empty.jpg" title="Fruit Cookie Pie">
+                            <div style="background-image: url(/static/empty.jpg);" class="rounded-m preload-img shadow-l img-fluid square-img" ></div>
                             <div class="caption"></div>
                         </a>		
-                        <a data-gallery="gallery-1" href="/static/images/shop1/diving/test3.jpg" title="Plain Cookies and Flour">
-                            <div style="background-image: url(/static/images/shop1/diving/test3.jpg);" class="rounded-m preload-img shadow-l img-fluid square-img" ></div>
+                        <a data-gallery="gallery-1" href="/static/empty.jpg" title="Plain Cookies and Flour">
+                            <div style="background-image: url(/static/empty.jpg);" class="rounded-m preload-img shadow-l img-fluid square-img" ></div>
                             <div class="caption"></div>
                         </a>	
-                        <a data-gallery="gallery-1" href="/static/images/shop1/diving/test4.jpg" title="Pots and Stuff">
-                            <div style="background-image: url(/static/images/shop1/diving/test4.jpg);" class="rounded-m preload-img shadow-l img-fluid square-img" ></div>
+                        <a data-gallery="gallery-1" href="/static/empty.jpg" title="Pots and Stuff">
+                            <div style="background-image: url(/static/empty.jpg);" class="rounded-m preload-img shadow-l img-fluid square-img" ></div>
                             <div class="caption"></div>
                         </a>
-                        <a data-gallery="gallery-1" href="/static/images/shop1/diving/test5.jpg" title="Pots and Stuff">
-                            <div style="background-image: url(/static/images/shop1/diving/test5.jpg);" class="rounded-m preload-img shadow-l img-fluid square-img" ></div>
+                        <a data-gallery="gallery-1" href="/static/empty.jpg" title="Pots and Stuff">
+                            <div style="background-image: url(/static/empty.jpg);" class="rounded-m preload-img shadow-l img-fluid square-img" ></div>
                             <div class="caption"></div>
                         </a>
-                        <a data-gallery="gallery-1" href="/static/images/shop1/diving/test6.jpg" title="Delicious Strawberries">
-                            <div style="background-image: url(/static/images/shop1/diving/test6.jpg);" class="rounded-m preload-img shadow-l img-fluid square-img" ></div>
+                        <a data-gallery="gallery-1" href="/static/empty.jpg" title="Delicious Strawberries">
+                            <div style="background-image: url(/static/empty.jpg);" class="rounded-m preload-img shadow-l img-fluid square-img" ></div>
                             <div class="caption"></div>
                         </a>
-                        <a data-gallery="gallery-1" href="/static/images/shop1/diving/test7.jpg" title="A Beautiful Camera">
-                            <div style="background-image: url(/static/images/shop1/diving/test7.jpg);" class="rounded-m preload-img shadow-l img-fluid square-img" ></div>
+                        <a data-gallery="gallery-1" href="/static/empty.jpg" title="A Beautiful Camera">
+                            <div style="background-image: url(/static/empty.jpg);" class="rounded-m preload-img shadow-l img-fluid square-img" ></div>
                             <div class="caption"></div>
                         </a>			
                     </div>
