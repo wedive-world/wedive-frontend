@@ -188,7 +188,7 @@ import VoerroTagsInput from '@voerro/vue-tagsinput';
 import '@voerro/vue-tagsinput/dist/style.css'
 
 import ForumAgendaMyPage from './ForumAgendaMyPage.vue';
-import forumAgendaAllPage from './forumAgendaAllPage.vue';
+import ForumAgendaAllPage from './ForumAgendaAllPage.vue';
 import ForumCommunityPage from './ForumCommunityPage.vue';
 
 const axios = require("axios")
@@ -200,7 +200,7 @@ export default {
     SwiperSlide,
     "tags-input": VoerroTagsInput,
     ForumAgendaMyPage,
-    forumAgendaAllPage,
+    ForumAgendaAllPage,
     ForumCommunityPage,
   },
   watch: {

@@ -30,7 +30,7 @@
               <p :class="'font-noto color-gray mb-0 font-200' + ((idToken == null || nickName == null) ? ' opacity-40' : '')">위다이브의 전문 매니저에게 요청합니다.</p>
               <i :class="'wedive_icoset2x wedive_icoset2x_rightarrow' + ((idToken == null || nickName == null) ? ' opacity-40' : '')"></i>
             </div>
-            <img src="/static/images/assets/concierge2.png" style="position: absolute;height: 80px;bottom: 0;right: 40px;" :class="((idToken == null || nickName == null) ? ' opacity-40' : '')">
+            <img src="/static/images/assets/concierge.png" style="position: absolute;height: 80px;bottom: 0;right: 40px;" :class="((idToken == null || nickName == null) ? ' opacity-40' : '')">
           </div>
         </div>
 
