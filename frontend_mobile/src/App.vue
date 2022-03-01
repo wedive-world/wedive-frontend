@@ -33,7 +33,7 @@
             <a v-else-if="pathname == '/chat_home'" v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_chat_new.png" width="26"></a>
             <a v-else-if="pathname == '/forum_home'" v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_book_new.png" width="24"></a>
             <a v-else v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_write.png" width="24"></a>
-            <a v-on:click="settingForum()" id="wedive-group" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_setting_fill.png" width="26"></a>
+            <!--<a v-on:click="settingForum()" id="wedive-group" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_setting_fill.png" width="26"></a>-->
             <a v-if="$route.path=='/site_list'" v-on:click="move('/site_home')" class="page-title-icon font-18" style="color: #858585;margin-right: 13.3333333333px;"><img src="/static/images/assets/icon_map_fill.png" width="26"></a>
             <a v-on:click="searchItem()" id="wedive-search" class="page-title-icon font-18 hide" style="color:#858585 !important;"><img src="/static/images/assets/icon_search_fill.png" width="28"></a>
             <a v-on:click="shareItem()" id="wedive-share" class="page-title-icon font-18 hide" style="color:#858585 !important;"><img src="/static/images/assets/icon_share_fill.png" height="24"/></a>
@@ -169,8 +169,9 @@ export default {
         $("#wedive-noti").removeClass("hide");
       } else if (item == '/forum_home') {
         $("#wedive-add").removeClass("hide");
-        $("#wedive-group").removeClass("hide");
+        //$("#wedive-group").removeClass("hide");
         $("#wedive-noti").removeClass("hide");
+        $("#wedive-search").removeClass("hide");
       } else if (item == '/site_list') {
         $("#wedive-search").removeClass("hide");
         $("#wedive-noti").removeClass("hide");
@@ -312,7 +313,8 @@ export default {
       location.href = localStorage.perferedSite + location.search;
     },
     settingForum() {
-      var menuData = "forum-add";
+      //var menuData = "forum-add";
+      var menuData = "agenda-type-add";
       document.getElementById(menuData).classList.add('menu-active');
       document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
 

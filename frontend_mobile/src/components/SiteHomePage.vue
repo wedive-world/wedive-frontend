@@ -359,7 +359,7 @@ var pointList = new Array();
 var centerList = new Array();
 var searchParams = {};
 var check_cate1 = true;
-var check_cate2 = true;
+var check_cate2 = false;
 var check_cate3 = true;
 
 var tour_flag = true;
@@ -479,13 +479,13 @@ async function updateAll() {
             markerList[i].setMap(null);
             markerList.splice(i, 1);
         }
-        else if (zoomLevel < 9) {
+        /*else if (zoomLevel < 9) {
             markerList[i].setLabel(" ");
             if (selecteduser != null && selecteduser._id == markerList[i]._id) {
                 new google.maps.event.trigger( markerList[i], 'click' );
                 selecteduser = null;
             }
-        } else {
+        }*/ else {
             var label_color = (markerList[i].type=='site') ? '#5f6368' : ((markerList[i].type=='point') ? '#498c99' : '#2a526f')
             var label_text = markerList[i].title + ((markerList[i].type=='site')?'' : ((markerList[i].type=='point') ? '': ''));
             markerList[i].setLabel({ color: label_color, fontWeight: 'bold', fontSize: '14px', className: 'wedive-label', text: label_text });
@@ -501,7 +501,8 @@ async function updateAll() {
     var allList_cate = ["사이트", "포인트", "센터"];
     for (var k=0; k<3; k++) {
         var allList = [];
-        if (k == 0 && check_cate1) {if (zoomLevel > 12)allList = []; else allList = siteList;}
+        //if (k == 0 && check_cate1) {if (zoomLevel > 12)allList = []; else allList = siteList;}
+        if (k == 0 && check_cate1) allList = siteList;
         else if (k == 1 && check_cate2) allList = pointList;
         else if (k == 2 && check_cate3) allList = centerList;
         for (var i=0; i<allList.length; i++) {
@@ -660,7 +661,7 @@ export default {
             {
                 featureType: "administrative.locality",
                 elementType: "labels.text.fill",
-                stylers: [{ color: "#d59563" }],
+                stylers: [{ color: "#d59563"}, {lightness: 40},{weight: 0.5 } ],
             },
             {
                 featureType: "poi",
@@ -676,6 +677,34 @@ export default {
                 featureType: "poi.park",
                 elementType: "labels.text.fill",
                 stylers: [{ color: "#6b9a76" }],
+            },
+            {
+                featureType: "poi.attraction",
+                stylers: [{visibility: "off"}]
+            },
+            {
+                featureType: "poi.business",
+                stylers: [{visibility: "off"}]
+            },
+            {
+                featureType: "poi.medical",
+                stylers: [{visibility: "off"}]
+            },
+            {
+                featureType: "poi.government",
+                stylers: [{visibility: "off"}]
+            },
+            {
+                featureType: "poi.place_of_worship",
+                stylers: [{visibility: "off"}]
+            },
+            {
+                featureType: "poi.school",
+                stylers: [{visibility: "off"}]
+            },
+            {
+                featureType: "poi.sports_complex",
+                stylers: [{visibility: "off"}]
             },
             {
                 featureType: "road",
@@ -735,7 +764,6 @@ export default {
         ];
 
         const light_style = [
-            
             {
                 featureType: "road",
                 elementType: "geometry",
@@ -751,7 +779,39 @@ export default {
                 elementType: "labels",
                 stylers: [{ visibility: "off" }],
             },
-            
+            {
+                featureType: "administrative.locality",
+                elementType: "labels.text.fill",
+                stylers: [{lightness: 40}, {weight: 0.5 } ],
+            },
+            {
+                featureType: "poi.attraction",
+                stylers: [{visibility: "off"}]
+            },
+            {
+                featureType: "poi.business",
+                stylers: [{visibility: "off"}]
+            },
+            {
+                featureType: "poi.medical",
+                stylers: [{visibility: "off"}]
+            },
+            {
+                featureType: "poi.government",
+                stylers: [{visibility: "off"}]
+            },
+            {
+                featureType: "poi.place_of_worship",
+                stylers: [{visibility: "off"}]
+            },
+            {
+                featureType: "poi.school",
+                stylers: [{visibility: "off"}]
+            },
+            {
+                featureType: "poi.sports_complex",
+                stylers: [{visibility: "off"}]
+            },
         ];
 
         const map_style = (localStorage['wedive-Theme'] == 'light-mode') ? light_style : night_style;
@@ -882,7 +942,7 @@ export default {
         check_sight80: false,
         check_sight90: false,
         check_cate1: true,
-        check_cate2: true,
+        check_cate2: false,
         check_cate3: true,
         check_type1: false,
         check_type2: false,

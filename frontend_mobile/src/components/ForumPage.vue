@@ -11,12 +11,12 @@
                     :options="swiperOption"
                     @slideChange="tabSlideChange"
                 >
-                    <swiper-slide>My 포럼</swiper-slide>
-                    <swiper-slide>다이빙</swiper-slide>
-                    <swiper-slide>동호회</swiper-slide>
-                    <swiper-slide>쇼핑</swiper-slide>
-                    <swiper-slide>트레이닝</swiper-slide>
-                    <swiper-slide>뉴스</swiper-slide>
+                    <swiper-slide><div v-on:click="moveTo(0)">My 포럼</div></swiper-slide>
+                    <swiper-slide><div v-on:click="moveTo(1)">다이빙</div></swiper-slide>
+                    <swiper-slide><div v-on:click="moveTo(2)">동호회</div></swiper-slide>
+                    <swiper-slide><div v-on:click="moveTo(3)">쇼핑</div></swiper-slide>
+                    <swiper-slide><div v-on:click="moveTo(4)">트레이닝</div></swiper-slide>
+                    <swiper-slide><div v-on:click="moveTo(5)">뉴스</div></swiper-slide>
                     
                     <div class="swiper-pagination" slot="pagination"></div>
                 </swiper>
@@ -45,108 +45,9 @@
                         {{ props.stateText }}
                     </div>
                     </template>
-                        <div class="pb-5">
-                            <div class="p-3">
-                                <div style="position:relative;">
-                                    <img class="inline-block me-2 circular_image" src="/static/images/assets/user_empty_m.png" style="vertical-align: top;width:40px;height:40px;"/>
-                                    <div class="inline-block font-noto">
-                                        <h5 class="mb-0 font-500 font-15">짱스</h5>
-                                        <p class="mb-0 mt-n1 font-13 color-gray">초보 다이버</p>
-                                    </div>
-                                    <p class="color-gray-dark mb-0 font-12" style="position: absolute;right: 0px;top: 0;">10분 전</p>
-                                </div>
-                                <div class="mt-1">
-                                    <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 잠실 수영장</p>
-                                </div>
-                                <div class="mt-3">
-                                    오랫만에 다이빙을 왔는데 정말정말 재미있네요.<br/>코시국에 이만한 힐링이 없어요.<br/>다들 새해 복 많이 받으세요~
-                                </div>
-                            </div>
-                            <div class="p-3">
-                                <div class="mt-1">
-                                    <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#힐링</span>
-                                    <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#새해</span>
-                                    <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#다이빙</span>
-                                </div>
-                                <div class="mt-4 mb-3">
-                                    <img src="/static/images/assets/ico_heart.png" width="22" class="me-1" style="margin-top:-1px;"/><span class="font-14 font-noto">1</span>
-                                    &nbsp;&nbsp;
-                                    <img src="/static/images/assets/ico_chat.png" width="22" class="me-1" style="margin-top:-1px;"/><span class="font-14 font-noto">1</span>
-                                </div>
-                            </div>
-                            <div class="divider mb-0" style="height:12px;border-top: 1px solid #88888840"></div>
-
-                            <div class="p-3">
-                                <div style="position:relative;">
-                                    <img class="inline-block me-2 circular_image" src="/static/images/assets/user_empty_m.png" style="vertical-align: top;width:40px;height:40px;"/>
-                                    <div class="inline-block font-noto">
-                                        <h5 class="mb-0 font-500 font-15">짱스</h5>
-                                        <p class="mb-0 mt-n1 font-13 color-gray">초보 다이버</p>
-                                    </div>
-                                    <p class="color-gray-dark mb-0 font-12" style="position: absolute;right: 0px;top: 0;">1일 전</p>
-                                </div>
-                                <div class="mt-1">
-                                    <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 문섬 포인트</p>
-                                </div>
-                                <div class="mt-3">
-                                    오랫만에 다이빙을 왔는데 정말정말 재미있네요.<br/>코시국에 이만한 힐링이 없어요.<br/>다들 새해 복 많이 받으세요~<br/>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <img class="col-12" src="https://fg.startupbridgeva.com/f/m3h/TOb/0kN/9OiKsk0MTnPMjkpw6CwyrDA0jAjOTUxKTc7NVsvqyAdAA.jpg" style="width:100%;"/>
-                            </div>
-                            <div class="p-3">
-                                <div class="mt-1">
-                                    <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#힐링</span>
-                                    <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#새해</span>
-                                    <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#다이빙</span>
-                                </div>
-                                <div class="mt-4 mb-3">
-                                    <img src="/static/images/assets/ico_heart.png" width="22" class="me-1" style="margin-top:-1px;"/><span class="font-14 font-noto">6</span>
-                                    &nbsp;&nbsp;
-                                    <img src="/static/images/assets/ico_chat.png" width="22" class="me-1" style="margin-top:-1px;"/><span class="font-14 font-noto">20</span>
-                                </div>
-                            </div>
-                            <div class="divider mb-0" style="height:12px;border-top: 1px solid #88888840"></div>
-                            
-                            <div class="p-3">
-                                <div style="position:relative;">
-                                    <img class="inline-block me-2 circular_image" src="/static/images/assets/user_empty_m.png" style="vertical-align: top;width:40px;height:40px;"/>
-                                    <div class="inline-block font-noto">
-                                        <h5 class="mb-0 font-500 font-15">짱스</h5>
-                                        <p class="mb-0 mt-n1 font-13 color-gray">초보 다이버</p>
-                                    </div>
-                                    <p class="color-gray-dark mb-0 font-12" style="position: absolute;right: 0px;top: 0;">1일 전</p>
-                                </div>
-                                <div class="mt-1">
-                                    <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i>제주 사이트</p>
-                                </div>
-                                <div class="mt-3">
-                                    오랫만에 다이빙을 왔는데 정말정말 재미있네요.<br/>코시국에 이만한 힐링이 없어요.<br/>다들 새해 복 많이 받으세요~<br/>
-                                </div>
-                            </div>
-                            <div class="square_image inline-block">
-                                <img src="https://d2mgzmtdeipcjp.cloudfront.net/files/good_contents/2020/06/09/15916682888292.png" style="object-fit: cover;"/>
-                            </div>
-                            <div class="square_image inline-block" style="float: right;">
-                                <img src="https://d2mgzmtdeipcjp.cloudfront.net/files/good_contents/2020/06/09/15916682352190.png" style="object-fit: cover;"/>
-                            </div>
-                            <div class="p-3">
-                                <div class="mt-1">
-                                    <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#힐링</span>
-                                    <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#새해</span>
-                                    <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#다이빙</span>
-                                </div>
-                                <div class="mt-4 mb-3">
-                                    <img src="/static/images/assets/ico_heart.png" width="22" class="me-1" style="margin-top:-1px;"/><span class="font-14 font-noto">6</span>
-                                    &nbsp;&nbsp;
-                                    <img src="/static/images/assets/ico_chat.png" width="22" class="me-1" style="margin-top:-1px;"/><span class="font-14 font-noto">20</span>
-                                </div>
-                            </div>
-                            <div class="divider mb-0" style="height:12px;border-top: 1px solid #88888840"></div>
-                            
-                            
-                        </div>
+                        <forum-agenda-my-page
+                            ref="forumAgendaMyPage"
+                        />
                     </pull-to>
                 </swiper-slide>
                 <swiper-slide
@@ -167,7 +68,7 @@
                         {{ props.stateText }}
                     </div>
                     </template>
-                        <div class="pb-5">
+                        <div class="">
                             <div class="p-3">
                                 <div style="position:relative;">
                                     <img class="inline-block me-2 circular_image" src="/static/images/assets/user_empty_m.png" style="vertical-align: top;width:40px;height:40px;"/>
@@ -190,40 +91,9 @@
                 <swiper-slide
                     :key="2"
                     :virtualIndex="2">
-                <pull-to :top-load-method="refresh" @top-state-change="stateChange" :top-config="TOP_DEFAULT_CONFIG" :is-bottom-bounce="false" :is-top-bounce="scrollTop == 0">
-                    <template slot="top-block" slot-scope="props">
-                    <div :class="'top-load-wrapper opacity-50' + (props.state === 'loaded-done' ? ' fadeout' : '')">
-                        <i class="font-18 fas"
-                            :class="{
-                                'fa-arrow-down': props.state === 'pull',
-                                'fa-arrow-down': props.state === 'trigger',
-                                'fa-spinner': props.state === 'loading',
-                                'fa-check': props.state === 'loaded-done'
-                            }"
-                            aria-hidden="true">
-                        </i>
-                        {{ props.stateText }}
-                    </div>
-                    </template>
-                        <div class="pb-5">
-                            <div class="p-3">
-                                <div style="position:relative;">
-                                    <img class="inline-block me-2 circular_image" src="/static/images/assets/user_empty_m.png" style="vertical-align: top;width:40px;height:40px;"/>
-                                    <div class="inline-block font-noto">
-                                        <h5 class="mb-0 font-500 font-15">짱스</h5>
-                                        <p class="mb-0 mt-n1 font-13 color-gray">초보 다이버</p>
-                                    </div>
-                                    <p class="color-gray-dark mb-0 font-12" style="position: absolute;right: 0px;top: 0;">10분 전</p>
-                                </div>
-                                <div class="mt-1">
-                                    <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 잠실 수영장</p>
-                                </div>
-                                <div class="mt-3">
-                                    오랫만에 다이빙을 왔는데 정말정말 재미있네요.<br/>코시국에 이만한 힐링이 없어요.<br/>다들 새해 복 많이 받으세요~
-                                </div>
-                            </div>
-                        </div>
-                    </pull-to>
+                    <forum-community-page
+                        ref="forumCommunityPage"
+                    />
                 </swiper-slide>
                 </swiper>
                 
@@ -262,6 +132,29 @@
         </div>    
     </div>
 
+    <div id="agenda-type-add" 
+         class="menu menu-box-modal rounded-0" 
+         data-menu-width="cover"
+         data-menu-height="cover"
+         style="margin-bottom: 0;">
+        
+        <div class="card rounded-0 bg-2" data-card-height="50">
+            <div class="card-top p-2">
+                <a href="#" class="close-menu icon icon-s rounded-l bg-theme color-theme "><i class="fa fa-arrow-left"></i></a>
+                <a v-on:click="createAgendaType" href="#" :class="'float-end icon icon-s rounded-l bg-theme me-3 mt-2 font-noto font-16 ' + ((isAgendaTypeWritten==0) ? 'color-gray' : 'color-theme')">확인</a>
+                <a href="" class="header-title color font-noto font-16">신규 아젠다 타입 생성</a>
+            </div>
+        </div>
+        
+        <div class="card rounded-0">
+            <div class="content mt-0">
+                <div class="input-style no-borders no-icon mb-4" style="margin-right:10px;margin-left:10px;">
+                    <input class="form-control" placeholder="타입 이름 (질문)" v-model="agenda_type_add">
+                </div>
+            </div>
+        </div>    
+    </div>
+
     <div id="agenda-add" 
          class="menu menu-box-modal rounded-0" 
          data-menu-width="cover"
@@ -272,16 +165,16 @@
             <div class="card-top p-2">
                 <a href="#" class="close-menu icon icon-s rounded-l bg-theme color-theme "><i class="fa fa-arrow-left"></i></a>
                 <a v-on:click="createAgenda" href="#" :class="'float-end icon icon-s rounded-l bg-theme me-3 mt-2 font-noto font-16 ' + ((isWritten==0) ? 'color-gray' : 'color-theme')">확인</a>
-                <a href="" class="header-title color font-noto font-16">로그 작성</a>
+                <a href="" class="header-title color font-noto font-16">글 작성</a>
             </div>
         </div>
         
         <div class="card rounded-0">
             <div class="content mt-0">
-                <div class="input-style no-borders no-icon mb-4" style="margin-right:10px;margin-left:10px;">
-                    <select id="formType" v-model="subjectType">
-                        <option value="default" disabled selected>주제를 선택해주세요</option>
-                        <option value="agenda">로그북</option>
+                <div class="input-style no-borders no-icon mb-4">
+                    <select id="formType" v-model="subjectType" style="padding-left:10px;color:#757575;border: 1px solid #e9e9e9;">
+                        <option value="default" disabled selected>글 종류를 선택해주세요.</option>
+                        <option value="agenda">일반</option>
                         <option value="question">질문</option>
                     </select>
                     <span><i class="fa fa-chevron-down"></i></span>
@@ -290,9 +183,37 @@
                     <em></em>
                 </div>
                 <div class="input-style validate-field mt-3">
-                    <textarea class="wedive-textarea" placeholder="의견을 자유롭게 적어주세요." v-model="review_detail"></textarea>
+                    <textarea rows="1" class="wedive-textarea2" placeholder="제목을 입력하세요." v-model="agenda_title"></textarea>
+                    <textarea class="wedive-textarea" :placeholder="textPlaceholder" v-model="agenda_contents"></textarea>
                 </div>
-                <div id="div_upload_photo" class="row m-0 mb-3">
+                <tags-input 
+                element-id="tags"
+                v-model="selectedTags"
+                :typeahead-style="'dropdown'"
+                :placeholder="'(옵션) 태그를 입력하세요.'"
+                :existing-tags="[
+                    { key: '마크로', value: '마크로' },
+                    { key: '일상', value: '일상' },
+                    { key: '맛집', value: '맛집' },
+                ]"
+                :typeahead="true">
+                </tags-input>
+                
+                
+                <tags-input 
+                element-id="tags"
+                v-model="selectedTags2"
+                :typeahead-style="'dropdown'"
+                :placeholder="'(옵션) 다이빙 장소를 입력하세요.'"
+                :existing-tags="[
+                    { key: 'K26', value: 'K26' },
+                    { key: '잠실수영장', value: '잠실수영장' },
+                    { key: '울산수영장', value: '울산수영장' },
+                ]"
+                :typeahead="true"
+                class="mt-2">
+                </tags-input>
+                <div id="div_upload_photo" class="row m-0 mb-3 mt-3">
                 </div>
                 <div class="mb-3 text-center p-2" style="border: 1px solid #e9e9e9;">
                     <input type="file" @change="addImage" id="" accept=".jpg, .png" style="text-indent: -999px;outline: none;width: 100%;height: 45px;color: rgba(0, 0, 0, 0) !important;">
@@ -311,6 +232,12 @@ import 'swiper/css/swiper.css'
 
 import gql from 'graphql-tag'
 import PullTo from 'vue-pull-to'
+import VoerroTagsInput from '@voerro/vue-tagsinput';
+import '@voerro/vue-tagsinput/dist/style.css'
+
+import ForumAgendaMyPage from './ForumAgendaMyPage.vue';
+import ForumCommunityPage from './ForumCommunityPage.vue';
+
 const axios = require("axios")
 
 export default {
@@ -319,9 +246,20 @@ export default {
     PullTo,
     Swiper,
     SwiperSlide,
+    "tags-input": VoerroTagsInput,
+    ForumAgendaMyPage,
+    ForumCommunityPage,
   },
   watch: {
-      review_detail: function(newVal, oldVal) {
+      subjectType: function(newVal, oldVal) {
+          console.log(newVal);
+          if (newVal == 'agenda') {
+              this.textPlaceholder = '의견을 자유롭게 적어주세요.';
+          } else if (newVal == 'question') {
+              this.textPlaceholder = '질문을 자유롭게 적어주세요.';
+          }
+      },
+      agenda_contents: function(newVal, oldVal) {
           if (newVal != '') {
               this.isWritten = 1;
           } else {
@@ -335,6 +273,13 @@ export default {
               this.isForumWritten = 0;
           }
       },
+      agenda_type_add: function(newVal, oldVal) {
+          if (this.agenda_type_add != '') {
+              this.isAgendaTypeWritten = 1;
+          } else {
+              this.isAgendaTypeWritten = 0;
+          }
+      },
       forum_add_description: function(newVal, oldVal) {
           if (this.forum_add_title != '' && this.forum_add_description != '') {
               this.isForumWritten = 1;
@@ -344,14 +289,29 @@ export default {
       },
   },
   methods: {
+      moveTo(idx) {
+          console.log(idx);
+          this.contentSwiper.slideTo(idx);
+          var height = $(".wedive-content-swiper .swiper-wrapper .swiper-slide-active").height();
+          if (height < ($(window).height() - 172)) {
+              height = $(window).height() - 172;
+          }
+          $(".wedive-content-swiper").eq(0).css("max-height", height);
+      },
       tabSlideChange() {
           this.contentSwiper.slideTo(this.tabSwiper.activeIndex);
           var height = $(".wedive-content-swiper .swiper-wrapper .swiper-slide-active").height();
+          if (height < ($(window).height() - 172)) {
+              height = $(window).height() - 172;
+          }
           $(".wedive-content-swiper").eq(0).css("max-height", height);
       },
       onSlideChange() {
           this.tabSwiper.slideTo(this.contentSwiper.activeIndex);
           var height = $(".wedive-content-swiper .swiper-wrapper .swiper-slide-active").height();
+          if (height < ($(window).height() - 172)) {
+              height = $(window).height() - 172;
+          }
           $(".wedive-content-swiper").eq(0).css("max-height", height);
       },
       addImage({ target: { files = [] } }) {
@@ -364,6 +324,47 @@ export default {
             var square_height = $("#div_upload_photo .square").height();
             $("#menu-review").css("height", 470 + (square_height*(parseInt(file_photo.length/4)+1)) + "px");
         }
+      },
+      async createAgendaType() {
+          var preloader = document.getElementById('preloader')
+            if(preloader){
+                preloader.classList.remove('preloader-hide');
+                preloader.classList.add('opacity-50');
+            }
+
+            var ipt = {name: this.agenda_type_add}
+            var result = await axios({
+                url: 'https://api.wedives.com/graphql',
+                method: 'post',
+                headers: {
+                    countrycode: 'ko',
+                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                },
+                data: {
+                    query: `
+                        mutation UpsertAgendaType($input: AgendaTypeInput) {
+                            upsertAgendaType(input: $input) {
+                                _id
+                            }
+                        }
+                    `,
+                    variables: {
+                        "input": ipt
+                    }
+                }
+            });
+            try {
+                Android.vibrate();
+                window.navigator.vibrate(20);
+            } catch (e) {
+                
+            }
+            if(preloader){
+                preloader.classList.remove('opacity-50');
+                preloader.classList.add('preloader-hide');
+            }
+            const activeMenu = document.querySelectorAll('.menu-active');
+            for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
       },
       async createForum() {
             var preloader = document.getElementById('preloader')
@@ -457,7 +458,7 @@ export default {
                 var result_upload = await client.request(updateMutation, {input: {"_id": result_img.uploadImage._id,"name": result_img.name,"description": "reviewImage","reference": null}});
                 _id_list.push(result_img.uploadImage._id);
             }
-            var _input = {type: this.subjectType, content: this.review_detail, images: _id_list};
+            var _input = {type: this.subjectType, content: this.agenda_contents, images: _id_list};
             const ipt = _input;
 
           var result = await axios({
@@ -593,6 +594,7 @@ export default {
   },
   data () {
     return {
+        textPlaceholder: '의견을 자유롭게 적어주세요.',
         swiperOption: {
             slidesPerView: 3.7,
             spaceBetween: 5,
@@ -606,11 +608,18 @@ export default {
         },
         isWritten: 0,
         isForumWritten: 0,
+        isAgendaTypeWritten: 0,
         scrollTop: 0,
-        review_detail: '',
+        agenda_title: '',
+        agenda_contents: '',
+        selectedTags: [
+        ],
+        selectedTags2: [
+        ],
         file_photo: [],
         subjectType: 'default',
         forum_add_title: '',
+        agenda_type_add: '',
         forum_add_description: '',
         TOP_DEFAULT_CONFIG: {
             pullText: '당겨서 새로고침', // The text is displayed when you pull down
@@ -622,19 +631,6 @@ export default {
             stayDistance: 50, // Trigger the distance after the refresh
             triggerDistance: 70 // Pull down the trigger to trigger the distance
         },
-        center_list : [
-            {title: "버블탱크 스쿠바다이빙", desc: "제주 남부에 위치한 PADI 5star 다이빙센터", star: 3.8, price_index: 2, feature: "덕다이빙, 케이브, 난파선, 드리프트", img: '/static/images/shop1/diving/test1.jpg', position: {lat: 33.24134444312815, lng: 126.56484940647604}},
-            {title: "다이브 투게더리조트", desc: "한줄설명1", star: 4.8, price_index: 2, feature: "덕다이빙, 케이브", img: '/static/images/shop1/diving/test2.jpg', position: {lat: 33.241633952501715, lng: 126.56456092676112}},
-            {title: "태평양 다이빙스쿨", desc: "블라블라", star: 3.1, price_index: 3, feature: "난파선, 드리프트", img: '/static/images/shop1/diving/test3.jpg', position: {lat: 33.24030993345755, lng: 126.56472966827262}},
-            {title: "쿨다이브", desc: "뭐라적지", star: 2.8, price_index: 2, feature: "드리프트", img: '/static/images/shop1/diving/test4.jpg', position: {lat: 33.241266401158086, lng: 126.56278906254684}},
-            {title: "스플래시 리조트", desc: "이곳에 설명이", star: 4.2, price_index: 4, feature: "난파선, 드리프트", img: '/static/images/shop1/diving/test5.jpg', position: {lat: 33.24245948959435, lng: 126.5633415608148}},
-            {title: "제주 블루샤크다이빙", desc: "ㅁㄴㅇㄹㄴㄷㅁㅈㄷㄻㄴㄷㄹㄷㅁㄴㄻㄴㄷㄻㄴㄷㄻㄴㄷㄹ", star: 3.9, price_index: 2, feature: "난파선", img: '/static/images/shop1/diving/test6.jpg', position: {lat: 33.24380026488202, lng: 126.56288927674295}},
-            {title: "잠수타기 다이브클럽", desc: "ㅁㄷㄴㄻㄴㄷㄻㄴㄷㄻㄴㄷㄻㄴㄷㄻㄴㄹㄷㅁㄷㄴㄻㄷㄴㄻㄴㄻㄴㄷㄹㄷㅁㄴㄹ", star: 4.1, price_index: 2, feature: "난파선, 드리프트", img: '/static/images/shop1/diving/test7.jpg', position: {lat: 33.24194725508795, lng: 126.5616725869943}},
-            {title: "홀리데이 다이빙 코리아", desc: "히히", star: 4.2, price_index: 3, feature: "덕다이빙, 케이브, 난파선, 드리프트", img: '/static/images/shop1/diving/test8.jpg', position: {lat: 33.24088391439924, lng: 126.5628795809329}},
-            {title: "천지연40", desc: "헬로", star: 4.3, price_index: 2, feature: "난파선, 드리프트", img: '/static/images/shop1/diving/test9.jpg', position: {lat: 33.242485636047576, lng: 126.5623109526933}},
-            {title: "언더더씨 스쿠바다이빙", desc: "방가워", star: 4.7, price_index: 2, feature: "덕다이빙, 케이브", img: '/static/images/shop1/diving/test10.jpg', position: {lat: 33.244246055136834, lng: 126.5671937429616}}
-        ],
-
     }
   }
 
@@ -658,10 +654,11 @@ export default {
 @keyframes loading{from {transform: rotate(0deg);}to {transform: rotate(360deg);}}
 @keyframes fadeout50 {from {opacity: 0.5;}to {opacity: 0;}}
 
-.wedive-textarea {min-height: 150px;padding-left: 10px;padding-right: 10px;}
+.wedive-textarea {min-height: 150px;padding-left: 10px;padding-right: 10px;border: 1px solid #e9e9e9;}
+.wedive-textarea2 {max-height: 45px;padding-left: 10px;padding-right: 10px;border: 1px solid #e9e9e9;}
 
 .wedive-swiper {min-height: 46px;padding-top: 10px;}
 
-.wedive-swiper > .swiper-wrapper > .swiper-slide {font-size:16px;color:#c1c2c3;font-family: 'Noto Sans Korean';font-weight:600;}
-.wedive-swiper > .swiper-wrapper > .swiper-slide-active {font-size:20px;color:black;}
+.wedive-swiper > .swiper-wrapper > .swiper-slide {font-size:16px;color:#c1c2c3;font-family: 'Noto Sans Korean';font-weight:500;}
+.wedive-swiper > .swiper-wrapper > .swiper-slide-active {font-size:20px;color:black;font-weight:600;}
 </style>
