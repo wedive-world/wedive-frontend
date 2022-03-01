@@ -36,6 +36,7 @@ import TrainingListPage from '@/components/TrainingListPage'
 import TrainingSettingPage from '@/components/TrainingSettingPage'
 import TrainingStartPage from '@/components/TrainingStartPage'
 import ForumPage from '@/components/ForumPage'
+import ForumDetailPage from '@/components/ForumDetailPage'
 import OhterPage from '@/components/OhterPage'
 import NotificationPage from '@/components/NotificationPage'
 import OtherDivingPage from '@/components/OtherDivingPage'
@@ -253,6 +254,11 @@ export default new Router({
       path: '/forum_home',
       name: 'ForumPage',
       component: ForumPage
+    },
+    {
+      path: '/forum/detail',
+      name: 'ForumDetailPage',
+      component: ForumDetailPage
     },
     {
       path: '/other_home',

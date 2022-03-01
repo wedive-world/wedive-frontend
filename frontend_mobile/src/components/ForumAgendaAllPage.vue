@@ -17,6 +17,22 @@
         </template>
         
         <div class="text-start">
+          <div class="p-3">
+            <swiper
+                ref="hashSwiper"
+                class="swiper wedive-swiper"
+                :options="swiperOption"
+            >
+                <swiper-slide style="width:auto;"><div class="font-noto" style="padding-top:2px;">인기 필터</div></swiper-slide>
+                <swiper-slide style="width:auto;"><div class="bg-gray-light color-gray rounded-sm me-2" style="padding: 2px 12px;" v-on:click="setFilter(0)"># 마크로</div></swiper-slide>
+                <swiper-slide style="width:auto;"><div class="bg-gray-light color-gray rounded-sm me-2" style="padding: 2px 12px;" v-on:click="setFilter(1)"># 대물</div></swiper-slide>
+                <swiper-slide style="width:auto;"><div class="bg-gray-light color-gray rounded-sm me-2" style="padding: 2px 12px;" v-on:click="setFilter(2)"># 먹방</div></swiper-slide>
+                <swiper-slide style="width:auto;"><div class="bg-gray-light color-gray rounded-sm me-2" style="padding: 2px 12px;" v-on:click="setFilter(3)"># 해루질</div></swiper-slide>
+                <swiper-slide style="width:auto;"><div class="bg-gray-light color-gray rounded-sm me-2" style="padding: 2px 12px;" v-on:click="setFilter(4)"># 프리다이빙</div></swiper-slide>
+                <swiper-slide style="width:auto;"><div class="font-noto">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></swiper-slide>
+            </swiper>
+          </div>
+          <div class="divider mb-0"></div>
           <div>
             <div class="p-3">
               <div style="position:relative;">
@@ -136,6 +152,9 @@
   </div>
 </template>
 <script>
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+import 'swiper/css/swiper.css'
+
 import gql from 'graphql-tag'
 import PullTo from 'vue-pull-to'
 const axios = require("axios")
@@ -143,6 +162,8 @@ const axios = require("axios")
 export default {
   name: 'HelloWorld',
   components: {
+      Swiper,
+      SwiperSlide,
       PullTo,
   },
   methods: {
@@ -196,6 +217,10 @@ export default {
           loadedStayTime: 400, // Time to stay after loading ms
           stayDistance: 50, // Trigger the distance after the refresh
           triggerDistance: 70 // Pull down the trigger to trigger the distance
+      },
+      swiperOption: {
+            spaceBetween: 10,
+            slidesPerView: 'auto',
       },
     }
   },

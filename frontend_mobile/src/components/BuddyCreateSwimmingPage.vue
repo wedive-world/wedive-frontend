@@ -72,8 +72,9 @@
                                 <div class="collapse" id="collapse2">
                                     <div class="p-2 row">
                                         <div class="form-check interest-check col-3" v-for="(hour,index) in hour_array" style="width: 25%;margin-left:0px;margin-right:0px;padding-left:calc(var(--bs-gutter-x) * .5);">
-                                            <input class="form-check-input" type="radio" name="check_hour" value="" :id="'check_hour'+index">
-                                            <label :class="'form-check-label rounded-xl' + (selectedDate && selectedDate.isToday && wediveHourCheck(now, hour) ? ' vc-text-gray-400' : '')" :for="'check_hour'+index" style="padding-left:12px;" v-on:click="setHour(index)">{{hour}}</label>
+                                            <input v-if="(selectedDate && selectedDate.isToday && wediveHourCheck(now, hour))" class="form-check-input" type="radio" name="check_hour" value="" :id="'check_hour'+index" disabled="disabled">
+                                            <input v-else class="form-check-input" type="radio" name="check_hour" value="" :id="'check_hour'+index">
+                                            <label :class="'form-check-label rounded-xl' + (selectedDate && selectedDate.isToday && wediveHourCheck(now, hour) ? ' vc-text-gray-600' : '')" :for="'check_hour'+index" style="padding-left:12px;" v-on:click="setHour(index, selectedDate, now, hour)">{{hour}}</label>
                                         </div>
                                     </div>
                                 </div>
@@ -638,7 +639,15 @@ export default {
       collapse2() {
         $("#collapse1_area").click();
       },
-      setHour(index) {
+      setHour(index, selectedDate, now, hour) {
+        if (selectedDate.isToday) {
+            var now_time = ((now.getHours() < 10 ? '0' + now.getHours() : now.getHours()) + ':' + (now.getMinutes() < 10 ? '0' + now.getMinutes() : now.getMinutes()));
+            if (hour.length == 4) {
+                hour = "0" + hour;
+            }
+            if (hour < now_time)
+                return;
+        }
         this.hour_show = this.hour_array[index];
         //$("#collapse2_area").click();
         if (this.day_show != "" && this.hour_show != "") {
