@@ -23,7 +23,7 @@
                 class="swiper wedive-swiper"
                 :options="swiperOption"
             >
-                <swiper-slide style="width:auto;"><div class="font-noto" style="padding-top:2px;">인기 필터</div></swiper-slide>
+                <swiper-slide style="width:auto;"><div class="font-noto" style="padding-top:2px;">인기 태그</div></swiper-slide>
                 <swiper-slide style="width:auto;"><div class="bg-gray-light color-gray rounded-sm me-2" style="padding: 2px 12px;" v-on:click="setFilter(0)"># 마크로</div></swiper-slide>
                 <swiper-slide style="width:auto;"><div class="bg-gray-light color-gray rounded-sm me-2" style="padding: 2px 12px;" v-on:click="setFilter(1)"># 대물</div></swiper-slide>
                 <swiper-slide style="width:auto;"><div class="bg-gray-light color-gray rounded-sm me-2" style="padding: 2px 12px;" v-on:click="setFilter(2)"># 먹방</div></swiper-slide>
