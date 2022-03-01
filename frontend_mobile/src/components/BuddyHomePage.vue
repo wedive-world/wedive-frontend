@@ -61,7 +61,7 @@
                 <div v-on:click="goDiving()" class="light-border-bottom mt-3">
                     <div class="d-flex mb-3 position-relative">
                         <div class="align-self-center">
-                            <img src="/static/images/point/ko/kangwon_yangyang_01.jpg" class="rounded-sm me-3" width="68">
+                            <img src="/static/images/diving_beach1.jpg" class="rounded-sm me-3" width="68">
                         </div>
                         <div class="text-start align-self-center font-noto">
                             <h2 class="font-16 line-height-s mt-2 mb-0 font-500">여자끼리 떠나는 제주여행</h2>
@@ -74,7 +74,7 @@
                 <div v-on:click="goDiving()" class="light-border-bottom mt-3">
                     <div class="d-flex mb-3 position-relative">
                         <div class="align-self-center">
-                            <img src="/static/images/point/ko/jeju_bumisland_01.jpg" class="rounded-sm me-3" width="68">
+                            <img src="/static/images/diving_beach1.jpg" class="rounded-sm me-3" width="68">
                         </div>
                         <div class="text-start align-self-center font-noto">
                             <h2 class="font-16 line-height-s mt-2 mb-0 font-500">가요가요 우리모두 가요</h2>
@@ -87,7 +87,7 @@
                 <div v-on:click="goDiving()" class="mt-3">
                     <div class="d-flex mb-3 position-relative">
                         <div class="align-self-center">
-                            <img src="/static/images/point/ko/jeju_munisland_06.jpg" class="rounded-sm me-3" width="68">
+                            <img src="/static/images/diving_beach1.jpg" class="rounded-sm me-3" width="68">
                         </div>
                         <div class="text-start align-self-center font-noto">
                             <h2 class="font-16 line-height-s mt-2 mb-0 font-500">제주도 가실분 급구</h2>
@@ -114,7 +114,7 @@
                 <div class="light-border-bottom mt-3">
                     <div class="d-flex mb-3 position-relative">
                         <div class="align-self-center">
-                            <img src="/static/images/point/ko/kangwon_yangyang_01.jpg" class="rounded-sm me-3" width="68">
+                            <img src="/static/images/diving_beach1.jpg" class="rounded-sm me-3" width="68">
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-17 line-height-s mt-2 mb-1">09.25(토) ~ 09.26(일)</h2>
@@ -126,7 +126,7 @@
                 <div class="mt-3">
                     <div class="d-flex mb-3 position-relative">
                         <div class="align-self-center">
-                            <img src="/static/images/point/ko/jeju_bumisland_01.jpg" class="rounded-sm me-3" width="68">
+                            <img src="/static/images/diving_beach1.jpg" class="rounded-sm me-3" width="68">
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-17 line-height-s mt-2 mb-1">09.22(수) ~ 09.25(토)</h2>
@@ -145,7 +145,7 @@
                 <div class="light-border-bottom mt-3">
                     <div class="d-flex mb-3 position-relative">
                         <div class="align-self-center">
-                            <img src="/static/images/point/ko/kangwon_yangyang_01.jpg" class="rounded-sm me-3" width="68">
+                            <img src="/static/images/diving_beach1.jpg" class="rounded-sm me-3" width="68">
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-17 line-height-s mt-2 mb-1">09.25(토) ~ 09.26(일)</h2>
@@ -157,7 +157,7 @@
                 <div class="mt-3">
                     <div class="d-flex mb-3 position-relative">
                         <div class="align-self-center">
-                            <img src="/static/images/point/ko/jeju_bumisland_01.jpg" class="rounded-sm me-3" width="68">
+                            <img src="/static/images/diving_beach1.jpg" class="rounded-sm me-3" width="68">
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-17 line-height-s mt-2 mb-1">09.22(수) ~ 09.25(토)</h2>
@@ -183,7 +183,7 @@
                 <div class="light-border-bottom mt-3">
                     <div class="d-flex mb-3 position-relative">
                         <div class="align-self-center">
-                            <img src="/static/images/point/ko/kangwon_yangyang_01.jpg" class="rounded-sm me-3" width="68">
+                            <img src="/static/images/diving_beach1.jpg" class="rounded-sm me-3" width="68">
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-17 line-height-s mt-2 mb-1">09.25(토) ~ 09.26(일)</h2>
@@ -195,7 +195,7 @@
                 <div class="mt-3">
                     <div class="d-flex mb-3 position-relative">
                         <div class="align-self-center">
-                            <img src="/static/images/point/ko/jeju_bumisland_01.jpg" class="rounded-sm me-3" width="68">
+                            <img src="/static/images/diving_beach1.jpg" class="rounded-sm me-3" width="68">
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-17 line-height-s mt-2 mb-1">09.22(수) ~ 09.25(토)</h2>

@@ -52,7 +52,7 @@
                             </clipPath>
                             </defs>
                             <!--<image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(chat.owner.avatarOrigin)?chat.owner.avatarOrigin:'/static/images/assets/user_empty.png'"/>-->
-                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href=""/>
+                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="/static/empty.jpg"/>
                         </svg>
                     </div>
                     <div class="inline-block font-noto v-align-top">
@@ -70,7 +70,7 @@
                             </clipPath>
                             </defs>
                             <!--<image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(chat.owner.avatarOrigin)?chat.owner.avatarOrigin:'/static/images/assets/user_empty.png'"/>-->
-                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href=""/>
+                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="/static/empty.jpg"/>
                         </svg>
                     </div>
                     <div class="inline-block font-noto v-align-top">
@@ -88,7 +88,7 @@
                             </clipPath>
                             </defs>
                             <!--<image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(chat.owner.avatarOrigin)?chat.owner.avatarOrigin:'/static/images/assets/user_empty.png'"/>-->
-                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href=""/>
+                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="/static/empty.jpg"/>
                         </svg>
                     </div>
                     <div class="inline-block font-noto v-align-top">

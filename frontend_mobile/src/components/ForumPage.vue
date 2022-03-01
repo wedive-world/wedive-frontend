@@ -139,7 +139,7 @@
                     <textarea rows="1" class="wedive-textarea2" placeholder="제목을 입력하세요." v-model="agenda_title"></textarea>
                     <textarea class="wedive-textarea" :placeholder="textPlaceholder" v-model="agenda_contents"></textarea>
                 </div>
-                <!--<tags-input 
+                <tags-input 
                 element-id="tags"
                 v-model="selectedTags"
                 :typeahead-style="'dropdown'"
@@ -165,7 +165,7 @@
                 ]"
                 :typeahead="true"
                 class="mt-2">
-                </tags-input>-->
+                </tags-input>
                 <div id="div_upload_photo" class="row m-0 mb-3 mt-3">
                 </div>
                 <div class="mb-3 text-center p-2" style="border: 1px solid #e9e9e9;">
@@ -184,8 +184,8 @@ import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import 'swiper/css/swiper.css'
 
 import gql from 'graphql-tag'
-//import VoerroTagsInput from '@voerro/vue-tagsinput';
-//import '@voerro/vue-tagsinput/dist/style.css'
+import VoerroTagsInput from '@voerro/vue-tagsinput';
+import '@voerro/vue-tagsinput/dist/style.css'
 
 import ForumAgendaMyPage from './ForumAgendaMyPage.vue';
 import forumAgendaAllPage from './forumAgendaAllPage.vue';
@@ -198,7 +198,7 @@ export default {
   components: {
     Swiper,
     SwiperSlide,
-    //"tags-input": VoerroTagsInput,
+    "tags-input": VoerroTagsInput,
     ForumAgendaMyPage,
     forumAgendaAllPage,
     ForumCommunityPage,
