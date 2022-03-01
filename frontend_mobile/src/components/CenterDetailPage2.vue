@@ -6,17 +6,17 @@
             <div class="splide__track">
                 <div class="splide__list">
                     <div class="splide__slide">
-                        <div data-card-height="250" class="card rounded-0 mb-0" style="background-image:url(/static/bubble1.jpg)">
+                        <div data-card-height="250" class="card rounded-0 mb-0" style="background-image:url()">
                             
                         </div>         
                     </div>
                     <div class="splide__slide">
-                        <div data-card-height="250" class="card rounded-0 mb-0" style="background-image:url(/static/bubble2.jpg)">
+                        <div data-card-height="250" class="card rounded-0 mb-0" style="background-image:url()">
                             
                         </div>
                     </div>
                     <div class="splide__slide">
-                        <div data-card-height="250" class="card rounded-0 mb-0" style="background-image:url(/static/bubble3.jpg)">
+                        <div data-card-height="250" class="card rounded-0 mb-0" style="background-image:url()">
                             
                         </div>   
                     </div>
