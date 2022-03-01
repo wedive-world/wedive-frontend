@@ -178,7 +178,7 @@
                                 <div class="splide__list">
                                     <div class="splide__slide">
                                         <div class="card m-2 card-style">
-                                            <img src="/static/images/point/ko/jeju_munisland_01.jpg" class="img-fluid">
+                                            <img src="" class="img-fluid">
                                             <div class="p-2 bg-theme rounded-sm">
                                                 <h4 class="font-13 line-height-s font-400 mb-0">문섬 바다 속 풍경</h4>
                                             </div>
@@ -186,7 +186,7 @@
                                     </div>
                                     <div class="splide__slide">
                                         <div class="card m-2 card-style">
-                                            <img src="/static/images/point/ko/jeju_munisland_02.jpg" class="img-fluid">
+                                            <img src="" class="img-fluid">
                                             <div class="p-2 bg-theme rounded-sm">
                                                 <h4 class="font-13 line-height-s font-400 mb-0">연산호 주변 범돔 무리</h4>
                                             </div>
@@ -194,7 +194,7 @@
                                     </div>
                                     <div class="splide__slide">
                                         <div class="card m-2 card-style">
-                                            <img src="/static/images/point/ko/jeju_munisland_03.jpg" class="img-fluid">
+                                            <img src="" class="img-fluid">
                                             <div class="p-2 bg-theme rounded-sm">
                                                 <h4 class="font-13 line-height-s font-400 mb-0">적벽 형태의 포인트</h4>
                                             </div>
@@ -202,7 +202,7 @@
                                     </div>
                                     <div class="splide__slide">
                                         <div class="card m-2 card-style">
-                                            <img src="/static/images/point/ko/jeju_munisland_04.jpg" class="img-fluid">
+                                            <img src="" class="img-fluid">
                                             <div class="p-2 bg-theme rounded-sm">
                                                 <h4 class="font-13 line-height-s font-400 mb-0">형형색색의 연산호</h4>
                                             </div>
@@ -210,7 +210,7 @@
                                     </div>
                                     <div class="splide__slide">
                                         <div class="card m-2 card-style">
-                                            <img src="/static/images/point/ko/jeju_munisland_05.jpg" class="img-fluid">
+                                            <img src="" class="img-fluid">
                                             <div class="p-2 bg-theme rounded-sm">
                                                 <h4 class="font-13 line-height-s font-400 mb-0">다양한 수중생물</h4>
                                             </div>
@@ -218,7 +218,7 @@
                                     </div>
                                     <div class="splide__slide">
                                         <div class="card m-2 card-style">
-                                            <img src="/static/images/point/ko/jeju_munisland_06.jpg" class="img-fluid">
+                                            <img src="" class="img-fluid">
                                             <div class="p-2 bg-theme rounded-sm">
                                                 <h4 class="font-13 line-height-s font-400 mb-0">문섬, 새끼섬</h4>
                                             </div>
@@ -239,7 +239,7 @@
                                 <div class="splide__list">
                                     <div class="splide__slide">
                                         <div class="card m-2 card-style">
-                                            <img src="/static/images/point/ko/jeju_bumisland_01.jpg" class="img-fluid">
+                                            <img src="" class="img-fluid">
                                             <div class="p-2 bg-theme rounded-sm">
                                                 <h4 class="font-13 line-height-s font-400 mb-0">범섬 전경</h4>
                                             </div>
@@ -247,7 +247,7 @@
                                     </div>
                                     <div class="splide__slide">
                                         <div class="card m-2 card-style">
-                                            <img src="/static/images/point/ko/jeju_bumisland_02.jpg" class="img-fluid">
+                                            <img src="" class="img-fluid">
                                             <div class="p-2 bg-theme rounded-sm">
                                                 <h4 class="font-13 line-height-s font-400 mb-0">범섬 바다 속 풍경</h4>
                                             </div>
@@ -255,7 +255,7 @@
                                     </div>
                                     <div class="splide__slide">
                                         <div class="card m-2 card-style">
-                                            <img src="/static/images/point/ko/jeju_bumisland_03.jpg" class="img-fluid">
+                                            <img src="" class="img-fluid">
                                             <div class="p-2 bg-theme rounded-sm">
                                                 <h4 class="font-13 line-height-s font-400 mb-0">범섬 내부 산호</h4>
                                             </div>
@@ -263,7 +263,7 @@
                                     </div>
                                     <div class="splide__slide">
                                         <div class="card m-2 card-style">
-                                            <img src="/static/images/point/ko/jeju_bumisland_04.jpg" class="img-fluid">
+                                            <img src="" class="img-fluid">
                                             <div class="p-2 bg-theme rounded-sm">
                                                 <h4 class="font-13 line-height-s font-400 mb-0">범섬 포인트 물고기</h4>
                                             </div>
@@ -284,7 +284,7 @@
                                 <div class="splide__list">
                                     <div class="splide__slide">
                                         <div class="card m-2 card-style">
-                                            <img src="/static/images/point/ko/jeju_seogunisland_01.jpg" class="img-fluid">
+                                            <img src="" class="img-fluid">
                                             <div class="p-2 bg-theme rounded-sm">
                                                 <h4 class="font-13 line-height-s font-400 mb-0">서건도 전경</h4>
                                             </div>
@@ -292,7 +292,7 @@
                                     </div>
                                     <div class="splide__slide">
                                         <div class="card m-2 card-style">
-                                            <img src="/static/images/point/ko/jeju_seogunisland_02.jpg" class="img-fluid">
+                                            <img src="" class="img-fluid">
                                             <div class="p-2 bg-theme rounded-sm">
                                                 <h4 class="font-13 line-height-s font-400 mb-0">서건도 내부 연산호</h4>
                                             </div>
@@ -300,7 +300,7 @@
                                     </div>
                                     <div class="splide__slide">
                                         <div class="card m-2 card-style">
-                                            <img src="/static/images/point/ko/jeju_seogunisland_03.jpg" class="img-fluid">
+                                            <img src="" class="img-fluid">
                                             <div class="p-2 bg-theme rounded-sm">
                                                 <h4 class="font-13 line-height-s font-400 mb-0">서건도 내부 물고기</h4>
                                             </div>
@@ -308,7 +308,7 @@
                                     </div>
                                     <div class="splide__slide">
                                         <div class="card m-2 card-style">
-                                            <img src="/static/images/point/ko/jeju_seogunisland_04.jpg" class="img-fluid">
+                                            <img src="" class="img-fluid">
                                             <div class="p-2 bg-theme rounded-sm">
                                                 <h4 class="font-13 line-height-s font-400 mb-0">내부 바위군</h4>
                                             </div>
@@ -316,7 +316,7 @@
                                     </div>
                                     <div class="splide__slide">
                                         <div class="card m-2 card-style">
-                                            <img src="/static/images/point/ko/jeju_seogunisland_05.jpg" class="img-fluid">
+                                            <img src="" class="img-fluid">
                                             <div class="p-2 bg-theme rounded-sm">
                                                 <h4 class="font-13 line-height-s font-400 mb-0">내부 기암괴석</h4>
                                             </div>

@@ -6,7 +6,7 @@
             <div class="splide__track">
                 <div class="splide__list">
                     <div class="splide__slide">
-                        <div data-card-height="250" class="card rounded-0 mb-0" style="background-image:url(/static/images/point/ko/jeju_munisland_01.jpg)">
+                        <div data-card-height="250" class="card rounded-0 mb-0" style="background-image:url()">
                             
                         </div>         
                     </div>
@@ -205,22 +205,22 @@
                     <a href="#" class="row m-0 mb-2"> 
                         <div class="col-6 ps-0 pe-1">
                             <div class="card rounded-sm mb-2">
-                                <a class="" data-gallery="'gallery-0" href="/static/images/point/ko/jeju_munisland_07.jpg" title="">
-                                    <img src="/static/images/empty.png" data-src="/static/images/point/ko/jeju_munisland_07.jpg" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 80px;">
+                                <a class="" data-gallery="'gallery-0" href="" title="">
+                                    <img src="/static/images/empty.png" data-src="" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 80px;">
                                     <div class="wedive-source mx-140">instagram.com/p/CUFJxmJvDbN</div>
                                 </a>
                             </div>
                             <div class="card rounded-sm mb-0">
-                                <a class="" data-gallery="'gallery-0" href="/static/images/point/ko/jeju_munisland_08.jpg" title="">
-                                    <img src="/static/images/empty.png" data-src="/static/images/point/ko/jeju_munisland_08.jpg" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 80px;">
+                                <a class="" data-gallery="'gallery-0" href="" title="">
+                                    <img src="/static/images/empty.png" data-src="" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 80px;">
                                     <div class="wedive-source mx-140">instagram.com/p/CRc8e6FBxaQ/</div>
                                 </a>
                             </div>
                         </div>
                         <div class="col-6 ps-1 pe-0">
                             <div class="card rounded-sm mb-0">
-                                <a class="" data-gallery="'gallery-0" href="/static/images/point/ko/jeju_munisland_09.jpg" title="">
-                                    <img src="/static/images/empty.png" data-src="/static/images/point/ko/jeju_munisland_09.jpg" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 170px;">
+                                <a class="" data-gallery="'gallery-0" href="" title="">
+                                    <img src="/static/images/empty.png" data-src="" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 170px;">
                                     <div class="wedive-source mx-140">instagram.com/p/CUDBy28PAHn/</div>
                                 </a>
                             </div>
@@ -234,16 +234,16 @@
                     형형색색의 크고 작은 물고기 떼
                 </div>
                 <div class="row m-0 text-center row-cols-3 mb-1" style="margin-left: -4px !important; margin-rigth: -4px !important;">
-                    <a class="col square-rect" data-gallery="'gallery-0" href="/static/images/point/ko/jeju_munisland_10.jpg" title="">
-                        <img src="/static/images/empty.png" data-src="/static/images/point/ko/jeju_munisland_10.jpg" class="preload-img img-fluid rounded-s" alt="Point image">
+                    <a class="col square-rect" data-gallery="'gallery-0" href="" title="">
+                        <img src="/static/images/empty.png" data-src="" class="preload-img img-fluid rounded-s" alt="Point image">
                         <div class="wedive-source mx-80">instagram.com/p/CUFJxmJvDbN/</div>
                     </a>
-                    <a class="col square-rect" data-gallery="'gallery-0" href="/static/images/point/ko/jeju_munisland_11.jpg" title="">
-                        <img src="/static/images/empty.png" data-src="/static/images/point/ko/jeju_munisland_11.jpg" class="preload-img img-fluid rounded-s" alt="Point image">
+                    <a class="col square-rect" data-gallery="'gallery-0" href="" title="">
+                        <img src="/static/images/empty.png" data-src="" class="preload-img img-fluid rounded-s" alt="Point image">
                         <div class="wedive-source mx-80">instagram.com/p/CRkZLrTB8XW/</div>
                     </a>
-                    <a class="col square-rect" data-gallery="'gallery-0" href="/static/images/point/ko/jeju_munisland_12.jpg" title="">
-                        <img src="/static/images/empty.png" data-src="/static/images/point/ko/jeju_munisland_12.jpg" class="preload-img img-fluid rounded-s" alt="Point image">
+                    <a class="col square-rect" data-gallery="'gallery-0" href="" title="">
+                        <img src="/static/images/empty.png" data-src="" class="preload-img img-fluid rounded-s" alt="Point image">
                         <div class="wedive-source mx-80">instagram.com/p/CUGnqi5v9kf/</div>
                     </a>
                 </div>
@@ -256,22 +256,22 @@
                     <a href="#" class="row m-0 mb-2"> 
                         <div class="col-6 ps-0 pe-1">
                             <div class="card rounded-sm mb-0">
-                                <a class="" data-gallery="'gallery-0" href="/static/images/point/ko/jeju_munisland_13.jpg" title="">
-                                    <img src="/static/images/empty.png" data-src="/static/images/point/ko/jeju_munisland_13.jpg" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 170px;">
+                                <a class="" data-gallery="'gallery-0" href="" title="">
+                                    <img src="/static/images/empty.png" data-src="" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 170px;">
                                     <div class="wedive-source mx-140">tripadvisor.co.kr/LocationPhotoDirectLink-g297892-d1776327-i52724201-Seogwipo_Submarine-Seogwipo_Jeju_Island.html/</div>
                                 </a>
                             </div>
                         </div>
                         <div class="col-6 ps-1 pe-0">
                             <div class="card rounded-sm mb-2">
-                                <a class="" data-gallery="'gallery-0" href="/static/images/point/ko/jeju_munisland_14.jpg" title="">
-                                    <img src="/static/images/empty.png" data-src="/static/images/point/ko/jeju_munisland_14.jpg" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 80px;">
+                                <a class="" data-gallery="'gallery-0" href="" title="">
+                                    <img src="/static/images/empty.png" data-src="" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 80px;">
                                     <div class="wedive-source mx-140">instagram.com/p/CQ9-DMchbMa/</div>
                                 </a>
                             </div>
                             <div class="card rounded-sm mb-0">
-                                <a class="" data-gallery="'gallery-0" href="/static/images/point/ko/jeju_munisland_15.jpg" title="">
-                                    <img src="/static/images/empty.png" data-src="/static/images/point/ko/jeju_munisland_15.jpg" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 80px;">
+                                <a class="" data-gallery="'gallery-0" href="" title="">
+                                    <img src="/static/images/empty.png" data-src="" class="preload-img img-fluid rounded-s" alt="Point image" style="height: 80px;">
                                     <div class="wedive-source mx-140">instagram.com/p/CQVrSaSB0l8/</div>
                                 </a>
                             </div>
@@ -343,38 +343,38 @@
                 </div>
                 <div class="content m-0">
                     <div class="gallery-views gallery-view-2">
-                        <a data-gallery="gallery-1" href="/static/images/point/ko/jeju_munisland_01.jpg" title="문섬 바다 속 풍경">
-                            <img src="images/empty.png" data-src="/static/images/point/ko/jeju_munisland_01.jpg" class="rounded-m preload-img shadow-l img-fluid" alt="img">
+                        <a data-gallery="gallery-1" href="" title="문섬 바다 속 풍경">
+                            <img src="images/empty.png" data-src="" class="rounded-m preload-img shadow-l img-fluid" alt="img">
                             <div class="caption pt-0 mb-2 ms-3">
                                 <p class="color-gray-light-mid font-600 mb-n1">문섬 바다 속 풍경</p>
                             </div>
                         </a>
-                        <a data-gallery="gallery-1" href="/static/images/point/ko/jeju_munisland_02.jpg" title="연산호 주변 범돔 무리">
-                            <img src="images/empty.png" data-src="/static/images/point/ko/jeju_munisland_02.jpg" class="rounded-m preload-img shadow-l img-fluid" alt="img">
+                        <a data-gallery="gallery-1" href="" title="연산호 주변 범돔 무리">
+                            <img src="images/empty.png" data-src="" class="rounded-m preload-img shadow-l img-fluid" alt="img">
                             <div class="caption pt-0 mb-2 ms-3">
                                 <p class="color-gray-light-mid font-600 mb-n1">연산호 주변 범돔 무리</p>
                             </div>
                         </a>		
-                        <a data-gallery="gallery-1" href="/static/images/point/ko/jeju_munisland_03.jpg" title="적벽 형태의 포인트">
-                            <img src="images/empty.png" data-src="/static/images/point/ko/jeju_munisland_03.jpg" class="rounded-m preload-img shadow-l img-fluid" alt="img">
+                        <a data-gallery="gallery-1" href="" title="적벽 형태의 포인트">
+                            <img src="images/empty.png" data-src="" class="rounded-m preload-img shadow-l img-fluid" alt="img">
                             <div class="caption pt-0 mb-2 ms-3">
                                 <p class="color-gray-light-mid font-600 mb-n1">적벽 형태의 포인트</p>
                             </div>
                         </a>	
-                        <a data-gallery="gallery-1" href="/static/images/point/ko/jeju_munisland_04.jpg" title="형형색색의 연산호">
-                            <img src="images/empty.png" data-src="/static/images/point/ko/jeju_munisland_04.jpg" class="rounded-m preload-img shadow-l img-fluid" alt="img">
+                        <a data-gallery="gallery-1" href="" title="형형색색의 연산호">
+                            <img src="images/empty.png" data-src="" class="rounded-m preload-img shadow-l img-fluid" alt="img">
                             <div class="caption pt-0 mb-2 ms-3">
                                 <p class="color-gray-light-mid font-600 mb-n1">형형색색의 연산호</p>
                             </div>
                         </a>
-                        <a data-gallery="gallery-1" href="/static/images/point/ko/jeju_munisland_05.jpg" title="다양한 수중생물">
-                            <img src="images/empty.png" data-src="/static/images/point/ko/jeju_munisland_05.jpg" class="rounded-m preload-img shadow-l img-fluid" alt="img">
+                        <a data-gallery="gallery-1" href="" title="다양한 수중생물">
+                            <img src="images/empty.png" data-src="" class="rounded-m preload-img shadow-l img-fluid" alt="img">
                             <div class="caption pt-0 mb-2 ms-3">
                                 <p class="color-gray-light-mid font-600 mb-n1">다양한 수중생물</p>
                             </div>
                         </a>
-                        <a data-gallery="gallery-1" href="/static/images/point/ko/jeju_munisland_06.jpg" title="문섬, 새끼섬">
-                            <img src="images/empty.png" data-src="/static/images/point/ko/jeju_munisland_06.jpg" class="rounded-m preload-img shadow-l img-fluid" alt="img">
+                        <a data-gallery="gallery-1" href="" title="문섬, 새끼섬">
+                            <img src="images/empty.png" data-src="" class="rounded-m preload-img shadow-l img-fluid" alt="img">
                             <div class="caption pt-0 mb-2 ms-3 mb-4">
                                 <p class="color-gray-light-mid font-600 mb-n1">문섬, 새끼섬</p>
                             </div>
