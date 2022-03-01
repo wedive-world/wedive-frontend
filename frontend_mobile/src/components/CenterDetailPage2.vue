@@ -45,7 +45,7 @@
                     <span class="service font-12">서비스 4.2</span>
                     <!--<span class="info" style="margin-bottom:3px;margin-top:3px;"><i class="icon_question font-12">별점 안내</i></span>-->
                 </div>
-                <div style="margin-top:8px;"><span>최근리뷰 32</span>&nbsp;&nbsp;<font class="color-gray-light">|</font>&nbsp;&nbsp;<img class="ext-img" src="/static/images/agency/logo_padi.svg" width="48" />&nbsp;&nbsp;<font class="color-gray-light">|</font>&nbsp;&nbsp;<span>₩₩</span>
+                <div style="margin-top:8px;"><span>최근리뷰 32</span>&nbsp;&nbsp;<font class="color-gray-light">|</font>&nbsp;&nbsp;<img class="ext-img" src="" width="48" />&nbsp;&nbsp;<font class="color-gray-light">|</font>&nbsp;&nbsp;<span>₩₩</span>
                 <!--<span class="badge font-10 bg-fade-gray-dark">PADI 공식</span>-->
                 </div>
 
@@ -53,17 +53,17 @@
                 <div class="d-flex mt-3 mb-0 text-center">
                     <div class="flex-grow-1 pd-0" style="border-right: 1px solid lightgray;">
                     <button href="#" v-on:click="call()">
-                        <img class="ext-img" src="/static/images/ico_call.png" width="24" style="margin-top:-4px;"/>
+                        <img class="ext-img" src="" width="24" style="margin-top:-4px;"/>
                         <span class="font-16 font-500 font-noto">전화</span>
                     </button>
                     </div>
                     <div class="flex-grow-1 pd-0" style="border-right: 1px solid lightgray;">
-                        <img class="ext-img" src="/static/images/ico_heart.png" width="24" style="margin-top:-4px;"/>
+                        <img class="ext-img" src="" width="24" style="margin-top:-4px;"/>
                         <span class="font-16 font-500 font-noto">찜 25</span>
                     </div>
                     
                     <div class="flex-grow-1 pd-0" data-menu="menu-share">
-                        <img class="ext-img" src="/static/images/ico_share.png" width="24" style="margin-top:-4px;"/>
+                        <img class="ext-img" src="" width="24" style="margin-top:-4px;"/>
                         <span class="font-16 font-500 font-noto">공유</span>
                     </div>
                     
@@ -108,7 +108,7 @@
                 <div data-bs-parent="#tab-group-1" class="collapse show" id="tab-1ab">
                     <div class="d-flex mb-3">
                         <div class="align-self-center">
-                            <img src="/static/images/diving_openwater.jpg" class="rounded-sm me-3" width="40">
+                            <img src="" class="rounded-sm me-3" width="40">
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-15 line-height-s mt-1 mb-n1">오픈워터 코스</h2>
@@ -121,7 +121,7 @@
                     </div>
                     <div class="d-flex mb-3">
                         <div class="align-self-center">
-                            <img src="/static/images/diving_advanced.jpg" class="rounded-sm me-3" width="40">
+                            <img src="" class="rounded-sm me-3" width="40">
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-15 line-height-s mt-1 mb-n1">어드벤스드 코스</h2>
@@ -134,7 +134,7 @@
                     </div>
                     <div class="d-flex mb-3">
                         <div class="align-self-center">
-                            <img src="/static/images/diving_advanced.jpg" class="rounded-sm me-3" width="40">
+                            <img src="" class="rounded-sm me-3" width="40">
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-15 line-height-s mt-1 mb-n1">오픈워터+어드벤스드</h2>
@@ -147,7 +147,7 @@
                     </div>
                     <div class="d-flex mb-3">
                         <div class="align-self-center">
-                            <img src="/static/images/diving_specialtea.jpg" class="rounded-sm me-3" width="40">
+                            <img src="" class="rounded-sm me-3" width="40">
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-15 line-height-s mt-1 mb-n1">스페셜티 코스</h2>
@@ -160,7 +160,7 @@
                     </div>
                     <div class="d-flex mb-3">
                         <div class="align-self-center">
-                            <img src="/static/images/diving_rescue.jpg" class="rounded-sm me-3" width="40">
+                            <img src="" class="rounded-sm me-3" width="40">
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-15 line-height-s mt-1 mb-n1">레스큐+응급처치</h2>
@@ -173,7 +173,7 @@
                     </div>
                     <div class="d-flex mb-3">
                         <div class="align-self-center">
-                            <img src="/static/images/diving_master.jpg" class="rounded-sm me-3" width="40">
+                            <img src="" class="rounded-sm me-3" width="40">
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-15 line-height-s mt-1 mb-n1">다이브마스터</h2>
@@ -188,7 +188,7 @@
                 <div data-bs-parent="#tab-group-1" class="collapse" id="tab-2ab">
                     <div class="d-flex mb-3">
                         <div class="align-self-center">
-                            <img src="/static/images/diving_island.jpg" class="rounded-sm me-3" width="70">
+                            <img src="" class="rounded-sm me-3" width="70">
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-15 line-height-s mt-1 mb-n1">섬 다이빙</h2>
@@ -201,7 +201,7 @@
                     </div>
                     <div class="d-flex mb-3">
                         <div class="align-self-center">
-                            <img src="/static/images/diving_boat.jpg" class="rounded-sm me-3" width="70">
+                            <img src="" class="rounded-sm me-3" width="70">
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-15 line-height-s mt-1 mb-n1">보트 다이빙</h2>
@@ -214,7 +214,7 @@
                     </div>
                     <div class="d-flex mb-3">
                         <div class="align-self-center">
-                            <img src="/static/images/diving_beach1.jpg" class="rounded-sm me-3" width="70">
+                            <img src="" class="rounded-sm me-3" width="70">
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-15 line-height-s mt-1 mb-n1">비치 다이빙</h2>
@@ -227,7 +227,7 @@
                     </div>
                     <div class="d-flex mb-3">
                         <div class="align-self-center">
-                            <img src="/static/images/diving_yacht.jpg" class="rounded-sm me-3" width="70">
+                            <img src="" class="rounded-sm me-3" width="70">
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-15 line-height-s mt-1 mb-n1">요트 다이빙</h2>
@@ -240,7 +240,7 @@
                     </div>
                     <div class="d-flex mb-3">
                         <div class="align-self-center">
-                            <img src="/static/images/diving_night.jpg" class="rounded-sm me-3" width="70">
+                            <img src="" class="rounded-sm me-3" width="70">
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-15 line-height-s mt-1 mb-n1">나이트 다이빙</h2>
@@ -255,7 +255,7 @@
                 <div data-bs-parent="#tab-group-1" class="collapse" id="tab-3ab">
                     <div class="d-flex mb-3">
                         <div class="align-self-center">
-                            <img src="/static/images/diving_beach.jpg" class="rounded-sm me-3" width="70">
+                            <img src="" class="rounded-sm me-3" width="70">
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-15 line-height-s mt-1 mb-n1">비치 체험 다이빙</h2>
@@ -268,7 +268,7 @@
                     </div>
                     <div class="d-flex mb-3 cursor-pointer" v-on:click="goCourse()">
                         <div class="align-self-center">
-                            <img src="/static/images/diving_boat.jpg" class="rounded-sm me-3" width="70">
+                            <img src="" class="rounded-sm me-3" width="70">
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-15 line-height-s mt-1 mb-n1">보트 체험 다이빙</h2>
@@ -628,13 +628,13 @@
 
                                 <div class="row text-center row-cols-3 mb-1" style="padding-left:10px;padding-right:10px;">
                                     <a class="col square-rect" v-bind:data-gallery="'gallery-'+index" v-bind:href="point.img1" title="">
-                                        <img src="/static/images/empty.png" v-bind:data-src="point.img1" class="preload-img img-fluid rounded-s" alt="Point image">
+                                        <img src="" v-bind:data-src="point.img1" class="preload-img img-fluid rounded-s" alt="Point image">
                                     </a>
                                     <a class="col square-rect" v-bind:data-gallery="'gallery-'+index" v-bind:href="point.img2" title="">
-                                        <img src="/static/images/empty.png" v-bind:data-src="point.img2" class="preload-img img-fluid rounded-s" alt="Point image">
+                                        <img src="" v-bind:data-src="point.img2" class="preload-img img-fluid rounded-s" alt="Point image">
                                     </a>
                                     <a class="col square-rect" v-bind:data-gallery="'gallery-'+index" v-bind:href="point.img3" title="">
-                                        <img src="/static/images/empty.png" v-bind:data-src="point.img3" class="preload-img img-fluid rounded-s" alt="Point image">
+                                        <img src="" v-bind:data-src="point.img3" class="preload-img img-fluid rounded-s" alt="Point image">
                                     </a>
                                 </div>
                                 <p class="pb-0 mb-0 line-height-m point_desc"> {{point.desc}} </p>
@@ -692,41 +692,41 @@
             </div>
             <div class="content mb-3 mt-n3">
                 <div class="gallery gallery-filter">
-                    <a href="/static/images/shop1/diving/test1.jpg" data-gallery="gallery-1" class="filtr-item" title="" data-category="1">
-                        <img src="/static/images/empty.png" data-src="/static/images/shop1/diving/test1.jpg" class="preload-img rounded-s shadow-m">
+                    <a href="" data-gallery="gallery-1" class="filtr-item" title="" data-category="1">
+                        <img src="/static/images/empty.png" data-src="" class="preload-img rounded-s shadow-m">
                     </a>
-                    <a href="/static/images/shop1/diving/test2.jpg" data-gallery="gallery-1" class="filtr-item" title="" data-category="1">
-                        <img src="/static/images/empty.png" data-src="/static/images/shop1/diving/test2.jpg" class="preload-img rounded-s shadow-m">
+                    <a href="" data-gallery="gallery-1" class="filtr-item" title="" data-category="1">
+                        <img src="/static/images/empty.png" data-src="" class="preload-img rounded-s shadow-m">
                     </a>
-                    <a href="/static/images/shop1/diving/test3.jpg" data-gallery="gallery-1" class="filtr-item" title="" data-category="1">
-                        <img src="/static/images/empty.png" data-src="/static/images/shop1/diving/test3.jpg" class="preload-img rounded-s shadow-m">
+                    <a href="" data-gallery="gallery-1" class="filtr-item" title="" data-category="1">
+                        <img src="/static/images/empty.png" data-src="" class="preload-img rounded-s shadow-m">
                     </a>
-                    <a href="/static/images/shop1/diving/test4.jpg" data-gallery="gallery-1" class="filtr-item" title="" data-category="1">
-                        <img src="/static/images/empty.png" data-src="/static/images/shop1/diving/test4.jpg" class="preload-img rounded-s shadow-m">
+                    <a href="" data-gallery="gallery-1" class="filtr-item" title="" data-category="1">
+                        <img src="/static/images/empty.png" data-src="" class="preload-img rounded-s shadow-m">
                     </a>
-                    <a href="/static/images/shop1/diving/test5.jpg" data-gallery="gallery-1" class="filtr-item" title="" data-category="1">
-                        <img src="/static/images/empty.png" data-src="/static/images/shop1/diving/test5.jpg" class="preload-img rounded-s shadow-m">
+                    <a href="" data-galler`="gallery-1" class="filtr-item" title="" data-category="1">
+                        <img src="/static/images/empty.png" data-src="" class="preload-img rounded-s shadow-m">
                     </a>
-                    <a href="/static/images/shop1/diving/test6.jpg" data-gallery="gallery-1" class="filtr-item" title="" data-category="1">
-                        <img src="/static/images/empty.png" data-src="/static/images/shop1/diving/test6.jpg" class="preload-img rounded-s shadow-m">
+                    <a href="" data-gallery="gallery-1" class="filtr-item" title="" data-category="1">
+                        <img src="/static/images/empty.png" data-src="" class="preload-img rounded-s shadow-m">
                     </a>							
-                    <a href="/static/images/shop1/edu/test1.jpg" data-gallery="gallery-2" class="filtr-item" title="" data-category="2">
-                        <img src="/static/images/empty.png" data-src="/static/images/shop1/edu/test1.jpg" class="preload-img rounded-s shadow-m">
+                    <a href="" data-gallery="gallery-2" class="filtr-item" title="" data-category="2">
+                        <img src="/static/images/empty.png" data-src="" class="preload-img rounded-s shadow-m">
                     </a>
-                    <a href="/static/images/shop1/shop/test3.jpg" data-gallery="gallery-3" class="filtr-item" title="" data-category="3">
-                        <img src="/static/images/empty.png" data-src="/static/images/shop1/shop/test3.jpg" class="preload-img rounded-s shadow-m">
+                    <a href="" data-gallery="gallery-3" class="filtr-item" title="" data-category="3">
+                        <img src="/static/images/empty.png" data-src="" class="preload-img rounded-s shadow-m">
                     </a>
-                    <a href="/static/images/shop1/shop/test12.jpg" data-gallery="gallery-3" class="filtr-item" title="" data-category="3">
-                        <img src="/static/images/empty.png" data-src="/static/images/shop1/shop/test12.jpg" class="preload-img rounded-s shadow-m">
+                    <a href="" data-gallery="gallery-3" class="filtr-item" title="" data-category="3">
+                        <img src="/static/images/empty.png" data-src="" class="preload-img rounded-s shadow-m">
                     </a>
-                    <a href="/static/images/shop1/shop/test15.jpg" data-gallery="gallery-3" class="filtr-item" title="" data-category="3">
-                        <img src="/static/images/empty.png" data-src="/static/images/shop1/shop/test15.jpg" class="preload-img rounded-s shadow-m">
+                    <a href="" data-gallery="gallery-3" class="filtr-item" title="" data-category="3">
+                        <img src="/static/images/empty.png" data-src="" class="preload-img rounded-s shadow-m">
                     </a>
-                    <a href="/static/images/shop1/shop/test21.jpg" data-gallery="gallery-3" class="filtr-item" title="" data-category="3">
-                        <img src="/static/images/empty.png" data-src="/static/images/shop1/shop/test21.jpg" class="preload-img rounded-s shadow-m">
+                    <a href="" data-gallery="gallery-3" class="filtr-item" title="" data-category="3">
+                        <img src="/static/images/empty.png" data-src="" class="preload-img rounded-s shadow-m">
                     </a>
-                    <a href="/static/images/shop1/shop/test22.jpg" data-gallery="gallery-3" class="filtr-item" title="" data-category="3">
-                        <img src="/static/images/empty.png" data-src="/static/images/shop1/shop/test22.jpg" class="preload-img rounded-s shadow-m">
+                    <a href="" data-gallery="gallery-3" class="filtr-item" title="" data-category="3">
+                        <img src="/static/images/empty.png" data-src="" class="preload-img rounded-s shadow-m">
                     </a>
                 </div>
             </div>
@@ -776,7 +776,7 @@
                         </tbody>
                     </table>
                     <div class="text-end">
-                        <img class="me-1 mb-3" height="20" src="/static/images/logo-kaoh.svg" />
+                        <img class="me-1 mb-3" height="20" src="" />
                     </div>
                 </div>
                 <div data-bs-parent="#tab-group-index" class="collapse" id="tab-monthly">
@@ -793,79 +793,79 @@
                             <tr class="border-bottom">
                                 <th class="font-12" scope="row">1월</th>
                                 <td class="font-12 color-gray">5.2ºC / 12.3ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>8.8ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_01.svg" width="32" height="32"/></td>
+                                <td class="font-12"><img class="me-2" src="" width="20" height="20"/>8.8ºC</td>
+                                <td class=""><img class="img_pop" src="" width="32" height="32"/></td>
                             </tr>
                             <tr class="border-bottom">
                                 <th class="font-12" scope="row">2월</th>
                                 <td class="font-12 color-gray">3.4ºC / 9.8ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>6.6ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_01.svg" width="32" height="32"/></td>
+                                <td class="font-12"><img class="me-2" src="" width="20" height="20"/>6.6ºC</td>
+                                <td class=""><img class="img_pop" src="" width="32" height="32"/></td>
                             </tr>
                             <tr class="border-bottom">
                                 <th class="font-12" scope="row">3월</th>
                                 <td class="font-12 color-gray">3.2ºC / 9.4ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>6.3ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_01.svg" width="32" height="32"/></td>
+                                <td class="font-12"><img class="me-2" src="" width="20" height="20"/>6.3ºC</td>
+                                <td class=""><img class="img_pop" src="" width="32" height="32"/></td>
                             </tr>
                             <tr class="border-bottom">
                                 <th class="font-12" scope="row">4월</th>
                                 <td class="font-12 color-gray">7.0ºC / 13.3ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>10.2ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_01.svg" width="32" height="32"/></td>
+                                <td class="font-12"><img class="me-2" src="" width="20" height="20"/>10.2ºC</td>
+                                <td class=""><img class="img_pop" src="" width="32" height="32"/></td>
                             </tr>
                             <tr class="border-bottom">
                                 <th class="font-12" scope="row">5월</th>
                                 <td class="font-12 color-gray">10.5ºC / 17.8ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>14.6ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_01.svg" width="32" height="32"/></td>
+                                <td class="font-12"><img class="me-2" src="" width="20" height="20"/>14.6ºC</td>
+                                <td class=""><img class="img_pop" src="" width="32" height="32"/></td>
                             </tr>
                             <tr class="border-bottom">
                                 <th class="font-12" scope="row">6월</th>
                                 <td class="font-12 color-gray">15.1ºC / 23.4ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>19.2ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_02.svg" width="32" height="32"/></td>
+                                <td class="font-12"><img class="me-2" src="" width="20" height="20"/>19.2ºC</td>
+                                <td class=""><img class="img_pop" src="" width="32" height="32"/></td>
                             </tr>
                             <tr class="border-bottom">
                                 <th class="font-12" scope="row">7월</th>
                                 <td class="font-12 color-gray">19.9ºC / 24.4ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_heavy_rain.svg" width="20" height="20"/>22.2ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_02.svg" width="32" height="32"/></td>
+                                <td class="font-12"><img class="me-2" src="" width="20" height="20"/>22.2ºC</td>
+                                <td class=""><img class="img_pop" src="" width="32" height="32"/></td>
                             </tr>
                             <tr class="border-bottom">
                                 <th class="font-12" scope="row">8월</th>
                                 <td class="font-12 color-gray">21.3ºC / 26.0ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_showers.svg" width="20" height="20"/>23.7ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_02.svg" width="32" height="32"/></td>
+                                <td class="font-12"><img class="me-2" src="" width="20" height="20"/>23.7ºC</td>
+                                <td class=""><img class="img_pop" src="" width="32" height="32"/></td>
                             </tr>
                             <tr class="border-bottom">
                                 <th class="font-12" scope="row">9월</th>
                                 <td class="font-12 color-gray">18.6ºC / 24.1ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_sunny.svg" width="20" height="20"/>21.4ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_02.svg" width="32" height="32"/></td>
+                                <td class="font-12"><img class="me-2" src="" width="20" height="20"/>21.4ºC</td>
+                                <td class=""><img class="img_pop" src="" width="32" height="32"/></td>
                             </tr>
                             <tr class="border-bottom">
                                 <th class="font-12" scope="row">10월</th>
                                 <td class="font-12 color-gray">14.9ºC / 21.6ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>18.2ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_02.svg" width="32" height="32"/></td>
+                                <td class="font-12"><img class="me-2" src="" width="20" height="20"/>18.2ºC</td>
+                                <td class=""><img class="img_pop" src="" width="32" height="32"/></td>
                             </tr>
                             <tr class="border-bottom">
                                 <th class="font-12" scope="row">11월</th>
                                 <td class="font-12 color-gray">10.8ºC / 17.6ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>14.2ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_01.svg" width="32" height="32"/></td>
+                                <td class="font-12"><img class="me-2" src="" width="20" height="20"/>14.2ºC</td>
+                                <td class=""><img class="img_pop" src="" width="32" height="32"/></td>
                             </tr>
                             <tr>
                                 <th class="font-12" scope="row">12월</th>
                                 <td class="font-12 color-gray">6.4ºC / 13.8ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/weather_partly_cloudy.svg" width="20" height="20"/>10.1ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/icon_popularity_01.svg" width="32" height="32"/></td>
+                                <td class="font-12"><img class="me-2" src="" width="20" height="20"/>10.1ºC</td>
+                                <td class=""><img class="img_pop" src="" width="32" height="32"/></td>
                             </tr>
                         </tbody>
                     </table>
                     <div class="text-end">
-                        <img class="me-1 mb-3" height="20" src="/static/images/logo-kma.svg" />
+                        <img class="me-1 mb-3" height="20" src="" />
                     </div>
                 </div>
             </div>
@@ -1264,7 +1264,7 @@ export default {
             map: this.map,
             position: {lat: 33.24134444312815, lng: 126.56484940647604},
             label: {text: '버블탱크 스쿠바다이빙', color: 'white', className: 'marker-position'},
-            icon: new google.maps.MarkerImage('/static/images/ico_pin1.png',null, null, null, new google.maps.Size(38,43)),
+            icon: new google.maps.MarkerImage('',null, null, null, new google.maps.Size(38,43)),
         });
 
         {
@@ -1278,14 +1278,14 @@ export default {
                 map: this.map,
                 position: position,
                 label: {text: title, color: 'white', className: 'marker-position2'},
-                icon: new google.maps.MarkerImage('/static/images/ico_pin2.png',null, null, null, new google.maps.Size(38,43)),
+                icon: new google.maps.MarkerImage('',null, null, null, new google.maps.Size(38,43)),
             });
             marker_point.addListener("click", () => {
                 $(".map-box").removeClass("hide");
                 for (var j=0; j<this.marker_list.length; j++) {
                     var _icon = this.marker_list[j].getIcon();
                     if (_icon.size.width != 38) {
-                        this.marker_list[j].setIcon(new google.maps.MarkerImage('/static/images/ico_pin2.png', null, null, null, new google.maps.Size(38,43)));
+                        this.marker_list[j].setIcon(new google.maps.MarkerImage('', null, null, null, new google.maps.Size(38,43)));
                         try {
                             this.marker_list[j].setLabel({text: title, color: 'white', className: 'marker-position2'});
                         } catch (e) {
@@ -1298,7 +1298,7 @@ export default {
                 $("#map_box_shop_img").attr("src", img);
                 
                 
-                marker_point.setIcon(new google.maps.MarkerImage('/static/images/ico_pin_big2.png', null, null, null, new google.maps.Size(58,66)));
+                marker_point.setIcon(new google.maps.MarkerImage('', null, null, null, new google.maps.Size(58,66)));
                 marker_point.setLabel({text: title, color: 'white', className: 'marker-position2 mt-86'});
                 this.map.panTo(marker_point.getPosition());
                 //if (this.map.getZoom() == 17) {
@@ -1314,7 +1314,7 @@ export default {
             for (var j=0; j<this.marker_list.length; j++) {
                 var _icon = this.marker_list[j].getIcon();
                 if (_icon.size.width != 38) {
-                    this.marker_list[j].setIcon(new google.maps.MarkerImage('/static/images/ico_pin2.png', null, null, null, new google.maps.Size(38,43)));
+                    this.marker_list[j].setIcon(new google.maps.MarkerImage('', null, null, null, new google.maps.Size(38,43)));
                     var _title = this.marker_list[j].getLabel().text;
                     this.marker_list[j].setLabel({text: _title, color: 'white', className: 'marker-position2'});
                 }
@@ -1377,7 +1377,7 @@ export default {
 .light-border-bottom {border-bottom: 1px solid #dee2e6;}
 .evaluation {background-color: rgba(196,187,171,.2);justify-content: space-around;border-radius: 5px;padding: 8px 8px 8px 0;}
 .evaluation>span.info {padding-left: 11px;border-left: 1px solid #c4bbab;}
-.evaluation>span .icon_question {display: inline-block;position: relative;top: 1px;display: block;width: 18px;height: 18px;background-size: 18px 18px;background-repeat: no-repeat;background-image: url(/static/images/question.png);text-indent: -9999px;}
+.evaluation>span .icon_question {display: inline-block;position: relative;top: 1px;display: block;width: 18px;height: 18px;background-size: 18px 18px;background-repeat: no-repeat;background-image: url();text-indent: -9999px;}
 
 .span_feature {width:66px;}
 .ico_feature1 {width: 44px;height: 40px;background-position: 0px 0px;}
@@ -1419,7 +1419,7 @@ export default {
 
 
 
-.icon-service {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/assets/wedive_service2.png);background-repeat: no-repeat;-webkit-background-size: 270px 270px;background-size: 270px 270px;}
+.icon-service {overflow: hidden;display: block;margin-left: 11px;background-image: url();background-repeat: no-repeat;-webkit-background-size: 270px 270px;background-size: 270px 270px;}
 
 .ico_equipt {}
 .ico_equipt1 {width: 60px;height: 63px;background-position: 0px 3px;}
@@ -1496,7 +1496,7 @@ export default {
 .ico_equipt66 {width: 60px;height: 63px;background-position: -280px -560px;}
 
 
-.icon-equiptment {overflow: hidden;display: block;margin-left: 3px;background-image: url(/static/images/assets/wedive_equiptment2.png);background-repeat: no-repeat;-webkit-background-size: 335px 585px;background-size: 335px 585px;}
+.icon-equiptment {overflow: hidden;display: block;margin-left: 3px;background-image: url();background-repeat: no-repeat;-webkit-background-size: 335px 585px;background-size: 335px 585px;}
 
 .wedive-ul {width: 100%;list-style:none;display: inline-block;margin-bottom: 0;padding-left: 5px !important;padding-right: 5px !important;}
 .wedive-ul > li {float: left;width: 50%;}
