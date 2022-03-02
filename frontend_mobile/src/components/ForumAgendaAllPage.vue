@@ -23,12 +23,12 @@
                 class="swiper wedive-swiper"
                 :options="swiperOption"
             >
-                <swiper-slide style="width:auto;"><div class="font-noto" style="padding-top:2px;">인기 태그</div></swiper-slide>
-                <swiper-slide style="width:auto;"><div class="bg-gray-light color-gray rounded-sm me-2" style="padding: 2px 12px;" v-on:click="setFilter(0)"># 마크로</div></swiper-slide>
-                <swiper-slide style="width:auto;"><div class="bg-gray-light color-gray rounded-sm me-2" style="padding: 2px 12px;" v-on:click="setFilter(1)"># 대물</div></swiper-slide>
-                <swiper-slide style="width:auto;"><div class="bg-gray-light color-gray rounded-sm me-2" style="padding: 2px 12px;" v-on:click="setFilter(2)"># 먹방</div></swiper-slide>
-                <swiper-slide style="width:auto;"><div class="bg-gray-light color-gray rounded-sm me-2" style="padding: 2px 12px;" v-on:click="setFilter(3)"># 해루질</div></swiper-slide>
-                <swiper-slide style="width:auto;"><div class="bg-gray-light color-gray rounded-sm me-2" style="padding: 2px 12px;" v-on:click="setFilter(4)"># 프리다이빙</div></swiper-slide>
+                <swiper-slide style="width:auto;"><div class="font-noto me-2" style="padding-top:2px;">인기 태그</div></swiper-slide>
+                <swiper-slide style="width:auto;"><div class="bg-gray-light color-gray rounded-sm me-2" style="padding: 2px 12px;" v-on:click="setFilter(0)">#마크로</div></swiper-slide>
+                <swiper-slide style="width:auto;"><div class="bg-gray-light color-gray rounded-sm me-2" style="padding: 2px 12px;" v-on:click="setFilter(1)">#대물</div></swiper-slide>
+                <swiper-slide style="width:auto;"><div class="bg-gray-light color-gray rounded-sm me-2" style="padding: 2px 12px;" v-on:click="setFilter(2)">#먹방</div></swiper-slide>
+                <swiper-slide style="width:auto;"><div class="bg-gray-light color-gray rounded-sm me-2" style="padding: 2px 12px;" v-on:click="setFilter(3)">#해루질</div></swiper-slide>
+                <swiper-slide style="width:auto;"><div class="bg-gray-light color-gray rounded-sm me-2" style="padding: 2px 12px;" v-on:click="setFilter(4)">#프리다이빙</div></swiper-slide>
                 <swiper-slide style="width:auto;"><div class="font-noto">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></swiper-slide>
             </swiper>
           </div>
@@ -36,8 +36,18 @@
           <div>
             <div class="p-3">
               <div style="position:relative;">
-                  <img class="inline-block me-2 circular_image" src="/static/images/assets/user_empty_m.png" style="vertical-align: top;width:40px;height:40px;"/>
-                  <div class="inline-block font-noto">
+                  <div class="user-img-s me-2">
+                      <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                          <defs>
+                          <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                          <clipPath id="clipSquircle">
+                              <use xlink:href="#shapeSquircle"/>
+                          </clipPath>
+                          </defs>
+                          <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="/static/images/assets/user_empty.png"/>
+                      </svg>
+                  </div>
+                  <div class="inline-block font-noto v-align-top mt-1">
                       <h5 class="mb-0 font-500 font-15">짱스</h5>
                       <p class="mb-0 mt-n1 font-13 color-gray">초보 다이버</p>
                   </div>
@@ -56,9 +66,9 @@
             </div>
             <div class="p-3">
               <div class="mt-1">
-                  <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#힐링</span>
-                  <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#새해</span>
-                  <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#다이빙</span>
+                  <span class="bg-gray-light color-gray rounded-sm me-1" style="padding: 6px 12px;">#힐링</span>
+                  <span class="bg-gray-light color-gray rounded-sm me-1" style="padding: 6px 12px;">#새해</span>
+                  <span class="bg-gray-light color-gray rounded-sm me-1" style="padding: 6px 12px;">#다이빙</span>
               </div>
               <div class="mt-4 mb-3">
                   <img src="/static/images/assets/ico_heart.png" width="22" class="me-1" style="margin-top:-1px;"/><span class="font-14 font-noto">1</span>
@@ -73,8 +83,18 @@
           <div>
             <div class="p-3">
               <div style="position:relative;">
-                  <img class="inline-block me-2 circular_image" src="/static/images/assets/user_empty_m.png" style="vertical-align: top;width:40px;height:40px;"/>
-                  <div class="inline-block font-noto">
+                  <div class="user-img-s me-2">
+                      <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                          <defs>
+                          <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                          <clipPath id="clipSquircle">
+                              <use xlink:href="#shapeSquircle"/>
+                          </clipPath>
+                          </defs>
+                          <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="/static/images/assets/user_empty.png"/>
+                      </svg>
+                  </div>
+                  <div class="inline-block font-noto v-align-top mt-1">
                       <h5 class="mb-0 font-500 font-15">짱스</h5>
                       <p class="mb-0 mt-n1 font-13 color-gray">초보 다이버</p>
                   </div>
@@ -96,9 +116,9 @@
             </div>
             <div class="p-3">
               <div class="mt-1">
-                  <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#힐링</span>
-                  <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#새해</span>
-                  <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#다이빙</span>
+                  <span class="bg-gray-light color-gray rounded-sm me-1" style="padding: 6px 12px;">#힐링</span>
+                  <span class="bg-gray-light color-gray rounded-sm me-1" style="padding: 6px 12px;">#새해</span>
+                  <span class="bg-gray-light color-gray rounded-sm me-1" style="padding: 6px 12px;">#다이빙</span>
               </div>
               <div class="mt-4 mb-3">
                   <img src="/static/images/assets/ico_heart.png" width="22" class="me-1" style="margin-top:-1px;"/><span class="font-14 font-noto">6</span>
@@ -111,8 +131,18 @@
           
           <div class="p-3">
               <div style="position:relative;">
-                  <img class="inline-block me-2 circular_image" src="/static/images/assets/user_empty_m.png" style="vertical-align: top;width:40px;height:40px;"/>
-                  <div class="inline-block font-noto">
+                  <div class="user-img-s me-2">
+                      <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                          <defs>
+                          <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                          <clipPath id="clipSquircle">
+                              <use xlink:href="#shapeSquircle"/>
+                          </clipPath>
+                          </defs>
+                          <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="/static/images/assets/user_empty.png"/>
+                      </svg>
+                  </div>
+                  <div class="inline-block font-noto v-align-top mt-1">
                       <h5 class="mb-0 font-500 font-15">짱스</h5>
                       <p class="mb-0 mt-n1 font-13 color-gray">초보 다이버</p>
                   </div>
@@ -135,9 +165,9 @@
           </div>
           <div class="p-3">
               <div class="mt-1">
-                  <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#힐링</span>
-                  <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#새해</span>
-                  <span class="bg-gray-light color-gray rounded-sm me-2" style="padding: 6px 12px;">#다이빙</span>
+                  <span class="bg-gray-light color-gray rounded-sm me-1" style="padding: 6px 12px;">#힐링</span>
+                  <span class="bg-gray-light color-gray rounded-sm me-1" style="padding: 6px 12px;">#새해</span>
+                  <span class="bg-gray-light color-gray rounded-sm me-1" style="padding: 6px 12px;">#다이빙</span>
               </div>
               <div class="mt-4 mb-3">
                   <img src="/static/images/assets/ico_heart.png" width="22" class="me-1" style="margin-top:-1px;"/><span class="font-14 font-noto">6</span>
@@ -219,7 +249,7 @@ export default {
           triggerDistance: 70 // Pull down the trigger to trigger the distance
       },
       swiperOption: {
-            spaceBetween: 10,
+            spaceBetween: 0,
             slidesPerView: 'auto',
       },
     }
@@ -280,4 +310,45 @@ export default {
 
 <style scoped>
 .inline-block {display: inline-block !important;}
+.v-align-top {vertical-align: top !important;}
+.user-img-s {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+  user-select: none;
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3csvg width='88px' height='88px' viewBox='0 0 88 88' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3e%3cpath d='M44%2c0.5 C59.8650505%2c0.5 70.7664452%2c3.40244096 77.6820021%2c10.3179979 C84.597559%2c17.2335548 87.5%2c28.1349495 87.5%2c44 C87.5%2c59.8650505 84.597559%2c70.7664452 77.6820021%2c77.6820021 C70.7664452%2c84.597559 59.8650505%2c87.5 44%2c87.5 C28.1349495%2c87.5 17.2335548%2c84.597559 10.3179979%2c77.6820021 C3.40244096%2c70.7664452 0.5%2c59.8650505 0.5%2c44 C0.5%2c28.1349495 3.40244096%2c17.2335548 10.3179979%2c10.3179979 C17.2335548%2c3.40244096 28.1349495%2c0.5 44%2c0.5 Z' fill='none' stroke='rgba(0,0,0,0.3)'%3e%3c/path%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .svg-profile {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .default-txt {
+    font-size: 2em;
+    fill: #fff;
+  }
+
+  .default-bg {
+    width: 100%;
+    height: 100%;
+    @each $num, $color in $userImgBgs {
+      &[data-color="#{$num}"] {
+        fill: $color;
+      }
+    }
+  }
+}
 </style>

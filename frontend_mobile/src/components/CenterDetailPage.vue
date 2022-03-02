@@ -121,7 +121,7 @@
                 <div v-else-if="centerData.educations && centerData.educations.filter(x=>x.type.includes('fun')).length > 0" data-bs-parent="#tab-group-1" class="collapse" id="tab-2ab">
                     <div class="d-flex mb-3">
                         <div class="align-self-center">
-                            <img src="/static/images/diving_island.jpg" class="rounded-sm me-3" width="70">
+                            <img src="/static/empty.jpg" class="rounded-sm me-3" width="70">
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-15 line-height-s mt-1 mb-n1">섬 다이빙</h2>
@@ -134,7 +134,7 @@
                     </div>
                     <div class="d-flex mb-3">
                         <div class="align-self-center">
-                            <img src="/static/images/diving_boat.jpg" class="rounded-sm me-3" width="70">
+                            <img src="/static/empty.jpg" class="rounded-sm me-3" width="70">
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-15 line-height-s mt-1 mb-n1">보트 다이빙</h2>
@@ -147,7 +147,7 @@
                     </div>
                     <div class="d-flex mb-3">
                         <div class="align-self-center">
-                            <img src="/static/images/diving_beach1.jpg" class="rounded-sm me-3" width="70">
+                            <img src="/static/empty.jpg" class="rounded-sm me-3" width="70">
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-15 line-height-s mt-1 mb-n1">비치 다이빙</h2>
@@ -160,7 +160,7 @@
                     </div>
                     <div class="d-flex mb-3">
                         <div class="align-self-center">
-                            <img src="/static/images/diving_yacht.jpg" class="rounded-sm me-3" width="70">
+                            <img src="/static/empty.jpg" class="rounded-sm me-3" width="70">
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-15 line-height-s mt-1 mb-n1">요트 다이빙</h2>
@@ -173,7 +173,7 @@
                     </div>
                     <div class="d-flex mb-3">
                         <div class="align-self-center">
-                            <img src="/static/images/diving_night.jpg" class="rounded-sm me-3" width="70">
+                            <img src="/static/empty.jpg" class="rounded-sm me-3" width="70">
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-15 line-height-s mt-1 mb-n1">나이트 다이빙</h2>
@@ -188,7 +188,7 @@
                 <div v-else-if="centerData.educations && centerData.educations.filter(x=>x.type.includes('experience')).length > 0" data-bs-parent="#tab-group-1" class="collapse" id="tab-3ab">
                     <div class="d-flex mb-3">
                         <div class="align-self-center">
-                            <img src="/static/images/diving_beach.jpg" class="rounded-sm me-3" width="70">
+                            <img src="/static/empty.jpg" class="rounded-sm me-3" width="70">
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-15 line-height-s mt-1 mb-n1">비치 체험 다이빙</h2>
@@ -201,7 +201,7 @@
                     </div>
                     <div class="d-flex mb-3 cursor-pointer" v-on:click="goCourse()">
                         <div class="align-self-center">
-                            <img src="/static/images/diving_boat.jpg" class="rounded-sm me-3" width="70">
+                            <img src="/static/empty.jpg" class="rounded-sm me-3" width="70">
                         </div>
                         <div class="text-start align-self-center">
                             <h2 class="font-15 line-height-s mt-1 mb-n1">보트 체험 다이빙</h2>

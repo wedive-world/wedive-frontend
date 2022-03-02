@@ -36,7 +36,7 @@
                     >
                     
                 </vue-typeahead-bootstrap>
-                <a href="#" class="btn btn-m rounded-s text-uppercase font-900 shadow-s bg-teal-light" style="width:64px;position:absolute; right:16px;top: 0;"><i class="fas fa-plus"></i></a>
+                <a data-menu="community-add" class="btn btn-m rounded-s text-uppercase font-900 shadow-s bg-teal-dark" style="width:64px;position:absolute; right:16px;top: 0;"><i class="fas fa-plus"></i></a>
             </div>
             <div v-for="item in communities">
             </div>
@@ -100,6 +100,7 @@
         </div>
 
     </pull-to>
+
   </div>
 </template>
 <script>

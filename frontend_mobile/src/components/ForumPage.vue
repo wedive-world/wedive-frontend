@@ -174,7 +174,38 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div id="community-add" 
+         class="menu menu-box-modal rounded-0" 
+         data-menu-width="cover"
+         data-menu-height="cover"
+         style="margin-bottom: 0;">
         
+        <div class="card rounded-0 bg-2" data-card-height="50">
+            <div class="card-top p-2">
+                <a href="#" class="close-menu icon icon-s rounded-l bg-theme color-theme "><i class="fa fa-arrow-left"></i></a>
+                <a v-on:click="createCommunity" href="#" :class="'float-end icon icon-s rounded-l bg-theme me-3 mt-2 font-noto font-16 ' + ((isCommunityWritten==0) ? 'color-gray' : 'color-theme')">확인</a>
+                <a href="" class="header-title color font-noto font-16">커뮤니티 생성</a>
+            </div>
+        </div>
+        
+        <div class="card rounded-0">
+            <div class="content mt-0">
+                <div class="input-style validate-field mt-3">
+                    <textarea rows="1" class="wedive-textarea2" placeholder="커뮤니티 이름을 입력하세요." v-model="community_title"></textarea>
+                    <textarea class="wedive-textarea" placeholder="커뮤니티 설명을 입력하세요." v-model="community_contents"></textarea>
+                </div>
+                
+                <div id="div_upload_photo_community" class="row m-0 mb-3 mt-3">
+                </div>
+                <div :class="'mb-3 text-center p-2' + (file_photo_community.length > 0 ? ' btn_disabled' : '')" style="border: 1px solid #e9e9e9;">
+                    <input v-if="file_photo_community.length > 0" type="file" @change="addImageCommunity" id="" accept=".jpg, .png" style="text-indent: -999px;outline: none;width: 100%;height: 45px;color: rgba(0, 0, 0, 0) !important;" disabled="disabled">
+                    <input v-else type="file" @change="addImageCommunity" id="" accept=".jpg, .png" style="text-indent: -999px;outline: none;width: 100%;height: 45px;color: rgba(0, 0, 0, 0) !important;">
+                    <div class="upload-file-text" style="color: black;margin-top:-44px !important;margin-bottom:12px;"><img class="me-1" src="/static/images/assets/icon_camera.png" height="18"/>대표 이미지</div>
+                </div>
+            </div>
+        </div>
     </div>
     
   </div>
@@ -183,7 +214,7 @@
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import 'swiper/css/swiper.css'
 
-import gql from 'graphql-tag'
+import { GraphQLClient, request, gql } from "graphql-request";
 import VoerroTagsInput from '@voerro/vue-tagsinput';
 import '@voerro/vue-tagsinput/dist/style.css'
 
@@ -205,7 +236,6 @@ export default {
   },
   watch: {
       subjectType: function(newVal, oldVal) {
-          console.log(newVal);
           if (newVal == 'agenda') {
               this.textPlaceholder = '의견을 자유롭게 적어주세요.';
           } else if (newVal == 'question') {
@@ -217,6 +247,20 @@ export default {
               this.isWritten = 1;
           } else {
               this.isWritten = 0;
+          }
+      },
+      community_title: function(newVal, oldVal) {
+          if (this.community_title != '' && this.community_contents != '') {
+              this.isCommunityWritten = 1;
+          } else {
+              this.isCommunityWritten = 0;
+          }
+      },
+      community_contents: function(newVal, oldVal) {
+          if (this.community_title != '' && this.community_contents != '') {
+              this.isCommunityWritten = 1;
+          } else {
+              this.isCommunityWritten = 0;
           }
       },
       forum_add_title: function(newVal, oldVal) {
@@ -271,11 +315,22 @@ export default {
         if (!files.length) {
           return;
         }
-        file_photo.push(files[0]);
+        this.file_photo.push(files[0]);
         $("#div_upload_photo").append('<div class="col-3 p-1 square " style="position: relative;"><div class="square_inner border-08" style="background:url('+URL.createObjectURL(files[0])+');background-size: cover;"><div class="square_inner_close" onclick="abc('+files[0].lastModified+',this);"></div></div></div>');
-        if (file_photo.length%4 == 1) {
+        if (this.file_photo.length%4 == 1) {
             var square_height = $("#div_upload_photo .square").height();
-            $("#menu-review").css("height", 470 + (square_height*(parseInt(file_photo.length/4)+1)) + "px");
+            $("#menu-review").css("height", 470 + (square_height*(parseInt(this.file_photo.length/4)+1)) + "px");
+        }
+      },
+      addImageCommunity({ target: { files = [] } }) {
+        if (!files.length || this.file_photo_community.length > 0) {
+          return;
+        }
+        this.file_photo_community.push(files[0]);
+        $("#div_upload_photo_community").append('<div class="col-3 p-1 square " style="position: relative;"><div class="square_inner border-08" style="background:url('+URL.createObjectURL(files[0])+');background-size: cover;"><div class="square_inner_close" onclick="abc('+files[0].lastModified+',this);"></div></div></div>');
+        if (this.file_photo_community.length%4 == 1) {
+            var square_height = $("#div_upload_photo_community .square").height();
+            $("#menu-review").css("height", 470 + (square_height*(parseInt(this.file_photo_community.length/4)+1)) + "px");
         }
       },
       async createAgendaType() {
@@ -362,14 +417,14 @@ export default {
             const activeMenu = document.querySelectorAll('.menu-active');
             for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
       },
-      async createAgenda() {
-            var preloader = document.getElementById('preloader')
-            if(preloader){
+      async createCommunity() {
+          var preloader = document.getElementById('preloader')
+          if(preloader){
                 preloader.classList.remove('preloader-hide');
                 preloader.classList.add('opacity-50');
-            }
-            var _id_list = new Array();
-            for (var i=0; i<file_photo.length; i++) {
+          }
+          var _id_list = new Array();
+          for (var i=0; i<this.file_photo_community.length; i++) {
                 var mutation = gql`
                     mutation UploadImageMutation($uploadImageFile: Upload!) {
                         uploadImage(file: $uploadImageFile) {
@@ -391,7 +446,7 @@ export default {
                     }
                 })
 
-                var result_img = await client.request(mutation, {uploadImageFile:file_photo[i],});
+                var result_img = await client.request(mutation, {uploadImageFile:this.file_photo_community[i],});
                 
                 var updateMutation = gql`
                     mutation Mutation($input: UpdateImageInput!) {
@@ -408,7 +463,88 @@ export default {
                         }
                     }
                 `;
-                var result_upload = await client.request(updateMutation, {input: {"_id": result_img.uploadImage._id,"name": result_img.name,"description": "reviewImage","reference": null}});
+                var result_upload = await client.request(updateMutation, {input: {"_id": result_img.uploadImage._id,"name": result_img.name,"description": "communityTitle","reference": null}});
+                _id_list.push(result_img.uploadImage._id);
+          }
+          var _input = {title: this.community_title, description: this.community_contents, images: _id_list};
+          const ipt = _input;
+          var result = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                    mutation Mutation($input: CommunityInput) {
+                        upsertCommunity(input: $input) {
+                            _id
+                        }
+                    }
+                `,
+                variables: {
+                    "input": ipt
+                }
+            }
+          });
+          if (result.data.data.upsertCommunity._id == null) {
+              console.log(result);
+          }
+          if(preloader){
+                preloader.classList.remove('opacity-50');
+                preloader.classList.add('preloader-hide');
+          }
+          const activeMenu = document.querySelectorAll('.menu-active');
+          for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
+      },
+      async createAgenda() {
+            var preloader = document.getElementById('preloader')
+            if(preloader){
+                preloader.classList.remove('preloader-hide');
+                preloader.classList.add('opacity-50');
+            }
+            var _id_list = new Array();
+            for (var i=0; i<this.file_photo.length; i++) {
+                var mutation = gql`
+                    mutation UploadImageMutation($uploadImageFile: Upload!) {
+                        uploadImage(file: $uploadImageFile) {
+                            _id
+                            name
+                            mimeType
+                            encoding
+                            thumbnailUrl
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `
+                var client = new GraphQLClient('https://api.wedives.com/graphql',
+                {
+                    headers: {
+                        countrycode: 'ko',
+                        idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                    }
+                })
+
+                var result_img = await client.request(mutation, {uploadImageFile:this.file_photo[i],});
+                
+                var updateMutation = gql`
+                    mutation Mutation($input: UpdateImageInput!) {
+                        updateImage(input: $input) {
+                            _id
+                            name
+                            description
+                            reference
+                            uploaderId
+                            mimeType
+                            encoding
+                            fileSize
+                            thumbnailUrl
+                        }
+                    }
+                `;
+                var result_upload = await client.request(updateMutation, {input: {"_id": result_img.uploadImage._id,"name": result_img.name,"description": "agendaImage","reference": null}});
                 _id_list.push(result_img.uploadImage._id);
             }
             var _input = {type: this.subjectType, content: this.agenda_contents, images: _id_list};
@@ -573,16 +709,20 @@ export default {
             
         },
         isWritten: 0,
+        isCommunityWritten: 0,
         isForumWritten: 0,
         isAgendaTypeWritten: 0,
         scrollTop: 0,
         agenda_title: '',
         agenda_contents: '',
+        community_title: '',
+        community_contents: '',
         selectedTags: [
         ],
         selectedTags2: [
         ],
         file_photo: [],
+        file_photo_community: [],
         subjectType: 'default',
         forum_add_title: '',
         agenda_type_add: '',
@@ -627,4 +767,7 @@ export default {
 
 .wedive-swiper > .swiper-wrapper > .swiper-slide {font-size:16px;color:#c1c2c3;font-family: 'Noto Sans Korean';font-weight:500;}
 .wedive-swiper > .swiper-wrapper > .swiper-slide-active {font-size:20px;color:black;font-weight:600;}
+.btn_disabled {cursor: not-allowed;background:#e1e2e3;}
+.btn_disabled > div {color: #777 !important;}
+.btn_disabled > img {filter: contrast(10%);}
 </style>

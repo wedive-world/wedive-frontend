@@ -79,7 +79,7 @@ if (window.location.pathname.indexOf('/chat/') == 0) {
     link: httpLink,
     cache: new InMemoryCache(),
   })
-} else if (window.location.pathname == '/site_list' || window.location.pathname == '/' || window.location.pathname == '/notification' || window.location.pathname == '/other/subscribe' || window.location.pathname == '/forum_home') {
+} else if (window.location.pathname == '/site_list' || window.location.pathname == '/' || window.location.pathname == '/notification' || window.location.pathname == '/other/subscribe' || window.location.pathname == '/forum_home' || window.location.pathname.indexOf('/recommend/') == 0) {
   const httpLink = new HttpLink({
     // You should use an absolute URL here
     uri: GRAPHQL_API_URL,
