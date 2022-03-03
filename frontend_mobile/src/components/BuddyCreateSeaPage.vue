@@ -196,8 +196,8 @@
                         <div class="content mt-1">
                             <h4 class="pt-3 mb-2 content mt-0 mb-2">모집 상세 입력</h4>
                             <div class="input-style validate-field mb-3 mt-4 me-3 ms-3">
-                                <textarea id="form6" rows="1" class="wedive-textarea2" placeholder="제목을 입력하세요." v-model="buddy_title"></textarea>
-                                <textarea id="form7" class="wedive-textarea" placeholder="이곳에 모집상세를 작성해보세요." v-model="buddy_detail"></textarea>
+                                <textarea id="form6" rows="1" class="wedive-textarea2 wedive-input" placeholder="제목을 입력하세요." v-model="buddy_title"></textarea>
+                                <textarea id="form7" class="wedive-textarea wedive-input" placeholder="이곳에 모집상세를 작성해보세요." v-model="buddy_detail"></textarea>
                             </div>
                             
                         </div>
@@ -863,9 +863,8 @@ export default {
 .btn[disabled] {pointer-events: none !important;background-image: linear-gradient(to bottom, #ccc, #ccc) !important;}
 .bg-e7e7e7 {background-color: transparent !important;}
 .interest-check input:checked ~ label {background-color: #2c9ac3;}
-.wedive-textarea {min-height: 160px;border: 2px solid #e9e9e9;background: #f5f5f5;padding-left: 10px;padding-right: 10px;}
-.wedive-textarea2 {max-height: 45px;min-height: 45px;border: 2px solid #e9e9e9;background: #f5f5f5;padding-left: 10px;padding-right: 10px;}
-.wedive-input {border: 2px solid #e9e9e9;background: #f5f5f5;padding: 0 10px;margin-bottom: 10px;width:100%;}
+.wedive-textarea {min-height: 160px;padding-left: 10px;padding-right: 10px;}
+.wedive-textarea2 {max-height: 45px;min-height: 45px;padding-left: 10px;padding-right: 10px;}
 .site_img:before{content:'';background:url(/static/images/assets/ico_pin0.png);width: 20px;height: 28px;position: absolute;bottom: -5px;left: 28px;background-size: cover;}
 .point_img:before{content:'';background:url(/static/images/assets/ico_pin1.png);width: 20px;height: 28px;position: absolute;bottom: -5px;left: 28px;background-size: cover;}
 .center_img:before{content:'';background:url(/static/images/assets/ico_pin2.png);width: 20px;height: 28px;position: absolute;bottom: -5px;left: 28px;background-size: cover;}

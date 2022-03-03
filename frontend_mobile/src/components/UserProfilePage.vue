@@ -30,31 +30,31 @@
                 </div>
             </div>
 
-            <h4 class="pt-4 mb-3">기본정보</h4>
+            <h4 class="pt-4 mb-3">기본 정보</h4>
             <div class="mt-2">
                 <div class="input-style no-borders has-icon validate-field mb-3">
-                    <i class="fas fa-id-card-alt color-gray"></i>
-                    <input type="name" class="form-control validate-name" id="form1" placeholder="닉네임" v-model="userData.nickName">
+                    <i class="fas fa-id-card-alt color-gray ms-2"></i>
+                    <input type="name" class="form-control validate-name wedive-input" style="padding-left:30px;" id="form1" placeholder="닉네임" v-model="userData.nickName">
                     <label for="form1" class="color-highlight">닉네임</label>
                     <i class="fa fa-times disabled invalid color-red-dark"></i>
                     <i class="fa fa-check disabled valid color-green-dark"></i>
                 </div>
                 <div class="input-style no-borders has-icon validate-field mb-3">
-                    <i class="fas fa-user-clock color-gray"></i>
-                    <input type="number" class="form-control validate-number" id="form3" placeholder="나이" v-model="age">
+                    <i class="fas fa-user-clock color-gray ms-2"></i>
+                    <input type="number" class="form-control validate-number wedive-input" style="padding-left:30px;" id="form3" placeholder="나이" v-model="age">
                     <label for="form3" class="color-highlight">나이</label>
                     <i class="fa fa-times disabled invalid color-red-dark"></i>
                     <i class="fa fa-check disabled valid color-green-dark"></i>
                 </div>
                 <div class="input-style no-borders has-icon validate-field mb-3">
-                    <i class="fas fa-venus-mars color-gray"></i>
+                    <i class="fas fa-venus-mars color-gray ms-2"></i>
                     <label for="form5" class="color-highlight">성별</label>
-                    <select id="form5" required v-model="userData.gender">
+                    <select id="form5" required v-model="userData.gender" class="wedive-input" style="padding-left:30px;">
                         <option value="" selected disabled>성별</option>
                         <option value="m">남자</option>
                         <option value="f">여자</option>
                     </select>
-                    <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
+                    <span class="mt-n1 me-3"><i class="fa fa-chevron-down"></i></span>
                     <i class="fa fa-check disabled valid color-green-dark"></i>
                     <i class="fa fa-check disabled invalid color-red-dark"></i>
                     <em></em>
@@ -86,9 +86,9 @@
                 </div>
                 <div class="collapse" id="collapse1">
                     <div class="input-style no-borders has-icon validate-field mb-3">
-                        <i class="fas fa-address-card color-gray"></i>
+                        <i class="fas fa-address-card color-gray ms-2"></i>
                         <label for="form11" class="color-highlight">스쿠바 라이센스</label>
-                        <select id="form11" required v-model="userData.scubaLicenseType">
+                        <select id="form11" required v-model="userData.scubaLicenseType" class="wedive-input" style="padding-left:30px;">
                             <option value="" selected disabled>스쿠바 라이센스</option>
                             <option value="PADI">PADI</option>
                             <option value="NAUI">NAUI</option>
@@ -130,16 +130,16 @@
                             <option value="SEI">SEI</option>
                             <option value="없음">없음</option>
                         </select>
-                        <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
+                        <span class="mt-n1 me-3"><i class="fa fa-chevron-down"></i></span>
                         <i class="fa fa-check disabled valid color-green-dark"></i>
                         <i class="fa fa-check disabled invalid color-red-dark"></i>
                         <em></em>
                     </div>
 
                     <div class="input-style no-borders has-icon validate-field mb-3">
-                        <i class="fas fa-layer-group color-gray"></i>
+                        <i class="fas fa-layer-group color-gray ms-2"></i>
                         <label for="form22" class="color-highlight">스쿠바 레벨</label>
-                        <select id="form22" required v-model="userData.scubaLicenseLevel">
+                        <select id="form22" required v-model="userData.scubaLicenseLevel" class="wedive-input" style="padding-left:30px;">
                             <option value="" selected disabled>스쿠바 레벨</option>
                             <option value="1">오픈워터</option>
                             <option value="2">어드밴스드</option>
@@ -148,16 +148,16 @@
                             <option value="5">강사</option>
                             <option value="0">없음</option>
                         </select>
-                        <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
+                        <span class="mt-n1 me-3"><i class="fa fa-chevron-down"></i></span>
                         <i class="fa fa-check disabled valid color-green-dark"></i>
                         <i class="fa fa-check disabled invalid color-red-dark"></i>
                         <em></em>
                     </div>
 
                     <div class="input-style no-borders has-icon validate-field mb-3">
-                        <i class="fas fa-clipboard-check color-gray"></i>
+                        <i class="fas fa-clipboard-check color-gray ms-2"></i>
                         <label for="form23" class="color-highlight">다이빙 로그</label>
-                        <select id="form23" required v-model="userData.divingLog">
+                        <select id="form23" required v-model="userData.divingLog" class="wedive-input" style="padding-left:30px;">
                             <option value="" selected disabled>다이빙 로그</option>
                             <option value="10">~10</option>
                             <option value="30">~30</option>
@@ -168,7 +168,7 @@
                             <option value="301">300~</option>
                             <option value="없음">없음</option>
                         </select>
-                        <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
+                        <span class="mt-n1 me-3"><i class="fa fa-chevron-down"></i></span>
                         <i class="fa fa-check disabled valid color-green-dark"></i>
                         <i class="fa fa-check disabled invalid color-red-dark"></i>
                         <em></em>
@@ -266,9 +266,9 @@
                 </div>
                 <div class="collapse" id="collapse2">
                     <div class="input-style no-borders has-icon validate-field mb-3">
-                        <i class="fas fa-address-card color-gray"></i>
+                        <i class="fas fa-address-card color-gray ms-2"></i>
                         <label for="form21" class="color-highlight">프리 라이센스</label>
-                        <select id="form21" required v-model="userData.freeLicenseType">
+                        <select id="form21" required v-model="userData.freeLicenseType" class="wedive-input" style="padding-left:30px;">
                             <option value="" selected disabled>프리 라이센스</option>
                             <option value="PADI">PADI</option>
                             <option value="NAUI">NAUI</option>
@@ -310,16 +310,16 @@
                             <option value="SEI">SEI</option>
                             <option value="없음">없음</option>
                         </select>
-                        <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
+                        <span class="mt-n1 me-3"><i class="fa fa-chevron-down"></i></span>
                         <i class="fa fa-check disabled valid color-green-dark"></i>
                         <i class="fa fa-check disabled invalid color-red-dark"></i>
                         <em></em>
                     </div>
 
                     <div class="input-style no-borders has-icon validate-field mb-3">
-                        <i class="fas fa-layer-group color-gray"></i>
+                        <i class="fas fa-layer-group color-gray ms-2"></i>
                         <label for="form12" class="color-highlight">프리 레벨</label>
-                        <select id="form12" required v-model="userData.freeLicenseLevel">
+                        <select id="form12" required v-model="userData.freeLicenseLevel" class="wedive-input" style="padding-left:30px;">
                             <option value="" selected disabled>프리 레벨</option>
                             <option value="1">레벨1</option>
                             <option value="2">레벨2</option>
@@ -328,7 +328,7 @@
                             <option value="5">강사</option>
                             <option value="0">없음</option>
                         </select>
-                        <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
+                        <span class="mt-n1 me-3"><i class="fa fa-chevron-down"></i></span>
                         <i class="fa fa-check disabled valid color-green-dark"></i>
                         <i class="fa fa-check disabled invalid color-red-dark"></i>
                         <em></em>

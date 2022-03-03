@@ -294,8 +294,7 @@ export default {
             }
           `,
           variables: {
-              "targetId": null,
-              "agendaTypes": null,
+              "targetId": "621db036efe4c50da6ea0825",
               "skip": this.skip,
               "limit": this.limit
           }

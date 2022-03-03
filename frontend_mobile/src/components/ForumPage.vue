@@ -11,12 +11,7 @@
                     :options="swiperOption"
                     @slideChange="tabSlideChange"
                 >
-                    <swiper-slide><div v-on:click="moveTo(0)">My 포럼</div></swiper-slide>
-                    <swiper-slide><div v-on:click="moveTo(1)">포럼</div></swiper-slide>
-                    <swiper-slide><div v-on:click="moveTo(2)">동호회</div></swiper-slide>
-                    <swiper-slide><div v-on:click="moveTo(3)">쇼핑</div></swiper-slide>
-                    <swiper-slide><div v-on:click="moveTo(4)">트레이닝</div></swiper-slide>
-                    <swiper-slide><div v-on:click="moveTo(5)">뉴스</div></swiper-slide>
+                    <swiper-slide v-for="(forum,index) in getForums" :key="forum._id"><div v-on:click="moveTo(index)">{{ forum.name }}</div></swiper-slide>
                     
                     <div class="swiper-pagination" slot="pagination"></div>
                 </swiper>
@@ -124,32 +119,31 @@
         
         <div class="card rounded-0">
             <div class="content mt-0">
-                <div class="input-style no-borders no-icon mb-4">
-                    <select id="formType" v-model="subjectType" style="padding-left:10px;color:#757575;border: 1px solid #e9e9e9;">
+                <div class="input-style no-borders no-icon mb-4 wedive-input">
+                    <select id="formType" v-model="subjectType" style="color:#757575;border: none;">
                         <option value="default" disabled selected>글 종류를 선택해주세요.</option>
-                        <option value="agenda">일반</option>
-                        <option value="question">질문</option>
+                        <option v-for="agendaType in getAllAgendaTypes" :value="agendaType._id">{{ agendaType.name }}</option>
                     </select>
-                    <span><i class="fa fa-chevron-down"></i></span>
+                    <span class="me-2"><i class="fa fa-chevron-down"></i></span>
                     <i class="fa fa-check disabled valid color-green-dark"></i>
                     <i class="fa fa-check disabled invalid color-red-dark"></i>
                     <em></em>
                 </div>
                 <div class="input-style validate-field mt-3">
-                    <textarea rows="1" class="wedive-textarea2" placeholder="제목을 입력하세요." v-model="agenda_title"></textarea>
-                    <textarea class="wedive-textarea" :placeholder="textPlaceholder" v-model="agenda_contents"></textarea>
+                    <textarea rows="1" class="wedive-textarea2 wedive-input" placeholder="제목을 입력하세요." v-model="agenda_title"></textarea>
+                    <textarea class="wedive-textarea wedive-input" :placeholder="textPlaceholder" v-model="agenda_contents"></textarea>
                 </div>
                 <tags-input 
-                element-id="tags"
-                v-model="selectedTags"
-                :typeahead-style="'dropdown'"
-                :placeholder="'(옵션) 태그를 입력하세요.'"
-                :existing-tags="[
-                    { key: '마크로', value: '마크로' },
-                    { key: '일상', value: '일상' },
-                    { key: '맛집', value: '맛집' },
-                ]"
-                :typeahead="true">
+                    element-id="tags"
+                    v-model="selectedTags"
+                    :typeahead-style="'dropdown'"
+                    :placeholder="'(옵션) 태그를 입력하세요.'"
+                    :existing-tags="[
+                        { key: '마크로', value: '마크로' },
+                        { key: '일상', value: '일상' },
+                        { key: '맛집', value: '맛집' },
+                    ]"
+                    :typeahead="true">
                 </tags-input>
                 
                 
@@ -234,6 +228,48 @@ export default {
     ForumAgendaAllPage,
     ForumCommunityPage,
   },
+  async beforeRouteEnter(to, from, next) {
+    var result = await axios({
+        url: 'https://api.wedives.com/graphql',
+        method: 'post',
+        headers: {
+            countrycode: 'ko',
+            idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+        },
+        data: {
+            query: `
+            query Query {
+                getForums {
+                    _id
+                    name
+                    description
+                }
+            }
+            `
+        }
+    });
+
+    var result2 = await axios({
+        url: 'https://api.wedives.com/graphql',
+        method: 'post',
+        headers: {
+            countrycode: 'ko',
+            idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+        },
+        data: {
+            query: `
+            query Query {
+                getAllAgendaTypes {
+                    _id
+                    name
+                }
+            }
+            `
+        }
+    });
+    
+    next(vm => {vm.setData(result, result2)});
+  },
   watch: {
       subjectType: function(newVal, oldVal) {
           if (newVal == 'agenda') {
@@ -286,6 +322,10 @@ export default {
       },
   },
   methods: {
+      setData(getForums, getAllAgendaTypes) {
+          this.getForums = getForums.data.data.getForums;
+          this.getAllAgendaTypes = getAllAgendaTypes.data.data.getAllAgendaTypes;
+      },
       moveTo(idx) {
           console.log(idx);
           this.contentSwiper.slideTo(idx);
@@ -488,9 +528,10 @@ export default {
                 }
             }
           });
-          if (result.data.data.upsertCommunity._id == null) {
-              console.log(result);
-          }
+          console.log(result);
+          //if (result.data.data.upsertCommunity._id == null) {
+              //console.log(result);
+          //}
           if(preloader){
                 preloader.classList.remove('opacity-50');
                 preloader.classList.add('preloader-hide');
@@ -547,7 +588,8 @@ export default {
                 var result_upload = await client.request(updateMutation, {input: {"_id": result_img.uploadImage._id,"name": result_img.name,"description": "agendaImage","reference": null}});
                 _id_list.push(result_img.uploadImage._id);
             }
-            var _input = {type: this.subjectType, content: this.agenda_contents, images: _id_list};
+  
+            var _input = {types: [this.subjectType], targetId: "621a0419a8eb33b6594f4870", title: this.agenda_title, content: this.agenda_contents, hashTags: this.selectedTags.map((x)=>{return {name: x.value}}), images: _id_list};
             const ipt = _input;
 
           var result = await axios({
@@ -562,7 +604,10 @@ export default {
                         mutation Mutation($input: AgendaInput) {
                             upsertAgenda(input: $input) {
                                 _id
-                                type
+                                types {
+                                    _id
+                                    name
+                                }
                                 author {
                                 uid
                                 _id
@@ -681,21 +726,10 @@ export default {
         }
     }
   },
-  apollo: {
-      getForums: {
-          query:gql `
-            query Query {
-                getForums {
-                    _id
-                    name
-                    description
-                }
-            }
-          `
-      }
-  },
   data () {
     return {
+        getForums: [],
+        getAllAgendaTypes: [],
         textPlaceholder: '의견을 자유롭게 적어주세요.',
         swiperOption: {
             slidesPerView: 3.7,

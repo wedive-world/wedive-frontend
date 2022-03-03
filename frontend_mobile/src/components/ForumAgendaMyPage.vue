@@ -269,8 +269,7 @@ export default {
             }
           `,
           variables: {
-              "targetId": null,
-              "agendaTypes": null,
+              "targetId": '621a0419a8eb33b6594f4870',
               "skip": this.skip,
               "limit": this.limit
           }

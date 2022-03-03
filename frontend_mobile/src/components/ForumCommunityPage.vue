@@ -26,12 +26,12 @@
                     :serializer="item => item.name"
                     :screen-reader-text-serializer="item => `${item.name}`"
                     highlightClass="special-highlight-class"
-                    @hit="selecteduser = $event;enableNext2($event);"
+                    @hit="selectedCommunity = $event;enableNext2($event);"
                     :minMatchingChars="2"
                     placeholder="커뮤니티 검색"
                     inputClass="special-input-class"
-                    :disabledValues="[(selecteduser ? [selecteduser.name] : [])]"
-                    @input="lookupUser3"
+                    :disabledValues="[(selectedCommunity ? [selectedCommunity.name] : [])]"
+                    @input="lookupCommunity"
                     style="width: 100%;padding-right: 80px;"
                     >
                     
@@ -138,6 +138,114 @@ export default {
       handleScroll (event) {
         this.scrollTop = $(document).scrollTop();
       },
+      async lookupCommunity() {
+        // progress bar
+        var preloader = document.getElementById('preloader')
+        if(preloader){
+            preloader.classList.remove('preloader-hide');
+            preloader.classList.add('opacity-50');
+        }
+        this.users = [];
+        var query = this.query;
+        var _searchParams = JSON.parse(JSON.stringify(searchParams));
+        if (_searchParams.adminScore) _searchParams.adminScore *= 20;
+        if (_searchParams.waterEnvironmentScore) _searchParams.waterEnvironmentScore *= 20;
+        if (_searchParams.eyeSightScore) _searchParams.eyeSightScore *= 20;
+        _searchParams.query = query;
+        
+
+        var result = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+            query: `
+                query SearchPlaces($searchParams: SearchParams, $limit: Int) {
+                    searchPlaces(searchParams: $searchParams, limit: $limit) {
+                        __typename
+                        ... on DiveSite {
+                            _id
+                            uniqueName
+                            name
+                            description
+                            adminScore
+                            latitude
+                            longitude
+                            backgroundImages {
+                                thumbnailUrl
+                            }
+                            interests {
+                                title
+                                type
+                            }
+                        }
+                        ... on DivePoint {
+                            _id
+                            uniqueName
+                            name
+                            description
+                            adminScore
+                            latitude
+                            longitude
+                            backgroundImages {
+                                thumbnailUrl
+                            }
+                            interests {
+                                title
+                                type
+                            }
+                        }
+                        ... on DiveCenter {
+                            _id
+                            uniqueName
+                            name
+                            description
+                            divingType
+                            adminScore
+                            latitude
+                            longitude
+                            institutionTypes
+                            backgroundImages {
+                                thumbnailUrl
+                            }
+                            interests {
+                                title
+                                type
+                            }
+                        }
+                        address
+                        latitude
+                        longitude
+                        countryCode
+                    }
+                }
+                `,
+                variables: {
+                    "limit": 10,
+                    "searchParams": _searchParams
+                }
+            }
+        });
+        //result.data.data.searchDiveCentersByName.forEach(x=>result.data.data.searchDiveCentersByName)
+        var result_list = new Array();
+        if (result.data.data.searchPlaces) {
+            result.data.data.searchPlaces.filter(place => place.__typename == 'DiveSite').forEach(item => {item.type='site';result_list.push(item)});
+            result.data.data.searchPlaces.filter(place => place.__typename == 'DivePoint').forEach(item => {item.type='point';result_list.push(item)});
+            result.data.data.searchPlaces.filter(place => place.__typename == 'DiveCenter').forEach(item => {item.type='center';result_list.push(item)});
+        }
+        //if (result.data.data.searchDiveSitesByName) result.data.data.searchDiveSitesByName.forEach(x=>{x.type='site';result_list.push(x)});
+        //if (result.data.data.searchDivePointsByName) result.data.data.searchDivePointsByName.forEach(x=>{x.type='point';result_list.push(x)});
+        //if (result.data.data.searchDiveCentersByName) result.data.data.searchDiveCentersByName.forEach(x=>{x.type='center';result_list.push(x)});
+        this.users = result_list;
+
+        if(preloader){
+            preloader.classList.remove('opacity-50');
+            preloader.classList.add('preloader-hide');
+        }
+      },
   },
   mounted() {
   },
@@ -150,6 +258,7 @@ export default {
   data () {
     return {
         query: '',
+        selectedCommunity: null,
         communities: [],
         getUserSubsciption: [],
         scrollTop: 0,

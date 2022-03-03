@@ -1,7 +1,7 @@
 <template>
   <div class="text-center">
     <div class="header header-fixed header-logo-center">
-        <a href="" class="header-title color ellipsis">{{ recommend_title }}</a>
+        <a href="" class="header-title color ellipsis" style="width: 250px;left: 36%;">{{ getPreviewsByRecommendationId.recommendationTitle }}</a>
         <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
     </div>
     <pull-to :top-load-method="refresh" @top-state-change="stateChange" :top-config="TOP_DEFAULT_CONFIG" :is-bottom-bounce="false" :is-top-bounce="scrollTop == 0" style="margin-top: 50px;">
@@ -20,8 +20,8 @@
         </div>
         </template>
         
-        <div class="card text-start p-3" v-if="getPreviewsByRecommendationId" style="min-height: calc(100vh - 50px);padding-bottom: 0 !important;margin-bottom: 0;">
-            <div v-for="(site,index) in getPreviewsByRecommendationId.filter(x=>x.__typename == 'DiveSite')">
+        <div class="card text-start p-3" v-if="getPreviewsByRecommendationId.previews" style="min-height: calc(100vh - 50px);padding-bottom: 0 !important;margin-bottom: 0;">
+            <div v-for="(site,index) in getPreviewsByRecommendationId.previews.filter(x=>x.__typename == 'DiveSite')">
                 <div class="map-box">
                     <a v-on:click="movePreview(site)">
                         <div class="bx">
@@ -123,7 +123,6 @@ export default {
   },
   data () {
     return {
-      recommend_title: '추천 상세',
       recommendation_id: '',
       skip: 0,
       limit: 20,
@@ -150,76 +149,79 @@ export default {
           query:gql `
             query Query($_id: ID!) {
                 getPreviewsByRecommendationId(_id: $_id) {
-                ... on Diving {
-                    diveCenters {
-                    name
-                    uniqueName
-                    description
-                    adminScore
-                    backgroundImages {
+                  recommendationTitle
+                  previews {
+                    ... on Diving {
+                        diveCenters {
+                        name
+                        uniqueName
+                        description
+                        adminScore
+                        backgroundImages {
+                            thumbnailUrl
+                        }
+                        }
+                        divePoints {
+                        name
+                        uniqueName
+                        description
+                        adminScore
+                        backgroundImages {
+                            thumbnailUrl
+                        }
+                        }
+                        diveSites {
+                        name
+                        uniqueName
+                        description
+                        adminScore
+                        backgroundImages {
+                            thumbnailUrl
+                        }
+                        }
+                    }
+                    ... on DiveSite {
+                        _id
+                        name
+                        uniqueName
+                        description
+                        adminScore
+                        backgroundImages {
+                        _id
                         thumbnailUrl
+                        }
                     }
-                    }
-                    divePoints {
-                    name
-                    uniqueName
-                    description
-                    adminScore
-                    backgroundImages {
+                    ... on DivePoint {
+                        name
+                        uniqueName
+                        description
+                        adminScore
+                        backgroundImages {
+                        _id
                         thumbnailUrl
+                        }
                     }
-                    }
-                    diveSites {
-                    name
-                    uniqueName
-                    description
-                    adminScore
-                    backgroundImages {
+                    ... on DiveCenter {
+                        name
+                        uniqueName
+                        description
+                        adminScore
+                        backgroundImages {
+                        _id
                         thumbnailUrl
+                        }
                     }
+                    ... on Instructor {
+                        _id
+                        gender
+                        profileImages {
+                        _id
+                        thumbnailUrl
+                        }
+                        careers
+                        introduction
                     }
-                }
-                ... on DiveSite {
-                    _id
-                    name
-                    uniqueName
-                    description
-                    adminScore
-                    backgroundImages {
-                    _id
-                    thumbnailUrl
-                    }
-                }
-                ... on DivePoint {
-                    name
-                    uniqueName
-                    description
-                    adminScore
-                    backgroundImages {
-                    _id
-                    thumbnailUrl
-                    }
-                }
-                ... on DiveCenter {
-                    name
-                    uniqueName
-                    description
-                    adminScore
-                    backgroundImages {
-                    _id
-                    thumbnailUrl
-                    }
-                }
-                ... on Instructor {
-                    _id
-                    gender
-                    profileImages {
-                    _id
-                    thumbnailUrl
-                    }
-                    careers
-                    introduction
-                }
+                  }
               }
             }
           `,
