@@ -16,14 +16,25 @@
 
     <div :class="'page-content pb-0' + (is_empty ? ' hide' : ' ')">
         <div class="card mb-0 border-bottom" style="margin-top:50px; z-index:1">
-            <div class="content mt-3 pb-2 mb-0">
-                <div class="gallery gallery-filter inline-block" style="width:66px;height:45px;">
+            <div class="content mt-3 pb-2 mb-0" style="position: relative;">
+                <div class="gallery gallery-filter inline-block" style="width:66px !important;padding:0 !important;">
                     <a :href="(userData.profileImages && userData.profileImages.length>0) ? userData.profileImages[0].thumbnailUrl : ('/static/images/assets/user_empty_'+((userData.gender)?userData.gender:'m')+'.png')" data-gallery="gallery-image" class="center_image filtr-item" :title="userData.nickName" data-category="user" style="width:60px;height:60px;">
-                        <img class="circular_image" :src="(userData.profileImages && userData.profileImages.length>0) ? userData.profileImages[0].thumbnailUrl : ('/static/images/assets/user_empty_'+((userData.gender)?userData.gender:'m')+'.png')" width="50" style="vertical-align: top;"/>
+                        <div class="user-img me-2">
+                            <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                                <defs>
+                                <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                                <clipPath id="clipSquircle">
+                                    <use xlink:href="#shapeSquircle"/>
+                                </clipPath>
+                                </defs>
+                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(userData.profileImages && userData.profileImages.length>0) ? userData.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty.png'"/>
+                            </svg>
+                        </div>
+                        
                     </a>
                 </div>
                 
-                <div class="inline-block font-noto">
+                <div class="font-noto" style="position: absolute;top:10px;left:74px;">
                     <h5 class="mb-0 font-500">{{ userData.nickName }}</h5>
                     <p class="mb-0 font-12 color-gray">{{ userData.levelShow }}</p>
                 </div>
@@ -288,9 +299,9 @@ export default {
         $(".header-fixed").hide();
     }
     setTimeout(function() {
-        $(".gallery-filter").css("width", "66px");
-        $(".gallery-filter").css("height", "45px");
-        $(".gallery-filter").css("display", "inline-block");
+        //$(".gallery-filter").css("width", "66px");
+        //$(".gallery-filter").css("height", "45px");
+        //$(".gallery-filter").css("display", "inline-block");
     },1500);
     
 
@@ -704,17 +715,52 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.inline-block {display: inline-block;}
+.inline-block {display: inline-block !important;}
 .border-bottom {border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important}
 .evaluation {background-color: rgba(196,187,171,.2);justify-content: space-around;border-radius: 5px;padding:10px;}
 .wedive-textarea {min-height: 130px;border: 2px solid #e9e9e9;background: #f5f5f5;padding-left: 10px;padding-right: 10px;width:100%;}
 .wedive-deep:before {content: '▼ 첫 수심 18m';position: absolute;margin-top: -20px;margin-left: 16%;color:#b4bcc8;}
+.state {fill: #ccc;stroke: #fff;}
+.state:hover {fill: steelblue;}
 
-.state {
-  fill: #ccc;
-  stroke: #fff;
+.user-img {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  overflow: hidden;
+  user-select: none;
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3csvg width='88px' height='88px' viewBox='0 0 88 88' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3e%3cpath d='M44%2c0.5 C59.8650505%2c0.5 70.7664452%2c3.40244096 77.6820021%2c10.3179979 C84.597559%2c17.2335548 87.5%2c28.1349495 87.5%2c44 C87.5%2c59.8650505 84.597559%2c70.7664452 77.6820021%2c77.6820021 C70.7664452%2c84.597559 59.8650505%2c87.5 44%2c87.5 C28.1349495%2c87.5 17.2335548%2c84.597559 10.3179979%2c77.6820021 C3.40244096%2c70.7664452 0.5%2c59.8650505 0.5%2c44 C0.5%2c28.1349495 3.40244096%2c17.2335548 10.3179979%2c10.3179979 C17.2335548%2c3.40244096 28.1349495%2c0.5 44%2c0.5 Z' fill='none' stroke='rgba(0,0,0,0.08)'%3e%3c/path%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .svg-profile {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .default-txt {
+    font-size: 2em;
+    fill: #fff;
+  }
+
+  .default-bg {
+    width: 100%;
+    height: 100%;
+    @each $num, $color in $userImgBgs {
+      &[data-color="#{$num}"] {
+        fill: $color;
+      }
+    }
+  }
 }
-.state:hover {
-  fill: steelblue;
-}
+.gallery-filter > a {padding: 0 !important;}
 </style>

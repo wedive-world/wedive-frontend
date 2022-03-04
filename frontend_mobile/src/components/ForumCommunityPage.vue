@@ -293,6 +293,23 @@ export default {
             }
           `
       },
+      getAllCommunities: {
+          query:gql `
+            query GetAllCommunities {
+                getAllCommunities {
+                    _id
+                    title
+                    description
+                    languageCode
+                    subscriptionCount
+                    images {
+                    _id
+                    thumbnailUrl
+                    }
+                }
+            }
+          `
+      },
   },
   
 }

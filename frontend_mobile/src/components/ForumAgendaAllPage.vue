@@ -16,7 +16,7 @@
         </div>
         </template>
         
-        <div class="text-start">
+        <div class="text-start" style="min-height: calc(100vh - 184px);">
           <div class="p-3">
             <swiper
                 ref="hashSwiper"
@@ -33,7 +33,7 @@
             </swiper>
           </div>
           <div class="divider mb-0"></div>
-          <div>
+          <div v-for="agenda in getAgendasByTargetId">
             <div class="p-3">
               <div style="position:relative;">
                   <div class="user-img-s me-2">
@@ -48,8 +48,8 @@
                       </svg>
                   </div>
                   <div class="inline-block font-noto v-align-top mt-1">
-                      <h5 class="mb-0 font-500 font-15">짱스</h5>
-                      <p class="mb-0 mt-n1 font-13 color-gray">초보 다이버</p>
+                      <h5 class="mb-0 font-500 font-15">{{ agenda.author.nickName }}</h5>
+                      <p class="mb-0 mt-n1 font-13 color-gray">{{ getDiverLevel(agenda.author.freeLicenseLevel, agenda.author.scubaLicenseLevel) }}</p>
                   </div>
                   <p class="color-gray-dark mb-0 font-12" style="position: absolute;right: 0px;top: 0;">10분 전</p>
               </div>
@@ -57,18 +57,16 @@
                   <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 잠실 수영장</p>
               </div>
               <div v-on:click="goDetail()">
-                <h5 class="font-600 mt-3 mb-2 font-17">블라블라 뭐시기 타이틀</h5>
+                <h5 class="font-600 mt-3 mb-2 font-17">{{ agenda.title }}</h5>
                 <p class="mb-0 font-noto opacity-90" style="line-height: 1.5;">
-                  오랫만에 다이빙을 왔는데 정말정말 재미있네요.<br/>코시국에 이만한 힐링이 없어요.<br/>다들 새해 복 많이 받으세요~
+                  {{ agenda.content }}
                   <span class="color-gray ms-2">... 더 보기</span>
                 </p>
               </div>
             </div>
             <div class="p-3">
               <div class="mt-1">
-                  <span class="bg-gray-light color-gray rounded-sm me-1" style="padding: 6px 12px;">#힐링</span>
-                  <span class="bg-gray-light color-gray rounded-sm me-1" style="padding: 6px 12px;">#새해</span>
-                  <span class="bg-gray-light color-gray rounded-sm me-1" style="padding: 6px 12px;">#다이빙</span>
+                  <span v-for="tag in agenda.hashTags" class="bg-gray-light color-gray rounded-sm me-1" style="padding: 6px 12px;">#{{ tag.name }}</span>
               </div>
               <div class="mt-4 mb-3">
                   <img src="/static/images/assets/ico_heart.png" width="22" class="me-1" style="margin-top:-1px;"/><span class="font-14 font-noto">1</span>
@@ -80,102 +78,7 @@
           </div>
 
 
-          <div>
-            <div class="p-3">
-              <div style="position:relative;">
-                  <div class="user-img-s me-2">
-                      <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
-                          <defs>
-                          <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
-                          <clipPath id="clipSquircle">
-                              <use xlink:href="#shapeSquircle"/>
-                          </clipPath>
-                          </defs>
-                          <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="/static/images/assets/user_empty.png"/>
-                      </svg>
-                  </div>
-                  <div class="inline-block font-noto v-align-top mt-1">
-                      <h5 class="mb-0 font-500 font-15">짱스</h5>
-                      <p class="mb-0 mt-n1 font-13 color-gray">초보 다이버</p>
-                  </div>
-                  <p class="color-gray-dark mb-0 font-12" style="position: absolute;right: 0px;top: 0;">1일 전</p>
-              </div>
-              <div class="mt-1">
-                  <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 문섬 포인트</p>
-              </div>
-              <div v-on:click="goDetail()">
-                <h5 class="font-600 mt-3 mb-2 font-17">블라블라 뭐시기 타이틀</h5>
-                <p class="mb-0 font-noto opacity-90" style="line-height: 1.5;">
-                  오랫만에 다이빙을 왔는데 정말정말 재미있네요.<br/>코시국에 이만한 힐링이 없어요.<br/>다들 새해 복 많이 받으세요~
-                  <span class="color-gray ms-2">... 더 보기</span>
-                </p>
-              </div>
-            </div>
-            <div class="row">
-              <img class="col-12" src="https://fg.startupbridgeva.com/f/m3h/TOb/0kN/9OiKsk0MTnPMjkpw6CwyrDA0jAjOTUxKTc7NVsvqyAdAA.jpg" style="width:100%;"/>
-            </div>
-            <div class="p-3">
-              <div class="mt-1">
-                  <span class="bg-gray-light color-gray rounded-sm me-1" style="padding: 6px 12px;">#힐링</span>
-                  <span class="bg-gray-light color-gray rounded-sm me-1" style="padding: 6px 12px;">#새해</span>
-                  <span class="bg-gray-light color-gray rounded-sm me-1" style="padding: 6px 12px;">#다이빙</span>
-              </div>
-              <div class="mt-4 mb-3">
-                  <img src="/static/images/assets/ico_heart.png" width="22" class="me-1" style="margin-top:-1px;"/><span class="font-14 font-noto">6</span>
-                  &nbsp;&nbsp;
-                  <img src="/static/images/assets/ico_chat.png" width="22" class="me-1" style="margin-top:-1px;"/><span class="font-14 font-noto">20</span>
-              </div>
-            </div>
-            <div class="divider mb-0" style="height:12px;border-top: 1px solid #88888840"></div>
-          </div>
           
-          <div class="p-3">
-              <div style="position:relative;">
-                  <div class="user-img-s me-2">
-                      <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
-                          <defs>
-                          <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
-                          <clipPath id="clipSquircle">
-                              <use xlink:href="#shapeSquircle"/>
-                          </clipPath>
-                          </defs>
-                          <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="/static/images/assets/user_empty.png"/>
-                      </svg>
-                  </div>
-                  <div class="inline-block font-noto v-align-top mt-1">
-                      <h5 class="mb-0 font-500 font-15">짱스</h5>
-                      <p class="mb-0 mt-n1 font-13 color-gray">초보 다이버</p>
-                  </div>
-                  <p class="color-gray-dark mb-0 font-12" style="position: absolute;right: 0px;top: 0;">1일 전</p>
-              </div>
-              <div class="mt-1">
-                  <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i>제주 사이트</p>
-              </div>
-              <h5 class="font-600 mt-3 mb-2 font-17">블라블라 뭐시기 타이틀</h5>
-              <p class="mb-0 font-noto opacity-90" style="line-height: 1.5;">
-                오랫만에 다이빙을 왔는데 정말정말 재미있네요.<br/>코시국에 이만한 힐링이 없어요.<br/>다들 새해 복 많이 받으세요~
-                <span class="color-gray ms-2">... 더 보기</span>
-              </p>
-          </div>
-          <div class="square_image inline-block">
-              <img src="https://d2mgzmtdeipcjp.cloudfront.net/files/good_contents/2020/06/09/15916682888292.png" style="object-fit: cover;"/>
-          </div>
-          <div class="square_image inline-block" style="float: right;">
-              <img src="https://d2mgzmtdeipcjp.cloudfront.net/files/good_contents/2020/06/09/15916682352190.png" style="object-fit: cover;"/>
-          </div>
-          <div class="p-3">
-              <div class="mt-1">
-                  <span class="bg-gray-light color-gray rounded-sm me-1" style="padding: 6px 12px;">#힐링</span>
-                  <span class="bg-gray-light color-gray rounded-sm me-1" style="padding: 6px 12px;">#새해</span>
-                  <span class="bg-gray-light color-gray rounded-sm me-1" style="padding: 6px 12px;">#다이빙</span>
-              </div>
-              <div class="mt-4 mb-3">
-                  <img src="/static/images/assets/ico_heart.png" width="22" class="me-1" style="margin-top:-1px;"/><span class="font-14 font-noto">6</span>
-                  &nbsp;&nbsp;
-                  <img src="/static/images/assets/ico_chat.png" width="22" class="me-1" style="margin-top:-1px;"/><span class="font-14 font-noto">20</span>
-              </div>
-          </div>
-          <div class="divider mb-0" style="height:12px;border-top: 1px solid #88888840"></div>
         </div>
 
     </pull-to>
@@ -202,9 +105,8 @@ export default {
       },
       async refresh(loaded) {
         if ($(document).scrollTop() == 0) {
-            setTimeout(function() {
-                loaded('done')
-            },1000);
+          await this.$apollo.queries.getAgendasByTargetId.refetch()
+          loaded('done')
         } else {
             console.log("1")
             loaded('done')
@@ -223,6 +125,23 @@ export default {
       handleScroll (event) {
         this.scrollTop = $(document).scrollTop();
       },
+      getDiverLevel(freeLicenseLevel, scubaLicenseLevel) {
+        var levelShow = '초보';
+        var scuba_level = ["초보", "오픈워터", "어드벤스드", "레스큐", "마스터", "강사", "위다이브 컨시어지"];
+        var free_level = ["초보", "레벨1", "레벨2", "레벨3", "레벨4", "강사"];
+
+        var my_s_lvl = parseInt((scubaLicenseLevel)?scubaLicenseLevel:"0");
+        var my_f_lvl = parseInt((freeLicenseLevel)?freeLicenseLevel:"0")
+        if (my_s_lvl > my_f_lvl) {
+            levelShow = (my_s_lvl>0) ? "스쿠바 " + scuba_level[my_s_lvl] : levelShow;
+        } else {
+            levelShow = (my_f_lvl>0) ? "프리 " + free_level[my_f_lvl] : levelShow;
+        }
+        levelShow += " 다이버";
+        if(my_s_lvl>5) levelShow = scuba_level[my_s_lvl];
+        
+        return levelShow;
+    },
   },
   mounted() {
   },

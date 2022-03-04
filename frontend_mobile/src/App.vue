@@ -79,7 +79,7 @@
           <div class="color-primary font-noto font-20 font-600"> 버디 모집</div>
           <p class="mb-2 color-gray">어디로 가실까요?</p>
         </div>
-        <div class="content mt-0 row">
+        <div class="content mt-0 row" :style="(locationsearch.includes('footer=hide') ? 'margin-bottom:64px;' : '')">
           <div v-on:click="goSwimming()" class="col-4 text-center p-0">
             <div class="m-1 border-08 pool">
               <img class="m-4 mb-2 opacity-60" src="/static/images/assets/icon_pool.png" width="40%"/>
@@ -199,7 +199,8 @@ export default {
 
     window.onpopstate = history.onpushstate = function(e) {
       if(window.location.href.split('/').pop().indexOf('modal')===-1){
-        window.localStorage.gclose = "1";
+        //console.log(">>set1");
+        //window.localStorage.gclose = "1";
         $(".gclose").eq(0).click();
       }
     }
@@ -250,7 +251,8 @@ export default {
       gender: localStorage.gender,
       pathname: window.location.pathname,
       notiData: null,
-      footer_list: ['/', '/site_list', '/site_home', '/forum_home', '/chat_home', '/other_home']
+      footer_list: ['/', '/site_list', '/site_home', '/forum_home', '/chat_home', '/other_home'],
+      locationsearch: window.location.search,
     }
   },
   components: {

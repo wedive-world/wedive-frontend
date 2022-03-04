@@ -9,13 +9,14 @@ var lightbox = GLightbox({
     preload:true,
 });
 lightbox.on('open', () => {
-    window.history.pushState({}, 'modal', '/modal');
+    if(window.location.href.split('/').pop() != 'modal'){
+        window.history.pushState({}, 'modal', window.location.pathname + '/modal');
+    }
 });
 
-lightbox.once('close', () => {
-    if (window.localStorage.gclose == "1") {
-        window.localStorage.gclose = '0';
-    } else {
+lightbox.on('close', () => {
+    console.log("close : " + window.location.href)
+    if(window.location.href.split('/').pop() == 'modal'){
         window.history.back(); 
     }
 });

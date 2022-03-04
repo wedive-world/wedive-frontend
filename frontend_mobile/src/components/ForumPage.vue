@@ -589,7 +589,7 @@ export default {
                 _id_list.push(result_img.uploadImage._id);
             }
   
-            var _input = {types: [this.subjectType], targetId: "621a0419a8eb33b6594f4870", title: this.agenda_title, content: this.agenda_contents, hashTags: this.selectedTags.map((x)=>{return {name: x.value}}), images: _id_list};
+            var _input = {types: [this.subjectType], targetId: "621db036efe4c50da6ea0825", title: this.agenda_title, content: this.agenda_contents, hashTags: this.selectedTags.map((x)=>{return {name: x.value}}), images: _id_list};
             const ipt = _input;
 
           var result = await axios({
