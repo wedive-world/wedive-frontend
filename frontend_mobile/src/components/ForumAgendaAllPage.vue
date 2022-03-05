@@ -64,6 +64,11 @@
                 </p>
               </div>
             </div>
+            <div class="" v-if="agenda.images && agenda.images.length > 0">
+              <div class="img_square" v-for="image in agenda.images">
+                <div class="img_square_inner" :style="'background: url('+image.thumbnailUrl+');'"/>
+              </div>
+              </div>
             <div class="p-3">
               <div class="mt-1">
                   <span v-for="tag in agenda.hashTags" class="bg-gray-light color-gray rounded-sm me-1" style="padding: 6px 12px;">#{{ tag.name }}</span>
@@ -218,6 +223,46 @@ export default {
               "skip": this.skip,
               "limit": this.limit
             }
+          },
+          result() {
+            var id_arr = new Array();
+            var width_arr = new Array();
+            this.getAgendasByTargetId.forEach(x => {
+                x.images.forEach(y => {
+                  id_arr.push(y._id);
+                  width_arr.push(720);
+                })
+            });
+            axios({
+                url: 'https://api.wedives.com/graphql',
+                method: 'post',
+                headers: {
+                    countrycode: 'ko',
+                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                },
+                data: {
+                    query: `
+                        query Query($ids: [ID], $widths: [Int]) {
+                            getImageUrlsByIds(_ids: $ids, widths: $widths)
+                        }
+                    `,
+                    variables: {
+                        ids: id_arr,
+                        widths: width_arr
+                    }
+
+                }
+            }).then(result_image => {
+                if (result_image.data.data.getImageUrlsByIds) {
+                    var i=0;
+                    this.getAgendasByTargetId.forEach(x => {
+                        x.images.forEach(y => {
+                          y.thumbnailUrl = result_image.data.data.getImageUrlsByIds[i];
+                          i++;
+                        })
+                    });
+                }
+            });
           }
       },
   },
@@ -271,4 +316,7 @@ export default {
     }
   }
 }
+.img_square{width: 100%;position: relative;}
+.img_square:after {content: "";display: block;padding-bottom: 100%;}
+.img_square_inner {position: absolute;width: 100%;height: 100%;background-size:cover !important;background-position: center !important;}
 </style>

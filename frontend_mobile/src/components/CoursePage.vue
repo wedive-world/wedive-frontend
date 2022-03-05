@@ -3,10 +3,10 @@
     <div data-menu-active="nav-site"></div>
     <div class="header header-fixed header-logo-center">
         <a href="" class="header-title color">버블탱크 다이빙센터</a>
-        <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
-        <a href="#" data-menu="menu-main" class="header-icon header-icon-4"><i class="fas fa-bars"></i></a>
-        <a href="#" data-toggle-theme class="header-icon header-icon-3 show-on-theme-dark"><i class="fas fa-sun"></i></a>
-        <a href="#" data-toggle-theme class="header-icon header-icon-3 show-on-theme-light"><i class="fas fa-moon"></i></a>
+        <a href="#" data-back-button class="font-16 header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
+        <a href="#" data-menu="menu-main" class="font-16 header-icon header-icon-4"><i class="fas fa-bars"></i></a>
+        <a href="#" data-toggle-theme class="font-16 header-icon header-icon-3 show-on-theme-dark"><i class="fas fa-sun"></i></a>
+        <a href="#" data-toggle-theme class="font-16 header-icon header-icon-3 show-on-theme-light"><i class="fas fa-moon"></i></a>
     </div>
     <div class="card card-fixed mt-4" style="background-image:url(/static/images/diving_boat.jpg)" data-card-height="350">
         

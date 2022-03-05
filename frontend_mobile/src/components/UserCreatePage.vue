@@ -3,8 +3,8 @@
 
     <div class="header header-fixed header-logo-center">
         <a href="" class="header-title color ellipsis">프로필</a>
-        <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
-        <a href="#" data-menu="menu-main" class="header-icon header-icon-4"><i class="fas fa-bars"></i></a>
+        <a href="#" data-back-button class="font-16 header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
+        <a href="#" data-menu="menu-main" class="font-16 header-icon header-icon-4"><i class="fas fa-bars"></i></a>
     </div>
     
     <div class="card card-clear" data-card-height="80"></div>

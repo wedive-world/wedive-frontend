@@ -751,10 +751,8 @@ export default {
         agenda_contents: '',
         community_title: '',
         community_contents: '',
-        selectedTags: [
-        ],
-        selectedTags2: [
-        ],
+        selectedTags: [],
+        selectedTags2: [],
         file_photo: [],
         file_photo_community: [],
         subjectType: 'default',

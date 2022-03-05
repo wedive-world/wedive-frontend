@@ -3,8 +3,8 @@
     <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-site" data-menu-load=""></div>
     <div class="header header-fixed header-logo-center">
         <a href="" class="header-title color ellipsis">{{ divingData.title }}</a>
-        <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
-        <a href="#" class="header-icon header-icon-4"><img src="/static/images/assets/ico_share.png" width="20"/></a>
+        <a href="#" data-back-button class="font-16 header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
+        <a href="#" class="font-16 header-icon header-icon-4"><img src="/static/images/assets/ico_share.png" width="20"/></a>
     </div>
     
     <div :class="'page-content p-0' + (is_empty ? '' : ' hide')">

@@ -3,7 +3,7 @@
     <div data-menu-active="nav-chat"></div>
     <div class="header header-fixed header-logo-center">
         <a href="" class="header-title color ellipsis">{{ roomName || '' }}</a>
-        <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
+        <a href="#" data-back-button class="font-16 header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
     </div>
 
     <div id="footer-bar-speach" style="z-index: 9999;display: table;width: 100%;">

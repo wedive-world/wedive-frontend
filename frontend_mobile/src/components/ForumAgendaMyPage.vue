@@ -197,8 +197,7 @@ export default {
               "limit": this.limit
           },
           result(data) {
-            console.log(data)
-            console.log(this.getAgendasByTargetId)
+            
           }
       },
   },

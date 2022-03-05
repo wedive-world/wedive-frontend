@@ -3,8 +3,8 @@
     <div data-menu-active="nav-chat"></div>
     <div class="header header-fixed header-logo-center">
         <a href="" class="header-title color ellipsis">{{ is_concierge ? '컨시어지' : (getChatRoomInfo && getChatRoomInfo.chatRoom ? getChatRoomInfo.chatRoom.title : '') }}</a>
-        <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
-        <a data-menu="menu-main-right" class="header-icon header-icon-4"><i class="fas fa-bars"></i></a>
+        <a href="#" data-back-button class="font-16 header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
+        <a data-menu="menu-main-right" class="font-16 header-icon header-icon-4"><i class="fas fa-bars"></i></a>
 
         <div v-if="is_concierge" class="font-noto" style="margin-top: 50px;height:90px;background:rgb(24, 24, 24);border-bottom:1px solid lightgray;padding:14px;">
             <p class="mb-0 font-16 font-600 color-white"><i class="fas fa-concierge-bell me-1"></i> 띠링띠링</p>
@@ -681,10 +681,16 @@ export default {
             }
         },
         result (data) {
-            console.log(data.data.getChatRoomInfo)
             if (data.data.getChatRoomInfo.chatRoom.type == "direct" && data.data.getChatRoomInfo.chatRoom.chatUsers.filter(x=>x._id == "hdcBRWybv6EG4kyDr").length > 0){
                 this.is_concierge = true;
             }
+            try {
+                this.getChatRoomInfo.chatRoom.title = data.data.getChatRoomInfo.chatMessages.filter(msg => msg.author.uid != this.uid)[0].author.name;
+            } catch (e) {
+
+            }
+            
+
             //console.log(data.getChatRoomInfo);
             //data.getChatRoomInfo.reverse();
         },

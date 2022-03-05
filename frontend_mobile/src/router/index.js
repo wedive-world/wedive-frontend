@@ -40,6 +40,7 @@ import ForumPage from '@/components/ForumPage'
 import ForumDetailPage from '@/components/ForumDetailPage'
 import OhterPage from '@/components/OhterPage'
 import NotificationPage from '@/components/NotificationPage'
+import CommunityDetailPage from '@/components/CommunityDetailPage'
 import OtherDivingPage from '@/components/OtherDivingPage'
 import OtherSubscribePage from '@/components/OtherSubscribePage'
 import OtherNotiPage from '@/components/OtherNotiPage'
@@ -276,6 +277,12 @@ export default new Router({
       path: '/other/notification',
       name: 'NotificationPage',
       component: NotificationPage
+    },
+    {
+      path: '/community/:id',
+      name: 'CommunityDetailPage',
+      props: true,
+      component: CommunityDetailPage
     },
     
     

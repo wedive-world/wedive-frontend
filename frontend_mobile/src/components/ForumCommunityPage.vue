@@ -42,7 +42,7 @@
             </div>
             
             <div style="position:relative;">
-                <div class="pe-3 ps-3 pt-2 pb-2 border-bottom">
+                <div v-for="community in getUserSubsciption.communities" v-on:click="goCommunity(community)" class="pe-3 ps-3 pt-2 pb-2 border-bottom">
                     <div class="user-img me-2">
                         <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
                             <defs>
@@ -51,16 +51,15 @@
                                 <use xlink:href="#shapeSquircle"/>
                             </clipPath>
                             </defs>
-                            <!--<image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(chat.owner.avatarOrigin)?chat.owner.avatarOrigin:'/static/images/assets/user_empty.png'"/>-->
-                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="/static/empty.jpg"/>
+                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(community.images.length > 0 && community.images[0].thumbnailUrl)?community.images[0].thumbnailUrl:'/static/images/assets/user_empty.png'"/>
                         </svg>
                     </div>
                     <div class="inline-block font-noto v-align-top">
-                        <h5 class="mb-0 font-500 font-16">마크로 구경 동호회<span class="wedive-bullet">MY</span></h5>
-                        <p class="mb-0 mt-1 font-13 color-gray ellipsis2" style="max-width: calc(100vw - 122px);line-height: 1.2;">전세계 마크로 여행지를 함께 둘러보는 다이버들의 모임입니다. 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라</p>
+                        <h5 class="mb-0 font-500 font-16">{{ community.title }}<span class="wedive-bullet">MY</span></h5>
+                        <p class="mb-0 mt-1 font-13 color-gray ellipsis2" style="max-width: calc(100vw - 122px);line-height: 1.2;">{{ community.description }}</p>
                     </div>
                 </div>
-                <div class="pe-3 ps-3 pt-2 pb-2 border-bottom">
+                <div v-if="getAllCommunities != null" v-for="community in getAllCommunities.filter(x=> myCommunityIds.includes(x._id) == false)" v-on:click="goCommunity(community)" class="pe-3 ps-3 pt-2 pb-2 border-bottom">
                     <div class="user-img me-2">
                         <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
                             <defs>
@@ -69,31 +68,12 @@
                                 <use xlink:href="#shapeSquircle"/>
                             </clipPath>
                             </defs>
-                            <!--<image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(chat.owner.avatarOrigin)?chat.owner.avatarOrigin:'/static/images/assets/user_empty.png'"/>-->
-                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="/static/empty.jpg"/>
+                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(community.images.length > 0 && community.images[0].thumbnailUrl)?community.images[0].thumbnailUrl:'/static/images/assets/user_empty.png'"/>
                         </svg>
                     </div>
                     <div class="inline-block font-noto v-align-top">
-                        <h5 class="mb-0 font-500 font-16">마크로 구경 동호회<span class="wedive-bullet"><i class="fas fa-user-friends fa-fw"></i> 20</span></h5>
-                        <p class="mb-0 mt-1 font-13 color-gray ellipsis2" style="max-width: calc(100vw - 122px);line-height: 1.2;">전세계 마크로 여행지를 함께 둘러보는 다이버들의 모임입니다. 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라</p>
-                    </div>
-                </div>
-                <div class="pe-3 ps-3 pt-2 pb-2 border-bottom">
-                    <div class="user-img me-2">
-                        <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
-                            <defs>
-                            <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
-                            <clipPath id="clipSquircle">
-                                <use xlink:href="#shapeSquircle"/>
-                            </clipPath>
-                            </defs>
-                            <!--<image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(chat.owner.avatarOrigin)?chat.owner.avatarOrigin:'/static/images/assets/user_empty.png'"/>-->
-                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="/static/empty.jpg"/>
-                        </svg>
-                    </div>
-                    <div class="inline-block font-noto v-align-top">
-                        <h5 class="mb-0 font-500 font-16">마크로 구경 동호회<span class="wedive-bullet"><i class="fas fa-user-friends fa-fw"></i> 20</span></h5>
-                        <p class="mb-0 mt-1 font-13 color-gray ellipsis2" style="max-width: calc(100vw - 122px);line-height: 1.2;">전세계 마크로 여행지를 함께 둘러보는 다이버들의 모임입니다. 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라</p>
+                        <h5 class="mb-0 font-500 font-16">{{ community.title }}<span class="wedive-bullet"><i class="fas fa-user-friends fa-fw me-1"></i> {{ community.subscriptionCount || 0 }}</span></h5>
+                        <p class="mb-0 mt-1 font-13 color-gray ellipsis2" style="max-width: calc(100vw - 122px);line-height: 1.2;">{{ community.description }}</p>
                     </div>
                 </div>
             </div>
@@ -115,13 +95,15 @@ export default {
       PullTo,
   },
   methods: {
+      goCommunity(community) {
+          location.href = '/community/' + community._id;
+      },
       async refresh(loaded) {
         if ($(document).scrollTop() == 0) {
             setTimeout(function() {
                 loaded('done')
             },1000);
         } else {
-            console.log("1")
             loaded('done')
             return false;
         }
@@ -261,6 +243,8 @@ export default {
         selectedCommunity: null,
         communities: [],
         getUserSubsciption: [],
+        getAllCommunities: [],
+        myCommunityIds: [],
         scrollTop: 0,
         TOP_DEFAULT_CONFIG: {
             pullText: '당겨서 새로고침', // The text is displayed when you pull down
@@ -291,7 +275,10 @@ export default {
                     }
                 }
             }
-          `
+          `,
+          result() {
+              this.myCommunityIds = this.getUserSubsciption.communities.map(y=>{return y._id});
+          }
       },
       getAllCommunities: {
           query:gql `
