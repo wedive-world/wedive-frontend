@@ -273,7 +273,7 @@ export default new Router({
       component: OhterPage
     },
     {
-      path: '/notification',
+      path: '/other/notification',
       name: 'NotificationPage',
       component: NotificationPage
     },

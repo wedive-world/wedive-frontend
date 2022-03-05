@@ -4,6 +4,7 @@
     <div class="main-header header header-fixed header-logo-center" style="height: 58px !important;">
         <a class="" href="/" style="margin-left: 16px;"><img class="logo-image" src="/static/images/assets/logo-gray.svg" height="42" style="margin-top:8px;"/></a>
         
+        <a v-if="idToken != null && nickName != null" v-on:click="goNoti()" :class="'header-icon header-icon-5' + (notiData && notiData.length > 0 && notiData[0].read != null && notiData[0].read == false ? ' has-notification' : '')" style="color:#858585 !important;margin-right: 18px;"><img src="/static/images/assets/icon_notification.png" width="28" style="margin-top: 12px;"></a>
         <a v-on:click="move('/site_list')" class="header-icon header-icon-3" style="margin-right: 18px;"><img src="/static/images/assets/icon_list_fill.png" width="26" style="margin-top: 12px;"/></i></a>
         <a v-on:click="searchBox()" href="#" class="header-icon header-icon-4" style="margin-right: 11px;"><img src="/static/images/assets/icon_search_fill.png" width="28" style="margin-top: 12px;"/></a>
         <!--<a href="#" class="header-icon header-icon-4 color-theme circular_image" data-menu="menu-main" :style="'background: url('+((userThumbnail) ? userThumbnail : '/static/images/assets/user_empty_'+((gender)?gender:'m')+'.png')+');background-size:cover;width:36px;height:36px;margin-top:7px !important;margin-right:7px;'"></a>-->
@@ -930,6 +931,7 @@ export default {
         my_latitude: 37.56425754670452,
         my_longitude: 126.9741944890715,
         nickName: localStorage.nickName,
+        idToken: localStorage.idToken,
         userThumbnail: localStorage.userThumbnail,
         gender: localStorage.gender,
         check_star70: false,
@@ -959,6 +961,7 @@ export default {
         check_point4: false,
         suggestions : (localStorage.suggestion ? JSON.parse(localStorage.suggestion) : []),
         tour_flag: true,
+        notiData: JSON.parse(localStorage.notiData),
     }
   }, 
   watch: {
@@ -995,6 +998,10 @@ export default {
       },
   },
   methods: {
+      goNoti() {
+        if(this.idToken != null && this.nickName != null)
+            location.href = '/other/notification';
+      },
       move(loc) {
           location.href = loc + location.search;
       },
@@ -1399,5 +1406,5 @@ export default {
 .site .map_box_cate {border: 1px solid #3f474c;color:#3f474c}
 .point .map_box_cate {border: 1px solid #3cb5a0;color:#3cb5a0}
 .center .map_box_cate {border: 1px solid #4687c1;color:#4687c1}
-
+.has-notification:before {content: '●';color: #ff5160;position:absolute;top:0;font-size:5px;margin-top: -9px;margin-left: 20px;}
 </style>

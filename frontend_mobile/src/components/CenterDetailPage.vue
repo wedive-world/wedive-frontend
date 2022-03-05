@@ -5,7 +5,7 @@
         <div v-if="getDiveCenterByUniqueName.backgroundImages == null || getDiveCenterByUniqueName.backgroundImages.length == 0" style="background:url(/static/empty.jpg);background-size: contain;height:250px;">
         </div>
         <div v-else style="min-height:250px;height:250px;max-height:250px;">
-            <div class="splide single-slider cover-slider slider-no-arrows slider-no-dots" id="cover-slider-1" data-card-height="250" style="position:relative;">
+                <div class="splide single-slider cover-slider slider-no-arrows slider-no-dots" id="cover-slider-1" data-card-height="250" style="position:relative;">
                 <div class="splide__track">
                     <div class="splide__list">
                         <div class="splide__slide" v-if="getDiveCenterByUniqueName.backgroundImages == null || getDiveCenterByUniqueName.backgroundImages.length == 0">
@@ -881,8 +881,6 @@
 import VueBottomSheet from "@webzlodimir/vue-bottom-sheet";
 import StarRating from 'vue-star-rating'
 import gql from 'graphql-tag'
-import VueSkeletonLoader from 'skeleton-loader-vue';
-
 
 //import { GraphQLClient, request, gql } from "graphql-request";
 const axios = require("axios")
@@ -1251,7 +1249,6 @@ export default {
   components: {
     StarRating,
     VueBottomSheet,
-    VueSkeletonLoader,
   },
   data () {
     return {
@@ -1513,28 +1510,6 @@ export default {
                             i++;
                         });
                     }
-                    /*var lightbox = GLightbox({
-                        closeOnOutsideClick: false,
-                        zoomable:false,
-                        descPosition:'bottom',
-                        selector: '[data-lazygallery]',
-                        openEffect: 'fade',
-                        closeEffect: 'fade',
-                        dragAutoSnap:true,
-                        preload:true,
-                    });
-                    lightbox.on('open', () => {
-                        if(window.location.href.split('/').pop() != 'modal'){
-                            window.history.pushState({}, 'modal', window.location.pathname + '/modal');
-                        }
-                    });
-
-                    lightbox.on('close', () => {
-                        console.log("close : " + window.location.href)
-                        if(window.location.href.split('/').pop() == 'modal'){
-                            window.history.back(); 
-                        }
-                    });*/
                 });
             }
 

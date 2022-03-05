@@ -2,26 +2,25 @@
   <div class="">
     <div data-menu-active="nav-site"></div>
     <div class="page-content pb-0">
-        <div v-if="siteData.backgroundImages == null || siteData.backgroundImages.length == 0" style="background:url(/static/empty.jpg);background-size: contain;height:250px;">
+        <div v-if="getDiveSiteByUniqueName.backgroundImages == null || getDiveSiteByUniqueName.backgroundImages.length == 0" style="background:url(/static/empty.jpg);background-size: contain;height:250px;">
         </div>
         <div v-else style="min-height:250px;height:250px;max-height:250px;">
-            <div class="splide single-slider cover-slider slider-no-arrows slider-no-dots" id="cover-slider-1" data-card-height="250">
+            <div class="splide single-slider cover-slider slider-no-arrows slider-no-dots" id="cover-slider-1" data-card-height="250" style="position:relative;">
                 <div class="splide__track">
                     <div class="splide__list">
-                        <div class="splide__slide" v-if="siteData.backgroundImages == null || siteData.backgroundImages.length == 0">
-                            <div id="background_img_null" data-card-height="250" class="card rounded-0 mb-0" style="background: url(/static/empty.jpg);background-position: center !important;background-size: contain !important;">
-                                
+                        <div class="splide__slide" v-if="getDiveSiteByUniqueName.backgroundImages == null || getDiveSiteByUniqueName.backgroundImages.length == 0">
+                            <div id="background_img_null" data-card-height="250" class="card rounded-0 mb-0" style="background: url(/static/empty.jpg);background-position: center !important;background-size: contain !important;">                                
                             </div>
                         </div>
-                        <div class="splide__slide" v-for="(image, index) in siteData.backgroundImages">
-                            <div data-card-height="250" :class="'card rounded-0 mb-0 background_img_' + index" v-bind:style="'background: url('+image.url+');background-size: cover !important;background-position: center !important;'">
+                        <div v-else class="splide__slide" v-for="(image, index) in getDiveSiteByUniqueName.backgroundImages">
+                            <div data-card-height="250" :class="'card rounded-0 mb-0 background-center background_img_' + index" v-bind:style="'background: url('+image.thumbnailUrl+');background-size: cover !important;'">
                                 <div class="wedive-source" style="bottom:50px;">{{ image.reference | makeReference }}</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div id="cover-slider-temp" :style="'background:url('+siteData.backgroundImages[0].url+');background-size: cover;height:250px;background-position: center;position:absolute;width:100%;top:58px;'">
+            <div id="cover-slider-temp" class="background-center" :style="'background:url('+getDiveSiteByUniqueName.backgroundImages[0].thumbnailUrl+');height:250px;position:absolute;width:100%;top:58px;'">
             </div>
         </div>
         
@@ -33,10 +32,10 @@
         
         <div class="card card-style" style="margin-top:-40px; z-index:1">
             <div class="content text-center mt-4">
-                <h2 class="font-20 font-700 mb-0 mt-1">{{ siteData.name }}</h2>
-                <h2 class="wedive-score">{{ (siteData.adminScore/20).toFixed(1) }}</h2>
-                <span class="wedive-score-desc">{{ recommend_word[parseInt(siteData.adminScore/20)] }}</span>
-                <p v-if="siteData.address != '' && siteData.address != ' '" class="color-gray m-0 ellipsis" style="max-width: calc(100vw - 130px);display: inline-block;"><i class="fas fa-map-marked-alt" ></i> {{ siteData.address }}</p>
+                <h2 class="font-20 font-700 mb-0 mt-1">{{ getDiveSiteByUniqueName.name }}</h2>
+                <h2 class="wedive-score">{{ (getDiveSiteByUniqueName.adminScore/20).toFixed(1) }}</h2>
+                <span class="wedive-score-desc">{{ recommend_word[parseInt(getDiveSiteByUniqueName.adminScore/20)] }}</span>
+                <p v-if="getDiveSiteByUniqueName.address != '' && getDiveSiteByUniqueName.address != ' '" class="color-gray m-0 ellipsis" style="max-width: calc(100vw - 130px);display: inline-block;"><i class="fas fa-map-marked-alt" ></i> {{ getDiveSiteByUniqueName.address }}</p>
                 
                 
                 <div class="evaluation d-flex mt-3">
@@ -44,43 +43,43 @@
                         <div class="star-area text-start ms-3" style="height: 30px;">
                             <span class="font-14 me-2 color-gray" style="float: left;padding-top:2px;">환경</span>
                             <div class="wedive-fish-back">
-                                <div class="wedive-fish-front" :style="'width:'+(siteData.waterEnvironmentScore>3 ? siteData.waterEnvironmentScore-3:0)+'%;'">
+                                <div class="wedive-fish-front" :style="'width:'+(getDiveSiteByUniqueName.waterEnvironmentScore>3 ? getDiveSiteByUniqueName.waterEnvironmentScore-3:0)+'%;'">
                                 </div>
-                                <span class="wedive-score-number">{{ (siteData.waterEnvironmentScore/20).toFixed(1) }}</span>
+                                <span class="wedive-score-number">{{ (getDiveSiteByUniqueName.waterEnvironmentScore/20).toFixed(1) }}</span>
                             </div>
                         </div>
                         <div class="star-area mt-1 text-start ms-3" style="height: 30px;">
                             <span class="font-14 me-2 color-gray" style="float: left;padding-top:2px;">조류</span>
                             <div class="wedive-wave-back">
-                                <div class="wedive-wave-front" :style="'width:'+(siteData.flowRateScore>3 ? siteData.flowRateScore-3: 0)+'%;'">
+                                <div class="wedive-wave-front" :style="'width:'+(getDiveSiteByUniqueName.flowRateScore>3 ? getDiveSiteByUniqueName.flowRateScore-3: 0)+'%;'">
                                 </div>
-                                <span class="wedive-score-number">{{ (siteData.flowRateScore/20).toFixed(1) }}</span>
+                                <span class="wedive-score-number">{{ (getDiveSiteByUniqueName.flowRateScore/20).toFixed(1) }}</span>
                             </div>
                         </div>
                         <div class="star-area mt-1 text-start ms-3" style="height: 30px;">
                             <span class="font-14 me-2 color-gray" style="float: left;padding-top:2px;">시야</span>
                             <div class="wedive-eye-back">
-                                <div class="wedive-eye-front" :style="'width:'+(siteData.eyeSightScore > 3 ? siteData.eyeSightScore-3 : 0)+'%;'">
+                                <div class="wedive-eye-front" :style="'width:'+(getDiveSiteByUniqueName.eyeSightScore > 3 ? getDiveSiteByUniqueName.eyeSightScore-3 : 0)+'%;'">
                                 </div>
-                                <span class="wedive-score-number">{{ (siteData.eyeSightScore/20).toFixed(1) }}</span>
+                                <span class="wedive-score-number">{{ (getDiveSiteByUniqueName.eyeSightScore/20).toFixed(1) }}</span>
                             </div>
                         </div>
                     </div>
                     <div class="flex-grow-1">
-                        <div style="height: 30px;padding-top:2px;">{{ recommend_env_word[parseInt(siteData.adminScore/20)] }}</div>
-                        <div class="mt-1" style="height: 30px;padding-top:2px;">{{ recommend_flow_word[parseInt(siteData.adminScore/20)] }}</div>
-                        <div class="mt-1" style="height: 30px;padding-top:2px;">{{ siteData.minSight }}-{{ siteData.maxSight }}m</div>
+                        <div style="height: 30px;padding-top:2px;">{{ recommend_env_word[parseInt(getDiveSiteByUniqueName.adminScore/20)] }}</div>
+                        <div class="mt-1" style="height: 30px;padding-top:2px;">{{ recommend_flow_word[parseInt(getDiveSiteByUniqueName.adminScore/20)] }}</div>
+                        <div class="mt-1" style="height: 30px;padding-top:2px;">{{ getDiveSiteByUniqueName.minSight }}-{{ getDiveSiteByUniqueName.maxSight }}m</div>
                     </div>
                 </div>
                 
-                <p class="color-gray mt-3 mb-0 text-start me-2 ms-2">{{ siteData.description }}</p>
+                <p class="color-gray mt-3 mb-0 text-start me-2 ms-2">{{ getDiveSiteByUniqueName.description }}</p>
                 
                 <div class="divider mt-3 mb-3"></div>
                 
                 <div class="d-flex mb-0 text-center">
                     <div v-on:click="clickLike()" :class="'flex-grow-1 pd-0' + ((idToken == null || nickName == null) ? ' opacity-40' : '')" style="border-right: 1px solid lightgray;">
                         <img class="ext-img" :src="'/static/images/assets/'+like_img+'.png'" width="24" style="margin-top:-4px;"/>
-                        <span class="font-16 font-500 font-noto">{{ siteData.likes }}</span>
+                        <span class="font-16 font-500 font-noto">{{ getDiveSiteByUniqueName.likes }}</span>
                     </div>
                     
                     <div v-on:click="clickSubscribe()" :class="'flex-grow-1 pd-0' + ((idToken == null || nickName == null) ? ' opacity-40' : '')" >
@@ -100,16 +99,16 @@
                     <i class="ico ico-wedive-w -circle color-primary scale-box fa-4x"></i>
                 </div>
                 <h4 class="text-center pt-2 mb-2">where is here?</h4>
-                <div v-if="siteData.interests && siteData.interests.filter(x=>x.type=='divingPointEnvironment'||x.type=='divingType'||x.type=='award').length>0" class="row text-start txt_box2 m-0">
-                    <div v-for="interest in siteData.interests.filter(x=>x.type=='award')" class="ico_feature col-3">
+                <div v-if="getDiveSiteByUniqueName.interests && getDiveSiteByUniqueName.interests.filter(x=>x.type=='divingPointEnvironment'||x.type=='divingType'||x.type=='award').length>0" class="row text-start txt_box2 m-0">
+                    <div v-for="interest in getDiveSiteByUniqueName.interests.filter(x=>x.type=='award')" class="ico_feature col-3">
                         <i :class="'ico_feature'+(award_category.findIndex(x=>x==interest.title)+1)+' icon-award'"></i>
                         <p class="span_feature text-center">{{ interest.title }}</p>
                     </div>
-                    <div v-for="interest in siteData.interests.filter(x=>x.type=='divingPointEnvironment')" class="ico_feature col-3">
+                    <div v-for="interest in getDiveSiteByUniqueName.interests.filter(x=>x.type=='divingPointEnvironment')" class="ico_feature col-3">
                         <i :class="'ico_feature'+(point_category.findIndex(x=>x==interest.title)+1)+' icon-point'"></i>
                         <p class="span_feature text-center">{{ interest.title }}</p>
                     </div>
-                    <div v-for="interest in siteData.interests.filter(x=>x.type=='divingType')" class="ico_feature col-3">
+                    <div v-for="interest in getDiveSiteByUniqueName.interests.filter(x=>x.type=='divingType')" class="ico_feature col-3">
                         <i :class="'ico_feature'+(type_category.findIndex(x=>x==interest.title)+1)+' icon-type'"></i>
                         <p class="span_feature text-center">{{ interest.title }}</p>
                     </div>
@@ -118,68 +117,68 @@
                     <div class="splide single-slider slider-no-arrows slider-has-dots pb-4 mb-0" id="single-slider-info">
                         <div class="splide__track">
                             <div class="splide__list pt-n3">
-                                <div v-if="siteData.visitTimeDescription != ''" class="splide__slide">
+                                <div v-if="getDiveSiteByUniqueName.visitTimeDescription != ''" class="splide__slide">
                                     <div class="min-h-160 p-2">
                                         <div class="mt-2">
                                             <h1 class="text-center mb-0"><i class="fas fa-calendar-alt font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">방문시기</h1>
                                             <p class="text-start font-400">
-                                                {{ siteData.visitTimeDescription }}
+                                                {{ getDiveSiteByUniqueName.visitTimeDescription }}
                                             </p>
                                         </div>
                                     </div>
                                 </div>
-                                <div v-if="siteData.waterTemperatureDescription != ''" class="splide__slide">
+                                <div v-if="getDiveSiteByUniqueName.waterTemperatureDescription != ''" class="splide__slide">
                                     <div class="min-h-160 p-2">
                                         <div class="mt-2">
                                             <h1 class="text-center mb-0"><i class="fas fa-temperature-high font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">수온</h1>
                                             <p class="text-start font-400">
-                                                {{ siteData.waterTemperatureDescription }}
+                                                {{ getDiveSiteByUniqueName.waterTemperatureDescription }}
                                             </p>
                                         </div>
                                     </div>
                                 </div>
-                                <div v-if="siteData.deepDescription != ''" class="splide__slide">
+                                <div v-if="getDiveSiteByUniqueName.deepDescription != ''" class="splide__slide">
                                     <div class="min-h-190 p-2">
                                         <div class="mt-2">
                                             <h1 class="text-center mb-0"><i class="fas fa-level-down-alt font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">수심</h1>
                                             <p class="text-start font-400">
-                                                {{ siteData.deepDescription }}
+                                                {{ getDiveSiteByUniqueName.deepDescription }}
                                             </p>
                                         </div>
                                     </div>
                                 </div>
-                                <div v-if="siteData.waterFlowDescription != ''" class="splide__slide">
+                                <div v-if="getDiveSiteByUniqueName.waterFlowDescription != ''" class="splide__slide">
                                     <div class="min-h-160 p-2">
                                         <div class="mt-2">
                                             <h1 class="text-center mb-0"><i class="fas fa-water font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">조류</h1>
                                             <p class="text-start font-400">
-                                                {{ siteData.waterFlowDescription }}
+                                                {{ getDiveSiteByUniqueName.waterFlowDescription }}
                                             </p>
                                         </div>
                                     </div>
                                 </div>
-                                <div v-if="siteData.eyeSightDescription != ''" class="splide__slide">
+                                <div v-if="getDiveSiteByUniqueName.eyeSightDescription != ''" class="splide__slide">
                                     <div class="min-h-160 p-2">
                                         <div class="mt-2">
                                             <h1 class="text-center mb-0"><i class="fas fa-eye font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">시야</h1>
                                             <p class="text-start font-400">
-                                                {{ siteData.eyeSightDescription }}
+                                                {{ getDiveSiteByUniqueName.eyeSightDescription }}
                                             </p>
                                         </div>
                                     </div>
                                 </div>
-                                <div v-if="siteData.highlightDescription != ''" class="splide__slide">
+                                <div v-if="getDiveSiteByUniqueName.highlightDescription != ''" class="splide__slide">
                                     <div class="min-h-160 p-2">
                                         <div class="mt-2">
                                             <h1 class="text-center mb-0"><i class="fas fa-highlighter font-30 color-highlight"></i></h1>
                                             <h1 class="text-center color-highlight font-16 mb-0">다이빙 하이라이트</h1>
                                             <p class="text-start font-400">
-                                                {{ siteData.highlightDescription }}
+                                                {{ getDiveSiteByUniqueName.highlightDescription }}
                                             </p>
                                         </div>
                                     </div> 
@@ -193,11 +192,11 @@
             </div>
         </div>
 
-        <div v-if="siteData.divePoints && siteData.divePoints.length> 0" class="card card-style">
+        <div v-if="getDiveSiteByUniqueName.divePoints && getDiveSiteByUniqueName.divePoints.length> 0" class="card card-style">
             <div class="content">
-                <h4 class="text-start pt-2 mb-2">{{ siteData.name }} 인기 포인트</h4>
+                <h4 class="text-start pt-2 mb-2">{{ getDiveSiteByUniqueName.name }} 인기 포인트</h4>
                 <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
-                <div v-for="(point,index) in siteData.divePoints" v-if="index<3">
+                <div v-for="(point,index) in getDiveSiteByUniqueName.divePoints" v-if="index<3">
                     <div class="">
                         <div class="">
                             <div class="justify-content-center mb-0 text-start">
@@ -212,8 +211,8 @@
                                 </p>
 
                                 <div v-if="point.images" class="row text-center row-cols-3 mb-1" style="padding-left:10px;padding-right:10px;">
-                                    <a v-for="(image, index) in point.images" v-if="point.images&&point.images.length>0&&index<3" class="col square-rect" v-bind:data-gallery="'gallery-'+index" v-bind:href="image.url" title="">
-                                        <img src="/static/images/assets/empty.png" v-bind:data-src="image.url" class="preload-img img-fluid rounded-s" alt="Point image">
+                                    <a v-for="(image, index) in point.images" v-if="point.images&&point.images.length>0&&index<3" class="col square-rect" v-bind:data-gallery="'gallery-'+index" v-bind:href="image.thumbnailUrl" title="">
+                                        <img src="/static/images/assets/empty.png" v-bind:data-src="image.thumbnailUrl" class="preload-img img-fluid rounded-s" alt="Point image">
                                         <div class="wedive-source mx-80">{{ image.reference | makeReference }}</div>
                                     </a>
                                 </div>
@@ -227,39 +226,39 @@
             </div>
         </div>
 
-        <div v-if="siteData.highlights && siteData.highlights.length>0" class="card card-style">
+        <div v-if="getDiveSiteByUniqueName.highlights && getDiveSiteByUniqueName.highlights.length>0" class="card card-style">
             <div class="content">
                 <h4 class="text-start pt-2 mb-2">하이라이트</h4>
-                <div v-for="(highlight, highIdx) in siteData.highlights">
+                <div v-for="(highlight, highIdx) in getDiveSiteByUniqueName.highlights">
                     <div v-if="(highIdx%3)==0" :class="highIdx==0 ? '' : 'mt-4'">
                         <span style="padding: 1px 8px;border: 2px solid black;border-radius:5px;">{{ highIdx + 1 }}</span><span class="font-noto font-14 ms-1">{{ highlight.description }}</span>
                         <div v-if="highlight.images && highlight.images.length>2" class="row m-0 mb-2"> 
                             <div class="col-6 ps-0 pe-1">
                                 <div class="card rounded-sm mb-2">
-                                    <a class="" data-gallery="'gallery-highlight" :href="highlight.images[0].url" :title="highlight.images[0].reference">
-                                        <img src="/static/images/assets/empty.png" :data-src="highlight.images[0].url" class="preload-img img-fluid rounded-s" :alt="highlight.images[0].name" style="height: 80px;">
+                                    <a class="" data-gallery="'gallery-highlight" :href="highlight.images[0].thumbnailUrl" :title="highlight.images[0].reference">
+                                        <img :src="highlight.images[0].thumbnailUrl" :data-src="highlight.images[0].thumbnailUrl" class="preload-img img-fluid rounded-s" :alt="highlight.images[0].name" style="height: 80px;">
                                         <div class="wedive-source mx-80">{{ highlight.images[0].reference | makeReference }}</div>
                                     </a>
                                 </div>
                                 <div v-if="highlight.images.length>1" class="card rounded-sm mb-0">
-                                    <a class="" data-gallery="'gallery-highlight" :href="highlight.images[1].url" :title="highlight.images[1].reference">
-                                        <img src="/static/images/assets/empty.png" :data-src="highlight.images[1].url" class="preload-img img-fluid rounded-s" :alt="highlight.images[1].name" style="height: 80px;">
+                                    <a class="" data-gallery="'gallery-highlight" :href="highlight.images[1].thumbnailUrl" :title="highlight.images[1].reference">
+                                        <img :src="highlight.images[1].thumbnailUrl" :data-src="highlight.images[1].thumbnailUrl" class="preload-img img-fluid rounded-s" :alt="highlight.images[1].name" style="height: 80px;">
                                         <div class="wedive-source mx-80">{{ highlight.images[1].reference | makeReference }}</div>
                                     </a>
                                 </div>
                             </div>
                             <div class="col-6 ps-1 pe-0">
                                 <div v-if="highlight.images.length>2" class="card rounded-sm mb-0">
-                                    <a class="" data-gallery="'gallery-highlight" :href="highlight.images[2].url" :title="highlight.images[2].reference">
-                                        <img src="/static/images/assets/empty.png" :data-src="highlight.images[2].url" class="preload-img img-fluid rounded-s" :alt="highlight.images[2].name" style="height: 170px;">
+                                    <a class="" data-gallery="'gallery-highlight" :href="highlight.images[2].thumbnailUrl" :title="highlight.images[2].reference">
+                                        <img :src="highlight.images[2].thumbnailUrl" :data-src="highlight.images[2].thumbnailUrl" class="preload-img img-fluid rounded-s" :alt="highlight.images[2].name" style="height: 170px;">
                                         <div class="wedive-source mx-80">{{ highlight.images[2].reference | makeReference }}</div>
                                     </a>
                                 </div>
                             </div>
                         </div>
                         <div v-else class="row m-0 mb-2"> 
-                            <a v-for="image in highlight.images" class="col square-rect" data-gallery="'gallery-highlight" :href="image.url" :title="image.reference" style="max-height:calc(50vw - 23px);min-height:calc(50vw - 23px);">
-                                <img src="/static/images/assets/empty.png" :data-src="image.url" class="preload-img img-fluid rounded-s" :alt="image.name">
+                            <a v-for="image in highlight.images" class="col square-rect" data-gallery="'gallery-highlight" :href="image.thumbnailUrl" :title="image.reference" style="max-height:calc(50vw - 23px);min-height:calc(50vw - 23px);">
+                                <img :src="image.thumbnailUrl" :data-src="image.thumbnailUrl" class="preload-img img-fluid rounded-s" :alt="image.name">
                                 <div class="wedive-source mx-80">{{ image.reference | makeReference }}</div>
                             </a>
                         </div>
@@ -270,8 +269,8 @@
                         <span style="padding: 1px 8px;border: 2px solid black;border-radius:5px;">{{ highIdx + 1 }}</span><span class="font-noto font-14 ms-1">{{ highlight.description }}</span>
                     
                         <div v-if="highlight.images && highlight.images.length>0" class="row m-0 text-center mb-1" style="margin-left: -4px !important; margin-rigth: -4px !important;">
-                            <a v-for="image in highlight.images" class="col square-rect" data-gallery="'gallery-highlight" :href="image.url" :title="image.reference" style="max-height:calc(50vw - 23px);">
-                                <img src="/static/images/assets/empty.png" :data-src="image.url" class="preload-img img-fluid rounded-s" :alt="image.name">
+                            <a v-for="image in highlight.images" class="col square-rect" data-gallery="'gallery-highlight" :href="image.thumbnailUrl" :title="image.reference" style="max-height:calc(50vw - 23px);">
+                                <img :src="image.thumbnailUrl" :data-src="image.thumbnailUrl" class="preload-img img-fluid rounded-s" :alt="image.name">
                                 <div class="wedive-source mx-80">{{ image.reference | makeReference }}</div>
                             </a>
                         </div>
@@ -282,30 +281,30 @@
                         <div v-if="highlight.images && highlight.images.length>2" class="row m-0 mb-2"> 
                             <div class="col-6 ps-0 pe-1">
                                 <div class="card rounded-sm mb-0">
-                                    <a class="" data-gallery="'gallery-highlight" :href="highlight.images[0].url" :title="highlight.images[0].reference">
-                                        <img src="/static/images/assets/empty.png" :data-src="highlight.images[0].url" class="preload-img img-fluid rounded-s" :alt="highlight.images[0].name" style="height: 170px;">
+                                    <a class="" data-gallery="'gallery-highlight" :href="highlight.images[0].thumbnailUrl" :title="highlight.images[0].reference">
+                                        <img :src="highlight.images[0].thumbnailUrl" :data-src="highlight.images[0].thumbnailUrl" class="preload-img img-fluid rounded-s" :alt="highlight.images[0].name" style="height: 170px;">
                                         <div class="wedive-source mx-80">{{ highlight.images[0].reference | makeReference }}</div>
                                     </a>
                                 </div>
                             </div>
                             <div class="col-6 ps-1 pe-0">
                                 <div v-if="highlight.images.length>1" class="card rounded-sm mb-2">
-                                    <a class="" data-gallery="'gallery-highlight" :href="highlight.images[1].url" :title="highlight.images[1].reference">
-                                        <img src="/static/images/assets/empty.png" :data-src="highlight.images[1].url" class="preload-img img-fluid rounded-s" :alt="highlight.images[1].name" style="height: 80px;">
+                                    <a class="" data-gallery="'gallery-highlight" :href="highlight.images[1].thumbnailUrl" :title="highlight.images[1].reference">
+                                        <img :src="highlight.images[1].thumbnailUrl" :data-src="highlight.images[1].thumbnailUrl" class="preload-img img-fluid rounded-s" :alt="highlight.images[1].name" style="height: 80px;">
                                         <div class="wedive-source mx-80">{{ highlight.images[1].reference | makeReference }}</div>
                                     </a>
                                 </div>
                                 <div v-if="highlight.images.length>2" class="card rounded-sm mb-0">
-                                    <a class="" data-gallery="'gallery-highlight" :href="highlight.images[2].url" :title="highlight.images[2].reference">
-                                        <img src="/static/images/assets/empty.png" :data-src="highlight.images[2].url" class="preload-img img-fluid rounded-s" :alt="highlight.images[2].name" style="height: 80px;">
+                                    <a class="" data-gallery="'gallery-highlight" :href="highlight.images[2].thumbnailUrl" :title="highlight.images[2].reference">
+                                        <img :src="highlight.images[2].thumbnailUrl" :data-src="highlight.images[2].thumbnailUrl" class="preload-img img-fluid rounded-s" :alt="highlight.images[2].name" style="height: 80px;">
                                         <div class="wedive-source mx-80">{{ highlight.images[2].reference | makeReference }}</div>
                                     </a>
                                 </div>
                             </div>
                         </div>
                         <div v-else class="row m-0 mb-2"> 
-                            <a v-for="image in highlight.images" class="col square-rect" data-gallery="'gallery-highlight" :href="image.url" :title="image.reference" style="max-height:calc(50vw - 23px);min-height:calc(50vw - 23px);">
-                                <img src="/static/images/assets/empty.png" :data-src="image.url" class="preload-img img-fluid rounded-s" :alt="image.name">
+                            <a v-for="image in highlight.images" class="col square-rect" data-gallery="'gallery-highlight" :href="image.thumbnailUrl" :title="image.reference" style="max-height:calc(50vw - 23px);min-height:calc(50vw - 23px);">
+                                <img :src="image.thumbnailUrl" :data-src="image.thumbnailUrl" class="preload-img img-fluid rounded-s" :alt="image.name">
                                 <div class="wedive-source mx-80">{{ image.reference | makeReference }}</div>
                             </a>
                         </div>
@@ -375,13 +374,13 @@
         </div>-->
 
 
-        <div v-if="siteData.diveCenters && siteData.diveCenters.length>0" class="card card-style">
+        <div v-if="getDiveSiteByUniqueName.diveCenters && getDiveSiteByUniqueName.diveCenters.length>0" class="card card-style">
             <div class="content mt-3">
                 <h4 class="text-start pt-2 mb-0">인기 다이빙 센터</h4>
-                <p class="mb-3 color-gray-light-mid">{{ siteData.name }} 사이트의 {{ siteData.diveCenters.length }}개의 센터 준비됨</p>
+                <p class="mb-3 color-gray-light-mid">{{ getDiveSiteByUniqueName.name }} 사이트의 {{ getDiveSiteByUniqueName.diveCenters.length }}개의 센터 준비됨</p>
                 <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
 
-                <div v-for="(center,index) in siteData.diveCenters" v-if="index<3">
+                <div v-for="(center,index) in getDiveSiteByUniqueName.diveCenters" v-if="index<3">
                     <div class="">
                         <a href="/center">
                             <div class="">
@@ -413,10 +412,10 @@
             </div>
         </div>
 
-        <div class="card card-style" v-if="siteData.youtubeVideoIds && siteData.youtubeVideoIds.length > 0">
+        <div class="card card-style" v-if="getDiveSiteByUniqueName.youtubeVideoIds && getDiveSiteByUniqueName.youtubeVideoIds.length > 0">
             <div class="content mb-4 pb-2">
                 <h4 class="text-start pt-2 mb-2">YouTube 소개</h4>
-                <div v-for="(youtube,index) in siteData.youtubeVideoIds" :class="'responsive-iframe' + (index>0 ? ' mt-3':'')" style="-border-radius: 16px;-moz-border-radius: 16px;border-radius: 16px;">
+                <div v-for="(youtube,index) in getDiveSiteByUniqueName.youtubeVideoIds" :class="'responsive-iframe' + (index>0 ? ' mt-3':'')" style="-border-radius: 16px;-moz-border-radius: 16px;border-radius: 16px;">
                     <iframe v-bind:src="'https://www.youtube.com/embed/'+youtube" frameborder='0' allowfullscreen></iframe>
                 </div>
             </div>
@@ -427,7 +426,7 @@
         
         <div class="card card-style">
             <div class="content mt-10">
-                <h4 class="text-start pt-2 mb-0">{{ siteData.name }} 포인트</h4>
+                <h4 class="text-start pt-2 mb-0">{{ getDiveSiteByUniqueName.name }} 포인트</h4>
                 <span class="wedive-txt-all color-gray mt-2"><img src="/static/images/assets/ico_pin1.png" width="19"/> 얕은수심&nbsp;&nbsp;<img src="/static/images/assets/ico_pin3.png" width="19"/> 깊은수심</span>
             </div>
             <div id="map" style="height: 300px;"></div>
@@ -457,7 +456,7 @@
                 <div class="splide__track">
                     <div class="splide__list">
                         <div v-for="near in nearData" class="splide__slide">
-                            <div class="card card-style card-nearby" :style="'background: url('+((near.backgroundImages!=null&&near.backgroundImages[0]!=null) ? near.backgroundImages[0].url : '/static/empty.jpg')+')'" data-card-height="260">
+                            <div class="card card-style card-nearby" :style="'background: url('+((near.backgroundImages!=null&&near.backgroundImages[0]!=null) ? near.backgroundImages[0].thumbnailUrl : '/static/empty.jpg')+')'" data-card-height="260">
                             
                                 <div class="card-top px-3 py-3">
                                     <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-red-dark"></i></a>
@@ -582,12 +581,12 @@
         <div class="card card-style">
             <div class="content">
             <h4 class="text-start">다이빙 로그</h4>
-            <a :href="'/review/'+siteData._id" class="color-highlight font-12 wedive-txt-all">모두보기</a>
+            <a :href="'/review/'+getDiveSiteByUniqueName._id" class="color-highlight font-12 wedive-txt-all">모두보기</a>
             <div class="divider mt-3 mb-2"></div>
-                <div v-if="siteData.reviews && siteData.reviews.length>0" class="splide single-slider slider-no-arrows slider-has-dots pb-2 mb-0 me-n2 ms-n2" id="single-slider-review">
+                <div v-if="getDiveSiteByUniqueName.reviews && getDiveSiteByUniqueName.reviews.length>0" class="splide single-slider slider-no-arrows slider-has-dots pb-2 mb-0 me-n2 ms-n2" id="single-slider-review">
                     <div class="splide__track">
                         <div class="splide__list">
-                            <div v-for="review in siteData.reviews" class="splide__slide pt-2">
+                            <div v-for="review in getDiveSiteByUniqueName.reviews" class="splide__slide pt-2">
                                 <div class="min-h-230 p-2">
                                         <div class="d-flex">
                                             <div class="flex-grow-1">
@@ -618,7 +617,7 @@
                             <div class="splide__slide">
                                 <div class="min-h-230 p-2">
                                         <h1 class="text-center"><i class="fas fa-pen-square fa-2x color-highlight mt-4"></i></h1>
-                                        <h1 class="text-center pt-3 font-20 mb-n1">{{ siteData.reviews.length }}개 다이빙 로그</h1>
+                                        <h1 class="text-center pt-3 font-20 mb-n1">{{ getDiveSiteByUniqueName.reviews.length }}개 다이빙 로그</h1>
                                         <p class="text-center color-highlight font-600">더보기 <i class="fas fa-chevron-right"></i></p>
                                 </div>    
                             </div>
@@ -661,7 +660,7 @@
          data-menu-height="470" 
          data-menu-width="370">
         <div class="menu-title">
-            <h4 class="text-center mt-4 pt-1 mb-2 font-noto font-19">{{ siteData.name }} 다이빙 로그</h4>
+            <h4 class="text-center mt-4 pt-1 mb-2 font-noto font-19">{{ getDiveSiteByUniqueName.name }} 다이빙 로그</h4>
             <a href="#" class="close-menu hide"><i class="fa fa-times-circle"></i></a>
         </div>
         <div class="me-4 ms-4" style="border-bottom: 2px solid black;"></div>
@@ -697,11 +696,12 @@
 </template>
 <script>
 import StarRating from 'vue-star-rating'
+import gql from 'graphql-tag'
 const axios = require("axios")
 
 export default {
   name: 'HelloWorld',
-  async beforeRouteEnter(to, from, next) {
+  /*async beforeRouteEnter(to, from, next) {
     if (to.params.id != null) {
         var result = await axios({
         url: 'https://api.wedives.com/graphql',
@@ -1604,201 +1604,36 @@ export default {
     } else {
         location.href = "/";
     }
-  },
+  },*/
   async mounted() {
-    if (this.$route.query.header && this.$route.query.header == 'hide') {
-        $(".page-title").hide();
-        $(".page-title-clear").hide();
-        $(".header-fixed").hide();
-    }
-    
-    
-    let script = document.createElement('script');
-    script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCWu8Fw-h-f1t8Sp3I7R3l_Ukr24HunXQM';
-    document.body.appendChild(script);
-    script.onload = () => {
-        const night_style = [
-            { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
-            { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
-            { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
-            {
-                featureType: "administrative.locality",
-                elementType: "labels.text.fill",
-                stylers: [{ color: "#d59563" }],
-            },
-            {
-                featureType: "poi",
-                elementType: "labels.text.fill",
-                stylers: [{ color: "#d59563" }],
-            },
-            {
-                featureType: "poi.park",
-                elementType: "geometry",
-                stylers: [{ color: "#263c3f" }],
-            },
-            {
-                featureType: "poi.park",
-                elementType: "labels.text.fill",
-                stylers: [{ color: "#6b9a76" }],
-            },
-            {
-                featureType: "road",
-                elementType: "geometry",
-                stylers: [{ color: "#38414e" }],
-            },
-            {
-                featureType: "road",
-                elementType: "geometry.stroke",
-                stylers: [{ color: "#212a37" }],
-            },
-            {
-                featureType: "road",
-                elementType: "labels.text.fill",
-                stylers: [{ color: "#9ca5b3" }],
-            },
-            {
-                featureType: "road.highway",
-                elementType: "geometry",
-                stylers: [{ color: "#746855" }],
-            },
-            {
-                featureType: "road.highway",
-                elementType: "geometry.stroke",
-                stylers: [{ color: "#1f2835" }],
-            },
-            {
-                featureType: "road.highway",
-                elementType: "labels.text.fill",
-                stylers: [{ color: "#f3d19c" }],
-            },
-            {
-                featureType: "transit",
-                elementType: "geometry",
-                stylers: [{ color: "#2f3948" }],
-            },
-            {
-                featureType: "transit.station",
-                elementType: "labels.text.fill",
-                stylers: [{ color: "#d59563" }],
-            },
-            {
-                featureType: "water",
-                elementType: "geometry",
-                stylers: [{ color: "#17263c" }],
-            },
-            {
-                featureType: "water",
-                elementType: "labels.text.fill",
-                stylers: [{ color: "#515c6d" }],
-            },
-            {
-                featureType: "water",
-                elementType: "labels.text.stroke",
-                stylers: [{ color: "#17263c" }],
-            },
-            ];
-
-        const map_style = (localStorage['wedive-Theme'] == 'light-mode') ? [] : night_style;
-
-        this.map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: this.siteData.latitude, lng: this.siteData.longitude},
-            zoom: 14,
-            mapTypeControl: false,
-            streetViewControl: false,
-            zoomControl: false,
-            styles: map_style
-        });
-
-        for (var i=0; i<this.siteData.divePoints.length; i++) {
-            var minDepth = this.siteData.divePoints[i].minDepth;
-            var _position = {lat: this.siteData.divePoints[i].latitude, lng: this.siteData.divePoints[i].longitude};
-            var _img = (minDepth < 18) ? '/static/images/assets/ico_pin1_o8.png' : '/static/images/assets/ico_pin3_o8.png';
-            const _marker_class = (minDepth < 18) ? 'marker-position2' : 'marker-position3';
-
-            const title = this.siteData.divePoints[i].name;
-            const uniqueName = this.siteData.divePoints[i].uniqueName;
-            const desc = this.siteData.divePoints[i].description;
-            const star = (this.siteData.divePoints[i].adminScore/20).toFixed(1);
-            
-            const img = (this.siteData.divePoints[i].backgroundImages&&this.siteData.divePoints[i].backgroundImages.length>0) ? this.siteData.divePoints[i].backgroundImages[0].thumbnailUrl : '/static/empty.jpg';
-            const _sml_img = _img;
-            const _big_img = (minDepth < 18) ? '/static/images/assets/ico_pin_big1.png' : '/static/images/assets/ico_pin_big3.png';
-
-            const marker_point = new google.maps.Marker({
-                map: this.map,
-                position: _position,
-                label: {text: title, color: 'white', className: _marker_class},
-                icon: new google.maps.MarkerImage(_img, null, null, null, new google.maps.Size(38,43)),
-            });
-
-            marker_point.addListener("click", () => {
-                $(".map-box").removeClass("hide");
-                for (var j=0; j<this.marker_list.length; j++) {
-                    var _icon = this.marker_list[j].getIcon();
-                    if (_icon.size.width != 38) {
-                        this.marker_list[j].setIcon(new google.maps.MarkerImage(this.marker_img_list[j].ori, null, null, null, new google.maps.Size(38,43)));
-                        try {
-                            var _title = this.marker_list[j].getLabel().text;
-                            this.marker_list[j].setLabel({text: _title, color: 'white', className: _marker_class});
-                        } catch (e) {
-                        }
-                    }
-                }
-                
-                $("#map_box_shop_href").attr("href", "/point/" + uniqueName);
-                $("#map_box_shop_name").text(title);
-                $("#map_box_shop_desc").text(desc);
-                $("#map_box_shop_star").text(star);
-                $("#map_box_shop_img").attr("src", img);
-                
-                
-                marker_point.setIcon(new google.maps.MarkerImage(_big_img, null, null, null, new google.maps.Size(58,66)));
-                marker_point.setLabel({text: title, color: 'white', className: _marker_class + ' mt-86'});
-                if (this.map.getZoom() == 14) {
-                    this.map.panTo(marker_point.getPosition());
-                } else {
-                    this.map.setZoom(14);
-                    this.map.setCenter(marker_point.getPosition());
-                }
-            });
-            this.marker_list.push(marker_point);
-            this.marker_img_list.push({ori: _sml_img, big: _big_img});
-        }
-
-        this.map.addListener("click", (e) => {
-            $(".map-box").addClass("hide");
-            for (var j=0; j<this.marker_list.length; j++) {
-                var _icon = this.marker_list[j].getIcon();
-                if (_icon.size.width != 38) {
-                    this.marker_list[j].setIcon(new google.maps.MarkerImage(this.marker_img_list[j].ori, null, null, null, new google.maps.Size(38,43)));
-                    var _label = this.marker_list[j].getLabel();
-                    var _title = _label.text;
-                    var _className = _label.className.replace('mt-86', '');
-                    this.marker_list[j].setLabel({text: _title, color: 'white', className: _className});
-                }
-            }
-            this.map.setZoom(12);
-        });
-        
-    };
-
     setTimeout(function() {
         $("#cover-slider-temp").animate({opacity: "0"}, 1200);
     },1000);
     setTimeout(function() {
         $("#cover-slider-temp").css("display", "none");
     },2500);
+
+    if (this.$route.query.header && this.$route.query.header == 'hide') {
+        $(".page-title").hide();
+        $(".page-title-clear").hide();
+        $(".header-fixed").hide();
+    }
   },
   created() {
-    
+    setTimeout(function() {
+        init_template();
+        var preloader = document.getElementById('preloader')
+        if(preloader){preloader.classList.add('preloader-hide');}
+    }, 500);
   },
   components: {
     StarRating
   },
   data () {
     return {
+        uniqueName: this.$route.params.id,
         map: null,
-        siteData: {},
+        getDiveSiteByUniqueName: {},
         nearData: [],
         marker_list: [],
         marker_img_list: [],
@@ -1817,8 +1652,442 @@ export default {
         nickName: localStorage.nickName,
     }
   },
+  apollo: {
+      getDiveSiteByUniqueName: {
+          query:gql `
+            query getDiveSiteByUniqueName($uniqueName: String!) {
+                getDiveSiteByUniqueName(uniqueName: $uniqueName) {
+                    diveCenters {
+                        _id
+                        name
+                        uniqueName
+                        adminScore
+                        backgroundImages {
+                            _id
+                            reference
+                            thumbnailUrl
+                        }
+                    }
+                    divePoints {
+                        _id
+                        name
+                        uniqueName
+                        latitude
+                        longitude
+                        minDepth
+                        adminScore
+                        highlightDescription
+                        backgroundImages {
+                            _id
+                            name
+                            description
+                            reference
+                            thumbnailUrl
+                        }
+                    }
+                    _id
+                    address
+                    latitude
+                    longitude
+                    countryCode
+                    name
+                    uniqueName
+                    description
+                    images {
+                        _id
+                        reference
+                        description
+                        thumbnailUrl
+                    }
+                    backgroundImages {
+                        _id
+                        reference
+                        description
+                        thumbnailUrl
+                    }
+                    youtubeVideoIds
+                    referenceUrls
+                    memo
+                    publishStatus
+                    month1 {
+                        _id
+                        title
+                        type
+                    }
+                    month2 {
+                        _id
+                        title
+                        type
+                    }
+                    month3 {
+                        _id
+                        title
+                        type
+                    }
+                    month4 {
+                        _id
+                        title
+                        type
+                    }
+                    month5 {
+                        _id
+                        title
+                        type
+                    }
+                    month6 {
+                        _id
+                        title
+                        type
+                    }
+                    month7 {
+                        _id
+                        title
+                        type
+                    }
+                    month8 {
+                        _id
+                        title
+                        type
+                    }
+                    month9 {
+                        _id
+                        title
+                        type
+                    }
+                    month10 {
+                        _id
+                        title
+                        type
+                    }
+                    month11 {
+                        _id
+                        title
+                        type
+                    }
+                    month12 {
+                        _id
+                        title
+                        type
+                    }
+                    interests {
+                        _id
+                        title
+                        type
+                    }
+                    highlights {
+                        _id
+                        name
+                        description
+                        images {
+                            _id
+                            reference
+                            thumbnailUrl
+                        }
+                        interests {
+                            _id
+                            title
+                            type
+                        }
+                    }
+                    eyeSightScore
+                    waterTemperatureScore
+                    adminScore
+                    flowRateScore
+                    waterEnvironmentScore
+                    minSight
+                    maxSight
+                    visitTimeDescription
+                    waterTemperatureDescription
+                    deepDescription
+                    waterFlowDescription
+                    eyeSightDescription
+                    highlightDescription
+                    reviews {
+                        _id
+                        targetId
+                        targetType
+                        author {
+                            name
+                            email
+                            _id
+                        }
+                        title
+                        content
+                        images {
+                            _id
+                            thumbnailUrl
+                        }
+                        rating
+                        reviewCount
+                        views
+                        likes
+                        createdAt
+                    }
+                    likes
+                    views
+                    reviewCount
+                    isUserSubscribe
+                    isUserLike
+                }
+            }
+          `,
+          variables() {
+              return {
+                uniqueName: this.uniqueName
+              }
+          },
+          result() {
+            {
+                var id_arr = new Array();
+                var width_arr = new Array();
+                this.getDiveSiteByUniqueName.backgroundImages.forEach(x => {
+                    id_arr.push(x._id);
+                    width_arr.push(720);
+                });
+                axios({
+                    url: 'https://api.wedives.com/graphql',
+                    method: 'post',
+                    headers: {
+                        countrycode: 'ko',
+                        idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                    },
+                    data: {
+                        query: `
+                            query Query($ids: [ID], $widths: [Int]) {
+                                getImageUrlsByIds(_ids: $ids, widths: $widths)
+                            }
+                        `,
+                        variables: {
+                            ids: id_arr,
+                            widths: width_arr
+                        }
+
+                    }
+                }).then(result_image => {
+                    if (result_image.data.data.getImageUrlsByIds) {
+                        var i=0;
+                        this.getDiveSiteByUniqueName.backgroundImages.forEach(x => {
+                            x.thumbnailUrl = result_image.data.data.getImageUrlsByIds[i];
+                            i++;
+                        });
+                    }
+                });
+            }
+            {
+                var id_arr = new Array();
+                var width_arr = new Array();
+                this.getDiveSiteByUniqueName.highlights.forEach(x => {
+                    x.images.forEach(y => {
+                        id_arr.push(y._id);
+                        width_arr.push(720);
+                    })
+                });
+                axios({
+                    url: 'https://api.wedives.com/graphql',
+                    method: 'post',
+                    headers: {
+                        countrycode: 'ko',
+                        idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                    },
+                    data: {
+                        query: `
+                            query Query($ids: [ID], $widths: [Int]) {
+                                getImageUrlsByIds(_ids: $ids, widths: $widths)
+                            }
+                        `,
+                        variables: {
+                            ids: id_arr,
+                            widths: width_arr
+                        }
+
+                    }
+                }).then(result_image => {
+                    if (result_image.data.data.getImageUrlsByIds) {
+                        var i=0;
+                        this.getDiveSiteByUniqueName.highlights.forEach(x => {
+                            x.images.forEach(y => {
+                                y.thumbnailUrl = result_image.data.data.getImageUrlsByIds[i];
+                                i++;
+                            });
+                        });
+                    }
+                });
+            }
+            ///////////////////////////////////////////////
+            let script = document.createElement('script');
+            script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCWu8Fw-h-f1t8Sp3I7R3l_Ukr24HunXQM';
+            document.body.appendChild(script);
+            script.onload = () => {
+                const night_style = [
+                    { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
+                    { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
+                    { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
+                    {
+                        featureType: "administrative.locality",
+                        elementType: "labels.text.fill",
+                        stylers: [{ color: "#d59563" }],
+                    },
+                    {
+                        featureType: "poi",
+                        elementType: "labels.text.fill",
+                        stylers: [{ color: "#d59563" }],
+                    },
+                    {
+                        featureType: "poi.park",
+                        elementType: "geometry",
+                        stylers: [{ color: "#263c3f" }],
+                    },
+                    {
+                        featureType: "poi.park",
+                        elementType: "labels.text.fill",
+                        stylers: [{ color: "#6b9a76" }],
+                    },
+                    {
+                        featureType: "road",
+                        elementType: "geometry",
+                        stylers: [{ color: "#38414e" }],
+                    },
+                    {
+                        featureType: "road",
+                        elementType: "geometry.stroke",
+                        stylers: [{ color: "#212a37" }],
+                    },
+                    {
+                        featureType: "road",
+                        elementType: "labels.text.fill",
+                        stylers: [{ color: "#9ca5b3" }],
+                    },
+                    {
+                        featureType: "road.highway",
+                        elementType: "geometry",
+                        stylers: [{ color: "#746855" }],
+                    },
+                    {
+                        featureType: "road.highway",
+                        elementType: "geometry.stroke",
+                        stylers: [{ color: "#1f2835" }],
+                    },
+                    {
+                        featureType: "road.highway",
+                        elementType: "labels.text.fill",
+                        stylers: [{ color: "#f3d19c" }],
+                    },
+                    {
+                        featureType: "transit",
+                        elementType: "geometry",
+                        stylers: [{ color: "#2f3948" }],
+                    },
+                    {
+                        featureType: "transit.station",
+                        elementType: "labels.text.fill",
+                        stylers: [{ color: "#d59563" }],
+                    },
+                    {
+                        featureType: "water",
+                        elementType: "geometry",
+                        stylers: [{ color: "#17263c" }],
+                    },
+                    {
+                        featureType: "water",
+                        elementType: "labels.text.fill",
+                        stylers: [{ color: "#515c6d" }],
+                    },
+                    {
+                        featureType: "water",
+                        elementType: "labels.text.stroke",
+                        stylers: [{ color: "#17263c" }],
+                    },
+                    ];
+
+                const map_style = (localStorage['wedive-Theme'] == 'light-mode') ? [] : night_style;
+
+                this.map = new google.maps.Map(document.getElementById('map'), {
+                    center: {lat: this.getDiveSiteByUniqueName.latitude, lng: this.getDiveSiteByUniqueName.longitude},
+                    zoom: 14,
+                    mapTypeControl: false,
+                    streetViewControl: false,
+                    zoomControl: false,
+                    styles: map_style
+                });
+
+                for (var i=0; i<this.getDiveSiteByUniqueName.divePoints.length; i++) {
+                    var minDepth = this.getDiveSiteByUniqueName.divePoints[i].minDepth;
+                    var _position = {lat: this.getDiveSiteByUniqueName.divePoints[i].latitude, lng: this.getDiveSiteByUniqueName.divePoints[i].longitude};
+                    var _img = (minDepth < 18) ? '/static/images/assets/ico_pin1_o8.png' : '/static/images/assets/ico_pin3_o8.png';
+                    const _marker_class = (minDepth < 18) ? 'marker-position2' : 'marker-position3';
+
+                    const title = this.getDiveSiteByUniqueName.divePoints[i].name;
+                    const uniqueName = this.getDiveSiteByUniqueName.divePoints[i].uniqueName;
+                    const desc = this.getDiveSiteByUniqueName.divePoints[i].description;
+                    const star = (this.getDiveSiteByUniqueName.divePoints[i].adminScore/20).toFixed(1);
+                    
+                    const img = (this.getDiveSiteByUniqueName.divePoints[i].backgroundImages&&this.getDiveSiteByUniqueName.divePoints[i].backgroundImages.length>0) ? this.getDiveSiteByUniqueName.divePoints[i].backgroundImages[0].thumbnailUrl : '/static/empty.jpg';
+                    const _sml_img = _img;
+                    const _big_img = (minDepth < 18) ? '/static/images/assets/ico_pin_big1.png' : '/static/images/assets/ico_pin_big3.png';
+
+                    const marker_point = new google.maps.Marker({
+                        map: this.map,
+                        position: _position,
+                        label: {text: title, color: 'white', className: _marker_class},
+                        icon: new google.maps.MarkerImage(_img, null, null, null, new google.maps.Size(38,43)),
+                    });
+
+                    marker_point.addListener("click", () => {
+                        $(".map-box").removeClass("hide");
+                        for (var j=0; j<this.marker_list.length; j++) {
+                            var _icon = this.marker_list[j].getIcon();
+                            if (_icon.size.width != 38) {
+                                this.marker_list[j].setIcon(new google.maps.MarkerImage(this.marker_img_list[j].ori, null, null, null, new google.maps.Size(38,43)));
+                                try {
+                                    var _title = this.marker_list[j].getLabel().text;
+                                    this.marker_list[j].setLabel({text: _title, color: 'white', className: _marker_class});
+                                } catch (e) {
+                                }
+                            }
+                        }
+                        
+                        $("#map_box_shop_href").attr("href", "/point/" + uniqueName);
+                        $("#map_box_shop_name").text(title);
+                        $("#map_box_shop_desc").text(desc);
+                        $("#map_box_shop_star").text(star);
+                        $("#map_box_shop_img").attr("src", img);
+                        
+                        
+                        marker_point.setIcon(new google.maps.MarkerImage(_big_img, null, null, null, new google.maps.Size(58,66)));
+                        marker_point.setLabel({text: title, color: 'white', className: _marker_class + ' mt-86'});
+                        if (this.map.getZoom() == 14) {
+                            this.map.panTo(marker_point.getPosition());
+                        } else {
+                            this.map.setZoom(14);
+                            this.map.setCenter(marker_point.getPosition());
+                        }
+                    });
+                    this.marker_list.push(marker_point);
+                    this.marker_img_list.push({ori: _sml_img, big: _big_img});
+                }
+
+                this.map.addListener("click", (e) => {
+                    $(".map-box").addClass("hide");
+                    for (var j=0; j<this.marker_list.length; j++) {
+                        var _icon = this.marker_list[j].getIcon();
+                        if (_icon.size.width != 38) {
+                            this.marker_list[j].setIcon(new google.maps.MarkerImage(this.marker_img_list[j].ori, null, null, null, new google.maps.Size(38,43)));
+                            var _label = this.marker_list[j].getLabel();
+                            var _title = _label.text;
+                            var _className = _label.className.replace('mt-86', '');
+                            this.marker_list[j].setLabel({text: _title, color: 'white', className: _className});
+                        }
+                    }
+                    this.map.setZoom(12);
+                });
+                
+            };
+          },
+          
+      },
+  },
   methods: {
-      setData(_siteData, _nearData) {
+      /*setData(_siteData, _nearData) {
           this.siteData = _siteData;
           if (_siteData.isUserLike) this.like_img = 'ico_heart2';
           if (_siteData.isUserSubscribe) this.subscribe_img = 'ico_subscribe2';
@@ -1832,10 +2101,10 @@ export default {
             var preloader = document.getElementById('preloader')
             if(preloader){preloader.classList.add('preloader-hide');}
           }, 1000);
-      },
+      },*/
       async clickLike() {
           if (localStorage.idToken && localStorage.nickName) {
-            const targetId = this.siteData._id;
+            const targetId = this.getDiveSiteByUniqueName._id;
             var result = await axios({
                 url: 'https://api.wedives.com/graphql',
                 method: 'post',
@@ -1857,10 +2126,10 @@ export default {
             });
             if (result && result.data && result.data.data && result.data.data.like == true) {
                 this.like_img = 'ico_heart2';
-                this.siteData.likes = ((this.siteData.likes==null)?0:this.siteData.likes)+1;
+                this.getDiveSiteByUniqueName.likes = ((this.getDiveSiteByUniqueName.likes==null)?0:this.getDiveSiteByUniqueName.likes)+1;
             } else if (result && result.data && result.data.data && result.data.data.like == false) {
                 this.like_img = 'ico_heart';
-                this.siteData.likes = this.siteData.likes-1;
+                this.getDiveSiteByUniqueName.likes = this.getDiveSiteByUniqueName.likes-1;
             }
           } else {
               this.login();
@@ -1868,7 +2137,7 @@ export default {
       },
       async clickSubscribe() {
           if (localStorage.idToken && localStorage.nickName) {
-            const targetId = this.siteData._id;
+            const targetId = this.getDiveSiteByUniqueName._id;
             var result = await axios({
                 url: 'https://api.wedives.com/graphql',
                 method: 'post',
@@ -1941,7 +2210,7 @@ export default {
             var result_upload = await client.request(updateMutation, {input: {"_id": result_img.uploadImage._id,"name": result_img.name,"description": "reviewImage","reference": null}});
             _id_list.push(result_img.uploadImage._id);
         }
-        var _input = {images: _id_list, targetId: this.siteData._id, targetType: 'diveSite', content: this.review_detail, rating: this.rating};
+        var _input = {images: _id_list, targetId: this.getDiveSiteByUniqueName._id, targetType: 'diveSite', content: this.review_detail, rating: this.rating};
         const ipt = _input;
         
         var result = await axios({
@@ -2120,4 +2389,5 @@ export default {
 .mx-80 {max-width: 80%;}
 .mx-120 {max-width: 120px;}
 .mx-140 {max-width: 140px;}
+.background-center {background-position: center !important;background-size: cover !important;}
 </style>

@@ -261,7 +261,7 @@ export default {
   methods: {
     goNoti() {
       if(this.idToken != null && this.nickName != null)
-        location.href = '/notification';
+        location.href = '/other/notification';
       else
         this.$refs.loginBottomSheet.open();
     },

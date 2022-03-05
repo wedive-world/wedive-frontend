@@ -2,7 +2,7 @@
   <div class="">
     <div data-menu-active="nav-chat"></div>
     <div class="header header-fixed header-logo-center">
-        <a href="" class="header-title color ellipsis">{{ (getChatRoomInfo && getChatRoomInfo.chatRoom ? getChatRoomInfo.chatRoom.title : '') }}</a>
+        <a href="" class="header-title color ellipsis">{{ is_concierge ? '컨시어지' : (getChatRoomInfo && getChatRoomInfo.chatRoom ? getChatRoomInfo.chatRoom.title : '') }}</a>
         <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
         <a data-menu="menu-main-right" class="header-icon header-icon-4"><i class="fas fa-bars"></i></a>
 
@@ -680,7 +680,11 @@ export default {
                 roomId: this.roomId
             }
         },
-        result ({ data }) {
+        result (data) {
+            console.log(data.data.getChatRoomInfo)
+            if (data.data.getChatRoomInfo.chatRoom.type == "direct" && data.data.getChatRoomInfo.chatRoom.chatUsers.filter(x=>x._id == "hdcBRWybv6EG4kyDr").length > 0){
+                this.is_concierge = true;
+            }
             //console.log(data.getChatRoomInfo);
             //data.getChatRoomInfo.reverse();
         },
