@@ -1224,10 +1224,11 @@ export default {
         setTimeout(function() {
             $("#cover-slider-temp").animate({opacity: "0"}, 1200);
             $('[data-toggle="tooltip"]').tooltip();
-        },1000);
+        },1500);
         setTimeout(function() {
+            console.log("none")
             $("#cover-slider-temp").css("display", "none");
-        },2500);
+        },3000);
     }
 
     if (this.$route.query.header && this.$route.query.header == 'hide') {

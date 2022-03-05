@@ -20,7 +20,7 @@
                     </div>
                 </div>
             </div>
-            <div id="cover-slider-temp" class="background-center" :style="'background:url('+getDiveSiteByUniqueName.backgroundImages[0].thumbnailUrl+');height:250px;position:absolute;width:100%;top:58px;'">
+            <div id="cover-slider-temp" class="background-center" :style="'background:url('+firstThumbnailImage+');height:250px;position:absolute;width:100%;top:58px;'">
             </div>
         </div>
         
@@ -1608,11 +1608,12 @@ export default {
   async mounted() {
     setTimeout(function() {
         $("#cover-slider-temp").animate({opacity: "0"}, 1200);
-    },1000);
+        $('[data-toggle="tooltip"]').tooltip();
+    },1500);
     setTimeout(function() {
         $("#cover-slider-temp").css("display", "none");
-    },2500);
-
+    },3000);
+    
     if (this.$route.query.header && this.$route.query.header == 'hide') {
         $(".page-title").hide();
         $(".page-title-clear").hide();
@@ -1634,6 +1635,7 @@ export default {
         uniqueName: this.$route.params.id,
         map: null,
         getDiveSiteByUniqueName: {},
+        firstThumbnailImage: '',
         nearData: [],
         marker_list: [],
         marker_img_list: [],
@@ -1838,6 +1840,7 @@ export default {
           },
           result() {
             {
+                this.firstThumbnailImage = (this.getDiveSiteByUniqueName.backgroundImages && this.getDiveSiteByUniqueName.backgroundImages.length > 0 && this.getDiveSiteByUniqueName.backgroundImages[0].thumbnailUrl) ? this.getDiveSiteByUniqueName.backgroundImages[0].thumbnailUrl : '/static/empty.jpg';
                 var id_arr = new Array();
                 var width_arr = new Array();
                 this.getDiveSiteByUniqueName.backgroundImages.forEach(x => {

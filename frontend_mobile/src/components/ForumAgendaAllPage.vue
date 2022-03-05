@@ -68,7 +68,7 @@
               <div class="img_square" v-for="image in agenda.images">
                 <div class="img_square_inner" :style="'background: url('+image.thumbnailUrl+');'"/>
               </div>
-              </div>
+            </div>
             <div class="p-3">
               <div class="mt-1">
                   <span v-for="tag in agenda.hashTags" class="bg-gray-light color-gray rounded-sm me-1" style="padding: 6px 12px;">#{{ tag.name }}</span>

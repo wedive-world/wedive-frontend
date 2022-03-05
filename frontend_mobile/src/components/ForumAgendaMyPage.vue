@@ -48,6 +48,11 @@
                 </p>
               </div>
             </div>
+            <div class="" v-if="agenda.images && agenda.images.length > 0">
+              <div class="img_square" v-for="image in agenda.images">
+                <div class="img_square_inner" :style="'background: url('+image.thumbnailUrl+');'"/>
+              </div>
+            </div>
             <div class="p-3">
               <div class="mt-1">
                   <span v-for="hashtag in agenda.hashTags" class="bg-gray-light color-gray rounded-sm me-1" style="padding: 6px 12px;">#{{ hashtag.name }}</span>
@@ -251,4 +256,7 @@ export default {
     }
   }
 }
+.img_square{width: 100%;position: relative;}
+.img_square:after {content: "";display: block;padding-bottom: 100%;}
+.img_square_inner {position: absolute;width: 100%;height: 100%;background-size:cover !important;background-position: center !important;}
 </style>
