@@ -212,10 +212,12 @@ export default {
               }
             }
           `,
-          variables: {
+          variables() {
+            return {
               "targetId": "621db036efe4c50da6ea0825",
               "skip": this.skip,
               "limit": this.limit
+            }
           }
       },
   },

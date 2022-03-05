@@ -2,26 +2,25 @@
   <div class="">
     <div data-menu-active="nav-site"></div>
     <div class="page-content pb-0">
-        <div v-if="centerData.backgroundImages == null || centerData.backgroundImages.length == 0" style="background:url(/static/empty.jpg);background-size: contain;height:250px;">
+        <div v-if="getDiveCenterByUniqueName.backgroundImages == null || getDiveCenterByUniqueName.backgroundImages.length == 0" style="background:url(/static/empty.jpg);background-size: contain;height:250px;">
         </div>
         <div v-else style="min-height:250px;height:250px;max-height:250px;">
             <div class="splide single-slider cover-slider slider-no-arrows slider-no-dots" id="cover-slider-1" data-card-height="250" style="position:relative;">
                 <div class="splide__track">
                     <div class="splide__list">
-                        <div class="splide__slide" v-if="centerData.backgroundImages == null || centerData.backgroundImages.length == 0">
-                            <div id="background_img_null" data-card-height="250" class="card rounded-0 mb-0" style="background: url(/static/empty.jpg);background-size: contain !important;background-position: center !important;">
-                                
+                        <div class="splide__slide" v-if="getDiveCenterByUniqueName.backgroundImages == null || getDiveCenterByUniqueName.backgroundImages.length == 0">
+                            <div id="background_img_null" data-card-height="250" class="card rounded-0 mb-0" style="background: url(/static/empty.jpg);background-size: cover !important;background-position: center !important;">
                             </div>
                         </div>
-                        <div class="splide__slide" v-for="(image, index) in centerData.backgroundImages">
-                            <div data-card-height="250" :class="'card rounded-0 mb-0 background_img_' + index" v-bind:style="'background: url('+image.url+');background-size: cover !important;background-position: center !important;'">
+                        <div v-else class="splide__slide" v-for="(image, index) in getDiveCenterByUniqueName.backgroundImages">
+                            <div data-card-height="250" :class="'card rounded-0 mb-0 background-center background_img_' + index" v-bind:style="'background: url('+image.thumbnailUrl+');background-size: cover !important;'">
                                 <div class="wedive-source" style="bottom:50px;">{{ image.reference | makeReference }}</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div id="cover-slider-temp" :style="'background:url('+centerData.backgroundImages[0].url+');background-size: cover;height:250px;background-position: center;position:absolute;width:100%;top:58px;'">
+            <div id="cover-slider-temp" class="background-center" :style="'background:url('+getDiveCenterByUniqueName.backgroundImages[0].thumbnailUrl+');height:250px;position:absolute;width:100%;top:58px;'">
             </div>
         </div>
         
@@ -32,38 +31,38 @@
         
         <div class="card card-style" style="margin-top:-40px; z-index:1">
             <div class="content text-center mt-4">
-                <h2 class="font-20 font-700 mb-1 mt-1">{{ centerData.name }}</h2>
-                <p class="text-start color-gray m-0" style="line-height: 1.5;">{{ centerData.description }}</p>
+                <h2 class="font-20 font-700 mb-1 mt-1">{{ getDiveCenterByUniqueName.name }}</h2>
+                <p class="text-start color-gray m-0" style="line-height: 1.5;">{{ getDiveCenterByUniqueName.description }}</p>
                 <div class="wedive-star-back">
-                  <div class="wedive-star-front" v-bind:style="'width:'+(centerData.adminScore > 3 ? centerData.adminScore-3 : 0)+'%'">
+                  <div class="wedive-star-front" v-bind:style="'width:'+(getDiveCenterByUniqueName.adminScore > 3 ? getDiveCenterByUniqueName.adminScore-3 : 0)+'%'">
                   </div>
-                  <span class="wedive-star-number">{{ (centerData.adminScore/20).toFixed(1) }}</span>
+                  <span class="wedive-star-number">{{ (getDiveCenterByUniqueName.adminScore/20).toFixed(1) }}</span>
                 </div>
                 
                 <div class="evaluation d-flex">
-                    <span class="view font-12">경치 {{ (centerData.viewScore/20).toFixed(1) }}</span>
-                    <span class="training font-12">교육 {{ (centerData.educationScore/20).toFixed(1) }}</span>
-                    <span class="equiptment font-12">시설 {{ (centerData.facilityScore/20).toFixed(1) }}</span>
-                    <span class="service font-12">서비스 {{ (centerData.serviceScore/20).toFixed(1) }}</span>
+                    <span class="view font-12">경치 {{ (getDiveCenterByUniqueName.viewScore/20).toFixed(1) }}</span>
+                    <span class="training font-12">교육 {{ (getDiveCenterByUniqueName.educationScore/20).toFixed(1) }}</span>
+                    <span class="equiptment font-12">시설 {{ (getDiveCenterByUniqueName.facilityScore/20).toFixed(1) }}</span>
+                    <span class="service font-12">서비스 {{ (getDiveCenterByUniqueName.serviceScore/20).toFixed(1) }}</span>
                     <!--<span class="info" style="margin-bottom:3px;margin-top:3px;"><i class="icon_question font-12">별점 안내</i></span>-->
                 </div>
-                <div style="margin-top:8px;"><span class="font-600"><img class="ext-img" src="/static/images/assets/ico_chat.png" width="18"/> {{ (centerData.reviewCount)?centerData.reviewCount:'0' }}</span>&nbsp;<font class="color-gray-light">|</font>&nbsp;
-                <span v-if="centerData.institutionTypes && centerData.institutionTypes.length > 0"><span v-for="(insti,index) in centerData.institutionTypes" v-if="index < 6" v-on:click="openInstitutionBottomSheet(insti)"><img class="ext-img" :src="'/static/images/agency/logo_'+insti.toLowerCase()+'.svg'" height="17" style="padding-bottom: 1px;" /><span v-if="index != (centerData.institutionTypes.length-1)">&nbsp;&nbsp;</span></span>&nbsp;<font class="color-gray-light">|</font>&nbsp;</span>
-                <span v-if="interest.type=='priceIndex'" v-for="interest in centerData.interests" class="color-gray">{{interest.title.replace(/\$/gi, '₩')}}</span>
+                <div style="margin-top:8px;"><span class="font-600"><img class="ext-img" src="/static/images/assets/ico_chat.png" width="18"/> {{ (getDiveCenterByUniqueName.reviewCount)?getDiveCenterByUniqueName.reviewCount:'0' }}</span>&nbsp;<font class="color-gray-light">|</font>&nbsp;
+                <span v-if="getDiveCenterByUniqueName.institutionTypes && getDiveCenterByUniqueName.institutionTypes.length > 0"><span v-for="(insti,index) in getDiveCenterByUniqueName.institutionTypes" v-if="index < 6" v-on:click="openInstitutionBottomSheet(insti)"><img class="ext-img" :src="'/static/images/agency/logo_'+insti.toLowerCase()+'.svg'" height="17" style="padding-bottom: 1px;" /><span v-if="index != (getDiveCenterByUniqueName.institutionTypes.length-1)">&nbsp;&nbsp;</span></span>&nbsp;<font class="color-gray-light">|</font>&nbsp;</span>
+                <span v-if="interest.type=='priceIndex'" v-for="interest in getDiveCenterByUniqueName.interests" class="color-gray">{{interest.title.replace(/\$/gi, '₩')}}</span>
                 <!--<span class="badge font-10 bg-fade-gray-dark">PADI 공식</span>-->
                 </div>
 
                 <div class="divider mt-3 mb-3"></div>
                 <div class="d-flex mt-3 mb-0 text-center">
                     <div class="flex-grow-1 pd-0" style="border-right: 1px solid lightgray;">
-                    <a :href="'tel:'+centerData.phoneNumber"" style="color:black;">
+                    <a :href="'tel:'+getDiveCenterByUniqueName.phoneNumber"" style="color:black;">
                         <img class="ext-img" src="/static/images/assets/ico_call.png" width="24" style="margin-top:-4px;"/>
                         <span class="font-16 font-500 font-noto"></span>
                     </a>
                     </div>
                     <div v-on:click="clickLike()" :class="'flex-grow-1 pd-0'+((idToken == null || nickName == null) ? ' opacity-40' : '')" style="border-right: 1px solid lightgray;">
                         <img class="ext-img" :src="'/static/images/assets/' + like_img + '.png'" width="24" style="margin-top:-4px;"/>
-                        <span class="font-16 font-500 font-noto">{{ centerData.likes }}</span>
+                        <span class="font-16 font-500 font-noto">{{ getDiveCenterByUniqueName.likes }}</span>
                     </div>
                     
                     <div v-on:click="clickSubscribe()" :class="'flex-grow-1 pd-0'+((idToken == null || nickName == null) ? ' opacity-40' : '')">
@@ -74,14 +73,14 @@
             </div>
         </div>
 
-        <div class="card card-style p-2" v-if="centerData.wediveComments && centerData.wediveComments.length > 0 && centerData.wediveComments[0] != ''">
+        <div class="card card-style p-2" v-if="getDiveCenterByUniqueName.wediveComments && getDiveCenterByUniqueName.wediveComments.length > 0 && getDiveCenterByUniqueName.wediveComments[0] != ''">
             <div class="content mb-2">
                 <div class="text-center">
                     <i class="ico ico-wedive-w color-primary scale-box fa-4x"></i>
                 </div>
                 <h4 class="text-center pt-2 mb-0">wedive's comment</h4>
                 <div class="justify-content-center mb-2 mt-3 text-start font-noto">
-                    <div v-for="(comment, index) in centerData.wediveComments">
+                    <div v-for="(comment, index) in getDiveCenterByUniqueName.wediveComments">
                         <div class="color-gray-light-mid font-700 wedive-comment-number">0{{(index+1)}}</div>
                         <div class="mb-2 font-200 wedive-comment-desc">
                             {{comment}}
@@ -93,17 +92,17 @@
         </div>
         
         
-        <div v-if="centerData.educations && centerData.educations.length > 0" class="card card-style">
+        <div v-if="getDiveCenterByUniqueName.educations && getDiveCenterByUniqueName.educations.length > 0" class="card card-style">
             <div class="content mb-0 mt-3" id="tab-group-1">
                 <div class="tab-controls tabs-small tabs-rounded" data-highlight="bg-highlight">
-                    <a v-if="centerData.educations && centerData.educations.filter(x=>x.type.includes('education')).length > 0" href="#" data-active data-bs-toggle="collapse" data-bs-target="#tab-1ab">교육</a>
-                    <a v-else-if="centerData.educations && centerData.educations.filter(x=>x.type.includes('fun')).length > 0" href="#" data-bs-toggle="collapse" data-bs-target="#tab-2ab">펀 다이빙</a>
-                    <a v-else-if="centerData.educations && centerData.educations.filter(x=>x.type.includes('experience')).length > 0" href="#" data-bs-toggle="collapse" data-bs-target="#tab-3ab">체험 다이빙</a>
+                    <a v-if="getDiveCenterByUniqueName.educations && getDiveCenterByUniqueName.educations.filter(x=>x.type.includes('education')).length > 0" href="#" data-active data-bs-toggle="collapse" data-bs-target="#tab-1ab">교육</a>
+                    <a v-else-if="getDiveCenterByUniqueName.educations && getDiveCenterByUniqueName.educations.filter(x=>x.type.includes('fun')).length > 0" href="#" data-bs-toggle="collapse" data-bs-target="#tab-2ab">펀 다이빙</a>
+                    <a v-else-if="getDiveCenterByUniqueName.educations && getDiveCenterByUniqueName.educations.filter(x=>x.type.includes('experience')).length > 0" href="#" data-bs-toggle="collapse" data-bs-target="#tab-3ab">체험 다이빙</a>
                 </div>
 
                 <div class="clearfix mb-4"></div>
-                <div v-if="centerData.educations && centerData.educations.filter(x=>x.type.includes('education')).length > 0" data-bs-parent="#tab-group-1" class="collapse show" id="tab-1ab">
-                    <div v-for="education in centerData.educations.filter(x=>x.type.includes('education'))" class="d-flex mb-3">
+                <div v-if="getDiveCenterByUniqueName.educations && getDiveCenterByUniqueName.educations.filter(x=>x.type.includes('education')).length > 0" data-bs-parent="#tab-group-1" class="collapse show" id="tab-1ab">
+                    <div v-for="education in getDiveCenterByUniqueName.educations.filter(x=>x.type.includes('education'))" class="d-flex mb-3">
                         <div class="align-self-center">
                             <img :src="education.images[0].thumbnailUrl" class="rounded-sm" width="40" height="40" style="object-fit: cover;margin-right:10px;">
                         </div>
@@ -118,7 +117,7 @@
                         </div>
                     </div>
                 </div>
-                <div v-else-if="centerData.educations && centerData.educations.filter(x=>x.type.includes('fun')).length > 0" data-bs-parent="#tab-group-1" class="collapse" id="tab-2ab">
+                <div v-else-if="getDiveCenterByUniqueName.educations && getDiveCenterByUniqueName.educations.filter(x=>x.type.includes('fun')).length > 0" data-bs-parent="#tab-group-1" class="collapse" id="tab-2ab">
                     <div class="d-flex mb-3">
                         <div class="align-self-center">
                             <img src="/static/empty.jpg" class="rounded-sm me-3" width="70">
@@ -185,7 +184,7 @@
                         </div>
                     </div>
                 </div>
-                <div v-else-if="centerData.educations && centerData.educations.filter(x=>x.type.includes('experience')).length > 0" data-bs-parent="#tab-group-1" class="collapse" id="tab-3ab">
+                <div v-else-if="getDiveCenterByUniqueName.educations && getDiveCenterByUniqueName.educations.filter(x=>x.type.includes('experience')).length > 0" data-bs-parent="#tab-group-1" class="collapse" id="tab-3ab">
                     <div class="d-flex mb-3">
                         <div class="align-self-center">
                             <img src="/static/empty.jpg" class="rounded-sm me-3" width="70">
@@ -227,11 +226,11 @@
                 </div>
                 
                 <div data-bs-parent="#tab-group-2" class="collapse text-start px-2 show" id="tab-info">
-                    <div class="line-height-l pb-3 mt-2 light-border-bottom" v-if="centerData.tickets && centerData.tickets.length > 0" style="position: relative;">
+                    <div class="line-height-l pb-3 mt-2 light-border-bottom" v-if="getDiveCenterByUniqueName.tickets && getDiveCenterByUniqueName.tickets.length > 0" style="position: relative;">
                         <strong class="small-title"><i class="fas fa-money-bill-alt color-blue2-dark me-1"></i> 입장료 / 입장정보</strong>
                         <div>
                             <table class="table table-borderless text-center rounded-3 shadow-sm mt-1 font-noto" style="border-collapse: collapse;outline: 1px solid rgba(0, 0, 0, 0.08);overflow: hidden;">
-                                <tr v-for="ticket in centerData.tickets" class="border-bottom">
+                                <tr v-for="ticket in getDiveCenterByUniqueName.tickets" class="border-bottom">
                                     <th class="pt-2 pb-2 font-400" style="background: rgba(196,187,171,.2);" width="96">{{ ticket.unitName }}</th>
                                     <td class="text-start p-2">{{ ticket.price | makeComma }}</td>
                                 </tr>
@@ -241,12 +240,12 @@
                             <table class="table table-borderless text-center rounded-3 shadow-sm mt-1 font-noto" style="border-collapse: collapse;outline: 1px solid rgba(0, 0, 0, 0.08);overflow: hidden;">
                                 <tr class="border-bottom">
                                     <th class="pt-2 pb-2 font-400" style="background: rgba(196,187,171,.2);" width="96">스쿠바 다이빙</th>
-                                    <td v-if="centerData.divingType.includes('scubaDiving')" class="text-start p-2">{{ enteranceScuba[centerData.enteranceLevelScuba] }}</td>
+                                    <td v-if="getDiveCenterByUniqueName.divingType.includes('scubaDiving')" class="text-start p-2">{{ enteranceScuba[getDiveCenterByUniqueName.enteranceLevelScuba] }}</td>
                                     <td v-else class="text-start p-2" style="color:#cd5b3c;">불가</td>
                                 </tr>
                                 <tr>
                                     <th class="pt-2 pb-2 font-400" style="background: rgba(196,187,171,.2);" width="96">프리 다이빙</th>
-                                    <td v-if="centerData.divingType.includes('freeDiving')" class="text-start p-2">{{ enteranceFree[centerData.enteranceLevelFree] }}</td>
+                                    <td v-if="getDiveCenterByUniqueName.divingType.includes('freeDiving')" class="text-start p-2">{{ enteranceFree[getDiveCenterByUniqueName.enteranceLevelFree] }}</td>
                                     <td v-else class="text-start p-2" style="color:#cd5b3c;">불가</td>
                                 </tr>
                             </table>
@@ -255,7 +254,7 @@
                     <div class="line-height-l pb-3 mt-2 light-border-bottom" style="position: relative;">
                         <strong class="small-title"><i class="fas fa-highlighter color-blue2-dark me-1"></i> 시설 정보</strong>
                         <div class="row text-start">
-                            <div class="ico_feature col-3" v-if="interest.type=='facility'" v-for="interest in centerData.interests">
+                            <div class="ico_feature col-3" v-if="interest.type=='facility'" v-for="interest in getDiveCenterByUniqueName.interests">
                                 <i v-if="item == interest.title" v-for="(item, index) in feature_list" :class="'ico_feature'+(index+1)+' icon-service'"></i>
                                 <p class="span_feature text-center" style="line-height: 1.05;">{{ interest.title }}</p>
                             </div>
@@ -265,7 +264,7 @@
                     <div class="line-height-l pb-3 mt-2 light-border-bottom" style="position: relative;">
                         <strong class="small-title"><i class="fas fa-credit-card color-blue2-dark me-1"></i> 결제 방법</strong>
                         <ul class="wedive-ul ps-0">
-                            <li v-if="interest.type=='payment'" v-for="interest in centerData.interests" class="col-md-6">{{interest.title}}</li>
+                            <li v-if="interest.type=='payment'" v-for="interest in getDiveCenterByUniqueName.interests" class="col-md-6">{{interest.title}}</li>
                         </ul>
                     </div>
 
@@ -289,14 +288,14 @@
                     <div class="line-height-l pb-3 mt-2 light-border-bottom" style="position: relative;">
                         <strong class="small-title"><i class="fas fa-language color-blue2-dark me-1"></i> 지원 언어</strong>
                         <ul class="wedive-ul ps-0">
-                            <li v-if="interest.type=='language'" v-for="interest in centerData.interests" class="col-md-6">{{interest.title}}</li>
+                            <li v-if="interest.type=='language'" v-for="interest in getDiveCenterByUniqueName.interests" class="col-md-6">{{interest.title}}</li>
                         </ul>
                     </div>
                 </div>
                 <div data-bs-parent="#tab-group-2" class="collapse px-2" id="tab-time">
-                    <div class="mt-3" v-if="centerData.openingHours && centerData.openingHours.length > 0">
-                        <div v-for="(opening,index) in centerData.openingHours" class="row mb-0" style="position: relative;">
-                            <div v-if="opening[0].includes('>')" :class="'timeline-deco'+((centerData.openingHours[(index+1)]==null || (centerData.openingHours[(index+1)] && centerData.openingHours[(index+1)][0].includes('>')==false)) ? ' deco-end': '')" style="padding: 0;left: 16px;background-color: rgba(0, 0, 0, 1);"></div>
+                    <div class="mt-3" v-if="getDiveCenterByUniqueName.openingHours && getDiveCenterByUniqueName.openingHours.length > 0">
+                        <div v-for="(opening,index) in getDiveCenterByUniqueName.openingHours" class="row mb-0" style="position: relative;">
+                            <div v-if="opening[0].includes('>')" :class="'timeline-deco'+((getDiveCenterByUniqueName.openingHours[(index+1)]==null || (getDiveCenterByUniqueName.openingHours[(index+1)] && getDiveCenterByUniqueName.openingHours[(index+1)][0].includes('>')==false)) ? ' deco-end': '')" style="padding: 0;left: 16px;background-color: rgba(0, 0, 0, 1);"></div>
                             <hr v-if="opening[0].includes('>')" class="hori-line">
                             <h5 v-if="opening[0].includes('>')" class="col-6 text-start font-13 font-400 mb-0" style="width: calc(50% - 26px);">{{ opening[0].replace('>','') }}</h5>
                             <h5 v-else class="col-6 text-start font-13 font-400 mb-0">{{ opening[0] }}</h5>
@@ -309,8 +308,8 @@
                     </div>
                 </div>
                 <div data-bs-parent="#tab-group-2" class="collapse px-2" id="tab-eqpt">
-                    <div class="mt-3 text-start row" v-if="centerData.rentals && centerData.rentals.length > 0">
-                        <div class="ico_equipt col-3" v-for="rental in centerData.rentals">
+                    <div class="mt-3 text-start row" v-if="getDiveCenterByUniqueName.rentals && getDiveCenterByUniqueName.rentals.length > 0">
+                        <div class="ico_equipt col-3" v-for="rental in getDiveCenterByUniqueName.rentals">
                             <i :class="'ico_equipt' + (rentalOptions.findIndex(x=>x==rental.name)+1) + ' icon-equiptment'"></i>
                             <p class="span_feature text-center mb-0" style="line-height: 1.05;margin-bottom:8px !important;">{{ rental.name }}</p>
                             <p v-if="rental.price==0" class="span_feature text-center mb-0 color-gray mt-n1" style="line-height: 1.05;">무료</p>
@@ -327,11 +326,11 @@
             </div>    
         </div>
 
-        <div v-if="centerData.divePoints && centerData.divePoints.length > 0" class="card card-style">
+        <div v-if="getDiveCenterByUniqueName.divePoints && getDiveCenterByUniqueName.divePoints.length > 0" class="card card-style">
             <div class="content">
                 <h4 class="text-start pt-2 mb-2">다이빙 가능 포인트</h4>
                 <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
-                <div v-for="(point,index) in centerData.divePoints">
+                <div v-for="(point,index) in getDiveCenterByUniqueName.divePoints">
                     <div class="">
                         <div class="">
                             <div class="justify-content-center mb-0 text-start">
@@ -345,18 +344,18 @@
                                     <span> {{ (point.adminScore/20).toFixed(1) }} </span>
                                 </p>
 
-                                <div v-if="point.highlights" class="row text-center row-cols-3 mb-1" style="padding-left:10px;padding-right:10px;">
-                                    <a v-if="point.highlights.length>0&&point.highlights[0].images&&point.highlights[0].images.length>0" class="col square-rect" v-bind:data-gallery="'gallery-'+index" v-bind:href="point.highlights[0].images[0].url" title="">
-                                        <img src="/static/images/assets/empty.png" v-bind:data-src="point.highlights[0].images[0].url" class="preload-img img-fluid rounded-s" alt="Point image">
-                                        <div class="wedive-source mx-140">{{ point.highlights[0].images[0].reference | makeReference }}</div>
+                                <div v-if="point.backgroundImages" class="row text-center row-cols-3 mb-1" style="padding-left:10px;padding-right:10px;">
+                                    <a v-if="point.backgroundImages &&point.backgroundImages.length>0" class="col square-rect" v-bind:data-gallery="'gallery-'+index" v-bind:href="point.backgroundImages[0].thumbnailUrl" title="">
+                                        <img :src="point.backgroundImages[0].thumbnailUrl" v-bind:data-src="point.backgroundImages[0].thumbnailUrl" class="preload-img img-fluid rounded-s" alt="Point image">
+                                        <div class="wedive-source mx-80">{{ point.backgroundImages[0].reference | makeReference }}</div>
                                     </a>
-                                    <a v-if="point.highlights.length>1&&point.highlights[1].images&&point.highlights[1].images.length>0" class="col square-rect" v-bind:data-gallery="'gallery-'+index" v-bind:href="point.highlights[1].images[0].url" title="">
-                                        <img src="/static/images/assets/empty.png" v-bind:data-src="point.highlights[1].images[0].url" class="preload-img img-fluid rounded-s" alt="Point image">
-                                        <div class="wedive-source mx-140">{{ point.highlights[1].images[0].reference | makeReference }}</div>
+                                    <a v-if="point.backgroundImages&&point.backgroundImages.length>1" class="col square-rect" v-bind:data-gallery="'gallery-'+index" v-bind:href="point.backgroundImages[1].thumbnailUrl" title="">
+                                        <img :src="point.backgroundImages[1].thumbnailUrl" v-bind:data-src="point.backgroundImages[1].thumbnailUrl" class="preload-img img-fluid rounded-s" alt="Point image">
+                                        <div class="wedive-source mx-80">{{ point.backgroundImages[1].reference | makeReference }}</div>
                                     </a>
-                                    <a v-if="point.highlights.length>2&&point.highlights[2].images&&point.highlights[2].images.length>0" class="col square-rect" v-bind:data-gallery="'gallery-'+index" v-bind:href="point.highlights[2].images[0].url" title="">
-                                        <img src="/static/images/assets/empty.png" v-bind:data-src="point.highlights[2].images[0].url" class="preload-img img-fluid rounded-s" alt="Point image">
-                                        <div class="wedive-source mx-140">{{ point.highlights[2].images[0].reference | makeReference }}</div>
+                                    <a v-if="point.backgroundImages&&point.backgroundImages.length>2" class="col square-rect" v-bind:data-gallery="'gallery-'+index" v-bind:href="point.backgroundImages[2].thumbnailUrl" title="">
+                                        <img :src="point.backgroundImages[2].thumbnailUrl" v-bind:data-src="point.backgroundImages[2].thumbnailUrl" class="preload-img img-fluid rounded-s" alt="Point image">
+                                        <div class="wedive-source mx-80">{{ point.backgroundImages[2].reference | makeReference }}</div>
                                     </a>
                                 </div>
                                 <p class="pb-0 mb-0 line-height-m point_desc"> {{point.highlightDescription}} </p>
@@ -373,7 +372,7 @@
             <div class="content mb-0">
                 <h4 class="text-start pt-2 mb-2">주소</h4>
                 <p class="text-start mb-3 mb-0">
-                    <span data-menu="menu-copy"><i class="far fa-copy me-2"></i>{{ centerData.geoAddress }}</span><br/>
+                    <span data-menu="menu-copy"><i class="far fa-copy me-2"></i>{{ getDiveCenterByUniqueName.geoAddress }}</span><br/>
                     <a href="#" class="color-highlight hide" data-menu="menu-direction"><i class="fas fa-route me-2"></i> 공항-샵 이동방법 안내</a>
                 </p>
             </div>
@@ -401,163 +400,25 @@
         <div class="card card-style">
             <div class="content"> 
                 <h4 class="text-start pt-2 mb-3">사진</h4>
-                <ul v-if="centerData.images != null && centerData.images.length > 0" class="gallery-filter-controls">
+                <ul v-if="getDiveCenterByUniqueName.images != null && getDiveCenterByUniqueName.images.length > 0" class="gallery-filter-controls">
                     <li class="color-highlight gallery-filter-all" data-filter="all">전체보기</li>
                     <li v-for="(option, index) in imageCategory" :data-filter="(index+1)">{{ option }}</li>
                 </ul>
             </div>
-            <div v-if="centerData.images == null || centerData.images.length == 0" class="content mb-3 mt-n3">
+            <div v-if="getDiveCenterByUniqueName.images == null || getDiveCenterByUniqueName.images.length == 0" class="content mb-3 mt-n3">
                 <div class="text-center"><img src="/static/images/assets/empty_image.jpg" width="60%" style="margin-top:-40px;"/></div>
                 <div class="font-noto text-center mb-3" style="color: #717a92;">등록된 사진이 아직 없어요.</div>
             </div>
             <div class="content mb-3 mt-n3">
                 <div class="gallery gallery-filter">
-                    <a v-for="(image, index) in centerData.images" :href="image.url" data-gallery="gallery-image" class="center_image filtr-item" :title="image.reference" :data-category="(imageCategory.findIndex(x=>x==image.description)+1)">
-                        <img :src="image.url" :data-src="image.url" :data-index="index" class="preload-img rounded-s shadow-m">
+                    <a v-for="(image, index) in getDiveCenterByUniqueName.images" :href="image.thumbnailUrl" data-gallery="gallery-image" class="center_image filtr-item" :title="image.reference" :data-category="(imageCategory.findIndex(x=>x==image.description)+1)">
+                        <img :src="image.thumbnailUrl" :data-src="image.thumbnailUrl" :data-index="index" class="preload-img rounded-s shadow-m">
                     </a>
                 </div>
             </div>
         </div>
 
-        <!--<div class="card card-style">
-            <div class="content mb-2" id="tab-group-index">
-                <h4 class="text-start pt-2 mb-2">스쿠바 지수</h4>
-                <div class="tab-controls tabs-small tabs-rounded" data-highlight="bg-highlight">
-                    <a href="#" data-active data-bs-toggle="collapse" data-bs-target="#tab-realtime">실시간 지수</a>
-                    <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-monthly">월별 수온</a>
-                </div>
-                <div class="clearfix mb-4"></div>
-                <div data-bs-parent="#tab-group-index" class="collapse show" id="tab-realtime">
-                    <table class="table table-borderless text-center rounded-sm shadow-l mt-3" style="overflow: hidden;">
-                        <thead>
-                            <tr class="bg-secondary th-02">
-                                <th scope="col" class="color-white font-12">날짜</th>
-                                <th scope="col" class="color-white font-12">파고</th>
-                                <th scope="col" class="color-white font-12">유속</th>
-                                <th scope="col" class="color-white font-12">수온</th>
-                                <th scope="col" class="color-white font-12">스쿠바</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th class="font-12" scope="row">09/11</th>
-                                <td class="font-12">0.1~0.3</td>
-                                <td class="font-12">0.4~1.0</td>
-                                <td class="font-12">22~23</td>
-                                <td class="color-blue-dark font-12">보통</td>
-                            </tr>
-                            <tr>
-                                <th class="font-12" scope="row">09/12</th>
-                                <td class="font-12">0.2~0.3</td>
-                                <td class="font-12">0.4~0.8</td>
-                                <td class="font-12">23~24</td>
-                                <td class="color-green-dark font-12">좋음</td>
-                            </tr>
-                            <tr>
-                                <th class="font-12" scope="row">09/13</th>
-                                <td class="color-red-dark font-12">0.7~0.9</td>
-                                <td class="color-red-dark font-12">0.6~1.2</td>
-                                <td class="font-12">24</td>
-                                <td class="color-red-dark font-12">나쁨</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="text-end">
-                        <img class="me-1 mb-3" height="20" src="/static/images/assets/logo-kaoh.svg" />
-                    </div>
-                </div>
-                <div data-bs-parent="#tab-group-index" class="collapse" id="tab-monthly">
-                    <table class="table table-borderless text-center rounded-sm shadow-l mt-3" style="overflow: hidden;">
-                        <thead>
-                            <tr class="bg-secondary th-02">
-                                <th scope="col" class="color-white font-12">월</th>
-                                <th scope="col" class="color-white font-12">최저/최고 수온</th>
-                                <th scope="col" class="color-white font-12">평균</th>
-                                <th scope="col" class="color-white font-12">인기도</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">1월</th>
-                                <td class="font-12 color-gray">5.2ºC / 12.3ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>8.8ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_01.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">2월</th>
-                                <td class="font-12 color-gray">3.4ºC / 9.8ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>6.6ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_01.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">3월</th>
-                                <td class="font-12 color-gray">3.2ºC / 9.4ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>6.3ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_01.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">4월</th>
-                                <td class="font-12 color-gray">7.0ºC / 13.3ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>10.2ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_01.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">5월</th>
-                                <td class="font-12 color-gray">10.5ºC / 17.8ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>14.6ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_01.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">6월</th>
-                                <td class="font-12 color-gray">15.1ºC / 23.4ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>19.2ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_02.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">7월</th>
-                                <td class="font-12 color-gray">19.9ºC / 24.4ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_heavy_rain.svg" width="20" height="20"/>22.2ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_02.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">8월</th>
-                                <td class="font-12 color-gray">21.3ºC / 26.0ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_showers.svg" width="20" height="20"/>23.7ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_02.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">9월</th>
-                                <td class="font-12 color-gray">18.6ºC / 24.1ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_sunny.svg" width="20" height="20"/>21.4ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_02.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">10월</th>
-                                <td class="font-12 color-gray">14.9ºC / 21.6ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>18.2ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_02.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">11월</th>
-                                <td class="font-12 color-gray">10.8ºC / 17.6ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>14.2ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_01.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr>
-                                <th class="font-12" scope="row">12월</th>
-                                <td class="font-12 color-gray">6.4ºC / 13.8ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>10.1ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_01.svg" width="32" height="32"/></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="text-end">
-                        <img class="me-1 mb-3" height="20" src="/static/images/assets/logo-kma.svg" />
-                    </div>
-                </div>
-            </div>
-        </div>-->
-        <div class="card card-style">
+        <div class="card card-style hide">
             <div class="content mb-2" id="tab-group-index">
                 <h4 class="text-start pt-2 mb-2">월별 수온</h4>
                 <div>
@@ -702,12 +563,12 @@
         <div class="card card-style">
             <div class="content">
             <h4 class="text-start">리뷰</h4>
-            <a :href="'/review/'+centerData._id" class="color-highlight font-12 wedive-txt-all">모두보기</a>
+            <a :href="'/review/'+getDiveCenterByUniqueName._id" class="color-highlight font-12 wedive-txt-all">모두보기</a>
             <div class="divider mt-3 mb-2"></div>
-                <div v-if="centerData.reviews && centerData.reviews.length>0" class="splide single-slider slider-no-arrows slider-has-dots pb-2 mb-0 me-n2 ms-n2" id="single-slider-review">
+                <div v-if="getDiveCenterByUniqueName.reviews && getDiveCenterByUniqueName.reviews.length>0" class="splide single-slider slider-no-arrows slider-has-dots pb-2 mb-0 me-n2 ms-n2" id="single-slider-review">
                     <div class="splide__track">
                         <div class="splide__list">
-                            <div v-for="review in centerData.reviews" class="splide__slide pt-2">
+                            <div v-for="review in getDiveCenterByUniqueName.reviews" class="splide__slide pt-2">
                                 <div class="min-h-230 p-2">
                                         <div class="d-flex">
                                             <div class="flex-grow-1">
@@ -738,7 +599,7 @@
                             <div class="splide__slide">
                                 <div class="min-h-230 p-2">
                                         <h1 class="text-center"><i class="fas fa-pen-square fa-2x color-highlight mt-4"></i></h1>
-                                        <h1 class="text-center pt-3 font-20 mb-n1">{{ centerData.reviews.length }}개 리뷰</h1>
+                                        <h1 class="text-center pt-3 font-20 mb-n1">{{ getDiveCenterByUniqueName.reviews.length }}개 리뷰</h1>
                                         <p class="text-center color-highlight font-600">더보기 <i class="fas fa-chevron-right"></i></p>
                                 </div>    
                             </div>
@@ -767,78 +628,6 @@
         </div>
 
 
-
-
-        <!--<div class="card card-style">
-            <div class="content text-start mb-0">
-                <h4 class="pt-2 mb-0">리뷰</h4>
-                <span class="text-show-all">전체 보기 <i class="fas fa-chevron-right"></i></span>
-            </div>
-                
-            <div class="content text-start">
-                <div class="d-flex">
-                    <div class="flex-grow-1">
-                        <h1 class="float-start fa-2x font-900 me-3">5.00</h1>
-                        <span>
-                            <i class="fa fa-star color-yellow-dark"></i>
-                            <i class="fa fa-star color-yellow-dark"></i>
-                            <i class="fa fa-star color-yellow-dark"></i>
-                            <i class="fa fa-star color-yellow-dark"></i>
-                            <i class="fa fa-star color-yellow-dark"></i>
-                        </span>
-                    </div>
-                    <div>
-                        <h6 class="text-end">김성진</h6>
-                        <p class="font-10 mb-0 mt-n2 opacity-40 text-end">2021.08.30</p>
-                    </div>
-                </div>
-                <p class="review-text mt-3">
-                    제주도에서 스쿠바 다이빙 할 때 항상 방문하는 버블탱크 입니다.<br/>
-                    예약할 때 문의 드리면 친절하게 답변해 주십니다.<br/>
-                    다이빙 할 때도 신경 많이 써 주시고<br/>
-                    불편한 점 말씀 드리면 신속하게 해결해 주세요<br/>
-                    렌탈 장비 관리 철저하게 하셔서<br/>
-                    믿고 이용할 수 있어요!!
-                </p>
-            </div>
-                
-            <div class="divider divider-margins mb-3"></div>
-                
-            <div class="content text-start">
-                <div class="d-flex">
-                    <div class="flex-grow-1">
-                        <h1 class="float-start fa-2x font-900 me-3">4.98</h1>
-                        <span>
-                            <i class="fa fa-star color-yellow-dark"></i>
-                            <i class="fa fa-star color-yellow-dark"></i>
-                            <i class="fa fa-star color-yellow-dark"></i>
-                            <i class="fa fa-star color-yellow-dark"></i>
-                            <i class="fa fa-star color-yellow-dark"></i>
-                        </span>
-                    </div>
-                    <div>
-                        <h6 class="text-end">조관우</h6>
-                        <p class="font-10 mb-0 mt-n2 opacity-40 text-end">2021.08.27</p>
-                    </div>
-                </div>
-                <p class="review-text mt-3">
-                    태풍이 올라와서 취소되진 않을까 걱정을 많이 했는데 잘챙겨주셔서 오픈워터 딸수 있었습니다ㅎㅎ<br/>
-                    맑은날이 아니라 아쉬웠지만 어드밴스드 딸때는 날씨요정이 함께 해주기를 기대합니다...ㅎㅎ<br/>
-                    잡아주신 숙소도 버블탱크 바로 앞에 있어서 넘 좋았어요.<br/>
-                    깔끔하고 호텔사장님도 엄청 친절하셨어요ㅋ<br/>
-                    그리고 버블탱크 샤워실에 스킨로션에 샴푸,린스,바디워시,클렌징폼, 머리끈까지 구비되어 있었습니다.<br/>
-                    세심함에 치였슴당💕
-                </p>
-            </div>
-
-            <div class="content text-start">
-                <a href="#" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0"><i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;리뷰 쓰기</a>
-            </div>
-        </div>
-        -->
-        
-
-        
         <div data-menu-load="/static/menu-footer.html"></div>
 
     </div>
@@ -927,7 +716,7 @@
          data-menu-height="470" 
          data-menu-width="370">
         <div class="menu-title">
-            <h4 class="text-center mt-4 pt-1 mb-2 font-noto font-19">{{ centerData.name }} 알림</h4>
+            <h4 class="text-center mt-4 pt-1 mb-2 font-noto font-19">{{ getDiveCenterByUniqueName.name }} 알림</h4>
             <a href="#" class="close-menu hide"><i class="fa fa-times-circle"></i></a>
             <div class="text-center color-gray-light-mid mb-1">
                 <i class="wedive_icoset wedive_icoset_info me-1"></i> 원하는 일정에 알림을 추가할 수 있어요.
@@ -1043,7 +832,7 @@
          data-menu-height="470" 
          data-menu-width="370">
         <div class="menu-title">
-            <h4 class="text-center mt-4 pt-1 mb-2 font-noto font-19">{{ centerData.name }} 리뷰</h4>
+            <h4 class="text-center mt-4 pt-1 mb-2 font-noto font-19">{{ getDiveCenterByUniqueName.name }} 리뷰</h4>
             <a href="#" class="close-menu hide"><i class="fa fa-times-circle"></i></a>
         </div>
         <div class="me-4 ms-4" style="border-bottom: 2px solid black;"></div>
@@ -1091,12 +880,16 @@
 <script>
 import VueBottomSheet from "@webzlodimir/vue-bottom-sheet";
 import StarRating from 'vue-star-rating'
-import { GraphQLClient, request, gql } from "graphql-request";
+import gql from 'graphql-tag'
+import VueSkeletonLoader from 'skeleton-loader-vue';
+
+
+//import { GraphQLClient, request, gql } from "graphql-request";
 const axios = require("axios")
 
 export default {
   name: 'HelloWorld',
-  async beforeRouteEnter(to, from, next) {
+  /*async beforeRouteEnter(to, from, next) {
     if (to.params.id != null) {
         var result = await axios({
         url: 'https://api.wedives.com/graphql',
@@ -1146,66 +939,21 @@ export default {
                             uniqueName
                             adminScore
                             highlightDescription
-                            highlights {
-                                images {
-                                    _id
-                                    name
-                                    description
-                                    reference
-                                    thumbnailUrl
-                                }    
-                            }
-                            images {
+                            latitude
+                            longitude
+                            backgroundImages {
                                 _id
-                                name
-                                description
                                 reference
                                 thumbnailUrl
                             }
                         }
                         images {
                             _id
-                            name
-                            description
                             reference
                             thumbnailUrl
                         }
                         backgroundImages {
                             _id
-                            name
-                            description
-                            reference
-                            thumbnailUrl
-                        }
-                        interests {
-                        _id
-                        title
-                        type
-                        }
-                        tickets {
-                        _id
-                        price
-                        unitName
-                        name
-                        uniqueName
-                        days
-                        hours
-                        amount
-                        }
-                        educations {
-                        _id
-                        price
-                        type
-                        unitName
-                        name
-                        uniqueName
-                        days
-                        hours
-                        amount
-                        images {
-                            _id
-                            name
-                            description
                             reference
                             thumbnailUrl
                         }
@@ -1214,26 +962,56 @@ export default {
                             title
                             type
                         }
+                        tickets {
+                            _id
+                            price
+                            unitName
+                            name
+                            uniqueName
+                            days
+                            hours
+                            amount
+                        }
+                        educations {
+                            _id
+                            price
+                            type
+                            unitName
+                            name
+                            uniqueName
+                            days
+                            hours
+                            amount
+                            images {
+                                _id
+                                reference
+                                thumbnailUrl
+                            }
+                            interests {
+                                _id
+                                title
+                                type
+                            }
                         }
                         courses {
-                        _id
-                        price
-                        unitName
-                        name
-                        uniqueName
-                        days
-                        hours
-                        amount
+                            _id
+                            price
+                            unitName
+                            name
+                            uniqueName
+                            days
+                            hours
+                            amount
                         }
                         rentals {
-                        _id
-                        price
-                        unitName
-                        name
-                        uniqueName
-                        days
-                        hours
-                        amount
+                            _id
+                            price
+                            unitName
+                            name
+                            uniqueName
+                            days
+                            hours
+                            amount
                         }
                         name
                         uniqueName
@@ -1442,13 +1220,328 @@ export default {
     } else {
         location.href = "/";
     }
-  },
+  },*/
   async mounted() {
     if (this.$route.params.id) {
-        if (this.centerData.latitude && this.centerData.longitude) {
-            var preloader = document.getElementById('preloader')
-            if(preloader){preloader.classList.add('preloader-hide');}
+        setTimeout(function() {
+            $("#cover-slider-temp").animate({opacity: "0"}, 1200);
+            $('[data-toggle="tooltip"]').tooltip();
+        },1000);
+        setTimeout(function() {
+            $("#cover-slider-temp").css("display", "none");
+        },2500);
+    }
+
+    if (this.$route.query.header && this.$route.query.header == 'hide') {
+        $(".page-title").hide();
+        $(".page-title-clear").hide();
+        $(".header-fixed").hide();
+    }
+  },
+  created() {
+      setTimeout(function() {
+        init_template();
+        var preloader = document.getElementById('preloader')
+        if(preloader){preloader.classList.add('preloader-hide');}
+    }, 500);
+  },
+  beforeDestroy () {
+    
+  },
+  components: {
+    StarRating,
+    VueBottomSheet,
+    VueSkeletonLoader,
+  },
+  data () {
+    return {
+        uniqueName: this.$route.params.id,
+        map: null,
+        marker_list: [],
+        getDiveCenterByUniqueName: {},
+        feature_list: ["외국어가능", "샤워가능", "룸서비스", "늦은 퇴실", "컨시어지", "주차", "주방", "남녀화장실", "24시업무", "비지니스", "장애인편의", "세탁서비스", "금연실", "아이돌봄", "반려동물", "WIFI", "공항셔틀", "피트니스", "도미토리", "감압챔버", "픽업", "일부장비", "전용보트", "아쿠아리움", "나이트록스", "DPV", "무료렌탈", "강의실", "수건제공", "유료샤워", "딥수영장", "장비렌탈불가", "스튜디오", "국제규격", "다이빙풀"],
+        pay_list: ["현금", "VISA", "MasterCard", "UnionPay", "JCB", "American Express", "Discover card", "PAYCO", "Kakao Pay", "Naver Pay"],
+        equipt_list: ["마스크", "레귤레이터", "다이버 PC", "다이버 워치", "나침반", "수중 스쿠터", "산소탱크", "핀", "구명조끼", "나이프", "스노클링", "부츠", "잠수복 상의", "잠수복 하의", "라이트", "스쿠버 세트", "카메라", "수심계", , "게이지", "잠수복", , "풀세트", "유아장비"],
+        rentalOptions: ["스킨스쿠바 풀세트", "스킨 풀세트", "마스크", "스노클", "잠수복", "오리발", "부츠", "장갑", "부츠&장갑", "웨이트&벨트", "웨이트", "스쿠버 세트", "BCD", "호흡기", "보조호흡기", "SMB", "공기통", "나이트록스", "라이트", "컴퓨터", "카메라", "DPV", "조류걸이", "프리 풀세트", "프리 핀", "프리 마스크", "프리 스노클", "프리 잠수복", "프리벨트", "프리웨이트", "바텀웨이트", "랜야드", "부이", "로프", "부이&로프", "고정부이", "사이드마운트", "더블탱크", "아르곤탱크", "재호흡기", "공기충전", "옥토퍼스", "마스크&스노클", "후드", "나이프", "랜턴", "텍렌턴", "잠수복(숏)", "잠수복(원피스)", "프리 마스크&스노클", "모노핀", "탐침봉", "나침반", "다이빙풀", "머메이드"],
+        imageCategory: ["다이빙", "교육", "센터"],
+        enteranceScuba: {"5": "강사 동반 입장 (그 외 불가)", "4": "마스터 이상 버디입장 가능", "3": "레스큐 이상 버디입장 가능", "2": "어드밴스 이상 버디입장 가능", "1": "오픈워터 이상 버디입장 가능", "0": "누구나 버디입장 가능"},
+        enteranceFree: {"5": "강사 동반 입장 (그 외 불가)", "4": "레벨4 이상 버디입장 가능", "3": "레벨3 이상 버디입장 가능", "2": "레벨2 이상 버디입장 가능", "1": "레벨1 이상 버디입장 가능", "0": "누구나 버디입장 가능"},
+        rating: 5,
+        rateDescription: '매우 만족해요!',
+        review_detail: '',
+        file_photo: [],
+        like_img: 'ico_heart',
+        subscribe_img: 'ico_subscribe',
+        idToken: localStorage.idToken,
+        nickName: localStorage.nickName,
+        open_insti: null,
+    }
+  }, 
+  apollo: {
+      getDiveCenterByUniqueName: {
+          query:gql `
+            query GetDiveCenterByUniqueName($uniqueName: String!) {
+                getDiveCenterByUniqueName(uniqueName: $uniqueName) {
+                    _id
+                    managers {
+                    _id
+                    name
+                    email
+                    gender
+                    birthAge
+                    }
+                    clerks {
+                    _id
+                    name
+                    email
+                    gender
+                    birthAge
+                    }
+                    divingType
+                    phoneNumber
+                    email
+                    enteranceFee
+                    enteranceLevelFree
+                    enteranceLevelScuba
+                    openingHours
+                    institutionTypes
+                    webPageUrl
+                    geoAddress
+                    adminScore
+                    viewScore
+                    educationScore
+                    facilityScore
+                    serviceScore
+                    wediveComments
+                    divePoints {
+                        _id
+                        name
+                        uniqueName
+                        adminScore
+                        highlightDescription
+                        latitude
+                        longitude
+                        backgroundImages {
+                            _id
+                            reference
+                            thumbnailUrl
+                        }
+                    }
+                    images {
+                        _id
+                        reference
+                        description
+                        thumbnailUrl
+                    }
+                    backgroundImages {
+                        _id
+                        reference
+                        thumbnailUrl
+                    }
+                    interests {
+                        _id
+                        title
+                        type
+                    }
+                    tickets {
+                        _id
+                        price
+                        unitName
+                        name
+                        uniqueName
+                        days
+                        hours
+                        amount
+                    }
+                    educations {
+                        _id
+                        price
+                        type
+                        unitName
+                        name
+                        uniqueName
+                        days
+                        hours
+                        amount
+                        images {
+                            _id
+                            reference
+                            thumbnailUrl
+                        }
+                        interests {
+                            _id
+                            title
+                            type
+                        }
+                    }
+                    courses {
+                        _id
+                        price
+                        unitName
+                        name
+                        uniqueName
+                        days
+                        hours
+                        amount
+                    }
+                    rentals {
+                        _id
+                        price
+                        unitName
+                        name
+                        uniqueName
+                        days
+                        hours
+                        amount
+                    }
+                    name
+                    uniqueName
+                    description
+                    youtubeVideoIds
+                    referenceUrls
+                    memo
+                    address
+                    latitude
+                    longitude
+                    countryCode
+                    publishStatus
+                    reviews {
+                        _id
+                        targetId
+                        targetType
+                        author {
+                            name
+                            email
+                            _id
+                            profileImages {
+                                thumbnailUrl
+                            }
+                        }
+                        title
+                        content
+                        images {
+                            _id
+                            thumbnailUrl
+                        }
+                        rating
+                        reviewCount
+                        views
+                        likes
+                        createdAt
+                    }
+                    likes
+                    views
+                    reviewCount
+                    isUserSubscribe
+                    isUserLike
+                }
+            }
+          `,
+          variables() {
+              return {
+                uniqueName: this.uniqueName
+              }
+          },
+          result() {
+            {
+                var id_arr = new Array();
+                var width_arr = new Array();
+                this.getDiveCenterByUniqueName.backgroundImages.forEach(x => {
+                    id_arr.push(x._id);
+                    width_arr.push(720);
+                });
+                axios({
+                    url: 'https://api.wedives.com/graphql',
+                    method: 'post',
+                    headers: {
+                        countrycode: 'ko',
+                        idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                    },
+                    data: {
+                        query: `
+                            query Query($ids: [ID], $widths: [Int]) {
+                                getImageUrlsByIds(_ids: $ids, widths: $widths)
+                            }
+                        `,
+                        variables: {
+                            ids: id_arr,
+                            widths: width_arr
+                        }
+
+                    }
+                }).then(result_image => {
+                    if (result_image.data.data.getImageUrlsByIds) {
+                        var i=0;
+                        this.getDiveCenterByUniqueName.backgroundImages.forEach(x => {
+                            x.thumbnailUrl = result_image.data.data.getImageUrlsByIds[i];
+                            i++;
+                        });
+                    }
+                });
+            }
+            {
+                var id_arr = new Array();
+                var width_arr = new Array();
+                this.getDiveCenterByUniqueName.images.forEach(x => {
+                    id_arr.push(x._id);
+                    width_arr.push(720);
+                });
+                axios({
+                    url: 'https://api.wedives.com/graphql',
+                    method: 'post',
+                    headers: {
+                        countrycode: 'ko',
+                        idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                    },
+                    data: {
+                        query: `
+                            query Query($ids: [ID], $widths: [Int]) {
+                                getImageUrlsByIds(_ids: $ids, widths: $widths)
+                            }
+                        `,
+                        variables: {
+                            ids: id_arr,
+                            widths: width_arr
+                        }
+
+                    }
+                }).then(result_image => {
+                    if (result_image.data.data.getImageUrlsByIds) {
+                        var i=0;
+                        this.getDiveCenterByUniqueName.images.forEach(x => {
+                            x.thumbnailUrl = result_image.data.data.getImageUrlsByIds[i];
+                            i++;
+                        });
+                    }
+                    /*var lightbox = GLightbox({
+                        closeOnOutsideClick: false,
+                        zoomable:false,
+                        descPosition:'bottom',
+                        selector: '[data-lazygallery]',
+                        openEffect: 'fade',
+                        closeEffect: 'fade',
+                        dragAutoSnap:true,
+                        preload:true,
+                    });
+                    lightbox.on('open', () => {
+                        if(window.location.href.split('/').pop() != 'modal'){
+                            window.history.pushState({}, 'modal', window.location.pathname + '/modal');
+                        }
+                    });
+
+                    lightbox.on('close', () => {
+                        console.log("close : " + window.location.href)
+                        if(window.location.href.split('/').pop() == 'modal'){
+                            window.history.back(); 
+                        }
+                    });*/
+                });
+            }
+
             
+            
+            ////////////////////////////////////////////////////////////////////////////////
+
             let script = document.createElement('script');
             script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCWu8Fw-h-f1t8Sp3I7R3l_Ukr24HunXQM';
             document.body.appendChild(script);
@@ -1537,7 +1630,7 @@ export default {
                 const map_style = (localStorage['wedive-Theme'] == 'light-mode') ? [] : night_style;
 
                 this.map = new google.maps.Map(document.getElementById('map'), {
-                    center: {lat: this.centerData.latitude, lng: this.centerData.longitude},
+                    center: {lat: this.getDiveCenterByUniqueName.latitude, lng: this.getDiveCenterByUniqueName.longitude},
                     zoom: 8,
                     mapTypeControl: false,
                     streetViewControl: false,
@@ -1546,16 +1639,16 @@ export default {
                 });
                 var marker_shop = new google.maps.Marker({
                     map: this.map,
-                    position: {lat: this.centerData.latitude, lng: this.centerData.longitude},
-                    label: {text: this.centerData.name, color: 'white', className: 'marker-position'},
+                    position: {lat: this.getDiveCenterByUniqueName.latitude, lng: this.getDiveCenterByUniqueName.longitude},
+                    label: {text: this.getDiveCenterByUniqueName.name, color: 'white', className: 'marker-position'},
                     icon: new google.maps.MarkerImage('/static/images/assets/ico_pin2.png',null, null, null, new google.maps.Size(38,43)),
                 });
 
-                for (var i=0; i<this.centerData.divePoints.length; i++) {
-                    var position = {lat: this.centerData.divePoints[i].latitude, lng: this.centerData.divePoints[i].longitude};
-                    const title = this.centerData.divePoints[i].name;
-                    const star = (this.centerData.divePoints[i].adminScore/20).toFixed(1);
-                    const img = (this.centerData.divePoints[i].backgroundImages && this.centerData.divePoints[i].backgroundImages.length>0) ? this.centerData.divePoints[i].backgroundImages[0].thumbnailUrl : '/static/empty.jpg';
+                for (var i=0; i<this.getDiveCenterByUniqueName.divePoints.length; i++) {
+                    var position = {lat: this.getDiveCenterByUniqueName.divePoints[i].latitude, lng: this.getDiveCenterByUniqueName.divePoints[i].longitude};
+                    const title = this.getDiveCenterByUniqueName.divePoints[i].name;
+                    const star = (this.getDiveCenterByUniqueName.divePoints[i].adminScore/20).toFixed(1);
+                    const img = (this.getDiveCenterByUniqueName.divePoints[i].backgroundImages && this.getDiveCenterByUniqueName.divePoints[i].backgroundImages.length>0) ? this.getDiveCenterByUniqueName.divePoints[i].backgroundImages[0].thumbnailUrl : '/static/empty.jpg';
                     
 
                     var marker_point = new google.maps.Marker({
@@ -1605,58 +1698,11 @@ export default {
                     }
                 });
             };
-        }
-        
-        setTimeout(function() {
-            $("#cover-slider-temp").animate({opacity: "0"}, 1200);
-            $('[data-toggle="tooltip"]').tooltip();
-        },1000);
-        setTimeout(function() {
-            $("#cover-slider-temp").css("display", "none");
-        },2500);
-    }
-
-    if (this.$route.query.header && this.$route.query.header == 'hide') {
-        $(".page-title").hide();
-        $(".page-title-clear").hide();
-        $(".header-fixed").hide();
-    }
-    
+          }
+      },
   },
-  created() {
-      
-  },
-  beforeDestroy () {
-    
-  },
-  components: {
-    StarRating,
-    VueBottomSheet,
-  },
-  data () {
-    return {
-        map: null,
-        marker_list: [],
-        centerData: {},
-        feature_list: ["외국어가능", "샤워가능", "룸서비스", "늦은 퇴실", "컨시어지", "주차", "주방", "남녀화장실", "24시업무", "비지니스", "장애인편의", "세탁서비스", "금연실", "아이돌봄", "반려동물", "WIFI", "공항셔틀", "피트니스", "도미토리", "감압챔버", "픽업", "일부장비", "전용보트", "아쿠아리움", "나이트록스", "DPV", "무료렌탈", "강의실", "수건제공", "유료샤워", "딥수영장", "장비렌탈불가", "스튜디오", "국제규격", "다이빙풀"],
-        pay_list: ["현금", "VISA", "MasterCard", "UnionPay", "JCB", "American Express", "Discover card", "PAYCO", "Kakao Pay", "Naver Pay"],
-        equipt_list: ["마스크", "레귤레이터", "다이버 PC", "다이버 워치", "나침반", "수중 스쿠터", "산소탱크", "핀", "구명조끼", "나이프", "스노클링", "부츠", "잠수복 상의", "잠수복 하의", "라이트", "스쿠버 세트", "카메라", "수심계", , "게이지", "잠수복", , "풀세트", "유아장비"],
-        rentalOptions: ["스킨스쿠바 풀세트", "스킨 풀세트", "마스크", "스노클", "잠수복", "오리발", "부츠", "장갑", "부츠&장갑", "웨이트&벨트", "웨이트", "스쿠버 세트", "BCD", "호흡기", "보조호흡기", "SMB", "공기통", "나이트록스", "라이트", "컴퓨터", "카메라", "DPV", "조류걸이", "프리 풀세트", "프리 핀", "프리 마스크", "프리 스노클", "프리 잠수복", "프리벨트", "프리웨이트", "바텀웨이트", "랜야드", "부이", "로프", "부이&로프", "고정부이", "사이드마운트", "더블탱크", "아르곤탱크", "재호흡기", "공기충전", "옥토퍼스", "마스크&스노클", "후드", "나이프", "랜턴", "텍렌턴", "잠수복(숏)", "잠수복(원피스)", "프리 마스크&스노클", "모노핀", "탐침봉", "나침반", "다이빙풀", "머메이드"],
-        imageCategory: ["다이빙", "교육", "센터"],
-        enteranceScuba: {"5": "강사 동반 입장 (그 외 불가)", "4": "마스터 이상 버디입장 가능", "3": "레스큐 이상 버디입장 가능", "2": "어드밴스 이상 버디입장 가능", "1": "오픈워터 이상 버디입장 가능", "0": "누구나 버디입장 가능"},
-        enteranceFree: {"5": "강사 동반 입장 (그 외 불가)", "4": "레벨4 이상 버디입장 가능", "3": "레벨3 이상 버디입장 가능", "2": "레벨2 이상 버디입장 가능", "1": "레벨1 이상 버디입장 가능", "0": "누구나 버디입장 가능"},
-        rating: 5,
-        rateDescription: '매우 만족해요!',
-        review_detail: '',
-        file_photo: [],
-        like_img: 'ico_heart',
-        subscribe_img: 'ico_subscribe',
-        idToken: localStorage.idToken,
-        nickName: localStorage.nickName,
-        open_insti: null,
-    }
-  }, methods: {
-      setData(_centerData) {
+  methods: {
+      /*setData(_centerData) {
         this.centerData = _centerData;
         if (_centerData.isUserLike) this.like_img = 'ico_heart2';
         if (_centerData.isUserSubscribe) this.subscribe_img = 'ico_subscribe2';
@@ -1665,7 +1711,7 @@ export default {
             var preloader = document.getElementById('preloader')
             if(preloader){preloader.classList.add('preloader-hide');}
         }, 1000);
-      },
+      },*/
       openInstitutionBottomSheet(insti) {
             this.open_insti = insti;
 
@@ -1701,7 +1747,7 @@ export default {
       },
       async clickLike() {
           if (localStorage.idToken && localStorage.nickName) {
-            const targetId = this.centerData._id;
+            const targetId = this.getDiveCenterByUniqueName._id;
             var result = await axios({
                 url: 'https://api.wedives.com/graphql',
                 method: 'post',
@@ -1724,10 +1770,10 @@ export default {
             console.log(result.data.data.like);
             if (result && result.data && result.data.data && result.data.data.like == true) {
                 this.like_img = 'ico_heart2';
-                this.centerData.likes = ((this.centerData.likes==null)?0:this.centerData.likes)+1;
+                this.getDiveCenterByUniqueName.likes = ((this.getDiveCenterByUniqueName.likes==null)?0:this.getDiveCenterByUniqueName.likes)+1;
             } else if (result && result.data && result.data.data && result.data.data.like == false) {
                 this.like_img = 'ico_heart';
-                this.centerData.likes = this.centerData.likes-1;
+                this.getDiveCenterByUniqueName.likes = this.getDiveCenterByUniqueName.likes-1;
             }
           } else {
               this.login();
@@ -1735,7 +1781,7 @@ export default {
       },
       async clickSubscribe() {
           if (localStorage.idToken && localStorage.nickName) {
-            const targetId = this.centerData._id;
+            const targetId = this.getDiveCenterByUniqueName._id;
             var result = await axios({
                 url: 'https://api.wedives.com/graphql',
                 method: 'post',
@@ -1808,7 +1854,7 @@ export default {
             var result_upload = await client.request(updateMutation, {input: {"_id": result_img.uploadImage._id,"name": result_img.name,"description": "reviewImage","reference": null}});
             _id_list.push(result_img.uploadImage._id);
         }
-        var _input = {images: _id_list, targetId: this.centerData._id, targetType: 'diveCenter', content: this.review_detail, rating: this.rating};
+        var _input = {images: _id_list, targetId: this.getDiveCenterByUniqueName._id, targetType: 'diveCenter', content: this.review_detail, rating: this.rating};
         const ipt = _input;
         
         var result = await axios({
@@ -1879,11 +1925,11 @@ export default {
           location.href='/course';
       },
       gallery_show: function() {
-          for (var i=0; i<this.centerData.images.length; i++) {
+          /*for (var i=0; i<this.getDiveCenterByUniqueName.images.length; i++) {
               setTimeout(function(src, dst) {
                   $("[src='"+src+"']").attr("src", dst);
-              }, 50, this.centerData.images[i].thumbnailUrl, this.centerData.images[i].url)
-          }
+              }, 50, this.getDiveCenterByUniqueName.images[i].thumbnailUrl, this.getDiveCenterByUniqueName.images[i].url)
+          }*/
       },
       login() {
         localStorage.loginUrl = window.location.pathname;
@@ -1929,6 +1975,7 @@ export default {
           event.currentTarget.children[0].children[0].children[0].classList.toggle("fa-check-circle")
       }
   }
+  
 
   
 }
@@ -2098,4 +2145,8 @@ export default {
 .chip-normal {padding:3px 8px;background:lightgray;border-radius:4px;color:gray;}
 .chip-emphasis {padding:3px 8px;background:#1d397c ;border-radius:4px;color:#ddd;}
 .border-bottom {border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important}
+.background-center {background-position: center !important;background-size: cover !important;}
+.mx-80 {max-width: 80%;}
+.mx-120 {max-width: 120px;}
+.mx-140 {max-width: 140px;}
 </style>

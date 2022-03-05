@@ -214,7 +214,7 @@
                                 <div v-if="point.images" class="row text-center row-cols-3 mb-1" style="padding-left:10px;padding-right:10px;">
                                     <a v-for="(image, index) in point.images" v-if="point.images&&point.images.length>0&&index<3" class="col square-rect" v-bind:data-gallery="'gallery-'+index" v-bind:href="image.url" title="">
                                         <img src="/static/images/assets/empty.png" v-bind:data-src="image.url" class="preload-img img-fluid rounded-s" alt="Point image">
-                                        <div class="wedive-source mx-140">{{ image.reference | makeReference }}</div>
+                                        <div class="wedive-source mx-80">{{ image.reference | makeReference }}</div>
                                     </a>
                                 </div>
                                 
@@ -238,13 +238,13 @@
                                 <div class="card rounded-sm mb-2">
                                     <a class="" data-gallery="'gallery-highlight" :href="highlight.images[0].url" :title="highlight.images[0].reference">
                                         <img src="/static/images/assets/empty.png" :data-src="highlight.images[0].url" class="preload-img img-fluid rounded-s" :alt="highlight.images[0].name" style="height: 80px;">
-                                        <div class="wedive-source mx-140">{{ highlight.images[0].reference | makeReference }}</div>
+                                        <div class="wedive-source mx-80">{{ highlight.images[0].reference | makeReference }}</div>
                                     </a>
                                 </div>
                                 <div v-if="highlight.images.length>1" class="card rounded-sm mb-0">
                                     <a class="" data-gallery="'gallery-highlight" :href="highlight.images[1].url" :title="highlight.images[1].reference">
                                         <img src="/static/images/assets/empty.png" :data-src="highlight.images[1].url" class="preload-img img-fluid rounded-s" :alt="highlight.images[1].name" style="height: 80px;">
-                                        <div class="wedive-source mx-140">{{ highlight.images[1].reference | makeReference }}</div>
+                                        <div class="wedive-source mx-80">{{ highlight.images[1].reference | makeReference }}</div>
                                     </a>
                                 </div>
                             </div>
@@ -252,7 +252,7 @@
                                 <div v-if="highlight.images.length>2" class="card rounded-sm mb-0">
                                     <a class="" data-gallery="'gallery-highlight" :href="highlight.images[2].url" :title="highlight.images[2].reference">
                                         <img src="/static/images/assets/empty.png" :data-src="highlight.images[2].url" class="preload-img img-fluid rounded-s" :alt="highlight.images[2].name" style="height: 170px;">
-                                        <div class="wedive-source mx-140">{{ highlight.images[2].reference | makeReference }}</div>
+                                        <div class="wedive-source mx-80">{{ highlight.images[2].reference | makeReference }}</div>
                                     </a>
                                 </div>
                             </div>
@@ -284,7 +284,7 @@
                                 <div class="card rounded-sm mb-0">
                                     <a class="" data-gallery="'gallery-highlight" :href="highlight.images[0].url" :title="highlight.images[0].reference">
                                         <img src="/static/images/assets/empty.png" :data-src="highlight.images[0].url" class="preload-img img-fluid rounded-s" :alt="highlight.images[0].name" style="height: 170px;">
-                                        <div class="wedive-source mx-140">{{ highlight.images[0].reference | makeReference }}</div>
+                                        <div class="wedive-source mx-80">{{ highlight.images[0].reference | makeReference }}</div>
                                     </a>
                                 </div>
                             </div>
@@ -292,13 +292,13 @@
                                 <div v-if="highlight.images.length>1" class="card rounded-sm mb-2">
                                     <a class="" data-gallery="'gallery-highlight" :href="highlight.images[1].url" :title="highlight.images[1].reference">
                                         <img src="/static/images/assets/empty.png" :data-src="highlight.images[1].url" class="preload-img img-fluid rounded-s" :alt="highlight.images[1].name" style="height: 80px;">
-                                        <div class="wedive-source mx-140">{{ highlight.images[1].reference | makeReference }}</div>
+                                        <div class="wedive-source mx-80">{{ highlight.images[1].reference | makeReference }}</div>
                                     </a>
                                 </div>
                                 <div v-if="highlight.images.length>2" class="card rounded-sm mb-0">
                                     <a class="" data-gallery="'gallery-highlight" :href="highlight.images[2].url" :title="highlight.images[2].reference">
                                         <img src="/static/images/assets/empty.png" :data-src="highlight.images[2].url" class="preload-img img-fluid rounded-s" :alt="highlight.images[2].name" style="height: 80px;">
-                                        <div class="wedive-source mx-140">{{ highlight.images[2].reference | makeReference }}</div>
+                                        <div class="wedive-source mx-80">{{ highlight.images[2].reference | makeReference }}</div>
                                     </a>
                                 </div>
                             </div>
@@ -2117,5 +2117,7 @@ export default {
 .map-box {position: absolute;right: 6px;bottom: 21px;margin: 5px 5px 4px;width: 115px;}
 .bx {background-color: rgba(255,255,255);padding: 10px;min-height: 105px;border: 1px solid rgba(0,0,0,.1);border-radius: 10px;}
 .wedive-textarea {min-height: 150px;border: 2px solid #e9e9e9;background: #f5f5f5;padding-left: 10px;padding-right: 10px;}
-
+.mx-80 {max-width: 80%;}
+.mx-120 {max-width: 120px;}
+.mx-140 {max-width: 140px;}
 </style>
