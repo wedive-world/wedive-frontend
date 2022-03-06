@@ -201,7 +201,18 @@ export default {
       if(window.location.href.split('/').pop().indexOf('modal')===-1){
         //console.log(">>set1");
         //window.localStorage.gclose = "1";
-        $(".gclose").eq(0).click();
+        try {
+          $(".gclose").eq(0).click();
+        } catch (e) {
+
+        }
+        try {
+          var activeMenu = document.querySelectorAll('.menu-active');
+          for(var i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
+        } catch (e) {
+          
+        }
+        
       }
     }
   },
@@ -319,6 +330,10 @@ export default {
       var menuData = "agenda-type-add";
       document.getElementById(menuData).classList.add('menu-active');
       document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
+      // jjangs : open menu
+      if(window.location.href.split('/').pop() != 'modal'){
+          window.history.pushState({}, 'modal', window.location.pathname + '/modal');
+      }
 
       
       var menu = document.getElementById(menuData);
@@ -364,6 +379,10 @@ export default {
             var menuData = "agenda-add";
             document.getElementById(menuData).classList.add('menu-active');
             document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
+            // jjangs : open menu
+            if(window.location.href.split('/').pop() != 'modal'){
+                window.history.pushState({}, 'modal', window.location.pathname + '/modal');
+            }
 
             
             var menu = document.getElementById(menuData);
@@ -406,6 +425,10 @@ export default {
           var menuData = "chat-add";
           document.getElementById(menuData).classList.add('menu-active');
           document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
+          // jjangs : open menu
+          if(window.location.href.split('/').pop() != 'modal'){
+              window.history.pushState({}, 'modal', window.location.pathname + '/modal');
+          }
 
           
           var menu = document.getElementById(menuData);

@@ -453,6 +453,10 @@ export default {
           var menuData = 'menu-rating';
           document.getElementById(menuData).classList.add('menu-active');
           document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
+          // jjangs : open menu
+          if(window.location.href.split('/').pop() != 'modal'){
+                window.history.pushState({}, 'modal', window.location.pathname + '/modal');
+          }
       },
       weDiveDateFormat(date, showTime) {
           var _date = null

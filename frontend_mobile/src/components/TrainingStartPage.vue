@@ -175,6 +175,10 @@ export default {
         var menuData = 'menu-starter';
         document.getElementById(menuData).classList.add('menu-active');
         document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
+        // jjangs : open menu
+        if(window.location.href.split('/').pop() != 'modal'){
+            window.history.pushState({}, 'modal', window.location.pathname + '/modal');
+        }
         $(".menu-hider").css("background-color", "rgba(0, 0, 0, 0.65)");
 
         var audioBeep = document.createElement('audio');

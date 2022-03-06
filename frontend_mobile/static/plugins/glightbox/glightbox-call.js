@@ -16,7 +16,6 @@ setTimeout(function() {
     });
     
     lightbox.on('close', () => {
-        console.log("close : " + window.location.href)
         if(window.location.href.split('/').pop() == 'modal'){
             window.history.back(); 
         }

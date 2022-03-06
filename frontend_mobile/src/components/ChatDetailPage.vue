@@ -838,6 +838,10 @@ export default {
         var menuData = "chat-add";
         document.getElementById(menuData).classList.add('menu-active');
         document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
+        // jjangs : open menu
+        if(window.location.href.split('/').pop() != 'modal'){
+            window.history.pushState({}, 'modal', window.location.pathname + '/modal');
+        }
 
         
         var menu = document.getElementById(menuData);
@@ -902,6 +906,10 @@ export default {
 
             const activeMenu = document.querySelectorAll('.menu-active');
             for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
+            // jjangs close menu
+            if(window.location.href.split('/').pop() == 'modal'){
+                window.history.back(); 
+            }
 
             try {
                 Android.vibrate();
@@ -1076,6 +1084,10 @@ export default {
             }
             const activeMenu = document.querySelectorAll('.menu-active');
             for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
+            // jjangs close menu
+            if(window.location.href.split('/').pop() == 'modal'){
+                window.history.back(); 
+            }
         }
     },
     removeLocationSelected(location) {

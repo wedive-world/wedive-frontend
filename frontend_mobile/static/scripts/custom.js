@@ -1,3 +1,4 @@
+var prev_el = document.getElementById("wedive-noti");
 //Removing Preloader
 
 //document.onreadystatechange = () => { 
@@ -349,6 +350,10 @@
                 var wrappers = document.querySelectorAll('.header, #footer-bar, .page-content');
 
                 menuOpen.forEach(el => el.addEventListener('click',e =>{
+                    // jjangs : open menu
+                    if(window.location.href.split('/').pop() != 'modal'){
+                        window.history.pushState({}, 'modal', window.location.pathname + '/modal');
+                    }
                     //Close Existing Opened Menus
                     const activeMenu = document.querySelectorAll('.menu-active');
                     for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
@@ -372,6 +377,9 @@
                             setTimeout(function(){
                                 document.getElementById(menuData).classList.remove('menu-active');
                                 document.getElementsByClassName('menu-hider')[0].classList.remove('menu-active');
+                                if(window.location.href.split('/').pop() == 'modal'){
+                                    window.history.back(); 
+                                }
                             },menuTimeout)
                         }
 
@@ -395,10 +403,18 @@
                 //Closing Menus
                 const menuClose = document.querySelectorAll('.close-menu, .menu-hider');
                 menuClose.forEach(el => el.addEventListener('click',e =>{
+                    // jjangs close menu
+                    if(window.location.href.split('/').pop() == 'modal' && (el.isEqualNode(prev_el) == false)){
+                        prev_el = el;
+                        window.history.back(); 
+                    } else {
+                        prev_el = document.getElementById("wedive-noti");
+                    }
                     const activeMenu = document.querySelectorAll('.menu-active');
                     for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
                     for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+0+"px)"}
                 }));
+                
             }
         }
         activateMenus();
@@ -625,8 +641,8 @@
                 setTimeout(function(){setColorScheme();},50)
             }))
         }
-        if(localStorage.getItem(pwaName+'-Theme') == "dark-mode"){document.body.className = 'theme-dark';}
-        if(localStorage.getItem(pwaName+'-Theme') == "light-mode"){document.body.className = 'theme-light';}
+        //if(localStorage.getItem(pwaName+'-Theme') == "dark-mode"){document.body.className = 'theme-dark';}
+        //if(localStorage.getItem(pwaName+'-Theme') == "light-mode"){document.body.className = 'theme-light';}
 
 
         //Accordion Rotate

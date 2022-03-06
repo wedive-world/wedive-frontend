@@ -777,11 +777,19 @@ export default {
           if (result.data && result.data.data && result.data.data.upsertDiving) {
               const activeMenu = document.querySelectorAll('.menu-active');
               for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
+              // jjangs close menu
+              if(window.location.href.split('/').pop() == 'modal'){
+                window.history.back(); 
+              }
 
               setTimeout(function() {
                 var menuData = 'menu-complete';
                 document.getElementById(menuData).classList.add('menu-active');
                 document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
+                // jjangs : open menu
+                if(window.location.href.split('/').pop() != 'modal'){
+                    window.history.pushState({}, 'modal', window.location.pathname + '/modal');
+                }
               },500);
           } else {
               var toastData = 'snackbar-request-error';
@@ -819,11 +827,19 @@ export default {
           if (result.data && result.data.data && result.data.data.acceptParticipant) {
               const activeMenu = document.querySelectorAll('.menu-active');
               for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
+              // jjangs close menu
+              if(window.location.href.split('/').pop() == 'modal'){
+                window.history.back(); 
+              }
 
               setTimeout(function() {
                 var menuData = 'menu-complete';
                 document.getElementById(menuData).classList.add('menu-active');
                 document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
+                // jjangs : open menu
+                if(window.location.href.split('/').pop() != 'modal'){
+                    window.history.pushState({}, 'modal', window.location.pathname + '/modal');
+                }
               },500);
           } else {
               var toastData = 'snackbar-request-error';
@@ -877,11 +893,19 @@ export default {
           if (result.data && result.data.data && result.data.data.upsertDiving) {
               const activeMenu = document.querySelectorAll('.menu-active');
               for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
+              // jjangs close menu
+              if(window.location.href.split('/').pop() == 'modal'){
+                window.history.back(); 
+              }
 
               setTimeout(function() {
                 var menuData = 'menu-complete';
                 document.getElementById(menuData).classList.add('menu-active');
                 document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
+                // jjangs : open menu
+                if(window.location.href.split('/').pop() != 'modal'){
+                    window.history.pushState({}, 'modal', window.location.pathname + '/modal');
+                }
               },500);
           } else {
               var toastData = 'snackbar-request-error';
@@ -921,11 +945,19 @@ export default {
               //Close Existing Opened Menus
               const activeMenu = document.querySelectorAll('.menu-active');
               for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
+              // jjangs close menu
+              if(window.location.href.split('/').pop() == 'modal'){
+                window.history.back(); 
+              }
 
               setTimeout(function() {
                 var menuData = 'menu-join-requested';
                 document.getElementById(menuData).classList.add('menu-active');
                 document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
+                // jjangs : open menu
+                if(window.location.href.split('/').pop() != 'modal'){
+                    window.history.pushState({}, 'modal', window.location.pathname + '/modal');
+                }
               },500);
               
           } else {
@@ -937,17 +969,29 @@ export default {
               //Close Existing Opened Menus
               const activeMenu = document.querySelectorAll('.menu-active');
               for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
+              // jjangs close menu
+              if(window.location.href.split('/').pop() == 'modal'){
+                window.history.back(); 
+              }
           }
       },
       showReivewModal() {
           //Close Existing Opened Menus
           const activeMenu = document.querySelectorAll('.menu-active');
           for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
+          // jjangs close menu
+          if(window.location.href.split('/').pop() == 'modal'){
+            window.history.back(); 
+          }
           
           //var menuData = 'menu-join';
           var menuData = 'menu-rating';
           document.getElementById(menuData).classList.add('menu-active');
           document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
+          // jjangs : open menu
+          if(window.location.href.split('/').pop() != 'modal'){
+            window.history.pushState({}, 'modal', window.location.pathname + '/modal');
+          }
       },
       weDiveDateFormat(date, showTime) {
           var _date = null

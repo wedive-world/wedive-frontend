@@ -364,7 +364,10 @@ export default {
             var menuData = "search-suggestion";
             document.getElementById(menuData).classList.add('menu-active');
             document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
-
+            // jjangs : open menu
+            if(window.location.href.split('/').pop() != 'modal'){
+                window.history.pushState({}, 'modal', window.location.pathname + '/modal');
+            }
             
             var menu = document.getElementById(menuData);
             var menuEffect = menu.getAttribute('data-menu-effect');

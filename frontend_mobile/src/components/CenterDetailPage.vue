@@ -1220,17 +1220,6 @@ export default {
     }
   },*/
   async mounted() {
-    if (this.$route.params.id) {
-        setTimeout(function() {
-            $("#cover-slider-temp").animate({opacity: "0"}, 1200);
-            $('[data-toggle="tooltip"]').tooltip();
-        },1500);
-        setTimeout(function() {
-            console.log("none")
-            $("#cover-slider-temp").css("display", "none");
-        },3000);
-    }
-
     if (this.$route.query.header && this.$route.query.header == 'hide') {
         $(".page-title").hide();
         $(".page-title-clear").hide();
@@ -1441,6 +1430,8 @@ export default {
               }
           },
           result() {
+            if (this.getDiveCenterByUniqueName.isUserLike) this.like_img = 'ico_heart2';
+            if (this.getDiveCenterByUniqueName.isUserSubscribe) this.subscribe_img = 'ico_subscribe2';
             {
                 var id_arr = new Array();
                 var width_arr = new Array();
@@ -1475,6 +1466,13 @@ export default {
                             i++;
                         });
                     }
+                    setTimeout(function() {
+                        $("#cover-slider-temp").animate({opacity: "0"}, 1200);
+                        $('[data-toggle="tooltip"]').tooltip();
+                    },500);
+                    setTimeout(function() {
+                        $("#cover-slider-temp").css("display", "none");
+                    },2000);
                 });
             }
             {
@@ -1680,8 +1678,6 @@ export default {
   methods: {
       /*setData(_centerData) {
         this.centerData = _centerData;
-        if (_centerData.isUserLike) this.like_img = 'ico_heart2';
-        if (_centerData.isUserSubscribe) this.subscribe_img = 'ico_subscribe2';
         setTimeout(function() {
             init_template();
             var preloader = document.getElementById('preloader')
@@ -1857,6 +1853,10 @@ export default {
         // close dialog
         const activeMenu = document.querySelectorAll('.menu-active');
         for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
+        // jjangs close menu
+        if(window.location.href.split('/').pop() == 'modal'){
+            window.history.back(); 
+        }
 
         // toast
         var toastData = 'snackbar-review-success';

@@ -240,7 +240,7 @@ try {
   
   } else if (userAgent.indexOf('iphone') !== -1 || userAgent.indexOf('ipad') !== -1) {
     
-    // console.log(`ios connected, ${JSON.stringify(JSON.parse(iOS.getUserInformation()))}`)
+    // console.log(`ios connected, ${JSON.stringify(JfSON.parse(iOS.getUserInformation()))}`)
     // localStorage.setItem(userAuthKey, JSON.parse(iOS.getUserInformation()));
   
   } else { // 안드로이드, IOS 가 아닌 경우 (더 조건을 추가해서 처리해도 됨)
@@ -250,3 +250,8 @@ try {
 } catch(e) {
 
 }
+
+
+// add 22-03-06 from custom.js
+if(localStorage.getItem(pwaName+'-Theme') == "dark-mode"){document.body.className = 'theme-dark';}
+if(localStorage.getItem(pwaName+'-Theme') == "light-mode"){document.body.className = 'theme-light';}

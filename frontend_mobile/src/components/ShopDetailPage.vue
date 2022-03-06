@@ -466,7 +466,10 @@ export default {
         try {
           const activeMenu = document.querySelectorAll('.menu-active');
           for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
-          for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+0+"px)"}
+          // jjangs close menu
+          if(window.location.href.split('/').pop() == 'modal'){
+            window.history.back(); 
+          }
         } catch (e) {
 
         }
@@ -474,6 +477,10 @@ export default {
         var menuData = 'menu-order';
         document.getElementById(menuData).classList.add('menu-active');
         document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
+        // jjangs : open menu
+        if(window.location.href.split('/').pop() != 'modal'){
+            window.history.pushState({}, 'modal', window.location.pathname + '/modal');
+        }
       }
     },
     deleteOrderItem: function() {

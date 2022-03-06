@@ -947,7 +947,10 @@ export default {
             
             const activeMenu = document.querySelectorAll('.menu-active');
             for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
-            //for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+0+"px)"}
+            // jjangs close menu
+            if(window.location.href.split('/').pop() == 'modal'){
+                window.history.back(); 
+            }
             
             
 
@@ -966,7 +969,10 @@ export default {
                 $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08 wedive-label bg-white">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
                 const activeMenu = document.querySelectorAll('.menu-active');
                 for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
-                for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+0+"px)"}
+                // jjangs close menu
+                if(window.location.href.split('/').pop() == 'modal'){
+                    window.history.back(); 
+                }
             }*/
       },
       

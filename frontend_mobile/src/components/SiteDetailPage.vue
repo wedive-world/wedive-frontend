@@ -1606,14 +1606,6 @@ export default {
     }
   },*/
   async mounted() {
-    setTimeout(function() {
-        $("#cover-slider-temp").animate({opacity: "0"}, 1200);
-        $('[data-toggle="tooltip"]').tooltip();
-    },1500);
-    setTimeout(function() {
-        $("#cover-slider-temp").css("display", "none");
-    },3000);
-    
     if (this.$route.query.header && this.$route.query.header == 'hide') {
         $(".page-title").hide();
         $(".page-title-clear").hide();
@@ -1839,6 +1831,8 @@ export default {
               }
           },
           result() {
+            if (this.getDiveSiteByUniqueName.isUserLike) this.like_img = 'ico_heart2';
+            if (this.getDiveSiteByUniqueName.isUserSubscribe) this.subscribe_img = 'ico_subscribe2';
             {
                 this.firstThumbnailImage = (this.getDiveSiteByUniqueName.backgroundImages && this.getDiveSiteByUniqueName.backgroundImages.length > 0 && this.getDiveSiteByUniqueName.backgroundImages[0].thumbnailUrl) ? this.getDiveSiteByUniqueName.backgroundImages[0].thumbnailUrl : '/static/empty.jpg';
                 var id_arr = new Array();
@@ -1873,6 +1867,14 @@ export default {
                             x.thumbnailUrl = result_image.data.data.getImageUrlsByIds[i];
                             i++;
                         });
+                        setTimeout(function() {
+                            $("#cover-slider-temp").animate({opacity: "0"}, 1200);
+                            $('[data-toggle="tooltip"]').tooltip();
+                        },500);
+                        setTimeout(function() {
+                            console.log("none")
+                            $("#cover-slider-temp").css("display", "none");
+                        },2000);
                     }
                 });
             }
@@ -2240,6 +2242,10 @@ export default {
         // close dialog
         const activeMenu = document.querySelectorAll('.menu-active');
         for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
+        // jjangs close menu
+        if(window.location.href.split('/').pop() == 'modal'){
+            window.history.back(); 
+        }
 
         // toast
         var toastData = 'snackbar-review-success';

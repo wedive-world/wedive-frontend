@@ -413,6 +413,10 @@ export default {
             }
             const activeMenu = document.querySelectorAll('.menu-active');
             for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
+            // jjangs close menu
+            if(window.location.href.split('/').pop() == 'modal'){
+                window.history.back(); 
+            }
       },
       async createForum() {
             var preloader = document.getElementById('preloader')
@@ -456,6 +460,10 @@ export default {
             }
             const activeMenu = document.querySelectorAll('.menu-active');
             for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
+            // jjangs close menu
+            if(window.location.href.split('/').pop() == 'modal'){
+                window.history.back(); 
+            }
       },
       async createCommunity() {
           var preloader = document.getElementById('preloader')
@@ -538,6 +546,10 @@ export default {
           }
           const activeMenu = document.querySelectorAll('.menu-active');
           for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
+          // jjangs close menu
+          if(window.location.href.split('/').pop() == 'modal'){
+            window.history.back(); 
+          }
       },
       async createAgenda() {
             var preloader = document.getElementById('preloader')
@@ -661,6 +673,10 @@ export default {
             }
             const activeMenu = document.querySelectorAll('.menu-active');
             for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
+            // jjangs close menu
+            if(window.location.href.split('/').pop() == 'modal'){
+                window.history.back(); 
+            }
       },
       async refresh(loaded) {
         if ($(document).scrollTop() == 0) {
