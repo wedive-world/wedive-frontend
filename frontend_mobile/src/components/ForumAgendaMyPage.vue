@@ -35,7 +35,7 @@
                       <h5 class="mb-0 font-500 font-15">{{ agenda.author.nickName }}</h5>
                       <p class="mb-0 mt-n1 font-13 color-gray">{{ getDiverLevel(agenda.author.freeLicenseLevel, agenda.author.scubaLicenseLevel) }}</p>
                   </div>
-                  <p class="color-gray-dark mb-0 font-12" style="position: absolute;right: 0px;top: 0;">10분 전</p>
+                  <p class="color-gray-dark mb-0 font-12" style="position: absolute;right: 0px;top: 0;">{{ timeForToday(agenda.createdAt) }}</p>
               </div>
               <div class="">
                   <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 잠실 수영장</p>
@@ -58,11 +58,11 @@
                   <span v-for="hashtag in agenda.hashTags" class="bg-gray-light color-gray rounded-sm me-1" style="padding: 6px 12px;">#{{ hashtag.name }}</span>
               </div>
               <div class="mt-4 mb-3">
-                  <img src="/static/images/assets/ico_heart.png" width="22" class="me-1" style="margin-top:-1px;"/>
-                  <span class="font-14 font-noto">{{ agenda.likes ? agenda.likes : 0 }}</span>
+                  <img :src="'/static/images/assets/ico_heart'+(agenda.isUserLike?'2':'')+'.png'" width="22" class="me-1" style="margin-top:-1px;"/>
+                  <span class="font-14 font-noto">{{ agenda.likes || 0 }}</span>
                   &nbsp;&nbsp;
                   <img src="/static/images/assets/ico_chat.png" width="22" class="me-1" style="margin-top:-1px;"/>
-                  <span class="font-14 font-noto">{{ agenda.reviewCount ? agenda.reviewCount : 0 }}</span>
+                  <span class="font-14 font-noto">{{ agenda.reviewCount || 0 }}</span>
               </div>
             </div>
             <div class="divider mb-0" style="height:12px;border-top: 1px solid #88888840"></div>
@@ -113,6 +113,28 @@ export default {
       handleScroll (event) {
         this.scrollTop = $(document).scrollTop();
       },
+      timeForToday(value) {
+        const today = new Date();
+        const timeValue = new Date(value);
+
+        const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
+        if (betweenTime < 1) return '방금전';
+        if (betweenTime < 60) {
+            return `${betweenTime}분전`;
+        }
+
+        const betweenTimeHour = Math.floor(betweenTime / 60);
+        if (betweenTimeHour < 24) {
+            return `${betweenTimeHour}시간전`;
+        }
+
+        const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
+        if (betweenTimeDay < 365) {
+            return `${betweenTimeDay}일전`;
+        }
+
+        return `${Math.floor(betweenTimeDay / 365)}년전`;
+      },
       getDiverLevel(freeLicenseLevel, scubaLicenseLevel) {
         var levelShow = '초보';
         var scuba_level = ["초보", "오픈워터", "어드벤스드", "레스큐", "마스터", "강사", "위다이브 컨시어지"];
@@ -129,7 +151,7 @@ export default {
         if(my_s_lvl>5) levelShow = scuba_level[my_s_lvl];
         
         return levelShow;
-    },
+      },
   },
   mounted() {
   },

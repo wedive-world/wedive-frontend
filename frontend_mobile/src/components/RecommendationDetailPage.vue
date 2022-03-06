@@ -22,35 +22,34 @@
         
         <div class="card text-start p-3" v-if="getPreviewsByRecommendationId.previews" style="min-height: calc(100vh - 50px);padding-bottom: 0 !important;margin-bottom: 0;">
             <div v-for="(site,index) in getPreviewsByRecommendationId.previews.filter(x=>x.__typename == 'DiveSite')">
-                <div class="map-box">
-                    <a v-on:click="movePreview(site)">
-                        <div class="bx">
-                            <div class="justify-content-center mb-0 text-start">
-                                <div class="thumb-img me-2">
-                                    <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
-                                        <defs>
-                                        <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
-                                        <clipPath id="clipSquircle">
-                                            <use xlink:href="#shapeSquircle"/>
-                                        </clipPath>
-                                        </defs>
-                                        <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(site.backgroundImages && site.backgroundImages.length > 0) ? site.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'"/>
-                                    </svg>
-                                </div>
-                                <!--<div class="" style="float: left;position: relative;width: 95px; height:95px;">
-                                    <img v-bind:src="(site.backgroundImages && site.backgroundImages.length > 0) ? site.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;margin-top: 3px;">
-                                </div>-->
-                                <div class="" style="display:inline-block;vertical-align: top;width: calc(100vw - 138px);">
-                                    <h4 class="font-15"> {{ site.name }} </h4>
-                                    <p class="pb-0 mb-0 nearby_desc"> {{ site.description }} </p>
-                                    
-                                    <p class="pb-0 mb-0"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
-                                        <span> {{(site.adminScore/20).toFixed(1)}} </span>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
+                <div v-on:click="movePreview(site)" class="map-box">
+                  <div class="bx">
+                      <div class="justify-content-center mb-0 text-start">
+                          <div class="thumb-img me-2">
+                              <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                                  <defs>
+                                  <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                                  <clipPath id="clipSquircle">
+                                      <use xlink:href="#shapeSquircle"/>
+                                  </clipPath>
+                                  </defs>
+                                  <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(site.backgroundImages && site.backgroundImages.length > 0) ? site.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'"/>
+                              </svg>
+                          </div>
+                          <!--<div class="" style="float: left;position: relative;width: 95px; height:95px;">
+                              <img v-bind:src="(site.backgroundImages && site.backgroundImages.length > 0) ? site.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;margin-top: 3px;">
+                          </div>-->
+                          <div class="" style="display:inline-block;vertical-align: top;width: calc(100vw - 138px);">
+                              <h4 class="font-15"> {{ site.name }} </h4>
+                              <p class="pb-0 mb-0 nearby_desc"> {{ site.description }} </p>
+                              
+                              <p class="pb-0 mb-0"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
+                                  <span> {{(site.adminScore/20).toFixed(1)}} </span>
+                              </p>
+                          </div>
+                      </div>
+                  </div>
+              
                 </div>
                 <div class="divider mt-3 mb-3"></div>
             </div>
@@ -102,6 +101,30 @@ export default {
       },
       handleScroll (event) {
         this.scrollTop = $(document).scrollTop();
+      },
+      async movePreview(item) {
+        var dic_type1 = {"DiveSite": "diveSite", "DivePoint": "divePoint", "DiveCenter": "diveCenter", "Diving": "diving", "User": "user", "Review": "review", "Forum": "forum", "Recommendation": "recommendation"};
+        await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                mutation Mutation($targetId: ID!, $targetType: UserReactionTargetType!) {
+                    view(targetId: $targetId, targetType: $targetType)
+                }
+                `,
+                variables: {
+                    "targetId": item._id,
+                    "targetType": dic_type1[item.__typename]
+                }
+            }
+        });
+        var dic_type2 = {"DiveSite": "site", "DivePoint": "point", "DiveCenter": "center", "Diving": "diving", "User": "user", "Review": "review", "Forum": "forum", "Recommendation": "recommendation"};
+        location.href = '/' + dic_type2[item.__typename] + '/' + item.uniqueName;
       },
   },
   mounted() {

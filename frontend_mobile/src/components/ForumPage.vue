@@ -12,8 +12,6 @@
                     @slideChange="tabSlideChange"
                 >
                     <swiper-slide v-for="(forum,index) in getForums" :key="forum._id"><div v-on:click="moveTo(index)">{{ forum.name }}</div></swiper-slide>
-                    
-                    <div class="swiper-pagination" slot="pagination"></div>
                 </swiper>
             </div>
             <div>
@@ -750,6 +748,7 @@ export default {
         swiperOption: {
             slidesPerView: 3.7,
             spaceBetween: 5,
+            pagination: false,
             //pagination: {
             //    el: '.swiper-pagination'
             //},
