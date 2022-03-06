@@ -61,26 +61,35 @@
                 <h5 class="font-600 mt-3 mb-2 font-17">{{ agenda.title }}</h5>
                 <p class="mb-0 font-noto opacity-90" style="line-height: 1.5;">
                   {{ agenda.content }}
-                  <span class="color-gray ms-2">... 더 보기</span>
                 </p>
+                <p class="color-gray mt-2 mb-0">... 더 보기</p>
               </div>
             </div>
             <div
               v-if="agenda.images && agenda.images.length == 1"
               class="img_square">
               <div class="img_square_inner" :style="'background: url('+agenda.images[0].thumbnailUrl+');'"/>
+              <vue-star :id="agenda._id" class="img-center-icon" animate="animated wobble" color="#FF5160">
+                <i slot="icon" class="fa fa-heart" style="font-size:80px;"></i>
+              </vue-star>
+              <div class="img_square_inner" style="z-index: 900;" v-on:click="likeAnimation(agenda, false)"/>
             </div>
             <div v-if="agenda.images && agenda.images.length > 1" style="position: relative;">
               <swiper
                   class="swiper wedive-swiper"
                   :options="swiperImgOption"
                 >
-                  <swiper-slide v-for="image in agenda.images">
+                  <swiper-slide v-for="(image,img_idx) in agenda.images" :key="image._id">
                     <div class="img_square">
                       <div class="img_square_inner" :style="'background: url('+image.thumbnailUrl+');'"/>
+                      <vue-star v-if="img_idx==0" :id="agenda._id" class="img-center-icon" animate="animated wobble" color="#FF5160">
+                        <i slot="icon" class="fa fa-heart" style="font-size:80px;"></i>
+                      </vue-star>
+                      <div v-if="img_idx==0" class="img_square_inner" style="z-index: 900;" v-on:click="likeAnimation(agenda, false)"/>
                     </div>
                   </swiper-slide>
               </swiper>
+              
               <div class="swiper-pagination"></div>
               <div class="swiper-button-prev" slot="button-prev"></div>
               <div class="swiper-button-next" slot="button-next"></div>
@@ -90,10 +99,12 @@
                   <span v-for="tag in agenda.hashTags" class="bg-gray-light color-gray rounded-sm me-1" style="padding: 6px 12px;">#{{ tag.name }}</span>
               </div>
               <div class="mt-4 mb-3">
-                  <img :src="'/static/images/assets/ico_heart'+(agenda.isUserLike?'2':'')+'.png'" width="22" class="me-1" style="margin-top:-1px;"/>
-                    <span class="font-14 font-noto">{{ agenda.likes || 0 }}</span>
+                  <vue-star :id="'like_' + agenda._id" :class="(agenda.isUserLike ? 'heart-active-force' : 'heart-disabled-force')" animate="animated rubberBand" color="#FF5160">
+                    <i v-on:click="likeAnimation(agenda, true)" slot="icon" class="fa fa-heart font-20"></i>
+                  </vue-star>
+                    <span class="font-14 font-noto ms-4">{{ agenda.likes || 0 }}</span>
                   &nbsp;&nbsp;
-                  <img src="/static/images/assets/ico_chat.png" width="22" class="me-1" style="margin-top:-1px;"/>
+                  <i class="fas fa-comment me-1 font-20" style="color:#bbb;"></i>
                     <span class="font-14 font-noto">{{ agenda.reviewCount || 0 }}</span>
               </div>
             </div>
@@ -111,9 +122,9 @@
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import 'swiper/css/swiper.css'
 
-
 import gql from 'graphql-tag'
 import PullTo from 'vue-pull-to'
+import VueStar from 'vue-star'
 const axios = require("axios")
 
 export default {
@@ -122,8 +133,58 @@ export default {
       Swiper,
       SwiperSlide,
       PullTo,
+      VueStar,
   },
   methods: {
+      async likeAnimation(item, isBottom) {
+        if (item.likes == null) item.likes = 0;
+
+        if (item.isUserLike == true) {
+          item.isUserLike = false;
+          item.likes--;
+          if (isBottom && item.isBottomClicked == false) { // enabled되었는데, 아래를 클릭하면 지워져야함
+            $("#like_"+item._id + "  .VueStar__ground .VueStar__icon").click();
+            item.isBottomClicked = !item.isBottomClicked;
+          } else if (isBottom == false && item.isBottomClicked == true) {
+            $("#like_"+item._id + "  .VueStar__ground .VueStar__icon").click();
+            item.isBottomClicked = !item.isBottomClicked;
+          }
+          
+        } else {
+          item.isUserLike = true;
+          item.likes++;
+          if (isBottom == false) {
+            $("#"+item._id + "  .VueStar__ground .VueStar__icon").click();
+            setTimeout(function() {
+              $("#"+item._id + "  .VueStar__ground .VueStar__icon").click();
+            },1000) 
+          }
+        }
+
+        if (isBottom) {
+          item.isBottomClicked = !item.isBottomClicked;
+        }
+        
+        var result = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                    mutation Like($targetId: ID!, $targetType: UserReactionTargetType!) {
+                        like(targetId: $targetId, targetType: $targetType)
+                    }
+                `,
+                variables: {
+                    "targetId": item._id,
+                    "targetType": "agenda"
+                }
+            }
+        });
+      },
       goUser(user) {
         location.href='/user/' + user._id;
       },
@@ -278,6 +339,9 @@ export default {
             }
           },
           result() {
+            this.getAgendasByTargetId.forEach(x => {
+              x.isBottomClicked = false;
+            })
             var id_arr = new Array();
             var width_arr = new Array();
             this.getAgendasByTargetId.forEach(x => {

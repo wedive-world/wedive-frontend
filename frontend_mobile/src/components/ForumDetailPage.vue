@@ -62,11 +62,20 @@
                   <span v-for="tag in getAgendaById.hashTags" class="bg-gray-light color-gray rounded-sm me-1" style="padding: 6px 12px;">#{{ tag.name }}</span>
               </div>
               <div class="mt-4 mb-3">
-                  <img :src="'/static/images/assets/'+like_img+'.png'" width="22" class="me-1" style="margin-top:-1px;"/>
+                  <vue-star :id="'like_' + getAgendaById._id" :class="(getAgendaById.isUserLike ? 'heart-active-force' : 'heart-disabled-force')" animate="animated rubberBand" color="#FF5160">
+                    <i v-on:click="likeAnimation(getAgendaById, true)" slot="icon" class="fa fa-heart font-20"></i>
+                  </vue-star>
+                    <span class="font-14 font-noto ms-4">{{ getAgendaById.likes || 0 }}</span>
+                  &nbsp;&nbsp;
+                  <i class="fas fa-comment me-1 font-20" style="color:#bbb;"></i>
+                    <span class="font-14 font-noto">{{ getAgendaById.reviewCount || 0 }}</span>
+
+
+                  <!--<img :src="'/static/images/assets/'+like_img+'.png'" width="22" class="me-1" style="margin-top:-1px;"/>
                     <span class="font-14 font-noto">{{ getAgendaById.likes || 0 }}</span>
                   &nbsp;&nbsp;
                   <img src="/static/images/assets/ico_chat.png" width="22" class="me-1" style="margin-top:-1px;"/>
-                    <span class="font-14 font-noto">{{ getAgendaById.reviewCount || 0 }}</span>
+                    <span class="font-14 font-noto">{{ getAgendaById.reviewCount || 0 }}</span>-->
               </div>
           </div>
           <div class="divider mb-0" style="height:12px;border-top: 1px solid #88888840"></div>
@@ -80,14 +89,65 @@
 <script>
 import gql from 'graphql-tag'
 import PullTo from 'vue-pull-to'
+import VueStar from 'vue-star'
 const axios = require("axios")
 
 export default {
   name: 'HelloWorld',
   components: {
-      PullTo,
+    PullTo,
+    VueStar,
   },
   methods: {
+      async likeAnimation(item, isBottom) {
+        if (item.likes == null) item.likes = 0;
+
+        if (item.isUserLike == true) {
+          item.isUserLike = false;
+          item.likes--;
+          if (isBottom && item.isBottomClicked == false) { // enabled되었는데, 아래를 클릭하면 지워져야함
+            $("#like_"+item._id + "  .VueStar__ground .VueStar__icon").click();
+            item.isBottomClicked = !item.isBottomClicked;
+          } else if (isBottom == false && item.isBottomClicked == true) {
+            $("#like_"+item._id + "  .VueStar__ground .VueStar__icon").click();
+            item.isBottomClicked = !item.isBottomClicked;
+          }
+          
+        } else {
+          item.isUserLike = true;
+          item.likes++;
+          if (isBottom == false) {
+            $("#"+item._id + "  .VueStar__ground .VueStar__icon").click();
+            setTimeout(function() {
+              $("#"+item._id + "  .VueStar__ground .VueStar__icon").click();
+            },1000) 
+          }
+        }
+
+        if (isBottom) {
+          item.isBottomClicked = !item.isBottomClicked;
+        }
+        
+        var result = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                    mutation Like($targetId: ID!, $targetType: UserReactionTargetType!) {
+                        like(targetId: $targetId, targetType: $targetType)
+                    }
+                `,
+                variables: {
+                    "targetId": item._id,
+                    "targetType": "agenda"
+                }
+            }
+        });
+      },
       goUser(user) {
         location.href='/user/' + user._id;
       },
@@ -201,6 +261,7 @@ export default {
           query:gql `
             query Query($id: ID!) {
               getAgendaById(_id: $id) {
+                _id
                 types {
                   _id
                   name
@@ -241,8 +302,9 @@ export default {
             }
           },
           result() {
-            if (this.getAgendaById.isUserLike) this.like_img = 'ico_heart2';
+            this.getAgendaById.isBottomClicked = false;
 
+            if (this.getAgendaById.isUserLike) this.like_img = 'ico_heart2';
             var id_arr = new Array();
             var width_arr = new Array();
             

@@ -141,7 +141,7 @@ const axios = require("axios")
 export default {
   name: 'App',
   mounted() {
-    if (localStorage.tokenAt == null || (new Date().getTime() - localStorage.tokenAt) > 100000) {
+    if (localStorage.tokenAt == null || (new Date().getTime() - localStorage.tokenAt) > 50000) {
       this.getFirebaseToken()
     }
 

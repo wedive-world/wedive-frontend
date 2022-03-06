@@ -102,7 +102,10 @@
                             <h5 v-else-if="chat.chatUsers && chat.chatUsers.length == 0 && chat.owner" class="font-15 font-600 mb-0" v-html="chat.owner.name"></h5>
                             <h5 v-else class="font-15 font-600 mb-0 ellipsis" v-html="chat.chatUsers.filter(user=>user.uid != uid).map(user => {return user.name}).join()" style="max-width: calc(100vw - 190px);"></h5>
                         </div>
-                        <p class="line-height-s opacity-60 font-13 ellipsis2" style="max-width: calc(100vw - 172px);margin-top:8px;">
+                        <div v-if="chat.divingInfo" class="mt-n1">
+                            <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> {{ chat.divingInfo.name }} ({{ (chat.divingInfo.daysLeft > 0 ? 'D-'+chat.divingInfo.daysLeft : '완료') }})</p>
+                        </div>
+                        <p :class="'line-height-s opacity-60 font-13 ellipsis' + (chat.divingInfo ? '' : '2 mt-2')" style="max-width: calc(100vw - 172px);">
                             {{ (chat.lastChatMessage && chat.lastChatMessage.text)?(chat.lastChatMessage.text.includes('[[')&&chat.lastChatMessage.text.includes(']]')?((chat.lastChatMessage.text.includes('emoji|'))?'이모티콘':((chat.lastChatMessage.text.includes('center|')||chat.lastChatMessage.text.includes('point|')||chat.lastChatMessage.text.includes('site|'))?chat.lastChatMessage.text.split('|')[2]:'')):chat.lastChatMessage.text): ''}}
                         </p>
                     </div>
@@ -267,6 +270,7 @@ export default {
                     unread
                     divingInfo {
                     title
+                    name
                     daysLeft
                     }
                     createdAt

@@ -325,7 +325,6 @@ export default {
           this.getAllAgendaTypes = getAllAgendaTypes.data.data.getAllAgendaTypes;
       },
       moveTo(idx) {
-          console.log(idx);
           this.contentSwiper.slideTo(idx);
           var height = $(".wedive-content-swiper .swiper-wrapper .swiper-slide-active").height();
           if (height < ($(window).height() - 172)) {
