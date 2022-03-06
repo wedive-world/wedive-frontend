@@ -416,38 +416,41 @@ export default {
                     }
                 });
             });
-            var result_image = await axios({
-                url: 'https://api.wedives.com/graphql',
-                method: 'post',
-                headers: {
-                    countrycode: 'ko',
-                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-                },
-                data: {
-                    query: `
-                        query Query($ids: [ID], $widths: [Int]) {
-                            getImageUrlsByIds(_ids: $ids, widths: $widths)
+            if (id_arr.length > 0) {
+                var result_image = await axios({
+                    url: 'https://api.wedives.com/graphql',
+                    method: 'post',
+                    headers: {
+                        countrycode: 'ko',
+                        idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                    },
+                    data: {
+                        query: `
+                            query Query($ids: [ID], $widths: [Int]) {
+                                getImageUrlsByIds(_ids: $ids, widths: $widths)
+                            }
+                        `,
+                        variables: {
+                            ids: id_arr,
+                            widths: width_arr
                         }
-                    `,
-                    variables: {
-                        ids: id_arr,
-                        widths: width_arr
-                    }
 
-                }
-            });
-            if (result_image.data.data.getImageUrlsByIds) {
-                var cnt = 0;
-                this.getUserRecommendationsByTargetType.filter(x=>x.previewCount > 3).forEach(x => {
-                    x.previews.forEach(y => {
-                        if (y.backgroundImages.length > 0) {
-                            y.backgroundImages[0].thumbnailUrl = result_image.data.data.getImageUrlsByIds[cnt];
-                            cnt++;
-                        }
-                    });
+                    }
                 });
-                //console.log(result_image.data.data.getImageUrlsByIds);
+                if (result_image.data.data.getImageUrlsByIds) {
+                    var cnt = 0;
+                    this.getUserRecommendationsByTargetType.filter(x=>x.previewCount > 3).forEach(x => {
+                        x.previews.forEach(y => {
+                            if (y.backgroundImages.length > 0) {
+                                y.backgroundImages[0].thumbnailUrl = result_image.data.data.getImageUrlsByIds[cnt];
+                                cnt++;
+                            }
+                        });
+                    });
+                    //console.log(result_image.data.data.getImageUrlsByIds);
+                }
             }
+            
             var splide = document.getElementsByClassName('splide');
             if(splide.length){
                 var singleSlider = document.querySelectorAll('.single-slider-site');

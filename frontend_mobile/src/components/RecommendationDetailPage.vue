@@ -79,7 +79,6 @@ export default {
   methods: {
       setData(id) {
           console.log(id);
-          this.recommendation_id = id;
       },
       async refresh(loaded) {
         if ($(document).scrollTop() == 0) {
@@ -123,7 +122,7 @@ export default {
   },
   data () {
     return {
-      recommendation_id: '',
+      recommendation_id: this.$route.params.id,
       skip: 0,
       limit: 20,
       scrollTop: 0,

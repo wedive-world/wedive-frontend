@@ -28,7 +28,7 @@
                     highlightClass="special-highlight-class"
                     @hit="selectedCommunity = $event;enableNext2($event);"
                     :minMatchingChars="2"
-                    placeholder="커뮤니티 검색"
+                    placeholder="동호회 검색"
                     inputClass="special-input-class"
                     :disabledValues="[(selectedCommunity ? [selectedCommunity.name] : [])]"
                     @input="lookupCommunity"

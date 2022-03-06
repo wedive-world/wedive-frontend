@@ -264,8 +264,9 @@ export default new Router({
       component: ForumPage
     },
     {
-      path: '/forum/detail',
+      path: '/agenda/:id',
       name: 'ForumDetailPage',
+      props: true,
       component: ForumDetailPage
     },
     {

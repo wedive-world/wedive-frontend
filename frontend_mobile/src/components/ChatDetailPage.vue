@@ -685,7 +685,7 @@ export default {
                 this.is_concierge = true;
             }
             try {
-                this.getChatRoomInfo.chatRoom.title = data.data.getChatRoomInfo.chatMessages.filter(msg => msg.author.uid != this.uid)[0].author.name;
+                this.getChatRoomInfo.chatRoom.title = data.data.getChatRoomInfo.chatRoom.chatUsers.filter(user => user.uid != this.uid)[0].name;
             } catch (e) {
 
             }
@@ -794,7 +794,7 @@ export default {
         sendText: '',
         sendDisable: true,        
         getChatRoomInfo: [],
-        roomId: '',
+        roomId: this.$route.params.id,
         skip: 0,
         limit: 20,
         prev_height: 0,
@@ -819,7 +819,6 @@ export default {
   }, 
   methods: {
     setData(roomId, divingInfo) {
-        this.roomId = roomId;
         this.divingInfo = divingInfo;
         if (this.divingInfo != null) {
             this.divingInfo.diveLocation = [];

@@ -56,7 +56,7 @@
               <div class="mt-1">
                   <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 잠실 수영장</p>
               </div>
-              <div v-on:click="goDetail()">
+              <div v-on:click="goDetail(agenda)">
                 <h5 class="font-600 mt-3 mb-2 font-17">{{ agenda.title }}</h5>
                 <p class="mb-0 font-noto opacity-90" style="line-height: 1.5;">
                   {{ agenda.content }}
@@ -105,8 +105,8 @@ export default {
       PullTo,
   },
   methods: {
-      goDetail() {
-        location.href='/forum/detail';
+      goDetail(agenda) {
+        location.href='/agenda/' + agenda._id;
       },
       async refresh(loaded) {
         if ($(document).scrollTop() == 0) {
@@ -183,6 +183,7 @@ export default {
           query:gql `
             query Query($targetId: ID!, $agendaTypes: [ID], $skip: Int, $limit: Int) {
               getAgendasByTargetId(targetId: $targetId, agendaTypes: $agendaTypes, skip: $skip, limit: $limit) {
+                _id
                 types {
                   _id
                   name
@@ -233,7 +234,8 @@ export default {
                   width_arr.push(720);
                 })
             });
-            axios({
+            if (id_arr.length > 0) {
+              axios({
                 url: 'https://api.wedives.com/graphql',
                 method: 'post',
                 headers: {
@@ -252,17 +254,18 @@ export default {
                     }
 
                 }
-            }).then(result_image => {
-                if (result_image.data.data.getImageUrlsByIds) {
-                    var i=0;
-                    this.getAgendasByTargetId.forEach(x => {
-                        x.images.forEach(y => {
-                          y.thumbnailUrl = result_image.data.data.getImageUrlsByIds[i];
-                          i++;
-                        })
-                    });
-                }
-            });
+              }).then(result_image => {
+                  if (result_image.data.data.getImageUrlsByIds) {
+                      var i=0;
+                      this.getAgendasByTargetId.forEach(x => {
+                          x.images.forEach(y => {
+                            y.thumbnailUrl = result_image.data.data.getImageUrlsByIds[i];
+                            i++;
+                          })
+                      });
+                  }
+              });
+            }
           }
       },
   },

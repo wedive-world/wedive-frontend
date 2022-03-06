@@ -1841,42 +1841,44 @@ export default {
                     id_arr.push(x._id);
                     width_arr.push(720);
                 });
-                axios({
-                    url: 'https://api.wedives.com/graphql',
-                    method: 'post',
-                    headers: {
-                        countrycode: 'ko',
-                        idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-                    },
-                    data: {
-                        query: `
-                            query Query($ids: [ID], $widths: [Int]) {
-                                getImageUrlsByIds(_ids: $ids, widths: $widths)
+                if (id_arr.length > 0) {
+                    axios({
+                        url: 'https://api.wedives.com/graphql',
+                        method: 'post',
+                        headers: {
+                            countrycode: 'ko',
+                            idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                        },
+                        data: {
+                            query: `
+                                query Query($ids: [ID], $widths: [Int]) {
+                                    getImageUrlsByIds(_ids: $ids, widths: $widths)
+                                }
+                            `,
+                            variables: {
+                                ids: id_arr,
+                                widths: width_arr
                             }
-                        `,
-                        variables: {
-                            ids: id_arr,
-                            widths: width_arr
-                        }
 
-                    }
-                }).then(result_image => {
-                    if (result_image.data.data.getImageUrlsByIds) {
-                        var i=0;
-                        this.getDiveSiteByUniqueName.backgroundImages.forEach(x => {
-                            x.thumbnailUrl = result_image.data.data.getImageUrlsByIds[i];
-                            i++;
-                        });
-                        setTimeout(function() {
-                            $("#cover-slider-temp").animate({opacity: "0"}, 1200);
-                            $('[data-toggle="tooltip"]').tooltip();
-                        },500);
-                        setTimeout(function() {
-                            console.log("none")
-                            $("#cover-slider-temp").css("display", "none");
-                        },2000);
-                    }
-                });
+                        }
+                    }).then(result_image => {
+                        if (result_image.data.data.getImageUrlsByIds) {
+                            var i=0;
+                            this.getDiveSiteByUniqueName.backgroundImages.forEach(x => {
+                                x.thumbnailUrl = result_image.data.data.getImageUrlsByIds[i];
+                                i++;
+                            });
+                            setTimeout(function() {
+                                $("#cover-slider-temp").animate({opacity: "0"}, 1200);
+                                $('[data-toggle="tooltip"]').tooltip();
+                            },500);
+                            setTimeout(function() {
+                                console.log("none")
+                                $("#cover-slider-temp").css("display", "none");
+                            },2000);
+                        }
+                    });
+                }
             }
             {
                 var id_arr = new Array();
@@ -1887,36 +1889,38 @@ export default {
                         width_arr.push(720);
                     })
                 });
-                axios({
-                    url: 'https://api.wedives.com/graphql',
-                    method: 'post',
-                    headers: {
-                        countrycode: 'ko',
-                        idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-                    },
-                    data: {
-                        query: `
-                            query Query($ids: [ID], $widths: [Int]) {
-                                getImageUrlsByIds(_ids: $ids, widths: $widths)
+                if (id_arr.length > 0) {
+                    axios({
+                        url: 'https://api.wedives.com/graphql',
+                        method: 'post',
+                        headers: {
+                            countrycode: 'ko',
+                            idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                        },
+                        data: {
+                            query: `
+                                query Query($ids: [ID], $widths: [Int]) {
+                                    getImageUrlsByIds(_ids: $ids, widths: $widths)
+                                }
+                            `,
+                            variables: {
+                                ids: id_arr,
+                                widths: width_arr
                             }
-                        `,
-                        variables: {
-                            ids: id_arr,
-                            widths: width_arr
-                        }
 
-                    }
-                }).then(result_image => {
-                    if (result_image.data.data.getImageUrlsByIds) {
-                        var i=0;
-                        this.getDiveSiteByUniqueName.highlights.forEach(x => {
-                            x.images.forEach(y => {
-                                y.thumbnailUrl = result_image.data.data.getImageUrlsByIds[i];
-                                i++;
+                        }
+                    }).then(result_image => {
+                        if (result_image.data.data.getImageUrlsByIds) {
+                            var i=0;
+                            this.getDiveSiteByUniqueName.highlights.forEach(x => {
+                                x.images.forEach(y => {
+                                    y.thumbnailUrl = result_image.data.data.getImageUrlsByIds[i];
+                                    i++;
+                                });
                             });
-                        });
-                    }
-                });
+                        }
+                    });
+                }
             }
             ///////////////////////////////////////////////
             let script = document.createElement('script');

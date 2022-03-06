@@ -413,6 +413,32 @@ export default {
     }
   },
   apollo: {
+      getCommunityById : {
+        query:gql`
+          query Query($id: ID!) {
+            getCommunityById(_id: $id) {
+              title
+              description
+              owners {
+                _id
+                uid
+                nickName
+                profileImages {
+                  thumbnailUrl
+                }
+                freeLicenseLevel
+                scubaLicenseLevel
+              }
+              languageCode
+            }
+          }
+        `,
+          variables() {
+              return {
+                "id": this.communityId
+              }
+          },
+      },
       getAgendasByTargetId: {
           query:gql `
             query Query($targetId: ID!, $agendaTypes: [ID], $skip: Int, $limit: Int) {
@@ -467,7 +493,8 @@ export default {
                   width_arr.push(720);
                 })
             });
-            axios({
+            if (id_arr.length > 0) {
+              axios({
                 url: 'https://api.wedives.com/graphql',
                 method: 'post',
                 headers: {
@@ -486,17 +513,18 @@ export default {
                     }
 
                 }
-            }).then(result_image => {
-                if (result_image.data.data.getImageUrlsByIds) {
-                    var i=0;
-                    this.getAgendasByTargetId.forEach(x => {
-                        x.images.forEach(y => {
-                          y.thumbnailUrl = result_image.data.data.getImageUrlsByIds[i];
-                          i++;
-                        })
-                    });
-                }
-            });
+              }).then(result_image => {
+                  if (result_image.data.data.getImageUrlsByIds) {
+                      var i=0;
+                      this.getAgendasByTargetId.forEach(x => {
+                          x.images.forEach(y => {
+                            y.thumbnailUrl = result_image.data.data.getImageUrlsByIds[i];
+                            i++;
+                          })
+                      });
+                  }
+              });
+            }
           }
       },
       getAllAgendaTypes: {
