@@ -7,22 +7,31 @@
     </div>
 
     <div class="page-content transform-none" style="margin-top: 50px;padding:0;">
-        <div class="card card-style ms-0 me-0 rounded-0 mb-0" style="height: calc(100vh - 50px)">
+        <div class="card card-style ms-0 me-0 rounded-0 mb-0" style="min-height: calc(100vh - 50px)">
             <div v-if="divingData.length == 0" class="text-center">
                 <img src="/static/images/assets/empty_list2.jpg" width="60%" style="margin-top:25%;" />
                 <p class="color-gray-light-mid">앗! 아직 버디찾기를 한번도 해보지 않으셨네요!</p>
                 <a href="/buddy_create" class="btn btn-m mb-3 rounded-xl text-uppercase font-500 shadow-s bg-secondary font-noto"> 버디찾기 생성 </a>
             </div>
-            <div v-else class="content mt-3">
+            <div v-else class="content mt-1">
                 <div v-for="diving in divingData">
                     <div class="map-box">
                         <a :href="'/diving/' + diving._id">
-                            <div :class="'bx position-relative' + ((diving.status == 'divingComplete') ? ' opacity-40':'')">
+                            <div :class="'pt-2 pb-2 bx position-relative' + ((diving.status == 'divingComplete') ? ' opacity-40':'')">
                                 <div class="justify-content-center mb-0 text-start font-noto">
-                                    <div v-if="diving.locationData && diving.locationData.backgroundImages && diving.locationData.backgroundImages.length>0" class="" style="float: left;position: relative;width: 68px; height:68px;">
-                                        <img v-bind:src="diving.locationData.backgroundImages[0].thumbnailUrl" class="rounded-s mx-auto" width="68" height="68" style="object-fit: cover;">
+                                    <div class="thumb-img me-2">
+                                        <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                                            <defs>
+                                            <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                                            <clipPath id="clipSquircle">
+                                                <use xlink:href="#shapeSquircle"/>
+                                            </clipPath>
+                                            </defs>
+                                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="diving.locationData.backgroundImages && diving.locationData.backgroundImages.length > 0 && diving.locationData.backgroundImages[0].thumbnailUrl ? diving.locationData.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'"/>
+                                        </svg>
                                     </div>
-                                    <div class="" style="padding-left: 82px;">
+                                    
+                                    <div class="mt-2" style="display:inline-block;vertical-align: top;">
                                         <h4 class="mb-0 font-16 font-500">{{ diving.title }}</h4>
                                         <p class="font-13 pb-0 mb-0 mt-n1 ellipsis color-gray">{{ diving.showAt }} ({{ diving.typeShow }})</p>
                                         <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> {{ diving.location }}</p>
@@ -36,7 +45,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="divider mt-3 mb-3"></div>
+                    <!--<div class="divider mt-3 mb-3"></div>-->
                 </div>
                 
                 
@@ -225,7 +234,48 @@ export default {
 
 
 <style scoped>
-.wedive-chip {font-family: 'Noto Sans Korean';border-radius:6px !important;padding: 0 8px;margin:0 !important;position:absolute;right:0px;bottom:0px;}
+.wedive-chip {font-family: 'Noto Sans Korean';border-radius:6px !important;padding: 0 8px;margin:0 !important;position:absolute;right:0px;bottom:26px;}
 .wedive-chip i {width: auto;line-height: inherit;margin-right: 2px;}
 .position-relative {position: relative;}
+
+.thumb-img {
+  position: relative;
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+  user-select: none;
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3csvg width='88px' height='88px' viewBox='0 0 88 88' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3e%3cpath d='M44%2c0.5 C59.8650505%2c0.5 70.7664452%2c3.40244096 77.6820021%2c10.3179979 C84.597559%2c17.2335548 87.5%2c28.1349495 87.5%2c44 C87.5%2c59.8650505 84.597559%2c70.7664452 77.6820021%2c77.6820021 C70.7664452%2c84.597559 59.8650505%2c87.5 44%2c87.5 C28.1349495%2c87.5 17.2335548%2c84.597559 10.3179979%2c77.6820021 C3.40244096%2c70.7664452 0.5%2c59.8650505 0.5%2c44 C0.5%2c28.1349495 3.40244096%2c17.2335548 10.3179979%2c10.3179979 C17.2335548%2c3.40244096 28.1349495%2c0.5 44%2c0.5 Z' fill='none' stroke='rgba(0,0,0,0.3)'%3e%3c/path%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .svg-profile {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .default-txt {
+    font-size: 2em;
+    fill: #fff;
+  }
+
+  .default-bg {
+    width: 100%;
+    height: 100%;
+    @each $num, $color in $userImgBgs {
+      &[data-color="#{$num}"] {
+        fill: $color;
+      }
+    }
+  }
+}
 </style>

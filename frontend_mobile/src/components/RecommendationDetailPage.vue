@@ -1,7 +1,7 @@
 <template>
   <div class="text-center">
     <div class="header header-fixed header-logo-center">
-        <a href="" class="header-title color ellipsis" style="width: 250px;left: 36%;">{{ getPreviewsByRecommendationId.recommendationTitle }}</a>
+        <a href="" class="header-title color ellipsis" style="width: 250px;left: 36%;" v-html="getPreviewsByRecommendationId.recommendationTitle"></a>
         <a href="#" data-back-button class="font-16 header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
     </div>
     <pull-to :top-load-method="refresh" @top-state-change="stateChange" :top-config="TOP_DEFAULT_CONFIG" :is-bottom-bounce="false" :is-top-bounce="scrollTop == 0" style="margin-top: 50px;">

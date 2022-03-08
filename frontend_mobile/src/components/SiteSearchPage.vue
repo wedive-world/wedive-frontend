@@ -7,7 +7,7 @@
             <a href="/site_home" class="action-map"><span>지도</span></a>
         </div>
         <div class="card card-style ms-0 me-0 rounded-0 mb-0">
-            <div class="p-3">
+            <div class="p-3 pb-0">
                 <vue-typeahead-bootstrap
                     id="input_query"
                     v-model="query"
@@ -32,12 +32,23 @@
                     <div class="map-box">
                         <a :href="'/' + ((item.__typename=='DiveSite') ? 'site' : (item.__typename=='DivePoint') ? 'point' : 'center') + '/' + item.uniqueName">
                         
-                            <div class="bx">
+                            <div class="bx mt-3 mb-3">
                                 <div class="justify-content-center mb-0 text-start">
-                                    <div :class="item.__typename + '-tag'" style="float: left;position: relative;width: 75px; height:75px;">
-                                        <img v-bind:src="(item.backgroundImages && item.backgroundImages.length>0) ? item.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'" class="rounded-s mx-auto" width="75" height="75" style="object-fit: cover;">
+                                    <div style="float: left;position: relative;width: 75px; height:75px;">
+                                        <div class="thumb-img me-2">
+                                            <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                                                <defs>
+                                                <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                                                <clipPath id="clipSquircle">
+                                                    <use xlink:href="#shapeSquircle"/>
+                                                </clipPath>
+                                                </defs>
+                                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(item.backgroundImages && item.backgroundImages.length>0) ? item.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'"/>
+                                            </svg>
+                                        </div>
+                                        <!--<img v-bind:src="(item.backgroundImages && item.backgroundImages.length>0) ? item.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'" class="rounded-s mx-auto" width="75" height="75" style="object-fit: cover;">-->
                                     </div>
-                                    <div :class="item.__typename" style="padding-left: 90px;">
+                                    <div :class="item.__typename" style="display:inline-block;vertical-align: top;width: calc(100vw - 130px);margin-left:16px;min-height:80px;padding-top:8px;">
                                         <span class="map_box_cate">{{ ((item.__typename=='DiveSite')? '사이트' : (item.__typename=='DivePoint')? '포인트' : '센터') }}</span><span class="font-18 pb-0 font-600"> {{item.name}} </span>
                                         <p class="pb-0 mb-0 line-height-m ellipsis"> {{ (item.description == '') ? '&nbsp;' : item.description }} </p>
                                         <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
@@ -51,7 +62,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="divider mt-3 mb-3"></div>
+                    
                 </div>
             </div>
             
@@ -313,6 +324,11 @@ export default {
   },
   
   methods: {
+      enableNext2(ev) {
+          if(window.location.href.split('/').pop() == 'modal'){
+            window.history.back(); 
+          }
+      },
       async lookupPlace() {
         if (this.query_place == '') {
             this.places = [];
@@ -347,6 +363,9 @@ export default {
           //console.log("removeSuggestSelected")
       },
       selectSuggestion(item) {
+          if(window.location.href.split('/').pop() == 'modal'){
+            window.history.back(); 
+          }
           localStorage.suggestionFlag = '1';
           this.query = item;
           document.getElementById("search-suggestion").classList.remove('menu-active');
@@ -581,16 +600,14 @@ export default {
     }
     setTimeout(function() {
         $("#input_query > .input-group > input").focus();
+        $("#suggestion_typeahead > .input-group > input").focus();
     },500);
 
-
-
     ////////////
-    this.openSuggestion();
-
+    const oSuggestion = this.openSuggestion;
     setTimeout(function() {
-        $("#suggestion_typeahead > .input-group > input").focus();
-    }, 500);
+        oSuggestion();
+    }, 800);
   },
   created() {
     setTimeout(function() {
@@ -672,5 +689,46 @@ export default {
 .DiveSite .map_box_cate {border: 1px solid #3f474c;color:#3f474c}
 .DivePoint .map_box_cate {border: 1px solid #3cb5a0;color:#3cb5a0}
 .DiveCenter .map_box_cate {border: 1px solid #4687c1;color:#4687c1}
+
+.thumb-img {
+  position: relative;
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+  user-select: none;
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3csvg width='88px' height='88px' viewBox='0 0 88 88' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3e%3cpath d='M44%2c0.5 C59.8650505%2c0.5 70.7664452%2c3.40244096 77.6820021%2c10.3179979 C84.597559%2c17.2335548 87.5%2c28.1349495 87.5%2c44 C87.5%2c59.8650505 84.597559%2c70.7664452 77.6820021%2c77.6820021 C70.7664452%2c84.597559 59.8650505%2c87.5 44%2c87.5 C28.1349495%2c87.5 17.2335548%2c84.597559 10.3179979%2c77.6820021 C3.40244096%2c70.7664452 0.5%2c59.8650505 0.5%2c44 C0.5%2c28.1349495 3.40244096%2c17.2335548 10.3179979%2c10.3179979 C17.2335548%2c3.40244096 28.1349495%2c0.5 44%2c0.5 Z' fill='none' stroke='rgba(0,0,0,0.3)'%3e%3c/path%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .svg-profile {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .default-txt {
+    font-size: 2em;
+    fill: #fff;
+  }
+
+  .default-bg {
+    width: 100%;
+    height: 100%;
+    @each $num, $color in $userImgBgs {
+      &[data-color="#{$num}"] {
+        fill: $color;
+      }
+    }
+  }
+}
 
 </style>
