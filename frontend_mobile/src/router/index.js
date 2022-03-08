@@ -71,17 +71,17 @@ export default new Router({
       component: BuddyCreatePage2
     },
     {
-      path: '/buddy_swimming',
+      path: '/buddy/swimming',
       name: 'BuddyCreateSwimmingPage',
       component: BuddyCreateSwimmingPage
     },
     {
-      path: '/buddy_sea',
+      path: '/buddy/sea',
       name: 'BuddyCreateSeaPage',
       component: BuddyCreateSeaPage
     },
     {
-      path: '/buddy_abroad',
+      path: '/buddy/abroad',
       name: 'BuddyCreateAbroadPage',
       component: BuddyCreateAbroadPage
     },

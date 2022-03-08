@@ -294,7 +294,7 @@ export default {
       $(".pool img").css("filter", "invert(100%)");
       $(".pool p").css("color", "white");
       setTimeout(function() {
-        location.href='/buddy_swimming';
+        location.href='/buddy/swimming';
       }, 30);
     },
     goSea() {
@@ -304,7 +304,7 @@ export default {
       $(".sea img").css("filter", "invert(100%)");
       $(".sea p").css("color", "white");
       setTimeout(function() {
-        location.href='/buddy_sea';
+        location.href='/buddy/sea';
       }, 30);
     },
     goAbroad() {
@@ -313,7 +313,7 @@ export default {
       $(".oversea img").css("filter", "invert(100%)");
       $(".oversea p").css("color", "white");
       setTimeout(function() {
-        location.href='/buddy_abroad';
+        location.href='/buddy/abroad';
       }, 30);
     },
     openLoginBottomSheet() {
