@@ -545,6 +545,13 @@ async function updateAll() {
                     marker_shop.setLabel(" ");
                 }
                 marker_shop.addListener("click", () => {
+                    try {
+                        console.log("viberate");
+                        Android.vibrate();
+                        window.navigator.vibrate(20);
+                    } catch (e) {
+                        
+                    }
                     $(".map-box").removeClass("hide");
                     $("#btn_new").addClass("hide");
                     $("#btn_filter").addClass("hide");
