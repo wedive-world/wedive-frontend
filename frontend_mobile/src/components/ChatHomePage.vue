@@ -152,10 +152,21 @@
                 <template slot="suggestion" slot-scope="{ data, htmlText }">
                     <div class="d-flex align-items-center" style="position:relative !important;">
                     <div class="">
-                        <img
+                        <div class="user-img me-2">
+                            <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                                <defs>
+                                <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                                <clipPath id="clipSquircle">
+                                    <use xlink:href="#shapeSquircle"/>
+                                </clipPath>
+                                </defs>
+                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(data.profileImages && data.profileImages.length>0) ? data.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty.png'"/>
+                            </svg>
+                        </div>
+                        <!--<img
                         class="rounded-s me-3"
                         :src="(data.profileImages && data.profileImages.length>0) ? data.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty.png'"
-                        style="width: 50px; height: 50px;object-fit:cover;" />
+                        style="width: 50px; height: 50px;object-fit:cover;" />-->
                     </div>
                     <span class="ml-4" style="">
                         <p class="font-noto font-16 mb-0">{{ data.nickName }}</p>
@@ -168,12 +179,23 @@
             <div class="m-2">
                 <div v-for="user in chatSelectedList" class=" border-bottom pt-2 pb-2">
                     <div class="d-flex align-items-center" style="position:relative !important;">
-                        <div class="">
+                        <div class="user-img me-2">
+                            <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                                <defs>
+                                <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                                <clipPath id="clipSquircle">
+                                    <use xlink:href="#shapeSquircle"/>
+                                </clipPath>
+                                </defs>
+                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(user.profileImages && user.profileImages.length>0) ? user.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty.png'"/>
+                            </svg>
+                        </div>
+                        <!--<div class="">
                             <img
                             class="rounded-s me-3"
                             :src="(user.profileImages && user.profileImages.length>0) ? user.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty.png'"
                             style="width: 50px; height: 50px;object-fit:cover;" />
-                        </div>
+                        </div>-->
                         <span class="ml-4" style="">
                             <p class="font-noto font-16 mb-0">{{ user.nickName }}</p>
                             <p class="font-13 mb-0 color-gray">{{ getDiverLevel(user.freeLicenseLevel, user.scubaLicenseLevel) }}</p>

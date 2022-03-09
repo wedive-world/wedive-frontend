@@ -103,9 +103,10 @@
                     <i v-on:click="likeAnimation(agenda, true)" slot="icon" class="fa fa-heart font-20"></i>
                   </vue-star>
                     <span class="font-14 font-noto ms-4">{{ agenda.likes || 0 }}</span>
-                  &nbsp;&nbsp;
-                  <i class="fas fa-comment me-1 font-20" style="color:#bbb;"></i>
+                  <span v-on:click="goDetail(agenda)">
+                  <i class="fas fa-comment me-1 ms-2 font-20" style="color:#bbb;"></i>
                     <span class="font-14 font-noto">{{ agenda.reviewCount || 0 }}</span>
+                  </span>
               </div>
             </div>
             <div class="divider mb-0" style="height:12px;border-top: 1px solid #88888840"></div>

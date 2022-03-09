@@ -16,7 +16,7 @@
                     aria-valuemax="100">
             </div>
         </div>
-        <div class="splide single-slider slider-no-arrows" id="single-slider-1" data-splide='{"autoplay":false, "drag": false, "lazyLoad": "nearby", "preloadPages": 6, "pagination": false}'>
+        <div :ref="'splide_1'" class="splide single-slider slider-no-arrows" id="single-slider-1" data-splide='{"autoplay":false, "drag": false, "lazyLoad": "nearby", "preloadPages": 6, "pagination": false}'>
             <div class="splide__track">
                 <div class="splide__list">
                     <div class="splide__slide">
@@ -652,6 +652,9 @@ export default {
         //$("#collapse2_area").click();
         if (this.day_show != "" && this.hour_show != "") {
             $("#btn_next1").attr("disabled", false);
+            console.log(this.$refs)
+            this.$refs.splide_1.go('>');
+            this.next1();
         }
       },
       search_recommend_click(_id, type, name, img, desc, target) {
