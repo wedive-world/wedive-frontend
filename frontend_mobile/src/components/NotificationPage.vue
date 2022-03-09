@@ -234,7 +234,7 @@ export default {
               console.log(result);
           }
           var type_to_url = {"diving": "diving", "user": "user", "instructor": "instructor", "diveSite": "site", "divePoint": "point", "diveCenter": "center"};
-          location.href = type_to_url[noti.subjectType] + "/" + noti.subject._id;
+          location.href = "/" + type_to_url[noti.subjectType] + "/" + noti.subject._id;
     },
   }
 

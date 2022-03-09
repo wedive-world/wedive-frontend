@@ -582,7 +582,7 @@
                                                 
                                             </div>
                                             <div>
-                                                <h6 class="text-end">{{ review.author.name }}</h6>
+                                                <h6 class="text-end">{{ review.author.nickName }}</h6>
                                                 <p class="font-10 mb-0 mt-n2 opacity-40 text-end">{{ review.createdAt ? timeForToday(review.createdAt) : '' }}</p>
                                             </div>
                                         </div>
@@ -1043,7 +1043,10 @@ export default {
                             rating
                             reviewCount
                             views
+                            isUserLike
+                            isUserDislike
                             likes
+                            dislikes
                             createdAt
                         }
                         likes
@@ -1397,7 +1400,7 @@ export default {
                         targetId
                         targetType
                         author {
-                            name
+                            nickName
                             email
                             _id
                             profileImages {
@@ -1845,6 +1848,30 @@ export default {
                     mutation Mutation($input: ReviewInput) {
                         upsertReview(input: $input) {
                             _id
+                            targetId
+                            targetType
+                            author {
+                                nickName
+                                email
+                                _id
+                                profileImages {
+                                    thumbnailUrl
+                                }
+                            }
+                            title
+                            content
+                            images {
+                                _id
+                                thumbnailUrl
+                            }
+                            rating
+                            reviewCount
+                            views
+                            isUserLike
+                            isUserDislike
+                            likes
+                            dislikes
+                            createdAt
                         }
                     }
                 `,
@@ -1853,6 +1880,8 @@ export default {
                 }
             }
         });
+
+        this.getDiveCenterByUniqueName.reviews.push(result.data.data.upsertReview);
 
         // close dialog
         const activeMenu = document.querySelectorAll('.menu-active');

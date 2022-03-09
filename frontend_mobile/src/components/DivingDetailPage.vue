@@ -22,11 +22,6 @@
             <div class="splide single-slider cover-slider slider-no-arrows slider-no-dots" id="cover-slider-1" data-card-height="250" style="position:relative;">
                 <div class="splide__track">
                     <div class="splide__list">
-                        <div class="splide__slide" v-if="locationData[0].backgroundImages == null || locationData[0].backgroundImages.length == 0">
-                            <div id="background_img_null" data-card-height="250" class="card rounded-0 mb-0" style="background: url(/static/empty.jpg);background-size: contain !important;">
-                                
-                            </div>
-                        </div>
                         <div class="splide__slide" v-for="(image, index) in locationData[0].backgroundImages">
                             <div data-card-height="250" :class="'card rounded-0 mb-0 background-center background_img_' + index" v-bind:style="'background: url('+image.thumbnailUrl+');background-size: cover !important;'">
                                 <div class="wedive-source">{{ image.reference | makeReference }}</div>
@@ -35,7 +30,7 @@
                     </div>
                 </div>
             </div>
-            <div id="cover-slider-temp" class="background-center" :style="'background:url('+locationData[0].backgroundImages[0].thumbnailUrl+');position:absolute;width:100%;top:0px;'">
+            <div id="cover-slider-temp" class="background-center" :style="'background:url('+locationData[0].backgroundImages[0].thumbnailUrl+');position:absolute;width:100%;top:0px;height:250px;'">
             </div>
         </div>
 
@@ -473,9 +468,7 @@ export default {
   },
   created() {
       setTimeout(function() {
-        init_template();
-        var preloader = document.getElementById('preloader')
-        if(preloader){preloader.classList.add('preloader-hide');}
+        
     }, 500);
   },
   components: {
@@ -596,6 +589,15 @@ export default {
               }
           },
           result() {
+            setTimeout(function() {
+                init_template();
+                var preloader = document.getElementById('preloader')
+                if(preloader){preloader.classList.add('preloader-hide');}
+            },500);
+            
+
+
+            
             this.getDivingById.location = '';
             if (this.getDivingById.diveSites && this.getDivingById.diveSites.length > 0) {
                 this.getDivingById.diveSites.forEach(x => {
@@ -618,6 +620,7 @@ export default {
                 });
                 this.getDivingById.location = this.getDivingById.diveCenters[0].name;
             }
+            console.log(this.locationData)
 
             
 
