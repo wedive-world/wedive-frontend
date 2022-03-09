@@ -23,13 +23,9 @@
                 class="swiper wedive-swiper"
                 :options="swiperOption"
             >
-                <swiper-slide style="width:auto;"><div class="font-noto me-2" style="padding-top:2px;">인기 태그</div></swiper-slide>
-                <swiper-slide style="width:auto;"><div class="bg-gray-light color-gray rounded-sm me-2" style="padding: 2px 12px;" v-on:click="setFilter(0)">#마크로</div></swiper-slide>
-                <swiper-slide style="width:auto;"><div class="bg-gray-light color-gray rounded-sm me-2" style="padding: 2px 12px;" v-on:click="setFilter(1)">#대물</div></swiper-slide>
-                <swiper-slide style="width:auto;"><div class="bg-gray-light color-gray rounded-sm me-2" style="padding: 2px 12px;" v-on:click="setFilter(2)">#먹방</div></swiper-slide>
-                <swiper-slide style="width:auto;"><div class="bg-gray-light color-gray rounded-sm me-2" style="padding: 2px 12px;" v-on:click="setFilter(3)">#해루질</div></swiper-slide>
-                <swiper-slide style="width:auto;"><div class="bg-gray-light color-gray rounded-sm me-2" style="padding: 2px 12px;" v-on:click="setFilter(4)">#프리다이빙</div></swiper-slide>
-                <swiper-slide style="width:auto;"><div class="font-noto">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></swiper-slide>
+                <swiper-slide style="width:auto;" :key="'sslide_00'"><div class="font-noto me-2" style="padding-top:2px;">인기 태그</div></swiper-slide>
+                <swiper-slide style="width:auto;" :key="'sslide_' + index" v-for="(hashtag,index) in getHotHashTags"><div class="bg-gray-light color-gray rounded-sm me-2" style="padding: 2px 12px;" v-on:click="setFilter(index)">#{{ hashtag }}</div></swiper-slide>
+                <swiper-slide style="width:auto;" :key="'sslide_last'"><div class="font-noto">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></swiper-slide>
             </swiper>
           </div>
           <div class="divider mb-0"></div>
@@ -268,6 +264,7 @@ export default {
       limit: 20,
       scrollTop: 0,
       getAgendasByTargetId: [],
+      getHotHashTags: [],
       TOP_DEFAULT_CONFIG: {
           pullText: '당겨서 새로고침', // The text is displayed when you pull down
           triggerText: '업데이트', // The text that appears when the trigger distance is pulled down
@@ -293,6 +290,13 @@ export default {
     }
   },
   apollo: {
+      getHotHashTags: {
+       query:gql`
+        query Query {
+          getHotHashTags
+        }
+       ` 
+      },
       getAgendasByTargetId: {
           query:gql `
             query Query($targetId: ID!, $agendaTypes: [ID], $skip: Int, $limit: Int) {

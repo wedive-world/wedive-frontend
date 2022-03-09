@@ -87,13 +87,13 @@
               <vue-star :id="'like_' + review._id" class="preventClickVueStar" animate="animated tada" :class="(review.isUserLike ? 'like-active-force' : 'like-disabled-force')" color="#1D397C" style="left:0;top:0;margin-top:-5px;">
                 <i slot="icon" class="fas fa-thumbs-up"></i>
               </vue-star>
-              <span v-on:click="reviewLike(review)" class="ps-3" :style="'color: ' + (review.isUserLike ? '#1D397C;' : '#bbb;')">좋아요</span>
+              <span v-on:click="reviewLike(review)" class="ps-3" :style="'color: ' + (review.isUserLike ? '#1D397C;' : '#bbb;')">좋아요 {{ review.likes }}</span>
             </span>
             <span class="ms-2" style="position: relative;">
               <vue-star :id="'dislike_' + review._id" class="preventClickVueStar" animate="animated tada" :class="(review.isUserDislike ? 'like-active-force' : 'like-disabled-force')" color="#1D397C" style="left:0;top:0;margin-top:-5px;">
                 <i slot="icon" class="fas fa-thumbs-down"></i>
               </vue-star>
-              <span v-on:click="reviewDislike(review)" class="ms-3" :style="'color: ' + (review.isUserDislike ? '#1D397C;' : '#bbb;')">싫어요</span>
+              <span v-on:click="reviewDislike(review)" class="ms-3" :style="'color: ' + (review.isUserDislike ? '#1D397C;' : '#bbb;')">싫어요 {{ review.dislikes }}</span>
             </span>
           </div>
           
@@ -315,13 +315,13 @@ export default {
                               }
                               isUserLike
                               isUserDislike
+                              likes
+                              dislikes
                             }
                         }
                     `,
-                    variables() {
-                      return {
-                        input: ipt
-                      }
+                    variables: {
+                      input: ipt
                     }
                 }
             });
@@ -393,11 +393,9 @@ export default {
                         like(targetId: $targetId, targetType: $targetType)
                     }
                 `,
-                variables() {
-                  return {
-                    targetId: review._id,
-                    targetType: "review"
-                  }
+                variables: {
+                  targetId: review._id,
+                  targetType: "review"
                 }
             }
         });
@@ -431,11 +429,9 @@ export default {
                         dislike(targetId: $targetId, targetType: $targetType)
                     }
                 `,
-                variables() {
-                  return {
-                    targetId: review._id,
-                    targetType: "review"
-                  }
+                variables: {
+                  targetId: review._id,
+                  targetType: "review"
                 }
             }
         });
@@ -482,11 +478,9 @@ export default {
                         like(targetId: $targetId, targetType: $targetType)
                     }
                 `,
-                variables() {
-                  return {
-                    targetId: item._id,
-                    targetType: "agenda"
-                  }
+                variables: {
+                  targetId: item._id,
+                  targetType: "agenda"
                 }
             }
         });
@@ -516,10 +510,12 @@ export default {
       handleScroll (event) {
         this.scrollTop = $(document).scrollTop();
       },
-      loadmore(loaded) {
+      async loadmore(loaded) {
         this.skip += this.limit;
         const ipt = {skip: this.skip, limit: this.limit, targetId: this.agendaId};
-        this.$apollo.queries.getReviewsByTargetId.fetchMore({
+        const prev_result = JSON.parse(JSON.stringify(this.getReviewsByTargetId));
+        try {
+          await this.$apollo.queries.getReviewsByTargetId.fetchMore({
             // New variables
             variables: {
               skip: this.skip,
@@ -528,8 +524,8 @@ export default {
             },
             // Transform the previous result with new data
             updateQuery: (previousResult, { fetchMoreResult }) => {
-                console.log(previousResult.getReviewsByTargetId)
-                console.log(fetchMoreResult.getReviewsByTargetId)
+                //console.log(previousResult.getReviewsByTargetId)
+                //console.log(fetchMoreResult.getReviewsByTargetId)
                 return {
                     getReviewsByTargetId: [
                       ...fetchMoreResult.getReviewsByTargetId,
@@ -537,7 +533,14 @@ export default {
                     ],
                 }
             },
-        });
+          });
+        } catch (e) {
+
+        }
+        
+        prev_result.reverse().forEach(x=>{
+          this.getReviewsByTargetId.unshift(x);
+        })
         loaded('done');
       },
       timeForToday(value) {
@@ -754,7 +757,7 @@ export default {
                       });
                   }
                   this.scrollHeight = $("#agenda_content").prop('scrollHeight') - ($(window).height());
-                  console.log(this.scrollHeight)
+                  //console.log(this.scrollHeight)
               });
             }
           }
@@ -777,6 +780,8 @@ export default {
               }
               isUserLike
               isUserDislike
+              likes
+              dislikes
             }
           }
         `,
@@ -786,8 +791,6 @@ export default {
             limit: this.limit,
             targetId: this.agendaId
           }
-        },
-        result() {
         }
       }
   },
