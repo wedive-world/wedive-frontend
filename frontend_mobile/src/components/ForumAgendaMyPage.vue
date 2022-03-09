@@ -103,6 +103,9 @@
   </div>
 </template>
 <script>
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+import 'swiper/css/swiper.css'
+
 import gql from 'graphql-tag'
 import PullTo from 'vue-pull-to'
 import VueStar from 'vue-star'
@@ -111,6 +114,8 @@ const axios = require("axios")
 export default {
   name: 'HelloWorld',
   components: {
+      Swiper,
+      SwiperSlide,
       PullTo,
       VueStar,
   },
@@ -167,14 +172,13 @@ export default {
       goUser(author) {
         location.href='/user/' + author._id;
       },
-      goDetail() {
-        location.href='/forum/detail';
+      goDetail(agenda) {
+        location.href='/agenda/' + agenda._id;
       },
       async refresh(loaded) {
         if ($(document).scrollTop() == 0) {
-            setTimeout(function() {
-                loaded('done')
-            },1000);
+          await this.$apollo.queries.getAgendasByTargetId.refetch()
+          loaded('done')
         } else {
             console.log("1")
             loaded('done')
@@ -257,6 +261,18 @@ export default {
           stayDistance: 50, // Trigger the distance after the refresh
           triggerDistance: 70 // Pull down the trigger to trigger the distance
       },
+      swiperOption: {
+        pagination: false,
+        spaceBetween: 0,
+        slidesPerView: 'auto',
+      },
+      swiperImgOption: {
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true
+        },
+        navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+      }
     }
   },
   apollo: {
@@ -301,7 +317,7 @@ export default {
           `,
           variables() {
             return {
-              "targetId": "621a0419a8eb33b6594f4870",
+              "targetId": "621db036efe4c50da6ea0825", //"621a0419a8eb33b6594f4870",
               "skip": this.skip,
               "limit": this.limit
             }
@@ -406,4 +422,15 @@ export default {
 .img_square{width: 100%;position: relative;}
 .img_square:after {content: "";display: block;padding-bottom: 100%;}
  .img_square_inner {position: absolute;width: 100%;height: 100%;background-size:cover !important;background-position: center !important;}
+
+ .swiper-pagination {
+    position: absolute;
+    text-align: center;
+    transition: .3s opacity;
+    transform: translate3d(0,0,0);
+    z-index: 10;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+}
 </style>

@@ -1238,8 +1238,6 @@ export default {
                 },
                 // Transform the previous result with new data
                 updateQuery: (previousResult, { fetchMoreResult }) => {
-                    
-                    //this.skip += this.limit;
                     //console.log(previousResult.getChatRoomInfo.chatMessages)
                     //console.log(fetchMoreResult.getChatRoomInfo.chatMessages)
                     return {

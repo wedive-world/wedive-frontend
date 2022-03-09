@@ -326,27 +326,36 @@ export default {
       },
       moveTo(idx) {
           this.contentSwiper.slideTo(idx);
-          var height = $(".wedive-content-swiper .swiper-wrapper .swiper-slide-active").height();
-          if (height < ($(window).height() - 172)) {
-              height = $(window).height() - 172;
-          }
-          $(".wedive-content-swiper").eq(0).css("max-height", height);
+          setTimeout(function() {
+            var height = $(".wedive-content-swiper > .swiper-wrapper > .swiper-slide-active").height();
+            if (height < ($(window).height() - 172)) {
+                height = $(window).height() - 172;
+            }
+            $(".wedive-content-swiper").eq(0).css("max-height", height);
+          },100);
       },
       tabSlideChange() {
           this.contentSwiper.slideTo(this.tabSwiper.activeIndex);
-          var height = $(".wedive-content-swiper .swiper-wrapper .swiper-slide-active").height();
-          if (height < ($(window).height() - 172)) {
-              height = $(window).height() - 172;
-          }
-          $(".wedive-content-swiper").eq(0).css("max-height", height);
+          setTimeout(function() {
+            var height = $(".wedive-content-swiper > .swiper-wrapper > .swiper-slide-active").height();
+            if (height < ($(window).height() - 172)) {
+                height = $(window).height() - 172;
+            }
+            $(".wedive-content-swiper").eq(0).css("max-height", height);
+          },100);
+          
       },
       onSlideChange() {
+          console.log("1")
           this.tabSwiper.slideTo(this.contentSwiper.activeIndex);
-          var height = $(".wedive-content-swiper .swiper-wrapper .swiper-slide-active").height();
-          if (height < ($(window).height() - 172)) {
-              height = $(window).height() - 172;
-          }
-          $(".wedive-content-swiper").eq(0).css("max-height", height);
+          setTimeout(function() {
+            var height = $(".wedive-content-swiper > .swiper-wrapper > .swiper-slide-active").height();
+            if (height < ($(window).height() - 172)) {
+                height = $(window).height() - 172;
+            }
+            console.log("height=" + height + " / window_height=" + ($(window).height()-182))
+            $(".wedive-content-swiper").eq(0).css("max-height", height);
+          },100);
       },
       addImage({ target: { files = [] } }) {
         if (!files.length) {

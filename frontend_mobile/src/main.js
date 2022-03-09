@@ -64,7 +64,7 @@ if (window.location.pathname.indexOf('/chat/') == 0) {
     cache: new InMemoryCache(),
     connectToDevTools: true,
   })
-} else if (window.location.pathname.indexOf('/chat') == 0 || window.location.pathname.indexOf('/diving/') == 0) {
+} else if (window.location.pathname.indexOf('/chat') == 0) {
   const httpLink = new HttpLink({
     // You should use an absolute URL here
     uri: GRAPHQL_URL,
@@ -79,7 +79,7 @@ if (window.location.pathname.indexOf('/chat/') == 0) {
     link: httpLink,
     cache: new InMemoryCache(),
   })
-} else if (window.location.pathname == '/site_list' || window.location.pathname == '/' || window.location.pathname == '/other/notification' || window.location.pathname == '/other/subscribe' || window.location.pathname == '/forum_home' || window.location.pathname.indexOf('/recommend/') == 0 || window.location.pathname.indexOf('/center/') == 0 || window.location.pathname.indexOf('/site/') == 0 || window.location.pathname.indexOf('/community/') == 0 || window.location.pathname.indexOf('/agenda/') == 0) {
+} else if (window.location.pathname == '/site_list' || window.location.pathname == '/' || window.location.pathname == '/other/notification' || window.location.pathname == '/other/subscribe' || window.location.pathname == '/forum_home' || window.location.pathname.indexOf('/recommend/') == 0 || window.location.pathname.indexOf('/center/') == 0 || window.location.pathname.indexOf('/site/') == 0 || window.location.pathname.indexOf('/community/') == 0 || window.location.pathname.indexOf('/agenda/') == 0 || window.location.pathname.indexOf('/diving/') == 0) {
   const httpLink = new HttpLink({
     // You should use an absolute URL here
     uri: GRAPHQL_API_URL,
@@ -189,7 +189,6 @@ if (currentTime - parseInt(localStorage.suggestionDate) > 86400000) {
           tmp_result.push(x);
         }
       });
-      console.log(tmp_result)
       localStorage.suggestion = JSON.stringify(tmp_result);
     }
   })

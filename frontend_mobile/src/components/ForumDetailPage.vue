@@ -7,7 +7,7 @@
     </div>
     
     <div class="card card-clear" data-card-height="80"></div>
-    <pull-to :top-load-method="refresh" @top-state-change="stateChange" :top-config="TOP_DEFAULT_CONFIG" :is-bottom-bounce="false" :is-top-bounce="scrollTop == 0">
+    <pull-to :bottom-load-method="loadmore" @bottom-state-change="stateChange" :top-load-method="refresh" @top-state-change="stateChange" :top-config="TOP_DEFAULT_CONFIG" :bottom-config="BOTTOM_DEFAULT_CONFIG" :is-top-bounce="scrollTop == 0" :is-bottom-bounce="scrollTop>scrollHeight" style="margin-bottom:50px;">
         <template class="text-center" slot="top-block" slot-scope="props">
         <div :class="'top-load-wrapper opacity-50' + (props.state === 'loaded-done' ? ' fadeout' : '')">
             <i class="font-18 fas"
@@ -23,7 +23,7 @@
         </div>
         </template>
         
-        <div class="card text-start">
+        <div id="agenda_content" class="card text-start mb-0">
             <div class="p-3">
               <div v-on:click="goUser(getAgendaById.author)" style="position:relative;">
                   <div class="user-img-s me-2">
@@ -69,17 +69,34 @@
                   &nbsp;&nbsp;
                   <i class="fas fa-comment me-1 font-20" style="color:#bbb;"></i>
                     <span class="font-14 font-noto">{{ getAgendaById.reviewCount || 0 }}</span>
-
-
-                  <!--<img :src="'/static/images/assets/'+like_img+'.png'" width="22" class="me-1" style="margin-top:-1px;"/>
-                    <span class="font-14 font-noto">{{ getAgendaById.likes || 0 }}</span>
-                  &nbsp;&nbsp;
-                  <img src="/static/images/assets/ico_chat.png" width="22" class="me-1" style="margin-top:-1px;"/>
-                    <span class="font-14 font-noto">{{ getAgendaById.reviewCount || 0 }}</span>-->
               </div>
           </div>
-          
+          <div class="divider mb-0" style="height:12px;border-top: 1px solid #88888840;"></div>
+          <div v-for="(review,index) in getReviewsByTargetId" :class="'p-3' + ((index < getReviewsByTargetId.length-1) ? ' border-bottom' : '')" style="position: relative;">
+            <p class="color-highlight font-15 mb-0 font-noto">{{ review.author.nickName }}</p>
+            <p class="color-gray-dark mb-0 font-12" style="position: absolute;right: 16px;top: 16px;">{{ timeForToday(review.createdAt) }}</p>
+            <div v-if="review.content && review.content.includes('[[emoji|') && review.content.includes(']]')">
+                <div class="">
+                  <img v-if="(review.content.substring(review.content.indexOf('[[emoji|')+8,review.content.indexOf(']]'))).includes('basic')" :src="'/static/images/emoji/' + (review.content.substring(review.content.indexOf('[[emoji|')+8,review.content.indexOf(']]')))" style="max-width:100px;"/>
+                  <img v-else :src="'/static/images/emoji/' + (review.content.substring(review.content.indexOf('[[emoji|')+8,review.content.indexOf(']]')))" style="max-width:120px;"/>
+                </div>
+            </div>
+            <p class="mb-3 font-noto">{{ review.content.includes('[[emoji|') ? review.content.replace(review.content.substring(review.content.indexOf('[[emoji|'),review.content.indexOf(']]')+2), '') : review.content }}</p>
 
+            <span style="position: relative;z-index:1000;">
+              <vue-star :id="'like_' + review._id" class="preventClickVueStar" animate="animated tada" :class="(review.isUserLike ? 'like-active-force' : 'like-disabled-force')" color="#1D397C" style="left:0;top:0;margin-top:-5px;">
+                <i slot="icon" class="fas fa-thumbs-up"></i>
+              </vue-star>
+              <span v-on:click="reviewLike(review)" class="ps-3" :style="'color: ' + (review.isUserLike ? '#1D397C;' : '#bbb;')">좋아요</span>
+            </span>
+            <span class="ms-2" style="position: relative;">
+              <vue-star :id="'dislike_' + review._id" class="preventClickVueStar" animate="animated tada" :class="(review.isUserDislike ? 'like-active-force' : 'like-disabled-force')" color="#1D397C" style="left:0;top:0;margin-top:-5px;">
+                <i slot="icon" class="fas fa-thumbs-down"></i>
+              </vue-star>
+              <span v-on:click="reviewDislike(review)" class="ms-3" :style="'color: ' + (review.isUserDislike ? '#1D397C;' : '#bbb;')">싫어요</span>
+            </span>
+          </div>
+          
           
         </div>
 
@@ -97,13 +114,13 @@
         </div>
         <div style="min-height: 52px;height: 52px;max-height:134px;background: black;">
             <div class="d-flex" style="background:black;min-height: 52px;">
-            <div class="me-1 speach-icon">
+            <div class="me-1 speach-icon hide">
                 <div style="width: 45px;display: inline-block;position: relative;">
                     <input type="file" id="file-upload" class="upload-file text-center" accept=".jpg, .png" style="width:32px;">
                     <p class="upload-file-text" style="color: #abb7ba;position:absolute;width:32px;height:32px;margin-top:-2px;left:8px;footer-bar-speachradius:16px;"><i class="fas fa-image pt-1 font-20"></i></p>
                 </div>
             </div>
-            <div class="flex-fill speach-input">
+            <div class="flex-fill speach-input ps-3">
                 <textarea 
                     id="textarea-input"
                     @focus="resizeFocus"
@@ -217,30 +234,10 @@ export default {
         if (this.sendDisable == false) {
             // 01. 이모지
             if (this.is_emoji_clicked) {
-                const message = "[[emoji|" + this.emoji_url + "]]";
-                const roomId = this.roomId;
-                var result = await axios({
-                    url: 'https://chat.wedives.com/graphql',
-                    method: 'post',
-                    headers: {
-                        idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-                    },
-                    data: {
-                        query: `
-                            mutation PostMessageToRoom($roomId: String!, $input: String!) {
-                                postMessageToRoom(roomId: $roomId, input: $input) {
-                                    _id
-                                }
-                            }
-                        `,
-                        variables: {
-                            "roomId": roomId,
-                            "input": message
-                        }
-                    }
-                });
+                this.sendText = "[[emoji|" + this.emoji_url + "]]" + this.sendText;
+                
                 this.is_emoji_clicked = false;
-                this.sendText = '';
+                this.is_emoji = !this.is_emoji;
             }
             // 02. 이미지
             var _id_list = new Array();
@@ -304,15 +301,35 @@ export default {
                     query: `
                         mutation Mutation($input: ReviewInput) {
                             upsertReview(input: $input) {
+                              _id
+                              content
+                              createdAt
+                              author {
                                 _id
+                                uid
+                                nickName
+                                gender
+                                profileImages {
+                                  thumbnailUrl
+                                }
+                              }
+                              isUserLike
+                              isUserDislike
                             }
                         }
                     `,
-                    variables: {
-                        "input": ipt
+                    variables() {
+                      return {
+                        input: ipt
+                      }
                     }
                 }
             });
+
+            this.getReviewsByTargetId.unshift(result.data.data.upsertReview);
+            this.sendText = '';
+
+            
 
             // toast
             var toastData = 'snackbar-review-success';
@@ -346,6 +363,82 @@ export default {
       speechContentClick() {
           this.is_emoji = false;
           this.is_attach = false;
+      },
+      async reviewLike(review) {
+        if (review.isBottomLikeClicked == null)
+        review.isBottomLikeClicked = false;
+
+        if (review.isUserLike) {
+          if (review.isClicked == false && review.isBottomLikeClicked) {
+            $("#like_"+review._id + "  .VueStar__ground .VueStar__icon").click();
+            review.isBottomLikeClicked = !review.isBottomLikeClicked;
+          }
+        }$("#like_"+review._id + "  .VueStar__ground .VueStar__icon").click();
+        if (review.isUserLike == null) {
+          review.isUserLike = false;
+        }
+        review.isUserLike = !review.isUserLike;
+        review.isBottomLikeClicked = !review.isBottomLikeClicked;
+        
+        var result = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                    mutation Like($targetId: ID!, $targetType: UserReactionTargetType!) {
+                        like(targetId: $targetId, targetType: $targetType)
+                    }
+                `,
+                variables() {
+                  return {
+                    targetId: review._id,
+                    targetType: "review"
+                  }
+                }
+            }
+        });
+      },
+      async reviewDislike(review) {
+        if (review.isBottomDislikeClicked == null)
+        review.isBottomDislikeClicked = false;
+
+        if (review.isUserDislike) {
+          if (review.isClicked == false && review.isBottomDislikeClicked) {
+            $("#dislike_"+review._id + "  .VueStar__ground .VueStar__icon").click();
+            review.isBottomDislikeClicked = !review.isBottomDislikeClicked;
+          }
+        }$("#dislike_"+review._id + "  .VueStar__ground .VueStar__icon").click();
+        if (review.isUserDislike == null) {
+          review.isUserDislike = false;
+        }
+        review.isUserDislike = !review.isUserDislike;
+        review.isBottomDislikeClicked = !review.isBottomDislikeClicked;
+        
+        var result = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                    mutation Dislike($targetId: ID!, $targetType: UserReactionTargetType!) {
+                        dislike(targetId: $targetId, targetType: $targetType)
+                    }
+                `,
+                variables() {
+                  return {
+                    targetId: review._id,
+                    targetType: "review"
+                  }
+                }
+            }
+        });
       },
       async likeAnimation(item, isBottom) {
         if (item.likes == null) item.likes = 0;
@@ -389,9 +482,11 @@ export default {
                         like(targetId: $targetId, targetType: $targetType)
                     }
                 `,
-                variables: {
-                    "targetId": item._id,
-                    "targetType": "agenda"
+                variables() {
+                  return {
+                    targetId: item._id,
+                    targetType: "agenda"
+                  }
                 }
             }
         });
@@ -405,7 +500,6 @@ export default {
                 loaded('done')
             },1000);
         } else {
-            console.log("1")
             loaded('done')
             return false;
         }
@@ -421,6 +515,30 @@ export default {
       },
       handleScroll (event) {
         this.scrollTop = $(document).scrollTop();
+      },
+      loadmore(loaded) {
+        this.skip += this.limit;
+        const ipt = {skip: this.skip, limit: this.limit, targetId: this.agendaId};
+        this.$apollo.queries.getReviewsByTargetId.fetchMore({
+            // New variables
+            variables: {
+              skip: this.skip,
+              limit: this.limit,
+              targetId: this.agendaId
+            },
+            // Transform the previous result with new data
+            updateQuery: (previousResult, { fetchMoreResult }) => {
+                console.log(previousResult.getReviewsByTargetId)
+                console.log(fetchMoreResult.getReviewsByTargetId)
+                return {
+                    getReviewsByTargetId: [
+                      ...fetchMoreResult.getReviewsByTargetId,
+                      ...previousResult.getReviewsByTargetId,
+                    ],
+                }
+            },
+        });
+        loaded('done');
       },
       timeForToday(value) {
         const today = new Date();
@@ -476,7 +594,6 @@ export default {
         //$("#file-upload1-img").hide();
       },
       removeImage(idx) {
-          console.log(this.file_photo.length +"/" + idx);
           this.file_photo.splice(idx, 1);
           this.file_photo_url.splice(idx, 1);
           if (this.file_photo.length == 0) {
@@ -511,10 +628,12 @@ export default {
     return {
       agendaId: this.$route.params.id,
       getAgendaById: {},
+      getReviewsByTargetId: [],
       like_img: 'ico_heart',
       skip: 0,
-      limit: 20,
+      limit: 5,
       scrollTop: 0,
+      scrollHeight: 0,
       getAgendasByTargetId: [],
       sendText: '',
       sendDisable: true,
@@ -536,6 +655,17 @@ export default {
           loadedStayTime: 400, // Time to stay after loading ms
           stayDistance: 50, // Trigger the distance after the refresh
           triggerDistance: 70 // Pull down the trigger to trigger the distance
+      },
+      BOTTOM_DEFAULT_CONFIG: {
+        pullText: '추가 로딩',
+        triggerText: '업데이트',
+        loadingText: '로딩중...',
+        doneText: '로딩 완료',
+        failText: '실패',
+        loadedStayTime: 400,
+        stayDistance: 50,
+        triggerDistance: 70
+
       },
     }
   },
@@ -623,10 +753,43 @@ export default {
                         i++;
                       });
                   }
+                  this.scrollHeight = $("#agenda_content").prop('scrollHeight') - ($(window).height());
+                  console.log(this.scrollHeight)
               });
             }
           }
       },
+      getReviewsByTargetId: {
+        query:gql `
+          query GetReviewsByTargetId($targetId: ID!, $skip: Int, $limit: Int) {
+            getReviewsByTargetId(targetId: $targetId, skip: $skip, limit: $limit) {
+              _id
+              content
+              createdAt
+              author {
+                _id
+                uid
+                nickName
+                gender
+                profileImages {
+                  thumbnailUrl
+                }
+              }
+              isUserLike
+              isUserDislike
+            }
+          }
+        `,
+        variables() {
+          return {
+            skip: this.skip,
+            limit: this.limit,
+            targetId: this.agendaId
+          }
+        },
+        result() {
+        }
+      }
   },
   
 }
