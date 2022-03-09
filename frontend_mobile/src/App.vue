@@ -21,7 +21,7 @@
             <a href="/chat_home" id="nav-chat"><div class="menu-ico menu-ico4"></div><span>채팅</span></a>
             <a href="/other_home" id="nav-other"><div class="menu-ico menu-ico5"></div><span>더보기</span></a>
           </div>
-          <div v-if="footer_list.includes(pathname) && locationsearch.includes('footer=hide')" id="aaabbbccc" class="footer-bar" style="border-radius: 30px 30px 0px 0px;height: 64px;position: fixed;bottom: 0px;left: 0px;right: 0px;z-index: 98;-webkit-backdrop-filter: saturate(180%) blur(20px);backdrop-filter: saturate(180%) blur(20px);background-color: rgba(255, 255, 255, 0.7);display: flex;min-height: 51px;text-align: center;transition: transform 350ms ease !important;">
+          <div v-if="footer_list.includes(pathname) && locationsearch.includes('footer=hide')" id="aaabbbccc" class="footer-bar" style="border-radius: 30px 30px 0px 0px;height: 64px;position: fixed;bottom: 0px;left: 0px;right: 0px;z-index: 98;-webkit-backdrop-filter: saturate(180%) blur(20px);backdrop-filter: saturate(180%) blur(20px);background-color: rgba(255, 255, 255, 0.7);display: flex;min-height: 51px;border-top: solid 1px rgba(0, 0, 0, 0.05);text-align: center;transition: transform 350ms ease !important;">
             <div style=""></div>
           </div>
         
