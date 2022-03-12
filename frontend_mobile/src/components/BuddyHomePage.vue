@@ -316,7 +316,8 @@ export default {
   },
   apollo: {
     getUserRecommendationsByTargetType: {
-        query: gql`query Query($targetType: RecommendationTargetType) {
+        query: gql`
+        query Query($targetType: RecommendationTargetType) {
             getUserRecommendationsByTargetType(targetType: $targetType) {
                 _id
                 title
@@ -327,76 +328,48 @@ export default {
                 type
                 targetType
                 previews {
-                ... on Diving {
-                    diveCenters {
-                    name
-                    uniqueName
-                    description
-                    adminScore
-                    backgroundImages {
-                        thumbnailUrl
+                    ... on Diving {
+                        _id
+                        title
+                        description
+                        status
+                        type
+                        maxPeopleNumber
+                        startedAt
+                        finishedAt
+                        chatRoomId
+                        createdAt
+                        views
+                        likes
+                        dislikes
+                        diveCenters {
+                            name
+                            uniqueName
+                            description
+                            adminScore
+                            backgroundImages {
+                                thumbnailUrl
+                            }
+                        }
+                        divePoints {
+                            name
+                            uniqueName
+                            description
+                            adminScore
+                            backgroundImages {
+                                thumbnailUrl
+                            }
+                        }
+                        diveSites {
+                            name
+                            uniqueName
+                            description
+                            adminScore
+                            backgroundImages {
+                                thumbnailUrl
+                            }
+                        }
                     }
-                    }
-                    divePoints {
-                    name
-                    uniqueName
-                    description
-                    adminScore
-                    backgroundImages {
-                        thumbnailUrl
-                    }
-                    }
-                    diveSites {
-                    name
-                    uniqueName
-                    description
-                    adminScore
-                    backgroundImages {
-                        thumbnailUrl
-                    }
-                    }
-                }
-                ... on DiveSite {
-                    _id
-                    name
-                    uniqueName
-                    description
-                    adminScore
-                    backgroundImages {
-                    _id
-                    thumbnailUrl
-                    }
-                }
-                ... on DivePoint {
-                    name
-                    uniqueName
-                    description
-                    adminScore
-                    backgroundImages {
-                    _id
-                    thumbnailUrl
-                    }
-                }
-                ... on DiveCenter {
-                    name
-                    uniqueName
-                    description
-                    adminScore
-                    backgroundImages {
-                    _id
-                    thumbnailUrl
-                    }
-                }
-                ... on Instructor {
-                    _id
-                    gender
-                    profileImages {
-                    _id
-                    thumbnailUrl
-                    }
-                    careers
-                    introduction
-                }
                 }
             }
         }`,
@@ -524,9 +497,8 @@ export default {
   methods: {
       async refresh(loaded) {
         if ($(document).scrollTop() == 0) {
-            setTimeout(function() {
-                loaded('done')
-            },1000);
+            await this.$apollo.queries.getUserRecommendationsByTargetType.refetch();
+            loaded('done')
         } else {
             console.log("1")
             loaded('done')

@@ -13,7 +13,7 @@
                     <i class="fas fa-calendar" style="margin-top: -3px;color: gray;"></i>
                 </div>
             </div>
-            <div class="p-3">
+            <div class="p-3 pb-0">
                 <vue-typeahead-bootstrap
                     id="input_query"
                     v-model="query"
@@ -33,10 +33,21 @@
                     <template slot="suggestion" slot-scope="{ data, htmlText }">
                         <div class="d-flex align-items-center" style="position:relative !important;">
                         <div :class="''+data.type + '-tag'" style="position:relative;">
-                            <img
+                            <div class="user-img me-2">
+                                <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                                    <defs>
+                                    <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                                    <clipPath id="clipSquircle">
+                                        <use xlink:href="#shapeSquircle"/>
+                                    </clipPath>
+                                    </defs>
+                                    <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(data.backgroundImages && data.backgroundImages.length>0) ? data.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'"/>
+                                </svg>
+                            </div>
+                            <!--<img
                             class="rounded-s me-3"
                             :src="(data.backgroundImages && data.backgroundImages.length>0) ? data.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'"
-                            style="width: 40px; height: 40px;" />
+                            style="width: 40px; height: 40px;" />-->
                         </div>
                         <span v-if="data.type == 'site'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + htmlText + ' 사이트</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + data.description+'</span>'"></span>
                         <span v-else-if="data.type == 'point'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + htmlText + ' 포인트</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + data.description+'</span>'"></span>
@@ -55,10 +66,21 @@
                     <div v-on:click="goDiving(item)" :class="'light-border-bottom mt-3' + (item.status == 'searchable' ? '' : ' opacity-50')">
                         <div class="d-flex mb-3 position-relative">
                             <div class="align-self-center">
-                                <img :src="(item.diveLocation && item.diveLocation.length > 0 && item.diveLocation[0].backgroundImages && item.diveLocation[0].backgroundImages.length > 0) ? item.diveLocation[0].backgroundImages[0].thumbnailUrl : '/static/empty.jpg'" class="rounded-sm me-3" width="68">
+                                <div class="user-img me-2">
+                                    <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                                        <defs>
+                                        <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                                        <clipPath id="clipSquircle">
+                                            <use xlink:href="#shapeSquircle"/>
+                                        </clipPath>
+                                        </defs>
+                                        <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(item.diveLocation && item.diveLocation.length > 0 && item.diveLocation[0].backgroundImages && item.diveLocation[0].backgroundImages.length > 0) ? item.diveLocation[0].backgroundImages[0].thumbnailUrl : '/static/empty.jpg'"/>
+                                    </svg>
+                                </div>
+                                <!--<img :src="(item.diveLocation && item.diveLocation.length > 0 && item.diveLocation[0].backgroundImages && item.diveLocation[0].backgroundImages.length > 0) ? item.diveLocation[0].backgroundImages[0].thumbnailUrl : '/static/empty.jpg'" class="rounded-sm me-3" width="68">-->
                             </div>
-                            <div class="text-start align-self-center font-noto">
-                                <h2 class="font-16 line-height-s mt-2 mb-0 font-500">{{ item.title }}</h2>
+                            <div class="text-start align-self-center font-noto" style="vertical-align: top;">
+                                <h2 class="font-16 line-height-s mb-0 font-500">{{ item.title }}</h2>
                                 <p class="color-gray font-13 mb-0 ellipsis">{{ wediveDate(item.startedAt) }} ~ {{ wediveDate(item.finishedAt) }}</p>
                                 <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> {{ (item.diveLocation && item.diveLocation.length > 0) ? item.diveLocation[0].name : '' }} ({{ wediveDivingType(item.type) }})</p>
                             </div>
@@ -649,4 +671,45 @@ export default {
 .wedive-chip {font-family: 'Noto Sans Korean';border-radius:6px !important;padding: 0 8px;margin:0 !important;position:absolute;right:0px;bottom:0px;}
 .wedive-chip i {width: auto;line-height: inherit;margin-right: 2px;}
 .light-border-bottom {border-bottom: 1px solid #dee2e6;}
+
+.user-img {
+  position: relative;
+  display: inline-block;
+  width: 70px;
+  height: 70px;
+  overflow: hidden;
+  user-select: none;
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3csvg width='88px' height='88px' viewBox='0 0 88 88' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3e%3cpath d='M44%2c0.5 C59.8650505%2c0.5 70.7664452%2c3.40244096 77.6820021%2c10.3179979 C84.597559%2c17.2335548 87.5%2c28.1349495 87.5%2c44 C87.5%2c59.8650505 84.597559%2c70.7664452 77.6820021%2c77.6820021 C70.7664452%2c84.597559 59.8650505%2c87.5 44%2c87.5 C28.1349495%2c87.5 17.2335548%2c84.597559 10.3179979%2c77.6820021 C3.40244096%2c70.7664452 0.5%2c59.8650505 0.5%2c44 C0.5%2c28.1349495 3.40244096%2c17.2335548 10.3179979%2c10.3179979 C17.2335548%2c3.40244096 28.1349495%2c0.5 44%2c0.5 Z' fill='none' stroke='rgba(0,0,0,0.3)'%3e%3c/path%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .svg-profile {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .default-txt {
+    font-size: 2em;
+    fill: #fff;
+  }
+
+  .default-bg {
+    width: 100%;
+    height: 100%;
+    @each $num, $color in $userImgBgs {
+      &[data-color="#{$num}"] {
+        fill: $color;
+      }
+    }
+  }
+}
 </style>

@@ -95,8 +95,21 @@
                 <div class="">
                     <div class="owner border-bottom pt-2 pb-2 position-relative" style="position: relative;">
                         <div v-on:click="goUserPage(getDivingById.hostUser)">
-                            <img class="inline-block circular_image" :src="(getDivingById.hostUser && getDivingById.hostUser.profileImages && getDivingById.hostUser.profileImages.length>0 && getDivingById.hostUser.profileImages[0].thumbnailUrl) ? getDivingById.hostUser.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty_'+((getDivingById.hostUser&&getDivingById.hostUser.gender)?getDivingById.hostUser.gender:'m')+'.png'" width="50" style="vertical-align: top;"/>
-                            <div class="inline-block font-noto ms-3">
+                            
+                            <div class="user-img me-2">
+                                <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                                    <defs>
+                                    <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                                    <clipPath id="clipSquircle">
+                                        <use xlink:href="#shapeSquircle"/>
+                                    </clipPath>
+                                    </defs>
+                                    <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(getDivingById.hostUser && getDivingById.hostUser.profileImages && getDivingById.hostUser.profileImages.length>0 && getDivingById.hostUser.profileImages[0].thumbnailUrl) ? getDivingById.hostUser.profileImages[0].thumbnailUrl : '/static/assets/user_empty.jpg'"/>
+                                </svg>
+                            </div>
+                            
+                            <!--<img class="inline-block circular_image" :src="(getDivingById.hostUser && getDivingById.hostUser.profileImages && getDivingById.hostUser.profileImages.length>0 && getDivingById.hostUser.profileImages[0].thumbnailUrl) ? getDivingById.hostUser.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty_'+((getDivingById.hostUser&&getDivingById.hostUser.gender)?getDivingById.hostUser.gender:'m')+'.png'" width="50" style="vertical-align: top;"/>-->
+                            <div class="inline-block font-noto ms-2">
                                 <h5 class="mb-0 font-500 font-15">{{ (getDivingById.hostUser!=null&&getDivingById.hostUser.nickName!=null) ? getDivingById.hostUser.nickName : ((getDivingById.hostUser.name!=null) ? getDivingById.hostUser.name : '비공개') }}</h5>
                                 <p class="mb-0 font-14 color-gray">{{ getDivingById.hostUser ? getDiverLevel(getDivingById.hostUser.freeLicenseLevel, getDivingById.hostUser.scubaLicenseLevel) : '' }}</p>
                             </div>
@@ -105,8 +118,21 @@
                     </div>
                     <div class="border-bottom pt-2 pb-2 position-relative" v-for="participant in getDivingById.participants.filter(member=> member.status == 'joined')">
                         <div v-on:click="goUserPage(participant.user)">
-                            <img class="inline-block circular_image" :src="(participant.user && participant.user.profileImages && participant.user.profileImages.length>0 && participant.user.profileImages[0].thumbnailUrl) ? participant.user.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty_'+(participant.gender ? participant.gender : 'm')+'.png'" width="50" style="vertical-align: top;"/>
-                            <div class="inline-block font-noto ms-3">
+                            
+                            <div class="user-img me-2">
+                                <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                                    <defs>
+                                    <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                                    <clipPath id="clipSquircle">
+                                        <use xlink:href="#shapeSquircle"/>
+                                    </clipPath>
+                                    </defs>
+                                    <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(participant.user && participant.user.profileImages && participant.user.profileImages.length>0 && participant.user.profileImages[0].thumbnailUrl) ? participant.user.profileImages[0].thumbnailUrl : '/static/assets/user_empty.jpg'"/>
+                                </svg>
+                            </div>
+
+                            <!--<img class="inline-block circular_image" :src="(participant.user && participant.user.profileImages && participant.user.profileImages.length>0 && participant.user.profileImages[0].thumbnailUrl) ? participant.user.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty_'+(participant.gender ? participant.gender : 'm')+'.png'" width="50" style="vertical-align: top;"/>-->
+                            <div class="inline-block font-noto ms-2">
                                 <h5 class="mb-0 font-500 font-15">{{ (participant.user!=null&&participant.user.nickName!=null) ? participant.user.nickName : ((participant.name!=null) ? participant.name : '비공개') }}</h5>
                                 <p class="mb-0 font-14 color-gray ellipsis" style="max-width: calc(100vw - 170px);">{{ participant ? getDiverLevel(participant.freeLicenseLevel, participant.scubaLicenseLevel) : '' }}</p>
                             </div>
@@ -124,8 +150,21 @@
                     <div class="p-0" v-for="participant in getDivingById.participants.filter(member=> member.status == 'applied')">
                         <div class="border-bottom pt-2 pb-2 position-relative">
                             <div v-on:click="goUserPage(participant.user)">
-                                <img class="inline-block circular_image" :src="(participant.user && participant.user.profileImages && participant.user.profileImages.length>0 && participant.user.profileImages[0].thumbnailUrl) ? participant.user.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty_'+(participant.gender ? participant.gender : 'm')+'.png'" width="50" style="vertical-align: top;"/>
-                                <div class="inline-block font-noto ms-3">
+
+                                <div class="user-img me-2">
+                                    <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                                        <defs>
+                                        <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                                        <clipPath id="clipSquircle">
+                                            <use xlink:href="#shapeSquircle"/>
+                                        </clipPath>
+                                        </defs>
+                                        <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(participant.user && participant.user.profileImages && participant.user.profileImages.length>0 && participant.user.profileImages[0].thumbnailUrl) ? participant.user.profileImages[0].thumbnailUrl : '/static/assets/user_empty.jpg'"/>
+                                    </svg>
+                                </div>
+                                
+                                <!--<img class="inline-block circular_image" :src="(participant.user && participant.user.profileImages && participant.user.profileImages.length>0 && participant.user.profileImages[0].thumbnailUrl) ? participant.user.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty_'+(participant.gender ? participant.gender : 'm')+'.png'" width="50" style="vertical-align: top;"/>-->
+                                <div class="inline-block font-noto ms-2">
                                     <h5 class="mb-0 font-500 font-15">{{ (participant.user!=null&&participant.user.nickName!=null) ? participant.user.nickName : ((participant.name!=null) ? participant.name : '비공개') }}</h5>
                                     <p class="mb-0 font-13 color-gray ellipsis" style="max-width: calc(100vw - 220px);">{{ participant ? getDiverLevel(participant.freeLicenseLevel, participant.scubaLicenseLevel) : '' }}</p>
                                 </div>
@@ -147,8 +186,19 @@
                 <h2 class="font-18 font-700 mb-2">다이빙 장소</h2>
                 
                 <div v-for="location in locationData" class="evaluation" style="min-height: 115px;" v-on:click="goDetail(location.type, location.uniqueName)">
-                    <img :src="location.backgroundImages[0].thumbnailUrl" class="rounded-s mx-auto me-3" width="95" height="95" style="float: left;position: relative;"/>
-                    <div style="padding-left:110px;">
+                    
+                    <div class="thumb-img me-2">
+                        <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                            <defs>
+                            <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                            <clipPath id="clipSquircle">
+                                <use xlink:href="#shapeSquircle"/>
+                            </clipPath>
+                            </defs>
+                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(location.backgroundImages && location.backgroundImages.length > 0) ? location.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'"/>
+                        </svg>
+                    </div>
+                    <div style="display:inline-block;vertical-align: top;width: calc(100vw - 156px);">
                         <h2 class="font-16 mb-2 font-600">{{ location.name }}</h2>
                         <p class="color-gray mb-2 line-height-s ellipsis" style="display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;white-space: unset;">{{ location.description }}</p>
                         <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
@@ -1041,7 +1091,7 @@ export default {
           }
       },
       goDetail(type, uniqueName) {
-          location.href = type + '/' + uniqueName;
+          location.href = '/'+type + '/' + uniqueName;
       },
       async clickLike() {
           if (localStorage.idToken && localStorage.nickName && this.getDivingById.status != 'publicEnded') {
@@ -1171,4 +1221,84 @@ export default {
 .wedive-chip2 {font-family: 'Noto Sans Korean';border-radius:6px !important;padding: 2px 12px;margin:0 !important;position:absolute;right:64px;bottom:20px;color:black !important;}
 .position-relative {position: relative;}
 .background-center {background-position: center !important;background-size: cover !important;}
+.thumb-img {
+  position: relative;
+  display: inline-block;
+  width: 90px;
+  height: 90px;
+  overflow: hidden;
+  user-select: none;
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3csvg width='88px' height='88px' viewBox='0 0 88 88' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3e%3cpath d='M44%2c0.5 C59.8650505%2c0.5 70.7664452%2c3.40244096 77.6820021%2c10.3179979 C84.597559%2c17.2335548 87.5%2c28.1349495 87.5%2c44 C87.5%2c59.8650505 84.597559%2c70.7664452 77.6820021%2c77.6820021 C70.7664452%2c84.597559 59.8650505%2c87.5 44%2c87.5 C28.1349495%2c87.5 17.2335548%2c84.597559 10.3179979%2c77.6820021 C3.40244096%2c70.7664452 0.5%2c59.8650505 0.5%2c44 C0.5%2c28.1349495 3.40244096%2c17.2335548 10.3179979%2c10.3179979 C17.2335548%2c3.40244096 28.1349495%2c0.5 44%2c0.5 Z' fill='none' stroke='rgba(0,0,0,0.3)'%3e%3c/path%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .svg-profile {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .default-txt {
+    font-size: 2em;
+    fill: #fff;
+  }
+
+  .default-bg {
+    width: 100%;
+    height: 100%;
+    @each $num, $color in $userImgBgs {
+      &[data-color="#{$num}"] {
+        fill: $color;
+      }
+    }
+  }
+}
+.user-img {
+  position: relative;
+  display: inline-block;
+  width: 45px;
+  height: 45px;
+  overflow: hidden;
+  user-select: none;
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3csvg width='88px' height='88px' viewBox='0 0 88 88' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3e%3cpath d='M44%2c0.5 C59.8650505%2c0.5 70.7664452%2c3.40244096 77.6820021%2c10.3179979 C84.597559%2c17.2335548 87.5%2c28.1349495 87.5%2c44 C87.5%2c59.8650505 84.597559%2c70.7664452 77.6820021%2c77.6820021 C70.7664452%2c84.597559 59.8650505%2c87.5 44%2c87.5 C28.1349495%2c87.5 17.2335548%2c84.597559 10.3179979%2c77.6820021 C3.40244096%2c70.7664452 0.5%2c59.8650505 0.5%2c44 C0.5%2c28.1349495 3.40244096%2c17.2335548 10.3179979%2c10.3179979 C17.2335548%2c3.40244096 28.1349495%2c0.5 44%2c0.5 Z' fill='none' stroke='rgba(0,0,0,0.3)'%3e%3c/path%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .svg-profile {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .default-txt {
+    font-size: 2em;
+    fill: #fff;
+  }
+
+  .default-bg {
+    width: 100%;
+    height: 100%;
+    @each $num, $color in $userImgBgs {
+      &[data-color="#{$num}"] {
+        fill: $color;
+      }
+    }
+  }
+}
 </style>

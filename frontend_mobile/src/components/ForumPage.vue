@@ -11,7 +11,7 @@
                     :options="swiperOption"
                     @slideChange="tabSlideChange"
                 >
-                    <swiper-slide v-for="(forum,index) in getForums" :key="forum._id"><div v-on:click="moveTo(index)">{{ forum.name }}</div></swiper-slide>
+                    <swiper-slide v-for="(forum,index) in getForums.filter(x=>x.name!='트레이닝')" :key="forum._id"><div v-on:click="moveTo(index)">{{ forum.name }}</div></swiper-slide>
                 </swiper>
             </div>
             <div>
