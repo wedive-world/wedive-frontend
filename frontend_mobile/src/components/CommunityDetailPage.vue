@@ -2,7 +2,7 @@
   <div class="text-center">
     <div data-menu-active="nav-forum"></div>
     <div class="header header-fixed header-logo-center">
-        <a href="" class="header-title color ellipsis">{{ getCommunityById.title }}</a>
+        <a href="" class="header-title color ellipsis">{{ getCommunityById ? getCommunityById.title : '' }}</a>
         <a href="#" data-back-button class="font-16 header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
         <a class="font-16 header-icon header-icon-3" data-menu="agenda-add"><i class="fas fa-edit"></i></a>
         <a data-menu="menu-main-right" class="font-16 header-icon header-icon-4"><i class="fas fa-bars"></i></a>
@@ -111,7 +111,7 @@
          data-menu-height="cover"
          style="margin-bottom: 0;">
         
-        <div class="card rounded-0 bg-2" data-card-height="50">
+        <div class="card rounded-0 bg-2 text-start" data-card-height="50">
             <div class="card-top p-2">
                 <a href="#" class="close-menu icon icon-s rounded-l bg-theme color-theme "><i class="fa fa-arrow-left"></i></a>
                 <a v-on:click="createAgenda" href="#" :class="'float-end icon icon-s rounded-l bg-theme me-3 mt-2 font-noto font-16 ' + ((isWritten==0) ? 'color-gray' : 'color-theme')">확인</a>
@@ -164,7 +164,7 @@
                 </tags-input>
                 <div id="div_upload_photo" class="row m-0 mb-3 mt-3">
                 </div>
-                <div class="mb-3 text-center p-2" style="border: 1px solid #e9e9e9;">
+                <div class="mb-3 text-center p-2 wedive-button">
                     <input type="file" @change="addImage" id="" accept=".jpg, .png" style="text-indent: -999px;outline: none;width: 100%;height: 45px;color: rgba(0, 0, 0, 0) !important;">
                     <div class="upload-file-text" style="color: black;margin-top:-44px !important;margin-bottom:12px;"><img class="me-1" src="/static/images/assets/icon_camera.png" height="18"/>첨부하기</div>
                 </div>
@@ -517,6 +517,16 @@ export default {
     }
   },
   apollo: {
+      getAllAgendaTypes: {
+          query:gql `
+            query Query {
+                getAllAgendaTypes {
+                    _id
+                    name
+                }
+            }
+          `,
+      },
       getCommunityById : {
         query:gql`
           query Query($id: ID!) {
@@ -635,16 +645,6 @@ export default {
             }
           }
       },
-      getAllAgendaTypes: {
-          query:gql `
-            query Query {
-                getAllAgendaTypes {
-                    _id
-                    name
-                }
-            }
-          `,
-      }
       
   },
   

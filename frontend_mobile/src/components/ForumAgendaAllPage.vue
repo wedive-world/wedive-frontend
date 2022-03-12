@@ -333,6 +333,17 @@ export default {
                 isUserDislike
                 isUserLike
                 views
+                agendaPlaces {
+                  ... on DiveCenter {
+                    name
+                  }
+                  ... on DiveSite {
+                    name
+                  }
+                  ... on DivePoint {
+                    name
+                  }
+                }
               }
             }
           `,

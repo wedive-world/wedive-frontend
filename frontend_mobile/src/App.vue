@@ -77,7 +77,7 @@
           
       </div>
 
-      <vue-bottom-sheet ref="createBottomSheet">
+      <vue-bottom-sheet ref="createBottomSheet" @opened="bottomSheetOepn" @closed="bottomSheetClose">
         <div class="text-center">
           <div class="color-primary font-noto font-20 font-600"> 버디 모집</div>
           <p class="mb-2 color-gray">어디로 가실까요?</p>
@@ -105,7 +105,7 @@
       </vue-bottom-sheet>
 
       <!-- Menu login -->
-      <vue-bottom-sheet ref="loginBottomSheet">
+      <vue-bottom-sheet ref="loginBottomSheet" @opened="bottomSheetOepn" @closed="bottomSheetClose">
         <div class="m-3 text-center">
             <div class="color-primary font-noto font-20 font-600"><i class="ico ico-wedive-w color-primary ico-26" style="display: inline-block;margin:0;margin-bottom: -5px;"></i> wedive에 로그인</div>
         </div>
@@ -140,6 +140,8 @@
 import VueBottomSheet from "@webzlodimir/vue-bottom-sheet";
 import { GoogleAuthProvider, getAuth, signInWithPopup, onAuthStateChanged, onIdTokenChanged  } from "firebase/auth";
 const axios = require("axios")
+var closeBottomSheet = null;
+var closeCreateSheet = null;
 
 export default {
   name: 'App',
@@ -209,9 +211,22 @@ export default {
         } catch (e) {
 
         }
+
         try {
           var activeMenu = document.querySelectorAll('.menu-active');
           for(var i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
+        } catch (e) {
+          
+        }
+
+        try {
+          closeBottomSheet();
+        } catch (e) {
+          
+        }
+
+        try {
+          closeCreateSheet();
         } catch (e) {
           
         }
@@ -253,6 +268,9 @@ export default {
     } else if (localStorage.notiData && localStorage.notiData != '') {
       this.notiData = JSON.parse(localStorage.notiData);
     }
+
+    closeBottomSheet = this.closeLoginBottomSheet;
+    closeCreateSheet = this.closeCreateSheet;
   },
   destroyed() {
     
@@ -273,6 +291,17 @@ export default {
     VueBottomSheet,
   },
   methods: {
+    bottomSheetOepn() {
+      // jjangs : open menu
+      if(window.location.href.split('/').pop() != 'modal'){
+          window.history.pushState({}, 'modal', (window.location.pathname == '/' ? '/modal' : window.location.pathname + '/modal'));
+      }
+    },
+    bottomSheetClose() {
+      if(window.location.href.split('/').pop() == 'modal'){
+        window.history.back(); 
+      }
+    },
     goNoti() {
       if(this.idToken != null && this.nickName != null)
         location.href = '/other/notification';

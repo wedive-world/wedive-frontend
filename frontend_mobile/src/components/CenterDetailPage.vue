@@ -848,7 +848,7 @@
             </div>
             <div id="div_upload_photo" class="row m-0 mb-3">
             </div>
-            <div class="mb-3 text-center p-2" style="border: 1px solid #e9e9e9;">
+            <div class="mb-3 text-center p-2 wedive-button">
                 <input type="file" @change="addImage" id="" accept=".jpg, .png" style="text-indent: -999px;outline: none;width: 100%;height: 45px;color: rgba(0, 0, 0, 0) !important;">
                 <div class="upload-file-text" style="color: black;margin-top:-44px !important;margin-bottom:12px;"><img class="me-1" src="/static/images/assets/icon_camera.png" height="18"/>첨부하기</div>
             </div>

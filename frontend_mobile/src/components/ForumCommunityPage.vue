@@ -17,7 +17,7 @@
         </template>
         
         <div class="text-start pt-3 pb-3">
-            <div class="pe-3 ps-3" style="position: relative;">
+            <!--<div class="pe-3 ps-3" style="position: relative;">
                 <vue-typeahead-bootstrap
                     id="input_query"
                     v-model="query"
@@ -37,13 +37,11 @@
                     
                 </vue-typeahead-bootstrap>
                 <a data-menu="community-add" class="btn btn-m rounded-s text-uppercase font-900 shadow-s bg-teal-dark" style="width:64px;position:absolute; right:16px;top: 0;"><i class="fas fa-plus"></i></a>
-            </div>
-            <div v-for="item in communities">
-            </div>
-            
-            <div style="position:relative;">
-                <div v-for="community in getUserSubsciption.communities" v-on:click="goCommunity(community)" class="pe-3 ps-3 pt-2 pb-2 border-bottom">
-                    <div class="user-img me-2">
+            </div>-->
+            <h4 class="pt-1 mb-0 ps-3">내 동호회</h4>
+            <div class="row m-0 ps-2 pe-2" style="position:relative;">
+                <div v-for="community in getUserSubsciption.communities" v-on:click="goCommunity(community)" class="col-3 text-center p-0">
+                    <div class="cafe-img me-2">
                         <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
                             <defs>
                             <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
@@ -55,10 +53,29 @@
                         </svg>
                     </div>
                     <div class="inline-block font-noto v-align-top">
-                        <h5 class="mb-0 font-500 font-16">{{ community.title }}<span class="wedive-bullet">MY</span></h5>
-                        <p class="mb-0 mt-1 font-13 color-gray ellipsis2" style="max-width: calc(100vw - 122px);line-height: 1.2;">{{ community.description }}</p>
+                        <h5 class="mb-0 font-500 font-14 mt-n1">{{ community.title }}</h5>
                     </div>
                 </div>
+                <div data-menu="community-add" class="col-3 text-center p-0">
+                    <div class="cafe-img me-2">
+                        <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                            <defs>
+                            <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                            <clipPath id="clipSquircle">
+                                <use xlink:href="#shapeSquircle"/>
+                            </clipPath>
+                            </defs>
+                            <image style="filter: opacity(0.6);" class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="/static/images/assets/ico_plus.png"/>
+                        </svg>
+                    </div>
+                    <div class="inline-block font-noto v-align-top">
+                        <h5 class="mb-0 font-500 font-14 mt-n1">추가</h5>
+                    </div>
+                </div>
+            </div>
+
+            <h4 class="mt-3 mb-0 ps-3">추천 동호회</h4>
+            <div>
                 <div v-if="getAllCommunities != null" v-for="community in getAllCommunities.filter(x=> myCommunityIds.includes(x._id) == false)" v-on:click="goCommunity(community)" class="pe-3 ps-3 pt-2 pb-2 border-bottom">
                     <div class="user-img me-2">
                         <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
@@ -309,6 +326,46 @@ export default {
 .inline-block {display: inline-block !important;}
 .v-align-top {vertical-align: top !important;}
 .wedive-bullet {margin-left:12px; background: #d1d2d3; font-size:12px;border-radius:6px;padding: 2px 6px;color: #666;}
+.cafe-img {
+  position: relative;
+  display: inline-block;
+  width: 88%;
+  
+  overflow: hidden;
+  user-select: none;
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3csvg width='88px' height='88px' viewBox='0 0 88 88' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3e%3cpath d='M44%2c0.5 C59.8650505%2c0.5 70.7664452%2c3.40244096 77.6820021%2c10.3179979 C84.597559%2c17.2335548 87.5%2c28.1349495 87.5%2c44 C87.5%2c59.8650505 84.597559%2c70.7664452 77.6820021%2c77.6820021 C70.7664452%2c84.597559 59.8650505%2c87.5 44%2c87.5 C28.1349495%2c87.5 17.2335548%2c84.597559 10.3179979%2c77.6820021 C3.40244096%2c70.7664452 0.5%2c59.8650505 0.5%2c44 C0.5%2c28.1349495 3.40244096%2c17.2335548 10.3179979%2c10.3179979 C17.2335548%2c3.40244096 28.1349495%2c0.5 44%2c0.5 Z' fill='none' stroke='rgba(0,0,0,0.3)'%3e%3c/path%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .svg-profile {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .default-txt {
+    font-size: 2em;
+    fill: #fff;
+  }
+
+  .default-bg {
+    width: 100%;
+    height: 100%;
+    @each $num, $color in $userImgBgs {
+      &[data-color="#{$num}"] {
+        fill: $color;
+      }
+    }
+  }
+}
 .user-img {
   position: relative;
   display: inline-block;

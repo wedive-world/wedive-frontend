@@ -365,17 +365,26 @@ export default {
           this.is_attach = false;
       },
       async reviewLike(review) {
-        if (review.isBottomLikeClicked == null)
-        review.isBottomLikeClicked = false;
-
-        if (review.isUserLike) {
-          if (review.isClicked == false && review.isBottomLikeClicked) {
-            $("#like_"+review._id + "  .VueStar__ground .VueStar__icon").click();
-            review.isBottomLikeClicked = !review.isBottomLikeClicked;
-          }
-        }$("#like_"+review._id + "  .VueStar__ground .VueStar__icon").click();
+        if (review.isUserLike && review.isBottomLikeClicked == null) {
+          $("#like_"+review._id + "  .VueStar__ground .VueStar__icon").click();
+          review.isBottomLikeClicked = !review.isBottomLikeClicked;
+          console.log("click")
+        }
+        if (review.isBottomLikeClicked == null) {
+          if (review.isUserLike)
+            review.isBottomLikeClicked = true;
+          else
+            review.isBottomLikeClicked = false;
+        }
+        $("#like_"+review._id + "  .VueStar__ground .VueStar__icon").click();
+        console.log("click")
         if (review.isUserLike == null) {
           review.isUserLike = false;
+        }
+        if (review.isUserLike) {
+          review.likes--;
+        } else {
+          review.likes++;
         }
         review.isUserLike = !review.isUserLike;
         review.isBottomLikeClicked = !review.isBottomLikeClicked;
@@ -401,17 +410,24 @@ export default {
         });
       },
       async reviewDislike(review) {
-        if (review.isBottomDislikeClicked == null)
-        review.isBottomDislikeClicked = false;
-
-        if (review.isUserDislike) {
-          if (review.isClicked == false && review.isBottomDislikeClicked) {
-            $("#dislike_"+review._id + "  .VueStar__ground .VueStar__icon").click();
-            review.isBottomDislikeClicked = !review.isBottomDislikeClicked;
-          }
-        }$("#dislike_"+review._id + "  .VueStar__ground .VueStar__icon").click();
+        if (review.isUserDislike && review.isBottomDislikeClicked == null) {
+          $("#dislike_"+review._id + "  .VueStar__ground .VueStar__icon").click();
+          review.isBottomDislikeClicked = !review.isBottomDislikeClicked;
+        }
+        if (review.isBottomLikeClicked == null) {
+          if (review.isUserLike)
+            review.isBottomLikeClicked = true;
+          else
+            review.isBottomLikeClicked = false;
+        }
+        $("#dislike_"+review._id + "  .VueStar__ground .VueStar__icon").click();
         if (review.isUserDislike == null) {
           review.isUserDislike = false;
+        }
+        if (review.isUserDislike) {
+          review.dislikes--;
+        } else {
+          review.dislikes++;
         }
         review.isUserDislike = !review.isUserDislike;
         review.isBottomDislikeClicked = !review.isBottomDislikeClicked;

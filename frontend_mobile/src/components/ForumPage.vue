@@ -136,31 +136,43 @@
                     v-model="selectedTags"
                     :typeahead-style="'dropdown'"
                     :placeholder="'(옵션) 태그를 입력하세요.'"
-                    :existing-tags="[
-                        { key: '마크로', value: '마크로' },
-                        { key: '일상', value: '일상' },
-                        { key: '맛집', value: '맛집' },
-                    ]"
+                    :existing-tags="tagSuggestion"
                     :typeahead="true">
                 </tags-input>
                 
                 
-                <tags-input 
-                element-id="tags"
-                v-model="selectedTags2"
-                :typeahead-style="'dropdown'"
-                :placeholder="'(옵션) 다이빙 장소를 입력하세요.'"
-                :existing-tags="[
-                    { key: 'K26', value: 'K26' },
-                    { key: '잠실수영장', value: '잠실수영장' },
-                    { key: '울산수영장', value: '울산수영장' },
-                ]"
-                :typeahead="true"
-                class="mt-2">
-                </tags-input>
+                <vue-typeahead-bootstrap
+                    id="search_typeahead"
+                    class="wedive-search mt-2"
+                    v-model="selectedTags2"
+                    :data="locations"
+                    :serializer="item => item.name"
+                    :screen-reader-text-serializer="item => `${item.name}`"
+                    highlightClass="special-highlight-class"
+                    @hit="selectedLocation = $event;"
+                    :minMatchingChars="2"
+                    :showAllResults="true"
+                    :maxMatches="30"
+                    placeholder="(옵션) 다이빙 장소를 입력하세요."
+                    inputClass="special-input-class"
+                    @input="lookupUser3"
+                    >
+                    <template slot="suggestion" slot-scope="{ data, htmlText }">
+                        <div class="d-flex align-items-center">
+                        <img
+                            class="rounded-s me-2"
+                            :src="(data.backgroundImages && data.backgroundImages.length>0) ? data.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'"
+                            style="width: 40px; height: 40px;" />
+                        <span v-if="data.type == 'site'" class="ml-4" v-html="'<span class=\'badge border color-site border-site\'>사이트</span>&nbsp;<i class=\'fa fa-star color-yellow-dark icon-10 text-center me-2\'></i>'+(data.adminScore/20).toFixed(1)+'<br/><span class=\'font-noto font-16\'>' + htmlText + '</span>'"></span>
+                        <span v-else-if="data.type == 'point'" class="ml-4" v-html="'<span class=\'badge border color-point border-point\'>포인트</span>&nbsp;<i class=\'fa fa-star color-yellow-dark icon-10 text-center me-2\'></i>'+(data.adminScore/20).toFixed(1)+'<br/><span class=\'font-noto font-16\'>' + htmlText + '</span>'"></span>
+                        <span v-else-if="data.type == 'center'" class="ml-4" v-html="'<span class=\'badge border color-center border-center\'>센터</span>&nbsp;<i class=\'fa fa-star color-yellow-dark icon-10 text-center me-2\'></i>'+(data.adminScore/20).toFixed(1)+'<br/><span class=\'font-noto font-16\'>' + htmlText + '</span>'"></span>
+                        </div>
+                    </template>
+                </vue-typeahead-bootstrap>
+                
                 <div id="div_upload_photo" class="row m-0 mb-3 mt-3">
                 </div>
-                <div class="mb-3 text-center p-2" style="border: 1px solid #e9e9e9;">
+                <div class="mb-3 text-center p-2 wedive-button">
                     <input type="file" @change="addImage" id="" accept=".jpg, .png" style="text-indent: -999px;outline: none;width: 100%;height: 45px;color: rgba(0, 0, 0, 0) !important;">
                     <div class="upload-file-text" style="color: black;margin-top:-44px !important;margin-bottom:12px;"><img class="me-1" src="/static/images/assets/icon_camera.png" height="18"/>첨부하기</div>
                 </div>
@@ -185,13 +197,13 @@
         <div class="card rounded-0">
             <div class="content mt-0">
                 <div class="input-style validate-field mt-3">
-                    <textarea rows="1" class="wedive-textarea2" placeholder="커뮤니티 이름을 입력하세요." v-model="community_title"></textarea>
-                    <textarea class="wedive-textarea" placeholder="커뮤니티 설명을 입력하세요." v-model="community_contents"></textarea>
+                    <textarea rows="1" class="wedive-textarea2 wedive-input" placeholder="커뮤니티 이름을 입력하세요." v-model="community_title"></textarea>
+                    <textarea class="wedive-textarea wedive-input" placeholder="커뮤니티 설명을 입력하세요." v-model="community_contents"></textarea>
                 </div>
                 
                 <div id="div_upload_photo_community" class="row m-0 mb-3 mt-3">
                 </div>
-                <div :class="'mb-3 text-center p-2' + (file_photo_community.length > 0 ? ' btn_disabled' : '')" style="border: 1px solid #e9e9e9;">
+                <div :class="'mb-3 text-center p-2 wedive-button' + (file_photo_community.length > 0 ? ' btn_disabled' : '')">
                     <input v-if="file_photo_community.length > 0" type="file" @change="addImageCommunity" id="" accept=".jpg, .png" style="text-indent: -999px;outline: none;width: 100%;height: 45px;color: rgba(0, 0, 0, 0) !important;" disabled="disabled">
                     <input v-else type="file" @change="addImageCommunity" id="" accept=".jpg, .png" style="text-indent: -999px;outline: none;width: 100%;height: 45px;color: rgba(0, 0, 0, 0) !important;">
                     <div class="upload-file-text" style="color: black;margin-top:-44px !important;margin-bottom:12px;"><img class="me-1" src="/static/images/assets/icon_camera.png" height="18"/>대표 이미지</div>
@@ -608,6 +620,10 @@ export default {
             }
   
             var _input = {types: [this.subjectType], targetId: "621db036efe4c50da6ea0825", title: this.agenda_title, content: this.agenda_contents, hashTags: this.selectedTags.map((x)=>{return {name: x.value}}), images: _id_list};
+            if (this.selectedLocation.hasOwnProperty("_id")) {
+                _input.agendaPlaces = [this.selectedLocation._id];
+            }
+
             const ipt = _input;
 
           var result = await axios({
@@ -707,6 +723,85 @@ export default {
       handleScroll (event) {
         this.scrollTop = $(document).scrollTop();
       },
+      async lookupUser3() {
+        this.locations = [];
+        const query = this.selectedTags2;
+        var result = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                    query SearchPlaces($searchParams: SearchParams, $limit: Int) {
+                        searchPlaces(searchParams: $searchParams, limit: $limit) {
+                            __typename
+                            ... on DiveCenter {
+                                _id
+                                uniqueName
+                                name
+                                description
+                                divingType
+                                adminScore
+                                latitude
+                                longitude
+                                backgroundImages {
+                                    thumbnailUrl
+                                }
+                            }
+                            ... on DiveSite {
+                                _id
+                                uniqueName
+                                name
+                                description
+                                adminScore
+                                latitude
+                                longitude
+                                backgroundImages {
+                                    thumbnailUrl
+                                }
+                            }
+                            ... on DivePoint {
+                                _id
+                                uniqueName
+                                name
+                                description
+                                adminScore
+                                latitude
+                                longitude
+                                backgroundImages {
+                                    thumbnailUrl
+                                }
+                            }
+                            address
+                            latitude
+                            longitude
+                            countryCode
+                        }
+                    }
+                `,
+                variables: {
+                    "limit": 10,
+                    "searchParams": {
+                        "query": query
+                    }
+                }
+            }
+        });
+        //result.data.data.searchDiveCentersByName.forEach(x=>result.data.data.searchDiveCentersByName)
+        var result_list = new Array();
+        if (result.data.data.searchPlaces) {
+            result.data.data.searchPlaces.filter(place => place.__typename == 'DiveSite').forEach(item => {item.type='site';result_list.push(item)});
+            result.data.data.searchPlaces.filter(place => place.__typename == 'DivePoint').forEach(item => {item.type='point';result_list.push(item)});
+            result.data.data.searchPlaces.filter(place => place.__typename == 'DiveCenter').forEach(item => {item.type='center';result_list.push(item)});
+        }
+        //if (result.data.data.searchDiveSitesByName) result.data.data.searchDiveSitesByName.forEach(x=>{x.type='site';result_list.push(x)});
+        //if (result.data.data.searchDivePointsByName) result.data.data.searchDivePointsByName.forEach(x=>{x.type='point';result_list.push(x)});
+        //if (result.data.data.searchDiveCentersByName) result.data.data.searchDiveCentersByName.forEach(x=>{x.type='center';result_list.push(x)});
+        this.locations = result_list;
+      },
   },
   mounted() {
     if (this.$route.query.header && this.$route.query.header == 'hide') {
@@ -750,6 +845,8 @@ export default {
   },
   data () {
     return {
+        tagSuggestion: JSON.parse(localStorage.suggestion).map(x=>{return({key: x, value: x})}),
+        locations: [],
         getForums: [],
         getAllAgendaTypes: [],
         textPlaceholder: '의견을 자유롭게 적어주세요.',
@@ -775,7 +872,8 @@ export default {
         community_title: '',
         community_contents: '',
         selectedTags: [],
-        selectedTags2: [],
+        selectedTags2: '',
+        selectedLocation: {},
         file_photo: [],
         file_photo_community: [],
         subjectType: 'default',
