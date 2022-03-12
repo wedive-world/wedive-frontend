@@ -1,7 +1,7 @@
 <template>
   <div class="text-center">
     <div class="header header-fixed header-logo-center">
-        <a href="" class="header-title color ellipsis" style="width: 250px;left: 36%;" v-html="getPreviewsByRecommendationId.recommendationTitle"></a>
+        <a href="" class="header-title color ellipsis" style="width: 250px;left: 36%;" v-html="getPreviewsByRecommendationId ? getPreviewsByRecommendationId.recommendationTitle : ''"></a>
         <a href="#" data-back-button class="font-16 header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
     </div>
     <pull-to :top-load-method="refresh" @top-state-change="stateChange" :top-config="TOP_DEFAULT_CONFIG" :is-bottom-bounce="false" :is-top-bounce="scrollTop == 0" style="margin-top: 50px;">
@@ -20,8 +20,8 @@
         </div>
         </template>
         
-        <div class="card text-start p-3" v-if="getPreviewsByRecommendationId.previews" style="min-height: calc(100vh - 50px);padding-bottom: 0 !important;margin-bottom: 0;">
-            <div v-for="(site,index) in getPreviewsByRecommendationId.previews.filter(x=>x.__typename == 'DiveSite')">
+        <div class="card text-start p-3" v-if="getPreviewsByRecommendationId && getPreviewsByRecommendationId.previews" style="min-height: calc(100vh - 50px);padding-bottom: 0 !important;margin-bottom: 0;">
+            <div v-for="(site,index) in getPreviewsByRecommendationId.previews.filter(x=>x.__typename == targetType)">
                 <div v-on:click="movePreview(site)" class="map-box">
                   <div class="bx">
                       <div class="justify-content-center mb-0 text-start">
@@ -68,17 +68,7 @@ export default {
   components: {
       PullTo,
   },
-  async beforeRouteEnter(to, from, next) {
-    if (to.params.id != null) {
-        next(vm => {vm.setData(to.params.id)});
-    } else {
-        location.href = "/";
-    }
-  },
   methods: {
-      setData(id) {
-          console.log(id);
-      },
       async refresh(loaded) {
         if ($(document).scrollTop() == 0) {
             setTimeout(function() {
@@ -149,7 +139,9 @@ export default {
       skip: 0,
       limit: 20,
       scrollTop: 0,
-      getAgendasByTargetId: [],
+      targetType: 'DiveSite',
+      getRecommendationById: {},
+      getPreviewsByRecommendationId: [],
       TOP_DEFAULT_CONFIG: {
           pullText: '당겨서 새로고침', // The text is displayed when you pull down
           triggerText: '업데이트', // The text that appears when the trigger distance is pulled down
@@ -167,6 +159,34 @@ export default {
     }
   },
   apollo: {
+      getRecommendationById: {
+        query:gql`
+          query Query($_id: ID!) {
+            getRecommendationById(_id: $_id) {
+              _id
+              targetType
+            }
+          }
+        `,
+        variables() {
+            return {
+              _id: this.recommendation_id,
+          }
+        },
+        result() {
+          if (this.getRecommendationById.targetType == 'diveSite') {
+            this.targetType = 'DiveSite';
+          } else if (this.getRecommendationById.targetType == 'divePoint') {
+            this.targetType = 'DivePoint';
+          } else if (this.getRecommendationById.targetType == 'diveCenter') {
+            this.targetType = 'DiveCenter';
+          } else if (this.getRecommendationById.targetType == 'diving') {
+            this.targetType = 'Diving';
+          }  else if (this.getRecommendationById.targetType == 'instructorProfile') {
+            this.targetType = 'InstructorProfile';
+          }
+        }
+      },
       getPreviewsByRecommendationId: {
           query:gql `
             query Query($_id: ID!) {

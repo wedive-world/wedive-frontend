@@ -638,6 +638,17 @@ export default {
                         mutation Mutation($input: AgendaInput) {
                             upsertAgenda(input: $input) {
                                 _id
+                                agendaPlaces {
+                                ... on DiveCenter {
+                                    name
+                                }
+                                ... on DiveSite {
+                                    name
+                                }
+                                ... on DivePoint {
+                                    name
+                                }
+                                }
                                 types {
                                     _id
                                     name

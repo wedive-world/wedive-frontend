@@ -38,7 +38,7 @@
                 </vue-typeahead-bootstrap>
                 <a data-menu="community-add" class="btn btn-m rounded-s text-uppercase font-900 shadow-s bg-teal-dark" style="width:64px;position:absolute; right:16px;top: 0;"><i class="fas fa-plus"></i></a>
             </div>-->
-            <h4 class="pt-1 mb-0 ps-3">내 동호회</h4>
+            <h4 class="pt-1 mb-2 ps-3">내 동호회</h4>
             <div class="row m-0 ps-2 pe-2" style="position:relative;">
                 <div v-for="community in getUserSubsciption.communities" v-on:click="goCommunity(community)" class="col-3 text-center p-0">
                     <div class="cafe-img me-2">
@@ -53,7 +53,7 @@
                         </svg>
                     </div>
                     <div class="inline-block font-noto v-align-top">
-                        <h5 class="mb-0 font-500 font-14 mt-n1">{{ community.title }}</h5>
+                        <h5 class="mb-0 font-400 font-14 mt-n1" style="color: #333;">{{ community.title }}</h5>
                     </div>
                 </div>
                 <div data-menu="community-add" class="col-3 text-center p-0">
@@ -69,14 +69,26 @@
                         </svg>
                     </div>
                     <div class="inline-block font-noto v-align-top">
-                        <h5 class="mb-0 font-500 font-14 mt-n1">추가</h5>
+                        <h5 class="mb-0 font-400 font-14 mt-n1" style="color: #333;">추가</h5>
                     </div>
                 </div>
             </div>
 
-            <h4 class="mt-3 mb-0 ps-3">추천 동호회</h4>
+            <div class="divider mb-0 mt-2" style="height: 12px; border-top: 1px solid rgba(136, 136, 136, 0.25);"></div>
+            <h4 class="mt-3 mb-2 ps-3">최신 동호회 글</h4>
             <div>
-                <div v-if="getAllCommunities != null" v-for="community in getAllCommunities.filter(x=> myCommunityIds.includes(x._id) == false)" v-on:click="goCommunity(community)" class="pe-3 ps-3 pt-2 pb-2 border-bottom">
+                <div v-for="(agenda,index) in getRecentAgendaBySubscribedCommunity" v-on:click="goDetail(agenda)" :class="'pe-3 ps-3 pt-2 pb-2' + (index < getRecentAgendaBySubscribedCommunity.length-1 ? ' border-bottom' : '')">
+                    <div class="inline-block font-noto v-align-top">
+                        <h5 class="mb-0 font-500 font-16">{{ agenda.title }}<span class="color-gray-light font-14"><i class="fas fa-heart ms-2"></i> {{ agenda.likes || 0 }}</span></h5>
+                        <p class="mb-0 mt-1 font-13 color-gray ellipsis2" style="max-width: calc(100vw - 32px);line-height: 1.2;" v-html="agenda.content.replace(/\n/gi, '<br/>')"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider mb-0 mt-2" style="height: 12px; border-top: 1px solid rgba(136, 136, 136, 0.25);"></div>
+            <h4 class="mt-3 mb-2 ps-3">추천 동호회</h4>
+            <div>
+                <div v-if="getAllCommunities != null" v-for="(community,index) in getAllCommunities.filter(x=> myCommunityIds.includes(x._id) == false)" v-on:click="goCommunity(community)" :class="'pe-3 ps-3 pt-2 pb-2' + (index < getAllCommunities.filter(x=> myCommunityIds.includes(x._id) == false).length-1 ? ' border-bottom' : '')">
                     <div class="user-img me-2">
                         <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
                             <defs>
@@ -262,6 +274,7 @@ export default {
         getUserSubsciption: [],
         getAllCommunities: [],
         myCommunityIds: [],
+        getRecentAgendaBySubscribedCommunity: [],
         scrollTop: 0,
         TOP_DEFAULT_CONFIG: {
             pullText: '당겨서 새로고침', // The text is displayed when you pull down
@@ -314,6 +327,25 @@ export default {
             }
           `
       },
+      getRecentAgendaBySubscribedCommunity: {
+          query:gql`
+            query Query($skip: Int, $limit: Int) {
+                getRecentAgendaBySubscribedCommunity(skip: $skip, limit: $limit) {
+                    _id
+                    title
+                    content
+                    author {
+                    nickName
+                    }
+                    likes
+                }
+            }
+          `, variables() {
+              return {
+                  limit: 5,
+              }
+          }
+      }
   },
   
 }
