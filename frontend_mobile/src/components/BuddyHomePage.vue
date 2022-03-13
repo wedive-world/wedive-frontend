@@ -53,7 +53,94 @@
         </div>
 
         
-        <div class="card card-style">
+
+        <div v-for="(recommendation,rec_idx) in getUserRecommendationsByTargetType">
+            <div v-if="recommendation.previewCount == 0" v-on:click="moveRecommend(recommendation._id, 'recommendation')" class="card card-style" :style="recommendation.cssStyle.includes('|') ? recommendation.cssStyle.split('|')[0] : recommendation.cssStyle">
+                <div :class="'content mb-0 mt-3 me-0' + (recommendation.className ? ' ' + recommendation.className : '')">
+                    <h4 class="text-start mb-0 font-600" v-html="recommendation.title"></h4><i class="wedive-txt-all wedive_right"></i>
+                    <p class="mb-0 opacity-60 ls-n1">{{ recommendation.description ? recommendation.description : '' }}</p>
+                    
+                    <img v-if="recommendation.cssStyle.includes('|')" :class="recommendation.cssStyle.split('|')[2]" :src="'/static/images/assets/' + recommendation.cssStyle.split('|')[1]" style="padding-bottom:16px;max-height:200px;"/>
+                </div>
+            </div>
+
+            <div v-else-if="recommendation.previewCount == 2 || recommendation.previewCount == 3" class="card card-style">
+                <div class="content mb-0 mt-3">
+                    <div v-on:click="moveRecommend(recommendation._id, 'recommendation')">
+                        <h4 class="text-start mb-0">{{ recommendation.title }}<i class="wedive-txt-all wedive_right"></i></h4>
+                        <p class="mb-3 color-gray-light-mid">{{ recommendation.description ? recommendation.description : '' }}</p>
+                    </div>
+                    
+                    <div v-for="(preview,index) in recommendation.previews">
+                        <div class="map-box" style="position: relative;height: 85px;">
+                            <a v-on:click="movePreview(preview)">
+                                <div class="bx">
+                                    <div class="justify-content-center mb-0 text-start">
+                                        <div class="thumb-img me-2">
+                                            <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                                                <defs>
+                                                <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                                                <clipPath id="clipSquircle">
+                                                    <use xlink:href="#shapeSquircle"/>
+                                                </clipPath>
+                                                </defs>
+                                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="preview.backgroundImage"/>
+                                            </svg>
+                                        </div>
+                                        <!--<div class="" style="float: left;position: relative;width: 95px; height:95px;">
+                                            <img v-bind:src="(preview.backgroundImages && preview.backgroundImages.length > 0) ? preview.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;margin-top: 3px;">
+                                        </div>-->
+                                        <div class="" style="display:inline-block;vertical-align: top;width: calc(100vw - 156px);">
+                                            <h4 class="font-15 mt-1"> {{ preview.title }} </h4>
+                                            <p class="pb-0 mb-0 nearby_desc"> {{ getWediveStartEnd(preview.startedAt, preview.finishedAt) }} </p>
+                                            
+                                            <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> {{ preview.location }} ({{ preview.type.join().replace('scubaDiving', '스쿠바').replace('freeDiving', '프리') }})</p>
+                                        </div>
+                                        <span class="chip chip-s bg-gray-light text-center font-400 wedive-chip color-black">{{ preview.participants.filter(x=>x.status=='joined').length+1 }}/{{ preview.maxPeopleNumber }}</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="divider mt-3 mb-3"></div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div v-else>
+                <div v-on:click="moveRecommend(recommendation._id, 'recommendation')">
+                    <h4 :class="'text-start mb-0' + (rec_idx==0 ? '' : ' mt-4')" style="margin-left: 14px;margin-right: 14px;position:relative;">{{ recommendation.title }}<i class="wedive-txt-all wedive_right" style="top:3px !important;"></i></h4>
+                    <p v-if="recommendation.description" class="mb-2 color-gray-light-mid" style="margin-left: 14px;margin-right: 14px;margin-top:-2px;">{{ recommendation.description }}</p>
+                </div>
+                <div class="splide single-slider-site slider-no-arrows visible-slider slider-no-dots" :id="'single-slider-'+recommendation._id" style="height:276px;">
+                    <div class="splide__track">
+                        <div class="splide__list">
+                            <div v-for="(preview, index) in recommendation.previews" class="splide__slide">
+                                <a v-on:click="movePreview(preview)">
+                                    <div class="card card-style card-nearby" :style="'background: url('+((preview.backgroundImages && preview.backgroundImages.length > 0) ? preview.backgroundImages[0].thumbnailUrl : '/static/empty.jpg')+')'" data-card-height="260">
+                                        <div class="card-top px-3 py-3">
+                                            <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-red-dark"></i></a>
+                                        </div>
+                                        <div class="card-bottom px-3 py-3">
+                                            <h4 class="color-white font-18 font-600">{{ preview.title }}</h4>
+                                            <div class="divider bg-white opacity-20 mb-1"></div>
+                                            <div class="d-flex">
+                                                <div class="align-self-center" style="max-width: 100%;">
+                                                    <p class="font-11 opacity-70 font-600 color-white nearby_desc mb-0" style="max-width: 100%;">{{ preview.description }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-overlay bg-gradient opacity-30"></div>
+                                        <div class="card-overlay bg-gradient"></div>
+                                    </div>
+                                </a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--<div class="card card-style">
             <div class="content mb-0 mt-3">
                 <h4 class="text-start pt-2 mb-0"><a href="/">따끈따끈 신규 프리다이빙<i class="wedive-txt-all wedive_right"></i></a></h4>
                 
@@ -250,6 +337,7 @@
                 <div class="text-center"><img class="mt-4 mb-5" src="/static/images/assets/lifebuoy.png"/></div>
             </div>
         </div>
+        -->
         
 
         
@@ -335,6 +423,9 @@ export default {
                         status
                         type
                         maxPeopleNumber
+                        participants {
+                            status
+                        }
                         startedAt
                         finishedAt
                         chatRoomId
@@ -487,6 +578,15 @@ export default {
                     window.addEventListener("resize", card_extender);
                 }
             }
+
+            console.log("aaaaaaaa")
+            this.getUserRecommendationsByTargetType.forEach(recommendation => {
+                recommendation.previews.forEach(x => {
+                    x.location = x.diveSites.length > 0 ? x.diveSites[0].name : x.divePoints.length > 0 ? x.divePoints[0].name : x.diveCenters.length > 0 ? x.diveCenters[0].name : '';
+                    
+                    x.backgroundImage = x.diveSites.length > 0 ? x.diveSites[0].backgroundImages[parseInt(Math.random()*x.diveSites[0].backgroundImages.length)].thumbnailUrl : x.divePoints.length > 0 ? x.divePoints[0].backgroundImages[parseInt(Math.random()*x.divePoints[0].backgroundImages.length)].thumbnailUrl : x.diveCenters.length > 0 ? x.diveCenters[0].backgroundImages[parseInt(Math.random()*x.diveCenters[0].backgroundImages.length)].thumbnailUrl : '/static/empty.jpg';
+                });
+            });
         },
         fetchPolicy: 'no-cache'
     },
@@ -495,6 +595,52 @@ export default {
     PullTo,
   },
   methods: {
+      async moveRecommend(id, targetType) {
+        await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                mutation Mutation($targetId: ID!, $targetType: UserReactionTargetType!) {
+                    view(targetId: $targetId, targetType: $targetType)
+                }
+                `,
+                variables: {
+                    "targetId": id,
+                    "targetType": targetType
+                }
+            }
+        });
+        location.href = '/recommend/' + id;
+      },
+      async movePreview(item) {
+        var dic_type1 = {"DiveSite": "diveSite", "DivePoint": "divePoint", "DiveCenter": "diveCenter", "Diving": "diving", "User": "user", "Review": "review", "Forum": "forum", "Recommendation": "recommendation"};
+        await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                mutation Mutation($targetId: ID!, $targetType: UserReactionTargetType!) {
+                    view(targetId: $targetId, targetType: $targetType)
+                }
+                `,
+                variables: {
+                    "targetId": item._id,
+                    "targetType": dic_type1[item.__typename]
+                }
+            }
+        });
+        var dic_type2 = {"DiveSite": "site", "DivePoint": "point", "DiveCenter": "center", "Diving": "diving", "User": "user", "Review": "review", "Forum": "forum", "Recommendation": "recommendation"};
+        location.href = '/' + dic_type2[item.__typename] + '/' + item.uniqueName;
+      },
       async refresh(loaded) {
         if ($(document).scrollTop() == 0) {
             await this.$apollo.queries.getUserRecommendationsByTargetType.refetch();
@@ -504,6 +650,15 @@ export default {
             loaded('done')
             return false;
         }
+      },
+      getWediveStartEnd(_startedAt, _finishedAt) {
+          var startedAt = new Date(_startedAt);
+          var finishedAt = new Date(_finishedAt);
+          var getDay = ["일", "월", "화", "수", "목", "금", "토"];
+          if (startedAt.getMonth() == finishedAt.getMonth() && startedAt.getDate() == finishedAt.getDate())
+            return (startedAt.getMonth()+1) + "." + startedAt.getDate() + "(" + getDay[startedAt.getDay()] + ")";
+          else
+            return (startedAt.getMonth()+1) + "." + startedAt.getDate() + "(" + getDay[startedAt.getDay()] + ") ~ " + (finishedAt.getMonth()+1) + "." + finishedAt.getDate() + "(" + getDay[finishedAt.getDay()] + ")";
       },
       stateChange(state) {
         if (state === 'pull' || state === 'trigger') {
@@ -626,10 +781,21 @@ export default {
 .wedive-txt-all {position: absolute;top: 20px;right: 16px;}
 .ls-n1 {letter-spacing: -1px;}
 
-@keyframes motion-updown {0% {margin-top: -20px;}20% {margin-top: 0px;}40% {margin-top: -20px;}60% {margin-top: 0px;}80% {margin-top: 0px;}100% {margin-top: 0px;}}
--webkit-@keyframes motion-updown {0% {margin-top: -20px;}20% {margin-top: 0px;}40% {margin-top: -20px;}60% {margin-top: 0px;}80% {margin-top: 0px;}100% {margin-top: 0px;}}
+@keyframes motion-updown {0% {margin-top: 0px;}20% {margin-top: 10px;}40% {margin-top: 0px;}60% {margin-top: 10px;}80% {margin-top: 0px;}100% {margin-top: 0px;}}
+-webkit-@keyframes motion-updown {0% {margin-top: 0px;}20% {margin-top: 10px;}40% {margin-top: 0px;}60% {margin-top: 10px;}80% {margin-top: 0px;}100% {margin-top: 0px;}}
+@keyframes motion-leftright {0% {margin-right: 0px;}20% {margin-right: 25px;}40% {margin-right: 0px;}60% {margin-right: 25px;}80% {margin-right: 0px;}100% {margin-right: 0px;}}
+-webkit-@keyframes motion-leftright {0% {margin-right: 0px;}20% {margin-right: 25px;}40% {margin-right: 0px;}60% {margin-right: 25px;}80% {margin-right: 0px;}100% {margin-right: 0px;}}
+@keyframes motion-endtoend {0% {left: -100px; opacity: .5;}50% {left: 40%; opacity: .5;}100% {left: 100%; opacity: 0;}}
+-webkit-@keyframes motion-endtoend {0% {left: -100px; opacity: .5;}50% {left: 40%; opacity: .5;}100% {left: 100%; opacity: 0;}}
 
-.movebox {animation: motion-updown 3s linear 0s infinite alternate; margin-top: 0;-webkit-animation: motion-updown 3s linear 0s infinite alternate; margin-top: 0;}
+.moveboxupdown {animation: motion-updown 3s linear 0s infinite alternate; margin-top: 0;-webkit-animation: motion-updown 3s linear 0s infinite alternate; margin-top: 0;}
+.movebox {animation: motion-leftright 3s linear 0s infinite alternate; margin-top: 0;-webkit-animation: motion-leftright 3s linear 0s infinite alternate; margin-top: 0;}
+.movebox2 {position:absolute;white-space: nowrap;left:-100px;padding-top:5px;opacity:.5;animation: motion-endtoend 20s linear infinite;-webkit-animation: motion-endtoend 20s linear infinite;}
+.movebox3 {position:absolute;white-space: nowrap;left:-100px;padding-top:50px;opacity:.5;animation: motion-endtoend 30s linear infinite;-webkit-animation: motion-endtoend 30s linear infinite;}
+.nearby_desc {font-family: 'Noto Sans Korean' !important;font-weight:200;overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;line-height: 1.4;}
+.card-nearby {margin-left: 10px;background-size: cover !important;}
+.icon-concierge {position: fixed;width: 58px;height: 58px;bottom: 70px;right:24px;background-size:cover;background: url(/static/images/assets/concierge.gif);background-size:cover !important;background-position-y: 8px;background-repeat: no-repeat;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
+
 .chip span {line-height: 24px !important;}
 .icon-concierge {position: fixed;width: 58px;height: 58px;bottom: 70px;right:24px;background-size:cover;background: url(/static/images/assets/concierge.gif);background-size:cover !important;background-position-y: 8px;background-repeat: no-repeat;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
 .position-relative {position: relative;}
@@ -640,4 +806,48 @@ export default {
 .fadeout {animation-name: fadeout50;animation-duration: 1s;animation-iteration-count:1;}
 @keyframes loading{from {transform: rotate(0deg);}to {transform: rotate(360deg);}}
 @keyframes fadeout50 {from {opacity: 0.5;}to {opacity: 0;}}
+
+.card-white > h4 {color: white}
+.card-white > p {color: white !important;}
+.card-white .wedive-txt-all {color: white;filter: brightness(100) !important;}
+.thumb-img {
+  position: relative;
+  display: inline-block;
+  width: 90px;
+  height: 90px;
+  overflow: hidden;
+  user-select: none;
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3csvg width='88px' height='88px' viewBox='0 0 88 88' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3e%3cpath d='M44%2c0.5 C59.8650505%2c0.5 70.7664452%2c3.40244096 77.6820021%2c10.3179979 C84.597559%2c17.2335548 87.5%2c28.1349495 87.5%2c44 C87.5%2c59.8650505 84.597559%2c70.7664452 77.6820021%2c77.6820021 C70.7664452%2c84.597559 59.8650505%2c87.5 44%2c87.5 C28.1349495%2c87.5 17.2335548%2c84.597559 10.3179979%2c77.6820021 C3.40244096%2c70.7664452 0.5%2c59.8650505 0.5%2c44 C0.5%2c28.1349495 3.40244096%2c17.2335548 10.3179979%2c10.3179979 C17.2335548%2c3.40244096 28.1349495%2c0.5 44%2c0.5 Z' fill='none' stroke='rgba(0,0,0,0.3)'%3e%3c/path%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .svg-profile {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .default-txt {
+    font-size: 2em;
+    fill: #fff;
+  }
+
+  .default-bg {
+    width: 100%;
+    height: 100%;
+    @each $num, $color in $userImgBgs {
+      &[data-color="#{$num}"] {
+        fill: $color;
+      }
+    }
+  }
+}
 </style>

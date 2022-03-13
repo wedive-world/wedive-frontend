@@ -54,7 +54,7 @@
                 </div>
             </div>
 
-            <div v-else-if="recommendation.previewCount == 3" class="card card-style">
+            <div v-else-if="recommendation.previewCount == 2 || recommendation.previewCount == 3" class="card card-style">
                 <div class="content mb-0 mt-3">
                     <div v-on:click="moveRecommend(recommendation._id, 'recommendation')">
                         <h4 class="text-start mb-0">{{ recommendation.title }}<i class="wedive-txt-all wedive_right"></i></h4>

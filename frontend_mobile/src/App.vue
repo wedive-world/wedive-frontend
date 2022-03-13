@@ -146,7 +146,7 @@ var closeCreateSheet = null;
 export default {
   name: 'App',
   mounted() {
-    if (localStorage.tokenAt == null || (new Date().getTime() - localStorage.tokenAt) > 10000) {
+    if (localStorage.tokenAt == null || (new Date().getTime() - localStorage.tokenAt) > 50000) {
       this.getFirebaseToken()
     }
 

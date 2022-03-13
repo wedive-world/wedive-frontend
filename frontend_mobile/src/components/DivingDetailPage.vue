@@ -38,8 +38,19 @@
         <div class="card mb-0" style="z-index:1;">
             <div class="content mt-3 row pb-3 mb-0 border-bottom" v-on:click="goUserPage(getDivingById.hostUser)">
                 <div class="col-6 p-0">
-                    <img class="inline-block me-2 circular_image" :src="(getDivingById.hostUser && getDivingById.hostUser.profileImages && getDivingById.hostUser.profileImages.length>0 && getDivingById.hostUser.profileImages[0].thumbnailUrl) ? getDivingById.hostUser.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty_'+((getDivingById.hostUser&&getDivingById.hostUser.gender)?getDivingById.hostUser.gender:'m')+'.png'" width="50" style="vertical-align: top;"/>
-                    <div class="inline-block font-noto">
+                    <div class="user-img me-2">
+                        <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                            <defs>
+                            <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                            <clipPath id="clipSquircle">
+                                <use xlink:href="#shapeSquircle"/>
+                            </clipPath>
+                            </defs>
+                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(getDivingById.hostUser && getDivingById.hostUser.profileImages && getDivingById.hostUser.profileImages.length>0 && getDivingById.hostUser.profileImages[0].thumbnailUrl) ? getDivingById.hostUser.profileImages[0].thumbnailUrl : '/static/assets/user_empty.jpg'"/>
+                        </svg>
+                    </div>
+                    <!--<img class="inline-block me-2 circular_image" :src="(getDivingById.hostUser && getDivingById.hostUser.profileImages && getDivingById.hostUser.profileImages.length>0 && getDivingById.hostUser.profileImages[0].thumbnailUrl) ? getDivingById.hostUser.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty_'+((getDivingById.hostUser&&getDivingById.hostUser.gender)?getDivingById.hostUser.gender:'m')+'.png'" width="50" style="vertical-align: top;"/>-->
+                    <div class="inline-block font-noto" style="vertical-align: top;">
                         <h5 class="mb-0 font-500 font-15">{{ (getDivingById.hostUser && getDivingById.hostUser.nickName) ? getDivingById.hostUser.nickName : '' }}</h5>
                         <p class="mb-0 font-13 color-gray">{{ getDivingById.hostUser ? getDiverLevel(getDivingById.hostUser.freeLicenseLevel, getDivingById.hostUser.scubaLicenseLevel) : '' }}</p>
                     </div>
@@ -109,7 +120,7 @@
                             </div>
                             
                             <!--<img class="inline-block circular_image" :src="(getDivingById.hostUser && getDivingById.hostUser.profileImages && getDivingById.hostUser.profileImages.length>0 && getDivingById.hostUser.profileImages[0].thumbnailUrl) ? getDivingById.hostUser.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty_'+((getDivingById.hostUser&&getDivingById.hostUser.gender)?getDivingById.hostUser.gender:'m')+'.png'" width="50" style="vertical-align: top;"/>-->
-                            <div class="inline-block font-noto ms-2">
+                            <div class="inline-block font-noto ms-2" style="vertical-align: top;">
                                 <h5 class="mb-0 font-500 font-15">{{ (getDivingById.hostUser!=null&&getDivingById.hostUser.nickName!=null) ? getDivingById.hostUser.nickName : ((getDivingById.hostUser.name!=null) ? getDivingById.hostUser.name : '비공개') }}</h5>
                                 <p class="mb-0 font-14 color-gray">{{ getDivingById.hostUser ? getDiverLevel(getDivingById.hostUser.freeLicenseLevel, getDivingById.hostUser.scubaLicenseLevel) : '' }}</p>
                             </div>
@@ -132,7 +143,7 @@
                             </div>
 
                             <!--<img class="inline-block circular_image" :src="(participant.user && participant.user.profileImages && participant.user.profileImages.length>0 && participant.user.profileImages[0].thumbnailUrl) ? participant.user.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty_'+(participant.gender ? participant.gender : 'm')+'.png'" width="50" style="vertical-align: top;"/>-->
-                            <div class="inline-block font-noto ms-2">
+                            <div class="inline-block font-noto ms-2" style="vertical-align: top;">
                                 <h5 class="mb-0 font-500 font-15">{{ (participant.user!=null&&participant.user.nickName!=null) ? participant.user.nickName : ((participant.name!=null) ? participant.name : '비공개') }}</h5>
                                 <p class="mb-0 font-14 color-gray ellipsis" style="max-width: calc(100vw - 170px);">{{ participant ? getDiverLevel(participant.freeLicenseLevel, participant.scubaLicenseLevel) : '' }}</p>
                             </div>
@@ -164,7 +175,7 @@
                                 </div>
                                 
                                 <!--<img class="inline-block circular_image" :src="(participant.user && participant.user.profileImages && participant.user.profileImages.length>0 && participant.user.profileImages[0].thumbnailUrl) ? participant.user.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty_'+(participant.gender ? participant.gender : 'm')+'.png'" width="50" style="vertical-align: top;"/>-->
-                                <div class="inline-block font-noto ms-2">
+                                <div class="inline-block font-noto ms-2" style="vertical-align: top;">
                                     <h5 class="mb-0 font-500 font-15">{{ (participant.user!=null&&participant.user.nickName!=null) ? participant.user.nickName : ((participant.name!=null) ? participant.name : '비공개') }}</h5>
                                     <p class="mb-0 font-13 color-gray ellipsis" style="max-width: calc(100vw - 220px);">{{ participant ? getDiverLevel(participant.freeLicenseLevel, participant.scubaLicenseLevel) : '' }}</p>
                                 </div>
@@ -199,9 +210,9 @@
                         </svg>
                     </div>
                     <div style="display:inline-block;vertical-align: top;width: calc(100vw - 156px);">
-                        <h2 class="font-16 mb-2 font-600">{{ location.name }}</h2>
-                        <p class="color-gray mb-2 line-height-s ellipsis" style="display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;white-space: unset;">{{ location.description }}</p>
-                        <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
+                        <h2 class="font-16 mb-1 font-600">{{ location.name }}</h2>
+                        <p class="color-gray mb-1 line-height-s ellipsis" style="display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;white-space: unset;">{{ location.description }}</p>
+                        <p class="pb-0 mb-0"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
                             <span> {{ (location.adminScore/20).toFixed(1) }} </span>
                             &nbsp;<font class="color-gray-light">|</font>&nbsp;
                             <span v-if="location.institutionTypes && location.institutionTypes.length > 0"><span v-for="(insti,index) in location.institutionTypes" v-if="index < 4"><img class="ext-img" :src="'/static/images/agency/logo_'+insti.toLowerCase()+'.svg'" height="17" style="padding-bottom: 1px;" /><span v-if="index != (location.institutionTypes.length-1)">&nbsp;&nbsp;</span></span>&nbsp;<font class="color-gray-light">|</font>&nbsp;</span>

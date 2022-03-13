@@ -55,7 +55,7 @@
               </div>
               <div v-on:click="goDetail(agenda)">
                 <h5 class="font-600 mt-3 mb-2 font-17"><span v-if="agenda.types && agenda.types.length > 0 && agenda.types[0].name == '질문'" class="color-highlight" style="background: #e1e2e3;border-radius:8px;padding:0px 5px 3px 5px;">Q.</span> {{ agenda.title }}</h5>
-                <p class="mb-0 font-noto opacity-90" style="line-height: 1.5;" v-html="agenda.content.replace(/\n/gi, '<br/>')">
+                <p class="mb-0 font-noto opacity-90 ellipsis5" style="line-height: 1.5;" v-html="agenda.content.replace(/\n/gi, '<br/>')">
                 </p>
                 <p class="color-gray mt-2 mb-0">... 더 보기</p>
               </div>

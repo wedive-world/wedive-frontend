@@ -17,8 +17,29 @@ import { HttpLink } from 'apollo-link-http'
 import { split } from 'apollo-link'
 import { WebSocketLink } from 'apollo-link-ws'
 import { getMainDefinition } from 'apollo-utilities'
+import { onError } from 'apollo-link-error';
+import promiseToObservable from './promiseToObservable';
+
 
 import VueApollo from 'vue-apollo'
+
+
+export default (refreshToken) =>
+  onError(({
+    forward,
+    graphQLErrors,
+    networkError = {},
+    operation,
+    // response,
+  }) => {
+    console.log(networkError);
+    //UNAUTHENTICATED --> by jjangs
+    if (networkError.message === 'UNAUTHORIZED') { // or whatever you want to check
+      // note: await refreshToken, then call its link middleware again!
+      return promiseToObservable(refreshToken()).flatMap(() => forward(operation));
+    }
+  });
+
 
 
 var _apolloClient = null;

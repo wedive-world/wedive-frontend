@@ -194,6 +194,22 @@ export default {
                   recommendationTitle
                   previews {
                     ... on Diving {
+                        _id
+                        title
+                        description
+                        status
+                        type
+                        maxPeopleNumber
+                        participants {
+                            status
+                        }
+                        startedAt
+                        finishedAt
+                        chatRoomId
+                        createdAt
+                        views
+                        likes
+                        dislikes
                         diveCenters {
                         name
                         uniqueName

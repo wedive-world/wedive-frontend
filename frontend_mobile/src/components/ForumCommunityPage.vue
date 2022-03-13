@@ -53,7 +53,7 @@
                         </svg>
                     </div>
                     <div class="inline-block font-noto v-align-top">
-                        <h5 class="mb-0 font-400 font-14 mt-n1" style="color: #333;">{{ community.title }}</h5>
+                        <h5 class="mb-0 font-400 font-14 mt-n1" style="color: #333;line-height:1.3;">{{ community.title }}</h5>
                     </div>
                 </div>
                 <div data-menu="community-add" class="col-3 text-center p-0">
@@ -69,7 +69,7 @@
                         </svg>
                     </div>
                     <div class="inline-block font-noto v-align-top">
-                        <h5 class="mb-0 font-400 font-14 mt-n1" style="color: #333;">추가</h5>
+                        <h5 class="mb-0 font-400 font-14 mt-n1" style="color: #333;line-height:1.3;">추가</h5>
                     </div>
                 </div>
             </div>

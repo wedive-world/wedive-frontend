@@ -44,12 +44,11 @@
                   </div>
                   <p class="color-gray-dark mb-0 font-12" style="position: absolute;right: 0px;top: 0;">{{ timeForToday(getAgendaById.createdAt) }}</p>
               </div>
-              <div class="mt-1">
-                  <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 잠실 수영장</p>
+              <div v-if="getAgendaById.agendaPlaces && getAgendaById.agendaPlaces.length > 0 && getAgendaById.agendaPlaces[0].name" class="">
+                  <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> {{ getAgendaById.agendaPlaces[0].name }}</p>
               </div>
               <h5 class="font-600 mt-3 mb-2 font-17">{{ getAgendaById.title }}</h5>
-              <p class="mb-0 font-noto opacity-90" style="line-height: 1.5;">
-                {{ getAgendaById.content }}
+              <p class="mb-0 font-noto opacity-90" style="line-height: 1.5;" v-html="getAgendaById.content.replace(/\n/gi, '<br/>')">
               </p>
           </div>
           <div class="" v-if="getAgendaById.images && getAgendaById.images.length > 0">

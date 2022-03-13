@@ -432,9 +432,9 @@ export default {
 }
 .img_square{width: 100%;position: relative;}
 .img_square:after {content: "";display: block;padding-bottom: 100%;}
- .img_square_inner {position: absolute;width: 100%;height: 100%;background-size:cover !important;background-position: center !important;}
+.img_square_inner {position: absolute;width: 100%;height: 100%;background-size:cover !important;background-position: center !important;}
 
- .swiper-pagination {
+.swiper-pagination {
     position: absolute;
     text-align: center;
     transition: .3s opacity;

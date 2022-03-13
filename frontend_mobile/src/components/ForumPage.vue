@@ -358,14 +358,14 @@ export default {
           
       },
       onSlideChange() {
-          console.log("1")
+          //console.log("1")
           this.tabSwiper.slideTo(this.contentSwiper.activeIndex);
           setTimeout(function() {
             var height = $(".wedive-content-swiper > .swiper-wrapper > .swiper-slide-active").height();
             if (height < ($(window).height() - 172)) {
                 height = $(window).height() - 172;
             }
-            console.log("height=" + height + " / window_height=" + ($(window).height()-182))
+            //console.log("height=" + height + " / window_height=" + ($(window).height()-182))
             $(".wedive-content-swiper").eq(0).css("max-height", height);
           },100);
       },

@@ -547,7 +547,7 @@ async function updateAll() {
                 marker_shop.addListener("click", () => {
                     try {
                         console.log("viberate");
-                        Android.vibrate();
+                        Android.vibrate(50);
                         window.navigator.vibrate(20);
                     } catch (e) {
                         
