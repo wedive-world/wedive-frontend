@@ -844,7 +844,7 @@
         </div>
         <div class="content mt-0">
             <div class="input-style validate-field mt-3">
-                <textarea class="wedive-textarea" placeholder="의견을 자유롭게 적어주세요." v-model="review_detail"></textarea>
+                <textarea class="wedive-textarea wedive-input" placeholder="의견을 자유롭게 적어주세요." v-model="review_detail"></textarea>
             </div>
             <div id="div_upload_photo" class="row m-0 mb-3">
             </div>
@@ -856,10 +856,10 @@
 
         <div class="row m-0">
             <div class="col-6 pe-1">
-                <a href="#" class="close-menu btn btn-m btn-full rounded-0 text-uppercase font-900 shadow-s bg-gray-dark">취소</a>
+                <a href="#" class="close-menu btn btn-m btn-full rounded-s text-uppercase font-900 shadow-s bg-gray-dark">취소</a>
             </div>
             <div class="col-6 ps-1">
-                <a v-on:click="review_send()" class="btn btn-m btn-full rounded-0 text-uppercase font-900 shadow-s bg-black">리뷰등록</a>
+                <a v-on:click="review_send()" class="btn btn-m btn-full rounded-s text-uppercase font-900 shadow-s bg-black">리뷰등록</a>
             </div>
         </div>
     </div>
@@ -1792,95 +1792,102 @@ export default {
       async review_send() {
         var _id_list = new Array();
         for (var i=0; i<file_photo.length; i++) {
-            var mutation = gql`
-                mutation UploadImageMutation($uploadImageFile: Upload!) {
-                    uploadImage(file: $uploadImageFile) {
-                        _id
-                        name
-                        mimeType
-                        encoding
-                        thumbnailUrl
-                        createdAt
-                        updatedAt
+            const upload_photo = file_photo[i];
+            console.log(upload_photo);
+            var result_img = await this.$apollo.mutate({
+                // Query
+                mutation: gql`
+                    mutation UploadImageMutation($file: Upload!) {
+                        uploadImage(file: $file) {
+                            _id
+                            name
+                            mimeType
+                            encoding
+                            thumbnailUrl
+                            createdAt
+                            updatedAt
+                        }
                     }
-                }
-            `
-            var client = new GraphQLClient('https://api.wedives.com/graphql',
-            {
-                headers: {
-                    countrycode: 'ko',
-                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-                }
-            })
+                `,
+                // Parameters
+                variables: {
+                    file: upload_photo
+                },
+            });
 
-            var result_img = await client.request(mutation, {uploadImageFile:file_photo[i],});
-            
-            var updateMutation = gql`
-                mutation Mutation($input: UpdateImageInput!) {
-                    updateImage(input: $input) {
-                        _id
-                        name
-                        description
-                        reference
-                        uploaderId
-                        mimeType
-                        encoding
-                        fileSize
-                        thumbnailUrl
+
+            var result_upload = await this.$apollo.mutate({
+                // Query
+                mutation: gql`
+                    mutation Mutation($input: UpdateImageInput!) {
+                        updateImage(input: $input) {
+                            _id
+                            name
+                            description
+                            reference
+                            uploaderId
+                            mimeType
+                            encoding
+                            fileSize
+                            thumbnailUrl
+                        }
                     }
-                }
-            `;
-            var result_upload = await client.request(updateMutation, {input: {"_id": result_img.uploadImage._id,"name": result_img.name,"description": "reviewImage","reference": null}});
+                `,
+                // Parameters
+                variables: {
+                    input: {
+                        _id: result_img.uploadImage._id,
+                        name: result_img.name,
+                        description: "reviewImage",
+                        reference: null
+                    }
+                },
+            });
+            
             _id_list.push(result_img.uploadImage._id);
         }
         var _input = {images: _id_list, targetId: this.getDiveCenterByUniqueName._id, targetType: 'diveCenter', content: this.review_detail, rating: this.rating};
         const ipt = _input;
-        
-        var result = await axios({
-            url: 'https://api.wedives.com/graphql',
-            method: 'post',
-            headers: {
-                countrycode: 'ko',
-                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-            },
-            data: {
-                query: `
-                    mutation Mutation($input: ReviewInput) {
-                        upsertReview(input: $input) {
+
+        var result = await this.$apollo.mutate({
+            // Query
+            mutation: gql`
+                mutation Mutation($input: ReviewInput) {
+                    upsertReview(input: $input) {
+                        _id
+                        targetId
+                        targetType
+                        author {
+                            nickName
+                            email
                             _id
-                            targetId
-                            targetType
-                            author {
-                                nickName
-                                email
-                                _id
-                                profileImages {
-                                    thumbnailUrl
-                                }
-                            }
-                            title
-                            content
-                            images {
-                                _id
+                            profileImages {
                                 thumbnailUrl
                             }
-                            rating
-                            reviewCount
-                            views
-                            isUserLike
-                            isUserDislike
-                            likes
-                            dislikes
-                            createdAt
                         }
+                        title
+                        content
+                        images {
+                            _id
+                            thumbnailUrl
+                        }
+                        rating
+                        reviewCount
+                        views
+                        isUserLike
+                        isUserDislike
+                        likes
+                        dislikes
+                        createdAt
                     }
-                `,
-                variables: {
-                    "input": ipt
                 }
-            }
+            `,
+            // Parameters
+            variables: {
+                input: ipt
+            },
         });
-
+        
         this.getDiveCenterByUniqueName.reviews.push(result.data.data.upsertReview);
 
         // close dialog

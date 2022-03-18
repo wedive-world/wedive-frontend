@@ -38,6 +38,7 @@ import TrainingSettingPage from '@/components/TrainingSettingPage'
 import TrainingStartPage from '@/components/TrainingStartPage'
 import ForumPage from '@/components/ForumPage'
 import ForumDetailPage from '@/components/ForumDetailPage'
+import ReviewMorePage from '@/components/ReviewMorePage'
 import OhterPage from '@/components/OhterPage'
 import NotificationPage from '@/components/NotificationPage'
 import CommunityDetailPage from '@/components/CommunityDetailPage'
@@ -117,7 +118,7 @@ export default new Router({
       component: CenterDetailPage2
     },
     {
-      path: '/review/:id',
+      path: '/review2/:id',
       name: 'ReviewAllPage',
       props: true,
       component: ReviewAllPage
@@ -268,6 +269,12 @@ export default new Router({
       name: 'ForumDetailPage',
       props: true,
       component: ForumDetailPage
+    },
+    {
+      path: '/review/:id',
+      name: 'ReviewMorePage',
+      props: true,
+      component: ReviewMorePage
     },
     {
       path: '/other_home',
