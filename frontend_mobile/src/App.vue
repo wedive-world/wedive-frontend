@@ -325,6 +325,9 @@ export default {
       $(".pool img").css("-webkit-filter", "invert(100%)");
       $(".pool img").css("filter", "invert(100%)");
       $(".pool p").css("color", "white");
+      if(window.location.href.split('/').pop() == 'modal'){
+        window.history.back(); 
+      }
       setTimeout(function() {
         location.href='/buddy/swimming';
       }, 30);
@@ -335,6 +338,9 @@ export default {
       $(".sea img").css("-webkit-filter", "invert(100%)");
       $(".sea img").css("filter", "invert(100%)");
       $(".sea p").css("color", "white");
+      if(window.location.href.split('/').pop() == 'modal'){
+        window.history.back(); 
+      }
       setTimeout(function() {
         location.href='/buddy/sea';
       }, 30);
@@ -344,6 +350,9 @@ export default {
       $(".oversea img").css("-webkit-filter", "invert(100%)");
       $(".oversea img").css("filter", "invert(100%)");
       $(".oversea p").css("color", "white");
+      if(window.location.href.split('/').pop() == 'modal'){
+        window.history.back(); 
+      }
       setTimeout(function() {
         location.href='/buddy/abroad';
       }, 30);

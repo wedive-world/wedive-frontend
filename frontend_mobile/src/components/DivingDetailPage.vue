@@ -82,7 +82,7 @@
                 <h2 class="font-18 font-700 mb-0">{{ getDivingById.title }}</h2>
                 <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> {{ getDivingById.location }}</p>
                 <p class="color-gray-dark mb-0 font-12" style="position: absolute;right: 0px;top: 0;">{{ timeForToday(getDivingById.createdAt) }} 모집시작</p>
-                <p class="color-gray mt-4 mb-4 font-14" v-html="getDivingById.description"></p>
+                <p class="color-gray mt-4 mb-4 font-14" v-html="getDivingById.description.replace(/\n/gi,'<br/>')"></p>
                 
                 <div class="evaluation">
                     <div class="row mb-0 line-height-l">

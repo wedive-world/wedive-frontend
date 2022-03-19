@@ -21,8 +21,8 @@
         </template>
         
         <div class="card text-start p-3" v-if="getPreviewsByRecommendationId && getPreviewsByRecommendationId.previews" style="min-height: calc(100vh - 50px);padding-bottom: 0 !important;margin-bottom: 0;">
-            <div v-for="(site,index) in getPreviewsByRecommendationId.previews.filter(x=>x.__typename == targetType)">
-                <div v-on:click="movePreview(site)" class="map-box">
+            <div v-for="(preview,index) in getPreviewsByRecommendationId.previews.filter(x=>x.__typename == targetType)">
+                <div v-on:click="movePreview(preview)" class="map-box">
                   <div class="bx">
                       <div class="justify-content-center mb-0 text-start">
                           <div class="thumb-img me-2">
@@ -33,18 +33,23 @@
                                       <use xlink:href="#shapeSquircle"/>
                                   </clipPath>
                                   </defs>
-                                  <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(site.backgroundImages && site.backgroundImages.length > 0) ? site.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'"/>
+                                  <image v-if="preview.__typename=='Diving'" class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(preview.locations && preview.locations.length > 0 && preview.locations[0].backgroundImages && preview.locations[0].backgroundImages.length > 0) ? preview.locations[0].backgroundImages[0].thumbnailUrl : '/static/empty.jpg'"/>
+                                  <image v-else class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(preview.backgroundImages && preview.backgroundImages.length > 0) ? preview.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'"/>
                               </svg>
                           </div>
                           <!--<div class="" style="float: left;position: relative;width: 95px; height:95px;">
-                              <img v-bind:src="(site.backgroundImages && site.backgroundImages.length > 0) ? site.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;margin-top: 3px;">
+                              <img v-bind:src="(preview.backgroundImages && preview.backgroundImages.length > 0) ? preview.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;margin-top: 3px;">
                           </div>-->
                           <div class="" style="display:inline-block;vertical-align: top;width: calc(100vw - 138px);">
-                              <h4 class="font-15"> {{ site.name }} </h4>
-                              <p class="pb-0 mb-0 nearby_desc"> {{ site.description }} </p>
+                              <h4 v-if="preview.__typename=='Diving'" class="font-15"> {{ preview.title }} </h4>
+                              <h4 v-else class="font-15"> {{ preview.name }} </h4>
+                              <p class="pb-0 mb-0 nearby_desc" v-html="preview.description.replace(/\n/gi,'<br/>')"></p>
                               
-                              <p class="pb-0 mb-0"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
-                                  <span> {{(site.adminScore/20).toFixed(1)}} </span>
+                              <p v-if="preview.__typename!='Diving'" class="pb-0 mb-0"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
+                                  <span> {{(preview.adminScore/20).toFixed(1)}} </span>
+                              </p>
+                              <p v-else class="color-highlight font-13 mb-0 ellipsis">
+                                <i class="wedive_icoset wedive_icoset_marker"></i> {{ preview.locations && preview.locations.length > 0 ? preview.locations[0].name : '' }}
                               </p>
                           </div>
                       </div>
@@ -114,7 +119,11 @@ export default {
             }
         });
         var dic_type2 = {"DiveSite": "site", "DivePoint": "point", "DiveCenter": "center", "Diving": "diving", "User": "user", "Review": "review", "Forum": "forum", "Recommendation": "recommendation"};
-        location.href = '/' + dic_type2[item.__typename] + '/' + item.uniqueName;
+        if (item.__typename=='Diving'){
+          location.href = '/' + dic_type2[item.__typename] + '/' + item._id;
+        } else {
+          location.href = '/' + dic_type2[item.__typename] + '/' + item.uniqueName;
+        }
       },
   },
   mounted() {
@@ -287,6 +296,13 @@ export default {
               return {
                 _id: this.recommendation_id,
             }
+          },
+          result() {
+            this.getPreviewsByRecommendationId.previews.forEach(preview => {
+              if (preview.__typename=='Diving') {
+                preview.locations = preview.diveSites.length > 0 ? preview.diveSites : preview.divePoints.length > 0 ? preview.divePoints : preview.diveCenters.length > 0 ? preview.diveCenters : [];
+              }
+            })
           },
           fetchPolicy: 'no-cache'
       },

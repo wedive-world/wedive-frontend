@@ -639,7 +639,7 @@ export default {
             }
         });
         var dic_type2 = {"DiveSite": "site", "DivePoint": "point", "DiveCenter": "center", "Diving": "diving", "User": "user", "Review": "review", "Forum": "forum", "Recommendation": "recommendation"};
-        location.href = '/' + dic_type2[item.__typename] + '/' + item.uniqueName;
+        location.href = '/' + dic_type2[item.__typename] + '/' + item._id;
       },
       async refresh(loaded) {
         if ($(document).scrollTop() == 0) {
