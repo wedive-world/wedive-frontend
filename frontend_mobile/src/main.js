@@ -23,7 +23,7 @@ import promiseToObservable from './promiseToObservable';
 
 import VueApollo from 'vue-apollo'
 
-
+/*
 export default (refreshToken) =>
   onError(({
     forward,
@@ -38,7 +38,7 @@ export default (refreshToken) =>
       // note: await refreshToken, then call its link middleware again!
       return promiseToObservable(refreshToken()).flatMap(() => forward(operation));
     }
-  });
+  });*/
 
 
 
@@ -109,10 +109,15 @@ if (window.location.pathname.indexOf('/chat/') == 0) {
       idtoken: (localStorage.idToken) ? localStorage.idToken : "",
     },
   })
+  // Handle errors
+  const errorLink = onError(error => {
+    console.log(error);
+    return promiseToObservable(refreshToken()).flatMap(() => forward(operation));
+  })
   
   // Create the apollo client
   _apolloClient = new ApolloClient({
-    link: httpLink,
+    link: errorLink.concat(httpLink),
     cache: new InMemoryCache()
   })
 }

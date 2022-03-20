@@ -61,7 +61,7 @@
                   <a href="#" class="pwa-install mx-auto btn btn-m font-600 bg-highlight">Add to Home Screen</a>
                   <a href="#" class="pwa-dismiss close-menu btn-full mt-3 pt-2 text-center text-uppercase font-600 color-red-light font-12 pb-4 mb-3">Maybe later</a>
               </div>
-          </div>   
+          </div>
 
           <!-- Install instructions for iOS -->
           <div id="menu-install-pwa-ios" class="menu menu-box-bottom rounded-m">
@@ -73,7 +73,7 @@
                   </p>
                   <a href="#" class="pwa-dismiss close-menu btn-full mt-3 text-center text-uppercase font-900 color-red-light opacity-90 font-110 pb-5">Maybe later</a>
               </div>
-          </div>  
+          </div>
           
       </div>
 

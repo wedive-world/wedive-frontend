@@ -597,11 +597,13 @@
                                 </div>     
                             </div>
                             <div class="splide__slide">
+                                <a :href="'/review/'+getDiveCenterByUniqueName._id">
                                 <div class="min-h-230 p-2">
                                         <h1 class="text-center"><i class="fas fa-pen-square fa-2x color-highlight mt-4"></i></h1>
                                         <h1 class="text-center pt-3 font-20 mb-n1">{{ getDiveCenterByUniqueName.reviews.length }}개 리뷰</h1>
                                         <p class="text-center color-highlight font-600">더보기 <i class="fas fa-chevron-right"></i></p>
-                                </div>    
+                                </div>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -1888,7 +1890,8 @@ export default {
             },
         });
         
-        this.getDiveCenterByUniqueName.reviews.push(result.data.data.upsertReview);
+
+        this.getDiveCenterByUniqueName.reviews.push(result.data.upsertReview);
 
         // close dialog
         const activeMenu = document.querySelectorAll('.menu-active');

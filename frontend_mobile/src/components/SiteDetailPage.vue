@@ -615,11 +615,13 @@
                                 </div>     
                             </div>
                             <div class="splide__slide">
+                                <a :href="'/review/'+getDiveSiteByUniqueName._id">
                                 <div class="min-h-230 p-2">
                                         <h1 class="text-center"><i class="fas fa-pen-square fa-2x color-highlight mt-4"></i></h1>
                                         <h1 class="text-center pt-3 font-20 mb-n1">{{ getDiveSiteByUniqueName.reviews.length }}개 다이빙 로그</h1>
                                         <p class="text-center color-highlight font-600">더보기 <i class="fas fa-chevron-right"></i></p>
-                                </div>    
+                                </div>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -1324,51 +1326,47 @@ export default {
         var _input = {images: _id_list, targetId: this.getDiveSiteByUniqueName._id, targetType: 'diveSite', content: this.review_detail, rating: this.rating};
         const ipt = _input;
         
-        var result = await axios({
-            url: 'https://api.wedives.com/graphql',
-            method: 'post',
-            headers: {
-                countrycode: 'ko',
-                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-            },
-            data: {
-                query: `
-                    mutation Mutation($input: ReviewInput) {
-                        upsertReview(input: $input) {
+        var result = await this.$apollo.mutate({
+            // Query
+            mutation: gql`
+                mutation Mutation($input: ReviewInput) {
+                    upsertReview(input: $input) {
+                        _id
+                        targetId
+                        targetType
+                        author {
+                            nickName
+                            email
                             _id
-                            targetId
-                            targetType
-                            author {
-                                nickName
-                                email
-                                _id
-                                profileImages {
-                                    thumbnailUrl
-                                }
-                            }
-                            title
-                            content
-                            images {
-                                _id
+                            profileImages {
                                 thumbnailUrl
                             }
-                            rating
-                            reviewCount
-                            views
-                            isUserLike
-                            isUserDislike
-                            likes
-                            dislikes
-                            createdAt
                         }
+                        title
+                        content
+                        images {
+                            _id
+                            thumbnailUrl
+                        }
+                        rating
+                        reviewCount
+                        views
+                        isUserLike
+                        isUserDislike
+                        likes
+                        dislikes
+                        createdAt
                     }
-                `,
-                variables: {
-                    "input": ipt
                 }
-            }
+            `,
+            // Parameters
+            variables: {
+                input: ipt
+            },
         });
-        this.getDiveSiteByUniqueName.reviews.push(result.data.data.upsertReview);
+        
+
+        this.getDiveSiteByUniqueName.reviews.push(result.data.upsertReview);
 
         // close dialog
         const activeMenu = document.querySelectorAll('.menu-active');

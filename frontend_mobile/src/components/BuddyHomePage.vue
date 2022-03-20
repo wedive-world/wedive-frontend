@@ -579,7 +579,6 @@ export default {
                 }
             }
 
-            console.log("aaaaaaaa")
             this.getUserRecommendationsByTargetType.forEach(recommendation => {
                 recommendation.previews.forEach(x => {
                     x.location = x.diveSites.length > 0 ? x.diveSites[0].name : x.divePoints.length > 0 ? x.divePoints[0].name : x.diveCenters.length > 0 ? x.diveCenters[0].name : '';

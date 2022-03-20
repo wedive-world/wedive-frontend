@@ -4,7 +4,7 @@
         <a href="" class="header-title color ellipsis">리뷰 전체보기</a>
         <a href="#" data-back-button class="font-16 header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
     </div>
-    <pull-to :top-load-method="refresh" @top-state-change="stateChange" :top-config="TOP_DEFAULT_CONFIG" :is-bottom-bounce="false" :is-top-bounce="scrollTop == 0" style="margin-top: 50px;">
+    <pull-to :bottom-load-method="loadmore" @bottom-state-change="stateChange" :top-load-method="refresh" @top-state-change="stateChange" :top-config="TOP_DEFAULT_CONFIG" :bottom-config="BOTTOM_DEFAULT_CONFIG" :is-top-bounce="scrollTop == 0" :is-bottom-bounce="scrollTop>scrollHeight" style="margin-top: 50px;">
         <template class="text-center" slot="top-block" slot-scope="props">
         <div :class="'top-load-wrapper opacity-50' + (props.state === 'loaded-done' ? ' fadeout' : '')">
             <i class="font-18 fas"
@@ -20,7 +20,7 @@
         </div>
         </template>
         
-        <div class="card mb-0 text-start" style="min-height: calc(100vh - 50px);">
+        <div id="review-content" class="card mb-0 text-start" style="min-height: calc(100vh - 50px);">
           <div class="divider mb-0"></div>
           <div v-for="review in getReviewsByTargetId">
             <div class="p-3">
@@ -202,6 +202,39 @@ export default {
       handleScroll (event) {
         this.scrollTop = $(document).scrollTop();
       },
+      async loadmore(loaded) {
+        this.skip += this.limit;
+        const ipt = {skip: this.skip, limit: this.limit, targetId: this.agendaId};
+        const prev_result = JSON.parse(JSON.stringify(this.getReviewsByTargetId));
+        try {
+          await this.$apollo.queries.getReviewsByTargetId.fetchMore({
+            // New variables
+            variables: {
+              skip: this.skip,
+              limit: this.limit,
+              targetId: this.targetId
+            },
+            // Transform the previous result with new data
+            updateQuery: (previousResult, { fetchMoreResult }) => {
+                //console.log(previousResult.getReviewsByTargetId)
+                //console.log(fetchMoreResult.getReviewsByTargetId)
+                return {
+                    getReviewsByTargetId: [
+                      ...fetchMoreResult.getReviewsByTargetId,
+                      ...previousResult.getReviewsByTargetId,
+                    ],
+                }
+            },
+          });
+        } catch (e) {
+
+        }
+        
+        prev_result.reverse().forEach(x=>{
+          this.getReviewsByTargetId.unshift(x);
+        })
+        loaded('done');
+      },
       timeForToday(value) {
         const today = new Date();
         const timeValue = new Date(value);
@@ -247,9 +280,10 @@ export default {
     $(".page-title-clear").hide();
 
     if (this.$route.query.header && this.$route.query.header == 'hide') {
-      $(".page-title").hide();
-      $(".page-title-clear").hide();
       $(".header-fixed").hide();
+    }
+    if (this.$route.query.footer && this.$route.query.footer == 'hide') {
+      $("#footer-bar").hide();
     }
   },
   created() {
@@ -267,18 +301,29 @@ export default {
     return {
       targetId: this.$route.params.id,
       skip: 0,
-      limit: 20,
+      limit: 10,
       scrollTop: 0,
+      scrollHeight: 0,
       getReviewsByTargetId: [],
       TOP_DEFAULT_CONFIG: {
-          pullText: '당겨서 새로고침', // The text is displayed when you pull down
-          triggerText: '업데이트', // The text that appears when the trigger distance is pulled down
-          loadingText: '로딩중...', // The text in the load
-          doneText: '새로고침 완료', // Load the finished text
-          failText: '실패', // Load failed text
-          loadedStayTime: 400, // Time to stay after loading ms
-          stayDistance: 50, // Trigger the distance after the refresh
-          triggerDistance: 70 // Pull down the trigger to trigger the distance
+        pullText: '당겨서 새로고침', // The text is displayed when you pull down
+        triggerText: '업데이트', // The text that appears when the trigger distance is pulled down
+        loadingText: '로딩중...', // The text in the load
+        doneText: '새로고침 완료', // Load the finished text
+        failText: '실패', // Load failed text
+        loadedStayTime: 400, // Time to stay after loading ms
+        stayDistance: 50, // Trigger the distance after the refresh
+        triggerDistance: 70 // Pull down the trigger to trigger the distance
+      },
+      BOTTOM_DEFAULT_CONFIG: {
+        pullText: '추가 로딩',
+        triggerText: '업데이트',
+        loadingText: '로딩중...',
+        doneText: '로딩 완료',
+        failText: '실패',
+        loadedStayTime: 400,
+        stayDistance: 50,
+        triggerDistance: 70
       },
       swiperOption: {
         pagination: false,
@@ -362,14 +407,15 @@ export default {
                 }
               }).then(result_image => {
                   if (result_image.data.data.getImageUrlsByIds) {
-                      var i=0;
-                      this.getReviewsByTargetId.forEach(x => {
-                          x.images.forEach(y => {
-                            y.thumbnailUrl = result_image.data.data.getImageUrlsByIds[i];
-                            i++;
-                          })
-                      });
+                    var i=0;
+                    this.getReviewsByTargetId.forEach(x => {
+                        x.images.forEach(y => {
+                          y.thumbnailUrl = result_image.data.data.getImageUrlsByIds[i];
+                          i++;
+                        })
+                    });
                   }
+                  this.scrollHeight = $("#review-content").prop('scrollHeight') - ($(window).height());
               });
             }
           }

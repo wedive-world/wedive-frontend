@@ -24,6 +24,11 @@
         </template>
         
         <div class="text-start card mb-0" style="min-height: calc(100vh - 50px);">
+          <div class="card mb-0" style="height:150px;background:url(/static/images/assets/beach-diving.jpg);background-size:cover;background-position-y: center;position:relative;">
+            <p class="p-3 color-white ellipsis" style="position:absolute;bottom:0;bottom: -30px;z-index: 9;max-width: 100vw;">{{ getCommunityById.description }}</p>
+            <div class="card-overlay bg-gradient opacity-80"></div>  
+          </div>
+          
           <div v-for="agenda in getAgendasByTargetId">
             <div class="p-3">
               <div v-on:click="goUser(agenda.author)" style="position:relative;">
@@ -45,8 +50,8 @@
                   </div>
                   <p class="color-gray-dark mb-0 font-12" style="position: absolute;right: 0px;top: 0;">{{ timeForToday(agenda.createdAt) }}</p>
               </div>
-              <div class="mt-1">
-                  <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> 잠실 수영장</p>
+              <div v-if="agenda.agendaPlaces && agenda.agendaPlaces.length > 0 && agenda.agendaPlaces[0].name" class="">
+                  <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> {{ agenda.agendaPlaces[0].name }}</p>
               </div>
               <div v-on:click="goDetail(agenda)">
                 <h5 class="font-600 mt-3 mb-2 font-17">{{ agenda.title }}</h5>
@@ -544,6 +549,10 @@ export default {
                 scubaLicenseLevel
               }
               languageCode
+              images {
+                thumbnailUrl
+                _id
+              }
             }
           }
         `,

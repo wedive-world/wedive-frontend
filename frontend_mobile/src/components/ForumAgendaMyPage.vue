@@ -44,7 +44,7 @@
                   <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> {{ agenda.agendaPlaces[0].name }}</p>
               </div>
               <div v-on:click="goDetail(agenda)">
-                <h5 class="font-600 mt-3 mb-2 font-17"><span v-if="agenda.types && agenda.types.length > 0 && agenda.types[0].name == '질문'" class="color-highlight" style="background: #e1e2e3;border-radius:8px;padding:0px 5px 3px 5px;">Q.</span> {{ agenda.title }}</h5>
+                <h5 class="font-600 mt-3 mb-2 font-17"><span v-if="agenda.types && agenda.types.length > 0 && agenda.types[0].name == '질문'" class="color-highlight" style="background: #e1e2e3;border-radius:8px;padding:2px 5px 2px;">Q.</span> {{ agenda.title }}</h5>
                 <p class="mb-0 font-noto opacity-90 ellipsis5" style="line-height: 1.5;" v-html="agenda.content.replace(/\n/gi, '<br/>')">
                   
                 </p>
