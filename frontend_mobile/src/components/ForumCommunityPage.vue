@@ -38,54 +38,62 @@
                 </vue-typeahead-bootstrap>
                 <a data-menu="community-add" class="btn btn-m rounded-s text-uppercase font-900 shadow-s bg-teal-dark" style="width:64px;position:absolute; right:16px;top: 0;"><i class="fas fa-plus"></i></a>
             </div>-->
-            <h4 class="pt-1 mb-2 ps-3">내 동호회</h4>
-            <div class="row m-0 ps-2 pe-2" style="position:relative;">
-                <div v-for="community in getUserSubsciption.communities" v-on:click="goCommunity(community)" class="col-3 text-center p-0">
-                    <div class="cafe-img me-2">
-                        <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
-                            <defs>
-                            <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
-                            <clipPath id="clipSquircle">
-                                <use xlink:href="#shapeSquircle"/>
-                            </clipPath>
-                            </defs>
-                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(community.images.length > 0 && community.images[0].thumbnailUrl)?community.images[0].thumbnailUrl:'/static/images/assets/user_empty.png'"/>
-                        </svg>
+            
+            <div v-if="nickName == null || idToken == null">
+            </div>
+            <div v-else>
+                <h4 class="pt-1 mb-2 ps-3">내 동호회</h4>
+                <div class="row m-0 ps-2 pe-2" style="position:relative;">
+                    <div v-for="community in getUserSubsciption.communities" v-on:click="goCommunity(community)" class="col-3 text-center p-0">
+                        <div class="cafe-img me-2">
+                            <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                                <defs>
+                                <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                                <clipPath id="clipSquircle">
+                                    <use xlink:href="#shapeSquircle"/>
+                                </clipPath>
+                                </defs>
+                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(community.images.length > 0 && community.images[0].thumbnailUrl)?community.images[0].thumbnailUrl:'/static/empty.jpg'"/>
+                            </svg>
+                        </div>
+                        <div class="inline-block font-noto v-align-top">
+                            <h5 class="mb-0 font-400 font-14 mt-n1" style="color: #333;line-height:1.3;">{{ community.title }}</h5>
+                        </div>
                     </div>
-                    <div class="inline-block font-noto v-align-top">
-                        <h5 class="mb-0 font-400 font-14 mt-n1" style="color: #333;line-height:1.3;">{{ community.title }}</h5>
+                    <div data-menu="community-add" class="col-3 text-center p-0">
+                        <div class="cafe-img me-2">
+                            <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                                <defs>
+                                <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                                <clipPath id="clipSquircle">
+                                    <use xlink:href="#shapeSquircle"/>
+                                </clipPath>
+                                </defs>
+                                <image style="filter: opacity(0.6);" class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="/static/images/assets/ico_plus.png"/>
+                            </svg>
+                        </div>
+                        <div class="inline-block font-noto v-align-top">
+                            <h5 class="mb-0 font-400 font-14 mt-n1" style="color: #333;line-height:1.3;">생성</h5>
+                        </div>
                     </div>
                 </div>
-                <div data-menu="community-add" class="col-3 text-center p-0">
-                    <div class="cafe-img me-2">
-                        <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
-                            <defs>
-                            <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
-                            <clipPath id="clipSquircle">
-                                <use xlink:href="#shapeSquircle"/>
-                            </clipPath>
-                            </defs>
-                            <image style="filter: opacity(0.6);" class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="/static/images/assets/ico_plus.png"/>
-                        </svg>
-                    </div>
-                    <div class="inline-block font-noto v-align-top">
-                        <h5 class="mb-0 font-400 font-14 mt-n1" style="color: #333;line-height:1.3;">추가</h5>
-                    </div>
-                </div>
+
+                <div class="divider mb-0 mt-2" style="height: 12px; border-top: 1px solid rgba(136, 136, 136, 0.25);"></div>
             </div>
 
-            <div class="divider mb-0 mt-2" style="height: 12px; border-top: 1px solid rgba(136, 136, 136, 0.25);"></div>
-            <h4 class="mt-3 mb-2 ps-3">최신 동호회 글</h4>
-            <div>
-                <div v-for="(agenda,index) in getRecentAgendaBySubscribedCommunity" v-on:click="goDetail(agenda)" :class="'pe-3 ps-3 pt-2 pb-2' + (index < getRecentAgendaBySubscribedCommunity.length-1 ? ' border-bottom' : '')">
-                    <div class="inline-block font-noto v-align-top">
-                        <h5 class="mb-0 font-500 font-16">{{ agenda.title }}<span class="color-gray-light font-14"><i class="fas fa-heart ms-2"></i> {{ agenda.likes || 0 }}</span></h5>
-                        <p class="mb-0 mt-1 font-13 color-gray ellipsis2" style="max-width: calc(100vw - 32px);line-height: 1.2;" v-html="agenda.content.replace(/\n/gi, '<br/>')"></p>
+            <div v-if="getRecentAgendaBySubscribedCommunity && getRecentAgendaBySubscribedCommunity.length > 0">
+                <h4 class="mt-3 mb-2 ps-3">최신 동호회 글</h4>
+                <div>
+                    <div v-for="(agenda,index) in getRecentAgendaBySubscribedCommunity" v-on:click="goDetail(agenda)" :class="'pe-3 ps-3 pt-2 pb-2' + (index < getRecentAgendaBySubscribedCommunity.length-1 ? ' border-bottom' : '')">
+                        <div class="inline-block font-noto v-align-top">
+                            <h5 class="mb-0 font-500 font-16">{{ agenda.title }}<span class="color-gray-light font-14"><i class="fas fa-heart ms-2"></i> {{ agenda.likes || 0 }}</span></h5>
+                            <p class="mb-0 mt-1 font-13 color-gray ellipsis2" style="max-width: calc(100vw - 32px);line-height: 1.2;" v-html="agenda.content.replace(/\n/gi, '<br/>')"></p>
+                        </div>
                     </div>
                 </div>
+                <div class="divider mb-0 mt-2" style="height: 12px; border-top: 1px solid rgba(136, 136, 136, 0.25);"></div>
             </div>
 
-            <div class="divider mb-0 mt-2" style="height: 12px; border-top: 1px solid rgba(136, 136, 136, 0.25);"></div>
             <h4 class="mt-3 mb-2 ps-3">추천 동호회</h4>
             <div>
                 <div v-if="getAllCommunities != null" v-for="(community,index) in getAllCommunities.filter(x=> myCommunityIds.includes(x._id) == false)" v-on:click="goCommunity(community)" :class="'pe-3 ps-3 pt-2 pb-2' + (index < getAllCommunities.filter(x=> myCommunityIds.includes(x._id) == false).length-1 ? ' border-bottom' : '')">
@@ -268,6 +276,8 @@ export default {
   },
   data () {
     return {
+        nickName: localStorage.nickName,
+        idToken: localStorage.idToken,
         query: '',
         selectedCommunity: null,
         communities: [],

@@ -19,7 +19,7 @@ import { WebSocketLink } from 'apollo-link-ws'
 import { getMainDefinition } from 'apollo-utilities'
 import { onError } from 'apollo-link-error';
 import promiseToObservable from './promiseToObservable';
-
+import { GoogleAuthProvider, getAuth, signInWithPopup, onAuthStateChanged, onIdTokenChanged  } from "firebase/auth";
 
 import VueApollo from 'vue-apollo'
 
@@ -112,7 +112,18 @@ if (window.location.pathname.indexOf('/chat/') == 0) {
   // Handle errors
   const errorLink = onError(error => {
     console.log(error);
-    return promiseToObservable(refreshToken()).flatMap(() => forward(operation));
+    const auth = getAuth();
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        localStorage.uid = user.uid;
+        localStorage.idToken = await user.getIdToken(false);
+        localStorage.tokenAt = (new Date()).getTime();
+        location.reload();
+      } else {
+        console.log("signed out");
+      }
+    });
+    //return promiseToObservable(refreshToken()).flatMap(() => forward(operation));
   })
   
   // Create the apollo client

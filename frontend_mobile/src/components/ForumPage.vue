@@ -190,15 +190,39 @@
             <div class="card-top p-2">
                 <a href="#" class="close-menu icon icon-s rounded-l bg-theme color-theme "><i class="fa fa-arrow-left"></i></a>
                 <a v-on:click="createCommunity" href="#" :class="'float-end icon icon-s rounded-l bg-theme me-3 mt-2 font-noto font-16 ' + ((isCommunityWritten==0) ? 'color-gray' : 'color-theme')">확인</a>
-                <a href="" class="header-title color font-noto font-16">커뮤니티 생성</a>
+                <a href="" class="header-title color font-noto font-16">동호회 생성</a>
             </div>
         </div>
         
         <div class="card rounded-0">
             <div class="content mt-0">
                 <div class="input-style validate-field mt-3">
-                    <textarea rows="1" class="wedive-textarea2 wedive-input" placeholder="커뮤니티 이름을 입력하세요." v-model="community_title"></textarea>
-                    <textarea class="wedive-textarea wedive-input" placeholder="커뮤니티 설명을 입력하세요." v-model="community_contents"></textarea>
+                    <textarea rows="1" class="wedive-textarea2 wedive-input" placeholder="동호회 이름을 입력하세요." v-model="community_title"></textarea>
+                    <textarea class="wedive-textarea wedive-input" placeholder="동호회 설명을 입력하세요." v-model="community_contents"></textarea>
+                </div>
+
+                <div class="">
+                    <div id="is_private"
+                        class="d-flex no-effect"
+                        data-trigger-switch="toggle-id-1" 
+                        data-bs-toggle="collapse" 
+                        href="#collapse1" 
+                        role="button" 
+                        aria-expanded="false" 
+                        aria-controls="collapse1">
+                        <div class="pt-1">
+                            <h4 class="pt-3 mb-2">비공개 동호회</h4>
+                        </div>
+                        <div class="ms-auto me-4 pe-2 mt-2">
+                            <div class="custom-control ios-switch" style="margin-top:16px !important;">
+                                <input type="checkbox" class="ios-input" id="toggle-id-1">
+                                <label class="custom-control-label" for="toggle-id-1"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="collapse" id="collapse1">
+                        <textarea rows="1" class="wedive-textarea2 wedive-input" placeholder="비밀번호를 입력하세요." v-model="community_password" style="width:100%;padding-top:10px;"></textarea>
+                    </div>
                 </div>
                 
                 <div id="div_upload_photo_community" class="row m-0 mb-3 mt-3">
@@ -212,6 +236,7 @@
         </div>
     </div>
     
+    <div id="snackbar-new-community-error" class="snackbar-toast color-white bg-red-dark" data-bs-delay="1500" data-bs-autohide="true" style="z-index:9999;"><i class="fa fa-times me-3"></i>비밀번호를 입력해주세요.</div>
   </div>
 </template>
 <script>
@@ -484,6 +509,15 @@ export default {
             }
       },
       async createCommunity() {
+          var is_private = $("#is_private").attr("aria-expanded");
+          if (is_private && (this.community_password == null || this.community_password == '')) {
+              var toastData = 'snackbar-new-community-error';
+              var notificationToast = document.getElementById(toastData);
+              var notificationToast = new bootstrap.Toast(notificationToast);
+              notificationToast.show();
+              
+              return;
+          }
           var preloader = document.getElementById('preloader')
           if(preloader){
                 preloader.classList.remove('preloader-hide');
@@ -532,7 +566,11 @@ export default {
                 var result_upload = await client.request(updateMutation, {input: {"_id": result_img.uploadImage._id,"name": result_img.name,"description": "communityTitle","reference": null}});
                 _id_list.push(result_img.uploadImage._id);
           }
-          var _input = {title: this.community_title, description: this.community_contents, images: _id_list};
+          var _input = {title: this.community_title, description: this.community_contents, images: _id_list, visibility: "public"};
+          if (is_private) {
+              _input.visibility = "private";
+              _input.password = this.community_password;
+          }
           const ipt = _input;
           var result = await axios({
             url: 'https://api.wedives.com/graphql',
@@ -882,6 +920,7 @@ export default {
         agenda_contents: '',
         community_title: '',
         community_contents: '',
+        community_password: '',
         selectedTags: [],
         selectedTags2: '',
         selectedLocation: {},

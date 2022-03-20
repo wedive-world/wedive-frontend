@@ -1,13 +1,24 @@
 <template>
   <div class="text-center">
     <div data-menu-active="nav-forum"></div>
-    <div class="header header-fixed header-logo-center">
-        <a href="" class="header-title color ellipsis">{{ getCommunityById ? getCommunityById.title : '' }}</a>
-        <a href="#" data-back-button class="font-16 header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
-        <a class="font-16 header-icon header-icon-3" data-menu="agenda-add"><i class="fas fa-edit"></i></a>
-        <a data-menu="menu-main-right" class="font-16 header-icon header-icon-4"><i class="fas fa-bars"></i></a>
+    <div class="header header-fixed header-logo-center" :style="'height:180px !important;background:url('+(getCommunityById && getCommunityById.images&&getCommunityById.images.length>0&&getCommunityById.images[0].thumbnailUrl ? getCommunityById.images[0].thumbnailUrl : '/static/empty.jpg')+');background-size:cover;background-position-y: center;position:relative;'">
+        <a href="#" data-back-button class="font-16 header-icon header-icon-1 color-white" style="z-index:10;"><i class="fas fa-chevron-left"></i></a>
+        
+        <a v-if="getCommunityById&& getCommunityById.users.filter(x=>x.uid==uid).length > 0 && nickName!=null && idToken!=null" class="font-16 header-icon header-icon-3 color-white" data-menu="agenda-add" style="z-index:10;"><i class="fas fa-edit"></i></a>
+        <a v-else-if="getCommunityById && getCommunityById.users.filter(x=>x.uid==uid).length > 0" class="font-16 header-icon header-icon-3 color-white" v-on:click="login()" style="z-index:10;"><i class="fas fa-edit"></i></a>
+        <a v-else-if="nickName!=null && idToken!=null" class="font-16 header-icon header-icon-3 color-white" data-menu="menu-join" style="z-index:10;"><i class="fas fa-bell"></i></a>
+        <a v-else class="font-16 header-icon header-icon-3 color-white" v-on:click="login()" style="z-index:10;"><i class="fas fa-bell"></i></a>
+        <a data-menu="menu-main-right" class="font-16 header-icon header-icon-4 color-white" style="z-index:10;"><i class="fas fa-bars"></i></a>
+        
+        <div class="card-overlay bg-gradient opacity-50"></div>
+        <div class="card-overlay bg-gradient-reverse opacity-10"></div>
+
+        <div class="text-start" style="position:absolute;bottom:0;bottom: -30px;z-index: 9;">        
+          <p class="pe-3 ps-3 color-white mb-0 font-16 font-noto font-500"><i class="fas fa-user-friends me-1"></i> {{ getCommunityById ? getCommunityById.title : '' }}</p>
+          <p class="pe-3 ps-3 pb-2 color-white ellipsis opacity-80" style="max-width: 100vw;">{{ getCommunityById ? getCommunityById.description : '' }}</p>
+        </div>
     </div>
-    <pull-to :top-load-method="refresh" @top-state-change="stateChange" :top-config="TOP_DEFAULT_CONFIG" :is-bottom-bounce="false" :is-top-bounce="scrollTop == 0" style="margin-top:50px;">
+    <pull-to :top-load-method="refresh" @top-state-change="stateChange" :top-config="TOP_DEFAULT_CONFIG" :is-bottom-bounce="false" :is-top-bounce="scrollTop == 0" style="margin-top:0px;">
         <template class="text-center" slot="top-block" slot-scope="props">
         <div :class="'top-load-wrapper opacity-50' + (props.state === 'loaded-done' ? ' fadeout' : '')">
             <i class="font-18 fas"
@@ -23,12 +34,7 @@
         </div>
         </template>
         
-        <div class="text-start card mb-0" style="min-height: calc(100vh - 50px);">
-          <div class="card mb-0" style="height:150px;background:url(/static/images/assets/beach-diving.jpg);background-size:cover;background-position-y: center;position:relative;">
-            <p class="p-3 color-white ellipsis" style="position:absolute;bottom:0;bottom: -30px;z-index: 9;max-width: 100vw;">{{ getCommunityById.description }}</p>
-            <div class="card-overlay bg-gradient opacity-80"></div>  
-          </div>
-          
+        <div class="text-start card mb-0" style="min-height: calc(100vh - 150px);">
           <div v-for="agenda in getAgendasByTargetId">
             <div class="p-3">
               <div v-on:click="goUser(agenda.author)" style="position:relative;">
@@ -101,6 +107,9 @@
                   &nbsp;&nbsp;
                   <i class="fas fa-comment me-1 font-20" style="color:#bbb;"></i>
                     <span class="font-14 font-noto">{{ agenda.reviewCount || 0 }}</span>
+                  <span v-on:click="setNotification(agenda._id)"><i class="ms-3 fas fa-flag me-1 font-20" style="color:#bbb;"></i>
+                    <span class="font-14 font-noto">공지설정</span>
+                  </span>
               </div>
             </div>
             <div class="divider mb-0" style="height:12px;border-top: 1px solid #88888840"></div>
@@ -176,6 +185,77 @@
             </div>
         </div>
     </div>
+
+
+
+    <div id="menu-main-right" class="menu menu-box-right rounded-0 text-start" data-menu-width="280">
+        <div class="pt-1 pb-1 ps-3 pe-3">
+            <div class="font-600">동호회 멤버</div>
+            <div v-if="getCommunityById && getCommunityById.users">
+                <div v-for="(user, index) in getCommunityById.users" class="pt-1 pb-1">
+                    <svg class="svg-profile user-img user-img-small" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                        <defs>
+                        <path :id="'shapeSquircle'+index" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                        <clipPath :id="'clipSquircle'+index">
+                            <use :xlink:href="'#shapeSquircle'+index"/>
+                        </clipPath>
+                        </defs>
+                        <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" :clip-path="'url(#clipSquircle'+index+')'" :xlink:href="(user.profileImages && user.profileImages.length>0)?user.profileImages[0].thumbnailUrl:'/static/images/assets/user_empty.png'"/>
+                    </svg>
+                    <div class="ms-2 d-inline-block v-align-top">
+                        <span v-if="user.uid == uid" style="display: inline-block;padding: 1px 6px;background: #e1e2e3;border-radius: 6px;">나</span>
+                        <h5 style="display: inline-block;" class="font-15 font-600 mb-0 mt-2">{{ user.nickName }}<span v-if="user.uid == getCommunityById.owners[0].uid"> (회장)</span></h5>
+                    </div>
+                </div>
+            </div>
+
+            <!--<div v-on:click="invite" class="pt-1 pb-1">
+                <svg class="svg-profile user-img user-img-small" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                    <defs>
+                    <path id="shapeSquircle00" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                    <clipPath id="clipSquircle00">
+                        <use xlink:href="#shapeSquircle00"/>
+                    </clipPath>
+                    </defs>
+                    <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle00)" xlink:href="/static/images/assets/ico_plus.png"/>
+                </svg>
+                <div class="ms-2 d-inline-block v-align-top">
+                    <h5 class="font-15 font-600 mb-0 mt-2">대화상대 초대</h5>
+                </div>
+            </div>-->
+
+        </div>
+
+        <div class="ps-1 pe-1" style="width: 100%; height:40px;background: #00000015;border-top: 1px solid lightgray;position: absolute;bottom: 0px;">
+            <img data-menu="menu-leaveroom" src="/static/images/assets/ico_exit.png" width="24" height="24" style="margin: 8px;" />
+        </div>
+    </div>
+
+
+
+    <div id="menu-join" 
+         class="menu menu-box-modal" 
+         data-menu-height="200" 
+         data-menu-width="370">
+        <div class="menu-title">
+            <h4 class="text-center mt-4 pt-1 mb-2 font-noto font-19">동호회 가입</h4>
+            <a href="#" class="close-menu hide"><i class="fa fa-times-circle"></i></a>
+        </div>
+        <div class="me-4 ms-4" style="border-bottom: 2px solid black;"></div>
+        <div class="content mt-4 pb-4">
+            동호회에 가입하시겠습니까?
+        </div>
+
+        <div class="row m-0">
+            <div class="col-6 pe-1">
+                <a href="#" class="close-menu btn btn-m btn-full rounded-s text-uppercase font-900 shadow-s bg-gray-dark">취소</a>
+            </div>
+            <div class="col-6 ps-1">
+                <a v-on:click="join_community()" class="btn btn-m btn-full rounded-s text-uppercase font-900 shadow-s bg-black">가입</a>
+            </div>
+        </div>
+    </div>
+
   </div>
 </template>
 <script>
@@ -198,6 +278,79 @@ export default {
     VueStar,
   },
   methods: {
+      login() {
+        this.$root.$children[0].$refs.loginBottomSheet.open();
+      },
+      async setNotification(agendaId) {
+        var result = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                    mutation RegisterNotice($communityId: ID!, $agendaId: ID!) {
+                      registerNotice(communityId: $communityId, agendaId: $agendaId) {
+                        success
+                      }
+                    }
+                `,
+                variables: {
+                    "communityId": this.communityId,
+                    "agendaId": agendaId
+                }
+            }
+        });
+        console.log(result);
+      },
+      async unsetNotification(agendaId) {
+        var result = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                    mutation Mutation($communityId: ID!, $agendaId: ID!) {
+                      unregisterNotice(communityId: $communityId, agendaId: $agendaId) {
+                        success
+                      }
+                    }
+                `,
+                variables: {
+                    "communityId": this.communityId,
+                    "agendaId": agendaId
+                }
+            }
+        });
+        console.log(result);
+      },
+      async join_community() {
+        var result = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                    mutation Subscribe($targetId: ID!, $targetType: UserReactionTargetType!) {
+                        subscribe(targetId: $targetId, targetType: $targetType)
+                    }
+                `,
+                variables: {
+                    "targetId": this.communityId,
+                    "targetType": "community"
+                }
+            }
+        });
+        location.reload();
+      },
       async likeAnimation(item, isBottom) {
         if (item.likes == null) item.likes = 0;
 
@@ -496,6 +649,9 @@ export default {
   data () {
     return {
       communityId: this.$route.params.id,
+      nickName: localStorage.nickName,
+      idToken: localStorage.idToken,
+      uid: localStorage.uid,
       subjectType: 'default',
       textPlaceholder: '의견을 자유롭게 적어주세요.',
       getAllAgendaTypes: [],
@@ -553,14 +709,59 @@ export default {
                 thumbnailUrl
                 _id
               }
+              users {
+                uid
+                nickName
+                profileImages {
+                  thumbnailUrl
+                }
+              }
             }
           }
         `,
-          variables() {
-              return {
-                "id": this.communityId
-              }
-          },
+        variables() {
+            return {
+              "id": this.communityId
+            }
+        },
+        results() {
+            var id_arr = new Array();
+            var width_arr = new Array();
+            this.getCommunityById.images.forEach(x => {
+                id_arr.push(x._id);
+                width_arr.push(720);
+            });
+            if (id_arr.length > 0) {
+                axios({
+                    url: 'https://api.wedives.com/graphql',
+                    method: 'post',
+                    headers: {
+                        countrycode: 'ko',
+                        idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                    },
+                    data: {
+                        query: `
+                            query Query($ids: [ID], $widths: [Int]) {
+                                getImageUrlsByIds(_ids: $ids, widths: $widths)
+                            }
+                        `,
+                        variables: {
+                            ids: id_arr,
+                            widths: width_arr
+                        }
+
+                    }
+                }).then(result_image => {
+                    if (result_image.data.data.getImageUrlsByIds) {
+                        var i=0;
+                        this.getCommunityById.images.forEach(x => {
+                            x.thumbnailUrl = result_image.data.data.getImageUrlsByIds[i];
+                            i++;
+                        });
+                    }
+                });
+            }
+        }
       },
       getAgendasByTargetId: {
           query:gql `
@@ -666,6 +867,51 @@ export default {
 <style scoped>
 .inline-block {display: inline-block !important;}
 .v-align-top {vertical-align: top !important;}
+.user-img-small {
+    width: 40px !important;
+    height: 40px !important;
+}
+
+.user-img {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+  user-select: none;
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3csvg width='88px' height='88px' viewBox='0 0 88 88' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3e%3cpath d='M44%2c0.5 C59.8650505%2c0.5 70.7664452%2c3.40244096 77.6820021%2c10.3179979 C84.597559%2c17.2335548 87.5%2c28.1349495 87.5%2c44 C87.5%2c59.8650505 84.597559%2c70.7664452 77.6820021%2c77.6820021 C70.7664452%2c84.597559 59.8650505%2c87.5 44%2c87.5 C28.1349495%2c87.5 17.2335548%2c84.597559 10.3179979%2c77.6820021 C3.40244096%2c70.7664452 0.5%2c59.8650505 0.5%2c44 C0.5%2c28.1349495 3.40244096%2c17.2335548 10.3179979%2c10.3179979 C17.2335548%2c3.40244096 28.1349495%2c0.5 44%2c0.5 Z' fill='none' stroke='rgba(0,0,0,0.08)'%3e%3c/path%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .svg-profile {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .default-txt {
+    font-size: 2em;
+    fill: #fff;
+  }
+
+  .default-bg {
+    width: 100%;
+    height: 100%;
+    @each $num, $color in $userImgBgs {
+      &[data-color="#{$num}"] {
+        fill: $color;
+      }
+    }
+  }
+}
+
 .user-img-s {
   position: relative;
   display: inline-block;
@@ -712,4 +958,5 @@ export default {
 .img_square{width: 100%;position: relative;}
 .img_square:after {content: "";display: block;padding-bottom: 100%;}
 .img_square_inner {position: absolute;width: 100%;height: 100%;background-size:cover !important;background-position: center !important;}
+.owner:after {content: '';position: absolute;bottom: 6px;left: 34px;width: 22px;height: 22px;background-image: url(/static/images/assets/crown_s.png);background-repeat: no-repeat;background-size: contain;}
 </style>

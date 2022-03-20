@@ -375,7 +375,7 @@
                 </div>
                 <a v-on:click="setTitle()" class="btn btn-m btn-full mb-3 rounded-xs text-uppercase font-900 shadow-s bg-dark-dark col-3" style="width: 21%;padding: 13px 8px !important;border-radius: 8px !important;">변경</a>
             </div>
-            <div class="font-600">대화 상대</div>
+            <div class="font-600">대화상대</div>
             <div v-if="getChatRoomInfo && getChatRoomInfo.chatRoom && getChatRoomInfo.chatRoom.chatUsers">
                 <div v-for="(user, index) in getChatRoomInfo.chatRoom.chatUsers" class="pt-1 pb-1">
                     <svg class="svg-profile user-img user-img-small" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
