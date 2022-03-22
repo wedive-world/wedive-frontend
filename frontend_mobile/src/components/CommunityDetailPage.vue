@@ -107,8 +107,8 @@
                   &nbsp;&nbsp;
                   <i class="fas fa-comment me-1 font-20" style="color:#bbb;"></i>
                     <span class="font-14 font-noto">{{ agenda.reviewCount || 0 }}</span>
-                  <span v-on:click="setNotification(agenda._id)"><i class="ms-3 fas fa-flag me-1 font-20" style="color:#bbb;"></i>
-                    <span class="font-14 font-noto">공지설정</span>
+                  <span v-on:click="setNotification(agenda._id, agenda.isUserSubscribe)"><i class="ms-3 fas fa-flag me-1 font-20" :style="'color:' + (agenda.isUserSubscribe ? '#1d397c;' : '#bbb;')"></i>
+                    <span class="font-14 font-noto">{{ agenda.isUserSubscribe ? '공지해제' : '공지설정' }}</span>
                   </span>
               </div>
             </div>
@@ -281,32 +281,9 @@ export default {
       login() {
         this.$root.$children[0].$refs.loginBottomSheet.open();
       },
-      async setNotification(agendaId) {
-        var result = await axios({
-            url: 'https://api.wedives.com/graphql',
-            method: 'post',
-            headers: {
-                countrycode: 'ko',
-                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-            },
-            data: {
-                query: `
-                    mutation RegisterNotice($communityId: ID!, $agendaId: ID!) {
-                      registerNotice(communityId: $communityId, agendaId: $agendaId) {
-                        success
-                      }
-                    }
-                `,
-                variables: {
-                    "communityId": this.communityId,
-                    "agendaId": agendaId
-                }
-            }
-        });
-        console.log(result);
-      },
-      async unsetNotification(agendaId) {
-        var result = await axios({
+      async setNotification(agendaId, isUserSubscribe) {
+        if (isUserSubscribe) {
+          var result = await axios({
             url: 'https://api.wedives.com/graphql',
             method: 'post',
             headers: {
@@ -326,8 +303,30 @@ export default {
                     "agendaId": agendaId
                 }
             }
-        });
-        console.log(result);
+          });
+        } else {
+          var result = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                    mutation RegisterNotice($communityId: ID!, $agendaId: ID!) {
+                      registerNotice(communityId: $communityId, agendaId: $agendaId) {
+                        success
+                      }
+                    }
+                `,
+                variables: {
+                    "communityId": this.communityId,
+                    "agendaId": agendaId
+                }
+            }
+          });
+        }
       },
       async join_community() {
         var result = await axios({
@@ -799,6 +798,7 @@ export default {
                 isUserDislike
                 isUserLike
                 views
+                isUserSubscribe
               }
             }
           `,

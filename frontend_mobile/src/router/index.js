@@ -37,11 +37,13 @@ import TrainingListPage from '@/components/TrainingListPage'
 import TrainingSettingPage from '@/components/TrainingSettingPage'
 import TrainingStartPage from '@/components/TrainingStartPage'
 import ForumPage from '@/components/ForumPage'
+import ForumSearchPage from '@/components/ForumSearchPage'
 import ForumDetailPage from '@/components/ForumDetailPage'
 import ReviewMorePage from '@/components/ReviewMorePage'
 import OhterPage from '@/components/OhterPage'
 import NotificationPage from '@/components/NotificationPage'
 import CommunityDetailPage from '@/components/CommunityDetailPage'
+import CommunitySearchPage from '@/components/CommunitySearchPage'
 import OtherDivingPage from '@/components/OtherDivingPage'
 import OtherSubscribePage from '@/components/OtherSubscribePage'
 import OtherNotiPage from '@/components/OtherNotiPage'
@@ -265,6 +267,11 @@ export default new Router({
       component: ForumPage
     },
     {
+      path: '/forum/search',
+      name: 'ForumSearchPage',
+      component: ForumSearchPage
+    },
+    {
       path: '/agenda/:id',
       name: 'ForumDetailPage',
       props: true,
@@ -287,11 +294,17 @@ export default new Router({
       component: NotificationPage
     },
     {
+      path: '/community/search',
+      name: 'CommunitySearchPage',
+      component: CommunitySearchPage
+    },
+    {
       path: '/community/:id',
       name: 'CommunityDetailPage',
       props: true,
       component: CommunityDetailPage
     },
+    
     
     
     

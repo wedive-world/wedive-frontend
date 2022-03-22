@@ -914,8 +914,8 @@ export default {
                 $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
             }
             if (this.pb_dyn != "") {
-                var record_type = "STA"
-                var record_val = this.pb_sta;
+                var record_type = "DYN"
+                var record_val = this.pb_dyn;
                 $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
             }
             if (this.pb_dnf != "") {

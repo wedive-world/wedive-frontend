@@ -515,10 +515,16 @@ export default {
       if (item == '/site_list') {
         location.href='/site/search';
       }
-      if (item == '/') {
+      else if (item == '/forum_home') {
+        if ($("#tab-forum .swiper .swiper-wrapper .swiper-slide-active").text() == '동호회') {
+          location.href = '/community/search';
+        } else {
+          location.href = '/forum/search';
+        }
+      }
+      else if (item == '/') {
         location.href='/diving/search';
       }
-      console.log("searchItem");
     },
     shareItem() {
       console.log("shareItem")
