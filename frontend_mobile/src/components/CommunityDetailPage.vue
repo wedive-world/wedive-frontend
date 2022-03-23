@@ -107,7 +107,7 @@
                   &nbsp;&nbsp;
                   <i class="fas fa-comment me-1 font-20" style="color:#bbb;"></i>
                     <span class="font-14 font-noto">{{ agenda.reviewCount || 0 }}</span>
-                  <span v-on:click="setNotification(agenda._id, agenda.isUserSubscribe)"><i class="ms-3 fas fa-flag me-1 font-20" :style="'color:' + (agenda.isUserSubscribe ? '#1d397c;' : '#bbb;')"></i>
+                  <span v-on:click="setNotification(agenda)"><i class="ms-3 fas fa-flag me-1 font-20" :style="'color:' + (agenda.isUserSubscribe ? '#1d397c;' : '#bbb;')"></i>
                     <span class="font-14 font-noto">{{ agenda.isUserSubscribe ? '공지해제' : '공지설정' }}</span>
                   </span>
               </div>
@@ -281,7 +281,9 @@ export default {
       login() {
         this.$root.$children[0].$refs.loginBottomSheet.open();
       },
-      async setNotification(agendaId, isUserSubscribe) {
+      async setNotification(agenda) {
+        var agendaId = agenda._id;
+        var isUserSubscribe = agenda.isUserSubscribe;
         if (isUserSubscribe) {
           var result = await axios({
             url: 'https://api.wedives.com/graphql',
@@ -327,6 +329,11 @@ export default {
             }
           });
         }
+
+        if (agenda.isUserSubscribe == null) {
+          agenda.isUserSubscribe = false;
+        }
+        agenda.isUserSubscribe = !agenda.isUserSubscribe;
       },
       async join_community() {
         var result = await axios({
