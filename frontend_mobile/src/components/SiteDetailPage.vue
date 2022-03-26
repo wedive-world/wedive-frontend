@@ -7,13 +7,13 @@
         <div v-else style="min-height:250px;height:250px;max-height:250px;">
             <div class="splide single-slider cover-slider slider-no-arrows slider-no-dots" id="cover-slider-1" data-card-height="250" style="position:relative;">
                 <div class="splide__track">
-                    <div class="splide__list">
-                        <div class="splide__slide" v-if="getDiveSiteByUniqueName.backgroundImages == null || getDiveSiteByUniqueName.backgroundImages.length == 0">
+                    <div class="splide__list" style="width: 100%;">
+                        <div v-if="getDiveSiteByUniqueName.backgroundImages == null || getDiveSiteByUniqueName.backgroundImages.length == 0" class="splide__slide" style="width: 100%;">
                             <div id="background_img_null" data-card-height="250" class="card rounded-0 mb-0" style="background: url(/static/empty.jpg);background-position: center !important;background-size: contain !important;">                                
                             </div>
                         </div>
-                        <div v-else class="splide__slide" v-for="(image, index) in getDiveSiteByUniqueName.backgroundImages">
-                            <div data-card-height="250" :class="'card rounded-0 mb-0 background-center background_img_' + index" v-bind:style="'background: url('+image.thumbnailUrl+');background-size: cover !important;'">
+                        <div v-else class="splide__slide" v-for="(image, index) in getDiveSiteByUniqueName.backgroundImages" style="width: 100%;">
+                            <div data-card-height="250" :class="'card rounded-0 mb-0 background-center background_img_' + index" v-bind:style="'background: url('+image.thumbnailUrl+');background-size: cover !important;width:100%;'">
                                 <div class="wedive-source" style="bottom:50px;">{{ image.reference | makeReference }}</div>
                             </div>
                         </div>
@@ -69,6 +69,20 @@
                         <div style="height: 30px;padding-top:2px;">{{ recommend_env_word[parseInt(getDiveSiteByUniqueName.adminScore/20)] }}</div>
                         <div class="mt-1" style="height: 30px;padding-top:2px;">{{ recommend_flow_word[parseInt(getDiveSiteByUniqueName.adminScore/20)] }}</div>
                         <div class="mt-1" style="height: 30px;padding-top:2px;">{{ getDiveSiteByUniqueName.minSight }}-{{ getDiveSiteByUniqueName.maxSight }}m</div>
+                    </div>
+                </div>
+
+                <div class="evaluation d-flex mt-2">
+                    <img v-if="getDiveSiteByUniqueName.waterTemperature" :src="'/static/images/assets/weather/'+(weatherIcon[getDiveSiteByUniqueName.waterTemperature.weatherDescription])+'.png'" width="50"/>
+                    <div>
+                        <p class="mb-0"><span class="color-gray">기온</span> <span style="display:inline-block;min-width:46px;text-align:right;">{{ getDiveSiteByUniqueName.waterTemperature && getDiveSiteByUniqueName.waterTemperature.temperatureC ? getDiveSiteByUniqueName.waterTemperature.temperatureC + '°C' : '' }}</span></p>
+                        <p class="mb-0"><span class="color-gray">수온</span> <span style="display:inline-block;min-width:46px;text-align:right;">{{ getDiveSiteByUniqueName.waterTemperature && getDiveSiteByUniqueName.waterTemperature.currentSeaTemperature ? getDiveSiteByUniqueName.waterTemperature.currentSeaTemperature.split("/")[0].replace(/ /gi,'') : '' }}</span></p>
+
+                        <!--<i class="fas fa-tint"></i>-->
+                    </div>
+                    <div>
+                        <p class="mb-0"><span class="color-gray">습도</span> <span style="display:inline-block;min-width:46px;text-align:right;">{{ getDiveSiteByUniqueName.waterTemperature && getDiveSiteByUniqueName.waterTemperature.humidity ? getDiveSiteByUniqueName.waterTemperature.humidity : '' }}</span></p>
+                        <p class="mb-0"><span class="color-gray">바람</span> <span style="display:inline-block;min-width:46px;text-align:right;">{{ '2 mph' }}</span></p>
                     </div>
                 </div>
                 
@@ -719,11 +733,11 @@ export default {
     }
   },
   created() {
-    setTimeout(function() {
+    /*setTimeout(function() {
         init_template();
         var preloader = document.getElementById('preloader')
         if(preloader){preloader.classList.add('preloader-hide');}
-    }, 500);
+    }, 1000);*/
   },
   components: {
     StarRating
@@ -752,6 +766,7 @@ export default {
         nickName: localStorage.nickName,
         enumPopularity: {"nothing":"icon_popularity_01", "unrecommended": "icon_popularity_01", "soso": "icon_popularity_02", "popular": "icon_popularity_03"},
         enumClimate: {"nothing": "weather_sunny", "sunny": "weather_sunny", "cloudy": "weather_partly_cloudy", "rain": "weather_showers", "heavyRain": "weather_heavy_rain"},
+        weatherIcon: {"clear sky":"sunny_light","few clouds":"mostly_sunny","broken clouds":"partly_cloudy","scattered clouds":"mostly_cloudy_day","overcast clouds":"cloudy","light rain":"scattered_showers_day","light intensity shower rain":"scattered_showers_day","shower rain":"showers_rain","moderate rain":"heavy_rain","light snow":"flurries","light shower snow":"wintry_mix_rain_snow","snow":"snow_showers_snow","mist":"mist","fog":"fog","haze":"haze_fog_dust_smoke","smoke":"haze_fog_dust_smoke","thunderstorm":"strong_tstorms"},
     }
   },
   apollo: {
@@ -943,7 +958,6 @@ export default {
                         temperatureC
                         temperatureF
                         weatherDescription
-                        weatherIcon
                         humidity
                         temperatureDetail {
                             MinC
@@ -967,6 +981,12 @@ export default {
               }
           },
           result() {
+            setTimeout(function() {
+                init_template();
+                var preloader = document.getElementById('preloader')
+                if(preloader){preloader.classList.add('preloader-hide');}
+            },100);
+
             if (this.getDiveSiteByUniqueName.isUserLike) this.like_img = 'ico_heart2';
             if (this.getDiveSiteByUniqueName.isUserSubscribe) this.subscribe_img = 'ico_subscribe2';
             {
@@ -1009,7 +1029,6 @@ export default {
                                 $('[data-toggle="tooltip"]').tooltip();
                             },500);
                             setTimeout(function() {
-                                console.log("none")
                                 $("#cover-slider-temp").css("display", "none");
                             },2000);
                         }
@@ -1158,7 +1177,7 @@ export default {
                 for (var i=0; i<this.getDiveSiteByUniqueName.divePoints.length; i++) {
                     var minDepth = this.getDiveSiteByUniqueName.divePoints[i].minDepth;
                     var _position = {lat: this.getDiveSiteByUniqueName.divePoints[i].latitude, lng: this.getDiveSiteByUniqueName.divePoints[i].longitude};
-                    var _img = (minDepth < 18) ? '/static/images/assets/ico_pin1_o8.png' : '/static/images/assets/ico_pin3_o8.png';
+                    var _img = (minDepth < 18) ? '/static/images/assets/ico_pin1.png' : '/static/images/assets/ico_pin3.png';
                     const _marker_class = (minDepth < 18) ? 'marker-position2' : 'marker-position3';
 
                     const title = this.getDiveSiteByUniqueName.divePoints[i].name;
@@ -1488,7 +1507,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .light-border-bottom {border-bottom: 1px solid #dee2e6;}
-.evaluation {background-color: rgba(196,187,171,.2);justify-content: space-around;border-radius: 5px;padding: 8px 8px 8px 0;}
+.evaluation {background-color: rgba(196,187,171,.15);justify-content: space-around;border-radius: 5px;padding: 8px 8px 8px 0;}
 .evaluation>span.info {padding-left: 11px;border-left: 1px solid #c4bbab;}
 .evaluation>span .icon_question {display: inline-block;position: relative;top: 1px;display: block;width: 18px;height: 18px;background-size: 18px 18px;background-repeat: no-repeat;background-image: url(/static/images/assets/question.png);text-indent: -9999px;}
 
