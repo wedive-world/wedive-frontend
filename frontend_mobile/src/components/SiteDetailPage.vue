@@ -482,7 +482,7 @@
         </div>
         
 
-        <div class="card card-style hide">
+        <div class="card card-style">
             <div class="content mb-2" id="tab-group-index">
                 <h4 class="text-start pt-2 mb-2">월별 수온</h4>
                 <div>
@@ -495,7 +495,14 @@
                                 <th scope="col" class="color-white font-12">인기도</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody v-if="getDiveSiteByUniqueName.waterTemperature && getDiveSiteByUniqueName.waterTemperature.temperatureDetail && getDiveSiteByUniqueName.waterTemperature.temperatureDetail.MinC">
+                            <tr class="border-bottom" v-for="(minC, index) in getDiveSiteByUniqueName.waterTemperature.temperatureDetail.MinC">
+                                <th class="font-12" scope="row">{{ index+1 }}월</th>
+                                <td class="font-12 color-gray">{{ minC }}ºC / {{ getDiveSiteByUniqueName.waterTemperature.temperatureDetail.MaxC[index] }}ºC</td>
+                                <td class="font-12"><img class="me-2" :src="'/static/images/assets/'+(enumClimate[getDiveSiteByUniqueName['month'+(index+1)].filter(x=>x.type=='climate')[0].title])+'.svg'" width="20" height="20"/>{{ ((getDiveSiteByUniqueName.waterTemperature.temperatureDetail.MaxC[index]+minC)/2).toFixed(1) }}ºC</td>
+                                <td class=""><img class="img_pop" :src="'/static/images/assets/'+(enumPopularity[getDiveSiteByUniqueName['month'+(index+1)].filter(x=>x.type=='popularity')[0].title])+'.svg'" width="32" height="32"/></td>
+                            </tr>
+                        <!--
                             <tr class="border-bottom">
                                 <th class="font-12" scope="row">1월</th>
                                 <td class="font-12 color-gray">5.2ºC / 12.3ºC</td>
@@ -568,6 +575,7 @@
                                 <td class="font-12"><img class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>10.1ºC</td>
                                 <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_01.svg" width="32" height="32"/></td>
                             </tr>
+                        -->
                         </tbody>
                     </table>
                     <div class="text-end">
@@ -742,6 +750,8 @@ export default {
         subscribe_img: 'ico_subscribe',
         idToken: localStorage.idToken,
         nickName: localStorage.nickName,
+        enumPopularity: {"nothing":"icon_popularity_01", "unrecommended": "icon_popularity_01", "soso": "icon_popularity_02", "popular": "icon_popularity_03"},
+        enumClimate: {"nothing": "weather_sunny", "sunny": "weather_sunny", "cloudy": "weather_partly_cloudy", "rain": "weather_showers", "heavyRain": "weather_heavy_rain"},
     }
   },
   apollo: {
@@ -926,6 +936,28 @@ export default {
                     reviewCount
                     isUserSubscribe
                     isUserLike
+                    waterTemperature {
+                        name
+                        currentSeaTemperature
+                        weatherText
+                        temperatureC
+                        temperatureF
+                        weatherDescription
+                        weatherIcon
+                        humidity
+                        temperatureDetail {
+                            MinC
+                            MaxC
+                            MinF
+                            MaxF
+                        }
+                        weekTideForecast {
+                            daysOfWeek
+                            tideForecasts
+                        }
+                        latitude
+                        longitude
+                    }
                 }
             }
           `,

@@ -431,14 +431,14 @@
                                 <th scope="col" class="color-white font-12">인기도</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">1월</th>
-                                <td class="font-12 color-gray">5.2ºC / 12.3ºC</td>
+                        <tbody v-if="getDiveCenterByUniqueName.waterTemperature && getDiveCenterByUniqueName.waterTemperature.temperatureDetail && getDiveCenterByUniqueName.waterTemperature.temperatureDetail.MinC">
+                            <tr class="border-bottom" v-for="(minC, index) in getDiveCenterByUniqueName.waterTemperature.temperatureDetail.MinC">
+                                <th class="font-12" scope="row">{{ index+1 }}월</th>
+                                <td class="font-12 color-gray">{{ minC }}ºC / {{ getDiveCenterByUniqueName.waterTemperature.temperatureDetail.MaxC[index] }}ºC</td>
                                 <td class="font-12"><img class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>8.8ºC</td>
                                 <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_01.svg" width="32" height="32"/></td>
                             </tr>
-                            <tr class="border-bottom">
+                            <!--<tr class="border-bottom">
                                 <th class="font-12" scope="row">2월</th>
                                 <td class="font-12 color-gray">3.4ºC / 9.8ºC</td>
                                 <td class="font-12"><img class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>6.6ºC</td>
@@ -503,7 +503,7 @@
                                 <td class="font-12 color-gray">6.4ºC / 13.8ºC</td>
                                 <td class="font-12"><img class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>10.1ºC</td>
                                 <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_01.svg" width="32" height="32"/></td>
-                            </tr>
+                            </tr>-->
                         </tbody>
                     </table>
                     <div class="text-end">
@@ -1426,6 +1426,28 @@ export default {
                     reviewCount
                     isUserSubscribe
                     isUserLike
+                    waterTemperature {
+                        name
+                        currentSeaTemperature
+                        weatherText
+                        temperatureC
+                        temperatureF
+                        weatherDescription
+                        weatherIcon
+                        humidity
+                        temperatureDetail {
+                            MinC
+                            MaxC
+                            MinF
+                            MaxF
+                        }
+                        weekTideForecast {
+                            daysOfWeek
+                            tideForecasts
+                        }
+                        latitude
+                        longitude
+                    }
                 }
             }
           `,
