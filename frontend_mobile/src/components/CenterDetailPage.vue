@@ -46,6 +46,21 @@
                     <span class="service font-12">서비스 {{ (getDiveCenterByUniqueName.serviceScore/20).toFixed(1) }}</span>
                     <!--<span class="info" style="margin-bottom:3px;margin-top:3px;"><i class="icon_question font-12">별점 안내</i></span>-->
                 </div>
+
+                <div v-if="getDiveCenterByUniqueName.waterTemperature" class="evaluation d-flex mt-2">
+                    <img :src="'/static/images/assets/weather/'+(weatherIcon[getDiveCenterByUniqueName.waterTemperature.weatherDescription])+'.png'" width="50"/>
+                    <div>
+                        <p class="mb-0"><span class="color-gray">기온</span> <span style="display:inline-block;min-width:46px;text-align:right;">{{ getDiveCenterByUniqueName.waterTemperature && getDiveCenterByUniqueName.waterTemperature.temperatureC ? getDiveCenterByUniqueName.waterTemperature.temperatureC + '°C' : '' }}</span></p>
+                        <p class="mb-0"><span class="color-gray">수온</span> <span style="display:inline-block;min-width:46px;text-align:right;">{{ getDiveCenterByUniqueName.waterTemperature && getDiveCenterByUniqueName.waterTemperature.currentSeaTemperature ? getDiveCenterByUniqueName.waterTemperature.currentSeaTemperature.split("/")[0].replace(/ /gi,'') : '' }}</span></p>
+
+                        <!--<i class="fas fa-tint"></i>-->
+                    </div>
+                    <div>
+                        <p class="mb-0"><span class="color-gray">습도</span> <span style="display:inline-block;min-width:46px;text-align:right;">{{ getDiveCenterByUniqueName.waterTemperature && getDiveCenterByUniqueName.waterTemperature.humidity ? getDiveCenterByUniqueName.waterTemperature.humidity : '' }}</span></p>
+                        <p class="mb-0"><span class="color-gray">바람</span> <span style="display:inline-block;min-width:46px;text-align:right;">{{ '2 mph' }}</span></p>
+                    </div>
+                </div>
+
                 <div style="margin-top:8px;"><span class="font-600"><img class="ext-img" src="/static/images/assets/ico_chat.png" width="18"/> {{ (getDiveCenterByUniqueName.reviewCount)?getDiveCenterByUniqueName.reviewCount:'0' }}</span>&nbsp;<font class="color-gray-light">|</font>&nbsp;
                 <span v-if="getDiveCenterByUniqueName.institutionTypes && getDiveCenterByUniqueName.institutionTypes.length > 0"><span v-for="(insti,index) in getDiveCenterByUniqueName.institutionTypes" v-if="index < 6" v-on:click="openInstitutionBottomSheet(insti)"><img class="ext-img" :src="'/static/images/agency/logo_'+insti.toLowerCase()+'.svg'" height="17" style="padding-bottom: 1px;" /><span v-if="index != (getDiveCenterByUniqueName.institutionTypes.length-1)">&nbsp;&nbsp;</span></span>&nbsp;<font class="color-gray-light">|</font>&nbsp;</span>
                 <span v-if="interest.type=='priceIndex'" v-for="interest in getDiveCenterByUniqueName.interests" class="color-gray">{{interest.title.replace(/\$/gi, '₩')}}</span>
@@ -1232,11 +1247,7 @@ export default {
     }
   },
   created() {
-      setTimeout(function() {
-        init_template();
-        var preloader = document.getElementById('preloader')
-        if(preloader){preloader.classList.add('preloader-hide');}
-    }, 500);
+      
   },
   beforeDestroy () {
     
@@ -1267,6 +1278,9 @@ export default {
         idToken: localStorage.idToken,
         nickName: localStorage.nickName,
         open_insti: null,
+        enumPopularity: {"nothing":"icon_popularity_01", "unrecommended": "icon_popularity_01", "soso": "icon_popularity_02", "popular": "icon_popularity_03"},
+        enumClimate: {"nothing": "weather_sunny", "sunny": "weather_sunny", "cloudy": "weather_partly_cloudy", "rain": "weather_showers", "heavyRain": "weather_heavy_rain"},
+        weatherIcon: {"clear sky":"sunny_light","few clouds":"mostly_sunny","broken clouds":"partly_cloudy","scattered clouds":"mostly_cloudy_day","overcast clouds":"cloudy","light rain":"scattered_showers_day","light intensity shower rain":"scattered_showers_day","shower rain":"showers_rain","moderate rain":"heavy_rain","light snow":"flurries","light shower snow":"wintry_mix_rain_snow","snow":"snow_showers_snow","mist":"mist","fog":"fog","haze":"haze_fog_dust_smoke","smoke":"haze_fog_dust_smoke","thunderstorm":"strong_tstorms"},
     }
   }, 
   apollo: {
@@ -1457,6 +1471,11 @@ export default {
               }
           },
           result() {
+            setTimeout(function() {
+                init_template();
+                var preloader = document.getElementById('preloader')
+                if(preloader){preloader.classList.add('preloader-hide');}
+            }, 500);
             if (this.getDiveCenterByUniqueName.isUserLike) this.like_img = 'ico_heart2';
             if (this.getDiveCenterByUniqueName.isUserSubscribe) this.subscribe_img = 'ico_subscribe2';
             {
@@ -2027,7 +2046,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .light-border-bottom {border-bottom: 1px solid #dee2e6;}
-.evaluation {background-color: rgba(196,187,171,.2);justify-content: space-around;border-radius: 5px;padding: 8px 8px 8px 0;}
+.evaluation {background-color: rgba(196,187,171,.15);justify-content: space-around;border-radius: 5px;padding: 8px 8px 8px 0;}
 .evaluation>span.info {padding-left: 11px;border-left: 1px solid #c4bbab;}
 .evaluation>span .icon_question {display: inline-block;position: relative;top: 1px;display: block;width: 18px;height: 18px;background-size: 18px 18px;background-repeat: no-repeat;background-image: url(/static/images/assets/question.png);text-indent: -9999px;}
 

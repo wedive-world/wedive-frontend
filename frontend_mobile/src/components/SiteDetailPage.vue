@@ -72,8 +72,8 @@
                     </div>
                 </div>
 
-                <div class="evaluation d-flex mt-2">
-                    <img v-if="getDiveSiteByUniqueName.waterTemperature" :src="'/static/images/assets/weather/'+(weatherIcon[getDiveSiteByUniqueName.waterTemperature.weatherDescription])+'.png'" width="50"/>
+                <div v-if="getDiveSiteByUniqueName.waterTemperature" class="evaluation d-flex mt-2">
+                    <img :src="'/static/images/assets/weather/'+(weatherIcon[getDiveSiteByUniqueName.waterTemperature.weatherDescription])+'.png'" width="50"/>
                     <div>
                         <p class="mb-0"><span class="color-gray">기온</span> <span style="display:inline-block;min-width:46px;text-align:right;">{{ getDiveSiteByUniqueName.waterTemperature && getDiveSiteByUniqueName.waterTemperature.temperatureC ? getDiveSiteByUniqueName.waterTemperature.temperatureC + '°C' : '' }}</span></p>
                         <p class="mb-0"><span class="color-gray">수온</span> <span style="display:inline-block;min-width:46px;text-align:right;">{{ getDiveSiteByUniqueName.waterTemperature && getDiveSiteByUniqueName.waterTemperature.currentSeaTemperature ? getDiveSiteByUniqueName.waterTemperature.currentSeaTemperature.split("/")[0].replace(/ /gi,'') : '' }}</span></p>
