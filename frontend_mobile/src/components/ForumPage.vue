@@ -243,7 +243,8 @@
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import 'swiper/css/swiper.css'
 
-import { GraphQLClient, request, gql } from "graphql-request";
+import gql from 'graphql-tag'
+//import { GraphQLClient, request, gql } from "graphql-request";
 import VoerroTagsInput from '@voerro/vue-tagsinput';
 import '@voerro/vue-tagsinput/dist/style.css'
 
@@ -262,48 +263,6 @@ export default {
     ForumAgendaMyPage,
     ForumAgendaAllPage,
     ForumCommunityPage,
-  },
-  async beforeRouteEnter(to, from, next) {
-    var result = await axios({
-        url: 'https://api.wedives.com/graphql',
-        method: 'post',
-        headers: {
-            countrycode: 'ko',
-            idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-        },
-        data: {
-            query: `
-            query Query {
-                getForums {
-                    _id
-                    name
-                    description
-                }
-            }
-            `
-        }
-    });
-
-    var result2 = await axios({
-        url: 'https://api.wedives.com/graphql',
-        method: 'post',
-        headers: {
-            countrycode: 'ko',
-            idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-        },
-        data: {
-            query: `
-            query Query {
-                getAllAgendaTypes {
-                    _id
-                    name
-                }
-            }
-            `
-        }
-    });
-    
-    next(vm => {vm.setData(result, result2)});
   },
   watch: {
       subjectType: function(newVal, oldVal) {
@@ -356,11 +315,30 @@ export default {
           }
       },
   },
-  methods: {
-      setData(getForums, getAllAgendaTypes) {
-          this.getForums = getForums.data.data.getForums;
-          this.getAllAgendaTypes = getAllAgendaTypes.data.data.getAllAgendaTypes;
+  apollo: {
+      getForums: {
+          query:gql `
+            query Query {
+                getForums {
+                    _id
+                    name
+                    description
+                }
+            }
+          `
       },
+      getAllAgendaTypes: {
+          query:gql `
+            query Query {
+                getAllAgendaTypes {
+                    _id
+                    name
+                }
+            }
+          `
+      },
+  },
+  methods: {
       moveTo(idx) {
           this.contentSwiper.slideTo(idx);
           setTimeout(function() {
@@ -525,45 +503,54 @@ export default {
           }
           var _id_list = new Array();
           for (var i=0; i<this.file_photo_community.length; i++) {
-                var mutation = gql`
-                    mutation UploadImageMutation($uploadImageFile: Upload!) {
-                        uploadImage(file: $uploadImageFile) {
-                            _id
-                            name
-                            mimeType
-                            encoding
-                            thumbnailUrl
-                            createdAt
-                            updatedAt
+                var result_img = await this.$apollo.mutate({
+                    // Query
+                    mutation: gql`
+                        mutation UploadImageMutation($file: Upload!) {
+                            uploadImage(file: $file) {
+                                _id
+                                name
+                                mimeType
+                                encoding
+                                thumbnailUrl
+                                createdAt
+                                updatedAt
+                            }
                         }
-                    }
-                `
-                var client = new GraphQLClient('https://api.wedives.com/graphql',
-                {
-                    headers: {
-                        countrycode: 'ko',
-                        idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-                    }
-                })
-
-                var result_img = await client.request(mutation, {uploadImageFile:this.file_photo_community[i],});
+                    `,
+                    // Parameters
+                    variables: {
+                        file: this.file_photo_community[i]
+                    },
+                });
+                var result_upload = await this.$apollo.mutate({
+                    // Query
+                    mutation: gql`
+                        mutation Mutation($input: UpdateImageInput!) {
+                            updateImage(input: $input) {
+                                _id
+                                name
+                                description
+                                reference
+                                uploaderId
+                                mimeType
+                                encoding
+                                fileSize
+                                thumbnailUrl
+                            }
+                        }
+                    `,
+                    // Parameters
+                    variables: {
+                        input: {
+                            _id: result_img.uploadImage._id,
+                            name: result_img.name,
+                            description: "communityTitle",
+                            reference: null
+                        }
+                    },
+                });
                 
-                var updateMutation = gql`
-                    mutation Mutation($input: UpdateImageInput!) {
-                        updateImage(input: $input) {
-                            _id
-                            name
-                            description
-                            reference
-                            uploaderId
-                            mimeType
-                            encoding
-                            fileSize
-                            thumbnailUrl
-                        }
-                    }
-                `;
-                var result_upload = await client.request(updateMutation, {input: {"_id": result_img.uploadImage._id,"name": result_img.name,"description": "communityTitle","reference": null}});
                 _id_list.push(result_img.uploadImage._id);
           }
           var _input = {title: this.community_title, description: this.community_contents, images: _id_list, visibility: "public"};
@@ -615,45 +602,54 @@ export default {
             }
             var _id_list = new Array();
             for (var i=0; i<this.file_photo.length; i++) {
-                var mutation = gql`
-                    mutation UploadImageMutation($uploadImageFile: Upload!) {
-                        uploadImage(file: $uploadImageFile) {
-                            _id
-                            name
-                            mimeType
-                            encoding
-                            thumbnailUrl
-                            createdAt
-                            updatedAt
+                var result_img = await this.$apollo.mutate({
+                    // Query
+                    mutation: gql`
+                        mutation UploadImageMutation($file: Upload!) {
+                            uploadImage(file: $file) {
+                                _id
+                                name
+                                mimeType
+                                encoding
+                                thumbnailUrl
+                                createdAt
+                                updatedAt
+                            }
                         }
-                    }
-                `
-                var client = new GraphQLClient('https://api.wedives.com/graphql',
-                {
-                    headers: {
-                        countrycode: 'ko',
-                        idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-                    }
-                })
+                    `,
+                    // Parameters
+                    variables: {
+                        file: this.this.file_photo[i]
+                    },
+                });
+                var result_upload = await this.$apollo.mutate({
+                    // Query
+                    mutation: gql`
+                        mutation Mutation($input: UpdateImageInput!) {
+                            updateImage(input: $input) {
+                                _id
+                                name
+                                description
+                                reference
+                                uploaderId
+                                mimeType
+                                encoding
+                                fileSize
+                                thumbnailUrl
+                            }
+                        }
+                    `,
+                    // Parameters
+                    variables: {
+                        input: {
+                            _id: result_img.uploadImage._id,
+                            name: result_img.name,
+                            description: "agendaImage",
+                            reference: null
+                        }
+                    },
+                });
 
-                var result_img = await client.request(mutation, {uploadImageFile:this.file_photo[i],});
-                
-                var updateMutation = gql`
-                    mutation Mutation($input: UpdateImageInput!) {
-                        updateImage(input: $input) {
-                            _id
-                            name
-                            description
-                            reference
-                            uploaderId
-                            mimeType
-                            encoding
-                            fileSize
-                            thumbnailUrl
-                        }
-                    }
-                `;
-                var result_upload = await client.request(updateMutation, {input: {"_id": result_img.uploadImage._id,"name": result_img.name,"description": "agendaImage","reference": null}});
                 _id_list.push(result_img.uploadImage._id);
             }
   

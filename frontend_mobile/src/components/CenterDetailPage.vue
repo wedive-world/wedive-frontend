@@ -57,7 +57,7 @@
                     </div>
                     <div>
                         <p class="mb-0"><span class="color-gray">습도</span> <span style="display:inline-block;min-width:46px;text-align:right;">{{ getDiveCenterByUniqueName.waterTemperature && getDiveCenterByUniqueName.waterTemperature.humidity ? getDiveCenterByUniqueName.waterTemperature.humidity : '' }}</span></p>
-                        <p class="mb-0"><span class="color-gray">바람</span> <span style="display:inline-block;min-width:46px;text-align:right;">{{ '2 mph' }}</span></p>
+                        <p class="mb-0"><span class="color-gray">바람</span> <span style="display:inline-block;min-width:46px;text-align:right;">{{ getDiveCenterByUniqueName.waterTemperature && getDiveCenterByUniqueName.waterTemperature.windSpeed ? getDiveCenterByUniqueName.waterTemperature.windSpeed : '' }}</span></p>
                     </div>
                 </div>
 
@@ -1449,6 +1449,7 @@ export default {
                         weatherDescription
                         weatherIcon
                         humidity
+                        windSpeed
                         temperatureDetail {
                             MinC
                             MaxC

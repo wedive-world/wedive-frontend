@@ -107,8 +107,8 @@
                   &nbsp;&nbsp;
                   <i class="fas fa-comment me-1 font-20" style="color:#bbb;"></i>
                     <span class="font-14 font-noto">{{ agenda.reviewCount || 0 }}</span>
-                  <span v-on:click="setNotification(agenda)"><i class="ms-3 fas fa-flag me-1 font-20" :style="'color:' + (agenda.isUserSubscribe ? '#1d397c;' : '#bbb;')"></i>
-                    <span class="font-14 font-noto">{{ agenda.isUserSubscribe ? '공지해제' : '공지설정' }}</span>
+                  <span v-on:click="setNotification(agenda)"><i class="ms-3 fas fa-flag me-1 font-20" :style="'color:' + (agenda.types.filter(x=>x._id == '624017f9abe6e467bdc55cb4').length>0 ? '#1d397c;' : '#bbb;')"></i>
+                    <span class="font-14 font-noto">{{ agenda.types.filter(x=>x._id == '624017f9abe6e467bdc55cb4').length>0 ? '공지해제' : '공지설정' }}</span>
                   </span>
               </div>
             </div>
@@ -283,8 +283,8 @@ export default {
       },
       async setNotification(agenda) {
         var agendaId = agenda._id;
-        var isUserSubscribe = agenda.isUserSubscribe;
-        if (isUserSubscribe) {
+        
+        if (agenda.types.filter(x=>x._id=='624017f9abe6e467bdc55cb4').length > 0) {
           var result = await axios({
             url: 'https://api.wedives.com/graphql',
             method: 'post',
@@ -306,6 +306,12 @@ export default {
                 }
             }
           });
+          for (var i=0; i<agenda.types.length; i++) {
+            if (agenda.types[i]._id == '624017f9abe6e467bdc55cb4') {
+              agenda.types.splice(i,1);
+              break;
+            }
+          }
         } else {
           var result = await axios({
             url: 'https://api.wedives.com/graphql',
@@ -328,12 +334,8 @@ export default {
                 }
             }
           });
+          agenda.types.push({_id:'624017f9abe6e467bdc55cb4', name:'공지'});
         }
-
-        if (agenda.isUserSubscribe == null) {
-          agenda.isUserSubscribe = false;
-        }
-        agenda.isUserSubscribe = !agenda.isUserSubscribe;
       },
       async join_community() {
         var result = await axios({

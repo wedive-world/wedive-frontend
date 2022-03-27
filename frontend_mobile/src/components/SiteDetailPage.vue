@@ -82,7 +82,7 @@
                     </div>
                     <div>
                         <p class="mb-0"><span class="color-gray">습도</span> <span style="display:inline-block;min-width:46px;text-align:right;">{{ getDiveSiteByUniqueName.waterTemperature && getDiveSiteByUniqueName.waterTemperature.humidity ? getDiveSiteByUniqueName.waterTemperature.humidity : '' }}</span></p>
-                        <p class="mb-0"><span class="color-gray">바람</span> <span style="display:inline-block;min-width:46px;text-align:right;">{{ '2 mph' }}</span></p>
+                        <p class="mb-0"><span class="color-gray">바람</span> <span style="display:inline-block;min-width:46px;text-align:right;">{{ getDiveSiteByUniqueName.waterTemperature && getDiveSiteByUniqueName.waterTemperature.windSpeed ? getDiveSiteByUniqueName.waterTemperature.windSpeed : '' }}</span></p>
                     </div>
                 </div>
                 
@@ -513,8 +513,8 @@
                             <tr class="border-bottom" v-for="(minC, index) in getDiveSiteByUniqueName.waterTemperature.temperatureDetail.MinC">
                                 <th class="font-12" scope="row">{{ index+1 }}월</th>
                                 <td class="font-12 color-gray">{{ minC }}ºC / {{ getDiveSiteByUniqueName.waterTemperature.temperatureDetail.MaxC[index] }}ºC</td>
-                                <td class="font-12"><img class="me-2" :src="'/static/images/assets/'+(enumClimate[getDiveSiteByUniqueName['month'+(index+1)].filter(x=>x.type=='climate')[0].title])+'.svg'" width="20" height="20"/>{{ ((getDiveSiteByUniqueName.waterTemperature.temperatureDetail.MaxC[index]+minC)/2).toFixed(1) }}ºC</td>
-                                <td class=""><img class="img_pop" :src="'/static/images/assets/'+(enumPopularity[getDiveSiteByUniqueName['month'+(index+1)].filter(x=>x.type=='popularity')[0].title])+'.svg'" width="32" height="32"/></td>
+                                <td class="font-12"><img class="me-2" :src="'/static/images/assets/'+(getDiveSiteByUniqueName['month'+(index+1)].filter(x=>x.type=='climate').length > 0 ? enumClimate[getDiveSiteByUniqueName['month'+(index+1)].filter(x=>x.type=='climate')[0].title] : 'empty')+'.svg'" width="20" height="20"/>{{ ((getDiveSiteByUniqueName.waterTemperature.temperatureDetail.MaxC[index]+minC)/2).toFixed(1) }}ºC</td>
+                                <td class=""><img class="img_pop" :src="'/static/images/assets/'+(getDiveSiteByUniqueName['month'+(index+1)].filter(x=>x.type=='popularity').length > 0 ? enumPopularity[getDiveSiteByUniqueName['month'+(index+1)].filter(x=>x.type=='popularity')[0].title] : 'empty')+'.svg'" width="32" height="32"/></td>
                             </tr>
                         <!--
                             <tr class="border-bottom">
@@ -959,6 +959,7 @@ export default {
                         temperatureF
                         weatherDescription
                         humidity
+                        windSpeed
                         temperatureDetail {
                             MinC
                             MaxC
