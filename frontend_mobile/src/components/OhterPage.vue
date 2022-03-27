@@ -2,7 +2,7 @@
   <div class="">
     <div data-menu-active="nav-other"></div>
     <div :class="'page-content font-noto card text-center' + ((idToken && nickName)?' hide':'')" style="height: calc(100vh - 101px);display:block;">
-        <img src="/static/images/assets/empty_login.jpg" width="60%" style="margin-top:25%;"/>
+        <img src="https://d34l91104zg4p3.cloudfront.net/assets/empty_login.jpg" width="60%" style="margin-top:25%;"/>
         <p class="color-gray mt-2">{{ login_word }}이 필요한 페이지 입니다.</p>
         <a v-on:click="login()" class="btn btn-m mb-3 rounded-xl text-uppercase font-500 shadow-s bg-secondary font-noto"><i class="fas fa-user-lock me-1"></i> {{ login_word }}</a>
     </div>
@@ -14,12 +14,12 @@
         </div>
         <a href="/user/my" class="position-relative" style="z-index:1;">
             <div class="content pb-0">
-                <h2 class="font-15 font-300 mb-0"><img src="/static/images/assets/other_user.png" height="30" /><span class="ms-2 vertical-m">내 프로필</span><i class="wedive-txt-all wedive_right" style="top:22px;"></i></h2>
+                <h2 class="font-15 font-300 mb-0"><img src="https://d34l91104zg4p3.cloudfront.net/assets/other_user.png" height="30" /><span class="ms-2 vertical-m">내 프로필</span><i class="wedive-txt-all wedive_right" style="top:22px;"></i></h2>
             </div>
         </a>
         <a href="/other/noti"  class="position-relative border-bottom" style="z-index:1;">
             <div class="content pb-0">
-                <h2 class="font-15 font-300 mb-0"><img src="/static/images/assets/other_alarm.png" height="30" /><span class="ms-2 vertical-m">알림 설정</span><i class="wedive-txt-all wedive_right" style="top:22px;"></i></h2>
+                <h2 class="font-15 font-300 mb-0"><img src="https://d34l91104zg4p3.cloudfront.net/assets/other_alarm.png" height="30" /><span class="ms-2 vertical-m">알림 설정</span><i class="wedive-txt-all wedive_right" style="top:22px;"></i></h2>
             </div>
         </a>
         <div class="position-relative" style="z-index:1;">
@@ -29,32 +29,32 @@
         </div>
         <a href="/other/subscribe" class="position-relative" style="z-index:1;">
             <div class="content pb-0">
-                <h2 class="font-15 font-300 mb-0"><img src="/static/images/assets/other_alarm2.png" height="30" /><span class="ms-2 vertical-m">나의 구독 장소</span><i class="wedive-txt-all wedive_right" style="top:22px;"></i></h2>
+                <h2 class="font-15 font-300 mb-0"><img src="https://d34l91104zg4p3.cloudfront.net/assets/other_alarm2.png" height="30" /><span class="ms-2 vertical-m">나의 구독 장소</span><i class="wedive-txt-all wedive_right" style="top:22px;"></i></h2>
             </div>
         </a>
         <!--<a href="/other/subscribe" class="position-relative" style="z-index:1;">
             <div class="content pb-0">
-                <h2 class="font-15 font-300 mb-0"><img src="/static/images/assets/other_interest.png" height="30" /><span class="ms-2 vertical-m">나의 관심 장소</span><i class="wedive-txt-all wedive_right" style="top:22px;"></i></h2>
+                <h2 class="font-15 font-300 mb-0"><img src="https://d34l91104zg4p3.cloudfront.net/assets/other_interest.png" height="30" /><span class="ms-2 vertical-m">나의 관심 장소</span><i class="wedive-txt-all wedive_right" style="top:22px;"></i></h2>
             </div>
         </a>-->
         <a href="/diving/my" class="position-relative" style="z-index:1;">
             <div class="content pb-0">
-                <h2 class="font-15 font-300 mb-0"><img src="/static/images/assets/other_diving.png" height="30" /><span class="ms-2 vertical-m">나의 버디찾기</span><i class="wedive-txt-all wedive_right" style="top:22px;"></i></h2>
+                <h2 class="font-15 font-300 mb-0"><img src="https://d34l91104zg4p3.cloudfront.net/assets/other_diving.png" height="30" /><span class="ms-2 vertical-m">나의 버디찾기</span><i class="wedive-txt-all wedive_right" style="top:22px;"></i></h2>
             </div>
         </a>
         <div class="position-relative border-bottom" style="z-index:1;">
             <div class="content pb-0">
-                <h2 class="font-15 font-300 mb-0"><img src="/static/images/assets/other_review.png" height="30" /><span class="ms-2 vertical-m">나의 리뷰</span><i class="wedive-txt-all wedive_right" style="top:22px;"></i></h2>
+                <h2 class="font-15 font-300 mb-0"><img src="https://d34l91104zg4p3.cloudfront.net/assets/other_review.png" height="30" /><span class="ms-2 vertical-m">나의 리뷰</span><i class="wedive-txt-all wedive_right" style="top:22px;"></i></h2>
             </div>
         </div>
         <div class="position-relative hide" style="z-index:1;">
             <div class="content pb-0">
-                <h2 class="font-15 font-300 mb-0"><img src="/static/images/assets/other_coupon.png" height="30" /><span class="ms-2 vertical-m">쿠폰</span><i class="wedive-txt-all wedive_right" style="top:22px;"></i></h2>
+                <h2 class="font-15 font-300 mb-0"><img src="https://d34l91104zg4p3.cloudfront.net/assets/other_coupon.png" height="30" /><span class="ms-2 vertical-m">쿠폰</span><i class="wedive-txt-all wedive_right" style="top:22px;"></i></h2>
             </div>
         </div>
         <div class="position-relative hide" style="z-index:1;">
             <div class="content pb-0">
-                <h2 class="font-15 font-300 mb-0"><img src="/static/images/assets/other_bill.png" height="30" /><span class="ms-2 vertical-m">영수증</span><i class="wedive-txt-all wedive_right" style="top:22px;"></i></h2>
+                <h2 class="font-15 font-300 mb-0"><img src="https://d34l91104zg4p3.cloudfront.net/assets/other_bill.png" height="30" /><span class="ms-2 vertical-m">영수증</span><i class="wedive-txt-all wedive_right" style="top:22px;"></i></h2>
             </div>
         </div>
         <div class="position-relative" style="z-index:1;">
@@ -64,12 +64,12 @@
         </div>
         <a href="/other/terms" class="position-relative" style="z-index:1;">
             <div class="content pb-0">
-                <h2 class="font-15 font-300 mb-0"><img src="/static/images/assets/other_terms.png" height="30" /><span class="ms-2 vertical-m">이용약관</span><i class="wedive-txt-all wedive_right" style="top:22px;"></i></h2>
+                <h2 class="font-15 font-300 mb-0"><img src="https://d34l91104zg4p3.cloudfront.net/assets/other_terms.png" height="30" /><span class="ms-2 vertical-m">이용약관</span><i class="wedive-txt-all wedive_right" style="top:22px;"></i></h2>
             </div>
         </a>
         <a href="/other/privacy" class="position-relative" style="z-index:1;">
             <div class="content pb-0">
-                <h2 class="font-15 font-300 mb-0"><img src="/static/images/assets/other_privacy.png" height="30" /><span class="ms-2 vertical-m">개인정보 처리 방침</span><i class="wedive-txt-all wedive_right" style="top:22px;"></i></h2>
+                <h2 class="font-15 font-300 mb-0"><img src="https://d34l91104zg4p3.cloudfront.net/assets/other_privacy.png" height="30" /><span class="ms-2 vertical-m">개인정보 처리 방침</span><i class="wedive-txt-all wedive_right" style="top:22px;"></i></h2>
             </div>
         </a>
         
@@ -89,63 +89,6 @@ const axios = require("axios")
 
 export default {
   name: 'HelloWorld',
-  async beforeRouteEnter(to, from, next) {
-    if (to.params.id != null) {
-        var result = await axios({
-            url: 'https://api.wedives.com/graphql',
-            method: 'post',
-            headers: {
-                countrycode: 'ko',
-                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-            },
-            data: {
-                query: `
-                query GetCurrentUser {
-                    getCurrentUser {
-                        _id
-                        uid
-                        authProvider
-                        oauthToken
-                        fcmToken
-                        email
-                        emailVerified
-                        phoneNumber
-                        profileImages {
-                        _id
-                        thumbnailUrl
-                        }
-                        nickName
-                        name
-                        birthAge
-                        gender
-                        residence
-                        interests {
-                        title
-                        type
-                        }
-                        divingLog
-                        freeDivingBests
-                        freeLicenseLevel
-                        freeLicenseType
-                        scubaLicenseLevel
-                        scubaLicenseType
-                        createdAt
-                    }
-                }
-                `
-            }
-        });
-
-        var ret = null;
-        if (result && result.data && result.data.data && result.data.data.getCurrentUser) {ret = result.data.data.getCurrentUser;}
-        console.log(ret)
-        
-        next(vm => {vm.setData(ret)});
-    }
-    else {
-        next(vm => {vm.setData(null)});
-    }
-  },
   async mounted() {
     if (this.$route.query.header && this.$route.query.header == 'hide') {
         $(".page-title").hide();
@@ -162,7 +105,7 @@ export default {
         init_template();
         var preloader = document.getElementById('preloader')
         if(preloader){preloader.classList.add('preloader-hide');}
-    }, 500);
+    }, 50);
   },
   data () {
     return {
@@ -172,34 +115,6 @@ export default {
     }
   },
   methods: {
-      setData(_userData) {
-          if (_userData == null) {
-              this.is_empty = true;
-          } else {
-              this.userData = _userData;
-            // 다이버 레벨 보여주기
-            this.userData.levelShow = '초보';
-            var scuba_level = ["초보", "오픈워터", "어드벤스드", "레스큐", "마스터", "강사", "위다이브 컨시어지"];
-            var free_level = ["초보", "레벨1", "레벨2", "레벨3", "레벨4", "강사"];
-            var s_lvl = parseInt(this.userData.scubaLicenseLevel);
-            var f_lvl = parseInt(this.userData.freeLicenseLevel);
-            this.userData.scubaLevelShow = (s_lvl>0) ? scuba_level[s_lvl] : "";
-            this.userData.freeLevelShow = (f_lvl>0) ? free_level[f_lvl] : "";
-            if (s_lvl > f_lvl) {
-                this.userData.levelShow = (s_lvl>0) ? "스쿠바 " + scuba_level[s_lvl] : this.userData.levelShow;
-            } else {
-                this.userData.levelShow = (f_lvl>0) ? "프리 " + free_level[f_lvl] : this.userData.levelShow;
-            }
-            this.userData.levelShow += " 다이버";
-            if(my_s_lvl>5) this.userData.levelShow = scuba_level[my_s_lvl];
-            
-            setTimeout(function() {
-                init_template();
-                var preloader = document.getElementById('preloader')
-                if(preloader){preloader.classList.add('preloader-hide');}
-            }, 1000);
-          }
-      },
       login() {
         localStorage.loginUrl = window.location.pathname;
         if (localStorage.hasOwnProperty("idToken") == false || localStorage.idToken == null) {

@@ -48,7 +48,7 @@
                 </div>
 
                 <div v-if="getDiveCenterByUniqueName.waterTemperature" class="evaluation d-flex mt-2">
-                    <img :src="'/static/images/assets/weather/'+(weatherIcon[getDiveCenterByUniqueName.waterTemperature.weatherDescription])+'.png'" width="50"/>
+                    <img :src="'https://d34l91104zg4p3.cloudfront.net/assets/weather/'+(weatherIcon[getDiveCenterByUniqueName.waterTemperature.weatherDescription])+'.png'" width="50"/>
                     <div>
                         <p class="mb-0"><span class="color-gray">기온</span> <span style="display:inline-block;min-width:46px;text-align:right;">{{ getDiveCenterByUniqueName.waterTemperature && getDiveCenterByUniqueName.waterTemperature.temperatureC ? getDiveCenterByUniqueName.waterTemperature.temperatureC + '°C' : '' }}</span></p>
                         <p class="mb-0"><span class="color-gray">수온</span> <span style="display:inline-block;min-width:46px;text-align:right;">{{ getDiveCenterByUniqueName.waterTemperature && getDiveCenterByUniqueName.waterTemperature.currentSeaTemperature ? getDiveCenterByUniqueName.waterTemperature.currentSeaTemperature.split("/")[0].replace(/ /gi,'') : '' }}</span></p>
@@ -61,7 +61,7 @@
                     </div>
                 </div>
 
-                <div style="margin-top:8px;"><span class="font-600"><img class="ext-img" src="/static/images/assets/ico_chat.png" width="18"/> {{ (getDiveCenterByUniqueName.reviewCount)?getDiveCenterByUniqueName.reviewCount:'0' }}</span>&nbsp;<font class="color-gray-light">|</font>&nbsp;
+                <div style="margin-top:8px;"><span class="font-600"><img class="ext-img" src="https://d34l91104zg4p3.cloudfront.net/assets/ico_chat.png" width="18"/> {{ (getDiveCenterByUniqueName.reviewCount)?getDiveCenterByUniqueName.reviewCount:'0' }}</span>&nbsp;<font class="color-gray-light">|</font>&nbsp;
                 <span v-if="getDiveCenterByUniqueName.institutionTypes && getDiveCenterByUniqueName.institutionTypes.length > 0"><span v-for="(insti,index) in getDiveCenterByUniqueName.institutionTypes" v-if="index < 6" v-on:click="openInstitutionBottomSheet(insti)"><img class="ext-img" :src="'/static/images/agency/logo_'+insti.toLowerCase()+'.svg'" height="17" style="padding-bottom: 1px;" /><span v-if="index != (getDiveCenterByUniqueName.institutionTypes.length-1)">&nbsp;&nbsp;</span></span>&nbsp;<font class="color-gray-light">|</font>&nbsp;</span>
                 <span v-if="interest.type=='priceIndex'" v-for="interest in getDiveCenterByUniqueName.interests" class="color-gray">{{interest.title.replace(/\$/gi, '₩')}}</span>
                 <!--<span class="badge font-10 bg-fade-gray-dark">PADI 공식</span>-->
@@ -71,17 +71,17 @@
                 <div class="d-flex mt-3 mb-0 text-center">
                     <div class="flex-grow-1 pd-0" style="border-right: 1px solid lightgray;">
                     <a :href="'tel:'+getDiveCenterByUniqueName.phoneNumber"" style="color:black;">
-                        <img class="ext-img" src="/static/images/assets/ico_call.png" width="24" style="margin-top:-4px;"/>
+                        <img class="ext-img" src="https://d34l91104zg4p3.cloudfront.net/assets/ico_call.png" width="24" style="margin-top:-4px;"/>
                         <span class="font-16 font-500 font-noto"></span>
                     </a>
                     </div>
                     <div v-on:click="clickLike()" :class="'flex-grow-1 pd-0'+((idToken == null || nickName == null) ? ' opacity-40' : '')" style="border-right: 1px solid lightgray;">
-                        <img class="ext-img" :src="'/static/images/assets/' + like_img + '.png'" width="24" style="margin-top:-4px;"/>
+                        <img class="ext-img" :src="'https://d34l91104zg4p3.cloudfront.net/assets/' + like_img + '.png'" width="24" style="margin-top:-4px;"/>
                         <span class="font-16 font-500 font-noto">{{ getDiveCenterByUniqueName.likes }}</span>
                     </div>
                     
                     <div v-on:click="clickSubscribe()" :class="'flex-grow-1 pd-0'+((idToken == null || nickName == null) ? ' opacity-40' : '')">
-                        <img class="ext-img" :src="'/static/images/assets/'+subscribe_img+'.png'" width="24" style="margin-top:-4px;"/>
+                        <img class="ext-img" :src="'https://d34l91104zg4p3.cloudfront.net/assets/'+subscribe_img+'.png'" width="24" style="margin-top:-4px;"/>
                         <span class="font-16 font-500 font-noto"></span>
                     </div>
                 </div>
@@ -318,7 +318,7 @@
                         </div>
                     </div>
                     <div class="mt-3" v-else>
-                        <div class="text-center"><img src="/static/images/assets/empty_time.jpg" width="60%"/></div>
+                        <div class="text-center"><img src="https://d34l91104zg4p3.cloudfront.net/assets/empty_time.jpg" width="60%"/></div>
                         <div class="font-noto text-center mb-3" style="color: #717a92;">영업시간 데이터가 아직 없어요.</div>
                     </div>
                 </div>
@@ -334,7 +334,7 @@
 
                     </div>
                     <div class="mt-3 text-start row" v-else>
-                        <div class="text-center"><img src="/static/images/assets/empty_equiptment.jpg" width="60%"/></div>
+                        <div class="text-center"><img src="https://d34l91104zg4p3.cloudfront.net/assets/empty_equiptment.jpg" width="60%"/></div>
                         <div class="font-noto text-center mb-3" style="color: #717a92;">장비 대여가 불가능한 센터입니다.</div>
                     </div>
                 </div>
@@ -421,7 +421,7 @@
                 </ul>
             </div>
             <div v-if="getDiveCenterByUniqueName.images == null || getDiveCenterByUniqueName.images.length == 0" class="content mb-3 mt-n3">
-                <div class="text-center"><img src="/static/images/assets/empty_image.jpg" width="60%" style="margin-top:-40px;"/></div>
+                <div class="text-center"><img src="https://d34l91104zg4p3.cloudfront.net/assets/empty_image.jpg" width="60%" style="margin-top:-40px;"/></div>
                 <div class="font-noto text-center mb-3" style="color: #717a92;">등록된 사진이 아직 없어요.</div>
             </div>
             <div class="content mb-3 mt-n3">
@@ -450,79 +450,79 @@
                             <tr class="border-bottom" v-for="(minC, index) in getDiveCenterByUniqueName.waterTemperature.temperatureDetail.MinC">
                                 <th class="font-12" scope="row">{{ index+1 }}월</th>
                                 <td class="font-12 color-gray">{{ minC }}ºC / {{ getDiveCenterByUniqueName.waterTemperature.temperatureDetail.MaxC[index] }}ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>8.8ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_01.svg" width="32" height="32"/></td>
+                                <td class="font-12"><img class="me-2" src="https://d34l91104zg4p3.cloudfront.net/assets/weather_partly_cloudy.svg" width="20" height="20"/>8.8ºC</td>
+                                <td class=""><img class="img_pop" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_popularity_01.svg" width="32" height="32"/></td>
                             </tr>
                             <!--<tr class="border-bottom">
                                 <th class="font-12" scope="row">2월</th>
                                 <td class="font-12 color-gray">3.4ºC / 9.8ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>6.6ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_01.svg" width="32" height="32"/></td>
+                                <td class="font-12"><img class="me-2" src="https://d34l91104zg4p3.cloudfront.net/assets/weather_partly_cloudy.svg" width="20" height="20"/>6.6ºC</td>
+                                <td class=""><img class="img_pop" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_popularity_01.svg" width="32" height="32"/></td>
                             </tr>
                             <tr class="border-bottom">
                                 <th class="font-12" scope="row">3월</th>
                                 <td class="font-12 color-gray">3.2ºC / 9.4ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>6.3ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_01.svg" width="32" height="32"/></td>
+                                <td class="font-12"><img class="me-2" src="https://d34l91104zg4p3.cloudfront.net/assets/weather_partly_cloudy.svg" width="20" height="20"/>6.3ºC</td>
+                                <td class=""><img class="img_pop" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_popularity_01.svg" width="32" height="32"/></td>
                             </tr>
                             <tr class="border-bottom">
                                 <th class="font-12" scope="row">4월</th>
                                 <td class="font-12 color-gray">7.0ºC / 13.3ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>10.2ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_01.svg" width="32" height="32"/></td>
+                                <td class="font-12"><img class="me-2" src="https://d34l91104zg4p3.cloudfront.net/assets/weather_partly_cloudy.svg" width="20" height="20"/>10.2ºC</td>
+                                <td class=""><img class="img_pop" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_popularity_01.svg" width="32" height="32"/></td>
                             </tr>
                             <tr class="border-bottom">
                                 <th class="font-12" scope="row">5월</th>
                                 <td class="font-12 color-gray">10.5ºC / 17.8ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>14.6ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_01.svg" width="32" height="32"/></td>
+                                <td class="font-12"><img class="me-2" src="https://d34l91104zg4p3.cloudfront.net/assets/weather_partly_cloudy.svg" width="20" height="20"/>14.6ºC</td>
+                                <td class=""><img class="img_pop" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_popularity_01.svg" width="32" height="32"/></td>
                             </tr>
                             <tr class="border-bottom">
                                 <th class="font-12" scope="row">6월</th>
                                 <td class="font-12 color-gray">15.1ºC / 23.4ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>19.2ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_02.svg" width="32" height="32"/></td>
+                                <td class="font-12"><img class="me-2" src="https://d34l91104zg4p3.cloudfront.net/assets/weather_partly_cloudy.svg" width="20" height="20"/>19.2ºC</td>
+                                <td class=""><img class="img_pop" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_popularity_02.svg" width="32" height="32"/></td>
                             </tr>
                             <tr class="border-bottom">
                                 <th class="font-12" scope="row">7월</th>
                                 <td class="font-12 color-gray">19.9ºC / 24.4ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_heavy_rain.svg" width="20" height="20"/>22.2ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_02.svg" width="32" height="32"/></td>
+                                <td class="font-12"><img class="me-2" src="https://d34l91104zg4p3.cloudfront.net/assets/weather_heavy_rain.svg" width="20" height="20"/>22.2ºC</td>
+                                <td class=""><img class="img_pop" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_popularity_02.svg" width="32" height="32"/></td>
                             </tr>
                             <tr class="border-bottom">
                                 <th class="font-12" scope="row">8월</th>
                                 <td class="font-12 color-gray">21.3ºC / 26.0ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_showers.svg" width="20" height="20"/>23.7ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_02.svg" width="32" height="32"/></td>
+                                <td class="font-12"><img class="me-2" src="https://d34l91104zg4p3.cloudfront.net/assets/weather_showers.svg" width="20" height="20"/>23.7ºC</td>
+                                <td class=""><img class="img_pop" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_popularity_02.svg" width="32" height="32"/></td>
                             </tr>
                             <tr class="border-bottom">
                                 <th class="font-12" scope="row">9월</th>
                                 <td class="font-12 color-gray">18.6ºC / 24.1ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_sunny.svg" width="20" height="20"/>21.4ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_02.svg" width="32" height="32"/></td>
+                                <td class="font-12"><img class="me-2" src="https://d34l91104zg4p3.cloudfront.net/assets/weather_sunny.svg" width="20" height="20"/>21.4ºC</td>
+                                <td class=""><img class="img_pop" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_popularity_02.svg" width="32" height="32"/></td>
                             </tr>
                             <tr class="border-bottom">
                                 <th class="font-12" scope="row">10월</th>
                                 <td class="font-12 color-gray">14.9ºC / 21.6ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>18.2ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_02.svg" width="32" height="32"/></td>
+                                <td class="font-12"><img class="me-2" src="https://d34l91104zg4p3.cloudfront.net/assets/weather_partly_cloudy.svg" width="20" height="20"/>18.2ºC</td>
+                                <td class=""><img class="img_pop" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_popularity_02.svg" width="32" height="32"/></td>
                             </tr>
                             <tr class="border-bottom">
                                 <th class="font-12" scope="row">11월</th>
                                 <td class="font-12 color-gray">10.8ºC / 17.6ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>14.2ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_01.svg" width="32" height="32"/></td>
+                                <td class="font-12"><img class="me-2" src="https://d34l91104zg4p3.cloudfront.net/assets/weather_partly_cloudy.svg" width="20" height="20"/>14.2ºC</td>
+                                <td class=""><img class="img_pop" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_popularity_01.svg" width="32" height="32"/></td>
                             </tr>
                             <tr>
                                 <th class="font-12" scope="row">12월</th>
                                 <td class="font-12 color-gray">6.4ºC / 13.8ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>10.1ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_01.svg" width="32" height="32"/></td>
+                                <td class="font-12"><img class="me-2" src="https://d34l91104zg4p3.cloudfront.net/assets/weather_partly_cloudy.svg" width="20" height="20"/>10.1ºC</td>
+                                <td class=""><img class="img_pop" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_popularity_01.svg" width="32" height="32"/></td>
                             </tr>-->
                         </tbody>
                     </table>
                     <div class="text-end">
-                        <img class="me-1 mb-3" height="20" src="/static/images/assets/logo-kma.svg" />
+                        <img class="me-1 mb-3" height="20" src="https://d34l91104zg4p3.cloudfront.net/assets/logo-kma.svg" />
                     </div>
                 </div>
             </div>
@@ -537,7 +537,7 @@
                     <div class="splide__track">
                         <div class="splide__list">
                             <div class="splide__slide" style="width:220px !important;">
-                                <div class="card card-style card-nearby mb-0" style="background: url(/static/images/assets/song.jpg);background-size:contain;" data-card-height="250" data-card-width="200">
+                                <div class="card card-style card-nearby mb-0" style="background: url(https://d34l91104zg4p3.cloudfront.net/assets/song.jpg);background-size:contain;" data-card-height="250" data-card-width="200">
                                     <svg style="width:60px;margin-top:-6px;filter:opacity(.3)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M128 80v380c0 3.3 3.8 5.2 6.4 3.2l116.8-92c2.9-2.1 6.8-2.1 9.6 0l116.8 92c2.6 2 6.4.1 6.4-3.2V80c0-17.7-14.3-32-32-32H160c-17.7 0-32 14.3-32 32z"/></svg>
                                     <span class="font-noto color-white" style="position:absolute;left:17px;top:8px;">추천</span>
                                     <div class="card-top px-3 py-3">
@@ -554,7 +554,7 @@
                                 </div>
                             </div>
                             <div class="splide__slide" style="width:220px !important;">
-                                <div class="card card-style card-nearby mb-0" style="background: url(/static/images/assets/lee.jpg);background-size:contain;" data-card-height="250" data-card-width="200">
+                                <div class="card card-style card-nearby mb-0" style="background: url(https://d34l91104zg4p3.cloudfront.net/assets/lee.jpg);background-size:contain;" data-card-height="250" data-card-width="200">
                                     <div class="card-top px-3 py-3">
                                         <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-gray-light"></i></a>
                                     </div>
@@ -604,7 +604,7 @@
                                         <p class="review-text mt-2 mb-1">
                                             <div v-if="review.images && review.images.length>0">
                                             <a v-for="(image,index) in review.images" v-if="index<3" :href="image.thumbnailUrl" data-gallery="gallery-99" class="filtr-item" title="" data-category="99">
-                                                <img src="/static/images/assets/empty.png" :data-src="image.thumbnailUrl" class="preload-img rounded-s shadow-m review_img" alt="방문자리뷰">
+                                                <img src="https://d34l91104zg4p3.cloudfront.net/assets/empty.png" :data-src="image.thumbnailUrl" class="preload-img rounded-s shadow-m review_img" alt="방문자리뷰">
                                             </a>
                                             </div>
                                             {{ review.content }}
@@ -624,7 +624,7 @@
                     </div>
                 </div>
                 <div v-else class="text-center">
-                    <img src="/static/images/assets/empty_list.jpg" width="50%" />
+                    <img src="https://d34l91104zg4p3.cloudfront.net/assets/empty_list.jpg" width="50%" />
                     <p class="color-gray">아직 작성된 리뷰가 없어요.</p>
                 </div>
             </div>
@@ -743,7 +743,7 @@
         <div class="content mt-3">
             <div class="wedive-select" style="min-height:250px;max-height: 250px;overflow-y: auto;">
                 <div class="text-center">
-                    <img src="/static/images/assets/empty_schedule2.jpg" width="85%" class="mt-2"/>
+                    <img src="https://d34l91104zg4p3.cloudfront.net/assets/empty_schedule2.jpg" width="85%" class="mt-2"/>
                     <p class="color-gray-light-mid">등록된 알림 일정이 없어요.</p>
                 </div>
                 <!--<div v-on:click="clickSelect" class="wedive-select-border">
@@ -867,7 +867,7 @@
             </div>
             <div class="mb-3 text-center p-2 wedive-button">
                 <input type="file" @change="addImage" id="" accept=".jpg, .png" style="text-indent: -999px;outline: none;width: 100%;height: 45px;color: rgba(0, 0, 0, 0) !important;">
-                <div class="upload-file-text" style="color: black;margin-top:-44px !important;margin-bottom:12px;"><img class="me-1" src="/static/images/assets/icon_camera.png" height="18"/>첨부하기</div>
+                <div class="upload-file-text" style="color: black;margin-top:-44px !important;margin-bottom:12px;"><img class="me-1" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_camera.png" height="18"/>첨부하기</div>
             </div>
         </div>
 
@@ -1666,7 +1666,7 @@ export default {
                     map: this.map,
                     position: {lat: this.getDiveCenterByUniqueName.latitude, lng: this.getDiveCenterByUniqueName.longitude},
                     label: {text: this.getDiveCenterByUniqueName.name, color: 'white', className: 'marker-position'},
-                    icon: new google.maps.MarkerImage('/static/images/assets/ico_pin2.png',null, null, null, new google.maps.Size(38,43)),
+                    icon: new google.maps.MarkerImage('https://d34l91104zg4p3.cloudfront.net/assets/ico_pin2.png',null, null, null, new google.maps.Size(38,43)),
                 });
 
                 for (var i=0; i<this.getDiveCenterByUniqueName.divePoints.length; i++) {
@@ -1680,14 +1680,14 @@ export default {
                         map: this.map,
                         position: position,
                         label: {text: title, color: 'white', className: 'marker-position2'},
-                        icon: new google.maps.MarkerImage('/static/images/assets/ico_pin1.png',null, null, null, new google.maps.Size(38,43)),
+                        icon: new google.maps.MarkerImage('https://d34l91104zg4p3.cloudfront.net/assets/ico_pin1.png',null, null, null, new google.maps.Size(38,43)),
                     });
                     marker_point.addListener("click", () => {
                         $(".map-box").removeClass("hide");
                         for (var j=0; j<this.marker_list.length; j++) {
                             var _icon = this.marker_list[j].getIcon();
                             if (_icon.size.width != 38) {
-                                this.marker_list[j].setIcon(new google.maps.MarkerImage('/static/images/assets/ico_pin2.png', null, null, null, new google.maps.Size(38,43)));
+                                this.marker_list[j].setIcon(new google.maps.MarkerImage('https://d34l91104zg4p3.cloudfront.net/assets/ico_pin2.png', null, null, null, new google.maps.Size(38,43)));
                                 try {
                                     this.marker_list[j].setLabel({text: title, color: 'white', className: 'marker-position2'});
                                 } catch (e) {
@@ -1700,7 +1700,7 @@ export default {
                         $("#map_box_shop_img").attr("src", img);
                         
                         
-                        marker_point.setIcon(new google.maps.MarkerImage('/static/images/assets/ico_pin_big2.png', null, null, null, new google.maps.Size(58,66)));
+                        marker_point.setIcon(new google.maps.MarkerImage('https://d34l91104zg4p3.cloudfront.net/assets/ico_pin_big2.png', null, null, null, new google.maps.Size(58,66)));
                         marker_point.setLabel({text: title, color: 'white', className: 'marker-position2 mt-86'});
                         this.map.panTo(marker_point.getPosition());
                         //if (this.map.getZoom() == 17) {
@@ -1716,7 +1716,7 @@ export default {
                     for (var j=0; j<this.marker_list.length; j++) {
                         var _icon = this.marker_list[j].getIcon();
                         if (_icon.size.width != 38) {
-                            this.marker_list[j].setIcon(new google.maps.MarkerImage('/static/images/assets/ico_pin2.png', null, null, null, new google.maps.Size(38,43)));
+                            this.marker_list[j].setIcon(new google.maps.MarkerImage('https://d34l91104zg4p3.cloudfront.net/assets/ico_pin2.png', null, null, null, new google.maps.Size(38,43)));
                             var _title = this.marker_list[j].getLabel().text;
                             this.marker_list[j].setLabel({text: _title, color: 'white', className: 'marker-position2'});
                         }
@@ -2049,7 +2049,7 @@ export default {
 .light-border-bottom {border-bottom: 1px solid #dee2e6;}
 .evaluation {background-color: rgba(196,187,171,.15);justify-content: space-around;border-radius: 5px;padding: 8px 8px 8px 0;}
 .evaluation>span.info {padding-left: 11px;border-left: 1px solid #c4bbab;}
-.evaluation>span .icon_question {display: inline-block;position: relative;top: 1px;display: block;width: 18px;height: 18px;background-size: 18px 18px;background-repeat: no-repeat;background-image: url(/static/images/assets/question.png);text-indent: -9999px;}
+.evaluation>span .icon_question {display: inline-block;position: relative;top: 1px;display: block;width: 18px;height: 18px;background-size: 18px 18px;background-repeat: no-repeat;background-image: url(https://d34l91104zg4p3.cloudfront.net/assets/question.png);text-indent: -9999px;}
 
 .span_feature {width:66px;line-height:1.2;}
 .ico_feature {}
@@ -2092,7 +2092,7 @@ export default {
 
 
 
-.icon-service {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/assets/wedive_service2.png);background-repeat: no-repeat;-webkit-background-size: 270px 270px;background-size: 270px 270px;}
+.icon-service {overflow: hidden;display: block;margin-left: 11px;background-image: url(https://d34l91104zg4p3.cloudfront.net/assets/wedive_service2.png);background-repeat: no-repeat;-webkit-background-size: 270px 270px;background-size: 270px 270px;}
 
 .ico_equipt {}
 .ico_equipt1 {width: 60px;height: 63px;background-position: 0px 3px;}
@@ -2169,7 +2169,7 @@ export default {
 .ico_equipt66 {width: 60px;height: 63px;background-position: -280px -560px;}
 
 
-.icon-equiptment {overflow: hidden;display: block;margin-left: 3px;background-image: url(/static/images/assets/wedive_equiptment2.png);background-repeat: no-repeat;-webkit-background-size: 335px 585px;background-size: 335px 585px;}
+.icon-equiptment {overflow: hidden;display: block;margin-left: 3px;background-image: url(https://d34l91104zg4p3.cloudfront.net/assets/wedive_equiptment2.png);background-repeat: no-repeat;-webkit-background-size: 335px 585px;background-size: 335px 585px;}
 
 .wedive-ul {width: 100%;list-style:none;display: inline-block;margin-bottom: 0;padding-left: 5px !important;padding-right: 5px !important;}
 .wedive-ul > li {float: left;width: 50%;}

@@ -47,7 +47,7 @@
                         </clipPath>
                         </defs>
                         <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" 
-                          :xlink:href="agenda.author && agenda.author.profileImages && agenda.author.profileImages.length > 0 && agenda.author.profileImages[0].thumbnailUrl ? agenda.author.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty.png'"/>
+                          :xlink:href="agenda.author && agenda.author.profileImages && agenda.author.profileImages.length > 0 && agenda.author.profileImages[0].thumbnailUrl ? agenda.author.profileImages[0].thumbnailUrl : 'https://d34l91104zg4p3.cloudfront.net/assets/user_empty.png'"/>
                     </svg>
                   </div>
                   <div class="inline-block font-noto v-align-top mt-1">
@@ -180,7 +180,7 @@
                 </div>
                 <div class="mb-3 text-center p-2 wedive-button">
                     <input type="file" @change="addImage" id="" accept=".jpg, .png" style="text-indent: -999px;outline: none;width: 100%;height: 45px;color: rgba(0, 0, 0, 0) !important;">
-                    <div class="upload-file-text" style="color: black;margin-top:-44px !important;margin-bottom:12px;"><img class="me-1" src="/static/images/assets/icon_camera.png" height="18"/>첨부하기</div>
+                    <div class="upload-file-text" style="color: black;margin-top:-44px !important;margin-bottom:12px;"><img class="me-1" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_camera.png" height="18"/>첨부하기</div>
                 </div>
             </div>
         </div>
@@ -200,7 +200,7 @@
                             <use :xlink:href="'#shapeSquircle'+index"/>
                         </clipPath>
                         </defs>
-                        <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" :clip-path="'url(#clipSquircle'+index+')'" :xlink:href="(user.profileImages && user.profileImages.length>0)?user.profileImages[0].thumbnailUrl:'/static/images/assets/user_empty.png'"/>
+                        <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" :clip-path="'url(#clipSquircle'+index+')'" :xlink:href="(user.profileImages && user.profileImages.length>0)?user.profileImages[0].thumbnailUrl:'https://d34l91104zg4p3.cloudfront.net/assets/user_empty.png'"/>
                     </svg>
                     <div class="ms-2 d-inline-block v-align-top">
                         <span v-if="user.uid == uid" style="display: inline-block;padding: 1px 6px;background: #e1e2e3;border-radius: 6px;">나</span>
@@ -217,7 +217,7 @@
                         <use xlink:href="#shapeSquircle00"/>
                     </clipPath>
                     </defs>
-                    <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle00)" xlink:href="/static/images/assets/ico_plus.png"/>
+                    <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle00)" xlink:href="https://d34l91104zg4p3.cloudfront.net/assets/ico_plus.png"/>
                 </svg>
                 <div class="ms-2 d-inline-block v-align-top">
                     <h5 class="font-15 font-600 mb-0 mt-2">대화상대 초대</h5>
@@ -227,7 +227,7 @@
         </div>
 
         <div class="ps-1 pe-1" style="width: 100%; height:40px;background: #00000015;border-top: 1px solid lightgray;position: absolute;bottom: 0px;">
-            <img data-menu="menu-leaveroom" src="/static/images/assets/ico_exit.png" width="24" height="24" style="margin: 8px;" />
+            <img data-menu="menu-leaveroom" src="https://d34l91104zg4p3.cloudfront.net/assets/ico_exit.png" width="24" height="24" style="margin: 8px;" />
         </div>
     </div>
 
@@ -967,5 +967,5 @@ export default {
 .img_square{width: 100%;position: relative;}
 .img_square:after {content: "";display: block;padding-bottom: 100%;}
 .img_square_inner {position: absolute;width: 100%;height: 100%;background-size:cover !important;background-position: center !important;}
-.owner:after {content: '';position: absolute;bottom: 6px;left: 34px;width: 22px;height: 22px;background-image: url(/static/images/assets/crown_s.png);background-repeat: no-repeat;background-size: contain;}
+.owner:after {content: '';position: absolute;bottom: 6px;left: 34px;width: 22px;height: 22px;background-image: url(https://d34l91104zg4p3.cloudfront.net/assets/crown_s.png);background-repeat: no-repeat;background-size: contain;}
 </style>

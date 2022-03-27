@@ -19,7 +19,7 @@
     <div class="page-content pt-2">
         <div v-on:click="goList()" class="card card-style hide" style="background: white;height:148px;">
             <div class="content mb-0 mt-3">
-                <img class="float-right" src="/static/images/assets/save_earth.png" style="position: absolute;z-index: 11;right: 10px;top:40px;"/>
+                <img class="float-right" src="https://d34l91104zg4p3.cloudfront.net/assets/save_earth.png" style="position: absolute;z-index: 11;right: 10px;top:40px;"/>
                 <h4 class="text-start mb-1 font-15" style="padding-top:36px;">지구 구석구석 다이빙 사이트 검색</h4>
 
                 <div class="search-box search-dark border-08 bg-theme rounded-sm" style="position: absolute;width: calc(100% - 30px);z-index: 9;">
@@ -37,7 +37,7 @@
                         <h4 class="text-start pt-2 mb-0 color-white">지도에서 한눈에</h4>
                         <p class="text-start mb-0 color-white opacity-70">전세계 곳곳을 한눈에 여행해요.</p>
                     </div>
-                    <img class="col-3 ps-0" src="/static/images/assets/earth_low.gif" style="position:absolute;bottom:0;right:0;max-width:90px;width:90px;"/>
+                    <img class="col-3 ps-0" src="https://d34l91104zg4p3.cloudfront.net/assets/earth_low.gif" style="position:absolute;bottom:0;right:0;max-width:90px;width:90px;"/>
                 </div>
             </div>
         </div>
@@ -50,7 +50,7 @@
                     <h4 class="text-start mb-0 font-600" v-html="recommendation.title"></h4><i class="wedive-txt-all wedive_right"></i>
                     <p class="mb-0 opacity-60 ls-n1">{{ recommendation.description ? recommendation.description : '' }}</p>
                     
-                    <img v-if="recommendation.cssStyle.includes('|')" :class="recommendation.cssStyle.split('|')[2]" :src="'/static/images/assets/' + recommendation.cssStyle.split('|')[1]" style="padding-bottom:16px;max-height:200px;"/>
+                    <img v-if="recommendation.cssStyle.includes('|')" :class="recommendation.cssStyle.split('|')[2]" :src="'https://d34l91104zg4p3.cloudfront.net/assets/' + recommendation.cssStyle.split('|')[1]" style="padding-bottom:16px;max-height:200px;"/>
                 </div>
             </div>
 
@@ -138,9 +138,9 @@
                 <h4 class="color-white text-start pt-1 mb-1">환상의 시간, 리브어보드</h4>
                 <p class="color-white mb-0 color-gray">287개 리브어보드 모아보기</p>
                 <a class="color-white font-12 opacity-60 wedive-txt-all">보러가기 <i class="wedive_icoset wedive_icoset_rightarrow" style="-webkit-background-size: 393px 16px;background-size: 393px 16px;width: 16px;height: 20px;background-position: -375px 0px;"></i></a>
-                <img class="float-right mt-n3 movebox" src="/static/images/assets/boat.png" style="padding-bottom:16px;"/>
-                <img class="movebox2" src="/static/images/assets/cloud.png" width="100"/>
-                <img class="movebox3" src="/static/images/assets/cloud.png" width="70"/>
+                <img class="float-right mt-n3 movebox" src="https://d34l91104zg4p3.cloudfront.net/assets/boat.png" style="padding-bottom:16px;"/>
+                <img class="movebox2" src="https://d34l91104zg4p3.cloudfront.net/assets/cloud.png" width="100"/>
+                <img class="movebox3" src="https://d34l91104zg4p3.cloudfront.net/assets/cloud.png" width="70"/>
             </div>
         </div>
 
@@ -609,7 +609,7 @@ export default {
 .movebox3 {position:absolute;white-space: nowrap;left:-100px;padding-top:50px;opacity:.5;animation: motion-endtoend 30s linear infinite;-webkit-animation: motion-endtoend 30s linear infinite;}
 .nearby_desc {font-family: 'Noto Sans Korean' !important;font-weight:200;overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;line-height: 1.4;}
 .card-nearby {margin-left: 10px;background-size: cover !important;}
-.icon-concierge {position: fixed;width: 58px;height: 58px;bottom: 70px;right:24px;background-size:cover;background: url(/static/images/assets/concierge.gif);background-size:cover !important;background-position-y: 8px;background-repeat: no-repeat;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
+.icon-concierge {position: fixed;width: 58px;height: 58px;bottom: 70px;right:24px;background-size:cover;background: url(https://d34l91104zg4p3.cloudfront.net/assets/concierge.gif);background-size:cover !important;background-position-y: 8px;background-repeat: no-repeat;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
 
 .top-load-wrapper {line-height: 10px;text-align: center;}
 .fa-arrow-down {transition: .2s;transform: rotate(180deg);}

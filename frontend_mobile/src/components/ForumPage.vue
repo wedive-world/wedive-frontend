@@ -174,7 +174,7 @@
                 </div>
                 <div class="mb-3 text-center p-2 wedive-button">
                     <input type="file" @change="addImage" id="" accept=".jpg, .png" style="text-indent: -999px;outline: none;width: 100%;height: 45px;color: rgba(0, 0, 0, 0) !important;">
-                    <div class="upload-file-text" style="color: black;margin-top:-44px !important;margin-bottom:12px;"><img class="me-1" src="/static/images/assets/icon_camera.png" height="18"/>첨부하기</div>
+                    <div class="upload-file-text" style="color: black;margin-top:-44px !important;margin-bottom:12px;"><img class="me-1" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_camera.png" height="18"/>첨부하기</div>
                 </div>
             </div>
         </div>
@@ -230,7 +230,7 @@
                 <div :class="'mb-3 text-center p-2 wedive-button' + (file_photo_community.length > 0 ? ' btn_disabled' : '')">
                     <input v-if="file_photo_community.length > 0" type="file" @change="addImageCommunity" id="" accept=".jpg, .png" style="text-indent: -999px;outline: none;width: 100%;height: 45px;color: rgba(0, 0, 0, 0) !important;" disabled="disabled">
                     <input v-else type="file" @change="addImageCommunity" id="" accept=".jpg, .png" style="text-indent: -999px;outline: none;width: 100%;height: 45px;color: rgba(0, 0, 0, 0) !important;">
-                    <div class="upload-file-text" style="color: black;margin-top:-44px !important;margin-bottom:12px;"><img class="me-1" src="/static/images/assets/icon_camera.png" height="18"/>대표 이미지</div>
+                    <div class="upload-file-text" style="color: black;margin-top:-44px !important;margin-bottom:12px;"><img class="me-1" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_camera.png" height="18"/>대표 이미지</div>
                 </div>
             </div>
         </div>

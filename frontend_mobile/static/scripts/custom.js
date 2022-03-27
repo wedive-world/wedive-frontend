@@ -585,7 +585,7 @@ var prev_el = document.getElementById("wedive-noti");
                 document.body.classList.add('theme-light');
                 document.body.classList.remove('theme-dark','detect-theme');
                 document.querySelectorAll('.logo-image').forEach((elem, index)=> {
-                    elem.setAttribute("src", "/static/images/assets/logo-dark.svg");
+                    elem.setAttribute("src", "https://d34l91104zg4p3.cloudfront.net/assets/logo-dark.svg");
                 });
                 document.querySelectorAll('.footer-bar-6 a img').forEach((elem, index)=> {
                     elem.style.filter = 'invert(0%)';

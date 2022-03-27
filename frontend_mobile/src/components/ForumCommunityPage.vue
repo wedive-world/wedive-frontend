@@ -69,7 +69,7 @@
                                     <use xlink:href="#shapeSquircle"/>
                                 </clipPath>
                                 </defs>
-                                <image style="filter: opacity(0.6);" class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="/static/images/assets/ico_plus.png"/>
+                                <image style="filter: opacity(0.6);" class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="https://d34l91104zg4p3.cloudfront.net/assets/ico_plus.png"/>
                             </svg>
                         </div>
                         <div class="inline-block font-noto v-align-top">
@@ -105,7 +105,7 @@
                                 <use xlink:href="#shapeSquircle"/>
                             </clipPath>
                             </defs>
-                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(community.images.length > 0 && community.images[0].thumbnailUrl)?community.images[0].thumbnailUrl:'/static/images/assets/user_empty.png'"/>
+                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(community.images.length > 0 && community.images[0].thumbnailUrl)?community.images[0].thumbnailUrl:'https://d34l91104zg4p3.cloudfront.net/assets/user_empty.png'"/>
                         </svg>
                     </div>
                     <div class="inline-block font-noto v-align-top">

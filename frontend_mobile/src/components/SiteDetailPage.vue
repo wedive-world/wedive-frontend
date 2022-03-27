@@ -73,7 +73,7 @@
                 </div>
 
                 <div v-if="getDiveSiteByUniqueName.waterTemperature" class="evaluation d-flex mt-2">
-                    <img :src="'/static/images/assets/weather/'+(weatherIcon[getDiveSiteByUniqueName.waterTemperature.weatherDescription])+'.png'" width="50"/>
+                    <img :src="'https://d34l91104zg4p3.cloudfront.net/assets/weather/'+(weatherIcon[getDiveSiteByUniqueName.waterTemperature.weatherDescription])+'.png'" width="50"/>
                     <div>
                         <p class="mb-0"><span class="color-gray">기온</span> <span style="display:inline-block;min-width:46px;text-align:right;">{{ getDiveSiteByUniqueName.waterTemperature && getDiveSiteByUniqueName.waterTemperature.temperatureC ? getDiveSiteByUniqueName.waterTemperature.temperatureC + '°C' : '' }}</span></p>
                         <p class="mb-0"><span class="color-gray">수온</span> <span style="display:inline-block;min-width:46px;text-align:right;">{{ getDiveSiteByUniqueName.waterTemperature && getDiveSiteByUniqueName.waterTemperature.currentSeaTemperature ? getDiveSiteByUniqueName.waterTemperature.currentSeaTemperature.split("/")[0].replace(/ /gi,'') : '' }}</span></p>
@@ -92,12 +92,12 @@
                 
                 <div class="d-flex mb-0 text-center">
                     <div v-on:click="clickLike()" :class="'flex-grow-1 pd-0' + ((idToken == null || nickName == null) ? ' opacity-40' : '')" style="border-right: 1px solid lightgray;">
-                        <img class="ext-img" :src="'/static/images/assets/'+like_img+'.png'" width="24" style="margin-top:-4px;"/>
+                        <img class="ext-img" :src="'https://d34l91104zg4p3.cloudfront.net/assets/'+like_img+'.png'" width="24" style="margin-top:-4px;"/>
                         <span class="font-16 font-500 font-noto">{{ getDiveSiteByUniqueName.likes }}</span>
                     </div>
                     
                     <div v-on:click="clickSubscribe()" :class="'flex-grow-1 pd-0' + ((idToken == null || nickName == null) ? ' opacity-40' : '')" >
-                        <img class="ext-img" :src="'/static/images/assets/'+subscribe_img+'.png'" width="24" style="margin-top:-4px;"/>
+                        <img class="ext-img" :src="'https://d34l91104zg4p3.cloudfront.net/assets/'+subscribe_img+'.png'" width="24" style="margin-top:-4px;"/>
                         <span class="font-16 font-500 font-noto"></span>
                     </div>
                 </div>
@@ -226,7 +226,7 @@
 
                                 <div v-if="point.images" class="row text-center row-cols-3 mb-1" style="padding-left:10px;padding-right:10px;">
                                     <a v-for="(image, index) in point.images" v-if="point.images&&point.images.length>0&&index<3" class="col square-rect" v-bind:data-gallery="'gallery-'+index" v-bind:href="image.thumbnailUrl" title="">
-                                        <img src="/static/images/assets/empty.png" v-bind:data-src="image.thumbnailUrl" class="preload-img img-fluid rounded-s" alt="Point image">
+                                        <img src="https://d34l91104zg4p3.cloudfront.net/assets/empty.png" v-bind:data-src="image.thumbnailUrl" class="preload-img img-fluid rounded-s" alt="Point image">
                                         <div class="wedive-source mx-80">{{ image.reference | makeReference }}</div>
                                     </a>
                                 </div>
@@ -441,7 +441,7 @@
         <div class="card card-style">
             <div class="content mt-10">
                 <h4 class="text-start pt-2 mb-0">{{ getDiveSiteByUniqueName.name }} 포인트</h4>
-                <span class="wedive-txt-all color-gray mt-2"><img src="/static/images/assets/ico_pin1.png" width="19"/> 얕은수심&nbsp;&nbsp;<img src="/static/images/assets/ico_pin3.png" width="19"/> 깊은수심</span>
+                <span class="wedive-txt-all color-gray mt-2"><img src="https://d34l91104zg4p3.cloudfront.net/assets/ico_pin1.png" width="19"/> 얕은수심&nbsp;&nbsp;<img src="https://d34l91104zg4p3.cloudfront.net/assets/ico_pin3.png" width="19"/> 깊은수심</span>
             </div>
             <div id="map" style="height: 300px;"></div>
             <div class="map-box hide">
@@ -513,87 +513,87 @@
                             <tr class="border-bottom" v-for="(minC, index) in getDiveSiteByUniqueName.waterTemperature.temperatureDetail.MinC">
                                 <th class="font-12" scope="row">{{ index+1 }}월</th>
                                 <td class="font-12 color-gray">{{ minC }}ºC / {{ getDiveSiteByUniqueName.waterTemperature.temperatureDetail.MaxC[index] }}ºC</td>
-                                <td class="font-12"><img class="me-2" :src="'/static/images/assets/'+(getDiveSiteByUniqueName['month'+(index+1)].filter(x=>x.type=='climate').length > 0 ? enumClimate[getDiveSiteByUniqueName['month'+(index+1)].filter(x=>x.type=='climate')[0].title] : 'empty')+'.svg'" width="20" height="20"/>{{ ((getDiveSiteByUniqueName.waterTemperature.temperatureDetail.MaxC[index]+minC)/2).toFixed(1) }}ºC</td>
-                                <td class=""><img class="img_pop" :src="'/static/images/assets/'+(getDiveSiteByUniqueName['month'+(index+1)].filter(x=>x.type=='popularity').length > 0 ? enumPopularity[getDiveSiteByUniqueName['month'+(index+1)].filter(x=>x.type=='popularity')[0].title] : 'empty')+'.svg'" width="32" height="32"/></td>
+                                <td class="font-12"><img class="me-2" :src="'https://d34l91104zg4p3.cloudfront.net/assets/'+(getDiveSiteByUniqueName['month'+(index+1)].filter(x=>x.type=='climate').length > 0 ? enumClimate[getDiveSiteByUniqueName['month'+(index+1)].filter(x=>x.type=='climate')[0].title] : 'empty')+'.svg'" width="20" height="20"/>{{ ((getDiveSiteByUniqueName.waterTemperature.temperatureDetail.MaxC[index]+minC)/2).toFixed(1) }}ºC</td>
+                                <td class=""><img class="img_pop" :src="'https://d34l91104zg4p3.cloudfront.net/assets/'+(getDiveSiteByUniqueName['month'+(index+1)].filter(x=>x.type=='popularity').length > 0 ? enumPopularity[getDiveSiteByUniqueName['month'+(index+1)].filter(x=>x.type=='popularity')[0].title] : 'empty')+'.svg'" width="32" height="32"/></td>
                             </tr>
                         <!--
                             <tr class="border-bottom">
                                 <th class="font-12" scope="row">1월</th>
                                 <td class="font-12 color-gray">5.2ºC / 12.3ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>8.8ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_01.svg" width="32" height="32"/></td>
+                                <td class="font-12"><img class="me-2" src="https://d34l91104zg4p3.cloudfront.net/assets/weather_partly_cloudy.svg" width="20" height="20"/>8.8ºC</td>
+                                <td class=""><img class="img_pop" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_popularity_01.svg" width="32" height="32"/></td>
                             </tr>
                             <tr class="border-bottom">
                                 <th class="font-12" scope="row">2월</th>
                                 <td class="font-12 color-gray">3.4ºC / 9.8ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>6.6ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_01.svg" width="32" height="32"/></td>
+                                <td class="font-12"><img class="me-2" src="https://d34l91104zg4p3.cloudfront.net/assets/weather_partly_cloudy.svg" width="20" height="20"/>6.6ºC</td>
+                                <td class=""><img class="img_pop" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_popularity_01.svg" width="32" height="32"/></td>
                             </tr>
                             <tr class="border-bottom">
                                 <th class="font-12" scope="row">3월</th>
                                 <td class="font-12 color-gray">3.2ºC / 9.4ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>6.3ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_01.svg" width="32" height="32"/></td>
+                                <td class="font-12"><img class="me-2" src="https://d34l91104zg4p3.cloudfront.net/assets/weather_partly_cloudy.svg" width="20" height="20"/>6.3ºC</td>
+                                <td class=""><img class="img_pop" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_popularity_01.svg" width="32" height="32"/></td>
                             </tr>
                             <tr class="border-bottom">
                                 <th class="font-12" scope="row">4월</th>
                                 <td class="font-12 color-gray">7.0ºC / 13.3ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>10.2ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_01.svg" width="32" height="32"/></td>
+                                <td class="font-12"><img class="me-2" src="https://d34l91104zg4p3.cloudfront.net/assets/weather_partly_cloudy.svg" width="20" height="20"/>10.2ºC</td>
+                                <td class=""><img class="img_pop" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_popularity_01.svg" width="32" height="32"/></td>
                             </tr>
                             <tr class="border-bottom">
                                 <th class="font-12" scope="row">5월</th>
                                 <td class="font-12 color-gray">10.5ºC / 17.8ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>14.6ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_01.svg" width="32" height="32"/></td>
+                                <td class="font-12"><img class="me-2" src="https://d34l91104zg4p3.cloudfront.net/assets/weather_partly_cloudy.svg" width="20" height="20"/>14.6ºC</td>
+                                <td class=""><img class="img_pop" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_popularity_01.svg" width="32" height="32"/></td>
                             </tr>
                             <tr class="border-bottom">
                                 <th class="font-12" scope="row">6월</th>
                                 <td class="font-12 color-gray">15.1ºC / 23.4ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>19.2ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_02.svg" width="32" height="32"/></td>
+                                <td class="font-12"><img class="me-2" src="https://d34l91104zg4p3.cloudfront.net/assets/weather_partly_cloudy.svg" width="20" height="20"/>19.2ºC</td>
+                                <td class=""><img class="img_pop" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_popularity_02.svg" width="32" height="32"/></td>
                             </tr>
                             <tr class="border-bottom">
                                 <th class="font-12" scope="row">7월</th>
                                 <td class="font-12 color-gray">19.9ºC / 24.4ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_heavy_rain.svg" width="20" height="20"/>22.2ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_02.svg" width="32" height="32"/></td>
+                                <td class="font-12"><img class="me-2" src="https://d34l91104zg4p3.cloudfront.net/assets/weather_heavy_rain.svg" width="20" height="20"/>22.2ºC</td>
+                                <td class=""><img class="img_pop" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_popularity_02.svg" width="32" height="32"/></td>
                             </tr>
                             <tr class="border-bottom">
                                 <th class="font-12" scope="row">8월</th>
                                 <td class="font-12 color-gray">21.3ºC / 26.0ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_showers.svg" width="20" height="20"/>23.7ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_02.svg" width="32" height="32"/></td>
+                                <td class="font-12"><img class="me-2" src="https://d34l91104zg4p3.cloudfront.net/assets/weather_showers.svg" width="20" height="20"/>23.7ºC</td>
+                                <td class=""><img class="img_pop" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_popularity_02.svg" width="32" height="32"/></td>
                             </tr>
                             <tr class="border-bottom">
                                 <th class="font-12" scope="row">9월</th>
                                 <td class="font-12 color-gray">18.6ºC / 24.1ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_sunny.svg" width="20" height="20"/>21.4ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_02.svg" width="32" height="32"/></td>
+                                <td class="font-12"><img class="me-2" src="https://d34l91104zg4p3.cloudfront.net/assets/weather_sunny.svg" width="20" height="20"/>21.4ºC</td>
+                                <td class=""><img class="img_pop" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_popularity_02.svg" width="32" height="32"/></td>
                             </tr>
                             <tr class="border-bottom">
                                 <th class="font-12" scope="row">10월</th>
                                 <td class="font-12 color-gray">14.9ºC / 21.6ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>18.2ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_02.svg" width="32" height="32"/></td>
+                                <td class="font-12"><img class="me-2" src="https://d34l91104zg4p3.cloudfront.net/assets/weather_partly_cloudy.svg" width="20" height="20"/>18.2ºC</td>
+                                <td class=""><img class="img_pop" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_popularity_02.svg" width="32" height="32"/></td>
                             </tr>
                             <tr class="border-bottom">
                                 <th class="font-12" scope="row">11월</th>
                                 <td class="font-12 color-gray">10.8ºC / 17.6ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>14.2ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_01.svg" width="32" height="32"/></td>
+                                <td class="font-12"><img class="me-2" src="https://d34l91104zg4p3.cloudfront.net/assets/weather_partly_cloudy.svg" width="20" height="20"/>14.2ºC</td>
+                                <td class=""><img class="img_pop" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_popularity_01.svg" width="32" height="32"/></td>
                             </tr>
                             <tr>
                                 <th class="font-12" scope="row">12월</th>
                                 <td class="font-12 color-gray">6.4ºC / 13.8ºC</td>
-                                <td class="font-12"><img class="me-2" src="/static/images/assets/weather_partly_cloudy.svg" width="20" height="20"/>10.1ºC</td>
-                                <td class=""><img class="img_pop" src="/static/images/assets/icon_popularity_01.svg" width="32" height="32"/></td>
+                                <td class="font-12"><img class="me-2" src="https://d34l91104zg4p3.cloudfront.net/assets/weather_partly_cloudy.svg" width="20" height="20"/>10.1ºC</td>
+                                <td class=""><img class="img_pop" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_popularity_01.svg" width="32" height="32"/></td>
                             </tr>
                         -->
                         </tbody>
                     </table>
                     <div class="text-end">
-                        <img class="me-1 mb-3" height="20" src="/static/images/assets/logo-kma.svg" />
+                        <img class="me-1 mb-3" height="20" src="https://d34l91104zg4p3.cloudfront.net/assets/logo-kma.svg" />
                     </div>
                 </div>
             </div>
@@ -629,7 +629,7 @@
                                         <p class="review-text mt-2 mb-1">
                                             <div v-if="review.images && review.images.length>0">
                                             <a v-for="(image,index) in review.images" v-if="index<3" :href="image.thumbnailUrl" data-gallery="gallery-99" class="filtr-item" title="" data-category="99">
-                                                <img src="/static/images/assets/empty.png" :data-src="image.thumbnailUrl" class="preload-img rounded-s shadow-m review_img" alt="방문자리뷰">
+                                                <img src="https://d34l91104zg4p3.cloudfront.net/assets/empty.png" :data-src="image.thumbnailUrl" class="preload-img rounded-s shadow-m review_img" alt="방문자리뷰">
                                             </a>
                                             </div>
                                             {{ review.content }}
@@ -649,7 +649,7 @@
                     </div>
                 </div>
                 <div v-else class="text-center">
-                    <img src="/static/images/assets/empty_list.jpg" width="50%" />
+                    <img src="https://d34l91104zg4p3.cloudfront.net/assets/empty_list.jpg" width="50%" />
                     <p class="color-gray">아직 작성된 다이빙 로그가 없어요.</p>
                 </div>
             </div>
@@ -702,7 +702,7 @@
             </div>
             <div class="mb-3 text-center p-2 wedive-button">
                 <input type="file" @change="addImage" id="" accept=".jpg, .png" style="text-indent: -999px;outline: none;width: 100%;height: 45px;color: rgba(0, 0, 0, 0) !important;">
-                <div class="upload-file-text" style="color: black;margin-top:-44px !important;margin-bottom:12px;"><img class="me-1" src="/static/images/assets/icon_camera.png" height="18"/>첨부하기</div>
+                <div class="upload-file-text" style="color: black;margin-top:-44px !important;margin-bottom:12px;"><img class="me-1" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_camera.png" height="18"/>첨부하기</div>
             </div>
         </div>
 
@@ -1178,7 +1178,7 @@ export default {
                 for (var i=0; i<this.getDiveSiteByUniqueName.divePoints.length; i++) {
                     var minDepth = this.getDiveSiteByUniqueName.divePoints[i].minDepth;
                     var _position = {lat: this.getDiveSiteByUniqueName.divePoints[i].latitude, lng: this.getDiveSiteByUniqueName.divePoints[i].longitude};
-                    var _img = (minDepth < 18) ? '/static/images/assets/ico_pin1.png' : '/static/images/assets/ico_pin3.png';
+                    var _img = (minDepth < 18) ? 'https://d34l91104zg4p3.cloudfront.net/assets/ico_pin1.png' : 'https://d34l91104zg4p3.cloudfront.net/assets/ico_pin3.png';
                     const _marker_class = (minDepth < 18) ? 'marker-position2' : 'marker-position3';
 
                     const title = this.getDiveSiteByUniqueName.divePoints[i].name;
@@ -1188,7 +1188,7 @@ export default {
                     
                     const img = (this.getDiveSiteByUniqueName.divePoints[i].backgroundImages&&this.getDiveSiteByUniqueName.divePoints[i].backgroundImages.length>0) ? this.getDiveSiteByUniqueName.divePoints[i].backgroundImages[0].thumbnailUrl : '/static/empty.jpg';
                     const _sml_img = _img;
-                    const _big_img = (minDepth < 18) ? '/static/images/assets/ico_pin_big1.png' : '/static/images/assets/ico_pin_big3.png';
+                    const _big_img = (minDepth < 18) ? 'https://d34l91104zg4p3.cloudfront.net/assets/ico_pin_big1.png' : 'https://d34l91104zg4p3.cloudfront.net/assets/ico_pin_big3.png';
 
                     const marker_point = new google.maps.Marker({
                         map: this.map,
@@ -1510,7 +1510,7 @@ export default {
 .light-border-bottom {border-bottom: 1px solid #dee2e6;}
 .evaluation {background-color: rgba(196,187,171,.15);justify-content: space-around;border-radius: 5px;padding: 8px 8px 8px 0;}
 .evaluation>span.info {padding-left: 11px;border-left: 1px solid #c4bbab;}
-.evaluation>span .icon_question {display: inline-block;position: relative;top: 1px;display: block;width: 18px;height: 18px;background-size: 18px 18px;background-repeat: no-repeat;background-image: url(/static/images/assets/question.png);text-indent: -9999px;}
+.evaluation>span .icon_question {display: inline-block;position: relative;top: 1px;display: block;width: 18px;height: 18px;background-size: 18px 18px;background-repeat: no-repeat;background-image: url(https://d34l91104zg4p3.cloudfront.net/assets/question.png);text-indent: -9999px;}
 
 .span_feature {width:66px;line-height:1.2;}
 .ico_feature {}
@@ -1545,9 +1545,9 @@ export default {
 .ico_feature29 {width: 44px;height: 40px;background-position: -180px -144px;}
 .ico_feature30 {width: 44px;height: 40px;background-position: -225px -144px;}
 
-.icon-point {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/assets/wedive_point.png);background-repeat: no-repeat;-webkit-background-size: 270px 200px;background-size: 270px 200px;}
-.icon-type {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/assets/wedive_type.png);background-repeat: no-repeat;-webkit-background-size: 270px 118px;background-size: 270px 118px;}
-.icon-award {overflow: hidden;display: block;margin-left: 11px;background-image: url(/static/images/assets/wedive_award.png);background-repeat: no-repeat;-webkit-background-size: 270px 200px;background-size: 270px 200px;}
+.icon-point {overflow: hidden;display: block;margin-left: 11px;background-image: url(https://d34l91104zg4p3.cloudfront.net/assets/wedive_point.png);background-repeat: no-repeat;-webkit-background-size: 270px 200px;background-size: 270px 200px;}
+.icon-type {overflow: hidden;display: block;margin-left: 11px;background-image: url(https://d34l91104zg4p3.cloudfront.net/assets/wedive_type.png);background-repeat: no-repeat;-webkit-background-size: 270px 118px;background-size: 270px 118px;}
+.icon-award {overflow: hidden;display: block;margin-left: 11px;background-image: url(https://d34l91104zg4p3.cloudfront.net/assets/wedive_award.png);background-repeat: no-repeat;-webkit-background-size: 270px 200px;background-size: 270px 200px;}
 
 .wedive-ul {width: 100%;list-style:none;display: inline-block;margin-bottom: 0;padding-left: 5px !important;padding-right: 5px !important;}
 .wedive-ul > li {float: left;width: 50%;}

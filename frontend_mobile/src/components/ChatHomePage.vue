@@ -18,13 +18,13 @@
     </template>
     <div>
         <div v-if="idToken == null || nickName == null" class="card card-style ms-0 me-0 rounded-0 text-center mb-0" style="height: calc(100vh - 58px);display:block;">
-            <img src="/static/images/assets/empty_message.jpg" width="60%" style="margin-top: 25%;" />
+            <img src="https://d34l91104zg4p3.cloudfront.net/assets/empty_message.jpg" width="60%" style="margin-top: 25%;" />
             <p class="color-gray mt-2">{{ login_word }}이 필요합니다.</p>
 
             <a v-on:click="login()" class="btn btn-m mb-3 rounded-xl text-uppercase font-500 shadow-s bg-secondary font-noto"><i class="fas fa-user-lock me-1"></i> {{ login_word }}</a>
         </div>
         <div v-else-if="getJoinedRoomList.length == 0" class="card card-style ms-0 me-0 rounded-0 text-center mb-0" style="height: calc(100vh - 58px);display:block;">
-            <img src="/static/images/assets/empty_message.jpg" width="60%" style="margin-top: 25%;" />
+            <img src="https://d34l91104zg4p3.cloudfront.net/assets/empty_message.jpg" width="60%" style="margin-top: 25%;" />
             <p class="color-gray mb-2">진행중인 대화가 없습니다.</p>
         </div>
         <div v-else class="card card-style ms-0 me-0 rounded-0 mb-0" style="min-height:calc(100vh - 101px)">
@@ -39,7 +39,7 @@
                                     <use xlink:href="#shapeSquircle"/>
                                 </clipPath>
                                 </defs>
-                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(chat.owner.avatarOrigin)?chat.owner.avatarOrigin:'/static/images/assets/user_empty.png'"/>
+                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(chat.owner.avatarOrigin)?chat.owner.avatarOrigin:'https://d34l91104zg4p3.cloudfront.net/assets/user_empty.png'"/>
                             </svg>
                         </div>
                     </div>
@@ -52,7 +52,7 @@
                                     <use xlink:href="#shapeSquircle"/>
                                 </clipPath>
                                 </defs>
-                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(user.avatarOrigin)?user.avatarOrigin:'/static/images/assets/user_empty.png'"/>
+                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(user.avatarOrigin)?user.avatarOrigin:'https://d34l91104zg4p3.cloudfront.net/assets/user_empty.png'"/>
                             </svg>
                         </div>
                     </div>
@@ -65,7 +65,7 @@
                                     <use xlink:href="#shapeSquircle"/>
                                 </clipPath>
                                 </defs>
-                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(user.avatarOrigin)?user.avatarOrigin:'/static/images/assets/user_empty.png'"/>
+                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(user.avatarOrigin)?user.avatarOrigin:'https://d34l91104zg4p3.cloudfront.net/assets/user_empty.png'"/>
                             </svg>
                         </div>
                     </div>
@@ -78,7 +78,7 @@
                                     <use xlink:href="#shapeSquircle"/>
                                 </clipPath>
                                 </defs>
-                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(user.avatarOrigin)?user.avatarOrigin:'/static/images/assets/user_empty.png'"/>
+                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(user.avatarOrigin)?user.avatarOrigin:'https://d34l91104zg4p3.cloudfront.net/assets/user_empty.png'"/>
                             </svg>
                         </div>
                     </div>
@@ -91,13 +91,13 @@
                                     <use xlink:href="#shapeSquircle"/>
                                 </clipPath>
                                 </defs>
-                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(user.avatarOrigin)?user.avatarOrigin:'/static/images/assets/user_empty.png'"/>
+                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(user.avatarOrigin)?user.avatarOrigin:'https://d34l91104zg4p3.cloudfront.net/assets/user_empty.png'"/>
                             </svg>
                         </div>
                     </div>
                     <div class="ms-2 d-inline-block v-align-top">
                         <div>
-                            <span v-if="chat.type=='channel'" style="color:#77777780;position:fixed;"><img src="/static/images/assets/ico_users.png" style="height: 15px;width: 15px;margin-bottom: 4px;margin-right:3px;"/>{{ chat.chatUsers.length }}</span>
+                            <span v-if="chat.type=='channel'" style="color:#77777780;position:fixed;"><img src="https://d34l91104zg4p3.cloudfront.net/assets/ico_users.png" style="height: 15px;width: 15px;margin-bottom: 4px;margin-right:3px;"/>{{ chat.chatUsers.length }}</span>
                             <h5 v-if="chat.type=='channel'" class="font-15 font-600 mb-0 ellipsis" v-html="(chat.title == null || chat.title == '') ? '&nbsp' : chat.title" style="margin-left:34px;max-width: calc(100vw - 190px);"></h5>
                             <h5 v-else-if="chat.chatUsers && chat.chatUsers.length == 0 && chat.owner" class="font-15 font-600 mb-0" v-html="chat.owner.name"></h5>
                             <h5 v-else class="font-15 font-600 mb-0 ellipsis" v-html="chat.chatUsers.filter(user=>user.uid != uid).map(user => {return user.name}).join()" style="max-width: calc(100vw - 190px);"></h5>
@@ -160,12 +160,12 @@
                                     <use xlink:href="#shapeSquircle"/>
                                 </clipPath>
                                 </defs>
-                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(data.profileImages && data.profileImages.length>0) ? data.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty.png'"/>
+                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(data.profileImages && data.profileImages.length>0) ? data.profileImages[0].thumbnailUrl : 'https://d34l91104zg4p3.cloudfront.net/assets/user_empty.png'"/>
                             </svg>
                         </div>
                         <!--<img
                         class="rounded-s me-3"
-                        :src="(data.profileImages && data.profileImages.length>0) ? data.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty.png'"
+                        :src="(data.profileImages && data.profileImages.length>0) ? data.profileImages[0].thumbnailUrl : 'https://d34l91104zg4p3.cloudfront.net/assets/user_empty.png'"
                         style="width: 50px; height: 50px;object-fit:cover;" />-->
                     </div>
                     <span class="ml-4" style="">
@@ -187,13 +187,13 @@
                                     <use xlink:href="#shapeSquircle"/>
                                 </clipPath>
                                 </defs>
-                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(user.profileImages && user.profileImages.length>0) ? user.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty.png'"/>
+                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(user.profileImages && user.profileImages.length>0) ? user.profileImages[0].thumbnailUrl : 'https://d34l91104zg4p3.cloudfront.net/assets/user_empty.png'"/>
                             </svg>
                         </div>
                         <!--<div class="">
                             <img
                             class="rounded-s me-3"
-                            :src="(user.profileImages && user.profileImages.length>0) ? user.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty.png'"
+                            :src="(user.profileImages && user.profileImages.length>0) ? user.profileImages[0].thumbnailUrl : 'https://d34l91104zg4p3.cloudfront.net/assets/user_empty.png'"
                             style="width: 50px; height: 50px;object-fit:cover;" />
                         </div>-->
                         <span class="ml-4" style="">

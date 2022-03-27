@@ -212,7 +212,7 @@
                         <div class="content mt-1">
                             <h4 class="pt-3 mb-2 content mt-0 mb-2">선택사항</h4>
                             <div class="mt-3 row ms-3 mb-2">
-                                <div class="col-3" style="display: inline-block;"><img class="mt-2" src="/static/images/assets/ico_wedive_d.png" width="40px" /></div>
+                                <div class="col-3" style="display: inline-block;"><img class="mt-2" src="https://d34l91104zg4p3.cloudfront.net/assets/ico_wedive_d.png" width="40px" /></div>
                                 <div class="mx-auto col-9" style="display: inline-block;">
                                     <div class="color-highlight font-12 col-4">모집 인원</div>
                                     <div class="stepper rounded-s float-start">
@@ -225,7 +225,7 @@
                             </div>
 
                             <div class="mt-1 row ms-3 mb-2">
-                                <div class="col-3" style="display: inline-block;"><img class="mt-2" src="/static/images/assets/user_empty_m.png" width="40px" /></div>
+                                <div class="col-3" style="display: inline-block;"><img class="mt-2" src="https://d34l91104zg4p3.cloudfront.net/assets/user_empty_m.png" width="40px" /></div>
                                 <div class="mx-auto col-9" style="display: inline-block;">
                                     <div class="color-secondary font-12">참여 남성</div>
                                     <div class="stepper rounded-s float-start">
@@ -238,7 +238,7 @@
                             </div>
 
                             <div class="mt-1 row ms-3">
-                                <div class="col-3" style="display: inline-block;"><img class="mt-2" src="/static/images/assets/user_empty_f.png" width="40px" /></div>
+                                <div class="col-3" style="display: inline-block;"><img class="mt-2" src="https://d34l91104zg4p3.cloudfront.net/assets/user_empty_f.png" width="40px" /></div>
                                 <div class="mx-auto col-9" style="display: inline-block;">
                                     <div class="color-secondary font-12">참여 여성</div>
                                     <div class="stepper rounded-s float-start">
@@ -311,7 +311,7 @@
                         <div id="slide5" class="card card-full pb-0 mb-0 border-bottom" style="height: calc( 100vh - 56px );">
                         <div class="content mt-1">
                             <div class="text-center mt-4 mb-3">
-                                <img src="/static/images/assets/search.gif" width="40%" class="m-5"/>
+                                <img src="https://d34l91104zg4p3.cloudfront.net/assets/search.gif" width="40%" class="m-5"/>
                                 <h4 class="font-noto mb-1 mt-n2 font-500 font-20" style="line-height: 1.4;">버디모집 등록이<br/>완료되었습니다.</h4>
                                 <p class="font-noto mb-1 mt-3 font-300 font-14 color-gray">다른 다이버가 신청하는 경우, 승인을 해주세요.</p>
                             </div>
@@ -862,9 +862,9 @@ export default {
 .interest-check input:checked ~ label {background-color: #2c9ac3;}
 .wedive-textarea {min-height: 160px;padding-left: 10px;padding-right: 10px;}
 .wedive-textarea2 {max-height: 45px;min-height: 45px;padding-left: 10px;padding-right: 10px;}
-.site_img:before{content:'';background:url(/static/images/assets/ico_pin0.png);width: 20px;height: 28px;position: absolute;bottom: -5px;left: 28px;background-size: cover;}
-.point_img:before{content:'';background:url(/static/images/assets/ico_pin1.png);width: 20px;height: 28px;position: absolute;bottom: -5px;left: 28px;background-size: cover;}
-.center_img:before{content:'';background:url(/static/images/assets/ico_pin2.png);width: 20px;height: 28px;position: absolute;bottom: -5px;left: 28px;background-size: cover;}
+.site_img:before{content:'';background:url(https://d34l91104zg4p3.cloudfront.net/assets/ico_pin0.png);width: 20px;height: 28px;position: absolute;bottom: -5px;left: 28px;background-size: cover;}
+.point_img:before{content:'';background:url(https://d34l91104zg4p3.cloudfront.net/assets/ico_pin1.png);width: 20px;height: 28px;position: absolute;bottom: -5px;left: 28px;background-size: cover;}
+.center_img:before{content:'';background:url(https://d34l91104zg4p3.cloudfront.net/assets/ico_pin2.png);width: 20px;height: 28px;position: absolute;bottom: -5px;left: 28px;background-size: cover;}
 .bg-secondary2>.d-flex>span>.color-gray-nonimportant{color: white !important;}
 
 .DiveSite-tag:before {content: '';width: 0px;height: 0px;border-bottom: 16px solid #3f474c;border-left: 16px solid rgba(0,0,0,0);position: absolute;bottom: 0;right: 16px;}

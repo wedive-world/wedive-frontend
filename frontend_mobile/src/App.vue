@@ -7,7 +7,7 @@
       <div id="page">
           
           <div class="header header-auto-show header-fixed header-logo-center">
-              <a class="header-title" href="/"><img class="logo-image" src="/static/images/assets/logo-gray.svg" height="42" /></a>
+              <a class="header-title" href="/"><img class="logo-image" src="https://d34l91104zg4p3.cloudfront.net/assets/logo-gray.svg" height="42" /></a>
               <!--<a href="#" data-menu="menu-main" class="header-icon header-icon-1"><i class="fas fa-bars"></i></a>
               <a href="#" data-toggle-theme class="header-icon header-icon-4 show-on-theme-dark"><i class="fas fa-sun"></i></a>
               <a href="#" data-toggle-theme class="header-icon header-icon-4 show-on-theme-light"><i class="fas fa-moon"></i></a>-->
@@ -30,17 +30,17 @@
           </div>
           <div class="page-title page-title-fixed ps-3">
             <i class="fas fa-arrow-left font-24 me-2 pt-2 hide" style="opacity: 0.6;" id="page-back" v-on:click="goBack()"></i>
-            <img href="/" class="logo-image" style="margin-right: auto;" src="/static/images/assets/logo-gray.svg" height="42"/>
-            <a v-on:click="goNoti()" id="wedive-noti" :class="'page-title-icon font-18 hide' + (notiData && notiData.length > 0 && notiData[0].read != null && notiData[0].read == false ? ' has-notification' : '')" style="color:#858585 !important;"><img src="/static/images/assets/icon_notification.png" width="28"></a>
-            <a v-if="pathname == '/'" v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_buddy_new.png" width="28"></a>
-            <a v-else-if="pathname == '/chat_home'" v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_chat_new.png" width="26"></a>
-            <a v-else-if="pathname == '/forum_home'" v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_book_new.png" width="24"></a>
-            <a v-else v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_write.png" width="24"></a>
-            <!--<a v-on:click="settingForum()" id="wedive-group" class="page-title-icon color-theme hide"><img src="/static/images/assets/icon_setting_fill.png" width="26"></a>-->
-            <a v-if="$route.path=='/site_list'" v-on:click="move('/site_home')" class="page-title-icon font-18" style="color: #858585;margin-right: 13.3333333333px;"><img src="/static/images/assets/icon_map_fill.png" width="26"></a>
-            <a v-on:click="searchItem()" id="wedive-search" class="page-title-icon font-18 hide" style="color:#858585 !important;"><img src="/static/images/assets/icon_search_fill.png" width="28"></a>
-            <a v-on:click="shareItem()" id="wedive-share" class="page-title-icon font-18 hide" style="color:#858585 !important;"><img src="/static/images/assets/icon_share_fill.png" height="24"/></a>
-            <!--<a href="#" class="page-title-icon" data-menu="menu-main" :style="'background: url('+((userThumbnail) ? userThumbnail : '/static/images/assets/user_empty_'+((gender)?gender:'m')+'.png')+');background-size:cover;'"></a>-->
+            <img href="/" class="logo-image" style="margin-right: auto;" src="https://d34l91104zg4p3.cloudfront.net/assets/logo-gray.svg" height="42"/>
+            <a v-on:click="goNoti()" id="wedive-noti" :class="'page-title-icon font-18 hide' + (notiData && notiData.length > 0 && notiData[0].read != null && notiData[0].read == false ? ' has-notification' : '')" style="color:#858585 !important;"><img src="https://d34l91104zg4p3.cloudfront.net/assets/icon_notification.png" width="28"></a>
+            <a v-if="pathname == '/'" v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="https://d34l91104zg4p3.cloudfront.net/assets/icon_buddy_new.png" width="28"></a>
+            <a v-else-if="pathname == '/chat_home'" v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="https://d34l91104zg4p3.cloudfront.net/assets/icon_chat_new.png" width="26"></a>
+            <a v-else-if="pathname == '/forum_home'" v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="https://d34l91104zg4p3.cloudfront.net/assets/icon_book_new.png" width="24"></a>
+            <a v-else v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="https://d34l91104zg4p3.cloudfront.net/assets/icon_write.png" width="24"></a>
+            <!--<a v-on:click="settingForum()" id="wedive-group" class="page-title-icon color-theme hide"><img src="https://d34l91104zg4p3.cloudfront.net/assets/icon_setting_fill.png" width="26"></a>-->
+            <a v-if="$route.path=='/site_list'" v-on:click="move('/site_home')" class="page-title-icon font-18" style="color: #858585;margin-right: 13.3333333333px;"><img src="https://d34l91104zg4p3.cloudfront.net/assets/icon_map_fill.png" width="26"></a>
+            <a v-on:click="searchItem()" id="wedive-search" class="page-title-icon font-18 hide" style="color:#858585 !important;"><img src="https://d34l91104zg4p3.cloudfront.net/assets/icon_search_fill.png" width="28"></a>
+            <a v-on:click="shareItem()" id="wedive-share" class="page-title-icon font-18 hide" style="color:#858585 !important;"><img src="https://d34l91104zg4p3.cloudfront.net/assets/icon_share_fill.png" height="24"/></a>
+            <!--<a href="#" class="page-title-icon" data-menu="menu-main" :style="'background: url('+((userThumbnail) ? userThumbnail : 'https://d34l91104zg4p3.cloudfront.net/assets/user_empty_'+((gender)?gender:'m')+'.png')+');background-size:cover;'"></a>-->
           </div>
           <div class="page-title-clear"></div>
 
@@ -52,7 +52,7 @@
           <!-- Be sure this is on your main visiting page, for example, the index.html page-->
           <!-- Install Prompt for Android -->
           <div id="menu-install-pwa-android" class="menu menu-box-bottom rounded-m">
-              <img class="mx-auto mt-4 rounded-m" src="/static/images/assets/logo_d.png" alt="img" width="90">
+              <img class="mx-auto mt-4 rounded-m" src="https://d34l91104zg4p3.cloudfront.net/assets/logo_d.png" alt="img" width="90">
               <h4 class="text-center mt-4 mb-2">WeDive on your Home Screen</h4>
               <p class="text-center boxed-text-xl">
                   Install WeDive on your home screen, and access it just like a regular app. It really is that simple!
@@ -66,7 +66,7 @@
           <!-- Install instructions for iOS -->
           <div id="menu-install-pwa-ios" class="menu menu-box-bottom rounded-m">
               <div class="boxed-text-xl top-25">
-                  <img class="mx-auto mt-4 rounded-m" src="/static/images/assets/logo_d.png" alt="img" width="90">
+                  <img class="mx-auto mt-4 rounded-m" src="https://d34l91104zg4p3.cloudfront.net/assets/logo_d.png" alt="img" width="90">
                   <h4 class="text-center mt-4 mb-2">WeDive on your Home Screen</h4>
                   <p class="text-center ms-3 me-3">
                       Install WeDive on your home screen, and access it just like a regular app. Open your Safari menu and tap "Add to Home Screen".
@@ -85,19 +85,19 @@
         <div class="content mt-0 row" :style="(locationsearch.includes('footer=hide') ? 'margin-bottom:64px;' : '')">
           <div v-on:click="goSwimming()" class="col-4 text-center p-0">
             <div class="m-1 border-08 pool">
-              <img class="m-4 mb-2 opacity-60" src="/static/images/assets/icon_pool.png" width="40%"/>
+              <img class="m-4 mb-2 opacity-60" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_pool.png" width="40%"/>
               <p class="mb-4">수영장</p>
             </div>
           </div>
           <div v-on:click="goSea()" class="col-4 text-center p-0">
             <div class="m-1 border-08 sea">
-              <img class="m-4 mb-2 opacity-60" src="/static/images/assets/icon_sea.png" width="40%"/>
+              <img class="m-4 mb-2 opacity-60" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_sea.png" width="40%"/>
               <p class="mb-4">바다</p>
             </div>
           </div>
           <div v-on:click="goAbroad()" class="col-4 text-center p-0">
             <div class="m-1 border-08 oversea">
-              <img class="m-4 mb-2 opacity-60" src="/static/images/assets/icon_oversea.png" width="40%"/>
+              <img class="m-4 mb-2 opacity-60" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_oversea.png" width="40%"/>
               <p class="mb-4">해외/리브어보드</p>
             </div>
           </div>
@@ -112,7 +112,7 @@
         <div class="content pt-3 row">
               <a v-on:click="loginGoogle()" href="#" class="mb-3 rounded-xl text-start btn btn-m btn-full bg-google btn-icon font-600"><i class="fab fa-google rounded-xl font-16 text-center"></i> Google 계정으로 로그인</a>
               <a href="#" class="mb-3 rounded-xl text-start btn btn-m btn-full bg-dark-dark btn-icon font-600"><i class="fab fa-apple rounded-xl font-16 text-center"></i> Apple 계정으로 로그인</a>
-              <a href="#" class="mb-3 rounded-xl text-start btn btn-m btn-full bg-yellow-dark btn-icon font-600"><i class="text-center rounded-xl" style="position: absolute;left: 0px;top: 0px;line-height: 43px;width: 40px;height: 100%;background-color: rgba(0, 0, 0, 0.1);"><img src="/static/images/assets/logo_kakao.png" height="16" style="vertical-align: middle;"/></i> Kakao 계정으로 로그인</a>
+              <a href="#" class="mb-3 rounded-xl text-start btn btn-m btn-full bg-yellow-dark btn-icon font-600"><i class="text-center rounded-xl" style="position: absolute;left: 0px;top: 0px;line-height: 43px;width: 40px;height: 100%;background-color: rgba(0, 0, 0, 0.1);"><img src="https://d34l91104zg4p3.cloudfront.net/assets/logo_kakao.png" height="16" style="vertical-align: middle;"/></i> Kakao 계정으로 로그인</a>
           </div>
       </vue-bottom-sheet>
       <div id="menu-login" class="menu menu-box-bottom rounded-half">
@@ -125,7 +125,7 @@
           <div class="content pt-3 row">
               <a v-on:click="loginGoogle()" href="#" class="mb-3 rounded-xl text-start btn btn-m btn-full bg-google btn-icon font-600"><i class="fab fa-google rounded-xl font-16 text-center"></i> Google 계정으로 로그인</a>
               <a href="#" class="mb-3 rounded-xl text-start btn btn-m btn-full bg-dark-dark btn-icon font-600"><i class="fab fa-apple rounded-xl font-16 text-center"></i> Apple 계정으로 로그인</a>
-              <a href="#" class="mb-3 rounded-xl text-start btn btn-m btn-full bg-yellow-dark btn-icon font-600"><i class="text-center rounded-xl" style="position: absolute;left: 0px;top: 0px;line-height: 43px;width: 40px;height: 100%;background-color: rgba(0, 0, 0, 0.1);"><img src="/static/images/assets/logo_kakao.png" height="16" style="vertical-align: middle;"/></i> Kakao 계정으로 로그인</a>
+              <a href="#" class="mb-3 rounded-xl text-start btn btn-m btn-full bg-yellow-dark btn-icon font-600"><i class="text-center rounded-xl" style="position: absolute;left: 0px;top: 0px;line-height: 43px;width: 40px;height: 100%;background-color: rgba(0, 0, 0, 0.1);"><img src="https://d34l91104zg4p3.cloudfront.net/assets/logo_kakao.png" height="16" style="vertical-align: middle;"/></i> Kakao 계정으로 로그인</a>
           </div>
           <br/>
       </div>
@@ -672,21 +672,21 @@ export default {
 .footer-bar > a{color: #a8a8b1;flex: 1 1 0px !important;}
 .footer-bar .active-nav span {color: #1d397c !important;font-weight:600 !important;}
 .menu-ico {height:22px;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;margin-bottom:5px;}
-#nav-home > .menu-ico {background: url('/static/images/assets/menu0_off.png');}
-#nav-buddy > .menu-ico {background: url('/static/images/assets/menu1_off.png');}
-#nav-site > .menu-ico {background: url('/static/images/assets/menu2_off.png');}
-#nav-forum > .menu-ico {background: url('/static/images/assets/menu3_off.png');}
-#nav-chat  .menu-ico {background: url('/static/images/assets/menu4_off.png');}
-#nav-other  .menu-ico {background: url('/static/images/assets/menu5_off.png');}
-#nav-training > .menu-ico {background: url('/static/images/assets/menu5_off.png');}
-.active-nav > .menu-ico0 {background: url('/static/images/assets/menu0_on.png') !important;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;}
-.active-nav > .menu-ico1 {background: url('/static/images/assets/menu1_on.png') !important;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;}
-.active-nav > .menu-ico2 {background: url('/static/images/assets/menu2_on.png') !important;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;}
-.active-nav > .menu-ico3 {background: url('/static/images/assets/menu3_on.png') !important;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;}
-.active-nav > .menu-ico4 {background: url('/static/images/assets/menu4_on.png') !important;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;}
-.active-nav > .menu-ico5 {background: url('/static/images/assets/menu5_on.png') !important;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;}
+#nav-home > .menu-ico {background: url('https://d34l91104zg4p3.cloudfront.net/assets/menu0_off.png');}
+#nav-buddy > .menu-ico {background: url('https://d34l91104zg4p3.cloudfront.net/assets/menu1_off.png');}
+#nav-site > .menu-ico {background: url('https://d34l91104zg4p3.cloudfront.net/assets/menu2_off.png');}
+#nav-forum > .menu-ico {background: url('https://d34l91104zg4p3.cloudfront.net/assets/menu3_off.png');}
+#nav-chat  .menu-ico {background: url('https://d34l91104zg4p3.cloudfront.net/assets/menu4_off.png');}
+#nav-other  .menu-ico {background: url('https://d34l91104zg4p3.cloudfront.net/assets/menu5_off.png');}
+#nav-training > .menu-ico {background: url('https://d34l91104zg4p3.cloudfront.net/assets/menu5_off.png');}
+.active-nav > .menu-ico0 {background: url('https://d34l91104zg4p3.cloudfront.net/assets/menu0_on.png') !important;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;}
+.active-nav > .menu-ico1 {background: url('https://d34l91104zg4p3.cloudfront.net/assets/menu1_on.png') !important;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;}
+.active-nav > .menu-ico2 {background: url('https://d34l91104zg4p3.cloudfront.net/assets/menu2_on.png') !important;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;}
+.active-nav > .menu-ico3 {background: url('https://d34l91104zg4p3.cloudfront.net/assets/menu3_on.png') !important;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;}
+.active-nav > .menu-ico4 {background: url('https://d34l91104zg4p3.cloudfront.net/assets/menu4_on.png') !important;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;}
+.active-nav > .menu-ico5 {background: url('https://d34l91104zg4p3.cloudfront.net/assets/menu5_on.png') !important;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;}
 .ico-wedive-w {-webkit-font-smoothing: antialiased;display: grid;margin-left: calc(50% - 20px);font-style: normal;font-variant: normal;text-rendering: auto;line-height: 1;width:40px;height:40px;}
-.ico-wedive-w:before {content: "";background-image: url('/static/images/assets/ico_wedive_d.png');background-size:40px 40px;width:40px;height:40px;display:block;}
+.ico-wedive-w:before {content: "";background-image: url('https://d34l91104zg4p3.cloudfront.net/assets/ico_wedive_d.png');background-size:40px 40px;width:40px;height:40px;display:block;}
 .ico-26 {width: 26px !important; height: 26px !important;}
 .ico-26:before {background-size: 26px 26px !important;width: 26px !important;height: 26px !important;}
 .has-notification:before {content: '●';color: #ff5160;position:absolute;top:0;font-size:5px;margin-top: -9px;margin-left: 20px;}

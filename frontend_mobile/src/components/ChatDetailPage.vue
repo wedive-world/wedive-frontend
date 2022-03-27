@@ -9,7 +9,7 @@
         <div v-if="is_concierge" class="font-noto" style="margin-top: 50px;height:90px;background:rgb(24, 24, 24);border-bottom:1px solid lightgray;padding:14px;">
             <p class="mb-0 font-16 font-600 color-white"><i class="fas fa-concierge-bell me-1"></i> 띠링띠링</p>
             <p class="mb-0 font-14 opacity-80 color-white" style="line-height:1.3;">버디매칭, 장소추천,<br/>다이빙 예약을 도와드립니다.</p>
-            <img src="/static/images/assets/concierge.gif" style="height:74px;width:74px;position:absolute;right:14px;top:58px;-webkit-mask-image: -webkit-radial-gradient(center, white, black);border-radius: 16px;"/>
+            <img src="https://d34l91104zg4p3.cloudfront.net/assets/concierge.gif" style="height:74px;width:74px;position:absolute;right:14px;top:58px;-webkit-mask-image: -webkit-radial-gradient(center, white, black);border-radius: 16px;"/>
         </div>
 
         <div v-if="divingInfo" v-on:click="moveDiving(divingInfo)" class="font-noto" style="margin-top: 50px;height:90px;border-bottom:1px solid lightgray;padding:14px;position:relative;">
@@ -55,7 +55,7 @@
                 <div v-on:click="is_attach = ! is_attach;is_emoji=false;" style="width: 45px;display: inline-block;position: relative;">
                     <!--<input type="file" id="file-upload" class="upload-file text-center" accept=".jpg, .png" style="width:32px;">-->
                     <!--<p class="upload-file-text bg-gray-dark" style="color: #abb7ba;position:absolute;width:32px;height:32px;margin-top:-2px;left:8px;border-radius:16px;"><i class="fas fa-image pt-2 font-16"></i></p>-->
-                    <img src="/static/images/assets/chat_icon_plus.png" style="width:22px;margin-top:14px;margin-left:4px;"/>
+                    <img src="https://d34l91104zg4p3.cloudfront.net/assets/chat_icon_plus.png" style="width:22px;margin-top:14px;margin-left:4px;"/>
                 </div>
             </div>
             <div class="flex-fill speach-input">
@@ -72,7 +72,7 @@
                     style="border-radius:16px;margin-top:6px;background: #303440;color:white;max-height:122px;" />
             </div>
             <div v-on:click="is_emoji = !is_emoji;is_attach=false;" style="width: 26px;display: inline-block;position: relative;">
-                    <img src="/static/images/assets/chat_icon_emoji.png" style="width:24px;margin-top:13px;margin-left:8px;"/>
+                    <img src="https://d34l91104zg4p3.cloudfront.net/assets/chat_icon_emoji.png" style="width:24px;margin-top:13px;margin-left:8px;"/>
                 </div>
             <div v-on:click="sendMessage()" class="ms-3 speach-icon" :style="(sendDisable?'background: #7C7C7C;width:50px;':'background: #1d397c;width:50px;')">
                 <i class="fas fa-paper-plane color-white font-20" style="margin-top:16px;"></i>
@@ -175,7 +175,7 @@
                                         <use xlink:href="#shapeSquircle"/>
                                     </clipPath>
                                     </defs>
-                                    <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(chat.author.avatarOrigin)?chat.author.avatarOrigin:'/static/images/assets/user_empty.png'"/>
+                                    <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(chat.author.avatarOrigin)?chat.author.avatarOrigin:'https://d34l91104zg4p3.cloudfront.net/assets/user_empty.png'"/>
                                 </svg>
                             </div>
                         </div>
@@ -244,7 +244,7 @@
                                 <use xlink:href="#shapeSquircle"/>
                             </clipPath>
                             </defs>
-                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="/static/images/assets/user_empty.png"/>
+                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="https://d34l91104zg4p3.cloudfront.net/assets/user_empty.png"/>
                         </svg>
                     </div>
                 </div>
@@ -385,7 +385,7 @@
                             <use :xlink:href="'#shapeSquircle'+index"/>
                         </clipPath>
                         </defs>
-                        <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" :clip-path="'url(#clipSquircle'+index+')'" :xlink:href="(user.avatarOrigin)?user.avatarOrigin:'/static/images/assets/user_empty.png'"/>
+                        <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" :clip-path="'url(#clipSquircle'+index+')'" :xlink:href="(user.avatarOrigin)?user.avatarOrigin:'https://d34l91104zg4p3.cloudfront.net/assets/user_empty.png'"/>
                     </svg>
                     <div class="ms-2 d-inline-block v-align-top">
                         <span v-if="user.uid == uid" style="display: inline-block;padding: 1px 6px;background: #e1e2e3;border-radius: 6px;">나</span>
@@ -402,7 +402,7 @@
                         <use xlink:href="#shapeSquircle00"/>
                     </clipPath>
                     </defs>
-                    <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle00)" xlink:href="/static/images/assets/ico_plus.png"/>
+                    <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle00)" xlink:href="https://d34l91104zg4p3.cloudfront.net/assets/ico_plus.png"/>
                 </svg>
                 <div class="ms-2 d-inline-block v-align-top">
                     <h5 class="font-15 font-600 mb-0 mt-2">대화상대 초대</h5>
@@ -412,7 +412,7 @@
         </div>
 
         <div class="ps-1 pe-1" style="width: 100%; height:40px;background: #00000015;border-top: 1px solid lightgray;position: absolute;bottom: 52px;">
-            <img data-menu="menu-leaveroom" src="/static/images/assets/ico_exit.png" width="24" height="24" style="margin: 8px;" />
+            <img data-menu="menu-leaveroom" src="https://d34l91104zg4p3.cloudfront.net/assets/ico_exit.png" width="24" height="24" style="margin: 8px;" />
         </div>
     </div>
     
@@ -450,7 +450,7 @@
                     <div class="">
                         <img
                         class="rounded-s me-3"
-                        :src="(data.profileImages && data.profileImages.length>0) ? data.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty.png'"
+                        :src="(data.profileImages && data.profileImages.length>0) ? data.profileImages[0].thumbnailUrl : 'https://d34l91104zg4p3.cloudfront.net/assets/user_empty.png'"
                         style="width: 50px; height: 50px;object-fit:cover;" />
                     </div>
                     <span class="ml-4" style="">
@@ -467,7 +467,7 @@
                         <div class="">
                             <img
                             class="rounded-s me-3"
-                            :src="(user.profileImages && user.profileImages.length>0) ? user.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty.png'"
+                            :src="(user.profileImages && user.profileImages.length>0) ? user.profileImages[0].thumbnailUrl : 'https://d34l91104zg4p3.cloudfront.net/assets/user_empty.png'"
                             style="width: 50px; height: 50px;object-fit:cover;" />
                         </div>
                         <span class="ml-4" style="">

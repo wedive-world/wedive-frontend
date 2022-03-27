@@ -3,12 +3,12 @@
     <div class="header header-fixed header-logo-center">
         <a href="" class="header-title color ellipsis">사용자 프로필</a>
         <a href="#" data-back-button class="font-16 header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
-        <a href="#" class="font-16 header-icon header-icon-4"><img src="/static/images/assets/ico_share.png" width="20"/></a>
+        <a href="#" class="font-16 header-icon header-icon-4"><img src="https://d34l91104zg4p3.cloudfront.net/assets/ico_share.png" width="20"/></a>
     </div>
     
     <div :class="'page-content p-0' + (is_empty ? '' : ' hide')">
         <div class="card mb-0" style="height: calc(100vh - 60px);display: inline-block;text-align: center;width:100%;">
-            <img src="/static/images/assets/empty_list2.jpg" width="80%" style="margin-top:100px;"/>
+            <img src="https://d34l91104zg4p3.cloudfront.net/assets/empty_list2.jpg" width="80%" style="margin-top:100px;"/>
             <p class="font-noto">앗! 찾을 수 없는 사용자 입니다.<br/>
             <a href="/buddy_home" class="slider-next btn font-400 font-12 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3 pe-4 ps-4 mt-2">다이빙 리스트로 돌아가기</a></p>
         </div>
@@ -18,7 +18,7 @@
         <div class="card mb-0 border-bottom" style="margin-top:50px; z-index:1">
             <div class="content mt-3 pb-2 mb-0" style="position: relative;">
                 <div class="gallery gallery-filter inline-block" style="width:66px !important;padding:0 !important;">
-                    <a :href="(userData.profileImages && userData.profileImages.length>0) ? userData.profileImages[0].thumbnailUrl : ('/static/images/assets/user_empty_'+((userData.gender)?userData.gender:'m')+'.png')" data-gallery="gallery-image" class="center_image filtr-item" :title="userData.nickName" data-category="user" style="width:60px;height:60px;">
+                    <a :href="(userData.profileImages && userData.profileImages.length>0) ? userData.profileImages[0].thumbnailUrl : ('https://d34l91104zg4p3.cloudfront.net/assets/user_empty_'+((userData.gender)?userData.gender:'m')+'.png')" data-gallery="gallery-image" class="center_image filtr-item" :title="userData.nickName" data-category="user" style="width:60px;height:60px;">
                         <div class="user-img me-2">
                             <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
                                 <defs>
@@ -27,7 +27,7 @@
                                     <use xlink:href="#shapeSquircle"/>
                                 </clipPath>
                                 </defs>
-                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(userData.profileImages && userData.profileImages.length>0) ? userData.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty.png'"/>
+                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(userData.profileImages && userData.profileImages.length>0) ? userData.profileImages[0].thumbnailUrl : 'https://d34l91104zg4p3.cloudfront.net/assets/user_empty.png'"/>
                             </svg>
                         </div>
                         
@@ -41,13 +41,13 @@
             </div>
             <div v-if="userData._id != user_id" class="row m-0 mt-1 ps-2 pe-2">
                 <div v-on:click="clickChat()" class="col-4 p-1">
-                    <span class="btn btn-border btn-m btn-full text-uppercase font-900 border-gray-dark color-black bg-theme" style="padding: 8px 0 !important;"><img src="/static/images/assets/ico_chat.png" height="20"/></span>
+                    <span class="btn btn-border btn-m btn-full text-uppercase font-900 border-gray-dark color-black bg-theme" style="padding: 8px 0 !important;"><img src="https://d34l91104zg4p3.cloudfront.net/assets/ico_chat.png" height="20"/></span>
                 </div>
                 <div v-on:click="clickLike()" class="col-4 p-1">
-                    <span class="btn btn-border btn-m btn-full text-uppercase font-900 border-gray-dark color-black bg-theme" style="padding: 8px 0 !important;"><img :src="'/static/images/assets/'+like_img+'.png'" height="20"/>{{ userData.likes }}</span>
+                    <span class="btn btn-border btn-m btn-full text-uppercase font-900 border-gray-dark color-black bg-theme" style="padding: 8px 0 !important;"><img :src="'https://d34l91104zg4p3.cloudfront.net/assets/'+like_img+'.png'" height="20"/>{{ userData.likes }}</span>
                 </div>
                 <div v-on:click="clickSubscribe()" class="col-4 p-1">
-                    <span class="btn btn-border btn-m btn-full text-uppercase font-900 border-gray-dark color-black bg-theme" style="padding: 8px 0 !important;"><img :src="'/static/images/assets/'+subscribe_img+'.png'" height="20"/></span>
+                    <span class="btn btn-border btn-m btn-full text-uppercase font-900 border-gray-dark color-black bg-theme" style="padding: 8px 0 !important;"><img :src="'https://d34l91104zg4p3.cloudfront.net/assets/'+subscribe_img+'.png'" height="20"/></span>
                 </div>
             </div>
             <div class="content pb-3">
@@ -56,7 +56,7 @@
                     <div class="inline-block text-start">
                         <div class="font-noto font-600 font-16 me-1" style="color:#cd5b3c;">18m</div>
                     </div>
-                    <img class="inline-block me-2" src="/static/images/assets/heart.png" width="26" style="vertical-align: top;"/>
+                    <img class="inline-block me-2" src="https://d34l91104zg4p3.cloudfront.net/assets/heart.png" width="26" style="vertical-align: top;"/>
                 </div>
                 <div class="progress rounded-l wedive-deep" style="height:8px">
                     <div class="progress-bar bg-heart text-start ps-3 color-white" 
@@ -74,7 +74,7 @@
             <div class="content pb-0">
                 <h2 class="font-15 font-700 mb-1">스쿠바다이빙</h2>
                 <div class="evaluation p-3" style="position: relative;">
-                    <img class="inline-block ms-1 me-1" src="/static/images/assets/award1.png" height="80" style="vertical-align: top;"/>
+                    <img class="inline-block ms-1 me-1" src="https://d34l91104zg4p3.cloudfront.net/assets/award1.png" height="80" style="vertical-align: top;"/>
                     <div class="inline-block">
                         <p class="mb-0 font-noto font-13 color-gray mb-1">SCUBA DIVING LICENSE</p>
                         <p class="mb-0 font-noto font-20 font-500">{{ userData.scubaLevelShow }} 자격증</p>
@@ -89,7 +89,7 @@
             <div class="content pb-0">
                 <h2 class="font-15 font-700 mb-1">프리다이빙</h2>
                 <div class="evaluation p-3" style="position: relative;">
-                    <img class="inline-block ms-1 me-1" src="/static/images/assets/award2.png" height="80" style="vertical-align: top;"/>
+                    <img class="inline-block ms-1 me-1" src="https://d34l91104zg4p3.cloudfront.net/assets/award2.png" height="80" style="vertical-align: top;"/>
                     <div class="inline-block">
                         <p class="mb-0 font-noto font-13 color-gray mb-1">FREE DIVING LICENSE</p>
                         <p class="mb-0 font-noto font-20 font-500">{{ userData.freeLevelShow }} 자격증</p>

@@ -29,14 +29,14 @@
                                         <h4 class="text-start pt-2 mb-0 color-white">위다이브 컨시어지 <i class="fas fa-concierge-bell ms-1"></i></h4>
                                         <p class="text-start mb-0 color-white opacity-70">전문 매니저가 버디를 매칭해드려요.</p>
                                     </div>
-                                    <img class="ps-0" src="/static/images/assets/concierge.gif" style="position:absolute;bottom:0;right:0;max-width:96px;width:96px;margin-bottom:-8px;"/>
+                                    <img class="ps-0" src="https://d34l91104zg4p3.cloudfront.net/assets/concierge.gif" style="position:absolute;bottom:0;right:0;max-width:96px;width:96px;margin-bottom:-8px;"/>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div v-if="nickName==null && idToken == null" v-on:click="login" class="splide__slide">
                         <div class="card card-style" style="box-shadow: none;background: #494949;">
-                            <div class="mb-0" style="min-height: 96px;background:url(/static/images/assets/onoff1.gif);background-size: 154px 96px;background-repeat:no-repeat;background-position-x:right;">
+                            <div class="mb-0" style="min-height: 96px;background:url(https://d34l91104zg4p3.cloudfront.net/assets/onoff1.gif);background-size: 154px 96px;background-repeat:no-repeat;background-position-x:right;">
                                 <div class="mb-0" style="position: relative;">
                                     <div style="margin-top:16px;margin-left:15px;">
                                         <h4 class="text-start pt-2 mb-0 color-white">로그인</h4>
@@ -60,7 +60,7 @@
                     <h4 class="text-start mb-0 font-600" v-html="recommendation.title"></h4><i class="wedive-txt-all wedive_right"></i>
                     <p class="mb-0 opacity-60 ls-n1">{{ recommendation.description ? recommendation.description : '' }}</p>
                     
-                    <img v-if="recommendation.cssStyle.includes('|')" :class="recommendation.cssStyle.split('|')[2]" :src="'/static/images/assets/' + recommendation.cssStyle.split('|')[1]" style="padding-bottom:16px;max-height:200px;"/>
+                    <img v-if="recommendation.cssStyle.includes('|')" :class="recommendation.cssStyle.split('|')[2]" :src="'https://d34l91104zg4p3.cloudfront.net/assets/' + recommendation.cssStyle.split('|')[1]" style="padding-bottom:16px;max-height:200px;"/>
                 </div>
             </div>
 
@@ -190,7 +190,7 @@
         <div class="card card-style" style="background: #56abf7;">
             <div class="content mb-0 mt-3 me-0">
                 <h4 class="text-start pt-1 mb-2" style="background: #56abf7;position: relative;">얼마 남지 않은 다이빙 D-7</h4><i class="wedive-txt-all wedive_right"></i>
-                <div class="text-end"><img class="" src="/static/images/assets/calendar.gif" style="max-height: 200px;"/></div>
+                <div class="text-end"><img class="" src="https://d34l91104zg4p3.cloudfront.net/assets/calendar.gif" style="max-height: 200px;"/></div>
             </div>
         </div>
 
@@ -259,7 +259,7 @@
         <div class="card card-style" style="background: #dbdbdb;">
             <div class="content mb-0 mt-3">
                 <h4 class="text-start pt-2 mb-1 font-600 color-black"><i class="fas fa-map-marker-alt me-2"></i>내 주변 다이빙<i class="wedive-txt-all wedive_right"></i></h4>
-                <div style="text-align:center;"><img class="" src="/static/images/assets/nearby.gif" style="max-height:200px;"/></div>
+                <div style="text-align:center;"><img class="" src="https://d34l91104zg4p3.cloudfront.net/assets/nearby.gif" style="max-height:200px;"/></div>
             </div>
         </div>
 
@@ -300,7 +300,7 @@
             <div class="content mb-0 mt-3">
                 <h4 class="color-white text-start pt-2 mb-0 font-600">제주 지역 다이빙<i class="wedive-txt-all wedive_right"></i></h4>
                 <p class="color-white mb-0 opacity-60 ls-n1">#떠나요&nbsp;&nbsp;#제주도&nbsp;&nbsp;#낭만 바다</p>
-                <img class="float-right" src="/static/images/assets/jeju.jpg" style="max-height:180px;"  />
+                <img class="float-right" src="https://d34l91104zg4p3.cloudfront.net/assets/jeju.jpg" style="max-height:180px;"  />
             </div>
         </div>
 
@@ -308,7 +308,7 @@
             <div class="content mb-0 mt-3">
                 <h4 class="text-start pt-2 mb-0 font-600"><i class="fas fa-camera me-2"></i>수중 촬영 다이빙<i class="wedive-txt-all wedive_right"></i></h4>
                 <p class="mb-0 opacity-60 ls-n1">#인스타 사진&nbsp;&nbsp;#인생 한컷</p>
-                <div class="text-center"><img class="mt-n1" src="/static/images/assets/camera.gif" style="max-height:200px;"/></div>
+                <div class="text-center"><img class="mt-n1" src="https://d34l91104zg4p3.cloudfront.net/assets/camera.gif" style="max-height:200px;"/></div>
             </div>
         </div>
 
@@ -316,9 +316,9 @@
             <div class="content mb-0 mt-3">
                 <h4 class="color-white text-start pt-1 mb-0">뒷풀이 포함 이벤트<i class="wedive-txt-all wedive_right"></i></h4>
                 <p class="color-white mb-0 opacity-60 ls-n1">#맥주인생&nbsp;&nbsp;#좋은사람</p>
-                <img style="position:absolute;bottom:0;left:20%;height:90%;" src="/static/images/assets/fireworks.gif"/>
-                <img style="position:absolute;bottom:0;left:0;height:70%;" src="/static/images/assets/fireworks2.gif"/>
-                <img class="mt-n2 mb-4 float-right" src="/static/images/assets/beer.png" />
+                <img style="position:absolute;bottom:0;left:20%;height:90%;" src="https://d34l91104zg4p3.cloudfront.net/assets/fireworks.gif"/>
+                <img style="position:absolute;bottom:0;left:0;height:70%;" src="https://d34l91104zg4p3.cloudfront.net/assets/fireworks2.gif"/>
+                <img class="mt-n2 mb-4 float-right" src="https://d34l91104zg4p3.cloudfront.net/assets/beer.png" />
             </div>
         </div>
 
@@ -326,7 +326,7 @@
             <div class="content mb-0 mt-3">
                 <h4 class="text-start pt-1 mb-0">해외투어<i class="wedive-txt-all wedive_right"></i></h4>
                 <p class="mb-0 opacity-60 ls-n1">#세계 10대 포인트&nbsp;&nbsp;#가자 성지로!</p>
-                <div class="text-center"><img class="movebox" src="/static/images/assets/air-plane.png" width="200"/></div>
+                <div class="text-center"><img class="movebox" src="https://d34l91104zg4p3.cloudfront.net/assets/air-plane.png" width="200"/></div>
             </div>
         </div>
 
@@ -334,7 +334,7 @@
             <div class="content mb-0 mt-3">
                 <h4 class="text-start pt-1 mb-0">초보자 참여 가능<i class="wedive-txt-all wedive_right"></i></h4>
                 <p class="mb-0 opacity-60 ls-n1">#걱정마요&nbsp;&nbsp;#누구나 시작은&nbsp;&nbsp;#함께 해요</p>
-                <div class="text-center"><img class="mt-4 mb-5" src="/static/images/assets/lifebuoy.png"/></div>
+                <div class="text-center"><img class="mt-4 mb-5" src="https://d34l91104zg4p3.cloudfront.net/assets/lifebuoy.png"/></div>
             </div>
         </div>
         -->
@@ -793,10 +793,10 @@ export default {
 .movebox3 {position:absolute;white-space: nowrap;left:-100px;padding-top:50px;opacity:.5;animation: motion-endtoend 30s linear infinite;-webkit-animation: motion-endtoend 30s linear infinite;}
 .nearby_desc {font-family: 'Noto Sans Korean' !important;font-weight:200;overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;line-height: 1.4;}
 .card-nearby {margin-left: 10px;background-size: cover !important;}
-.icon-concierge {position: fixed;width: 58px;height: 58px;bottom: 70px;right:24px;background-size:cover;background: url(/static/images/assets/concierge.gif);background-size:cover !important;background-position-y: 8px;background-repeat: no-repeat;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
+.icon-concierge {position: fixed;width: 58px;height: 58px;bottom: 70px;right:24px;background-size:cover;background: url(https://d34l91104zg4p3.cloudfront.net/assets/concierge.gif);background-size:cover !important;background-position-y: 8px;background-repeat: no-repeat;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
 
 .chip span {line-height: 24px !important;}
-.icon-concierge {position: fixed;width: 58px;height: 58px;bottom: 70px;right:24px;background-size:cover;background: url(/static/images/assets/concierge.gif);background-size:cover !important;background-position-y: 8px;background-repeat: no-repeat;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
+.icon-concierge {position: fixed;width: 58px;height: 58px;bottom: 70px;right:24px;background-size:cover;background: url(https://d34l91104zg4p3.cloudfront.net/assets/concierge.gif);background-size:cover !important;background-position-y: 8px;background-repeat: no-repeat;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
 .position-relative {position: relative;}
 
 .top-load-wrapper {line-height: 10px;text-align: center;}

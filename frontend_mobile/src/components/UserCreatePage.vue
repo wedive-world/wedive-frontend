@@ -31,7 +31,7 @@
                                 <div id="file-upload1-back" style="width: 150px;height:150px;display: inline-block;background: #c7c7c7;position: relative;border-radius:75px;background-size:cover;">
                                     <input type="file" @change="imageUserChange" id="file-upload1" class="upload-file text-center" accept=".jpg, .png" style="height: 150px;">
                                     <p class="upload-file-text" style="color: #abb7ba;position:absolute;left:40px;top:76px;">
-                                        <img id="file-upload1-img" src="/static/images/assets/icon_image2.png" width="80"></img>
+                                        <img id="file-upload1-img" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_image2.png" width="80"></img>
                                     </p></input>
                                 </div>
                             </div>
@@ -403,7 +403,7 @@
                         <div id="slide5" class="card card-full pb-0 mb-0 border-bottom" style="height: calc( 100vh - 56px );">
                         <div class="content mt-1" style="padding-top: 80px;">
                             <div class="text-center mt-2 mb-3">
-                                <img src="/static/images/assets/confetti.gif" width="50%"/>
+                                <img src="https://d34l91104zg4p3.cloudfront.net/assets/confetti.gif" width="50%"/>
                                 <p class="font-noto mb-1 mt-2 font-16">{{ nickname }}님, weDive에 오신것을 환영합니다.</p>
                                 <p class="font-noto color-gray"><span class="span_timer">3</span>초 후 이전페이지로 이동할께요.</p>
                             </div>

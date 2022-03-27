@@ -4,12 +4,12 @@
     <div class="header header-fixed header-logo-center">
         <a href="" class="header-title color ellipsis">{{ getDivingById.title }}</a>
         <a href="#" data-back-button class="font-16 header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
-        <a href="#" class="font-16 header-icon header-icon-4"><img src="/static/images/assets/ico_share.png" width="20"/></a>
+        <a href="#" class="font-16 header-icon header-icon-4"><img src="https://d34l91104zg4p3.cloudfront.net/assets/ico_share.png" width="20"/></a>
     </div>
     
     <div :class="'page-content p-0' + (is_empty ? '' : ' hide')">
         <div class="card mb-0" style="height: calc(100vh - 60px);display: inline-block;text-align: center;width:100%;">
-            <img src="/static/images/assets/empty_list2.jpg" width="60%" style="margin-top:25%;"/>
+            <img src="https://d34l91104zg4p3.cloudfront.net/assets/empty_list2.jpg" width="60%" style="margin-top:25%;"/>
             <p class="font-noto color-gray">앗! 찾을 수 없는 버디찾기 입니다.<br/>
             <a href="/buddy_home" class="slider-next btn font-400 font-12 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3 pe-4 ps-4 mt-2">다이빙 리스트로 돌아가기</a></p>
         </div>
@@ -49,7 +49,7 @@
                             <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(getDivingById.hostUser && getDivingById.hostUser.profileImages && getDivingById.hostUser.profileImages.length>0 && getDivingById.hostUser.profileImages[0].thumbnailUrl) ? getDivingById.hostUser.profileImages[0].thumbnailUrl : '/static/assets/user_empty.jpg'"/>
                         </svg>
                     </div>
-                    <!--<img class="inline-block me-2 circular_image" :src="(getDivingById.hostUser && getDivingById.hostUser.profileImages && getDivingById.hostUser.profileImages.length>0 && getDivingById.hostUser.profileImages[0].thumbnailUrl) ? getDivingById.hostUser.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty_'+((getDivingById.hostUser&&getDivingById.hostUser.gender)?getDivingById.hostUser.gender:'m')+'.png'" width="50" style="vertical-align: top;"/>-->
+                    <!--<img class="inline-block me-2 circular_image" :src="(getDivingById.hostUser && getDivingById.hostUser.profileImages && getDivingById.hostUser.profileImages.length>0 && getDivingById.hostUser.profileImages[0].thumbnailUrl) ? getDivingById.hostUser.profileImages[0].thumbnailUrl : 'https://d34l91104zg4p3.cloudfront.net/assets/user_empty_'+((getDivingById.hostUser&&getDivingById.hostUser.gender)?getDivingById.hostUser.gender:'m')+'.png'" width="50" style="vertical-align: top;"/>-->
                     <div class="inline-block font-noto" style="vertical-align: top;">
                         <h5 class="mb-0 font-500 font-15">{{ (getDivingById.hostUser && getDivingById.hostUser.nickName) ? getDivingById.hostUser.nickName : '' }}</h5>
                         <p class="mb-0 font-13 color-gray">{{ getDivingById.hostUser ? getDiverLevel(getDivingById.hostUser.freeLicenseLevel, getDivingById.hostUser.scubaLicenseLevel) : '' }}</p>
@@ -61,7 +61,7 @@
                             <div class="font-10 color-gray mt-n1" id="maner_deep">매너수심</div>
                             <div class="font-noto font-600 mt-n2" style="color:#cd5b3c;">18m</div>
                         </div>
-                        <img class="inline-block me-2" src="/static/images/assets/heart.png" width="30" style="vertical-align: top;"/>
+                        <img class="inline-block me-2" src="https://d34l91104zg4p3.cloudfront.net/assets/heart.png" width="30" style="vertical-align: top;"/>
                     </div>
                     <div>
                         <div class="progress rounded-l wedive-deep" style="height:4px;width:96px;float: right;margin-right:6px;">
@@ -119,7 +119,7 @@
                                 </svg>
                             </div>
                             
-                            <!--<img class="inline-block circular_image" :src="(getDivingById.hostUser && getDivingById.hostUser.profileImages && getDivingById.hostUser.profileImages.length>0 && getDivingById.hostUser.profileImages[0].thumbnailUrl) ? getDivingById.hostUser.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty_'+((getDivingById.hostUser&&getDivingById.hostUser.gender)?getDivingById.hostUser.gender:'m')+'.png'" width="50" style="vertical-align: top;"/>-->
+                            <!--<img class="inline-block circular_image" :src="(getDivingById.hostUser && getDivingById.hostUser.profileImages && getDivingById.hostUser.profileImages.length>0 && getDivingById.hostUser.profileImages[0].thumbnailUrl) ? getDivingById.hostUser.profileImages[0].thumbnailUrl : 'https://d34l91104zg4p3.cloudfront.net/assets/user_empty_'+((getDivingById.hostUser&&getDivingById.hostUser.gender)?getDivingById.hostUser.gender:'m')+'.png'" width="50" style="vertical-align: top;"/>-->
                             <div class="inline-block font-noto ms-2" style="vertical-align: top;">
                                 <h5 class="mb-0 font-500 font-15">{{ (getDivingById.hostUser!=null&&getDivingById.hostUser.nickName!=null) ? getDivingById.hostUser.nickName : ((getDivingById.hostUser.name!=null) ? getDivingById.hostUser.name : '비공개') }}</h5>
                                 <p class="mb-0 font-14 color-gray">{{ getDivingById.hostUser ? getDiverLevel(getDivingById.hostUser.freeLicenseLevel, getDivingById.hostUser.scubaLicenseLevel) : '' }}</p>
@@ -142,7 +142,7 @@
                                 </svg>
                             </div>
 
-                            <!--<img class="inline-block circular_image" :src="(participant.user && participant.user.profileImages && participant.user.profileImages.length>0 && participant.user.profileImages[0].thumbnailUrl) ? participant.user.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty_'+(participant.gender ? participant.gender : 'm')+'.png'" width="50" style="vertical-align: top;"/>-->
+                            <!--<img class="inline-block circular_image" :src="(participant.user && participant.user.profileImages && participant.user.profileImages.length>0 && participant.user.profileImages[0].thumbnailUrl) ? participant.user.profileImages[0].thumbnailUrl : 'https://d34l91104zg4p3.cloudfront.net/assets/user_empty_'+(participant.gender ? participant.gender : 'm')+'.png'" width="50" style="vertical-align: top;"/>-->
                             <div class="inline-block font-noto ms-2" style="vertical-align: top;">
                                 <h5 class="mb-0 font-500 font-15">{{ (participant.user!=null&&participant.user.nickName!=null) ? participant.user.nickName : ((participant.name!=null) ? participant.name : '비공개') }}</h5>
                                 <p class="mb-0 font-14 color-gray ellipsis" style="max-width: calc(100vw - 170px);">{{ participant ? getDiverLevel(participant.freeLicenseLevel, participant.scubaLicenseLevel) : '' }}</p>
@@ -174,7 +174,7 @@
                                     </svg>
                                 </div>
                                 
-                                <!--<img class="inline-block circular_image" :src="(participant.user && participant.user.profileImages && participant.user.profileImages.length>0 && participant.user.profileImages[0].thumbnailUrl) ? participant.user.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty_'+(participant.gender ? participant.gender : 'm')+'.png'" width="50" style="vertical-align: top;"/>-->
+                                <!--<img class="inline-block circular_image" :src="(participant.user && participant.user.profileImages && participant.user.profileImages.length>0 && participant.user.profileImages[0].thumbnailUrl) ? participant.user.profileImages[0].thumbnailUrl : 'https://d34l91104zg4p3.cloudfront.net/assets/user_empty_'+(participant.gender ? participant.gender : 'm')+'.png'" width="50" style="vertical-align: top;"/>-->
                                 <div class="inline-block font-noto ms-2" style="vertical-align: top;">
                                     <h5 class="mb-0 font-500 font-15">{{ (participant.user!=null&&participant.user.nickName!=null) ? participant.user.nickName : ((participant.name!=null) ? participant.name : '비공개') }}</h5>
                                     <p class="mb-0 font-13 color-gray ellipsis" style="max-width: calc(100vw - 220px);">{{ participant ? getDiverLevel(participant.freeLicenseLevel, participant.scubaLicenseLevel) : '' }}</p>
@@ -188,7 +188,7 @@
                     </div>
                 </div>
                 <div v-else class="text-center">
-                    <img src="/static/images/assets/empty_mailbox.jpg" width="60%" />
+                    <img src="https://d34l91104zg4p3.cloudfront.net/assets/empty_mailbox.jpg" width="60%" />
                     <p class="color-gray mb-4">신청인원이 아직 없어요.</p>
                 </div>
             </div>
@@ -232,7 +232,7 @@
         <div v-if="getDivingById.hostUser && getDivingById.hostUser._id != userId" id="footer-bar-shop" class="d-flex" style="min-height: 52px !important;height: 52px !important;">
             <div v-on:click="clickLike()" :class="'me-1 speach-icon' + ((idToken == null || nickName == null || getDivingById.status == 'publicEnded'|| getDivingById.status=='divingComplete') ? ' opacity-40' : '')">
                 <div style="width: 52px;height: 52px;display: inline-block;position: relative;border-right:1px solid rgba(0, 0, 0, 0.08);">
-                    <img class="'inline-block me-2" :src="'/static/images/assets/'+like_img+'.png'" width="30" style="display: block;margin-top:10px;margin-left:10px;"/>
+                    <img class="'inline-block me-2" :src="'https://d34l91104zg4p3.cloudfront.net/assets/'+like_img+'.png'" width="30" style="display: block;margin-top:10px;margin-left:10px;"/>
                 </div>
             </div>
             <div class="flex-fill speach-input p-2">
@@ -246,7 +246,7 @@
         <div v-else-if="getDivingById.hostUser && getDivingById.hostUser._id == userId" id="footer-bar-shop" class="d-flex" style="min-height: 52px !important;height: 52px !important;">
             <div class="me-1 speach-icon opacity-40">
                 <div style="width: 52px;height: 52px;display: inline-block;position: relative;border-right:1px solid rgba(0, 0, 0, 0.08);">
-                    <img class="'inline-block me-2" src="/static/images/assets/ico_heart.png" width="30" style="display: block;margin-top:10px;margin-left:10px;"/>
+                    <img class="'inline-block me-2" src="https://d34l91104zg4p3.cloudfront.net/assets/ico_heart.png" width="30" style="display: block;margin-top:10px;margin-left:10px;"/>
                 </div>
             </div>
             <div class="flex-fill speach-input p-2">
@@ -1227,7 +1227,7 @@ export default {
 .border-bottom {border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important}
 .evaluation {background-color: rgba(196,187,171,.2);justify-content: space-around;border-radius: 5px;padding:10px;}
 .wedive-textarea {min-height: 150px;border: 2px solid #e9e9e9;background: #f5f5f5;padding-left: 10px;padding-right: 10px;width:100%;}
-.owner:after {content: '';position: absolute;bottom: 6px;left: 34px;width: 22px;height: 22px;background-image: url(/static/images/assets/crown_s.png);background-repeat: no-repeat;background-size: contain;}
+.owner:after {content: '';position: absolute;bottom: 6px;left: 34px;width: 22px;height: 22px;background-image: url(https://d34l91104zg4p3.cloudfront.net/assets/crown_s.png);background-repeat: no-repeat;background-size: contain;}
 .wedive-chip {font-family: 'Noto Sans Korean';border-radius:6px !important;padding: 2px 12px;margin:0 !important;position:absolute;right:10px;bottom:20px;color:black !important;}
 .wedive-chip2 {font-family: 'Noto Sans Korean';border-radius:6px !important;padding: 2px 12px;margin:0 !important;position:absolute;right:64px;bottom:20px;color:black !important;}
 .position-relative {position: relative;}

@@ -35,7 +35,7 @@
                           </clipPath>
                           </defs>
                           <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" 
-                            :xlink:href="getAgendaById.author && getAgendaById.author.profileImages && getAgendaById.author.profileImages.length > 0 && getAgendaById.author.profileImages[0].thumbnailUrl ? getAgendaById.author.profileImages[0].thumbnailUrl : '/static/images/assets/user_empty.png'"/>
+                            :xlink:href="getAgendaById.author && getAgendaById.author.profileImages && getAgendaById.author.profileImages.length > 0 && getAgendaById.author.profileImages[0].thumbnailUrl ? getAgendaById.author.profileImages[0].thumbnailUrl : 'https://d34l91104zg4p3.cloudfront.net/assets/user_empty.png'"/>
                       </svg>
                   </div>
                   <div class="inline-block font-noto v-align-top mt-1">
@@ -133,7 +133,7 @@
                     style="border-radius:16px;margin-top:6px;background: #303440;color:white;max-height:122px;" />
             </div>
             <div v-on:click="is_emoji = !is_emoji;is_attach=false;" style="width: 26px;display: inline-block;position: relative;">
-                    <img src="/static/images/assets/chat_icon_emoji.png" style="width:24px;margin-top:13px;margin-left:8px;"/>
+                    <img src="https://d34l91104zg4p3.cloudfront.net/assets/chat_icon_emoji.png" style="width:24px;margin-top:13px;margin-left:8px;"/>
                 </div>
             <div v-on:click="sendMessage()" class="ms-3 speach-icon" :style="(sendDisable?'background: #7C7C7C;width:50px;':'background: #1d397c;width:50px;')">
                 <i class="fas fa-paper-plane color-white font-20" style="margin-top:16px;"></i>

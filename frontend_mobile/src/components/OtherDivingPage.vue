@@ -9,7 +9,7 @@
     <div class="page-content transform-none" style="margin-top: 50px;padding:0;">
         <div class="card card-style ms-0 me-0 rounded-0 mb-0" style="min-height: calc(100vh - 50px)">
             <div v-if="divingData.length == 0" class="text-center">
-                <img src="/static/images/assets/empty_list2.jpg" width="60%" style="margin-top:25%;" />
+                <img src="https://d34l91104zg4p3.cloudfront.net/assets/empty_list2.jpg" width="60%" style="margin-top:25%;" />
                 <p class="color-gray-light-mid">앗! 아직 버디찾기를 한번도 해보지 않으셨네요!</p>
                 <a href="/buddy_create" class="btn btn-m mb-3 rounded-xl text-uppercase font-500 shadow-s bg-secondary font-noto"> 버디찾기 생성 </a>
             </div>

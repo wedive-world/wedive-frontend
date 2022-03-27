@@ -2,12 +2,12 @@
   <div class="" style="height: 100%; !important">
     <div data-menu-active="nav-site"></div>
     <div class="main-header header header-fixed header-logo-center" style="height: 58px !important;">
-        <a class="" href="/" style="margin-left: 16px;"><img class="logo-image" src="/static/images/assets/logo-gray.svg" height="42" style="margin-top:8px;"/></a>
+        <a class="" href="/" style="margin-left: 16px;"><img class="logo-image" src="https://d34l91104zg4p3.cloudfront.net/assets/logo-gray.svg" height="42" style="margin-top:8px;"/></a>
         
-        <a v-if="idToken != null && nickName != null" v-on:click="goNoti()" :class="'header-icon header-icon-5' + (notiData && notiData.length > 0 && notiData[0].read != null && notiData[0].read == false ? ' has-notification' : '')" style="color:#858585 !important;margin-right: 18px;"><img src="/static/images/assets/icon_notification.png" width="28" style="margin-top: 12px;"></a>
-        <a v-on:click="move('/site_list')" class="header-icon header-icon-3" style="margin-right: 18px;"><img src="/static/images/assets/icon_list_fill.png" width="26" style="margin-top: 12px;"/></i></a>
-        <a v-on:click="searchBox()" href="#" class="header-icon header-icon-4" style="margin-right: 11px;"><img src="/static/images/assets/icon_search_fill.png" width="28" style="margin-top: 12px;"/></a>
-        <!--<a href="#" class="header-icon header-icon-4 color-theme circular_image" data-menu="menu-main" :style="'background: url('+((userThumbnail) ? userThumbnail : '/static/images/assets/user_empty_'+((gender)?gender:'m')+'.png')+');background-size:cover;width:36px;height:36px;margin-top:7px !important;margin-right:7px;'"></a>-->
+        <a v-if="idToken != null && nickName != null" v-on:click="goNoti()" :class="'header-icon header-icon-5' + (notiData && notiData.length > 0 && notiData[0].read != null && notiData[0].read == false ? ' has-notification' : '')" style="color:#858585 !important;margin-right: 18px;"><img src="https://d34l91104zg4p3.cloudfront.net/assets/icon_notification.png" width="28" style="margin-top: 12px;"></a>
+        <a v-on:click="move('/site_list')" class="header-icon header-icon-3" style="margin-right: 18px;"><img src="https://d34l91104zg4p3.cloudfront.net/assets/icon_list_fill.png" width="26" style="margin-top: 12px;"/></i></a>
+        <a v-on:click="searchBox()" href="#" class="header-icon header-icon-4" style="margin-right: 11px;"><img src="https://d34l91104zg4p3.cloudfront.net/assets/icon_search_fill.png" width="28" style="margin-top: 12px;"/></a>
+        <!--<a href="#" class="header-icon header-icon-4 color-theme circular_image" data-menu="menu-main" :style="'background: url('+((userThumbnail) ? userThumbnail : 'https://d34l91104zg4p3.cloudfront.net/assets/user_empty_'+((gender)?gender:'m')+'.png')+');background-size:cover;width:36px;height:36px;margin-top:7px !important;margin-right:7px;'"></a>-->
     </div>
     
 
@@ -508,7 +508,7 @@ async function updateAll() {
         else if (k == 2 && check_cate3) allList = centerList;
         for (var i=0; i<allList.length; i++) {
             if (markerList && markerList.filter(x=>x._id == allList[i]._id).length == 0) {
-                const img_path = (allList[i].adminScore > 40) ? '/static/images/assets/ico_pin'+k+'.png' : '/static/images/assets/ico_pin_small'+k+'.png'
+                const img_path = (allList[i].adminScore > 40) ? 'https://d34l91104zg4p3.cloudfront.net/assets/ico_pin'+k+'.png' : 'https://d34l91104zg4p3.cloudfront.net/assets/ico_pin_small'+k+'.png'
                 const img = (allList[i].backgroundImages && allList[i].backgroundImages.length>0) ? allList[i].backgroundImages[0].thumbnailUrl : '/static/empty.jpg';
                 const img_size = new google.maps.Size(38,43);
                 const title = allList[i].name;
@@ -590,7 +590,7 @@ async function updateAll() {
                         
                     }
                     
-                    marker_shop.setIcon(new google.maps.MarkerImage('/static/images/assets/ico_pin_big'+_k+'.png', null, null, null, new google.maps.Size(58,66)));
+                    marker_shop.setIcon(new google.maps.MarkerImage('https://d34l91104zg4p3.cloudfront.net/assets/ico_pin_big'+_k+'.png', null, null, null, new google.maps.Size(58,66)));
                     map.panTo(marker_shop.getPosition());
                     /*if (map.getZoom() == 18) {
                         map.panTo(marker_shop.getPosition());
@@ -1396,8 +1396,8 @@ export default {
 .site .wedive-corner-bottom:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #31373b !important;}
 .point .wedive-corner-bottom:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #308f7f !important;}
 .center .wedive-corner-bottom:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #376a97 !important;}
-.icon-concierge {position: fixed;width: 58px;height: 58px;bottom: 70px;right:24px;background: url(/static/images/assets/concierge.gif);background-size:contain !important;background-position-y: 8px;background-repeat: no-repeat;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
-.icon-filter {position: fixed;width: 58px;height: 58px;bottom: 140px;right:24px;background: url(/static/images/assets/filter2.png);background-size:contain !important;background-position-y: 8px;background-repeat: no-repeat;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;background-position: bottom;}
+.icon-concierge {position: fixed;width: 58px;height: 58px;bottom: 70px;right:24px;background: url(https://d34l91104zg4p3.cloudfront.net/assets/concierge.gif);background-size:contain !important;background-position-y: 8px;background-repeat: no-repeat;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
+.icon-filter {position: fixed;width: 58px;height: 58px;bottom: 140px;right:24px;background: url(https://d34l91104zg4p3.cloudfront.net/assets/filter2.png);background-size:contain !important;background-position-y: 8px;background-repeat: no-repeat;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;background-position: bottom;}
 .box-bottom {width:calc(100% - 120px);height:36px;position: absolute;right: 0;bottom: 0;display:flex;}
 .box-bottom-corner {display:inline-block;width:36px;height:36px;z-index:999;}
 .box-bottom-corner:before {content: '';position: absolute;height: 80px;width: 80px;border-radius: 100%;z-index: -1;box-shadow: 10px 10px 5px 100px #1d397c;}

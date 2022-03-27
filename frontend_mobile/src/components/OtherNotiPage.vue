@@ -8,7 +8,7 @@
 
     
     <div :class="'page-content font-noto card text-center pb-0 mb-0' + ((idToken && nickName)?' hide':'')" style="height: calc(100vh - 50px);display:block;margin-top:50px;">
-        <img src="/static/images/assets/empty_login.jpg" width="60%" style="margin-top:25%;"/>
+        <img src="https://d34l91104zg4p3.cloudfront.net/assets/empty_login.jpg" width="60%" style="margin-top:25%;"/>
         <p class="color-gray mt-2">{{ login_word }}이 필요한 페이지 입니다.</p>
         <a v-on:click="login()" class="btn btn-m mb-3 rounded-xl text-uppercase font-500 shadow-s bg-secondary font-noto"><i class="fas fa-user-lock me-1"></i> {{ login_word }}</a>
     </div>

@@ -21,7 +21,7 @@
                 <div v-on:click="is_attach = ! is_attach;is_emoji=false;" style="width: 45px;display: inline-block;position: relative;">
                     <!--<input type="file" id="file-upload" class="upload-file text-center" accept=".jpg, .png" style="width:32px;">-->
                     <!--<p class="upload-file-text bg-gray-dark" style="color: #abb7ba;position:absolute;width:32px;height:32px;margin-top:-2px;left:8px;border-radius:16px;"><i class="fas fa-image pt-2 font-16"></i></p>-->
-                    <img src="/static/images/assets/chat_icon_plus.png" style="width:22px;margin-top:14px;margin-left:4px;"/>
+                    <img src="https://d34l91104zg4p3.cloudfront.net/assets/chat_icon_plus.png" style="width:22px;margin-top:14px;margin-left:4px;"/>
                 </div>
             </div>
             <div class="flex-fill speach-input">
@@ -38,7 +38,7 @@
                     style="border-radius:16px;margin-top:6px;background: #303440;color:white;max-height:122px;" />
             </div>
             <div v-on:click="is_emoji = !is_emoji;is_attach=false;" style="width: 26px;display: inline-block;position: relative;">
-                    <img src="/static/images/assets/chat_icon_emoji.png" style="width:24px;margin-top:13px;margin-left:8px;"/>
+                    <img src="https://d34l91104zg4p3.cloudfront.net/assets/chat_icon_emoji.png" style="width:24px;margin-top:13px;margin-left:8px;"/>
                 </div>
             <div v-on:click="sendMessage()" class="ms-3 speach-icon" :style="(sendDisable?'background: #7C7C7C;width:50px;':'background: #1d397c;width:50px;')">
                 <i class="fas fa-paper-plane color-white font-20" style="margin-top:16px;"></i>
@@ -134,7 +134,7 @@
                                     <use xlink:href="#shapeSquircle"/>
                                 </clipPath>
                                 </defs>
-                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(chat.author.avatarOrigin)?chat.author.avatarOrigin:'/static/images/assets/user_empty.png'"/>
+                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(chat.author.avatarOrigin)?chat.author.avatarOrigin:'https://d34l91104zg4p3.cloudfront.net/assets/user_empty.png'"/>
                             </svg>
                         </div>
                     </div>
@@ -186,7 +186,7 @@
                                 <use xlink:href="#shapeSquircle"/>
                             </clipPath>
                             </defs>
-                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="/static/images/assets/user_empty.png"/>
+                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" xlink:href="https://d34l91104zg4p3.cloudfront.net/assets/user_empty.png"/>
                         </svg>
                     </div>
                 </div>
