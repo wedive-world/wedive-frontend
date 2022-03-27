@@ -84,7 +84,7 @@
                             </div>
                         </div>
                         <div style="position: absolute;bottom: 0;width:100%;">
-                            <a id="btn_next1" href="#" class="slider-next btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 ms-3 me-3 mb-3" style="height: 46px;padding-top: 10px;" disabled="disabled" v-on:click="next1()">다음</a>
+                            <a id="btn_next1" href="#" class="slider-next btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 ms-3 me-3 mb-3" style="height: 46px;padding-top: 10px;" disabled="disabled" v-on:click="fireNext()">다음</a>
                         </div>
                         </div>
                     </div>
@@ -186,8 +186,8 @@
                         
                         
                         <div class="row me-0 ms-0 mb-0" style="position: absolute;bottom: 0;width:100%;padding-left:20px;padding-right:20px;">
-                            <a href="#" class="col-6 slider-prev btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>
-                            <a id="btn_next2" href="#" class="slider-next col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;" disabled="disabled" v-on:click="next2()">다음</a>
+                            <a href="#" class="col-6 slider-prev btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;" v-on:click="fireBack()">이전</a>
+                            <a id="btn_next2" href="#" class="slider-next col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;" disabled="disabled" v-on:click="fireNext()">다음</a>
                         </div>
                         </div>
                     </div>
@@ -202,8 +202,8 @@
                             
                         </div>
                         <div class="row me-0 ms-0 mb-0" style="position: absolute;bottom: 0;width:100%;padding-left:20px;padding-right:20px;">
-                            <a href="#" class="col-6 slider-prev btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>
-                            <a id="btn_next3" href="#" class="slider-next col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;" disabled="disabled" v-on:click="next3()">다음</a>
+                            <a href="#" class="col-6 slider-prev btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;" v-on:click="fireBack()">이전</a>
+                            <a id="btn_next3" href="#" class="slider-next col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;" disabled="disabled" v-on:click="fireNext()">다음</a>
                         </div>
                         </div>
                     </div>
@@ -302,7 +302,7 @@
                             </div>
                         </div>
                         <div class="row me-0 ms-0 mb-0" style="position: absolute;bottom: 0;width:100%;padding-left:20px;padding-right:20px;">
-                            <a href="#" class="col-6 slider-prev btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>
+                            <a href="#" class="col-6 slider-prev btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;" v-on:click="fireBack()">이전</a>
                             <a id="btn_next4" href="#" class="slider-next col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;" v-on:click="next4()">완료</a>
                         </div>
                         </div>
@@ -386,6 +386,7 @@ export default {
     return {
         my_latitude: null,
         my_longitude: null,
+        progress: 25,
 
         check_diving_scuba: false,
         check_diving_free: false,
@@ -541,17 +542,18 @@ export default {
             return false;
           }
       },
-      next1() {
-          $(".progress-bar").css("width", "50%");
+      fireBack() {
+          this.progress -= 25;
+          $(".progress-bar").css("width", this.progress + '%');
       },
-      next2() {
-          $(".progress-bar").css("width", "75%");
-          setTimeout(function() {
-              $("#form6").focus();
-          },200);
-      },
-      next3() {
-          $(".progress-bar").css("width", "100%");
+      fireNext() {
+          this.progress += 25;
+          $(".progress-bar").css("width", this.progress + '%');
+          if (this.progress == 75) {
+              setTimeout(function() {
+                $("#form6").focus();
+              },200);
+          }
       },
       async next4() {
         var preloader = document.getElementById('preloader')
