@@ -3,7 +3,7 @@
     <div data-menu-active="nav-buddy"></div>
     <div class="header header-fixed header-logo-center">
         <a href="" class="header-title color ellipsis">{{ getAgendaById.title }}</a>
-        <a href="#" data-back-button class="font-16 header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
+        <a v-on:click="historyBack" data-back-button class="font-16 header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
     </div>
     
     <div class="card card-clear" data-card-height="80"></div>
@@ -76,8 +76,8 @@
             <p class="color-gray-dark mb-0 font-12" style="position: absolute;right: 16px;top: 16px;">{{ timeForToday(review.createdAt) }}</p>
             <div v-if="review.content && review.content.includes('[[emoji|') && review.content.includes(']]')">
                 <div class="">
-                  <img v-if="(review.content.substring(review.content.indexOf('[[emoji|')+8,review.content.indexOf(']]'))).includes('basic')" :src="'/static/images/emoji/' + (review.content.substring(review.content.indexOf('[[emoji|')+8,review.content.indexOf(']]')))" style="max-width:100px;"/>
-                  <img v-else :src="'/static/images/emoji/' + (review.content.substring(review.content.indexOf('[[emoji|')+8,review.content.indexOf(']]')))" style="max-width:120px;"/>
+                  <img v-if="(review.content.substring(review.content.indexOf('[[emoji|')+8,review.content.indexOf(']]'))).includes('basic')" :src="'https://d34l91104zg4p3.cloudfront.net/emoji/' + (review.content.substring(review.content.indexOf('[[emoji|')+8,review.content.indexOf(']]')))" style="max-width:100px;"/>
+                  <img v-else :src="'https://d34l91104zg4p3.cloudfront.net/emoji/' + (review.content.substring(review.content.indexOf('[[emoji|')+8,review.content.indexOf(']]')))" style="max-width:120px;"/>
                 </div>
             </div>
             <p class="mb-3 font-noto">{{ review.content.includes('[[emoji|') ? review.content.replace(review.content.substring(review.content.indexOf('[[emoji|'),review.content.indexOf(']]')+2), '') : review.content }}</p>
@@ -105,7 +105,7 @@
     <div id="footer-bar-speach" style="z-index: 9999;display: table;width: 100%;border-top-width: 0px !important;background: transparent;">
         <div :class="(is_emoji_clicked?'':'hide')" style="background:#00000066;height:100px;">
             <i v-on:click="is_emoji_clicked=false;emoji_url='';sendDisable=true;" class="wedive_icoset2x wedive_icoset2x_close" style="position:absolute;right:10px;top:10px;"/>
-            <img :src="'/static/images/emoji/' + emoji_url" style="width:80px;margin-top:10px;"/>
+            <img :src="'https://d34l91104zg4p3.cloudfront.net/emoji/' + emoji_url" style="width:80px;margin-top:10px;"/>
         </div>
         <div :class="(is_image_attached?'':'hide')" style="background:#00000066;height:100px;text-align:left;padding:0 16px;">
             <i v-on:click="is_image_attached=false;sendDisable=true;file_photo=[];file_photo_url=[];" class="wedive_icoset2x wedive_icoset2x_close" style="position:absolute;right:10px;top:10px;"/>
@@ -150,31 +150,31 @@
         <div :class="'' + (is_emoji?'':' hide')" style="max-height:300px;background: #303440;overflow-y: auto;">
             <div class="" id="tab-group-1">
                 <div class="tab-controls tabs-small" data-highlight="bg-highlight" style="height:36px;border-bottom:1px solid #88888840;display: -webkit-box;">
-                    <a href="#" data-active data-bs-toggle="collapse" data-bs-target="#tab-1ab" style="padding: 0px 24px;display:table-cell;"><img src="/static/images/emoji/wedive/emoji.png" style="width:28px;margin-top:1px;"/></a>
-                    <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-2ab" style="padding: 0px 24px;display:table-cell;"><img src="/static/images/emoji/basic/emoji.png" style="width:28px;margin-top:1px;"/></a>
+                    <a href="#" data-active data-bs-toggle="collapse" data-bs-target="#tab-1ab" style="padding: 0px 24px;display:table-cell;"><img src="https://d34l91104zg4p3.cloudfront.net/emoji/wedive/emoji.png" style="width:28px;margin-top:1px;"/></a>
+                    <a href="#" data-bs-toggle="collapse" data-bs-target="#tab-2ab" style="padding: 0px 24px;display:table-cell;"><img src="https://d34l91104zg4p3.cloudfront.net/emoji/basic/emoji.png" style="width:28px;margin-top:1px;"/></a>
                 </div>
 
                 <div data-bs-parent="#tab-group-1" class="collapse show row p-3 m-0" id="tab-1ab" style="max-height:264px;min-height:264px;overflow-y: auto;background: #303440;position:relative;">
-                    <div v-on:click="is_emoji_clicked=true;emoji_url='wedive/01.gif';sendDisable=false;" class="col-3 ps-2 pe-2"><img src="/static/images/emoji/wedive/01.gif" width="100%" /></div>
-                    <div v-on:click="is_emoji_clicked=true;emoji_url='wedive/02.gif';sendDisable=false;" class="col-3 ps-2 pe-2"><img src="/static/images/emoji/wedive/02.gif" width="100%" /></div>
-                    <div v-on:click="is_emoji_clicked=true;emoji_url='wedive/03.gif';sendDisable=false;" class="col-3 ps-2 pe-2"><img src="/static/images/emoji/wedive/03.gif" width="100%" /></div>
-                    <div v-on:click="is_emoji_clicked=true;emoji_url='wedive/04.gif';sendDisable=false;" class="col-3 ps-2 pe-2"><img src="/static/images/emoji/wedive/04.gif" width="100%" /></div>
-                    <div v-on:click="is_emoji_clicked=true;emoji_url='wedive/05.gif';sendDisable=false;" class="col-3 ps-2 pe-2"><img src="/static/images/emoji/wedive/05.gif" width="100%" /></div>
-                    <div v-on:click="is_emoji_clicked=true;emoji_url='wedive/06.gif';sendDisable=false;" class="col-3 ps-2 pe-2"><img src="/static/images/emoji/wedive/06.gif" width="100%" /></div>
+                    <div v-on:click="is_emoji_clicked=true;emoji_url='wedive/01.gif';sendDisable=false;" class="col-3 ps-2 pe-2"><img src="https://d34l91104zg4p3.cloudfront.net/emoji/wedive/01.gif" width="100%" /></div>
+                    <div v-on:click="is_emoji_clicked=true;emoji_url='wedive/02.gif';sendDisable=false;" class="col-3 ps-2 pe-2"><img src="https://d34l91104zg4p3.cloudfront.net/emoji/wedive/02.gif" width="100%" /></div>
+                    <div v-on:click="is_emoji_clicked=true;emoji_url='wedive/03.gif';sendDisable=false;" class="col-3 ps-2 pe-2"><img src="https://d34l91104zg4p3.cloudfront.net/emoji/wedive/03.gif" width="100%" /></div>
+                    <div v-on:click="is_emoji_clicked=true;emoji_url='wedive/04.gif';sendDisable=false;" class="col-3 ps-2 pe-2"><img src="https://d34l91104zg4p3.cloudfront.net/emoji/wedive/04.gif" width="100%" /></div>
+                    <div v-on:click="is_emoji_clicked=true;emoji_url='wedive/05.gif';sendDisable=false;" class="col-3 ps-2 pe-2"><img src="https://d34l91104zg4p3.cloudfront.net/emoji/wedive/05.gif" width="100%" /></div>
+                    <div v-on:click="is_emoji_clicked=true;emoji_url='wedive/06.gif';sendDisable=false;" class="col-3 ps-2 pe-2"><img src="https://d34l91104zg4p3.cloudfront.net/emoji/wedive/06.gif" width="100%" /></div>
                 </div>
                 <div data-bs-parent="#tab-group-1" class="collapse row pe-3 ps-3 m-0" id="tab-2ab" style="max-height:264px;min-height:264px;overflow-y: auto;background: #303440;position:relative;;">
-                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/01.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/01.gif" width="100%" /></div>
-                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/02.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/02.gif" width="100%" /></div>
-                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/03.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/03.gif" width="100%" /></div>
-                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/04.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/04.gif" width="100%" /></div>
-                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/05.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/05.gif" width="100%" /></div>
-                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/06.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/06.gif" width="100%" /></div>
-                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/07.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/07.gif" width="100%" /></div>
-                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/08.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/08.gif" width="100%" /></div>
-                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/09.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/09.gif" width="100%" /></div>
-                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/10.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/10.gif" width="100%" /></div>
-                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/11.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/11.gif" width="100%" /></div>
-                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/12.gif';sendDisable=false;" class="col-3 p-3"><img src="/static/images/emoji/basic/12.gif" width="100%" /></div>
+                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/01.gif';sendDisable=false;" class="col-3 p-3"><img src="https://d34l91104zg4p3.cloudfront.net/emoji/basic/01.gif" width="100%" /></div>
+                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/02.gif';sendDisable=false;" class="col-3 p-3"><img src="https://d34l91104zg4p3.cloudfront.net/emoji/basic/02.gif" width="100%" /></div>
+                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/03.gif';sendDisable=false;" class="col-3 p-3"><img src="https://d34l91104zg4p3.cloudfront.net/emoji/basic/03.gif" width="100%" /></div>
+                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/04.gif';sendDisable=false;" class="col-3 p-3"><img src="https://d34l91104zg4p3.cloudfront.net/emoji/basic/04.gif" width="100%" /></div>
+                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/05.gif';sendDisable=false;" class="col-3 p-3"><img src="https://d34l91104zg4p3.cloudfront.net/emoji/basic/05.gif" width="100%" /></div>
+                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/06.gif';sendDisable=false;" class="col-3 p-3"><img src="https://d34l91104zg4p3.cloudfront.net/emoji/basic/06.gif" width="100%" /></div>
+                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/07.gif';sendDisable=false;" class="col-3 p-3"><img src="https://d34l91104zg4p3.cloudfront.net/emoji/basic/07.gif" width="100%" /></div>
+                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/08.gif';sendDisable=false;" class="col-3 p-3"><img src="https://d34l91104zg4p3.cloudfront.net/emoji/basic/08.gif" width="100%" /></div>
+                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/09.gif';sendDisable=false;" class="col-3 p-3"><img src="https://d34l91104zg4p3.cloudfront.net/emoji/basic/09.gif" width="100%" /></div>
+                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/10.gif';sendDisable=false;" class="col-3 p-3"><img src="https://d34l91104zg4p3.cloudfront.net/emoji/basic/10.gif" width="100%" /></div>
+                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/11.gif';sendDisable=false;" class="col-3 p-3"><img src="https://d34l91104zg4p3.cloudfront.net/emoji/basic/11.gif" width="100%" /></div>
+                    <div v-on:click="is_emoji_clicked=true;emoji_url='basic/12.gif';sendDisable=false;" class="col-3 p-3"><img src="https://d34l91104zg4p3.cloudfront.net/emoji/basic/12.gif" width="100%" /></div>
                 </div>
                 <div data-bs-parent="#tab-group-1" class="collapse row pe-3 ps-3 m-0" id="tab-3ab" style="max-height:264px;min-height:264px;overflow-y: auto;background: #303440;position:relative;">
                     
@@ -229,6 +229,13 @@ export default {
       },
   },
   methods: {
+      historyBack() {
+          try {
+              Android.onHistoryBack();
+          } catch (e) {
+
+          }
+      },
       async sendMessage() {
         if (this.sendDisable == false) {
             // 01. 이모지

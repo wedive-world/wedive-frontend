@@ -3,13 +3,13 @@
 
     <div class="header header-fixed header-logo-center">
         <a href="" class="header-title color ellipsis">프로필</a>
-        <a href="#" data-back-button class="font-16 header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
+        <a v-on:click="historyBack()" data-back-button class="font-16 header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
         <a href="#" data-menu="menu-main" class="font-16 header-icon header-icon-4"><i class="fas fa-bars"></i></a>
     </div>
     
-    <div class="card card-clear" data-card-height="80"></div>
+    
 
-    <div class="page-content pb-0"> 
+    <div class="page-content pb-0" style="margin-top: 50px;"> 
         <div class="progress" style="height:6px;">
             <div class="progress-bar border-0 bg-highlight text-start ps-2" 
                     role="progressbar" style="width: 25%" 
@@ -526,8 +526,6 @@ const axios = require("axios")
 export default {
   name: 'HelloWorld',
   mounted() {
-    document.getElementById("footer-bar").classList.add("hide");
-    
     $(".page-title").hide();
     $(".page-title-clear").hide();
     
@@ -548,8 +546,6 @@ export default {
     }, 1000);
     
     if (this.$route.query.header && this.$route.query.header == 'hide') {
-      $(".page-title").hide();
-      $(".page-title-clear").hide();
       $(".header-fixed").hide();
     }
     
@@ -654,6 +650,13 @@ export default {
       },
   },
   methods: {
+      historyBack() {
+          try {
+              Android.onHistoryBack();
+          } catch (e) {
+
+          }
+      },
       imageUserChange({ target: { files = [] } }) {
         if (!files.length) {
           return

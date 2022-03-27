@@ -582,7 +582,7 @@ async function updateAll() {
 
                     if (institutionTypes && institutionTypes.length > 0) {
                         $("#map_box_agency").removeClass("hide");
-                        $("#map_box_agency_img").attr("src", '/static/images/agency/logo_'+institutionTypes[0].toLowerCase()+'.svg');
+                        $("#map_box_agency_img").attr("src", 'https://d34l91104zg4p3.cloudfront.net/agency/logo_'+institutionTypes[0].toLowerCase()+'.svg');
                     }
                     if (price_index && price_index != '') {
                         $("#map_box_price").removeClass("hide");

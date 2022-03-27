@@ -62,7 +62,7 @@
                 </div>
 
                 <div style="margin-top:8px;"><span class="font-600"><img class="ext-img" src="https://d34l91104zg4p3.cloudfront.net/assets/ico_chat.png" width="18"/> {{ (getDiveCenterByUniqueName.reviewCount)?getDiveCenterByUniqueName.reviewCount:'0' }}</span>&nbsp;<font class="color-gray-light">|</font>&nbsp;
-                <span v-if="getDiveCenterByUniqueName.institutionTypes && getDiveCenterByUniqueName.institutionTypes.length > 0"><span v-for="(insti,index) in getDiveCenterByUniqueName.institutionTypes" v-if="index < 6" v-on:click="openInstitutionBottomSheet(insti)"><img class="ext-img" :src="'/static/images/agency/logo_'+insti.toLowerCase()+'.svg'" height="17" style="padding-bottom: 1px;" /><span v-if="index != (getDiveCenterByUniqueName.institutionTypes.length-1)">&nbsp;&nbsp;</span></span>&nbsp;<font class="color-gray-light">|</font>&nbsp;</span>
+                <span v-if="getDiveCenterByUniqueName.institutionTypes && getDiveCenterByUniqueName.institutionTypes.length > 0"><span v-for="(insti,index) in getDiveCenterByUniqueName.institutionTypes" v-if="index < 6" v-on:click="openInstitutionBottomSheet(insti)"><img class="ext-img" :src="'https://d34l91104zg4p3.cloudfront.net/agency/logo_'+insti.toLowerCase()+'.svg'" height="17" style="padding-bottom: 1px;" /><span v-if="index != (getDiveCenterByUniqueName.institutionTypes.length-1)">&nbsp;&nbsp;</span></span>&nbsp;<font class="color-gray-light">|</font>&nbsp;</span>
                 <span v-if="interest.type=='priceIndex'" v-for="interest in getDiveCenterByUniqueName.interests" class="color-gray">{{interest.title.replace(/\$/gi, '₩')}}</span>
                 <!--<span class="badge font-10 bg-fade-gray-dark">PADI 공식</span>-->
                 </div>
@@ -1738,7 +1738,7 @@ export default {
       openInstitutionBottomSheet(insti) {
             this.open_insti = insti;
 
-            var menuLoad = '/static/images/agency/'+(this.open_insti ? this.open_insti.toLowerCase().replace('/','_'): 'empty')+'.html';
+            var menuLoad = 'https://d34l91104zg4p3.cloudfront.net/agency/'+(this.open_insti ? this.open_insti.toLowerCase().replace('/','_'): 'empty')+'.html';
             console.log(menuLoad);
             var institutionBottomSheetContent = document.getElementById('institutionBottomSheetContent');
             console.log(menuLoad);
@@ -1750,7 +1750,7 @@ export default {
                     this.$refs.institutionBottomSheet.open();
                     $('[data-toggle="tooltip"]').tooltip()
                 } else {
-                    var menuLoad = '/static/images/agency/empty.html';
+                    var menuLoad = 'https://d34l91104zg4p3.cloudfront.net/agency/empty.html';
                     var institutionBottomSheetContent = document.getElementById('institutionBottomSheetContent');
                     fetch(menuLoad)
                     .then(data => data.text())

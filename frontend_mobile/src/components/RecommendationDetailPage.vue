@@ -2,7 +2,7 @@
   <div class="text-center">
     <div class="header header-fixed header-logo-center">
         <a href="" class="header-title color ellipsis" style="width: 250px;left: 36%;" v-html="getPreviewsByRecommendationId ? getPreviewsByRecommendationId.recommendationTitle : ''"></a>
-        <a href="#" data-back-button class="font-16 header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
+        <a v-on:click="historyBack()" data-back-button class="font-16 header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
     </div>
     <pull-to :top-load-method="refresh" @top-state-change="stateChange" :top-config="TOP_DEFAULT_CONFIG" :is-bottom-bounce="false" :is-top-bounce="scrollTop == 0" style="margin-top: 50px;">
         <template class="text-center" slot="top-block" slot-scope="props">
@@ -74,6 +74,13 @@ export default {
       PullTo,
   },
   methods: {
+      historyBack() {
+          try {
+              Android.onHistoryBack();
+          } catch (e) {
+
+          }
+      },
       async refresh(loaded) {
         if ($(document).scrollTop() == 0) {
             setTimeout(function() {

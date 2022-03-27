@@ -3,7 +3,7 @@
     <div data-menu-active="nav-site"></div>
     <div class="header header-fixed header-logo-center">
         <a href="" class="header-title color">버블탱크 다이빙센터</a>
-        <a href="#" data-back-button class="font-16 header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
+        <a v-on:click="historyBack()" data-back-button class="font-16 header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
         <a href="#" data-menu="menu-main" class="font-16 header-icon header-icon-4"><i class="fas fa-bars"></i></a>
         <a href="#" data-toggle-theme class="font-16 header-icon header-icon-3 show-on-theme-dark"><i class="fas fa-sun"></i></a>
         <a href="#" data-toggle-theme class="font-16 header-icon header-icon-3 show-on-theme-light"><i class="fas fa-moon"></i></a>
@@ -581,6 +581,13 @@ export default {
         
     }
   }, methods: {
+      historyBack() {
+          try {
+              Android.onHistoryBack();
+          } catch (e) {
+
+          }
+      },
       reserve_next: function() {
           setTimeout(function() {
             const activeMenu = document.querySelectorAll('.menu-active');

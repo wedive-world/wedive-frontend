@@ -3,7 +3,7 @@
     <div data-menu-active="nav-site"></div>
     <div class="header header-fixed header-logo-center">
         <a href="" class="header-title color">지도</a>
-        <a href="#" data-back-button class="font-16 header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
+        <a v-on:click="historyBack()" data-back-button class="font-16 header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
         <a href="#" data-menu="menu-main" class="font-16 header-icon header-icon-4"><i class="fas fa-bars"></i></a>
         <a href="#" data-toggle-theme class="font-16 header-icon header-icon-3 show-on-theme-dark"><i class="fas fa-sun"></i></a>
         <a href="#" data-toggle-theme class="font-16 header-icon header-icon-3 show-on-theme-light"><i class="fas fa-moon"></i></a>
@@ -31,7 +31,7 @@
                             <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
                                 &nbsp;<span id="map_box_shop_star"></span>
                                 &nbsp;<font class="color-gray-light">|</font>&nbsp;
-                                <img id="map_box_shop_fed" src="/static/images/agency/logo_padi.svg" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
+                                <img id="map_box_shop_fed" src="https://d34l91104zg4p3.cloudfront.net/agency/logo_padi.svg" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
                                 &nbsp;<font class="color-gray-light">|</font>&nbsp;
                                 <span id="map_box_shop_price"></span>
                             </p>
@@ -554,7 +554,13 @@ export default {
         marker_list: [],
     }
   }, methods: {
-      
+      historyBack() {
+          try {
+              Android.onHistoryBack();
+          } catch (e) {
+
+          }
+      },
   }
 
   

@@ -2,7 +2,7 @@
   <div class="text-center">
     <div class="header header-fixed header-logo-center">
         <a href="" class="header-title color ellipsis">리뷰 전체보기</a>
-        <a href="#" data-back-button class="font-16 header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
+        <a v-on:click="historyBack()" data-back-button class="font-16 header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
     </div>
     <pull-to :bottom-load-method="loadmore" @bottom-state-change="stateChange" :top-load-method="refresh" @top-state-change="stateChange" :top-config="TOP_DEFAULT_CONFIG" :bottom-config="BOTTOM_DEFAULT_CONFIG" :is-top-bounce="scrollTop == 0" :is-bottom-bounce="scrollTop>scrollHeight" style="margin-top: 50px;">
         <template class="text-center" slot="top-block" slot-scope="props">
@@ -125,6 +125,13 @@ export default {
       VueStar,
   },
   methods: {
+      historyBack() {
+          try {
+              Android.onHistoryBack();
+          } catch (e) {
+
+          }
+      },
       async likeAnimation(item, isBottom) {
         if (item.likes == null) item.likes = 0;
 

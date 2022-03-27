@@ -3,7 +3,7 @@
     <div data-menu-active="nav-buddy"></div>
     <div class="header header-fixed header-logo-center">
         <a href="" class="header-title color ellipsis">버디 모집</a>
-        <a href="#" data-back-button class="font-16 header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
+        <a v-on:click="historyBack()" data-back-button class="font-16 header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
     </div>
     
     <div class="card card-clear" data-card-height="80"></div>
@@ -149,6 +149,13 @@ export default {
         login_word : (localStorage.idToken == null) ? '로그인' : '등록',
     }
   }, methods: {
+      historyBack() {
+          try {
+              Android.onHistoryBack();
+          } catch (e) {
+
+          }
+      },
       openBottomSheet() {
         if(this.idToken != null && this.nickName != null)
           this.$refs.myBottomSheet.open();

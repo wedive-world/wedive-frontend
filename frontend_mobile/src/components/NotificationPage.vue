@@ -2,7 +2,7 @@
   <div class="">
     <div class="header header-fixed header-logo-center">
         <a href="" class="header-title color ellipsis">알림</a>
-        <a href="#" data-back-button class="font-16 header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
+        <a v-on:click="historyBack()" data-back-button class="font-16 header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
     </div>
     <div data-menu-active="nav-other"></div>
 
@@ -150,6 +150,13 @@ export default {
     PullTo,
   },
   methods: {
+    historyBack() {
+          try {
+              Android.onHistoryBack();
+          } catch (e) {
+
+          }
+    },
     async refresh(loaded) {
         if ($(document).scrollTop() == 0) {
           await this.$apollo.queries.getNotifications.refetch()

@@ -3,7 +3,7 @@
     <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-site" data-menu-load=""></div>
     <div class="header header-fixed header-logo-center">
         <a href="" class="header-title color ellipsis">{{ getDivingById.title }}</a>
-        <a href="#" data-back-button class="font-16 header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
+        <a v-on:click="historyBack()" data-back-button class="font-16 header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
         <a href="#" class="font-16 header-icon header-icon-4"><img src="https://d34l91104zg4p3.cloudfront.net/assets/ico_share.png" width="20"/></a>
     </div>
     
@@ -215,7 +215,7 @@
                         <p class="pb-0 mb-0"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
                             <span> {{ (location.adminScore/20).toFixed(1) }} </span>
                             &nbsp;<font class="color-gray-light">|</font>&nbsp;
-                            <span v-if="location.institutionTypes && location.institutionTypes.length > 0"><span v-for="(insti,index) in location.institutionTypes" v-if="index < 4"><img class="ext-img" :src="'/static/images/agency/logo_'+insti.toLowerCase()+'.svg'" height="17" style="padding-bottom: 1px;" /><span v-if="index != (location.institutionTypes.length-1)">&nbsp;&nbsp;</span></span>&nbsp;<font class="color-gray-light">|</font>&nbsp;</span>
+                            <span v-if="location.institutionTypes && location.institutionTypes.length > 0"><span v-for="(insti,index) in location.institutionTypes" v-if="index < 4"><img class="ext-img" :src="'https://d34l91104zg4p3.cloudfront.net/agency/logo_'+insti.toLowerCase()+'.svg'" height="17" style="padding-bottom: 1px;" /><span v-if="index != (location.institutionTypes.length-1)">&nbsp;&nbsp;</span></span>&nbsp;<font class="color-gray-light">|</font>&nbsp;</span>
                             <span v-if="interest.type=='priceIndex'" v-for="interest in location.interests" class="color-gray">{{interest.title.replace(/\$/gi, '₩')}}</span>
                         </p>
                     </div>
@@ -759,6 +759,13 @@ export default {
     }
   },
   methods: {
+      historyBack() {
+          try {
+              Android.onHistoryBack();
+          } catch (e) {
+
+          }
+      },
       goChatRoom(chatRoomId) {
           location.href = '/chat/' + chatRoomId;
       },

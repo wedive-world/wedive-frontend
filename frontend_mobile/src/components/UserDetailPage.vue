@@ -2,7 +2,7 @@
   <div class="">
     <div class="header header-fixed header-logo-center">
         <a href="" class="header-title color ellipsis">사용자 프로필</a>
-        <a href="#" data-back-button class="font-16 header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
+        <a v-on:click="historyBack()" data-back-button class="font-16 header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
         <a href="#" class="font-16 header-icon header-icon-4"><img src="https://d34l91104zg4p3.cloudfront.net/assets/ico_share.png" width="20"/></a>
     </div>
     
@@ -80,7 +80,7 @@
                         <p class="mb-0 font-noto font-20 font-500">{{ userData.scubaLevelShow }} 자격증</p>
                         <p class="mb-0 font-noto font-12 font-400" style="color: #c1c2c3">BY {{ userData.scubaLicenseType }}</p>
                     </div>
-                    <img :src="(userData.scubaLicenseType)?'/static/images/agency/logo_'+userData.scubaLicenseType.toLowerCase()+'.svg':''" height="20" style="position: absolute;right: 10px; bottom:10px;"/>
+                    <img :src="(userData.scubaLicenseType)?'https://d34l91104zg4p3.cloudfront.net/agency/logo_'+userData.scubaLicenseType.toLowerCase()+'.svg':''" height="20" style="position: absolute;right: 10px; bottom:10px;"/>
                 </div>
             </div>
         </div>
@@ -95,7 +95,7 @@
                         <p class="mb-0 font-noto font-20 font-500">{{ userData.freeLevelShow }} 자격증</p>
                         <p class="mb-0 font-noto font-12 font-400" style="color: #c1c2c3">BY {{ userData.freeLicenseType }}</p>
                     </div>
-                    <img :src="(userData.freeLicenseType)?'/static/images/agency/logo_'+userData.freeLicenseType.toLowerCase()+'.svg':''" height="20" style="position: absolute;right: 10px; bottom:10px;"/>
+                    <img :src="(userData.freeLicenseType)?'https://d34l91104zg4p3.cloudfront.net/agency/logo_'+userData.freeLicenseType.toLowerCase()+'.svg':''" height="20" style="position: absolute;right: 10px; bottom:10px;"/>
                 </div>
             </div>
         </div>
@@ -336,6 +336,13 @@ export default {
     }
   },
   methods: {
+      historyBack() {
+          try {
+              Android.onHistoryBack();
+          } catch (e) {
+
+          }
+      },
       async viewUserImage(profileImages) {
           if ($("#userProfileImage").hasClass("large-image") == false) {
             var _id = (profileImages && profileImages.length > 0) ? profileImages[0]._id : '';

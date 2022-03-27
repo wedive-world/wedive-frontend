@@ -3,7 +3,7 @@
     <div data-menu-active="nav-site"></div>
     <div class="header header-fixed header-logo-center">
         <a href="" class="header-title color ellipsis">나의 버디찾기</a>
-        <a href="#" data-back-button class="font-16 header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
+        <a v-on:click="historyBack()" data-back-button class="font-16 header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
     </div>
 
     <div class="page-content transform-none" style="margin-top: 50px;padding:0;">
@@ -164,6 +164,13 @@ export default {
     }
   },
   methods: {
+      historyBack() {
+          try {
+              Android.onHistoryBack();
+          } catch (e) {
+
+          }
+      },
       setData(_divingData) {
           this.divingData = _divingData;
           this.divingData.sort(function(a, b) {

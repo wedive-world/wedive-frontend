@@ -2,7 +2,7 @@
   <div class="">
     <div class="header header-fixed header-logo-center">
         <a href="" class="header-title color ellipsis">리뷰 전체보기</a>
-        <a href="#" data-back-button class="font-16 header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
+        <a v-on:click="historyBack()" data-back-button class="font-16 header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
     </div>
     <div data-menu-active="nav-other"></div>
     <div class="page-content pb-0" style="margin-top: 50px;">
@@ -131,6 +131,13 @@ export default {
         reviewData: [],
     }
   }, methods: {
+    historyBack() {
+          try {
+              Android.onHistoryBack();
+          } catch (e) {
+
+          }
+      },
     setData(reviewData) {
         this.reviewData = reviewData;
     },
