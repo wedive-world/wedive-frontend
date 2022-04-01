@@ -109,7 +109,7 @@
         
         <div v-if="getDiveCenterByUniqueName.educations && getDiveCenterByUniqueName.educations.length > 0" class="card card-style">
             <div class="content mb-0 mt-3" id="tab-group-1">
-                <div class="tab-controls tabs-small tabs-rounded" data-highlight="bg-highlight">
+                <div class="tab-controls tabs-small tabs-rounded" data-highlight="bg-secondary">
                     <a v-if="getDiveCenterByUniqueName.educations && getDiveCenterByUniqueName.educations.filter(x=>x.type.includes('education')).length > 0" href="#" data-active data-bs-toggle="collapse" data-bs-target="#tab-1ab">교육</a>
                     <a v-else-if="getDiveCenterByUniqueName.educations && getDiveCenterByUniqueName.educations.filter(x=>x.type.includes('fun')).length > 0" href="#" data-bs-toggle="collapse" data-bs-target="#tab-2ab">펀 다이빙</a>
                     <a v-else-if="getDiveCenterByUniqueName.educations && getDiveCenterByUniqueName.educations.filter(x=>x.type.includes('experience')).length > 0" href="#" data-bs-toggle="collapse" data-bs-target="#tab-3ab">체험 다이빙</a>
@@ -646,7 +646,12 @@
 
 
         <div data-menu-load="/static/menu-footer.html"></div>
-
+        <div id="footer-bar-shop" class="d-flex" style="min-height: 52px !important;height: 52px !important;">
+            <div class="flex-fill speach-input p-2">
+            <a data-menu="menu-finish" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0mb-5 font-noto">예약</a>
+            
+            </div>
+        </div>
     </div>
 
 
@@ -904,341 +909,6 @@ const axios = require("axios")
 
 export default {
   name: 'HelloWorld',
-  /*async beforeRouteEnter(to, from, next) {
-    if (to.params.id != null) {
-        var result = await axios({
-        url: 'https://api.wedives.com/graphql',
-        method: 'post',
-        headers: {
-            countrycode: 'ko',
-            idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-        },
-        data: {
-            query: `
-                query GetDiveCenterByUniqueName($uniqueName: String!) {
-                    getDiveCenterByUniqueName(uniqueName: $uniqueName) {
-                        _id
-                        managers {
-                        _id
-                        name
-                        email
-                        gender
-                        birthAge
-                        }
-                        clerks {
-                        _id
-                        name
-                        email
-                        gender
-                        birthAge
-                        }
-                        divingType
-                        phoneNumber
-                        email
-                        enteranceFee
-                        enteranceLevelFree
-                        enteranceLevelScuba
-                        openingHours
-                        institutionTypes
-                        webPageUrl
-                        geoAddress
-                        adminScore
-                        viewScore
-                        educationScore
-                        facilityScore
-                        serviceScore
-                        wediveComments
-                        divePoints {
-                            _id
-                            name
-                            uniqueName
-                            adminScore
-                            highlightDescription
-                            latitude
-                            longitude
-                            backgroundImages {
-                                _id
-                                reference
-                                thumbnailUrl
-                            }
-                        }
-                        images {
-                            _id
-                            reference
-                            thumbnailUrl
-                        }
-                        backgroundImages {
-                            _id
-                            reference
-                            thumbnailUrl
-                        }
-                        interests {
-                            _id
-                            title
-                            type
-                        }
-                        tickets {
-                            _id
-                            price
-                            unitName
-                            name
-                            uniqueName
-                            days
-                            hours
-                            amount
-                        }
-                        educations {
-                            _id
-                            price
-                            type
-                            unitName
-                            name
-                            uniqueName
-                            days
-                            hours
-                            amount
-                            images {
-                                _id
-                                reference
-                                thumbnailUrl
-                            }
-                            interests {
-                                _id
-                                title
-                                type
-                            }
-                        }
-                        courses {
-                            _id
-                            price
-                            unitName
-                            name
-                            uniqueName
-                            days
-                            hours
-                            amount
-                        }
-                        rentals {
-                            _id
-                            price
-                            unitName
-                            name
-                            uniqueName
-                            days
-                            hours
-                            amount
-                        }
-                        name
-                        uniqueName
-                        description
-                        youtubeVideoIds
-                        referenceUrls
-                        memo
-                        address
-                        latitude
-                        longitude
-                        countryCode
-                        publishStatus
-                        reviews {
-                            _id
-                            targetId
-                            targetType
-                            author {
-                                name
-                                email
-                                _id
-                                profileImages {
-                                    thumbnailUrl
-                                }
-                            }
-                            title
-                            content
-                            images {
-                                _id
-                                thumbnailUrl
-                            }
-                            rating
-                            reviewCount
-                            views
-                            isUserLike
-                            isUserDislike
-                            likes
-                            dislikes
-                            createdAt
-                        }
-                        likes
-                        views
-                        reviewCount
-                        isUserSubscribe
-                        isUserLike
-                    }
-                }
-            `,
-            variables: {
-                uniqueName: to.params.id
-            }
-
-        }
-        });
-        if (result.data.error && result.data.error.length > 0) {
-            location.reload();
-        }
-        if (localStorage.idToken) {
-            await axios({
-                url: 'https://api.wedives.com/graphql',
-                method: 'post',
-                headers: {
-                    countrycode: 'ko',
-                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-                },
-                data: {
-                    query: `
-                    mutation Mutation($targetId: ID!, $targetType: UserReactionTargetType!) {
-                        view(targetId: $targetId, targetType: $targetType)
-                    }
-                    `,
-                    variables: {
-                        "targetId": to.params.id,
-                        "targetType": "diveCenter"
-                    }
-                }
-            });
-        }
-        
-        if (result.data.data.getDiveCenterByUniqueName.backgroundImages.length > 0) {
-            for (var i=0; i<result.data.data.getDiveCenterByUniqueName.backgroundImages.length; i++) {
-                result.data.data.getDiveCenterByUniqueName.backgroundImages[i].url = '/static/empty.jpg';
-            }
-            var id_arr = [];
-            var width_arr = [];
-            for (var i=0; i<result.data.data.getDiveCenterByUniqueName.backgroundImages.length; i++) {
-                id_arr.push(result.data.data.getDiveCenterByUniqueName.backgroundImages[i]._id);
-                width_arr.push(720);
-            }
-            if (id_arr.length > 0) {
-                var result_image = await axios({
-                url: 'https://api.wedives.com/graphql',
-                method: 'post',
-                headers: {
-                    countrycode: 'ko',
-                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-                },
-                data: {
-                    query: `
-                        query Query($ids: [ID], $widths: [Int]) {
-                            getImageUrlsByIds(_ids: $ids, widths: $widths)
-                        }
-                    `,
-                    variables: {
-                        ids: id_arr,
-                        widths: width_arr
-                    }
-
-                }
-                });
-                if (result_image.data.data.getImageUrlsByIds) {
-                    for (var i=0; i<result_image.data.data.getImageUrlsByIds.length; i++) {
-                        result.data.data.getDiveCenterByUniqueName.backgroundImages[i].url = result_image.data.data.getImageUrlsByIds[i];
-                        //$(".background_img_" + i).css("background", "url(" + result_image.data.data.getImageUrlsByIds[i] + ")");
-                    }
-                }
-            }
-        }
-
-
-        if (result.data.data.getDiveCenterByUniqueName.images.length > 0) {
-            for (var i=0; i<result.data.data.getDiveCenterByUniqueName.images.length; i++) {
-                result.data.data.getDiveCenterByUniqueName.images[i].url = '/static/empty.jpg';
-            }
-            var id_arr = [];
-            var width_arr = [];
-            for (var i=0; i<result.data.data.getDiveCenterByUniqueName.images.length; i++) {
-                id_arr.push(result.data.data.getDiveCenterByUniqueName.images[i]._id);
-                width_arr.push(720);
-            }
-            if (id_arr.length > 0) {
-                var result_image = await axios({
-                url: 'https://api.wedives.com/graphql',
-                method: 'post',
-                headers: {
-                    countrycode: 'ko',
-                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-                },
-                data: {
-                    query: `
-                        query Query($ids: [ID], $widths: [Int]) {
-                            getImageUrlsByIds(_ids: $ids, widths: $widths)
-                        }
-                    `,
-                    variables: {
-                        ids: id_arr,
-                        widths: width_arr
-                    }
-
-                }
-                });
-                if (result_image.data.data.getImageUrlsByIds) {
-                    for (var i=0; i<result_image.data.data.getImageUrlsByIds.length; i++) {
-                        result.data.data.getDiveCenterByUniqueName.images[i].url = result_image.data.data.getImageUrlsByIds[i];
-                        //$(".center_image > [data-index="+i+"]").parent().attr("href", result.data.data.getDiveCenterByUniqueName.images[i].url);
-                    }
-                }
-            }
-            
-        }
-
-        // points 내 하이라이트 이미지 리스트
-        if (result.data.data.getDiveCenterByUniqueName.divePoints.length > 0) {
-            for (var j=0; j<result.data.data.getDiveCenterByUniqueName.divePoints.length; j++) {
-                for (var i=0; i<result.data.data.getDiveCenterByUniqueName.divePoints[j].highlights.length; i++) {
-                    if (result.data.data.getDiveCenterByUniqueName.divePoints[j].highlights[i].images && result.data.data.getDiveCenterByUniqueName.divePoints[j].highlights[i].images.length>0) {
-                        result.data.data.getDiveCenterByUniqueName.divePoints[j].highlights[i].images[0].url = '/static/empty.jpg';
-                    }
-                }
-                var id_arr = [];
-                var width_arr = [];
-                for (var i=0; i<result.data.data.getDiveCenterByUniqueName.divePoints[j].highlights.length; i++) {
-                    if (result.data.data.getDiveCenterByUniqueName.divePoints[j].highlights[i].images && result.data.data.getDiveCenterByUniqueName.divePoints[j].highlights[i].images.length > 0) {
-                        id_arr.push(result.data.data.getDiveCenterByUniqueName.divePoints[j].highlights[i].images[0]._id);
-                        width_arr.push(720);
-                    }
-                }
-                if (id_arr.length > 0) {
-                    var result_image = await axios({
-                    url: 'https://api.wedives.com/graphql',
-                    method: 'post',
-                    headers: {
-                        countrycode: 'ko',
-                        idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-                    },
-                    data: {
-                        query: `
-                            query Query($ids: [ID], $widths: [Int]) {
-                                getImageUrlsByIds(_ids: $ids, widths: $widths)
-                            }
-                        `,
-                        variables: {
-                            ids: id_arr,
-                            widths: width_arr
-                        }
-
-                    }
-                    });
-
-                    var cnt = 0;
-                    for (var i=0; i<result.data.data.getDiveCenterByUniqueName.divePoints[j].highlights.length; i++) {
-                        if (result.data.data.getDiveCenterByUniqueName.divePoints[j].highlights[i].images && result.data.data.getDiveCenterByUniqueName.divePoints[j].highlights[i].images.length > 0) {
-                            result.data.data.getDiveCenterByUniqueName.divePoints[j].highlights[i].images[0].url = result_image.data.data.getImageUrlsByIds[cnt++];
-                        }
-                    }
-                }
-            }
-        }
-        next(vm => {vm.setData(result.data.data.getDiveCenterByUniqueName)});
-    } else {
-        location.href = "/";
-    }
-  },*/
   async mounted() {
     if (this.$route.query.header && this.$route.query.header == 'hide') {
         $(".page-title").hide();
@@ -1440,6 +1110,13 @@ export default {
                     reviewCount
                     isUserSubscribe
                     isUserLike
+                }
+            }
+          `,
+          variables() {
+              return {
+                uniqueName: this.uniqueName
+                /*
                     waterTemperature {
                         name
                         currentSeaTemperature
@@ -1463,12 +1140,7 @@ export default {
                         latitude
                         longitude
                     }
-                }
-            }
-          `,
-          variables() {
-              return {
-                uniqueName: this.uniqueName
+                */
               }
           },
           result() {
