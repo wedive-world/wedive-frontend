@@ -767,7 +767,7 @@
             <textarea rows="1" class="wedive-textarea2 wedive-input col-8" placeholder="이름을 입력하세요." v-model="reservation_name"></textarea>
 
             <div class="col-3 font-16 font-noto" style="display: inline-block;vertical-align: top;padding-top: 7px;">전화번호</div>
-            <textarea rows="1" class="wedive-textarea2 wedive-input col-8" placeholder="핸드폰 번호를 입력하세요." v-model="reservation_phone"></textarea>
+            <textarea rows="1" class="wedive-textarea2 wedive-input col-8" placeholder="핸드폰 번호를 입력하세요." v-model="reservation_phone" id="textarea_reservation_phone"></textarea>
 
             <div class="col-3 font-16 font-noto" style="display: inline-block;vertical-align: top;padding-top: 7px;">이메일</div>
             <textarea rows="1" class="wedive-textarea2 wedive-input col-8" placeholder="이메일 주소를 입력하세요." v-model="reservation_email"></textarea>
@@ -826,8 +826,7 @@
 
         <div style="min-height: 62px !important;height: 62px !important;">
             <div class="flex-fill speach-input p-2">
-            <a class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 font-noto font-600"><i class="fas fa-calendar-check me-2"></i>예약 신청하기</a>
-            
+            <a v-on:click="makeReservation()" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 font-noto font-600"><i class="fas fa-calendar-check me-2"></i>예약 신청하기</a>
             </div>
         </div>
     </div>
@@ -1069,7 +1068,9 @@
         </div>
     </vue-bottom-sheet>
 
-    <div id="snackbar-review-success" class="snackbar-toast color-white bg-green-dark" data-bs-delay="1500" data-bs-autohide="true"><i class="fa fa-times me-3"></i>리뷰 등록이 완료되었습니다.</div>
+    <div id="snackbar-review-success" class="snackbar-toast color-white bg-green-dark" data-bs-delay="1500" data-bs-autohide="true" style="z-index:999;"><i class="fa fa-times me-3"></i>리뷰 등록이 완료되었습니다.</div>
+    <div id="snackbar-day-error" class="snackbar-toast color-white bg-red-dark" data-bs-delay="2000" data-bs-autohide="true" style="z-index:999;"><i class="fa fa-times me-3"></i>선택할 수 없는 날짜 입니다.</div>
+    <div id="snackbar-phone-error" class="snackbar-toast color-white bg-red-dark" data-bs-delay="2000" data-bs-autohide="true" style="z-index:999;"><i class="fa fa-times me-3"></i>전화번호를 입력하세요.</div>
   </div>
 </template>
 <script>
@@ -1607,11 +1608,57 @@ export default {
       },
   },
   methods: {
+      async makeReservation() {
+        if (this.reservation_phone == '') {
+            var toastData = 'snackbar-phone-error';
+            var notificationToast = document.getElementById(toastData);
+            var notificationToast = new bootstrap.Toast(notificationToast);
+            notificationToast.show();
+
+            $("#textarea_reservation_phone").focus();
+        } else {
+            console.log(this.selectedDate);
+            var startedAt = (new Date(this.selectedDate.year+"-"+this.selectedDate.month+"-"+this.selectedDate.day+" "+this.hour_show+":00"));
+            var finishedAt = (new Date(this.selectedDate.year+"-"+this.selectedDate.month+"-"+this.selectedDate.day+" 23:00:00"));
+            var result = await axios({
+                url: 'https://api.wedives.com/graphql',
+                method: 'post',
+                headers: {
+                    countrycode: 'ko',
+                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                },
+                data: {
+                    query: `
+                        mutation Mutation {
+                            upsertReservation {
+                                _id
+                            }
+                        }
+                    `,
+                    variables: {
+                        "input": {
+                            diveCenter: this.getDiveCenterByUniqueName._id,
+                            peopleNumber: this.people_show,
+                            startedAt: startedAt,
+                            finishedAt: finishedAt,
+                            name: this.reservation_name,
+                            phoenNumber: this.reservation_phone,
+                        },
+                    }
+                }
+            });
+            if (result && result.data && result.data.data && result.data.data.subscribe == true) {
+                this.subscribe_img = 'ico_subscribe2';
+            } else if (result && result.data && result.data.data && result.data.data.subscribe == false) {
+                this.subscribe_img = 'ico_subscribe';
+            }
+        }
+      },
       onDayClick(day) {
         var yesterday = new Date();
         yesterday.setDate(yesterday.getDate()-1);
         if (new Date(day.id) < yesterday) {
-            var toastData = 'snackbar-error';
+            var toastData = 'snackbar-day-error';
             var notificationToast = document.getElementById(toastData);
             var notificationToast = new bootstrap.Toast(notificationToast);
             notificationToast.show();

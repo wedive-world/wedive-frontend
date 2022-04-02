@@ -46,6 +46,7 @@ import CommunityDetailPage from '@/components/CommunityDetailPage'
 import CommunitySearchPage from '@/components/CommunitySearchPage'
 import OtherDivingPage from '@/components/OtherDivingPage'
 import OtherSubscribePage from '@/components/OtherSubscribePage'
+import OhterReservationPage from '@/components/OhterReservationPage'
 import OtherNotiPage from '@/components/OtherNotiPage'
 import OtherPrivacyPage from '@/components/OtherPrivacyPage'
 
@@ -187,6 +188,11 @@ export default new Router({
       path: '/other/subscribe',
       name: 'OtherSubscribePage',
       component: OtherSubscribePage
+    },
+    {
+      path: '/other/reservation',
+      name: 'OhterReservationPage',
+      component: OhterReservationPage
     },
     {
       path: '/other/noti',

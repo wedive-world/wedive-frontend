@@ -27,6 +27,11 @@
                 <h2 class="font-18 font-600 mb-0">서비스</h2>
             </div>
         </div>
+        <a href="/other/reservation" class="position-relative" style="z-index:1;">
+            <div class="content pb-0">
+                <h2 class="font-15 font-300 mb-0"><img src="https://d34l91104zg4p3.cloudfront.net/assets/other_reservation.png" height="30" /><span class="ms-2 vertical-m">나의 예약</span><i class="wedive-txt-all wedive_right" style="top:22px;"></i></h2>
+            </div>
+        </a>
         <a href="/other/subscribe" class="position-relative" style="z-index:1;">
             <div class="content pb-0">
                 <h2 class="font-15 font-300 mb-0"><img src="https://d34l91104zg4p3.cloudfront.net/assets/other_alarm2.png" height="30" /><span class="ms-2 vertical-m">나의 구독 장소</span><i class="wedive-txt-all wedive_right" style="top:22px;"></i></h2>

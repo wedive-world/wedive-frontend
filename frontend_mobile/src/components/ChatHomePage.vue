@@ -24,8 +24,24 @@
             <a v-on:click="login()" class="btn btn-m mb-3 rounded-xl text-uppercase font-500 shadow-s bg-secondary font-noto"><i class="fas fa-user-lock me-1"></i> {{ login_word }}</a>
         </div>
         <div v-else-if="getJoinedRoomList.length == 0" class="card card-style ms-0 me-0 rounded-0 text-center mb-0" style="height: calc(100vh - 58px);display:block;">
-            <img src="https://d34l91104zg4p3.cloudfront.net/assets/empty_message.jpg" width="60%" style="margin-top: 25%;" />
-            <p class="color-gray mb-2">진행중인 대화가 없습니다.</p>
+            <ContentLoader :width="windowWidth" height="700" id="div_content_loader">
+                <rect x="20" y="20" rx="10" ry="10" width="50" height="50" />
+                <rect x="80" y="30" rx="3" ry="3" :width="windowWidth-100" height="30" />
+                <rect x="20" y="90" rx="10" ry="10" width="50" height="50" />
+                <rect x="80" y="100" rx="3" ry="3" :width="windowWidth-100" height="30" />
+                <rect x="20" y="160" rx="10" ry="10" width="50" height="50" />
+                <rect x="80" y="170" rx="3" ry="3" :width="windowWidth-100" height="30" />
+                <rect x="20" y="230" rx="10" ry="10" width="50" height="50" />
+                <rect x="80" y="240" rx="3" ry="3" :width="windowWidth-100" height="30" />
+                <rect x="20" y="300" rx="10" ry="10" width="50" height="50" />
+                <rect x="80" y="310" rx="3" ry="3" :width="windowWidth-100" height="30" />
+                <rect x="20" y="370" rx="10" ry="10" width="50" height="50" />
+                <rect x="80" y="380" rx="3" ry="3" :width="windowWidth-100" height="30" />
+            </ContentLoader>
+            <div id="div_empty_notice" style="display: none;">
+                <img src="https://d34l91104zg4p3.cloudfront.net/assets/empty_message.jpg" width="60%" style="margin-top: 25%;" />
+                <p class="color-gray mb-2">진행중인 대화가 없습니다.</p>
+            </div>
         </div>
         <div v-else class="card card-style ms-0 me-0 rounded-0 mb-0" style="min-height:calc(100vh - 101px)">
             <div class="content mt-0 mb-0" style="padding-bottom:80px;">
@@ -215,6 +231,7 @@ import gql from 'graphql-tag'
 import { GoogleAuthProvider, getAuth, signInWithPopup, onAuthStateChanged  } from "firebase/auth";
 import VueTypeaheadBootstrap from 'vue-typeahead-bootstrap';
 import PullTo from 'vue-pull-to'
+import { ContentLoader } from 'vue-content-loader'
 
 var today = new Date();
 
@@ -229,17 +246,20 @@ export default {
     if (this.$route.query.footer && this.$route.query.footer == 'hide') {
       $("#footer-bar").hide();
     }
+    init_template();
+    var preloader = document.getElementById('preloader')
+    if(preloader){preloader.classList.add('preloader-hide');}
   },
   components: {
       VueTypeaheadBootstrap,
       PullTo,
+      ContentLoader,
   },
   created() {
     setTimeout(function() {
-        init_template();
-        var preloader = document.getElementById('preloader')
-        if(preloader){preloader.classList.add('preloader-hide');}
-    }, 500);
+        $("#div_content_loader").hide();
+        $("#div_empty_notice").show();
+    }, 2000);
     window.addEventListener('scroll', this.handleScroll);
   },
   beforeDestroy() {
@@ -247,6 +267,7 @@ export default {
   },
   data () {
     return {
+        windowWidth: window.innerWidth,
         getJoinedRoomList: [],
         idToken: localStorage.idToken,
         nickName: localStorage.nickName,
