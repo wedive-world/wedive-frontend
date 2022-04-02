@@ -663,7 +663,11 @@
         data-menu-width="cover"
         data-menu-height="cover"
         style="margin-bottom: 0;">
-        <div class="p-3">
+        <div class="header header-fixed header-logo-center">
+            <a href="" class="close-menu header-title color ellipsis">{{ getDiveCenterByUniqueName.name + ' 예약' }}</a>
+            <a data-back-button class="font-16 header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
+        </div>
+        <div class="p-3" style="margin-top:50px;">
             <div style="position: relative;">
                 <div class="d-flex no-effect" 
                     data-bs-toggle="collapse" 
@@ -1319,13 +1323,6 @@ export default {
                     reviewCount
                     isUserSubscribe
                     isUserLike
-                }
-            }
-          `,
-          variables() {
-              return {
-                uniqueName: this.uniqueName
-                /*
                     waterTemperature {
                         name
                         currentSeaTemperature
@@ -1349,7 +1346,12 @@ export default {
                         latitude
                         longitude
                     }
-                */
+                }
+            }
+          `,
+          variables() {
+              return {
+                uniqueName: this.uniqueName
               }
           },
           result() {

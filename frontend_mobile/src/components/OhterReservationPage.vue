@@ -29,9 +29,9 @@
             </div>
         </template>
         <div class="card mb-0" style="min-height: calc(100vh - 50px);">
-            <div v-for="site in getUserSubsciption.diveSites">
-                <div v-on:click="clickEvent(site, 'site')" class="pt-3 pb-3 pe-4 ps-4 border-bottom">
-                    <div v-if="site.backgroundImages && site.backgroundImages.length>0" class="" style="float: left;position: relative;width: 68px; height:68px;">
+            <div v-for="reservation in getReservationsByCurrentUser">
+                <div v-on:click="clickEvent(reservation, 'reservation')" class="pt-3 pb-3 pe-4 ps-4 border-bottom">
+                    <div v-if="reservation.diveCenter.backgroundImages && reservation.diveCenter.backgroundImages.length>0" class="" style="float: left;position: relative;width: 68px; height:68px;">
                         <div class="thumb-img me-2">
                             <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
                                 <defs>
@@ -40,72 +40,23 @@
                                     <use xlink:href="#shapeSquircle"/>
                                 </clipPath>
                                 </defs>
-                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(site.backgroundImages && site.backgroundImages.length > 0) ? site.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'"/>
+                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(reservation.diveCenter.backgroundImages && reservation.diveCenter.backgroundImages.length > 0) ? reservation.diveCenter.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'"/>
                             </svg>
                         </div>
-                        <!--<img v-bind:src="site.backgroundImages[0].thumbnailUrl" class="rounded-s mx-auto" width="68" height="68" style="object-fit: cover;">-->
+                        <!--<img v-bind:src="reservation.diveCenter.backgroundImages[0].thumbnailUrl" class="rounded-s mx-auto" width="68" height="68" style="object-fit: cover;">-->
                     </div>
                     <div class="" style="padding-left: 82px;">
-                        <h4 class="mb-2 font-16 font-600">{{ site.name }}</h4>
-                        <p class="font-13 pb-0 mb-0 mt-n1 ellipsis2 color-gray" style="line-height: 1.3;">{{ site.description }}</p>
+                        <h4 class="mb-2 font-16 font-600">{{ reservation.diveCenter.name }} 예약</h4>
+                        <p class="font-13 pb-0 mb-0 mt-n1 ellipsis2 color-gray" style="line-height: 1.3;">
+                            예약일시 : {{ reservation.startedAt }}<br/>
+                            예약인원 : {{ reservation.peopleNumber }}<br/>
+                            예 약 자 : {{ reservation.name }}<br/>
+                            전화번호 : {{ reservation.phoneNumber }}<br/>
+                        </p>
                     </div>
                 </div>
             </div>
-            <div v-for="point in getUserSubsciption.divepoints">
-                <div v-on:click="clickEvent(point, 'point')" class="pt-3 pb-3 pe-4 ps-4 border-bottom">
-                    <div v-if="point.backgroundImages && point.backgroundImages.length>0" class="" style="float: left;position: relative;width: 68px; height:68px;">
-                        <div class="thumb-img me-2">
-                            <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
-                                <defs>
-                                <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
-                                <clipPath id="clipSquircle">
-                                    <use xlink:href="#shapeSquircle"/>
-                                </clipPath>
-                                </defs>
-                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(point.backgroundImages && point.backgroundImages.length > 0) ? point.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'"/>
-                            </svg>
-                        </div>
-                        <!--<img v-bind:src="point.backgroundImages[0].thumbnailUrl" class="rounded-s mx-auto" width="68" height="68" style="object-fit: cover;">-->
-                    </div>
-                    <div class="" style="padding-left: 82px;">
-                        <h4 class="mb-2 font-16 font-600">{{ point.name }}</h4>
-                        <p class="font-13 pb-0 mb-0 mt-n1 ellipsis2 color-gray" style="line-height: 1.3;">{{ point.description }}</p>
-                    </div>
-                </div>
-            </div>
-            <div v-for="center in getUserSubsciption.diveCenters">
-                <div v-on:click="clickEvent(center, 'center')" class="pt-3 pb-3 pe-4 ps-4 border-bottom">
-                    <div v-if="center.backgroundImages && center.backgroundImages.length>0" class="" style="float: left;position: relative;width: 68px; height:68px;">
-                        <div class="thumb-img me-2">
-                            <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
-                                <defs>
-                                <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
-                                <clipPath id="clipSquircle">
-                                    <use xlink:href="#shapeSquircle"/>
-                                </clipPath>
-                                </defs>
-                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(center.backgroundImages && center.backgroundImages.length > 0) ? center.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'"/>
-                            </svg>
-                        </div>
-                        <!--<img v-bind:src="center.backgroundImages[0].thumbnailUrl" class="rounded-s mx-auto" width="68" height="68" style="object-fit: cover;">-->
-                    </div>
-                    <div class="" style="padding-left: 82px;">
-                        <h4 class="mb-2 font-16 font-600">{{ center.name }}</h4>
-                        <p class="font-13 pb-0 mb-0 mt-n1 ellipsis2 color-gray" style="line-height: 1.3;">{{ center.description }}</p>
-                    </div>
-                </div>
-            </div>
-            <div v-for="diving in getUserSubsciption.divings">
-                <div v-on:click="clickEvent(diving, 'diving')" class="pt-3 pb-3 pe-4 ps-4 border-bottom">
-                    <div v-if="diving.backgroundImages && diving.backgroundImages.length>0" class="" style="float: left;position: relative;width: 68px; height:68px;">
-                        <img v-bind:src="diving.backgroundImages[0].thumbnailUrl" class="rounded-s mx-auto" width="68" height="68" style="object-fit: cover;">
-                    </div>
-                    <div class="" style="padding-left: 82px;">
-                        <h4 class="mb-2 font-16 font-600">{{ diving.name }}</h4>
-                        <p class="font-13 pb-0 mb-0 mt-n1 ellipsis2 color-gray" style="line-height: 1.3;">{{ diving.description }}</p>
-                    </div>
-                </div>
-            </div>
+            
         </div>
         </pull-to>
     </div>
@@ -148,7 +99,7 @@ export default {
     return {
         skip: 0,
         limit: 10,
-        getUserSubsciption: [],
+        getReservationsByCurrentUser: [],
         login_word : (localStorage.idToken == null) ? '로그인' : '프로필 등록',
         idToken: localStorage.idToken,
         nickName: localStorage.nickName,
@@ -219,7 +170,7 @@ export default {
     },
     async refresh(loaded) {
         if ($(document).scrollTop() == 0) {
-          await this.$apollo.queries.getUserSubsciption.refetch()
+          await this.$apollo.queries.getReservationsByCurrentUser.refetch()
           loaded('done')
         } else {
             console.log("1")
