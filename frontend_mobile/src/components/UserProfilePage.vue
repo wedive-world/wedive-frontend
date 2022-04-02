@@ -184,7 +184,7 @@
                         <i class="fas fa-fish font-17 color-highlight"></i>
                         </div>
                         <div class="form-check interest-check">
-                        <input v-if="interest7===true" v-on:click="interest6=!interest7;" class="form-check-input" type="checkbox" checked="checked" value="" id="check_scuba2">
+                        <input v-if="interest7===true" v-on:click="interest7=!interest7;" class="form-check-input" type="checkbox" checked="checked" value="" id="check_scuba2">
                         <input v-else v-on:click="interest6=!interest7;" class="form-check-input" type="checkbox" value="" id="check_scuba2">
                         <label class="form-check-label rounded-xl border-08" for="check_scuba2">이색포인트</label>
                         <i class="fas fa-grin-stars color-white font-17"></i>

@@ -648,7 +648,7 @@
         <div data-menu-load="/static/menu-footer.html"></div>
         <div id="footer-bar-shop" class="d-flex" style="min-height: 52px !important;height: 52px !important;">
             <div class="flex-fill speach-input p-2">
-            <a data-menu="menu-finish" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0mb-5 font-noto">예약</a>
+            <a data-menu="menu-reservation" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 font-noto font-600"><i class="fas fa-calendar-check me-2"></i>예약</a>
             
             </div>
         </div>
@@ -657,7 +657,180 @@
 
     <!-- End of Page Content--> 
     <!-- All Menus, Action Sheets, Modals, Notifications, Toasts, Snackbars get Placed outside the <div class="page-content"> -->
+    <!-- Menu reservation -->
+    <div id="menu-reservation" 
+        class="menu menu-box-modal rounded-0"
+        data-menu-width="cover"
+        data-menu-height="cover"
+        style="margin-bottom: 0;">
+        <div class="p-3">
+            <div style="position: relative;">
+                <div class="d-flex no-effect" 
+                    data-bs-toggle="collapse" 
+                    href="#collapse1"
+                    role="button" 
+                    aria-expanded="false" 
+                    aria-controls="collapse1"
+                    id="collapse1_area"
+                    v-on:click="collapse1()"
+                    >
+                    <div class="">
+                        <h4 class="pt-3 mb-2 content mt-0 mb-2"><i class="fas fa-calendar me-2"></i>예약일자</h4>
+                        <h4 class="pt-3 mb-2 content mt-0 mb-2 font-300 color-secondary" style="position: absolute;right: 0px;top: 4px;">{{ day_show }}</h4>
+                    </div>
+                    
+                </div>
+                <div class="collapse show" id="collapse1">
+                    <v-calendar
+                        is-expanded
+                        v-model="selectedDate"
+                        @dayclick="onDayClick"
+                        :min-date="new Date()"
+                        :attributes="attributes"
+                        :select-attribute="selectAttribute"
+                        :theme="theme"></v-calendar>
+                </div>
+            </div>
 
+
+
+
+            <div style="position: relative;">
+                <div class="d-flex no-effect" 
+                    data-bs-toggle="collapse" 
+                    href="#collapse2"
+                    role="button" 
+                    aria-expanded="false" 
+                    aria-controls="collapse2"
+                    id="collapse2_area"
+                    v-on:click="collapse2()"
+                    >
+                    <div class="">
+                        <h4 class="pt-3 mb-2 content mt-0 mb-2"><i class="fas fa-clock me-2"></i>예약시간</h4>
+                        <h4 class="pt-3 mb-2 content mt-0 mb-2 font-300 color-secondary" style="position: absolute;right: 0px;top: 4px;">{{hour_show}}</h4>
+                    </div>
+                    
+                </div>
+                <div class="collapse" id="collapse2">
+                    <div class="p-2 row">
+                        <div class="form-check interest-check col-3" v-for="(hour,index) in hour_array" style="width: 25%;margin-left:0px;margin-right:0px;padding-left:calc(var(--bs-gutter-x) * .5);">
+                            <input v-if="(selectedDate && selectedDate.isToday && wediveHourCheck(now, hour))" class="form-check-input" type="radio" name="check_hour" value="" :id="'check_hour'+index" disabled="disabled">
+                            <input v-else class="form-check-input" type="radio" name="check_hour" value="" :id="'check_hour'+index">
+                            <label :class="'form-check-label rounded-xl' + (selectedDate && selectedDate.isToday && wediveHourCheck(now, hour) ? ' vc-text-gray-600' : '')" :for="'check_hour'+index" style="padding-left:12px;" v-on:click="setHour(index, selectedDate, now, hour)">{{hour}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div style="position: relative;">
+                <div class="d-flex no-effect" 
+                    data-bs-toggle="collapse" 
+                    href="#collapse3"
+                    role="button" 
+                    aria-expanded="false" 
+                    aria-controls="collapse3"
+                    id="collapse3_area"
+                    v-on:click="collapse3()"
+                    >
+                    <div class="">
+                        <h4 class="pt-3 mb-2 content mt-0 mb-2"><i class="fas fa-user me-2"></i> 예약인원</h4>
+                        <h4 class="pt-3 mb-2 content mt-0 mb-2 font-300 color-secondary" style="position: absolute;right: 0px;top: 4px;">{{people_show+'명'}}</h4>
+                    </div>
+                    
+                </div>
+                <div class="collapse" id="collapse3">
+                    <div class="p-2 text-end">
+                        <div class="color-highlight font-12">예약인원을 선택하세요.</div>
+                        <div class="mx-auto" style="display: inline-block;">
+                            <div class="stepper">
+                            <a v-on:click="people_show-=1" class="stepper-sub"><i class="fa fa-minus color-theme opacity-40"></i></a>
+                            <input type="number" min="1" max="99" value="1" id="people_count">
+                            <a v-on:click="people_show+=1" class="stepper-add"><i class="fa fa-plus color-theme opacity-40"></i></a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <div class="m-2 p-2 pe-3 ps-3" style="background: #fff4f4;color: #fc4c42;">
+                        당일 예약취소는 유선상 연락주세요.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="divider mb-0" style="height: 12px; border-top: 1px solid rgba(136, 136, 136, 0.25);"></div>
+
+        <div class="p-3 content mt-0 mb-2">
+            <h4 class="row m-0 mb-3">예약자 정보</h4>
+            <div class="col-3 font-16 font-noto" style="display: inline-block;vertical-align: top;padding-top: 7px;">예약자</div>
+            <textarea rows="1" class="wedive-textarea2 wedive-input col-8" placeholder="이름을 입력하세요." v-model="reservation_name"></textarea>
+
+            <div class="col-3 font-16 font-noto" style="display: inline-block;vertical-align: top;padding-top: 7px;">전화번호</div>
+            <textarea rows="1" class="wedive-textarea2 wedive-input col-8" placeholder="핸드폰 번호를 입력하세요." v-model="reservation_phone"></textarea>
+
+            <div class="col-3 font-16 font-noto" style="display: inline-block;vertical-align: top;padding-top: 7px;">이메일</div>
+            <textarea rows="1" class="wedive-textarea2 wedive-input col-8" placeholder="이메일 주소를 입력하세요." v-model="reservation_email"></textarea>
+        </div>
+
+        <div class="divider mb-0" style="height: 12px; border-top: 1px solid rgba(136, 136, 136, 0.25);"></div>
+        
+        <div class="p-3 content mt-0 mb-2">
+            <h4 class="row m-0 mb-3">개인정보 수집, 제공</h4>
+            <div class="accordion mt-3" id="accordion-2">
+                <div class="card card-style shadow-0 bg-gray-light m-0 mb-1" style="border-radius: 8px;">
+                    <button class="btn accordion-btn color-black no-effect" data-bs-toggle="collapse" data-bs-target="#accordion1" style="padding: 10px 17px;">
+                        개인정보 수집 동의
+                        <i class="fa fa-chevron-down font-10 accordion-icon"></i>
+                    </button>
+
+                    <div id="accordion1" class="collapse bg-theme" data-bs-parent="#accordion-2">
+                        <div class="pt-3 pb-3" style="max-height: 160px;overflow-y: auto;background: #fafbfc;">
+                            <p class="agreement_content p-2">
+                                &lt;개인정보 수집 동의&gt;<br><br>
+                                1. 기본수집항목: [필수] 위다이브 아이디, 이름, (휴대)전화번호, [선택] 이메일 주소<br>※ 추가 수집하는 필수항목<br>- 배송, 방문 등이 필요한 상품 구매 시 : 주소<br>- 해외 여행 관련 상품 구매 시 : 여권상 영문명, 여권번호 끝 4자리, 성별, 생년월일, 이메일주소, 카카오톡ID, 동행 아동정보(여권상 영문명, 생년월일, 신장)<br>- 병원을 이용하는 경우: 생년월일 (병원 재진 시 이전 진료기록 조회를 위해 예약자명, 생년월일, 전화번호가 수집될 수 있습니다.)<br><br>
+                                2. 수집 및 이용목적 : 사업자회원과 예약이용자의 원활한 거래 진행, 고객상담, 불만처리 등 민원 처리, 분쟁조정 해결을 위한 기록보존, 위다이브 예약 이용 후 리뷰작성에 따른 위다이브 리워드 지급 및 관련 안내<br><br>
+                                3. 보관기간<br>
+                                - 회원탈퇴 시 지체없이 파기<br>
+                                - 단, 관련 법령에&nbsp;의하여&nbsp;일정&nbsp;기간&nbsp;보관이&nbsp;필요한&nbsp;경우에는&nbsp;해당&nbsp;기간&nbsp;동안&nbsp;보관함<br><br>
+                                4. 동의 거부권 등에 대한 고지: 정보주체는 개인정보의 수집 및 이용 동의를 거부할 권리가 있으나, 이 경우 상품 및 서비스 예약이 제한될 수 있습니다.&nbsp;그 밖의 내용은 위다이브 개인정보 처리방침을 따릅니다.<br>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card card-style shadow-0 bg-gray-light m-0 mb-1" style="border-radius: 8px;">
+                    <button class="btn accordion-btn color-black no-effect" data-bs-toggle="collapse" data-bs-target="#accordion2" style="padding: 10px 17px;">
+                        개인정보 제공 동의
+                        <i class="fa fa-chevron-down font-10 accordion-icon"></i>
+                    </button>
+                    <div id="accordion2" class="collapse bg-theme" data-bs-parent="#accordion-2">
+                        <div class="pt-3 pb-3" style="max-height: 160px;overflow-y: auto;background: #fafbfc;">
+                            <p class="agreement_content p-2">
+                                &lt;개인정보 제공 동의&gt;<br><br>
+                                <span class="font-600">1. 개인정보를 제공받는 자 : {{ getDiveCenterByUniqueName.name }}</span><br><br>
+                                2. 제공하는 기본 개인정보 항목:
+                                &nbsp;[필수] 위다이브 아이디, 이름, (휴대)전화번호, 성별, 연령대, [선택] 이메일 주소<br>※ 추가 제공하는 필수항목<br>- 배송, 방문 등이 필요한 상품 구매 시 : 주소<br>- 해외 여행 관련 상품 구매 시 : 여권상 영문명, 여권번호 끝 4자리, 생년월일, 이메일주소, 카카오톡ID, 동행 아동정보(여권상 영문명, 생년월일, 신장)<br>- 병원을 이용하는 경우: 생년월일 (병원 재진 시 이전 진료기록 조회를 위해 예약자명, 생년월일, 전화번호가 수집될 수 있습니다.)<br><br>
+                                <span class="font-600">3. 개인정보를 제공받는 자의 이용목적 : 사업자회원과 예약이용자의 원활한 거래 진행, 서비스 분석과 통계에 따른 혜택 및 맞춤 서비스 제공, 민원처리 등 고객상담, 고객관리, 서비스 이용에 따른 설문조사 및 혜택 제공, 분쟁조정을 위한 기록보존</span><br><br>
+                                <span class="font-600">4. 개인정보를 제공받는 자의 개인정보 보유 및 이용기간 : 위다이브 회원탈퇴 시 또는 위 개인정보 이용목적 달성 시 까지 이용합니다.</span><br><br>
+                                5. 동의 거부권 등에 대한 고지 : 정보주체는 개인정보 제공 동의를 거부할 권리가 있으나, 이 경우 상품 및 서비스 예약이 제한될 수 있습니다.<br>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-2 color-gray" style="line-height: 1.4;">
+                예약 서비스 이용을 위한 개인정보 수집 및 제3자 제공 규정을 확인하였으며 이에 동의합니다.
+            </div>
+        </div>
+
+        <div style="min-height: 62px !important;height: 62px !important;">
+            <div class="flex-fill speach-input p-2">
+            <a class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 font-noto font-600"><i class="fas fa-calendar-check me-2"></i>예약 신청하기</a>
+            
+            </div>
+        </div>
+    </div>
     <!-- Menu Share -->
     <div id="menu-share" class="menu menu-box-bottom rounded-half">
         <div class="menu-title mt-n1">
@@ -906,6 +1079,7 @@ import gql from 'graphql-tag'
 
 //import { GraphQLClient, request, gql } from "graphql-request";
 const axios = require("axios")
+var weekday_ko = ["", "일", "월", "화", "수", "목", "금", "토"];
 
 export default {
   name: 'HelloWorld',
@@ -951,8 +1125,42 @@ export default {
         enumPopularity: {"nothing":"icon_popularity_01", "unrecommended": "icon_popularity_01", "soso": "icon_popularity_02", "popular": "icon_popularity_03"},
         enumClimate: {"nothing": "weather_sunny", "sunny": "weather_sunny", "cloudy": "weather_partly_cloudy", "rain": "weather_showers", "heavyRain": "weather_heavy_rain"},
         weatherIcon: {"clear sky":"sunny_light","few clouds":"mostly_sunny","broken clouds":"partly_cloudy","scattered clouds":"mostly_cloudy_day","overcast clouds":"cloudy","light rain":"scattered_showers_day","light intensity shower rain":"scattered_showers_day","shower rain":"showers_rain","moderate rain":"heavy_rain","light snow":"flurries","light shower snow":"wintry_mix_rain_snow","snow":"snow_showers_snow","mist":"mist","fog":"fog","haze":"haze_fog_dust_smoke","smoke":"haze_fog_dust_smoke","thunderstorm":"strong_tstorms"},
+
+        day_show: "",
+        hour_show: "",
+        people_show: 1,
+        selectedDate: null,
+        now: new Date(),
+        hour_array: ["7:00", "7:30", "8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30"],
+        theme: {
+            container: {
+            light: 'light-container-class',  // Classes to apply for light mode
+            dark: 'dark-container-class',  // Classes to apply for dark mode
+            }
+        },
+        selectAttribute: {
+            highlight: {
+                backgroundColor: '#08A14A', // green
+                borderColor: '#067B39',
+                borderWidth: '2px',
+                borderStyle: 'solid'
+            },
+            contentStyle: {
+                color: 'white'
+            },
+            // Don't need the date here
+        },
+        reservation_name: localStorage.userName,
+        reservation_phone: '',
+        reservation_email: localStorage.userEmail,
     }
   }, 
+  computed: {
+    attributes() {
+        // Insert today's attribute
+        // Insert weekend attribute
+    },
+  },
   apollo: {
       getDiveCenterByUniqueName: {
           query:gql `
@@ -1399,14 +1607,51 @@ export default {
       },
   },
   methods: {
-      /*setData(_centerData) {
-        this.centerData = _centerData;
-        setTimeout(function() {
-            init_template();
-            var preloader = document.getElementById('preloader')
-            if(preloader){preloader.classList.add('preloader-hide');}
-        }, 1000);
-      },*/
+      onDayClick(day) {
+        var yesterday = new Date();
+        yesterday.setDate(yesterday.getDate()-1);
+        if (new Date(day.id) < yesterday) {
+            var toastData = 'snackbar-error';
+            var notificationToast = document.getElementById(toastData);
+            var notificationToast = new bootstrap.Toast(notificationToast);
+            notificationToast.show();
+        } else {
+            this.selectedDate = day;
+            this.now = new Date();
+            this.day_show = day.month + "." + day.day + " (" + weekday_ko[day.weekdayPosition] + ")";
+            $("#collapse1_area").click();
+            $("#collapse2_area").click();
+        }
+        
+        if (this.day_show != "" && this.hour_show != "") {
+            
+        }
+      },
+      setHour(index, selectedDate, now, hour) {
+        if (selectedDate.isToday) {
+            var now_time = ((now.getHours() < 10 ? '0' + now.getHours() : now.getHours()) + ':' + (now.getMinutes() < 10 ? '0' + now.getMinutes() : now.getMinutes()));
+            if (hour.length == 4) {
+                hour = "0" + hour;
+            }
+            if (hour < now_time)
+                return;
+        }
+        this.hour_show = this.hour_array[index];
+        $("#collapse2_area").click();
+        $("#collapse3_area").click();
+        if (this.day_show != "" && this.hour_show != "") {
+            
+        }
+      },
+      collapse1() {
+        //$("#collapse2_area").click();
+      },
+      collapse2() {
+        //$("#collapse3_area").click();
+      },
+      collapse3() {
+        //$("#collapse4_area").click();
+      },
       openInstitutionBottomSheet(insti) {
             this.open_insti = insti;
 
@@ -1882,4 +2127,13 @@ export default {
 .mx-80 {max-width: 80%;}
 .mx-120 {max-width: 120px;}
 .mx-140 {max-width: 140px;}
+
+
+.stepper {border-color: black;}
+.stepper a {font-size: 14px !important;}
+.stepper a:first-child {border-right-color: black;}
+.stepper a:last-child {border-left-color: black;background: #1d397c;}
+.stepper a:last-child i {color: white !important;}
+.stepper input {font-size: 18px !important;}
+.wedive-textarea2 {max-height: 38px;min-height: 38px;padding-left: 10px;padding-right: 10px;padding-top: 5px;}
 </style>
