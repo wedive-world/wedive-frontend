@@ -42,7 +42,7 @@
             </div>
         </div>
 
-        <ContentLoader :width="windowWidth" height="700" id="div_content_loader" primaryColor="#bac3d6" secondaryColor="#e4e8f2">
+        <ContentLoader :width="windowWidth" height="700" id="div_content_loader" primaryColor="#e3e7ef" secondaryColor="#f4f7ff">
             <rect x="10" y="0" rx="20" ry="20" :width="windowWidth-20" height="120" />
             <rect x="10" y="130" rx="20" ry="20" :width="windowWidth-20" height="170" />
             <rect x="10" y="310" rx="20" ry="20" :width="windowWidth-20" height="50" />

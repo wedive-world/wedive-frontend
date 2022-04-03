@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <div data-menu-active="nav-site"></div>
-    <ContentLoader :width="windowWidth" :height="windowHeight-58" id="div_content_loader" primaryColor="#bac3d6" secondaryColor="#e4e8f2">
+    <ContentLoader :width="windowWidth" :height="windowHeight-58" id="div_content_loader" primaryColor="#e3e7ef" secondaryColor="#f4f7ff">
         <rect x="0" y="0" rx="0" ry="0" :width="windowWidth" height="250" />
         <rect x="40" y="270" rx="10" ry="10" :width="windowWidth-80" height="20" />
         <rect :x="windowWidth/2-50" y="315" rx="10" ry="10" width="100" height="20" />

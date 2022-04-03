@@ -124,7 +124,7 @@
     
     <div v-on:click="speechContentClick()" v-on:scroll="handleScroll" id="speech-content" class="card card-style ms-0 me-0 rounded-0" :style="'height: calc(100vh - 50px);overflow-y: auto;padding-top:'+(is_concierge || divingInfo?'130':'50')+'px;padding-bottom:50px;'">
         <div class="content">
-            <ContentLoader :width="windowWidth" height="700" id="div_content_loader">
+            <ContentLoader :width="windowWidth" height="700" id="div_content_loader" primaryColor="#e3e7ef" secondaryColor="#f4f7ff">
                 <rect x="10" y="60" rx="20" ry="20" width="50" height="50" />
                 <rect x="70" y="60" rx="20" ry="20" :width="windowWidth/2-20" height="50" />
                 <rect x="10" y="120" rx="20" ry="20" width="50" height="50" />
