@@ -119,18 +119,25 @@
                     
                 </div>
             </div>
-
-
-
-
-
-
-
         </div>
     </div>
     
     <div v-on:click="speechContentClick()" v-on:scroll="handleScroll" id="speech-content" class="card card-style ms-0 me-0 rounded-0" :style="'height: calc(100vh - 50px);overflow-y: auto;padding-top:'+(is_concierge || divingInfo?'130':'50')+'px;padding-bottom:50px;'">
         <div class="content">
+            <ContentLoader :width="windowWidth" height="700" id="div_content_loader">
+                <rect x="10" y="60" rx="20" ry="20" width="50" height="50" />
+                <rect x="70" y="60" rx="20" ry="20" :width="windowWidth/2-20" height="50" />
+                <rect x="10" y="120" rx="20" ry="20" width="50" height="50" />
+                <rect x="70" y="120" rx="20" ry="20" :width="windowWidth/2-20" height="50" />
+                <rect :x="windowWidth-60" y="180" rx="20" ry="20" width="50" height="50" />
+                <rect :x="windowWidth/2-20" y="180" rx="20" ry="20" :width="windowWidth/2-50" height="50" />
+                <rect x="10" y="240" rx="20" ry="20" width="50" height="50" />
+                <rect x="70" y="240" rx="20" ry="20" :width="windowWidth/2-20" height="50" />
+                <rect :x="windowWidth-60" y="300" rx="20" ry="20" width="50" height="50" />
+                <rect :x="windowWidth/2-20" y="300" rx="20" ry="20" :width="windowWidth/2-50" height="50" />
+                <rect :x="windowWidth-60" y="360" rx="20" ry="20" width="50" height="50" />
+                <rect :x="windowWidth/2-20" y="360" rx="20" ry="20" :width="windowWidth/2-50" height="50" />
+            </ContentLoader>
             <div v-for="(chat, index) in getChatRoomInfo.chatMessages">
                 <div v-if="chat.type == 'message'">
                     <div v-if="chat && chat.author && chat.author.uid == uid">
@@ -513,16 +520,8 @@
 <script>
 import gql from 'graphql-tag'
 import VueTypeaheadBootstrap from 'vue-typeahead-bootstrap';
+import { ContentLoader } from 'vue-content-loader'
 const axios = require("axios")
-
-
-
-
-
-
-
-
-
 var today = new Date();
 
 function hideKeyboard() {
@@ -692,6 +691,9 @@ export default {
             }
         },
         result (data) {
+            setTimeout(function() {
+                $("#div_content_loader").hide();
+            },200);
             if (data.data.getChatRoomInfo.chatRoom.type == "direct" && data.data.getChatRoomInfo.chatRoom.chatUsers.filter(x=>x._id == "hdcBRWybv6EG4kyDr").length > 0){
                 this.is_concierge = true;
             }
@@ -752,6 +754,10 @@ export default {
     },
   },
   mounted() {
+    init_template();
+    var preloader = document.getElementById('preloader')
+    if(preloader){preloader.classList.add('preloader-hide');}
+    
     $(".page-title").hide();
     $(".page-title-clear").hide();
     document.getElementById("page-back").classList.remove("hide");
@@ -782,15 +788,9 @@ export default {
   },
   components: {
     VueTypeaheadBootstrap,
+    ContentLoader,
   },
   created() {
-    setTimeout(function() {
-        init_template();
-        var preloader = document.getElementById('preloader')
-        if(preloader){preloader.classList.add('preloader-hide');}
-        
-    }, 500);
-    
     window.addEventListener('native.showkeyboard', this.keyboardShowHandler);
   },
   destroyed () {
@@ -798,6 +798,7 @@ export default {
   },
   data () {
     return {
+        windowWidth: window.innerWidth,
         query: '',
         selectedlocation: null,
         locations: [],
