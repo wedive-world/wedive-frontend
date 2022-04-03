@@ -659,7 +659,8 @@
         <div data-menu-load="/static/menu-footer.html"></div>
         <div id="footer-bar-shop" class="d-flex" style="min-height: 52px !important;height: 52px !important;">
             <div class="flex-fill speach-input p-2">
-            <a data-menu="menu-reservation" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 font-noto font-600"><i class="fas fa-calendar-check me-2"></i>예약</a>
+            <a v-if="getDiveCenterByUniqueName.uniqueName == 'k26'" href="https://m.k-26.com/reservation/reserved_user.php" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 font-noto font-600"><i class="fas fa-calendar-check me-2"></i>예약</a>
+            <a v-else data-menu="menu-reservation" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 font-noto font-600"><i class="fas fa-calendar-check me-2"></i>예약</a>
             
             </div>
         </div>
@@ -669,14 +670,45 @@
     <!-- End of Page Content--> 
     <!-- All Menus, Action Sheets, Modals, Notifications, Toasts, Snackbars get Placed outside the <div class="page-content"> -->
     <!-- Menu reservation -->
+    <div id="menu-reservation-confirmed" 
+        class="menu menu-box-modal rounded-0"
+        data-menu-width="cover"
+        data-menu-height="cover"
+        style="margin-bottom: 0;">
+        <div class="text-center">
+            <i class="fas fa-check-circle color-secondary" style="font-size:50px;margin-top:40%;"></i>
+            <div class="font-noto font-500 font-20 mt-2">예약 접수완료</div>
+            <div class="font-noto color-gray mt-3" style="line-height:1.5;">담당자가 확인중입니다.<br/>{{ getDiveCenterByUniqueName.name }}는 평균 10분내 예약이 완료됩니다.</div>
+        </div>
+        <div class="font-noto me-4 ms-4" style="margin-top:30%;">
+            <p class="color-gray pb-1 mb-1" style="border-bottom: 2px dotted #e1e2e3;">센터명
+                <span class="color-black" style="float:right;">{{ getDiveCenterByUniqueName.name }}</span>
+            </p>
+            <p class="color-gray mb-1">예약일
+                <span class="color-black" style="float:right;">{{ day_show }}</span>
+            </p>
+            <p class="color-gray mb-1">티켓명
+                <span class="color-black" style="float:right;">{{ showTicket }}</span>
+            </p>
+            <p class="color-gray mb-1">인원
+                <span class="color-black" style="float:right;">{{ people_show + '명' }}</span>
+            </p>
+        </div>
+        <div style="min-height: 62px !important;height: 62px !important;position: fixed;bottom: 0;width: 100%;">
+            <div class="flex-fill speach-input p-2">
+            <a class="close-menu btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 font-noto font-600">확인</a>
+            </div>
+        </div>
+    </div>
+    <!-- Menu reservation -->
     <div id="menu-reservation" 
         class="menu menu-box-modal rounded-0"
         data-menu-width="cover"
         data-menu-height="cover"
         style="margin-bottom: 0;">
         <div class="header header-fixed header-logo-center">
-            <a href="" class="close-menu header-title color ellipsis">{{ getDiveCenterByUniqueName.name + ' 예약' }}</a>
-            <a data-back-button class="font-16 header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
+            <a href="" class="header-title color ellipsis">{{ getDiveCenterByUniqueName.name + ' 예약' }}</a>
+            <a data-back-button class="close-menu font-16 header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
         </div>
         <div class="p-2 pb-4" style="margin-top:50px;">
             <div style="position: relative;">
@@ -1666,7 +1698,54 @@ export default {
         $("#collapse3_area").click();
       },
       async makeReservation() {
-        if (this.reservation_phone == '') {
+        //Close Existing Opened Menus
+        const activeMenu = document.querySelectorAll('.menu-active');
+        for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
+        // jjangs : open menu
+        if(window.location.href.split('/').pop() != 'modal'){
+            window.history.pushState({}, 'modal', window.location.pathname + '/modal');
+        }
+        // open menu
+        var menuData = "menu-reservation-confirmed";
+        document.getElementById(menuData).classList.add('menu-active');
+        document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
+        //Check and Apply Effects
+        var menu = document.getElementById(menuData);
+        var menuEffect = menu.getAttribute('data-menu-effect');
+        var menuLeft = menu.classList.contains('menu-box-left');
+        var menuRight = menu.classList.contains('menu-box-right');
+        var menuTop = menu.classList.contains('menu-box-top');
+        var menuBottom = menu.classList.contains('menu-box-bottom');
+        var menuWidth = menu.offsetWidth;
+        var menuHeight = menu.offsetHeight;
+        var menuTimeout = menu.getAttribute('data-menu-hide');
+
+        if(menuTimeout){
+            setTimeout(function(){
+                document.getElementById(menuData).classList.remove('menu-active');
+                document.getElementsByClassName('menu-hider')[0].classList.remove('menu-active');
+                if(window.location.href.split('/').pop() == 'modal'){
+                    window.history.back(); 
+                }
+            },menuTimeout)
+        }
+
+        if(menuEffect === "menu-push"){
+            var menuWidth = document.getElementById(menuData).getAttribute('data-menu-width');
+            if(menuLeft){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX("+menuWidth+"px)"}}
+            if(menuRight){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+menuWidth+"px)"}}
+            if(menuBottom){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY(-"+menuHeight+"px)"}}
+            if(menuTop){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY("+menuHeight+"px)"}}
+        }
+        if(menuEffect === "menu-parallax"){
+            var menuWidth = document.getElementById(menuData).getAttribute('data-menu-width');
+            if(menuLeft){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX("+menuWidth/10+"px)"}}
+            if(menuRight){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+menuWidth/10+"px)"}}
+            if(menuBottom){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY(-"+menuHeight/5+"px)"}}
+            if(menuTop){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY("+menuHeight/5+"px)"}}
+        }
+        
+        /*if (this.reservation_phone == '') {
             var toastData = 'snackbar-phone-error';
             var notificationToast = document.getElementById(toastData);
             var notificationToast = new bootstrap.Toast(notificationToast);
@@ -1709,7 +1788,7 @@ export default {
             } else if (result && result.data && result.data.data && result.data.data.subscribe == false) {
                 this.subscribe_img = 'ico_subscribe';
             }
-        }
+        }*/
       },
       onDayClick(day) {
         var yesterday = new Date();
