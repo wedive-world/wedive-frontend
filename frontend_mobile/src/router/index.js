@@ -49,6 +49,7 @@ import OtherSubscribePage from '@/components/OtherSubscribePage'
 import OhterReservationPage from '@/components/OhterReservationPage'
 import OtherNotiPage from '@/components/OtherNotiPage'
 import OtherPrivacyPage from '@/components/OtherPrivacyPage'
+import InstructorCreatePage from '@/components/InstructorCreatePage'
 
 Vue.use(Router)
 
@@ -310,7 +311,11 @@ export default new Router({
       props: true,
       component: CommunityDetailPage
     },
-    
+    {
+      path: '/instructor/create',
+      name: 'InstructorCreatePage',
+      component: InstructorCreatePage
+    },
     
     
     
