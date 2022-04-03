@@ -80,7 +80,7 @@
                                     <a href="" class="col-3 text-center box-bottom-item">컨시어지</a>
                                     <a href="" class="col-3 text-center box-bottom-item">버디</a>
                                     <a href="" class="col-3 text-center box-bottom-item">강사</a>
-                                    <a href="" class="col-3 text-center box-bottom-item">라운지</a>
+                                    <a href="" class="col-3 text-center box-bottom-item">포럼</a>
                                 </div>
                             </div>
                         </div>
