@@ -12,7 +12,7 @@
         <rect :x="(windowWidth-110)/3*2+60" y="460" rx="10" ry="10" :width="(windowWidth-110)/3" height="40" />
         <rect x="10" y="510" rx="20" ry="20" :width="windowWidth-20" height="190" />
     </ContentLoader>
-    <div class="page-content pb-0">
+    <div class="page-content" style="padding-bottom: 50px;">
         <div v-if="getDiveCenterByUniqueName.backgroundImages == null || getDiveCenterByUniqueName.backgroundImages.length == 0" style="background:url(/static/empty.jpg);background-size: contain;height:250px;">
         </div>
         <div v-else style="min-height:250px;height:250px;max-height:250px;">
@@ -678,7 +678,7 @@
             <a href="" class="close-menu header-title color ellipsis">{{ getDiveCenterByUniqueName.name + ' 예약' }}</a>
             <a data-back-button class="font-16 header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
         </div>
-        <div class="p-3" style="margin-top:50px;">
+        <div class="p-2 pb-4" style="margin-top:50px;">
             <div style="position: relative;">
                 <div class="d-flex no-effect" 
                     data-bs-toggle="collapse" 
@@ -690,7 +690,7 @@
                     v-on:click="collapse1()"
                     >
                     <div class="">
-                        <h4 class="pt-3 mb-2 content mt-0 mb-2"><i class="fas fa-calendar me-2"></i>예약일자</h4>
+                        <h4 class="pt-3 mb-2 content mt-0 mb-2 font-17 font-500 font-noto"><!--<i class="fas fa-calendar me-2"></i>-->예약일자</h4>
                         <h4 class="pt-3 mb-2 content mt-0 mb-2 font-300 color-secondary" style="position: absolute;right: 0px;top: 4px;">{{ day_show }}</h4>
                     </div>
                     
@@ -721,18 +721,41 @@
                     v-on:click="collapse2()"
                     >
                     <div class="">
-                        <h4 class="pt-3 mb-2 content mt-0 mb-2"><i class="fas fa-clock me-2"></i>예약시간</h4>
-                        <h4 class="pt-3 mb-2 content mt-0 mb-2 font-300 color-secondary" style="position: absolute;right: 0px;top: 4px;">{{hour_show}}</h4>
+                        <h4 class="pt-3 mb-2 content mt-0 mb-2 font-17 font-500 font-noto"><!--<i class="fas fa-clock me-2"></i>-->티켓선택</h4>
+                        <h4 class="pt-3 mb-2 content mt-0 mb-2 font-300 color-secondary" style="position: absolute;right: 0px;top: 4px;">{{showTicket}}</h4>
                     </div>
                     
                 </div>
                 <div class="collapse" id="collapse2">
-                    <div class="p-2 row">
-                        <div class="form-check interest-check col-3" v-for="(hour,index) in hour_array" style="width: 25%;margin-left:0px;margin-right:0px;padding-left:calc(var(--bs-gutter-x) * .5);">
+                    <div class="p-2 row" style="padding-left:35px !important;padding-right:25px !important;">
+                        <div v-on:click="selectTicket($event, '평일 1부 입장권')" class="font-noto mb-2" style="border: 2px dotted #b1b2b3;border-radius: 6px;padding:0;padding-bottom:10px;">
+                            <div class="bg-gray-light color-black font-16" style="border-top-left-radius: 6px;border-top-right-radius: 6px;padding:8px 10px;margin-bottom:10px;">
+                                평일 1부 입장권
+                                <span class="color-gray font-14" style="float: right;padding-right:10px;">08:00 - 12:00</span>
+                            </div>
+                            <span class="font-20 color-secondary" style="padding-left:10px;">30,000 원</span>
+                        </div>
+
+                        <div v-on:click="selectTicket($event, '평일 2부 입장권')" class="font-noto mb-2" style="border: 2px dotted #b1b2b3;border-radius: 6px;padding:0;padding-bottom:10px;">
+                            <div class="bg-gray-light color-black font-16" style="border-top-left-radius: 6px;border-top-right-radius: 6px;padding:8px 10px;margin-bottom:10px;">
+                                평일 2부 입장권
+                                <span class="color-gray font-14" style="float: right;padding-right:10px;">12:00 - 15:00</span>
+                            </div>
+                            <span class="font-20 color-secondary" style="padding-left:10px;">30,000 원</span>
+                        </div>
+
+                        <div v-on:click="selectTicket($event, '평일 3부 입장권')" class="font-noto mb-2" style="border: 2px dotted #b1b2b3;border-radius: 6px;padding:0;padding-bottom:10px;">
+                            <div class="bg-gray-light color-black font-16" style="border-top-left-radius: 6px;border-top-right-radius: 6px;padding:8px 10px;margin-bottom:10px;">
+                                평일 3부 입장권
+                                <span class="color-gray font-14" style="float: right;padding-right:10px;">16:00 - 20:00</span>
+                            </div>
+                            <span class="font-20 color-secondary" style="padding-left:10px;">30,000 원</span>
+                        </div>
+                        <!--<div class="form-check interest-check col-3" v-for="(hour,index) in hour_array" style="width: 25%;margin-left:0px;margin-right:0px;padding-left:calc(var(--bs-gutter-x) * .5);">
                             <input v-if="(selectedDate && selectedDate.isToday && wediveHourCheck(now, hour))" class="form-check-input" type="radio" name="check_hour" value="" :id="'check_hour'+index" disabled="disabled">
                             <input v-else class="form-check-input" type="radio" name="check_hour" value="" :id="'check_hour'+index">
                             <label :class="'form-check-label rounded-xl' + (selectedDate && selectedDate.isToday && wediveHourCheck(now, hour) ? ' vc-text-gray-600' : '')" :for="'check_hour'+index" style="padding-left:12px;" v-on:click="setHour(index, selectedDate, now, hour)">{{hour}}</label>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
             </div>
@@ -751,7 +774,7 @@
                     v-on:click="collapse3()"
                     >
                     <div class="">
-                        <h4 class="pt-3 mb-2 content mt-0 mb-2"><i class="fas fa-user me-2"></i> 예약인원</h4>
+                        <h4 class="pt-3 mb-2 content mt-0 mb-2 font-17 font-500 font-noto"><!--<i class="fas fa-user me-2"></i>-->예약인원</h4>
                         <h4 class="pt-3 mb-2 content mt-0 mb-2 font-300 color-secondary" style="position: absolute;right: 0px;top: 4px;">{{people_show+'명'}}</h4>
                     </div>
                     
@@ -768,7 +791,7 @@
                             <div class="clearfix"></div>
                         </div>
                     </div>
-                    <div class="m-2 p-2 pe-3 ps-3" style="background: #fff4f4;color: #fc4c42;">
+                    <div class="m-2 p-2 pe-3 ps-3" style="background: #fff4f4;color: #fc4c42;border-radius:4px;">
                         당일 예약취소는 유선상 연락주세요.
                     </div>
                 </div>
@@ -776,32 +799,32 @@
         </div>
         <div class="divider mb-0" style="height: 12px; border-top: 1px solid rgba(136, 136, 136, 0.25);"></div>
 
-        <div class="p-3 content mt-0 mb-2">
-            <h4 class="row m-0 mb-3">예약자 정보</h4>
-            <div class="col-3 font-16 font-noto" style="display: inline-block;vertical-align: top;padding-top: 7px;">예약자</div>
+        <div class="p-2 content mt-2 mb-2 pb-3 font-noto">
+            <h4 class="row m-0 mb-3 font-17 font-500">예약자 정보</h4>
+            <div class="col-3 font-16" style="display: inline-block;vertical-align: top;padding-top: 7px;width: calc(33.33333333% - 4px);">예약자</div>
             <textarea rows="1" class="wedive-textarea2 wedive-input col-8" placeholder="이름을 입력하세요." v-model="reservation_name"></textarea>
 
-            <div class="col-3 font-16 font-noto" style="display: inline-block;vertical-align: top;padding-top: 7px;">전화번호</div>
+            <div class="col-3 font-16" style="display: inline-block;vertical-align: top;padding-top: 7px;width: calc(33.33333333% - 4px);">전화번호</div>
             <textarea rows="1" class="wedive-textarea2 wedive-input col-8" placeholder="핸드폰 번호를 입력하세요." v-model="reservation_phone" id="textarea_reservation_phone"></textarea>
 
-            <div class="col-3 font-16 font-noto" style="display: inline-block;vertical-align: top;padding-top: 7px;">이메일</div>
+            <div class="col-3 font-16" style="display: inline-block;vertical-align: top;padding-top: 7px;width: calc(33.33333333% - 4px);">이메일</div>
             <textarea rows="1" class="wedive-textarea2 wedive-input col-8" placeholder="이메일 주소를 입력하세요." v-model="reservation_email"></textarea>
         </div>
 
         <div class="divider mb-0" style="height: 12px; border-top: 1px solid rgba(136, 136, 136, 0.25);"></div>
         
-        <div class="p-3 content mt-0 mb-2">
-            <h4 class="row m-0 mb-3">개인정보 수집, 제공</h4>
+        <div class="p-2 pb-3 content mt-2 mb-2 font-noto">
+            <h4 class="row m-0 mb-3 font-17 font-500">개인정보 수집, 제공</h4>
             <div class="accordion mt-3" id="accordion-2">
-                <div class="card card-style shadow-0 bg-gray-light m-0 mb-1" style="border-radius: 8px;">
-                    <button class="btn accordion-btn color-black no-effect" data-bs-toggle="collapse" data-bs-target="#accordion1" style="padding: 10px 17px;">
-                        개인정보 수집 동의
+                <div class="card card-style shadow-0 m-0 mb-1" style="border-radius: 8px;">
+                    <button class="btn accordion-btn color-black no-effect" data-bs-toggle="collapse" data-bs-target="#accordion1" style="padding: 6px 12px 10px 2px;">
+                        <i class="far fa-check-circle me-2 color-secondary font-16"></i>개인정보 수집 동의
                         <i class="fa fa-chevron-down font-10 accordion-icon"></i>
                     </button>
 
                     <div id="accordion1" class="collapse bg-theme" data-bs-parent="#accordion-2">
-                        <div class="pt-3 pb-3" style="max-height: 160px;overflow-y: auto;background: #fafbfc;">
-                            <p class="agreement_content p-2">
+                        <div class="" style="max-height: 160px;overflow-y: auto;">
+                            <p class="agreement_content pe-3 ps-3 color-gray" style="background: #fafbfc;">
                                 &lt;개인정보 수집 동의&gt;<br><br>
                                 1. 기본수집항목: [필수] 위다이브 아이디, 이름, (휴대)전화번호, [선택] 이메일 주소<br>※ 추가 수집하는 필수항목<br>- 배송, 방문 등이 필요한 상품 구매 시 : 주소<br>- 해외 여행 관련 상품 구매 시 : 여권상 영문명, 여권번호 끝 4자리, 성별, 생년월일, 이메일주소, 카카오톡ID, 동행 아동정보(여권상 영문명, 생년월일, 신장)<br>- 병원을 이용하는 경우: 생년월일 (병원 재진 시 이전 진료기록 조회를 위해 예약자명, 생년월일, 전화번호가 수집될 수 있습니다.)<br><br>
                                 2. 수집 및 이용목적 : 사업자회원과 예약이용자의 원활한 거래 진행, 고객상담, 불만처리 등 민원 처리, 분쟁조정 해결을 위한 기록보존, 위다이브 예약 이용 후 리뷰작성에 따른 위다이브 리워드 지급 및 관련 안내<br><br>
@@ -813,14 +836,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="card card-style shadow-0 bg-gray-light m-0 mb-1" style="border-radius: 8px;">
-                    <button class="btn accordion-btn color-black no-effect" data-bs-toggle="collapse" data-bs-target="#accordion2" style="padding: 10px 17px;">
-                        개인정보 제공 동의
+                <div class="card card-style shadow-0 m-0 mb-1" style="border-radius: 8px;">
+                    <button class="btn accordion-btn color-black no-effect" data-bs-toggle="collapse" data-bs-target="#accordion2" style="padding: 6px 12px 10px 2px;">
+                        <i class="far fa-check-circle me-2 color-secondary font-16"></i>개인정보 제공 동의
                         <i class="fa fa-chevron-down font-10 accordion-icon"></i>
                     </button>
                     <div id="accordion2" class="collapse bg-theme" data-bs-parent="#accordion-2">
-                        <div class="pt-3 pb-3" style="max-height: 160px;overflow-y: auto;background: #fafbfc;">
-                            <p class="agreement_content p-2">
+                        <div class="" style="max-height: 160px;overflow-y: auto;">
+                            <p class="agreement_content pe-3 ps-3 color-gray" style="background: #fafbfc;">
                                 &lt;개인정보 제공 동의&gt;<br><br>
                                 <span class="font-600">1. 개인정보를 제공받는 자 : {{ getDiveCenterByUniqueName.name }}</span><br><br>
                                 2. 제공하는 기본 개인정보 항목:
@@ -1151,6 +1174,7 @@ export default {
 
         day_show: "",
         hour_show: "",
+        showTicket: "",
         people_show: 1,
         selectedDate: null,
         now: new Date(),
@@ -1630,6 +1654,17 @@ export default {
       },
   },
   methods: {
+      selectTicket(event, ticketItem) {
+        if (event.currentTarget.classList.contains("ticket-select")) {
+            $(".ticket-select").each(function(index, item){item.classList.remove("ticket-select");});
+        } else {
+            $(".ticket-select").each(function(index, item){item.classList.remove("ticket-select");});
+            event.currentTarget.classList.add("ticket-select")
+        }
+        this.showTicket = ticketItem;
+        $("#collapse2_area").click();
+        $("#collapse3_area").click();
+      },
       async makeReservation() {
         if (this.reservation_phone == '') {
             var toastData = 'snackbar-phone-error';
@@ -2205,4 +2240,5 @@ export default {
 .stepper a:last-child i {color: white !important;}
 .stepper input {font-size: 18px !important;}
 .wedive-textarea2 {max-height: 38px;min-height: 38px;padding-left: 10px;padding-right: 10px;padding-top: 5px;}
+.ticket-select {border: 2px solid #2c9ac3 !important;}
 </style>
