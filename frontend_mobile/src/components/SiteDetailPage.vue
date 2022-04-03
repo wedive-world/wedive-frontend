@@ -1,6 +1,17 @@
 <template>
   <div class="">
     <div data-menu-active="nav-site"></div>
+    <ContentLoader :width="windowWidth" :height="windowHeight-58" id="div_content_loader" primaryColor="#bac3d6" secondaryColor="#e4e8f2">
+        <rect x="0" y="0" rx="0" ry="0" :width="windowWidth" height="250" />
+        <rect x="40" y="270" rx="10" ry="10" :width="windowWidth-80" height="20" />
+        <rect :x="windowWidth/2-50" y="315" rx="10" ry="10" width="100" height="20" />
+        <rect x="20" y="340" rx="10" ry="10" :width="windowWidth-40" height="40" />
+        <rect x="20" y="390" rx="10" ry="10" :width="windowWidth-40" height="60" />
+        <rect x="40" y="460" rx="10" ry="10" :width="(windowWidth-110)/3" height="40" />
+        <rect :x="(windowWidth-110)/3+50" y="460" rx="10" ry="10" :width="(windowWidth-110)/3" height="40" />
+        <rect :x="(windowWidth-110)/3*2+60" y="460" rx="10" ry="10" :width="(windowWidth-110)/3" height="40" />
+        <rect x="10" y="510" rx="20" ry="20" :width="windowWidth-20" height="190" />
+    </ContentLoader>
     <div class="page-content pb-0">
         <div v-if="getDiveSiteByUniqueName.backgroundImages == null || getDiveSiteByUniqueName.backgroundImages.length == 0" style="background:url(/static/empty.jpg);background-size: contain;height:250px;">
         </div>
@@ -721,11 +732,15 @@
 <script>
 import StarRating from 'vue-star-rating'
 import gql from 'graphql-tag'
+import { ContentLoader } from 'vue-content-loader'
 const axios = require("axios")
 
 export default {
   name: 'HelloWorld',
   async mounted() {
+    var preloader = document.getElementById('preloader')
+    if(preloader){preloader.classList.add('preloader-hide');}
+
     if (this.$route.query.header && this.$route.query.header == 'hide') {
         $(".page-title").hide();
         $(".page-title-clear").hide();
@@ -733,17 +748,15 @@ export default {
     }
   },
   created() {
-    /*setTimeout(function() {
-        init_template();
-        var preloader = document.getElementById('preloader')
-        if(preloader){preloader.classList.add('preloader-hide');}
-    }, 1000);*/
   },
   components: {
-    StarRating
+    StarRating,
+    ContentLoader,
   },
   data () {
     return {
+        windowWidth: window.innerWidth,
+        windowHeight: window.innerHeight,
         uniqueName: this.$route.params.id,
         map: null,
         getDiveSiteByUniqueName: {},
@@ -982,12 +995,6 @@ export default {
               }
           },
           result() {
-            setTimeout(function() {
-                init_template();
-                var preloader = document.getElementById('preloader')
-                if(preloader){preloader.classList.add('preloader-hide');}
-            },100);
-
             if (this.getDiveSiteByUniqueName.isUserLike) this.like_img = 'ico_heart2';
             if (this.getDiveSiteByUniqueName.isUserSubscribe) this.subscribe_img = 'ico_subscribe2';
             {
@@ -1245,8 +1252,13 @@ export default {
                     }
                     this.map.setZoom(12);
                 });
-                
             };
+            setTimeout(function() {
+                init_template();
+            },100);
+            setTimeout(function() {
+                $("#div_content_loader").hide();
+            },200);
           },
           
       },
