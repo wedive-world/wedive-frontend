@@ -24,7 +24,7 @@
             <a v-on:click="login()" class="btn btn-m mb-3 rounded-xl text-uppercase font-500 shadow-s bg-secondary font-noto"><i class="fas fa-user-lock me-1"></i> {{ login_word }}</a>
         </div>
         <div v-else-if="getJoinedRoomList.length == 0" class="card card-style ms-0 me-0 rounded-0 text-center mb-0" style="height: calc(100vh - 58px);display:block;">
-            <ContentLoader :width="windowWidth" height="700" id="div_content_loader">
+            <ContentLoader :width="windowWidth" height="700" id="div_content_loader" primaryColor="#ccd4e3" secondaryColor="#e4e8f2">
                 <rect x="20" y="20" rx="10" ry="10" width="50" height="50" />
                 <rect x="80" y="30" rx="3" ry="3" :width="windowWidth-100" height="30" />
                 <rect x="20" y="90" rx="10" ry="10" width="50" height="50" />
@@ -256,10 +256,6 @@ export default {
       ContentLoader,
   },
   created() {
-    setTimeout(function() {
-        $("#div_content_loader").hide();
-        $("#div_empty_notice").show();
-    }, 2000);
     window.addEventListener('scroll', this.handleScroll);
   },
   beforeDestroy() {
@@ -334,6 +330,10 @@ export default {
             }
           `,
           result ({ data, loading, networkStatus }) {
+            setTimeout(function() {
+                $("#div_content_loader").hide();
+                $("#div_empty_notice").show();
+            },100);
             data.getJoinedRoomList.sort(function(a, b) {
                 var a_create_at = (a.lastChatMessage && a.lastChatMessage.createdAt) ? a.lastChatMessage.createdAt : a.createdAt;
                 var b_create_at = (b.lastChatMessage && b.lastChatMessage.createdAt) ? b.lastChatMessage.createdAt : b.createdAt;

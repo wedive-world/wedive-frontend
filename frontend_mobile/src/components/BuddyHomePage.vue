@@ -52,6 +52,16 @@
             </div>
         </div>
 
+
+        <ContentLoader :width="windowWidth" height="700" id="div_content_loader" primaryColor="#bac3d6" secondaryColor="#e4e8f2">
+            <rect x="10" y="0" rx="20" ry="20" :width="windowWidth-20" height="120" />
+            <rect x="10" y="130" rx="20" ry="20" :width="windowWidth-20" height="170" />
+            <rect x="10" y="310" rx="20" ry="20" :width="windowWidth-20" height="50" />
+            <rect x="10" y="370" rx="20" ry="20" :width="windowWidth-20" height="50" />
+            <rect x="10" y="430" rx="20" ry="20" :width="windowWidth-20" height="50" />
+            
+        </ContentLoader>
+
         
 
         <div v-for="(recommendation,rec_idx) in getUserRecommendationsByTargetType">
@@ -354,12 +364,17 @@
 <script>
 import gql from 'graphql-tag'
 import PullTo from 'vue-pull-to'
+import { ContentLoader } from 'vue-content-loader'
 const axios = require("axios");
 
 
 export default {
   name: 'HelloWorld',
   mounted() {
+    init_template();
+    var preloader = document.getElementById('preloader')
+    if(preloader){preloader.classList.add('preloader-hide');}
+    
     if (this.$route.query.header && this.$route.query.header == 'hide') {
       $(".page-title").hide();
       $(".page-title-clear").hide();
@@ -375,15 +390,11 @@ export default {
     window.removeEventListener('scroll', this.handleScroll);
   },
   created() {
-    setTimeout(function() {
-        init_template();
-        var preloader = document.getElementById('preloader')
-        if(preloader){preloader.classList.add('preloader-hide');}
-    }, 500);
     window.addEventListener('scroll', this.handleScroll);
   },
   data () {
     return {
+        windowWidth: window.innerWidth,
         getUserRecommendationsByTargetType: [],
         prev_driection: true,
         lastScrollPosition: 0,
@@ -470,6 +481,9 @@ export default {
             }
         },
         async result () {
+            setTimeout(function() {
+                $("#div_content_loader").hide();
+            },300);
             var id_arr = new Array();
             var width_arr = new Array();
             this.getUserRecommendationsByTargetType.filter(x=>x.previewCount > 3).forEach(x => {
@@ -592,6 +606,7 @@ export default {
   },
   components: {
     PullTo,
+    ContentLoader,
   },
   methods: {
       async moveRecommend(id, targetType) {
