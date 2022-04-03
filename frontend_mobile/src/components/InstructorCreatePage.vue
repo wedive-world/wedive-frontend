@@ -28,44 +28,31 @@
             :virtualIndex="0">
                     <div id="slide1" class="card card-full pb-0 mb-0 border-bottom" style="height: calc( 100vh - 56px );">
                         <div class="content mt-0">
-                            <div class="me-4 ms-4 mt-4 rounded-s" style="background:#cccccc80;">
+                            <div class="me-3 ms-3 mt-4 font-noto" style="position: relative;">
+                                <span class="font-18 font-500">강습생 연락</span>
+                                <p class="font-12 color-gray" style="line-height: 1.5;">강습생이 연락할 수 있도록<br/>연락처 정보를 기입해주세요.</p>
+                                <img src="/static/images/assets/gif_hello.gif" height="100" style="position: absolute;top:0;right:0;"/>
+                            </div>
+                            <div class="me-2 ms-2 mt-5 rounded-s" style="background:#efefef;">
                                 <div class="p-3 pb-1 rounded-s">
                                     <div class="input-style input-style-always-active no-borders no-icon">
-                                        <input @focus="focusInput($event)" class="form-control font-noto font-18 font-500" id="form1ac" placeholder="이름을 입력하세요."  style="background: transparent;border-bottom-width: 0;">
+                                        <input v-model="ins_name" @focus="focusInput($event)" class="form-control font-noto font-18 font-500" placeholder="이름을 입력하세요." style="background: transparent;border-bottom-width: 0;">
                                         <label for="form1ac" class="color-gray font-600 font-10" style="background: transparent;">이름</label>
                                     </div>
                                 </div>
                                 <div class="p-3 pb-1 rounded-s">
                                     <div class="input-style input-style-always-active no-borders no-icon">
-                                        <input @focus="focusInput($event)" type="tel" class="form-control font-noto font-18 font-500" id="form1ac" placeholder="핸드폰 번호를 입력하세요."  style="background: transparent;border-bottom-width: 0;">
+                                        <input v-model="ins_phone" @focus="focusInput($event)" type="tel" class="form-control font-noto font-18 font-500" placeholder="핸드폰 번호를 입력하세요." style="background: transparent;border-bottom-width: 0;">
                                         <label for="form1ac" class="color-gray font-600 font-10" style="background: transparent;">전화번호</label>
                                     </div>
                                 </div>
                                 <div class="p-3 pb-1 rounded-s">
                                     <div class="input-style input-style-always-active no-borders no-icon">
-                                        <input @focus="focusInput($event)" type="email" class="form-control font-noto font-18 font-500" id="form1ac" placeholder="이메일을 입력하세요."  style="background: transparent;border-bottom-width: 0;">
+                                        <input v-model="ins_email" @focus="focusInput($event)" type="email" class="form-control font-noto font-18 font-500" placeholder="이메일을 입력하세요." style="background: transparent;border-bottom-width: 0;">
                                         <label for="form1ac" class="color-gray font-600 font-10" style="background: transparent;">이메일</label>
                                     </div>
                                 </div>
                             </div>
-                            <!--<div class="text-center mt-5 mb-3">
-                                <div id="file-upload1-back" style="width: 150px;height:150px;display: inline-block;background: #c7c7c7;position: relative;border-radius:75px;background-size:cover;">
-                                    <input type="file" @change="imageUserChange" id="file-upload1" class="upload-file text-center" accept=".jpg, .png" style="height: 150px;">
-                                    <p class="upload-file-text" style="color: #abb7ba;position:absolute;left:40px;top:76px;">
-                                        <img id="file-upload1-img" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_image2.png" width="80"></img>
-                                    </p></input>
-                                </div>
-                            </div>
-                            <div class="text-center">
-                                <div class="input-style no-borders mb-3" style="max-width: 200px;display: inline-block;">
-                                    <input type="text" class="form-control font-noto input-big" id="form1" placeholder="닉네임" style="text-align: center;" v-model="nickname">
-                                </div>
-
-                                <div>
-                                    <p class="font-noto mb-1 mt-2">다른사람이 부를 수 있는 <font class="color-primary">닉네임</font>을 입력해주세요.</p>
-                                </div>
-                            </div>-->
-
                         </div>
                         <div style="position: absolute;bottom: 0;width:100%;">
                             <a v-on:click="$refs.contentSwiper.$swiper.slideNext();" id="btn_next1" href="#" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 ms-3 me-3 mb-3" style="height: 46px;padding-top: 10px;" disabled="disabled">다음</a>
@@ -77,71 +64,83 @@
             :virtualIndex="1">
                     <div id="slide2" class="card card-full pb-0 mb-0 border-bottom" style="height: calc( 100vh - 56px );">
                         <div class="content mt-1">
-                            <div class="font-noto font-400 mt-3 mb-2 d-flex" style="background: #e7e7e7;color:#5f6368;padding: 10px 16px;">
-                                <div style="background-color:#fff;display: inline-block;align-self: flex-start;border-radius: 4px;height: 32px;flex-shrink: 0;margin: 7px 16px 0 0;width: 32px;padding: 7px;"><svg style="vertical-align: baseline;fill: currentColor;"width="18" height="18" viewBox="0 0 24 24" focusable="false" class="HLbGM NMm5M"><path d="M11 7h2v2h-2zm0 4h2v6h-2z"></path><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"></path></svg></div>
-                                <div style="display: inline-block;"><font class="color-primary font-14">{{nickname}}</font>님 반가워요.<br/>비슷한 나이의 친구들을 찾아드릴께요.</div>
+                            <div class="me-3 ms-3 mt-4 font-noto" style="position: relative;">
+                                <span class="font-18 font-500">강사 라이센스</span>
+                                <p class="font-12 color-gray" style="line-height: 1.5;">강사님의 라이센스 정보를 입력해주세요.<br/>&nbsp;</p>
+                                <img src="/static/images/assets/license.png" height="100" style="position: absolute;top:0;right:0;"/>
                             </div>
 
-                            <div>
-                            <div class="mt-2">
-                                <div class="input-style no-borders has-icon validate-field mb-3" style="width: 48%;display:inline-block;">
-                                    <i class="fa fa-id-badge color-gray" style="margin-left:5px;"></i>
-                                    <input type="number" class="form-control font-noto" id="form2" placeholder="나이" v-model="userage">
-                                    <i class="fa fa-check disabled valid color-green-dark"></i>
-                                    <i class="fa fa-check disabled invalid color-red-dark"></i>
+                            <div class="me-2 ms-2 mt-5 rounded-s" style="background:#efefef;">
+                                <div style="margin-left: -9px !important;">
+                                    <div class="custom-control ios-switch ios-switch-icon wedive-switch">
+                                        <input v-on:click="toggleLicense()" type="checkbox" class="ios-input" id="toggle-license">
+                                        <label class="custom-control-label" for="toggle-license"></label>
+                                        <span :class="'ps-3 font-16' + (licenseFlag ? ' opacity-30' : '')" style="padding-top:12px;">스쿠바 라이센스</span>
+                                        <span :class="'font-16' + (licenseFlag ? '' : ' opacity-30')" style="padding-top:12px;">프리 라이센스</span>
+                                    </div>
                                 </div>
-
-                                <div class="input-style no-borders has-icon validate-field  mb-2" style="width: 48%;display:inline-block;">
-                                    <i class="fas fa-venus-mars color-gray" style="margin-left:3px;"></i>
-                                    <select id="form3" class="font-noto" required v-model="usersex">
-                                        <option value="" selected disabled>성별</option>
-                                        <option value="m">남자</option>
-                                        <option value="f">여자</option>
-                                    </select>
-                                    <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
-                                    <i class="fa fa-check disabled valid color-green-dark"></i>
-                                    <i class="fa fa-check disabled invalid color-red-dark"></i>
-                                    <em></em>
+                                <div class="p-3 pb-1" style="margin-top: -7px;">
+                                    <div class="input-style input-style-always-active no-borders has-icon">
+                                        <i class="fas fa-address-card color-gray" style="margin-left:6px;"></i>
+                                        <label for="select_license" class="color-gray font-600 font-10" style="background: transparent;">라이센스</label>
+                                        <select id="select_license" @focus="focusInput($event)" required class="font-noto" v-model="scuba_license" style="background: transparent;border-bottom-width: 0;">
+                                            <option value="" selected disabled>스쿠바 라이센스</option>
+                                            <option value="PADI">PADI</option>
+                                            <option value="NAUI">NAUI</option>
+                                            <option value="BSAC">BSAC</option>
+                                            <option value="CMAS">CMAS</option>
+                                            <option value="SSI">SSI</option>
+                                            <option value="NDL">NDL</option>
+                                            <option value="SDI/TDI">SDI/TDI</option>
+                                            <option value="IANTD">IANTD</option>
+                                            <option value="KUDA">KUDA</option>
+                                            <option value="NASE">NASE</option>
+                                            <option value="YMCA">YMCA</option>
+                                            <option value="AIDA">AIDA</option>
+                                            <option value="AA">AA</option>
+                                            <option value="Molchanovs">Molchanovs</option>
+                                            <option value="RAID">RAID</option>
+                                            <option value="UTA">UTA</option>
+                                            <option value="SNSI">SNSI</option>
+                                            <option value="AFIA">AFIA</option>
+                                            <option value="KF">KF</option>
+                                            <option value="UTR">UTR</option>
+                                            <option value="PSAI">PSAI</option>
+                                            <option value="PSS">PSS</option>
+                                            <option value="NASDS">NASDS</option>
+                                            <option value="IDEA – WDA">IDEA – WDA</option>
+                                            <option value="IDA">IDA</option>
+                                            <option value="IDDA ">IDDA</option>
+                                            <option value="IAC ">IAC</option>
+                                            <option value="ACUC">ACUC</option>
+                                            <option value="VIT">VIT</option>
+                                            <option value="PDIC International">PDIC International</option>
+                                            <option value="RSTC">RSTC</option>
+                                            <option value="DDI">DDI</option>
+                                            <option value="IAHD">IAHD</option>
+                                            <option value="MDEA">MDEA</option>
+                                            <option value="ANDI">ANDI</option>
+                                            <option value="GUE">GUE</option>
+                                            <option value="PSAI">PSAI</option>
+                                            <option value="SEI">SEI</option>
+                                        </select>
+                                        <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
+                                        <em></em>
+                                    </div>
                                 </div>
-
-                            </div>
-                            </div>
-
-                            <div class="mb-0 mt-4 pt-2">
-                                <label class="wediev-label pb-1 color-highlight ms-2" style="margin-top:-26px;">선호사항 (선택)</label>
-                                <div class="form-check interest-check">
-                                <input v-on:click="interest1=!interest1;" class="form-check-input" type="checkbox" id="check_general1">
-                                <label class="form-check-label rounded-xl border-08" for="check_general1">국내투어</label>
-                                <i class="fas fa-caravan color-white font-17"></i>
-                                <i class="fas fa-caravan font-17 color-highlight"></i>
-                                </div>
-                                <div class="form-check interest-check">
-                                <input v-on:click="interest2=!interest2;" class="form-check-input" type="checkbox" value="" id="check_general2">
-                                <label class="form-check-label rounded-xl border-08" for="check_general2">해외투어</label>
-                                <i class="fas fa-globe-americas color-white font-17"></i>
-                                <i class="fas fa-globe-americas font-17 color-highlight"></i>
-                                </div>
-                                <div class="form-check interest-check">
-                                <input v-on:click="interest3=!interest3;" class="form-check-input" type="checkbox" value="" id="check_general3">
-                                <label class="form-check-label rounded-xl border-08" for="check_general3">수중정화</label>
-                                <i class="fas fa-broom color-white font-17"></i>
-                                <i class="fas fa-broom font-17 color-highlight"></i>
-                                </div>
-                                <div class="form-check interest-check">
-                                <input v-on:click="interest4=!interest4;" class="form-check-input" type="checkbox" value="" id="check_general4">
-                                <label class="form-check-label rounded-xl border-08" for="check_general4">뒷풀이</label>
-                                <i class="fas fa-beer color-white font-17"></i>
-                                <i class="fas fa-beer font-17 color-highlight"></i>
-                                </div>
-                                <div class="form-check interest-check">
-                                <input v-on:click="interest5=!interest5;" class="form-check-input" type="checkbox" value="" id="check_general5">
-                                <label class="form-check-label rounded-xl border-08" for="check_general5">동호회</label>
-                                <i class="fas fa-users color-white font-17"></i>
-                                <i class="fas fa-users font-17 color-highlight"></i>
+                                <div class="p-3 pb-1 pt-1">
+                                    <label class="color-gray font-600 font-10 mt-n2" style="background: transparent;">라이센스 이미지</label>
+                                    <div id="file-upload1-back" style="width: 150px;height:150px;display: inline-block;background: #c7c7c7;position: relative;border-radius:75px;background-size:cover;">
+                                        <input @focus="focusInput($event)" type="file" @change="imageUserChange" id="file-upload1" class="upload-file text-center" accept=".jpg, .png" style="height: 150px;">
+                                        <p class="upload-file-text" style="color: #abb7ba;position:absolute;left:40px;top:76px;">
+                                            <img id="file-upload1-img" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_image2.png" width="80"></img>
+                                        </p></input>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
+                        
+                        
                         <div class="row me-0 ms-0 mb-0" style="position: absolute;bottom: 0;width:100%;padding-left:20px;padding-right:20px;">
                             <a v-on:click="$refs.contentSwiper.$swiper.slidePrev();" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>
                             <a v-on:click="$refs.contentSwiper.$swiper.slideNext();" id="btn_next2" href="#" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3 gonext" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;" disabled="disabled">다음</a>
@@ -462,6 +461,11 @@ export default {
   },
   data () {
     return {
+        ins_name: (localStorage.userName ? localStorage.userName : ''),
+        ins_phone: '',
+        ins_email: (localStorage.userEmail ? localStorage.userEmail : ''),
+        licenseFlag: false,
+
         nickname: '',
         userage: '',
         usersex: '',
@@ -516,6 +520,29 @@ export default {
     }
   }, 
   watch: {
+      ins_name: function(newVal, oldVal) {
+          if (this.ins_name != '' && this.ins_phone != '' && this.ins_email != '') {
+              $("#btn_next1").attr("disabled", false);
+          } else {
+              $("#btn_next1").attr("disabled", true);
+          }
+      },
+      ins_phone: function(newVal, oldVal) {
+          if (this.ins_name != '' && this.ins_phone != '' && this.ins_email != '') {
+              $("#btn_next1").attr("disabled", false);
+          } else {
+              $("#btn_next1").attr("disabled", true);
+          }
+      },
+      ins_email: function(newVal, oldVal) {
+          if (this.ins_name != '' && this.ins_phone != '' && this.ins_email != '') {
+              $("#btn_next1").attr("disabled", false);
+          } else {
+              $("#btn_next1").attr("disabled", true);
+          }
+      },
+
+
       nickname: function(newVal, oldVal) {
           if (newVal === '') {
               $("#btn_next1").attr("disabled", true);
@@ -560,8 +587,14 @@ export default {
       },
   },
   methods: {
+      toggleLicense() {
+          this.licenseFlag = !this.licenseFlag;
+          $(".focusBorder").each(function(index, item){item.classList.remove("focusBorder");});
+          event.currentTarget.parentNode.classList.add("toggleBorder");
+      },
       focusInput(event) {
           $(".focusBorder").each(function(index, item){item.classList.remove("focusBorder");});
+          $(".toggleBorder").each(function(index, item){item.classList.remove("toggleBorder");});
           event.currentTarget.parentNode.parentNode.classList.add("focusBorder");
       },
       onSlideChange() {
@@ -893,6 +926,15 @@ select {background: white; background-color: white;}
 .input-big3::placeholder {font-size:14px !important;}
 .btn[disabled] {pointer-events: none !important;background-image: linear-gradient(to bottom, #ccc, #ccc) !important;}
 .bg-e7e7e7 {background-color: transparent !important;}
-.focusBorder {border: 2px solid #2c9ac3;}
+.focusBorder {border: 2px solid #2c9ac3;background: #fff;border-radius: 8px !important;}
 .form-control::placeholder {font-family: 'Noto Sans Korean' !important;font-size: 18px !important;font-weight: 500 !important;opacity: 30%;}
+
+.wedive-switch label::before {height: 62px !important;width: calc(100vw - 46px) !important;border-radius: 8px !important;border-width: 0 !important;}
+.toggleBorder label::before {border: 2px solid #2c9ac3 !important;border-radius: 8px !important;}
+.wedive-switch label::after {height: 62px !important;width: calc(50vw - 23px) !important;margin-top:-62px !important;border-radius: 8px !important;margin-left:-1px !important;}
+.ios-input:checked ~ .custom-control-label::after {-webkit-transform: translateX(calc(50vw - 23px)) !important;}
+.ios-switch-icon span {font-family: 'Noto Sans Korean' !important;font-weight: 500 !important;color: black !important;}
+.ios-input:checked ~ .custom-control-label::before {background-color: #efefef !important;}
+.ios-switch-icon label::before {background-color: #efefef !important;}
+.ios-switch-icon span:last-child {margin-left: 50%;}
 </style>
