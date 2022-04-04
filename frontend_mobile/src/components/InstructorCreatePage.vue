@@ -37,19 +37,19 @@
                                 <div class="p-3 pb-1 rounded-s">
                                     <div class="input-style input-style-always-active no-borders no-icon">
                                         <input v-model="ins_name" @focus="focusInput($event)" class="form-control font-noto font-18 font-500" placeholder="이름을 입력하세요." style="background: transparent;border-bottom-width: 0;">
-                                        <label for="form1ac" class="color-gray font-600 font-10" style="background: transparent;">이름</label>
+                                        <label class="color-gray font-600 font-10" style="background: transparent;">이름</label>
                                     </div>
                                 </div>
                                 <div class="p-3 pb-1 rounded-s">
                                     <div class="input-style input-style-always-active no-borders no-icon">
                                         <input v-model="ins_phone" @focus="focusInput($event)" type="tel" class="form-control font-noto font-18 font-500" placeholder="핸드폰 번호를 입력하세요." style="background: transparent;border-bottom-width: 0;">
-                                        <label for="form1ac" class="color-gray font-600 font-10" style="background: transparent;">전화번호</label>
+                                        <label class="color-gray font-600 font-10" style="background: transparent;">전화번호</label>
                                     </div>
                                 </div>
                                 <div class="p-3 pb-1 rounded-s">
                                     <div class="input-style input-style-always-active no-borders no-icon">
                                         <input v-model="ins_email" @focus="focusInput($event)" type="email" class="form-control font-noto font-18 font-500" placeholder="이메일을 입력하세요." style="background: transparent;border-bottom-width: 0;">
-                                        <label for="form1ac" class="color-gray font-600 font-10" style="background: transparent;">이메일</label>
+                                        <label class="color-gray font-600 font-10" style="background: transparent;">이메일</label>
                                     </div>
                                 </div>
                             </div>
@@ -128,12 +128,11 @@
                                         <em></em>
                                     </div>
                                 </div>
-                                <div class="p-3 pb-1 pt-1">
+                                <div class="p-3 pb-3 pt-1">
                                     <label class="color-gray font-600 font-10 mt-n2" style="background: transparent;">라이센스 이미지</label>
-                                    <div id="file-upload1-back" style="width: 150px;height:150px;display: inline-block;background: #c7c7c7;position: relative;border-radius:75px;background-size:cover;">
-                                        <input @focus="focusInput($event)" type="file" @change="imageUserChange" id="file-upload1" class="upload-file text-center" accept=".jpg, .png" style="height: 150px;">
+                                    <div id="file-upload1-back" style="background:url(/static/images/assets/license_icon_20.png);position: relative;background-size:cover;border-radius: 8px;">
+                                        <input @focus="focusInput($event)" type="file" @change="imageLicenseChange" id="file-upload1" class="upload-file text-center" accept=".jpg, .png" style="height: 160px;">
                                         <p class="upload-file-text" style="color: #abb7ba;position:absolute;left:40px;top:76px;">
-                                            <img id="file-upload1-img" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_image2.png" width="80"></img>
                                         </p></input>
                                     </div>
                                 </div>
@@ -152,158 +151,114 @@
             :virtualIndex="2">
                 <div id="slide3" class="card card-full pb-0 mb-0 border-bottom" style="height: calc( 100vh - 56px );">
                         <div class="content mt-1">
-                            <div class="font-noto font-400 mt-3 mb-2 d-flex" style="background: #e7e7e7;color:#5f6368;padding: 10px 16px;">
-                                <div style="background-color:#fff;display: inline-block;align-self: flex-start;border-radius: 4px;height: 32px;flex-shrink: 0;margin: 7px 16px 0 0;width: 32px;padding: 7px;"><svg style="vertical-align: baseline;fill: currentColor;"width="18" height="18" viewBox="0 0 24 24" focusable="false" class="HLbGM NMm5M"><path d="M11 7h2v2h-2zm0 4h2v6h-2z"></path><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"></path></svg></div>
-                                <div style="display: inline-block;"><font class="color-primary font-14">{{nickname}}</font>님, <font class="color-shopping font-14">스쿠바 다이빙</font> 해보셨나요?<br/>정보가 없으면 다음을 클릭해주세요.</div>
+                            <div class="me-3 ms-3 mt-4 font-noto" style="position: relative;">
+                                <span class="font-18 font-500">강사 정보</span>
+                                <p class="font-12 color-gray" style="line-height: 1.5;">위다이브가 사진을 변경해드려요.<br/>경력은 최대 4개 입력 가능합니다.</p>
+                                <img src="/static/images/assets/instructor_img.gif" height="100" style="position: absolute;top:0;right:0;border-radius:8px;"/>
                             </div>
-
-                            <div class="mt-3">
-                                <div class="input-style no-borders has-icon validate-field mb-3 mt-2">
-                                    <i class="fas fa-address-card color-gray" style="margin-left:6px;"></i>
-                                    <label for="form11" class="color-highlight bg-e7e7e7">스쿠바 라이센스</label>
-                                    <select id="form11" required class="font-noto" v-model="scuba_license">
-                                        <option value="" selected disabled>스쿠바 라이센스</option>
-                                        <option value="PADI">PADI</option>
-                                        <option value="NAUI">NAUI</option>
-                                        <option value="BSAC">BSAC</option>
-                                        <option value="CMAS">CMAS</option>
-                                        <option value="SSI">SSI</option>
-                                        <option value="NDL">NDL</option>
-                                        <option value="SDI/TDI">SDI/TDI</option>
-                                        <option value="IANTD">IANTD</option>
-                                        <option value="KUDA">KUDA</option>
-                                        <option value="NASE">NASE</option>
-                                        <option value="YMCA">YMCA</option>
-                                        <option value="AIDA">AIDA</option>
-                                        <option value="AA">AA</option>
-                                        <option value="Molchanovs">Molchanovs</option>
-                                        <option value="RAID">RAID</option>
-                                        <option value="UTA">UTA</option>
-                                        <option value="SNSI">SNSI</option>
-                                        <option value="AFIA">AFIA</option>
-                                        <option value="KF">KF</option>
-                                        <option value="UTR">UTR</option>
-                                        <option value="PSAI">PSAI</option>
-                                        <option value="PSS">PSS</option>
-                                        <option value="NASDS">NASDS</option>
-                                        <option value="IDEA – WDA">IDEA – WDA</option>
-                                        <option value="IDA">IDA</option>
-                                        <option value="IDDA ">IDDA</option>
-                                        <option value="IAC ">IAC</option>
-                                        <option value="ACUC">ACUC</option>
-                                        <option value="VIT">VIT</option>
-                                        <option value="PDIC International">PDIC International</option>
-                                        <option value="RSTC">RSTC</option>
-                                        <option value="DDI">DDI</option>
-                                        <option value="IAHD">IAHD</option>
-                                        <option value="MDEA">MDEA</option>
-                                        <option value="ANDI">ANDI</option>
-                                        <option value="GUE">GUE</option>
-                                        <option value="PSAI">PSAI</option>
-                                        <option value="SEI">SEI</option>
-                                    </select>
-                                    <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
-                                    <i class="fa fa-check disabled valid color-green-dark"></i>
-                                    <i class="fa fa-check disabled invalid color-red-dark"></i>
-                                    <em></em>
+                            <div class="me-2 ms-2 mt-5 rounded-s" style="background:#efefef;">
+                                <div class="p-3 pb-2 pt-1">
+                                    <label class="color-gray font-600 font-10 mt-n2" style="background: transparent;">증명사진</label>
+                                    <div id="file-upload2-back" style="background:url(/static/images/assets/photo_icon.png);position: relative;background-size: contain !important;background-repeat: no-repeat !important;border-radius: 8px;">
+                                        <input @focus="focusInput($event)" type="file" @change="imagePhotoChange" id="file-upload2" class="upload-file text-center" accept=".jpg, .png" style="height: 90px;">
+                                        <p class="upload-file-text" style="color: #abb7ba;position:absolute;left:40px;top:76px;">
+                                        </p></input>
+                                    </div>
                                 </div>
-
-                                <div class="input-style no-borders has-icon validate-field mb-3">
-                                    <i class="fas fa-layer-group color-gray" style="margin-left:6px;"></i>
-                                    <label for="form22" class="color-highlight bg-e7e7e7">스쿠바 레벨</label>
-                                    <select id="form22" required class="font-noto" v-model="scuba_level">
-                                        <option value="" selected disabled>스쿠바 레벨</option>
-                                        <option value="1">오픈워터</option>
-                                        <option value="2">어드밴스드</option>
-                                        <option value="3">레스큐</option>
-                                        <option value="4">마스터</option>
-                                        <option value="5">강사</option>
-                                    </select>
-                                    <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
-                                    <i class="fa fa-check disabled valid color-green-dark"></i>
-                                    <i class="fa fa-check disabled invalid color-red-dark"></i>
-                                    <em></em>
+                                <div class="p-3 pb-1 rounded-s">
+                                    <div class="input-style input-style-always-active no-borders no-icon">
+                                        <input v-model="ins_career1" @focus="focusInput($event)" class="form-control font-noto font-18 font-500" placeholder="경력1 (최신순)을 입력하세요." style="background: transparent;border-bottom-width: 0;">
+                                        <label class="color-gray font-600 font-10" style="background: transparent;">경력1</label>
+                                    </div>
                                 </div>
-
-                                <div class="input-style no-borders has-icon validate-field mb-3">
-                                    <i class="fas fa-clipboard-check color-gray" style="margin-left:6px;"></i>
-                                    <label for="form23" class="color-highlight bg-e7e7e7">다이빙 로그</label>
-                                    <select id="form23" required class="font-noto" v-model="scuba_log">
-                                        <option value="" selected disabled>다이빙 로그</option>
-                                        <option value="10">~10</option>
-                                        <option value="30">~30</option>
-                                        <option value="50">~50</option>
-                                        <option value="100">~100</option>
-                                        <option value="200">~200</option>
-                                        <option value="300">~300</option>
-                                        <option value="301">300~</option>
-                                        <option value="없음">없음</option>
-                                    </select>
-                                    <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
-                                    <i class="fa fa-check disabled valid color-green-dark"></i>
-                                    <i class="fa fa-check disabled invalid color-red-dark"></i>
-                                    <em></em>
+                                <div class="p-3 pb-1 rounded-s">
+                                    <div class="input-style input-style-always-active no-borders no-icon">
+                                        <input v-model="ins_career2" @focus="focusInput($event)" class="form-control font-noto font-18 font-500" placeholder="경력2 (최신순)을 입력하세요." style="background: transparent;border-bottom-width: 0;">
+                                        <label class="color-gray font-600 font-10" style="background: transparent;">경력2</label>
+                                    </div>
                                 </div>
-
-                                <div class="mb-0 mt-5 pt-2">
-                                    <label class="wediev-label pb-1 color-highlight ms-2" style="margin-top:-26px;">선호사항</label>
-                                    <div class="form-check interest-check">
-                                    <input v-on:click="interest6=!interest6;" class="form-check-input" type="checkbox" value="" id="check_scuba1">
-                                    <label class="form-check-label rounded-xl border-08" for="check_scuba1">대물포인트</label>
-                                    <i class="fas fa-fish color-white font-17"></i>
-                                    <i class="fas fa-fish font-17 color-highlight"></i>
+                                <div class="p-3 pb-1 rounded-s">
+                                    <div class="input-style input-style-always-active no-borders no-icon">
+                                        <input v-model="ins_career3" @focus="focusInput($event)" class="form-control font-noto font-18 font-500" placeholder="경력3 (최신순)을 입력하세요." style="background: transparent;border-bottom-width: 0;">
+                                        <label class="color-gray font-600 font-10" style="background: transparent;">경력3</label>
                                     </div>
-                                    <div class="form-check interest-check">
-                                    <input v-on:click="interest6=!interest7;" class="form-check-input" type="checkbox" value="" id="check_scuba2">
-                                    <label class="form-check-label rounded-xl border-08" for="check_scuba2">이색포인트</label>
-                                    <i class="fas fa-grin-stars color-white font-17"></i>
-                                    <i class="fas fa-grin-stars font-17 color-highlight"></i>
+                                </div>
+                                <div class="p-3 pb-1 rounded-s">
+                                    <div class="input-style input-style-always-active no-borders no-icon">
+                                        <input v-model="ins_career4" @focus="focusInput($event)" class="form-control font-noto font-18 font-500" placeholder="경력4 (최신순)을 입력하세요." style="background: transparent;border-bottom-width: 0;">
+                                        <label class="color-gray font-600 font-10" style="background: transparent;">경력4</label>
                                     </div>
-                                    <div class="form-check interest-check">
-                                    <input v-on:click="interest8=!interest8;" class="form-check-input" type="checkbox" value="" id="check_scuba3">
-                                    <label class="form-check-label rounded-xl border-08" for="check_scuba3">수중촬영</label>
-                                    <i class="fas fa-camera-retro color-white font-17"></i>
-                                    <i class="fas fa-camera-retro font-17 color-highlight"></i>
-                                    </div>
-                                    <div class="form-check interest-check">
-                                    <input v-on:click="interest9=!interest9;" class="form-check-input" type="checkbox" value="" id="check_scuba4">
-                                    <label class="form-check-label rounded-xl border-08" for="check_scuba4">리브어보드</label>
-                                    <i class="fas fa-ship color-white font-17"></i>
-                                    <i class="fas fa-ship font-17 color-highlight"></i>
-                                    </div>
-                                    <div class="form-check interest-check">
-                                    <input v-on:click="interest10=!interest10;" class="form-check-input" type="checkbox" value="" id="check_scuba5">
-                                    <label class="form-check-label rounded-xl border-08" for="check_scuba5">체크다이빙</label>
-                                    <i class="fas fa-check-square color-white font-17"></i>
-                                    <i class="fas fa-check-square font-17 color-highlight"></i>
-                                    </div>
-                                    
-                                    
-                                    <div class="form-check interest-check">
-                                    <input v-on:click="interest11=!interest11;" class="form-check-input" type="checkbox" value="" id="check_scuba6">
-                                    <label class="form-check-label rounded-xl border-08" for="check_scuba6">먹다이빙</label>
-                                    <i class="fab fa-get-pocket color-white font-17"></i>
-                                    <i class="fab fa-get-pocket font-17 color-highlight"></i>
-                                    </div>
-                                    <div class="form-check interest-check">
-                                    <input v-on:click="interest12=!interest12;" class="form-check-input" type="checkbox" value="" id="check_scuba7">
-                                    <label class="form-check-label rounded-xl border-08" for="check_scuba7">테크니컬다이빙</label>
-                                    <i class="fas fa-drafting-compass color-white font-17"></i>
-                                    <i class="fas fa-drafting-compass font-17 color-highlight"></i>
-                                    </div>
-                                    <div class="form-check interest-check">
-                                    <input v-on:click="interest13=!interest13;" class="form-check-input" type="checkbox" value="" id="check_scuba8">
-                                    <label class="form-check-label rounded-xl border-08" for="check_scuba8">마크로포인트</label>
-                                    <i class="fas fa-fish color-white font-17"></i>
-                                    <i class="fas fa-fish font-17 color-highlight"></i>
-                                    </div>
-                                    
                                 </div>
                             </div>
                         </div>
                         <div class="row me-0 ms-0 mb-0" style="position: absolute;bottom: 0;width:100%;padding-left:20px;padding-right:20px;">
                             <a v-on:click="$refs.contentSwiper.$swiper.slidePrev();" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>
-                            <a v-on:click="$refs.contentSwiper.$swiper.slideNext();" id="btn_next3" href="#" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3 gonext" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;">{{ next3_word }}</a>
+                            <a v-on:click="$refs.contentSwiper.$swiper.slideNext();" id="btn_next3" href="#" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3 gonext" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;" disabled="disabled">다음</a>
+                        </div>
+                    </div>
+        </swiper-slide>
+        <swiper-slide
+            :key="3"
+            :virtualIndex="3">
+                <div id="slide4" class="card card-full pb-0 mb-0 border-bottom" style="height: calc( 100vh - 56px );">
+                        <div class="content mt-1">
+                            <div class="me-3 ms-3 mt-4 font-noto" style="position: relative;">
+                                <span class="font-18 font-500">강사 소개</span>
+                                <p class="font-12 color-gray" style="line-height: 1.5;">강습생을 위해 소개를 해주세요.<br/>강습장소를 선택해주세요.</p>
+                                <img src="/static/images/assets/location-pin.png" height="100" style="position: absolute;top:0;right:0;border-radius:8px;"/>
+                            </div>
+                            <div class="me-2 ms-2 mt-5 rounded-s" style="background:#efefef;">
+                                <div class="p-3 pb-1 rounded-s">
+                                    <div class="input-style input-style-always-active no-borders no-icon">
+                                        <textarea v-model="ins_career1" @focus="focusInput($event)" class="form-control font-noto font-18 font-500" placeholder="경력1 (최신순)을 입력하세요." style="background: transparent;border-bottom-width: 0;"></textarea>
+                                        <label class="color-gray font-600 font-10" style="background: transparent;">자기소개</label>
+                                    </div>
+                                </div>
+                                <div class="p-3 pt-1 pb-3 rounded-s">
+                                    <label class="color-gray font-600 font-10" style="background: transparent;">강습장소</label>
+                                    <vue-typeahead-bootstrap
+                                        id="search_typeahead"
+                                        class="font-18"
+                                        @focus="focusInput2($event)"
+                                        v-model="query"
+                                        :data="locations"
+                                        :serializer="item => item.nickName"
+                                        :screen-reader-text-serializer="item => `${item.nickName}`"
+                                        highlightClass="special-highlight-class"
+                                        @hit="selectedLocation = $event;enableNext2($event);"
+                                        :minMatchingChars="1"
+                                        placeholder="사이트, 센터, 수영장"
+                                        inputClass="empty-typehead special-input-class"
+                                        @input="lookupLocation"
+                                        >
+                                        <template slot="suggestion" slot-scope="{ data, htmlText }">
+                                            <div class="d-flex align-items-center" style="position:relative !important;">
+                                            <div class="">
+                                                <div class="user-img me-2">
+                                                    <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                                                        <defs>
+                                                        <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                                                        <clipPath id="clipSquircle">
+                                                            <use xlink:href="#shapeSquircle"/>
+                                                        </clipPath>
+                                                        </defs>
+                                                        <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(data.profileImages && data.profileImages.length>0) ? data.profileImages[0].thumbnailUrl : 'https://d34l91104zg4p3.cloudfront.net/assets/user_empty.png'"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <span class="ml-4" style="">
+                                                <p class="font-noto font-16 mb-0">{{ data.nickName }}</p>
+                                            </span>
+                                            
+                                            </div>
+                                        </template>
+                                    </vue-typeahead-bootstrap>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row me-0 ms-0 mb-0" style="position: absolute;bottom: 0;width:100%;padding-left:20px;padding-right:20px;">
+                            <a v-on:click="$refs.contentSwiper.$swiper.slidePrev();" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>
+                            <a v-on:click="$refs.contentSwiper.$swiper.slideNext();" id="btn_next4" href="#" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3 gonext" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;" disabled="disabled">다음</a>
                         </div>
                     </div>
         </swiper-slide>
@@ -464,7 +419,13 @@ export default {
         ins_name: (localStorage.userName ? localStorage.userName : ''),
         ins_phone: '',
         ins_email: (localStorage.userEmail ? localStorage.userEmail : ''),
+        ins_career1: '',
+        ins_career2: '',
+        ins_career3: '',
+        ins_career4: '',
         licenseFlag: false,
+        locations: [],
+        query: '',
 
         nickname: '',
         userage: '',
@@ -474,6 +435,7 @@ export default {
         scuba_log: '',
         free_license: '',
         free_level: '',
+        file_license: null,
         file_photo: null,
         pb_sta: '',
         pb_dyn: '',
@@ -541,6 +503,28 @@ export default {
               $("#btn_next1").attr("disabled", true);
           }
       },
+      scuba_license: function(newVal, oldVal) {
+          if (this.scuba_license != '' && this.file_license != null) {
+              $("#btn_next2").attr("disabled", false);
+          } else {
+              $("#btn_next2").attr("disabled", true);
+          }
+      },
+      file_license: function(newVal, oldVal) {
+          if (this.scuba_license != '' && this.file_license != null) {
+              $("#btn_next2").attr("disabled", false);
+          } else {
+              $("#btn_next2").attr("disabled", true);
+          }
+      },
+      file_photo: function(newVal, oldVal) {
+          if (this.file_photo != null) {
+              $("#btn_next3").attr("disabled", false);
+          } else {
+              $("#btn_next3").attr("disabled", true);
+          }
+      },
+      
 
 
       nickname: function(newVal, oldVal) {
@@ -564,13 +548,6 @@ export default {
               $("#btn_next2").attr("disabled", false);
           }
       },
-      scuba_license: function(newVal, oldVal) {
-          if (this.scuba_license === '' && this.scuba_level === '' && this.scuba_log === '') {
-              this.next3_word = '넘어가기';
-          } else {
-              this.next3_word = '다음';
-          }
-      },
       scuba_level: function(newVal, oldVal) {
           if (this.scuba_license === '' && this.scuba_level === '' && this.scuba_log === '') {
               this.next3_word = '넘어가기';
@@ -587,6 +564,46 @@ export default {
       },
   },
   methods: {
+      async lookupLocation() {
+        this.users = [];
+        const query = this.query;
+        var result = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                    query FindUserByNickName($nickName: String!) {
+                        findUserByNickName(nickName: $nickName) {
+                            uid
+                            profileImages {
+                            thumbnailUrl
+                            }
+                            email
+                            scubaLicenseLevel
+                            freeLicenseLevel
+                            nickName
+                        }
+                    }
+                `,
+                variables: {
+                    "nickName": query
+                }
+            }
+        });
+        // 자기 자신은 검색이 안되게 한다.
+        var _users = result.data.data.findUserByNickName;
+        for (var i=0; i<_users.length; i++) {
+            if (_users[i].uid == localStorage.uid) {
+                _users.splice(i, 1);
+                break;
+            }
+        }
+        this.locations = _users;
+      },
       toggleLicense() {
           this.licenseFlag = !this.licenseFlag;
           $(".focusBorder").each(function(index, item){item.classList.remove("focusBorder");});
@@ -596,6 +613,9 @@ export default {
           $(".focusBorder").each(function(index, item){item.classList.remove("focusBorder");});
           $(".toggleBorder").each(function(index, item){item.classList.remove("toggleBorder");});
           event.currentTarget.parentNode.parentNode.classList.add("focusBorder");
+      },
+      focusInput2(event) {
+          consoel.log(event);
       },
       onSlideChange() {
           console.log("onSlideChange")
@@ -607,14 +627,23 @@ export default {
 
           }
       },
-      imageUserChange({ target: { files = [] } }) {
+      imageLicenseChange({ target: { files = [] } }) {
+        if (!files.length) {
+          return
+        }
+        this.file_license = files[0];
+        $("#file-upload1-back").css("background", "url(" + URL.createObjectURL(this.file_license) + ")");
+        $("#file-upload1-back").css("background-size", "contain");
+        $("#file-upload1-back").css("background-repeat", "no-repeat");
+      },
+      imagePhotoChange({ target: { files = [] } }) {
         if (!files.length) {
           return
         }
         this.file_photo = files[0];
-        $("#file-upload1-back").css("background", "url(" + URL.createObjectURL(this.file_photo) + ")");
-        $("#file-upload1-back").css("background-size", "cover");
-        $("#file-upload1-img").hide();
+        $("#file-upload2-back").css("background", "url(" + URL.createObjectURL(this.file_photo) + ")");
+        $("#file-upload2-back").css("background-size", "contain");
+        $("#file-upload2-back").css("background-repeat", "no-repeat");
       },
       async next1() {
           const nickName = this.nickname;
