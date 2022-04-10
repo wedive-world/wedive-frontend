@@ -323,8 +323,9 @@
                                 <img src="/static/images/assets/product.png" height="100" style="position: absolute;top:0;right:0;border-radius:8px;"/>
                             </div>
                             <div class="me-2 ms-2 mt-5 rounded-s" style="background:#efefef;">
-                                <draggable :list="education_list" group="backgroundItems" @start="drag=true" @end="drag=false">
-                                    <div v-for="(item, index) in education_list" style="cursor: move" :key="index" class="p-3 pb-1 rounded-s">
+                                <!--<draggable :list="education_list" group="backgroundItems" @start="drag=true" @end="drag=false">
+                                    <div v-for="(item, index) in education_list" style="cursor: move" :key="index" class="p-3 pb-1 rounded-s">-->
+                                    <div v-for="(item, index) in education_list" class="p-3 pb-1 rounded-s">
                                         <div class="input-style input-style-always-active no-borders no-icon">
                                             <i v-on:click="removeEducation(index)" class="wedive_icoset wedive_icoset_close" style="position: absolute;right:0px;margin:8px;"></i>
                                             <input :id="'product_'+index" v-model="item.product" @focus="focusInput($event)" class="form-control font-noto font-18 font-500" placeholder="교육과정" style="background: transparent;border-bottom-width: 0;">
@@ -332,7 +333,7 @@
                                             <label :for="'product_'+index" class="color-gray font-600 font-10" style="background: transparent;">교육과정 {{ (index+1) }}</label>
                                         </div>
                                     </div>
-                                </draggable>
+                                <!--</draggable>-->
                             </div>
                             <div class="text-center mt-2 opacity-50 font-noto" v-on:click="addEducation()"><i class="fas fa-plus me-2"></i> 교육과정 추가</div>
                         </div>
@@ -693,6 +694,9 @@ export default {
       },
   },
   methods: {
+      finished() {
+          location.href='/';
+      },
       removeEducation(index) {
           this.education_list.splice(index,1);
       },
