@@ -150,7 +150,7 @@
                     :screen-reader-text-serializer="item => `${item.name}`"
                     highlightClass="special-highlight-class"
                     @hit="selectedLocation = $event;"
-                    :minMatchingChars="2"
+                    :minMatchingChars="1"
                     :showAllResults="true"
                     :maxMatches="30"
                     placeholder="(옵션) 다이빙 장소를 입력하세요."

@@ -287,6 +287,25 @@ export default {
       locationsearch: window.location.search,
     }
   },
+  /*apollo: {
+    getNotifications: {
+      query:gql `
+        query GetNotifications($skip: Int, $limit: Int) {
+          getNotifications(skip: $skip, limit: $limit) {
+              read
+          }
+        }
+      `,
+      variables() {
+        return {
+          limit: 1,
+          skip: 0
+        }
+      },
+      result() {
+      },
+    },
+  },*/
   components: {
     VueBottomSheet,
   },
@@ -614,6 +633,9 @@ export default {
               notificationToast.show();
             },1000);
             
+            if (location.pathname.includes('/modal')) {
+              window.history.back();
+            }
             location.reload();
           } else {
             // 신규 아이디를 등록해준다.

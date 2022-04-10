@@ -12,8 +12,8 @@
     <div class="page-content pb-0" style="margin-top: 50px;"> 
         <div class="progress" style="height:6px;">
             <div class="progress-bar border-0 bg-highlight text-start ps-2" 
-                    role="progressbar" style="width: 25%" 
-                    aria-valuenow="0" aria-valuemin="25" 
+                    role="progressbar" :style="'width: '+progressBar+'%'" 
+                    aria-valuenow="0" :aria-valuemin="progressBar" 
                     aria-valuemax="100">
             </div>
         </div>
@@ -55,7 +55,7 @@
                             </div>
                         </div>
                         <div style="position: absolute;bottom: 0;width:100%;">
-                            <a v-on:click="$refs.contentSwiper.$swiper.slideNext();" id="btn_next1" href="#" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 ms-3 me-3 mb-3" style="height: 46px;padding-top: 10px;" disabled="disabled">다음</a>
+                            <a v-on:click="$refs.contentSwiper.$swiper.slideNext();progressBar += 20;" id="btn_next1" href="#" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 ms-3 me-3 mb-3" style="height: 46px;padding-top: 10px;" disabled="disabled">다음</a>
                         </div>
                     </div>
         </swiper-slide>
@@ -141,8 +141,8 @@
                         
                         
                         <div class="row me-0 ms-0 mb-0" style="position: absolute;bottom: 0;width:100%;padding-left:20px;padding-right:20px;">
-                            <a v-on:click="$refs.contentSwiper.$swiper.slidePrev();" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>
-                            <a v-on:click="$refs.contentSwiper.$swiper.slideNext();" id="btn_next2" href="#" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3 gonext" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;" disabled="disabled">다음</a>
+                            <a v-on:click="$refs.contentSwiper.$swiper.slidePrev();progressBar -= 20;" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>
+                            <a v-on:click="$refs.contentSwiper.$swiper.slideNext();progressBar += 20;" id="btn_next2" href="#" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3 gonext" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;" disabled="disabled">다음</a>
                         </div>
                     </div>
         </swiper-slide>
@@ -192,15 +192,15 @@
                             </div>
                         </div>
                         <div class="row me-0 ms-0 mb-0" style="position: absolute;bottom: 0;width:100%;padding-left:20px;padding-right:20px;">
-                            <a v-on:click="$refs.contentSwiper.$swiper.slidePrev();" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>
-                            <a v-on:click="$refs.contentSwiper.$swiper.slideNext();" id="btn_next3" href="#" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3 gonext" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;" disabled="disabled">다음</a>
+                            <a v-on:click="$refs.contentSwiper.$swiper.slidePrev();progressBar -= 20;" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>
+                            <a v-on:click="$refs.contentSwiper.$swiper.slideNext();progressBar += 20;" id="btn_next3" href="#" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3 gonext" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;" disabled="disabled">다음</a>
                         </div>
                     </div>
         </swiper-slide>
         <swiper-slide
             :key="3"
             :virtualIndex="3">
-                <div id="slide4" class="card card-full pb-0 mb-0 border-bottom" style="height: calc( 100vh - 56px );">
+                <div id="slide4" class="card card-full pb-0 mb-0 border-bottom" style="min-height: calc( 100vh - 56px );">
                         <div class="content mt-1">
                             <div class="me-3 ms-3 mt-4 font-noto" style="position: relative;">
                                 <span class="font-18 font-500">강사 소개</span>
@@ -210,7 +210,7 @@
                             <div class="me-2 ms-2 mt-5 rounded-s" style="background:#efefef;">
                                 <div class="p-3 pb-1 rounded-s">
                                     <div class="input-style input-style-always-active no-borders no-icon">
-                                        <textarea v-model="ins_career1" @focus="focusInput($event)" class="form-control font-noto font-18 font-500" placeholder="경력1 (최신순)을 입력하세요." style="background: transparent;border-bottom-width: 0;"></textarea>
+                                        <textarea v-model="ins_introduce" @focus="focusInput($event)" class="form-control font-noto font-18 font-500" placeholder="경력1 (최신순)을 입력하세요." style="background: transparent;border-bottom-width: 0;"></textarea>
                                         <label class="color-gray font-600 font-10" style="background: transparent;">자기소개</label>
                                     </div>
                                 </div>
@@ -219,46 +219,74 @@
                                     <vue-typeahead-bootstrap
                                         id="search_typeahead"
                                         class="font-18"
-                                        @focus="focusInput2($event)"
                                         v-model="query"
                                         :data="locations"
-                                        :serializer="item => item.nickName"
-                                        :screen-reader-text-serializer="item => `${item.nickName}`"
+                                        :serializer="item => item"
+                                        :screen-reader-text-serializer="item => `${item}`"
                                         highlightClass="special-highlight-class"
                                         @hit="selectedLocation = $event;enableNext2($event);"
                                         :minMatchingChars="1"
                                         placeholder="사이트, 센터, 수영장"
                                         inputClass="empty-typehead special-input-class"
-                                        @input="lookupLocation"
+                                        @input="lookupLocation()"
                                         >
                                         <template slot="suggestion" slot-scope="{ data, htmlText }">
                                             <div class="d-flex align-items-center" style="position:relative !important;">
-                                            <div class="">
-                                                <div class="user-img me-2">
-                                                    <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
-                                                        <defs>
-                                                        <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
-                                                        <clipPath id="clipSquircle">
-                                                            <use xlink:href="#shapeSquircle"/>
-                                                        </clipPath>
-                                                        </defs>
-                                                        <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(data.profileImages && data.profileImages.length>0) ? data.profileImages[0].thumbnailUrl : 'https://d34l91104zg4p3.cloudfront.net/assets/user_empty.png'"/>
-                                                    </svg>
+                                                <div class="justify-content-center mb-0 text-start" style="padding-top: 2px;">
+                                                    <i class="fas fa-search font-16 pe-2 color-gray"></i>
+                                                    <span class="pb-0 mb-0 line-height-m ellipsis"> {{ data }} </span>
                                                 </div>
-                                            </div>
-                                            <span class="ml-4" style="">
-                                                <p class="font-noto font-16 mb-0">{{ data.nickName }}</p>
-                                            </span>
-                                            
                                             </div>
                                         </template>
                                     </vue-typeahead-bootstrap>
+                                    <div class="m-2 pb-4">
+                                        <div v-for="location in locationSelectedList" class=" border-bottom pt-2 pb-2">
+                                            <div class="d-flex align-items-center" style="position:relative !important;">
+                                                <span class="ml-4" style="">
+                                                    <p class="font-noto font-16 mb-0">{{ location }}</p>
+                                                </span>
+                                                <i v-on:click="removeLocationSelected(location)" class="wedive_icoset wedive_icoset_close" style="position: absolute;right:0px;margin:8px;"></i>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row me-0 ms-0 mb-0" style="position: absolute;bottom: 0;width:100%;padding-left:20px;padding-right:20px;">
-                            <a v-on:click="$refs.contentSwiper.$swiper.slidePrev();" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>
-                            <a v-on:click="$refs.contentSwiper.$swiper.slideNext();" id="btn_next4" href="#" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3 gonext" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;" disabled="disabled">다음</a>
+                            <a v-on:click="$refs.contentSwiper.$swiper.slidePrev();progressBar -= 20;" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>
+                            <a v-on:click="$refs.contentSwiper.$swiper.slideNext();progressBar += 20;" id="btn_next4" href="#" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3 gonext" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;" disabled="disabled">다음</a>
+                        </div>
+                    </div>
+        </swiper-slide>
+        <swiper-slide
+            :key="4"
+            :virtualIndex="4">
+                <div id="slide5" class="card card-full pb-0 mb-0 border-bottom" style="min-height: calc( 100vh - 56px );">
+                        <div class="content mt-1">
+                            <div class="me-3 ms-3 mt-4 font-noto" style="position: relative;">
+                                <span class="font-18 font-500">판매 교육 상품</span>
+                                <p class="font-12 color-gray" style="line-height: 1.5;">진행하는 교육상품을 추가하세요.<br/>예) Advance코스, 300,000원.</p>
+                                <img src="/static/images/assets/location-pin.png" height="100" style="position: absolute;top:0;right:0;border-radius:8px;"/>
+                            </div>
+                            <div class="me-2 ms-2 mt-5 rounded-s" style="background:#efefef;">
+                                <div class="p-3 pt-1 rounded-s">
+                                    <label class="color-gray font-600 font-10" style="background: transparent;">교육상품</label>
+                                    <div class="m-2 pb-4">
+                                        <div v-for="location in locationSelectedList" class=" border-bottom pt-2 pb-2">
+                                            <div class="d-flex align-items-center" style="position:relative !important;">
+                                                <span class="ml-4" style="">
+                                                    <p class="font-noto font-16 mb-0">{{ location }}</p>
+                                                </span>
+                                                <i v-on:click="removeLocationSelected(location)" class="wedive_icoset wedive_icoset_close" style="position: absolute;right:0px;margin:8px;"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row me-0 ms-0 mb-0" style="position: absolute;bottom: 0;width:100%;padding-left:20px;padding-right:20px;">
+                            <a v-on:click="$refs.contentSwiper.$swiper.slidePrev();progressBar -= 20;" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>
+                            <a v-on:click="$refs.contentSwiper.$swiper.slideNext();progressBar += 20;" id="btn_next4" href="#" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3 gonext" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;" disabled="disabled">다음</a>
                         </div>
                     </div>
         </swiper-slide>
@@ -366,6 +394,7 @@
     
     <div id="snackbar-inputerror" class="snackbar-toast color-white bg-red-dark" data-bs-delay="3000" data-bs-autohide="true"><i class="fa fa-times me-3"></i>모든 항목을 입력해주세요.</div>
     <div id="snackbar-nicknameerror" class="snackbar-toast color-white bg-red-dark" data-bs-delay="3000" data-bs-autohide="true"><i class="fa fa-times me-3"></i>이미 사용중인 닉네임 입니다.</div>
+    <div id="snackbar-locationerror" class="snackbar-toast color-white bg-red-dark" data-bs-delay="3000" data-bs-autohide="true"><i class="fa fa-times me-3"></i>최대 10개의 장소를 등록할 수 있어요.</div>
 
 
   </div>
@@ -423,6 +452,7 @@ export default {
         ins_career2: '',
         ins_career3: '',
         ins_career4: '',
+        ins_introduce: '',
         licenseFlag: false,
         locations: [],
         query: '',
@@ -477,8 +507,10 @@ export default {
             //    nextEl: '.swiper-button-next',
             //    prevEl: '.swiper-button-prev'
             //}
-        }
-
+        },
+        suggestions : (localStorage.suggestion ? JSON.parse(localStorage.suggestion) : []),
+        locationSelectedList: [],
+        progressBar: 20,
     }
   }, 
   watch: {
@@ -524,6 +556,20 @@ export default {
               $("#btn_next3").attr("disabled", true);
           }
       },
+      ins_introduce: function(newVal, oldVal) {
+          if (this.ins_introduce != '' && this.locationSelectedList.length > 0) {
+              $("#btn_next4").attr("disabled", false);
+          } else {
+              $("#btn_next4").attr("disabled", true);
+          }
+      },
+      locationSelectedList: function(newVal, oldVal) {
+          if (this.ins_introduce != '' && this.locationSelectedList.length > 0) {
+              $("#btn_next4").attr("disabled", false);
+          } else {
+              $("#btn_next4").attr("disabled", true);
+          }
+      },
       
 
 
@@ -564,45 +610,67 @@ export default {
       },
   },
   methods: {
-      async lookupLocation() {
-        this.users = [];
-        const query = this.query;
-        var result = await axios({
-            url: 'https://api.wedives.com/graphql',
-            method: 'post',
-            headers: {
-                countrycode: 'ko',
-                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-            },
-            data: {
-                query: `
-                    query FindUserByNickName($nickName: String!) {
-                        findUserByNickName(nickName: $nickName) {
-                            uid
-                            profileImages {
-                            thumbnailUrl
-                            }
-                            email
-                            scubaLicenseLevel
-                            freeLicenseLevel
-                            nickName
-                        }
-                    }
-                `,
-                variables: {
-                    "nickName": query
-                }
+      enableNext2(ev) {
+          console.log(this.locationSelectedList.length);
+          if (this.locationSelectedList.length >= 10) {
+            var toastData = 'snackbar-locationerror';
+            var notificationToast = document.getElementById(toastData);
+            var notificationToast = new bootstrap.Toast(notificationToast);
+            notificationToast.show();
+          }
+          else {
+            if (this.locationSelectedList.filter(li => li == ev).length == 0)
+                this.locationSelectedList.push(ev);
+            if(window.location.href.split('/').pop() == 'modal'){
+                window.history.back(); 
             }
-        });
-        // 자기 자신은 검색이 안되게 한다.
-        var _users = result.data.data.findUserByNickName;
-        for (var i=0; i<_users.length; i++) {
-            if (_users[i].uid == localStorage.uid) {
-                _users.splice(i, 1);
+          }
+      },
+      removeLocationSelected(user) {
+        for (var i=0; i<this.locationSelectedList.length; i++) {
+            var x = this.locationSelectedList[i];
+            if (x == user) {
+                this.locationSelectedList.splice(i, 1);
                 break;
             }
         }
-        this.locations = _users;
+      },
+      async lookupLocation() {
+        $(".focusBorder").each(function(index, item){item.classList.remove("focusBorder");});
+        $(".toggleBorder").each(function(index, item){item.classList.remove("toggleBorder");});
+        $("#search_typeahead")[0].parentNode.classList.add("focusBorder");
+
+        if (this.places == null) {
+            this.places = [];
+        }
+        if (this.query == '') {
+            this.places = [];
+        } else {
+            if (this.suggestions.length > 0) {
+                this.locations = this.suggestions.filter(x => (x && x.includes(this.query)));
+            } 
+            if (this.suggestions.length == 0 || this.places.length == 0) {
+                var headers = (localStorage.idToken) ? {countrycode: 'ko', idtoken: localStorage.idToken} : {countrycode: 'ko'};
+                var result = await axios({
+                    url: 'https://api.wedives.com/graphql',
+                    method: 'post',
+                    headers: headers,
+                    data: {
+                    query: `
+                        query Query($query: String!) {
+                           findSearchSuggestions(query: $query)
+                        }
+                        `,
+                        variables: {
+                            "query": this.query
+                        }
+                    }
+                });
+                if (result.data.data.findSearchSuggestions) {
+                    this.locations = result.data.data.findSearchSuggestions;
+                }
+            }
+        }
       },
       toggleLicense() {
           this.licenseFlag = !this.licenseFlag;

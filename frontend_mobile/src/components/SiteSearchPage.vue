@@ -17,7 +17,7 @@
                     :screen-reader-text-serializer="item => `${item.name}`"
                     highlightClass="special-highlight-class"
                     @hit="selecteduser = $event;enableNext2($event);"
-                    :minMatchingChars="2"
+                    :minMatchingChars="1"
                     placeholder="사이트, 포인트, 센터 (수영장)"
                     inputClass="special-input-class"
                     :disabledValues="[(selecteduser ? [selecteduser.name] : [])]"

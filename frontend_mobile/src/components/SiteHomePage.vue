@@ -27,7 +27,7 @@
                     :screen-reader-text-serializer="item => `${item.name}`"
                     highlightClass="special-highlight-class"
                     @hit="selecteduser = $event;enableNext2($event);"
-                    :minMatchingChars="2"
+                    :minMatchingChars="1"
                     :showAllResults="true"
                     :maxMatches="30"
                     placeholder="사이트, 포인트, 센터 (수영장)"

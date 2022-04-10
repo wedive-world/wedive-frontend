@@ -114,7 +114,10 @@ if (window.location.pathname.indexOf('/chat/') == 0) {
     console.log();
     const auth = getAuth();
     onAuthStateChanged(auth, async (user) => {
+      console.log(error.graphQLErrors[0].extensions.code == 'UNAUTHENTICATED')
+      console.log(user)
       if (error.graphQLErrors && error.graphQLErrors.length>0 && error.graphQLErrors[0].extensions && error.graphQLErrors[0].extensions.code == "UNAUTHENTICATED" && user) {
+        console.log("a")
         localStorage.uid = user.uid;
         localStorage.idToken = await user.getIdToken(false);
         localStorage.tokenAt = (new Date()).getTime();

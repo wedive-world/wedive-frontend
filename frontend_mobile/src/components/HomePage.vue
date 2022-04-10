@@ -18,7 +18,7 @@
                             :screen-reader-text-serializer="item => `${item.name_ko}`"
                             highlightClass="special-highlight-class"
                             @hit="selecteduser = $event;show_scuba_label();"
-                            :minMatchingChars="2"
+                            :minMatchingChars="1"
                             placeholder="짱스님, 어디로 다이빙 할까요?"
                             inputClass="special-input-class"
                             :disabledValues="(selecteduser ? [selecteduser.name_ko] : [])"
