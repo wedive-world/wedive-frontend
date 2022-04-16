@@ -133,11 +133,58 @@
                                     </div>
                                 </div>
                                 <div class="p-3 pb-1" style="margin-top: -7px;">
-                                    <div class="input-style input-style-always-active no-borders has-icon">
+                                    <div v-if="licenseFlag == false" class="input-style input-style-always-active no-borders has-icon">
                                         <i class="fas fa-address-card color-gray" style="margin-left:6px;"></i>
                                         <label for="select_license" class="color-gray font-600 font-10" style="background: transparent;">라이센스</label>
                                         <select id="select_license" @focus="focusInput($event)" required class="font-noto" v-model="scuba_license" style="background: transparent;border-bottom-width: 0;">
                                             <option value="" selected disabled>스쿠바 라이센스</option>
+                                            <option value="PADI">PADI</option>
+                                            <option value="NAUI">NAUI</option>
+                                            <option value="BSAC">BSAC</option>
+                                            <option value="CMAS">CMAS</option>
+                                            <option value="SSI">SSI</option>
+                                            <option value="NDL">NDL</option>
+                                            <option value="SDI/TDI">SDI/TDI</option>
+                                            <option value="IANTD">IANTD</option>
+                                            <option value="KUDA">KUDA</option>
+                                            <option value="NASE">NASE</option>
+                                            <option value="YMCA">YMCA</option>
+                                            <option value="AIDA">AIDA</option>
+                                            <option value="AA">AA</option>
+                                            <option value="Molchanovs">Molchanovs</option>
+                                            <option value="RAID">RAID</option>
+                                            <option value="UTA">UTA</option>
+                                            <option value="SNSI">SNSI</option>
+                                            <option value="AFIA">AFIA</option>
+                                            <option value="KF">KF</option>
+                                            <option value="UTR">UTR</option>
+                                            <option value="PSAI">PSAI</option>
+                                            <option value="PSS">PSS</option>
+                                            <option value="NASDS">NASDS</option>
+                                            <option value="IDEA – WDA">IDEA – WDA</option>
+                                            <option value="IDA">IDA</option>
+                                            <option value="IDDA ">IDDA</option>
+                                            <option value="IAC ">IAC</option>
+                                            <option value="ACUC">ACUC</option>
+                                            <option value="VIT">VIT</option>
+                                            <option value="PDIC International">PDIC International</option>
+                                            <option value="RSTC">RSTC</option>
+                                            <option value="DDI">DDI</option>
+                                            <option value="IAHD">IAHD</option>
+                                            <option value="MDEA">MDEA</option>
+                                            <option value="ANDI">ANDI</option>
+                                            <option value="GUE">GUE</option>
+                                            <option value="PSAI">PSAI</option>
+                                            <option value="SEI">SEI</option>
+                                        </select>
+                                        <span class="mt-n1 me-2"><i class="fa fa-chevron-down"></i></span>
+                                        <em></em>
+                                    </div>
+                                    <div v-else class="input-style input-style-always-active no-borders has-icon">
+                                        <i class="fas fa-address-card color-gray" style="margin-left:6px;"></i>
+                                        <label for="select_license2" class="color-gray font-600 font-10" style="background: transparent;">라이센스</label>
+                                        <select id="select_license2" @focus="focusInput($event)" required class="font-noto" v-model="free_license" style="background: transparent;border-bottom-width: 0;">
+                                            <option value="" selected disabled>프리 라이센스</option>
                                             <option value="PADI">PADI</option>
                                             <option value="NAUI">NAUI</option>
                                             <option value="BSAC">BSAC</option>
