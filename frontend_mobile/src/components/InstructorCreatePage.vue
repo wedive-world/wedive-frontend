@@ -310,7 +310,7 @@
                             <div class="me-2 ms-2 mt-5 rounded-s" style="background:#efefef;">
                                 <div class="p-3 pb-1 rounded-s">
                                     <div class="input-style input-style-always-active no-borders no-icon">
-                                        <textarea id="ins_introduce" v-model="ins_introduce" @focus="focusInput($event)" class="form-control font-noto font-18 font-500" placeholder="경력1 (최신순)을 입력하세요." style="background: transparent;border-bottom-width: 0;"></textarea>
+                                        <textarea id="ins_introduce" v-model="ins_introduce" @focus="focusInput($event)" class="form-control font-noto font-18 font-500" placeholder="소개 내용을 글자로 입력해주세요." style="background: transparent;border-bottom-width: 0;"></textarea>
                                         <label class="color-gray font-600 font-10" style="background: transparent;">자기소개</label>
                                     </div>
                                 </div>
@@ -386,7 +386,7 @@
                         </div>
                         <div class="row me-0 ms-0 mb-0" style="position: absolute;bottom: 0;width:100%;padding-left:20px;padding-right:20px;">
                             <a v-on:click="$refs.contentSwiper.$swiper.slidePrev();progressBar -= 20;" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>
-                            <a v-on:click="$refs.contentSwiper.$swiper.slideNext();progressBar += 20;" id="btn_next4" href="#" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3 gonext" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;">다음</a>
+                            <a v-on:click="$refs.contentSwiper.$swiper.slideNext();progressBar += 20;completed();" id="btn_next4" href="#" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3 gonext" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;">완료</a>
                         </div>
                     </div>
         </swiper-slide>
@@ -400,7 +400,7 @@
                             <p class="font-noto font-14 mb-0 color-gray">위다이브 메니저가 이미지 수정 후 등록이 완료됩니다.</p>
                         </div>
                         <div class="row me-0 ms-0 mb-0" style="position: absolute;bottom: 0;width:100%;padding-left:20px;padding-right:20px;">
-                            <a v-on:click="finished();" id="btn_next5" href="#" class="col-12 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;">완료</a>
+                            <a v-on:click="finished();" id="btn_next5" href="#" class="col-12 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;">확인</a>
                         </div>
                 </div>
         </swiper-slide>
@@ -568,6 +568,7 @@ export default {
   data () {
     return {
         check_agree: false,
+        ins_id: '',
         ins_name: (localStorage.userName ? localStorage.userName : ''),
         ins_phone: '',
         ins_email: (localStorage.userEmail ? localStorage.userEmail : ''),
@@ -748,8 +749,65 @@ export default {
       },
   },
   methods: {
+      async completed() {
+          
+          //this.scuba_license
+          // careers
+          var careers = [];
+          if (this.ins_career1 != '') careers.push(this.ins_career1);
+          if (this.ins_career2 != '') careers.push(this.ins_career2);
+          if (this.ins_career3 != '') careers.push(this.ins_career3);
+          if (this.ins_career4 != '') careers.push(this.ins_career4);
+
+          // center
+          var diveCetner = null;
+          var centers = this.locationSelectedList.filter(x=>x.type == 'center');
+          if (centers.length > 0) {
+              diveCetner = new Array();
+              centers.forEach(x=>diveCetner.push(x._id));
+          }
+
+          // site
+          var diveSite = null;
+          var sites = this.locationSelectedList.filter(x=>x.type == 'site');
+          if (sites.length > 0) {
+              diveSite = new Array();
+              sites.forEach(x=>diveSite.push(x._id));
+          }
+
+          // point
+          var divePoint = null;
+          var points = this.locationSelectedList.filter(x=>x.type == 'point');
+          if (points.length > 0) {
+              divePoint = new Array();
+              points.forEach(x=>divePoint.push(x._id));
+          }
+
+          var _input = {instructorType: (this.licenseFlag == false ? "scubaDiving" : "freeDiving"), name: this.ins_name, phoneNumber: this.ins_phone, email: this.ins_email, introduction: ins_introduce, careers: careers, diveSite: diveSite, divePoint: divePoint, diveCetner: diveCetner};
+            const ipt = _input;
+            console.log(ipt);
+
+            /*var result = await this.$apollo.mutate({
+                // Query
+                mutation: gql`
+                    mutation UpsertInstructor($input: InstructorInput) {
+                        upsertInstructor(input: $input) {
+                            _id
+                        }
+                    }
+                `,
+                // Parameters
+                variables: {
+                    input: ipt
+                },
+            });*/
+            
+
+            console.log(result.data.upsertInstructor)
+            this.ins_id = result.data.upsertInstructor._id;
+      },
       finished() {
-          location.href='/';
+          location.href='/instructor/' + this.ins_id;
       },
       removeEducation(index) {
           this.education_list.splice(index,1);
@@ -758,7 +816,7 @@ export default {
           this.education_list.push({product: '', price: ''});
       },
       clickLocation(ev) {
-          console.log(ev);
+          //console.log(ev);
           if (this.locationSelectedList.length >= 10) {
             var toastData = 'snackbar-locationerror';
             var notificationToast = document.getElementById(toastData);
@@ -772,7 +830,7 @@ export default {
                 window.history.back(); 
             }
           }
-          console.log(this.locationSelectedList);
+          //console.log(this.locationSelectedList);
       },
       go_next(id) {
           if (id == 1) {
@@ -920,6 +978,7 @@ export default {
                 }*/
             }
         }
+        //console.log(this.locations);
       },
       toggleLicense() {
           this.licenseFlag = !this.licenseFlag;

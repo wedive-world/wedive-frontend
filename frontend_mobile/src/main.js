@@ -121,7 +121,9 @@ if (window.location.pathname.indexOf('/chat/') == 0) {
         delete localStorage.tokenAt;
         delete localStorage.notiAt;
         delete localStorage.notiData;
-        location.reload();
+        setTimeout(function() {
+          location.reload();
+        },100);
       } else {
         //console.log(error.graphQLErrors[0].extensions.code == 'UNAUTHENTICATED')
         //console.log(user)
