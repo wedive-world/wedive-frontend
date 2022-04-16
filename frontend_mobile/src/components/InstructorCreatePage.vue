@@ -783,9 +783,115 @@ export default {
               points.forEach(x=>divePoint.push(x._id));
           }
 
+          // profileImages
+          var profile_img = await this.$apollo.mutate({
+                // Query
+                mutation: gql`
+                    mutation UploadImageMutation($file: Upload!) {
+                        uploadImage(file: $file) {
+                            _id
+                            name
+                            mimeType
+                            encoding
+                            thumbnailUrl
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                // Parameters
+                variables: {
+                    file: this.file_photo
+                },
+            });
+
+
+            var profile_upload = await this.$apollo.mutate({
+                // Query
+                mutation: gql`
+                    mutation Mutation($input: UpdateImageInput!) {
+                        updateImage(input: $input) {
+                            _id
+                            name
+                            description
+                            reference
+                            uploaderId
+                            mimeType
+                            encoding
+                            fileSize
+                            thumbnailUrl
+                        }
+                    }
+                `,
+                // Parameters
+                variables: {
+                    input: {
+                        _id: profile_img.uploadImage._id,
+                        name: profile_img.name,
+                        description: "instructorProfileImage",
+                        reference: null
+                    }
+                },
+          });
+
+
+
+          // licenseImage
+          var profile_img = await this.$apollo.mutate({
+                // Query
+                mutation: gql`
+                    mutation UploadImageMutation($file: Upload!) {
+                        uploadImage(file: $file) {
+                            _id
+                            name
+                            mimeType
+                            encoding
+                            thumbnailUrl
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                // Parameters
+                variables: {
+                    file: this.file_photo
+                },
+            });
+
+
+            var profile_upload = await this.$apollo.mutate({
+                // Query
+                mutation: gql`
+                    mutation Mutation($input: UpdateImageInput!) {
+                        updateImage(input: $input) {
+                            _id
+                            name
+                            description
+                            reference
+                            uploaderId
+                            mimeType
+                            encoding
+                            fileSize
+                            thumbnailUrl
+                        }
+                    }
+                `,
+                // Parameters
+                variables: {
+                    input: {
+                        _id: profile_img.uploadImage._id,
+                        name: profile_img.name,
+                        description: "instructorProfileImage",
+                        reference: null
+                    }
+                },
+          });
+
           var _input = {instructorType: (this.licenseFlag == false ? "scubaDiving" : "freeDiving"), name: this.ins_name, phoneNumber: this.ins_phone, email: this.ins_email, introduction: ins_introduce, careers: careers, diveSite: diveSite, divePoint: divePoint, diveCetner: diveCetner};
             const ipt = _input;
             console.log(ipt);
+
+            profileImages
 
             /*var result = await this.$apollo.mutate({
                 // Query
