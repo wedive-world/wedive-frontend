@@ -116,11 +116,11 @@ if (window.location.pathname.indexOf('/chat/') == 0) {
     onAuthStateChanged(auth, async (user) => {
       if (user == null) {
         console.log("user is null !!!")
-        delete user.uid;
-        delete user.idToken;
-        delete user.tokenAt;
-        delete user.notiAt;
-        delete user.notiData;
+        delete localStorage.uid;
+        delete localStorage.idToken;
+        delete localStorage.tokenAt;
+        delete localStorage.notiAt;
+        delete localStorage.notiData;
         location.reload();
       } else {
         //console.log(error.graphQLErrors[0].extensions.code == 'UNAUTHENTICATED')
