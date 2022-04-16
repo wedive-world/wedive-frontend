@@ -115,8 +115,13 @@ if (window.location.pathname.indexOf('/chat/') == 0) {
     const auth = getAuth();
     onAuthStateChanged(auth, async (user) => {
       if (user == null) {
+        console.log("user is null !!!")
         delete user.uid;
         delete user.idToken;
+        delete user.tokenAt;
+        delete user.notiAt;
+        delete user.notiData;
+        location.reload();
       } else {
         //console.log(error.graphQLErrors[0].extensions.code == 'UNAUTHENTICATED')
         //console.log(user)

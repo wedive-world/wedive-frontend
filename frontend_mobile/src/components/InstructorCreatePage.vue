@@ -667,14 +667,21 @@ export default {
           }
       },
       scuba_license: function(newVal, oldVal) {
-          if (this.scuba_license != '' && this.file_license != null) {
+          if ((this.scuba_license != '' || this.free_license != '') && this.file_license != null) {
+              $("#btn_next2").attr("disabled", false);
+          } else {
+              $("#btn_next2").attr("disabled", true);
+          }
+      },
+      free_license: function(newVal, oldVal) {
+          if ((this.scuba_license != '' || this.free_license != '') && this.file_license != null) {
               $("#btn_next2").attr("disabled", false);
           } else {
               $("#btn_next2").attr("disabled", true);
           }
       },
       file_license: function(newVal, oldVal) {
-          if (this.scuba_license != '' && this.file_license != null) {
+          if ((this.scuba_license != '' || this.free_license != '') && this.file_license != null) {
               $("#btn_next2").attr("disabled", false);
           } else {
               $("#btn_next2").attr("disabled", true);
