@@ -317,7 +317,10 @@ export default {
             }
           `,
           result() {
-              this.myCommunityIds = this.getUserSubsciption.communities.map(y=>{return y._id});
+              if (this.getUserSubsciption.communities && this.getUserSubsciption.communities.length > 0 && this.getUserSubsciption.communities[0].hasOwnProperty('_id'))
+                this.myCommunityIds = this.getUserSubsciption.communities.map(y=>{return y._id});
+              else
+                this.myCommunityIds = [];
           }
       },
       getAllCommunities: {

@@ -111,19 +111,23 @@ if (window.location.pathname.indexOf('/chat/') == 0) {
   })
   // Handle errors
   const errorLink = onError(error => {
-    console.log();
     const auth = getAuth();
     onAuthStateChanged(auth, async (user) => {
       if (user == null) {
         console.log("user is null !!!")
+        var now = (new Date()).getTime();
         delete localStorage.uid;
         delete localStorage.idToken;
         delete localStorage.tokenAt;
         delete localStorage.notiAt;
         delete localStorage.notiData;
-        setTimeout(function() {
-          location.reload();
-        },100);
+        if (localStorage.userNullAt && now - localStorage.userNullAt > 5000) {
+        } else if (localStorage.userNullAt && now - localStorage.userNullAt <= 5000) { 
+          setTimeout(function() {
+            location.reload();
+          },100);
+        }
+        localStorage.userNullAt = now;
       } else {
         //console.log(error.graphQLErrors[0].extensions.code == 'UNAUTHENTICATED')
         //console.log(user)

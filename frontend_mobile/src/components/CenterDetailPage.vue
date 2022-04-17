@@ -62,7 +62,8 @@
                     <img :src="'https://d34l91104zg4p3.cloudfront.net/assets/weather/'+(weatherIcon[getDiveCenterByUniqueName.waterTemperature.weatherDescription])+'.png'" width="50"/>
                     <div>
                         <p class="mb-0"><span class="color-gray">기온</span> <span style="display:inline-block;min-width:46px;text-align:right;">{{ getDiveCenterByUniqueName.waterTemperature && getDiveCenterByUniqueName.waterTemperature.temperatureC ? getDiveCenterByUniqueName.waterTemperature.temperatureC + '°C' : '' }}</span></p>
-                        <p class="mb-0"><span class="color-gray">수온</span> <span style="display:inline-block;min-width:46px;text-align:right;">{{ getDiveCenterByUniqueName.waterTemperature && getDiveCenterByUniqueName.waterTemperature.currentSeaTemperature ? getDiveCenterByUniqueName.waterTemperature.currentSeaTemperature.split("/")[0].replace(/ /gi,'') : '' }}</span></p>
+                        <p class="mb-0" v-if="getDiveCenterByUniqueName.interests.filter(x=>x._id=='62142d77618c82ad78803e4e').length > 0"><span class="color-gray">수온</span> <span style="display:inline-block;min-width:46px;text-align:right;">-</span></p>
+                        <p class="mb-0" v-else><span class="color-gray">수온</span> <span style="display:inline-block;min-width:46px;text-align:right;">{{ getDiveCenterByUniqueName.waterTemperature && getDiveCenterByUniqueName.waterTemperature.currentSeaTemperature ? getDiveCenterByUniqueName.waterTemperature.currentSeaTemperature.split("/")[0].replace(/ /gi,'') : '' }}</span></p>
 
                         <!--<i class="fas fa-tint"></i>-->
                     </div>
