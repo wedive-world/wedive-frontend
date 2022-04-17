@@ -121,8 +121,8 @@ if (window.location.pathname.indexOf('/chat/') == 0) {
         delete localStorage.tokenAt;
         delete localStorage.notiAt;
         delete localStorage.notiData;
-        if (localStorage.userNullAt && now - localStorage.userNullAt > 5000) {
-        } else if (localStorage.userNullAt && now - localStorage.userNullAt <= 5000) { 
+        if (localStorage.userNullAt == null || (localStorage.userNullAt && localStorage.userNullAt - now > 5000)) {
+          console.log("reload")
           setTimeout(function() {
             location.reload();
           },100);
