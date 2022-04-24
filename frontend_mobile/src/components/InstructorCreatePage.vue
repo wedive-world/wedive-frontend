@@ -28,7 +28,7 @@
             :virtualIndex="0">
                     <div id="slide0" class="card card-full pb-0 mb-0 border-bottom" style="height: calc( 100vh - 56px );">
                         <div class="content mt-0 text-center font-noto">
-                            <img src="/static/images/assets/trainer.png" class="mt-5" width="50%"/>
+                            <img src="/static/images/assets/trainer.png" class="mt-5" width="176px"/>
                             <p class="font-18 font-500 mt-3 mb-0">위다이브 강사에 함께해요.</p>
                             <!--<p class="color-gray font-14 mb-0">다이빙 입문자를 만나는 가장빠른 방법입니다.</p>-->
 
@@ -53,7 +53,7 @@
                                     </button>
 
                                     <div class="bg-theme">
-                                        <div class="" style="max-height: 160px;overflow-y: auto;border-radius: 10px;">
+                                        <div class="" style="max-height: calc(100vh - 582px);overflow-y: auto;border-radius: 10px;">
                                             <p class="agreement_content pe-3 ps-3 color-gray" style="background: #fafbfc;">
                                                 &lt;개인정보 수집 동의&gt;<br><br>
                                                 1. 기본수집항목: [필수] 위다이브 아이디, 이름, (휴대)전화번호, 이메일 주소, 사진, 다이빙 라이센스, 강사 경력<br>※ 추가 수집하는 필수항목<br>- 배송, 방문 등이 필요한 상품 구매 시 : 주소<br>- 해외 여행 관련 상품 구매 시 : 여권상 영문명, 여권번호 끝 4자리, 성별, 생년월일, 이메일주소, 카카오톡ID, 동행 아동정보(여권상 영문명, 생년월일, 신장)<br>- 병원을 이용하는 경우: 생년월일 (병원 재진 시 이전 진료기록 조회를 위해 예약자명, 생년월일, 전화번호가 수집될 수 있습니다.)<br><br>
@@ -72,7 +72,7 @@
 
 
                         <div style="position: absolute;bottom: 0;width:100%;">
-                            <a v-on:click="$refs.contentSwiper.$swiper.slideNext();progressBar += 20;" id="btn_next0" href="#" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 ms-3 me-3 mb-3" style="height: 46px;padding-top: 10px;" disabled="disabled">다음</a>
+                            <a v-on:click="$refs.contentSwiper.$swiper.slideNext();progressBar += 16.67;" id="btn_next0" href="#" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 ms-3 me-3 mb-3" style="height: 46px;padding-top: 10px;" disabled="disabled">다음</a>
                         </div>
                     </div>
         </swiper-slide>
@@ -108,7 +108,7 @@
                             </div>
                         </div>
                         <div style="position: absolute;bottom: 0;width:100%;">
-                            <a v-on:click="$refs.contentSwiper.$swiper.slideNext();progressBar += 20;go_next(1);" id="btn_next1" href="#" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 ms-3 me-3 mb-3" style="height: 46px;padding-top: 10px;" disabled="disabled">다음</a>
+                            <a v-on:click="$refs.contentSwiper.$swiper.slideNext();progressBar += 16.67;go_next(1);" id="btn_next1" href="#" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 ms-3 me-3 mb-3" style="height: 46px;padding-top: 10px;" disabled="disabled">다음</a>
                         </div>
                     </div>
         </swiper-slide>
@@ -241,8 +241,8 @@
                         
                         
                         <div class="row me-0 ms-0 mb-0" style="position: absolute;bottom: 0;width:100%;padding-left:20px;padding-right:20px;">
-                            <a v-on:click="$refs.contentSwiper.$swiper.slidePrev();progressBar -= 20;" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>
-                            <a v-on:click="$refs.contentSwiper.$swiper.slideNext();progressBar += 20;go_next(2);" id="btn_next2" href="#" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3 gonext" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;" disabled="disabled">다음</a>
+                            <a v-on:click="$refs.contentSwiper.$swiper.slidePrev();progressBar -= 16.67;" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>
+                            <a v-on:click="$refs.contentSwiper.$swiper.slideNext();progressBar += 16.67;go_next(2);" id="btn_next2" href="#" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3 gonext" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;" disabled="disabled">다음</a>
                         </div>
                     </div>
         </swiper-slide>
@@ -292,8 +292,8 @@
                             </div>
                         </div>
                         <div class="row me-0 ms-0 mb-0" style="position: absolute;bottom: 0;width:100%;padding-left:20px;padding-right:20px;">
-                            <a v-on:click="$refs.contentSwiper.$swiper.slidePrev();progressBar -= 20;" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>
-                            <a v-on:click="$refs.contentSwiper.$swiper.slideNext();progressBar += 20;go_next(3);" id="btn_next3" href="#" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3 gonext" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;" disabled="disabled">다음</a>
+                            <a v-on:click="$refs.contentSwiper.$swiper.slidePrev();progressBar -= 16.67;" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>
+                            <a v-on:click="$refs.contentSwiper.$swiper.slideNext();progressBar += 16.67;go_next(3);" id="btn_next3" href="#" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3 gonext" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;" disabled="disabled">다음</a>
                         </div>
                     </div>
         </swiper-slide>
@@ -354,8 +354,8 @@
                             </div>
                         </div>
                         <div class="row me-0 ms-0 mb-0" style="position: absolute;bottom: 0;width:100%;padding-left:20px;padding-right:20px;">
-                            <a v-on:click="$refs.contentSwiper.$swiper.slidePrev();progressBar -= 20;" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>
-                            <a v-on:click="$refs.contentSwiper.$swiper.slideNext();progressBar += 20;go_next(4);" id="btn_next4" href="#" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3 gonext" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;" disabled="disabled">다음</a>
+                            <a v-on:click="$refs.contentSwiper.$swiper.slidePrev();progressBar -= 16.67;" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>
+                            <a v-on:click="$refs.contentSwiper.$swiper.slideNext();progressBar += 16.67;go_next(4);" id="btn_next4" href="#" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3 gonext" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;" disabled="disabled">다음</a>
                         </div>
                     </div>
         </swiper-slide>
@@ -385,8 +385,8 @@
                             <div class="text-center mt-2 opacity-50 font-noto" v-on:click="addEducation()"><i class="fas fa-plus me-2"></i> 교육과정 추가</div>
                         </div>
                         <div class="row me-0 ms-0 mb-0" style="position: absolute;bottom: 0;width:100%;padding-left:20px;padding-right:20px;">
-                            <a v-on:click="$refs.contentSwiper.$swiper.slidePrev();progressBar -= 20;" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>
-                            <a v-on:click="$refs.contentSwiper.$swiper.slideNext();progressBar += 20;completed();" id="btn_next4" href="#" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3 gonext" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;">완료</a>
+                            <a v-on:click="$refs.contentSwiper.$swiper.slidePrev();progressBar -= 16.67;" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>
+                            <a v-on:click="$refs.contentSwiper.$swiper.slideNext();progressBar += 16.67;completed();" id="btn_next4" href="#" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3 gonext" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;">다음</a>
                         </div>
                     </div>
         </swiper-slide>
@@ -394,13 +394,33 @@
             :key="6"
             :virtualIndex="6">
                 <div id="slide6" class="card card-full pb-0 mb-0 border-bottom" style="min-height: calc( 100vh - 56px );">
+                        <div class="content mt-1 mt-5">
+                            <p><label class="wediev-label pb-1 color-highlight ms-2">나를 어필해보세요. (선택 시 추천 홍보)</label></p>
+                            <div v-for="(inter,index) in interests" class="form-check interest-check">
+                                <input v-on:click="inter=!inter;" class="form-check-input" type="checkbox" value="" :id="'check'+index">
+                                <label class="form-check-label rounded-xl border-08" :for="'check'+index">{{ interest_desc[index] }}</label>
+                                <i class="fa fa-quote-left color-white font-17"></i>
+                                <i class="fa fa-quote-left font-17 color-highlight"></i>
+                            </div>
+                        </div>
+                        <div class="row me-0 ms-0 mb-0" style="position: absolute;bottom: 0;width:100%;padding-left:20px;padding-right:20px;">
+                            <a v-on:click="$refs.contentSwiper.$swiper.slidePrev();progressBar -= 16.67;" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>
+                            <a v-on:click="$refs.contentSwiper.$swiper.slideNext();progressBar += 16.67;completed();" id="btn_next4" href="#" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3 gonext" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;">완료</a>
+                        </div>
+                </div>
+        </swiper-slide>
+        </swiper>
+        <swiper-slide
+            :key="7"
+            :virtualIndex="7">
+                <div id="slide7" class="card card-full pb-0 mb-0 border-bottom" style="min-height: calc( 100vh - 56px );">
                         <div class="content mt-1 text-center mt-5">
                             <img class="mt-5" src="/static/images/assets/completed.gif" width="35%" />
                             <p class="font-noto font-18 mb-1 mt-3">접수가 완료되었습니다.</p>
                             <p class="font-noto font-14 mb-0 color-gray">위다이브 메니저가 이미지 수정 후 등록이 완료됩니다.</p>
                         </div>
                         <div class="row me-0 ms-0 mb-0" style="position: absolute;bottom: 0;width:100%;padding-left:20px;padding-right:20px;">
-                            <a v-on:click="finished();" id="btn_next5" href="#" class="col-12 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;">확인</a>
+                            <a v-on:click="finished();" id="btn_next6" href="#" class="col-12 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;">확인</a>
                         </div>
                 </div>
         </swiper-slide>
@@ -415,99 +435,8 @@
     </div>
     <!-- Page content ends here-->
     
-    <!-- Menu : Personal Best -->
-    <div id="menu-personal-best" 
-         class="menu menu-box-modal rounded-m bg-theme" 
-         data-menu-width="350"
-         data-menu-height="380">
-        <div class="menu-title p-2">
-            <h1 class="font-600 font-18">Personal Best 추가</h1>
-            <a href="#" class="close-menu"><i class="wedive_icoset wedive_icoset_close"></i></a>
-        </div>
-        
-        <div class="content">
-            <div class="row">
-                <div class="col-6">
-                    <div class="text-start input-style has-icon no-borders mb-1">
-                        <i class="fa fa-record-vinyl color-gray font-14"></i>
-                        <label for="form_pb_sta" class="color-highlight bg-e7e7e7">STA (숨참기)</label>
-                        <input type="number" class="form-control font-noto" id="form_pb_sta" placeholder="STA (숨참기)" v-model="pb_sta">
-                        <i class="fa fa-check disabled valid color-green-dark"></i>
-                        <i class="fa fa-check disabled invalid color-red-dark"></i>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="text-start input-style has-icon no-borders mb-1">
-                        <i class="fa fa-record-vinyl color-gray font-14"></i>
-                        <label for="form_pb_dyn" class="color-highlight bg-e7e7e7">DYN (핀잠영)</label>
-                        <input type="number" class="form-control font-noto" id="form_pb_dyn" placeholder="DYN (핀잠영)" v-model="pb_dyn">
-                        <i class="fa fa-check disabled valid color-green-dark"></i>
-                        <i class="fa fa-check disabled invalid color-red-dark"></i>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="text-start input-style has-icon no-borders mb-1">
-                        <i class="fa fa-record-vinyl color-gray font-14"></i>
-                        <label for="form_pb_dnf" class="color-highlight bg-e7e7e7">DNF (맨발 잠영)</label>
-                        <input type="number" class="form-control font-noto" id="form_pb_dnf" placeholder="DNF (맨발 잠영)" v-model="pb_dnf">
-                        <i class="fa fa-check disabled valid color-green-dark"></i>
-                        <i class="fa fa-check disabled invalid color-red-dark"></i>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="text-start input-style has-icon no-borders mb-1">
-                        <i class="fa fa-record-vinyl color-gray font-14"></i>
-                        <label for="form_pb_cwt" class="color-highlight bg-e7e7e7">CWT (고정 웨이트)</label>
-                        <input type="number" class="form-control font-noto" id="form_pb_cwt" placeholder="CWT (고정 웨이트)" v-model="pb_cwt">
-                        <i class="fa fa-check disabled valid color-green-dark"></i>
-                        <i class="fa fa-check disabled invalid color-red-dark"></i>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="text-start input-style has-icon no-borders mb-1">
-                        <i class="fa fa-record-vinyl color-gray font-14"></i>
-                        <label for="form_pb_vwt" class="color-highlight bg-e7e7e7">VWT (가변 웨이트)</label>
-                        <input type="number" class="form-control font-noto" id="form_pb_vwt" placeholder="VWT (가변 웨이트)" v-model="pb_vwt">
-                        <i class="fa fa-check disabled valid color-green-dark"></i>
-                        <i class="fa fa-check disabled invalid color-red-dark"></i>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="text-start input-style has-icon no-borders mb-1">
-                        <i class="fa fa-record-vinyl color-gray font-14"></i>
-                        <label for="form_pb_fim" class="color-highlight bg-e7e7e7">FIM (프리 이머전)</label>
-                        <input type="number" class="form-control font-noto" id="form_pb_fim" placeholder="FIM (프리 이머전)" v-model="pb_fim">
-                        <i class="fa fa-check disabled valid color-green-dark"></i>
-                        <i class="fa fa-check disabled invalid color-red-dark"></i>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="text-start input-style has-icon no-borders mb-1">
-                        <i class="fa fa-record-vinyl color-gray font-14"></i>
-                        <label for="form_pb_cnf" class="color-highlight bg-e7e7e7">CNF (맨발 잠수)</label>
-                        <input type="number" class="form-control font-noto" id="form_pb_cnf" placeholder="CNF (맨발 잠수)" v-model="pb_cnf">
-                        <i class="fa fa-check disabled valid color-green-dark"></i>
-                        <i class="fa fa-check disabled invalid color-red-dark"></i>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="text-start input-style has-icon no-borders mb-1">
-                        <i class="fa fa-record-vinyl color-gray font-14"></i>
-                        <label for="form_pb_nlt" class="color-highlight bg-e7e7e7">NLT (무제한 잠수)</label>
-                        <input type="number" class="form-control font-noto" id="form_pb_nlt" placeholder="NLT (무제한 잠수)" v-model="pb_nlt">
-                        <i class="fa fa-check disabled valid color-green-dark"></i>
-                        <i class="fa fa-check disabled invalid color-red-dark"></i>
-                    </div>
-                </div>
-            </div>
-            
-            
-            <a href="#" v-on:click="addPersonalBest()" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0">추가하기</a>
-        </div>
-    </div>
     
     <div id="snackbar-inputerror" class="snackbar-toast color-white bg-red-dark" data-bs-delay="3000" data-bs-autohide="true"><i class="fa fa-times me-3"></i>모든 항목을 입력해주세요.</div>
-    <div id="snackbar-nicknameerror" class="snackbar-toast color-white bg-red-dark" data-bs-delay="3000" data-bs-autohide="true"><i class="fa fa-times me-3"></i>이미 사용중인 닉네임 입니다.</div>
     <div id="snackbar-locationerror" class="snackbar-toast color-white bg-red-dark" data-bs-delay="3000" data-bs-autohide="true"><i class="fa fa-times me-3"></i>최대 10개의 장소를 등록할 수 있어요.</div>
 
 
@@ -516,7 +445,8 @@
 <script>
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import 'swiper/css/swiper.css'
-import { GraphQLClient, request, gql } from "graphql-request";
+import gql from 'graphql-tag'
+//import { GraphQLClient, request, gql } from "graphql-request";
 import draggable from 'vuedraggable'
 
 const axios = require("axios")
@@ -581,9 +511,6 @@ export default {
         locations: [],
         query: '',
 
-        nickname: '',
-        userage: '',
-        usersex: '',
         scuba_license: '',
         scuba_level: '',
         scuba_log: '',
@@ -591,51 +518,17 @@ export default {
         free_level: '',
         file_license: null,
         file_photo: null,
-        pb_sta: '',
-        pb_dyn: '',
-        pb_dnf: '',
-        pb_cwt: '',
-        pb_vwt: '',
-        pb_fim: '',
-        pb_cnf: '',
-        pb_nlt: '',
-        interest1: false,
-        interest2: false,
-        interest3: false,
-        interest4: false,
-        interest5: false,
-        interest6: false,
-        interest7: false,
-        interest8: false,
-        interest9: false,
-        interest10: false,
-        interest11: false,
-        interest12: false,
-        interest13: false,
-        interest14: false,
-        interest15: false,
-        interest16: false,
-        next3_word: '넘어가기',
+        
+        
         swiperOptions: {
-            //loop: true,
-            //loopedSlides: 5, // looped slides should be the same
-            //spaceBetween: 30,
-            //centeredSlides: true,
-            //slidesOffsetBefore: '100px',
-            //slidesOffsetAfter: '100px',
-            //slidesPerView: 'auto',
-            //touchRatio: 0.2,
             allowTouchMove: false,
-            //slideToClickedSlide: true,
-            //navigation: {
-            //    nextEl: '.swiper-button-next',
-            //    prevEl: '.swiper-button-prev'
-            //}
         },
         suggestions : (localStorage.suggestion ? JSON.parse(localStorage.suggestion) : []),
         locationSelectedList: [],
         progressBar: 0,
-        education_list: [{product: '', price: ''}],
+        education_list: [{product: null, price: null}],
+        interests: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+        interest_desc: ['사진 무료촬영 (전문장비)', '사진 무료촬영 (핸드폰)', '전업강사', '대회우승', '강사 트레이너', '마스터강사', '재수강 무료 (1회)', '재수강 무료 (2회)', '재수강 무료 (3회)', 'PADI 5star', '응급처치강사', '응급구조강사', '수상구조사', '대학교 출강', 'TV출연', '자체풀(수영장)보유', '정기 해외투어 운영', '요가강습 할인', '스키강습 할인'],
     }
   }, 
   watch: {
@@ -719,34 +612,6 @@ export default {
               $("#btn_next1").attr("disabled", false);
           }
       },
-      userage: function(newVal, oldVal) {
-          if (this.userage === '' || this.usersex === '') {
-              $("#btn_next2").attr("disabled", true);
-          } else {
-              $("#btn_next2").attr("disabled", false);
-          }
-      },
-      usersex: function(newVal, oldVal) {
-          if (this.userage === '' || this.usersex === '') {
-              $("#btn_next2").attr("disabled", true);
-          } else {
-              $("#btn_next2").attr("disabled", false);
-          }
-      },
-      scuba_level: function(newVal, oldVal) {
-          if (this.scuba_license === '' && this.scuba_level === '' && this.scuba_log === '') {
-              this.next3_word = '넘어가기';
-          } else {
-              this.next3_word = '다음';
-          }
-      },
-      scuba_log: function(newVal, oldVal) {
-          if (this.scuba_license === '' && this.scuba_level === '' && this.scuba_log === '') {
-              this.next3_word = '넘어가기';
-          } else {
-              this.next3_word = '다음';
-          }
-      },
   },
   methods: {
       async completed() {
@@ -783,6 +648,7 @@ export default {
               points.forEach(x=>divePoint.push(x._id));
           }
 
+/*
           // profileImages
           var profile_img = await this.$apollo.mutate({
                 // Query
@@ -837,7 +703,7 @@ export default {
 
 
           // licenseImage
-          var profile_img = await this.$apollo.mutate({
+          var license_img = await this.$apollo.mutate({
                 // Query
                 mutation: gql`
                     mutation UploadImageMutation($file: Upload!) {
@@ -859,7 +725,7 @@ export default {
             });
 
 
-            var profile_upload = await this.$apollo.mutate({
+            var license_upload = await this.$apollo.mutate({
                 // Query
                 mutation: gql`
                     mutation Mutation($input: UpdateImageInput!) {
@@ -879,19 +745,47 @@ export default {
                 // Parameters
                 variables: {
                     input: {
-                        _id: profile_img.uploadImage._id,
-                        name: profile_img.name,
+                        _id: license_img.uploadImage._id,
+                        name: license_img.name,
                         description: "instructorProfileImage",
                         reference: null
                     }
                 },
           });
+*/
+          var education_id_list = new Array();
+          for (var i=0; i<education_list.length; i++) {
+              var item = education_list[i];
 
-          var _input = {instructorType: (this.licenseFlag == false ? "scubaDiving" : "freeDiving"), name: this.ins_name, phoneNumber: this.ins_phone, email: this.ins_email, introduction: ins_introduce, careers: careers, diveSite: diveSite, divePoint: divePoint, diveCetner: diveCetner};
-            const ipt = _input;
-            console.log(ipt);
+              var education = await this.$apollo.mutate({
+                // Query
+                mutation: gql`
+                    mutation UpsertProduct($input: ProductInput) {
+                        upsertProduct(input: $input) {
+                            _id
+                        }
+                    }
+                `,
+                // Parameters
+                variables: {
+                    input : {
+                        name: item.name,
+                        uniqueName: 'edu_' + this.ins_phone + '_' + (i+1),
+                        price: item.price,
+                    }
+                },
+            });
+            education_id_list.push(education.data.upsertProduct._id);
+          }
+          console.log(education_list);
+          console.log(education_id_list);
+          
 
-            profileImages
+          //var _input = {instructorType: (this.licenseFlag == false ? "scubaDiving" : "freeDiving"), name: this.ins_name, phoneNumber: this.ins_phone, email: this.ins_email, introduction: ins_introduce._value, careers: careers, diveSite: diveSite, divePoint: divePoint, diveCetner: diveCetner, profileImages: profile_img.uploadImage._id, licenseImages: license_img.uploadImage._id, educations: education_id_list};
+          var _input = {instructorType: (this.licenseFlag == false ? "scubaDiving" : "freeDiving"), name: this.ins_name, phoneNumber: this.ins_phone, email: this.ins_email, introduction: ins_introduce._value, careers: careers, diveSite: diveSite, divePoint: divePoint, diveCetner: diveCetner, profileImages: "a1", licenseImages: "a2"};
+          
+          const ipt = _input;
+          console.log(_input)
 
             /*var result = await this.$apollo.mutate({
                 // Query
@@ -909,8 +803,8 @@ export default {
             });*/
             
 
-            console.log(result.data.upsertInstructor)
-            this.ins_id = result.data.upsertInstructor._id;
+            //console.log(result.data.upsertInstructor)
+            //this.ins_id = result.data.upsertInstructor._id;
       },
       finished() {
           location.href='/instructor/' + this.ins_id;
@@ -1132,291 +1026,6 @@ export default {
         $("#file-upload2-back").css("background", "url(" + URL.createObjectURL(this.file_photo) + ")");
         $("#file-upload2-back").css("background-size", "contain");
         $("#file-upload2-back").css("background-repeat", "no-repeat");
-      },
-      async next1() {
-          const nickName = this.nickname;
-          var result = await axios({
-            url: 'https://api.wedives.com/graphql',
-            method: 'post',
-            headers: {
-                countrycode: 'ko',
-                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-            },
-            data: {
-                query: `
-                query Query($nickName: String!) {
-                    getUserByNickName(nickName: $nickName) {
-                        email
-                    }
-                }
-                `,
-                variables: {
-                    nickName: nickName
-                }
-
-            }
-        });
-        
-
-        if (result && result.data && result.data.data) {
-            if (result.data.data.getUserByNickName == null) {
-                $("#btn_next1").addClass("gonext");
-                $(".progress-bar").css("width", "50%");
-                setTimeout(function() {
-                    $("#form2").focus();
-                },200);
-            } else {
-                var toastData = 'snackbar-nicknameerror';
-                var notificationToast = document.getElementById(toastData);
-                var notificationToast = new bootstrap.Toast(notificationToast);
-                notificationToast.show();
-            }
-        }
-      },
-      prev2() {
-          $("#btn_next1").removeClass("gonext");
-      },
-      next2() {
-          $(".progress-bar").css("width", "75%");
-      },
-      next3() {
-          $(".progress-bar").css("width", "100%");
-      },
-      async next4() {
-        //console.log(this.file_photo);
-
-        
-        var freeBest = new Array();
-        if (this.pb_sta != null && this.pb_sta != '') freeBest.push(["STA",this.pb_sta]);
-        if (this.pb_dyn != null && this.pb_dyn != '') freeBest.push(["DYN", this.pb_dyn]);
-        if (this.pb_dnf != null && this.pb_dnf != '') freeBest.push(["DNF", this.pb_dnf]);
-        if (this.pb_cwt != null && this.pb_cwt != '') freeBest.push(["CWT", this.pb_cwt]);
-        if (this.pb_vwt != null && this.pb_vwt != '') freeBest.push(["VWT", this.pb_vwt]);
-        if (this.pb_fim != null && this.pb_fim != '') freeBest.push(["FIM", this.pb_fim]);
-        if (this.pb_cnf != null && this.pb_cnf != '') freeBest.push(["CNF", this.pb_cnf]);
-        if (this.pb_nlt != null && this.pb_nlt != '') freeBest.push(["NLT", this.pb_nlt]);
-
-        var interest_id = ["61ac9d06eac3ebfb7ac9f952", "61ac9d0beac3ebfb7ac9f955", "61ac9d18eac3ebfb7ac9f958", "6174da70a60639819c3e6ad9", "61ac9d25eac3ebfb7ac9f95b", "61a2fefa098b3785ef439cb3", "61ac9de8eac3ebfb7ac9f95e", "61ac9deceac3ebfb7ac9f961", "6174da75a60639819c3e6ae5", "61ac9e21eac3ebfb7ac9f964", "6178f02df7c3a048b4706cc8", "6198ff5eae1cc12e02c3cca0", "6178f01cf7c3a048b4706cc6", "61ac9eaeeac3ebfb7ac9f968", "61ac9eb7eac3ebfb7ac9f96b", "61780278f7c3a048b4704a85"];
-        var interest_list = new Array();
-        for (var i=0; i<15; i++) {
-            if (this['interest'+(i+1)] == true) {
-                interest_list.push(interest_id[i]);
-            }
-        }
-
-        var result_img_user = null;
-        if (this.file_photo != null) {
-            var mutation = gql`
-                mutation UploadImageMutation($uploadImageFile: Upload!) {
-                    uploadImage(file: $uploadImageFile) {
-                        _id
-                        name
-                        mimeType
-                        encoding
-                        thumbnailUrl
-                        createdAt
-                        updatedAt
-                    }
-                }
-            `
-            var client = new GraphQLClient('https://api.wedives.com/graphql',
-            {
-                headers: {
-                    countrycode: 'ko',
-                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-                }
-            })
-
-            result_img_user = await client.request(mutation, {uploadImageFile: this.file_photo,});
-            //console.log(result_img_user);
-
-
-            var updateMutation = gql`
-                mutation Mutation($input: UpdateImageInput!) {
-                    updateImage(input: $input) {
-                        _id
-                        name
-                        description
-                        reference
-                        uploaderId
-                        mimeType
-                        encoding
-                        fileSize
-                        thumbnailUrl
-                    }
-                }
-            `;
-            var result_upload = await client.request(updateMutation, {input: {"_id": result_img_user.uploadImage._id,"name": result_img_user.name,"description": "userImage","reference": null}});
-            //console.log(result_upload);
-
-            var queryImageUrl = gql`
-                query Query($id: ID!, $width: Int) {
-                    getImageUrlById(_id: $id, width: $width)
-                }
-            `;
-            var result_url = await client.request(queryImageUrl, {"id": result_img_user.uploadImage._id,"width": 720});
-
-            localStorage.userPhoto = result_url.getImageUrlById;
-            localStorage.userThumbnail = result_img_user.uploadImage.thumbnailUrl
-        }
-        
-        
-        var result_find_user = await axios({
-            url: 'https://api.wedives.com/graphql',
-            method: 'post',
-            headers: {
-                countrycode: 'ko',
-                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-            },
-            data: {
-                query: `
-                    query Query($uid: ID!) {
-                    getUserByUid(uid: $uid) {
-                        _id
-                        nickName
-                        birthAge
-                        gender
-                    }
-                    }
-                `,
-                variables: {
-                    "uid": localStorage.uid
-                }
-            }
-        });
-        
-        
-        var birthAge = (new Date()).getFullYear() - parseInt(this.userage) + 1;
-        var input_temp = {"uid": localStorage.uid, "authProvider": localStorage.providerId, "oauthToken": localStorage.idToken, "email": localStorage.userEmail, "nickName": this.nickname, "name": localStorage.userName, "birthAge": birthAge, "gender": this.usersex, "interests": interest_list};
-
-        if (result_find_user.data.data.getUserByUid != null ) {
-            input_temp._id = result_find_user.data.data.getUserByUid._id;
-        }
-        
-
-        if (this.scuba_license && this.scuba_license != '') input_temp.scubaLicenseType = this.scuba_license;
-        if (this.scuba_level && this.scuba_level != '') input_temp.scubaLicenseLevel = this.scuba_level;
-        if (this.free_license && this.free_license != '') input_temp.freeLicenseType = this.free_license;
-        if (this.free_level && this.free_level != '') input_temp.freeLicenseLevel = this.free_level;
-        if (result_img_user) input_temp.profileImages = [result_img_user.uploadImage._id];
-        if (this.scuba_log && this.scuba_log != '') input_temp.divingLog = parseInt(this.scuba_log);
-        if (freeBest && freeBest.length > 0) input_temp.freeDivingBests = freeBest;
-        const ipt = input_temp;
-        
-        var result = await axios({
-            url: 'https://api.wedives.com/graphql',
-            method: 'post',
-            headers: {
-                countrycode: 'ko',
-                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-            },
-            data: {
-                query: `
-                    mutation Mutation($input: UserInput) {
-                        upsertUser(input: $input) {
-                            _id
-                            scubaLicenseType
-                            scubaLicenseLevel
-                            freeLicenseType
-                            freeLicenseLevel
-                            uid
-                            authProvider
-                            oauthToken
-                            email
-                            emailVerified
-                            phoneNumber
-                            phoneNumberVerified
-                            profileImages {
-                                _id
-                            }
-                            nickName
-                            name
-                            birthAge
-                            gender
-                            residence
-                            interests {
-                                _id
-                            }
-                            divingLog
-                            freeDivingBests
-                        }
-                    }
-                `,
-                variables: {
-                    "input": ipt
-                }
-            }
-        });
-        localStorage.userId = result.data.data.upsertUser._id;
-        localStorage.nickName = this.nickname;
-        localStorage.userGender  = this.usersex;
-
-        
-
-        setTimeout(function() {
-            $(".span_timer").text("2");
-        },1000)
-        setTimeout(function() {
-            $(".span_timer").text("1");
-        },2000)
-        setTimeout(function() {
-            
-            window.location.href=(localStorage.loginUrl == null || localStorage.loginUrl == '') ? '/' : localStorage.loginUrl;
-        },2100)
-      },
-      
-      addPersonalBest: function() {
-            $("#div_personal_best").html('');
-            
-            if (this.pb_sta != "") {
-                var record_type = "STA"
-                var record_val = this.pb_sta;
-                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
-            }
-            if (this.pb_dyn != "") {
-                var record_type = "STA"
-                var record_val = this.pb_sta;
-                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
-            }
-            if (this.pb_dnf != "") {
-                var record_type = "DNF"
-                var record_val = this.pb_dnf;
-                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
-            }
-            if (this.pb_cwt != "") {
-                var record_type = "CWT"
-                var record_val = this.pb_cwt;
-                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
-            }
-            if (this.pb_vwt != "") {
-                var record_type = "VWT"
-                var record_val = this.pb_vwt;
-                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
-            }
-            if (this.pb_fim != "") {
-                var record_type = "FIM"
-                var record_val = this.pb_fim;
-                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
-            }
-            if (this.pb_cnf != "") {
-                var record_type = "CNF"
-                var record_val = this.pb_cnf;
-                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
-            }
-            if (this.pb_nlt != "") {
-                var record_type = "NLT"
-                var record_val = this.pb_nlt;
-                $("#div_personal_best").append('<div class="form-check interest-check"><label class="form-check-label rounded-xl border-08">'+ record_type + ', '+ record_val + ((record_type=='STA') ? '분' : '미터') +'</label><i class="fas fa-clipboard font-17 color-highlight"></i></div>');
-            }
-
-            
-            const activeMenu = document.querySelectorAll('.menu-active');
-            for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
-            // jjangs close menu
-            if(window.location.href.split('/').pop() == 'modal'){
-                window.history.back(); 
-            }
-            
       },
       
   }
