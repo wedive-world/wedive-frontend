@@ -409,7 +409,6 @@
                         </div>
                 </div>
         </swiper-slide>
-        </swiper>
         <swiper-slide
             :key="7"
             :virtualIndex="7">
@@ -529,6 +528,7 @@ export default {
         education_list: [{product: null, price: null}],
         interests: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
         interest_desc: ['사진 무료촬영 (전문장비)', '사진 무료촬영 (핸드폰)', '전업강사', '대회우승', '강사 트레이너', '마스터강사', '재수강 무료 (1회)', '재수강 무료 (2회)', '재수강 무료 (3회)', 'PADI 5star', '응급처치강사', '응급구조강사', '수상구조사', '대학교 출강', 'TV출연', '자체풀(수영장)보유', '정기 해외투어 운영', '요가강습 할인', '스키강습 할인'],
+        interest_ids: ['62677aeafaacac65f8bde640','62677af4faacac65f8bde643','62677afdfaacac65f8bde646','62677b04faacac65f8bde649','62677b0bfaacac65f8bde64c','62677b16faacac65f8bde64f','62677b20faacac65f8bde652','62677b24faacac65f8bde655','62677b28faacac65f8bde658','62677b35faacac65f8bde65b','62677b44faacac65f8bde65e','62677b49faacac65f8bde661','62677b51faacac65f8bde664','62677b59faacac65f8bde667','62677b65faacac65f8bde66c','62677b6ffaacac65f8bde66f','62677b7cfaacac65f8bde672','62677b85faacac65f8bde675','62677b89faacac65f8bde678'],
     }
   }, 
   watch: {
@@ -780,9 +780,14 @@ export default {
           console.log(education_list);
           console.log(education_id_list);
           
-
-          //var _input = {instructorType: (this.licenseFlag == false ? "scubaDiving" : "freeDiving"), name: this.ins_name, phoneNumber: this.ins_phone, email: this.ins_email, introduction: ins_introduce._value, careers: careers, diveSite: diveSite, divePoint: divePoint, diveCetner: diveCetner, profileImages: profile_img.uploadImage._id, licenseImages: license_img.uploadImage._id, educations: education_id_list};
-          var _input = {instructorType: (this.licenseFlag == false ? "scubaDiving" : "freeDiving"), name: this.ins_name, phoneNumber: this.ins_phone, email: this.ins_email, introduction: ins_introduce._value, careers: careers, diveSite: diveSite, divePoint: divePoint, diveCetner: diveCetner, profileImages: "a1", licenseImages: "a2"};
+          var inter_ids = new Array();
+          for (var i=0; i<this.interests.length; i++) {
+              if (this.interests[i] == true) {
+                  inter_ids.push(this.interest_ids[i]);
+              }
+          }
+          //var _input = {instructorType: (this.licenseFlag == false ? "scubaDiving" : "freeDiving"), name: this.ins_name, phoneNumber: this.ins_phone, email: this.ins_email, introduction: ins_introduce._value, careers: careers, diveSite: diveSite, divePoint: divePoint, diveCetner: diveCetner, profileImages: profile_img.uploadImage._id, licenseImages: license_img.uploadImage._id, educations: education_id_list, interests: inter_ids};
+          var _input = {instructorType: (this.licenseFlag == false ? "scubaDiving" : "freeDiving"), name: this.ins_name, phoneNumber: this.ins_phone, email: this.ins_email, introduction: ins_introduce._value, careers: careers, diveSite: diveSite, divePoint: divePoint, diveCetner: diveCetner, profileImages: "a1", licenseImages: "a2", interests: inter_ids};
           
           const ipt = _input;
           console.log(_input)
