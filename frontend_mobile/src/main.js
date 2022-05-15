@@ -14,6 +14,8 @@ import { initializeApp } from 'firebase/app';
 import { ApolloClient } from 'apollo-client'
 import { InMemoryCache, IntrospectionFragmentMatcher } from 'apollo-cache-inmemory'
 import { HttpLink } from 'apollo-link-http'
+//import { createUploadLink } from "apollo-upload-client";
+//import { setContext } from "apollo-link-context";
 import { split } from 'apollo-link'
 import { WebSocketLink } from 'apollo-link-ws'
 import { getMainDefinition } from 'apollo-utilities'
@@ -101,12 +103,28 @@ if (window.location.pathname.indexOf('/chat/') == 0) {
     cache: new InMemoryCache(),
   })
 } else if (window.location.pathname == '/site_list' || window.location.pathname == '/' || window.location.pathname == '/other/notification' || window.location.pathname == '/other/reservation' || window.location.pathname == '/other/subscribe' || window.location.pathname == '/forum_home' || window.location.pathname.indexOf('/recommend/') == 0 || window.location.pathname.indexOf('/center/') == 0 || window.location.pathname.indexOf('/site/') == 0 || window.location.pathname.indexOf('/community/') == 0 || window.location.pathname.indexOf('/agenda/') == 0 || window.location.pathname.indexOf('/diving/') == 0 || window.location.pathname.indexOf('/review/') == 0 || window.location.pathname.indexOf('/instructor/create') == 0) {
+  /*const link = createUploadLink({
+    uri: GRAPHQL_API_URL
+  });
+  const authLink = setContext((_, { headers }) => {
+    // get the authentication token from local storage if it exists
+    const token = localStorage.getItem("jwt");
+    // return the headers to the context so httpLink can read them
+    return {
+      headers: {
+        ...headers,
+        authorization: token ? `JWT ${token}` : ""
+      }
+    };
+  });*/
+
   const httpLink = new HttpLink({
     // You should use an absolute URL here
     uri: GRAPHQL_API_URL,
     headers: {
       countryCode: "ko",
       idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+      //link: authLink.concat(link),
     },
   })
   // Handle errors

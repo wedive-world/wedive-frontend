@@ -649,7 +649,7 @@ export default {
               points.forEach(x=>divePoint.push(x._id));
           }
 
-
+          console.log(this.file_photo);
           // profileImages
           var profile_img = await this.$apollo.mutate({
                 // Query
