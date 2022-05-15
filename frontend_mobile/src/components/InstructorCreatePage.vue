@@ -46,8 +46,8 @@
                                         <div class="form-check icon-check">
                                             <input class="form-check-input" type="checkbox" value="" id="check_agree" v-model="check_agree">
                                             <label class="form-check-label font-noto font-15" for="check_agree">개인정보 취급방침 동의</label>
-                                            <i class="icon-check-1 far fa-square color-gray-dark font-18"></i>
-                                            <i class="icon-check-2 far fa-check-square font-18 color-highlight"></i>
+                                            <i class="icon-check-1 far fa-square color-gray-dark font-18" style="transform: none !important;"></i>
+                                            <i class="icon-check-2 far fa-check-square font-18 color-highlight" style="transform: none !important;"></i>
                                         </div>
                                     </button>
 
@@ -371,11 +371,12 @@
                             <div class="me-2 ms-2 mt-5 rounded-s" style="background:#efefef;">
                                 <!--<draggable :list="education_list" group="backgroundItems" @start="drag=true" @end="drag=false">
                                     <div v-for="(item, index) in education_list" style="cursor: move" :key="index" class="p-3 pb-1 rounded-s">-->
-                                    <div v-for="(item, index) in education_list" class="p-3 pb-1 rounded-s">
+                                    <div v-for="(item, index) in education_list" :class="'p-3 pb-1 rounded-s' + (index==0 ? '' : ' pt-1')">
                                         <div class="input-style input-style-always-active no-borders no-icon">
                                             <i v-on:click="removeEducation(index)" class="wedive_icoset wedive_icoset_close" style="position: absolute;right:0px;margin:8px;"></i>
-                                            <span style="margin: 0;position: relative;font-size: 12px;opacity: 0.6;">교육과정 {{ (index+1) }}</span>
-                                            <input :id="'product_'+index" v-model="item.product" @focus="focusInput($event)" class="form-control font-noto font-18 font-500" placeholder="교육과정" style="background: transparent;border-bottom-width: 0;">
+                                            <span style="margin: 0;position: relative;font-size: 12px;opacity: 0.6;">[교육과정 {{ (index+1) }}] 과정명</span>
+                                            <input :id="'product_'+index" v-model="item.product" @focus="focusInput($event)" class="form-control font-noto font-18 font-500" placeholder="교육과정" style="background: transparent;border-bottom-width: 0px;">
+                                            <span style="margin: 0;position: relative;font-size: 12px;opacity: 0.6;">[교육과정 {{ (index+1) }}] 가격</span>
                                             <input :id="'price_'+index" v-model="item.price" @focus="focusInput($event)" type="number" class="form-control font-noto font-18 font-500" placeholder="가격" style="background: transparent;border: none !important;">
                                             <!--<label :for="'product_'+index" class="color-gray font-600 font-10" style="background: transparent;">교육과정 {{ (index+1) }}</label>-->
                                         </div>
@@ -648,7 +649,7 @@ export default {
               points.forEach(x=>divePoint.push(x._id));
           }
 
-/*
+
           // profileImages
           var profile_img = await this.$apollo.mutate({
                 // Query
@@ -720,7 +721,7 @@ export default {
                 `,
                 // Parameters
                 variables: {
-                    file: this.file_photo
+                    file: this.file_license
                 },
             });
 
@@ -752,7 +753,7 @@ export default {
                     }
                 },
           });
-*/
+
           var education_id_list = new Array();
           for (var i=0; i<education_list.length; i++) {
               var item = education_list[i];
