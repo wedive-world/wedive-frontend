@@ -32,8 +32,7 @@
                             <p class="font-18 font-500 mt-3 mb-0">위다이브 강사에 함께해요.</p>
                             <!--<p class="color-gray font-14 mb-0">다이빙 입문자를 만나는 가장빠른 방법입니다.</p>-->
 
-                            <div class="me-5 ms-5 mt-2 rounded-s color-gray" style="">준비 물품</div>
-                            <div class="bg-fade-yellow-light me-4 ms-4 mt-1 rounded-s color-black" style="">증명 사진, 라이센스, 자기소개, 교육상품</div>
+                            <div class="bg-fade-yellow-light me-4 ms-4 mt-1 rounded-s color-black" style="">증명 사진, 라이센스, 자기소개, 교육상품 필요</div>
                         </div>
                         <div>
                             
@@ -53,10 +52,10 @@
                                     </button>
 
                                     <div class="bg-theme">
-                                        <div class="" style="max-height: calc(100vh - 582px);overflow-y: auto;border-radius: 10px;">
+                                        <div class="" style="max-height: calc(100vh - 552px);overflow-y: auto;border-radius: 10px;">
                                             <p class="agreement_content pe-3 ps-3 color-gray" style="background: #fafbfc;">
                                                 &lt;개인정보 수집 동의&gt;<br><br>
-                                                1. 기본수집항목: [필수] 위다이브 아이디, 이름, (휴대)전화번호, 이메일 주소, 사진, 다이빙 라이센스, 강사 경력<br>※ 추가 수집하는 필수항목<br>- 배송, 방문 등이 필요한 상품 구매 시 : 주소<br>- 해외 여행 관련 상품 구매 시 : 여권상 영문명, 여권번호 끝 4자리, 성별, 생년월일, 이메일주소, 카카오톡ID, 동행 아동정보(여권상 영문명, 생년월일, 신장)<br>- 병원을 이용하는 경우: 생년월일 (병원 재진 시 이전 진료기록 조회를 위해 예약자명, 생년월일, 전화번호가 수집될 수 있습니다.)<br><br>
+                                                1. 기본수집항목: [필수] 위다이브 아이디, 이름, (휴대)전화번호, 이메일 주소, 사진, 다이빙 라이센스, 강사 경력<br>※ 추가 수집하는 필수항목<br>- 배송, 방문 등이 필요한 상품 구매 시 : 주소<br>- 해외 여행 관련 상품 구매 시 : 여권상 영문명, 여권번호 끝 4자리, 성별, 생년월일, 이메일주소, Google ID, 동행 아동정보(여권상 영문명, 생년월일, 신장)<br>- 병원을 이용하는 경우: 생년월일 (병원 재진 시 이전 진료기록 조회를 위해 예약자명, 생년월일, 전화번호가 수집될 수 있습니다.)<br><br>
                                                 2. 수집 및 이용목적 : 강사회원과 강의이용자의 원활한 거래 진행, 고객상담, 불만처리 등 민원 처리, 분쟁조정 해결을 위한 기록보존, 위다이브 예약 이용 후 리뷰작성에 따른 위다이브 리워드 지급 및 관련 안내<br><br>
                                                 3. 보관기간<br>
                                                 - 회원탈퇴 시 지체없이 파기<br>
@@ -375,9 +374,10 @@
                                     <div v-for="(item, index) in education_list" class="p-3 pb-1 rounded-s">
                                         <div class="input-style input-style-always-active no-borders no-icon">
                                             <i v-on:click="removeEducation(index)" class="wedive_icoset wedive_icoset_close" style="position: absolute;right:0px;margin:8px;"></i>
+                                            <span style="margin: 0;position: relative;font-size: 12px;opacity: 0.6;">교육과정 {{ (index+1) }}</span>
                                             <input :id="'product_'+index" v-model="item.product" @focus="focusInput($event)" class="form-control font-noto font-18 font-500" placeholder="교육과정" style="background: transparent;border-bottom-width: 0;">
                                             <input :id="'price_'+index" v-model="item.price" @focus="focusInput($event)" type="number" class="form-control font-noto font-18 font-500" placeholder="가격" style="background: transparent;border: none !important;">
-                                            <label :for="'product_'+index" class="color-gray font-600 font-10" style="background: transparent;">교육과정 {{ (index+1) }}</label>
+                                            <!--<label :for="'product_'+index" class="color-gray font-600 font-10" style="background: transparent;">교육과정 {{ (index+1) }}</label>-->
                                         </div>
                                     </div>
                                 <!--</draggable>-->
@@ -1058,7 +1058,7 @@ select {background: white; background-color: white;}
 .btn[disabled] {pointer-events: none !important;background-image: linear-gradient(to bottom, #ccc, #ccc) !important;}
 .bg-e7e7e7 {background-color: transparent !important;}
 .focusBorder {border: 2px solid #2c9ac3;background: #fff;border-radius: 8px !important;}
-.form-control::placeholder {font-family: 'Noto Sans Korean' !important;font-size: 18px !important;font-weight: 500 !important;opacity: 30%;}
+.form-control::placeholder {font-family: 'Noto Sans Korean' !important;font-size: 18px !important;font-weight: 500 !important;opacity: 50%;}
 
 .wedive-switch label::before {height: 62px !important;width: calc(100vw - 46px) !important;border-radius: 8px !important;border-width: 0 !important;}
 .toggleBorder label::before {border: 2px solid #2c9ac3 !important;border-radius: 8px !important;}
