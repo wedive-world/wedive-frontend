@@ -52,6 +52,11 @@ import OtherNotiPage from '@/components/OtherNotiPage'
 import OtherPrivacyPage from '@/components/OtherPrivacyPage'
 import InstructorCreatePage from '@/components/InstructorCreatePage'
 
+import BeginnerPage from '@/components/guide/BeginnerPage'
+import Beginner1Page from '@/components/guide/Beginner1Page'
+import Beginner2Page from '@/components/guide/Beginner2Page'
+import Beginner3Page from '@/components/guide/Beginner3Page'
+
 Vue.use(Router)
 
 export default new Router({
@@ -322,6 +327,27 @@ export default new Router({
       name: 'InstructorCreatePage',
       component: InstructorCreatePage
     },
+    {
+      path: '/guide/beginner',
+      name: 'BeginnerPage',
+      component: BeginnerPage
+    },
+    {
+      path: '/guide/beginner1',
+      name: 'Beginner1Page',
+      component: Beginner1Page
+    },
+    {
+      path: '/guide/beginner2',
+      name: 'Beginner2Page',
+      component: Beginner2Page
+    },
+    {
+      path: '/guide/beginner3',
+      name: 'Beginner3Page',
+      component: Beginner3Page
+    },
+    
     
     
     
