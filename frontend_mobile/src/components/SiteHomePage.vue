@@ -576,7 +576,37 @@ async function updateAll() {
                 }
                 marker_shop.addListener("click", () => {
                     try {
-                        console.log("viberate");
+                        if (_k == 0) {
+                            $(".box-bottom-area").css("background-color","#3f474c");
+                            $(".wedive-corner-bottom").addClass("wedive-corner-bottom-site");
+                            $(".wedive-corner-bottom").removeClass("wedive-corner-bottom-point");
+                            $(".wedive-corner-bottom").removeClass("wedive-corner-bottom-center");
+                            $(".wedive-corner-bottom").removeClass("wedive-corner-bottom-shop");
+                        }
+                        else if (_k == 1) {
+                            $(".box-bottom-area").css("background-color","#3cb5a0");
+                            $(".wedive-corner-bottom").removeClass("wedive-corner-bottom-site");
+                            $(".wedive-corner-bottom").addClass("wedive-corner-bottom-point");
+                            $(".wedive-corner-bottom").removeClass("wedive-corner-bottom-center");
+                            $(".wedive-corner-bottom").removeClass("wedive-corner-bottom-shop");
+                        }
+                        else if (_k == 2) {
+                            $(".box-bottom-area").css("background-color","#4687c1");
+                            $(".wedive-corner-bottom").removeClass("wedive-corner-bottom-site");
+                            $(".wedive-corner-bottom").removeClass("wedive-corner-bottom-point");
+                            $(".wedive-corner-bottom").addClass("wedive-corner-bottom-center");
+                            $(".wedive-corner-bottom").removeClass("wedive-corner-bottom-shop");
+                        }
+                        else if (_k == 3) {
+                            $(".box-bottom-area").css("background-color","#c761ad");
+                            $(".wedive-corner-bottom").removeClass("wedive-corner-bottom-site");
+                            $(".wedive-corner-bottom").removeClass("wedive-corner-bottom-point");
+                            $(".wedive-corner-bottom").removeClass("wedive-corner-bottom-center");
+                            $(".wedive-corner-bottom").addClass("wedive-corner-bottom-shop");
+                        }
+                        
+                        
+
                         Android.vibrate(50);
                         window.navigator.vibrate(20);
                     } catch (e) {
@@ -1441,10 +1471,10 @@ export default {
 .wedive-corner {position: absolute;width: 30px;height: 30px;overflow: hidden;z-index:999;}
 .wedive-corner:after {content: '';position: absolute;height: 200%;width: 200%;border-radius: 100%;z-index: -1;box-shadow: 10px 10px 5px 100px #eff5fb;}
 .wedive-corner-bottom {left:-16px;bottom:0;width:16px;height:16px;}
-.site .wedive-corner-bottom:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #31373b !important;}
-.point .wedive-corner-bottom:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #308f7f !important;}
-.center .wedive-corner-bottom:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #376a97 !important;}
-.shop .wedive-corner-bottom:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #c761ad !important;}
+.wedive-corner-bottom-site:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #31373b !important;}
+.wedive-corner-bottom-point:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #308f7f !important;}
+.wedive-corner-bottom-center:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #376a97 !important;}
+.wedive-corner-bottom-shop:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #954982 !important;}
 .icon-concierge {position: fixed;width: 58px;height: 58px;bottom: 70px;right:24px;background: url(https://d34l91104zg4p3.cloudfront.net/assets/concierge.gif);background-size:contain !important;background-position-y: 8px;background-repeat: no-repeat;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
 .icon-filter {position: fixed;width: 58px;height: 58px;bottom: 140px;right:24px;background: url(https://d34l91104zg4p3.cloudfront.net/assets/filter2.png);background-size:contain !important;background-position-y: 8px;background-repeat: no-repeat;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;background-position: bottom;}
 .box-bottom {width:calc(100% - 120px);height:36px;position: absolute;right: 0;bottom: 0;display:flex;}
