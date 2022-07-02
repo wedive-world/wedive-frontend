@@ -145,6 +145,11 @@ export default new Router({
       component: ReviewAllPage
     },
     {
+      path: '/site/map',
+      name: 'SiteHomePage',
+      component: SiteHomePage
+    },
+    {
       path: '/site/search',
       name: 'SiteSearchPage',
       component: SiteSearchPage
@@ -158,11 +163,6 @@ export default new Router({
       path: '/course',
       name: 'CoursePage',
       component: CoursePage
-    },
-    {
-      path: '/site/map',
-      name: 'SiteHomePage',
-      component: SiteHomePage
     },
     {
       path: '/site_list',

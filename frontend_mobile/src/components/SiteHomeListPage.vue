@@ -496,7 +496,8 @@ export default {
         }
     },
     goSiteMap: function() {
-        location.href = '/site_home' + location.search;
+        //location.href = '/site_home' + location.search;
+        location.href = '/site/map' + location.search;
     },
     goList: function() {
         location.href='/center_list' + location.search;

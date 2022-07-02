@@ -62,8 +62,8 @@
                         </div>
                         
                         <div class="" style="padding-left: 110px;">
-                            <span id="map_box_cate" class="map_box_cate"></span><span id="map_box_shop_name" class="font-18 font-600 mb-0 ellipsis" style="max-width: 100%;display: block;"></span>
-                            <p id="map_box_shop_desc" class="pb-0 mb-0 line-height-m ellipsis"></p>
+                            <span id="map_box_cate" class="map_box_cate"></span><span id="map_box_shop_name" class="font-18 font-600 mb-0 ellipsis" style="max-width: calc(100% - 50px);display: inline-block;"></span>
+                            <p id="map_box_shop_desc" class="pb-0 mb-0 line-height-m ellipsis" style="margin-top: -6px;"></p>
                             <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>&nbsp;
                                 <span id="map_box_shop_star"></span>
                                 <span id="map_box_agency" class="hide">
@@ -78,10 +78,10 @@
                             <div class="box-bottom">
                                 <div class="wedive-corner wedive-corner-bottom"></div>
                                 <div class="box-bottom-area color-white row" style="box-shadow: inset 0px 0px 5px rgb(0 0 0 / 50%);">
-                                    <a href="" class="col-3 text-center box-bottom-item">컨시어지</a>
-                                    <a href="" class="col-3 text-center box-bottom-item">버디</a>
-                                    <a href="" class="col-3 text-center box-bottom-item">강사</a>
-                                    <a href="" class="col-3 text-center box-bottom-item">포럼</a>
+                                    <a href="" class="col-4 text-center box-bottom-item">컨시어지</a>
+                                    <a href="" class="col-4 text-center box-bottom-item">버디</a>
+                                    <!--<a href="" class="col-3 text-center box-bottom-item">강사</a>-->
+                                    <a href="" class="col-4 text-center box-bottom-item">포럼</a>
                                 </div>
                             </div>
                         </div>
@@ -516,7 +516,7 @@ async function updateAll() {
                 selecteduser = null;
             }
         }*/ else {
-            var label_color = (markerList[i].type=='site') ? '#5f6368' : ((markerList[i].type=='point') ? '#498c99' : '#2a526f')
+            var label_color = (markerList[i].type=='site') ? '#5f6368' : ((markerList[i].type=='point') ? '#498c99' : ((markerList[i].type=='center') ? '#2a526f' : '#9a4685'))
             var label_text = markerList[i].title + ((markerList[i].type=='site')?'' : ((markerList[i].type=='point') ? '': ''));
             markerList[i].setLabel({ color: label_color, fontWeight: 'bold', fontSize: '14px', className: 'wedive-label', text: label_text });
             if (selecteduser != null && selecteduser._id == markerList[i]._id) {
@@ -557,7 +557,7 @@ async function updateAll() {
                 const _k = k;
 
                 const label_text = (zoomLevel < 9) ? ' ' : (title + ((k==0)?'':((k==1)?'':'')));
-                const label_color = (k==0) ? '#5f6368' : ((k==1) ? '#498c99' : '#2a526f');
+                const label_color = (k==0) ? '#5f6368' : ((k==1) ? '#498c99' : ((k==2) ? '#2a526f' : '#9a4685'));
                 
                 const marker_shop = new google.maps.Marker({
                     map: map,
@@ -1460,9 +1460,9 @@ export default {
 .site .box-bottom-area {background-color: #3f474c;}
 .point .box-bottom-area {background-color: #3cb5a0;}
 .center .box-bottom-area {background-color: #4687c1;}
-.shop .box-bottom-area {background-color: #4687c1;}
+.shop .box-bottom-area {background-color: #c761ad;}
 
-.map_box_cate {padding: 2px 6px;margin-bottom:2px;margin-right:6px;border-radius:4px;}
+.map_box_cate {padding: 2px 6px;margin-bottom:0px;margin-right:6px;border-radius:4px;vertical-align: top;}
 .site .map_box_cate {border: 1px solid #3f474c;color:#3f474c}
 .point .map_box_cate {border: 1px solid #3cb5a0;color:#3cb5a0}
 .center .map_box_cate {border: 1px solid #4687c1;color:#4687c1}

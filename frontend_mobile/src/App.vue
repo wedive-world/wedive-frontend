@@ -37,7 +37,7 @@
             <a v-else-if="pathname == '/forum_home'" v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="https://d34l91104zg4p3.cloudfront.net/assets/icon_book_new.png" width="24"></a>
             <a v-else v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="https://d34l91104zg4p3.cloudfront.net/assets/icon_write.png" width="24"></a>
             <!--<a v-on:click="settingForum()" id="wedive-group" class="page-title-icon color-theme hide"><img src="https://d34l91104zg4p3.cloudfront.net/assets/icon_setting_fill.png" width="26"></a>-->
-            <a v-if="$route.path=='/site_list'" v-on:click="move('/site_home')" class="page-title-icon font-18" style="color: #858585;margin-right: 13.3333333333px;"><img src="https://d34l91104zg4p3.cloudfront.net/assets/icon_map_fill.png" width="26"></a>
+            <a v-if="$route.path=='/site_list'" v-on:click="move('/site/map')" class="page-title-icon font-18" style="color: #858585;margin-right: 13.3333333333px;"><img src="https://d34l91104zg4p3.cloudfront.net/assets/icon_map_fill.png" width="26"></a>
             <a v-on:click="searchItem()" id="wedive-search" class="page-title-icon font-18 hide" style="color:#858585 !important;"><img src="https://d34l91104zg4p3.cloudfront.net/assets/icon_search_fill.png" width="28"></a>
             <a v-on:click="shareItem()" id="wedive-share" class="page-title-icon font-18 hide" style="color:#858585 !important;"><img src="https://d34l91104zg4p3.cloudfront.net/assets/icon_share_fill.png" height="24"/></a>
             <!--<a href="#" class="page-title-icon" data-menu="menu-main" :style="'background: url('+((userThumbnail) ? userThumbnail : 'https://d34l91104zg4p3.cloudfront.net/assets/user_empty_'+((gender)?gender:'m')+'.png')+');background-size:cover;'"></a>-->
@@ -198,9 +198,9 @@ export default {
     
     
     
-    if (localStorage.perferedSite == null) {
+    //if (localStorage.perferedSite == null) {
       localStorage.perferedSite = '/site_list';
-    }
+    //}
 
     window.onpopstate = history.onpushstate = function(e) {
       if(window.location.href.split('/').pop().indexOf('modal')===-1){
@@ -283,7 +283,7 @@ export default {
       gender: localStorage.gender,
       pathname: window.location.pathname,
       notiData: null,
-      footer_list: ['/', '/site_list', '/site_home', '/forum_home', '/chat_home', '/other_home'],
+      footer_list: ['/', '/site_list', '/site/map', '/forum_home', '/chat_home', '/other_home'],
       locationsearch: window.location.search,
     }
   },
