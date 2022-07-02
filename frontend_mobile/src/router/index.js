@@ -160,7 +160,7 @@ export default new Router({
       component: CoursePage
     },
     {
-      path: '/site_home',
+      path: '/site/map',
       name: 'SiteHomePage',
       component: SiteHomePage
     },

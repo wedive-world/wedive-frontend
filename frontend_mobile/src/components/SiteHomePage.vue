@@ -676,7 +676,7 @@ export default {
             this.my_longitude = position.coords.longitude;
         });
     }
-    localStorage.perferedSite = '/site_home';
+    //localStorage.perferedSite = '/site_home';
 
 
 
