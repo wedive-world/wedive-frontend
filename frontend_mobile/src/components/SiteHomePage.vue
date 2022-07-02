@@ -42,7 +42,8 @@
                             style="width: 40px; height: 40px;" />
                         <span v-if="data.type == 'site'" class="ml-4" v-html="'<span class=\'badge border color-site border-site\'>사이트</span>&nbsp;<i class=\'fa fa-star color-yellow-dark icon-10 text-center me-2\'></i>'+(data.adminScore/20).toFixed(1)+'<br/><span class=\'font-noto font-16\'>' + htmlText + '</span>'"></span>
                         <span v-else-if="data.type == 'point'" class="ml-4" v-html="'<span class=\'badge border color-point border-point\'>포인트</span>&nbsp;<i class=\'fa fa-star color-yellow-dark icon-10 text-center me-2\'></i>'+(data.adminScore/20).toFixed(1)+'<br/><span class=\'font-noto font-16\'>' + htmlText + '</span>'"></span>
-                        <span v-else-if="data.type == 'center'" class="ml-4" v-html="'<span class=\'badge border color-center border-center\'>센터</span>&nbsp;<i class=\'fa fa-star color-yellow-dark icon-10 text-center me-2\'></i>'+(data.adminScore/20).toFixed(1)+'<br/><span class=\'font-noto font-16\'>' + htmlText + '</span>'"></span>
+                        <span v-else-if="data.type == 'center'" class="ml-4" v-html="'<span class=\'badge border color-center border-center\'>수영장</span>&nbsp;<i class=\'fa fa-star color-yellow-dark icon-10 text-center me-2\'></i>'+(data.adminScore/20).toFixed(1)+'<br/><span class=\'font-noto font-16\'>' + htmlText + '</span>'"></span>
+                        <span v-else-if="data.type == 'shop'" class="ml-4" v-html="'<span class=\'badge border color-shop border-shop\'>샵</span>&nbsp;<i class=\'fa fa-star color-yellow-dark icon-10 text-center me-2\'></i>'+(data.adminScore/20).toFixed(1)+'<br/><span class=\'font-noto font-16\'>' + htmlText + '</span>'"></span>
                         </div>
                     </template>
                 </vue-typeahead-bootstrap>
@@ -61,7 +62,7 @@
                         </div>
                         
                         <div class="" style="padding-left: 110px;">
-                            <span id="map_box_cate" class="map_box_cate"></span><span id="map_box_shop_name" class="font-18 font-600 mb-0"></span>
+                            <span id="map_box_cate" class="map_box_cate"></span><span id="map_box_shop_name" class="font-18 font-600 mb-0 ellipsis" style="max-width: 100%;display: block;"></span>
                             <p id="map_box_shop_desc" class="pb-0 mb-0 line-height-m ellipsis"></p>
                             <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>&nbsp;
                                 <span id="map_box_shop_star"></span>
@@ -118,7 +119,13 @@
                     </div>
                     <div class="form-check interest-check">
                         <input class="form-check-input" type="checkbox" value="" id="check_cate3" v-model="check_cate3">
-                        <label class="form-check-label shadow-xl rounded-xl" for="check_cate3">센터 (수영장)</label>
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_cate3">수영장</label>
+                        <i class="fa fa-check-circle color-white font-18"></i>
+                        <i class="fas fas fa-swimming-pool font-17 color-highlight"></i>
+                    </div>
+                    <div class="form-check interest-check">
+                        <input class="form-check-input" type="checkbox" value="" id="check_cate4" v-model="check_cate4">
+                        <label class="form-check-label shadow-xl rounded-xl" for="check_cate4">샵</label>
                         <i class="fa fa-check-circle color-white font-18"></i>
                         <i class="fas fa-store font-17 color-highlight"></i>
                     </div>
@@ -358,10 +365,12 @@ var selecteduser = null;
 var siteList = new Array();
 var pointList = new Array();
 var centerList = new Array();
+var shopList = new Array();
 var searchParams = {};
 var check_cate1 = true;
 var check_cate2 = false;
 var check_cate3 = true;
+var check_cate4 = false;
 
 var tour_flag = true;
 
@@ -450,6 +459,24 @@ async function updateAll() {
                                 type
                             }
                         }` : ``)+
+                        ((check_cate4) ? `... on DiveShop {
+                            _id
+                            uniqueName
+                            name
+                            description
+                            divingType
+                            adminScore
+                            latitude
+                            longitude
+                            institutionTypes
+                            backgroundImages {
+                                thumbnailUrl
+                            }
+                            interests {
+                                title
+                                type
+                            }
+                        }` : ``)+
                         `
                         address
                         latitude
@@ -467,10 +494,12 @@ async function updateAll() {
     siteList = [];
     pointList = [];
     centerList = [];
+    shopList = [];
     if (result.data.data.searchPlaces) {
         result.data.data.searchPlaces.filter(place => place.__typename == 'DiveSite').forEach(item => siteList.push(item));
         result.data.data.searchPlaces.filter(place => place.__typename == 'DivePoint').forEach(item => pointList.push(item));
         result.data.data.searchPlaces.filter(place => place.__typename == 'DiveCenter').forEach(item => centerList.push(item));
+        result.data.data.searchPlaces.filter(place => place.__typename == 'DiveShop').forEach(item => shopList.push(item));
     }
     
     // 필요 없는 그린 마커를 모두 삭제한다.
@@ -498,14 +527,15 @@ async function updateAll() {
     }
     
     // 새롭게 마커를 그려준다.
-    var allList_item = ["site", "point", "center"];
-    var allList_cate = ["사이트", "포인트", "센터"];
-    for (var k=0; k<3; k++) {
+    var allList_item = ["site", "point", "center", "shop"];
+    var allList_cate = ["사이트", "포인트", "센터", "샵"];
+    for (var k=0; k<4; k++) {
         var allList = [];
         //if (k == 0 && check_cate1) {if (zoomLevel > 12)allList = []; else allList = siteList;}
         if (k == 0 && check_cate1) allList = siteList;
         else if (k == 1 && check_cate2) allList = pointList;
         else if (k == 2 && check_cate3) allList = centerList;
+        else if (k == 3 && check_cate4) allList = shopList;
         for (var i=0; i<allList.length; i++) {
             if (markerList && markerList.filter(x=>x._id == allList[i]._id).length == 0) {
                 const img_path = (allList[i].adminScore > 40) ? 'https://d34l91104zg4p3.cloudfront.net/assets/ico_pin'+k+'.png' : 'https://d34l91104zg4p3.cloudfront.net/assets/ico_pin_small'+k+'.png'
@@ -953,6 +983,7 @@ export default {
         check_cate1: true,
         check_cate2: false,
         check_cate3: true,
+        check_cate4: false,
         check_type1: false,
         check_type2: false,
         check_env1: false,
@@ -985,6 +1016,9 @@ export default {
       },
       check_cate3: function(newVal, oldVal) {
         check_cate3 = newVal;
+      },
+      check_cate4: function(newVal, oldVal) {
+        check_cate4 = newVal;
       },
       query: function(newVal, oldVal) {
         //console.log(newVal + "/" + localStorage.suggestionFlag);
@@ -1223,19 +1257,6 @@ export default {
                     query SearchPlaces($searchParams: SearchParams, $limit: Int) {
                         searchPlaces(searchParams: $searchParams, limit: $limit) {
                             __typename
-                            ... on DiveCenter {
-                                _id
-                                uniqueName
-                                name
-                                description
-                                divingType
-                                adminScore
-                                latitude
-                                longitude
-                                backgroundImages {
-                                    thumbnailUrl
-                                }
-                            }
                             ... on DiveSite {
                                 _id
                                 uniqueName
@@ -1253,6 +1274,32 @@ export default {
                                 uniqueName
                                 name
                                 description
+                                adminScore
+                                latitude
+                                longitude
+                                backgroundImages {
+                                    thumbnailUrl
+                                }
+                            }
+                            ... on DiveCenter {
+                                _id
+                                uniqueName
+                                name
+                                description
+                                divingType
+                                adminScore
+                                latitude
+                                longitude
+                                backgroundImages {
+                                    thumbnailUrl
+                                }
+                            }
+                            ... on DiveShop {
+                                _id
+                                uniqueName
+                                name
+                                description
+                                divingType
                                 adminScore
                                 latitude
                                 longitude
@@ -1281,6 +1328,7 @@ export default {
             result.data.data.searchPlaces.filter(place => place.__typename == 'DiveSite').forEach(item => {item.type='site';result_list.push(item)});
             result.data.data.searchPlaces.filter(place => place.__typename == 'DivePoint').forEach(item => {item.type='point';result_list.push(item)});
             result.data.data.searchPlaces.filter(place => place.__typename == 'DiveCenter').forEach(item => {item.type='center';result_list.push(item)});
+            result.data.data.searchPlaces.filter(place => place.__typename == 'DiveShop').forEach(item => {item.type='shop';result_list.push(item)});
         }
         //if (result.data.data.searchDiveSitesByName) result.data.data.searchDiveSitesByName.forEach(x=>{x.type='site';result_list.push(x)});
         //if (result.data.data.searchDivePointsByName) result.data.data.searchDivePointsByName.forEach(x=>{x.type='point';result_list.push(x)});
@@ -1396,6 +1444,7 @@ export default {
 .site .wedive-corner-bottom:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #31373b !important;}
 .point .wedive-corner-bottom:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #308f7f !important;}
 .center .wedive-corner-bottom:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #376a97 !important;}
+.shop .wedive-corner-bottom:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #c761ad !important;}
 .icon-concierge {position: fixed;width: 58px;height: 58px;bottom: 70px;right:24px;background: url(https://d34l91104zg4p3.cloudfront.net/assets/concierge.gif);background-size:contain !important;background-position-y: 8px;background-repeat: no-repeat;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
 .icon-filter {position: fixed;width: 58px;height: 58px;bottom: 140px;right:24px;background: url(https://d34l91104zg4p3.cloudfront.net/assets/filter2.png);background-size:contain !important;background-position-y: 8px;background-repeat: no-repeat;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;background-position: bottom;}
 .box-bottom {width:calc(100% - 120px);height:36px;position: absolute;right: 0;bottom: 0;display:flex;}
@@ -1411,10 +1460,12 @@ export default {
 .site .box-bottom-area {background-color: #3f474c;}
 .point .box-bottom-area {background-color: #3cb5a0;}
 .center .box-bottom-area {background-color: #4687c1;}
+.shop .box-bottom-area {background-color: #4687c1;}
 
 .map_box_cate {padding: 2px 6px;margin-bottom:2px;margin-right:6px;border-radius:4px;}
 .site .map_box_cate {border: 1px solid #3f474c;color:#3f474c}
 .point .map_box_cate {border: 1px solid #3cb5a0;color:#3cb5a0}
 .center .map_box_cate {border: 1px solid #4687c1;color:#4687c1}
+.shop .map_box_cate {border: 1px solid #c761ad;color:#c761ad}
 .has-notification:before {content: '●';color: #ff5160;position:absolute;top:0;font-size:5px;margin-top: -9px;margin-left: 20px;}
 </style>

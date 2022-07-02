@@ -14,6 +14,7 @@ import UserCreatePage from '@/components/UserCreatePage'
 import CenterHomePage from '@/components/CenterHomePage'
 import CenterDetailPage from '@/components/CenterDetailPage'
 import CenterDetailPage2 from '@/components/CenterDetailPage2'
+import DiveShopDetailPage from '@/components/DiveShopDetailPage'
 import ReviewAllPage from '@/components/ReviewAllPage'
 import SiteSearchPage from '@/components/SiteSearchPage'
 import CenterListMapPage from '@/components/CenterListMapPage'
@@ -133,6 +134,11 @@ export default new Router({
       component: CenterDetailPage2
     },
     {
+      path: '/shop/:id',
+      name: 'DiveShopDetailPage',
+      component: DiveShopDetailPage
+    },
+    {
       path: '/review2/:id',
       name: 'ReviewAllPage',
       props: true,
@@ -245,12 +251,12 @@ export default new Router({
       component: ChatDummyPage
     },
     {
-      path: '/shop_home',
+      path: '/shopping_home',
       name: 'ShopHomePage',
       component: ShopHomePage
     },
     {
-      path: '/shop',
+      path: '/shopping',
       name: 'ShopDetailPage',
       component: ShopDetailPage
     },

@@ -14,7 +14,7 @@ import { initializeApp } from 'firebase/app';
 import { ApolloClient } from 'apollo-client'
 import { InMemoryCache, IntrospectionFragmentMatcher } from 'apollo-cache-inmemory'
 import { HttpLink } from 'apollo-link-http'
-//import { createUploadLink } from "apollo-upload-client";
+import { createUploadLink } from "apollo-upload-client";
 //import { setContext } from "apollo-link-context";
 import { split } from 'apollo-link'
 import { WebSocketLink } from 'apollo-link-ws'
@@ -102,10 +102,16 @@ if (window.location.pathname.indexOf('/chat/') == 0) {
     link: httpLink,
     cache: new InMemoryCache(),
   })
-} else if (window.location.pathname == '/site_list' || window.location.pathname == '/' || window.location.pathname == '/other/notification' || window.location.pathname == '/other/reservation' || window.location.pathname == '/other/subscribe' || window.location.pathname == '/forum_home' || window.location.pathname.indexOf('/recommend/') == 0 || window.location.pathname.indexOf('/center/') == 0 || window.location.pathname.indexOf('/site/') == 0 || window.location.pathname.indexOf('/community/') == 0 || window.location.pathname.indexOf('/agenda/') == 0 || window.location.pathname.indexOf('/diving/') == 0 || window.location.pathname.indexOf('/review/') == 0 || window.location.pathname.indexOf('/instructor/create') == 0) {
-  /*const link = createUploadLink({
-    uri: GRAPHQL_API_URL
+} else if (window.location.pathname == '/site_list' || window.location.pathname == '/' || window.location.pathname == '/other/notification' || window.location.pathname == '/other/reservation' || window.location.pathname == '/other/subscribe' || window.location.pathname == '/forum_home' || window.location.pathname.indexOf('/recommend/') == 0 || window.location.pathname.indexOf('/center/') == 0 || window.location.pathname.indexOf('/shop/') == 0 || window.location.pathname.indexOf('/site/') == 0 || window.location.pathname.indexOf('/community/') == 0 || window.location.pathname.indexOf('/agenda/') == 0 || window.location.pathname.indexOf('/diving/') == 0 || window.location.pathname.indexOf('/review/') == 0 || window.location.pathname.indexOf('/instructor/create') == 0) {
+  const link = createUploadLink({
+    uri: GRAPHQL_API_URL,
+    headers: {
+      countryCode: "ko",
+      idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+      //link: authLink.concat(link),
+    },
   });
+  /*
   const authLink = setContext((_, { headers }) => {
     // get the authentication token from local storage if it exists
     const token = localStorage.getItem("jwt");
@@ -118,7 +124,7 @@ if (window.location.pathname.indexOf('/chat/') == 0) {
     };
   });*/
 
-  const httpLink = new HttpLink({
+  /*const httpLink = new HttpLink({
     // You should use an absolute URL here
     uri: GRAPHQL_API_URL,
     headers: {
@@ -126,7 +132,7 @@ if (window.location.pathname.indexOf('/chat/') == 0) {
       idtoken: (localStorage.idToken) ? localStorage.idToken : "",
       //link: authLink.concat(link),
     },
-  })
+  })*/
   // Handle errors
   const errorLink = onError(error => {
     const auth = getAuth();
@@ -165,7 +171,7 @@ if (window.location.pathname.indexOf('/chat/') == 0) {
   
   // Create the apollo client
   _apolloClient = new ApolloClient({
-    link: errorLink.concat(httpLink),
+    link: errorLink.concat(link),
     cache: new InMemoryCache()
   })
 }
@@ -229,45 +235,6 @@ const userAgent = navigator.userAgent.toLowerCase();
 const userAuthKey = 'userAuth';
 var axios = require("axios");
 
-// searchSuggestion
-var currentTime = (new Date()).getTime();
-if (localStorage.suggestionDate == null) {
-  localStorage.suggestionDate = currentTime - 86400010;
-}
-var headers = (localStorage.idToken) ? {countrycode: 'ko', idtoken: localStorage.idToken} : {countrycode: 'ko'};
-if (currentTime - parseInt(localStorage.suggestionDate) > 86400000) {
-  axios({
-    url: 'https://api.wedives.com/graphql',
-    method: 'post',
-    headers: headers,
-    data: {
-        query: `
-            query Query {
-              getAllSearchSuggestions
-            }
-        `
-    }
-  }).then(function(result) {
-    localStorage.suggestionDate = currentTime;
-    if (result.data.data.getAllSearchSuggestions != null) {
-      var tmp_list = result.data.data.getAllSearchSuggestions;
-      var tmp_result = new Array();
-      tmp_list.forEach(x => {
-        if (x == null || x == '') {
-          // skip
-        } else if (x.length == 10 && /^[a-z0-9][a-z0-9]*$/.test(x)) {
-          // skip
-        } else if (x.replace(/\$/gi, '') == '') {
-          // skip
-        } else {
-          tmp_result.push(x);
-        }
-      });
-      localStorage.suggestion = JSON.stringify(tmp_result);
-    }
-  })
-}
-
 // Android
 try {
   if (userAgent.indexOf('android') !== -1) {
@@ -322,6 +289,48 @@ try {
   }
 } catch(e) {
 
+}
+
+
+//
+
+// searchSuggestion
+var currentTime = (new Date()).getTime();
+if (localStorage.suggestionDate == null) {
+  localStorage.suggestionDate = currentTime - 86400010;
+}
+var headers = (localStorage.idToken) ? {countrycode: 'ko', idtoken: localStorage.idToken} : {countrycode: 'ko'};
+if (currentTime - parseInt(localStorage.suggestionDate) > 86400000) {
+  axios({
+    url: 'https://api.wedives.com/graphql',
+    method: 'post',
+    headers: headers,
+    data: {
+        query: `
+            query Query {
+              getAllSearchSuggestions
+            }
+        `
+    }
+  }).then(function(result) {
+    localStorage.suggestionDate = currentTime;
+    if (result.data.data.getAllSearchSuggestions != null) {
+      var tmp_list = result.data.data.getAllSearchSuggestions;
+      var tmp_result = new Array();
+      tmp_list.forEach(x => {
+        if (x == null || x == '') {
+          // skip
+        } else if (x.length == 10 && /^[a-z0-9][a-z0-9]*$/.test(x)) {
+          // skip
+        } else if (x.replace(/\$/gi, '') == '') {
+          // skip
+        } else {
+          tmp_result.push(x);
+        }
+      });
+      localStorage.suggestion = JSON.stringify(tmp_result);
+    }
+  })
 }
 
 
