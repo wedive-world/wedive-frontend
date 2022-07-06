@@ -43,6 +43,63 @@ export default (refreshToken) =>
   });*/
 
 
+// Android
+try {
+  if (userAgent.indexOf('android') !== -1) {
+    const userInformation = JSON.parse(Android.getUserInformation());
+    console.log(`android connected, ${JSON.stringify(userInformation)}`);
+    localStorage.idToken = Android.getIdToken();
+    localStorage.setItem(userAuthKey, userInformation);
+    if (userInformation.uid) localStorage.uid = userInformation.uid;
+    //if (userInformation.idToken) localStorage.idToken = userInformation.idToken;
+    if (userInformation.email) localStorage.userEmail = userInformation.email;
+    if (userInformation.languageCode) localStorage.languageCode = userInformation.languageCode;
+
+    //var axios = require("axios");
+    axios({
+      url: 'https://api.wedives.com/graphql',
+      method: 'post',
+      headers: {
+        countrycode: 'ko',
+        idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+      },
+      data: {
+          query: `
+              query Query($uid: ID!) {
+                getUserByUid(uid: $uid) {
+                  _id
+                  nickName
+                  birthAge
+                  gender
+                }
+              }
+          `,
+          variables: {
+              "uid": localStorage.uid
+          }
+      }
+    }).then(function(result) {
+      if (result.data.data.getUserByUid != null) {
+        localStorage.nickName = result.data.data.getUserByUid.nickName;
+        localStorage.userId = result.data.data.getUserByUid._id;
+      }
+    })
+    
+  
+  } else if (userAgent.indexOf('iphone') !== -1 || userAgent.indexOf('ipad') !== -1) {
+    
+    // console.log(`ios connected, ${JSON.stringify(JfSON.parse(iOS.getUserInformation()))}`)
+    // localStorage.setItem(userAuthKey, JSON.parse(iOS.getUserInformation()));
+  
+  } else { // 안드로이드, IOS 가 아닌 경우 (더 조건을 추가해서 처리해도 됨)
+    //console.log(`web client connected.`);
+  
+  }
+} catch(e) {
+
+}
+
+
 
 var _apolloClient = null;
 const GRAPHQL_URL = process.env.VUE_APP_API_PATH || 'https://chat.wedives.com/graphql'
@@ -234,62 +291,6 @@ new Vue({
 const userAgent = navigator.userAgent.toLowerCase();
 const userAuthKey = 'userAuth';
 var axios = require("axios");
-
-// Android
-try {
-  if (userAgent.indexOf('android') !== -1) {
-    const userInformation = JSON.parse(Android.getUserInformation());
-  
-    console.log(`android connected, ${JSON.stringify(userInformation)}`);
-    localStorage.setItem(userAuthKey, userInformation);
-    if (userInformation.uid) localStorage.uid = userInformation.uid;
-    if (userInformation.idToken) localStorage.idToken = userInformation.idToken;
-    if (userInformation.email) localStorage.userEmail = userInformation.email;
-    if (userInformation.languageCode) localStorage.languageCode = userInformation.languageCode;
-
-    //var axios = require("axios");
-    axios({
-      url: 'https://api.wedives.com/graphql',
-      method: 'post',
-      headers: {
-        countrycode: 'ko',
-        idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-      },
-      data: {
-          query: `
-              query Query($uid: ID!) {
-                getUserByUid(uid: $uid) {
-                  _id
-                  nickName
-                  birthAge
-                  gender
-                }
-              }
-          `,
-          variables: {
-              "uid": localStorage.uid
-          }
-      }
-    }).then(function(result) {
-      if (result.data.data.getUserByUid != null) {
-        localStorage.nickName = result.data.data.getUserByUid.nickName;
-        localStorage.userId = result.data.data.getUserByUid._id;
-      }
-    })
-    
-  
-  } else if (userAgent.indexOf('iphone') !== -1 || userAgent.indexOf('ipad') !== -1) {
-    
-    // console.log(`ios connected, ${JSON.stringify(JfSON.parse(iOS.getUserInformation()))}`)
-    // localStorage.setItem(userAuthKey, JSON.parse(iOS.getUserInformation()));
-  
-  } else { // 안드로이드, IOS 가 아닌 경우 (더 조건을 추가해서 처리해도 됨)
-    //console.log(`web client connected.`);
-  
-  }
-} catch(e) {
-
-}
 
 
 //

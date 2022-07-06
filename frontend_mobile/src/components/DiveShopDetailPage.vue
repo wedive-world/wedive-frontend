@@ -1421,10 +1421,13 @@ export default {
             {
                 var id_arr = new Array();
                 var width_arr = new Array();
-                this.getDiveShopByUniqueName.backgroundImages.forEach(x => {
-                    id_arr.push(x._id);
-                    width_arr.push(720);
-                });
+                if (this.getDiveShopByUniqueName.backgroundImages) {
+                    this.getDiveShopByUniqueName.backgroundImages.forEach(x => {
+                        id_arr.push(x._id);
+                        width_arr.push(720);
+                    });
+                }
+                
                 if (id_arr.length > 0) {
                     axios({
                         url: 'https://api.wedives.com/graphql',
@@ -1448,10 +1451,12 @@ export default {
                     }).then(result_image => {
                         if (result_image.data.data.getImageUrlsByIds) {
                             var i=0;
-                            this.getDiveShopByUniqueName.backgroundImages.forEach(x => {
-                                x.thumbnailUrl = result_image.data.data.getImageUrlsByIds[i];
-                                i++;
-                            });
+                            if (this.getDiveShopByUniqueName.backgroundImages) {
+                                this.getDiveShopByUniqueName.backgroundImages.forEach(x => {
+                                    x.thumbnailUrl = result_image.data.data.getImageUrlsByIds[i];
+                                    i++;
+                                });
+                            }
                         }
                         setTimeout(function() {
                             $("#cover-slider-temp").animate({opacity: "0"}, 1200);
@@ -1466,10 +1471,13 @@ export default {
             {
                 var id_arr = new Array();
                 var width_arr = new Array();
-                this.getDiveShopByUniqueName.images.forEach(x => {
-                    id_arr.push(x._id);
-                    width_arr.push(720);
-                });
+                if (this.getDiveShopByUniqueName.images) {
+                        this.getDiveShopByUniqueName.images.forEach(x => {
+                        id_arr.push(x._id);
+                        width_arr.push(720);
+                    });
+                }
+                
                 if (id_arr.length > 0) {
                     axios({
                         url: 'https://api.wedives.com/graphql',
@@ -1493,10 +1501,12 @@ export default {
                     }).then(result_image => {
                         if (result_image.data.data.getImageUrlsByIds) {
                             var i=0;
-                            this.getDiveShopByUniqueName.images.forEach(x => {
-                                x.thumbnailUrl = result_image.data.data.getImageUrlsByIds[i];
-                                i++;
-                            });
+                            if (this.getDiveShopByUniqueName.images) {
+                                this.getDiveShopByUniqueName.images.forEach(x => {
+                                    x.thumbnailUrl = result_image.data.data.getImageUrlsByIds[i];
+                                    i++;
+                                });
+                            }
                         }
                     });
                 }

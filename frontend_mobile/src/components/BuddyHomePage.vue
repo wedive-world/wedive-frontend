@@ -2,6 +2,8 @@
   <div class="">
     <div data-menu-active="nav-buddy"></div>
 
+    
+
     <pull-to :top-load-method="refresh" @top-state-change="stateChange" :top-config="TOP_DEFAULT_CONFIG" :is-bottom-bounce="false" :is-top-bounce="scrollTop == 0">
     <template slot="top-block" slot-scope="props">
       <div :class="'top-load-wrapper opacity-50' + (props.state === 'loaded-done' ? ' fadeout' : '')">
@@ -365,6 +367,7 @@
 import gql from 'graphql-tag'
 import PullTo from 'vue-pull-to'
 import { ContentLoader } from 'vue-content-loader'
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 const axios = require("axios");
 
 
@@ -410,6 +413,18 @@ export default {
             loadedStayTime: 400, // Time to stay after loading ms
             stayDistance: 50, // Trigger the distance after the refresh
             triggerDistance: 70 // Pull down the trigger to trigger the distance
+        },
+        swiperOption: {
+            slidesPerView: 3.7,
+            spaceBetween: 5,
+            pagination: false,
+            //pagination: {
+            //    el: '.swiper-pagination'
+            //},
+            slidesOffsetBefore: 16, // slidesOffsetBefore는 첫번째 슬라이드의 시작점에 대한 변경할 때 사용
+            //slidesOffsetAfter: 130, // slidesOffsetAfter는 마지막 슬라이드 시작점 + 마지막 슬라이드 너비에 해당하는 위치의 변경이 필요할 때 사용
+            centeredSlides: true,
+            
         },
     }
   },
@@ -607,8 +622,20 @@ export default {
   components: {
     PullTo,
     ContentLoader,
+    Swiper,
+    SwiperSlide,
   },
   methods: {
+      moveTo(idx) {
+          //this.contentSwiper.slideTo(idx);
+      },
+      tabSlideChange() {
+          //this.contentSwiper.slideTo(this.tabSwiper.activeIndex);
+      },
+      onSlideChange() {
+          console.log("1")
+          //this.tabSwiper.slideTo(this.contentSwiper.activeIndex);
+      },
       async moveRecommend(id, targetType) {
         await axios({
             url: 'https://api.wedives.com/graphql',

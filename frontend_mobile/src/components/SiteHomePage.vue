@@ -1470,7 +1470,7 @@ export default {
 
 .wedive-corner {position: absolute;width: 30px;height: 30px;overflow: hidden;z-index:999;}
 .wedive-corner:after {content: '';position: absolute;height: 200%;width: 200%;border-radius: 100%;z-index: -1;box-shadow: 10px 10px 5px 100px #eff5fb;}
-.wedive-corner-bottom {left:-16px;bottom:0;width:16px;height:16px;}
+.wedive-corner-bottom {left:-16px;bottom:0;width:16px;height:18px;}
 .wedive-corner-bottom-site:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #31373b !important;}
 .wedive-corner-bottom-point:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #308f7f !important;}
 .wedive-corner-bottom-center:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #376a97 !important;}

@@ -1239,6 +1239,31 @@ export default {
     attributes() {
         // Insert today's attribute
         // Insert weekend attribute
+        /*
+        waterTemperature {
+                        name
+                        currentSeaTemperature
+                        weatherText
+                        temperatureC
+                        temperatureF
+                        weatherDescription
+                        weatherIcon
+                        humidity
+                        windSpeed
+                        temperatureDetail {
+                            MinC
+                            MaxC
+                            MinF
+                            MaxF
+                        }
+                        weekTideForecast {
+                            daysOfWeek
+                            tideForecasts
+                        }
+                        latitude
+                        longitude
+                    }
+        */
     },
   },
   apollo: {
@@ -1398,29 +1423,6 @@ export default {
                     reviewCount
                     isUserSubscribe
                     isUserLike
-                    waterTemperature {
-                        name
-                        currentSeaTemperature
-                        weatherText
-                        temperatureC
-                        temperatureF
-                        weatherDescription
-                        weatherIcon
-                        humidity
-                        windSpeed
-                        temperatureDetail {
-                            MinC
-                            MaxC
-                            MinF
-                            MaxF
-                        }
-                        weekTideForecast {
-                            daysOfWeek
-                            tideForecasts
-                        }
-                        latitude
-                        longitude
-                    }
                 }
             }
           `,
