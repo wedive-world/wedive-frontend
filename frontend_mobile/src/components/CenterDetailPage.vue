@@ -258,7 +258,7 @@
                         <div>
                             <table class="table table-borderless text-center rounded-3 shadow-sm mt-1 font-noto" style="border-collapse: collapse;outline: 1px solid rgba(0, 0, 0, 0.08);overflow: hidden;">
                                 <tr v-for="ticket in getDiveCenterByUniqueName.tickets" class="border-bottom">
-                                    <th class="pt-2 pb-2 font-400" style="background: rgba(196,187,171,.2);" width="96">{{ ticket.unitName }}</th>
+                                    <th class="pt-2 pb-2 font-400 line-height-s" style="background: rgba(196,187,171,.2);" width="116">{{ ticket.unitName }}</th>
                                     <td class="text-start p-2">{{ ticket.price | makeComma }}</td>
                                 </tr>
                             </table>
@@ -266,12 +266,12 @@
                         <div>
                             <table class="table table-borderless text-center rounded-3 shadow-sm mt-1 font-noto" style="border-collapse: collapse;outline: 1px solid rgba(0, 0, 0, 0.08);overflow: hidden;">
                                 <tr class="border-bottom">
-                                    <th class="pt-2 pb-2 font-400" style="background: rgba(196,187,171,.2);" width="96">스쿠바 다이빙</th>
+                                    <th class="pt-2 pb-2 font-400 line-height-s" style="background: rgba(196,187,171,.2);" width="116">스쿠바 다이빙</th>
                                     <td v-if="getDiveCenterByUniqueName.divingType.includes('scubaDiving')" class="text-start p-2">{{ enteranceScuba[getDiveCenterByUniqueName.enteranceLevelScuba] }}</td>
                                     <td v-else class="text-start p-2" style="color:#cd5b3c;">불가</td>
                                 </tr>
                                 <tr>
-                                    <th class="pt-2 pb-2 font-400" style="background: rgba(196,187,171,.2);" width="96">프리 다이빙</th>
+                                    <th class="pt-2 pb-2 font-400 line-height-s" style="background: rgba(196,187,171,.2);" width="116">프리 다이빙</th>
                                     <td v-if="getDiveCenterByUniqueName.divingType.includes('freeDiving')" class="text-start p-2">{{ enteranceFree[getDiveCenterByUniqueName.enteranceLevelFree] }}</td>
                                     <td v-else class="text-start p-2" style="color:#cd5b3c;">불가</td>
                                 </tr>
@@ -2236,7 +2236,7 @@ export default {
 .ico_equipt36 {width: 60px;height: 63px;background-position: -280px -280px;}
 
 
-.ico_equipt37 {width: 60px;height: 63px;background-position: 0px -336px;}
+.ico_equipt37 {width: 60px;height: 63px;background-position: 0px -340px;}
 .ico_equipt38 {width: 60px;height: 63px;background-position: -60px -336px;}
 .ico_equipt39 {width: 60px;height: 63px;background-position: -112px -336px;}
 .ico_equipt40 {width: 60px;height: 63px;background-position: -168px -336px;}

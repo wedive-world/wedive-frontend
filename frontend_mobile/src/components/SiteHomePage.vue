@@ -528,7 +528,7 @@ async function updateAll() {
     
     // 새롭게 마커를 그려준다.
     var allList_item = ["site", "point", "center", "shop"];
-    var allList_cate = ["사이트", "포인트", "센터", "샵"];
+    var allList_cate = ["사이트", "포인트", "수영장", "샵"];
     for (var k=0; k<4; k++) {
         var allList = [];
         //if (k == 0 && check_cate1) {if (zoomLevel > 12)allList = []; else allList = siteList;}
