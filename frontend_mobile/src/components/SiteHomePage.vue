@@ -4,8 +4,8 @@
     <div class="main-header header header-fixed header-logo-center" style="height: 58px !important;">
         <a class="" href="/" style="margin-left: 16px;"><img class="logo-image" src="https://d34l91104zg4p3.cloudfront.net/assets/logo-gray.svg" height="42" style="margin-top:8px;"/></a>
         
-        <a v-if="idToken != null && nickName != null" v-on:click="goNoti()" :class="'header-icon header-icon-5' + (notiData && notiData.length > 0 && notiData[0].read != null && notiData[0].read == false ? ' has-notification' : '')" style="color:#858585 !important;margin-right: 18px;"><img src="https://d34l91104zg4p3.cloudfront.net/assets/icon_notification.png" width="28" style="margin-top: 12px;"></a>
-        <a v-on:click="move('/site_list')" class="header-icon header-icon-3" style="margin-right: 18px;"><img src="https://d34l91104zg4p3.cloudfront.net/assets/icon_list_fill.png" width="26" style="margin-top: 12px;"/></i></a>
+        <a v-if="idToken != null && nickName != null" v-on:click="goNoti()" :class="'header-icon header-icon-3' + (notiData && notiData.length > 0 && notiData[0].read != null && notiData[0].read == false ? ' has-notification' : '')" style="color:#858585 !important;margin-right: 18px;"><img src="https://d34l91104zg4p3.cloudfront.net/assets/icon_notification.png" width="28" style="margin-top: 12px;"></a>
+        <!--<a v-on:click="move('/site_list')" class="header-icon header-icon-3" style="margin-right: 18px;"><img src="https://d34l91104zg4p3.cloudfront.net/assets/icon_list_fill.png" width="26" style="margin-top: 12px;"/></i></a>-->
         <a v-on:click="searchBox()" href="#" class="header-icon header-icon-4" style="margin-right: 11px;"><img src="https://d34l91104zg4p3.cloudfront.net/assets/icon_search_fill.png" width="28" style="margin-top: 12px;"/></a>
         <!--<a href="#" class="header-icon header-icon-4 color-theme circular_image" data-menu="menu-main" :style="'background: url('+((userThumbnail) ? userThumbnail : 'https://d34l91104zg4p3.cloudfront.net/assets/user_empty_'+((gender)?gender:'m')+'.png')+');background-size:cover;width:36px;height:36px;margin-top:7px !important;margin-right:7px;'"></a>-->
     </div>

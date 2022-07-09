@@ -881,7 +881,7 @@ export default {
         }
     },
     contentSwiper() {
-        if (this.$refs.tabSwiper.hasOwnProperty("swiper")){
+        if (this.$refs.contentSwiper.hasOwnProperty("swiper")){
             return this.$refs.contentSwiper.swiper;
         } else {
             return this.$refs.contentSwiper.$swiper;

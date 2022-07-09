@@ -145,7 +145,7 @@ export default new Router({
       component: ReviewAllPage
     },
     {
-      path: '/site/map',
+      path: '/site_map',
       name: 'SiteHomePage',
       component: SiteHomePage
     },

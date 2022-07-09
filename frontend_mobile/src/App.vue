@@ -15,7 +15,7 @@
 
           
           <div v-if="footer_list.includes(pathname)" id="footer-bar" class="footer-bar" style="border-radius: 30px 30px 0px 0px;">
-            <a href="/" id="nav-buddy"><div class="menu-ico menu-ico1"></div><span>버디</span></a>
+            <a href="/" id="nav-buddy"><div class="menu-ico menu-ico0"></div><span>홈</span></a>
             <a v-on:click="moveSite()" id="nav-site"><div class="menu-ico menu-ico2"></div><span>장소</span></a>
             <a href="/forum_home" id="nav-forum"><div class="menu-ico menu-ico3"></div><span>포럼</span></a>
             <a href="/chat_home" id="nav-chat"><div class="menu-ico menu-ico4"></div><span>채팅</span></a>
@@ -37,7 +37,7 @@
             <a v-else-if="pathname == '/forum_home'" v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="https://d34l91104zg4p3.cloudfront.net/assets/icon_book_new.png" width="24"></a>
             <a v-else v-on:click="addItem()" id="wedive-add" class="page-title-icon color-theme hide"><img src="https://d34l91104zg4p3.cloudfront.net/assets/icon_write.png" width="24"></a>
             <!--<a v-on:click="settingForum()" id="wedive-group" class="page-title-icon color-theme hide"><img src="https://d34l91104zg4p3.cloudfront.net/assets/icon_setting_fill.png" width="26"></a>-->
-            <a v-if="$route.path=='/site_list'" v-on:click="move('/site/map')" class="page-title-icon font-18" style="color: #858585;margin-right: 13.3333333333px;"><img src="https://d34l91104zg4p3.cloudfront.net/assets/icon_map_fill.png" width="26"></a>
+            <a v-if="$route.path=='/site_map'" v-on:click="move('/site_map')" class="page-title-icon font-18" style="color: #858585;margin-right: 13.3333333333px;"><img src="https://d34l91104zg4p3.cloudfront.net/assets/icon_map_fill.png" width="26"></a>
             <a v-on:click="searchItem()" id="wedive-search" class="page-title-icon font-18 hide" style="color:#858585 !important;"><img src="https://d34l91104zg4p3.cloudfront.net/assets/icon_search_fill.png" width="28"></a>
             <a v-on:click="shareItem()" id="wedive-share" class="page-title-icon font-18 hide" style="color:#858585 !important;"><img src="https://d34l91104zg4p3.cloudfront.net/assets/icon_share_fill.png" height="24"/></a>
             <!--<a href="#" class="page-title-icon" data-menu="menu-main" :style="'background: url('+((userThumbnail) ? userThumbnail : 'https://d34l91104zg4p3.cloudfront.net/assets/user_empty_'+((gender)?gender:'m')+'.png')+');background-size:cover;'"></a>-->
@@ -169,8 +169,8 @@ export default {
     try {
       var item = window.location.pathname;
       if (item == '/' || item == '/chat_home') {
-        $("#wedive-add").removeClass("hide");
-        $("#wedive-search").removeClass("hide");
+        //$("#wedive-add").removeClass("hide");
+        //$("#wedive-search").removeClass("hide");
         $("#wedive-noti").removeClass("hide");
       } else if (item == '/forum_home') {
         $("#wedive-add").removeClass("hide");
@@ -283,7 +283,7 @@ export default {
       gender: localStorage.gender,
       pathname: window.location.pathname,
       notiData: null,
-      footer_list: ['/', '/site_list', '/site/map', '/forum_home', '/chat_home', '/other_home'],
+      footer_list: ['/', '/site_list', '/site_map', '/forum_home', '/chat_home', '/other_home'],
       locationsearch: window.location.search,
     }
   },
@@ -383,7 +383,8 @@ export default {
       this.$refs.loginBottomSheet.close();
     },
     moveSite() {
-      location.href = localStorage.perferedSite + location.search;
+      //location.href = localStorage.perferedSite + location.search;
+      location.href = '/site_map';
     },
     settingForum() {
       //var menuData = "forum-add";
@@ -694,8 +695,8 @@ export default {
 .footer-bar > a{color: #a8a8b1;flex: 1 1 0px !important;}
 .footer-bar .active-nav span {color: #1d397c !important;font-weight:600 !important;}
 .menu-ico {height:22px;background-size: 22px 22px !important;background-position: center !important;background-repeat: no-repeat !important;margin-bottom:5px;}
-#nav-home > .menu-ico {background: url('https://d34l91104zg4p3.cloudfront.net/assets/menu0_off.png');}
-#nav-buddy > .menu-ico {background: url('https://d34l91104zg4p3.cloudfront.net/assets/menu1_off.png');}
+#nav-home > .menu-ico {background: url('https://d34l91104zg4p3.cloudfront.net/assets/menu1_off.png');}
+#nav-buddy > .menu-ico {background: url('https://d34l91104zg4p3.cloudfront.net/assets/menu0_off.png');}
 #nav-site > .menu-ico {background: url('https://d34l91104zg4p3.cloudfront.net/assets/menu2_off.png');}
 #nav-forum > .menu-ico {background: url('https://d34l91104zg4p3.cloudfront.net/assets/menu3_off.png');}
 #nav-chat  .menu-ico {background: url('https://d34l91104zg4p3.cloudfront.net/assets/menu4_off.png');}
