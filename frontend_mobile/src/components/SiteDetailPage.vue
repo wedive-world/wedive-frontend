@@ -506,6 +506,93 @@
             </div>
         </div>
         
+        <div v-if="getDivingsByPlaceId && getDivingsByPlaceId.length > 0">
+            <div class="card card-style">
+                <div class="content mb-0 mt-4">
+                    <div>
+                        <h4 class="text-start mb-3">이곳의 다이빙 버디찾기</h4>
+                    </div>
+                    
+                    <div v-for="(diving,index) in getDivingsByPlaceId" v-if="index < 3">
+                        <div :class="diving.dateStartedAt < now ? 'opacity-50' : ''" style="position: relative;height: 85px;">
+                            <a v-on:click="moveDiving(diving)">
+                                <div class="">
+                                    <div class="justify-content-center mb-0 text-start">
+                                        <div class="thumb-img me-2">
+                                            <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                                                <defs>
+                                                <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                                                <clipPath id="clipSquircle">
+                                                    <use xlink:href="#shapeSquircle"/>
+                                                </clipPath>
+                                                </defs>
+                                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="diving.backgroundImages && diving.backgroundImages.length > 0 ? diving.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'"/>
+                                            </svg>
+                                        </div>
+                                        <!--<div class="" style="float: left;position: relative;width: 95px; height:95px;">
+                                            <img v-bind:src="(diving.backgroundImages && diving.backgroundImages.length > 0) ? diving.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;margin-top: 3px;">
+                                        </div>-->
+                                        <div class="" style="display:inline-block;vertical-align: top;width: calc(100vw - 138px);">
+                                            <h4 class="font-15 mt-1 ellipsis"> {{ diving.title }} </h4>
+                                            <p class="pb-0 mb-0 nearby_desc"> {{ getWediveStartEnd(diving.startedAt, diving.finishedAt) }} </p>
+                                            
+                                            <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> {{ diving.name }} ({{ diving.type.join().replace('scubaDiving', '스쿠바').replace('freeDiving', '프리') }})</p>
+                                        </div>
+                                        <span class="chip chip-s bg-gray-light text-center font-400 wedive-chip color-black">{{ diving.participants.filter(x=>x.status=='joined').length+1 }}명 참석</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div v-if="index < getDivingsByPlaceId.length-1" class="divider mt-3 mb-3"></div>
+                        <div v-else class="mb-3"></div>
+                    </div>
+
+                    <div class="collapse" id="collapse-diving">
+                        <div v-for="(diving,index) in getDivingsByPlaceId" v-if="index >= 3">
+                            <div :class="diving.dateStartedAt < now ? 'opacity-50' : ''" style="position: relative;height: 85px;">
+                                <a v-on:click="moveDiving(diving)">
+                                    <div class="">
+                                        <div class="justify-content-center mb-0 text-start">
+                                            <div class="thumb-img me-2">
+                                                <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                                                    <defs>
+                                                    <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                                                    <clipPath id="clipSquircle">
+                                                        <use xlink:href="#shapeSquircle"/>
+                                                    </clipPath>
+                                                    </defs>
+                                                    <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="diving.backgroundImages && diving.backgroundImages.length > 0 ? diving.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'"/>
+                                                </svg>
+                                            </div>
+                                            <!--<div class="" style="float: left;position: relative;width: 95px; height:95px;">
+                                                <img v-bind:src="(diving.backgroundImages && diving.backgroundImages.length > 0) ? diving.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;margin-top: 3px;">
+                                            </div>-->
+                                            <div class="" style="display:inline-block;vertical-align: top;width: calc(100vw - 138px);">
+                                                <h4 class="font-15 mt-1 ellipsis"> {{ diving.title }} </h4>
+                                                <p class="pb-0 mb-0 nearby_desc"> {{ getWediveStartEnd(diving.startedAt, diving.finishedAt) }} </p>
+                                                
+                                                <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> {{ diving.name }} ({{ diving.type.join().replace('scubaDiving', '스쿠바').replace('freeDiving', '프리') }})</p>
+                                            </div>
+                                            <span class="chip chip-s bg-gray-light text-center font-400 wedive-chip color-black">{{ diving.participants.filter(x=>x.status=='joined').length+1 }}명 참석</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div v-if="index < getDivingsByPlaceId.length-1" class="divider mt-3 mb-3"></div>
+                            <div v-else class="mb-3"></div>
+                        </div>
+                    </div>  
+                    <div v-if="getDivingsByPlaceId && getDivingsByPlaceId.length > 3" class="list-group list-custom-small list-icon-0" style="background: rgba(196, 187, 171, 0.2);margin-left: -15px;margin-right: -15px;">
+                        <a data-bs-toggle="collapse" class="no-effect" href="#collapse-diving" v-on:click="collapse_text = (collapse_text == '더 보기' ? '줄이기' : '더 보기')">
+                            <p class="font-14 mb-0 text-center">{{ collapse_text }}</p>
+                        </a>        
+                    </div>
+                    
+                    
+                </div>
+            </div>
+        </div>
+
 
         <div class="card card-style">
             <div class="content mb-2" id="tab-group-index">
@@ -760,6 +847,9 @@ export default {
         uniqueName: this.$route.params.id,
         map: null,
         getDiveSiteByUniqueName: {},
+        getDivingsByPlaceId: [],
+        collapse_text: '더 보기',
+        now: new Date(),
         firstThumbnailImage: '',
         nearData: [],
         marker_list: [],
@@ -1259,6 +1349,112 @@ export default {
             setTimeout(function() {
                 $("#div_content_loader").hide();
             },200);
+
+
+
+            this.$apollo.query({
+                // Query
+                query: gql`
+                query Query($placeId: String!) {
+                    getDivingsByPlaceId(placeId: $placeId) {
+                        diveShops {
+                        _id
+                        name
+                        uniqueName
+                        adminScore
+                        backgroundImages {
+                            thumbnailUrl
+                        }
+                        }
+                        diveCenters {
+                        _id
+                        name
+                        uniqueName
+                        adminScore
+                        backgroundImages {
+                            thumbnailUrl
+                        }
+                        }
+                        divePoints {
+                        _id
+                        name
+                        uniqueName
+                        adminScore
+                        backgroundImages {
+                            thumbnailUrl
+                        }
+                        }
+                        diveSites {
+                        _id
+                        name
+                        uniqueName
+                        adminScore
+                        backgroundImages {
+                            thumbnailUrl
+                        }
+                        }
+                        _id
+                        title
+                        description
+                        status
+                        type
+                        hostUser {
+                        uid
+                        _id
+                        nickName
+                        gender
+                        birthAge
+                        }
+                        participants {
+                        status
+                        birth
+                        user {
+                            _id
+                            uid
+                            nickName
+                            birthAge
+                            gender
+                        }
+                        name
+                        gender
+                        }
+                        chatRoomId
+                        startedAt
+                        finishedAt
+                        interests {
+                        _id
+                        title
+                        }
+                    }
+                }
+                `,
+                // Parameters
+                variables: {
+                    placeId: this.getDiveSiteByUniqueName._id
+                },
+            }).then((data) => {
+                // Result
+                this.getDivingsByPlaceId = data.data.getDivingsByPlaceId;
+                this.getDivingsByPlaceId.forEach(x=> {
+                    var itm = (x.diveCenters.length > 0 ? x.diveCenters[0] : (x.divePoints.length > 0 ? x.divePoints[0] : (x.diveShops.length > 0 ? x.diveShops[0] : (x.diveSites.length > 0 ? x.diveSites[0] : []))));
+                    if (itm && itm.backgroundImages && itm.backgroundImages.length > 0) {
+                        x.backgroundImages = [{thumbnailUrl: itm.backgroundImages[0].thumbnailUrl}];
+                    }
+                    if (itm && itm.name) {
+                        x.name = itm.name;
+                    }
+                    if (itm && itm.adminScore) {
+                        x.adminScore = itm.adminScore;
+                    }
+                    x.dateStartedAt = new Date(x.startedAt);
+                });
+                console.log(this.getDivingsByPlaceId);
+                //}
+            }).catch((error) => {
+                // Error)
+                console.error(error)
+                // We restore the initial user input
+            });
           },
           
       },
@@ -1279,6 +1475,42 @@ export default {
             if(preloader){preloader.classList.add('preloader-hide');}
           }, 1000);
       },*/
+      async moveDiving(item) {
+        var dic_type1 = {"DiveSite": "diveSite", "DivePoint": "divePoint", "DiveCenter": "diveCenter", "Diving": "diving", "User": "user", "Review": "review", "Forum": "forum", "Recommendation": "recommendation"};
+        await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                mutation Mutation($targetId: ID!, $targetType: UserReactionTargetType!) {
+                    view(targetId: $targetId, targetType: $targetType)
+                }
+                `,
+                variables: {
+                    "targetId": item._id,
+                    "targetType": dic_type1[item.__typename]
+                }
+            }
+        });
+        var dic_type2 = {"DiveSite": "site", "DivePoint": "point", "DiveCenter": "center", "Diving": "diving", "User": "user", "Review": "review", "Forum": "forum", "Recommendation": "recommendation"};
+        if (item.__typename == 'DiveSite' || item.__typename == 'DivePoint' || item.__typename == 'DiveCenter')
+            location.href = '/' + dic_type2[item.__typename] + '/' + item.uniqueName;
+        else 
+            location.href = '/' + dic_type2[item.__typename] + '/' + item._id;
+      },
+      getWediveStartEnd(_startedAt, _finishedAt) {
+          var startedAt = new Date(_startedAt);
+          var finishedAt = new Date(_finishedAt);
+          var getDay = ["일", "월", "화", "수", "목", "금", "토"];
+          if (startedAt.getMonth() == finishedAt.getMonth() && startedAt.getDate() == finishedAt.getDate())
+            return (startedAt.getMonth()+1) + "." + startedAt.getDate() + "(" + getDay[startedAt.getDay()] + ")";
+          else
+            return (startedAt.getMonth()+1) + "." + startedAt.getDate() + "(" + getDay[startedAt.getDay()] + ") ~ " + (finishedAt.getMonth()+1) + "." + finishedAt.getDate() + "(" + getDay[finishedAt.getDay()] + ")";
+      },
       async clickLike() {
           if (localStorage.idToken && localStorage.nickName) {
             const targetId = this.getDiveSiteByUniqueName._id;
@@ -1592,4 +1824,48 @@ export default {
 .mx-120 {max-width: 120px;}
 .mx-140 {max-width: 140px;}
 .background-center {background-position: center !important;background-size: cover !important;}
+
+
+.thumb-img {
+  position: relative;
+  display: inline-block;
+  width: 75px;
+  height: 75px;
+  overflow: hidden;
+  user-select: none;
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3csvg width='88px' height='88px' viewBox='0 0 88 88' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3e%3cpath d='M44%2c0.5 C59.8650505%2c0.5 70.7664452%2c3.40244096 77.6820021%2c10.3179979 C84.597559%2c17.2335548 87.5%2c28.1349495 87.5%2c44 C87.5%2c59.8650505 84.597559%2c70.7664452 77.6820021%2c77.6820021 C70.7664452%2c84.597559 59.8650505%2c87.5 44%2c87.5 C28.1349495%2c87.5 17.2335548%2c84.597559 10.3179979%2c77.6820021 C3.40244096%2c70.7664452 0.5%2c59.8650505 0.5%2c44 C0.5%2c28.1349495 3.40244096%2c17.2335548 10.3179979%2c10.3179979 C17.2335548%2c3.40244096 28.1349495%2c0.5 44%2c0.5 Z' fill='none' stroke='rgba(0,0,0,0.3)'%3e%3c/path%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .svg-profile {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .default-txt {
+    font-size: 2em;
+    fill: #fff;
+  }
+
+  .default-bg {
+    width: 100%;
+    height: 100%;
+    @each $num, $color in $userImgBgs {
+      &[data-color="#{$num}"] {
+        fill: $color;
+      }
+    }
+  }
+}
+.wedive-chip {font-family: 'Noto Sans Korean';border-radius:6px !important;padding: 0 8px;margin:0 !important;position:absolute;right:0px;bottom:0px;}
+.wedive-chip i {width: auto;line-height: inherit;margin-right: 2px;}
 </style>

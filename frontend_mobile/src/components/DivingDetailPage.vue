@@ -240,7 +240,7 @@
             <a v-else-if="idToken == null || nickName == null" v-on:click="login()" class="btn btn-full font-400 rounded-s shadow-l bg-gray-dark color-white bd-w-0mb-5 font-noto">참여신청</a>
             <a v-else-if="(getDivingById.participants.filter(member=> (member.user && member.user._id == userId && member.status == 'applied'))).length > 0" class="btn btn-full font-400 rounded-s shadow-l bg-gray-dark color-white bd-w-0mb-5 font-noto">참여 승인 대기중</a>
             <a v-else-if="(getDivingById.participants.filter(member=> (member.user && member.user._id == userId && member.status == 'joined'))).length > 0" class="btn btn-full font-400 rounded-s shadow-l bg-gray-dark color-white bd-w-0mb-5 font-noto">참여 완료</a>
-            <a v-else-if="getDivingById.naver_cafe_url != null" :href="getDivingById.naver_cafe_url" class="btn btn-full font-400 rounded-s shadow-l color-white bd-w-0mb-5 font-noto" style="background-color: #21a238;">참여신청</a>
+            <a v-else-if="getDivingById.naver_cafe_url != null" :href="getDivingById.naver_cafe_url" target="_blank" class="btn btn-full font-400 rounded-s shadow-l color-white bd-w-0mb-5 font-noto" style="background-color: #21a238;">참여신청</a>
             <a v-else href="#" data-menu="menu-join" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0mb-5 font-noto">참여신청</a>
             </div>
         </div>
@@ -676,6 +676,7 @@ export default {
                 this.getDivingById.description = this.getDivingById.description.replace(url, '');
                 this.getDivingById.naver_cafe_url = url;
             }
+            console.log(this.getDivingById.description);
             
 
 
