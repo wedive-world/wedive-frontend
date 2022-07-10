@@ -660,7 +660,19 @@ export default {
             // 임시 //
             if (this.getDivingById.description.includes("https://cafe.naver.com")) {
                 var url = this.getDivingById.description.substring(this.getDivingById.description.indexOf("https://cafe.naver.com"), this.getDivingById.description.length);
-                url = url.substring(0, url.indexOf("\n"));
+                if (url.indexOf("\n") > 0 || url.indexOf(" ") > 0) {
+                    if (url.indexOf("\n") > 0 && url.indexOf(" ") > 0) {
+                        if (url.indexOf("\n") > url.indexOf(" ")) {
+                            url = url.substring(0, url.indexOf(" "));
+                        } else {
+                            url = url.substring(0, url.indexOf("\n"));
+                        }
+                    } else if (url.indexOf("\n") > 0) {
+                        url = url.substring(0, url.indexOf("\n"));
+                    } else if (url.indexOf(" ") > 0) {
+                        url = url.substring(0, url.indexOf(" "));
+                    }
+                }
                 this.getDivingById.description = this.getDivingById.description.replace(url, '');
                 this.getDivingById.naver_cafe_url = url;
             }

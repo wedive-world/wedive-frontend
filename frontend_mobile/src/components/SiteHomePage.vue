@@ -391,6 +391,8 @@ async function updateAll() {
     var sw = bounds.getSouthWest();
     var ne = bounds.getNorthEast();
 
+    console.log("updateAll : ");
+    console.log(searchParams)
     var _searchParams = JSON.parse(JSON.stringify(searchParams));
     _searchParams.lat1 = sw.lat();
     _searchParams.lng1 = sw.lng();
@@ -697,6 +699,10 @@ function myCallback()
 export default {
   name: 'HelloWorld',
   mounted() {
+    console.log("localStorage.notiData");
+    console.log(localStorage.notiData)
+    console.log("localStorage.suggestion");
+    console.log(localStorage.suggestion)
     var intervalID = setInterval(myCallback, 7000);
 
     // get Geo location
@@ -1029,7 +1035,7 @@ export default {
         check_point4: false,
         suggestions : (localStorage.suggestion ? JSON.parse(localStorage.suggestion) : []),
         tour_flag: true,
-        notiData: JSON.parse(localStorage.notiData),
+        notiData: (localStorage.notiData ? JSON.parse(localStorage.notiData) : []),
     }
   }, 
   watch: {
@@ -1058,6 +1064,8 @@ export default {
             this.lookupUser3();
         } else {
             this.openSuggestion();
+            console.log("this.query");
+            console.log(this.query)
             this.query_place = JSON.parse(JSON.stringify(this.query)) + "";
             setTimeout(function() {
                 $("#suggestion_typeahead > .input-group > input").focus();
@@ -1123,6 +1131,8 @@ export default {
       },
       handleFire() {
           localStorage.suggestionFlag = '1';
+          console.log("this.query_place");
+          console.log(this.query_place)
           this.query = (JSON.parse(JSON.stringify(this.query_place))+"");
           document.getElementById("search-suggestion").classList.remove('menu-active');
           document.getElementsByClassName('menu-hider')[0].classList.remove('menu-active');

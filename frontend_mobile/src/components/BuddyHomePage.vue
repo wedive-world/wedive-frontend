@@ -52,7 +52,7 @@
                 :key="0"
                 :virtualIndex="0"
                 style="padding-left:20px;">
-                <div>
+                <div style="padding-top: 10px;">
                     <div class="gallery gallery-filter inline-block" style="width:66px !important;padding:0 !important;min-height: 90px;">
                         <a :href="(getUserById && getUserById.profileImages && getUserById.profileImages.length>0) ? getUserById.profileImages[0].thumbnailUrl : ('https://d34l91104zg4p3.cloudfront.net/assets/user_empty.png')" data-gallery="gallery-image" class="center_image filtr-item" :title="(getUserById?getUserById.nickName:'')" data-category="user" style="width:60px;height:60px;">
                             <div class="user-img me-2">
@@ -68,18 +68,19 @@
                             </div>
                         </a>
                     </div>
-                    <div class="font-noto" style="position: absolute;top:10px;left:98px;">
+                    <div class="font-noto" style="position: absolute;top:8px;left:98px;">
                         
                         <h5 class="mb-0 font-500 ellipsis">{{ getUserById ? '다이버 ' + getUserById.nickName + '님' : '' }}</h5>
                         <span v-if="getUserById && getUserById.scubaLevelShow != ''">
-                            <img src="https://d34l91104zg4p3.cloudfront.net/assets/award1.png" height="30" class="inline-block" style="vertical-align: top;">
-                            <span class="chip chip-s text-center font-400 wedive-chip color-white" style="position: initial;background-color: #268cd3;margin-top: 4px !important;margin-left: -4px !important;">스쿠바 {{ getUserById ? getUserById.scubaLevelShow : '' }}</span>
+                            <img src="https://d34l91104zg4p3.cloudfront.net/assets/award1.png" height="30" class="inline-block" style="vertical-align: top;margin-left:-4px;">
+                            <span class="chip chip-s text-center font-400 wedive-chip color-white" style="position: initial;background-color: #268cd3;margin-top: 4px !important;margin-left: -4px !important;margin-right:8px !important;">스쿠바 {{ getUserById ? getUserById.scubaLevelShow : '' }}</span>
                         </span>
                         <span v-if="getUserById && getUserById.freeLevelShow != ''">
-                            <img src="https://d34l91104zg4p3.cloudfront.net/assets/award2.png" height="30" class="inline-block" style="vertical-align: top;">
+                            <img src="https://d34l91104zg4p3.cloudfront.net/assets/award2.png" height="30" class="inline-block" style="vertical-align: top;margin-left:-4px;">
                             <span class="chip chip-s text-center font-400 wedive-chip color-white" style="position: initial;background-color: #be4544;margin-top: 4px !important;margin-left: -4px !important;">프리 {{ getUserById ? getUserById.freeLevelShow : '' }}</span>
                         </span>
-                        
+                        <br/>
+                        <span class="color-gray">다이빙 호스트 {{ getUserById.divingHostCount }}회&nbsp;&nbsp;|&nbsp;&nbsp;다이빙 참여 {{ getUserById.divingParticipantCount }}회</span>
                     </div>
                 </div>
             </swiper-slide>
@@ -100,16 +101,13 @@
     
     <div class="pe-4 ps-4" style="margin-top:-100px;">
         <div class="row">
-            <div class="card card-style col-6 shadow-xl square m-0" style="width: calc(50% - 6px);">
+            <div class="card card-style col-6 shadow-xl square m-0" style="width: calc(50% - 6px);background-image: url(/static/images/assets/toss-hand.png);background-size: 70% 70%;background-repeat: no-repeat;background-position: right bottom;">
                 <div class="mb-0 mt-3" style="position:absolute;height:50%;">
                     <h4 class="font-noto text-start pt-1 mb-0">버디찾기</h4>
                     <p class="text-start mb-0 opacity-70">새로운 다이빙 생성</p>
-                    <div style="position: relative;">
-                        <img class="ps-0" src="/static/images/assets/toss-hand.png" style="position:absolute;right: -28px;top: -11px;width: 100%;"/>
-                    </div>
                 </div>
             </div>
-            <div class="card card-style col-6 shadow-xl square m-0" style="    width: calc(50% - 6px);margin-left: 12px !important;background-image: url(/static/images/assets/search2.png);background-size: 105px 105px;background-repeat: no-repeat;background-position: right bottom;">
+            <div class="card card-style col-6 shadow-xl square m-0" style="width: calc(50% - 6px);margin-left: 12px !important;background-image: url(/static/images/assets/search2.png);background-size: 70% 70%;background-repeat: no-repeat;background-position: right bottom;">
                 <div class="mb-0 mt-3" style="position:absolute;height:50%;">
                     <h4 class="font-noto text-start pt-1 mb-0">검색</h4>
                     <p class="text-start mb-0 opacity-70">다이빙, 장소 검색</p>
@@ -118,22 +116,22 @@
         </div>
     </div>
 
-    <div v-if="searchPlaces != null">
+    <div v-if="getNearByDivings != null" style="margin-top: -16px;">
         <div>
             <h4 class="text-start mb-2 mt-2 font-noto" style="margin-left: 14px;margin-right: 14px;position:relative;font-weight:600;">내 근처 다이빙 이벤트</h4>
         </div>
-        <div class="splide single-slider-site slider-no-arrows visible-slider slider-no-dots" id="single-slider-nearby" style="height:176px;">
+        <div class="splide single-slider-site slider-no-arrows visible-slider slider-no-dots" id="single-slider-nearby-diving" style="height:176px;">
             <div class="splide__track">
                 <div class="splide__list">
-                    <div v-for="(item, index) in searchPlaces.filter(x=>x.__typename == 'DiveCenter')" class="splide__slide">
+                    <div v-for="(item, index) in getNearByDivings" class="splide__slide">
                         <a v-on:click="movePreview(item)">
                             <div class="card card-style card-nearby" :style="'background: url('+((item.backgroundImages && item.backgroundImages.length > 0) ? item.backgroundImages[0].thumbnailUrl : '/static/empty.jpg')+')'" data-card-height="160">
                                 <div class="card-bottom px-3 py-3">
-                                    <h4 class="color-white font-18 font-600">{{ item.name }}</h4>
+                                    <h4 class="color-white font-18 font-600">{{ item.name }} ({{item.startedAt.substring(5, 10).replace(/-/gi, '/')}})</h4>
                                     <div class="divider bg-white opacity-20 mb-1"></div>
                                     <div class="d-flex">
                                         <div class="align-self-center" style="max-width: 100%;">
-                                            <p class="font-11 opacity-70 font-600 color-white nearby_desc mb-0" style="max-width: 100%;">{{ item.description }}</p>
+                                            <p class="font-11 opacity-70 font-600 color-white nearby_desc mb-0" style="max-width: 100%;" v-html="item.description"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -149,7 +147,7 @@
     </div>
 
     <div>
-        <div class="splide single-slider-noauto slider-no-arrows visible-slider slider-no-dots" id="single-slider-guide" style="height:126px;">
+        <div class="splide single-slider-noauto slider-no-arrows visible-slider slider-no-dots" id="single-slider-guide" style="height:136px;">
             <div class="splide__track">
                 <div class="splide__list">
                     <div class="splide__slide">
@@ -192,18 +190,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     <div class="page-content pt-2">
         <!--
         <div class="splide wedive-slider slider-no-arrows slider-no-dots" id="main-slider">
@@ -242,8 +228,7 @@
         -->
 
         
-
-        <div v-for="(recommendation,rec_idx) in getUserRecommendationsByTargetType" v-if="recommendation.previews.length > 0">
+        <div v-for="(recommendation,rec_idx) in recommendation1" v-if="recommendation.previews.length > 0">
             <div v-if="recommendation.previewCount == 0" v-on:click="moveRecommend(recommendation._id, 'recommendation')" class="card card-style" :style="recommendation.cssStyle.includes('|') ? recommendation.cssStyle.split('|')[0] : recommendation.cssStyle">
                 <div :class="'content mb-0 mt-3 me-0' + (recommendation.className ? ' ' + recommendation.className : '')">
                     <h4 class="text-start mb-0 font-600" v-html="recommendation.title"></h4><i class="wedive-txt-all wedive_right"></i>
@@ -290,14 +275,15 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="divider mt-3 mb-3"></div>
+                        <div v-if="index < recommendation.previews.length-1" class="divider mt-3 mb-3"></div>
+                        <div v-else class="mb-3"></div>
                     </div>
                     
                 </div>
             </div>
             <div v-else>
                 <div v-on:click="moveRecommend(recommendation._id, 'recommendation')">
-                    <h4 :class="'text-start mb-0' + (rec_idx==0 ? '' : ' mt-4')" style="margin-left: 14px;margin-right: 14px;position:relative;">{{ recommendation.title }}<i class="wedive-txt-all wedive_right" style="top:3px !important;"></i></h4>
+                    <h4 :class="'text-start mb-0' + (rec_idx==0 ? '' : ' mt-4')" style="margin-left: 14px;margin-right: 14px;position:relative;margin-top:16px;">{{ recommendation.title }}<i class="wedive-txt-all wedive_right" style="top:3px !important;"></i></h4>
                     <p v-if="recommendation.description" class="mb-2 color-gray-light-mid" style="margin-left: 14px;margin-right: 14px;margin-top:-2px;">{{ recommendation.description }}</p>
                 </div>
                 <div class="splide single-slider-site slider-no-arrows visible-slider slider-no-dots" :id="'single-slider-'+recommendation._id" style="height:276px;">
@@ -315,6 +301,131 @@
                                             <div class="d-flex">
                                                 <div class="align-self-center" style="max-width: 100%;">
                                                     <p class="font-11 opacity-70 font-600 color-white nearby_desc mb-0" style="max-width: 100%;">{{ preview.description }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-overlay bg-gradient opacity-30"></div>
+                                        <div class="card-overlay bg-gradient"></div>
+                                    </div>
+                                </a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+        <div v-if="getNearByDiveCenters != null" style="margin-top: 16px;">
+            <div>
+                <h4 class="text-start mb-2 mt-2 font-noto" style="margin-left: 14px;margin-right: 14px;position:relative;font-weight:600;">내 근처 다이빙 수영장</h4>
+            </div>
+            <div class="splide single-slider-site slider-no-arrows visible-slider slider-no-dots" id="single-slider-nearby-pool" style="height:176px;">
+                <div class="splide__track">
+                    <div class="splide__list">
+                        <div v-for="(item, index) in getNearByDiveCenters" class="splide__slide">
+                            <a v-on:click="movePreview(item)">
+                                <div class="card card-style card-nearby" :style="'background: url('+((item.backgroundImages && item.backgroundImages.length > 0) ? item.backgroundImages[0].thumbnailUrl : '/static/empty.jpg')+')'" data-card-height="160">
+                                    <div class="card-bottom px-3 py-3">
+                                        <h4 class="color-white font-18 font-600">{{ item.name }}</h4>
+                                        <div class="divider bg-white opacity-20 mb-1"></div>
+                                        <div class="d-flex">
+                                            <div class="align-self-center" style="max-width: 100%;">
+                                                <p class="font-11 opacity-70 font-600 color-white nearby_desc mb-0" style="max-width: 100%;">{{ item.description }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-overlay bg-gradient opacity-30"></div>
+                                    <div class="card-overlay bg-gradient"></div>
+                                </div>
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div v-for="(recommendation,rec_idx) in recommendation2">
+            <div v-if="recommendation.previewCount == 0" v-on:click="moveRecommend(recommendation._id, 'recommendation')" class="card card-style" :style="recommendation.cssStyle.includes('|') ? recommendation.cssStyle.split('|')[0] : recommendation.cssStyle">
+                <div :class="'content mb-0 mt-3 me-0' + (recommendation.className ? ' ' + recommendation.className : '')">
+                    <h4 class="text-start mb-0 font-600" v-html="recommendation.title"></h4><i class="wedive-txt-all wedive_right"></i>
+                    <p class="mb-0 opacity-60 ls-n1">{{ recommendation.description ? recommendation.description : '' }}</p>
+                    
+                    <img v-if="recommendation.cssStyle.includes('|')" :class="recommendation.cssStyle.split('|')[2]" :src="'https://d34l91104zg4p3.cloudfront.net/assets/' + recommendation.cssStyle.split('|')[1]" style="padding-bottom:16px;max-height:200px;"/>
+                </div>
+            </div>
+
+            <div v-else-if="recommendation.previewCount == 2 || recommendation.previewCount == 3" class="card card-style">
+                <div class="content mb-0 mt-3">
+                    <div v-on:click="moveRecommend(recommendation._id, 'recommendation')">
+                        <h4 class="text-start mb-0">{{ recommendation.title }}<i class="wedive-txt-all wedive_right"></i></h4>
+                        <p class="mb-3">{{ recommendation.description ? recommendation.description : '' }}</p>
+                    </div>
+                    
+                    <div v-for="(site,index) in recommendation.previews.filter(x=>x.__typename == 'DiveSite')">
+                        <div class="map-box">
+                            <a v-on:click="movePreview(site)">
+                                <div class="bx">
+                                    <div class="justify-content-center mb-0 text-start">
+                                        <div class="thumb-img me-2">
+                                            <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                                                <defs>
+                                                <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                                                <clipPath id="clipSquircle">
+                                                    <use xlink:href="#shapeSquircle"/>
+                                                </clipPath>
+                                                </defs>
+                                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(site.backgroundImages && site.backgroundImages.length > 0) ? site.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'"/>
+                                            </svg>
+                                        </div>
+                                        <!--<div class="" style="float: left;position: relative;width: 95px; height:95px;">
+                                            <img v-bind:src="(site.backgroundImages && site.backgroundImages.length > 0) ? site.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;margin-top: 3px;">
+                                        </div>-->
+                                        <div class="" style="display:inline-block;vertical-align: top;width: calc(100vw - 156px);">
+                                            <h4 class="font-15"> {{ site.name }} </h4>
+                                            <p class="pb-0 mb-0 nearby_desc"> {{ site.description }} </p>
+                                            
+                                            <p class="pb-0 mb-0"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
+                                                <span> {{(site.adminScore/20).toFixed(1)}} </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div v-if="index < recommendation.previews.length-1" class="divider mt-3 mb-3"></div>
+                        <div v-else class="mb-3"></div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div v-else>
+                <div v-on:click="moveRecommend(recommendation._id, 'recommendation')">
+                    <h4 :class="'text-start mb-0' + (rec_idx==0 ? '' : ' mt-4')" style="margin-left: 14px;margin-right: 14px;position:relative;">{{ recommendation.title }}<i class="wedive-txt-all wedive_right" style="top:3px !important;"></i></h4>
+                    <p v-if="recommendation.description" class="mb-2" style="margin-left: 14px;margin-right: 14px;margin-top:-2px;">{{ recommendation.description }}</p>
+                </div>
+                <div class="splide single-slider-site slider-no-arrows visible-slider slider-no-dots" :id="'single-slider-'+recommendation._id" style="height:276px;">
+                    <div class="splide__track">
+                        <div class="splide__list">
+                            <div v-for="(site, index) in recommendation.previews.filter(x=>x.__typename == 'DiveSite')" class="splide__slide">
+                                <a v-on:click="movePreview(site)">
+                                    <div class="card card-style card-nearby" :style="'background: url('+((site.backgroundImages && site.backgroundImages.length > 0) ? site.backgroundImages[0].thumbnailUrl : '/static/empty.jpg')+')'" data-card-height="260">
+                                        <div class="card-top px-3 py-3">
+                                            <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-red-dark"></i></a>
+                                        </div>
+                                        <div class="card-bottom px-3 py-3">
+                                            <h4 class="color-white font-18 font-600">{{ site.name }}</h4>
+                                            <div class="divider bg-white opacity-20 mb-1"></div>
+                                            <div class="d-flex">
+                                                <div class="align-self-center" style="max-width: 100%;">
+                                                    <p class="font-11 opacity-70 font-600 color-white nearby_desc mb-0" style="max-width: 100%;">{{ site.description }}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -586,7 +697,10 @@ export default {
         my_latitude: 37.56425754670452,
         my_longitude: 126.9741944890715,
         windowWidth: window.innerWidth,
-        getUserRecommendationsByTargetType: [],
+        getNearByDivings: [],
+        getNearByDiveCenters: [],
+        recommendation1: [],
+        recommendation2: [],
         prev_driection: true,
         lastScrollPosition: 0,
         idToken: localStorage.idToken,
@@ -617,60 +731,19 @@ export default {
     }
   },
   apollo: {
-    searchPlaces: {
+    getNearByDiveCenters: {
         query: gql`
-            query SearchPlaces($searchParams: SearchParams, $limit: Int) {
-                searchPlaces(searchParams: $searchParams, limit: $limit) {
-                    __typename
-                    ... on DiveSite {
-                        _id
-                        uniqueName
-                        name
-                        description
-                        adminScore
-                        latitude
-                        longitude
-                        backgroundImages {
-                            thumbnailUrl
-                        }
-                    }
-                    ... on DivePoint {
-                        _id
-                        uniqueName
-                        name
-                        description
-                        adminScore
-                        latitude
-                        longitude
-                        backgroundImages {
-                            thumbnailUrl
-                        }
-                    }
-                    ... on DiveCenter {
-                        _id
-                        uniqueName
-                        name
-                        description
-                        divingType
-                        adminScore
-                        latitude
-                        longitude
-                        backgroundImages {
-                            thumbnailUrl
-                        }
-                    }
-                    ... on DiveShop {
-                        _id
-                        uniqueName
-                        name
-                        description
-                        divingType
-                        adminScore
-                        latitude
-                        longitude
-                        backgroundImages {
-                            thumbnailUrl
-                        }
+            query GetNearByDiveCenters($lat: Float!, $lng: Float!) {
+                getNearByDiveCenters(lat: $lat, lng: $lng) {
+                    _id
+                    uniqueName
+                    name
+                    description
+                    adminScore
+                    latitude
+                    longitude
+                    backgroundImages {
+                        thumbnailUrl
                     }
                     address
                     latitude
@@ -681,11 +754,135 @@ export default {
         `,
         variables () {
             return {
-                "limit": 10,
-                "searchParams": {lat1 : this.my_latitude-0.2,lng1 : this.my_longitude-0.2,lat2 : this.my_latitude+0.2, lng2 : this.my_longitude+0.2}
+                "lat": this.my_latitude,
+                "lng": this.my_longitude
             }
         },
         async result () {
+        }
+    },
+    getNearByDivings: {
+        query: gql`
+            query GetNearByDivings($lat: Float!, $lng: Float!) {
+                getNearByDivings(lat: $lat, lng: $lng) {
+                    diveShops {
+                    _id
+                    name
+                    uniqueName
+                    adminScore
+                    backgroundImages {
+                        thumbnailUrl
+                    }
+                    }
+                    diveCenters {
+                    _id
+                    name
+                    uniqueName
+                    adminScore
+                    backgroundImages {
+                        thumbnailUrl
+                    }
+                    }
+                    divePoints {
+                    _id
+                    name
+                    uniqueName
+                    adminScore
+                    backgroundImages {
+                        thumbnailUrl
+                    }
+                    }
+                    diveSites {
+                    _id
+                    name
+                    uniqueName
+                    adminScore
+                    backgroundImages {
+                        thumbnailUrl
+                    }
+                    }
+                    _id
+                    title
+                    description
+                    status
+                    type
+                    hostUser {
+                    uid
+                    _id
+                    nickName
+                    gender
+                    birthAge
+                    }
+                    participants {
+                    status
+                    birth
+                    user {
+                        _id
+                        uid
+                        nickName
+                        birthAge
+                        gender
+                    }
+                    name
+                    gender
+                    }
+                    chatRoomId
+                    startedAt
+                    finishedAt
+                    interests {
+                    _id
+                    title
+                    }
+                }
+            }
+        `,
+        variables () {
+            return {
+                "lat": this.my_latitude,
+                "lng": this.my_longitude
+            }
+        },
+        async result () {
+            this.getNearByDivings.forEach(x => {
+                var itm = (x.diveCenters.length > 0 ? x.diveCenters[0] : (x.divePoints.length > 0 ? x.divePoints[0] : (x.diveShops.length > 0 ? x.diveShops[0] : (x.diveSites.length > 0 ? x.diveSites[0] : []))));
+                if (itm && itm.backgroundImages && itm.backgroundImages.length>0) {
+                    x.backgroundImages = [{thumbnailUrl: itm.backgroundImages[0].thumbnailUrl}];
+                }
+                if (itm && itm.name) {
+                    x.name = itm.name;
+                }
+                if (itm && itm.adminScore) {
+                    x.adminScore = itm.adminScore;
+                }
+                if (x.description.includes("https://cafe.naver.com")) {
+                    var url = x.description.substring(x.description.indexOf("https://cafe.naver.com"), x.description.length);
+                    if (url.indexOf("\n") > 0 || url.indexOf(" ") > 0) {
+                        if (url.indexOf("\n") > 0 && url.indexOf(" ") > 0) {
+                            if (url.indexOf("\n") > url.indexOf(" ")) {
+                                url = url.substring(0, url.indexOf(" "));
+                            } else {
+                                url = url.substring(0, url.indexOf("\n"));
+                            }
+                        } else if (url.indexOf("\n") > 0) {
+                            url = url.substring(0, url.indexOf("\n"));
+                        } else if (url.indexOf(" ") > 0) {
+                            url = url.substring(0, url.indexOf(" "));
+                        }
+                    }
+                    x.description = x.description.replace(url, '');
+                    x.naver_cafe_url = url;
+                }
+                if (x.description.includes("\n") == false) {
+                    x.description = x.description + "\n&nbsp;";
+                }
+                x.description = x.description.replace(/\n/gi, '<br/>');
+                if (x.description.lastIndexOf("<br/>") == x.description.length -5) {
+                    x.description = x.description + "&nbsp;";
+                }
+                if (x.description == '<br/>&nbsp;') {
+                    x.description = '내용 없음' + x.description;
+                }
+            });
         }
     },
     getUserById: {
@@ -780,10 +977,10 @@ export default {
             }
         }
     },
-    getUserRecommendationsByTargetType: {
+    recommendation1: {
         query: gql`
         query Query($targetType: RecommendationTargetType) {
-            getUserRecommendationsByTargetType(targetType: $targetType) {
+            recommendation1: getUserRecommendationsByTargetType(targetType: $targetType) {
                 _id
                 title
                 description
@@ -839,11 +1036,161 @@ export default {
                         }
                     }
                 }
+            },
+        }`,
+        variables () {
+            return {
+                targetType: "diving",
+            }
+        },
+        async result () {
+            var id_arr = new Array();
+            var width_arr = new Array();
+            this.recommendation1.filter(x=>x.previewCount > 3).forEach(x => {
+                x.previews.forEach(y => {
+                    if (y.backgroundImages && y.backgroundImages.length > 0) {
+                        id_arr.push(y.backgroundImages[0]._id);
+                        width_arr.push(720);
+                    }
+                });
+            });
+            if (id_arr.length > 0) {
+                var result_image = await axios({
+                    url: 'https://api.wedives.com/graphql',
+                    method: 'post',
+                    headers: {
+                        countrycode: 'ko',
+                        idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                    },
+                    data: {
+                        query: `
+                            query Query($ids: [ID], $widths: [Int]) {
+                                getImageUrlsByIds(_ids: $ids, widths: $widths)
+                            }
+                        `,
+                        variables: {
+                            ids: id_arr,
+                            widths: width_arr
+                        }
+
+                    }
+                });
+                if (result_image.data.data.getImageUrlsByIds) {
+                    var cnt = 0;
+                    this.recommendation1.filter(x=>x.previewCount > 3).forEach(x => {
+                        x.previews.forEach(y => {
+                            if (y.backgroundImages.length > 0) {
+                                y.backgroundImages[0].thumbnailUrl = result_image.data.data.getImageUrlsByIds[cnt];
+                                cnt++;
+                            }
+                        });
+                    });
+                    //console.log(result_image.data.data.getImageUrlsByIds);
+                }
+            }
+            
+            
+
+            this.recommendation1.forEach(recommendation => {
+                recommendation.previews.forEach(x => {
+                    if (x.divePoints && x.diveCenters) {
+                        x.location = x.diveSites.length > 0 ? x.diveSites[0].name : x.divePoints.length > 0 ? x.divePoints[0].name : x.diveCenters.length > 0 ? x.diveCenters[0].name : '';
+                        x.backgroundImage = x.diveSites.length > 0 ? x.diveSites[0].backgroundImages[parseInt(Math.random()*x.diveSites[0].backgroundImages.length)].thumbnailUrl : x.divePoints.length > 0 ? x.divePoints[0].backgroundImages[parseInt(Math.random()*x.divePoints[0].backgroundImages.length)].thumbnailUrl : x.diveCenters.length > 0 ? x.diveCenters[0].backgroundImages[parseInt(Math.random()*x.diveCenters[0].backgroundImages.length)].thumbnailUrl : '/static/empty.jpg';
+                    }
+                });
+            });
+        },
+        fetchPolicy: 'no-cache'
+    },
+    recommendation2: {
+        query: gql`
+        query Query($targetType: RecommendationTargetType) {
+            recommendation2: getUserRecommendationsByTargetType(targetType: $targetType) {
+                _id
+                title
+                description
+                previewCount
+                cssStyle
+                className
+                type
+                targetType
+                previews {
+                ... on Diving {
+                    diveCenters {
+                    name
+                    uniqueName
+                    description
+                    adminScore
+                    backgroundImages {
+                        thumbnailUrl
+                    }
+                    }
+                    divePoints {
+                    name
+                    uniqueName
+                    description
+                    adminScore
+                    backgroundImages {
+                        thumbnailUrl
+                    }
+                    }
+                    diveSites {
+                    name
+                    uniqueName
+                    description
+                    adminScore
+                    backgroundImages {
+                        thumbnailUrl
+                    }
+                    }
+                }
+                ... on DiveSite {
+                    _id
+                    name
+                    uniqueName
+                    description
+                    adminScore
+                    backgroundImages {
+                    _id
+                    thumbnailUrl
+                    }
+                }
+                ... on DivePoint {
+                    name
+                    uniqueName
+                    description
+                    adminScore
+                    backgroundImages {
+                    _id
+                    thumbnailUrl
+                    }
+                }
+                ... on DiveCenter {
+                    name
+                    uniqueName
+                    description
+                    adminScore
+                    backgroundImages {
+                    _id
+                    thumbnailUrl
+                    }
+                }
+                ... on Instructor {
+                    _id
+                    gender
+                    profileImages {
+                    _id
+                    thumbnailUrl
+                    }
+                    careers
+                    introduction
+                }
+                }
             }
         }`,
         variables () {
             return {
-                targetType: "diving"
+                targetType: "diveSite",
             }
         },
         async result () {
@@ -852,9 +1199,10 @@ export default {
                 $("body").css("background", "linear-gradient(180deg, #eff5fb 200px, #c6dbf3 201px, #668fbd 100%)");
                 $(".page-title-clear").css("background", "#eff5fb");
             },300);
+            
             var id_arr = new Array();
             var width_arr = new Array();
-            this.getUserRecommendationsByTargetType.filter(x=>x.previewCount > 3).forEach(x => {
+            this.recommendation2.filter(x=>x.previewCount > 3).forEach(x => {
                 x.previews.forEach(y => {
                     if (y.backgroundImages.length > 0) {
                         id_arr.push(y.backgroundImages[0]._id);
@@ -885,9 +1233,9 @@ export default {
                 });
                 if (result_image.data.data.getImageUrlsByIds) {
                     var cnt = 0;
-                    this.getUserRecommendationsByTargetType.filter(x=>x.previewCount > 3).forEach(x => {
+                    this.recommendation2.filter(x=>x.previewCount > 3).forEach(x => {
                         x.previews.forEach(y => {
-                            if (y.backgroundImages.length > 0) {
+                            if (y.backgroundImages && y.backgroundImages.length > 0) {
                                 y.backgroundImages[0].thumbnailUrl = result_image.data.data.getImageUrlsByIds[cnt];
                                 cnt++;
                             }
@@ -898,7 +1246,7 @@ export default {
             }
             
             var splide = document.getElementsByClassName('splide');
-            if(splide.length){
+            if(splide.length > 0){
                 var singleSlider = document.querySelectorAll('.single-slider-site');
                 if(singleSlider.length) {
                     singleSlider.forEach(function(e){
@@ -960,14 +1308,6 @@ export default {
                     window.addEventListener("resize", card_extender);
                 }
             }
-
-            this.getUserRecommendationsByTargetType.forEach(recommendation => {
-                recommendation.previews.forEach(x => {
-                    x.location = x.diveSites.length > 0 ? x.diveSites[0].name : x.divePoints.length > 0 ? x.divePoints[0].name : x.diveCenters.length > 0 ? x.diveCenters[0].name : '';
-                    
-                    x.backgroundImage = x.diveSites.length > 0 ? x.diveSites[0].backgroundImages[parseInt(Math.random()*x.diveSites[0].backgroundImages.length)].thumbnailUrl : x.divePoints.length > 0 ? x.divePoints[0].backgroundImages[parseInt(Math.random()*x.divePoints[0].backgroundImages.length)].thumbnailUrl : x.diveCenters.length > 0 ? x.diveCenters[0].backgroundImages[parseInt(Math.random()*x.diveCenters[0].backgroundImages.length)].thumbnailUrl : '/static/empty.jpg';
-                });
-            });
         },
         fetchPolicy: 'no-cache'
     },
@@ -1223,7 +1563,7 @@ export default {
 .movebox2 {position:absolute;white-space: nowrap;left:-100px;padding-top:5px;opacity:.5;animation: motion-endtoend 20s linear infinite;-webkit-animation: motion-endtoend 20s linear infinite;}
 .movebox3 {position:absolute;white-space: nowrap;left:-100px;padding-top:50px;opacity:.5;animation: motion-endtoend 30s linear infinite;-webkit-animation: motion-endtoend 30s linear infinite;}
 .nearby_desc {font-family: 'Noto Sans Korean' !important;font-weight:200;overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;line-height: 1.4;}
-.card-nearby {margin-left: 10px;background-size: cover !important;}
+.card-nearby {margin-left: 10px;margin-right: 2px;background-size: cover !important;}
 .icon-concierge {position: fixed;width: 58px;height: 58px;bottom: 70px;right:24px;background-size:cover;background: url(https://d34l91104zg4p3.cloudfront.net/assets/concierge.gif);background-size:cover !important;background-position-y: 8px;background-repeat: no-repeat;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
 
 .chip span {line-height: 24px !important;}
