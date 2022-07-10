@@ -51,7 +51,7 @@
             <swiper-slide
                 :key="0"
                 :virtualIndex="0"
-                class="ps-4">
+                style="padding-left:20px;">
                 <div>
                     <div class="gallery gallery-filter inline-block" style="width:66px !important;padding:0 !important;min-height: 90px;">
                         <a :href="(getUserById && getUserById.profileImages && getUserById.profileImages.length>0) ? getUserById.profileImages[0].thumbnailUrl : ('https://d34l91104zg4p3.cloudfront.net/assets/user_empty.png')" data-gallery="gallery-image" class="center_image filtr-item" :title="(getUserById?getUserById.nickName:'')" data-category="user" style="width:60px;height:60px;">
@@ -68,9 +68,18 @@
                             </div>
                         </a>
                     </div>
-                    <div class="font-noto" style="position: absolute;top:10px;left:104px;">
-                        <h5 class="mb-0 font-500">{{ getUserById ? getUserById.nickName : '' }}</h5>
-                        <p class="mb-0 font-14 color-gray">{{ getUserById ? getUserById.levelShow : '' }}</p>
+                    <div class="font-noto" style="position: absolute;top:10px;left:98px;">
+                        
+                        <h5 class="mb-0 font-500 ellipsis">{{ getUserById ? '다이버 ' + getUserById.nickName + '님' : '' }}</h5>
+                        <span v-if="getUserById && getUserById.scubaLevelShow != ''">
+                            <img src="https://d34l91104zg4p3.cloudfront.net/assets/award1.png" height="30" class="inline-block" style="vertical-align: top;">
+                            <span class="chip chip-s text-center font-400 wedive-chip color-white" style="position: initial;background-color: #268cd3;margin-top: 4px !important;margin-left: -4px !important;">스쿠바 {{ getUserById ? getUserById.scubaLevelShow : '' }}</span>
+                        </span>
+                        <span v-if="getUserById && getUserById.freeLevelShow != ''">
+                            <img src="https://d34l91104zg4p3.cloudfront.net/assets/award2.png" height="30" class="inline-block" style="vertical-align: top;">
+                            <span class="chip chip-s text-center font-400 wedive-chip color-white" style="position: initial;background-color: #be4544;margin-top: 4px !important;margin-left: -4px !important;">프리 {{ getUserById ? getUserById.freeLevelShow : '' }}</span>
+                        </span>
+                        
                     </div>
                 </div>
             </swiper-slide>
@@ -96,11 +105,11 @@
                     <h4 class="font-noto text-start pt-1 mb-0">버디찾기</h4>
                     <p class="text-start mb-0 opacity-70">새로운 다이빙 생성</p>
                     <div style="position: relative;">
-                        <img class="ps-0" src="/static/images/scuba.gif" style="position:absolute;right: -22px;top: -24px;width: 120%;"/>
+                        <img class="ps-0" src="/static/images/assets/toss-hand.png" style="position:absolute;right: -28px;top: -11px;width: 100%;"/>
                     </div>
                 </div>
             </div>
-            <div class="card card-style col-6 shadow-xl square m-0" style="width: calc(50% - 6px);margin-left:12px !important;background-image: url(/static/images/back1.jpg);">
+            <div class="card card-style col-6 shadow-xl square m-0" style="    width: calc(50% - 6px);margin-left: 12px !important;background-image: url(/static/images/assets/search2.png);background-size: 105px 105px;background-repeat: no-repeat;background-position: right bottom;">
                 <div class="mb-0 mt-3" style="position:absolute;height:50%;">
                     <h4 class="font-noto text-start pt-1 mb-0">검색</h4>
                     <p class="text-start mb-0 opacity-70">다이빙, 장소 검색</p>
@@ -111,7 +120,7 @@
 
     <div v-if="searchPlaces != null">
         <div>
-            <h4 class="text-start mb-2 mt-2 font-noto" style="margin-left: 14px;margin-right: 14px;position:relative;font-weight:600;">내 근처 다이빙 이벤트<i class="wedive-txt-all wedive_right" style="top:3px !important;"></i></h4>
+            <h4 class="text-start mb-2 mt-2 font-noto" style="margin-left: 14px;margin-right: 14px;position:relative;font-weight:600;">내 근처 다이빙 이벤트</h4>
         </div>
         <div class="splide single-slider-site slider-no-arrows visible-slider slider-no-dots" id="single-slider-nearby" style="height:176px;">
             <div class="splide__track">
@@ -119,9 +128,6 @@
                     <div v-for="(item, index) in searchPlaces.filter(x=>x.__typename == 'DiveCenter')" class="splide__slide">
                         <a v-on:click="movePreview(item)">
                             <div class="card card-style card-nearby" :style="'background: url('+((item.backgroundImages && item.backgroundImages.length > 0) ? item.backgroundImages[0].thumbnailUrl : '/static/empty.jpg')+')'" data-card-height="160">
-                                <div class="card-top px-3 py-3">
-                                    <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-red-dark"></i></a>
-                                </div>
                                 <div class="card-bottom px-3 py-3">
                                     <h4 class="color-white font-18 font-600">{{ item.name }}</h4>
                                     <div class="divider bg-white opacity-20 mb-1"></div>
@@ -143,12 +149,12 @@
     </div>
 
     <div>
-        <div class="splide single-slider-site slider-no-arrows visible-slider slider-no-dots" id="single-slider-guide" style="height:126px;">
+        <div class="splide single-slider-noauto slider-no-arrows visible-slider slider-no-dots" id="single-slider-guide" style="height:126px;">
             <div class="splide__track">
                 <div class="splide__list">
                     <div class="splide__slide">
                         <a href="/guide/beginner">
-                            <div class="card card-style card-nearby" style="background-color: #e9f2e7;" data-card-height="120">
+                            <div class="card card-style card-nearby" style="background-color: #fff;" data-card-height="120">
                                 <div class="card-center px-3 py-3">
                                     <h4 class="font-18 font-600">다이빙이 처음이세요?</h4>
                                     <p class="mb-0 line-height-s opacity-70">위다이브에서 준비한<br/>다이브 입문학 개론</p>
@@ -159,7 +165,7 @@
                     </div>
                     <div class="splide__slide">
                         <a href="/guide/beginner">
-                            <div class="card card-style card-nearby" style="background-color: #a5d3d5;" data-card-height="120">
+                            <div class="card card-style card-nearby" style="background-color: #fff;" data-card-height="120">
                                 <div class="card-center px-3 py-3">
                                     <h4 class="font-18 font-600">프리다이빙 즐기기</h4>
                                     <p class="mb-0 line-height-s opacity-70">프리다이빙<br/>심화과정</p>
@@ -170,7 +176,7 @@
                     </div>
                     <div class="splide__slide">
                         <a href="/guide/beginner">
-                            <div class="card card-style card-nearby" style="background-color: #a5d4f4;" data-card-height="120">
+                            <div class="card card-style card-nearby" style="background-color: #fff;" data-card-height="120">
                                 <div class="card-center px-3 py-3">
                                     <h4 class="font-18 font-600">스쿠바다이빙 즐기기</h4>
                                     <p class="mb-0 line-height-s opacity-70">스쿠바다이빙<br/>심화과정</p>
@@ -733,7 +739,7 @@ export default {
         },
         async result () {
             this.getUserById.levelShow = '초보';
-            var scuba_level = ["초보", "오픈워터", "어드벤스드", "레스큐", "마스터", "강사", "위다이브 컨시어지"];
+            var scuba_level = ["초보", "오픈워터", "어드", "레스큐", "마스터", "강사", "위다이브 컨시어지"];
             var free_level = ["초보", "레벨1", "레벨2", "레벨3", "레벨4", "강사"];
             var s_lvl = parseInt(this.getUserById.scubaLicenseLevel);
             var f_lvl = parseInt(this.getUserById.freeLicenseLevel);
@@ -843,7 +849,7 @@ export default {
         async result () {
             setTimeout(function() {
                 $("#div_content_loader").hide();
-                $("body").css("background", "linear-gradient(180deg, #eff5fb 200px, #c5d2d7 201px)");
+                $("body").css("background", "linear-gradient(180deg, #eff5fb 200px, #c6dbf3 201px, #668fbd 100%)");
                 $(".page-title-clear").css("background", "#eff5fb");
             },300);
             var id_arr = new Array();
@@ -1055,7 +1061,10 @@ export default {
             }
         });
         var dic_type2 = {"DiveSite": "site", "DivePoint": "point", "DiveCenter": "center", "Diving": "diving", "User": "user", "Review": "review", "Forum": "forum", "Recommendation": "recommendation"};
-        location.href = '/' + dic_type2[item.__typename] + '/' + item.uniqueName;
+        if (item.__typename == 'DiveSite' || item.__typename == 'DivePoint' || item.__typename == 'DiveCenter')
+            location.href = '/' + dic_type2[item.__typename] + '/' + item.uniqueName;
+        else 
+            location.href = '/' + dic_type2[item.__typename] + '/' + item._id;
       },
       async refresh(loaded) {
         if ($(document).scrollTop() == 0) {
@@ -1332,7 +1341,7 @@ export default {
   align-items: center;
   flex-direction: column;
   min-height: 140px;
-  background-color: #c5d2d7;
+  background-color: #c6dbf3;
   overflow: hidden;
 }
 .waveaa:after {

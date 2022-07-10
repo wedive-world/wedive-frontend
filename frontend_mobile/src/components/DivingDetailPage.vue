@@ -37,7 +37,7 @@
     
         <div class="card mb-0" style="z-index:1;">
             <div class="content mt-3 row pb-3 mb-0 border-bottom" v-on:click="goUserPage(getDivingById.hostUser)">
-                <div class="col-6 p-0">
+                <div class="p-0" style="width: calc(100% - 104px);flex: 0 0 auto;">
                     <div class="user-img me-2">
                         <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
                             <defs>
@@ -46,16 +46,16 @@
                                 <use xlink:href="#shapeSquircle"/>
                             </clipPath>
                             </defs>
-                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(getDivingById.hostUser && getDivingById.hostUser.profileImages && getDivingById.hostUser.profileImages.length>0 && getDivingById.hostUser.profileImages[0].thumbnailUrl) ? getDivingById.hostUser.profileImages[0].thumbnailUrl : '/static/assets/user_empty.jpg'"/>
+                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(getDivingById.hostUser && getDivingById.hostUser.profileImages && getDivingById.hostUser.profileImages.length>0 && getDivingById.hostUser.profileImages[0].thumbnailUrl) ? getDivingById.hostUser.profileImages[0].thumbnailUrl : 'https://d34l91104zg4p3.cloudfront.net/assets/user_empty.png'"/>
                         </svg>
                     </div>
                     <!--<img class="inline-block me-2 circular_image" :src="(getDivingById.hostUser && getDivingById.hostUser.profileImages && getDivingById.hostUser.profileImages.length>0 && getDivingById.hostUser.profileImages[0].thumbnailUrl) ? getDivingById.hostUser.profileImages[0].thumbnailUrl : 'https://d34l91104zg4p3.cloudfront.net/assets/user_empty_'+((getDivingById.hostUser&&getDivingById.hostUser.gender)?getDivingById.hostUser.gender:'m')+'.png'" width="50" style="vertical-align: top;"/>-->
-                    <div class="inline-block font-noto" style="vertical-align: top;">
-                        <h5 class="mb-0 font-500 font-15">{{ (getDivingById.hostUser && getDivingById.hostUser.nickName) ? getDivingById.hostUser.nickName : '' }}</h5>
-                        <p class="mb-0 font-13 color-gray">{{ getDivingById.hostUser ? getDiverLevel(getDivingById.hostUser.freeLicenseLevel, getDivingById.hostUser.scubaLicenseLevel) : '' }}</p>
+                    <div class="inline-block font-noto" style="vertical-align: top;max-width: calc(100vw - 200px);">
+                        <h5 class="mb-0 font-500 font-15 ellipsis">{{ (getDivingById.hostUser && getDivingById.hostUser.nickName) ? getDivingById.hostUser.nickName : '' }}</h5>
+                        <p class="mb-0 font-13 color-gray ellipsis">{{ getDivingById.hostUser ? getDiverLevel(getDivingById.hostUser.freeLicenseLevel, getDivingById.hostUser.scubaLicenseLevel) : '' }}</p>
                     </div>
                 </div>
-                <div class="col-6 p-0 text-end">
+                <div class="p-0 text-end" style="width: 104px;flex: 0 0 auto;">
                     <div>
                         <div class="inline-block text-start" style="width: 60px;">
                             <div class="font-10 color-gray mt-n1" id="maner_deep">매너수심</div>
@@ -81,8 +81,8 @@
             <div class="content mt-4 pb-3 border-bottom" style="position:relative;">
                 <h2 class="font-18 font-700 mb-0">{{ getDivingById.title }}</h2>
                 <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> {{ getDivingById.location }}</p>
-                <p class="color-gray-dark mb-0 font-12" style="position: absolute;right: 0px;top: 0;">{{ timeForToday(getDivingById.createdAt) }} 모집시작</p>
-                <p class="color-gray mt-4 mb-4 font-14" v-html="getDivingById.description.replace(/\n/gi,'<br/>')"></p>
+                <p class="color-gray-dark mb-0 font-12">{{ timeForToday(getDivingById.createdAt) }} 모집시작</p>
+                <p class="color-gray mt-4 mb-4 font-14" v-html="getDivingById.description.replace(/\n\n/gi,'\n').replace(/\n/gi,'<br/>')"></p>
                 
                 <div class="evaluation">
                     <div class="row mb-0 line-height-l">
@@ -115,7 +115,7 @@
                                         <use xlink:href="#shapeSquircle"/>
                                     </clipPath>
                                     </defs>
-                                    <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(getDivingById.hostUser && getDivingById.hostUser.profileImages && getDivingById.hostUser.profileImages.length>0 && getDivingById.hostUser.profileImages[0].thumbnailUrl) ? getDivingById.hostUser.profileImages[0].thumbnailUrl : '/static/assets/user_empty.jpg'"/>
+                                    <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(getDivingById.hostUser && getDivingById.hostUser.profileImages && getDivingById.hostUser.profileImages.length>0 && getDivingById.hostUser.profileImages[0].thumbnailUrl) ? getDivingById.hostUser.profileImages[0].thumbnailUrl : 'https://d34l91104zg4p3.cloudfront.net/assets/user_empty.png'"/>
                                 </svg>
                             </div>
                             
@@ -138,7 +138,7 @@
                                         <use xlink:href="#shapeSquircle"/>
                                     </clipPath>
                                     </defs>
-                                    <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(participant.user && participant.user.profileImages && participant.user.profileImages.length>0 && participant.user.profileImages[0].thumbnailUrl) ? participant.user.profileImages[0].thumbnailUrl : '/static/assets/user_empty.jpg'"/>
+                                    <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(participant.user && participant.user.profileImages && participant.user.profileImages.length>0 && participant.user.profileImages[0].thumbnailUrl) ? participant.user.profileImages[0].thumbnailUrl : 'https://d34l91104zg4p3.cloudfront.net/assets/user_empty.png'"/>
                                 </svg>
                             </div>
 
@@ -170,7 +170,7 @@
                                             <use xlink:href="#shapeSquircle"/>
                                         </clipPath>
                                         </defs>
-                                        <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(participant.user && participant.user.profileImages && participant.user.profileImages.length>0 && participant.user.profileImages[0].thumbnailUrl) ? participant.user.profileImages[0].thumbnailUrl : '/static/assets/user_empty.jpg'"/>
+                                        <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(participant.user && participant.user.profileImages && participant.user.profileImages.length>0 && participant.user.profileImages[0].thumbnailUrl) ? participant.user.profileImages[0].thumbnailUrl : 'https://d34l91104zg4p3.cloudfront.net/assets/user_empty.png'"/>
                                     </svg>
                                 </div>
                                 
@@ -240,6 +240,7 @@
             <a v-else-if="idToken == null || nickName == null" v-on:click="login()" class="btn btn-full font-400 rounded-s shadow-l bg-gray-dark color-white bd-w-0mb-5 font-noto">참여신청</a>
             <a v-else-if="(getDivingById.participants.filter(member=> (member.user && member.user._id == userId && member.status == 'applied'))).length > 0" class="btn btn-full font-400 rounded-s shadow-l bg-gray-dark color-white bd-w-0mb-5 font-noto">참여 승인 대기중</a>
             <a v-else-if="(getDivingById.participants.filter(member=> (member.user && member.user._id == userId && member.status == 'joined'))).length > 0" class="btn btn-full font-400 rounded-s shadow-l bg-gray-dark color-white bd-w-0mb-5 font-noto">참여 완료</a>
+            <a v-else-if="getDivingById.naver_cafe_url != null" :href="getDivingById.naver_cafe_url" class="btn btn-full font-400 rounded-s shadow-l color-white bd-w-0mb-5 font-noto" style="background-color: #21a238;">참여신청</a>
             <a v-else href="#" data-menu="menu-join" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0mb-5 font-noto">참여신청</a>
             </div>
         </div>
@@ -655,6 +656,14 @@ export default {
                 var preloader = document.getElementById('preloader')
                 if(preloader){preloader.classList.add('preloader-hide');}
             },500);
+
+            // 임시 //
+            if (this.getDivingById.description.includes("https://cafe.naver.com")) {
+                var url = this.getDivingById.description.substring(this.getDivingById.description.indexOf("https://cafe.naver.com"), this.getDivingById.description.length);
+                url = url.substring(0, url.indexOf("\n"));
+                this.getDivingById.description = this.getDivingById.description.replace(url, '');
+                this.getDivingById.naver_cafe_url = url;
+            }
             
 
 

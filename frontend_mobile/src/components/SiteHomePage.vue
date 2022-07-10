@@ -62,7 +62,7 @@
                         </div>
                         
                         <div class="" style="padding-left: 110px;">
-                            <span id="map_box_cate" class="map_box_cate"></span><span id="map_box_shop_name" class="font-18 font-600 mb-0 ellipsis" style="max-width: calc(100% - 50px);display: inline-block;"></span>
+                            <span id="map_box_cate" class="map_box_cate"></span><span id="map_box_shop_name" class="font-18 font-600 mb-0 ellipsis" style="max-width: calc(100% - 60px);display: inline-block;"></span>
                             <p id="map_box_shop_desc" class="pb-0 mb-0 line-height-m ellipsis" style="margin-top: -6px;"></p>
                             <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>&nbsp;
                                 <span id="map_box_shop_star"></span>

@@ -289,7 +289,11 @@ export default {
     $(".page-title").hide();
     $(".page-title-clear").hide();
     $(".header-auto-show").hide();
-    document.getElementById("footer-bar").classList.add("hide");
+    try{
+        document.getElementById("footer-bar").classList.add("hide");
+    } catch (e) {
+
+    }
     $("body").css("background-color", "white");
     
     if (this.$route.query.header && this.$route.query.header == 'hide') {

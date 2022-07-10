@@ -11,7 +11,11 @@ setTimeout(function() {
     });
     lightbox.on('open', () => {
         if(window.location.href.split('/').pop() != 'modal'){
-            window.history.pushState({}, 'modal', window.location.pathname + '/modal');
+            if (window.location.pathname == '/') {
+                window.history.pushState({}, 'modal', '/modal');
+            } else {
+                window.history.pushState({}, 'modal', window.location.pathname + '/modal');
+            }
         }
     });
     

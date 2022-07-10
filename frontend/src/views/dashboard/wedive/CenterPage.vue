@@ -1,4 +1,5 @@
 <template>
+  <div>
   <b-card
     :title="center_data.name"
   >
@@ -22,6 +23,32 @@
     
   </b-card>
 
+  <b-card>
+    <div v-for="(reference, index) in highlightImageReference">
+      <b-row>
+      <b-col md="4">
+        <img :src="reference.thumbnailUrl" />
+      </b-col>
+      <b-col md="6">
+        <b-form-input
+          type="text"
+          v-model="reference.reference"
+          placeholder="출처 기입"
+        />
+      </b-col>
+      <b-col md="2">
+        <b-button
+        variant="flat-primary"
+        class="mt-0 mt-md-2 pl-0 pr-0"
+        @click="submitReference(reference)"
+        >
+        ok
+        </b-button>
+      </b-col>
+      </b-row>
+    </div>
+  </b-card>
+  </div>
 </template>
 
 <script>
@@ -38,6 +65,10 @@ const { upsertDiveCenter, getAllDiveCenters, getDiveCenterByUniqueName } = requi
 const { upsertProduct, deleteProductById } = require('@/wedive-frontend-graphql/product-service')
 const { uploadSingleImage, updateImage, getImageUrl } = require('@/wedive-frontend-graphql/image-service')
 
+function sleep(ms) {
+  const wakeUpTime = Date.now() + ms;
+  while (Date.now() < wakeUpTime) {}
+}
 
 export default {
   components: {
@@ -72,6 +103,7 @@ export default {
       initImages1: [],
       initImages2: [],
       initImages3: [],
+      highlightImageReference: [],
     }
   },
   async beforeRouteEnter(to, from, next) {
@@ -97,6 +129,17 @@ export default {
     }
   },
   methods: {
+    async submitReference(reference) {
+      console.log(reference);
+      var ipt2 = {"_id": reference._id, "reference": reference.reference, "name": reference.name};
+      var result2 = await updateImage(ipt2);
+      console.log(result2);
+      this.$bvToast.toast('이미지 출처 = ' + reference.name, {
+        title: `업로드 완료`,
+        variant: 'success',
+        solid: false,
+      });
+    },
     setInterests: function(center_data) {
       
       this.center_data = center_data.getDiveCenterByUniqueName;
@@ -210,40 +253,50 @@ export default {
         }
     },
     async sendingEventBackground (file, xhr, formData) {
-        var name = file.name;
+      var name = file.name;
         var split_name = name.split(" ");
+        var reference = "";
         if (split_name.length < 2) {
           this.$bvToast.toast('파일명 = ' + name, {
-            title: `파일명이 잘못되었습니다.`,
+            title: `파일명에 띄어쓰기가 없어 출처가 공란으로 표기됩니다.`,
             variant: 'danger',
             solid: false,
           });
         } else {
-          var reference = split_name[1];
+          reference = split_name[1];
           if (reference.indexOf(".") > 0) {
             reference = reference.substring(0, reference.lastIndexOf("."))
           }
           reference = "https://www.instagram.com/p/" + reference;
-          var ipt = {"name": name,"reference": reference}
-          
-          var result = await uploadSingleImage(file);
-          //console.log(result);
-          ipt._id = result.uploadImage._id;
-          //console.log(ipt);
-          var result2 = await updateImage(ipt);
-
-          var images_id_list = this.center_data.backgroundImages.map((image)=>{return image._id});
-          images_id_list.push(result.uploadImage._id);
-          this.center_data.backgroundImages.push({_id: result.uploadImage._id})
-          var ipt2 = {"backgroundImages": images_id_list, "_id": this.center_data._id, "uniqueName": this.center_data.uniqueName, "latitude": this.center_data.latitude, "longitude": this.center_data.longitude};
-          var result3 = await upsertDiveCenter(ipt2);
-          this.$bvToast.toast('파일명 = ' + name, {
-            title: `업로드 완료`,
-            variant: 'success',
-            solid: false,
-          });
-          
         }
+        var ipt = {"name": name,"reference": reference}
+        
+        var result = await uploadSingleImage(file);
+        //console.log(result);
+        ipt._id = result.uploadImage._id;
+        //console.log(ipt);
+        var result2 = await updateImage(ipt);
+
+        await sleep(1000);
+
+
+        // reference 추가를 위해 생성
+        this.highlightImageReference.push({thumbnailUrl: result2.updateImage.thumbnailUrl, _id: result2.updateImage._id, reference: "", name: name});
+
+        if (this.center_data.backgroundImages == null) {
+          this.center_data.backgroundImages = [];
+        }
+
+        var images_id_list = this.center_data.backgroundImages.map((image)=>{return image._id});
+        images_id_list.push(result.uploadImage._id);
+        this.center_data.backgroundImages.push({_id: result.uploadImage._id})
+        var ipt2 = {"backgroundImages": images_id_list, "_id": this.center_data._id, "uniqueName": this.center_data.uniqueName, "latitude": this.center_data.latitude, "longitude": this.center_data.longitude};
+        var result3 = await upsertDiveCenter(ipt2);
+        this.$bvToast.toast('파일명 = ' + name, {
+          title: `업로드 완료`,
+          variant: 'success',
+          solid: false,
+        });
         //formData.append('paramName', 'some value or other');
     },
     makeToast(variant = null) {
