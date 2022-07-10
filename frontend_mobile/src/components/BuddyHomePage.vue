@@ -68,9 +68,18 @@
                             </div>
                         </a>
                     </div>
-                    <div class="font-noto" style="position: absolute;top:8px;left:98px;">
+                    <div class="font-noto" style="position: absolute;top:12px;left:98px;">
                         
                         <h5 class="mb-0 font-500 ellipsis">{{ getUserById ? '다이버 ' + getUserById.nickName + '님' : '' }}</h5>
+                        <span v-if="getUserById">
+                            <img src="/static/images/assets/main_heart.png" height="30" class="inline-block" style="vertical-align: top;margin-left:-4px;">
+                            <span class="chip chip-s text-center font-400 wedive-chip color-gray" style="position: initial;margin-top: 4px !important;margin-left: -4px !important;margin-right:8px !important;">호스트 {{ getUserById ? getUserById.divingHostCount : '-' }}회</span>
+                        </span>
+                        <span v-if="getUserById">
+                            <img src="/static/images/assets/main_check.png" height="30" class="inline-block" style="vertical-align: top;margin-left:-4px;">
+                            <span class="chip chip-s text-center font-400 wedive-chip color-gray" style="position: initial;margin-top: 4px !important;margin-left: -4px !important;">게스트 {{ getUserById ? getUserById.divingParticipantCount : '-' }}회</span>
+                        </span>
+                        <br/>
                         <span v-if="getUserById && getUserById.scubaLevelShow != ''">
                             <img src="https://d34l91104zg4p3.cloudfront.net/assets/award1.png" height="30" class="inline-block" style="vertical-align: top;margin-left:-4px;">
                             <span class="chip chip-s text-center font-400 wedive-chip color-white" style="position: initial;background-color: #268cd3;margin-top: 4px !important;margin-left: -4px !important;margin-right:8px !important;">스쿠바 {{ getUserById ? getUserById.scubaLevelShow : '' }}</span>
@@ -79,8 +88,6 @@
                             <img src="https://d34l91104zg4p3.cloudfront.net/assets/award2.png" height="30" class="inline-block" style="vertical-align: top;margin-left:-4px;">
                             <span class="chip chip-s text-center font-400 wedive-chip color-white" style="position: initial;background-color: #be4544;margin-top: 4px !important;margin-left: -4px !important;">프리 {{ getUserById ? getUserById.freeLevelShow : '' }}</span>
                         </span>
-                        <br/>
-                        <span class="color-gray">다이빙 호스트 {{ getUserById.divingHostCount }}회&nbsp;&nbsp;|&nbsp;&nbsp;다이빙 참여 {{ getUserById.divingParticipantCount }}회</span>
                     </div>
                 </div>
             </swiper-slide>
@@ -1342,7 +1349,6 @@ export default {
           //this.contentSwiper.slideTo(this.tabSwiper.activeIndex);
       },
       onSlideChange() {
-          console.log(this.contentSwiper.activeIndex);
           if (this.contentSwiper.activeIndex == 1) {
               this.$refs.h3_title1.classList.remove("h3_active")
               this.$refs.h3_title1.classList.add("h3_deactive")
