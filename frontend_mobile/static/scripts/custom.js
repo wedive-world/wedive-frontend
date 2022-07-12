@@ -868,13 +868,17 @@ var prev_el = document.getElementById("wedive-noti");
         var stepperSub = document.querySelectorAll('.stepper-sub');
         if(stepperAdd.length){
             stepperAdd.forEach(el => el.addEventListener('click', event => {
-                var currentValue = el.parentElement.querySelector('input').value
-                el.parentElement.querySelector('input').value = +currentValue + 1
+                if (el.parentElement.classList.contains("opacity-30") == false) {
+                    var currentValue = el.parentElement.querySelector('input').value
+                    el.parentElement.querySelector('input').value = +currentValue + 1
+                }
             }))
 
             stepperSub.forEach(el => el.addEventListener('click', event => {
-                var currentValue = el.parentElement.querySelector('input').value
-                el.parentElement.querySelector('input').value = +currentValue - 1
+                if (el.parentElement.classList.contains("opacity-30") == false) {
+                    var currentValue = el.parentElement.querySelector('input').value
+                    el.parentElement.querySelector('input').value = +currentValue - 1
+                }
             }))
         }
 
