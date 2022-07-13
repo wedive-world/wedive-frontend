@@ -9,9 +9,14 @@
         <a v-on:click="searchBox()" href="#" class="header-icon header-icon-4" style="margin-right: 11px;"><img src="https://d34l91104zg4p3.cloudfront.net/assets/icon_search_fill.png" width="28" style="margin-top: 12px;"/></a>
         <!--<a href="#" class="header-icon header-icon-4 color-theme circular_image" data-menu="menu-main" :style="'background: url('+((userThumbnail) ? userThumbnail : 'https://d34l91104zg4p3.cloudfront.net/assets/user_empty_'+((gender)?gender:'m')+'.png')+');background-size:cover;width:36px;height:36px;margin-top:7px !important;margin-right:7px;'"></a>-->
     </div>
-    
-
-    <div class="page-content pb-0" style="height: 100% !important;">
+    <div v-if="isPermissionEnabled == false" class="" style="height: 100vh;padding-top:200px;">
+        <div class="text-center">
+            <img src="/static/images/assets/no-location.png" width="160"/>
+            <p class="mb-0 opacity-30 font-noto font-14 mt-2 mb-1 ">위치 권한이 없어 추천이 되지 않아요.</p>
+            <a href="#" v-on:click="showAppSettingActivity" class="btn font-400 rounded-s shadow-l bg-secondary color-white bd-w-0 font-13">권한 부여하기</a>
+        </div>
+    </div>
+    <div v-else class="page-content pb-0" style="height: 100% !important;">
         
         <div id="map" style="height: 100% !important;position: inherit !important;"></div>
 
@@ -355,6 +360,7 @@ import VueTypeaheadBootstrap from 'vue-typeahead-bootstrap';
 import {debounce} from 'lodash';
 
 var tour_list = [{"type": "class", "name": "header-icon-3", "position": "bottom", "title": "장소 리스트로 확인"}, {"type": "id", "name": "btn_filter", "position": "left", "title": "필터를 선택해보세요."}, {"type": "id", "name": "btn_new", "position": "left", "title": "컨시어지에게 장소 추천받기"}];
+var isPermissionEnabled = null;
 
 const axios = require("axios")
 
@@ -678,7 +684,7 @@ async function updateAll() {
 
 function myCallback()
 {
-    if (tour_flag) {
+    if (tour_flag && (isPermissionEnabled == null || isPermissionEnabled == true)) {
         var random_idx = Math.floor(Math.random() * (tour_list.length * 3));
         if (random_idx < tour_list.length && $(((tour_list[random_idx].type == 'class') ? '.' : '#') + tour_list[random_idx].name).hasClass('hide') == false) {
             $(((tour_list[random_idx].type == 'class') ? '.' : '#') + tour_list[random_idx].name).tooltip({
@@ -699,10 +705,6 @@ function myCallback()
 export default {
   name: 'HelloWorld',
   mounted() {
-    console.log("localStorage.notiData");
-    console.log(localStorage.notiData)
-    console.log("localStorage.suggestion");
-    console.log(localStorage.suggestion)
     var intervalID = setInterval(myCallback, 7000);
 
     // get Geo location
@@ -711,6 +713,17 @@ export default {
             this.my_latitude = position.coords.latitude;
             this.my_longitude = position.coords.longitude;
         });
+    }
+
+    try {
+        this.isPermissionEnabled = Android.isPermissionEnabled();
+        isPermissionEnabled = this.isPermissionEnabled;
+        if (this.isPermissionEnabled == false) {
+            $("#btn_filter").addClass("hide");
+            $("#btn_new").addClass("hide");
+        }
+    } catch (e) {
+
     }
     //localStorage.perferedSite = '/site_home';
 
@@ -995,6 +1008,7 @@ export default {
   },
   data () {
     return {
+        isPermissionEnabled: null,
         query: '',
         query_place: '',
         selecteduser: null,
@@ -1077,6 +1091,13 @@ export default {
       },
   },
   methods: {
+      showAppSettingActivity() {
+          try {
+              Android.showAppSettingActivity()
+          } catch (e) {
+              
+          }
+      },
       goNoti() {
         if(this.idToken != null && this.nickName != null)
             location.href = '/other/notification';

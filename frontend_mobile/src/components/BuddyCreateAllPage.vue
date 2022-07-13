@@ -4,7 +4,6 @@
     <div class="header header-fixed header-logo-center">
         <a href="" class="header-title color ellipsis">버디 찾기</a>
         <a v-on:click="historyBack()" data-back-button class="font-16 header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
-        <a href="#" data-menu="menu-main" class="font-16 header-icon header-icon-4"><i class="fas fa-bars"></i></a>
     </div>
     
     
@@ -138,29 +137,33 @@
                                                     :src="(data.backgroundImages && data.backgroundImages.length>0) ? data.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'"
                                                     style="width: 40px; height: 40px;" />
                                                 </div>
-                                                <span v-if="data.type == 'site'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + htmlText + ' 사이트</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + data.description+'</span>'"></span>
-                                                <span v-else-if="data.type == 'point'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + htmlText + ' 포인트</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + data.description+'</span>'"></span>
-                                                <span v-else-if="data.type == 'center'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + htmlText + '</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + data.description+'</span>'"></span>
+                                                <span v-if="data.__typename == 'DiveSite'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'badge border color-site border-site me-2\'>사이트</span><span class=\'font-noto font-16\'>' + htmlText + '</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + data.description+'</span>'"></span>
+                                                <span v-else-if="data.__typename == 'DivePoint'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'badge border color-point border-point me-2\'>포인트</span><span class=\'font-noto font-16\'>' + htmlText + '</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + data.description+'</span>'"></span>
+                                                <span v-else-if="data.__typename == 'DiveCenter'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'badge border color-center border-center me-2\'>수영장</span><span class=\'font-noto font-16\'>' + htmlText + '</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + data.description+'</span>'"></span>
+                                                <span v-else-if="data.__typename == 'DiveShop'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'badge border color-shop border-shop me-2\'>센터</span><span class=\'font-noto font-16\'>' + htmlText + '</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + data.description+'</span>'"></span>
                                                 
                                                 </div>
                                             </template>
                                         </vue-typeahead-bootstrap>
-                                        <div 
-                                            id="search_result" 
-                                            class="hide bg-secondary2" 
-                                            v-on:click="search_result_click()"
-                                            style="padding:16px;border:1px solid #ced4da;border-radius:16px;">
-                                            <div class="d-flex align-items-center" style="position:relative !important;">
-                                            <div :class="''+search_type + '-tag'" style="position:relative;">
-                                            <img
-                                                class="rounded-s me-3"
-                                                :src="search_img"
-                                                style="width: 40px; height: 40px;" />
-                                            </div>
-                                            <span v-if="search_type == 'site'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + search_loc + ' 사이트</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(search_adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + search_desc+'</span>'"></span>
-                                            <span v-else-if="search_type == 'point'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + search_loc + ' 포인트</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(search_adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + search_desc+'</span>'"></span>
-                                            <span v-else-if="search_type == 'center'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + search_loc + '</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(search_adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + search_desc+'</span>'"></span>
-                                            
+                                        <div id="search_result">
+                                            <div 
+                                                v-for="search_item in search_result"
+                                                class="bg-secondary2 mt-2" 
+                                                v-on:click="search_result_click(search_item)"
+                                                style="padding:16px;border:1px solid #ced4da;border-radius:16px;">
+                                                <div class="d-flex align-items-center" style="position:relative !important;">
+                                                <div :class="''+search_item.type + '-tag'" style="position:relative;">
+                                                <img
+                                                    class="rounded-s me-3"
+                                                    :src="search_item.image_url"
+                                                    style="width: 40px; height: 40px;" />
+                                                </div>
+                                                <span v-if="search_item.type == 'DiveSite'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'badge border color-site border-site me-2\'>사이트</span><span class=\'font-noto font-16\'>' + search_item.location + '</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(search_item.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + search_item.description+'</span>'"></span>
+                                                <span v-else-if="search_item.type == 'DivePoint'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'badge border color-point border-point me-2\'>포인트</span><span class=\'font-noto font-16\'>' + search_item.location + '</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(search_item.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + search_item.description+'</span>'"></span>
+                                                <span v-else-if="search_item.type == 'DiveCenter'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'badge border color-center border-center me-2\'>수영장</span><span class=\'font-noto font-16\'>' + search_item.location + '</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(search_item.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + search_item.description+'</span>'"></span>
+                                                <span v-else-if="search_item.type == 'DiveShop'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'badge border color-shop border-shop me-2\'>센터</span><span class=\'font-noto font-16\'>' + search_item.location + '</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(search_item.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + search_item.description+'</span>'"></span>
+                                                <i v-on:click="removeLocationSelected(location)" class="wedive_icoset wedive_icoset_close" style="position: absolute;right: -8px;top: -10px;margin:8px;filter: invert(1);"></i>
+                                                </div>
                                             </div>
                                         </div>
 
@@ -194,13 +197,13 @@
                                 <div class="p-3 pb-1 rounded-s" id="div_diving_description">
                                     <div class="input-style input-style-always-active no-borders no-icon">
                                         <input id="ins_name" v-model="diving_title" @focus="focusInput($event)" class="form-control font-noto font-18 font-500" placeholder="제주 3박4일 스쿠바버디 구해요" style="background: transparent;border-bottom-width: 0;">
-                                        <label class="color-gray font-600 font-10" style="background: transparent;">버디찾기 제목</label>
+                                        <label class="color-gray font-600 font-10" style="background: transparent;">제목</label>
                                     </div>
                                 </div>
                                 <div class="p-3 pb-1 rounded-s">
                                     <div class="input-style input-style-always-active no-borders no-icon">
                                         <textarea id="form7" class="wedive-textarea wedive-input font-noto font-18 font-500" @focus="focusInput($event)" placeholder="이곳에 상세내용을 작성해보세요." v-model="diving_detail"></textarea>
-                                        <label class="color-gray font-600 font-10" style="background: transparent;">버디찾기 상세내용</label>
+                                        <label class="color-gray font-600 font-10" style="background: transparent;">상세내용</label>
                                     </div>
                                 </div>
                             </div>
@@ -417,6 +420,7 @@ export default {
         scheduleFlag: false,
         locations: [],
         query: '',
+        search_result: [],
         search_type: "",
         selecteduser: null,
         users: [],
@@ -439,6 +443,8 @@ export default {
         selectedDay: null,
         selectedDate: null,
         selectedRange: {},
+        selected_id: '',
+        diving_id: '',
         
         swiperOptions: {
             allowTouchMove: false,
@@ -490,33 +496,38 @@ export default {
       },
   },
   methods: {
-      search_result_click() {
-          $("#search_typeahead_big").removeClass("hide");
-          $("#search_result").addClass("hide");
+      search_result_click(item) {
+          var cnt = 0;
+          this.search_result.forEach(x=> {
+              if (x._id == item._id) {
+                  this.search_result.splice(cnt, 1);
+              }
+              cnt++;
+          })
+          if (this.search_result.length == 0) {
+              $("#btn_next2").attr("disabled", true);
+          }
           this.query = '';
+          /*$("#search_typeahead_big").removeClass("hide");
+          $("#search_result").addClass("hide");
+          
           $("#search_typeahead_big input").focus();
 
           $("#search_recommend_1").removeClass("bg-secondary2");
           $("#search_recommend_2").removeClass("bg-secondary2");
           $("#search_recommend_3").removeClass("bg-secondary2");
-
-          $("#btn_next2").attr("disabled", true);
+          */
       },
       enableNext2(ev) {
-          console.log(ev);
-          this.search_img = (ev.backgroundImages && ev.backgroundImages.length>0) ? ev.backgroundImages[0].thumbnailUrl : '/static/empty.jpg';
-          this.search_type=ev.type;
-          this.search_loc=ev.name;
-          this.search_desc=ev.description;
-          this.search_adminScore=ev.adminScore;
-          this.selected_id = ev._id;
-
+          console.log("aa");
+          this.search_result.push({type: ev.__typename, location: ev.name, adminScore: ev.adminScore, description: ev.description, image_url: ((ev.backgroundImages && ev.backgroundImages.length>0) ? ev.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'), _id: ev._id});
           
-          $("#search_typeahead_big").addClass("hide");
-          $("#search_result").removeClass("hide");
+          //$("#search_typeahead_big").addClass("hide");
+          //$("#search_result").removeClass("hide");
           if(this.label_scuba != false || this.label_free != false) {
               $("#btn_next2").attr("disabled", false);
           }
+          this.query = '';
       },
       clickRadio(id) {
           if (id == 'label_scuba') {
@@ -543,24 +554,116 @@ export default {
               }
               this.label_unlimited = !this.label_unlimited;
           }
-          if (this.selecteduser != null) {
+          if (this.selecteduser != null && (this.label_scuba || this.label_free)) {
               $("#btn_next2").attr("disabled", false);
+          } else {
+              $("#btn_next2").attr("disabled", true);
           }
       },
       disable_button(id) {
           $('#' + id).attr('disabled', true);
       },
       async completed() {
-          
+        var _type = new Array();
+        if (this.label_scuba) _type.push("scubaDiving")
+        if (this.label_free) _type.push("freeDiving")
+        const diving_type = _type;
+
+        var participants = new Array();
+        for (var i=0; i<parseInt($("#num_man").val()); i++) {
+            participants.push({"user": null, "status": "joined", "name": null, "birth": null, "gender": "m", "status": "joined"});
+        }
+        for (var i=0; i<parseInt($("#num_woman").val()); i++) {
+            participants.push({"user": null, "status": "joined", "name": null, "birth": null, "gender": "f", "status": "joined"});
+        }
+        const parti = participants;
+        const num_recruit = parseInt($("#num_recruit").val());
+
+        var interests = new Array();
+        if (this.check_gender1) interests.push("6174da5da60639819c3e6ac7");
+        if (this.check_gender2) interests.push("6174da5ea60639819c3e6ac9");
+        if (this.check_gender3) interests.push("6174da5fa60639819c3e6acb");
+        if (this.check_gender4) interests.push("6174da60a60639819c3e6acd");
+        if (this.check_amity1) interests.push("6174da70a60639819c3e6ad9");
+        if (this.check_amity2) interests.push("61b45bb413f324035a6c86bc");
+        if (this.check_amity3) interests.push("61b45bb913f324035a6c86bf");
+        const inter = interests;
+        const selected_id = this.selected_id;
+
+        var _s_date = null;
+        var _e_date = null;
+        console.log(this.scheduleFlag)
+        console.log(this.selectedDate);
+        if (this.scheduleFlag == false) {
+            _s_date = this.selectedDate.year + "-" + (this.selectedDate.month<10?"0"+this.selectedDate.month:this.selectedDate.month) + "-" + (this.selectedDate.day<10?"0"+this.selectedDate.day:this.selectedDate.day) + " 00:00:00";
+            _e_date = _s_date
+        } else {
+            _s_date = this.selectedRange.start.getFullYear() + "-" + ((this.selectedRange.start.getMonth()+1)<10?"0"+(this.selectedRange.start.getMonth()+1):(this.selectedRange.start.getMonth()+1)) + "-" + (this.selectedRange.start.getDate()<10?"0"+this.selectedRange.start.getDate():this.selectedRange.start.getDate()) + " 00:00:00";
+            _e_date = this.selectedRange.end.toISOString();
+        }
+        console.log(_s_date);
+        const s_date = new Date(_s_date).toISOString();
+        const e_date = _e_date;
+
+        var diveSite = new Array();
+        this.search_result.forEach(x => {if (x.type == 'DiveSite') diveSite.push(x._id)});
+        if (diveSite.length == 0) diveSite = null;
+        const __diveSite = diveSite;
+
+        var divePoint = new Array();
+        this.search_result.forEach(x => {if (x.type == 'DivePoint') divePoint.push(x._id)});
+        if (divePoint.length == 0) divePoint = null;
+        const __divePoint = divePoint;
+
+        var diveCenter = new Array();
+        this.search_result.forEach(x => {if (x.type == 'DiveCenter') diveCenter.push(x._id)});
+        if (diveCenter.length == 0) diveCenter = null;
+        const __diveCenter = diveCenter;
+
+        var diveShop = new Array();
+        this.search_result.forEach(x => {if (x.type == 'DiveShop') diveShop.push(x._id)});
+        if (diveShop.length == 0) diveShop = null;
+        const __diveShop = diveShop;
+
+        var upsert_diving = await this.$apollo.mutate({
+            // Query
+            mutation: gql`
+                mutation Mutation($input: DivingInput) {
+                        upsertDiving(input: $input) {
+                            _id
+                        }
+                    }
+            `,
+            // Parameters
+            variables: {
+                "input": {
+                    "title": this.diving_title,
+                    "description": this.diving_detail,
+                    "status": "searchable",
+                    "type": diving_type,
+                    "participants": parti,
+                    "maxPeopleNumber": (label_unlimited ? 99 : num_recruit + parti.length + 1),
+                    "interests": inter,
+                    "diveSites": __diveSite,
+                    "divePoints": __divePoint,
+                    "diveCenters": __diveCenter,
+                    "diveShops": __diveShop,
+                    "startedAt": s_date,
+                    "finishedAt": s_date,
+                }
+            },
+        });
+        this.diving_id = upsert_diving.data.upsertDiving._id
       },
       finished() {
-          //location.href='/instructor/' + this.ins_id;
+          location.href='/diving/' + this.diving_id;
       },
       go_next(id) {
           if (id == 1) {
             $(".focusBorder").each(function(index, item){item.classList.remove("focusBorder");});
             document.getElementById('div_diving_type').classList.add("toggleBorder");
           } else if (id == 2) {
+              //$("#ins_name").focus();
               $(".focusBorder").each(function(index, item){item.classList.remove("focusBorder");});
               document.getElementById('div_diving_description').classList.add("focusBorder");
           } else if (id == 3) {
@@ -586,31 +689,92 @@ export default {
             },
             data: {
                 query: `
-                    query Query($query: String!) {
-                        searchDiveCentersByName(query: $query) {
+                query SearchPlaces($searchParams: SearchParams, $limit: Int) {
+                    searchPlaces(searchParams: $searchParams, limit: $limit) {
+                        __typename
+                        ... on DiveSite {
                             _id
                             uniqueName
                             name
                             description
-                            divingType
                             adminScore
+                            latitude
+                            longitude
                             backgroundImages {
                                 thumbnailUrl
                             }
+                            interests {
+                                title
+                                type
+                            }
                         }
+                        ... on DivePoint {
+                            _id
+                            uniqueName
+                            name
+                            description
+                            adminScore
+                            latitude
+                            longitude
+                            backgroundImages {
+                                thumbnailUrl
+                            }
+                            interests {
+                                title
+                                type
+                            }
+                        }
+                        ... on DiveCenter {
+                            _id
+                            uniqueName
+                            name
+                            description
+                            adminScore
+                            latitude
+                            longitude
+                            backgroundImages {
+                                thumbnailUrl
+                            }
+                            interests {
+                                title
+                                type
+                            }
+                        }
+                        ... on DiveShop {
+                            _id
+                            uniqueName
+                            name
+                            description
+                            adminScore
+                            latitude
+                            longitude
+                            backgroundImages {
+                                thumbnailUrl
+                            }
+                            interests {
+                                title
+                                type
+                            }
+                        }
+                        address
+                        latitude
+                        longitude
+                        countryCode
                     }
+                }
                 `,
                 variables: {
-                    "query": query
+                    "limit": 10,
+                    "searchParams": {query: query}
                 }
             }
         });
+        
         //result.data.data.searchDiveCentersByName.forEach(x=>result.data.data.searchDiveCentersByName)
         var result_list = new Array();
-        if (result.data.data.searchDiveSitesByName) result.data.data.searchDiveSitesByName.forEach(x=>{x.type='site';result_list.push(x)});
-        if (result.data.data.searchDivePointsByName) result.data.data.searchDivePointsByName.forEach(x=>{x.type='point';result_list.push(x)});
-        if (result.data.data.searchDiveCentersByName) result.data.data.searchDiveCentersByName.forEach(x=>{x.type='center';result_list.push(x)});
+        if (result.data.data.searchPlaces) result.data.data.searchPlaces.forEach(x=>{result_list.push(x)});
         this.users = result_list;
+        
         if(preloader){
             preloader.classList.remove('opacity-50');
             preloader.classList.add('preloader-hide');
@@ -684,7 +848,6 @@ export default {
               }
                 
           }
-          
       },
   }
 

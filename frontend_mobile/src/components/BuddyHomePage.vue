@@ -96,9 +96,39 @@
             <swiper-slide
                 :key="1"
                 :virtualIndex="1">
-                <div class="text-center">
+                <div v-if="getDivingsByHostUserId.length > 0" class="pt-1 pe-4 ps-4">
+                    <div v-for="(diving,index) in getDivingsByHostUserId">
+                        <div class="map-box" style="position: relative;height: 50px;">
+                            <a v-on:click="movePreview(diving)">
+                                <div :class="(diving.isPast ? 'opacity-30' : '')">
+                                    <div class="justify-content-center mb-0 text-start">
+                                        <div class="small-thumb-img me-2">
+                                            <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                                                <defs>
+                                                <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                                                <clipPath id="clipSquircle">
+                                                    <use xlink:href="#shapeSquircle"/>
+                                                </clipPath>
+                                                </defs>
+                                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="diving.backgroundImage"/>
+                                            </svg>
+                                        </div>
+                                        <div class="" style="display:inline-block;vertical-align: top;width: calc(100vw - 138px);">
+                                            <p class="pb-0 mb-0 nearby_desc ellipsis"> {{ getWediveStartEnd(diving.startedAt, diving.finishedAt) }} | {{ diving.title }} </p>
+                                            
+                                            <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> {{ diving.location }} ({{ diving.type.join().replace('scubaDiving', '스쿠바').replace('freeDiving', '프리') }})</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div v-if="index < getDivingsByHostUserId.length-1" class="divider mt-0 mb-1"></div>
+                        <div v-else class=""></div>
+                    </div>                    
+                </div>
+                <div v-else class="text-center">
                     <img src="/static/images/assets/empty_list2_2.jpg" height="74" style="margin-top:4px;"/>
-                    <p class="mb-0 opacity-30 font-noto font-14 mt-n2">예정된 다이빙이 없습니다.</p>
+                    <p class="mb-0 opacity-30 font-noto font-14 mt-n2">나의 다이빙이 없습니다.</p>
                 </div>
             </swiper-slide>
             </swiper>
@@ -146,7 +176,7 @@
     </div>
     <div class="pe-4 ps-4" style="margin-top:-100px;z-index:100;">
         <div class="row">
-            <div class="card card-style col-6 shadow-xl square m-0" style="width: calc(50% - 6px);background-image: url(/static/images/assets/toss-hand.png);background-size: 70% 70%;background-repeat: no-repeat;background-position: right bottom;">
+            <div v-on:click="move('/buddy/create')" class="card card-style col-6 shadow-xl square m-0" style="width: calc(50% - 6px);background-image: url(/static/images/assets/toss-hand.png);background-size: 70% 70%;background-repeat: no-repeat;background-position: right bottom;">
                 <div class="mb-0 mt-3" style="position:absolute;height:50%;">
                     <h4 class="font-noto text-start pt-1 mb-0">버디찾기</h4>
                     <p class="text-start mb-0 opacity-70">새로운 다이빙 생성</p>
@@ -166,7 +196,14 @@
         <div>
             <h4 class="text-start mb-2 mt-2 font-noto" style="margin-left: 14px;margin-right: 14px;position:relative;font-weight:600;">내 근처 다이빙 이벤트</h4>
         </div>
-        <div class="splide single-slider-site slider-no-arrows visible-slider slider-no-dots" id="single-slider-nearby-diving" style="height:176px;">
+        <div v-if="isPermissionEnabled == false" class="card card-style card-nearby" style="height: 160px;margin-bottom: 16px;margin-right: 10px;">
+            <div class="text-center">
+                <img src="/static/images/assets/no-location.png" width="100"/>
+                <p class="mb-0 opacity-30 font-noto font-14 mt-n2">위치 권한이 없어 추천이 되지 않아요.</p>
+                <a href="#" v-on:click="showAppSettingActivity" class="btn font-400 rounded-s shadow-l bg-secondary color-white bd-w-0 font-13">권한 부여하기</a>
+            </div>
+        </div>
+        <div v-else class="splide single-slider-site slider-no-arrows visible-slider slider-no-dots" id="single-slider-nearby-diving" style="height:176px;">
             <div class="splide__track">
                 <div class="splide__list">
                     <div v-for="(item, index) in getNearByDivings" class="splide__slide">
@@ -730,6 +767,12 @@ export default {
       $("#footer-bar").hide();
     }
     $("#btn_new").hide();
+    try {
+        this.isPermissionEnabled = Android.isPermissionEnabled();
+    } catch (e) {
+
+    }
+    
   },
   beforeDestroy() {
     window.removeEventListener('scroll', this.handleScroll);
@@ -739,11 +782,13 @@ export default {
   },
   data () {
     return {
+        isPermissionEnabled: null,
         my_latitude: 37.56425754670452,
         my_longitude: 126.9741944890715,
         windowWidth: window.innerWidth,
         getNearByDivings: [],
         getNearByDiveCenters: [],
+        getDivingsByHostUserId: [],
         recommendation1: [],
         recommendation2: [],
         prev_driection: true,
@@ -776,6 +821,96 @@ export default {
     }
   },
   apollo: {
+    getDivingsByHostUserId: {
+        query: gql`
+            query Query($hostUserId: ID!, $limit: Int!) {
+                getDivingsByHostUserId(hostUserId: $hostUserId, limit: $limit) {
+                    diveCenters {
+                    backgroundImages {
+                        _id
+                        thumbnailUrl
+                    }
+                    name
+                    uniqueName
+                    description
+                    adminScore
+                    }
+                    diveShops {
+                    backgroundImages {
+                        _id
+                        thumbnailUrl
+                    }
+                    name
+                    uniqueName
+                    description
+                    adminScore
+                    }
+                    divePoints {
+                    backgroundImages {
+                        _id
+                        thumbnailUrl
+                    }
+                    name
+                    uniqueName
+                    description
+                    adminScore
+                    }
+                    diveSites {
+                    backgroundImages {
+                        _id
+                        thumbnailUrl
+                    }
+                    name
+                    uniqueName
+                    description
+                    adminScore
+                    }
+                    _id
+                    title
+                    description
+                    status
+                    type
+                    participants {
+                    user {
+                        uid
+                        nickName
+                        profileImages {
+                        thumbnailUrl
+                        }
+                        gender
+                    }
+                    name
+                    gender
+                    status
+                    }
+                    maxPeopleNumber
+                    startedAt
+                    finishedAt
+                    createdAt
+                    views
+                    likes
+                    _id
+                }
+            }
+        `,
+        variables () {
+            return {
+                hostUserId: localStorage.userId,
+                limit: 2
+            }
+        },
+        async result () {
+            var now = new Date();
+            this.getDivingsByHostUserId.forEach(x => {
+                x.isPast = false;
+                if (new Date(x.startedAt) < now ) {
+                    x.isPast = true;
+                }
+                x.location = x.diveSites.length > 0 ? x.diveSites[0].name : x.divePoints.length > 0 ? x.divePoints[0].name : x.diveCenters.length > 0 ? x.diveCenters[0].name : '';
+                x.backgroundImage = x.diveSites.length > 0 ? x.diveSites[0].backgroundImages[parseInt(Math.random()*x.diveSites[0].backgroundImages.length)].thumbnailUrl : x.divePoints.length > 0 ? x.divePoints[0].backgroundImages[parseInt(Math.random()*x.divePoints[0].backgroundImages.length)].thumbnailUrl : x.diveCenters.length > 0 ? x.diveCenters[0].backgroundImages[parseInt(Math.random()*x.diveCenters[0].backgroundImages.length)].thumbnailUrl : '/static/empty.jpg';
+            });
+        }
+    },
     getNearByDiveCenters: {
         query: gql`
             query GetNearByDiveCenters($lat: Float!, $lng: Float!) {
@@ -1380,6 +1515,16 @@ export default {
     }
   },
   methods: {
+      showAppSettingActivity() {
+          try {
+              Android.showAppSettingActivity()
+          } catch (e) {
+              
+          }
+      },
+      move(url) {
+          location.href=url;
+      },
       moveTo(idx) {
           this.contentSwiper.slideTo(idx);
       },
@@ -1452,7 +1597,8 @@ export default {
       },
       async refresh(loaded) {
         if ($(document).scrollTop() == 0) {
-            await this.$apollo.queries.getUserRecommendationsByTargetType.refetch();
+            await this.$apollo.queries.recommendation1.refetch();
+            await this.$apollo.queries.recommendation2.refetch();
             loaded('done')
         } else {
             console.log("1")
@@ -1629,6 +1775,46 @@ export default {
   display: inline-block;
   width: 75px;
   height: 75px;
+  overflow: hidden;
+  user-select: none;
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3csvg width='88px' height='88px' viewBox='0 0 88 88' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3e%3cpath d='M44%2c0.5 C59.8650505%2c0.5 70.7664452%2c3.40244096 77.6820021%2c10.3179979 C84.597559%2c17.2335548 87.5%2c28.1349495 87.5%2c44 C87.5%2c59.8650505 84.597559%2c70.7664452 77.6820021%2c77.6820021 C70.7664452%2c84.597559 59.8650505%2c87.5 44%2c87.5 C28.1349495%2c87.5 17.2335548%2c84.597559 10.3179979%2c77.6820021 C3.40244096%2c70.7664452 0.5%2c59.8650505 0.5%2c44 C0.5%2c28.1349495 3.40244096%2c17.2335548 10.3179979%2c10.3179979 C17.2335548%2c3.40244096 28.1349495%2c0.5 44%2c0.5 Z' fill='none' stroke='rgba(0,0,0,0.3)'%3e%3c/path%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .svg-profile {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .default-txt {
+    font-size: 2em;
+    fill: #fff;
+  }
+
+  .default-bg {
+    width: 100%;
+    height: 100%;
+    @each $num, $color in $userImgBgs {
+      &[data-color="#{$num}"] {
+        fill: $color;
+      }
+    }
+  }
+}
+.small-thumb-img {
+  position: relative;
+  display: inline-block;
+  width: 45px;
+  height: 45px;
   overflow: hidden;
   user-select: none;
   &::after {

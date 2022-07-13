@@ -341,7 +341,7 @@ body {
 .bg-site {background:#5f6368;} .color-site {color:#5f6368;} .border-site {border-color:#5f6368 !important;}
 .bg-point {background:#498c99;} .color-point {color:#498c99;} .border-point {border-color:#498c99 !important;}
 .bg-center {background:#2a526f;} .color-center {color:#2a526f;} .border-center {border-color:#2a526f !important;}
-.bg-shop {background:#c93d48;} .color-shop {color:#c93d48;} .border-center {border-color:#c93d48 !important;}
+.bg-shop {background:#c93d48;} .color-shop {color:#c93d48;} .border-shop {border-color:#c93d48 !important;}
 
 .bg-red-dark {
   background-color: #DA4453 !important;

@@ -87,6 +87,16 @@ export default {
                         description
                         adminScore
                         }
+                        diveShops {
+                        backgroundImages {
+                            _id
+                            thumbnailUrl
+                        }
+                        name
+                        uniqueName
+                        description
+                        adminScore
+                        }
                         divePoints {
                         backgroundImages {
                             _id
@@ -200,13 +210,16 @@ export default {
             diving.locationData = {};
             if (diving.diveSites && diving.diveSites.length > 0) {
                 diving.locationData = diving.diveSites[0];
-                diving.location = diving.diveSites[0].name + " 사이트";
+                diving.location = diving.diveSites[0].name;
             } else if (diving.divePoints && diving.divePoints.length > 0) {
                 diving.locationData = diving.divePoints[0];
-                diving.location = diving.divePoints[0].name + " 포인트";
+                diving.location = diving.divePoints[0].name;
             } else if (diving.diveCenters && diving.diveCenters.length > 0) {
                 diving.locationData = diving.diveCenters[0];
                 diving.location = diving.diveCenters[0].name;
+            } else if (diving.diveShops && diving.diveShops.length > 0) {
+                diving.locationData = diving.diveShops[0];
+                diving.location = diving.diveShops[0].name;
             }
           });
       },
