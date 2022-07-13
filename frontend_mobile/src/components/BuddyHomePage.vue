@@ -71,7 +71,6 @@
                         </a>
                     </div>
                     <div class="font-noto" style="position: absolute;top:12px;left:98px;">
-                        
                         <h5 class="mb-0 font-500 ellipsis">{{ getUserById ? '다이버 ' + getUserById.nickName + '님' : '' }}</h5>
                         <span v-if="getUserById">
                             <img src="/static/images/assets/main_heart.png" height="26" class="inline-block" style="vertical-align: top;">
@@ -409,7 +408,14 @@
             <div>
                 <h4 class="text-start mb-2 mt-2 font-noto" style="margin-left: 14px;margin-right: 14px;position:relative;font-weight:600;">내 근처 다이빙 수영장</h4>
             </div>
-            <div class="splide single-slider-site slider-no-arrows visible-slider slider-no-dots" id="single-slider-nearby-pool" style="height:176px;">
+            <div v-if="isPermissionEnabled == false" class="card card-style card-nearby" style="height: 160px;margin-bottom: 16px;margin-right: 10px;">
+                <div class="text-center">
+                    <img src="/static/images/assets/no-location.png" width="100"/>
+                    <p class="mb-0 opacity-30 font-noto font-14 mt-n2">위치 권한이 없어 추천이 되지 않아요.</p>
+                    <a href="#" v-on:click="showAppSettingActivity" class="btn font-400 rounded-s shadow-l bg-secondary color-white bd-w-0 font-13">권한 부여하기</a>
+                </div>
+            </div>
+            <div v-else class="splide single-slider-site slider-no-arrows visible-slider slider-no-dots" id="single-slider-nearby-pool" style="height:176px;">
                 <div class="splide__track">
                     <div class="splide__list">
                         <div v-for="(item, index) in getNearByDiveCenters" class="splide__slide">

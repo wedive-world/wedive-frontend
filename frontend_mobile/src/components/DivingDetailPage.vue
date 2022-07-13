@@ -93,7 +93,7 @@
                         <div class="col-3 text-center color-gray">선호사항</div>
                         <div class="col-9">{{ (getDivingById.interests && getDivingById.interests.length > 0) ? getDivingById.interests.map((x)=>{return x.title}).join().replace(/,/gi,', ') : '없음' }}</div>
                         <div class="col-3 text-center color-gray">모집인원</div>
-                        <div class="col-9">{{ (getDivingById.maxPeopleNumber) ? (getDivingById.maxPeopleNumber-getDivingById.participants.length-1) : '' }}명</div>
+                        <div class="col-9">{{ getDivingById.maxPeopleNumber ? getDivingById.maxPeopleNumber == 99 ? '제한 없음' : (getDivingById.maxPeopleNumber-getDivingById.participants.length-1) + '명' : '' }}</div>
                     </div>
                 </div>
                 <br/>
@@ -144,8 +144,9 @@
 
                             <!--<img class="inline-block circular_image" :src="(participant.user && participant.user.profileImages && participant.user.profileImages.length>0 && participant.user.profileImages[0].thumbnailUrl) ? participant.user.profileImages[0].thumbnailUrl : 'https://d34l91104zg4p3.cloudfront.net/assets/user_empty_'+(participant.gender ? participant.gender : 'm')+'.png'" width="50" style="vertical-align: top;"/>-->
                             <div class="inline-block font-noto ms-2" style="vertical-align: top;">
-                                <h5 class="mb-0 font-500 font-15">{{ (participant.user!=null&&participant.user.nickName!=null) ? participant.user.nickName : ((participant.name!=null) ? participant.name : '비공개') }}</h5>
-                                <p class="mb-0 font-14 color-gray ellipsis" style="max-width: calc(100vw - 170px);">{{ participant ? getDiverLevel(participant.freeLicenseLevel, participant.scubaLicenseLevel) : '' }}</p>
+                                <h5 class="mb-0 font-500 font-15">{{ (participant.user!=null&&participant.user.nickName!=null) ? participant.user.nickName : ((participant.name!=null) ? participant.name : participant.gender!=null ? '비공개 (' + (participant.gender == 'm' ? '남' : '여') + ')' : '비공개') }}</h5>
+                                <p v-if ="participant && participant.user == null" class="mb-0 font-14 color-gray ellipsis opacity-50" style="max-width: calc(100vw - 170px);">라이센스 정보 없음</p>
+                                <p v-else class="mb-0 font-14 color-gray ellipsis" style="max-width: calc(100vw - 170px);">{{ participant ? getDiverLevel(participant.freeLicenseLevel, participant.scubaLicenseLevel) : '' }}</p>
                             </div>
                         </div>
                         <span v-if="participant.user!=null" v-on:click="chatUser(participant.user)" class="chip chip-s bg-gray-light text-center font-400 wedive-chip">채팅</span>
@@ -176,7 +177,7 @@
                                 
                                 <!--<img class="inline-block circular_image" :src="(participant.user && participant.user.profileImages && participant.user.profileImages.length>0 && participant.user.profileImages[0].thumbnailUrl) ? participant.user.profileImages[0].thumbnailUrl : 'https://d34l91104zg4p3.cloudfront.net/assets/user_empty_'+(participant.gender ? participant.gender : 'm')+'.png'" width="50" style="vertical-align: top;"/>-->
                                 <div class="inline-block font-noto ms-2" style="vertical-align: top;">
-                                    <h5 class="mb-0 font-500 font-15">{{ (participant.user!=null&&participant.user.nickName!=null) ? participant.user.nickName : ((participant.name!=null) ? participant.name : '비공개') }}</h5>
+                                    <h5 class="mb-0 font-500 font-15">{{ (participant.user!=null&&participant.user.nickName!=null) ? participant.user.nickName : ((participant.name!=null) ? participant.name : participant.gender!=null ? '비공개 (' + (participant.gender == 'm' ? '남' : '여') + ')' : '비공개') }}</h5>
                                     <p class="mb-0 font-13 color-gray ellipsis" style="max-width: calc(100vw - 220px);">{{ participant ? getDiverLevel(participant.freeLicenseLevel, participant.scubaLicenseLevel) : '' }}</p>
                                 </div>
                             </div>
@@ -703,8 +704,6 @@ export default {
                 });
                 this.getDivingById.location = this.getDivingById.diveCenters[0].name;
             }
-            console.log(this.locationData)
-
             
 
             {
