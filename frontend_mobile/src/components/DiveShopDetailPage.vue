@@ -82,7 +82,7 @@
                 <div class="divider mt-3 mb-3"></div>
                 <div class="d-flex mt-3 mb-0 text-center">
                     <div class="flex-grow-1 pd-0" style="border-right: 1px solid lightgray;">
-                    <a :href="'tel:'+getDiveShopByUniqueName.phoneNumber"" style="color:black;">
+                    <a :class="(getDiveShopByUniqueName && getDiveShopByUniqueName.phoneNumber && getDiveShopByUniqueName.phoneNumber != '') ? '' : 'opacity-30'" :href="'tel:'+getDiveShopByUniqueName.phoneNumber"" style="color:black;">
                         <img class="ext-img" src="https://d34l91104zg4p3.cloudfront.net/assets/ico_call.png" width="24" style="margin-top:-4px;"/>
                         <span class="font-16 font-500 font-noto"></span>
                     </a>
@@ -399,7 +399,7 @@
             <div class="content mb-0">
                 <h4 class="text-start pt-2 mb-2">주소</h4>
                 <p class="text-start mb-3 mb-0">
-                    <span data-menu="menu-copy"><i class="far fa-copy me-2"></i>{{ getDiveShopByUniqueName.geoAddress }}</span><br/>
+                    <span data-menu="menu-copy"><i class="far fa-copy me-2"></i>{{ getDiveShopByUniqueName.address.replace(' KR', '') }}</span><br/>
                     <a href="#" class="color-highlight hide" data-menu="menu-direction"><i class="fas fa-route me-2"></i> 공항-샵 이동방법 안내</a>
                 </p>
             </div>
@@ -1270,7 +1270,7 @@ export default {
                     openingHours
                     institutionTypes
                     webPageUrl
-                    geoAddress
+                    address
                     adminScore
                     viewScore
                     educationScore
@@ -1384,7 +1384,17 @@ export default {
                     reviewCount
                     isUserSubscribe
                     isUserLike
-                    waterTemperature {
+                }
+            }
+          `,
+          variables() {
+              return {
+                uniqueName: this.uniqueName
+              }
+          },
+          result() {
+            /*
+            waterTemperature {
                         name
                         currentSeaTemperature
                         weatherText
@@ -1407,15 +1417,7 @@ export default {
                         latitude
                         longitude
                     }
-                }
-            }
-          `,
-          variables() {
-              return {
-                uniqueName: this.uniqueName
-              }
-          },
-          result() {
+                    */
             if (this.getDiveShopByUniqueName.isUserLike) this.like_img = 'ico_heart2';
             if (this.getDiveShopByUniqueName.isUserSubscribe) this.subscribe_img = 'ico_subscribe2';
             {

@@ -71,7 +71,7 @@
                         </a>
                     </div>
                     <div class="font-noto" style="position: absolute;top:12px;left:98px;" v-on:click="goLogin()">
-                        <h5 class="mb-0 font-500 ellipsis">{{ getUserById ? '다이버 ' + getUserById.nickName + '님' : ('위다이브 손님 ' + (idToken == null ? '로그인을 해보세요.' : '프로필을 등록해보세요.')) }}</h5>
+                        <h5 class="mb-0 font-500 ellipsis">{{ getUserById ? '다이버 ' + getUserById.nickName + '님' : ('위다이브 손님, ' + (idToken == null ? '로그인을 해보세요.' : '프로필을 등록해보세요.')) }}</h5>
                         <span :class="getUserById ? '' : 'opacity-30'">
                             <img src="/static/images/assets/main_heart.png" height="26" class="inline-block" style="vertical-align: top;">
                             <span class="chip chip-s text-center font-400 wedive-chip color-gray" style="position: initial;margin-top: 4px !important;margin-left: -4px !important;margin-right:8px !important;">호스트 {{ getUserById ? getUserById.divingHostCount : '0' }}회</span>
@@ -95,7 +95,7 @@
             <swiper-slide
                 :key="1"
                 :virtualIndex="1">
-                <div v-if="getDivingsByHostUserId.length > 0" class="pt-1 pe-4 ps-4">
+                <div v-if="getDivingsByHostUserId.length > 0" class="pt-3 pe-4 ps-4">
                     <div v-for="(diving,index) in getDivingsByHostUserId">
                         <div class="map-box" style="position: relative;height: 50px;">
                             <a v-on:click="movePreview(diving)">
@@ -272,7 +272,7 @@
 
 
 
-    <div class="page-content pt-2">
+    <div class="page-content">
         <!--
         <div class="splide wedive-slider slider-no-arrows slider-no-dots" id="main-slider">
             <div class="splide__track">
@@ -313,7 +313,7 @@
         <div v-for="(recommendation,rec_idx) in recommendation1" v-if="recommendation.previews.length > 0">
             <div v-if="recommendation.previewCount == 0" v-on:click="moveRecommend(recommendation._id, 'recommendation')" class="card card-style" :style="recommendation.cssStyle.includes('|') ? recommendation.cssStyle.split('|')[0] : recommendation.cssStyle">
                 <div :class="'content mb-0 mt-3 me-0' + (recommendation.className ? ' ' + recommendation.className : '')">
-                    <h4 class="text-start mb-0 font-600" v-html="recommendation.title"></h4><i class="wedive-txt-all wedive_right"></i>
+                    <h4 class="text-start mb-0 font-noto font-600" v-html="recommendation.title"></h4><i class="wedive-txt-all wedive_right"></i>
                     <p class="mb-0 opacity-60 ls-n1">{{ recommendation.description ? recommendation.description : '' }}</p>
                     
                     <img v-if="recommendation.cssStyle.includes('|')" :class="recommendation.cssStyle.split('|')[2]" :src="'https://d34l91104zg4p3.cloudfront.net/assets/' + recommendation.cssStyle.split('|')[1]" style="padding-bottom:16px;max-height:200px;"/>
@@ -323,7 +323,7 @@
             <div v-else-if="recommendation.previewCount == 2 || recommendation.previewCount == 3" class="card card-style">
                 <div class="content mb-0 mt-3">
                     <div v-on:click="moveRecommend(recommendation._id, 'recommendation')">
-                        <h4 class="text-start mb-0">{{ recommendation.title }}<i class="wedive-txt-all wedive_right"></i></h4>
+                        <h4 class="text-start mb-0 font-noto font-600">{{ recommendation.title }}<i class="wedive-txt-all wedive_right"></i></h4>
                         <p class="mb-3 color-gray-light-mid">{{ recommendation.description ? recommendation.description : '' }}</p>
                     </div>
                     
@@ -365,7 +365,7 @@
             </div>
             <div v-else>
                 <div v-on:click="moveRecommend(recommendation._id, 'recommendation')">
-                    <h4 :class="'text-start mb-0' + (rec_idx==0 ? '' : ' mt-4')" style="margin-left: 14px;margin-right: 14px;position:relative;margin-top:16px;">{{ recommendation.title }}<i class="wedive-txt-all wedive_right" style="top:3px !important;"></i></h4>
+                    <h4 :class="'text-start font-noto font-600 mb-0' + (rec_idx==0 ? '' : ' mt-4')" style="margin-left: 14px;margin-right: 14px;position:relative;margin-top:16px;">{{ recommendation.title }}<i class="wedive-txt-all wedive_right" style="top:3px !important;"></i></h4>
                     <p v-if="recommendation.description" class="mb-2 color-gray-light-mid" style="margin-left: 14px;margin-right: 14px;margin-top:-2px;">{{ recommendation.description }}</p>
                 </div>
                 <div class="splide single-slider-site slider-no-arrows visible-slider slider-no-dots" :id="'single-slider-'+recommendation._id" style="height:276px;">
@@ -444,7 +444,7 @@
         <div v-for="(recommendation,rec_idx) in recommendation2">
             <div v-if="recommendation.previewCount == 0" v-on:click="moveRecommend(recommendation._id, 'recommendation')" class="card card-style" :style="recommendation.cssStyle.includes('|') ? recommendation.cssStyle.split('|')[0] : recommendation.cssStyle">
                 <div :class="'content mb-0 mt-3 me-0' + (recommendation.className ? ' ' + recommendation.className : '')">
-                    <h4 class="text-start mb-0 font-600" v-html="recommendation.title"></h4><i class="wedive-txt-all wedive_right"></i>
+                    <h4 class="text-start mb-0 font-noto font-600" v-html="recommendation.title"></h4><i class="wedive-txt-all wedive_right"></i>
                     <p class="mb-0 opacity-60 ls-n1">{{ recommendation.description ? recommendation.description : '' }}</p>
                     
                     <img v-if="recommendation.cssStyle.includes('|')" :class="recommendation.cssStyle.split('|')[2]" :src="'https://d34l91104zg4p3.cloudfront.net/assets/' + recommendation.cssStyle.split('|')[1]" style="padding-bottom:16px;max-height:200px;"/>
@@ -454,7 +454,7 @@
             <div v-else-if="recommendation.previewCount == 2 || recommendation.previewCount == 3" class="card card-style">
                 <div class="content mb-0 mt-3">
                     <div v-on:click="moveRecommend(recommendation._id, 'recommendation')">
-                        <h4 class="text-start mb-0">{{ recommendation.title }}<i class="wedive-txt-all wedive_right"></i></h4>
+                        <h4 class="text-start font-noto font-600 mb-0">{{ recommendation.title }}<i class="wedive-txt-all wedive_right"></i></h4>
                         <p class="mb-3">{{ recommendation.description ? recommendation.description : '' }}</p>
                     </div>
                     
@@ -497,7 +497,7 @@
             </div>
             <div v-else>
                 <div v-on:click="moveRecommend(recommendation._id, 'recommendation')">
-                    <h4 :class="'text-start mb-0' + (rec_idx==0 ? '' : ' mt-4')" style="margin-left: 14px;margin-right: 14px;position:relative;">{{ recommendation.title }}<i class="wedive-txt-all wedive_right" style="top:3px !important;"></i></h4>
+                    <h4 :class="'text-start font-noto font-600 mb-0' + (rec_idx==0 ? '' : ' mt-4')" style="margin-left: 14px;margin-right: 14px;position:relative;">{{ recommendation.title }}<i class="wedive-txt-all wedive_right" style="top:3px !important;"></i></h4>
                     <p v-if="recommendation.description" class="mb-2" style="margin-left: 14px;margin-right: 14px;margin-top:-2px;">{{ recommendation.description }}</p>
                 </div>
                 <div class="splide single-slider-site slider-no-arrows visible-slider slider-no-dots" :id="'single-slider-'+recommendation._id" style="height:276px;">
@@ -2012,6 +2012,7 @@ export default {
   min-height: 140px;
   background-color: #c6dbf3;
   overflow: hidden;
+  margin-top: -20px;
 }
 .waveaa:after {
 content: "";

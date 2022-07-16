@@ -46,7 +46,7 @@ export default (refreshToken) =>
 // Android
 try {
   //console.log("check Android")
-  if (userAgent.indexOf('android') !== -1) {
+  if (window.navigator.userAgent.toLowerCase().indexOf('android') !== -1) {
     const userInformation = JSON.parse(Android.getUserInformation());
     //console.log(`android connected, ${JSON.stringify(userInformation)}`);
     localStorage.idToken = Android.getIdToken();
@@ -81,13 +81,13 @@ try {
             }
         }
       }).then(function(result) {
-        if (result.data.data.getUserByUid != null) {
+        if (result.data.data.getUserByUid != null && result.data.data.getUserByUid.nickName != null) {
           localStorage.nickName = result.data.data.getUserByUid.nickName;
           localStorage.userId = result.data.data.getUserByUid._id;
         }
       });
     }
-  } else if (userAgent.indexOf('iphone') !== -1 || userAgent.indexOf('ipad') !== -1) {
+  } else if (window.navigator.userAgent.toLowerCase().indexOf('iphone') !== -1 || window.navigator.userAgent.toLowerCase().indexOf('ipad') !== -1) {
     // console.log(`ios connected, ${JSON.stringify(JfSON.parse(iOS.getUserInformation()))}`)
     // localStorage.setItem(userAuthKey, JSON.parse(iOS.getUserInformation()));
   } else { // 안드로이드, IOS 가 아닌 경우 (더 조건을 추가해서 처리해도 됨)
@@ -95,7 +95,13 @@ try {
   
   }
 } catch(e) {
-
+  console.log(e);
+  console.log(e.toString().replace(/\\n/gi, '<br/>'));
+  var toastData = 'debug-error';
+  $("#" + toastData).text(e.toString().replace(/\\n/gi, '<br/>'));
+  var notificationToast = document.getElementById(toastData);
+  var notificationToast = new bootstrap.Toast(notificationToast);
+  notificationToast.show();
 }
 
 
@@ -287,7 +293,7 @@ new Vue({
   template: '<App/>'
 })
 
-const userAgent = navigator.userAgent.toLowerCase();
+const userAgent = window.navigator.userAgent.toLowerCase();
 const userAuthKey = 'userAuth';
 var axios = require("axios");
 
