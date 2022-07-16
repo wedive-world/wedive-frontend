@@ -111,8 +111,8 @@
         </div>
         <div class="content pt-3 row">
               <a v-on:click="loginGoogle()" href="#" class="mb-3 rounded-xl text-start btn btn-m btn-full bg-google btn-icon font-600"><i class="fab fa-google rounded-xl font-16 text-center"></i> Google 계정으로 로그인</a>
-              <a href="#" class="mb-3 rounded-xl text-start btn btn-m btn-full bg-dark-dark btn-icon font-600"><i class="fab fa-apple rounded-xl font-16 text-center"></i> Apple 계정으로 로그인</a>
-              <a href="#" class="mb-3 rounded-xl text-start btn btn-m btn-full bg-yellow-dark btn-icon font-600"><i class="text-center rounded-xl" style="position: absolute;left: 0px;top: 0px;line-height: 43px;width: 40px;height: 100%;background-color: rgba(0, 0, 0, 0.1);"><img src="https://d34l91104zg4p3.cloudfront.net/assets/logo_kakao.png" height="16" style="vertical-align: middle;"/></i> Kakao 계정으로 로그인</a>
+              <!--<a href="#" class="mb-3 rounded-xl text-start btn btn-m btn-full bg-dark-dark btn-icon font-600"><i class="fab fa-apple rounded-xl font-16 text-center"></i> Apple 계정으로 로그인</a>
+              <a href="#" class="mb-3 rounded-xl text-start btn btn-m btn-full bg-yellow-dark btn-icon font-600"><i class="text-center rounded-xl" style="position: absolute;left: 0px;top: 0px;line-height: 43px;width: 40px;height: 100%;background-color: rgba(0, 0, 0, 0.1);"><img src="https://d34l91104zg4p3.cloudfront.net/assets/logo_kakao.png" height="16" style="vertical-align: middle;"/></i> Kakao 계정으로 로그인</a>-->
           </div>
       </vue-bottom-sheet>
       <div id="menu-login" class="menu menu-box-bottom rounded-half">
@@ -124,8 +124,8 @@
           </div>
           <div class="content pt-3 row">
               <a v-on:click="loginGoogle()" href="#" class="mb-3 rounded-xl text-start btn btn-m btn-full bg-google btn-icon font-600"><i class="fab fa-google rounded-xl font-16 text-center"></i> Google 계정으로 로그인</a>
-              <a href="#" class="mb-3 rounded-xl text-start btn btn-m btn-full bg-dark-dark btn-icon font-600"><i class="fab fa-apple rounded-xl font-16 text-center"></i> Apple 계정으로 로그인</a>
-              <a href="#" class="mb-3 rounded-xl text-start btn btn-m btn-full bg-yellow-dark btn-icon font-600"><i class="text-center rounded-xl" style="position: absolute;left: 0px;top: 0px;line-height: 43px;width: 40px;height: 100%;background-color: rgba(0, 0, 0, 0.1);"><img src="https://d34l91104zg4p3.cloudfront.net/assets/logo_kakao.png" height="16" style="vertical-align: middle;"/></i> Kakao 계정으로 로그인</a>
+              <!--<a href="#" class="mb-3 rounded-xl text-start btn btn-m btn-full bg-dark-dark btn-icon font-600"><i class="fab fa-apple rounded-xl font-16 text-center"></i> Apple 계정으로 로그인</a>
+              <a href="#" class="mb-3 rounded-xl text-start btn btn-m btn-full bg-yellow-dark btn-icon font-600"><i class="text-center rounded-xl" style="position: absolute;left: 0px;top: 0px;line-height: 43px;width: 40px;height: 100%;background-color: rgba(0, 0, 0, 0.1);"><img src="https://d34l91104zg4p3.cloudfront.net/assets/logo_kakao.png" height="16" style="vertical-align: middle;"/></i> Kakao 계정으로 로그인</a>-->
           </div>
           <br/>
       </div>
@@ -563,7 +563,7 @@ export default {
           localStorage.idToken = await user.getIdToken(false);
           localStorage.tokenAt = (new Date()).getTime();
         } else {
-          console.log("signed out");
+          //console.log("signed out");
         }
       });
       onAuthStateChanged(auth, async (user) => {
@@ -572,7 +572,7 @@ export default {
           localStorage.idToken = await user.getIdToken(false);
           localStorage.tokenAt = (new Date()).getTime();
         } else {
-          console.log("signed out");
+          //console.log("signed out");
         }
       });
     },

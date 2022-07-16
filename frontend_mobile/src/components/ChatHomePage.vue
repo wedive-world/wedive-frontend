@@ -17,7 +17,7 @@
       </div>
     </template>
     <div>
-        <div v-if="idToken == null" class="card card-style ms-0 me-0 rounded-0 text-center mb-0" style="height: calc(100vh - 58px);display:block;">
+        <div v-if="idToken == null || nickName == null" class="card card-style ms-0 me-0 rounded-0 text-center mb-0" style="height: calc(100vh - 58px);display:block;">
             <img src="https://d34l91104zg4p3.cloudfront.net/assets/empty_message.jpg" width="60%" style="margin-top: 25%;" />
             <p class="color-gray mt-2">{{ login_word }}이 필요합니다.</p>
 
@@ -329,6 +329,9 @@ export default {
                 }
             }
           `,
+          skip() {
+              return (localStorage.idToken == null || localStorage.nickName == null);
+          },
           result ({ data, loading, networkStatus }) {
             setTimeout(function() {
                 $("#div_content_loader").hide();
@@ -339,7 +342,7 @@ export default {
                 var b_create_at = (b.lastChatMessage && b.lastChatMessage.createdAt) ? b.lastChatMessage.createdAt : b.createdAt;
                 return (a_create_at>b_create_at ? -1 : 1);
             });
-          },
+          },          
       }
   },
   methods: {

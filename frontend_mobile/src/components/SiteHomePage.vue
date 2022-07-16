@@ -397,8 +397,8 @@ async function updateAll() {
     var sw = bounds.getSouthWest();
     var ne = bounds.getNorthEast();
 
-    console.log("updateAll : ");
-    console.log(searchParams)
+    //console.log("updateAll : ");
+    //console.log(searchParams)
     var _searchParams = JSON.parse(JSON.stringify(searchParams));
     _searchParams.lat1 = sw.lat();
     _searchParams.lng1 = sw.lng();
@@ -1078,8 +1078,8 @@ export default {
             this.lookupUser3();
         } else {
             this.openSuggestion();
-            console.log("this.query");
-            console.log(this.query)
+            //console.log("this.query");
+            //console.log(this.query)
             this.query_place = JSON.parse(JSON.stringify(this.query)) + "";
             setTimeout(function() {
                 $("#suggestion_typeahead > .input-group > input").focus();
@@ -1140,12 +1140,14 @@ export default {
           //console.log("removeSuggestSelected")
       },
       selectSuggestion(item) {
+          console.log("item")
           localStorage.suggestionFlag = '1';
           this.query = item;
           document.getElementById("search-suggestion").classList.remove('menu-active');
           document.getElementsByClassName('menu-hider')[0].classList.remove('menu-active');
           this.places = [];
           tour_flag = true;
+          window.history.back(); 
           setTimeout(function() {
             $("#search_typeahead > .input-group > input").focus();
           }, 200)
@@ -1278,7 +1280,6 @@ export default {
         updateAll();
       },
       enableNext2(ev) {
-          //console.log(ev);
           localStorage.suggestionFlag = '1';
           selecteduser = ev;
           hideKeyboard()

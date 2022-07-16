@@ -70,24 +70,24 @@
                             </div>
                         </a>
                     </div>
-                    <div class="font-noto" style="position: absolute;top:12px;left:98px;">
-                        <h5 class="mb-0 font-500 ellipsis">{{ getUserById ? '다이버 ' + getUserById.nickName + '님' : '' }}</h5>
-                        <span v-if="getUserById">
+                    <div class="font-noto" style="position: absolute;top:12px;left:98px;" v-on:click="goLogin()">
+                        <h5 class="mb-0 font-500 ellipsis">{{ getUserById ? '다이버 ' + getUserById.nickName + '님' : ('위다이브 손님 ' + (idToken == null ? '로그인을 해보세요.' : '프로필을 등록해보세요.')) }}</h5>
+                        <span :class="getUserById ? '' : 'opacity-30'">
                             <img src="/static/images/assets/main_heart.png" height="26" class="inline-block" style="vertical-align: top;">
-                            <span class="chip chip-s text-center font-400 wedive-chip color-gray" style="position: initial;margin-top: 4px !important;margin-left: -4px !important;margin-right:8px !important;">호스트 {{ getUserById ? getUserById.divingHostCount : '-' }}회</span>
+                            <span class="chip chip-s text-center font-400 wedive-chip color-gray" style="position: initial;margin-top: 4px !important;margin-left: -4px !important;margin-right:8px !important;">호스트 {{ getUserById ? getUserById.divingHostCount : '0' }}회</span>
                         </span>
-                        <span v-if="getUserById">
+                        <span :class="getUserById ? '' : 'opacity-30'">
                             <img src="/static/images/assets/main_check.png" height="26" class="inline-block" style="vertical-align: top;margin-left:-4px;">
-                            <span class="chip chip-s text-center font-400 wedive-chip color-gray" style="position: initial;margin-top: 4px !important;margin-left: -4px !important;">게스트 {{ getUserById ? getUserById.divingParticipantCount : '-' }}회</span>
+                            <span class="chip chip-s text-center font-400 wedive-chip color-gray" style="position: initial;margin-top: 4px !important;margin-left: -4px !important;">게스트 {{ getUserById ? getUserById.divingParticipantCount : '0' }}회</span>
                         </span>
                         <br/>
-                        <span v-if="getUserById && getUserById.scubaLevelShow != ''">
+                        <span :class="(getUserById && getUserById.scubaLevelShow != '') ? '' : 'opacity-30'">
                             <img src="https://d34l91104zg4p3.cloudfront.net/assets/award1.png" height="30" class="inline-block" style="vertical-align: top;margin-left:-4px;">
-                            <span class="chip chip-s text-center font-400 wedive-chip color-white" style="position: initial;background-color: #268cd3;margin-top: 4px !important;margin-left: -4px !important;margin-right:8px !important;">스쿠바 {{ getUserById ? getUserById.scubaLevelShow : '' }}</span>
+                            <span class="chip chip-s text-center font-400 wedive-chip color-white" style="position: initial;background-color: #268cd3;margin-top: 4px !important;margin-left: -4px !important;margin-right:8px !important;">스쿠바 {{ getUserById ? getUserById.scubaLevelShow : '레벨 없음' }}</span>
                         </span>
-                        <span v-if="getUserById && getUserById.freeLevelShow != ''">
+                        <span :class="(getUserById && getUserById.freeLevelShow != '') ? '' : 'opacity-30'">
                             <img src="https://d34l91104zg4p3.cloudfront.net/assets/award2.png" height="30" class="inline-block" style="vertical-align: top;margin-left:-4px;">
-                            <span class="chip chip-s text-center font-400 wedive-chip color-white" style="position: initial;background-color: #be4544;margin-top: 4px !important;margin-left: -4px !important;">프리 {{ getUserById ? getUserById.freeLevelShow : '' }}</span>
+                            <span class="chip chip-s text-center font-400 wedive-chip color-white" style="position: initial;background-color: #be4544;margin-top: 4px !important;margin-left: -4px !important;">프리 {{ getUserById ? getUserById.freeLevelShow : '레벨 없음' }}</span>
                         </span>
                     </div>
                 </div>
@@ -125,9 +125,9 @@
                         <div v-else class=""></div>
                     </div>                    
                 </div>
-                <div v-else class="text-center">
+                <div v-else class="text-center" v-on:click="goLogin()">
                     <img src="/static/images/assets/empty_list2_2.jpg" height="74" style="margin-top:4px;"/>
-                    <p class="mb-0 opacity-30 font-noto font-14 mt-n2">나의 다이빙이 없습니다.</p>
+                    <p class="mb-0 opacity-30 font-noto font-14 mt-n2">{{ no_diving_word }}</p>
                 </div>
             </swiper-slide>
             </swiper>
@@ -801,6 +801,7 @@ export default {
         lastScrollPosition: 0,
         idToken: localStorage.idToken,
         nickName: localStorage.nickName,
+        no_diving_word: (localStorage.idToken == null) ? '로그인이 필요합니다.' : (localStorage.nickName == null ? '프로필 등록이 필요합니다.' : '나의 다이빙이 없습니다.'),
         scrollTop: 0,
         TOP_DEFAULT_CONFIG: {
             pullText: '당겨서 새로고침', // The text is displayed when you pull down
@@ -904,6 +905,9 @@ export default {
                 hostUserId: localStorage.userId,
                 limit: 2
             }
+        },
+        skip() {
+            return (localStorage.idToken == null || localStorage.nickName == null);
         },
         async result () {
             var now = new Date();
@@ -1120,6 +1124,9 @@ export default {
                 id: localStorage.userId
             }
         },
+        skip() {
+            return (localStorage.idToken == null || localStorage.nickName == null);
+        },
         async result () {
             this.getUserById.levelShow = '초보';
             var scuba_level = ["초보", "오픈워터", "어드", "레스큐", "마스터", "강사", "위다이브 컨시어지"];
@@ -1285,6 +1292,85 @@ export default {
                     }
                 });
             });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            var splide = document.getElementsByClassName('splide');
+            if(splide.length > 0){
+                var singleSlider = document.querySelectorAll('.single-slider-site');
+                if(singleSlider.length) {
+                    singleSlider.forEach(function(e){
+                        //setTimeout(function(e) {
+                            var single = new Splide( '#'+e.id, {
+                                type:'loop',
+                                autoplay:true,
+                                interval:4000,
+                                perPage: 1,
+                            }).mount();
+                            var sliderNext = document.querySelectorAll('.slider-next');
+                            var sliderPrev = document.querySelectorAll('.slider-prev');
+                            sliderNext.forEach(el => el.addEventListener('click', el => {single.go('>');}));
+                            sliderPrev.forEach(el => el.addEventListener('click', el => {single.go('<');}));
+                        //},100, e);
+                        
+                    });
+                }
+                //Card Extender
+                const cards = document.getElementsByClassName('card');
+                function card_extender(){
+                    var headerHeight, footerHeight, headerOnPage;
+                    var headerOnPage = document.querySelectorAll('.header:not(.header-transparent)')[0];
+                    var footerOnPage = document.querySelectorAll('#footer-bar')[0];
+
+                    headerOnPage ? headerHeight = document.querySelectorAll('.header')[0].offsetHeight : headerHeight = 0
+                    footerOnPage ? footerHeight = document.querySelectorAll('#footer-bar')[0].offsetHeight : footerHeight = 0
+
+                    for (let i = 0; i < cards.length; i++) {
+                        if(cards[i].getAttribute('data-card-height') === "cover"){
+                            if (window.matchMedia('(display-mode: fullscreen)').matches) {var windowHeight = window.outerHeight;}
+                            if (!window.matchMedia('(display-mode: fullscreen)').matches) {var windowHeight = window.innerHeight;}
+                            var coverHeight = windowHeight - headerHeight - footerHeight + 'px';
+                        }
+                        if(cards[i].getAttribute('data-card-height') === "cover-card"){
+                            var windowHeight = window.outerHeight;
+                            var coverHeight = windowHeight - 275 + 'px';
+                            cards[i].style.height =  coverHeight
+                        }
+                        if(cards[i].getAttribute('data-card-height') === "cover-full"){
+                            if (window.matchMedia('(display-mode: fullscreen)').matches) {var windowHeight = window.outerHeight;}
+                            if (!window.matchMedia('(display-mode: fullscreen)').matches) {var windowHeight = window.innerHeight;}
+                            var coverHeight = windowHeight + 'px';
+                            cards[i].style.height =  coverHeight
+                        }
+                        if(cards[i].hasAttribute('data-card-height')){
+                            var getHeight = cards[i].getAttribute('data-card-height');
+                            cards[i].style.height= getHeight +'px';
+                            if(getHeight === "cover"){
+                                var totalHeight = getHeight
+                                cards[i].style.height =  coverHeight
+                            }
+                        }
+                    }
+                }
+
+                if(cards.length){
+                    card_extender();
+                    window.addEventListener("resize", card_extender);
+                }
+            }
         },
         fetchPolicy: 'no-cache'
     },
@@ -1521,6 +1607,13 @@ export default {
     }
   },
   methods: {
+      goLogin() {
+        if (localStorage.hasOwnProperty("idToken") == false || localStorage.idToken == null) {
+          this.$root.$children[0].$refs.loginBottomSheet.open();
+        } else if (localStorage.hasOwnProperty("nickName") == false || localStorage.nickName == null) {
+          location.href='/user_create';
+        }
+      },
       showAppSettingActivity() {
           try {
               Android.showAppSettingActivity()

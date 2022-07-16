@@ -45,9 +45,10 @@ export default (refreshToken) =>
 
 // Android
 try {
+  //console.log("check Android")
   if (userAgent.indexOf('android') !== -1) {
     const userInformation = JSON.parse(Android.getUserInformation());
-    console.log(`android connected, ${JSON.stringify(userInformation)}`);
+    //console.log(`android connected, ${JSON.stringify(userInformation)}`);
     localStorage.idToken = Android.getIdToken();
     localStorage.setItem(userAuthKey, userInformation);
     if (userInformation.uid) localStorage.uid = userInformation.uid;
@@ -56,41 +57,39 @@ try {
     if (userInformation.languageCode) localStorage.languageCode = userInformation.languageCode;
 
     //var axios = require("axios");
-    axios({
-      url: 'https://api.wedives.com/graphql',
-      method: 'post',
-      headers: {
-        countrycode: 'ko',
-        idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-      },
-      data: {
-          query: `
-              query Query($uid: ID!) {
-                getUserByUid(uid: $uid) {
-                  _id
-                  nickName
-                  birthAge
-                  gender
+    if (localStorage.nickName == null) {
+      axios({
+        url: 'https://api.wedives.com/graphql',
+        method: 'post',
+        headers: {
+          countrycode: 'ko',
+          idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+        },
+        data: {
+            query: `
+                query Query($uid: ID!) {
+                  getUserByUid(uid: $uid) {
+                    _id
+                    nickName
+                    birthAge
+                    gender
+                  }
                 }
-              }
-          `,
-          variables: {
-              "uid": localStorage.uid
-          }
-      }
-    }).then(function(result) {
-      if (result.data.data.getUserByUid != null) {
-        localStorage.nickName = result.data.data.getUserByUid.nickName;
-        localStorage.userId = result.data.data.getUserByUid._id;
-      }
-    })
-    
-  
+            `,
+            variables: {
+                "uid": localStorage.uid
+            }
+        }
+      }).then(function(result) {
+        if (result.data.data.getUserByUid != null) {
+          localStorage.nickName = result.data.data.getUserByUid.nickName;
+          localStorage.userId = result.data.data.getUserByUid._id;
+        }
+      });
+    }
   } else if (userAgent.indexOf('iphone') !== -1 || userAgent.indexOf('ipad') !== -1) {
-    
     // console.log(`ios connected, ${JSON.stringify(JfSON.parse(iOS.getUserInformation()))}`)
     // localStorage.setItem(userAuthKey, JSON.parse(iOS.getUserInformation()));
-  
   } else { // 안드로이드, IOS 가 아닌 경우 (더 조건을 추가해서 처리해도 됨)
     //console.log(`web client connected.`);
   
