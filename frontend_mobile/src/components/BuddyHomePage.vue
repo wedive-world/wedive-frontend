@@ -273,7 +273,7 @@
 
 
 
-    <div class="page-content">
+    <div class="page-content" style="padding-bottom: 50px !important;">
         <!--
         <div class="splide wedive-slider slider-no-arrows slider-no-dots" id="main-slider">
             <div class="splide__track">
@@ -375,9 +375,6 @@
                             <div v-for="(preview, index) in recommendation.previews" class="splide__slide">
                                 <a v-on:click="movePreview(preview)">
                                     <div class="card card-style card-nearby" :style="'background: url('+((preview.backgroundImages && preview.backgroundImages.length > 0) ? preview.backgroundImages[0].thumbnailUrl : '/static/empty.jpg')+')'" data-card-height="260">
-                                        <div class="card-top px-3 py-3">
-                                            <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-red-dark"></i></a>
-                                        </div>
                                         <div class="card-bottom px-3 py-3">
                                             <h4 class="color-white font-18 font-600">{{ preview.title }}</h4>
                                             <div class="divider bg-white opacity-20 mb-1"></div>
@@ -507,9 +504,6 @@
                             <div v-for="(site, index) in recommendation.previews.filter(x=>x.__typename == 'DiveSite')" class="splide__slide">
                                 <a v-on:click="movePreview(site)">
                                     <div class="card card-style card-nearby" :style="'background: url('+((site.backgroundImages && site.backgroundImages.length > 0) ? site.backgroundImages[0].thumbnailUrl : '/static/empty.jpg')+')'" data-card-height="260">
-                                        <div class="card-top px-3 py-3">
-                                            <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-red-dark"></i></a>
-                                        </div>
                                         <div class="card-bottom px-3 py-3">
                                             <h4 class="color-white font-18 font-600">{{ site.name }}</h4>
                                             <div class="divider bg-white opacity-20 mb-1"></div>
@@ -732,20 +726,21 @@
 
         
         <div data-menu-load="/static/menu-footer.html"></div>
+        <div class="milky-way">
+            <div class="stars">
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+            </div>
     </div>
-    <div class="milky-way">
-        <div class="stars">
-            <div class="star"></div>
-            <div class="star"></div>
-            <div class="star"></div>
-            <div class="star"></div>
-            <div class="star"></div>
-            <div class="star"></div>
-            <div class="star"></div>
-            <div class="star"></div>
-            <div class="star"></div>
-        </div>
     </div>
+    
     
     </pull-to>
     <a v-on:click="concierge" id="btn_new" :class="'btn btn-m mb-3 rounded-xl font-900 shadow-s icon-concierge'" style="background-color: #181818;"></a>
@@ -2185,30 +2180,16 @@ svg #fish6{
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .milky-way {
-    height: 100vw;
-    margin-top: calc(-100vw - 40px);
+  height: 100vw;
+  margin-top: calc(-100vw + 40px);
+  z-index: -1;
 }
 .stars {
   position: relative;
   width: 100%;
   height: 100%;
+  z-index: -1;
 }
 
 .star {
@@ -2222,9 +2203,24 @@ svg #fish6{
 .star:nth-child(1) {
   top: 12px;
   left: 32%;
-  -ms-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  -o-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  width: 2px;
+  height: 2px;
+  -ms-box-shadow: 0 0 10px 5px rgba(202, 243, 189, 0.3);
+  -o-box-shadow: 0 0 10px 5px rgba(202, 243, 189, 0.3);
+  box-shadow: 0 0 10px 5px rgba(202, 243, 189, 0.3);
+}
+.star:nth-child(2) {
+  top: 6px;
+  left: 82%;
+  width: 1px;
+  height: 1px;
+  -ms-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.2);
+  -o-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.2);
+}
+.star:nth-child(3) {
+  top: 10px;
+  left: 55%;
   width: 2px;
   height: 2px;
   -webkit-animation: star 1s 1s alternate infinite;
@@ -2235,76 +2231,31 @@ svg #fish6{
   -o-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
   box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
 }
-.star:nth-child(2) {
-  top: 6px;
-  left: 82%;
-  -ms-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  -o-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  width: 1px;
-  height: 1px;
-  -webkit-animation: star 3s 3s alternate infinite;
-  animation: star 3s 3s alternate infinite;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-  -ms-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
-  -o-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
-  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
-}
-.star:nth-child(3) {
-  top: 10px;
-  left: 55%;
-  -ms-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  -o-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  width: 2px;
-  height: 2px;
-  -webkit-animation: star 2s 1s alternate infinite;
-  animation: star 2s 1s alternate infinite;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-  -ms-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
-  -o-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
-  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
-}
 .star:nth-child(4) {
   top: 89%;
   left: 33px;
-  -ms-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  -o-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
   width: 3px;
   height: 3px;
   -webkit-animation: star 1s 2s alternate infinite;
   animation: star 1s 2s alternate infinite;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
-  -ms-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
-  -o-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
-  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+  -ms-box-shadow: 0 0 10px 5px rgba(202, 243, 189, 0.3);
+  -o-box-shadow: 0 0 10px 5px rgba(202, 243, 189, 0.3);
+  box-shadow: 0 0 10px 5px rgba(202, 243, 189, 0.3);
 }
 .star:nth-child(5) {
   top: 30px;
   left: calc(100vw - 7px);
-  -ms-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  -o-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  -ms-box-shadow: 0 0 20px 10px rgba(202, 243, 189, 0.3);
+  -o-box-shadow: 0 0 20px 10px rgba(202, 243, 189, 0.3);
+  box-shadow: 0 0 20px 10px rgba(202, 243, 189, 0.3);
   width: 2px;
   height: 2px;
-  -webkit-animation: star 3s 3s alternate infinite;
-  animation: star 3s 3s alternate infinite;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-  -ms-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
-  -o-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
-  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
 }
 .star:nth-child(6) {
   top: 89%;
   left: 38vw;
-  -ms-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  -o-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
   width: 2px;
   height: 2px;
   -webkit-animation: star 1s 1s alternate infinite;
@@ -2318,15 +2269,8 @@ svg #fish6{
 .star:nth-child(7) {
   top: 62%;
   left: calc(100vw - 4px);
-  -ms-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  -o-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  width: 1px;
-  height: 1px;
-  -webkit-animation: star 3s 2s alternate infinite;
-  animation: star 3s 2s alternate infinite;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
+  width: 2px;
+  height: 2px;
   -ms-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
   -o-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
   box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
@@ -2334,34 +2278,24 @@ svg #fish6{
 .star:nth-child(8) {
   top: 90%;
   left: 55vw;
-  -ms-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  -o-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
   width: 2px;
   height: 2px;
   -webkit-animation: star 3s 1s alternate infinite;
   animation: star 3s 1s alternate infinite;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
-  -ms-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
-  -o-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
-  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+  -ms-box-shadow: 0 0 10px 5px rgba(202, 243, 189, 0.3);
+  -o-box-shadow: 0 0 10px 5px rgba(202, 243, 189, 0.3);
+  box-shadow: 0 0 10px 5px rgba(202, 243, 189, 0.3);
 }
 .star:nth-child(9) {
-  top: 55%;
-  left: 6px;
-  -ms-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  -o-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  top: 86%;
+  left: 16%;
   width: 3px;
   height: 3px;
-  -webkit-animation: star 4s 1s alternate infinite;
-  animation: star 4s 1s alternate infinite;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-  -ms-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
-  -o-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
-  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+  -ms-box-shadow: 0 0 10px 5px rgba(202, 243, 189, 0.3);
+  -o-box-shadow: 0 0 10px 5px rgba(202, 243, 189, 0.3);
+  box-shadow: 0 0 10px 5px rgba(202, 243, 189, 0.3);
 }
 @-webkit-keyframes star {
   0% {
