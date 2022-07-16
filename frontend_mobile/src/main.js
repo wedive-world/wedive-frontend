@@ -95,13 +95,11 @@ try {
   
   }
 } catch(e) {
-  console.log(e);
-  console.log(e.toString().replace(/\\n/gi, '<br/>'));
-  var toastData = 'debug-error';
+  /*var toastData = 'debug-error';
   $("#" + toastData).text(e.toString().replace(/\\n/gi, '<br/>'));
   var notificationToast = document.getElementById(toastData);
   var notificationToast = new bootstrap.Toast(notificationToast);
-  notificationToast.show();
+  notificationToast.show();*/
 }
 
 
