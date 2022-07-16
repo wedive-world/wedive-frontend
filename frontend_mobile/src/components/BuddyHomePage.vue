@@ -744,14 +744,6 @@
             <div class="star"></div>
             <div class="star"></div>
             <div class="star"></div>
-            <div class="star"></div>
-            <div class="star"></div>
-            <div class="star"></div>
-            <div class="star"></div>
-            <div class="star"></div>
-            <div class="star"></div>
-            <div class="star"></div>
-            
         </div>
     </div>
     
@@ -2276,13 +2268,13 @@ svg #fish6{
   box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
 }
 .star:nth-child(4) {
-  top: 10px;
-  left: 3px;
+  top: 89%;
+  left: 33px;
   -ms-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
   -o-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
   box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  width: 1px;
-  height: 1px;
+  width: 3px;
+  height: 3px;
   -webkit-animation: star 1s 2s alternate infinite;
   animation: star 1s 2s alternate infinite;
   -webkit-animation-fill-mode: both;
@@ -2308,15 +2300,15 @@ svg #fish6{
   box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
 }
 .star:nth-child(6) {
-  top: 148px;
-  left: calc(100vw - 9px);
+  top: 89%;
+  left: 38vw;
   -ms-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
   -o-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
   box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  width: 3px;
-  height: 3px;
-  -webkit-animation: star 3s 1s alternate infinite;
-  animation: star 3s 1s alternate infinite;
+  width: 2px;
+  height: 2px;
+  -webkit-animation: star 1s 1s alternate infinite;
+  animation: star 1s 1s alternate infinite;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
   -ms-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
@@ -2340,102 +2332,6 @@ svg #fish6{
   box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
 }
 .star:nth-child(8) {
-  top: 88%;
-  left: calc(100vw - 4px);
-  -ms-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  -o-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  width: 1px;
-  height: 1px;
-  -webkit-animation: star 1s 3s alternate infinite;
-  animation: star 1s 3s alternate infinite;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-  -ms-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
-  -o-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
-  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
-}
-.star:nth-child(9) {
-  top: 90%;
-  left: calc(100vw - 52px);
-  -ms-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  -o-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  width: 1px;
-  height: 1px;
-  -webkit-animation: star 1s 2s alternate infinite;
-  animation: star 1s 2s alternate infinite;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-  -ms-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
-  -o-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
-  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
-}
-.star:nth-child(10) {
-  top: 92%;
-  left: 68vw;
-  -ms-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  -o-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  width: 1px;
-  height: 1px;
-  -webkit-animation: star 2s 1s alternate infinite;
-  animation: star 2s 1s alternate infinite;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-  -ms-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
-  -o-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
-  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
-}
-.star:nth-child(11) {
-  top: 89%;
-  left: 38vw;
-  -ms-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  -o-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  width: 2px;
-  height: 2px;
-  -webkit-animation: star 1s 1s alternate infinite;
-  animation: star 1s 1s alternate infinite;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-  -ms-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
-  -o-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
-  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
-}
-.star:nth-child(12) {
-  top: 91%;
-  left: 6vw;
-  -ms-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  -o-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  width: 2px;
-  height: 2px;
-  -webkit-animation: star 3s 3s alternate infinite;
-  animation: star 3s 3s alternate infinite;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-  -ms-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
-  -o-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
-  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
-}
-.star:nth-child(13) {
-  top: 92%;
-  left: 9vw;
-  -ms-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  -o-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  width: 3px;
-  height: 3px;
-  -webkit-animation: star 1s 2s alternate infinite;
-  animation: star 1s 2s alternate infinite;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-  -ms-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
-  -o-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
-  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
-}
-.star:nth-child(14) {
   top: 90%;
   left: 55vw;
   -ms-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
@@ -2451,23 +2347,7 @@ svg #fish6{
   -o-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
   box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
 }
-.star:nth-child(15) {
-  top: 86%;
-  left: 24%;
-  -ms-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  -o-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
-  width: 3px;
-  height: 3px;
-  -webkit-animation: star 1s 3s alternate infinite;
-  animation: star 1s 3s alternate infinite;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-  -ms-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
-  -o-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
-  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
-}
-.star:nth-child(16) {
+.star:nth-child(9) {
   top: 55%;
   left: 6px;
   -ms-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
