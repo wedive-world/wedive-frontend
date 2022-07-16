@@ -1404,6 +1404,34 @@ export default {
                             thumbnailUrl
                         }
                     }
+                    diveSites {
+                        waterTemperature {
+                            name
+                            currentSeaTemperature
+                            weatherText
+                            temperatureC
+                            temperatureF
+                            weatherDescription
+                            weatherIcon
+                            humidity
+                            windSpeed
+                            temperatureDetail {
+                                MinC
+                                MaxC
+                                MinF
+                                MaxF
+                            }
+                            weekTideForecast {
+                                daysOfWeek
+                                tideForecasts
+                            }
+                            latitude
+                            longitude
+                        }
+                        name
+                        uniqueName
+                        _id
+                    }
                     images {
                         _id
                         reference
@@ -1522,6 +1550,11 @@ export default {
           result() {
             if (this.getDiveCenterByUniqueName.isUserLike) this.like_img = 'ico_heart2';
             if (this.getDiveCenterByUniqueName.isUserSubscribe) this.subscribe_img = 'ico_subscribe2';
+            {
+                if (this.getDiveCenterByUniqueName.diveSites && this.getDiveCenterByUniqueName.diveSites.length > 0 && this.getDiveCenterByUniqueName.diveSites[0].waterTemperature) {
+                    this.getDiveCenterByUniqueName.waterTemperature = this.getDiveCenterByUniqueName.diveSites[0].waterTemperature;
+                }
+            }
             {
                 var id_arr = new Array();
                 var width_arr = new Array();
@@ -1872,7 +1905,6 @@ export default {
                     }
                     x.dateStartedAt = new Date(x.startedAt);
                 });
-                console.log(this.getDivingsByPlaceId);
                 //}
             }).catch((error) => {
                 // Error)

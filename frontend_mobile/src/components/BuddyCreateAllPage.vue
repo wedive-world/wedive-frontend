@@ -126,21 +126,23 @@
                                             placeholder="다이빙 장소를 검색하세요"
                                             inputClass="special-input-class"
                                             :disabledValues="(selecteduser ? [selecteduser.name] : [])"
+                                            :showAllResults="true"
                                             @input="lookupLocationSearch"
                                             style="background: transparent;border-width: 0;padding:0;margin-botttom:8px;"
                                             >
                                             <template slot="suggestion" slot-scope="{ data, htmlText }">
                                                 <div class="d-flex align-items-center" style="position:relative !important;">
-                                                <div :class="''+data.type + '-tag'" style="position:relative;">
-                                                    <img
-                                                    class="rounded-s me-3"
-                                                    :src="(data.backgroundImages && data.backgroundImages.length>0) ? data.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'"
-                                                    style="width: 40px; height: 40px;" />
+                                                <div style="position:relative;">
+                                                    <div class="p-2 rounded-s" style="background: #f1f1f1;border: 1px solid #eaeaea;margin-right:8px;">
+                                                        <img
+                                                        :src="'/static/images/assets/' + (data.__typename == 'DiveShop' ? 'i_shop' : data.__typename == 'DiveCenter' ? 'i_center' : 'i_site') + '.png'"
+                                                        style="width: 30px; height: 30px;" />
+                                                    </div>
                                                 </div>
-                                                <span v-if="data.__typename == 'DiveSite'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'badge border color-site border-site me-2\'>사이트</span><span class=\'font-noto font-16\'>' + htmlText + '</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + data.description+'</span>'"></span>
-                                                <span v-else-if="data.__typename == 'DivePoint'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'badge border color-point border-point me-2\'>포인트</span><span class=\'font-noto font-16\'>' + htmlText + '</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + data.description+'</span>'"></span>
-                                                <span v-else-if="data.__typename == 'DiveCenter'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'badge border color-center border-center me-2\'>수영장</span><span class=\'font-noto font-16\'>' + htmlText + '</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + data.description+'</span>'"></span>
-                                                <span v-else-if="data.__typename == 'DiveShop'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'badge border color-shop border-shop me-2\'>센터</span><span class=\'font-noto font-16\'>' + htmlText + '</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + data.description+'</span>'"></span>
+                                                <p v-if="data.__typename == 'DiveSite'" style="margin-top: -22px;margin-bottom: 0;position: relative;width: calc(100vw - 160px);" v-html="'<p class=\'mb-0 font-noto font-14 ellipsis\' style=\'max-width: calc(100vw - 214px);display: inline-block;\'>' + htmlText + '</p><span class=\'font-14 ms-2\' style=\'margin-bottom: 0;position: absolute;right: 0px;top: 0px;\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'color-gray font-13 ellipsis\' style=\'width: 100%;position: absolute;margin-top: -2px;\'>' + (data.description ? data.description : '')+'</span>'"></p>
+                                                <p v-else-if="data.__typename == 'DivePoint'" style="margin-top: -22px;margin-bottom: 0;position: relative;width: calc(100vw - 160px);" v-html="'<p class=\'mb-0 font-noto font-14 ellipsis\' style=\'max-width: calc(100vw - 214px);display: inline-block;\'>' + htmlText + '</p><span class=\'font-14 ms-2\' style=\'margin-bottom: 0;position: absolute;right: 0px;top: 0px;\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'color-gray font-13 ellipsis\' style=\'width: 100%;position: absolute;margin-top: -2px;\'>' + (data.description ? data.description : '')+'</span>'"></p>
+                                                <p v-else-if="data.__typename == 'DiveCenter'" style="margin-top: -22px;margin-bottom: 0;position: relative;width: calc(100vw - 160px);" v-html="'<p class=\'mb-0 font-noto font-14 ellipsis\' style=\'max-width: calc(100vw - 214px);display: inline-block;\'>' + htmlText + '</p><span class=\'font-14 ms-2\' style=\'margin-bottom: 0;position: absolute;right: 0px;top: 0px;\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'color-gray font-13 ellipsis\' style=\'width: 100%;position: absolute;margin-top: -2px;\'>' + (data.description ? data.description : '')+'</span>'"></p>
+                                                <p v-else-if="data.__typename == 'DiveShop'" style="margin-top: -22px;margin-bottom: 0;position: relative;width: calc(100vw - 160px);" v-html="'<p class=\'mb-0 font-noto font-14 ellipsis\' style=\'max-width: calc(100vw - 214px);display: inline-block;\'>' + htmlText + '</p><span class=\'font-14 ms-2\' style=\'margin-bottom: 0;position: absolute;right: 0px;top: 0px;\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'color-gray font-13 ellipsis\' style=\'width: 100%;position: absolute;margin-top: -2px;\'>' + (data.description ? data.description : '')+'</span>'"></p>
                                                 
                                                 </div>
                                             </template>
@@ -698,15 +700,6 @@ export default {
                             name
                             description
                             adminScore
-                            latitude
-                            longitude
-                            backgroundImages {
-                                thumbnailUrl
-                            }
-                            interests {
-                                title
-                                type
-                            }
                         }
                         ... on DivePoint {
                             _id
@@ -714,15 +707,6 @@ export default {
                             name
                             description
                             adminScore
-                            latitude
-                            longitude
-                            backgroundImages {
-                                thumbnailUrl
-                            }
-                            interests {
-                                title
-                                type
-                            }
                         }
                         ... on DiveCenter {
                             _id
@@ -730,15 +714,6 @@ export default {
                             name
                             description
                             adminScore
-                            latitude
-                            longitude
-                            backgroundImages {
-                                thumbnailUrl
-                            }
-                            interests {
-                                title
-                                type
-                            }
                         }
                         ... on DiveShop {
                             _id
@@ -746,15 +721,6 @@ export default {
                             name
                             description
                             adminScore
-                            latitude
-                            longitude
-                            backgroundImages {
-                                thumbnailUrl
-                            }
-                            interests {
-                                title
-                                type
-                            }
                         }
                         address
                         latitude

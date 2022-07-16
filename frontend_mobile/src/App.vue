@@ -336,6 +336,8 @@ export default {
     goNoti() {
       if(this.idToken != null && this.nickName != null && this.nickName != 'null')
         location.href = '/other/notification';
+      else if (this.nickName == null || this.nickName == 'null')
+        this.$refs.nicknameBottomSheet.open();
       else
         this.$refs.loginBottomSheet.open();
     },
@@ -345,6 +347,8 @@ export default {
     openCreateSheet() {
       if(this.idToken != null && this.nickName != null && this.nickName != 'null')
         this.$refs.createBottomSheet.open();
+      else if (this.nickName == null || this.nickName == 'null')
+        this.$refs.nicknameBottomSheet.open();
       else
         this.$refs.loginBottomSheet.open();
     },
@@ -492,7 +496,6 @@ export default {
           }
           else if (this.nickName == null || this.nickName == 'null') {
             this.$refs.nicknameBottomSheet.open();
-            //location.href='/user_create';
           }
           else {
             this.$refs.loginBottomSheet.open();

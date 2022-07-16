@@ -31,15 +31,14 @@
                                         </svg>
                                     </div>
                                     
-                                    <div class="mt-2" style="display:inline-block;vertical-align: top;">
-                                        <h4 class="mb-0 font-16 font-500">{{ diving.title }}</h4>
-                                        <p class="font-13 pb-0 mb-0 mt-n1 ellipsis color-gray">{{ diving.showAt }} ({{ diving.typeShow }})</p>
+                                    <div class="mt-2" style="display:inline-block;vertical-align: top;max-width: calc(100vw - 122px);">
+                                        <h4 class="mb-0 font-16 font-500 ellipsis" style="">{{ diving.showAt }} ({{ diving.typeShow }})</h4>
                                         <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> {{ diving.location }}</p>
+                                        <p class="font-13 pb-0 mb-0 mt-n1 ellipsis color-gray">{{ diving.title }}</p>
                                     </div>
                                     <span class="chip chip-s bg-gray-light text-center font-400 wedive-chip color-black">
-                                        <i class="far fa-user"></i>
-                                        <span class="color-highlight" style="margin-right:2px;">{{ diving.participants.filter(parti=>parti.gender=='m'&&parti.status=='joined').length + (userGender=='m' ? 1:0) }}</span>/
-                                        <span class="color-shopping">{{ diving.participants.filter(parti=>parti.gender=='f'&&parti.status=='joined').length + (userGender=='f' ? 1:0) }}</span>
+                                        <i class="fa fa-user color-gray"></i>
+                                        <span class="" style="margin-right:2px;">{{ diving.participants.filter(parti=>parti.status=='joined').length + 1 }}</span>
                                     </span>
                                 </div>
                             </div>
@@ -254,7 +253,7 @@ export default {
 
 
 <style scoped>
-.wedive-chip {font-family: 'Noto Sans Korean';border-radius:6px !important;padding: 0 8px;margin:0 !important;position:absolute;right:0px;bottom:26px;}
+.wedive-chip {font-family: 'Noto Sans Korean';border-radius:6px !important;padding: 0 8px;margin:0 !important;position:absolute;right:0px;top:18px;}
 .wedive-chip i {width: auto;line-height: inherit;margin-right: 2px;}
 .position-relative {position: relative;}
 

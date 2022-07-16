@@ -20,12 +20,12 @@
     <ContentLoader :width="windowWidth" height="900" id="div_content_loader" primaryColor="#e3e7ef" secondaryColor="#f4f7ff">
         <rect x="20" y="40" rx="20" ry="20" width="70" height="70" />
         <rect x="100" y="30" rx="20" ry="20" :width="windowWidth-110" height="120" />
-        <rect x="10" y="170" rx="20" ry="20" :width="(windowWidth/2)-16" height="170" />
-        <rect :x="(windowWidth/2)+4" y="170" rx="20" ry="20" :width="(windowWidth/2)-16" height="170" />
-        <rect x="10" y="370" rx="20" ry="20" :width="windowWidth-20" height="130" />
-        <rect x="10" y="510" rx="20" ry="20" :width="windowWidth-20" height="50" />
-        <rect x="10" y="570" rx="20" ry="20" :width="windowWidth-20" height="50" />
-        <rect x="10" y="630" rx="20" ry="20" :width="windowWidth-20" height="100" />
+        <rect x="10" y="160" rx="20" ry="20" :width="(windowWidth/2)-16" height="170" />
+        <rect :x="(windowWidth/2)+4" y="160" rx="20" ry="20" :width="(windowWidth/2)-16" height="170" />
+        <rect x="10" y="340" rx="20" ry="20" :width="windowWidth-20" height="80" />
+        <rect x="10" y="450" rx="20" ry="20" :width="windowWidth-20" height="100" />
+        <rect x="10" y="560" rx="20" ry="20" :width="windowWidth-20" height="50" />
+        <rect x="10" y="620" rx="20" ry="20" :width="windowWidth-20" height="100" />
         
     </ContentLoader>
     
@@ -72,8 +72,8 @@
                         </a>
                     </div>
                     <div class="font-noto" style="position: absolute;top:14px;left:98px;" v-on:click="goLogin()">
-                        <h5 class="mb-0 font-500 ellipsis">{{ getUserById && getUserById.nickName && getUserById.nickName != 'null' ? '다이버 ' + getUserById.nickName + '님' : (idToken == null ? '위다이브 손님, 로그인을 해보세요.' : '다이버님, 프로필을 등록해보세요.') }}</h5>
-                        <span :class="getUserById ? '' : 'opacity-30'">
+                        <h5 class="mb-2 font-500 ellipsis">{{ getUserById && getUserById.nickName && getUserById.nickName != 'null' ? '다이버 ' + getUserById.nickName + '님' : (idToken == null ? '위다이브 손님, 로그인을 해보세요.' : '다이버님, 프로필을 등록해보세요.') }}</h5>
+                        <!--<span :class="getUserById ? '' : 'opacity-30'">
                             <img src="/static/images/assets/main_heart.png" height="22" class="inline-block" style="vertical-align: top;">
                             <span class="chip chip-s text-center font-400 wedive-chip color-gray" style="position: initial;margin-left: -4px !important;margin-right:8px !important;">호스트 {{ getUserById ? getUserById.divingHostCount : '0' }}회</span>
                         </span>
@@ -81,7 +81,7 @@
                             <img src="/static/images/assets/main_check.png" height="22" class="inline-block" style="vertical-align: top;margin-left:-4px;">
                             <span class="chip chip-s text-center font-400 wedive-chip color-gray" style="position: initial;margin-left: -4px !important;">게스트 {{ getUserById ? getUserById.divingParticipantCount : '0' }}회</span>
                         </span>
-                        <br/>
+                        <br/>-->
                         <span :class="(getUserById && getUserById.scubaLevelShow != '') ? '' : 'opacity-30'">
                             <img src="https://d34l91104zg4p3.cloudfront.net/assets/award1.png" height="30" class="inline-block" style="vertical-align: top;margin-left:-4px;">
                             <span class="chip chip-s text-center font-400 wedive-chip color-white" style="position: initial;background-color: #268cd3;margin-top: 4px !important;margin-left: -4px !important;margin-right:8px !important;">스쿠바 {{ getUserById ? getUserById.scubaLevelShow : '레벨 없음' }}</span>
@@ -177,27 +177,36 @@
     <div class="waveaa">
     </div>
     
-    <div class="pe-4 ps-4" style="margin-top:-100px;z-index:100;">
-        <div class="row">
-            <div v-on:click="move('/buddy/create')" class="card card-style col-6 shadow-xl square m-0" style="width: calc(50% - 6px);background-image: url(/static/images/assets/toss-hand.png);background-size: 70% 70%;background-repeat: no-repeat;background-position: right bottom;background-color: #ffffffcf;">
-                <div class="mb-0 mt-3" style="position:absolute;height:50%;">
+    <div class="pe-4 ps-4" style="margin-top:-110px;z-index:100;">
+        <div class="row mb-3">
+            <div v-on:click="move('/buddy/create')" class="card card-style col-6 shadow-xl square m-0 p-0" style="width: calc(50% - 6px);background-image: url(/static/images/assets/toss-hand.png);background-size: 70% 70%;background-repeat: no-repeat;background-position: right bottom;background-color: #ffffffcf;">
+                <div class="mb-0 mt-2 ms-2" style="position:absolute;height:50%;">
                     <h4 class="font-noto text-start pt-1 mb-0">버디찾기</h4>
                     <p class="text-start mb-0 opacity-70">새로운 다이빙 생성</p>
                 </div>
             </div>
-            <div v-on:click="move('/diving/search')" class="card card-style col-6 shadow-xl square m-0" style="width: calc(50% - 6px);margin-left: 12px !important;background-image: url(/static/images/assets/search2.png);background-size: 70% 70%;background-repeat: no-repeat;background-position: right bottom;background-color: #ffffffcf;">
-                <div class="mb-0 mt-3" style="position:absolute;height:50%;">
+            <div v-on:click="move('/diving/search')" class="card card-style col-6 shadow-xl square m-0 p-0" style="width: calc(50% - 6px);margin-left: 12px !important;background-image: url(/static/images/assets/search2.png);background-size: 70% 70%;background-repeat: no-repeat;background-position: right bottom;background-color: #ffffffcf;">
+                <div class="mb-0 mt-2 ms-2" style="position:absolute;height:50%;">
                     <h4 class="font-noto text-start pt-1 mb-0">검색</h4>
                     <p class="text-start mb-0 opacity-70">다이빙, 장소 검색</p>
+                </div>
+            </div>
+            <div v-on:click="move('/guide/list')" class="card card-style col-12 shadow-xl" style="height: 80px; margin: 12px 0px 0px 0px;background-image: url(/static/images/assets/guide-book.png);background-size: 80px 80px;background-repeat: no-repeat;background-position: right 20px bottom 0px;background-color: #ffffffcf;">
+                <div class="mb-0 mt-2" style="position:absolute;height:50%;">
+                    <h4 class="font-noto text-start pt-1 mb-0">가이드</h4>
+                    <p class="text-start mb-0 opacity-70">다이빙 입문, 유형별 맞춤 가이드</p>
                 </div>
             </div>
         </div>
     </div>
     
-
+    <div class="d-flex mb-3 pt-3">
+        <img src="/static/images/assets/soulmate-hand.png" width="90" style="margin-left: 12px;"/>
+        <div class="font-noto font-18 font-600 ps-2 opacity-80" style="padding-top:6px;">{{ (getUserById && getUserById.nickName && getUserById.nickName != 'null') ? getUserById.nickName : '다이버' }}님을 위한 <br/>디이빙 추천</div>
+    </div>
     <div v-if="getNearByDivings != null && getNearByDivings.length > 0" style="margin-top: -16px;">
         <div>
-            <h4 class="text-start mb-2 mt-2 font-noto" style="margin-left: 14px;margin-right: 14px;position:relative;font-weight:600;">내 근처 다이빙 이벤트</h4>
+            <h4 class="text-start mb-2 mt-2 font-noto" style="margin-left: 22%;margin-right: 14px;position:relative;font-weight:600;">내 근처 다이빙 이벤트</h4>
         </div>
         <div v-if="isPermissionEnabled == false" class="card card-style card-nearby" style="height: 160px;margin-bottom: 16px;margin-right: 10px;">
             <div class="text-center">
@@ -230,7 +239,7 @@
         </div>
     </div>
 
-    <div>
+    <div class="hide">
         <div class="splide single-slider-noauto slider-no-arrows visible-slider slider-no-dots" id="single-slider-guide" style="height:136px;">
             <div class="splide__track">
                 <div class="splide__list">
@@ -312,7 +321,7 @@
         -->
 
         
-        <div v-for="(recommendation,rec_idx) in recommendation1" v-if="recommendation.previews.length > 0">
+        <div v-for="(recommendation,rec_idx) in recommendation1">
             <div v-if="recommendation.previewCount == 0" v-on:click="moveRecommend(recommendation._id, 'recommendation')" class="card card-style" :style="recommendation.cssStyle.includes('|') ? recommendation.cssStyle.split('|')[0] : recommendation.cssStyle">
                 <div :class="'content mb-0 mt-3 me-0' + (recommendation.className ? ' ' + recommendation.className : '')">
                     <h4 class="text-start mb-0 font-noto font-600" v-html="recommendation.title"></h4><i class="wedive-txt-all wedive_right"></i>
@@ -349,12 +358,11 @@
                                             <img v-bind:src="(preview.backgroundImages && preview.backgroundImages.length > 0) ? preview.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;margin-top: 3px;">
                                         </div>-->
                                         <div class="" style="display:inline-block;vertical-align: top;width: calc(100vw - 138px);">
-                                            <h4 class="font-15 mt-1 ellipsis"> {{ preview.title }} </h4>
-                                            <p class="pb-0 mb-0 nearby_desc"> {{ getWediveStartEnd(preview.startedAt, preview.finishedAt) }} </p>
-                                            
+                                            <h4 class="font-15 mt-1 ellipsis mb-0">{{ getWediveStartEnd(preview.startedAt, preview.finishedAt) }}</h4>
                                             <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> {{ preview.location }} ({{ preview.type.join().replace('scubaDiving', '스쿠바').replace('freeDiving', '프리') }})</p>
+                                            <p class="pb-0 mb-0 nearby_desc ellipsis">{{ preview.title }}</p>
                                         </div>
-                                        <span class="chip chip-s bg-gray-light text-center font-400 wedive-chip color-black">{{ preview.participants.filter(x=>x.status=='joined').length+1 }}명 참석</span>
+                                        <span class="chip chip-s bg-gray-light text-center font-400 wedive-chip color-black"><i class="fa fa-user color-gray"></i> {{ preview.participants.filter(x=>x.status=='joined').length+1 }}</span>
                                     </div>
                                 </div>
                             </a>
@@ -401,8 +409,11 @@
 
 
 
-
-
+        <div class="d-flex mb-3 pt-3">
+            <img src="/static/images/assets/map-location.png" width="90" style="margin-left: 12px;"/>
+            <div class="font-noto font-18 font-600 ps-2 opacity-80" style="padding-top:6px;">{{ (getUserById && getUserById.nickName && getUserById.nickName != 'null') ? getUserById.nickName : '다이버' }}님을 위한 <br/>디이빙 장소 추천</div>
+        </div>
+        
         <div v-if="getNearByDiveCenters != null" style="margin-top: 16px;">
             <div>
                 <h4 class="text-start mb-2 mt-2 font-noto" style="margin-left: 14px;margin-right: 14px;position:relative;font-weight:600;">내 근처 다이빙 수영장</h4>
@@ -1194,8 +1205,8 @@ export default {
     },
     recommendation1: {
         query: gql`
-        query Query($targetType: RecommendationTargetType) {
-            recommendation1: getUserRecommendationsByTargetType(targetType: $targetType) {
+        query Query($targetType: RecommendationTargetType, $count: Int) {
+            recommendation1: getUserRecommendationsByTargetType(targetType: $targetType, count: $count) {
                 _id
                 title
                 description
@@ -1256,6 +1267,7 @@ export default {
         variables () {
             return {
                 targetType: "diving",
+                count: 3,
             }
         },
         async result () {
@@ -1314,27 +1326,13 @@ export default {
                     }
                 });
             });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         },
         fetchPolicy: 'no-cache'
     },
     recommendation2: {
         query: gql`
-        query Query($targetType: RecommendationTargetType) {
-            recommendation2: getUserRecommendationsByTargetType(targetType: $targetType) {
+        query Query($targetType: RecommendationTargetType, $count: Int) {
+            recommendation2: getUserRecommendationsByTargetType(targetType: $targetType, count: $count) {
                 _id
                 title
                 description
@@ -1420,6 +1418,7 @@ export default {
         variables () {
             return {
                 targetType: "diveSite",
+                count: 3,
             }
         },
         async result () {
@@ -1791,7 +1790,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.wedive-chip {font-family: 'Noto Sans Korean';border-radius:6px !important;padding: 0 8px;margin:0 !important;position:absolute;right:0px;bottom:0px;}
+.wedive-chip {font-family: 'Noto Sans Korean';border-radius:6px !important;padding: 0 8px;margin:0 !important;position:absolute;right:0px;top:4px;}
 .wedive-chip i {width: auto;line-height: inherit;margin-right: 2px;}
 .light-border-bottom {border-bottom: 1px solid #dee2e6;}
 .wedive-txt-all {position: absolute;top: 20px;right: 16px;}
@@ -1954,7 +1953,7 @@ export default {
 .h3_active {color: black; font-size: 18px;background-image: linear-gradient(90deg, #25beb2, #25beb2);background-position: bottom;background-size: 100% 30%;background-repeat: no-repeat;padding-left:4px;padding-right:4px;font-weight: 600;}
 .h3_deactive {color: #b5b7b9; font-size: 16px;padding-left:4px;padding-right:4px;font-weight: 400;}
 
-.square:after {
+.square:after .square80:after {
   content: "";
   display: block;
   padding-bottom: 24px;

@@ -320,13 +320,13 @@
                     </div>
                 </div>
                 <div data-bs-parent="#tab-group-2" class="collapse px-2" id="tab-time">
-                    <div class="mt-3" v-if="getDiveShopByUniqueName.openingHours && getDiveShopByUniqueName.openingHours.length > 0">
-                        <div v-for="(opening,index) in getDiveShopByUniqueName.openingHours" class="row mb-0" style="position: relative;">
-                            <div v-if="opening[0].includes('>')" :class="'timeline-deco'+((getDiveShopByUniqueName.openingHours[(index+1)]==null || (getDiveShopByUniqueName.openingHours[(index+1)] && getDiveShopByUniqueName.openingHours[(index+1)][0].includes('>')==false)) ? ' deco-end': '')" style="padding: 0;left: 16px;background-color: rgba(0, 0, 0, 1);"></div>
-                            <hr v-if="opening[0].includes('>')" class="hori-line">
-                            <h5 v-if="opening[0].includes('>')" class="col-6 text-start font-13 font-400 mb-0" style="width: calc(50% - 26px);">{{ opening[0].replace('>','') }}</h5>
-                            <h5 v-else class="col-6 text-start font-13 font-400 mb-0">{{ opening[0] }}</h5>
-                            <p class="col-6 mb-1 text-end">{{ opening[1] }}</p>
+                    <div class="mt-3" v-if="getDiveShopByUniqueName.placeOpeningHours && getDiveShopByUniqueName.placeOpeningHours.length > 0">
+                        <div v-for="(opening,index) in getDiveShopByUniqueName.placeOpeningHours" class="row mb-0" style="position: relative;">
+                            <div v-if="opening.split(': ')[0].includes('>')" :class="'timeline-deco'+((getDiveShopByUniqueName.placeOpeningHours[(index+1)]==null || (getDiveShopByUniqueName.placeOpeningHours[(index+1)] && getDiveShopByUniqueName.placeOpeningHours[(index+1)][0].includes('>')==false)) ? ' deco-end': '')" style="padding: 0;left: 16px;background-color: rgba(0, 0, 0, 1);"></div>
+                            <hr v-if="opening.split(': ')[0].includes('>')" class="hori-line">
+                            <h5 v-if="opening.split(': ')[0].includes('>')" class="col-6 text-start font-13 font-400 mb-0" style="width: calc(50% - 26px);">{{ opening.split(': ')[0].replace('>','') }}</h5>
+                            <h5 v-else class="col-6 text-start font-13 font-400 mb-0">{{ opening.split(': ')[0] }}</h5>
+                            <p class="col-6 mb-1 text-end">{{ opening.split(': ')[1] }}</p>
                         </div>
                     </div>
                     <div class="mt-3" v-else>
@@ -399,7 +399,7 @@
             <div class="content mb-0">
                 <h4 class="text-start pt-2 mb-2">주소</h4>
                 <p class="text-start mb-3 mb-0">
-                    <span data-menu="menu-copy"><i class="far fa-copy me-2"></i>{{ getDiveShopByUniqueName.address.replace(' KR', '') }}</span><br/>
+                    <span data-menu="menu-copy"><i class="far fa-copy me-2"></i>{{ getDiveShopByUniqueName && getDiveShopByUniqueName.address ? getDiveShopByUniqueName.address.replace(' KR', '') : '' }}</span><br/>
                     <a href="#" class="color-highlight hide" data-menu="menu-direction"><i class="fas fa-route me-2"></i> 공항-샵 이동방법 안내</a>
                 </p>
             </div>
@@ -1267,7 +1267,7 @@ export default {
                     enteranceFee
                     enteranceLevelFree
                     enteranceLevelScuba
-                    openingHours
+                    placeOpeningHours
                     institutionTypes
                     webPageUrl
                     address
@@ -1384,6 +1384,34 @@ export default {
                     reviewCount
                     isUserSubscribe
                     isUserLike
+                    diveSites {
+                        waterTemperature {
+                            name
+                            currentSeaTemperature
+                            weatherText
+                            temperatureC
+                            temperatureF
+                            weatherDescription
+                            weatherIcon
+                            humidity
+                            windSpeed
+                            temperatureDetail {
+                                MinC
+                                MaxC
+                                MinF
+                                MaxF
+                            }
+                            weekTideForecast {
+                                daysOfWeek
+                                tideForecasts
+                            }
+                            latitude
+                            longitude
+                        }
+                        name
+                        uniqueName
+                        _id
+                    }
                 }
             }
           `,
@@ -1393,33 +1421,13 @@ export default {
               }
           },
           result() {
-            /*
-            waterTemperature {
-                        name
-                        currentSeaTemperature
-                        weatherText
-                        temperatureC
-                        temperatureF
-                        weatherDescription
-                        weatherIcon
-                        humidity
-                        windSpeed
-                        temperatureDetail {
-                            MinC
-                            MaxC
-                            MinF
-                            MaxF
-                        }
-                        weekTideForecast {
-                            daysOfWeek
-                            tideForecasts
-                        }
-                        latitude
-                        longitude
-                    }
-                    */
             if (this.getDiveShopByUniqueName.isUserLike) this.like_img = 'ico_heart2';
             if (this.getDiveShopByUniqueName.isUserSubscribe) this.subscribe_img = 'ico_subscribe2';
+            {
+                if (this.getDiveShopByUniqueName.diveSites && this.getDiveShopByUniqueName.diveSites.length > 0 && this.getDiveShopByUniqueName.diveSites[0].waterTemperature) {
+                    this.getDiveShopByUniqueName.waterTemperature = this.getDiveShopByUniqueName.diveSites[0].waterTemperature;
+                }
+            }
             {
                 var id_arr = new Array();
                 var width_arr = new Array();
