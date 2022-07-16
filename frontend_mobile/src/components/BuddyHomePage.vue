@@ -732,6 +732,27 @@
         
         <div data-menu-load="/static/menu-footer.html"></div>
     </div>
+    <div class="milky-way">
+        <div class="stars">
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            
+        </div>
+    </div>
     
     </pull-to>
     <a v-on:click="concierge" id="btn_new" :class="'btn btn-m mb-3 rounded-xl font-900 shadow-s icon-concierge'" style="background-color: #181818;"></a>
@@ -2164,6 +2185,325 @@ svg #fish6{
     -ms-transform: translateY(-3px);
     -webkit-transform: translateY(-3px);
     transform: translateY(-3px);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.milky-way {
+    height: 100vw;
+    margin-top: calc(-100vw - 40px);
+}
+.stars {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.star {
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  background: #fff;
+  border-radius: 50%;
+  z-index: -1;
+}
+.star:nth-child(1) {
+  top: 12px;
+  left: 32%;
+  -ms-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  -o-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  width: 2px;
+  height: 2px;
+  -webkit-animation: star 1s 1s alternate infinite;
+  animation: star 1s 1s alternate infinite;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -ms-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+  -o-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+}
+.star:nth-child(2) {
+  top: 6px;
+  left: 82%;
+  -ms-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  -o-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  width: 1px;
+  height: 1px;
+  -webkit-animation: star 3s 3s alternate infinite;
+  animation: star 3s 3s alternate infinite;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -ms-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+  -o-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+}
+.star:nth-child(3) {
+  top: 10px;
+  left: 55%;
+  -ms-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  -o-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  width: 2px;
+  height: 2px;
+  -webkit-animation: star 2s 1s alternate infinite;
+  animation: star 2s 1s alternate infinite;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -ms-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+  -o-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+}
+.star:nth-child(4) {
+  top: 10px;
+  left: 3px;
+  -ms-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  -o-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  width: 1px;
+  height: 1px;
+  -webkit-animation: star 1s 2s alternate infinite;
+  animation: star 1s 2s alternate infinite;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -ms-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+  -o-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+}
+.star:nth-child(5) {
+  top: 30px;
+  left: calc(100vw - 7px);
+  -ms-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  -o-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  width: 2px;
+  height: 2px;
+  -webkit-animation: star 3s 3s alternate infinite;
+  animation: star 3s 3s alternate infinite;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -ms-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+  -o-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+}
+.star:nth-child(6) {
+  top: 148px;
+  left: calc(100vw - 9px);
+  -ms-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  -o-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  width: 3px;
+  height: 3px;
+  -webkit-animation: star 3s 1s alternate infinite;
+  animation: star 3s 1s alternate infinite;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -ms-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+  -o-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+}
+.star:nth-child(7) {
+  top: 62%;
+  left: calc(100vw - 4px);
+  -ms-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  -o-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  width: 1px;
+  height: 1px;
+  -webkit-animation: star 3s 2s alternate infinite;
+  animation: star 3s 2s alternate infinite;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -ms-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+  -o-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+}
+.star:nth-child(8) {
+  top: 88%;
+  left: calc(100vw - 4px);
+  -ms-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  -o-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  width: 1px;
+  height: 1px;
+  -webkit-animation: star 1s 3s alternate infinite;
+  animation: star 1s 3s alternate infinite;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -ms-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+  -o-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+}
+.star:nth-child(9) {
+  top: 90%;
+  left: calc(100vw - 52px);
+  -ms-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  -o-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  width: 1px;
+  height: 1px;
+  -webkit-animation: star 1s 2s alternate infinite;
+  animation: star 1s 2s alternate infinite;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -ms-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+  -o-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+}
+.star:nth-child(10) {
+  top: 92%;
+  left: 68vw;
+  -ms-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  -o-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  width: 1px;
+  height: 1px;
+  -webkit-animation: star 2s 1s alternate infinite;
+  animation: star 2s 1s alternate infinite;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -ms-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+  -o-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+}
+.star:nth-child(11) {
+  top: 89%;
+  left: 38vw;
+  -ms-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  -o-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  width: 2px;
+  height: 2px;
+  -webkit-animation: star 1s 1s alternate infinite;
+  animation: star 1s 1s alternate infinite;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -ms-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+  -o-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+}
+.star:nth-child(12) {
+  top: 91%;
+  left: 6vw;
+  -ms-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  -o-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  width: 2px;
+  height: 2px;
+  -webkit-animation: star 3s 3s alternate infinite;
+  animation: star 3s 3s alternate infinite;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -ms-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+  -o-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+}
+.star:nth-child(13) {
+  top: 92%;
+  left: 9vw;
+  -ms-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  -o-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  width: 3px;
+  height: 3px;
+  -webkit-animation: star 1s 2s alternate infinite;
+  animation: star 1s 2s alternate infinite;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -ms-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+  -o-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+}
+.star:nth-child(14) {
+  top: 90%;
+  left: 55vw;
+  -ms-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  -o-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  width: 2px;
+  height: 2px;
+  -webkit-animation: star 3s 1s alternate infinite;
+  animation: star 3s 1s alternate infinite;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -ms-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+  -o-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+}
+.star:nth-child(15) {
+  top: 86%;
+  left: 24%;
+  -ms-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  -o-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  width: 3px;
+  height: 3px;
+  -webkit-animation: star 1s 3s alternate infinite;
+  animation: star 1s 3s alternate infinite;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -ms-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+  -o-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+}
+.star:nth-child(16) {
+  top: 55%;
+  left: 6px;
+  -ms-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  -o-box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  box-shadow: 0 0 20px 10px rgba(102, 143, 189, 0.3);
+  width: 3px;
+  height: 3px;
+  -webkit-animation: star 4s 1s alternate infinite;
+  animation: star 4s 1s alternate infinite;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -ms-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+  -o-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+}
+@-webkit-keyframes star {
+  0% {
+    -ms-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+    -o-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+  }
+  100% {
+    -ms-box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.3);
+    -o-box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.3);
+  }
+}
+@keyframes star {
+  0% {
+    -ms-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+    -o-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+  }
+  100% {
+    -ms-box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.3);
+    -o-box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.3);
   }
 }
 
