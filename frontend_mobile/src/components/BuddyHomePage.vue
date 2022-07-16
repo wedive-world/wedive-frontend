@@ -195,7 +195,7 @@
     </div>
     
 
-    <div v-if="getNearByDivings != null" style="margin-top: -16px;">
+    <div v-if="getNearByDivings != null && getNearByDivings.length > 0" style="margin-top: -16px;">
         <div>
             <h4 class="text-start mb-2 mt-2 font-noto" style="margin-left: 14px;margin-right: 14px;position:relative;font-weight:600;">내 근처 다이빙 이벤트</h4>
         </div>
@@ -1084,7 +1084,6 @@ export default {
                     x.description = '내용 없음' + x.description;
                 }
             });
-
 
             if (this.getNearByDivings.length > 0) {
                 setTimeout(function() {
