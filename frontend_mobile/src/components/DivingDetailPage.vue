@@ -687,22 +687,26 @@ export default {
                 this.getDivingById.diveSites.forEach(x => {
                     x.type = 'site';
                     this.locationData.push(x);
+                    this.getDivingById.location += (this.getDivingById.location != '' ? ', ' : '') + x.name + "";
                 });
-                this.getDivingById.location = this.getDivingById.diveSites[0].name + "";
+                
+                
             }
             if (this.getDivingById.divePoints && this.getDivingById.divePoints.length > 0) {
                 this.getDivingById.divePoints.forEach(x => {
                     x.type = 'point';
                     this.locationData.push(x);
+                    this.getDivingById.location += (this.getDivingById.location != '' ? ', ' : '') + x.name + "";
                 });
-                this.getDivingById.location = this.getDivingById.divePoints[0].name + "";
+                //this.getDivingById.location = this.getDivingById.divePoints[0].name + "";
             } 
             if (this.getDivingById.diveCenters && this.getDivingById.diveCenters.length > 0) {
                 this.getDivingById.diveCenters.forEach(x => {
                     x.type = 'center';
                     this.locationData.push(x);
+                    this.getDivingById.location += (this.getDivingById.location != '' ? ', ' : '') + x.name + "";
                 });
-                this.getDivingById.location = this.getDivingById.diveCenters[0].name;
+                //this.getDivingById.location = this.getDivingById.diveCenters[0].name;
             }
             
 

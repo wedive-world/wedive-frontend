@@ -1500,7 +1500,7 @@ export default {
 .bx-search {padding: 8px 14px;min-height: 48px;}
 .bx-filter {border: 1px solid rgba(0,0,0,.1);padding: 8px 4px;display:inline-block;}
 
-.wedive-corner {position: absolute;width: 30px;height: 30px;overflow: hidden;z-index:999;}
+.wedive-corner {position: absolute;width: 30px;height: 30px;overflow: hidden;z-index:99;}
 .wedive-corner:after {content: '';position: absolute;height: 200%;width: 200%;border-radius: 100%;z-index: -1;box-shadow: 10px 10px 5px 100px #eff5fb;}
 .wedive-corner-bottom {left:-16px;bottom:0;width:16px;height:18px;}
 .wedive-corner-bottom-site:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #31373b !important;}

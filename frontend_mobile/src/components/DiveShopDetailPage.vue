@@ -1607,7 +1607,7 @@ export default {
 
                 this.map = new google.maps.Map(document.getElementById('map'), {
                     center: {lat: this.getDiveShopByUniqueName.latitude, lng: this.getDiveShopByUniqueName.longitude},
-                    zoom: 8,
+                    zoom: 11,
                     mapTypeControl: false,
                     streetViewControl: false,
                     zoomControl: false,

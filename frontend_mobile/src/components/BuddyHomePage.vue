@@ -96,31 +96,29 @@
             <swiper-slide
                 :key="1"
                 :virtualIndex="1">
-                <div v-if="getDivingsByHostUserId.length > 0" class="pt-3 pe-4 ps-4">
+                <div v-if="getDivingsByHostUserId.length > 0" class="pt-3 ps-4" style="margin-right: 90px;">
                     <div v-for="(diving,index) in getDivingsByHostUserId">
                         <div class="map-box" style="position: relative;height: 50px;">
-                            <a v-on:click="movePreview(diving)">
-                                <div :class="(diving.isPast ? 'opacity-30' : '')">
-                                    <div class="justify-content-center mb-0 text-start">
-                                        <div class="small-thumb-img me-2">
-                                            <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
-                                                <defs>
-                                                <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
-                                                <clipPath id="clipSquircle">
-                                                    <use xlink:href="#shapeSquircle"/>
-                                                </clipPath>
-                                                </defs>
-                                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="diving.backgroundImage"/>
-                                            </svg>
-                                        </div>
-                                        <div class="" style="display:inline-block;vertical-align: top;width: calc(100vw - 138px);">
-                                            <p class="pb-0 mb-0 nearby_desc ellipsis"> {{ getWediveStartEnd(diving.startedAt, diving.finishedAt) }} | {{ diving.title }} </p>
-                                            
-                                            <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> {{ diving.location }} ({{ diving.type.join().replace('scubaDiving', '스쿠바').replace('freeDiving', '프리') }})</p>
-                                        </div>
+                            <div v-on:click="movePreview(diving)" :class="(diving.isPast ? 'opacity-30' : '')">
+                                <div class="justify-content-center mb-0 text-start">
+                                    <div class="small-thumb-img me-2">
+                                        <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                                            <defs>
+                                            <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                                            <clipPath id="clipSquircle">
+                                                <use xlink:href="#shapeSquircle"/>
+                                            </clipPath>
+                                            </defs>
+                                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="diving.backgroundImage"/>
+                                        </svg>
+                                    </div>
+                                    <div class="" style="display:inline-block;vertical-align: top;width: calc(100% - 60px);">
+                                        <p class="pb-0 mb-0 nearby_desc ellipsis" style="display: block;"> {{ getWediveStartEnd(diving.startedAt, diving.finishedAt) }} | {{ diving.title }} </p>
+                                        
+                                        <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> {{ diving.location }} ({{ diving.type.join().replace('scubaDiving', '스쿠바').replace('freeDiving', '프리') }})</p>
                                     </div>
                                 </div>
-                            </a>
+                            </div>
                         </div>
                         <div v-if="index < getDivingsByHostUserId.length-1" class="divider mt-0 mb-1"></div>
                         <div v-else class=""></div>
@@ -129,6 +127,10 @@
                 <div v-else class="text-center" v-on:click="goLogin()">
                     <img src="/static/images/assets/empty_list2_2.jpg" height="74" style="margin-top:4px;"/>
                     <p class="mb-0 opacity-30 font-noto font-14 mt-n2">{{ no_diving_word }}</p>
+                </div>
+                <div v-on:click="moveMyDiving()" style="position: absolute;right: 10px;top: 40px;text-align: -webkit-center;background: #ffffff;padding: 6px 8px;border-radius: 10px;">
+                    <i class="wedive_icoset wedive_icoset_rightbar" style="display: block;"></i>
+                    <span>모두보기</span>
                 </div>
             </swiper-slide>
             </swiper>
@@ -183,7 +185,7 @@
                     <p class="text-start mb-0 opacity-70">새로운 다이빙 생성</p>
                 </div>
             </div>
-            <div class="card card-style col-6 shadow-xl square m-0" style="width: calc(50% - 6px);margin-left: 12px !important;background-image: url(/static/images/assets/search2.png);background-size: 70% 70%;background-repeat: no-repeat;background-position: right bottom;background-color: #ffffffcf;">
+            <div v-on:click="move('/diving/search')" class="card card-style col-6 shadow-xl square m-0" style="width: calc(50% - 6px);margin-left: 12px !important;background-image: url(/static/images/assets/search2.png);background-size: 70% 70%;background-repeat: no-repeat;background-position: right bottom;background-color: #ffffffcf;">
                 <div class="mb-0 mt-3" style="position:absolute;height:50%;">
                     <h4 class="font-noto text-start pt-1 mb-0">검색</h4>
                     <p class="text-start mb-0 opacity-70">다이빙, 장소 검색</p>
@@ -204,25 +206,23 @@
                 <a href="#" v-on:click="showAppSettingActivity" class="btn font-400 rounded-s shadow-l bg-secondary color-white bd-w-0 font-13">권한 부여하기</a>
             </div>
         </div>
-        <div v-else class="splide single-slider-site slider-no-arrows visible-slider slider-no-dots" id="single-slider-nearby-diving" style="height:176px;">
+        <div v-else class="splide slider-no-arrows visible-slider slider-no-dots" id="single-slider-nearby-diving" style="height:176px;">
             <div class="splide__track">
                 <div class="splide__list">
                     <div v-for="(item, index) in getNearByDivings" class="splide__slide">
-                        <a v-on:click="movePreview(item)">
-                            <div class="card card-style card-nearby" :style="'background: url('+((item.backgroundImages && item.backgroundImages.length > 0) ? item.backgroundImages[0].thumbnailUrl : '/static/empty.jpg')+')'" data-card-height="160">
-                                <div class="card-bottom px-3 py-3">
-                                    <h4 class="color-white font-18 font-600">{{ item.name }} ({{item.startedAt.substring(5, 10).replace(/-/gi, '/')}})</h4>
-                                    <div class="divider bg-white opacity-20 mb-1"></div>
-                                    <div class="d-flex">
-                                        <div class="align-self-center" style="max-width: 100%;">
-                                            <p class="font-11 opacity-70 font-600 color-white nearby_desc mb-0" style="max-width: 100%;" v-html="item.description"></p>
-                                        </div>
+                        <div v-on:click="movePreview(item)" class="card card-style card-nearby" :style="'z-index:999;background: url('+((item.backgroundImages && item.backgroundImages.length > 0) ? item.backgroundImages[0].thumbnailUrl : '/static/empty.jpg')+')'" data-card-height="160">
+                            <div class="card-bottom px-3 py-3">
+                                <h4 class="color-white font-18 font-600">{{ item.name }} ({{item.startedAt.substring(5, 10).replace(/-/gi, '/')}})</h4>
+                                <div class="divider bg-white opacity-20 mb-1"></div>
+                                <div class="d-flex">
+                                    <div class="align-self-center" style="max-width: 100%;">
+                                        <p class="font-11 opacity-70 font-600 color-white nearby_desc mb-0" style="max-width: 100%;" v-html="item.description"></p>
                                     </div>
                                 </div>
-                                <div class="card-overlay bg-gradient opacity-30"></div>
-                                <div class="card-overlay bg-gradient"></div>
                             </div>
-                        </a>
+                            <div class="card-overlay bg-gradient opacity-30"></div>
+                            <div class="card-overlay bg-gradient"></div>
+                        </div>
                     </div>
                     
                 </div>
@@ -1084,6 +1084,20 @@ export default {
                     x.description = '내용 없음' + x.description;
                 }
             });
+
+
+            console.log(this.getNearByDivings)
+            if (this.getNearByDivings.length > 0) {
+                setTimeout(function() {
+                    console.log("aaaaaaaa")
+                    var single = new Splide( '#single-slider-nearby-diving', {
+                        type:'loop',
+                        autoplay:true,
+                        interval:4000,
+                        perPage: 1,
+                    }).mount();
+                },200);
+            }
         }
     },
     getUserById: {
@@ -1317,71 +1331,6 @@ export default {
 
 
 
-
-
-            var splide = document.getElementsByClassName('splide');
-            if(splide.length > 0){
-                var singleSlider = document.querySelectorAll('.single-slider-site');
-                if(singleSlider.length) {
-                    singleSlider.forEach(function(e){
-                        //setTimeout(function(e) {
-                            var single = new Splide( '#'+e.id, {
-                                type:'loop',
-                                autoplay:true,
-                                interval:4000,
-                                perPage: 1,
-                            }).mount();
-                            var sliderNext = document.querySelectorAll('.slider-next');
-                            var sliderPrev = document.querySelectorAll('.slider-prev');
-                            sliderNext.forEach(el => el.addEventListener('click', el => {single.go('>');}));
-                            sliderPrev.forEach(el => el.addEventListener('click', el => {single.go('<');}));
-                        //},100, e);
-                        
-                    });
-                }
-                //Card Extender
-                const cards = document.getElementsByClassName('card');
-                function card_extender(){
-                    var headerHeight, footerHeight, headerOnPage;
-                    var headerOnPage = document.querySelectorAll('.header:not(.header-transparent)')[0];
-                    var footerOnPage = document.querySelectorAll('#footer-bar')[0];
-
-                    headerOnPage ? headerHeight = document.querySelectorAll('.header')[0].offsetHeight : headerHeight = 0
-                    footerOnPage ? footerHeight = document.querySelectorAll('#footer-bar')[0].offsetHeight : footerHeight = 0
-
-                    for (let i = 0; i < cards.length; i++) {
-                        if(cards[i].getAttribute('data-card-height') === "cover"){
-                            if (window.matchMedia('(display-mode: fullscreen)').matches) {var windowHeight = window.outerHeight;}
-                            if (!window.matchMedia('(display-mode: fullscreen)').matches) {var windowHeight = window.innerHeight;}
-                            var coverHeight = windowHeight - headerHeight - footerHeight + 'px';
-                        }
-                        if(cards[i].getAttribute('data-card-height') === "cover-card"){
-                            var windowHeight = window.outerHeight;
-                            var coverHeight = windowHeight - 275 + 'px';
-                            cards[i].style.height =  coverHeight
-                        }
-                        if(cards[i].getAttribute('data-card-height') === "cover-full"){
-                            if (window.matchMedia('(display-mode: fullscreen)').matches) {var windowHeight = window.outerHeight;}
-                            if (!window.matchMedia('(display-mode: fullscreen)').matches) {var windowHeight = window.innerHeight;}
-                            var coverHeight = windowHeight + 'px';
-                            cards[i].style.height =  coverHeight
-                        }
-                        if(cards[i].hasAttribute('data-card-height')){
-                            var getHeight = cards[i].getAttribute('data-card-height');
-                            cards[i].style.height= getHeight +'px';
-                            if(getHeight === "cover"){
-                                var totalHeight = getHeight
-                                cards[i].style.height =  coverHeight
-                            }
-                        }
-                    }
-                }
-
-                if(cards.length){
-                    card_extender();
-                    window.addEventListener("resize", card_extender);
-                }
-            }
         },
         fetchPolicy: 'no-cache'
     },
@@ -1528,6 +1477,7 @@ export default {
                 }
             }
             
+
             var splide = document.getElementsByClassName('splide');
             if(splide.length > 0){
                 var singleSlider = document.querySelectorAll('.single-slider-site');
@@ -1540,10 +1490,10 @@ export default {
                                 interval:4000,
                                 perPage: 1,
                             }).mount();
-                            var sliderNext = document.querySelectorAll('.slider-next');
+                            /*var sliderNext = document.querySelectorAll('.slider-next');
                             var sliderPrev = document.querySelectorAll('.slider-prev');
                             sliderNext.forEach(el => el.addEventListener('click', el => {single.go('>');}));
-                            sliderPrev.forEach(el => el.addEventListener('click', el => {single.go('<');}));
+                            sliderPrev.forEach(el => el.addEventListener('click', el => {single.go('<');}));*/
                         //},100, e);
                         
                     });
@@ -1618,6 +1568,9 @@ export default {
     }
   },
   methods: {
+      moveMyDiving() {
+          location.href='/diving/my';
+      },
       goLogin() {
         if (localStorage.hasOwnProperty("idToken") == false || localStorage.idToken == null) {
           this.$root.$children[0].$refs.loginBottomSheet.open();
@@ -1679,6 +1632,7 @@ export default {
         location.href = '/recommend/' + id;
       },
       async movePreview(item) {
+        console.log("aa");
         var dic_type1 = {"DiveSite": "diveSite", "DivePoint": "divePoint", "DiveCenter": "diveCenter", "Diving": "diving", "User": "user", "Review": "review", "Forum": "forum", "Recommendation": "recommendation"};
         await axios({
             url: 'https://api.wedives.com/graphql',
@@ -2207,6 +2161,10 @@ svg #fish6{
   left: 42%;
   width: 2px;
   height: 2px;
+  -webkit-animation: star 1s 1s alternate infinite;
+  animation: star 1s 1s alternate infinite;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
   -ms-box-shadow: 0 0 10px 5px rgba(202, 243, 189, 0.3);
   -o-box-shadow: 0 0 10px 5px rgba(202, 243, 189, 0.3);
   box-shadow: 0 0 10px 5px rgba(202, 243, 189, 0.3);
@@ -2229,13 +2187,13 @@ svg #fish6{
   left: 55%;
   width: 2px;
   height: 2px;
-  -webkit-animation: star 1s 1s alternate infinite;
-  animation: star 1s 1s alternate infinite;
+  -webkit-animation: star 1.6s 1.6s alternate infinite;
+  animation: star 1.6s 1.6s alternate infinite;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
-  -ms-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
-  -o-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
-  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+  -ms-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.4);
+  -o-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.4);
 }
 .star:nth-child(4) {
   top: 89%;
@@ -2264,8 +2222,8 @@ svg #fish6{
   left: 38vw;
   width: 2px;
   height: 2px;
-  -webkit-animation: star 1s 1s alternate infinite;
-  animation: star 1s 1s alternate infinite;
+  -webkit-animation: star 1s 1.5s alternate infinite;
+  animation: star 1s 1.5s alternate infinite;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
   -ms-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
@@ -2286,8 +2244,8 @@ svg #fish6{
   left: 55vw;
   width: 2px;
   height: 2px;
-  -webkit-animation: star 3s 1s alternate infinite;
-  animation: star 3s 1s alternate infinite;
+  -webkit-animation: star 2.5s 1s alternate infinite;
+  animation: star 2.5s 1s alternate infinite;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
   -ms-box-shadow: 0 0 10px 5px rgba(202, 243, 189, 0.3);

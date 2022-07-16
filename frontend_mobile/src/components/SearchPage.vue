@@ -3,7 +3,53 @@
     <div data-menu-active="nav-site"></div>
     <div class="page-content text-start transform-none" style="padding-bottom: 0px;">
         <div class="card card-style ms-0 me-0 rounded-0 mb-0">
-            <div data-menu="schedule-suggestion" class="row p-3 wedive-search" style="margin: 0;padding: 10px 6px !important;">
+            <div class="p-3 pb-0">
+                <vue-typeahead-bootstrap
+                    id="suggestion_typeahead"
+                    class="wedive-search disable-search-result"
+                    v-model="query_place"
+                    :data="places"
+                    :serializer="item => item"
+                    :screen-reader-text-serializer="item => `${item}`"
+                    highlightClass="special-highlight-class"
+                    @hit="selecteduser = $event;enableNext2($event);"
+                    :minMatchingChars="1"
+                    placeholder="어디로 다이빙가세요?"
+                    inputClass="special-input-class"
+                    @input="lookupPlace"
+                    @keyup.enter="handleFire"
+                    >
+                </vue-typeahead-bootstrap>
+                <div class="content mt-0 mb-0" style="min-height: calc(100vh - 208px);padding-top:8px;padding-bottom:40px;">
+                    <div v-for="item in places">
+                        <div class="map-box">
+                            <a v-on:click="selectSuggestion(item)">
+                                <div class="bx">
+                                    <div class="justify-content-center mb-0 text-start" style="padding-top: 2px;">
+                                        <i class="fas fa-search font-16 pe-2 color-gray"></i>
+                                        <span class="pb-0 mb-0 line-height-m ellipsis"> {{ item }} </span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="divider mt-3 mb-3"></div>
+                    </div>
+                </div>
+                <a v-on:click="triggerSearch()" class="btn btn-m btn-full rounded-xs text-uppercase font-900 shadow-s bg-dark-dark col-3" style="width: 18%;padding: 13px 8px !important;border-radius: 8px !important;display:inline-block;margin-bottom:1px;">검색</a>
+                
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+            <div data-menu="schedule-suggestion" class="row p-3 wedive-search hide" style="margin: 0;padding: 10px 6px !important;">
                 <div class="col-6 input-group wedive-calendar-input" style="width: 50%;">
                     <input class="form-control" disabled="disabled" style="border-radius: 8px;padding-left: 36px;" v-model="schedule_from"/>
                     <i class="fas fa-calendar" style="margin-top: -3px;color: gray;"></i>
@@ -12,52 +58,6 @@
                     <input class="form-control" disabled="disabled" style="border-radius: 8px;padding-left: 36px;" v-model="schedule_to"/>
                     <i class="fas fa-calendar" style="margin-top: -3px;color: gray;"></i>
                 </div>
-            </div>
-            <div class="p-3 pb-0">
-                <vue-typeahead-bootstrap
-                    id="input_query"
-                    v-model="query"
-                    class="wedive-search disable-search-result"
-                    :data="users"
-                    :serializer="item => item.name"
-                    :screen-reader-text-serializer="item => `${item.name}`"
-                    highlightClass="special-highlight-class"
-                    @hit="selecteduser = $event;enableNext2($event);"
-                    :minMatchingChars="1"
-                    placeholder="어디로 다이빙 가세요?"
-                    inputClass="special-input-class"
-                    :disabledValues="[(selecteduser ? [selecteduser.name] : [])]"
-                    @input="lookupLocation"
-                    style="width: 80%;display:inline-block;"
-                    >
-                    <template slot="suggestion" slot-scope="{ data, htmlText }">
-                        <div class="d-flex align-items-center" style="position:relative !important;">
-                        <div :class="''+data.type + '-tag'" style="position:relative;">
-                            <div class="user-img me-2">
-                                <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
-                                    <defs>
-                                    <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
-                                    <clipPath id="clipSquircle">
-                                        <use xlink:href="#shapeSquircle"/>
-                                    </clipPath>
-                                    </defs>
-                                    <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(data.backgroundImages && data.backgroundImages.length>0) ? data.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'"/>
-                                </svg>
-                            </div>
-                            <!--<img
-                            class="rounded-s me-3"
-                            :src="(data.backgroundImages && data.backgroundImages.length>0) ? data.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'"
-                            style="width: 40px; height: 40px;" />-->
-                        </div>
-                        <span v-if="data.type == 'site'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + htmlText + ' 사이트</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + data.description+'</span>'"></span>
-                        <span v-else-if="data.type == 'point'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + htmlText + ' 포인트</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + data.description+'</span>'"></span>
-                        <span v-else-if="data.type == 'center'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + htmlText + '</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + data.description+'</span>'"></span>
-                        
-                        </div>
-                    </template>
-                </vue-typeahead-bootstrap>
-                <a v-on:click="triggerSearch()" class="btn btn-m btn-full rounded-xs text-uppercase font-900 shadow-s bg-dark-dark col-3" style="width: 18%;padding: 13px 8px !important;border-radius: 8px !important;display:inline-block;margin-bottom:1px;">검색</a>
-                
             </div>
             
             
@@ -84,7 +84,7 @@
                                 <p class="color-gray font-13 mb-0 ellipsis">{{ wediveDate(item.startedAt) }} ~ {{ wediveDate(item.finishedAt) }}</p>
                                 <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> {{ (item.diveLocation && item.diveLocation.length > 0) ? item.diveLocation[0].name : '' }} ({{ wediveDivingType(item.type) }})</p>
                             </div>
-                            <span class="chip chip-s bg-gray-light text-center font-400 wedive-chip color-black">{{ (item.participants.filter(x=>x.status=='joined').length+1) }}명 참석</span>
+                            <span class="chip chip-s bg-gray-light text-center font-400 wedive-chip color-black">{{ (item.participants.filter(x=>x.status=='joined').length+1) }}/{{ item.maxPeopleNumber }}</span>
                         </div>
                     </div>
                 </div>
@@ -125,53 +125,6 @@
 
             <div style="position: absolute;bottom: 0;width:100%;">
                 <a id="btn_schedule" class="close-menu btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 ms-1 me-1 mb-3" style="height: 46px;padding-top: 10px;" disabled="disabled">선택</a>
-            </div>
-        </div>
-    </div>
-    <div id="search-suggestion" 
-         class="menu menu-box-modal rounded-0" 
-         data-menu-width="cover"
-         data-menu-height="cover"
-         style="margin-bottom: 0;">
-        
-        <div class="card rounded-0 bg-2" data-card-height="50" style="margin-bottom: 24px;">
-            <div class="card-top p-2">
-                <a v-on:click="chatSelectedList = [];selecteduser=null;query='';" href="#" class="close-menu icon icon-s rounded-l bg-theme color-theme "><i class="fa fa-arrow-left"></i></a>
-                <a href="" class="header-title color font-noto font-16">검색</a>
-            </div>
-        </div>
-        
-        <div class="card rounded-0 content">
-            <vue-typeahead-bootstrap
-                id="suggestion_typeahead"
-                class="wedive-search disable-search-result"
-                v-model="query_place"
-                :data="places"
-                :serializer="item => item"
-                :screen-reader-text-serializer="item => `${item}`"
-                highlightClass="special-highlight-class"
-                @hit="selecteduser = $event;enableNext2($event);"
-                :minMatchingChars="1"
-                placeholder="어디로 다이빙가세요?"
-                inputClass="special-input-class"
-                @input="lookupPlace"
-                @keyup.enter="handleFire"
-                >
-            </vue-typeahead-bootstrap>
-            <div class="content mt-0 mb-0" style="min-height: calc(100vh - 208px);padding-top:8px;padding-bottom:40px;">
-                <div v-for="item in places">
-                    <div class="map-box">
-                        <a v-on:click="selectSuggestion(item)">
-                            <div class="bx">
-                                <div class="justify-content-center mb-0 text-start" style="padding-top: 2px;">
-                                    <i class="fas fa-search font-16 pe-2 color-gray"></i>
-                                    <span class="pb-0 mb-0 line-height-m ellipsis"> {{ item }} </span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="divider mt-3 mb-3"></div>
-                </div>
             </div>
         </div>
     </div>
@@ -319,6 +272,7 @@ export default {
         }
       },
       enableNext2(ev) {
+          console.log(ev);
           this.search_img = (ev.backgroundImages && ev.backgroundImages.length>0) ? ev.backgroundImages[0].thumbnailUrl : '/static/empty.jpg';
           this.search_type=ev.type;
           this.search_loc=ev.name;
@@ -340,7 +294,6 @@ export default {
 
       },
       async lookupPlace() {
-        //console.log("this.query_place = " + this.query_place);
         if (this.query_place == '') {
             this.places = [];
         } else {
@@ -379,9 +332,6 @@ export default {
           document.getElementById("search-suggestion").classList.remove('menu-active');
           document.getElementsByClassName('menu-hider')[0].classList.remove('menu-active');
           this.places = [];
-          if (location.pathname.substring(location.pathname.lastIndexOf('/')) == '/modal') {
-              history.back();
-          }
       },
       handleFire() {
           localStorage.suggestionFlag = '1';
