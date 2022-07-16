@@ -124,7 +124,7 @@
     
     <div v-on:click="speechContentClick()" v-on:scroll="handleScroll" id="speech-content" class="card card-style ms-0 me-0 rounded-0" :style="'height: calc(100vh - 50px);overflow-y: auto;padding-top:'+(is_concierge || divingInfo?'130':'50')+'px;padding-bottom:50px;'">
         <div class="content">
-            <ContentLoader :width="windowWidth" height="700" id="div_content_loader" primaryColor="#e3e7ef" secondaryColor="#f4f7ff">
+            <ContentLoader :width="windowWidth" height="700" id="div_content_loader" primaryColor="#f2f3f6" secondaryColor="#f4f7ff">
                 <rect x="10" y="60" rx="20" ry="20" width="50" height="50" />
                 <rect x="70" y="60" rx="20" ry="20" :width="windowWidth/2-20" height="50" />
                 <rect x="10" y="120" rx="20" ry="20" width="50" height="50" />
@@ -680,6 +680,10 @@ export default {
                     uid
                     name
                 }
+                owner {
+                    uid
+                    name
+                }
                 }
             }
         }`,
@@ -918,7 +922,7 @@ export default {
             // Result
             var toastData = 'snackbar-error';
             if (data.data.setRoomTitle.success) {
-                this.roomInfo.title = this.changeTitle;
+                this.getChatRoomInfo.chatRoom.title = this.changeTitle;
                 toastData = 'snackbar-success';
             }var notificationToast = document.getElementById(toastData);
             var notificationToast = new bootstrap.Toast(notificationToast);
@@ -948,7 +952,8 @@ export default {
         })
     },
     leaveRoom() {
-        if (this.roomInfo.owner.uid == this.uid) {
+        //console.log(this.getChatRoomInfo.chatRoom);
+        if (this.getChatRoomInfo.chatRoom.owner.uid == this.uid) {
             this.$apollo.mutate({
                 // Query
                 mutation: gql`mutation DeleteRoom($roomId: String!) {
@@ -983,7 +988,7 @@ export default {
                 },
             }).then((data) => {
                 // Result
-                location.href="/chat_home"
+                //location.href="/chat_home"
                 //}
             }).catch((error) => {
                 // Error

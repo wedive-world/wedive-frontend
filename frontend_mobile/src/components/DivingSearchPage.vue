@@ -62,7 +62,11 @@
             
             
             <div class="content mt-0 mb-0" style="min-height: calc(100vh - 143px);padding-bottom:40px;">
-                <div v-for="item in searchDivings">
+                <div v-if="searchDivings && searchDivings.length == 0" class="text-center">
+                    <img src="https://d34l91104zg4p3.cloudfront.net/assets/empty_list2.jpg" width="60%" style="margin-top: 50px;"/>
+                    <p class="font-noto color-gray">검색결과가 없어요.</p>
+                </div>
+                <div v-else v-for="item in searchDivings">
                     <div v-on:click="goDiving(item)" :class="'light-border-bottom mt-3' + (item.status == 'searchable' ? '' : ' opacity-50')">
                         <div class="d-flex mb-3 position-relative">
                             <div class="align-self-center">
@@ -317,6 +321,7 @@ export default {
             preloader.classList.remove('opacity-50');
             preloader.classList.add('preloader-hide');
         }
+        console.log(this.searchDivings);
       },
       enableNext2(ev) {
           this.search_img = (ev.backgroundImages && ev.backgroundImages.length>0) ? ev.backgroundImages[0].thumbnailUrl : '/static/empty.jpg';
@@ -609,7 +614,7 @@ export default {
         selecteduser: null,
         users: [],
         places: [],
-        searchDivings: [],
+        searchDivings: null,
         suggestSelectedList: [],
         suggestions : (localStorage.suggestion ? JSON.parse(localStorage.suggestion) : []),
         selectedDay: null,
