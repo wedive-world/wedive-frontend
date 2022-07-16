@@ -520,7 +520,7 @@ export default {
         localStorage.loginUrl = window.location.pathname;
         if (localStorage.hasOwnProperty("idToken") == false || localStorage.idToken == null) {
           this.$root.$children[0].$refs.loginBottomSheet.open();
-        } else if (localStorage.hasOwnProperty("nickName") == false || localStorage.nickName == null) {
+        } else if (localStorage.hasOwnProperty("nickName") == false || localStorage.nickName == null || localStorage.nickName == 'null') {
           location.href='/user_create';
         }
       },

@@ -57,7 +57,7 @@ try {
     if (userInformation.languageCode) localStorage.languageCode = userInformation.languageCode;
 
     //var axios = require("axios");
-    if (localStorage.nickName == null) {
+    if (localStorage.nickName == null || localStorage.nickName == 'null') {
       axios({
         url: 'https://api.wedives.com/graphql',
         method: 'post',
@@ -81,7 +81,7 @@ try {
             }
         }
       }).then(function(result) {
-        if (result.data.data.getUserByUid != null && result.data.data.getUserByUid.nickName != null) {
+        if (result.data.data.getUserByUid != null && result.data.data.getUserByUid.nickName != null && result.data.data.getUserByUid.nickName != 'null') {
           localStorage.nickName = result.data.data.getUserByUid.nickName;
           localStorage.userId = result.data.data.getUserByUid._id;
         }

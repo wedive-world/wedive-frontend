@@ -692,7 +692,7 @@ export default {
         
 
         if (result && result.data && result.data.data) {
-            if (result.data.data.getUserByNickName == null) {
+            if (result.data.data.getUserByNickName == null || result.data.data.getUserByNickName == 'null') {
                 $("#btn_next1").addClass("gonext");
                 $(".progress-bar").css("width", "50%");
                 setTimeout(function() {

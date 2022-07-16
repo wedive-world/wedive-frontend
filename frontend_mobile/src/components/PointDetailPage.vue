@@ -87,12 +87,12 @@
                 <div class="divider mt-3 mb-3"></div>
                 
                 <div class="d-flex mb-0 text-center">
-                    <div v-on:click="clickLike()" :class="'flex-grow-1 pd-0' + ((idToken == null || nickName == null) ? ' opacity-40' : '')" style="border-right: 1px solid lightgray;">
+                    <div v-on:click="clickLike()" :class="'flex-grow-1 pd-0' + ((idToken == null || nickName == null || nickName == 'null') ? ' opacity-40' : '')" style="border-right: 1px solid lightgray;">
                         <img class="ext-img" :src="'https://d34l91104zg4p3.cloudfront.net/assets/'+like_img+'.png'" width="24" style="margin-top:-4px;"/>
                         <span class="font-16 font-500 font-noto">{{ pointData.likes }}</span>
                     </div>
                     
-                    <div v-on:click="clickSubscribe()" :class="'flex-grow-1 pd-0' + ((idToken == null || nickName == null) ? ' opacity-40' : '')">
+                    <div v-on:click="clickSubscribe()" :class="'flex-grow-1 pd-0' + ((idToken == null || nickName == null || nickName == 'null') ? ' opacity-40' : '')">
                         <img class="ext-img" :src="'https://d34l91104zg4p3.cloudfront.net/assets/'+subscribe_img+'.png'" width="24" style="margin-top:-4px;"/>
                         <span class="font-16 font-500 font-noto"></span>
                     </div>
@@ -486,7 +486,7 @@
                 </div>
             </div>
             <div class="divider mt-2 mb-2 ms-3 me-3"></div>
-            <div v-on:click="login()" :data-menu="((idToken == null || nickName == null) ? '' : 'menu-review')" :class="((idToken == null || nickName == null) ? 'opacity-40' : '')">
+            <div v-on:click="login()" :data-menu="((idToken == null || nickName == null || nickName == 'null') ? '' : 'menu-review')" :class="((idToken == null || nickName == null || nickName == 'null') ? 'opacity-40' : '')">
                 <div class="star-area mt-4 text-center" style="letter-spacing: -2px;">
                     <i class="fa fa-star font-20 color-gray-light"></i>
                     <i class="fa fa-star font-20 color-gray-light"></i>
@@ -1273,7 +1273,7 @@ export default {
           }, 1000);
       },
       async clickLike() {
-          if (localStorage.idToken && localStorage.nickName) {
+          if (localStorage.idToken && localStorage.nickName != null && localStorage.nickName != 'null') {
             const targetId = this.pointData._id;
             var result = await axios({
                 url: 'https://api.wedives.com/graphql',
@@ -1476,7 +1476,7 @@ export default {
         localStorage.loginUrl = window.location.pathname;
         if (localStorage.hasOwnProperty("idToken") == false || localStorage.idToken == null) {
           this.$root.$children[0].$refs.loginBottomSheet.open();
-        } else if (localStorage.hasOwnProperty("nickName") == false || localStorage.nickName == null) {
+        } else if (localStorage.hasOwnProperty("nickName") == false || localStorage.nickName == null || nickName == 'null') {
           location.href='/user_create';
         }
       },

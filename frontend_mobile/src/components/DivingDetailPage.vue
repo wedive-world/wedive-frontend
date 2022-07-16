@@ -238,7 +238,7 @@
             </div>
             <div class="flex-fill speach-input p-2">
             <a v-if="getDivingById.status == 'publicEnded'|| getDivingById.status=='divingComplete'" class="btn btn-full font-400 rounded-s shadow-l bg-gray-dark color-white bd-w-0mb-5 font-noto">모집종료된 이벤트</a>
-            <a v-else-if="idToken == null || nickName == null" v-on:click="login()" class="btn btn-full font-400 rounded-s shadow-l bg-gray-dark color-white bd-w-0mb-5 font-noto">참여신청</a>
+            <a v-else-if="idToken == null || nickName == null || nickName == 'null'" v-on:click="login()" class="btn btn-full font-400 rounded-s shadow-l bg-gray-dark color-white bd-w-0mb-5 font-noto">참여신청</a>
             <a v-else-if="(getDivingById.participants.filter(member=> (member.user && member.user._id == userId && member.status == 'applied'))).length > 0" class="btn btn-full font-400 rounded-s shadow-l bg-gray-dark color-white bd-w-0mb-5 font-noto">참여 승인 대기중</a>
             <a v-else-if="(getDivingById.participants.filter(member=> (member.user && member.user._id == userId && member.status == 'joined'))).length > 0" class="btn btn-full font-400 rounded-s shadow-l bg-gray-dark color-white bd-w-0mb-5 font-noto">참여 완료</a>
             <a v-else-if="getDivingById.naver_cafe_url != null" :href="getDivingById.naver_cafe_url" target="_blank" class="btn btn-full font-400 rounded-s shadow-l color-white bd-w-0mb-5 font-noto" style="background-color: #21a238;">참여신청</a>
@@ -1125,7 +1125,7 @@ export default {
           
       },
       goUserPage(user) {
-          if (localStorage.idToken && localStorage.nickName) {
+          if (localStorage.idToken && localStorage.nickName != null && localStorage.nickName != 'null') {
               if (user && user._id) {
                   location.href = '/user/' + user._id;
               }
@@ -1137,7 +1137,7 @@ export default {
           location.href = '/'+type + '/' + uniqueName;
       },
       async clickLike() {
-          if (localStorage.idToken && localStorage.nickName && this.getDivingById.status != 'publicEnded') {
+          if (localStorage.idToken && localStorage.nickName != null && localStorage.nickName != 'null' && this.getDivingById.status != 'publicEnded') {
             const targetId = this.getDivingById._id;
             var result = await axios({
                 url: 'https://api.wedives.com/graphql',
@@ -1173,7 +1173,7 @@ export default {
         localStorage.loginUrl = window.location.pathname;
         if (localStorage.hasOwnProperty("idToken") == false || localStorage.idToken == null) {
           this.$root.$children[0].$refs.loginBottomSheet.open();
-        } else if (localStorage.hasOwnProperty("nickName") == false || localStorage.nickName == null) {
+        } else if (localStorage.hasOwnProperty("nickName") == false || localStorage.nickName == null || localStorage.nickName == 'null') {
           location.href='/user_create';
         }
       },

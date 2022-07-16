@@ -72,7 +72,7 @@
                         </a>
                     </div>
                     <div class="font-noto" style="position: absolute;top:14px;left:98px;" v-on:click="goLogin()">
-                        <h5 class="mb-0 font-500 ellipsis">{{ getUserById ? '다이버 ' + getUserById.nickName + '님' : ('위다이브 손님, ' + (idToken == null ? '로그인을 해보세요.' : '프로필을 등록해보세요.')) }}</h5>
+                        <h5 class="mb-0 font-500 ellipsis">{{ getUserById && getUserById.nickName && getUserById.nickName != 'null' ? '다이버 ' + getUserById.nickName + '님' : (idToken == null ? '위다이브 손님, 로그인을 해보세요.' : '다이버님, 프로필을 등록해보세요.') }}</h5>
                         <span :class="getUserById ? '' : 'opacity-30'">
                             <img src="/static/images/assets/main_heart.png" height="22" class="inline-block" style="vertical-align: top;">
                             <span class="chip chip-s text-center font-400 wedive-chip color-gray" style="position: initial;margin-left: -4px !important;margin-right:8px !important;">호스트 {{ getUserById ? getUserById.divingHostCount : '0' }}회</span>
@@ -812,7 +812,7 @@ export default {
         lastScrollPosition: 0,
         idToken: localStorage.idToken,
         nickName: localStorage.nickName,
-        no_diving_word: (localStorage.idToken == null) ? '로그인이 필요합니다.' : (localStorage.nickName == null ? '프로필 등록이 필요합니다.' : '나의 다이빙이 없습니다.'),
+        no_diving_word: (localStorage.idToken == null) ? '로그인이 필요합니다.' : (localStorage.nickName == null || localStorage.nickName == 'null' ? '프로필 등록이 필요합니다.' : '나의 다이빙이 없습니다.'),
         scrollTop: 0,
         TOP_DEFAULT_CONFIG: {
             pullText: '당겨서 새로고침', // The text is displayed when you pull down
@@ -918,7 +918,7 @@ export default {
             }
         },
         skip() {
-            return (localStorage.idToken == null || localStorage.nickName == null);
+            return (localStorage.idToken == null || localStorage.nickName == null || localStorage.nickName == 'null');
         },
         async result () {
             var now = new Date();
@@ -1086,10 +1086,8 @@ export default {
             });
 
 
-            console.log(this.getNearByDivings)
             if (this.getNearByDivings.length > 0) {
                 setTimeout(function() {
-                    console.log("aaaaaaaa")
                     var single = new Splide( '#single-slider-nearby-diving', {
                         type:'loop',
                         autoplay:true,
@@ -1150,7 +1148,7 @@ export default {
             }
         },
         skip() {
-            return (localStorage.idToken == null || localStorage.nickName == null);
+            return (localStorage.idToken == null || localStorage.nickName == null || localStorage.nickName == 'null');
         },
         async result () {
             this.getUserById.levelShow = '초보';
@@ -1574,7 +1572,7 @@ export default {
       goLogin() {
         if (localStorage.hasOwnProperty("idToken") == false || localStorage.idToken == null) {
           this.$root.$children[0].$refs.loginBottomSheet.open();
-        } else if (localStorage.hasOwnProperty("nickName") == false || localStorage.nickName == null) {
+        } else if (localStorage.hasOwnProperty("nickName") == false || localStorage.nickName == null || localStorage.nickName == 'null') {
           location.href='/user_create';
         }
       },
@@ -1709,7 +1707,7 @@ export default {
         localStorage.loginUrl = window.location.pathname;
         if (localStorage.hasOwnProperty("idToken") == false || localStorage.idToken == null) {
           this.$root.$children[0].$refs.loginBottomSheet.open();
-        } else if (localStorage.hasOwnProperty("nickName") == false || localStorage.nickName == null) {
+        } else if (localStorage.hasOwnProperty("nickName") == false || localStorage.nickName == null || localStorage.nickName == 'null') {
           location.href='/user_create';
         }
       },

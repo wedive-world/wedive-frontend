@@ -17,7 +17,7 @@
       </div>
     </template>
     <div>
-        <div v-if="idToken == null || nickName == null" class="card card-style ms-0 me-0 rounded-0 text-center mb-0" style="height: calc(100vh - 58px);display:block;">
+        <div v-if="idToken == null || nickName == null || nickName == 'null'" class="card card-style ms-0 me-0 rounded-0 text-center mb-0" style="height: calc(100vh - 58px);display:block;">
             <img src="https://d34l91104zg4p3.cloudfront.net/assets/empty_message.jpg" width="60%" style="margin-top: 25%;" />
             <p class="color-gray mt-2">{{ login_word }}이 필요합니다.</p>
 
@@ -249,6 +249,13 @@ export default {
     init_template();
     var preloader = document.getElementById('preloader')
     if(preloader){preloader.classList.add('preloader-hide');}
+
+    if (localStorage.idToken == null || localStorage.nickName == null || localStorage.nickName == 'null') {
+        setTimeout(function() {
+            $("#div_content_loader").hide();
+            $("#div_empty_notice").show();
+        },100);
+    }
   },
   components: {
       VueTypeaheadBootstrap,
@@ -330,7 +337,7 @@ export default {
             }
           `,
           skip() {
-              return (localStorage.idToken == null || localStorage.nickName == null);
+              return (localStorage.idToken == null || localStorage.nickName == null || localStorage.nickName == 'null');
           },
           result ({ data, loading, networkStatus }) {
             setTimeout(function() {
@@ -402,7 +409,7 @@ export default {
         localStorage.loginUrl = window.location.pathname;
         if (localStorage.hasOwnProperty("idToken") == false || localStorage.idToken == null) {
           this.$root.$children[0].$refs.loginBottomSheet.open();
-        } else if (localStorage.hasOwnProperty("nickName") == false || localStorage.nickName == null) {
+        } else if (localStorage.hasOwnProperty("nickName") == false || localStorage.nickName == null || localStorage.nickName == 'null') {
           location.href='/user_create';
         }
     },

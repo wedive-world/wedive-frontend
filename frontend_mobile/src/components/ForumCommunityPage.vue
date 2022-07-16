@@ -39,7 +39,7 @@
                 <a data-menu="community-add" class="btn btn-m rounded-s text-uppercase font-900 shadow-s bg-teal-dark" style="width:64px;position:absolute; right:16px;top: 0;"><i class="fas fa-plus"></i></a>
             </div>-->
             
-            <div v-if="nickName == null || idToken == null">
+            <div v-if="nickName == null || nickName == 'null' || idToken == null">
             </div>
             <div v-else>
                 <h4 class="pt-1 mb-2 ps-3">내 동호회</h4>

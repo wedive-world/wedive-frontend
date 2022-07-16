@@ -1,12 +1,12 @@
 <template>
   <div class="">
     <div data-menu-active="nav-other"></div>
-    <div :class="'page-content font-noto card text-center' + ((idToken)?' hide':'')" style="height: calc(100vh - 101px);display:block;">
+    <div :class="'page-content font-noto card text-center' + ((idToken != null && nickName != null && nickName != 'null')?' hide':'')" style="height: calc(100vh - 101px);display:block;">
         <img src="https://d34l91104zg4p3.cloudfront.net/assets/empty_login.jpg" width="60%" style="margin-top:25%;"/>
         <p class="color-gray mt-2">{{ login_word }}이 필요한 페이지 입니다.</p>
         <a v-on:click="login()" class="btn btn-m mb-3 rounded-xl text-uppercase font-500 shadow-s bg-secondary font-noto"><i class="fas fa-user-lock me-1"></i> {{ login_word }}</a>
     </div>
-    <div :class="'page-content font-noto card ps-2 pe-2'+((idToken)?'':' hide')">
+    <div :class="'page-content font-noto card ps-2 pe-2'+((idToken != null && nickName != null && nickName != 'null')?'':' hide')">
         <div class="position-relative" style="z-index:1;">
             <div class="m-3">
                 <h2 class="font-18 font-600 mb-0">나의 설정</h2>
@@ -124,7 +124,7 @@ export default {
         localStorage.loginUrl = window.location.pathname;
         if (localStorage.hasOwnProperty("idToken") == false || localStorage.idToken == null) {
           this.$root.$children[0].$refs.loginBottomSheet.open();
-        } else if (localStorage.hasOwnProperty("nickName") == false || localStorage.nickName == null) {
+        } else if (localStorage.hasOwnProperty("nickName") == false || localStorage.nickName == null || localStorage.nickName == 'null') {
           location.href='/user_create';
         }
       },
