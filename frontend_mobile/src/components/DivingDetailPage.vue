@@ -1174,7 +1174,7 @@ export default {
         if (localStorage.hasOwnProperty("idToken") == false || localStorage.idToken == null) {
           this.$root.$children[0].$refs.loginBottomSheet.open();
         } else if (localStorage.hasOwnProperty("nickName") == false || localStorage.nickName == null || localStorage.nickName == 'null') {
-          location.href='/user/create';
+          this.$root.$children[0].$refs.nicknameBottomSheet.open();
         }
       },
       async chatUser(user) {
@@ -1244,7 +1244,7 @@ export default {
                 //localStorage.chatName = user.nickName;
                 //location.href = '/chat/create'
 
-                this.$router.push({name: "ChatDummyPage", params: {is_concierge: true, roomName: user.nickName, chatType: "direct", chatUids: JSON.stringify([user.uid])}});
+                this.$router.push({name: "ChatDummyPage", params: {is_concierge: false, roomName: user.nickName, chatType: "direct", chatUids: JSON.stringify([user.uid])}});
             }
       }
   }

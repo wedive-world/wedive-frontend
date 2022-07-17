@@ -17,13 +17,13 @@
       </div>
     </template>
     <div>
-        <div v-if="idToken == null || nickName == null || nickName == 'null'" class="card card-style ms-0 me-0 rounded-0 text-center mb-0" style="height: calc(100vh - 58px);display:block;">
+        <!--<div v-if="idToken == null || nickName == null || nickName == 'null'" class="card card-style ms-0 me-0 rounded-0 text-center mb-0" style="height: calc(100vh - 58px);display:block;">
             <img src="https://d34l91104zg4p3.cloudfront.net/assets/empty_message.jpg" width="60%" style="margin-top: 25%;" />
             <p class="color-gray mt-2">{{ login_word }}이 필요합니다.</p>
 
             <a v-on:click="login()" class="btn btn-m mb-3 rounded-xl text-uppercase font-500 shadow-s bg-secondary font-noto"><i class="fas fa-user-lock me-1"></i> {{ login_word }}</a>
-        </div>
-        <div v-else-if="getJoinedRoomList.length == 0" class="card card-style ms-0 me-0 rounded-0 text-center mb-0" style="height: calc(100vh - 58px);display:block;">
+        </div>-->
+        <div v-if="getJoinedRoomList.length == 0" class="card card-style ms-0 me-0 rounded-0 text-center mb-0" style="height: calc(100vh - 58px);display:block;">
             <ContentLoader :width="windowWidth" height="700" id="div_content_loader" primaryColor="#f2f3f6" secondaryColor="#f4f7ff">
                 <rect x="20" y="20" rx="10" ry="10" width="50" height="50" />
                 <rect x="80" y="30" rx="15" ry="15" :width="windowWidth-100" height="30" />
@@ -145,7 +145,7 @@
         <div class="card rounded-0 bg-2" data-card-height="50">
             <div class="card-top p-2">
                 <a v-on:click="chatSelectedList = [];selecteduser=null;query='';" href="#" class="close-menu icon icon-s rounded-l bg-theme color-theme "><i class="fa fa-arrow-left"></i></a>
-                <a v-on:click="createChat" href="#" :class="'float-end icon icon-s rounded-l bg-theme me-3 mt-2 font-noto font-16 ' + ((chatSelectedList.length==0) ? 'color-gray' : 'color-theme')"><span v-if="chatSelectedList.length> 0" class="color-highlight font-600 me-2">{{chatSelectedList.length}}</span>확인</a>
+                <a v-on:click="createChat()" href="#" :class="'float-end icon icon-s rounded-l bg-theme me-3 mt-2 font-noto font-16 ' + ((chatSelectedList.length==0) ? 'color-gray' : 'color-theme')"><span v-if="chatSelectedList.length> 0" class="color-highlight font-600 me-2">{{chatSelectedList.length}}</span>확인</a>
                 <a href="" class="header-title color font-noto font-16">대화상대 초대</a>
             </div>
         </div>
@@ -337,7 +337,8 @@ export default {
             }
           `,
           skip() {
-              return (localStorage.idToken == null || localStorage.nickName == null || localStorage.nickName == 'null');
+              //return (localStorage.idToken == null || localStorage.nickName == null || localStorage.nickName == 'null');
+              return (localStorage.idToken == null);
           },
           result ({ data, loading, networkStatus }) {
             setTimeout(function() {
@@ -390,11 +391,13 @@ export default {
         return levelShow;
     },
     enableNext2(ev) {
+        
         if (this.chatSelectedList.filter(li => li.uid == ev.uid).length == 0)
             this.chatSelectedList.push(ev);
         setTimeout(function() {
             $("#search_typeahead > .input-group > input").val('')
         }, 300);
+        this.query = '';
     },
     removeChatSelected(user) {
         for (var i=0; i<this.chatSelectedList.length; i++) {
@@ -434,9 +437,14 @@ export default {
                 //localStorage.chatUids = JSON.stringify(chatUids);
                 //localStorage.chatName = this.chatSelectedList[0].nickName;
                 //location.href = '/chat/create'
-                
-                this.$router.push({name: "ChatDummyPage", params: {is_concierge: true, roomName: this.chatSelectedList[0].nickName, chatType: "direct", chatUids: JSON.stringify([this.chatSelectedList[0].uid])}});
+                history.back();
+                console.log({is_concierge: false, roomName: this.chatSelectedList[0].nickName, chatType: "direct", chatUids: JSON.stringify([this.chatSelectedList[0].uid])});
+                this.$router.push({name: "ChatDummyPage", params: {is_concierge: false, roomName: this.chatSelectedList[0].nickName, chatType: "direct", chatUids: JSON.stringify([this.chatSelectedList[0].uid])}});
             }
+        } else {
+            history.back();
+            console.log({is_concierge: false, roomName: this.chatSelectedList.map(x => x.nickName).join(), chatType: "channel", chatUids: JSON.stringify(this.chatSelectedList.map(x => x.uid))})
+            this.$router.push({name: "ChatDummyPage", params: {is_concierge: false, roomName: this.chatSelectedList.map(x => x.nickName).join(), chatType: "channel", chatUids: JSON.stringify(this.chatSelectedList.map(x => x.uid))}});
         }
     },
     async lookupUser() {

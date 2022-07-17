@@ -30,9 +30,9 @@
         </template>
         <div class="card mb-0" style="min-height: calc(100vh - 50px);">
             <div v-for="(noti,index) in getNotifications" v-if="noti.title">
-                <div v-on:click="clickNoti(noti)" class="pt-3 pb-3 pe-4 ps-4 border-bottom">
+                <div v-on:click="clickNoti(noti)" :class="'pt-3 pb-3 pe-4 ps-4 border-bottom' + (noti.read ? ' opacity-30' : '')">
                     <h4 class="font-13" style="position: relative;">
-                        <i :class="'me-1 '+notiClass[noti.event]"></i><span class="opacity-70"> {{noti.title}} </span>
+                        <i :class="'me-1 '+notiClass[noti.event]"></i><span class="color-primary"> {{noti.title}} </span>
                         <span :class="'font-13 opacity-50' + (noti.read === false ? ' has-notification abs-right' : '')" style="position:absolute;right:0px;">{{ timeForToday(noti.createdAt) }}</span>
                     </h4>
                     <p class="font-15 mb-0 me-3 ms-3" style="line-height:1.3"> {{noti.message}} </p>

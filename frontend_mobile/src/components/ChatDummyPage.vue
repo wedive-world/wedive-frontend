@@ -358,13 +358,21 @@ export default {
       getMessagesByRoomId: function(newVal, oldVal) {
           if (oldVal.length == 0) {
               setTimeout(function() {
-                $('#speech-content').scrollTop($('#speech-content')[0].scrollHeight);
+                try {
+                    $('#speech-content').scrollTop($('#speech-content')[0].scrollHeight);
+                } catch (e) {
+                    console.log(e)
+                }
               },10)
           } else {
               const prev_height = this.prev_height;
               
               setTimeout(function() {
-                $('#speech-content').scrollTop($('#speech-content')[0].scrollHeight - prev_height);
+                try {
+                    $('#speech-content').scrollTop($('#speech-content')[0].scrollHeight - prev_height);
+                } catch (e) {
+                    console.log(e)
+                }
               },10)
           }
       },
@@ -373,7 +381,11 @@ export default {
               $('#speech-content').css("height", (this.speechContentHeight-300) + "px")
               setTimeout(function() {
                 hideKeyboard();
-                $('#speech-content').scrollTop($('#speech-content')[0].scrollHeight);
+                try {
+                    $('#speech-content').scrollTop($('#speech-content')[0].scrollHeight);
+                } catch (e) {
+                    console.log(e)
+                }
               },100)
           } else {
               $('#speech-content').css("height", (this.speechContentHeight) + "px")
@@ -384,10 +396,18 @@ export default {
               $('#speech-content').css("height", (this.speechContentHeight-150) + "px")
               setTimeout(function() {
                 hideKeyboard();
-                $('#speech-content').scrollTop($('#speech-content')[0].scrollHeight);
+                try {
+                    $('#speech-content').scrollTop($('#speech-content')[0].scrollHeight);
+                } catch (e) {
+                    console.log(e)
+                }
               },100)
           } else {
-              $('#speech-content').css("height", (this.speechContentHeight) + "px")
+              try {
+                  $('#speech-content').css("height", (this.speechContentHeight) + "px")
+              } catch (e) {
+                  console.log(e)
+              }
           }
       },
   },
@@ -412,7 +432,12 @@ export default {
     }
     this.speechContentHeight = $("#speech-content").height();
     setTimeout(function() {
-        $('#speech-content').scrollTop($('#speech-content')[0].scrollHeight);
+        try {
+            $('#speech-content').scrollTop($('#speech-content')[0].scrollHeight);
+        } catch (e) {
+            console.log(e);
+        }
+        
         //var element = document.getElementById("speech-content");
         //element.scrollTop = element.scrollHeight;
     },200);
@@ -709,7 +734,11 @@ export default {
     },
     keyboardShowHandler(event) {
         //console.log("keyboardShowHandler")
-        $('#speech-content').scrollTop($('#speech-content')[0].scrollHeight);
+        try {
+            $('#speech-content').scrollTop($('#speech-content')[0].scrollHeight);
+        } catch (e) {
+            console.log(e)
+        }
     },
     async sendMessage() {
         if (this.sendDisable == false) {

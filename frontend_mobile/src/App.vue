@@ -180,11 +180,14 @@ export default {
     
     try {
       var item = window.location.pathname;
-      if (item == '/' || item == '/chat_home') {
+      if (item == '/') {
         //$("#wedive-add").removeClass("hide");
         //$("#wedive-search").removeClass("hide");
         $("#wedive-noti").removeClass("hide");
-      } else if (item == '/forum_home') {
+      } else if (item == '/chat_home') {
+        $("#wedive-add").removeClass("hide");
+        $("#wedive-noti").removeClass("hide");
+      }else if (item == '/forum_home') {
         $("#wedive-add").removeClass("hide");
         //$("#wedive-group").removeClass("hide");
         $("#wedive-noti").removeClass("hide");

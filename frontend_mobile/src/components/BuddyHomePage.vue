@@ -200,7 +200,7 @@
     </div>
     
     <div class="d-flex mb-4 pt-3">
-        <img src="/static/images/assets/soulmate-hand.png" width="90" style="margin-left: 12px;"/>
+        <img src="/static/images/assets/soulmate-hand.png" width="90" style="margin-left: 12px;margin-bottom:12px;"/>
         <div class="font-noto font-18 font-600 ps-2 opacity-80" style="padding-top:6px;">{{ (getUserById && getUserById.nickName && getUserById.nickName != 'null') ? getUserById.nickName : '다이버' }}님을 위한 <br/>디이빙 추천</div>
     </div>
     <div v-if="getNearByDivings != null && getNearByDivings.length > 0" style="margin-top: -16px;">
@@ -218,7 +218,7 @@
             <div class="splide__track">
                 <div class="splide__list">
                     <div v-for="(item, index) in getNearByDivings" class="splide__slide">
-                        <div v-on:click="movePreview(item)" class="card card-style card-nearby" :style="'z-index:999;background: url('+((item.backgroundImages && item.backgroundImages.length > 0) ? item.backgroundImages[0].thumbnailUrl : '/static/empty.jpg')+')'" data-card-height="160">
+                        <div v-on:click="movePreview(item)" class="card card-style card-nearby" :style="'z-index:999;background: url('+((item.backgroundImages && item.backgroundImages.length > 0) ? item.backgroundImages[0].thumbnailUrl : '/static/empty.jpg')+');background-position: center;'" data-card-height="160">
                             <div class="card-bottom px-3 py-3">
                                 <h4 class="color-white font-18 font-600">{{ item.name }} ({{item.startedAt.substring(5, 10).replace(/-/gi, '/')}})</h4>
                                 <div class="divider bg-white opacity-20 mb-1"></div>
@@ -463,12 +463,12 @@
                     <a href="#" v-on:click="showAppSettingActivity" class="btn font-400 rounded-s shadow-l bg-secondary color-white bd-w-0 font-13">권한 부여하기</a>
                 </div>
             </div>
-            <div v-else class="splide single-slider-site slider-no-arrows visible-slider slider-no-dots" id="single-slider-nearby-pool" style="height:176px;">
+            <div v-else class="splide slider-no-arrows visible-slider slider-no-dots" id="single-slider-nearby-pool" style="height:176px;">
                 <div class="splide__track">
                     <div class="splide__list">
                         <div v-for="(item, index) in getNearByDiveCenters" class="splide__slide">
                             <a v-on:click="movePreview(item)">
-                                <div class="card card-style card-nearby" :style="'background: url('+((item.backgroundImages && item.backgroundImages.length > 0) ? item.backgroundImages[0].thumbnailUrl : '/static/empty.jpg')+')'" data-card-height="160">
+                                <div class="card card-style card-nearby" :style="'background: url('+((item.backgroundImages && item.backgroundImages.length > 0) ? item.backgroundImages[0].thumbnailUrl : '/static/empty.jpg')+');background-position: center;'" data-card-height="160">
                                     <div class="card-bottom px-3 py-3">
                                         <h4 class="color-white font-18 font-600">{{ item.name }}</h4>
                                         <div class="divider bg-white opacity-20 mb-1"></div>
@@ -1036,6 +1036,7 @@ export default {
                     longitude
                     backgroundImages {
                         thumbnailUrl
+                        _id
                     }
                     address
                     latitude
@@ -1044,6 +1045,9 @@ export default {
                 }
             }
         `,
+        skip() {
+            return (this.getNearByDiveCenters == null || this.getNearByDiveCenters.length > 0 ? true : false);
+        },
         variables () {
             return {
                 "lat": this.my_latitude,
@@ -1051,6 +1055,63 @@ export default {
             }
         },
         async result () {
+            //console.log(this.getNearByDiveCenters);
+            //////////////////////////////////////////////////////
+            var id_arr = new Array();
+            var width_arr = new Array();
+            this.getNearByDiveCenters.forEach(x => {
+                if (x.backgroundImages && x.backgroundImages.length > 0) {
+                    id_arr.push(x.backgroundImages[0]._id);
+                    width_arr.push(720);
+                }
+            });
+            if (id_arr.length > 0) {
+                var result_image = await axios({
+                    url: 'https://api.wedives.com/graphql',
+                    method: 'post',
+                    headers: {
+                        countrycode: 'ko',
+                        idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                    },
+                    data: {
+                        query: `
+                            query Query($ids: [ID], $widths: [Int]) {
+                                getImageUrlsByIds(_ids: $ids, widths: $widths)
+                            }
+                        `,
+                        variables: {
+                            ids: id_arr,
+                            widths: width_arr
+                        }
+
+                    }
+                });
+                if (result_image.data.data.getImageUrlsByIds) {
+                    var cnt = 0;
+                    this.getNearByDiveCenters.forEach(x => {
+                        if (x.backgroundImages.length > 0) {
+                            x.backgroundImages[0].thumbnailUrl = result_image.data.data.getImageUrlsByIds[cnt];
+                            cnt++;
+                        }
+                    });
+                    //console.log(result_image.data.data.getImageUrlsByIds);
+                }
+            }
+            
+            //////////////////////////////////////////////////////
+            if (this.getNearByDiveCenters.length > 0) {
+                setTimeout(function() {
+                    var single = new Splide( '#single-slider-nearby-pool', {
+                        type:'loop',
+                        autoplay:true,
+                        interval:4000,
+                        perPage: 1,
+                    }).mount();
+                },200);
+                setTimeout(function() {
+                    $("#single-slider-nearby-pool-track .card-nearby").css("background-position", "center");
+                },300);
+            }
         }
     },
     getNearByDivings: {
@@ -1064,6 +1125,7 @@ export default {
                     adminScore
                     backgroundImages {
                         thumbnailUrl
+                        _id
                     }
                     }
                     diveCenters {
@@ -1073,6 +1135,7 @@ export default {
                     adminScore
                     backgroundImages {
                         thumbnailUrl
+                        _id
                     }
                     }
                     divePoints {
@@ -1082,6 +1145,7 @@ export default {
                     adminScore
                     backgroundImages {
                         thumbnailUrl
+                        _id
                     }
                     }
                     diveSites {
@@ -1091,6 +1155,7 @@ export default {
                     adminScore
                     backgroundImages {
                         thumbnailUrl
+                        _id
                     }
                     }
                     _id
@@ -1134,11 +1199,14 @@ export default {
                 "lng": this.my_longitude
             }
         },
+        skip() {
+            return (this.getNearByDivings == null || this.getNearByDivings.length > 0 ? true : false);
+        },
         async result () {
             this.getNearByDivings.forEach(x => {
                 var itm = (x.diveCenters.length > 0 ? x.diveCenters[0] : (x.divePoints.length > 0 ? x.divePoints[0] : (x.diveShops.length > 0 ? x.diveShops[0] : (x.diveSites.length > 0 ? x.diveSites[0] : []))));
                 if (itm && itm.backgroundImages && itm.backgroundImages.length>0) {
-                    x.backgroundImages = [{thumbnailUrl: itm.backgroundImages[0].thumbnailUrl}];
+                    x.backgroundImages = [{thumbnailUrl: itm.backgroundImages[0].thumbnailUrl, _id: itm.backgroundImages[0]._id}];
                 }
                 if (itm && itm.name) {
                     x.name = itm.name;
@@ -1176,6 +1244,50 @@ export default {
                 }
             });
 
+            
+            //////////////////////////////////////////////////////
+            var id_arr = new Array();
+            var width_arr = new Array();
+            this.getNearByDivings.forEach(x => {
+                if (x.backgroundImages && x.backgroundImages.length > 0) {
+                    id_arr.push(x.backgroundImages[0]._id);
+                    width_arr.push(720);
+                }
+            });
+            if (id_arr.length > 0) {
+                var result_image = await axios({
+                    url: 'https://api.wedives.com/graphql',
+                    method: 'post',
+                    headers: {
+                        countrycode: 'ko',
+                        idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                    },
+                    data: {
+                        query: `
+                            query Query($ids: [ID], $widths: [Int]) {
+                                getImageUrlsByIds(_ids: $ids, widths: $widths)
+                            }
+                        `,
+                        variables: {
+                            ids: id_arr,
+                            widths: width_arr
+                        }
+
+                    }
+                });
+                if (result_image.data.data.getImageUrlsByIds) {
+                    var cnt = 0;
+                    this.getNearByDivings.forEach(x => {
+                        if (x.backgroundImages.length > 0) {
+                            x.backgroundImages[0].thumbnailUrl = result_image.data.data.getImageUrlsByIds[cnt];
+                            cnt++;
+                        }
+                    });
+                    //console.log(result_image.data.data.getImageUrlsByIds);
+                }
+            }
+            
+            //////////////////////////////////////////////////////
             if (this.getNearByDivings.length > 0) {
                 setTimeout(function() {
                     var single = new Splide( '#single-slider-nearby-diving', {
@@ -1185,7 +1297,11 @@ export default {
                         perPage: 1,
                     }).mount();
                 },200);
+                setTimeout(function() {
+                    $("#single-slider-nearby-diving-track .card-nearby").css("background-position", "center");
+                },300);
             }
+            
         }
     },
     getUserById: {
@@ -1351,11 +1467,14 @@ export default {
                 count: 3,
             }
         },
+        skip() {
+            return (this.recommendation1 == null || this.recommendation1.length > 0 ? true : false);
+        },
         async result () {
             // 민혁 : 이건 예전에 같이 논의한건데 현재 구조상, 기술적으로 어렵습니다 api 실행이 언제 끝난다는 보장이 없음 //
             // previewCount > 0 인데, preivews.length == 0 이면 없애버리자
             var cnt = 0;
-            this.recommendation1.filter(x=>x.previewCount > 3).forEach(x => {
+            this.recommendation1.filter(x=>x.shownType == 'splide').forEach(x => {
                 if (x.previewCount > 0 && x.previews.length == 0) {
                     this.recommendation1.splice(cnt, 1);
                     cnt++;
@@ -1363,7 +1482,7 @@ export default {
             });
             var id_arr = new Array();
             var width_arr = new Array();
-            this.recommendation1.filter(x=>x.previewCount > 3).forEach(x => {
+            this.recommendation1.filter(x=>x.shownType == 'splide').forEach(x => {
                 this.recommendation1_collapse_text[x._id] = '더 보기';
                 x.previews.forEach(y => {
                     if (y.backgroundImages && y.backgroundImages.length > 0) {
@@ -1395,7 +1514,7 @@ export default {
                 });
                 if (result_image.data.data.getImageUrlsByIds) {
                     var cnt = 0;
-                    this.recommendation1.filter(x=>x.previewCount > 3).forEach(x => {
+                    this.recommendation1.filter(x=>x.shownType == 'splide').forEach(x => {
                         x.previews.forEach(y => {
                             if (y.backgroundImages.length > 0) {
                                 y.backgroundImages[0].thumbnailUrl = result_image.data.data.getImageUrlsByIds[cnt];
@@ -1513,6 +1632,9 @@ export default {
                 count: 3,
             }
         },
+        skip() {
+            return (this.recommendation2 == null || this.recommendation2.length > 0 ? true : false);
+        },
         async result () {
             setTimeout(function() {
                 $("#div_content_loader").hide();
@@ -1522,7 +1644,7 @@ export default {
             
             var id_arr = new Array();
             var width_arr = new Array();
-            this.recommendation2.filter(x=>x.previewCount > 3).forEach(x => {
+            this.recommendation2.filter(x=>x.shownType == 'splide').forEach(x => {
                 this.recommendation2_collapse_text[x._id] = '더 보기';
                 x.previews.forEach(y => {
                     if (y.backgroundImages.length > 0) {
@@ -1554,7 +1676,7 @@ export default {
                 });
                 if (result_image.data.data.getImageUrlsByIds) {
                     var cnt = 0;
-                    this.recommendation2.filter(x=>x.previewCount > 3).forEach(x => {
+                    this.recommendation2.filter(x=>x.shownType == 'splide').forEach(x => {
                         x.previews.forEach(y => {
                             if (y.backgroundImages && y.backgroundImages.length > 0) {
                                 y.backgroundImages[0].thumbnailUrl = result_image.data.data.getImageUrlsByIds[cnt];
