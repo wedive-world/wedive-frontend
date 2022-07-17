@@ -127,7 +127,7 @@
                     <img src="/static/images/assets/empty_list2_2.jpg" height="74" style="margin-top:4px;"/>
                     <p class="mb-0 opacity-30 font-noto font-14 mt-n2">{{ no_diving_word }}</p>
                 </div>
-                <div v-on:click="moveMyDiving()" style="position: absolute;right: 12px;top: 40px;text-align: -webkit-center;background: #ffffff;padding: 6px 8px;border-radius: 10px;">
+                <div v-if="getDivingsRelatedWithCurrentUser.length > 0" v-on:click="moveMyDiving()" style="position: absolute;right: 12px;top: 40px;text-align: -webkit-center;background: #ffffff;padding: 6px 8px;border-radius: 10px;">
                     <i class="wedive_icoset wedive_icoset_rightbar" style="display: block;"></i>
                     <span>모두보기</span>
                 </div>
@@ -199,13 +199,13 @@
         </div>
     </div>
     
-    <div class="d-flex mb-3 pt-3">
+    <div class="d-flex mb-4 pt-3">
         <img src="/static/images/assets/soulmate-hand.png" width="90" style="margin-left: 12px;"/>
         <div class="font-noto font-18 font-600 ps-2 opacity-80" style="padding-top:6px;">{{ (getUserById && getUserById.nickName && getUserById.nickName != 'null') ? getUserById.nickName : '다이버' }}님을 위한 <br/>디이빙 추천</div>
     </div>
     <div v-if="getNearByDivings != null && getNearByDivings.length > 0" style="margin-top: -16px;">
         <div>
-            <h4 class="text-start mb-2 mt-2 font-noto" style="margin-left: 22%;margin-right: 14px;position:relative;font-weight:600;">내 근처 다이빙 이벤트</h4>
+            <h4 class="text-start mb-2 mt-2 font-noto" style="margin-left: 14px;margin-right: 14px;position:relative;font-weight:600;">내 근처 다이빙 이벤트</h4>
         </div>
         <div v-if="isPermissionEnabled == false" class="card card-style card-nearby" style="height: 160px;margin-bottom: 16px;margin-right: 10px;">
             <div class="text-center">
@@ -1664,7 +1664,7 @@ export default {
         if (localStorage.hasOwnProperty("idToken") == false || localStorage.idToken == null) {
           this.$root.$children[0].$refs.loginBottomSheet.open();
         } else if (localStorage.hasOwnProperty("nickName") == false || localStorage.nickName == null || localStorage.nickName == 'null') {
-          location.href='/user_create';
+          location.href='/user/create';
         }
       },
       showAppSettingActivity() {
@@ -1799,7 +1799,7 @@ export default {
         if (localStorage.hasOwnProperty("idToken") == false || localStorage.idToken == null) {
           this.$root.$children[0].$refs.loginBottomSheet.open();
         } else if (localStorage.hasOwnProperty("nickName") == false || localStorage.nickName == null || localStorage.nickName == 'null') {
-          location.href='/user_create';
+          location.href='/user/create';
         }
       },
       async concierge() {
@@ -1862,12 +1862,14 @@ export default {
             })
             if (go_flag == false) {
                 // 없는경우, 더미로 하나 만든다.
-                localStorage.chatType = 'direct';
-                var chatUids = new Array();
-                chatUids.push(concierge_uid);
-                localStorage.chatUids = JSON.stringify(chatUids);
-                localStorage.chatName = "WeDive";
-                location.href = '/chat/create'
+                //localStorage.chatType = 'direct';
+                //var chatUids = new Array();
+                //chatUids.push(concierge_uid);
+                //localStorage.chatUids = ;
+                //localStorage.chatName = "WeDive";
+                //location.href = '/chat/create'
+
+                this.$router.push({name: "ChatDummyPage", params: {is_concierge: true, roomName: "WeDive", chatType: "direct", chatUids: JSON.stringify([concierge_uid])}});
             }
         } else { // 로그인
             this.login();

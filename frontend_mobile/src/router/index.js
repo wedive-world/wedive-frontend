@@ -43,13 +43,14 @@ import ForumPage from '@/components/ForumPage'
 import ForumSearchPage from '@/components/ForumSearchPage'
 import ForumDetailPage from '@/components/ForumDetailPage'
 import ReviewMorePage from '@/components/ReviewMorePage'
-import OhterPage from '@/components/OhterPage'
+import OtherPage from '@/components/OtherPage'
 import NotificationPage from '@/components/NotificationPage'
 import CommunityDetailPage from '@/components/CommunityDetailPage'
 import CommunitySearchPage from '@/components/CommunitySearchPage'
 import OtherDivingPage from '@/components/OtherDivingPage'
+import OtherReservationPage from '@/components/OtherReservationPage'
+import ReservationAdminPage from '@/components/ReservationAdminPage'
 import OtherSubscribePage from '@/components/OtherSubscribePage'
-import OhterReservationPage from '@/components/OhterReservationPage'
 import OtherNotiPage from '@/components/OtherNotiPage'
 import OtherPrivacyPage from '@/components/OtherPrivacyPage'
 import InstructorCreatePage from '@/components/InstructorCreatePage'
@@ -114,7 +115,7 @@ export default new Router({
       component: UserProfilePage
     },
     {
-      path: '/user_create',
+      path: '/user/create',
       name: 'UserCreatePage',
       component: UserCreatePage
     },
@@ -204,14 +205,19 @@ export default new Router({
       component: OtherDivingPage
     },
     {
+      path: '/reservation/my',
+      name: 'OtherReservationPage',
+      component: OtherReservationPage
+    },
+    {
+      path: '/reservation/admin',
+      name: 'ReservationAdminPage',
+      component: ReservationAdminPage
+    },
+    {
       path: '/other/subscribe',
       name: 'OtherSubscribePage',
       component: OtherSubscribePage
-    },
-    {
-      path: '/other/reservation',
-      name: 'OhterReservationPage',
-      component: OhterReservationPage
     },
     {
       path: '/other/noti',
@@ -241,15 +247,15 @@ export default new Router({
       component: ChatHomePage
     },
     {
+      path: '/chat/create',
+      name: 'ChatDummyPage',
+      component: ChatDummyPage
+    },
+    {
       path: '/chat/:id',
       name: 'ChatDetailPage',
       props: true,
       component: ChatDetailPage
-    },
-    {
-      path: '/chat/create',
-      name: 'ChatDummyPage',
-      component: ChatDummyPage
     },
     {
       path: '/shopping_home',
@@ -310,8 +316,8 @@ export default new Router({
     },
     {
       path: '/other_home',
-      name: 'OhterPage',
-      component: OhterPage
+      name: 'OtherPage',
+      component: OtherPage
     },
     {
       path: '/other/notification',

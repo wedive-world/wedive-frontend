@@ -4,7 +4,14 @@
     <div class="header header-fixed header-logo-center">
         <a href="" class="header-title color ellipsis">{{ roomName || '' }}</a>
         <a v-on:click="historyBack()" data-back-button class="font-16 header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
+
+        <div v-if="is_concierge" class="font-noto" style="margin-top: 50px;height:90px;background:rgb(24, 24, 24);border-bottom:1px solid lightgray;padding:14px;">
+            <p class="mb-0 font-16 font-600 color-white"><i class="fas fa-concierge-bell me-1"></i> 띠링띠링</p>
+            <p class="mb-0 font-14 opacity-80 color-white" style="line-height:1.3;">버디매칭, 장소추천,<br/>다이빙 예약을 도와드립니다.</p>
+            <img src="https://d34l91104zg4p3.cloudfront.net/assets/concierge.gif" style="height:74px;width:74px;position:absolute;right:14px;top:58px;-webkit-mask-image: -webkit-radial-gradient(center, white, black);border-radius: 16px;"/>
+        </div>
     </div>
+
 
     <div id="footer-bar-speach" style="z-index: 9999;display: table;width: 100%;">
         <div :class="(is_emoji_clicked?'':'hide')" style="background:#00000066;height:100px;">
@@ -387,8 +394,13 @@ export default {
   mounted() {
     $(".page-title").hide();
     $(".page-title-clear").hide();
-    document.getElementById("page-back").classList.remove("hide");
-    document.getElementById("footer-bar").classList.add("hide");
+    try {
+        document.getElementById("page-back").classList.remove("hide");
+        document.getElementById("footer-bar").classList.add("hide");
+    } catch (e) {
+
+    }
+    
 
     if (this.$route.query.header && this.$route.query.header == 'hide') {
       $(".page-title").hide();
@@ -421,6 +433,13 @@ export default {
     VueTypeaheadBootstrap,
   },
   created() {
+    //this.$router.push({name: "ChatDummyPage", params: {is_concierge: true, roomName: "WeDive", chatType: "direct", chatUids: JSON.stringify([concierge_uid])}});
+    this.route_params = this.$route.params;
+    this.is_concierge = (this.route_params && this.route_params.hasOwnProperty('is_concierge') ? this.route_params.is_concierge : null);
+    this.roomName = (this.route_params && this.route_params.hasOwnProperty('roomName') ? this.route_params.roomName : null);
+    this.chatType = (this.route_params && this.route_params.hasOwnProperty('chatType') ? this.route_params.chatType : 'direct');
+    this.chatUids = (this.route_params && this.route_params.hasOwnProperty('chatUids') ? JSON.parse(this.route_params.chatUids) : []);
+    
     setTimeout(function() {
         init_template();
         var preloader = document.getElementById('preloader')
@@ -435,6 +454,8 @@ export default {
   },
   data () {
     return {
+        route_params: null,
+        is_concierge: false,
         query: '',
         selectedlocation: null,
         locations: [],
@@ -444,7 +465,9 @@ export default {
         getMessagesByRoomId: [],
         getJoinedRoomList: [],
         roomId: '',
-        roomName: localStorage.chatName,
+        roomName: null,
+        chatType: null,
+        chatUids: null,
         skip: 0,
         limit: 50,
         prev_height: 0,
@@ -483,7 +506,7 @@ export default {
                 //console.log(this.locationSelectedList[i])
                 var bg_img = (this.locationSelectedList[i].backgroundImages && this.locationSelectedList[i].backgroundImages.length > 0 ) ? this.locationSelectedList[i].backgroundImages[0].thumbnailUrl : '/static/empty.jpg';
                 const message = '[['+this.locationSelectedList[i].type+'|'+this.locationSelectedList[i].uniqueName+'|'+this.locationSelectedList[i].name+'|'+this.locationSelectedList[i].description+'|'+bg_img+']]';
-                const userId = JSON.parse(localStorage.chatUids)[0];                
+                const userId = this.chatUids[0];                
                 
                 var result = await axios({
                     url: 'https://chat.wedives.com/graphql',
@@ -517,9 +540,9 @@ export default {
                 this.sendText = '';
                 var ret = (result.data && result.data.data && result.data.data.getJoinedRoomList) ? result.data.data.getJoinedRoomList : null
                 if (ret != null) {
-                    delete localStorage.chatUids;
-                    delete localStorage.chatType;
-                    delete localStorage.chatName;
+                    //delete localStorage.chatUids;
+                    //delete localStorage.chatType;
+                    //delete localStorage.chatName;
                     location.href = '/chat/' + ret.chatRoom._id;
                 }
             }
@@ -694,7 +717,7 @@ export default {
             // 01. 이모지
             if (this.is_emoji_clicked) {
                 const message = "[[emoji|" + this.emoji_url + "]]";
-                const userId = JSON.parse(localStorage.chatUids)[0];
+                const userId = this.chatUids[0];
 
                 var result = await axios({
                     url: 'https://chat.wedives.com/graphql',
@@ -791,7 +814,7 @@ export default {
             // 03. 텍스트
             if (this.sendText != "") {
                 const message = this.sendText;
-                const userId = JSON.parse(localStorage.chatUids)[0];
+                const userId = this.chatUids[0];
 
                 var result = await axios({
                     url: 'https://chat.wedives.com/graphql',
@@ -825,9 +848,9 @@ export default {
                 ret = (result.data && result.data.data && result.data.data.postMessageToUser) ? result.data.data.postMessageToUser : null
             }
             if (ret != null) {
-                delete localStorage.chatUids;
-                delete localStorage.chatType;
-                delete localStorage.chatName;
+                //delete localStorage.chatUids;
+                //delete localStorage.chatType;
+                //delete localStorage.chatName;
                 location.href = '/chat/' + ret.chatRoom._id;
             }
         }

@@ -930,7 +930,10 @@
             <input type="number" class="wedive-input2 wedive-input col-8 font-16 font-noto" style="margin-bottom: 7px;" placeholder="핸드폰 번호를 입력하세요." v-model="reservation_phone" id="textarea_reservation_phone"></input>
 
             <div class="col-3 font-16" style="display: inline-block;vertical-align: top;padding-top: 7px;width: calc(33.33333333% - 4px);">이메일</div>
-            <input type="email" class="wedive-input2 wedive-input col-8 font-16 font-noto" placeholder="이메일 주소를 입력하세요." v-model="reservation_email"></input>
+            <input type="email" class="wedive-input2 wedive-input col-8 font-16 font-noto" style="margin-bottom: 7px;"placeholder="이메일 주소를 입력하세요." v-model="reservation_email"></input>
+
+            <div class="col-3 font-16" style="display: inline-block;vertical-align: top;padding-top: 7px;width: calc(33.33333333% - 4px);">요청사항</div>
+            <textarea class="wedive-textarea2 wedive-input col-8" style="min-height: 180px;" placeholder="요청사항을 입력하세요." v-model="reservation_requirement"></textarea>
         </div>
 
         <div class="divider mb-0" style="height: 12px; border-top: 1px solid rgba(136, 136, 136, 0.25);"></div>
@@ -1325,6 +1328,7 @@ export default {
         reservation_name: localStorage.userName,
         reservation_phone: null,
         reservation_email: localStorage.userEmail,
+        reservation_requirement: '',
     }
   }, 
   computed: {
@@ -2027,7 +2031,8 @@ export default {
                             name: this.reservation_name,
                             phoneNumber: this.reservation_phone,
                             email: this.reservation_email,
-                            receipts: {product: this.selectedTicket._id, quantity: 1}
+                            receipts: {product: this.selectedTicket._id, quantity: 1},
+                            requirementText: this.reservation_requirement
                         },
                     }
                 }
@@ -2395,7 +2400,7 @@ export default {
         if (localStorage.hasOwnProperty("idToken") == false || localStorage.idToken == null) {
           this.$root.$children[0].$refs.loginBottomSheet.open();
         } else if (localStorage.hasOwnProperty("nickName") == false || localStorage.nickName == null || nickName == 'null') {
-          location.href='/user_create';
+          location.href='/user/create';
         }
       },
       timeForToday(value) {

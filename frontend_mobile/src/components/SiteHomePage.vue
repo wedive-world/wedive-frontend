@@ -1445,7 +1445,7 @@ export default {
         if (localStorage.hasOwnProperty("idToken") == false || localStorage.idToken == null) {
           this.$root.$children[0].$refs.loginBottomSheet.open();
         } else if (localStorage.hasOwnProperty("nickName") == false || localStorage.nickName == null || localStorage.nickName == 'null') {
-          location.href='/user_create';
+          location.href='/user/create';
         }
       },
       async concierge() {
@@ -1508,12 +1508,14 @@ export default {
             })
             if (go_flag == false) {
                 // 없는경우, 더미로 하나 만든다.
-                localStorage.chatType = 'direct';
-                var chatUids = new Array();
-                chatUids.push(concierge_uid);
-                localStorage.chatUids = JSON.stringify(chatUids);
-                localStorage.chatName = "WeDive";
-                location.href = '/chat/create'
+                //localStorage.chatType = 'direct';
+                //var chatUids = new Array();
+                //chatUids.push(concierge_uid);
+                //localStorage.chatUids = JSON.stringify(chatUids);
+                //localStorage.chatName = "WeDive";
+                //location.href = '/chat/create'
+
+                this.$router.push({name: "ChatDummyPage", params: {is_concierge: true, roomName: "WeDive", chatType: "direct", chatUids: JSON.stringify([concierge_uid])}});
             }
         } else { // 로그인
             this.login();

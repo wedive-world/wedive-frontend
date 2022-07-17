@@ -682,15 +682,12 @@
             <div class="font-noto font-500 font-20 mt-2">예약 접수완료</div>
             <div class="font-noto color-gray mt-3" style="line-height:1.5;">담당자가 확인중입니다.<br/>{{ getDiveShopByUniqueName.name }}는 평균 10분내 예약이 완료됩니다.</div>
         </div>
-        <div class="font-noto me-4 ms-4" style="margin-top:30%;">
+        <div class="font-noto font-16 me-4 ms-4" style="margin-top:30%;">
             <p class="color-gray pb-1 mb-1" style="border-bottom: 2px dotted #e1e2e3;">센터명
                 <span class="color-black" style="float:right;">{{ getDiveShopByUniqueName.name }}</span>
             </p>
             <p class="color-gray mb-1">예약일
                 <span class="color-black" style="float:right;">{{ day_show }}</span>
-            </p>
-            <p class="color-gray mb-1">티켓명
-                <span class="color-black" style="float:right;">{{ showTicket }}</span>
             </p>
             <p class="color-gray mb-1">인원
                 <span class="color-black" style="float:right;">{{ people_show + '명' }}</span>
@@ -755,41 +752,15 @@
                     v-on:click="collapse2()"
                     >
                     <div class="">
-                        <h4 class="pt-3 mb-2 content mt-0 mb-2 font-17 font-500 font-noto"><!--<i class="fas fa-clock me-2"></i>-->티켓선택</h4>
+                        <h4 class="pt-3 mb-2 content mt-0 mb-2 font-17 font-500 font-noto"><!--<i class="fas fa-clock me-2"></i>-->예약정보</h4>
                         <h4 class="pt-3 mb-2 content mt-0 mb-2 font-300 color-secondary" style="position: absolute;right: 0px;top: 4px;">{{showTicket}}</h4>
                     </div>
                     
                 </div>
                 <div class="collapse" id="collapse2">
                     <div class="p-2 row" style="padding-left:35px !important;padding-right:25px !important;">
-                        <div v-on:click="selectTicket($event, '평일 1부 입장권')" class="font-noto mb-2" style="border: 2px dotted #b1b2b3;border-radius: 6px;padding:0;padding-bottom:10px;">
-                            <div class="bg-gray-light color-black font-16" style="border-top-left-radius: 6px;border-top-right-radius: 6px;padding:8px 10px;margin-bottom:10px;">
-                                평일 1부 입장권
-                                <span class="color-gray font-14" style="float: right;padding-right:10px;">08:00 - 12:00</span>
-                            </div>
-                            <span class="font-20 color-secondary" style="padding-left:10px;">30,000 원</span>
-                        </div>
-
-                        <div v-on:click="selectTicket($event, '평일 2부 입장권')" class="font-noto mb-2" style="border: 2px dotted #b1b2b3;border-radius: 6px;padding:0;padding-bottom:10px;">
-                            <div class="bg-gray-light color-black font-16" style="border-top-left-radius: 6px;border-top-right-radius: 6px;padding:8px 10px;margin-bottom:10px;">
-                                평일 2부 입장권
-                                <span class="color-gray font-14" style="float: right;padding-right:10px;">12:00 - 15:00</span>
-                            </div>
-                            <span class="font-20 color-secondary" style="padding-left:10px;">30,000 원</span>
-                        </div>
-
-                        <div v-on:click="selectTicket($event, '평일 3부 입장권')" class="font-noto mb-2" style="border: 2px dotted #b1b2b3;border-radius: 6px;padding:0;padding-bottom:10px;">
-                            <div class="bg-gray-light color-black font-16" style="border-top-left-radius: 6px;border-top-right-radius: 6px;padding:8px 10px;margin-bottom:10px;">
-                                평일 3부 입장권
-                                <span class="color-gray font-14" style="float: right;padding-right:10px;">16:00 - 20:00</span>
-                            </div>
-                            <span class="font-20 color-secondary" style="padding-left:10px;">30,000 원</span>
-                        </div>
-                        <!--<div class="form-check interest-check col-3" v-for="(hour,index) in hour_array" style="width: 25%;margin-left:0px;margin-right:0px;padding-left:calc(var(--bs-gutter-x) * .5);">
-                            <input v-if="(selectedDate && selectedDate.isToday && wediveHourCheck(now, hour))" class="form-check-input" type="radio" name="check_hour" value="" :id="'check_hour'+index" disabled="disabled">
-                            <input v-else class="form-check-input" type="radio" name="check_hour" value="" :id="'check_hour'+index">
-                            <label :class="'form-check-label rounded-xl' + (selectedDate && selectedDate.isToday && wediveHourCheck(now, hour) ? ' vc-text-gray-600' : '')" :for="'check_hour'+index" style="padding-left:12px;" v-on:click="setHour(index, selectedDate, now, hour)">{{hour}}</label>
-                        </div>-->
+                        <div class="color-highlight font-12">※ 위다이브 컨시어지가 예약을 도와드립니다.</div>
+                        <textarea class="wedive-textarea2 wedive-input" style="min-height: 180px;" placeholder="요청사항을 입력하세요." v-model="reservation_requirement"></textarea>
                     </div>
                 </div>
             </div>
@@ -839,10 +810,10 @@
             <textarea rows="1" class="wedive-textarea2 wedive-input col-8" placeholder="이름을 입력하세요." v-model="reservation_name"></textarea>
 
             <div class="col-3 font-16" style="display: inline-block;vertical-align: top;padding-top: 7px;width: calc(33.33333333% - 4px);">전화번호</div>
-            <textarea rows="1" class="wedive-textarea2 wedive-input col-8" placeholder="핸드폰 번호를 입력하세요." v-model="reservation_phone" id="textarea_reservation_phone"></textarea>
+            <input type="number" class="wedive-input2 wedive-input col-8 font-16 font-noto" style="margin-bottom: 7px;" placeholder="핸드폰 번호를 입력하세요." v-model="reservation_phone" id="textarea_reservation_phone"></input>
 
             <div class="col-3 font-16" style="display: inline-block;vertical-align: top;padding-top: 7px;width: calc(33.33333333% - 4px);">이메일</div>
-            <textarea rows="1" class="wedive-textarea2 wedive-input col-8" placeholder="이메일 주소를 입력하세요." v-model="reservation_email"></textarea>
+            <input type="email" class="wedive-input2 wedive-input col-8 font-16 font-noto" style="margin-bottom: 7px;"placeholder="이메일 주소를 입력하세요." v-model="reservation_email"></input>
         </div>
 
         <div class="divider mb-0" style="height: 12px; border-top: 1px solid rgba(136, 136, 136, 0.25);"></div>
@@ -898,7 +869,7 @@
 
         <div style="min-height: 62px !important;height: 62px !important;">
             <div class="flex-fill speach-input p-2">
-            <a v-on:click="makeReservation()" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 font-noto font-600"><i class="fas fa-calendar-check me-2"></i>예약 신청하기</a>
+            <a v-on:click="makeReservation()" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 font-noto font-500"><i class="fas fa-calendar-check me-2"></i>예약 신청하기</a>
             </div>
         </div>
     </div>
@@ -1168,7 +1139,6 @@ export default {
     }
   },
   created() {
-      
   },
   beforeDestroy () {
     
@@ -1211,7 +1181,6 @@ export default {
         showTicket: "",
         people_show: 1,
         selectedDate: null,
-        selectedTicket: null,
         now: new Date(),
         hour_array: ["7:00", "7:30", "8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30"],
         theme: {
@@ -1235,6 +1204,7 @@ export default {
         reservation_name: localStorage.userName,
         reservation_phone: '',
         reservation_email: localStorage.userEmail,
+        reservation_requirement: '다이빙 횟수 : \n숙박 포함여부 (방개수) : \n식사 여부 : \n\n기타 : 체험다이빙, 강습 등 요청사항',
     }
   }, 
   computed: {
@@ -1426,6 +1396,7 @@ export default {
               }
           },
           result() {
+              console.log(this.getDiveShopByUniqueName._id)
             if (this.getDiveShopByUniqueName.isUserLike) this.like_img = 'ico_heart2';
             if (this.getDiveShopByUniqueName.isUserSubscribe) this.subscribe_img = 'ico_subscribe2';
             {
@@ -1719,12 +1690,12 @@ export default {
             var notificationToast = document.getElementById('snackbar-custom-error');
             var notificationToast2 = new bootstrap.Toast(notificationToast);
             notificationToast2.show();
-        } else if (this.selectedTicket == null) {
+        } /*else if (this.selectedTicket == null) {
             $("#snackbar-custom-error-span").text("티켓을 선택해주세요.")
             var notificationToast = document.getElementById('snackbar-custom-error');
             var notificationToast2 = new bootstrap.Toast(notificationToast);
             notificationToast2.show();
-        } else if (this.reservation_name == null) {
+        } */else if (this.reservation_name == null) {
             $("#snackbar-custom-error-span").text("예약자 이름을 입력해주세요.")
             var notificationToast = document.getElementById('snackbar-custom-error');
             var notificationToast2 = new bootstrap.Toast(notificationToast);
@@ -1767,7 +1738,8 @@ export default {
                             name: this.reservation_name,
                             phoneNumber: this.reservation_phone,
                             email: this.reservation_email,
-                            receipts: {product: this.selectedTicket._id, quantity: 1}
+                            receipts: null,
+                            requirementText: this.reservation_requirement
                         },
                     }
                 }
@@ -2135,7 +2107,7 @@ export default {
         if (localStorage.hasOwnProperty("idToken") == false || localStorage.idToken == null) {
           this.$root.$children[0].$refs.loginBottomSheet.open();
         } else if (localStorage.hasOwnProperty("nickName") == false || localStorage.nickName == null || localStorage.nickName == 'null') {
-          location.href='/user_create';
+          location.href='/user/create';
         }
       },
       timeForToday(value) {
@@ -2356,6 +2328,8 @@ export default {
 .stepper a:last-child {border-left-color: black;background: #1d397c;}
 .stepper a:last-child i {color: white !important;}
 .stepper input {font-size: 18px !important;}
-.wedive-textarea2 {max-height: 38px;min-height: 38px;padding-left: 10px;padding-right: 10px;padding-top: 5px;}
+.wedive-textarea2, .wedive-input2 {max-height: 38px;min-height: 38px;padding-left: 10px;padding-right: 10px;font-family: 'Noto Sans Korean';font-size: 16px;}
+.wedive-textarea2 {padding-top: 5px;}
+.wedive-textarea2::placeholder, .wedive-input2::placeholder{font-family: 'Noto Sans Korean' !important;font-size: 16px !important;opacity:.7 !important;}
 .ticket-select {border: 2px solid #2c9ac3 !important;}
 </style>

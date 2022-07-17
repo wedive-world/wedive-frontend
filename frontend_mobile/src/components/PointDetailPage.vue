@@ -1766,7 +1766,7 @@ export default {
         if (localStorage.hasOwnProperty("idToken") == false || localStorage.idToken == null) {
           this.$root.$children[0].$refs.loginBottomSheet.open();
         } else if (localStorage.hasOwnProperty("nickName") == false || localStorage.nickName == null || localStorage.nickName == 'null') {
-          location.href='/user_create';
+          location.href='/user/create';
         }
       },
       timeForToday(value) {

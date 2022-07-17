@@ -27,7 +27,7 @@
                 <h2 class="font-18 font-600 mb-0">서비스</h2>
             </div>
         </div>
-        <a href="/other/reservation" class="position-relative" style="z-index:1;">
+        <a href="/reservation/my" class="position-relative" style="z-index:1;">
             <div class="content pb-0">
                 <h2 class="font-15 font-300 mb-0"><img src="https://d34l91104zg4p3.cloudfront.net/assets/other_reservation.png" height="30" /><span class="ms-2 vertical-m">나의 예약</span><i class="wedive-txt-all wedive_right" style="top:22px;"></i></h2>
             </div>
@@ -125,7 +125,7 @@ export default {
         if (localStorage.hasOwnProperty("idToken") == false || localStorage.idToken == null) {
           this.$root.$children[0].$refs.loginBottomSheet.open();
         } else if (localStorage.hasOwnProperty("nickName") == false || localStorage.nickName == null || localStorage.nickName == 'null') {
-          location.href='/user_create';
+          location.href='/user/create';
         }
       },
   }

@@ -110,7 +110,7 @@
             <div class="color-primary font-noto font-20 font-600">프로필 등록이 필요합니다.</div>
         </div>
         <div class="content pt-3 row">
-              <a href="/user_create" class="mb-3 rounded-xl text-start btn btn-m btn-full bg-dark-dark btn-icon font-600"><i class="fa fa-user rounded-xl font-16 text-center"></i> 프로필 등록하기</a>
+              <a href="/user/create" class="mb-3 rounded-xl text-start btn btn-m btn-full bg-dark-dark btn-icon font-600"><i class="fa fa-user rounded-xl font-16 text-center"></i> 프로필 등록하기</a>
               <!--<a href="#" class="mb-3 rounded-xl text-start btn btn-m btn-full bg-dark-dark btn-icon font-600"><i class="fab fa-apple rounded-xl font-16 text-center"></i> Apple 계정으로 로그인</a>
               <a href="#" class="mb-3 rounded-xl text-start btn btn-m btn-full bg-yellow-dark btn-icon font-600"><i class="text-center rounded-xl" style="position: absolute;left: 0px;top: 0px;line-height: 43px;width: 40px;height: 100%;background-color: rgba(0, 0, 0, 0.1);"><img src="https://d34l91104zg4p3.cloudfront.net/assets/logo_kakao.png" height="16" style="vertical-align: middle;"/></i> Kakao 계정으로 로그인</a>-->
           </div>
@@ -683,7 +683,7 @@ export default {
                     }
                 }
             });
-            location.href='/user_create';
+            location.href='/user/create';
           }
       }).catch((error) => {
           const errorCode = error.code;
