@@ -475,17 +475,14 @@
             </div>
         </div>
 
-        <div v-if="nearData && nearData.length > 0">
+        <div v-if="getDiveSitesNearby && getDiveSitesNearby.length > 0">
             <h4 class="text-start mb-2 mt-4" style="margin-left: 10px;margin-right: 10px;">근처 사이트</h4>
-            <div class="splide single-slider slider-no-arrows visible-slider slider-no-dots" id="single-slider-nearby">
+            <div class="splide slider-no-arrows visible-slider slider-no-dots" id="single-slider-nearby">
                 <div class="splide__track">
                     <div class="splide__list">
-                        <div v-for="near in nearData" class="splide__slide">
-                            <div class="card card-style card-nearby" :style="'background: url('+((near.backgroundImages!=null&&near.backgroundImages[0]!=null) ? near.backgroundImages[0].thumbnailUrl : '/static/empty.jpg')+')'" data-card-height="260">
+                        <div v-for="near in getDiveSitesNearby" class="splide__slide">
+                            <div class="card card-style card-nearby" :style="'background: url('+((near.backgroundImages!=null&&near.backgroundImages[0]!=null) ? near.backgroundImages[0].thumbnailUrl : '/static/empty.jpg')+')'" data-card-height="160">
                             
-                                <div class="card-top px-3 py-3">
-                                    <a href="#" data-menu="menu-heart" class="bg-white rounded-sm icon icon-xs float-end"><i class="fa fa-heart color-red-dark"></i></a>
-                                </div>
                                 <div class="card-bottom px-3 py-3">
                                     <h4 class="color-white font-18 font-600">{{ near.name }}</h4>
                                     <div class="divider bg-white opacity-20 mb-1"></div>
@@ -614,80 +611,6 @@
                                 <td class="font-12"><img class="me-2" :src="'https://d34l91104zg4p3.cloudfront.net/assets/'+(getDiveSiteByUniqueName['month'+(index+1)].filter(x=>x.type=='climate').length > 0 ? enumClimate[getDiveSiteByUniqueName['month'+(index+1)].filter(x=>x.type=='climate')[0].title] : 'empty')+'.svg'" width="20" height="20"/>{{ ((getDiveSiteByUniqueName.waterTemperature.temperatureDetail.MaxC[index]+minC)/2).toFixed(1) }}ºC</td>
                                 <td class=""><img class="img_pop" :src="'https://d34l91104zg4p3.cloudfront.net/assets/'+(getDiveSiteByUniqueName['month'+(index+1)].filter(x=>x.type=='popularity').length > 0 ? enumPopularity[getDiveSiteByUniqueName['month'+(index+1)].filter(x=>x.type=='popularity')[0].title] : 'empty')+'.svg'" width="32" height="32"/></td>
                             </tr>
-                        <!--
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">1월</th>
-                                <td class="font-12 color-gray">5.2ºC / 12.3ºC</td>
-                                <td class="font-12"><img class="me-2" src="https://d34l91104zg4p3.cloudfront.net/assets/weather_partly_cloudy.svg" width="20" height="20"/>8.8ºC</td>
-                                <td class=""><img class="img_pop" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_popularity_01.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">2월</th>
-                                <td class="font-12 color-gray">3.4ºC / 9.8ºC</td>
-                                <td class="font-12"><img class="me-2" src="https://d34l91104zg4p3.cloudfront.net/assets/weather_partly_cloudy.svg" width="20" height="20"/>6.6ºC</td>
-                                <td class=""><img class="img_pop" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_popularity_01.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">3월</th>
-                                <td class="font-12 color-gray">3.2ºC / 9.4ºC</td>
-                                <td class="font-12"><img class="me-2" src="https://d34l91104zg4p3.cloudfront.net/assets/weather_partly_cloudy.svg" width="20" height="20"/>6.3ºC</td>
-                                <td class=""><img class="img_pop" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_popularity_01.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">4월</th>
-                                <td class="font-12 color-gray">7.0ºC / 13.3ºC</td>
-                                <td class="font-12"><img class="me-2" src="https://d34l91104zg4p3.cloudfront.net/assets/weather_partly_cloudy.svg" width="20" height="20"/>10.2ºC</td>
-                                <td class=""><img class="img_pop" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_popularity_01.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">5월</th>
-                                <td class="font-12 color-gray">10.5ºC / 17.8ºC</td>
-                                <td class="font-12"><img class="me-2" src="https://d34l91104zg4p3.cloudfront.net/assets/weather_partly_cloudy.svg" width="20" height="20"/>14.6ºC</td>
-                                <td class=""><img class="img_pop" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_popularity_01.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">6월</th>
-                                <td class="font-12 color-gray">15.1ºC / 23.4ºC</td>
-                                <td class="font-12"><img class="me-2" src="https://d34l91104zg4p3.cloudfront.net/assets/weather_partly_cloudy.svg" width="20" height="20"/>19.2ºC</td>
-                                <td class=""><img class="img_pop" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_popularity_02.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">7월</th>
-                                <td class="font-12 color-gray">19.9ºC / 24.4ºC</td>
-                                <td class="font-12"><img class="me-2" src="https://d34l91104zg4p3.cloudfront.net/assets/weather_heavy_rain.svg" width="20" height="20"/>22.2ºC</td>
-                                <td class=""><img class="img_pop" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_popularity_02.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">8월</th>
-                                <td class="font-12 color-gray">21.3ºC / 26.0ºC</td>
-                                <td class="font-12"><img class="me-2" src="https://d34l91104zg4p3.cloudfront.net/assets/weather_showers.svg" width="20" height="20"/>23.7ºC</td>
-                                <td class=""><img class="img_pop" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_popularity_02.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">9월</th>
-                                <td class="font-12 color-gray">18.6ºC / 24.1ºC</td>
-                                <td class="font-12"><img class="me-2" src="https://d34l91104zg4p3.cloudfront.net/assets/weather_sunny.svg" width="20" height="20"/>21.4ºC</td>
-                                <td class=""><img class="img_pop" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_popularity_02.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">10월</th>
-                                <td class="font-12 color-gray">14.9ºC / 21.6ºC</td>
-                                <td class="font-12"><img class="me-2" src="https://d34l91104zg4p3.cloudfront.net/assets/weather_partly_cloudy.svg" width="20" height="20"/>18.2ºC</td>
-                                <td class=""><img class="img_pop" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_popularity_02.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <th class="font-12" scope="row">11월</th>
-                                <td class="font-12 color-gray">10.8ºC / 17.6ºC</td>
-                                <td class="font-12"><img class="me-2" src="https://d34l91104zg4p3.cloudfront.net/assets/weather_partly_cloudy.svg" width="20" height="20"/>14.2ºC</td>
-                                <td class=""><img class="img_pop" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_popularity_01.svg" width="32" height="32"/></td>
-                            </tr>
-                            <tr>
-                                <th class="font-12" scope="row">12월</th>
-                                <td class="font-12 color-gray">6.4ºC / 13.8ºC</td>
-                                <td class="font-12"><img class="me-2" src="https://d34l91104zg4p3.cloudfront.net/assets/weather_partly_cloudy.svg" width="20" height="20"/>10.1ºC</td>
-                                <td class=""><img class="img_pop" src="https://d34l91104zg4p3.cloudfront.net/assets/icon_popularity_01.svg" width="32" height="32"/></td>
-                            </tr>
-                        -->
                         </tbody>
                     </table>
                     <div class="text-end">
@@ -770,7 +693,12 @@
 
 
         
-        <div data-menu-load="/static/menu-footer.html"></div>
+        <div data-menu-load="/static/menu-footer.html" style="margin-bottom: 76px;"></div>
+        <div id="footer-bar-shop" class="d-flex" style="min-height: 52px !important;height: 52px !important;">
+            <div class="flex-fill speach-input p-2">
+                <a v-on:click="findBuddyClick()" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 font-noto font-500"><i class="fas fa-user-friends me-2"></i>버디모집</a>
+            </div>
+        </div>
 
     </div>
 
@@ -851,7 +779,7 @@ export default {
         collapse_text: '더 보기',
         now: new Date(),
         firstThumbnailImage: '',
-        nearData: [],
+        getDiveSitesNearby: [],
         marker_list: [],
         marker_img_list: [],
         recommend_word: ["비추천", "낮음", "일반적", "좋음", "최고", "완벽함"],
@@ -873,6 +801,49 @@ export default {
     }
   },
   apollo: {
+      getDiveSitesNearby: {
+          query:gql `
+            query GetDiveSitesNearBy($lat1: Float!, $lon1: Float!, $lat2: Float!, $lon2: Float!) {
+                getDiveSitesNearby(lat1: $lat1, lon1: $lon1, lat2: $lat2, lon2: $lon2) {
+                    _id
+                    backgroundImages {
+                        _id
+                        thumbnailUrl
+                    }
+                    name
+                    uniqueName
+                    description
+                }
+            }
+          `,
+          skip() {
+              return (this.getDiveSiteByUniqueName == null || this.getDiveSiteByUniqueName.latitude == null ? true : false);
+          },
+          variables() {
+              return {
+                lat1: (this.getDiveSiteByUniqueName.latitude-0.2),
+                lon1: (this.getDiveSiteByUniqueName.longitude-0.2),
+                lat2: (this.getDiveSiteByUniqueName.latitude+0.2),
+                lon2: (this.getDiveSiteByUniqueName.longitude+0.2),
+              }
+          },
+          result() {
+              var cnt = 0;
+              this.getDiveSitesNearby.forEach(x => {
+                  if (x._id == this.getDiveSiteByUniqueName._id) {
+                      this.getDiveSitesNearby.splice(cnt, 1);
+                  }
+                  cnt++;
+              });
+
+              var single = new Splide( '#single-slider-nearby', {
+                    type:'loop',
+                    autoplay:true,
+                    interval:4000,
+                    perPage: 1,
+                }).mount();
+          }
+      },
       getDiveSiteByUniqueName: {
           query:gql `
             query getDiveSiteByUniqueName($uniqueName: String!) {
@@ -1079,12 +1050,16 @@ export default {
                 }
             }
           `,
+          skip() {
+              return (this.getDiveSiteByUniqueName && this.getDiveSiteByUniqueName._id ? true : false)
+          },
           variables() {
               return {
                 uniqueName: this.uniqueName
               }
           },
           result() {
+            this.$apollo.queries.getDiveSitesNearby.refetch();
             if (this.getDiveSiteByUniqueName.isUserLike) this.like_img = 'ico_heart2';
             if (this.getDiveSiteByUniqueName.isUserSubscribe) this.subscribe_img = 'ico_subscribe2';
             {
@@ -1448,7 +1423,6 @@ export default {
                     }
                     x.dateStartedAt = new Date(x.startedAt);
                 });
-                console.log(this.getDivingsByPlaceId);
                 //}
             }).catch((error) => {
                 // Error)
@@ -1460,21 +1434,9 @@ export default {
       },
   },
   methods: {
-      /*setData(_siteData, _nearData) {
-          this.siteData = _siteData;
-          if (_siteData.isUserLike) this.like_img = 'ico_heart2';
-          if (_siteData.isUserSubscribe) this.subscribe_img = 'ico_subscribe2';
-          _nearData.forEach(d => {
-              if (d._id != this.siteData._id) {
-                  this.nearData.push(d);
-              }
-          });
-          setTimeout(function() {
-            init_template();
-            var preloader = document.getElementById('preloader')
-            if(preloader){preloader.classList.add('preloader-hide');}
-          }, 1000);
-      },*/
+      findBuddyClick() {
+          this.$router.push({name: "BuddyCreateAllPage", params: this.getDiveSiteByUniqueName})
+      },
       async moveDiving(item) {
         var dic_type1 = {"DiveSite": "diveSite", "DivePoint": "divePoint", "DiveCenter": "diveCenter", "Diving": "diving", "User": "user", "Review": "review", "Forum": "forum", "Recommendation": "recommendation"};
         await axios({

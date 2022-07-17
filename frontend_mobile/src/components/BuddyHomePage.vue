@@ -96,8 +96,8 @@
             <swiper-slide
                 :key="1"
                 :virtualIndex="1">
-                <div v-if="getDivingsByHostUserId.length > 0" class="pt-3 ps-4" style="margin-right: 90px;">
-                    <div v-for="(diving,index) in getDivingsByHostUserId">
+                <div v-if="getDivingsRelatedWithCurrentUser.length > 0" class="pt-3 ps-4" style="margin-right: 90px;">
+                    <div v-for="(diving,index) in getDivingsRelatedWithCurrentUser">
                         <div class="map-box" style="position: relative;height: 50px;">
                             <div v-on:click="movePreview(diving)" :class="(diving.isPast ? 'opacity-30' : '')">
                                 <div class="justify-content-center mb-0 text-start">
@@ -113,14 +113,13 @@
                                         </svg>
                                     </div>
                                     <div class="" style="display:inline-block;vertical-align: top;width: calc(100% - 60px);">
-                                        <p class="pb-0 mb-0 nearby_desc ellipsis" style="display: block;"> {{ getWediveStartEnd(diving.startedAt, diving.finishedAt) }} | {{ diving.title }} </p>
-                                        
-                                        <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> {{ diving.location }} ({{ diving.type.join().replace('scubaDiving', '스쿠바').replace('freeDiving', '프리') }})</p>
+                                        <p class="pb-0 mb-0 font-noto ellipsis font-500" style="display: block;"> {{ getWediveStartEnd(diving.startedAt, diving.finishedAt) }}</p>
+                                        <p class="color-highlight font-13 mb-0 ellipsis mt-n1"><i class="wedive_icoset wedive_icoset_marker"></i> {{ diving.location }} ({{ diving.type.join().replace('scubaDiving', '스쿠바').replace('freeDiving', '프리') }})</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div v-if="index < getDivingsByHostUserId.length-1" class="divider mt-0 mb-1"></div>
+                        <div v-if="index < getDivingsRelatedWithCurrentUser.length-1" class="divider mt-0 mb-1"></div>
                         <div v-else class=""></div>
                     </div>                    
                 </div>
@@ -128,7 +127,7 @@
                     <img src="/static/images/assets/empty_list2_2.jpg" height="74" style="margin-top:4px;"/>
                     <p class="mb-0 opacity-30 font-noto font-14 mt-n2">{{ no_diving_word }}</p>
                 </div>
-                <div v-on:click="moveMyDiving()" style="position: absolute;right: 10px;top: 40px;text-align: -webkit-center;background: #ffffff;padding: 6px 8px;border-radius: 10px;">
+                <div v-on:click="moveMyDiving()" style="position: absolute;right: 12px;top: 40px;text-align: -webkit-center;background: #ffffff;padding: 6px 8px;border-radius: 10px;">
                     <i class="wedive_icoset wedive_icoset_rightbar" style="display: block;"></i>
                     <span>모두보기</span>
                 </div>
@@ -137,7 +136,7 @@
         </div>
     </div>
 
-    <div style="max-width: 100vw;position:relative;">
+    <div style="width: 100vw !important;max-width: 100vw !important;position:relative;">
         <svg class="fish" id="fish" style="position: absolute;top: 0px;padding-top: 120px;z-index:-1;max-width: 100vw;">
         <path
             id="fish2"
@@ -180,19 +179,19 @@
     <div class="pe-4 ps-4" style="margin-top:-110px;z-index:100;">
         <div class="row mb-3">
             <div v-on:click="move('/buddy/create')" class="card card-style col-6 shadow-xl square m-0 p-0" style="width: calc(50% - 6px);background-image: url(/static/images/assets/toss-hand.png);background-size: 70% 70%;background-repeat: no-repeat;background-position: right bottom;background-color: #ffffffcf;">
-                <div class="mb-0 mt-2 ms-2" style="position:absolute;height:50%;">
-                    <h4 class="font-noto text-start pt-1 mb-0">버디찾기</h4>
+                <div class="mb-0 mt-2 ms-2 ps-1" style="position:absolute;height:50%;">
+                    <h4 class="font-noto text-start pt-1 mb-0">버디모집</h4>
                     <p class="text-start mb-0 opacity-70">새로운 다이빙 생성</p>
                 </div>
             </div>
             <div v-on:click="move('/diving/search')" class="card card-style col-6 shadow-xl square m-0 p-0" style="width: calc(50% - 6px);margin-left: 12px !important;background-image: url(/static/images/assets/search2.png);background-size: 70% 70%;background-repeat: no-repeat;background-position: right bottom;background-color: #ffffffcf;">
-                <div class="mb-0 mt-2 ms-2" style="position:absolute;height:50%;">
+                <div class="mb-0 mt-2 ms-2 ps-1" style="position:absolute;height:50%;">
                     <h4 class="font-noto text-start pt-1 mb-0">검색</h4>
                     <p class="text-start mb-0 opacity-70">다이빙, 장소 검색</p>
                 </div>
             </div>
             <div v-on:click="move('/guide/list')" class="card card-style col-12 shadow-xl" style="height: 80px; margin: 12px 0px 0px 0px;background-image: url(/static/images/assets/guide-book.png);background-size: 80px 80px;background-repeat: no-repeat;background-position: right 20px bottom 0px;background-color: #ffffffcf;">
-                <div class="mb-0 mt-2" style="position:absolute;height:50%;">
+                <div class="mb-0 mt-2 ps-1" style="position:absolute;height:50%;">
                     <h4 class="font-noto text-start pt-1 mb-0">가이드</h4>
                     <p class="text-start mb-0 opacity-70">다이빙 입문, 유형별 맞춤 가이드</p>
                 </div>
@@ -322,7 +321,7 @@
 
         
         <div v-for="(recommendation,rec_idx) in recommendation1">
-            <div v-if="recommendation.previewCount == 0" v-on:click="moveRecommend(recommendation._id, 'recommendation')" class="card card-style" :style="recommendation.cssStyle.includes('|') ? recommendation.cssStyle.split('|')[0] : recommendation.cssStyle">
+            <div v-if="recommendation.shownType == 'card'" v-on:click="moveRecommend(recommendation._id, 'recommendation')" class="card card-style" :style="recommendation.cssStyle.includes('|') ? recommendation.cssStyle.split('|')[0] : recommendation.cssStyle">
                 <div :class="'content mb-0 mt-3 me-0' + (recommendation.className ? ' ' + recommendation.className : '')">
                     <h4 class="text-start mb-0 font-noto font-600" v-html="recommendation.title"></h4><i class="wedive-txt-all wedive_right"></i>
                     <p class="mb-0 opacity-60 ls-n1">{{ recommendation.description ? recommendation.description : '' }}</p>
@@ -331,14 +330,14 @@
                 </div>
             </div>
 
-            <div v-else-if="recommendation.previewCount == 2 || recommendation.previewCount == 3" class="card card-style">
+            <div v-else-if="recommendation.shownType == 'list'" class="card card-style">
                 <div class="content mb-0 mt-3">
                     <div v-on:click="moveRecommend(recommendation._id, 'recommendation')">
                         <h4 class="text-start mb-0 font-noto font-600">{{ recommendation.title }}<i class="wedive-txt-all wedive_right"></i></h4>
                         <p class="mb-3 color-gray-light-mid">{{ recommendation.description ? recommendation.description : '' }}</p>
                     </div>
                     
-                    <div v-for="(preview,index) in recommendation.previews">
+                    <div v-for="(preview,index) in recommendation.previews" v-if="index < 2">
                         <div class="map-box" style="position: relative;height: 85px;">
                             <a v-on:click="movePreview(preview)">
                                 <div class="bx">
@@ -369,6 +368,45 @@
                         </div>
                         <div v-if="index < recommendation.previews.length-1" class="divider mt-3 mb-3"></div>
                         <div v-else class="mb-3"></div>
+                    </div>
+                    <div class="collapse" :id="'collapse_' + recommendation._id">
+                        <div v-for="(preview,index) in recommendation.previews" v-if="index >= 2">
+                            <div class="map-box" style="position: relative;height: 85px;">
+                                <a v-on:click="movePreview(preview)">
+                                    <div class="bx">
+                                        <div class="justify-content-center mb-0 text-start">
+                                            <div class="thumb-img me-2">
+                                                <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                                                    <defs>
+                                                    <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                                                    <clipPath id="clipSquircle">
+                                                        <use xlink:href="#shapeSquircle"/>
+                                                    </clipPath>
+                                                    </defs>
+                                                    <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="preview.backgroundImage"/>
+                                                </svg>
+                                            </div>
+                                            <!--<div class="" style="float: left;position: relative;width: 95px; height:95px;">
+                                                <img v-bind:src="(preview.backgroundImages && preview.backgroundImages.length > 0) ? preview.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;margin-top: 3px;">
+                                            </div>-->
+                                            <div class="" style="display:inline-block;vertical-align: top;width: calc(100vw - 138px);">
+                                                <h4 class="font-15 mt-1 ellipsis mb-0">{{ getWediveStartEnd(preview.startedAt, preview.finishedAt) }}</h4>
+                                                <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> {{ preview.location }} ({{ preview.type.join().replace('scubaDiving', '스쿠바').replace('freeDiving', '프리') }})</p>
+                                                <p class="pb-0 mb-0 nearby_desc ellipsis">{{ preview.title }}</p>
+                                            </div>
+                                            <span class="chip chip-s bg-gray-light text-center font-400 wedive-chip color-black"><i class="fa fa-user color-gray"></i> {{ preview.participants.filter(x=>x.status=='joined').length+1 }}</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div v-if="index < recommendation.previews.length-1" class="divider mt-3 mb-3"></div>
+                            <div v-else class="mb-3"></div>
+                        </div>
+                    </div>
+                    <div v-if="recommendation.previews.length > 2" class="list-group list-custom-small list-icon-0" style="background: rgba(196, 187, 171, 0.2);margin-left: -15px;margin-right: -15px;">
+                        <a data-bs-toggle="collapse" class="no-effect" :href="'#collapse_' + recommendation._id" v-on:click="recommendation1_collapse_text[recommendation._id] = (recommendation1_collapse_text[recommendation._id] == '더 보기' ? '줄이기' : '더 보기')">
+                            <p class="font-14 mb-0 text-center">{{ recommendation1_collapse_text[recommendation._id] }}</p>
+                        </a>        
                     </div>
                     
                 </div>
@@ -452,7 +490,7 @@
         </div>
 
         <div v-for="(recommendation,rec_idx) in recommendation2">
-            <div v-if="recommendation.previewCount == 0" v-on:click="moveRecommend(recommendation._id, 'recommendation')" class="card card-style" :style="recommendation.cssStyle.includes('|') ? recommendation.cssStyle.split('|')[0] : recommendation.cssStyle">
+            <div v-if="recommendation.shownType == 'card'" v-on:click="moveRecommend(recommendation._id, 'recommendation')" class="card card-style" :style="recommendation.cssStyle.includes('|') ? recommendation.cssStyle.split('|')[0] : recommendation.cssStyle">
                 <div :class="'content mb-0 mt-3 me-0' + (recommendation.className ? ' ' + recommendation.className : '')">
                     <h4 class="text-start mb-0 font-noto font-600" v-html="recommendation.title"></h4><i class="wedive-txt-all wedive_right"></i>
                     <p class="mb-0 opacity-60 ls-n1">{{ recommendation.description ? recommendation.description : '' }}</p>
@@ -461,14 +499,14 @@
                 </div>
             </div>
 
-            <div v-else-if="recommendation.previewCount == 2 || recommendation.previewCount == 3" class="card card-style">
+            <div v-else-if="recommendation.shownType == 'list'" class="card card-style">
                 <div class="content mb-0 mt-3">
                     <div v-on:click="moveRecommend(recommendation._id, 'recommendation')">
                         <h4 class="text-start font-noto font-600 mb-0">{{ recommendation.title }}<i class="wedive-txt-all wedive_right"></i></h4>
                         <p class="mb-3">{{ recommendation.description ? recommendation.description : '' }}</p>
                     </div>
                     
-                    <div v-for="(site,index) in recommendation.previews.filter(x=>x.__typename == 'DiveSite')">
+                    <div v-for="(site,index) in recommendation.previews.filter(x=>x.__typename == 'DiveSite')" v-if="index < 2">
                         <div class="map-box">
                             <a v-on:click="movePreview(site)">
                                 <div class="bx">
@@ -501,6 +539,47 @@
                         </div>
                         <div v-if="index < recommendation.previews.length-1" class="divider mt-3 mb-3"></div>
                         <div v-else class="mb-3"></div>
+                    </div>
+                    <div class="collapse" :id="'collapse_' + recommendation._id">
+                        <div v-for="(site,index) in recommendation.previews.filter(x=>x.__typename == 'DiveSite')" v-if="index >= 2">
+                            <div class="map-box">
+                                <a v-on:click="movePreview(site)">
+                                    <div class="bx">
+                                        <div class="justify-content-center mb-0 text-start">
+                                            <div class="thumb-img me-2">
+                                                <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                                                    <defs>
+                                                    <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                                                    <clipPath id="clipSquircle">
+                                                        <use xlink:href="#shapeSquircle"/>
+                                                    </clipPath>
+                                                    </defs>
+                                                    <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(site.backgroundImages && site.backgroundImages.length > 0) ? site.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'"/>
+                                                </svg>
+                                            </div>
+                                            <!--<div class="" style="float: left;position: relative;width: 95px; height:95px;">
+                                                <img v-bind:src="(site.backgroundImages && site.backgroundImages.length > 0) ? site.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;margin-top: 3px;">
+                                            </div>-->
+                                            <div class="" style="display:inline-block;vertical-align: top;width: calc(100vw - 156px);">
+                                                <h4 class="font-15"> {{ site.name }} </h4>
+                                                <p class="pb-0 mb-0 nearby_desc"> {{ site.description }} </p>
+                                                
+                                                <p class="pb-0 mb-0"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
+                                                    <span> {{(site.adminScore/20).toFixed(1)}} </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div v-if="index < recommendation.previews.length-1" class="divider mt-3 mb-3"></div>
+                            <div v-else class="mb-3"></div>
+                        </div>
+                    </div>
+                    <div v-if="recommendation.previews.length > 2" class="list-group list-custom-small list-icon-0" style="background: rgba(196, 187, 171, 0.2);margin-left: -15px;margin-right: -15px;">
+                        <a data-bs-toggle="collapse" class="no-effect" :href="'#collapse_' + recommendation._id" v-on:click="recommendation2_collapse_text[recommendation._id] = (recommendation2_collapse_text[recommendation._id] == '더 보기' ? '줄이기' : '더 보기')">
+                            <p class="font-14 mb-0 text-center">{{ recommendation2_collapse_text[recommendation._id] }}</p>
+                        </a>        
                     </div>
                     
                 </div>
@@ -816,11 +895,11 @@ export default {
         windowWidth: window.innerWidth,
         getNearByDivings: [],
         getNearByDiveCenters: [],
-        getDivingsByHostUserId: [],
+        getDivingsRelatedWithCurrentUser: [],
         recommendation1: [],
         recommendation2: [],
-        recommendation1_collapse_text: [],
-        recommendation2_collapse_text: [],
+        recommendation1_collapse_text: {},
+        recommendation2_collapse_text: {},
         prev_driection: true,
         lastScrollPosition: 0,
         idToken: localStorage.idToken,
@@ -852,10 +931,10 @@ export default {
     }
   },
   apollo: {
-    getDivingsByHostUserId: {
+    getDivingsRelatedWithCurrentUser: {
         query: gql`
-            query Query($hostUserId: ID!, $limit: Int!) {
-                getDivingsByHostUserId(hostUserId: $hostUserId, limit: $limit) {
+            query Query($limit: Int!) {
+                getDivingsRelatedWithCurrentUser(limit: $limit) {
                     diveCenters {
                     backgroundImages {
                         _id
@@ -926,7 +1005,6 @@ export default {
         `,
         variables () {
             return {
-                hostUserId: localStorage.userId,
                 limit: 2
             }
         },
@@ -935,7 +1013,7 @@ export default {
         },
         async result () {
             var now = new Date();
-            this.getDivingsByHostUserId.forEach(x => {
+            this.getDivingsRelatedWithCurrentUser.forEach(x => {
                 x.isPast = false;
                 if (new Date(x.startedAt) < now ) {
                     x.isPast = true;
@@ -1216,6 +1294,7 @@ export default {
                 cssStyle
                 className
                 type
+                shownType
                 targetType
                 previews {
                     ... on Diving {
@@ -1276,7 +1355,7 @@ export default {
             var id_arr = new Array();
             var width_arr = new Array();
             this.recommendation1.filter(x=>x.previewCount > 3).forEach(x => {
-                recommendation1_collapse_text.push({_id: x._id, text: '더 보기'});
+                this.recommendation1_collapse_text[x._id] = '더 보기';
                 x.previews.forEach(y => {
                     if (y.backgroundImages && y.backgroundImages.length > 0) {
                         id_arr.push(y.backgroundImages[0]._id);
@@ -1435,7 +1514,7 @@ export default {
             var id_arr = new Array();
             var width_arr = new Array();
             this.recommendation2.filter(x=>x.previewCount > 3).forEach(x => {
-                this.recommendation2_collapse_text.push({_id: x._id, text: '더 보기'});
+                this.recommendation2_collapse_text[x._id] = '더 보기';
                 x.previews.forEach(y => {
                     if (y.backgroundImages.length > 0) {
                         id_arr.push(y.backgroundImages[0]._id);

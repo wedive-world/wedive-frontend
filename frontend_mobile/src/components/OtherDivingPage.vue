@@ -74,8 +74,8 @@ export default {
             },
             data: {
                 query: `
-                query GetDivingsByHostUserId($hostUserId: ID!) {
-                    getDivingsByHostUserId(hostUserId: $hostUserId) {
+                query GetDivingsRelatedWithCurrentUser($limit: Int!) {
+                    getDivingsRelatedWithCurrentUser(limit: $limit) {
                         diveCenters {
                         backgroundImages {
                             _id
@@ -145,14 +145,14 @@ export default {
                 }
                 `,
                 variables: {
-                    hostUserId: localStorage.userId
+                    limit: 20
                 }
 
             }
         });
         
         
-        var ret = (result.data && result.data.data && result.data.data.getDivingsByHostUserId) ? result.data.data.getDivingsByHostUserId : null
+        var ret = (result.data && result.data.data && result.data.data.getDivingsRelatedWithCurrentUser) ? result.data.data.getDivingsRelatedWithCurrentUser : null
         next(vm => {vm.setData(ret)});
     }
   },

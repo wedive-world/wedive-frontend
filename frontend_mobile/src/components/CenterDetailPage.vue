@@ -746,10 +746,12 @@
 
         <div data-menu-load="/static/menu-footer.html"></div>
         <div id="footer-bar-shop" class="d-flex" style="min-height: 52px !important;height: 52px !important;">
-            <div class="flex-fill speach-input p-2">
-            <a v-if="getDiveCenterByUniqueName.uniqueName == 'k26'" href="https://m.k-26.com/reservation/reserved_user.php" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 font-noto font-600"><i class="fas fa-calendar-check me-2"></i>예약</a>
-            <a v-else data-menu="menu-reservation" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 font-noto font-600"><i class="fas fa-calendar-check me-2"></i>예약</a>
-            
+            <div class="flex-fill speach-input pt-2 pb-2 ps-4 pe-4">
+                <div class="row">
+                    <a v-if="getDiveCenterByUniqueName.uniqueName == 'k26'" href="https://m.k-26.com/reservation/reserved_user.php" class="col-6 btn btn-full rounded-s shadow-l gradient-highlight color-white bd-w-0 font-noto font-500"><i class="fas fa-calendar-check me-2"></i>예약</a>
+                    <a v-else data-menu="menu-reservation" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 font-noto font-500" style="width: calc(50% - 6px);margin-right:6px;"><i class="fas fa-calendar-check me-2"></i>예약</a>
+                    <a v-on:click="findBuddyClick()" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 font-noto font-500" style="width: calc(50% - 6px);margin-left:6px;"><i class="fas fa-user-friends me-2"></i>버디모집</a>
+                </div>
             </div>
         </div>
     </div>
@@ -1542,6 +1544,9 @@ export default {
                 }
             }
           `,
+          skip() {
+              return (this.getDiveCenterByUniqueName && this.getDiveCenterByUniqueName._id ? true : false)
+          },
           variables() {
               return {
                 uniqueName: this.uniqueName
@@ -1915,6 +1920,9 @@ export default {
       }
   },
   methods: {
+      findBuddyClick() {
+          this.$router.push({name: "BuddyCreateAllPage", params: this.getDiveCenterByUniqueName})
+      },
       async moveDiving(item) {
         var dic_type1 = {"DiveSite": "diveSite", "DivePoint": "divePoint", "DiveCenter": "diveCenter", "Diving": "diving", "User": "user", "Review": "review", "Forum": "forum", "Recommendation": "recommendation"};
         await axios({
