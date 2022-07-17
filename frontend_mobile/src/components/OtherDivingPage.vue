@@ -145,7 +145,8 @@ export default {
                 }
                 `,
                 variables: {
-                    limit: 20
+                    limit: 20,
+                    uid: (localStorage.uid ? localStorage.uid : '')
                 }
 
             }

@@ -770,7 +770,7 @@
             <div class="font-noto font-500 font-20 mt-2">예약 접수완료</div>
             <div class="font-noto color-gray mt-3" style="line-height:1.5;">담당자가 확인중입니다.<br/>{{ getDiveCenterByUniqueName.name }}는 평균 10분내 예약이 완료됩니다.</div>
         </div>
-        <div class="font-noto me-4 ms-4" style="margin-top:30%;">
+        <div class="font-noto font-16 me-4 ms-4" style="margin-top:30%;">
             <p class="color-gray pb-1 mb-1" style="border-bottom: 2px dotted #e1e2e3;">센터명
                 <span class="color-black" style="float:right;">{{ getDiveCenterByUniqueName.name }}</span>
             </p>
@@ -850,15 +850,15 @@
                 </div>
                 <div class="collapse" id="collapse2">
                     <div class="p-2 row" style="padding-left:35px !important;padding-right:25px !important;">
-                        <div v-on:click="selectTicket($event, '평일 1부 입장권')" class="font-noto mb-2" style="border: 2px dotted #b1b2b3;border-radius: 6px;padding:0;padding-bottom:10px;">
+                        <div v-for="ticket in getDiveCenterByUniqueName.tickets" v-on:click="selectTicket($event, ticket)" class="font-noto mb-2" style="border: 2px dotted #b1b2b3;border-radius: 6px;padding:0;padding-bottom:10px;">
                             <div class="bg-gray-light color-black font-16" style="border-top-left-radius: 6px;border-top-right-radius: 6px;padding:8px 10px;margin-bottom:10px;">
-                                평일 1부 입장권
-                                <span class="color-gray font-14" style="float: right;padding-right:10px;">08:00 - 12:00</span>
+                                {{ ticket.unitName }}
+                                <!--<span class="color-gray font-14" style="float: right;padding-right:10px;">08:00 - 12:00</span>-->
                             </div>
-                            <span class="font-20 color-secondary" style="padding-left:10px;">30,000 원</span>
+                            <span class="font-20 color-secondary" style="padding-left:10px;">{{ ticket.price | makeComma }} 원</span>
                         </div>
 
-                        <div v-on:click="selectTicket($event, '평일 2부 입장권')" class="font-noto mb-2" style="border: 2px dotted #b1b2b3;border-radius: 6px;padding:0;padding-bottom:10px;">
+                        <!--<div v-on:click="selectTicket($event, '평일 2부 입장권')" class="font-noto mb-2" style="border: 2px dotted #b1b2b3;border-radius: 6px;padding:0;padding-bottom:10px;">
                             <div class="bg-gray-light color-black font-16" style="border-top-left-radius: 6px;border-top-right-radius: 6px;padding:8px 10px;margin-bottom:10px;">
                                 평일 2부 입장권
                                 <span class="color-gray font-14" style="float: right;padding-right:10px;">12:00 - 15:00</span>
@@ -872,7 +872,7 @@
                                 <span class="color-gray font-14" style="float: right;padding-right:10px;">16:00 - 20:00</span>
                             </div>
                             <span class="font-20 color-secondary" style="padding-left:10px;">30,000 원</span>
-                        </div>
+                        </div>-->
                         <!--<div class="form-check interest-check col-3" v-for="(hour,index) in hour_array" style="width: 25%;margin-left:0px;margin-right:0px;padding-left:calc(var(--bs-gutter-x) * .5);">
                             <input v-if="(selectedDate && selectedDate.isToday && wediveHourCheck(now, hour))" class="form-check-input" type="radio" name="check_hour" value="" :id="'check_hour'+index" disabled="disabled">
                             <input v-else class="form-check-input" type="radio" name="check_hour" value="" :id="'check_hour'+index">
@@ -914,7 +914,7 @@
                         </div>
                     </div>
                     <div class="m-2 p-2 pe-3 ps-3" style="background: #fff4f4;color: #fc4c42;border-radius:4px;">
-                        당일 예약취소는 유선상 연락주세요.
+                        당일 예약취소는 업체에 유선상 연락주세요.
                     </div>
                 </div>
             </div>
@@ -927,10 +927,10 @@
             <textarea rows="1" class="wedive-textarea2 wedive-input col-8" placeholder="이름을 입력하세요." v-model="reservation_name"></textarea>
 
             <div class="col-3 font-16" style="display: inline-block;vertical-align: top;padding-top: 7px;width: calc(33.33333333% - 4px);">전화번호</div>
-            <textarea rows="1" class="wedive-textarea2 wedive-input col-8" placeholder="핸드폰 번호를 입력하세요." v-model="reservation_phone" id="textarea_reservation_phone"></textarea>
+            <input type="number" class="wedive-input2 wedive-input col-8 font-16 font-noto" style="margin-bottom: 7px;" placeholder="핸드폰 번호를 입력하세요." v-model="reservation_phone" id="textarea_reservation_phone"></input>
 
             <div class="col-3 font-16" style="display: inline-block;vertical-align: top;padding-top: 7px;width: calc(33.33333333% - 4px);">이메일</div>
-            <textarea rows="1" class="wedive-textarea2 wedive-input col-8" placeholder="이메일 주소를 입력하세요." v-model="reservation_email"></textarea>
+            <input type="email" class="wedive-input2 wedive-input col-8 font-16 font-noto" placeholder="이메일 주소를 입력하세요." v-model="reservation_email"></input>
         </div>
 
         <div class="divider mb-0" style="height: 12px; border-top: 1px solid rgba(136, 136, 136, 0.25);"></div>
@@ -986,7 +986,7 @@
 
         <div style="min-height: 62px !important;height: 62px !important;">
             <div class="flex-fill speach-input p-2">
-            <a v-on:click="makeReservation()" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 font-noto font-600"><i class="fas fa-calendar-check me-2"></i>예약 신청하기</a>
+            <a v-on:click="makeReservation()" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 font-noto font-500"><i class="fas fa-calendar-check me-2"></i>예약 신청하기</a>
             </div>
         </div>
     </div>
@@ -1231,6 +1231,7 @@
     <div id="snackbar-review-success" class="snackbar-toast color-white bg-green-dark" data-bs-delay="1500" data-bs-autohide="true" style="z-index:999;"><i class="fa fa-times me-3"></i>리뷰 등록이 완료되었습니다.</div>
     <div id="snackbar-day-error" class="snackbar-toast color-white bg-red-dark" data-bs-delay="2000" data-bs-autohide="true" style="z-index:999;"><i class="fa fa-times me-3"></i>선택할 수 없는 날짜 입니다.</div>
     <div id="snackbar-phone-error" class="snackbar-toast color-white bg-red-dark" data-bs-delay="2000" data-bs-autohide="true" style="z-index:999;"><i class="fa fa-times me-3"></i>전화번호를 입력하세요.</div>
+    <div id="snackbar-custom-error" class="snackbar-toast color-white bg-red-dark" data-bs-delay="2000" data-bs-autohide="true" style="z-index:999;"><i class="fa fa-times me-3"></i><span id="snackbar-custom-error-span"></span></div>
   </div>
 </template>
 <script>
@@ -1297,9 +1298,10 @@ export default {
         collapse_text: '더 보기',
         day_show: "",
         hour_show: "",
-        showTicket: "",
+        showTicket: "선택안함",
         people_show: 1,
         selectedDate: null,
+        selectedTicket: null,
         now: new Date(),
         hour_array: ["7:00", "7:30", "8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30"],
         theme: {
@@ -1321,7 +1323,7 @@ export default {
             // Don't need the date here
         },
         reservation_name: localStorage.userName,
-        reservation_phone: '',
+        reservation_phone: null,
         reservation_email: localStorage.userEmail,
     }
   }, 
@@ -1966,69 +1968,40 @@ export default {
             $(".ticket-select").each(function(index, item){item.classList.remove("ticket-select");});
             event.currentTarget.classList.add("ticket-select")
         }
-        this.showTicket = ticketItem;
+        this.selectedTicket = ticketItem;
+        this.showTicket = ticketItem.unitName;
         $("#collapse2_area").click();
         $("#collapse3_area").click();
       },
       async makeReservation() {
-        //Close Existing Opened Menus
-        const activeMenu = document.querySelectorAll('.menu-active');
-        for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
-        // jjangs : open menu
-        if(window.location.href.split('/').pop() != 'modal'){
-            window.history.pushState({}, 'modal', window.location.pathname + '/modal');
-        }
-        // open menu
-        var menuData = "menu-reservation-confirmed";
-        document.getElementById(menuData).classList.add('menu-active');
-        document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
-        //Check and Apply Effects
-        var menu = document.getElementById(menuData);
-        var menuEffect = menu.getAttribute('data-menu-effect');
-        var menuLeft = menu.classList.contains('menu-box-left');
-        var menuRight = menu.classList.contains('menu-box-right');
-        var menuTop = menu.classList.contains('menu-box-top');
-        var menuBottom = menu.classList.contains('menu-box-bottom');
-        var menuWidth = menu.offsetWidth;
-        var menuHeight = menu.offsetHeight;
-        var menuTimeout = menu.getAttribute('data-menu-hide');
-
-        if(menuTimeout){
-            setTimeout(function(){
-                document.getElementById(menuData).classList.remove('menu-active');
-                document.getElementsByClassName('menu-hider')[0].classList.remove('menu-active');
-                if(window.location.href.split('/').pop() == 'modal'){
-                    window.history.back(); 
-                }
-            },menuTimeout)
-        }
-
-        if(menuEffect === "menu-push"){
-            var menuWidth = document.getElementById(menuData).getAttribute('data-menu-width');
-            if(menuLeft){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX("+menuWidth+"px)"}}
-            if(menuRight){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+menuWidth+"px)"}}
-            if(menuBottom){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY(-"+menuHeight+"px)"}}
-            if(menuTop){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY("+menuHeight+"px)"}}
-        }
-        if(menuEffect === "menu-parallax"){
-            var menuWidth = document.getElementById(menuData).getAttribute('data-menu-width');
-            if(menuLeft){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX("+menuWidth/10+"px)"}}
-            if(menuRight){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+menuWidth/10+"px)"}}
-            if(menuBottom){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY(-"+menuHeight/5+"px)"}}
-            if(menuTop){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY("+menuHeight/5+"px)"}}
-        }
-        
-        /*if (this.reservation_phone == '') {
-            var toastData = 'snackbar-phone-error';
-            var notificationToast = document.getElementById(toastData);
-            var notificationToast = new bootstrap.Toast(notificationToast);
-            notificationToast.show();
-
-            $("#textarea_reservation_phone").focus();
+        if (this.selectedDate == null || this.selectedDate.id == null) {
+            $("#snackbar-custom-error-span").text("예약일자를 선택해주세요.")
+            var notificationToast = document.getElementById('snackbar-custom-error');
+            var notificationToast2 = new bootstrap.Toast(notificationToast);
+            notificationToast2.show();
+        } else if (this.selectedTicket == null) {
+            $("#snackbar-custom-error-span").text("티켓을 선택해주세요.")
+            var notificationToast = document.getElementById('snackbar-custom-error');
+            var notificationToast2 = new bootstrap.Toast(notificationToast);
+            notificationToast2.show();
+        } else if (this.reservation_name == null) {
+            $("#snackbar-custom-error-span").text("예약자 이름을 입력해주세요.")
+            var notificationToast = document.getElementById('snackbar-custom-error');
+            var notificationToast2 = new bootstrap.Toast(notificationToast);
+            notificationToast2.show();
+        } else if (this.reservation_phone == '') {
+            $("#snackbar-custom-error-span").text("예약자 전화번호를 입력해주세요.")
+            var notificationToast = document.getElementById('snackbar-custom-error');
+            var notificationToast2 = new bootstrap.Toast(notificationToast);
+            notificationToast2.show();
+        } else if (this.reservation_email == null) {
+            $("#snackbar-custom-error-span").text("예약자 이메일을 입력해주세요.")
+            var notificationToast = document.getElementById('snackbar-custom-error');
+            var notificationToast2 = new bootstrap.Toast(notificationToast);
+            notificationToast2.show();
         } else {
-            console.log(this.selectedDate);
-            var startedAt = (new Date(this.selectedDate.year+"-"+this.selectedDate.month+"-"+this.selectedDate.day+" "+this.hour_show+":00"));
-            var finishedAt = (new Date(this.selectedDate.year+"-"+this.selectedDate.month+"-"+this.selectedDate.day+" 23:00:00"));
+            var startedAt = (new Date(this.selectedDate.id+" 00:00:00"));
+            var finishedAt = (new Date(this.selectedDate.id+" 23:59:59"));
             var result = await axios({
                 url: 'https://api.wedives.com/graphql',
                 method: 'post',
@@ -2047,21 +2020,73 @@ export default {
                     variables: {
                         "input": {
                             diveCenter: this.getDiveCenterByUniqueName._id,
+                            diveShop: null,
                             peopleNumber: this.people_show,
                             startedAt: startedAt,
                             finishedAt: finishedAt,
                             name: this.reservation_name,
                             phoneNumber: this.reservation_phone,
+                            email: this.reservation_email,
+                            receipts: {product: this.selectedTicket._id, quantity: 1}
                         },
                     }
                 }
             });
-            if (result && result.data && result.data.data && result.data.data.subscribe == true) {
-                this.subscribe_img = 'ico_subscribe2';
-            } else if (result && result.data && result.data.data && result.data.data.subscribe == false) {
-                this.subscribe_img = 'ico_subscribe';
+            if (result.data && result.data.data && result.data.data.upsertReservation && result.data.data.upsertReservation._id) {
+                //Close Existing Opened Menus
+                const activeMenu = document.querySelectorAll('.menu-active');
+                for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
+                // jjangs : open menu
+                if(window.location.href.split('/').pop() != 'modal'){
+                    window.history.pushState({}, 'modal', window.location.pathname + '/modal');
+                }
+                // open menu
+                var menuData = "menu-reservation-confirmed";
+                document.getElementById(menuData).classList.add('menu-active');
+                document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
+                //Check and Apply Effects
+                var menu = document.getElementById(menuData);
+                var menuEffect = menu.getAttribute('data-menu-effect');
+                var menuLeft = menu.classList.contains('menu-box-left');
+                var menuRight = menu.classList.contains('menu-box-right');
+                var menuTop = menu.classList.contains('menu-box-top');
+                var menuBottom = menu.classList.contains('menu-box-bottom');
+                var menuWidth = menu.offsetWidth;
+                var menuHeight = menu.offsetHeight;
+                var menuTimeout = menu.getAttribute('data-menu-hide');
+
+                if(menuTimeout){
+                    setTimeout(function(){
+                        document.getElementById(menuData).classList.remove('menu-active');
+                        document.getElementsByClassName('menu-hider')[0].classList.remove('menu-active');
+                        if(window.location.href.split('/').pop() == 'modal'){
+                            window.history.back(); 
+                        }
+                    },menuTimeout)
+                }
+
+                if(menuEffect === "menu-push"){
+                    var menuWidth = document.getElementById(menuData).getAttribute('data-menu-width');
+                    if(menuLeft){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX("+menuWidth+"px)"}}
+                    if(menuRight){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+menuWidth+"px)"}}
+                    if(menuBottom){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY(-"+menuHeight+"px)"}}
+                    if(menuTop){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY("+menuHeight+"px)"}}
+                }
+                if(menuEffect === "menu-parallax"){
+                    var menuWidth = document.getElementById(menuData).getAttribute('data-menu-width');
+                    if(menuLeft){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX("+menuWidth/10+"px)"}}
+                    if(menuRight){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+menuWidth/10+"px)"}}
+                    if(menuBottom){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY(-"+menuHeight/5+"px)"}}
+                    if(menuTop){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY("+menuHeight/5+"px)"}}
+                }
+            } else {
+                $("#snackbar-custom-error-span").text("예약도중 에러가 발생하였습니다.")
+                var notificationToast = document.getElementById('snackbar-custom-error');
+                var notificationToast2 = new bootstrap.Toast(notificationToast);
+                notificationToast2.show();
             }
-        }*/
+        }
+
       },
       onDayClick(day) {
         var yesterday = new Date();
@@ -2591,7 +2616,9 @@ export default {
 .stepper a:last-child {border-left-color: black;background: #1d397c;}
 .stepper a:last-child i {color: white !important;}
 .stepper input {font-size: 18px !important;}
-.wedive-textarea2 {max-height: 38px;min-height: 38px;padding-left: 10px;padding-right: 10px;padding-top: 5px;}
+.wedive-textarea2, .wedive-input2 {max-height: 38px;min-height: 38px;padding-left: 10px;padding-right: 10px;font-family: 'Noto Sans Korean';font-size: 16px;}
+.wedive-textarea2 {padding-top: 5px;}
+.wedive-textarea2::placeholder, .wedive-input2::placeholder{font-family: 'Noto Sans Korean' !important;font-size: 16px !important;opacity:.7 !important;}
 .ticket-select {border: 2px solid #2c9ac3 !important;}
 
 .thumb-img {

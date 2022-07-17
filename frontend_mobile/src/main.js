@@ -42,6 +42,11 @@ export default (refreshToken) =>
     }
   });*/
 
+// modal 처리
+if (location.pathname.substring(location.pathname.lastIndexOf('/')) == '/modal') {
+  location.href = location.href.replace('/modal', '');
+}
+
 
 // Android
 try {

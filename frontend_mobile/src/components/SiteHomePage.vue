@@ -1054,6 +1054,7 @@ export default {
 
         $("#search_typeahead_font16 > .input-group > input").addClass("font-noto font-16 font-500 p-0");
         $("#search_typeahead_font16 > .input-group > input").css("margin", "2px 0px 0px 4px");
+        $("#search_typeahead_font16 > .input-group > input").css("background", "transparent");
         $("#footer-bar").show();
     }, 50);
   },
@@ -1537,7 +1538,7 @@ export default {
 }
 
 .display-block {display:inline-block;}
-.map-search {position: absolute;right: 0;top: 57px;left: 0;margin: 5px 12px 4px;border-radius:16px;background-color: white;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
+.map-search {position: absolute;right: 0;top: 63px;left: 0;margin: 5px 12px 4px;border-radius:16px;background-color: white;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
 .bx {padding: 15px 14px;min-height: 125px;}
 .bx-search {padding: 8px 14px;min-height: 48px;}
 .bx-filter {border: 1px solid rgba(0,0,0,.1);padding: 8px 4px;display:inline-block;}

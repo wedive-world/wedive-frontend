@@ -826,7 +826,7 @@
                         </div>
                     </div>
                     <div class="m-2 p-2 pe-3 ps-3" style="background: #fff4f4;color: #fc4c42;border-radius:4px;">
-                        당일 예약취소는 유선상 연락주세요.
+                        당일 예약취소는 업체에 유선상 연락주세요.
                     </div>
                 </div>
             </div>

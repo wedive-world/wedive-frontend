@@ -242,7 +242,7 @@
                                         <i class="icon-check-1 far fa-circle color-gray-dark font-16"></i>
                                         <i class="icon-check-2 far fa-check-circle font-16 color-highlight" style="font-size: 20px !important;"></i>
                                     </div>
-                                    <div class="stepper rounded-s opacity-30" id="stepper-recruit">
+                                    <div class="stepper opacity-30" id="stepper-recruit">
                                         <a href="#" @focus="focusInput($event)" class="stepper-sub"><i class="fa fa-minus color-theme opacity-40"></i></a>
                                         <input type="number" min="0" max="99" value="0" id="num_recruit">
                                         <a href="#" @focus="focusInput($event)" class="stepper-add"><i class="fa fa-plus color-theme opacity-40"></i></a>
@@ -253,7 +253,7 @@
                                     <div class="row">
                                         <div class="col-6">
                                         <label class="color-gray font-600 font-10 mt-n2" style="background: transparent;">참여중인 남자</label>
-                                        <div class="stepper rounded-s">
+                                        <div class="stepper">
                                             <a href="#" @focus="focusInput2($event)" class="stepper-sub"><i class="fa fa-minus color-theme opacity-40"></i></a>
                                             <input type="number" min="0" max="99" value="0" id="num_man">
                                             <a href="#" @focus="focusInput2($event)" class="stepper-add"><i class="fa fa-plus color-theme opacity-40"></i></a>
@@ -262,7 +262,7 @@
                                         </div>
                                         <div class="col-6">
                                         <label class="color-gray font-600 font-10 mt-n2" style="background: transparent;">참여중인 여자</label>
-                                        <div class="stepper rounded-s">
+                                        <div class="stepper">
                                             <a href="#" @focus="focusInput2($event)" class="stepper-sub"><i class="fa fa-minus color-theme opacity-40"></i></a>
                                             <input type="number" min="0" max="99" value="0" id="num_woman">
                                             <a href="#" @focus="focusInput2($event)" class="stepper-add"><i class="fa fa-plus color-theme opacity-40"></i></a>
@@ -867,4 +867,11 @@ select {background: white; background-color: white;}
 .DiveCenter .map_box_cate {border: 1px solid #4687c1;color:#4687c1}
 .wedive-textarea {min-height: 200px;background: transparent !important;line-height: 26px !important;}
 .wedive-textarea::placeholder{font-size:18px !important;color: #d9dbdd;}
+
+.stepper {border-color: #888;}
+.stepper a {font-size: 14px !important;}
+.stepper a:first-child {border-right-color: #888;}
+.stepper a:last-child {border-left-color: #888;background: #1d397c;}
+.stepper a:last-child i {color: white !important;}
+.stepper input {font-size: 18px !important;}
 </style>

@@ -1352,6 +1352,15 @@ export default {
             }
         },
         async result () {
+            // 민혁 : 이건 예전에 같이 논의한건데 현재 구조상, 기술적으로 어렵습니다 api 실행이 언제 끝난다는 보장이 없음 //
+            // previewCount > 0 인데, preivews.length == 0 이면 없애버리자
+            var cnt = 0;
+            this.recommendation1.filter(x=>x.previewCount > 3).forEach(x => {
+                if (x.previewCount > 0 && x.previews.length == 0) {
+                    this.recommendation1.splice(cnt, 1);
+                    cnt++;
+                }
+            });
             var id_arr = new Array();
             var width_arr = new Array();
             this.recommendation1.filter(x=>x.previewCount > 3).forEach(x => {
