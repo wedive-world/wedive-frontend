@@ -1211,6 +1211,7 @@ export default {
         showTicket: "",
         people_show: 1,
         selectedDate: null,
+        selectedTicket: null,
         now: new Date(),
         hour_array: ["7:00", "7:30", "8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30"],
         theme: {
@@ -1707,69 +1708,40 @@ export default {
             $(".ticket-select").each(function(index, item){item.classList.remove("ticket-select");});
             event.currentTarget.classList.add("ticket-select")
         }
-        this.showTicket = ticketItem;
+        this.selectedTicket = ticketItem;
+        this.showTicket = ticketItem.unitName;
         $("#collapse2_area").click();
         $("#collapse3_area").click();
       },
       async makeReservation() {
-        //Close Existing Opened Menus
-        const activeMenu = document.querySelectorAll('.menu-active');
-        for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
-        // jjangs : open menu
-        if(window.location.href.split('/').pop() != 'modal'){
-            window.history.pushState({}, 'modal', window.location.pathname + '/modal');
-        }
-        // open menu
-        var menuData = "menu-reservation-confirmed";
-        document.getElementById(menuData).classList.add('menu-active');
-        document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
-        //Check and Apply Effects
-        var menu = document.getElementById(menuData);
-        var menuEffect = menu.getAttribute('data-menu-effect');
-        var menuLeft = menu.classList.contains('menu-box-left');
-        var menuRight = menu.classList.contains('menu-box-right');
-        var menuTop = menu.classList.contains('menu-box-top');
-        var menuBottom = menu.classList.contains('menu-box-bottom');
-        var menuWidth = menu.offsetWidth;
-        var menuHeight = menu.offsetHeight;
-        var menuTimeout = menu.getAttribute('data-menu-hide');
-
-        if(menuTimeout){
-            setTimeout(function(){
-                document.getElementById(menuData).classList.remove('menu-active');
-                document.getElementsByClassName('menu-hider')[0].classList.remove('menu-active');
-                if(window.location.href.split('/').pop() == 'modal'){
-                    window.history.back(); 
-                }
-            },menuTimeout)
-        }
-
-        if(menuEffect === "menu-push"){
-            var menuWidth = document.getElementById(menuData).getAttribute('data-menu-width');
-            if(menuLeft){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX("+menuWidth+"px)"}}
-            if(menuRight){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+menuWidth+"px)"}}
-            if(menuBottom){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY(-"+menuHeight+"px)"}}
-            if(menuTop){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY("+menuHeight+"px)"}}
-        }
-        if(menuEffect === "menu-parallax"){
-            var menuWidth = document.getElementById(menuData).getAttribute('data-menu-width');
-            if(menuLeft){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX("+menuWidth/10+"px)"}}
-            if(menuRight){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+menuWidth/10+"px)"}}
-            if(menuBottom){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY(-"+menuHeight/5+"px)"}}
-            if(menuTop){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY("+menuHeight/5+"px)"}}
-        }
-        
-        /*if (this.reservation_phone == '') {
-            var toastData = 'snackbar-phone-error';
-            var notificationToast = document.getElementById(toastData);
-            var notificationToast = new bootstrap.Toast(notificationToast);
-            notificationToast.show();
-
-            $("#textarea_reservation_phone").focus();
+        if (this.selectedDate == null || this.selectedDate.id == null) {
+            $("#snackbar-custom-error-span").text("예약일자를 선택해주세요.")
+            var notificationToast = document.getElementById('snackbar-custom-error');
+            var notificationToast2 = new bootstrap.Toast(notificationToast);
+            notificationToast2.show();
+        } else if (this.selectedTicket == null) {
+            $("#snackbar-custom-error-span").text("티켓을 선택해주세요.")
+            var notificationToast = document.getElementById('snackbar-custom-error');
+            var notificationToast2 = new bootstrap.Toast(notificationToast);
+            notificationToast2.show();
+        } else if (this.reservation_name == null) {
+            $("#snackbar-custom-error-span").text("예약자 이름을 입력해주세요.")
+            var notificationToast = document.getElementById('snackbar-custom-error');
+            var notificationToast2 = new bootstrap.Toast(notificationToast);
+            notificationToast2.show();
+        } else if (this.reservation_phone == '') {
+            $("#snackbar-custom-error-span").text("예약자 전화번호를 입력해주세요.")
+            var notificationToast = document.getElementById('snackbar-custom-error');
+            var notificationToast2 = new bootstrap.Toast(notificationToast);
+            notificationToast2.show();
+        } else if (this.reservation_email == null) {
+            $("#snackbar-custom-error-span").text("예약자 이메일을 입력해주세요.")
+            var notificationToast = document.getElementById('snackbar-custom-error');
+            var notificationToast2 = new bootstrap.Toast(notificationToast);
+            notificationToast2.show();
         } else {
-            console.log(this.selectedDate);
-            var startedAt = (new Date(this.selectedDate.year+"-"+this.selectedDate.month+"-"+this.selectedDate.day+" "+this.hour_show+":00"));
-            var finishedAt = (new Date(this.selectedDate.year+"-"+this.selectedDate.month+"-"+this.selectedDate.day+" 23:00:00"));
+            var startedAt = (new Date(this.selectedDate.id+" 00:00:00"));
+            var finishedAt = (new Date(this.selectedDate.id+" 23:59:59"));
             var result = await axios({
                 url: 'https://api.wedives.com/graphql',
                 method: 'post',
@@ -1787,22 +1759,74 @@ export default {
                     `,
                     variables: {
                         "input": {
+                            diveCenter: null,
                             diveShop: this.getDiveShopByUniqueName._id,
                             peopleNumber: this.people_show,
                             startedAt: startedAt,
                             finishedAt: finishedAt,
                             name: this.reservation_name,
                             phoneNumber: this.reservation_phone,
+                            email: this.reservation_email,
+                            receipts: {product: this.selectedTicket._id, quantity: 1}
                         },
                     }
                 }
             });
-            if (result && result.data && result.data.data && result.data.data.subscribe == true) {
-                this.subscribe_img = 'ico_subscribe2';
-            } else if (result && result.data && result.data.data && result.data.data.subscribe == false) {
-                this.subscribe_img = 'ico_subscribe';
+            if (result.data && result.data.data && result.data.data.upsertReservation && result.data.data.upsertReservation._id) {
+                //Close Existing Opened Menus
+                const activeMenu = document.querySelectorAll('.menu-active');
+                for(let i=0; i < activeMenu.length; i++){activeMenu[i].classList.remove('menu-active');}
+                // jjangs : open menu
+                if(window.location.href.split('/').pop() != 'modal'){
+                    window.history.pushState({}, 'modal', window.location.pathname + '/modal');
+                }
+                // open menu
+                var menuData = "menu-reservation-confirmed";
+                document.getElementById(menuData).classList.add('menu-active');
+                document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
+                //Check and Apply Effects
+                var menu = document.getElementById(menuData);
+                var menuEffect = menu.getAttribute('data-menu-effect');
+                var menuLeft = menu.classList.contains('menu-box-left');
+                var menuRight = menu.classList.contains('menu-box-right');
+                var menuTop = menu.classList.contains('menu-box-top');
+                var menuBottom = menu.classList.contains('menu-box-bottom');
+                var menuWidth = menu.offsetWidth;
+                var menuHeight = menu.offsetHeight;
+                var menuTimeout = menu.getAttribute('data-menu-hide');
+
+                if(menuTimeout){
+                    setTimeout(function(){
+                        document.getElementById(menuData).classList.remove('menu-active');
+                        document.getElementsByClassName('menu-hider')[0].classList.remove('menu-active');
+                        if(window.location.href.split('/').pop() == 'modal'){
+                            window.history.back(); 
+                        }
+                    },menuTimeout)
+                }
+
+                if(menuEffect === "menu-push"){
+                    var menuWidth = document.getElementById(menuData).getAttribute('data-menu-width');
+                    if(menuLeft){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX("+menuWidth+"px)"}}
+                    if(menuRight){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+menuWidth+"px)"}}
+                    if(menuBottom){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY(-"+menuHeight+"px)"}}
+                    if(menuTop){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY("+menuHeight+"px)"}}
+                }
+                if(menuEffect === "menu-parallax"){
+                    var menuWidth = document.getElementById(menuData).getAttribute('data-menu-width');
+                    if(menuLeft){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX("+menuWidth/10+"px)"}}
+                    if(menuRight){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+menuWidth/10+"px)"}}
+                    if(menuBottom){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY(-"+menuHeight/5+"px)"}}
+                    if(menuTop){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY("+menuHeight/5+"px)"}}
+                }
+            } else {
+                $("#snackbar-custom-error-span").text("예약도중 에러가 발생하였습니다.")
+                var notificationToast = document.getElementById('snackbar-custom-error');
+                var notificationToast2 = new bootstrap.Toast(notificationToast);
+                notificationToast2.show();
             }
-        }*/
+        }
+
       },
       onDayClick(day) {
         var yesterday = new Date();

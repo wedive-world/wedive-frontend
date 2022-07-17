@@ -618,22 +618,22 @@ export default {
         const e_date = _e_date;
 
         var diveSite = new Array();
-        this.search_result.forEach(x => {if (x.type == 'DiveSite') diveSite.push(x._id)});
+        this.search_result.forEach(x => {if (x.__typename == 'DiveSite') diveSite.push(x._id)});
         if (diveSite.length == 0) diveSite = null;
         const __diveSite = diveSite;
 
         var divePoint = new Array();
-        this.search_result.forEach(x => {if (x.type == 'DivePoint') divePoint.push(x._id)});
+        this.search_result.forEach(x => {if (x.__typename == 'DivePoint') divePoint.push(x._id)});
         if (divePoint.length == 0) divePoint = null;
         const __divePoint = divePoint;
 
         var diveCenter = new Array();
-        this.search_result.forEach(x => {if (x.type == 'DiveCenter') diveCenter.push(x._id)});
+        this.search_result.forEach(x => {if (x.__typename == 'DiveCenter') diveCenter.push(x._id)});
         if (diveCenter.length == 0) diveCenter = null;
         const __diveCenter = diveCenter;
 
         var diveShop = new Array();
-        this.search_result.forEach(x => {if (x.type == 'DiveShop') diveShop.push(x._id)});
+        this.search_result.forEach(x => {if (x.__typename == 'DiveShop') diveShop.push(x._id)});
         if (diveShop.length == 0) diveShop = null;
         const __diveShop = diveShop;
 
