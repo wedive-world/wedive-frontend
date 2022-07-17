@@ -819,6 +819,8 @@ export default {
         getDivingsByHostUserId: [],
         recommendation1: [],
         recommendation2: [],
+        recommendation1_collapse_text: [],
+        recommendation2_collapse_text: [],
         prev_driection: true,
         lastScrollPosition: 0,
         idToken: localStorage.idToken,
@@ -1274,6 +1276,7 @@ export default {
             var id_arr = new Array();
             var width_arr = new Array();
             this.recommendation1.filter(x=>x.previewCount > 3).forEach(x => {
+                recommendation1_collapse_text.push({_id: x._id, text: '더 보기'});
                 x.previews.forEach(y => {
                     if (y.backgroundImages && y.backgroundImages.length > 0) {
                         id_arr.push(y.backgroundImages[0]._id);
@@ -1340,6 +1343,7 @@ export default {
                 cssStyle
                 className
                 type
+                shownType
                 targetType
                 previews {
                 ... on Diving {
@@ -1431,6 +1435,7 @@ export default {
             var id_arr = new Array();
             var width_arr = new Array();
             this.recommendation2.filter(x=>x.previewCount > 3).forEach(x => {
+                this.recommendation2_collapse_text.push({_id: x._id, text: '더 보기'});
                 x.previews.forEach(y => {
                     if (y.backgroundImages.length > 0) {
                         id_arr.push(y.backgroundImages[0]._id);

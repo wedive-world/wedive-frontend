@@ -75,7 +75,7 @@
                             </div>
                         </div>
                         <div class="row me-0 ms-0 mb-0" style="position: absolute;bottom: 0;width:100%;padding-left:20px;padding-right:20px;">
-                            <a v-on:click="$refs.contentSwiper.$swiper.slidePrev();progressBar -= 25;disable_button('btn_next1')" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>
+                            <a v-on:click="$refs.contentSwiper.$swiper.slidePrev();progressBar -= 25;" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>
                             <a v-on:click="$refs.contentSwiper.$swiper.slideNext();progressBar += 25;go_next(1);" id="btn_next1" href="#" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3 gonext" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;" disabled="disabled">다음</a>
                         </div>
                     </div>
@@ -139,10 +139,10 @@
                                                         style="width: 30px; height: 30px;" />
                                                     </div>
                                                 </div>
-                                                <p v-if="data.__typename == 'DiveSite'" style="margin-top: -22px;margin-bottom: 0;position: relative;width: calc(100vw - 160px);" v-html="'<p class=\'mb-0 font-noto font-14 ellipsis\' style=\'max-width: calc(100vw - 214px);display: inline-block;\'>' + htmlText + '</p><span class=\'font-14 ms-2\' style=\'margin-bottom: 0;position: absolute;right: 0px;top: 0px;\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'color-gray font-13 ellipsis\' style=\'width: 100%;position: absolute;margin-top: -2px;\'>' + (data.description ? data.description : '')+'</span>'"></p>
-                                                <p v-else-if="data.__typename == 'DivePoint'" style="margin-top: -22px;margin-bottom: 0;position: relative;width: calc(100vw - 160px);" v-html="'<p class=\'mb-0 font-noto font-14 ellipsis\' style=\'max-width: calc(100vw - 214px);display: inline-block;\'>' + htmlText + '</p><span class=\'font-14 ms-2\' style=\'margin-bottom: 0;position: absolute;right: 0px;top: 0px;\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'color-gray font-13 ellipsis\' style=\'width: 100%;position: absolute;margin-top: -2px;\'>' + (data.description ? data.description : '')+'</span>'"></p>
-                                                <p v-else-if="data.__typename == 'DiveCenter'" style="margin-top: -22px;margin-bottom: 0;position: relative;width: calc(100vw - 160px);" v-html="'<p class=\'mb-0 font-noto font-14 ellipsis\' style=\'max-width: calc(100vw - 214px);display: inline-block;\'>' + htmlText + '</p><span class=\'font-14 ms-2\' style=\'margin-bottom: 0;position: absolute;right: 0px;top: 0px;\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'color-gray font-13 ellipsis\' style=\'width: 100%;position: absolute;margin-top: -2px;\'>' + (data.description ? data.description : '')+'</span>'"></p>
-                                                <p v-else-if="data.__typename == 'DiveShop'" style="margin-top: -22px;margin-bottom: 0;position: relative;width: calc(100vw - 160px);" v-html="'<p class=\'mb-0 font-noto font-14 ellipsis\' style=\'max-width: calc(100vw - 214px);display: inline-block;\'>' + htmlText + '</p><span class=\'font-14 ms-2\' style=\'margin-bottom: 0;position: absolute;right: 0px;top: 0px;\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'color-gray font-13 ellipsis\' style=\'width: 100%;position: absolute;margin-top: -2px;\'>' + (data.description ? data.description : '')+'</span>'"></p>
+                                                <p v-if="data.__typename == 'DiveSite'" style="margin-top: -22px;margin-bottom: 0;position: relative;width: calc(100vw - 160px);" v-html="'<p class=\'mb-0 font-noto font-15 ellipsis\' style=\'max-width: calc(100vw - 214px);display: inline-block;\'>' + htmlText + '</p><span class=\'font-14 ms-2\' style=\'margin-bottom: 0;position: absolute;right: 0px;top: 0px;\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'color-gray font-13 ellipsis\' style=\'width: 100%;position: absolute;margin-top: -2px;\'>' + (data.description ? data.description : '')+'</span>'"></p>
+                                                <p v-else-if="data.__typename == 'DivePoint'" style="margin-top: -22px;margin-bottom: 0;position: relative;width: calc(100vw - 160px);" v-html="'<p class=\'mb-0 font-noto font-15 ellipsis\' style=\'max-width: calc(100vw - 214px);display: inline-block;\'>' + htmlText + '</p><span class=\'font-14 ms-2\' style=\'margin-bottom: 0;position: absolute;right: 0px;top: 0px;\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'color-gray font-13 ellipsis\' style=\'width: 100%;position: absolute;margin-top: -2px;\'>' + (data.description ? data.description : '')+'</span>'"></p>
+                                                <p v-else-if="data.__typename == 'DiveCenter'" style="margin-top: -22px;margin-bottom: 0;position: relative;width: calc(100vw - 160px);" v-html="'<p class=\'mb-0 font-noto font-15 ellipsis\' style=\'max-width: calc(100vw - 214px);display: inline-block;\'>' + htmlText + '</p><span class=\'font-14 ms-2\' style=\'margin-bottom: 0;position: absolute;right: 0px;top: 0px;\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'color-gray font-13 ellipsis\' style=\'width: 100%;position: absolute;margin-top: -2px;\'>' + (data.description ? data.description : '')+'</span>'"></p>
+                                                <p v-else-if="data.__typename == 'DiveShop'" style="margin-top: -22px;margin-bottom: 0;position: relative;width: calc(100vw - 160px);" v-html="'<p class=\'mb-0 font-noto font-15 ellipsis\' style=\'max-width: calc(100vw - 214px);display: inline-block;\'>' + htmlText + '</p><span class=\'font-14 ms-2\' style=\'margin-bottom: 0;position: absolute;right: 0px;top: 0px;\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'color-gray font-13 ellipsis\' style=\'width: 100%;position: absolute;margin-top: -2px;\'>' + (data.description ? data.description : '')+'</span>'"></p>
                                                 
                                                 </div>
                                             </template>
@@ -155,15 +155,20 @@
                                                 style="padding:16px;border:1px solid #ced4da;border-radius:16px;">
                                                 <div class="d-flex align-items-center" style="position:relative !important;">
                                                 <div :class="''+search_item.type + '-tag'" style="position:relative;">
-                                                <img
-                                                    class="rounded-s me-3"
-                                                    :src="search_item.image_url"
-                                                    style="width: 40px; height: 40px;" />
+                                                    <div style="position:relative;">
+                                                        <div class="p-2 rounded-s" style="background: #f1f1f1;border: 1px solid #eaeaea;margin-right:8px;">
+                                                            <img
+                                                            :src="'/static/images/assets/' + (search_item.__typename == 'DiveShop' ? 'i_shop' : search_item.__typename == 'DiveCenter' ? 'i_center' : 'i_site') + '.png'"
+                                                            style="width: 30px; height: 30px;" />
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <span v-if="search_item.type == 'DiveSite'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'badge border color-site border-site me-2\'>사이트</span><span class=\'font-noto font-16\'>' + search_item.location + '</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(search_item.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + search_item.description+'</span>'"></span>
-                                                <span v-else-if="search_item.type == 'DivePoint'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'badge border color-point border-point me-2\'>포인트</span><span class=\'font-noto font-16\'>' + search_item.location + '</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(search_item.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + search_item.description+'</span>'"></span>
-                                                <span v-else-if="search_item.type == 'DiveCenter'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'badge border color-center border-center me-2\'>수영장</span><span class=\'font-noto font-16\'>' + search_item.location + '</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(search_item.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + search_item.description+'</span>'"></span>
-                                                <span v-else-if="search_item.type == 'DiveShop'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'badge border color-shop border-shop me-2\'>센터</span><span class=\'font-noto font-16\'>' + search_item.location + '</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(search_item.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + search_item.description+'</span>'"></span>
+
+                                                <p v-if="search_item.__typename == 'DiveSite'" style="margin-top: -22px;margin-bottom: 0;position: relative;width: calc(100vw - 160px);" v-html="'<p class=\'mb-0 font-noto font-15 ellipsis color-white\' style=\'max-width: calc(100vw - 214px);display: inline-block;\'>' + search_item.location + '</p><br/><span class=\'color-white opacity-60 font-13 ellipsis\' style=\'width: 100%;position: absolute;margin-top: -8px;\'>' + (search_item.description ? search_item.description : '')+'</span>'"></p>
+                                                <p v-else-if="search_item.__typename == 'DivePoint'" style="margin-top: -22px;margin-bottom: 0;position: relative;width: calc(100vw - 160px);" v-html="'<p class=\'mb-0 font-noto font-15 ellipsis color-white\' style=\'max-width: calc(100vw - 214px);display: inline-block;\'>' + search_item.location + '</p><br/><span class=\'color-white opacity-60 font-13 ellipsis\' style=\'width: 100%;position: absolute;margin-top: -8px;\'>' + (search_item.description ? search_item.description : '')+'</span>'"></p>
+                                                <p v-else-if="search_item.__typename == 'DiveCenter'" style="margin-top: -22px;margin-bottom: 0;position: relative;width: calc(100vw - 160px);" v-html="'<p class=\'mb-0 font-noto font-15 ellipsis color-white\' style=\'max-width: calc(100vw - 214px);display: inline-block;\'>' + search_item.location + '</p><br/><span class=\'color-white opacity-60 font-13 ellipsis\' style=\'width: 100%;position: absolute;margin-top: -8px;\'>' + (search_item.description ? search_item.description : '')+'</span>'"></p>
+                                                <p v-else-if="search_item.__typename == 'DiveShop'" style="margin-top: -22px;margin-bottom: 0;position: relative;width: calc(100vw - 160px);" v-html="'<p class=\'mb-0 font-noto font-15 ellipsis color-white\' style=\'max-width: calc(100vw - 214px);display: inline-block;\'>' + search_item.location + '</p><br/><span class=\'color-white opacity-60 font-13 ellipsis\' style=\'width: 100%;position: absolute;margin-top: -8px;\'>' + (search_item.description ? search_item.description : '')+'</span>'"></p>
+
                                                 <i v-on:click="removeLocationSelected(location)" class="wedive_icoset wedive_icoset_close" style="position: absolute;right: -8px;top: -10px;margin:8px;filter: invert(1);"></i>
                                                 </div>
                                             </div>
@@ -401,6 +406,11 @@ export default {
     draggable,
   },
   created() {
+    this.route_params = this.$route.params;
+    if (this.route_params != null && this.route_params.hasOwnProperty('_id')) {
+        $("#footer-bar").hide();
+        this.search_result.push({__typename: this.route_params.__typename, location: this.route_params.name, adminScore: this.route_params.adminScore, description: this.route_params.description, _id: this.route_params._id});
+    }
     const insname = this.ins_name;
     setTimeout(function() {
         init_template();
@@ -418,6 +428,7 @@ export default {
   },
   data () {
     return {
+        route_params: null,
         check_agree: false,
         scheduleFlag: false,
         locations: [],
@@ -483,14 +494,14 @@ export default {
   },
   watch: {
       diving_title: function(newVal, oldVal) {
-          if (newVal != '' && this.diving_detail != '') {
+          if (this.diving_detail != '' && this.diving_detail != '') {
               $("#btn_next3").attr("disabled", false);
           } else {
               $("#btn_next3").attr("disabled", true);
           }
       },
       diving_detail: function(newVal, oldVal) {
-          if (newVal != '' && this.diving_title != '') {
+          if (this.diving_detail != '' && this.diving_title != '') {
               $("#btn_next3").attr("disabled", false);
           } else {
               $("#btn_next3").attr("disabled", true);
@@ -521,8 +532,7 @@ export default {
           */
       },
       enableNext2(ev) {
-          console.log("aa");
-          this.search_result.push({type: ev.__typename, location: ev.name, adminScore: ev.adminScore, description: ev.description, image_url: ((ev.backgroundImages && ev.backgroundImages.length>0) ? ev.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'), _id: ev._id});
+          this.search_result.push({__typename: ev.__typename, location: ev.name, adminScore: ev.adminScore, description: ev.description, _id: ev._id});
           
           //$("#search_typeahead_big").addClass("hide");
           //$("#search_result").removeClass("hide");
@@ -556,7 +566,7 @@ export default {
               }
               this.label_unlimited = !this.label_unlimited;
           }
-          if (this.selecteduser != null && (this.label_scuba || this.label_free)) {
+          if (this.search_result.length > 0 && (this.label_scuba || this.label_free)) {
               $("#btn_next2").attr("disabled", false);
           } else {
               $("#btn_next2").attr("disabled", true);

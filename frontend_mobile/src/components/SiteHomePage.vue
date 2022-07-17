@@ -25,6 +25,44 @@
                 
                 
                 <vue-typeahead-bootstrap
+                    id="search_typeahead_font16"
+                    class="form-control font-noto"
+                    v-model="query"
+                    :data="users"
+                    :serializer="item => item.name"
+                    :screen-reader-text-serializer="item => `${item.name}`"
+                    highlightClass="special-highlight-class"
+                    @hit="selecteduser = $event;enableNext2($event);"
+                    :minMatchingChars="1"
+                    placeholder="다이빙 장소를 검색하세요"
+                    inputClass="special-input-class"
+                    :disabledValues="(selecteduser ? [selecteduser.name] : [])"
+                    :showAllResults="true"
+                    @input="lookupUser3"
+                    style="background: transparent;border-width: 0;padding:0;margin-botttom:8px;"
+                    >
+                    <template slot="suggestion" slot-scope="{ data, htmlText }">
+                        <div class="d-flex align-items-center" style="position:relative !important;">
+                        <div style="position:relative;">
+                            <div class="p-2 rounded-s" style="background: #f1f1f1;border: 1px solid #eaeaea;margin-right:8px;">
+                                <img
+                                :src="'/static/images/assets/' + (data.__typename == 'DiveShop' ? 'i_shop' : data.__typename == 'DiveCenter' ? 'i_center' : 'i_site') + '.png'"
+                                style="width: 30px; height: 30px;" />
+                            </div>
+                        </div>
+                        <p v-if="data.__typename == 'DiveSite'" style="margin-top: -22px;margin-bottom: 0;position: relative;width: calc(100vw - 136px);" v-html="'<p class=\'mb-0 font-noto font-15 ellipsis\' style=\'max-width: calc(100vw - 214px);display: inline-block;\'>' + htmlText + '</p><span class=\'font-14 ms-2\' style=\'margin-bottom: 0;position: absolute;right: 0px;top: 0px;\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'color-gray font-13 ellipsis\' style=\'width: 100%;position: absolute;margin-top: -2px;\'>' + (data.description ? data.description : '')+'</span>'"></p>
+                        <p v-else-if="data.__typename == 'DivePoint'" style="margin-top: -22px;margin-bottom: 0;position: relative;width: calc(100vw - 136px);" v-html="'<p class=\'mb-0 font-noto font-15 ellipsis\' style=\'max-width: calc(100vw - 214px);display: inline-block;\'>' + htmlText + '</p><span class=\'font-14 ms-2\' style=\'margin-bottom: 0;position: absolute;right: 0px;top: 0px;\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'color-gray font-13 ellipsis\' style=\'width: 100%;position: absolute;margin-top: -2px;\'>' + (data.description ? data.description : '')+'</span>'"></p>
+                        <p v-else-if="data.__typename == 'DiveCenter'" style="margin-top: -22px;margin-bottom: 0;position: relative;width: calc(100vw - 136px);" v-html="'<p class=\'mb-0 font-noto font-15 ellipsis\' style=\'max-width: calc(100vw - 214px);display: inline-block;\'>' + htmlText + '</p><span class=\'font-14 ms-2\' style=\'margin-bottom: 0;position: absolute;right: 0px;top: 0px;\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'color-gray font-13 ellipsis\' style=\'width: 100%;position: absolute;margin-top: -2px;\'>' + (data.description ? data.description : '')+'</span>'"></p>
+                        <p v-else-if="data.__typename == 'DiveShop'" style="margin-top: -22px;margin-bottom: 0;position: relative;width: calc(100vw - 136px);" v-html="'<p class=\'mb-0 font-noto font-15 ellipsis\' style=\'max-width: calc(100vw - 214px);display: inline-block;\'>' + htmlText + '</p><span class=\'font-14 ms-2\' style=\'margin-bottom: 0;position: absolute;right: 0px;top: 0px;\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'color-gray font-13 ellipsis\' style=\'width: 100%;position: absolute;margin-top: -2px;\'>' + (data.description ? data.description : '')+'</span>'"></p>
+                        
+                        </div>
+                    </template>
+                </vue-typeahead-bootstrap>
+                
+                
+                
+                
+                <!--<vue-typeahead-bootstrap
                     id="search_typeahead"
                     v-model="query"
                     :data="users"
@@ -51,7 +89,7 @@
                         <span v-else-if="data.type == 'shop'" class="ml-4" v-html="'<span class=\'badge border color-shop border-shop\'>샵</span>&nbsp;<i class=\'fa fa-star color-yellow-dark icon-10 text-center me-2\'></i>'+(data.adminScore/20).toFixed(1)+'<br/><span class=\'font-noto font-16\'>' + htmlText + '</span>'"></span>
                         </div>
                     </template>
-                </vue-typeahead-bootstrap>
+                </vue-typeahead-bootstrap>-->
             </div>
         </div>
 
@@ -59,40 +97,39 @@
         
         
         <div class="map-box hide">
-            <a id="map_box_href" href="">
                 <div class="bx">
                     <div class="justify-content-center mb-0 text-start">
-                        <div class="" style="float: left;position: relative;width: 95px; height:95px;">
-                            <img id="map_box_shop_img" src="" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;">
-                        </div>
-                        
-                        <div class="" style="padding-left: 110px;">
-                            <span id="map_box_cate" class="map_box_cate"></span><span id="map_box_shop_name" class="font-18 font-600 mb-0 ellipsis" style="max-width: calc(100% - 60px);display: inline-block;"></span>
-                            <p id="map_box_shop_desc" class="pb-0 mb-0 line-height-m ellipsis" style="margin-top: -6px;"></p>
-                            <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>&nbsp;
-                                <span id="map_box_shop_star"></span>
-                                <span id="map_box_agency" class="hide">
-                                    <font class="color-gray-light">&nbsp;|&nbsp;</font>
-                                    <img id="map_box_agency_img" src="" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
-                                </span>
-                                <span id="map_box_price" class="hide">
-                                    <font class="color-gray-light">&nbsp;|&nbsp;</font>
-                                    <span id="map_box_price_index" style="letter-spacing: -2px;"></span>
-                                </span>
-                            </p>
-                            <div class="box-bottom">
-                                <div class="wedive-corner wedive-corner-bottom"></div>
-                                <div class="box-bottom-area color-white row" style="box-shadow: inset 0px 0px 5px rgb(0 0 0 / 50%);">
-                                    <a href="" class="col-4 text-center box-bottom-item">컨시어지</a>
-                                    <a href="" class="col-4 text-center box-bottom-item">버디</a>
-                                    <!--<a href="" class="col-3 text-center box-bottom-item">강사</a>-->
-                                    <a href="" class="col-4 text-center box-bottom-item">포럼</a>
-                                </div>
+                        <a class="map_box_href" href="">
+                            <div class="" style="float: left;position: relative;width: 95px; height:95px;">
+                                <img id="map_box_shop_img" src="" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;">
+                            </div>
+                            <div class="" style="padding-left: 110px;">
+                                <span id="map_box_cate" class="map_box_cate"></span><span id="map_box_shop_name" class="font-18 font-600 mb-0 ellipsis" style="max-width: calc(100% - 60px);display: inline-block;"></span>
+                                <p id="map_box_shop_desc" class="pb-0 mb-0 line-height-m ellipsis" style="margin-top: -6px;"></p>
+                                <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>&nbsp;
+                                    <span id="map_box_shop_star"></span>
+                                    <span id="map_box_agency" class="hide">
+                                        <font class="color-gray-light">&nbsp;|&nbsp;</font>
+                                        <img id="map_box_agency_img" src="" height="14" class="ext-img mt-n1" style="filter: grayscale(100%) contrast(0.5);">
+                                    </span>
+                                    <span id="map_box_price" class="hide">
+                                        <font class="color-gray-light">&nbsp;|&nbsp;</font>
+                                        <span id="map_box_price_index" style="letter-spacing: -2px;"></span>
+                                    </span>
+                                </p>
+                            </div>
+                        </a>
+                        <div class="box-bottom">
+                            <div class="wedive-corner wedive-corner-bottom"></div>
+                            <div class="box-bottom-area color-white row" style="box-shadow: inset 0px 0px 5px rgb(0 0 0 / 50%);z-index:999;">
+                                <a href="" class="col-4 text-center box-bottom-item">컨시어지</a>
+                                <a v-on:click="mapBoxClick('buddy')" class="col-4 text-center box-bottom-item">버디</a>
+                                <!--<a href="" class="col-3 text-center box-bottom-item">강사</a>-->
+                                <a href="" class="col-4 text-center box-bottom-item">포럼</a>
                             </div>
                         </div>
                     </div>
                 </div>
-            </a>
         </div>
     </div>
 
@@ -379,6 +416,7 @@ var check_cate3 = true;
 var check_cate4 = false;
 
 var tour_flag = true;
+var markerItem = null;
 
 function hideKeyboard() {
     var element = $("#textarea-input");
@@ -546,6 +584,7 @@ async function updateAll() {
         else if (k == 3 && check_cate4) allList = shopList;
         for (var i=0; i<allList.length; i++) {
             if (markerList && markerList.filter(x=>x._id == allList[i]._id).length == 0) {
+                const _markerItem = allList[i];
                 const img_path = (allList[i].adminScore > 40) ? 'https://d34l91104zg4p3.cloudfront.net/assets/ico_pin'+k+'.png' : 'https://d34l91104zg4p3.cloudfront.net/assets/ico_pin_small'+k+'.png'
                 const img = (allList[i].backgroundImages && allList[i].backgroundImages.length>0) ? allList[i].backgroundImages[0].thumbnailUrl : '/static/empty.jpg';
                 const img_size = new google.maps.Size(38,43);
@@ -583,9 +622,12 @@ async function updateAll() {
                     marker_shop.setLabel(" ");
                 }
                 marker_shop.addListener("click", () => {
+                    markerItem = _markerItem;
                     try {
                         if (_k == 0) {
                             $(".box-bottom-area").css("background-color","#3f474c");
+                            $("#map_box_cate").css("border", "1px solid #3f474c");
+                            $("#map_box_cate").css("color", "#3f474c");
                             $(".wedive-corner-bottom").addClass("wedive-corner-bottom-site");
                             $(".wedive-corner-bottom").removeClass("wedive-corner-bottom-point");
                             $(".wedive-corner-bottom").removeClass("wedive-corner-bottom-center");
@@ -593,6 +635,8 @@ async function updateAll() {
                         }
                         else if (_k == 1) {
                             $(".box-bottom-area").css("background-color","#3cb5a0");
+                            $("#map_box_cate").css("border", "1px solid #3cb5a0");
+                            $("#map_box_cate").css("color", "#3cb5a0");
                             $(".wedive-corner-bottom").removeClass("wedive-corner-bottom-site");
                             $(".wedive-corner-bottom").addClass("wedive-corner-bottom-point");
                             $(".wedive-corner-bottom").removeClass("wedive-corner-bottom-center");
@@ -600,6 +644,8 @@ async function updateAll() {
                         }
                         else if (_k == 2) {
                             $(".box-bottom-area").css("background-color","#4687c1");
+                            $("#map_box_cate").css("border", "1px solid #4687c1");
+                            $("#map_box_cate").css("color", "#4687c1");
                             $(".wedive-corner-bottom").removeClass("wedive-corner-bottom-site");
                             $(".wedive-corner-bottom").removeClass("wedive-corner-bottom-point");
                             $(".wedive-corner-bottom").addClass("wedive-corner-bottom-center");
@@ -607,18 +653,22 @@ async function updateAll() {
                         }
                         else if (_k == 3) {
                             $(".box-bottom-area").css("background-color","#c761ad");
+                            $("#map_box_cate").css("border", "1px solid #c761ad");
+                            $("#map_box_cate").css("color", "#c761ad");
                             $(".wedive-corner-bottom").removeClass("wedive-corner-bottom-site");
                             $(".wedive-corner-bottom").removeClass("wedive-corner-bottom-point");
                             $(".wedive-corner-bottom").removeClass("wedive-corner-bottom-center");
                             $(".wedive-corner-bottom").addClass("wedive-corner-bottom-shop");
                         }
-                        
-                        
-
+                    } catch (e) {
+                        console.log("663");
+                        console.log(e);
+                    }
+                    try {
                         Android.vibrate(50);
                         window.navigator.vibrate(20);
                     } catch (e) {
-                        
+
                     }
                     $(".map-box").removeClass("hide");
                     $("#btn_new").addClass("hide");
@@ -633,7 +683,7 @@ async function updateAll() {
                     $("#map_box_shop_name").text(title + (k==0?'':(k==1?'':'')));
                     $("#map_box_shop_desc").text(desc);
                     $("#map_box_shop_star").text(star);
-                    $("#map_box_href").attr("href", "/" + m_type + "/" + uniqueName);
+                    $(".map_box_href").attr("href", "/" + m_type + "/" + uniqueName);
                     
                     $(".box-bottom").removeClass('site').removeClass('point').removeClass('center');
                     $(".box-bottom").addClass(m_type)
@@ -1001,6 +1051,10 @@ export default {
         init_template();
         var preloader = document.getElementById('preloader')
         if(preloader){preloader.classList.add('preloader-hide');}
+
+        $("#search_typeahead_font16 > .input-group > input").addClass("font-noto font-16 font-500 p-0");
+        $("#search_typeahead_font16 > .input-group > input").css("margin", "2px 0px 0px 4px");
+        $("#footer-bar").show();
     }, 50);
   },
   destroyed () {
@@ -1070,27 +1124,15 @@ export default {
       check_cate4: function(newVal, oldVal) {
         check_cate4 = newVal;
       },
-      query: function(newVal, oldVal) {
-        //console.log(newVal + "/" + localStorage.suggestionFlag);
-        if(localStorage.suggestionFlag && localStorage.suggestionFlag == '1') {
-            localStorage.suggestionFlag = '0';
-            
-            this.lookupUser3();
-        } else {
-            this.openSuggestion();
-            //console.log("this.query");
-            //console.log(this.query)
-            this.query_place = JSON.parse(JSON.stringify(this.query)) + "";
-            setTimeout(function() {
-                $("#suggestion_typeahead > .input-group > input").focus();
-            }, 200)
-        }
-      },
+      
       tour_flag: function(newVal, oldVal) {
         tour_flag = newVal;
       },
   },
   methods: {
+      mapBoxClick(item) {
+          this.$router.push({name: "BuddyCreateAllPage", params: markerItem})
+      },
       showAppSettingActivity() {
           try {
               Android.showAppSettingActivity()
@@ -1525,9 +1567,5 @@ export default {
 .shop .box-bottom-area {background-color: #c761ad;}
 
 .map_box_cate {padding: 2px 6px;margin-bottom:0px;margin-right:6px;border-radius:4px;vertical-align: top;}
-.site .map_box_cate {border: 1px solid #3f474c;color:#3f474c}
-.point .map_box_cate {border: 1px solid #3cb5a0;color:#3cb5a0}
-.center .map_box_cate {border: 1px solid #4687c1;color:#4687c1}
-.shop .map_box_cate {border: 1px solid #c761ad;color:#c761ad}
 .has-notification:before {content: '●';color: #ff5160;position:absolute;top:0;font-size:5px;margin-top: -9px;margin-left: 20px;}
 </style>
