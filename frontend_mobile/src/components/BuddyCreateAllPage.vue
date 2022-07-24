@@ -416,6 +416,7 @@ export default {
         console.log(this.$route.params);
         if (this.$route.params.startedAt.substring(0,10) == this.$route.params.finishedAt.substring(0,10)) {
             this.scheduleFlag = false;
+            this.selectedDay = new Date(this.$route.params.startedAt);
         } else {
             this.scheduleFlag = true;
         }

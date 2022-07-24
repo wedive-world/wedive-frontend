@@ -399,39 +399,73 @@
         </div>-->
 
 
-        <div v-if="getDiveSiteByUniqueName.diveCenters && getDiveSiteByUniqueName.diveCenters.length>0" class="card card-style">
-            <div class="content mt-3">
-                <h4 class="text-start pt-2 mb-0">인기 다이빙 센터</h4>
-                <p class="mb-3 color-gray-light-mid">{{ getDiveSiteByUniqueName.name }} 사이트의 {{ getDiveSiteByUniqueName.diveCenters.length }}개의 센터 준비됨</p>
-                <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
-
-                <div v-for="(center,index) in getDiveSiteByUniqueName.diveCenters" v-if="index<3">
+        <div v-if="getDiveShopsNearBy && getDiveShopsNearBy.length>0" class="card card-style">
+            <div class="content mt-3 mb-0">
+                <h4 class="text-start pt-2 mb-0">인기 다이빙 샵</h4>
+                <p class="mb-3 color-gray-light-mid">{{ getDiveSiteByUniqueName.name }} 사이트의 {{ getDiveShopsNearBy.length }}개의 샵 준비됨</p>
+                
+                <div v-for="(shop,index) in getDiveShopsNearBy" v-if="index<3">
                     <div class="">
-                        <a href="/center">
-                            <div class="">
-                                <div class="justify-content-center mb-0 text-start">
-                                    <div class="" style="float: left;position: relative;width: 95px; height:95px;">
-                                        <img v-if="center.backgroundImages&&center.backgroundImages.length>0" v-bind:src="center.backgroundImages[0].thumbnailUrl" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;">
-                                        <img v-else src="/static/empty.jpg" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;">
-                                    </div>
-                                    <div class="" style="padding-left: 110px;">
-                                        <h4 class="font-15"> {{ center.name }} </h4>
-                                        <p class="pb-0 mb-0 line-height-m ellipsis2"> {{ center.description }} </p>
-                                        <!--<p class="pb-0 mb-0 mt-n1 ellipsis color-gray-light-mid">
-                                            {{ (center.interests == null) ? "" : center.interests.filter(x=>x.type=='facility').map(x=>{return x.title}).join().replace(",",", ") }}&nbsp;
-                                        </p>-->
-                                        <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
-                                            <span> {{ (center.adminScore/20).toFixed(1) }} </span>
-                                            &nbsp;<font class="color-gray-light">|</font>&nbsp;
-                                            <span v-if="center.institutionTypes && center.institutionTypes.length > 0"><img v-if="insti in center.institutionTypes" class="ext-img" :src="'https://d34l91104zg4p3.cloudfront.net/agency/logo_'+insti.toLowerCase()+'.svg'" height="14" />&nbsp;&nbsp;<font class="color-gray-light">|</font>&nbsp;&nbsp;</span>
-                                            <span v-if="interest.type=='priceIndex'" v-for="interest in center.interests" class="color-gray">{{interest.title.replace(/\$/gi, '₩')}}</span>
-                                        </p>
-                                    </div>
-                                </div>
+                        <div class="justify-content-center mb-0 text-start">
+                            <div class="thumb-img me-2">
+                                <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                                    <defs>
+                                    <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                                    <clipPath id="clipSquircle">
+                                        <use xlink:href="#shapeSquircle"/>
+                                    </clipPath>
+                                    </defs>
+                                    <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="shop.backgroundImages && shop.backgroundImages.length > 0 ? shop.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'"/>
+                                </svg>
                             </div>
-                        </a>
+                            <!--<div class="" style="float: left;position: relative;width: 95px; height:95px;">
+                                <img v-bind:src="(shop.backgroundImages && shop.backgroundImages.length > 0) ? shop.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;margin-top: 3px;">
+                            </div>-->
+                            <div class="" style="display:inline-block;vertical-align: top;width: calc(100vw - 138px);">
+                                <h4 class="font-15 mt-1 ellipsis"> {{ shop.name }} </h4>
+                                <p class="pb-0 mb-0 nearby_desc ellipsis color-gray"> {{ getDistance(shop) }} <span v-if="shop.adminScore"><i class="fa fa-star font-13 color-yellow-dark ms-1"></i> {{ (shop.adminScore/20).toFixed(1) }} </span></p>
+                                <p class="pb-0 mb-0 nearby_desc ellipsis"> {{ shop.description }}</p>
+                                
+                            </div>
+                            
+                        </div>
                     </div>
-                    <div class="divider mt-3 mb-3"></div>
+                    <div class="divider mt-1 mb-2"></div>
+                </div>
+                <div class="collapse" id="collapse-near-shop">
+                    <div v-for="(shop,index) in getDiveShopsNearBy" v-if="index>=3">
+                        <div class="">
+                            <div class="justify-content-center mb-0 text-start">
+                                <div class="thumb-img me-2">
+                                    <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                                        <defs>
+                                        <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                                        <clipPath id="clipSquircle">
+                                            <use xlink:href="#shapeSquircle"/>
+                                        </clipPath>
+                                        </defs>
+                                        <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="shop.backgroundImages && shop.backgroundImages.length > 0 ? shop.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'"/>
+                                    </svg>
+                                </div>
+                                <!--<div class="" style="float: left;position: relative;width: 95px; height:95px;">
+                                    <img v-bind:src="(shop.backgroundImages && shop.backgroundImages.length > 0) ? shop.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'" class="rounded-s mx-auto" width="95" height="95" style="object-fit: cover;margin-top: 3px;">
+                                </div>-->
+                                <div class="" style="display:inline-block;vertical-align: top;width: calc(100vw - 138px);">
+                                    <h4 class="font-15 mt-1 ellipsis"> {{ shop.name }} </h4>
+                                    <p class="pb-0 mb-0 nearby_desc ellipsis color-gray"> {{ getDistance(shop) }} <span v-if="shop.adminScore"><i class="fa fa-star font-13 color-yellow-dark ms-1"></i> {{ (shop.adminScore/20).toFixed(1) }} </span></p>
+                                    <p class="pb-0 mb-0 nearby_desc ellipsis"> {{ shop.description }}</p>
+                                    
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="divider mt-1 mb-2"></div>
+                    </div>
+                </div>
+                <div v-if="getDiveShopsNearBy && getDiveShopsNearBy.length > 3" class="list-group list-custom-small list-icon-0" style="background: rgba(196, 187, 171, 0.2);margin-left: -15px;margin-right: -15px;">
+                    <a data-bs-toggle="collapse" class="no-effect" href="#collapse-near-shop" v-on:click="collapse_text_shop = (collapse_text_shop == '더 보기' ? '줄이기' : '더 보기')">
+                        <p class="font-14 mb-0 text-center">{{ collapse_text_shop }}</p>
+                    </a>
                 </div>
                 
             </div>
@@ -777,9 +811,11 @@ export default {
         getDiveSiteByUniqueName: {},
         getDivingsByPlaceId: [],
         collapse_text: '더 보기',
+        collapse_text_shop: '더 보기',
         now: new Date(),
         firstThumbnailImage: '',
         getDiveSitesNearby: [],
+        getDiveShopsNearBy: [],
         marker_list: [],
         marker_img_list: [],
         recommend_word: ["비추천", "낮음", "일반적", "좋음", "최고", "완벽함"],
@@ -801,6 +837,38 @@ export default {
     }
   },
   apollo: {
+      getDiveShopsNearBy: {
+          query:gql `
+            query GetDiveShopsNearBy($lat1: Float!, $lon1: Float!, $lat2: Float!, $lon2: Float!) {
+                getDiveShopsNearBy(lat1: $lat1, lon1: $lon1, lat2: $lat2, lon2: $lon2) {
+                    _id
+                    backgroundImages {
+                        _id
+                        thumbnailUrl
+                    }
+                    name
+                    uniqueName
+                    description
+                    latitude
+                    longitude
+                }
+            }
+          `,
+          skip() {
+              return (this.getDiveSiteByUniqueName == null || this.getDiveSiteByUniqueName.latitude == null ? true : false);
+          },
+          variables() {
+              return {
+                lat1: (this.getDiveSiteByUniqueName.latitude-0.05),
+                lon1: (this.getDiveSiteByUniqueName.longitude-0.05),
+                lat2: (this.getDiveSiteByUniqueName.latitude+0.05),
+                lon2: (this.getDiveSiteByUniqueName.longitude+0.05),
+              }
+          },
+          result() {
+              //console.log(this.getDiveShopsNearBy)
+          }
+      },
       getDiveSitesNearby: {
           query:gql `
             query GetDiveSitesNearBy($lat1: Float!, $lon1: Float!, $lat2: Float!, $lon2: Float!) {
@@ -1073,6 +1141,10 @@ export default {
           },
           result() {
             this.$apollo.queries.getDiveSitesNearby.refetch();
+            if (this.getDiveShopsNearBy == null || this.getDiveShopsNearBy.length == 0) {
+                this.$apollo.queries.getDiveShopsNearBy.refetch();
+            }
+            
             if (this.getDiveSiteByUniqueName.isUserLike) this.like_img = 'ico_heart2';
             if (this.getDiveSiteByUniqueName.isUserSubscribe) this.subscribe_img = 'ico_subscribe2';
             {
@@ -1447,6 +1519,23 @@ export default {
       },
   },
   methods: {
+      getDistance(shop) {
+        var R = 6371; // km
+        var lat1 = shop.latitude;
+        var lon1 = shop.longitude;
+        var lat2 = this.getDiveSiteByUniqueName.latitude
+        var lon2 = this.getDiveSiteByUniqueName.longitude
+        var dLat = Math.PI / 180 * (lat2-lat1);
+        var dLon = Math.PI / 180 * (lon2-lon1);
+        var lat1 = Math.PI / 180 * (lat1);
+        var lat2 = Math.PI / 180 * (lat2);
+
+        var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2); 
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+        var d = R * c;
+        return d.toFixed(2) + ' km';
+      },
       findBuddyClick() {
           this.$router.push({name: "BuddyCreateAllPage", target: this.getDiveSiteByUniqueName})
       },
