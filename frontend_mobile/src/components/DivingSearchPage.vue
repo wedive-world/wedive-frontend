@@ -28,6 +28,7 @@
                     inputClass="special-input-class"
                     :disabledValues="[(selecteduser ? [selecteduser.name] : [])]"
                     @input="lookupLocation"
+                    @focus="focusLocation"
                     style="width: 80%;display:inline-block;"
                     >
                     <template slot="suggestion" slot-scope="{ data, htmlText }">
@@ -482,6 +483,9 @@ export default {
                 if(menuBottom){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY(-"+menuHeight/5+"px)"}}
                 if(menuTop){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY("+menuHeight/5+"px)"}}
             }
+      },
+      focusLocation() {
+          console.log("focusLocation");
       },
       async lookupLocation() {
         // progress bar

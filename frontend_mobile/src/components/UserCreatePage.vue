@@ -515,6 +515,8 @@
     
     <div id="snackbar-inputerror" class="snackbar-toast color-white bg-red-dark" data-bs-delay="3000" data-bs-autohide="true"><i class="fa fa-times me-3"></i>모든 항목을 입력해주세요.</div>
     <div id="snackbar-nicknameerror" class="snackbar-toast color-white bg-red-dark" data-bs-delay="3000" data-bs-autohide="true"><i class="fa fa-times me-3"></i>이미 사용중인 닉네임 입니다.</div>
+    <div id="snackbar-nickname_kor" class="snackbar-toast color-white bg-red-dark" data-bs-delay="3000" data-bs-autohide="true"><i class="fa fa-times me-3"></i>한글 닉네임은 8자 이내만 가능합니다.</div>
+    <div id="snackbar-nickname_eng" class="snackbar-toast color-white bg-red-dark" data-bs-delay="3000" data-bs-autohide="true"><i class="fa fa-times me-3"></i>영문 닉네임은 10자 이내만 가능합니다.</div>
 
 
   </div>
@@ -610,7 +612,12 @@ export default {
           if (newVal === '') {
               $("#btn_next1").attr("disabled", true);
           } else {
-              $("#btn_next1").attr("disabled", false);
+              if ( (/^[a-zA-Z]+$/.test(this.nickname) && this.nickname.length > 10) || (/^[a-zA-Z]+$/.test(this.nickname)==false && this.nickname.length > 8) ) {
+                $("#btn_next1").attr("disabled", true);
+              }
+              else {
+                $("#btn_next1").attr("disabled", false);
+              }
           }
       },
       userage: function(newVal, oldVal) {
@@ -667,44 +674,57 @@ export default {
         $("#file-upload1-img").hide();
       },
       async next1() {
-          const nickName = this.nickname;
-          var result = await axios({
-            url: 'https://api.wedives.com/graphql',
-            method: 'post',
-            headers: {
-                countrycode: 'ko',
-                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-            },
-            data: {
-                query: `
-                query Query($nickName: String!) {
-                    getUserByNickName(nickName: $nickName) {
-                        email
+          console.log(this.nickname)
+          if (/^[a-zA-Z]+$/.test(this.nickname) && this.nickname.length > 10) {
+            var toastData = 'snackbar-nickname_eng';
+            var notificationToast = document.getElementById(toastData);
+            var notificationToast = new bootstrap.Toast(notificationToast);
+            notificationToast.show();
+          } else if (/^[a-zA-Z]+$/.test(this.nickname)==false && this.nickname.length > 8) {
+            var toastData = 'snackbar-nickname_kor';
+            var notificationToast = document.getElementById(toastData);
+            var notificationToast = new bootstrap.Toast(notificationToast);
+            notificationToast.show();
+          } else {
+            const nickName = this.nickname;
+            var result = await axios({
+                url: 'https://api.wedives.com/graphql',
+                method: 'post',
+                headers: {
+                    countrycode: 'ko',
+                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                },
+                data: {
+                    query: `
+                    query Query($nickName: String!) {
+                        getUserByNickName(nickName: $nickName) {
+                            email
+                        }
                     }
-                }
-                `,
-                variables: {
-                    nickName: nickName
-                }
+                    `,
+                    variables: {
+                        nickName: nickName
+                    }
 
-            }
-        });
-        
+                }
+            });
+            
 
-        if (result && result.data && result.data.data) {
-            if (result.data.data.getUserByNickName == null || result.data.data.getUserByNickName == 'null') {
-                $("#btn_next1").addClass("gonext");
-                $(".progress-bar").css("width", "50%");
-                setTimeout(function() {
-                    $("#form2").focus();
-                },200);
-            } else {
-                var toastData = 'snackbar-nicknameerror';
-                var notificationToast = document.getElementById(toastData);
-                var notificationToast = new bootstrap.Toast(notificationToast);
-                notificationToast.show();
+            if (result && result.data && result.data.data) {
+                if (result.data.data.getUserByNickName == null || result.data.data.getUserByNickName == 'null') {
+                    $("#btn_next1").addClass("gonext");
+                    $(".progress-bar").css("width", "50%");
+                    setTimeout(function() {
+                        $("#form2").focus();
+                    },200);
+                } else {
+                    var toastData = 'snackbar-nicknameerror';
+                    var notificationToast = document.getElementById(toastData);
+                    var notificationToast = new bootstrap.Toast(notificationToast);
+                    notificationToast.show();
+                }
             }
-        }
+          }
       },
       prev2() {
           $("#btn_next1").removeClass("gonext");

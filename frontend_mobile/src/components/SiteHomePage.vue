@@ -4,9 +4,9 @@
     <div class="main-header header header-fixed header-logo-center" style="height: 58px !important;">
         <a class="" href="/" style="margin-left: 16px;"><img class="logo-image" src="https://d34l91104zg4p3.cloudfront.net/assets/logo-gray.svg" height="42" style="margin-top:8px;"/></a>
         
-        <a v-if="idToken != null && nickName != null && nickName != 'null'" v-on:click="goNoti()" :class="'header-icon header-icon-3' + (notiData && notiData.length > 0 && notiData[0].read != null && notiData[0].read == false ? ' has-notification' : '')" style="color:#858585 !important;margin-right: 18px;"><img src="https://d34l91104zg4p3.cloudfront.net/assets/icon_notification.png" width="28" style="margin-top: 12px;"></a>
-        <!--<a v-on:click="move('/site_list')" class="header-icon header-icon-3" style="margin-right: 18px;"><img src="https://d34l91104zg4p3.cloudfront.net/assets/icon_list_fill.png" width="26" style="margin-top: 12px;"/></i></a>-->
-        <a v-on:click="searchBox()" href="#" class="header-icon header-icon-4" style="margin-right: 11px;"><img src="https://d34l91104zg4p3.cloudfront.net/assets/icon_search_fill.png" width="28" style="margin-top: 12px;"/></a>
+        <a v-if="idToken != null && nickName != null && nickName != 'null'" v-on:click="goNoti()" :class="'header-icon header-icon-4' + (notiData && notiData.length > 0 && notiData[0].read != null && notiData[0].read == false ? ' has-notification' : '')" style="color:#858585 !important;margin-right: 18px;"><img src="https://d34l91104zg4p3.cloudfront.net/assets/icon_notification.png" width="28" style="margin-top: 12px;"></a>
+        
+        <!--<a v-on:click="searchBox()" href="#" class="header-icon header-icon-4" style="margin-right: 11px;"><img src="https://d34l91104zg4p3.cloudfront.net/assets/icon_search_fill.png" width="28" style="margin-top: 12px;"/></a>-->
         <!--<a href="#" class="header-icon header-icon-4 color-theme circular_image" data-menu="menu-main" :style="'background: url('+((userThumbnail) ? userThumbnail : 'https://d34l91104zg4p3.cloudfront.net/assets/user_empty_'+((gender)?gender:'m')+'.png')+');background-size:cover;width:36px;height:36px;margin-top:7px !important;margin-right:7px;'"></a>-->
     </div>
     <div v-if="isPermissionEnabled == false" class="" style="height: 100vh;padding-top:200px;">
@@ -20,10 +20,11 @@
         
         <div id="map" style="height: 100% !important;position: inherit !important;"></div>
 
-        <div class="map-search hide">
+        <div class="map-search">
             <div class="bx-search">
                 
-                
+                <input class="form-control top-search" style="padding-top: 8px;" @focus="openSuggestion()" placeholder="다이빙 장소를 검색하세요."></input>
+                <!--
                 <vue-typeahead-bootstrap
                     id="search_typeahead_font16"
                     class="form-control font-noto"
@@ -58,7 +59,7 @@
                         </div>
                     </template>
                 </vue-typeahead-bootstrap>
-                
+                -->
                 
                 
                 
@@ -354,9 +355,10 @@
         </div>
         
         <div class="card rounded-0 content">
+            <div class="row mb-0">
             <vue-typeahead-bootstrap
                 id="suggestion_typeahead"
-                class="wedive-search disable-search-result"
+                class="wedive-search"
                 v-model="query_place"
                 :data="places"
                 :serializer="item => item"
@@ -364,29 +366,36 @@
                 highlightClass="special-highlight-class"
                 @hit="selecteduser = $event;enableNext2($event);"
                 :minMatchingChars="1"
-                placeholder="사이트, 포인트, 센터 (수영장)"
+                placeholder="어디로 떠나볼까요?"
                 inputClass="special-input-class"
                 @input="lookupPlace"
-                @keyup.enter="handleFire"
+                style="width: 80%;display:inline-block;"
                 >
             </vue-typeahead-bootstrap>
-            <div class="content mt-0 mb-0" style="min-height: calc(100vh - 208px);padding-top:8px;padding-bottom:40px;">
-                <div v-for="item in places">
-                    <div class="">
-                        <a v-on:click="selectSuggestion(item)">
-                            <div class="">
-                                <div class="justify-content-center mb-0 text-start" style="padding-top: 2px;">
-                                    <i class="fas fa-search font-16 pe-2 color-gray"></i>
-                                    <span class="pb-0 mb-0 line-height-m ellipsis"> {{ item }} </span>
-                                </div>
-                            </div>
-                        </a>
+            <a v-on:click="enableNext2(query_place)" class="btn rounded-xs bg-dark-dark col-3 opacity-60" style="width: 18%;padding: 11px 8px !important;border-radius: 8px !important;display:inline-block;margin-bottom:8px;line-height: 1.2;"><i class="fa fa-search font-14"></i></a>
+            </div>
+            <div class="content m-0" style="min-height: calc(100vh - 208px);padding-top:8px;">
+                <div v-for="item in users">
+                    <div v-on:click="selectSuggestion(item)" class="d-flex align-items-center" style="position:relative !important;">
+                        <div :class="''+item.__typename + '-tag'" style="position:relative;">
+                            <img
+                            class="rounded-s me-3"
+                            :src="(item.backgroundImages && item.backgroundImages.length>0) ? item.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'"
+                            style="width: 40px; height: 40px;" />
+                        </div>
+                        <span v-if="item.__typename == 'DiveSite'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + item.name + '</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(item.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + (item.description ? item.description : '')+'</span>'"></span>
+                        <span v-else-if="item.__typename == 'DivePoint'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + item.name + '</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(item.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + (item.description ? item.description : '')+'</span>'"></span>
+                        <span v-else-if="item.__typename == 'DiveCenter'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + item.name + '</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(item.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + (item.description ? item.description : '')+'</span>'"></span>
+                        <span v-else-if="item.__typename == 'DiveShop'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + item.name + '</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(item.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + (item.description ? item.description : '')+'</span>'"></span>
                     </div>
+                    
                     <div class="divider mt-3 mb-3"></div>
                 </div>
             </div>
         </div>
     </div>
+
+    
 
     <a id="btn_filter" data-menu="menu-filter" v-on:click="tour_flag=false;" class="btn btn-m mb-3 rounded-xl font-900 shadow-s icon-filter" style="background-color: #181818;"></a>
     <a v-on:click="concierge" id="btn_new" class="btn btn-m mb-3 rounded-xl font-900 shadow-s icon-concierge" style="background-color: #181818;"></a>
@@ -975,7 +984,7 @@ export default {
             $(".map-box").addClass("hide");
             $("#btn_new").removeClass("hide");
             $("#btn_filter").removeClass("hide");
-            if ($('.map-search').hasClass("hide") == false ) $('.map-search').addClass("hide");
+            //if ($('.map-search').hasClass("hide") == false ) $('.map-search').addClass("hide");
         });
 
         
@@ -1131,8 +1140,53 @@ export default {
       },
   },
   methods: {
+      openSuggestion() {
+            var menuData = "search-suggestion";
+            document.getElementById(menuData).classList.add('menu-active');
+            document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
+            // jjangs : open menu
+            if(window.location.href.split('/').pop() != 'modal'){
+                window.history.pushState({}, 'modal', window.location.pathname + '/modal');
+            }
+            
+            var menu = document.getElementById(menuData);
+            var menuEffect = menu.getAttribute('data-menu-effect');
+            var menuLeft = menu.classList.contains('menu-box-left');
+            var menuRight = menu.classList.contains('menu-box-right');
+            var menuTop = menu.classList.contains('menu-box-top');
+            var menuBottom = menu.classList.contains('menu-box-bottom');
+            var menuWidth = menu.offsetWidth;
+            var menuHeight = menu.offsetHeight;
+            var menuTimeout = menu.getAttribute('data-menu-hide');
+            if(menuTimeout){
+                setTimeout(function(){
+                    document.getElementById(menuData).classList.remove('menu-active');
+                    document.getElementsByClassName('menu-hider')[0].classList.remove('menu-active');
+                },menuTimeout)
+            }
+            if(menuEffect === "menu-push"){
+                var menuWidth = document.getElementById(menuData).getAttribute('data-menu-width');
+                if(menuLeft){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX("+menuWidth+"px)"}}
+                if(menuRight){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+menuWidth+"px)"}}
+                if(menuBottom){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY(-"+menuHeight+"px)"}}
+                if(menuTop){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY("+menuHeight+"px)"}}
+            }
+            if(menuEffect === "menu-parallax"){
+                var menuWidth = document.getElementById(menuData).getAttribute('data-menu-width');
+                if(menuLeft){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX("+menuWidth/10+"px)"}}
+                if(menuRight){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+menuWidth/10+"px)"}}
+                if(menuBottom){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY(-"+menuHeight/5+"px)"}}
+                if(menuTop){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY("+menuHeight/5+"px)"}}
+            }
+            setTimeout(function() {
+                console.log("aa");
+                $("#suggestion_typeahead > .input-group > input").focus();
+                $("#suggestion_typeahead > .input-group > input").addClass("font-noto font-16");
+            }, 300);
+            
+      },
       mapBoxClick(item) {
-          this.$router.push({name: "BuddyCreateAllPage", params: markerItem})
+          this.$router.push({name: "BuddyCreateAllPage", target: markerItem})
       },
       showAppSettingActivity() {
           try {
@@ -1156,7 +1210,8 @@ export default {
             if (this.suggestions.length > 0) {
                 this.places = this.suggestions.filter(x => (x && x.includes(this.query_place)));
             }
-            if (this.suggestions.length == 0 || this.places == 0) {
+            //if (this.suggestions.length == 0 || this.places == 0) {
+            else {
                 var headers = (localStorage.idToken) ? {countrycode: 'ko', idtoken: localStorage.idToken} : {countrycode: 'ko'};
                 var result = await axios({
                     url: 'https://api.wedives.com/graphql',
@@ -1184,7 +1239,10 @@ export default {
       },
       selectSuggestion(item) {
           console.log("item")
-          localStorage.suggestionFlag = '1';
+          console.log(item)
+          history.back();
+          location.href = (item.__typename == 'DiveSite' ? '/site/' : item.__typename == 'DivePoint' ? '/point/' : item.__typename == 'DiveCenter' ? '/center/' : '/shop/') + item.uniqueName;
+          /*localStorage.suggestionFlag = '1';
           this.query = item;
           document.getElementById("search-suggestion").classList.remove('menu-active');
           document.getElementsByClassName('menu-hider')[0].classList.remove('menu-active');
@@ -1193,7 +1251,7 @@ export default {
           window.history.back(); 
           setTimeout(function() {
             $("#search_typeahead > .input-group > input").focus();
-          }, 200)
+          }, 200)*/
       },
       handleFire() {
           localStorage.suggestionFlag = '1';
@@ -1207,48 +1265,6 @@ export default {
           setTimeout(function() {
             $("#search_typeahead > .input-group > input").focus();
           }, 200)
-      },
-      openSuggestion() {
-            tour_flag = false;
-            var menuData = "search-suggestion";
-            document.getElementById(menuData).classList.add('menu-active');
-            document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
-            // jjangs : open menu
-            if(window.location.href.split('/').pop() != 'modal'){
-                window.history.pushState({}, 'modal', window.location.pathname + '/modal');
-            }
-            
-            var menu = document.getElementById(menuData);
-            var menuEffect = menu.getAttribute('data-menu-effect');
-            var menuLeft = menu.classList.contains('menu-box-left');
-            var menuRight = menu.classList.contains('menu-box-right');
-            var menuTop = menu.classList.contains('menu-box-top');
-            var menuBottom = menu.classList.contains('menu-box-bottom');
-            var menuWidth = menu.offsetWidth;
-            var menuHeight = menu.offsetHeight;
-            var menuTimeout = menu.getAttribute('data-menu-hide');
-
-            if(menuTimeout){
-                setTimeout(function(){
-                    document.getElementById(menuData).classList.remove('menu-active');
-                    document.getElementsByClassName('menu-hider')[0].classList.remove('menu-active');
-                },menuTimeout)
-            }
-
-            if(menuEffect === "menu-push"){
-                var menuWidth = document.getElementById(menuData).getAttribute('data-menu-width');
-                if(menuLeft){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX("+menuWidth+"px)"}}
-                if(menuRight){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+menuWidth+"px)"}}
-                if(menuBottom){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY(-"+menuHeight+"px)"}}
-                if(menuTop){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY("+menuHeight+"px)"}}
-            }
-            if(menuEffect === "menu-parallax"){
-                var menuWidth = document.getElementById(menuData).getAttribute('data-menu-width');
-                if(menuLeft){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX("+menuWidth/10+"px)"}}
-                if(menuRight){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+menuWidth/10+"px)"}}
-                if(menuBottom){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY(-"+menuHeight/5+"px)"}}
-                if(menuTop){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY("+menuHeight/5+"px)"}}
-            }
       },
       submit_filter() {
         tour_flag = true;
@@ -1322,8 +1338,87 @@ export default {
         
         updateAll();
       },
-      enableNext2(ev) {
-          localStorage.suggestionFlag = '1';
+      async enableNext2(ev) {
+          var result = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                    query SearchPlaces($searchParams: SearchParams, $limit: Int) {
+                        searchPlaces(searchParams: $searchParams, limit: $limit) {
+                            __typename
+                            ... on DiveSite {
+                                _id
+                                uniqueName
+                                name
+                                description
+                                adminScore
+                                latitude
+                                longitude
+                                backgroundImages {
+                                    thumbnailUrl
+                                }
+                            }
+                            ... on DivePoint {
+                                _id
+                                uniqueName
+                                name
+                                description
+                                adminScore
+                                latitude
+                                longitude
+                                backgroundImages {
+                                    thumbnailUrl
+                                }
+                            }
+                            ... on DiveCenter {
+                                _id
+                                uniqueName
+                                name
+                                description
+                                divingType
+                                adminScore
+                                latitude
+                                longitude
+                                backgroundImages {
+                                    thumbnailUrl
+                                }
+                            }
+                            ... on DiveShop {
+                                _id
+                                uniqueName
+                                name
+                                description
+                                divingType
+                                adminScore
+                                latitude
+                                longitude
+                                backgroundImages {
+                                    thumbnailUrl
+                                }
+                            }
+                            address
+                            latitude
+                            longitude
+                            countryCode
+                        }
+                    }
+                `,
+                variables: {
+                    "limit": 10,
+                    "searchParams": {
+                        "query": ev
+                    }
+                }
+            }
+        });
+          
+          this.users = result.data.data.searchPlaces; 
+          /*localStorage.suggestionFlag = '1';
           selecteduser = ev;
           hideKeyboard()
           if (map.getZoom() < 10)
@@ -1331,7 +1426,7 @@ export default {
           setTimeout(function(lat, lng) {
               map.panTo({lat: lat, lng: lng});
               updateAll();
-          },50, ev.latitude, ev.longitude)
+          },50, ev.latitude, ev.longitude)*/
           
       },
       mapFilter(type) {
@@ -1540,7 +1635,7 @@ export default {
 }
 
 .display-block {display:inline-block;}
-.map-search {position: absolute;right: 0;top: 63px;left: 0;margin: 5px 12px 4px;border-radius:16px;background-color: white;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
+.map-search {position: absolute;right: 0;top: 63px;left: 0;margin: 5px 12px 4px;border-radius:16px;background-color: white;box-shadow: 0 2px 8px 0 rgb(0 0 0 / 35%) !important;}
 .bx {padding: 15px 14px;min-height: 125px;}
 .bx-search {padding: 8px 14px;min-height: 48px;}
 .bx-filter {border: 1px solid rgba(0,0,0,.1);padding: 8px 4px;display:inline-block;}
@@ -1554,7 +1649,7 @@ export default {
 .wedive-corner-bottom-shop:after {right: 0;bottom: 0;box-shadow: 10px 10px 5px 100px #954982 !important;}
 .icon-concierge {position: fixed;width: 58px;height: 58px;bottom: 70px;right:24px;background: url(https://d34l91104zg4p3.cloudfront.net/assets/concierge.gif);background-size:contain !important;background-position-y: 8px;background-repeat: no-repeat;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;}
 .icon-filter {position: fixed;width: 58px;height: 58px;bottom: 140px;right:24px;background: url(https://d34l91104zg4p3.cloudfront.net/assets/filter2.png);background-size:contain !important;background-position-y: 8px;background-repeat: no-repeat;box-shadow: 0 4px 24px 0 rgb(0 0 0 / 45%) !important;background-position: bottom;}
-.box-bottom {width:calc(100% - 120px);height:36px;position: absolute;right: 0;bottom: 0;display:flex;}
+.box-bottom {width:calc(100% - 120px);height:36px;position: absolute;right: 0;bottom: 0;display:flex;z-index: 99;}
 .box-bottom-corner {display:inline-block;width:36px;height:36px;z-index:999;}
 .box-bottom-corner:before {content: '';position: absolute;height: 80px;width: 80px;border-radius: 100%;z-index: -1;box-shadow: 10px 10px 5px 100px #1d397c;}
 .box-bottom-area {width:100%;border-radius: 24px 0 16px 0;justify-content: space-around;margin:0 !important;padding: 0 4px;}
@@ -1571,4 +1666,5 @@ export default {
 
 .map_box_cate {padding: 2px 6px;margin-bottom:0px;margin-right:6px;border-radius:4px;vertical-align: top;}
 .has-notification:before {content: '●';color: #ff5160;position:absolute;top:0;font-size:5px;margin-top: -9px;margin-left: 20px;}
+.top-search::placeholder {font-size: 16px !important;font-family: 'Noto Sans Korean';opacity:50%;font-weight:500;}
 </style>

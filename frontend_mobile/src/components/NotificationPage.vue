@@ -106,24 +106,24 @@ export default {
                     targetType
                     subjectType
                     subject {
-                    ... on Diving {
-                        _id
-                    }
-                    ... on DiveSite {
-                        _id
-                    }
-                    ... on DivePoint {
-                        _id
-                    }
-                    ... on DiveCenter {
-                        _id
-                    }
-                    ... on Instructor {
-                        _id
-                    }
-                    ... on User {
-                        _id
-                    }
+                        ... on Diving {
+                            _id
+                        }
+                        ... on DiveSite {
+                            _id
+                        }
+                        ... on DivePoint {
+                            _id
+                        }
+                        ... on DiveCenter {
+                            _id
+                        }
+                        ... on Instructor {
+                            _id
+                        }
+                        ... on User {
+                            _id
+                        }
                     }
                     title
                     message

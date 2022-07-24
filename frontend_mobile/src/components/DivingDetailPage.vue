@@ -253,7 +253,10 @@
             </div>
             <div class="flex-fill speach-input p-2">
             <a v-if="getDivingById.status == 'publicEnded'|| getDivingById.status=='divingComplete'" class="btn btn-full font-400 rounded-s shadow-l bg-gray-dark color-white bd-w-0mb-5 font-noto">모집종료</a>
-            <a v-else data-menu="menu-finish" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0mb-5 font-noto">모집종료</a>
+            <div v-else class="row" style="padding-right: 16px;">
+                <a v-on:click="modifyDiving()" class="btn btn-full col-6 font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 font-noto me-2" style="width: calc(50% - 4px);"><i class="fas fa-pen fa-fw"></i> 수정</a>
+                <a data-menu="menu-finish" class="btn btn-full col-6 font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 font-noto" style="width: calc(50% - 4px);"><i class="fas fa-flag fa-fw"></i> 모집종료</a>
+            </div>
             
             </div>
         </div>
@@ -784,6 +787,9 @@ export default {
     }
   },
   methods: {
+      modifyDiving() {
+          this.$router.push({name: "BuddyCreateAllPage", params: this.getDivingById});
+      },
       historyBack() {
           try {
               Android.onHistoryBack();

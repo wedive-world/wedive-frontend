@@ -32,7 +32,8 @@
 
                             <div style="">
                                 <div class="custom-control ios-switch ios-switch-icon wedive-switch toggleBorder" style="margin: 0 !important;padding: 0 !important;">
-                                    <input v-on:click="toggleSchedule()" type="checkbox" class="ios-input" id="toggle-license">
+                                    <input v-if="scheduleFlag" v-on:click="toggleSchedule()" type="checkbox" class="ios-input" id="toggle-license" checked="checked">
+                                    <input v-else v-on:click="toggleSchedule()" type="checkbox" class="ios-input" id="toggle-license">
                                     <label class="custom-control-label" for="toggle-license"></label>
                                     <span :class="'ps-3 font-16' + (scheduleFlag ? ' opacity-30' : '')" style="padding-top:12px;padding-left:56px !important;">당일 일정</span>
                                     <span :class="'font-16' + (scheduleFlag ? '' : ' opacity-30')" style="padding-top:12px;padding-left:40px;">1박 이상</span>
@@ -406,11 +407,21 @@ export default {
     draggable,
   },
   created() {
-    this.route_params = this.$route.params;
-    if (this.route_params != null && this.route_params.hasOwnProperty('_id')) {
+    if (this.$route.target != null && this.$route.target.hasOwnProperty('_id')) {
         $("#footer-bar").hide();
-        this.search_result.push({__typename: this.route_params.__typename, location: this.route_params.name, adminScore: this.route_params.adminScore, description: this.route_params.description, _id: this.route_params._id});
+        this.search_result.push({__typename: this.$route.target.__typename, location: this.$route.target.name, adminScore: this.$route.target.adminScore, description: this.$route.target.description, _id: this.$route.target._id});
+        const insname = this.ins_name;
+    } else if (this.$route.params != null && this.$route.params.hasOwnProperty('_id')) {
+        $("#footer-bar").hide();
+        console.log(this.$route.params);
+        if (this.$route.params.startedAt.substring(0,10) == this.$route.params.finishedAt.substring(0,10)) {
+            this.scheduleFlag = false;
+        } else {
+            this.scheduleFlag = true;
+        }
+        //this.search_result.push({__typename: this.$route.params.__typename, location: this.$route.params.name, adminScore: this.$route.params.adminScore, description: this.$route.params.description, _id: this.$route.params._id});
     }
+    
     const insname = this.ins_name;
     setTimeout(function() {
         init_template();
@@ -428,7 +439,6 @@ export default {
   },
   data () {
     return {
-        route_params: null,
         check_agree: false,
         scheduleFlag: false,
         locations: [],
@@ -604,8 +614,6 @@ export default {
 
         var _s_date = null;
         var _e_date = null;
-        console.log(this.scheduleFlag)
-        console.log(this.selectedDate);
         if (this.scheduleFlag == false) {
             _s_date = this.selectedDate.year + "-" + (this.selectedDate.month<10?"0"+this.selectedDate.month:this.selectedDate.month) + "-" + (this.selectedDate.day<10?"0"+this.selectedDate.day:this.selectedDate.day) + " 00:00:00";
             _e_date = _s_date

@@ -416,10 +416,10 @@
                                     </div>
                                     <div class="" style="padding-left: 110px;">
                                         <h4 class="font-15"> {{ center.name }} </h4>
-                                        <p class="pb-0 mb-0 line-height-m ellipsis"> {{ center.description }} </p>
-                                        <p class="pb-0 mb-0 mt-n1 ellipsis color-gray-light-mid">
+                                        <p class="pb-0 mb-0 line-height-m ellipsis2"> {{ center.description }} </p>
+                                        <!--<p class="pb-0 mb-0 mt-n1 ellipsis color-gray-light-mid">
                                             {{ (center.interests == null) ? "" : center.interests.filter(x=>x.type=='facility').map(x=>{return x.title}).join().replace(",",", ") }}&nbsp;
-                                        </p>
+                                        </p>-->
                                         <p class="pb-0 mb-0 mt-n1"><i class="fa fa-star font-13 color-yellow-dark scale-box"></i>
                                             <span> {{ (center.adminScore/20).toFixed(1) }} </span>
                                             &nbsp;<font class="color-gray-light">|</font>&nbsp;
@@ -452,7 +452,7 @@
         <div class="card card-style">
             <div class="content mt-10">
                 <h4 class="text-start pt-2 mb-0">{{ getDiveSiteByUniqueName.name }} 포인트</h4>
-                <span class="wedive-txt-all color-gray mt-2"><img src="https://d34l91104zg4p3.cloudfront.net/assets/ico_pin1.png" width="19"/> 얕은수심&nbsp;&nbsp;<img src="https://d34l91104zg4p3.cloudfront.net/assets/ico_pin3.png" width="19"/> 깊은수심</span>
+                <span class="wedive-txt-all color-gray mt-2"><img src="https://d34l91104zg4p3.cloudfront.net/assets/ico_pin1.png" width="19"/> 얕은수심&nbsp;&nbsp;<img src="https://d34l91104zg4p3.cloudfront.net/assets/ico_pin4.png" width="19"/> 깊은수심</span>
             </div>
             <div id="map" style="height: 300px;"></div>
             <div class="map-box hide">
@@ -851,6 +851,19 @@ export default {
                     diveCenters {
                         _id
                         name
+                        description
+                        uniqueName
+                        adminScore
+                        backgroundImages {
+                            _id
+                            reference
+                            thumbnailUrl
+                        }
+                    }
+                    diveShops {
+                        _id
+                        name
+                        description
                         uniqueName
                         adminScore
                         backgroundImages {
@@ -1250,7 +1263,7 @@ export default {
                 for (var i=0; i<this.getDiveSiteByUniqueName.divePoints.length; i++) {
                     var minDepth = this.getDiveSiteByUniqueName.divePoints[i].minDepth;
                     var _position = {lat: this.getDiveSiteByUniqueName.divePoints[i].latitude, lng: this.getDiveSiteByUniqueName.divePoints[i].longitude};
-                    var _img = (minDepth < 18) ? 'https://d34l91104zg4p3.cloudfront.net/assets/ico_pin1.png' : 'https://d34l91104zg4p3.cloudfront.net/assets/ico_pin3.png';
+                    var _img = (minDepth < 18) ? 'https://d34l91104zg4p3.cloudfront.net/assets/ico_pin1.png' : 'https://d34l91104zg4p3.cloudfront.net/assets/ico_pin4.png';
                     const _marker_class = (minDepth < 18) ? 'marker-position2' : 'marker-position3';
 
                     const title = this.getDiveSiteByUniqueName.divePoints[i].name;
@@ -1260,7 +1273,7 @@ export default {
                     
                     const img = (this.getDiveSiteByUniqueName.divePoints[i].backgroundImages&&this.getDiveSiteByUniqueName.divePoints[i].backgroundImages.length>0) ? this.getDiveSiteByUniqueName.divePoints[i].backgroundImages[0].thumbnailUrl : '/static/empty.jpg';
                     const _sml_img = _img;
-                    const _big_img = (minDepth < 18) ? 'https://d34l91104zg4p3.cloudfront.net/assets/ico_pin_big1.png' : 'https://d34l91104zg4p3.cloudfront.net/assets/ico_pin_big3.png';
+                    const _big_img = (minDepth < 18) ? 'https://d34l91104zg4p3.cloudfront.net/assets/ico_pin_big1.png' : 'https://d34l91104zg4p3.cloudfront.net/assets/ico_pin_big4.png';
 
                     const marker_point = new google.maps.Marker({
                         map: this.map,
@@ -1435,7 +1448,7 @@ export default {
   },
   methods: {
       findBuddyClick() {
-          this.$router.push({name: "BuddyCreateAllPage", params: this.getDiveSiteByUniqueName})
+          this.$router.push({name: "BuddyCreateAllPage", target: this.getDiveSiteByUniqueName})
       },
       async moveDiving(item) {
         var dic_type1 = {"DiveSite": "diveSite", "DivePoint": "divePoint", "DiveCenter": "diveCenter", "Diving": "diving", "User": "user", "Review": "review", "Forum": "forum", "Recommendation": "recommendation"};
