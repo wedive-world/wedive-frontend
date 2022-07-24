@@ -637,6 +637,7 @@ export default {
                     interests {
                         title
                         type
+                        _id
                     }
                     maxPeopleNumber
                     likes
@@ -688,26 +689,42 @@ export default {
             this.getDivingById.location = '';
             if (this.getDivingById.diveSites && this.getDivingById.diveSites.length > 0) {
                 this.getDivingById.diveSites.forEach(x => {
-                    x.type = 'site';
-                    this.locationData.push(x);
-                    this.getDivingById.location += (this.getDivingById.location != '' ? ', ' : '') + x.name + "";
+                    if (this.locationData.forEach(y => y._id == x._id) == null) {
+                        x.type = 'site';
+                        this.locationData.push(x);
+                        this.getDivingById.location += (this.getDivingById.location != '' ? ', ' : '') + x.name + "";
+                    }
                 });
                 
                 
             }
             if (this.getDivingById.divePoints && this.getDivingById.divePoints.length > 0) {
                 this.getDivingById.divePoints.forEach(x => {
-                    x.type = 'point';
-                    this.locationData.push(x);
-                    this.getDivingById.location += (this.getDivingById.location != '' ? ', ' : '') + x.name + "";
+                    if (this.locationData.forEach(y => y._id == x._id) == null) {
+                        x.type = 'point';
+                        this.locationData.push(x);
+                        this.getDivingById.location += (this.getDivingById.location != '' ? ', ' : '') + x.name + "";
+                    }
                 });
                 //this.getDivingById.location = this.getDivingById.divePoints[0].name + "";
             } 
             if (this.getDivingById.diveCenters && this.getDivingById.diveCenters.length > 0) {
                 this.getDivingById.diveCenters.forEach(x => {
-                    x.type = 'center';
-                    this.locationData.push(x);
-                    this.getDivingById.location += (this.getDivingById.location != '' ? ', ' : '') + x.name + "";
+                    if (this.locationData.forEach(y => y._id == x._id) == null) {
+                        x.type = 'center';
+                        this.locationData.push(x);
+                        this.getDivingById.location += (this.getDivingById.location != '' ? ', ' : '') + x.name + "";
+                    }
+                });
+                //this.getDivingById.location = this.getDivingById.diveCenters[0].name;
+            }
+            if (this.getDivingById.diveShops && this.getDivingById.diveShops.length > 0) {
+                this.getDivingById.diveShops.forEach(x => {
+                    if (this.locationData.forEach(y => y._id == x._id) == null) {
+                        x.type = 'shop';
+                        this.locationData.push(x);
+                        this.getDivingById.location += (this.getDivingById.location != '' ? ', ' : '') + x.name + "";
+                    }
                 });
                 //this.getDivingById.location = this.getDivingById.diveCenters[0].name;
             }

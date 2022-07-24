@@ -1179,7 +1179,6 @@ export default {
                 if(menuTop){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY("+menuHeight/5+"px)"}}
             }
             setTimeout(function() {
-                console.log("aa");
                 $("#suggestion_typeahead > .input-group > input").focus();
                 $("#suggestion_typeahead > .input-group > input").addClass("font-noto font-16");
             }, 300);

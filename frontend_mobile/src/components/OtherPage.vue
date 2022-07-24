@@ -77,6 +77,15 @@
                 <h2 class="font-15 font-300 mb-0"><img src="https://d34l91104zg4p3.cloudfront.net/assets/other_privacy.png" height="30" /><span class="ms-2 vertical-m">개인정보 처리 방침</span><i class="wedive-txt-all wedive_right" style="top:22px;"></i></h2>
             </div>
         </a>
+
+        <div class="row ps-3 pe-3 mt-3">
+            <div v-on:click="logout()" class="col-6 text-center border-black p-1" style="width: calc(50% - 4px);margin-right: 4px;">
+                <h2 class="font-15 font-300 mb-0"><img src="/static/images/assets/other_logout.png" height="30" /><span class="ms-2 vertical-m">로그아웃</span><i class="wedive-txt-all wedive_right" style="top:22px;"></i></h2>
+            </div>
+            <div v-on:click="byebye()" class="col-6 text-center border-black p-1" style="width: calc(50% - 4px);margin-left: 4px;">
+                <h2 class="font-15 font-300 mb-0"><img src="/static/images/assets/other_bye.png" height="30" /><span class="ms-2 vertical-m">회원탈퇴</span><i class="wedive-txt-all wedive_right" style="top:22px;"></i></h2>
+            </div>
+        </div>
         
         
     </div>
@@ -128,6 +137,14 @@ export default {
           location.href='/user/create';
         }
       },
+      logout() {
+        localStorage.clear();
+        // android token 삭제
+      },
+      byebye() {
+        localStorage.clear();
+        // api호출
+      },
   }
 
   
@@ -143,4 +160,5 @@ export default {
 .border-bottom {border-bottom: 1px solid rgba(0, 0, 0, 0.2) !important}
 .br-0 {border-radius: 0 !important;}
 .position-relative {position: relative;}
+.border-black {border: 1px solid black;}
 </style>

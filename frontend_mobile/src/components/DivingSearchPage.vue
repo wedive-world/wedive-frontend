@@ -17,51 +17,26 @@
                 <vue-typeahead-bootstrap
                     id="input_query"
                     v-model="query"
-                    class="wedive-search disable-search-result"
-                    :data="users"
-                    :serializer="item => item.name"
-                    :screen-reader-text-serializer="item => `${item.name}`"
+                    class="wedive-search"
+                    :data="places"
+                    :serializer="item => item"
+                    :screen-reader-text-serializer="item => `${item}`"
                     highlightClass="special-highlight-class"
                     @hit="selecteduser = $event;enableNext2($event);"
                     :minMatchingChars="1"
                     placeholder="어디로 다이빙 가세요?"
                     inputClass="special-input-class"
-                    :disabledValues="[(selecteduser ? [selecteduser.name] : [])]"
-                    @input="lookupLocation"
-                    @focus="focusLocation"
+                    @input="lookupPlace"
                     style="width: 80%;display:inline-block;"
+                    :showAllResults="true"
                     >
-                    <template slot="suggestion" slot-scope="{ data, htmlText }">
-                        <div class="d-flex align-items-center" style="position:relative !important;">
-                        <div :class="''+data.type + '-tag'" style="position:relative;">
-                            <div class="user-img me-2">
-                                <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
-                                    <defs>
-                                    <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
-                                    <clipPath id="clipSquircle">
-                                        <use xlink:href="#shapeSquircle"/>
-                                    </clipPath>
-                                    </defs>
-                                    <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(data.backgroundImages && data.backgroundImages.length>0) ? data.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'"/>
-                                </svg>
-                            </div>
-                            <!--<img
-                            class="rounded-s me-3"
-                            :src="(data.backgroundImages && data.backgroundImages.length>0) ? data.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'"
-                            style="width: 40px; height: 40px;" />-->
-                        </div>
-                        <span v-if="data.type == 'site'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + htmlText + ' 사이트</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + data.description+'</span>'"></span>
-                        <span v-else-if="data.type == 'point'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + htmlText + ' 포인트</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + data.description+'</span>'"></span>
-                        <span v-else-if="data.type == 'center'" class="ml-4" style="margin-top: -20px;" v-html="'<span class=\'font-noto font-16\'>' + htmlText + '</span><span class=\'font-13 ms-2\'>(<i class=\'fa fa-star color-gray-light icon-10 text-center me-1\'></i>'+(data.adminScore/20).toFixed(1)+')</span><br/><span class=\'ellipsis\' style=\'width: calc(100% - 50px);position: absolute;margin-top:-4px;\'>' + data.description+'</span>'"></span>
-                        
-                        </div>
-                    </template>
+                    
                 </vue-typeahead-bootstrap>
-                <a v-on:click="triggerSearch()" class="btn btn-m btn-full rounded-xs text-uppercase font-900 shadow-s bg-dark-dark col-3" style="width: 18%;padding: 13px 8px !important;border-radius: 8px !important;display:inline-block;margin-bottom:1px;">검색</a>
+                <a v-on:click="triggerSearch()" class="btn rounded-xs bg-dark-dark col-3 opacity-60" style="width: 18%;padding: 11px 8px !important;border-radius: 8px !important;display:inline-block;margin-bottom:5px;line-height: 1.2;"><i class="fa fa-search font-14"></i></a>
                 
             </div>
-            
-            
+
+            <div id="div_latest"><label class="font-12 mt-2 me-3 ms-3" style="color: #b4bcc8"><i class="wedive_icoset wedive_icoset_info me-1"/>최신 다이빙 리스트 입니다.</label> </div>
             <div class="content mt-0 mb-0" style="min-height: calc(100vh - 143px);padding-bottom:40px;">
                 <div v-if="searchDivings && searchDivings.length == 0" class="text-center">
                     <img src="https://d34l91104zg4p3.cloudfront.net/assets/empty_list2.jpg" width="60%" style="margin-top: 50px;"/>
@@ -85,7 +60,7 @@
                                 <!--<img :src="(item.diveLocation && item.diveLocation.length > 0 && item.diveLocation[0].backgroundImages && item.diveLocation[0].backgroundImages.length > 0) ? item.diveLocation[0].backgroundImages[0].thumbnailUrl : '/static/empty.jpg'" class="rounded-sm me-3" width="68">-->
                             </div>
                             <div class="text-start align-self-center font-noto" style="vertical-align: top;">
-                                <h2 class="font-16 line-height-s mb-0 font-500">{{ item.title }}</h2>
+                                <h2 class="font-16 line-height-s mb-0 font-500 ellipsis" style="max-width: calc(100vw - 110px);">{{ item.title }}</h2>
                                 <p class="color-gray font-13 mb-0 ellipsis">{{ wediveDate(item.startedAt) }} ~ {{ wediveDate(item.finishedAt) }}</p>
                                 <p class="color-highlight font-13 mb-0 ellipsis"><i class="wedive_icoset wedive_icoset_marker"></i> {{ (item.diveLocation && item.diveLocation.length > 0) ? item.diveLocation[0].name : '' }} ({{ wediveDivingType(item.type) }})</p>
                             </div>
@@ -215,10 +190,10 @@ export default {
             //},200);
         } else {
             this.query_place = JSON.parse(JSON.stringify(this.query)) + "";
-            this.openSuggestion();
+            /*this.openSuggestion();
             setTimeout(function() {
                 $("#suggestion_typeahead > .input-group > input").focus();
-            }, 200)
+            }, 200)*/
         }
       },
   },
@@ -236,6 +211,11 @@ export default {
           return val.join().replace('freeDiving', '프리').replace('scubaDiving', '스쿠버');
       },
       async triggerSearch() {
+          if (this.query == '' && this.schedule_from == '일정 없음' && this.schedule_to == '일정 없음') {
+              $("#div_latest").show();
+          } else {
+              $("#div_latest").hide();
+          }
           // progress bar
           var preloader = document.getElementById('preloader')
           if(preloader){
@@ -322,7 +302,7 @@ export default {
             preloader.classList.remove('opacity-50');
             preloader.classList.add('preloader-hide');
         }
-        console.log(this.searchDivings);
+        //console.log(this.searchDivings);
       },
       enableNext2(ev) {
           this.search_img = (ev.backgroundImages && ev.backgroundImages.length>0) ? ev.backgroundImages[0].thumbnailUrl : '/static/empty.jpg';
@@ -347,13 +327,13 @@ export default {
       },
       async lookupPlace() {
         //console.log("this.query_place = " + this.query_place);
-        if (this.query_place == '') {
+        if (this.query == '') {
             this.places = [];
         } else {
             if (this.suggestions.length > 0) {
-                this.places = this.suggestions.filter(x => (x && x.includes(this.query_place)));
+                this.places = this.suggestions.filter(x => (x && x.includes(this.query)));
             }
-            if (this.suggestions.length > 0 || this.places.length == 0) {
+            else {
                 var headers = (localStorage.idToken) ? {countrycode: 'ko', idtoken: localStorage.idToken} : {countrycode: 'ko'};
                 var result = await axios({
                     url: 'https://api.wedives.com/graphql',
@@ -366,7 +346,7 @@ export default {
                         }
                         `,
                         variables: {
-                            "query": this.query_place
+                            "query": this.query
                         }
                     }
                 });
@@ -483,9 +463,10 @@ export default {
                 if(menuBottom){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY(-"+menuHeight/5+"px)"}}
                 if(menuTop){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY("+menuHeight/5+"px)"}}
             }
-      },
-      focusLocation() {
-          console.log("focusLocation");
+            setTimeout(function() {
+                $("#suggestion_typeahead > .input-group > input").focus();
+                $("#suggestion_typeahead > .input-group > input").addClass("font-noto font-16");
+            }, 300);
       },
       async lookupLocation() {
         // progress bar
@@ -600,9 +581,8 @@ export default {
       $(".page-title-clear").hide();
       $(".header-fixed").hide();
     }
-    setTimeout(function() {
-        $("#input_query > .input-group > input").focus();
-    },500);
+    $("#div_latest").hide();
+    this.triggerSearch();
   },
   created() {
     setTimeout(function() {

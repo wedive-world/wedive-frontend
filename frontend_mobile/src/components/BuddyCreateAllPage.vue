@@ -96,7 +96,8 @@
                                     <div class="" style="margin-left: 10px;padding: 0px 0px 5px 10px;" id="div_diving_type">
                                         <label class="color-gray font-600 font-10" style="background: transparent;">다이빙 타입</label>
                                         <div class="form-check icon-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="radio_scuba" @focus="focusInput($event)" v-on:click="clickRadio('label_scuba')">
+                                            <input v-if="label_scuba" checked="checked" class="form-check-input" type="checkbox" value="" id="radio_scuba" @focus="focusInput($event)" v-on:click="clickRadio('label_scuba')">
+                                            <input v-else class="form-check-input" type="checkbox" value="" id="radio_scuba" @focus="focusInput($event)" v-on:click="clickRadio('label_scuba')">
                                             <label class="form-check-label font-noto font-18 font-500 opacity-30" for="radio_scuba" id="label_scuba">스쿠바</label>
                                             <i class="icon-check-1 far fa-circle color-gray-dark font-16"></i>
                                             <i class="icon-check-2 far fa-check-circle font-16 color-highlight" style="font-size: 20px !important;"></i>
@@ -238,7 +239,8 @@
                                 <div class="p-3 pb-2 pt-1" id="div_diving_option">
                                     <label class="color-gray font-600 font-10 mt-n2" style="background: transparent;">모집인원</label>
                                     <div class="form-check icon-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="radio_unlimited" @focus="focusInput($event)" v-on:click="clickRadio('label_unlimited')" checked="checked">
+                                        <input v-if="label_unlimited" checked="checked" class="form-check-input" type="checkbox" value="" id="radio_unlimited" @focus="focusInput($event)" v-on:click="clickRadio('label_unlimited')">
+                                        <input v-else class="form-check-input" type="checkbox" value="" id="radio_unlimited" @focus="focusInput($event)" v-on:click="clickRadio('label_unlimited')">
                                         <label class="form-check-label font-noto font-18 font-500" for="radio_unlimited" id="label_unlimited">제한 없음</label>
                                         <i class="icon-check-1 far fa-circle color-gray-dark font-16"></i>
                                         <i class="icon-check-2 far fa-check-circle font-16 color-highlight" style="font-size: 20px !important;"></i>
@@ -276,6 +278,7 @@
                                     <label class="color-gray font-600 font-10 mt-n2" style="background: transparent;">선호사항</label>
                                     <div class="">
                                         <div class="form-check interest-check">
+                                            <input class="form-check-input" @focus="focusInput3($event)" type="checkbox" value="" id="check_gender1" v-model="check_gender1">
                                             <input class="form-check-input" @focus="focusInput3($event)" type="checkbox" value="" id="check_gender1" v-model="check_gender1">
                                             <label class="form-check-label rounded-xl border-08" for="check_gender1">무관</label>
                                             <i class="fas fa-user color-white font-18"></i>
@@ -413,14 +416,69 @@ export default {
         const insname = this.ins_name;
     } else if (this.$route.params != null && this.$route.params.hasOwnProperty('_id')) {
         $("#footer-bar").hide();
-        console.log(this.$route.params);
+        //console.log(this.$route.params);
         if (this.$route.params.startedAt.substring(0,10) == this.$route.params.finishedAt.substring(0,10)) {
             this.scheduleFlag = false;
             this.selectedDay = new Date(this.$route.params.startedAt);
+            this.day_show = (this.selectedDay.getMonth()+1) + "." + this.selectedDay.getDate() + " (" + weekday_ko[this.selectedDay.getDay()] + ")";
         } else {
             this.scheduleFlag = true;
+            this.selectedRange.start = new Date(this.$route.params.startedAt);
+            this.selectedRange.end = new Date(this.$route.params.finishedAt);
+            this.day_show = (this.selectedRange.start.getMonth()+1) + "." + this.selectedRange.start.getDate() + " (" + weekday_ko[this.selectedRange.start.getDay()] + ") ~ " + (this.selectedRange.end.getMonth()+1) + "." + this.selectedRange.end.getDate() + " (" + weekday_ko[this.selectedRange.end.getDay()] + ")";
         }
-        //this.search_result.push({__typename: this.$route.params.__typename, location: this.$route.params.name, adminScore: this.$route.params.adminScore, description: this.$route.params.description, _id: this.$route.params._id});
+
+        // 다이빙 타입
+        if (this.$route.params.type.includes('scubaDiving')) {this.label_scuba = true;setTimeout(function() {$('#label_scuba').removeClass('opacity-30');},100);}
+        if (this.$route.params.type.includes('freeDiving')) {this.label_free = true;setTimeout(function() {$('#label_free').removeClass('opacity-30');},100);}
+
+        // 다이빙 장소
+        if (this.$route.params.diveSites) {
+            this.$route.params.diveSites.forEach(x=>{
+                this.search_result.push({__typename: x.__typename, location: x.name, adminScore: x.adminScore, description: x.description, _id: x._id});
+            });
+        }
+        if (this.$route.params.divePoints) {
+            this.$route.params.divePoints.forEach(x=>{
+                this.search_result.push({__typename: x.__typename, location: x.name, adminScore: x.adminScore, description: x.description, _id: x._id});
+            });
+        }
+        if (this.$route.params.diveCenters) {
+            this.$route.params.diveCenters.forEach(x=>{
+                this.search_result.push({__typename: x.__typename, location: x.name, adminScore: x.adminScore, description: x.description, _id: x._id});
+            });
+        }
+        if (this.$route.params.diveShops) {
+            this.$route.params.diveShops.forEach(x=>{
+                this.search_result.push({__typename: x.__typename, location: x.name, adminScore: x.adminScore, description: x.description, _id: x._id});
+            });
+        }
+
+        // 제목 // 상세내용
+        this.diving_title = this.$route.params.title;
+        this.diving_detail = this.$route.params.description;
+
+        // 모집인원
+        const num_recruit = this.$route.params.maxPeopleNumber - this.$route.params.participants.length;
+        if (this.$route.params.maxPeopleNumber == 99) this.label_unlimited = true;
+        else {this.label_unlimited = false;setTimeout(function() {$("#num_recruit").val(num_recruit);}, 100);}
+        
+        // 참여남자 // 참여여자
+        const num_man = this.$route.params.participants.filter(x=>x.user == null && x.gender == 'm').length;
+        const num_woman = this.$route.params.participants.filter(x=>x.user == null && x.gender == 'f').length;
+        setTimeout(function() {$("#num_man").val(num_man);}, 100)
+        setTimeout(function() {$("#num_woman").val(num_woman);}, 100)
+        
+        // 선호사항
+        this.$route.params.interests.forEach(x => {
+            if (x._id == "6174da5da60639819c3e6ac7") this.check_gender1 = true;
+            if (x._id == "6174da5ea60639819c3e6ac9") this.check_gender2 = true;
+            if (x._id == "6174da5fa60639819c3e6acb") this.check_gender3 = true;
+            if (x._id == "6174da60a60639819c3e6acd") this.check_gender4 = true;
+            if (x._id == "6174da70a60639819c3e6ad9") this.check_amity1 = true;
+            if (x._id == "61b45bb413f324035a6c86bc") this.check_amity2 = true;
+            if (x._id == "61b45bb913f324035a6c86bf") this.check_amity3 = true;
+        })
     }
     
     const insname = this.ins_name;
@@ -616,33 +674,36 @@ export default {
         var _s_date = null;
         var _e_date = null;
         if (this.scheduleFlag == false) {
-            _s_date = this.selectedDate.year + "-" + (this.selectedDate.month<10?"0"+this.selectedDate.month:this.selectedDate.month) + "-" + (this.selectedDate.day<10?"0"+this.selectedDate.day:this.selectedDate.day) + " 00:00:00";
+            try {
+                _s_date = this.selectedDate.year + "-" + (this.selectedDate.month<10?"0"+this.selectedDate.month:this.selectedDate.month) + "-" + (this.selectedDate.day<10?"0"+this.selectedDate.day:this.selectedDate.day) + " 00:00:00";
+            } catch (e) {
+                _s_date = this.selectedDay.getFullYear() + "-" + ((this.selectedDay.getMonth()+1)<10?"0"+(this.selectedDay.getMonth()+1):(this.selectedDay.getMonth()+1)) + "-" + (this.selectedDay.getDate()<10?"0"+this.selectedDay.getDate():this.selectedDay.getDate()) + " 00:00:00";
+            }
             _e_date = _s_date
         } else {
             _s_date = this.selectedRange.start.getFullYear() + "-" + ((this.selectedRange.start.getMonth()+1)<10?"0"+(this.selectedRange.start.getMonth()+1):(this.selectedRange.start.getMonth()+1)) + "-" + (this.selectedRange.start.getDate()<10?"0"+this.selectedRange.start.getDate():this.selectedRange.start.getDate()) + " 00:00:00";
             _e_date = this.selectedRange.end.toISOString();
         }
-        console.log(_s_date);
         const s_date = new Date(_s_date).toISOString();
         const e_date = _e_date;
 
         var diveSite = new Array();
-        this.search_result.forEach(x => {if (x.__typename == 'DiveSite') diveSite.push(x._id)});
+        this.search_result.forEach(x => {if (x.__typename == 'DiveSite' && diveSite.includes(x._id) == false) diveSite.push(x._id)});
         if (diveSite.length == 0) diveSite = null;
         const __diveSite = diveSite;
 
         var divePoint = new Array();
-        this.search_result.forEach(x => {if (x.__typename == 'DivePoint') divePoint.push(x._id)});
+        this.search_result.forEach(x => {if (x.__typename == 'DivePoint' && divePoint.includes(x._id) == false) divePoint.push(x._id)});
         if (divePoint.length == 0) divePoint = null;
         const __divePoint = divePoint;
 
         var diveCenter = new Array();
-        this.search_result.forEach(x => {if (x.__typename == 'DiveCenter') diveCenter.push(x._id)});
+        this.search_result.forEach(x => {if (x.__typename == 'DiveCenter' && diveCenter.includes(x._id) == false) diveCenter.push(x._id)});
         if (diveCenter.length == 0) diveCenter = null;
         const __diveCenter = diveCenter;
 
         var diveShop = new Array();
-        this.search_result.forEach(x => {if (x.__typename == 'DiveShop') diveShop.push(x._id)});
+        this.search_result.forEach(x => {if (x.__typename == 'DiveShop' && diveShop.includes(x._id) == false) diveShop.push(x._id)});
         if (diveShop.length == 0) diveShop = null;
         const __diveShop = diveShop;
 
@@ -680,13 +741,25 @@ export default {
           location.href='/diving/' + this.diving_id;
       },
       go_next(id) {
-          if (id == 1) {
+          if (id == 0) {
+            if (this.day_show != '' && this.selectedDay != null && this.selectedRange != null) {
+                $("#btn_next1").attr("disabled", false);
+            }
+          } else if (id == 1) {
             $(".focusBorder").each(function(index, item){item.classList.remove("focusBorder");});
             document.getElementById('div_diving_type').classList.add("toggleBorder");
+
+            if (this.search_result.length > 0 && (this.label_scuba == true || this.label_free == true)) {
+                $("#btn_next2").attr("disabled", false);
+            }
           } else if (id == 2) {
               //$("#ins_name").focus();
               $(".focusBorder").each(function(index, item){item.classList.remove("focusBorder");});
               document.getElementById('div_diving_description').classList.add("focusBorder");
+
+              if (this.diving_title != '' && this.diving_detail != '') {
+                  $("#btn_next3").attr("disabled", false);
+              }
           } else if (id == 3) {
               $(".focusBorder").each(function(index, item){item.classList.remove("focusBorder");});
               document.getElementById('div_diving_option').classList.add("focusBorder");
