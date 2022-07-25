@@ -74,7 +74,7 @@
           <a data-menu="menu-report" v-on:click="reportTargetId=getAgendaById._id"><span class="font-10 mb-0 mt-n2 opacity-40 p-2" style="position:absolute;right:6px;bottom:26px;"><img src="/static/images/assets/icon_alarm.png" width="16" style="margin-bottom: 5px;margin-right:3px;"/>신고하기</span></a>
           </div>
           <div class="divider mb-0" style="height:12px;border-top: 1px solid #88888840;"></div>
-          <div v-for="(review,index) in getReviewsByTargetId" :class="'p-3' + ((index < getReviewsByTargetId.length-1) ? ' border-bottom' : '')" style="position: relative;">
+          <div v-if="getReviewsByTargetId && getReviewsByTargetId.length > 0" v-for="(review,index) in getReviewsByTargetId.filter(x=>x.isBlocked == false)" :class="'p-3' + ((index < getReviewsByTargetId.length-1) ? ' border-bottom' : '')" style="position: relative;">
             <p class="color-highlight font-15 mb-0 font-noto">{{ review.author.nickName }}</p>
             <p class="color-gray-dark mb-0 font-12" style="position: absolute;right: 16px;top: 16px;">{{ timeForToday(review.createdAt) }}</p>
             <div v-if="review.content && review.content.includes('[[emoji|') && review.content.includes(']]')">
@@ -873,6 +873,7 @@ export default {
               isUserDislike
               likes
               dislikes
+              isBlocked
             }
           }
         `,

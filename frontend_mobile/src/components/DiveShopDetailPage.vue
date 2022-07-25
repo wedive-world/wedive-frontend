@@ -595,7 +595,7 @@
                 <div v-if="getDiveShopByUniqueName.reviews && getDiveShopByUniqueName.reviews.length>0" class="splide single-slider slider-no-arrows slider-has-dots pb-2 mb-0 me-n2 ms-n2" id="single-slider-review">
                     <div class="splide__track">
                         <div class="splide__list">
-                            <div v-for="review in getDiveShopByUniqueName.reviews" class="splide__slide pt-2">
+                            <div v-for="review in getDiveShopByUniqueName.reviews.filter(x=>x.isBlocked==false)" class="splide__slide pt-2">
                                 <div class="min-h-230 p-2">
                                         <div class="d-flex">
                                             <div class="flex-grow-1">
@@ -1379,6 +1379,7 @@ export default {
                         views
                         likes
                         createdAt
+                        isBlocked
                     }
                     likes
                     views

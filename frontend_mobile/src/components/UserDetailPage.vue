@@ -15,7 +15,7 @@
     </div>
 
     <div :class="'page-content pb-0' + (is_empty ? ' hide' : ' ')">
-        <div class="card mb-0 border-bottom" style="margin-top:50px; z-index:1">
+        <div :class="'card mb-0 border-bottom' + (getUserById.isBlocked ? ' opacity-30' : '')" style="margin-top:50px; z-index:1">
             <div class="content mt-3 pb-2 mb-0" style="position: relative;">
                 <div class="gallery gallery-filter inline-block" style="width:66px !important;padding:0 !important;">
                     <a :href="(getUserById.profileImages && getUserById.profileImages.length>0) ? getUserById.profileImages[0].thumbnailUrl : ('https://d34l91104zg4p3.cloudfront.net/assets/user_empty_'+((getUserById.gender)?getUserById.gender:'m')+'.png')" data-gallery="gallery-image" class="center_image filtr-item" :title="getUserById.nickName" data-category="user" style="width:60px;height:60px;">
@@ -98,7 +98,7 @@
                 </div>
             </div>
         </div>
-
+        <div :class="(getUserById.isBlocked ? ' opacity-30' : '')">
         <div class="card mb-0 border-bottom" style="z-index:1;">
             <div class="content pb-0">
                 <h2 class="font-15 font-700 mb-0">호스트 참여횟수 {{ getUserById.divingHostCount }}회</h2>
@@ -109,14 +109,23 @@
                 <h2 class="font-15 font-700 mb-0">게스트 참여횟수 {{ getUserById.divingParticipantCount }}회</h2>
             </div>
         </div>
-        <a data-menu="menu-report">
+        </div>
+        <a v-if="getUserById.isBlocked" v-on:click="unBlock()">
+            <div class="card mb-0 border-bottom" style="z-index:1;">
+                <div class="content pb-0">
+                    <h2 class="font-15 font-700 mb-0">이 사용자 차단해제</h2>
+                </div>
+            </div>
+        </a>
+        <a v-else data-menu="menu-report">
             <div class="card mb-0 border-bottom" style="z-index:1;">
                 <div class="content pb-0">
                     <h2 class="font-15 font-700 mb-0">이 사용자 신고하기</h2>
                 </div>
             </div>
         </a>
-        <div id="map"></div>
+            
+        <div :class="(getUserById.isBlocked ? ' opacity-30' : '')" id="map"></div>
         
     </div>
 
@@ -272,6 +281,7 @@ export default {
                     views
                     likes
                     dislikes
+                    isBlocked
                 }
             }
         `,
@@ -389,6 +399,29 @@ export default {
     }
   },
   methods: {
+      unBlock() {
+          this.$apollo.mutate({
+            // Query
+            mutation: gql`mutation Mutation($targetId: ID!) {
+                unblock(targetId: $targetId) {
+                    success
+                }
+            }`,
+            // Parameters
+            variables: {
+                targetId: this.getUserById._id
+            },
+        }).then((data) => {
+            // Result
+            console.log(data)
+            location.reload();
+            //}
+        }).catch((error) => {
+            // Error)
+            console.error(error)
+            // We restore the initial user input
+        })
+      },
       clickReportRadio(id) {
         $("#btn_report").attr("disabled", false);
         for (var i=0; i<this.$root.$children[0].report_items.length; i++) {

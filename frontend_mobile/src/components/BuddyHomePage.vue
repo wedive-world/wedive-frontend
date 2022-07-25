@@ -337,7 +337,7 @@
                         <p class="mb-3 color-gray-light-mid">{{ recommendation.description ? recommendation.description : '' }}</p>
                     </div>
                     
-                    <div v-for="(preview,index) in recommendation.previews" v-if="index < 2">
+                    <div v-for="(preview,index) in recommendation.previews.filter(x=>x.isBlocked == false)" v-if="index < 2">
                         <div class="map-box" style="position: relative;height: 85px;">
                             <a v-on:click="movePreview(preview)">
                                 <div class="bx">
@@ -366,11 +366,11 @@
                                 </div>
                             </a>
                         </div>
-                        <div v-if="index < recommendation.previews.length-1" class="divider mt-3 mb-3"></div>
+                        <div v-if="index < recommendation.previews.filter(x=>x.isBlocked == false).length-1" class="divider mt-3 mb-3"></div>
                         <div v-else class="mb-3"></div>
                     </div>
                     <div class="collapse" :id="'collapse_' + recommendation._id">
-                        <div v-for="(preview,index) in recommendation.previews" v-if="index >= 2">
+                        <div v-for="(preview,index) in recommendation.previews.filter(x=>x.isBlocked == false)" v-if="index >= 2">
                             <div class="map-box" style="position: relative;height: 85px;">
                                 <a v-on:click="movePreview(preview)">
                                     <div class="bx">
@@ -399,11 +399,11 @@
                                     </div>
                                 </a>
                             </div>
-                            <div v-if="index < recommendation.previews.length-1" class="divider mt-3 mb-3"></div>
+                            <div v-if="index < recommendation.previews.filter(x=>x.isBlocked == false).length-1" class="divider mt-3 mb-3"></div>
                             <div v-else class="mb-3"></div>
                         </div>
                     </div>
-                    <div v-if="recommendation.previews.length > 2" class="list-group list-custom-small list-icon-0" style="background: rgba(196, 187, 171, 0.2);margin-left: -15px;margin-right: -15px;">
+                    <div v-if="recommendation.previews.filter(x=>x.isBlocked == false).length > 2" class="list-group list-custom-small list-icon-0" style="background: rgba(196, 187, 171, 0.2);margin-left: -15px;margin-right: -15px;">
                         <a data-bs-toggle="collapse" class="no-effect" :href="'#collapse_' + recommendation._id" v-on:click="recommendation1_collapse_text[recommendation._id] = (recommendation1_collapse_text[recommendation._id] == '더 보기' ? '줄이기' : '더 보기')">
                             <p class="font-14 mb-0 text-center">{{ recommendation1_collapse_text[recommendation._id] }}</p>
                         </a>        
@@ -419,7 +419,7 @@
                 <div class="splide single-slider-site slider-no-arrows visible-slider slider-no-dots" :id="'single-slider-'+recommendation._id" style="height:276px;">
                     <div class="splide__track">
                         <div class="splide__list">
-                            <div v-for="(preview, index) in recommendation.previews" class="splide__slide">
+                            <div v-for="(preview, index) in recommendation.previews.filter(x=>x.isBlocked == false)" class="splide__slide">
                                 <a v-on:click="movePreview(preview)">
                                     <div class="card card-style card-nearby" :style="'background: url('+((preview.backgroundImages && preview.backgroundImages.length > 0) ? preview.backgroundImages[0].thumbnailUrl : '/static/empty.jpg')+')'" data-card-height="260">
                                         <div class="card-bottom px-3 py-3">
@@ -1415,6 +1415,7 @@ export default {
                 previews {
                     ... on Diving {
                         _id
+                        isBlocked
                         title
                         description
                         status

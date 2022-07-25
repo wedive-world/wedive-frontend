@@ -151,7 +151,7 @@
 
 <script>
 import VueBottomSheet from "@webzlodimir/vue-bottom-sheet";
-import { GoogleAuthProvider, getAuth, signInWithPopup, onAuthStateChanged, onIdTokenChanged  } from "firebase/auth";
+import { GoogleAuthProvider, getAuth, signOut, signInWithPopup, onAuthStateChanged, onIdTokenChanged  } from "firebase/auth";
 const axios = require("axios")
 var closeBottomSheet = null;
 var closeCreateSheet = null;
@@ -301,7 +301,6 @@ export default {
       notiData: null,
       footer_list: ['/', '/site_list', '/site_map', '/forum_home', '/chat_home', '/other_home'],
       locationsearch: window.location.search,
-      report_items: ['욕설·명예회손', '특정인 배제·비방', '중복·도배성', '광고·홍보글', '음란물·선정성', '연애 대상구함', '정치글', '부적절한 모임', '불법 게시물'],
       report_items: localStorage.reports ? JSON.parse(localStorage.reports) : [],
     }
   },
@@ -580,6 +579,41 @@ export default {
     goHome: function() {
       if (Android != null)
         window.location.href="/";
+    },
+    signOut() {
+      const auth = getAuth();
+      signOut(auth).then(() => {
+        try {
+          Android.signOut()
+        } catch (e) {
+
+        }
+        console.log("sign-out success");
+        // Sign-out successful.
+      }).catch((error) => {
+        console.log(error);
+        // An error happened.
+      });
+    },
+    async deleteCurrentUser() {
+      var result = await axios({
+        url: 'https://api.wedives.com/graphql',
+        method: 'post',
+        headers: {
+            countrycode: 'ko',
+            idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+        },
+        data: {
+            query: `
+                mutation Mutation {
+                  deleteCurrentUser {
+                    success
+                  }
+                }
+            `
+        }
+      });
+      console.log(result);
     },
     getFirebaseToken() {
       const auth = getAuth();

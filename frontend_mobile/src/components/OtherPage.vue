@@ -139,10 +139,13 @@ export default {
       },
       logout() {
         localStorage.clear();
+        this.$root.$children[0].signOut();
         // android token 삭제
       },
       byebye() {
+        this.$root.$children[0].deleteCurrentUser();
         localStorage.clear();
+        this.$root.$children[0].signOut();
         // api호출
       },
   }

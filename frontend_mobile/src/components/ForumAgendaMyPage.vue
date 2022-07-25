@@ -19,7 +19,7 @@
         </template>
         
         <div class="text-start" style="min-height: calc(100vh - 184px);">
-          <div v-for="agenda in getAgendasByTargetId" style="position:relative;">
+          <div v-if="getAgendasByTargetId && getAgendasByTargetId.length > 0" v-for="agenda in getAgendasByTargetId.filter(x=>x.isBlocked == false)" style="position:relative;">
             <div class="p-3">
               <div v-on:click="goUser(agenda.author)" style="position:relative;">
                   <div class="user-img-s me-2">
@@ -326,6 +326,7 @@ export default {
             query Query($targetId: ID!, $agendaTypes: [ID], $skip: Int, $limit: Int) {
               getAgendasByTargetId(targetId: $targetId, agendaTypes: $agendaTypes, skip: $skip, limit: $limit) {
                 _id
+                isBlocked
                 types {
                   _id
                   name

@@ -78,7 +78,7 @@
             <div v-if="getDivingById.status == 'divingComplete'" class="content mt-4 pt-2 pb-2 font-noto font-14 text-center" style="color:#cd5b3c;border: 2px solid #cd5b3c;">
                 종료된 다이빙 이벤트 입니다.
             </div>
-            <div class="content mt-4 pb-3 border-bottom" style="position:relative;">
+            <div :class="'content mt-4 pb-3 border-bottom' + (getDivingById.isBlocked ? ' opacity-30' : '')" style="position:relative;">
                 <h2 class="font-18 font-700 mb-0">{{ getDivingById.title }}</h2>
                 <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> {{ getDivingById.location }}</p>
                 <p class="color-gray-dark mb-0 font-12">{{ timeForToday(getDivingById.createdAt) }} 모집시작</p>
@@ -224,7 +224,8 @@
             </div>
 
             <div :class="'content mt-0 pb-3 border-bottom' + ((getDivingById.status=='publicEnded' || getDivingById.status=='divingComplete' || getDivingById.hostUser && getDivingById.hostUser._id == userId)? ' opacity-40' : '')" >
-                <a data-menu="menu-report"><h2 class="font-15 font-700 mb-1">이 게시글 신고하기</h2></a>
+                <a v-if="getDivingById.isBlocked" v-on:click="unBlock()"><h2 class="font-15 font-700 mb-1">이 게시글 신고해제</h2></a>
+                <a v-else data-menu="menu-report"><h2 class="font-15 font-700 mb-1">이 게시글 신고하기</h2></a>
             </div>
 
 
@@ -675,6 +676,7 @@ export default {
                     createdAt
                     isUserSubscribe
                     isUserLike
+                    isBlocked
                 }
             }
           `,
@@ -832,6 +834,29 @@ export default {
     }
   },
   methods: {
+      unBlock() {
+          this.$apollo.mutate({
+            // Query
+            mutation: gql`mutation Mutation($targetId: ID!) {
+                unblock(targetId: $targetId) {
+                    success
+                }
+            }`,
+            // Parameters
+            variables: {
+                targetId: this.getDivingById._id
+            },
+        }).then((data) => {
+            // Result
+            console.log(data)
+            location.reload();
+            //}
+        }).catch((error) => {
+            // Error)
+            console.error(error)
+            // We restore the initial user input
+        })
+      },
       clickReportRadio(id) {
         $("#btn_report").attr("disabled", false);
         for (var i=0; i<this.$root.$children[0].report_items.length; i++) {

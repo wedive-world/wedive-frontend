@@ -21,7 +21,7 @@ import { WebSocketLink } from 'apollo-link-ws'
 import { getMainDefinition } from 'apollo-utilities'
 import { onError } from 'apollo-link-error';
 import promiseToObservable from './promiseToObservable';
-import { GoogleAuthProvider, getAuth, signInWithPopup, onAuthStateChanged, onIdTokenChanged  } from "firebase/auth";
+import { GoogleAuthProvider, getAuth, signOut, signInWithPopup, onAuthStateChanged, onIdTokenChanged  } from "firebase/auth";
 
 import VueApollo from 'vue-apollo'
 

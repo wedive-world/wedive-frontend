@@ -9,7 +9,7 @@
         
         <div class="card mb-0" style="min-height: calc(100vh - 50px);">
             <div class="content mb-0 mt-3">
-                <div v-for="(review,index) in reviewData" style="position: relative;">
+                <div v-if="reviewData && reviewData.length > 0" v-for="(review,index) in reviewData.filter(x=>x.isBlocked == false)" style="position: relative;">
                     <div class="min-h-230 p-2">
                         <div class="d-flex">
                             <div class="flex-grow-1">
@@ -97,6 +97,7 @@ export default {
                 query GetReviewsByTargetId($targetId: ID!, $skip: Int, $limit: Int) {
                     getReviewsByTargetId(targetId: $targetId, skip: $skip, limit: $limit) {
                         _id
+                        isBlocked
                         targetId
                         targetType
                         author {
