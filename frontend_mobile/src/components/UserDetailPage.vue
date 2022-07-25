@@ -18,7 +18,7 @@
         <div class="card mb-0 border-bottom" style="margin-top:50px; z-index:1">
             <div class="content mt-3 pb-2 mb-0" style="position: relative;">
                 <div class="gallery gallery-filter inline-block" style="width:66px !important;padding:0 !important;">
-                    <a :href="(userData.profileImages && userData.profileImages.length>0) ? userData.profileImages[0].thumbnailUrl : ('https://d34l91104zg4p3.cloudfront.net/assets/user_empty_'+((userData.gender)?userData.gender:'m')+'.png')" data-gallery="gallery-image" class="center_image filtr-item" :title="userData.nickName" data-category="user" style="width:60px;height:60px;">
+                    <a :href="(getUserById.profileImages && getUserById.profileImages.length>0) ? getUserById.profileImages[0].thumbnailUrl : ('https://d34l91104zg4p3.cloudfront.net/assets/user_empty_'+((getUserById.gender)?getUserById.gender:'m')+'.png')" data-gallery="gallery-image" class="center_image filtr-item" :title="getUserById.nickName" data-category="user" style="width:60px;height:60px;">
                         <div class="user-img me-2">
                             <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
                                 <defs>
@@ -27,23 +27,23 @@
                                     <use xlink:href="#shapeSquircle"/>
                                 </clipPath>
                                 </defs>
-                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(userData.profileImages && userData.profileImages.length>0) ? userData.profileImages[0].thumbnailUrl : 'https://d34l91104zg4p3.cloudfront.net/assets/user_empty.png'"/>
+                                <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(getUserById.profileImages && getUserById.profileImages.length>0) ? getUserById.profileImages[0].thumbnailUrl : 'https://d34l91104zg4p3.cloudfront.net/assets/user_empty.png'"/>
                             </svg>
                         </div>
                     </a>
                 </div>
                 
                 <div class="font-noto" style="position: absolute;top:10px;left:74px;">
-                    <h5 class="mb-0 font-500">{{ userData.nickName }}</h5>
-                    <p class="mb-0 font-12 color-gray">{{ userData.levelShow }}</p>
+                    <h5 class="mb-0 font-500">{{ getUserById.nickName }}</h5>
+                    <p class="mb-0 font-12 color-gray">{{ getUserById.levelShow }}</p>
                 </div>
             </div>
-            <div v-if="userData._id != user_id" class="row m-0 mt-1 ps-2 pe-2">
+            <div v-if="getUserById._id != user_id" class="row m-0 mt-1 ps-2 pe-2">
                 <div v-on:click="clickChat()" class="col-4 p-1">
                     <span class="btn btn-border btn-m btn-full text-uppercase font-900 border-gray-dark color-black bg-theme" style="padding: 8px 0 !important;"><img src="https://d34l91104zg4p3.cloudfront.net/assets/ico_chat.png" height="20"/></span>
                 </div>
                 <div v-on:click="clickLike()" class="col-4 p-1">
-                    <span class="btn btn-border btn-m btn-full text-uppercase font-900 border-gray-dark color-black bg-theme" style="padding: 8px 0 !important;"><img :src="'https://d34l91104zg4p3.cloudfront.net/assets/'+like_img+'.png'" height="20"/>{{ userData.likes }}</span>
+                    <span class="btn btn-border btn-m btn-full text-uppercase font-900 border-gray-dark color-black bg-theme" style="padding: 8px 0 !important;"><img :src="'https://d34l91104zg4p3.cloudfront.net/assets/'+like_img+'.png'" height="20"/>{{ getUserById.likes }}</span>
                 </div>
                 <div v-on:click="clickSubscribe()" class="col-4 p-1">
                     <span class="btn btn-border btn-m btn-full text-uppercase font-900 border-gray-dark color-black bg-theme" style="padding: 8px 0 !important;"><img :src="'https://d34l91104zg4p3.cloudfront.net/assets/'+subscribe_img+'.png'" height="20"/></span>
@@ -69,46 +69,53 @@
 
 
 
-        <div v-if="userData.scubaLicenseType" class="card mb-0 border-bottom" style="z-index:1;">
+        <div v-if="getUserById.scubaLicenseType" class="card mb-0 border-bottom" style="z-index:1;">
             <div class="content pb-0">
                 <h2 class="font-15 font-700 mb-1">스쿠바다이빙</h2>
                 <div class="evaluation p-3" style="position: relative;">
                     <img class="inline-block ms-1 me-1" src="https://d34l91104zg4p3.cloudfront.net/assets/award1.png" height="80" style="vertical-align: top;"/>
                     <div class="inline-block">
                         <p class="mb-0 font-noto font-13 color-gray mb-1">SCUBA DIVING LICENSE</p>
-                        <p class="mb-0 font-noto font-20 font-500">{{ userData.scubaLevelShow }} 자격증</p>
-                        <p class="mb-0 font-noto font-12 font-400" style="color: #c1c2c3">BY {{ userData.scubaLicenseType }}</p>
+                        <p class="mb-0 font-noto font-20 font-500">{{ getUserById.scubaLevelShow }} 자격증</p>
+                        <p class="mb-0 font-noto font-12 font-400" style="color: #c1c2c3">BY {{ getUserById.scubaLicenseType }}</p>
                     </div>
-                    <img :src="(userData.scubaLicenseType)?'https://d34l91104zg4p3.cloudfront.net/agency/logo_'+userData.scubaLicenseType.toLowerCase()+'.svg':''" height="20" style="position: absolute;right: 10px; bottom:10px;"/>
+                    <img :src="(getUserById.scubaLicenseType)?'https://d34l91104zg4p3.cloudfront.net/agency/logo_'+getUserById.scubaLicenseType.toLowerCase()+'.svg':''" height="20" style="position: absolute;right: 10px; bottom:10px;"/>
                 </div>
             </div>
         </div>
 
-        <div v-if="userData.freeLicenseType" class="card mb-0 border-bottom" style="z-index:1;">
+        <div v-if="getUserById.freeLicenseType" class="card mb-0 border-bottom" style="z-index:1;">
             <div class="content pb-0">
                 <h2 class="font-15 font-700 mb-1">프리다이빙</h2>
                 <div class="evaluation p-3" style="position: relative;">
                     <img class="inline-block ms-1 me-1" src="https://d34l91104zg4p3.cloudfront.net/assets/award2.png" height="80" style="vertical-align: top;"/>
                     <div class="inline-block">
                         <p class="mb-0 font-noto font-13 color-gray mb-1">FREE DIVING LICENSE</p>
-                        <p class="mb-0 font-noto font-20 font-500">{{ userData.freeLevelShow }} 자격증</p>
-                        <p class="mb-0 font-noto font-12 font-400" style="color: #c1c2c3">BY {{ userData.freeLicenseType }}</p>
+                        <p class="mb-0 font-noto font-20 font-500">{{ getUserById.freeLevelShow }} 자격증</p>
+                        <p class="mb-0 font-noto font-12 font-400" style="color: #c1c2c3">BY {{ getUserById.freeLicenseType }}</p>
                     </div>
-                    <img :src="(userData.freeLicenseType)?'https://d34l91104zg4p3.cloudfront.net/agency/logo_'+userData.freeLicenseType.toLowerCase()+'.svg':''" height="20" style="position: absolute;right: 10px; bottom:10px;"/>
+                    <img :src="(getUserById.freeLicenseType)?'https://d34l91104zg4p3.cloudfront.net/agency/logo_'+getUserById.freeLicenseType.toLowerCase()+'.svg':''" height="20" style="position: absolute;right: 10px; bottom:10px;"/>
                 </div>
             </div>
         </div>
 
         <div class="card mb-0 border-bottom" style="z-index:1;">
             <div class="content pb-0">
-                <h2 class="font-15 font-700 mb-0">호스트 참여횟수 {{ userData.divingHostCount }}회</h2>
+                <h2 class="font-15 font-700 mb-0">호스트 참여횟수 {{ getUserById.divingHostCount }}회</h2>
             </div>
         </div>
         <div class="card mb-0 border-bottom" style="z-index:1;">
             <div class="content pb-0">
-                <h2 class="font-15 font-700 mb-0">게스트 참여횟수 {{ userData.divingParticipantCount }}회</h2>
+                <h2 class="font-15 font-700 mb-0">게스트 참여횟수 {{ getUserById.divingParticipantCount }}회</h2>
             </div>
         </div>
+        <a data-menu="menu-report">
+            <div class="card mb-0 border-bottom" style="z-index:1;">
+                <div class="content pb-0">
+                    <h2 class="font-15 font-700 mb-0">이 사용자 신고하기</h2>
+                </div>
+            </div>
+        </a>
         <div id="map"></div>
         
     </div>
@@ -137,6 +144,32 @@
         </div>
     </div>
 
+    <!-- 신고하기 -->
+    <div id="menu-report" 
+          class="menu menu-box-modal rounded-0" 
+          data-menu-width="cover"
+          data-menu-height="cover"
+          style="margin-bottom: 0;">
+          
+          <div class="card rounded-0 bg-2" data-card-height="50" style="margin-bottom: 24px;">
+              <div class="card-top p-2">
+                  <a href="#" class="close-menu icon icon-s rounded-l bg-theme color-theme "><i class="fa fa-arrow-left"></i></a>
+                  <a href="" class="header-title color font-noto font-16">신고사유를 선택하세요.</a>
+              </div>
+          </div>
+          
+          <div class="card rounded-0 content">
+              <div v-for="(report,index) in $root.$children[0].report_items" class="form-check icon-check mb-3">
+                  <input class="form-check-input" type="radio" :value="index" :id="'radio_report'+index" name="radioReport" v-on:click="clickReportRadio('radio_report' + index)">
+                  <label class="form-check-label font-noto font-18 font-500 opacity-30" :for="'radio_report'+index">{{ report }}</label>
+                  <i class="icon-check-1 far fa-circle color-gray-dark font-16"></i>
+                  <i class="icon-check-2 far fa-check-circle font-16 color-highlight" style="font-size: 20px !important;"></i>
+              </div>
+          </div>
+          <div style="position: absolute;bottom: 0;width:100%;">
+              <a v-on:click="makeReport()" id="btn_report" disabled="disabled" href="#" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 ms-3 me-3 mb-3" style="height: 46px;padding-top: 10px;">신고하기</a>
+          </div>
+    </div>
 
 
 
@@ -147,126 +180,11 @@
 </template>
 <script>
 import StarRating from 'vue-star-rating'
+import gql from 'graphql-tag'
 const axios = require("axios")
-//const cities = [{ 'code': 'OTT', 'city': 'OTTAWA', 'country': 'CANADA', 'lat': '23.10', 'lon': '120.34' }, { 'code': 'BSB', 'city': 'BRASILIA', 'country': 'BRAZIL', 'lat': '-32.85', 'lon': '133.30' }, { 'code': 'DEL', 'city': 'DELHI', 'country': 'INDIA', 'lat': '4.71', 'lon': '-127.57' }, { 'code': 'CMX', 'city': 'CIDADE DO MÉXICO', 'country': 'MÉXICO', 'lat': '0.42', 'lon': '93.19' }, { 'code': 'SID', 'city': 'SIDNEY', 'country': 'AUSTRALIA', 'lat': '-48.38', 'lon': '-71.71' }, { 'code': 'TOK', 'city': 'TOQUIO', 'country': 'JAPÃO', 'lat': '17.34', 'lon': '-81.73' }, { 'code': 'CCA', 'city': 'CIDADE DO CABO', 'country': 'AFRICA DO SUL', 'lat': '-43.20', 'lon': '-171.97' }, { 'code': 'CMP', 'city': 'CAMPO GRANDE', 'country': 'BRASIL', 'lat': '-36.15', 'lon': '130.72' }, { 'code': 'PAR', 'city': 'PARIS', 'country': 'FRANÇA', 'lat': '22.19', 'lon': '174.27' }, { 'code': 'NOY', 'city': 'NOVA YORK', 'country': 'USA', 'lat': '11.23', 'lon': '112.96' }]
 
 export default {
   name: 'HelloWorld',
-  async beforeRouteEnter(to, from, next) {
-    if (to.params.id != null) {
-        var result = await axios({
-            url: 'https://api.wedives.com/graphql',
-            method: 'post',
-            headers: {
-                countrycode: 'ko',
-                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-            },
-            data: {
-                query: `
-                query GetUserById($id: ID!) {
-                    getUserById(_id: $id) {
-                        _id
-                        uid
-                        divingHistoryLocations
-                        authProvider
-                        oauthToken
-                        fcmToken
-                        email
-                        emailVerified
-                        phoneNumber
-                        profileImages {
-                        _id
-                        thumbnailUrl
-                        }
-                        nickName
-                        name
-                        birthAge
-                        gender
-                        residence
-                        interests {
-                        title
-                        type
-                        }
-                        divingLog
-                        freeDivingBests
-                        freeLicenseLevel
-                        freeLicenseType
-                        scubaLicenseLevel
-                        scubaLicenseType
-                        divingHostCount
-                        divingParticipantCount
-                        createdAt
-                        isUserLike
-                        isUserDislike
-                        isUserSubscribe
-                        views
-                        likes
-                        dislikes
-                    }
-                }
-                `,
-                variables: {
-                    id: to.params.id
-                }
-
-            }
-        });
-        if (result && result.data && result.data.data && result.data.data.getUserById) {
-            var _id = (result.data.data.getUserById.profileImages && result.data.data.getUserById.profileImages.length > 0) ? result.data.data.getUserById.profileImages[0]._id : '';
-            var result_image = await axios({
-                url: 'https://api.wedives.com/graphql',
-                method: 'post',
-                headers: {
-                    countrycode: 'ko',
-                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-                },
-                data: {
-                    query: `
-                        query Query($ids: [ID], $widths: [Int]) {
-                            getImageUrlsByIds(_ids: $ids, widths: $widths)
-                        }
-                    `,
-                    variables: {
-                        ids: [_id],
-                        widths: [720]
-                    }
-
-                }
-                });
-                if (result_image.data.data.getImageUrlsByIds) {
-                    result.data.data.getUserById.profileImages[0].thumbnailUrl = result_image.data.data.getImageUrlsByIds[0]
-                }
-        }
-        if (localStorage.idToken) {
-            await axios({
-                url: 'https://api.wedives.com/graphql',
-                method: 'post',
-                headers: {
-                    countrycode: 'ko',
-                    idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-                },
-                data: {
-                    query: `
-                    mutation Mutation($targetId: ID!, $targetType: UserReactionTargetType!) {
-                        view(targetId: $targetId, targetType: $targetType)
-                    }
-                    `,
-                    variables: {
-                        "targetId": to.params.id,
-                        "targetType": "user"
-                    }
-                }
-            });
-        }
-
-        var ret = null;
-        if (result && result.data && result.data.data && result.data.data.getUserById) {ret = result.data.data.getUserById;}
-        
-        next(vm => {vm.setData(ret)});
-    } else {
-        location.href = "/";
-    }
-  },
   async mounted() {
     let script = document.createElement('script')
     script.onload = () => {
@@ -302,20 +220,152 @@ export default {
         $(".header-fixed").hide();
     }
     setTimeout(function() {
-        //$(".gallery-filter").css("width", "66px");
-        //$(".gallery-filter").css("height", "45px");
-        //$(".gallery-filter").css("display", "inline-block");
-    },1500);
+        init_template();
+        var preloader = document.getElementById('preloader')
+        if(preloader){preloader.classList.add('preloader-hide');}
+    }, 1000);
     
 
   },
   components: {
     StarRating
   },
+  apollo: {
+    getUserById: {
+        query:gql `
+            query Query($id: ID!) {
+                getUserById(_id: $id) {
+                    _id
+                    uid
+                    divingHistoryLocations
+                    authProvider
+                    oauthToken
+                    fcmToken
+                    email
+                    emailVerified
+                    phoneNumber
+                    profileImages {
+                    _id
+                    thumbnailUrl
+                    }
+                    nickName
+                    name
+                    birthAge
+                    gender
+                    residence
+                    interests {
+                    title
+                    type
+                    }
+                    divingLog
+                    freeDivingBests
+                    freeLicenseLevel
+                    freeLicenseType
+                    scubaLicenseLevel
+                    scubaLicenseType
+                    divingHostCount
+                    divingParticipantCount
+                    createdAt
+                    isUserLike
+                    isUserDislike
+                    isUserSubscribe
+                    views
+                    likes
+                    dislikes
+                }
+            }
+        `,
+        variables() {
+            return {
+                id: this.param_id
+            }
+        },
+        async result() {
+            if (this.getUserById) {
+                var _id = (this.getUserById.profileImages && this.getUserById.profileImages.length > 0) ? this.getUserById.profileImages[0]._id : '';
+                var result_image = await axios({
+                    url: 'https://api.wedives.com/graphql',
+                    method: 'post',
+                    headers: {
+                        countrycode: 'ko',
+                        idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                    },
+                    data: {
+                        query: `
+                            query Query($ids: [ID], $widths: [Int]) {
+                                getImageUrlsByIds(_ids: $ids, widths: $widths)
+                            }
+                        `,
+                        variables: {
+                            ids: [_id],
+                            widths: [720]
+                        }
+
+                    }
+                    });
+                    if (result_image.data.data.getImageUrlsByIds) {
+                        this.getUserById.profileImages[0].thumbnailUrl = result_image.data.data.getImageUrlsByIds[0]
+                    }
+            }
+            if (localStorage.idToken) {
+                await axios({
+                    url: 'https://api.wedives.com/graphql',
+                    method: 'post',
+                    headers: {
+                        countrycode: 'ko',
+                        idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                    },
+                    data: {
+                        query: `
+                        mutation Mutation($targetId: ID!, $targetType: UserReactionTargetType!) {
+                            view(targetId: $targetId, targetType: $targetType)
+                        }
+                        `,
+                        variables: {
+                            "targetId": this.param_id,
+                            "targetType": "user"
+                        }
+                    }
+                });
+            }
+
+            /////////////////////////////////////////////////////////
+            // 다이버 레벨 보여주기
+            if (this.getUserById.isUserLike) this.like_img = 'ico_heart2';
+            if (this.getUserById.isUserSubscribe) this.subscribe_img = 'ico_subscribe2';
+            this.getUserById.levelShow = '초보';
+            var scuba_level = ["초보", "오픈워터", "어드벤스드", "레스큐", "마스터", "강사", "위다이브 컨시어지"];
+            var free_level = ["초보", "레벨1", "레벨2", "레벨3", "레벨4", "강사"];
+            var s_lvl = parseInt(this.getUserById.scubaLicenseLevel);
+            var f_lvl = parseInt(this.getUserById.freeLicenseLevel);
+            this.getUserById.scubaLevelShow = (s_lvl>0) ? scuba_level[s_lvl] : "";
+            this.getUserById.freeLevelShow = (f_lvl>0) ? free_level[f_lvl] : "";
+            if (s_lvl > f_lvl) {
+                this.getUserById.levelShow = (s_lvl>0) ? "스쿠바 " + scuba_level[s_lvl] : this.getUserById.levelShow;
+            } else {
+                this.getUserById.levelShow = (f_lvl>0) ? "프리 " + free_level[f_lvl] : this.getUserById.levelShow;
+            }
+            this.getUserById.levelShow += " 다이버";
+            if(s_lvl>5) this.getUserById.levelShow = scuba_level[s_lvl];
+
+            // divingHistoryLocations 중복제거
+            var temp_arr = new Array();
+            this.getUserById.divingHistoryLocations.forEach(x => {if (x.length > 1) temp_arr.push(x[0] + "/" + x[1])});
+            var set = new Set(temp_arr);
+            var uniqueArr = [...set];
+            var temp_arr2 = new Array(); 
+            
+            
+            uniqueArr.forEach(x => {var tmp = x.split("/");var lat = (-934.98706532366 + (53.49 * parseFloat(tmp[0])))/56.143819846822;var lng = (6903.1396614152 - (106.225 * parseFloat(tmp[1])))/97.194178186786;temp_arr2.push({ 'country': '', 'lon': lng.toFixed(5), 'lat': lat.toFixed(5) })});
+            this.getUserById.divingHistoryLocations = temp_arr2;
+        }
+    }
+  },
   data () {
     return {
+        param_id: this.$route.params.id,
         map: null,
-        userData: {},
+        getUserById: {},
         locationData: {},
         rating: 3,
         rateDescription: '나쁘지 않아요.',
@@ -339,6 +389,42 @@ export default {
     }
   },
   methods: {
+      clickReportRadio(id) {
+        $("#btn_report").attr("disabled", false);
+        for (var i=0; i<this.$root.$children[0].report_items.length; i++) {
+            if ($("#radio_report" + i).parent().children()[1].classList.contains('opacity-30') == false)
+                $("#radio_report" + i).parent().children()[1].classList.add('opacity-30');
+        }
+        $('#' + id).parent().children()[1].classList.remove('opacity-30');
+      },
+      makeReport() {
+        var sel_index = $(':radio[name="radioReport"]:checked').val();
+        const sel_reason = this.$root.$children[0].report_items[sel_index];
+
+        this.$apollo.mutate({
+            // Query
+            mutation: gql`mutation Mutation($targetId: ID!, $reason: String!) {
+                report(targetId: $targetId, reason: $reason) {
+                    success
+                }
+            }`,
+            // Parameters
+            variables: {
+                targetId: this.getUserById._id,
+                reason: sel_reason
+            },
+        }).then((data) => {
+            // Result
+            console.log(data)
+            document.getElementById("menu-report").classList.remove('menu-active');
+            document.getElementsByClassName('menu-hider')[0].classList.remove('menu-active');
+            //}
+        }).catch((error) => {
+            // Error)
+            console.error(error)
+            // We restore the initial user input
+        })
+      },
       historyBack() {
           try {
               Android.onHistoryBack();
@@ -397,10 +483,10 @@ export default {
 
       },
       request() {
-            console.log(this.userData.divingHistoryLocations);
+            /*console.log(this.getUserById.divingHistoryLocations);
             const app = this,
                 circles = this.g.selectAll('circle')
-                    .data(this.userData.divingHistoryLocations)
+                    .data(this.getUserById.divingHistoryLocations)
                     .enter()
                     .append('a')
                     .attr('xlink:href', d => `https://www.google.com/search?q=${d.country}`)
@@ -414,7 +500,7 @@ export default {
                 .on('start', this.drag_start)
                 .on('drag', (d, i, a) => this.drag_drag(d, i, a))
 
-            this.drag_handler(circles)
+            this.drag_handler(circles)*/
         },
         drag_start() {
             this.start_x = +d3.event.x
@@ -430,7 +516,7 @@ export default {
       async sendDirectMessage() {
         if (localStorage.idToken) {
             const message = this.dm_text;
-            const userId = this.userData.uid;
+            const userId = this.getUserById.uid;
             var result = await axios({
                 url: 'https://chat.wedives.com/graphql',
                 method: 'post',
@@ -526,46 +612,6 @@ export default {
           }
           
       },
-      setData(_userData) {
-          if (_userData == null) {
-              this.is_empty = true;
-          } else {
-            this.userData = _userData;
-            // 다이버 레벨 보여주기
-            if (_userData.isUserLike) this.like_img = 'ico_heart2';
-            if (_userData.isUserSubscribe) this.subscribe_img = 'ico_subscribe2';
-            this.userData.levelShow = '초보';
-            var scuba_level = ["초보", "오픈워터", "어드벤스드", "레스큐", "마스터", "강사", "위다이브 컨시어지"];
-            var free_level = ["초보", "레벨1", "레벨2", "레벨3", "레벨4", "강사"];
-            var s_lvl = parseInt(this.userData.scubaLicenseLevel);
-            var f_lvl = parseInt(this.userData.freeLicenseLevel);
-            this.userData.scubaLevelShow = (s_lvl>0) ? scuba_level[s_lvl] : "";
-            this.userData.freeLevelShow = (f_lvl>0) ? free_level[f_lvl] : "";
-            if (s_lvl > f_lvl) {
-                this.userData.levelShow = (s_lvl>0) ? "스쿠바 " + scuba_level[s_lvl] : this.userData.levelShow;
-            } else {
-                this.userData.levelShow = (f_lvl>0) ? "프리 " + free_level[f_lvl] : this.userData.levelShow;
-            }
-            this.userData.levelShow += " 다이버";
-            if(s_lvl>5) this.userData.levelShow = scuba_level[s_lvl];
-
-            // divingHistoryLocations 중복제거
-            var temp_arr = new Array();
-            this.userData.divingHistoryLocations.forEach(x => {if (x.length > 1) temp_arr.push(x[0] + "/" + x[1])});
-            var set = new Set(temp_arr);
-            var uniqueArr = [...set];
-            var temp_arr2 = new Array(); 
-            
-            
-            uniqueArr.forEach(x => {var tmp = x.split("/");var lat = (-934.98706532366 + (53.49 * parseFloat(tmp[0])))/56.143819846822;var lng = (6903.1396614152 - (106.225 * parseFloat(tmp[1])))/97.194178186786;temp_arr2.push({ 'country': '', 'lon': lng.toFixed(5), 'lat': lat.toFixed(5) })});
-            this.userData.divingHistoryLocations = temp_arr2;
-          }
-          setTimeout(function() {
-            init_template();
-            var preloader = document.getElementById('preloader')
-            if(preloader){preloader.classList.add('preloader-hide');}
-          }, 1000);
-      },
       async clickChat() {
           if (localStorage.idToken) {
             var result = await axios({
@@ -619,7 +665,7 @@ export default {
             });
 
             var roomList = result.data.data.getJoinedRoomList;
-            const userId = this.userData.uid;
+            const userId = this.getUserById.uid;
             roomList.forEach(room => {
                 if (room.type=='direct') {
                     var chatroom = room.chatUsers.filter(user => user.uid == userId);
@@ -661,7 +707,7 @@ export default {
       },
       async clickLike() {
           if (localStorage.idToken) {
-            const targetId = this.userData._id;
+            const targetId = this.getUserById._id;
             var result = await axios({
                 url: 'https://api.wedives.com/graphql',
                 method: 'post',
@@ -683,16 +729,16 @@ export default {
             });
             if (result && result.data && result.data.data && result.data.data.like == true) {
                 this.like_img = 'ico_heart2';
-                this.userData.likes = ((this.userData.likes==null)?0:this.userData.likes)+1;
+                this.getUserById.likes = ((this.getUserById.likes==null)?0:this.getUserById.likes)+1;
             } else if (result && result.data && result.data.data && result.data.data.like == false) {
                 this.like_img = 'ico_heart';
-                this.userData.likes = this.userData.likes - 1;
+                this.getUserById.likes = this.getUserById.likes - 1;
             }
           }
       },
       async clickSubscribe() {
           if (localStorage.idToken) {
-            const targetId = this.userData._id;
+            const targetId = this.getUserById._id;
             var result = await axios({
                 url: 'https://api.wedives.com/graphql',
                 method: 'post',

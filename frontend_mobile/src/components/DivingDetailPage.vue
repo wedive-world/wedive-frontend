@@ -224,7 +224,7 @@
             </div>
 
             <div :class="'content mt-0 pb-3 border-bottom' + ((getDivingById.status=='publicEnded' || getDivingById.status=='divingComplete' || getDivingById.hostUser && getDivingById.hostUser._id == userId)? ' opacity-40' : '')" >
-                <h2 class="font-15 font-700 mb-1">이 게시글 신고하기</h2>
+                <a data-menu="menu-report"><h2 class="font-15 font-700 mb-1">이 게시글 신고하기</h2></a>
             </div>
 
 
@@ -486,6 +486,34 @@
             </div>
         </div>
     </div>
+
+    <!-- 신고하기 -->
+    <div id="menu-report" 
+          class="menu menu-box-modal rounded-0" 
+          data-menu-width="cover"
+          data-menu-height="cover"
+          style="margin-bottom: 0;">
+          
+          <div class="card rounded-0 bg-2" data-card-height="50" style="margin-bottom: 24px;">
+              <div class="card-top p-2">
+                  <a href="#" class="close-menu icon icon-s rounded-l bg-theme color-theme "><i class="fa fa-arrow-left"></i></a>
+                  <a href="" class="header-title color font-noto font-16">신고사유를 선택하세요.</a>
+              </div>
+          </div>
+          
+          <div class="card rounded-0 content">
+              <div v-for="(report,index) in $root.$children[0].report_items" class="form-check icon-check mb-3">
+                  <input class="form-check-input" type="radio" :value="index" :id="'radio_report'+index" name="radioReport" v-on:click="clickReportRadio('radio_report' + index)">
+                  <label class="form-check-label font-noto font-18 font-500 opacity-30" :for="'radio_report'+index">{{ report }}</label>
+                  <i class="icon-check-1 far fa-circle color-gray-dark font-16"></i>
+                  <i class="icon-check-2 far fa-check-circle font-16 color-highlight" style="font-size: 20px !important;"></i>
+              </div>
+          </div>
+          <div style="position: absolute;bottom: 0;width:100%;">
+              <a v-on:click="makeReport()" id="btn_report" disabled="disabled" href="#" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 ms-3 me-3 mb-3" style="height: 46px;padding-top: 10px;">신고하기</a>
+          </div>
+    </div>
+
     
     <div id="snackbar-join-error" class="snackbar-toast color-white bg-red-dark" data-bs-delay="1500" data-bs-autohide="true"><i class="fa fa-times me-3"></i>에러가 발생하여 신청이 불가합니다.</div>
     <div id="snackbar-request-error" class="snackbar-toast color-white bg-red-dark" data-bs-delay="1500" data-bs-autohide="true"><i class="fa fa-times me-3"></i>에러가 발생하여 {{ request_result }}이 되지 않았습니다.</div>
@@ -804,6 +832,42 @@ export default {
     }
   },
   methods: {
+      clickReportRadio(id) {
+        $("#btn_report").attr("disabled", false);
+        for (var i=0; i<this.$root.$children[0].report_items.length; i++) {
+            if ($("#radio_report" + i).parent().children()[1].classList.contains('opacity-30') == false)
+                $("#radio_report" + i).parent().children()[1].classList.add('opacity-30');
+        }
+        $('#' + id).parent().children()[1].classList.remove('opacity-30');
+      },
+      makeReport() {
+        var sel_index = $(':radio[name="radioReport"]:checked').val();
+        const sel_reason = this.$root.$children[0].report_items[sel_index];
+
+        this.$apollo.mutate({
+            // Query
+            mutation: gql`mutation Mutation($targetId: ID!, $reason: String!) {
+                report(targetId: $targetId, reason: $reason) {
+                    success
+                }
+            }`,
+            // Parameters
+            variables: {
+                targetId: this.getDivingById._id,
+                reason: sel_reason
+            },
+        }).then((data) => {
+            // Result
+            console.log(data)
+            document.getElementById("menu-report").classList.remove('menu-active');
+            document.getElementsByClassName('menu-hider')[0].classList.remove('menu-active');
+            //}
+        }).catch((error) => {
+            // Error)
+            console.error(error)
+            // We restore the initial user input
+        })
+      },
       modifyDiving() {
           this.$router.push({name: "BuddyCreateAllPage", params: this.getDivingById});
       },

@@ -142,6 +142,7 @@
           <br/>
       </div>
 
+      
     <div class="menu-hider"></div>
     <div id="snackbar-login-error" class="snackbar-toast color-white bg-red-dark" data-bs-delay="1500" data-bs-autohide="true"><i class="fa fa-times me-3"></i>로그인에 실패하였습니다.</div>
     <div id="snackbar-login-success" class="snackbar-toast color-white bg-green-dark" data-bs-delay="1500" data-bs-autohide="true"><i class="fa fa-times me-3"></i>{{nickName}}님 돌아와주셨군요!</div>
@@ -300,6 +301,7 @@ export default {
       notiData: null,
       footer_list: ['/', '/site_list', '/site_map', '/forum_home', '/chat_home', '/other_home'],
       locationsearch: window.location.search,
+      report_items: ['욕설·명예회손', '특정인 배제·비방', '중복·도배성', '광고·홍보글', '음란물·선정성', '연애 대상구함', '정치글', '부적절한 모임', '불법 게시물'],
     }
   },
   /*apollo: {
@@ -736,4 +738,5 @@ export default {
 .ico-26 {width: 26px !important; height: 26px !important;}
 .ico-26:before {background-size: 26px 26px !important;width: 26px !important;height: 26px !important;}
 .has-notification:before {content: '●';color: #ff5160;position:absolute;top:0;font-size:5px;margin-top: -9px;margin-left: 20px;}
+.btn[disabled] {pointer-events: none !important;background-image: linear-gradient(to bottom, #ccc, #ccc) !important;}
 </style>
