@@ -159,9 +159,9 @@
           </div>
           
           <div class="card rounded-0 content">
-              <div v-for="(report,index) in $root.$children[0].report_items" class="form-check icon-check mb-3">
-                  <input class="form-check-input" type="radio" :value="index" :id="'radio_report'+index" name="radioReport" v-on:click="clickReportRadio('radio_report' + index)">
-                  <label class="form-check-label font-noto font-18 font-500 opacity-30" :for="'radio_report'+index">{{ report }}</label>
+              <div v-for="report in $root.$children[0].report_items" class="form-check icon-check mb-3">
+                  <input class="form-check-input" type="radio" :value="report[0]" :id="'radio_report'+report[0]" name="radioReport" v-on:click="clickReportRadio('radio_report' + report[0])">
+                  <label class="form-check-label font-noto font-18 font-500 opacity-30" :for="'radio_report'+report[0]">{{ report[1] }}</label>
                   <i class="icon-check-1 far fa-circle color-gray-dark font-16"></i>
                   <i class="icon-check-2 far fa-check-circle font-16 color-highlight" style="font-size: 20px !important;"></i>
               </div>
@@ -398,8 +398,8 @@ export default {
         $('#' + id).parent().children()[1].classList.remove('opacity-30');
       },
       makeReport() {
-        var sel_index = $(':radio[name="radioReport"]:checked').val();
-        const sel_reason = this.$root.$children[0].report_items[sel_index];
+        const sel_reason = $(':radio[name="radioReport"]:checked').val();
+        
 
         this.$apollo.mutate({
             // Query
@@ -418,6 +418,7 @@ export default {
             console.log(data)
             document.getElementById("menu-report").classList.remove('menu-active');
             document.getElementsByClassName('menu-hider')[0].classList.remove('menu-active');
+            location.reload();
             //}
         }).catch((error) => {
             // Error)

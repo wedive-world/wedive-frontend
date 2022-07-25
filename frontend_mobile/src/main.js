@@ -167,7 +167,7 @@ if (window.location.pathname.indexOf('/chat/') == 0) {
     link: httpLink,
     cache: new InMemoryCache(),
   })
-} else if (window.location.pathname == '/site_list' || window.location.pathname == '/' || window.location.pathname == '/other/notification' || window.location.pathname == '/other/reservation' || window.location.pathname == '/other/subscribe' || window.location.pathname == '/forum_home' || window.location.pathname.indexOf('/recommend/') == 0 || window.location.pathname.indexOf('/user/') == 0 || window.location.pathname.indexOf('/center/') == 0 || window.location.pathname.indexOf('/shop/') == 0 || window.location.pathname.indexOf('/site/') == 0 || window.location.pathname.indexOf('/point/') == 0 || window.location.pathname.indexOf('/community/') == 0 || window.location.pathname.indexOf('/agenda/') == 0 || window.location.pathname.indexOf('/diving/') == 0 || window.location.pathname.indexOf('/reservation/') == 0 || window.location.pathname.indexOf('/review/') == 0 || window.location.pathname.indexOf('/instructor/create') == 0 || window.location.pathname.indexOf('/buddy/create') == 0) {
+} else if (window.location.pathname == '/site_list' || window.location.pathname == '/' || window.location.pathname == '/other/notification' || window.location.pathname == '/other/reservation' || window.location.pathname == '/other/subscribe' || window.location.pathname == '/forum_home' || window.location.pathname.indexOf('/recommend/') == 0 || window.location.pathname.indexOf('/user/') == 0 || window.location.pathname.indexOf('/center/') == 0 || window.location.pathname.indexOf('/shop/') == 0 || window.location.pathname.indexOf('/site/') == 0 || window.location.pathname.indexOf('/point/') == 0 || window.location.pathname.indexOf('/community/') == 0 || window.location.pathname.indexOf('/agenda/') == 0 || window.location.pathname.indexOf('/diving/') == 0 || window.location.pathname.indexOf('/reservation/') == 0 || window.location.pathname.indexOf('/review/') == 0 || window.location.pathname.indexOf('/review2/') == 0 || window.location.pathname.indexOf('/instructor/create') == 0 || window.location.pathname.indexOf('/buddy/create') == 0) {
   const link = createUploadLink({
     uri: GRAPHQL_API_URL,
     headers: {
@@ -339,7 +339,27 @@ if (currentTime - parseInt(localStorage.suggestionDate) > 86400000) {
       });
       localStorage.suggestion = JSON.stringify(tmp_result);
     }
-  })
+  });
+
+
+
+  axios({
+    url: 'https://api.wedives.com/graphql',
+    method: 'post',
+    headers: headers,
+    data: {
+        query: `
+          query Query {
+            getReportCodes
+          }
+        `
+    }
+  }).then(function(result) {
+    if (result.data.data.getReportCodes != null) {
+      var tmp_list = result.data.data.getReportCodes;
+      localStorage.reports = JSON.stringify(tmp_list);
+    }
+  });
 }
 
 

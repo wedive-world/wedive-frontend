@@ -24,32 +24,33 @@
         </template>
         
         <div id="agenda_content" class="card text-start mb-0">
-            <div class="p-3">
-              <div v-on:click="goUser(getAgendaById.author)" style="position:relative;">
-                  <div class="user-img-s me-2">
-                      <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
-                          <defs>
-                          <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
-                          <clipPath id="clipSquircle">
-                              <use xlink:href="#shapeSquircle"/>
-                          </clipPath>
-                          </defs>
-                          <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" 
-                            :xlink:href="getAgendaById.author && getAgendaById.author.profileImages && getAgendaById.author.profileImages.length > 0 && getAgendaById.author.profileImages[0].thumbnailUrl ? getAgendaById.author.profileImages[0].thumbnailUrl : 'https://d34l91104zg4p3.cloudfront.net/assets/user_empty.png'"/>
-                      </svg>
-                  </div>
-                  <div class="inline-block font-noto v-align-top mt-1">
-                      <h5 class="mb-0 font-500 font-15">{{ getAgendaById.author ? getAgendaById.author.nickName : '' }}</h5>
-                      <p class="mb-0 mt-n1 font-13 color-gray">{{ getAgendaById.author ? getDiverLevel(getAgendaById.author.freeLicenseLevel, getAgendaById.author.scubaLicenseLevel) : '초보 다이버' }}</p>
-                  </div>
-                  <p class="color-gray-dark mb-0 font-12" style="position: absolute;right: 0px;top: 0;">{{ timeForToday(getAgendaById.createdAt) }}</p>
-              </div>
-              <div v-if="getAgendaById.agendaPlaces && getAgendaById.agendaPlaces.length > 0 && getAgendaById.agendaPlaces[0].name" class="">
-                  <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> {{ getAgendaById.agendaPlaces[0].name }}</p>
-              </div>
-              <h5 class="font-600 mt-3 mb-2 font-17">{{ getAgendaById.title }}</h5>
-              <p class="mb-0 font-noto opacity-90" style="line-height: 1.5;" v-html="getAgendaById.content.replace(/\n/gi, '<br/>')">
-              </p>
+          <div style="position:relative;">
+          <div class="p-3">
+            <div v-on:click="goUser(getAgendaById.author)" style="position:relative;">
+                <div class="user-img-s me-2">
+                    <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                        <defs>
+                        <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                        <clipPath id="clipSquircle">
+                            <use xlink:href="#shapeSquircle"/>
+                        </clipPath>
+                        </defs>
+                        <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" 
+                          :xlink:href="getAgendaById.author && getAgendaById.author.profileImages && getAgendaById.author.profileImages.length > 0 && getAgendaById.author.profileImages[0].thumbnailUrl ? getAgendaById.author.profileImages[0].thumbnailUrl : 'https://d34l91104zg4p3.cloudfront.net/assets/user_empty.png'"/>
+                    </svg>
+                </div>
+                <div class="inline-block font-noto v-align-top mt-1">
+                    <h5 class="mb-0 font-500 font-15">{{ getAgendaById.author ? getAgendaById.author.nickName : '' }}</h5>
+                    <p class="mb-0 mt-n1 font-13 color-gray">{{ getAgendaById.author ? getDiverLevel(getAgendaById.author.freeLicenseLevel, getAgendaById.author.scubaLicenseLevel) : '초보 다이버' }}</p>
+                </div>
+                <p class="color-gray-dark mb-0 font-12" style="position: absolute;right: 0px;top: 0;">{{ timeForToday(getAgendaById.createdAt) }}</p>
+            </div>
+            <div v-if="getAgendaById.agendaPlaces && getAgendaById.agendaPlaces.length > 0 && getAgendaById.agendaPlaces[0].name" class="">
+                <p class="color-highlight font-13 mb-0 ellipsis font-noto"><i class="wedive_icoset wedive_icoset_marker"></i> {{ getAgendaById.agendaPlaces[0].name }}</p>
+            </div>
+            <h5 class="font-600 mt-3 mb-2 font-17">{{ getAgendaById.title }}</h5>
+            <p v-if="getAgendaById && getAgendaById.content" class="mb-0 font-noto opacity-90" style="line-height: 1.5;" v-html="getAgendaById.content.replace(/\n/gi, '<br/>')">
+            </p>
           </div>
           <div class="" v-if="getAgendaById.images && getAgendaById.images.length > 0">
             <div class="img_square mb-4" v-for="image in getAgendaById.images">
@@ -69,6 +70,8 @@
                   <i class="fas fa-comment me-1 font-20" style="color:#bbb;"></i>
                     <span class="font-14 font-noto">{{ getAgendaById.reviewCount || 0 }}</span>
               </div>
+          </div>
+          <a data-menu="menu-report" v-on:click="reportTargetId=getAgendaById._id"><span class="font-10 mb-0 mt-n2 opacity-40 p-2" style="position:absolute;right:6px;bottom:26px;"><img src="/static/images/assets/icon_alarm.png" width="16" style="margin-bottom: 5px;margin-right:3px;"/>신고하기</span></a>
           </div>
           <div class="divider mb-0" style="height:12px;border-top: 1px solid #88888840;"></div>
           <div v-for="(review,index) in getReviewsByTargetId" :class="'p-3' + ((index < getReviewsByTargetId.length-1) ? ' border-bottom' : '')" style="position: relative;">
@@ -94,6 +97,7 @@
               </vue-star>
               <span v-on:click="reviewDislike(review)" class="ms-3" :style="'color: ' + (review.isUserDislike ? '#1D397C;' : '#bbb;')">싫어요 {{ review.dislikes }}</span>
             </span>
+            <a data-menu="menu-report" v-on:click="reportTargetId=review._id"><span class="font-10 mb-0 mt-n2 opacity-40 p-2" style="position:absolute;right:6px;bottom:8px;"><img src="/static/images/assets/icon_alarm.png" width="16" style="margin-bottom: 5px;margin-right:3px;"/>신고하기</span></a>
           </div>
           
           
@@ -182,6 +186,34 @@
             </div>
         </div>
     </div>
+
+    <!-- 신고하기 -->
+    <div id="menu-report" 
+          class="menu menu-box-modal rounded-0 text-start"
+          data-menu-width="cover"
+          data-menu-height="cover"
+          style="margin-bottom: 0;z-index: 10002;">
+          
+          <div class="card rounded-0 bg-2" data-card-height="50" style="margin-bottom: 24px;">
+              <div class="card-top p-2">
+                  <a href="#" class="close-menu icon icon-s rounded-l bg-theme color-theme "><i class="fa fa-arrow-left"></i></a>
+                  <a href="" class="header-title color font-noto font-16">신고사유를 선택하세요.</a>
+              </div>
+          </div>
+          
+          <div class="card rounded-0 content">
+              <div v-for="report in $root.$children[0].report_items" class="form-check icon-check mb-3">
+                  <input class="form-check-input" type="radio" :value="report[0]" :id="'radio_report'+report[0]" name="radioReport" v-on:click="clickReportRadio('radio_report' + report[0])">
+                  <label class="form-check-label font-noto font-18 font-500 opacity-30" :for="'radio_report'+report[0]">{{ report[1] }}</label>
+                  <i class="icon-check-1 far fa-circle color-gray-dark font-16"></i>
+                  <i class="icon-check-2 far fa-check-circle font-16 color-highlight" style="font-size: 20px !important;"></i>
+              </div>
+          </div>
+          <div style="position: absolute;bottom: 0;width:100%;">
+              <a v-on:click="makeReport()" id="btn_report" disabled="disabled" href="#" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 ms-3 me-3 mb-3" style="height: 46px;padding-top: 10px;">신고하기</a>
+          </div>
+    </div>
+
     <div id="snackbar-review-success" class="snackbar-toast color-white bg-green-dark" data-bs-delay="1500" data-bs-autohide="true"><i class="fa fa-times me-3"></i>리뷰 등록이 완료되었습니다.</div>
   </div>
 </template>
@@ -229,6 +261,43 @@ export default {
       },
   },
   methods: {
+      clickReportRadio(id) {
+        $("#btn_report").attr("disabled", false);
+        for (var i=0; i<this.$root.$children[0].report_items.length; i++) {
+            if ($("#radio_report" + i).parent().children()[1].classList.contains('opacity-30') == false)
+                $("#radio_report" + i).parent().children()[1].classList.add('opacity-30');
+        }
+        $('#' + id).parent().children()[1].classList.remove('opacity-30');
+      },
+      makeReport() {
+        const sel_reason = $(':radio[name="radioReport"]:checked').val();
+        
+
+        this.$apollo.mutate({
+            // Query
+            mutation: gql`mutation Mutation($targetId: ID!, $reason: String!) {
+                report(targetId: $targetId, reason: $reason) {
+                    success
+                }
+            }`,
+            // Parameters
+            variables: {
+                targetId: this.reportTargetId,
+                reason: sel_reason
+            },
+        }).then((data) => {
+            // Result
+            console.log(data)
+            document.getElementById("menu-report").classList.remove('menu-active');
+            document.getElementsByClassName('menu-hider')[0].classList.remove('menu-active');
+            location.reload();
+            //}
+        }).catch((error) => {
+            // Error)
+            console.error(error)
+            // We restore the initial user input
+        })
+      },
       historyBack() {
           try {
               Android.onHistoryBack();
@@ -690,8 +759,8 @@ export default {
         loadedStayTime: 400,
         stayDistance: 50,
         triggerDistance: 70
-
       },
+      reportTargetId: null,
     }
   },
   apollo: {

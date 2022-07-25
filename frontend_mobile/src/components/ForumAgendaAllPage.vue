@@ -29,7 +29,7 @@
             </swiper>
           </div>
           <div class="divider mb-0"></div>
-          <div v-for="agenda in getAgendasByTargetId">
+          <div v-for="agenda in getAgendasByTargetId" style="position:relative;">
             <div class="p-3">
               <div v-on:click="goUser(agenda.author)" style="position:relative;">
                   <div class="user-img-s me-2">
@@ -89,6 +89,7 @@
               <div class="swiper-button-prev" slot="button-prev"></div>
               <div class="swiper-button-next" slot="button-next"></div>
             </div>
+            <a v-on:click="openReport(agenda)"><span class="font-10 mb-0 mt-n2 opacity-40 p-2" style="position:absolute;right:8px;bottom:36px;"><img src="/static/images/assets/icon_alarm.png" width="16" style="margin-bottom: 5px;margin-right:3px;"/>신고하기</span></a>
             <div class="p-3">
               <div class="mt-1">
                   <span v-for="tag in agenda.hashTags" class="bg-gray-light color-gray rounded-sm me-1" style="padding: 6px 12px;">#{{ tag.name }}</span>
@@ -132,6 +133,49 @@ export default {
       VueStar,
   },
   methods: {
+      openReport(agenda) {
+        this.$emit('selectedAgenda', agenda._id);
+        //this.selectedAgenda = agenda;
+        var menuData = "menu-report";
+        document.getElementById(menuData).classList.add('menu-active');
+        document.getElementsByClassName('menu-hider')[0].classList.add('menu-active');
+        // jjangs : open menu
+        if(window.location.href.split('/').pop() != 'modal'){
+            window.history.pushState({}, 'modal', window.location.pathname + '/modal');
+        }
+        
+        var menu = document.getElementById(menuData);
+        var menuEffect = menu.getAttribute('data-menu-effect');
+        var menuLeft = menu.classList.contains('menu-box-left');
+        var menuRight = menu.classList.contains('menu-box-right');
+        var menuTop = menu.classList.contains('menu-box-top');
+        var menuBottom = menu.classList.contains('menu-box-bottom');
+        var menuWidth = menu.offsetWidth;
+        var menuHeight = menu.offsetHeight;
+        var menuTimeout = menu.getAttribute('data-menu-hide');
+
+        if(menuTimeout){
+            setTimeout(function(){
+                document.getElementById(menuData).classList.remove('menu-active');
+                document.getElementsByClassName('menu-hider')[0].classList.remove('menu-active');
+            },menuTimeout)
+        }
+
+        if(menuEffect === "menu-push"){
+            var menuWidth = document.getElementById(menuData).getAttribute('data-menu-width');
+            if(menuLeft){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX("+menuWidth+"px)"}}
+            if(menuRight){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+menuWidth+"px)"}}
+            if(menuBottom){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY(-"+menuHeight+"px)"}}
+            if(menuTop){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY("+menuHeight+"px)"}}
+        }
+        if(menuEffect === "menu-parallax"){
+            var menuWidth = document.getElementById(menuData).getAttribute('data-menu-width');
+            if(menuLeft){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX("+menuWidth/10+"px)"}}
+            if(menuRight){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateX(-"+menuWidth/10+"px)"}}
+            if(menuBottom){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY(-"+menuHeight/5+"px)"}}
+            if(menuTop){for(let i=0; i < wrappers.length; i++){wrappers[i].style.transform = "translateY("+menuHeight/5+"px)"}}
+        }
+      },
       async likeAnimation(item, isBottom) {
         if (item.likes == null) item.likes = 0;
 

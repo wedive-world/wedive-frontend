@@ -35,7 +35,7 @@
         </template>
         
         <div class="text-start card mb-0" style="min-height: calc(100vh - 150px);">
-          <div v-for="agenda in getAgendasByTargetId">
+          <div v-for="agenda in getAgendasByTargetId" style="position:relative;">
             <div class="p-3">
               <div v-on:click="goUser(agenda.author)" style="position:relative;">
                   <div class="user-img-s me-2">
@@ -95,6 +95,7 @@
               <div class="swiper-button-prev" slot="button-prev"></div>
               <div class="swiper-button-next" slot="button-next"></div>
             </div>
+            <a data-menu="menu-report" v-on:click="selectedAgenda = agenda;"><span class="font-10 mb-0 mt-n2 opacity-40 p-2" style="position:absolute;right:8px;bottom:36px;"><img src="/static/images/assets/icon_alarm.png" width="16" style="margin-bottom: 5px;margin-right:3px;"/>신고하기</span></a>
             <div class="p-3">
               <div class="mt-1">
                   <span v-for="tag in agenda.hashTags" class="bg-gray-light color-gray rounded-sm me-1" style="padding: 6px 12px;">#{{ tag.name }}</span>
@@ -118,6 +119,33 @@
         </div>
 
     </pull-to>
+
+    <!-- 신고하기 -->
+    <div id="menu-report" 
+          class="menu menu-box-modal rounded-0 text-start" 
+          data-menu-width="cover"
+          data-menu-height="cover"
+          style="margin-bottom: 0;">
+          
+          <div class="card rounded-0 bg-2" data-card-height="50" style="margin-bottom: 24px;">
+              <div class="card-top p-2">
+                  <a href="#" class="close-menu icon icon-s rounded-l bg-theme color-theme "><i class="fa fa-arrow-left"></i></a>
+                  <a href="" class="header-title color font-noto font-16">신고사유를 선택하세요.</a>
+              </div>
+          </div>
+          
+          <div class="card rounded-0 content">
+              <div v-for="report in $root.$children[0].report_items" class="form-check icon-check mb-3">
+                  <input class="form-check-input" type="radio" :value="report[0]" :id="'radio_report'+report[0]" name="radioReport" v-on:click="clickReportRadio('radio_report' + report[0])">
+                  <label class="form-check-label font-noto font-18 font-500 opacity-30" :for="'radio_report'+report[0]">{{ report[1] }}</label>
+                  <i class="icon-check-1 far fa-circle color-gray-dark font-16"></i>
+                  <i class="icon-check-2 far fa-check-circle font-16 color-highlight" style="font-size: 20px !important;"></i>
+              </div>
+          </div>
+          <div style="position: absolute;bottom: 0;width:100%;">
+              <a v-on:click="makeReport()" id="btn_report" disabled="disabled" href="#" class="btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 ms-3 me-3 mb-3" style="height: 46px;padding-top: 10px;">신고하기</a>
+          </div>
+    </div>
 
     <div id="agenda-add" 
          class="menu menu-box-modal rounded-0" 
@@ -278,6 +306,43 @@ export default {
     VueStar,
   },
   methods: {
+      clickReportRadio(id) {
+        $("#btn_report").attr("disabled", false);
+        for (var i=0; i<this.$root.$children[0].report_items.length; i++) {
+            if ($("#radio_report" + i).parent().children()[1].classList.contains('opacity-30') == false)
+                $("#radio_report" + i).parent().children()[1].classList.add('opacity-30');
+        }
+        $('#' + id).parent().children()[1].classList.remove('opacity-30');
+      },
+      makeReport() {
+        const sel_reason = $(':radio[name="radioReport"]:checked').val();
+        
+
+        this.$apollo.mutate({
+            // Query
+            mutation: gql`mutation Mutation($targetId: ID!, $reason: String!) {
+                report(targetId: $targetId, reason: $reason) {
+                    success
+                }
+            }`,
+            // Parameters
+            variables: {
+                targetId: this.selectedAgenda._id,
+                reason: sel_reason
+            },
+        }).then((data) => {
+            // Result
+            console.log(data)
+            document.getElementById("menu-report").classList.remove('menu-active');
+            document.getElementsByClassName('menu-hider')[0].classList.remove('menu-active');
+            location.reload();
+            //}
+        }).catch((error) => {
+            // Error)
+            console.error(error)
+            // We restore the initial user input
+        })
+      },
       login() {
         this.$root.$children[0].$refs.loginBottomSheet.open();
       },
@@ -683,6 +748,7 @@ export default {
           stayDistance: 50, // Trigger the distance after the refresh
           triggerDistance: 70 // Pull down the trigger to trigger the distance
       },
+      selectedAgenda: null,
     }
   },
   apollo: {
