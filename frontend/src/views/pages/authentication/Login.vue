@@ -6,7 +6,7 @@
       <b-link class="brand-logo">
         <vuexy-logo />
         <h2 class="brand-text text-primary ml-1">
-          Vuexy
+          WeDive
         </h2>
       </b-link>
       <!-- /Brand logo-->
@@ -41,7 +41,7 @@
             class="mb-1 font-weight-bold"
             title-tag="h2"
           >
-            Welcome to Vuexy! 👋
+            Welcome to WeDive! 👋
           </b-card-title>
           <b-card-text class="mb-2">
             Please sign-in to your account and start the adventure
@@ -53,14 +53,11 @@
           >
             <div class="alert-body font-small-2">
               <p>
-                <small class="mr-50"><span class="font-weight-bold">Admin:</span> admin@demo.com | admin</small>
-              </p>
-              <p>
-                <small class="mr-50"><span class="font-weight-bold">Client:</span> client@demo.com | client</small>
+                <small class="mr-50"><span class="font-weight-bold">This system is not opened yet</span></small>
               </p>
             </div>
             <feather-icon
-              v-b-tooltip.hover.left="'This is just for ACL demo purpose'"
+              v-b-tooltip.hover.left="'This is just test purpose'"
               icon="HelpCircleIcon"
               size="18"
               class="position-absolute"
@@ -93,7 +90,7 @@
                     v-model="userEmail"
                     :state="errors.length > 0 ? false:null"
                     name="login-email"
-                    placeholder="john@example.com"
+                    placeholder="test@test.com"
                   />
                   <small class="text-danger">{{ errors[0] }}</small>
                 </validation-provider>
@@ -161,11 +158,11 @@
             </b-form>
           </validation-observer>
 
-          <b-card-text class="text-center mt-2">
+          <!--<b-card-text class="text-center mt-2">
             <span>New on our platform? </span>
             <b-link :to="{name:'auth-register'}">
               <span>&nbsp;Create an account</span>
-            </b-link>
+            </b-link>-->
           </b-card-text>
 
           <!-- divider -->
@@ -251,8 +248,10 @@ export default {
   data() {
     return {
       status: '',
-      password: 'admin',
-      userEmail: 'admin@demo.com',
+      //password: 'admin',
+      //userEmail: 'admin@demo.com',
+      password: '',
+      userEmail: '',
       sideImg: require('@/assets/images/pages/login-v2.svg'),
 
       // validation rules
