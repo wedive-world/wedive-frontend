@@ -50,7 +50,7 @@
                 </div>
                 <div class="divider mt-2 mb-2"></div>
             </a>
-            <a class="mb-0" href="/guide/beginner3">
+            <!--<a class="mb-0" href="/guide/beginner3">
                 <div class="map-box">
                     <div class="justify-content-center mb-0 text-start">
                         <div class="thumb-img me-2">
@@ -225,7 +225,7 @@
                     </div>
                 </div>
                 <div class="divider mt-2 mb-2"></div>
-            </a>
+            </a>-->
         </div>
         
 
