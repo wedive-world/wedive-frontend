@@ -53,6 +53,7 @@ import ReservationAdminPage from '@/components/ReservationAdminPage'
 import OtherSubscribePage from '@/components/OtherSubscribePage'
 import OtherNotiPage from '@/components/OtherNotiPage'
 import OtherPrivacyPage from '@/components/OtherPrivacyPage'
+import OtherUgcPage from '@/components/OtherUgcPage'
 import InstructorCreatePage from '@/components/InstructorCreatePage'
 
 import BeginnerPage from '@/components/guide/BeginnerPage'
@@ -228,6 +229,11 @@ export default new Router({
       path: '/other/privacy',
       name: 'OtherPrivacyPage',
       component: OtherPrivacyPage
+    },
+    {
+      path: '/other/ugc',
+      name: 'OtherUgcPage',
+      component: OtherUgcPage
     },
     {
       path: '/diving/:id',
