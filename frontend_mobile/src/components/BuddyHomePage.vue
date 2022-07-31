@@ -190,7 +190,7 @@
                     <p class="text-start mb-0 opacity-70">다이빙, 장소 검색</p>
                 </div>
             </div>
-            <div v-on:click="move('/guide/list')" class="card card-style col-12 shadow-xl" style="height: 80px; margin: 12px 0px 0px 0px;background-image: url(/static/images/assets/guide-book.png);background-size: 80px 80px;background-repeat: no-repeat;background-position: right 20px bottom 0px;background-color: #ffffffcf;">
+            <div v-on:click="move('/guide/beginner')" class="card card-style col-12 shadow-xl" style="height: 80px; margin: 12px 0px 0px 0px;background-image: url(/static/images/assets/guide-book.png);background-size: 80px 80px;background-repeat: no-repeat;background-position: right 20px bottom 0px;background-color: #ffffffcf;">
                 <div class="mb-0 mt-2 ps-1" style="position:absolute;height:50%;">
                     <h4 class="font-noto text-start pt-1 mb-0">가이드</h4>
                     <p class="text-start mb-0 opacity-70">다이빙 입문, 유형별 맞춤 가이드</p>
