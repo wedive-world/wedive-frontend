@@ -659,11 +659,11 @@
 
 
         <div data-menu-load="/static/menu-footer.html"></div>
-        <div id="footer-bar-shop" class="d-flex" style="min-height: 52px !important;height: 52px !important;">
+        <div id="footer-bar-shop" class="d-flex hide" style="min-height: 52px !important;height: 52px !important;">
             <div class="flex-fill speach-input pt-2 pb-2 ps-4 pe-4">
                 <div class="row">
-                    <a data-menu="menu-reservation" :class="(getDiveShopByUniqueName.isBookable == null || getDiveShopByUniqueName.isBookable == true ? 'col-6' : 'col-12') + ' btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 font-noto font-500'" style="width: calc(50% - 6px);margin-right:6px;"><i class="fas fa-calendar-check me-2"></i>예약</a>
-                    <a v-on:click="findBuddyClick()" :class="(getDiveShopByUniqueName.isBookable == null || getDiveShopByUniqueName.isBookable == true ? '' : 'hide ') + 'col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 font-noto font-500'" style="width: calc(50% - 6px);margin-left:6px;"><i class="fas fa-user-friends me-2"></i>버디모집</a>
+                    <a data-menu="menu-reservation" :class="(getDiveShopByUniqueName.isBookable == null || getDiveShopByUniqueName.isBookable == true ? '' : 'hide') + ' btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 font-noto font-500'" style="width: calc(50% - 6px);margin-right:6px;"><i class="fas fa-calendar-check me-2"></i>예약</a>
+                    <a v-on:click="findBuddyClick()" :class="(getDiveShopByUniqueName.isBookable == null || getDiveShopByUniqueName.isBookable == true ? 'col-6' : 'col-12') + ' btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 font-noto font-500'" :style="(getDiveShopByUniqueName.isBookable == null || getDiveShopByUniqueName.isBookable == true ? 'width: calc(50% - 6px);margin-left:6px;' : '')"><i class="fas fa-user-friends me-2"></i>버디모집</a>
                 </div>
             </div>
         </div>
@@ -1689,6 +1689,7 @@ export default {
                     }
                 });
             };
+            $("#footer-bar-shop").removeClass("hide");
             
             setTimeout(function() {
                 init_template();

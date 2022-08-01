@@ -11,6 +11,7 @@ import BuddyCreateAbroadPage from '@/components/BuddyCreateAbroadPage'
 import BuddyHomePage from '@/components/BuddyHomePage'
 import UserProfilePage from '@/components/UserProfilePage'
 import UserCreatePage from '@/components/UserCreatePage'
+import UserCreateNewPage from '@/components/UserCreateNewPage'
 import CenterHomePage from '@/components/CenterHomePage'
 import CenterDetailPage from '@/components/CenterDetailPage'
 import CenterDetailPage2 from '@/components/CenterDetailPage2'
@@ -117,6 +118,11 @@ export default new Router({
     },
     {
       path: '/user/create',
+      name: 'UserCreateNewPage',
+      component: UserCreateNewPage
+    },
+    {
+      path: '/user/create2',
       name: 'UserCreatePage',
       component: UserCreatePage
     },
