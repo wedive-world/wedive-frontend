@@ -21,9 +21,11 @@
         <div id="map" style="height: 100% !important;position: inherit !important;"></div>
 
         <div class="map-search">
-            <div class="bx-search">
-                
-                <input class="form-control top-search" style="padding-top: 8px;" @focus="openSuggestion()" placeholder="다이빙 장소를 검색하세요."></input>
+            <div class="bx-search p-0">
+                <div class="input-style has-borders has-icon mb-0">
+                    <i class="fa fa-search color-gray"></i>
+                    <input class="form-control top-search" style="padding-top: 4px;" @focus="openSuggestion()" placeholder="다이빙 장소를 검색하세요."/>
+                </div>
                 <!--
                 <vue-typeahead-bootstrap
                     id="search_typeahead_font16"
@@ -123,10 +125,10 @@
                         <div class="box-bottom">
                             <div class="wedive-corner wedive-corner-bottom"></div>
                             <div class="box-bottom-area color-white row" style="box-shadow: inset 0px 0px 5px rgb(0 0 0 / 50%);z-index:999;">
-                                <a href="" class="col-4 text-center box-bottom-item">컨시어지</a>
-                                <a v-on:click="mapBoxClick('buddy')" class="col-4 text-center box-bottom-item">버디</a>
+                                <a href="" class="col-6 text-center box-bottom-item">컨시어지</a>
+                                <a v-on:click="mapBoxClick('buddy')" class="col-6 text-center box-bottom-item">버디</a>
                                 <!--<a href="" class="col-3 text-center box-bottom-item">강사</a>-->
-                                <a href="" class="col-4 text-center box-bottom-item">포럼</a>
+                                <!--<a href="" class="col-4 text-center box-bottom-item">포럼</a>-->
                             </div>
                         </div>
                     </div>
@@ -144,7 +146,7 @@
         </div>
         <div class="content m-0 text-start" style="min-height:calc(100vh - 125px);">
             <div class="card card-style ms-0 me-0 rounded-0 mb-0">
-                <div class="content mt-1">
+                <div class="content mt-1" style="min-height: calc(100vh - 101px);">
                     <div>
                         <label for="filter_type" class="color-highlight font-700">타입</label>
                     </div>
@@ -424,6 +426,32 @@ var check_cate2 = false;
 var check_cate3 = true;
 var check_cate4 = false;
 
+var check_env1 = false;
+var check_env2 = false;
+var check_env3 = false;
+var check_env4 = false;
+var check_env5 = false;
+var check_env6 = false;
+var check_env7 = false;
+
+var check_point1 = false;
+var check_point2 = false;
+var check_point3 = false;
+var check_point4 = false;
+
+var check_type1 = false;
+var check_type2 = false;
+
+var check_star70 = false;
+var check_star80 = false;
+var check_star90 = false;
+var check_fish70 = false;
+var check_fish80 = false;
+var check_fish90 = false;
+var check_sight70 = false;
+var check_sight80 = false;
+var check_sight90 = false;
+
 var tour_flag = true;
 var markerItem = null;
 
@@ -451,6 +479,40 @@ async function updateAll() {
     _searchParams.lng1 = sw.lng();
     _searchParams.lat2 = ne.lat();
     _searchParams.lng2 = ne.lng();
+    _searchParams.interests = [];
+    _searchParams.divingTypes = [];
+
+    if (check_env1) _searchParams.interests.push('617806f5f7c3a048b4704cde');
+    if (check_env2) _searchParams.interests.push('6178f01cf7c3a048b4706cc6');
+    if (check_env3) _searchParams.interests.push('61a2fefa098b3785ef439cb3');
+    if (check_env4) _searchParams.interests.push('61ac9de8eac3ebfb7ac9f95e');
+    if (check_env5) _searchParams.interests.push('61dd64b59815533e8906ba97');
+    if (check_env6) _searchParams.interests.push('61abfc1ceac3ebfb7ac9f84e');
+    if (check_env7) {
+        _searchParams.interests.push('61763aa7f7c3a048b47047ac');
+        _searchParams.interests.push('61763a77f7c3a048b47047a8');
+        _searchParams.interests.push('6198fdf7ae1cc12e02c3cc7d');
+    }
+    if (check_point1) _searchParams.interests.push('6174da75a60639819c3e6ae5');
+    if (check_point2) _searchParams.interests.push('6178021ff7c3a048b4704a7a');
+    if (check_point3) _searchParams.interests.push('61dd659a9815533e8906baa2');
+    if (check_point4) _searchParams.interests.push('61763794f7c3a048b4704789');
+
+    if (check_type1) _searchParams.divingTypes.push('scubaDiving');
+    if (check_type2) _searchParams.divingTypes.push('freeDiving');
+
+    if (check_star70) _searchParams.adminScore = 70;
+    else if (check_star80) _searchParams.adminScore = 80;
+    else if (check_star90) _searchParams.adminScore = 90;
+
+    if (check_fish70) _searchParams.waterEnvironmentScore = 70;
+    else if (check_fish80) _searchParams.waterEnvironmentScore = 80;
+    else if (check_fish80) _searchParams.waterEnvironmentScore = 90;
+
+    if (check_sight70) _searchParams.eyeSightScore = 70;
+    else if (check_sight80) _searchParams.eyeSightScore = 80;
+    else if (check_sight90) _searchParams.eyeSightScore = 90;
+
     
     var result = await axios({
         url: 'https://api.wedives.com/graphql',
@@ -1133,6 +1195,66 @@ export default {
       },
       check_cate4: function(newVal, oldVal) {
         check_cate4 = newVal;
+      },
+      check_env1: function(newVal, oldVal) {
+        check_env1 = newVal;
+      },
+      check_env2: function(newVal, oldVal) {
+        check_env2 = newVal;
+      },
+      check_env3: function(newVal, oldVal) {
+        check_env3 = newVal;
+      },
+      check_env4: function(newVal, oldVal) {
+        check_env4 = newVal;
+      },
+      check_env5: function(newVal, oldVal) {
+        check_env5 = newVal;
+      },
+      check_env6: function(newVal, oldVal) {
+        check_env6 = newVal;
+      },
+      check_env7: function(newVal, oldVal) {
+        check_env7 = newVal;
+      },
+      check_point1: function(newVal, oldVal) {
+        check_point1 = newVal;
+      },
+      check_point2: function(newVal, oldVal) {
+        check_point2 = newVal;
+      },
+      check_point3: function(newVal, oldVal) {
+        check_point3 = newVal;
+      },
+      check_point4: function(newVal, oldVal) {
+        check_point4 = newVal;
+      },
+      check_star70: function(newVal, oldVal) {
+        check_star70 = newVal;
+      },
+      check_star80: function(newVal, oldVal) {
+        check_star80 = newVal;
+      },
+      check_star90: function(newVal, oldVal) {
+        check_star90 = newVal;
+      },
+      check_fish70: function(newVal, oldVal) {
+        check_fish70 = newVal;
+      },
+      check_fish80: function(newVal, oldVal) {
+        check_fish80 = newVal;
+      },
+      check_fish90: function(newVal, oldVal) {
+        check_fish90 = newVal;
+      },
+      check_sight70: function(newVal, oldVal) {
+        check_sight70 = newVal;
+      },
+      check_sight80: function(newVal, oldVal) {
+        check_sight80 = newVal;
+      },
+      check_sight90: function(newVal, oldVal) {
+        check_sight90 = newVal;
       },
       
       tour_flag: function(newVal, oldVal) {
