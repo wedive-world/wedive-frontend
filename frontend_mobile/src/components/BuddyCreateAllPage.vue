@@ -410,7 +410,7 @@ export default {
     draggable,
   },
   created() {
-    console.log('$("#footer-bar").hide();')
+    //console.log('$("#footer-bar").hide();')
     $("#footer-bar").hide();
     if (this.$route.target != null && this.$route.target.hasOwnProperty('_id')) {
         this.search_result.push({__typename: this.$route.target.__typename, location: this.$route.target.name, adminScore: this.$route.target.adminScore, description: this.$route.target.description, _id: this.$route.target._id});

@@ -125,7 +125,7 @@
                         <div class="box-bottom">
                             <div class="wedive-corner wedive-corner-bottom"></div>
                             <div class="box-bottom-area color-white row" style="box-shadow: inset 0px 0px 5px rgb(0 0 0 / 50%);z-index:999;">
-                                <a href="" class="col-6 text-center box-bottom-item">컨시어지</a>
+                                <a v-on:click="mapBoxClick('concierge')" class="col-6 text-center box-bottom-item">컨시어지</a>
                                 <a v-on:click="mapBoxClick('buddy')" class="col-6 text-center box-bottom-item">버디</a>
                                 <!--<a href="" class="col-3 text-center box-bottom-item">강사</a>-->
                                 <!--<a href="" class="col-4 text-center box-bottom-item">포럼</a>-->
@@ -853,7 +853,7 @@ export default {
 
     document.getElementById("page-back").classList.remove("hide");
     //document.getElementById("footer-bar").classList.add("hide");
-    document.getElementById("footer-bar").style.borderRadius = "30px 30px 0 0";
+    //document.getElementById("footer-bar").style.borderRadius = "30px 30px 0 0";
 
     let script = document.createElement('script');
     script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCWu8Fw-h-f1t8Sp3I7R3l_Ukr24HunXQM';
@@ -1306,8 +1306,84 @@ export default {
             }, 300);
             
       },
-      mapBoxClick(item) {
-          this.$router.push({name: "BuddyCreateAllPage", target: markerItem})
+      async mapBoxClick(item) {
+          if (item == 'buddy')
+            this.$router.push({name: "BuddyCreateAllPage", target: markerItem})
+          else if (item == 'concierge') {
+              if (localStorage.idToken) {
+                var result = await axios({
+                    url: 'https://chat.wedives.com/graphql',
+                    method: 'post',
+                    headers: {
+                        countrycode: 'ko',
+                        idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+                    },
+                    data: {
+                        query: `
+                            query {
+                                getJoinedRoomList {
+                                    lastChatMessage {
+                                    text
+                                    author {
+                                        _id
+                                        uid
+                                        name
+                                        avatarOrigin
+                                    }
+                                    createdAt
+                                    }
+                                    _id
+                                    title
+                                    type
+                                    lastMessageAt
+                                    numOfmessages
+                                    unread
+                                    createdAt
+                                    chatUsers {
+                                    _id
+                                    name
+                                    uid
+                                    avatarOrigin
+                                    }
+                                    usersCount
+                                    owner {
+                                    _id
+                                    uid
+                                    name
+                                    avatarOrigin
+                                    }
+                                }
+                            }
+                        `
+                    }
+                });
+                
+                var concierge_uid = "RuOiMt9YUTbRUJQTrXv4cWMEimr2";
+                // 개설된 채팅이 있는지 확인한다.
+                var go_flag = false;
+                result.data.data.getJoinedRoomList.forEach(room => {
+                    if (room.type == 'direct' && room.chatUsers.filter(u=>u.uid == concierge_uid).length > 0) {
+                        go_flag = true;
+                        //location.href = '/chat/' + room._id;
+                        const room_id = room._id;
+                        this.$router.push({name: 'ChatDetailPage', params: { room_id }, target: markerItem})
+                    }
+                })
+                if (go_flag == false) {
+                    // 없는경우, 더미로 하나 만든다.
+                    //localStorage.chatType = 'direct';
+                    //var chatUids = new Array();
+                    //chatUids.push(concierge_uid);
+                    //localStorage.chatUids = JSON.stringify(chatUids);
+                    //localStorage.chatName = "WeDive";
+                    //location.href = '/chat/create'
+
+                    this.$router.push({name: "ChatDummyPage", params: {is_concierge: true, roomName: "WeDive", chatType: "direct", chatUids: JSON.stringify([concierge_uid])}});
+                }
+            } else { // 로그인
+                this.login();
+            }
+          }
       },
       showAppSettingActivity() {
           try {
