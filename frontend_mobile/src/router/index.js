@@ -53,6 +53,7 @@ import ReservationAdminPage from '@/components/ReservationAdminPage'
 import OtherSubscribePage from '@/components/OtherSubscribePage'
 import OtherNotiPage from '@/components/OtherNotiPage'
 import OtherPrivacyPage from '@/components/OtherPrivacyPage'
+import OtherTermsPage from '@/components/OtherTermsPage'
 import InstructorCreatePage from '@/components/InstructorCreatePage'
 
 import BeginnerPage from '@/components/guide/BeginnerPage'
@@ -228,6 +229,11 @@ export default new Router({
       path: '/other/privacy',
       name: 'OtherPrivacyPage',
       component: OtherPrivacyPage
+    },
+    {
+      path: '/other/terms',
+      name: 'OtherTermsPage',
+      component: OtherTermsPage
     },
     {
       path: '/diving/:id',

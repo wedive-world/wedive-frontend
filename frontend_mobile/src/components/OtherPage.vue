@@ -140,12 +140,14 @@ export default {
       logout() {
         localStorage.clear();
         this.$root.$children[0].signOut();
+        location.href='/';
         // android token 삭제
       },
       byebye() {
         this.$root.$children[0].deleteCurrentUser();
         localStorage.clear();
         this.$root.$children[0].signOut();
+        location.href='/';
         // api호출
       },
   }

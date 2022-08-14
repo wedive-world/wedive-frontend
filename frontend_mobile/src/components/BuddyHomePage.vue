@@ -201,7 +201,7 @@
     
     <div class="d-flex mb-4 pt-3">
         <img src="/static/images/assets/soulmate-hand.png" width="90" style="margin-left: 12px;margin-bottom:12px;"/>
-        <div class="font-noto font-18 font-600 ps-2 opacity-80" style="padding-top:6px;">{{ (getUserById && getUserById.nickName && getUserById.nickName != 'null') ? getUserById.nickName : '다이버' }}님을 위한 <br/>디이빙 추천</div>
+        <div class="font-noto font-18 font-600 ps-2 opacity-80" style="padding-top:6px;">{{ (getUserById && getUserById.nickName && getUserById.nickName != 'null') ? getUserById.nickName : '다이버' }}님을 위한 <br/>다이빙 추천</div>
     </div>
     <div v-if="getNearByDivings != null && getNearByDivings.length > 0" style="margin-top: -16px;">
         <div>
@@ -449,7 +449,7 @@
 
         <div class="d-flex mb-3 pt-3">
             <img src="/static/images/assets/map-location.png" width="90" style="margin-left: 12px;"/>
-            <div class="font-noto font-18 font-600 ps-2 opacity-80" style="padding-top:6px;">{{ (getUserById && getUserById.nickName && getUserById.nickName != 'null') ? getUserById.nickName : '다이버' }}님을 위한 <br/>디이빙 장소 추천</div>
+            <div class="font-noto font-18 font-600 ps-2 opacity-80" style="padding-top:6px;">{{ (getUserById && getUserById.nickName && getUserById.nickName != 'null') ? getUserById.nickName : '다이버' }}님을 위한 <br/>다이빙 장소 추천</div>
         </div>
         
         <div v-if="getNearByDiveCenters != null" style="margin-top: 16px;">

@@ -618,7 +618,9 @@ export default {
     getFirebaseToken() {
       const auth = getAuth();
       onIdTokenChanged(auth, async (user) => {
-        if (user) {
+        //console.log("onIdTokenChanged : ");
+        //console.log(user);
+        if (user && localStorage.userEmail) {
           localStorage.uid = user.uid;
           localStorage.idToken = await user.getIdToken(false);
           localStorage.tokenAt = (new Date()).getTime();
@@ -627,7 +629,9 @@ export default {
         }
       });
       onAuthStateChanged(auth, async (user) => {
-        if (user) {
+        //console.log("onAuthStateChanged : ");
+        //console.log(user);
+        if (user && localStorage.userEmail) {
           localStorage.uid = user.uid;
           localStorage.idToken = await user.getIdToken(false);
           localStorage.tokenAt = (new Date()).getTime();
@@ -643,6 +647,8 @@ export default {
 
       signInWithPopup(auth, provider)
       .then(async(result) => {
+          console.log("signInWithPopup : ");
+          console.log(user);
           const credential = GoogleAuthProvider.credentialFromResult(result);
           const token = credential.accessToken;
           const user = result.user;
