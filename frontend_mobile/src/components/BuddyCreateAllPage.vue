@@ -410,12 +410,12 @@ export default {
     draggable,
   },
   created() {
+    //console.log('$("#footer-bar").hide();')
+    $("#footer-bar").hide();
     if (this.$route.target != null && this.$route.target.hasOwnProperty('_id')) {
-        $("#footer-bar").hide();
         this.search_result.push({__typename: this.$route.target.__typename, location: this.$route.target.name, adminScore: this.$route.target.adminScore, description: this.$route.target.description, _id: this.$route.target._id});
         const insname = this.ins_name;
     } else if (this.$route.params != null && this.$route.params.hasOwnProperty('_id')) {
-        $("#footer-bar").hide();
         //console.log(this.$route.params);
         if (this.$route.params.startedAt.substring(0,10) == this.$route.params.finishedAt.substring(0,10)) {
             this.scheduleFlag = false;

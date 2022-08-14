@@ -36,6 +36,21 @@
             </div>
             <!--<img :src="(divingInfo.diveLocation && divingInfo.diveLocation.length > 0 && divingInfo.diveLocation[0].backgroundImages && divingInfo.diveLocation[0].backgroundImages.length > 0) ? divingInfo.diveLocation[0].backgroundImages[0].thumbnailUrl : '/static/empty.jpg'" style="height:74px;width:74px;position:absolute;right:14px;top:58px;-webkit-mask-image: -webkit-radial-gradient(center, white, black);border-radius: 16px;"/>-->
         </div>
+        <div v-else-if="locationInfo" v-on:click="moveLocation(locationInfo)" class="font-noto" style="margin-top: 50px;height:90px;border-bottom:1px solid lightgray;padding:14px;position:relative;">
+            <div class="thumb-img me-2" style="position:absolute;right:14px;top:14px;">
+                <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
+                    <defs>
+                    <path id="shapeSquircle" d="M44,0 C76.0948147,0 88,11.9051853 88,44 C88,76.0948147 76.0948147,88 44,88 C11.9051853,88 0,76.0948147 0,44 C0,11.9051853 11.9051853,0 44,0 Z"></path>
+                    <clipPath id="clipSquircle">
+                        <use xlink:href="#shapeSquircle"/>
+                    </clipPath>
+                    </defs>
+                    <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(locationInfo.diveLocation && locationInfo.diveLocation.length > 0 && locationInfo.diveLocation[0].backgroundImages && locationInfo.diveLocation[0].backgroundImages.length > 0) ? locationInfo.diveLocation[0].backgroundImages[0].thumbnailUrl : '/static/empty.jpg'"/>
+                </svg>
+            </div>
+            <p class="mb-0 font-16 font-600"><i class="fas fa-swimmer me-1"></i> {{ locationInfo.name }}</p>
+            <p class="mb-0 font-14 opacity-80 ellipsis2" style="line-height:1.3;max-width: calc(100vw - 118px) !important;">{{ locationInfo.description }}</p>
+        </div>
     </div>
 
     
@@ -795,6 +810,10 @@ export default {
     ContentLoader,
   },
   created() {
+    console.log(this.$route)
+    if (this.$route.target != null && this.$route.target.hasOwnProperty('_id')) {
+        locationInfo = this.$route.target;
+    }
     window.addEventListener('native.showkeyboard', this.keyboardShowHandler);
   },
   destroyed () {
@@ -831,6 +850,7 @@ export default {
         roomInfo: {},
         changeTitle: '',
         divingInfo: null,
+        locationInfo: null,
     }
   }, 
   methods: {

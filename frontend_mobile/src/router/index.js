@@ -11,6 +11,7 @@ import BuddyCreateAbroadPage from '@/components/BuddyCreateAbroadPage'
 import BuddyHomePage from '@/components/BuddyHomePage'
 import UserProfilePage from '@/components/UserProfilePage'
 import UserCreatePage from '@/components/UserCreatePage'
+import UserCreateNewPage from '@/components/UserCreateNewPage'
 import CenterHomePage from '@/components/CenterHomePage'
 import CenterDetailPage from '@/components/CenterDetailPage'
 import CenterDetailPage2 from '@/components/CenterDetailPage2'
@@ -54,6 +55,7 @@ import OtherSubscribePage from '@/components/OtherSubscribePage'
 import OtherNotiPage from '@/components/OtherNotiPage'
 import OtherPrivacyPage from '@/components/OtherPrivacyPage'
 import OtherTermsPage from '@/components/OtherTermsPage'
+import OtherUgcPage from '@/components/OtherUgcPage'
 import InstructorCreatePage from '@/components/InstructorCreatePage'
 
 import BeginnerPage from '@/components/guide/BeginnerPage'
@@ -117,6 +119,11 @@ export default new Router({
     },
     {
       path: '/user/create',
+      name: 'UserCreateNewPage',
+      component: UserCreateNewPage
+    },
+    {
+      path: '/user/create2',
       name: 'UserCreatePage',
       component: UserCreatePage
     },
@@ -234,6 +241,11 @@ export default new Router({
       path: '/other/terms',
       name: 'OtherTermsPage',
       component: OtherTermsPage
+    },
+    {
+      path: '/other/ugc',
+      name: 'OtherUgcPage',
+      component: OtherUgcPage
     },
     {
       path: '/diving/:id',

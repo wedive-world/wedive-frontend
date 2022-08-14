@@ -140,6 +140,8 @@ export default {
         init_template();
         var preloader = document.getElementById('preloader')
         if(preloader){preloader.classList.add('preloader-hide');}
+        console.log('$("#footer-bar").hide();')
+        $("#footer-bar").hide();
     }, 500);
   },
   data () {

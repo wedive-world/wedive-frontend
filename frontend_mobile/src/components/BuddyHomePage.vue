@@ -405,7 +405,7 @@
                     </div>
                     <div v-if="recommendation.previews.filter(x=>x.isBlocked == false).length > 2" class="list-group list-custom-small list-icon-0" style="background: rgba(196, 187, 171, 0.2);margin-left: -15px;margin-right: -15px;">
                         <a data-bs-toggle="collapse" class="no-effect" :href="'#collapse_' + recommendation._id" v-on:click="recommendation1_collapse_text[recommendation._id] = (recommendation1_collapse_text[recommendation._id] == '더 보기' ? '줄이기' : '더 보기')">
-                            <p class="font-14 mb-0 text-center">{{ recommendation1_collapse_text[recommendation._id] }}</p>
+                            <p class="font-14 mb-0 text-center">{{ recommendation1_collapse_text[recommendation._id] == null ? recommendation1_collapse_text[recommendation._id] = '더 보기' : recommendation1_collapse_text[recommendation._id] }}</p>
                         </a>        
                     </div>
                     
@@ -578,7 +578,7 @@
                     </div>
                     <div v-if="recommendation.previews.length > 2" class="list-group list-custom-small list-icon-0" style="background: rgba(196, 187, 171, 0.2);margin-left: -15px;margin-right: -15px;">
                         <a data-bs-toggle="collapse" class="no-effect" :href="'#collapse_' + recommendation._id" v-on:click="recommendation2_collapse_text[recommendation._id] = (recommendation2_collapse_text[recommendation._id] == '더 보기' ? '줄이기' : '더 보기')">
-                            <p class="font-14 mb-0 text-center">{{ recommendation2_collapse_text[recommendation._id] }}</p>
+                            <p class="font-14 mb-0 text-center">{{ recommendation2_collapse_text[recommendation._id] == null ? recommendation2_collapse_text[recommendation._id] = '더 보기' : recommendation2_collapse_text[recommendation._id] }}</p>
                         </a>        
                     </div>
                     
