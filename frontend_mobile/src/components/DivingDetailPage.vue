@@ -87,7 +87,7 @@
                 <div class="evaluation">
                     <div class="row mb-0 line-height-l">
                         <div class="col-3 text-center color-gray">시작일시</div>
-                        <div class="col-9">{{ weDiveDateFormat(new Date(getDivingById.startedAt), true) }}</div>
+                        <div class="col-9">{{ weDiveDateFormat(new Date(getDivingById.startedAt), false) }}</div>
                         <div v-if="showFinishedAt == false" class="col-3 text-center color-gray">종료일시</div>
                         <div v-if="showFinishedAt == false" class="col-9">{{ weDiveDateFormat(new Date(getDivingById.finishedAt), false) }}</div>
                         <div class="col-3 text-center color-gray">선호사항</div>
@@ -129,7 +129,6 @@
                     </div>
                     <div class="border-bottom pt-2 pb-2 position-relative" v-for="participant in getDivingById.participants.filter(member=> member.status == 'joined')">
                         <div v-on:click="goUserPage(participant.user)">
-                            
                             <div class="user-img me-2">
                                 <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
                                     <defs>
@@ -143,13 +142,13 @@
                             </div>
 
                             <!--<img class="inline-block circular_image" :src="(participant.user && participant.user.profileImages && participant.user.profileImages.length>0 && participant.user.profileImages[0].thumbnailUrl) ? participant.user.profileImages[0].thumbnailUrl : 'https://d34l91104zg4p3.cloudfront.net/assets/user_empty_'+(participant.gender ? participant.gender : 'm')+'.png'" width="50" style="vertical-align: top;"/>-->
-                            <div class="inline-block font-noto ms-2" style="vertical-align: top;">
+                            <div :class="'inline-block font-noto ms-2' + (participant.user._id == 'resigned' ? ' opacity-50' : '')" style="vertical-align: top;">
                                 <h5 class="mb-0 font-500 font-15">{{ (participant.user!=null&&participant.user.nickName!=null) ? participant.user.nickName : ((participant.name!=null) ? participant.name : participant.gender!=null ? '비공개 (' + (participant.gender == 'm' ? '남' : '여') + ')' : '비공개') }}</h5>
                                 <p v-if ="participant && participant.user == null" class="mb-0 font-14 color-gray ellipsis opacity-50" style="max-width: calc(100vw - 170px);">라이센스 정보 없음</p>
                                 <p v-else class="mb-0 font-14 color-gray ellipsis" style="max-width: calc(100vw - 170px);">{{ participant ? getDiverLevel(participant.freeLicenseLevel, participant.scubaLicenseLevel) : '' }}</p>
                             </div>
                         </div>
-                        <span v-if="participant.user!=null" v-on:click="chatUser(participant.user)" class="chip chip-s bg-gray-light text-center font-400 wedive-chip">채팅</span>
+                        <span v-if="participant.user!=null && participant.user._id!='resigned'" v-on:click="chatUser(participant.user)" class="chip chip-s bg-gray-light text-center font-400 wedive-chip">채팅</span>
                     </div>
                 </div>
             </div>
@@ -176,12 +175,12 @@
                                 </div>
                                 
                                 <!--<img class="inline-block circular_image" :src="(participant.user && participant.user.profileImages && participant.user.profileImages.length>0 && participant.user.profileImages[0].thumbnailUrl) ? participant.user.profileImages[0].thumbnailUrl : 'https://d34l91104zg4p3.cloudfront.net/assets/user_empty_'+(participant.gender ? participant.gender : 'm')+'.png'" width="50" style="vertical-align: top;"/>-->
-                                <div class="inline-block font-noto ms-2" style="vertical-align: top;">
+                                <div :class="'inline-block font-noto ms-2' + (participant.user._id == 'resigned' ? ' opacity-50' : '')" style="vertical-align: top;">
                                     <h5 class="mb-0 font-500 font-15">{{ (participant.user!=null&&participant.user.nickName!=null) ? participant.user.nickName : ((participant.name!=null) ? participant.name : participant.gender!=null ? '비공개 (' + (participant.gender == 'm' ? '남' : '여') + ')' : '비공개') }}</h5>
                                     <p class="mb-0 font-13 color-gray ellipsis" style="max-width: calc(100vw - 220px);">{{ participant ? getDiverLevel(participant.freeLicenseLevel, participant.scubaLicenseLevel) : '' }}</p>
                                 </div>
                             </div>
-                            <span v-if="participant.user!=null" v-on:click="chatUser(participant.user)" data-menu="menu-dm" class="chip chip-s bg-gray-light text-center font-400 wedive-chip">채팅</span>
+                            <span v-if="participant.user!=null && participant.user._id!='resigned'" v-on:click="chatUser(participant.user)" data-menu="menu-dm" class="chip chip-s bg-gray-light text-center font-400 wedive-chip">채팅</span>
                             <span data-menu="menu-approval" v-on:click="setUser(participant)" class="chip chip-s bg-gray-light text-center font-400 wedive-chip2">승인</span>
                             <!--<p class="color-gray-dark mb-0 font-14">{{ (participant.user!=null&&participant.user.nickName!=null) ? participant.user.nickName : ((participant.name!=null) ? participant.name : '비공개') }}</p>-->
                         </div>
@@ -915,7 +914,7 @@ export default {
           this.requester = participant;
       },
       getDiverLevel(freeLicenseLevel, scubaLicenseLevel) {
-        var levelShow = '초보';
+        var levelShow = '';
         var scuba_level = ["초보", "오픈워터", "어드벤스드", "레스큐", "마스터", "강사", "위다이브 컨시어지"];
         var free_level = ["초보", "레벨1", "레벨2", "레벨3", "레벨4", "강사"];
 
@@ -926,7 +925,11 @@ export default {
         } else {
             levelShow = (my_f_lvl>0) ? "프리 " + free_level[my_f_lvl] : levelShow;
         }
-        levelShow += " 다이버";
+        if (levelShow == '') {
+            levelShow = "-";
+        } else {
+            levelShow += " 다이버";
+        }
         if(my_s_lvl>5) levelShow = scuba_level[my_s_lvl];
         
         return levelShow;
@@ -1238,12 +1241,16 @@ export default {
           
       },
       goUserPage(user) {
-          if (localStorage.idToken && localStorage.nickName != null && localStorage.nickName != 'null') {
-              if (user && user._id) {
-                  location.href = '/user/' + user._id;
-              }
-          } else if (user != null) {
-              this.login();
+          if (user._id == 'resigned') {
+              // do nothing
+          } else {
+              if (localStorage.idToken && localStorage.nickName != null && localStorage.nickName != 'null') {
+                if (user && user._id) {
+                    location.href = '/user/' + user._id;
+                }
+            } else if (user != null) {
+                this.login();
+            }
           }
       },
       goDetail(type, uniqueName) {

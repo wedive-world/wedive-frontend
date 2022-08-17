@@ -32,8 +32,8 @@
 
                             <div style="">
                                 <div class="custom-control ios-switch ios-switch-icon wedive-switch toggleBorder" style="margin: 0 !important;padding: 0 !important;">
-                                    <input v-if="scheduleFlag" v-on:click="toggleSchedule()" type="checkbox" class="ios-input" id="toggle-license" checked="checked">
-                                    <input v-else v-on:click="toggleSchedule()" type="checkbox" class="ios-input" id="toggle-license">
+                                    <input v-if="scheduleFlag" v-on:click="toggleSchedule" type="checkbox" class="ios-input" id="toggle-license" checked="checked">
+                                    <input v-else v-on:click="toggleSchedule" type="checkbox" class="ios-input" id="toggle-license">
                                     <label class="custom-control-label" for="toggle-license"></label>
                                     <span :class="'ps-3 font-16' + (scheduleFlag ? ' opacity-30' : '')" style="padding-top:12px;padding-left:56px !important;">당일 일정</span>
                                     <span :class="'font-16' + (scheduleFlag ? '' : ' opacity-30')" style="padding-top:12px;padding-left:40px;">1박 이상</span>
@@ -103,7 +103,8 @@
                                             <i class="icon-check-2 far fa-check-circle font-16 color-highlight" style="font-size: 20px !important;"></i>
                                         </div>
                                         <div class="form-check icon-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="radio_free" @focus="focusInput($event)" v-on:click="clickRadio('label_free')">
+                                            <input v-if="label_free" checked="checked" class="form-check-input" type="checkbox" value="" id="radio_free" @focus="focusInput($event)" v-on:click="clickRadio('label_free')">
+                                            <input v-else class="form-check-input" type="checkbox" value="" id="radio_free" @focus="focusInput($event)" v-on:click="clickRadio('label_free')">
                                             <label class="form-check-label font-noto font-18 font-500 opacity-30" for="radio_free" id="label_free">프리</label>
                                             <i class="icon-check-1 far fa-circle color-gray-dark font-16"></i>
                                             <i class="icon-check-2 far fa-check-circle font-16 color-highlight" style="font-size: 20px !important;"></i>
@@ -412,11 +413,12 @@ export default {
   created() {
     //console.log('$("#footer-bar").hide();')
     $("#footer-bar").hide();
+    console.log(this.$route.params);
     if (this.$route.target != null && this.$route.target.hasOwnProperty('_id')) {
         this.search_result.push({__typename: this.$route.target.__typename, location: this.$route.target.name, adminScore: this.$route.target.adminScore, description: this.$route.target.description, _id: this.$route.target._id});
         const insname = this.ins_name;
     } else if (this.$route.params != null && this.$route.params.hasOwnProperty('_id')) {
-        //console.log(this.$route.params);
+        this.createId = this.$route.params._id;
         if (this.$route.params.startedAt.substring(0,10) == this.$route.params.finishedAt.substring(0,10)) {
             this.scheduleFlag = false;
             this.selectedDay = new Date(this.$route.params.startedAt);
@@ -425,6 +427,7 @@ export default {
             this.scheduleFlag = true;
             this.selectedRange.start = new Date(this.$route.params.startedAt);
             this.selectedRange.end = new Date(this.$route.params.finishedAt);
+            this.selectedDay = this.selectedRange;
             this.day_show = (this.selectedRange.start.getMonth()+1) + "." + this.selectedRange.start.getDate() + " (" + weekday_ko[this.selectedRange.start.getDay()] + ") ~ " + (this.selectedRange.end.getMonth()+1) + "." + this.selectedRange.end.getDate() + " (" + weekday_ko[this.selectedRange.end.getDay()] + ")";
         }
 
@@ -527,6 +530,7 @@ export default {
         selectedRange: {},
         selected_id: '',
         diving_id: '',
+        createId: null,
         
         swiperOptions: {
             allowTouchMove: false,
@@ -686,7 +690,7 @@ export default {
         }
         const s_date = new Date(_s_date).toISOString();
         const e_date = _e_date;
-
+        
         var diveSite = new Array();
         this.search_result.forEach(x => {if (x.__typename == 'DiveSite' && diveSite.includes(x._id) == false) diveSite.push(x._id)});
         if (diveSite.length == 0) diveSite = null;
@@ -707,34 +711,69 @@ export default {
         if (diveShop.length == 0) diveShop = null;
         const __diveShop = diveShop;
 
-        var upsert_diving = await this.$apollo.mutate({
-            // Query
-            mutation: gql`
-                mutation Mutation($input: DivingInput) {
-                        upsertDiving(input: $input) {
-                            _id
+        var upsert_diving = null;
+        if (this.createId) {
+            upsert_diving = await this.$apollo.mutate({
+                // Query
+                mutation: gql`
+                    mutation Mutation($input: DivingInput) {
+                            upsertDiving(input: $input) {
+                                _id
+                            }
                         }
+                `,
+                // Parameters
+                variables: {
+                    "input": {
+                        "_id" : this.createId,
+                        "title": this.diving_title,
+                        "description": this.diving_detail,
+                        "status": "searchable",
+                        "type": diving_type,
+                        "participants": parti,
+                        "maxPeopleNumber": (label_unlimited ? 99 : num_recruit + parti.length + 1),
+                        "interests": inter,
+                        "diveSites": __diveSite,
+                        "divePoints": __divePoint,
+                        "diveCenters": __diveCenter,
+                        "diveShops": __diveShop,
+                        "startedAt": s_date,
+                        "finishedAt": e_date,
                     }
-            `,
-            // Parameters
-            variables: {
-                "input": {
-                    "title": this.diving_title,
-                    "description": this.diving_detail,
-                    "status": "searchable",
-                    "type": diving_type,
-                    "participants": parti,
-                    "maxPeopleNumber": (label_unlimited ? 99 : num_recruit + parti.length + 1),
-                    "interests": inter,
-                    "diveSites": __diveSite,
-                    "divePoints": __divePoint,
-                    "diveCenters": __diveCenter,
-                    "diveShops": __diveShop,
-                    "startedAt": s_date,
-                    "finishedAt": s_date,
-                }
-            },
-        });
+                },
+            });
+        } else {
+            upsert_diving = await this.$apollo.mutate({
+                // Query
+                mutation: gql`
+                    mutation Mutation($input: DivingInput) {
+                            upsertDiving(input: $input) {
+                                _id
+                            }
+                        }
+                `,
+                // Parameters
+                variables: {
+                    "input": {
+                        "title": this.diving_title,
+                        "description": this.diving_detail,
+                        "status": "searchable",
+                        "type": diving_type,
+                        "participants": parti,
+                        "maxPeopleNumber": (label_unlimited ? 99 : num_recruit + parti.length + 1),
+                        "interests": inter,
+                        "diveSites": __diveSite,
+                        "divePoints": __divePoint,
+                        "diveCenters": __diveCenter,
+                        "diveShops": __diveShop,
+                        "startedAt": s_date,
+                        "finishedAt": e_date,
+                    }
+                },
+            });
+        }
+
+        
         this.diving_id = upsert_diving.data.upsertDiving._id
       },
       finished() {
@@ -838,10 +877,13 @@ export default {
             preloader.classList.add('preloader-hide');
         }
       },
-      toggleSchedule() {
-          this.scheduleFlag = !this.scheduleFlag;
-          $(".focusBorder").each(function(index, item){item.classList.remove("focusBorder");});
-          event.currentTarget.parentNode.classList.add("toggleBorder");
+      toggleSchedule(event) {
+          //if ((this.scheduleFlag == false && (event.clientX > ($( window ).width() / 2))) || (this.scheduleFlag == true && (event.clientX < ($( window ).width() / 2)))) {
+            //console.log("aa");
+            this.scheduleFlag = !this.scheduleFlag;
+            $(".focusBorder").each(function(index, item){item.classList.remove("focusBorder");});
+            event.currentTarget.parentNode.classList.add("toggleBorder");
+          //}
       },
       focusInput(event) {
           $(".focusBorder").each(function(index, item){item.classList.remove("focusBorder");});

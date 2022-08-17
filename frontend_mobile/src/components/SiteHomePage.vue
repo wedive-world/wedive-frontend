@@ -1863,5 +1863,5 @@ export default {
 
 .map_box_cate {padding: 2px 6px;margin-bottom:0px;margin-right:6px;border-radius:4px;vertical-align: top;}
 .has-notification:before {content: '●';color: #ff5160;position:absolute;top:0;font-size:5px;margin-top: -9px;margin-left: 20px;}
-.top-search::placeholder {font-size: 16px !important;font-family: 'Noto Sans Korean';opacity:50%;font-weight:500;}
+.top-search::placeholder {font-size: 16px !important;font-family: 'Noto Sans Korean';opacity:50%;font-weight:500;color:black;}
 </style>
