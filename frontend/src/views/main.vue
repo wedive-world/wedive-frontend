@@ -5,6 +5,7 @@
       cancel-variant="outline-secondary"
       ok-title="확인"
       cancel-title="닫기"
+      :ok-disabled="(phone_number == '' || agree_selected == false)"
       centered
       title="곧 출시될 예정입니다. 출시를 안내해드릴께요."
     >
@@ -12,10 +13,26 @@
         <b-form-group>
           <label for="phone">전화번호:</label>
           <b-form-input
+            v-model="phone_number"
             id="phone"
             type="phone"
             placeholder="010-1234-1234"
           />
+        </b-form-group>
+        <b-form-group>
+          <b-form-checkbox
+            v-model="agree_selected"
+            value="A"
+            class="custom-control-primary mt-2"
+          >
+            개인정보 수집 및 이용 동의
+          </b-form-checkbox>
+          <div style="position: relative;border: 1px solid #e6e6e6;background:#fafafa;padding: 10px 16px 13px 13px;border-radius: 0.357rem;">
+            1. 목적 : 이용자의 애플 앱스토어 등록 알림<br/>
+            2. 항목 : 휴대폰번호<br/>
+            <big>3. 보유기간 : 앱스토어 알림 시까지 보유</big>
+          </div>
+          <span style="opacity: 70%;">※ 위 개인정보 수집에 대한 동의를 거부할 권리가 있으며, 동의 거부 시에는 알림이 제한될 수 있습니다.</span>
         </b-form-group>
       </b-form>
     </b-modal>
@@ -175,7 +192,7 @@
 </template>
 
 <script>
-import { BRow, BCol, BImg, BButton, BFormInput } from 'bootstrap-vue'
+import { BRow, BCol, BImg, BButton, BFormInput, BFormCheckbox } from 'bootstrap-vue'
 import VideoBackground from 'vue-responsive-video-background-player'
 
 export default {
@@ -185,12 +202,15 @@ export default {
     BImg,
     BButton,
     BFormInput,
+    BFormCheckbox,
     
     VideoBackground,
   },
   data() {
     return {
-      windowWidth: window.innerWidth
+      windowWidth: window.innerWidth,
+      phone_number: '',
+      agree_selected: false,
     }
   },
   mounted() {

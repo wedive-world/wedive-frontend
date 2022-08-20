@@ -64,6 +64,7 @@ export default {
       $(".page-title-clear").hide();
       $(".header-fixed").hide();
     }
+    this.readAll();
   },
   created() {
     setTimeout(function() {
@@ -216,7 +217,7 @@ export default {
         return `${Math.floor(betweenTimeDay / 365)}년전`;
     },
     async clickNoti(noti) {
-        var result = await axios({
+        /*var result = await axios({
             url: 'https://api.wedives.com/graphql',
             method: 'post',
             headers: {
@@ -239,9 +240,32 @@ export default {
           if (result.data && result.data.data && result.data.data.read && result.data.data.read.success == false) {
               console.log("READ RESULT ERR >>");
               console.log(result);
-          }
+          }*/
           var type_to_url = {"diving": "diving", "user": "user", "instructor": "instructor", "diveSite": "site", "divePoint": "point", "diveCenter": "center"};
           location.href = "/" + type_to_url[noti.subjectType] + "/" + noti.subject._id;
+    },
+    async readAll() {
+        var result = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                    mutation Mutation {
+                        readAll {
+                            success
+                        }
+                    }
+                `
+            }
+          });
+          if (result.data && result.data.data && result.data.data.read && result.data.data.read.success == false) {
+              console.log("READ RESULT ERR >>");
+              console.log(result);
+          }
     },
   }
 

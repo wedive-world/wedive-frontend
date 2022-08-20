@@ -106,7 +106,7 @@
                     </div>
                 </div>
             </div>
-            <a href="/site_map" class="btn btn-border btn-m btn-full mb-3 rounded-sm font-900 border-gray color-black bg-theme me-3 ms-3 mt-3" style="font-size: 14px !important;">장소 추가하기</a>
+            <!--<a href="/site_map" class="btn btn-border btn-m btn-full mb-3 rounded-sm font-900 border-gray color-black bg-theme me-3 ms-3 mt-3" style="font-size: 14px !important;">장소 추가하기</a>-->
         </div>
         </pull-to>
     </div>
