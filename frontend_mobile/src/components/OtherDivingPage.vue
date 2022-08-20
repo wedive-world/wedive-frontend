@@ -8,13 +8,13 @@
 
     <div class="page-content transform-none" style="margin-top: 50px;padding:0;">
         <div class="card card-style ms-0 me-0 rounded-0 mb-0" style="min-height: calc(100vh - 50px)">
-            <div v-if="divingData.length == 0" class="text-center">
+            <div v-if="getDivingsRelatedWithCurrentUser.length == 0" class="text-center">
                 <img src="https://d34l91104zg4p3.cloudfront.net/assets/empty_list2.jpg" width="60%" style="margin-top:25%;" />
-                <p class="color-gray-light-mid">앗! 아직 버디찾기를 한번도 해보지 않으셨네요!</p>
+                <p class="color-gray-light-mid">아직 버디찾기를 한번도 해보지 않으셨네요!</p>
                 <a href="/buddy_create" class="btn btn-m mb-3 rounded-xl text-uppercase font-500 shadow-s bg-secondary font-noto"> 버디찾기 생성 </a>
             </div>
             <div v-else class="content mt-1">
-                <div v-for="diving in divingData">
+                <div v-for="diving in getDivingsRelatedWithCurrentUser" v-on:scroll="handleScroll">
                     <div class="map-box">
                         <a :href="'/diving/' + diving._id">
                             <div :class="'pt-2 pb-2 bx position-relative' + ((diving.status == 'divingComplete') ? ' opacity-40':'')">
@@ -59,103 +59,142 @@
   </div>
 </template>
 <script>
+import gql from 'graphql-tag'
 const axios = require("axios")
 
 export default {
   name: 'HelloWorld',
-  async beforeRouteEnter(to, from, next) {
-    if (localStorage.userId != null) {
-        var result = await axios({
-            url: 'https://api.wedives.com/graphql',
-            method: 'post',
-            headers: {
-                countrycode: 'ko',
-                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-            },
-            data: {
-                query: `
-                query GetDivingsRelatedWithCurrentUser($limit: Int!) {
-                    getDivingsRelatedWithCurrentUser(limit: $limit) {
-                        diveCenters {
-                        backgroundImages {
-                            _id
-                            thumbnailUrl
-                        }
-                        name
-                        uniqueName
-                        description
-                        adminScore
-                        }
-                        diveShops {
-                        backgroundImages {
-                            _id
-                            thumbnailUrl
-                        }
-                        name
-                        uniqueName
-                        description
-                        adminScore
-                        }
-                        divePoints {
-                        backgroundImages {
-                            _id
-                            thumbnailUrl
-                        }
-                        name
-                        uniqueName
-                        description
-                        adminScore
-                        }
-                        diveSites {
-                        backgroundImages {
-                            _id
-                            thumbnailUrl
-                        }
-                        name
-                        uniqueName
-                        description
-                        adminScore
-                        }
+  apollo: {
+    getDivingsRelatedWithCurrentUser: {
+        query: gql`
+            query GetDivingsRelatedWithCurrentUser($skip: Int!, $limit: Int!) {
+                getDivingsRelatedWithCurrentUser(skip: $skip, limit: $limit) {
+                    diveCenters {
+                    backgroundImages {
                         _id
-                        title
-                        description
-                        status
-                        type
-                        participants {
-                        user {
-                            uid
-                            nickName
-                            profileImages {
-                            thumbnailUrl
-                            }
-                            gender
-                        }
-                        name
-                        gender
-                        status
-                        }
-                        maxPeopleNumber
-                        startedAt
-                        finishedAt
-                        createdAt
-                        views
-                        likes
-                        _id
+                        thumbnailUrl
                     }
+                    name
+                    uniqueName
+                    description
+                    adminScore
+                    }
+                    diveShops {
+                    backgroundImages {
+                        _id
+                        thumbnailUrl
+                    }
+                    name
+                    uniqueName
+                    description
+                    adminScore
+                    }
+                    divePoints {
+                    backgroundImages {
+                        _id
+                        thumbnailUrl
+                    }
+                    name
+                    uniqueName
+                    description
+                    adminScore
+                    }
+                    diveSites {
+                    backgroundImages {
+                        _id
+                        thumbnailUrl
+                    }
+                    name
+                    uniqueName
+                    description
+                    adminScore
+                    }
+                    _id
+                    title
+                    description
+                    status
+                    type
+                    participants {
+                    user {
+                        uid
+                        nickName
+                        profileImages {
+                        thumbnailUrl
+                        }
+                        gender
+                    }
+                    name
+                    gender
+                    status
+                    }
+                    maxPeopleNumber
+                    startedAt
+                    finishedAt
+                    createdAt
+                    views
+                    likes
+                    _id
                 }
-                `,
-                variables: {
-                    limit: 20,
-                    uid: (localStorage.uid ? localStorage.uid : '')
+            }
+        `,
+        variables () {
+            return {
+                limit: 20,
+                skip: this.skip,
+                uid: (localStorage.uid ? localStorage.uid : ''),
+            }
+        },
+        result (data) {
+            this.getDivingsRelatedWithCurrentUser.sort(function(a, b) {
+                return new Date(a.startedAt) - new Date(b.startedAt);
+            });
+            var now = new Date();
+            this.getDivingsRelatedWithCurrentUser.forEach(diving => {
+
+                var startedAt = new Date(diving.startedAt);
+                var finishedAt = new Date(diving.finishedAt);
+                if (diving.startedAt == diving.finishedAt) {
+                    diving.showAt = (startedAt.getMonth()+1) + "월 " + startedAt.getDate() + "일"
+                } else {
+                    diving.showAt = (startedAt.getMonth()+1) + "/" + startedAt.getDate() + " ~ " + (finishedAt.getMonth()+1) + "/" + finishedAt.getDate() + ""
+                }
+                diving.typeShow = (diving.type.join().replace(/scubaDiving/gi,"스쿠바").replace(/freeDiving/gi,"프리").replace(/,/gi, "/"));
+                
+                if (startedAt.getFullYear() == finishedAt.getFullYear() && startedAt.getMonth() == finishedAt.getMonth() && startedAt.getDate() == finishedAt.getDate()) {
+                    diving.showFinishedAt = true;
                 }
 
-            }
-        });
+                if (startedAt < now) {
+                    diving.status = 'divingComplete';
+                }
+
+                diving.location = '';
+                diving.locationData = {};
+                if (diving.diveSites && diving.diveSites.length > 0) {
+                    diving.locationData = diving.diveSites[0];
+                    diving.location = diving.diveSites[0].name;
+                } else if (diving.divePoints && diving.divePoints.length > 0) {
+                    diving.locationData = diving.divePoints[0];
+                    diving.location = diving.divePoints[0].name;
+                } else if (diving.diveCenters && diving.diveCenters.length > 0) {
+                    diving.locationData = diving.diveCenters[0];
+                    diving.location = diving.diveCenters[0].name;
+                } else if (diving.diveShops && diving.diveShops.length > 0) {
+                    diving.locationData = diving.diveShops[0];
+                    diving.location = diving.diveShops[0].name;
+                }
+            });
+            
+            setTimeout(function() {
+                $("#div_content_loader").hide();
+            },200);
+            
+            //console.log(data.getChatRoomInfo);
+            //data.getChatRoomInfo.reverse();
+        },
         
         
-        var ret = (result.data && result.data.data && result.data.data.getDivingsRelatedWithCurrentUser) ? result.data.data.getDivingsRelatedWithCurrentUser : null
-        next(vm => {vm.setData(ret)});
-    }
+    },
   },
   mounted() {
     $(".page-title").hide();
@@ -169,11 +208,39 @@ export default {
   },
   data () {
     return {
-        divingData: [],
+        getDivingsRelatedWithCurrentUser: [],
         userGender: localStorage.userGender,
+        skip: 0,
+        prev_height: 0,
     }
   },
   methods: {
+      handleScroll(e) {
+        if (e.target.scrollTop == 0) {
+            this.skip += this.limit;
+            this.prev_height = $('#speech-content')[0].scrollHeight;
+            
+            this.$apollo.queries.getDivingsRelatedWithCurrentUser.fetchMore({
+                // New variables
+                variables: {
+                    skip: this.skip,
+                    limit: 20,
+                    uid: (localStorage.uid ? localStorage.uid : ''),
+                },
+                // Transform the previous result with new data
+                updateQuery: (previousResult, { fetchMoreResult }) => {
+                    //console.log(previousResult.getChatRoomInfo.chatMessages)
+                    //console.log(fetchMoreResult.getChatRoomInfo.chatMessages)
+                    return {
+                        getDivingsRelatedWithCurrentUser: [
+                            ...fetchMoreResult.getDivingsRelatedWithCurrentUser || [],
+                            ...previousResult.getDivingsRelatedWithCurrentUser || [],
+                        ],
+                    }
+                },
+            });
+        }
+      },
       historyBack() {
           try {
               Android.onHistoryBack();

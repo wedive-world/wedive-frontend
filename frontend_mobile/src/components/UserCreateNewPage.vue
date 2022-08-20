@@ -411,6 +411,9 @@
                                 <p class="font-noto color-gray"><span class="span_timer">3</span>초 후 이전페이지로 이동할께요.</p>
                             </div>
                         </div>
+                        <div class="row me-0 ms-0 mb-0" style="position: absolute;bottom: 0;width:100%;padding-left:20px;padding-right:20px;">
+                            <a v-on:click="go_finish();" id="btn_finish" href="#" class="col-12 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3 gonext" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;">완료</a>
+                        </div>
                     </div>
         </swiper-slide>
         </swiper>
@@ -913,11 +916,13 @@ export default {
                 $(".span_timer").text("1");
             },2000)
             setTimeout(function() {
-                
-                //window.location.href=(localStorage.loginUrl == null || localStorage.loginUrl == '') ? '/' : localStorage.loginUrl;
+                window.location.href=(localStorage.loginUrl == null || localStorage.loginUrl == '') ? '/' : localStorage.loginUrl;
             },2100)
           }
           console.log("go next : " + idx)
+      },
+      go_finish() {
+          window.location.href=(localStorage.loginUrl == null || localStorage.loginUrl == '') ? '/' : localStorage.loginUrl;
       },
       focusInput(event) {
           $(".focusBorder").each(function(index, item){item.classList.remove("focusBorder");});

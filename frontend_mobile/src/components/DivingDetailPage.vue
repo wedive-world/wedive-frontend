@@ -694,8 +694,11 @@ export default {
             // 임시 //
             if (this.getDivingById.description.includes("https://cafe.naver.com")) {
                 var url = this.getDivingById.description.substring(this.getDivingById.description.indexOf("https://cafe.naver.com"), this.getDivingById.description.length);
-                if (url.indexOf("\n") > 0 || url.indexOf(" ") > 0) {
-                    if (url.indexOf("\n") > 0 && url.indexOf(" ") > 0) {
+                if (url.indexOf("\n") > 0 || url.indexOf(" ") > 0 || url.indexOf(")") > 0) {
+                    if (url.indexOf(")") > 0) {
+                        url = url.substring(0, url.indexOf(")"));
+                    }
+                    else if (url.indexOf("\n") > 0 && url.indexOf(" ") > 0) {
                         if (url.indexOf("\n") > url.indexOf(" ")) {
                             url = url.substring(0, url.indexOf(" "));
                         } else {
