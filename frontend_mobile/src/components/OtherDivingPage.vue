@@ -145,10 +145,7 @@ export default {
             }
         },
         result (data) {
-            this.getDivingsRelatedWithCurrentUser.sort(function(a, b) {
-                return new Date(a.startedAt) - new Date(b.startedAt);
-            });
-            var now = new Date();
+            //var now = new Date();
             this.getDivingsRelatedWithCurrentUser.forEach(diving => {
 
                 var startedAt = new Date(diving.startedAt);

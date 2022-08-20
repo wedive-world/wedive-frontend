@@ -57,7 +57,7 @@
                 style="padding-left:20px;">
                 <div style="padding-top: 10px;">
                     <div class="gallery gallery-filter inline-block" style="width:66px !important;padding:0 !important;min-height: 90px;">
-                        <a :href="(getUserById && getUserById.profileImages && getUserById.profileImages.length>0) ? getUserById.profileImages[0].thumbnailUrl : ('https://d34l91104zg4p3.cloudfront.net/assets/user_empty.png')" data-gallery="gallery-image" class="center_image filtr-item" :title="(getUserById?getUserById.nickName:'')" data-category="user" style="width:60px;height:60px;">
+                        <a :href="(getUserByUid && getUserByUid.profileImages && getUserByUid.profileImages.length>0) ? getUserByUid.profileImages[0].thumbnailUrl : ('https://d34l91104zg4p3.cloudfront.net/assets/user_empty.png')" data-gallery="gallery-image" class="center_image filtr-item" :title="(getUserByUid?getUserByUid.nickName:'')" data-category="user" style="width:60px;height:60px;">
                             <div class="user-img me-2">
                                 <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
                                     <defs>
@@ -66,29 +66,29 @@
                                         <use xlink:href="#shapeSquircle"/>
                                     </clipPath>
                                     </defs>
-                                    <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(getUserById && getUserById.profileImages && getUserById.profileImages.length>0) ? getUserById.profileImages[0].thumbnailUrl : 'https://d34l91104zg4p3.cloudfront.net/assets/user_empty.png'"/>
+                                    <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="(getUserByUid && getUserByUid.profileImages && getUserByUid.profileImages.length>0) ? getUserByUid.profileImages[0].thumbnailUrl : 'https://d34l91104zg4p3.cloudfront.net/assets/user_empty.png'"/>
                                 </svg>
                             </div>
                         </a>
                     </div>
                     <div class="font-noto" style="position: absolute;top:14px;left:98px;" v-on:click="goLogin()">
-                        <h5 class="mb-2 font-500 ellipsis">{{ getUserById && getUserById.nickName && getUserById.nickName != 'null' ? '다이버 ' + getUserById.nickName + '님' : (idToken == null ? '위다이브 손님, 로그인을 해보세요.' : '다이버님, 프로필을 등록해보세요.') }}</h5>
-                        <!--<span :class="getUserById ? '' : 'opacity-30'">
+                        <h5 class="mb-2 font-500 ellipsis">{{ getUserByUid && getUserByUid.nickName && getUserByUid.nickName != 'null' ? '다이버 ' + getUserByUid.nickName + '님' : (idToken == null ? '위다이브 손님, 로그인을 해보세요.' : '다이버님, 프로필을 등록해보세요.') }}</h5>
+                        <!--<span :class="getUserByUid ? '' : 'opacity-30'">
                             <img src="/static/images/assets/main_heart.png" height="22" class="inline-block" style="vertical-align: top;">
-                            <span class="chip chip-s text-center font-400 wedive-chip color-gray" style="position: initial;margin-left: -4px !important;margin-right:8px !important;">호스트 {{ getUserById ? getUserById.divingHostCount : '0' }}회</span>
+                            <span class="chip chip-s text-center font-400 wedive-chip color-gray" style="position: initial;margin-left: -4px !important;margin-right:8px !important;">호스트 {{ getUserByUid ? getUserByUid.divingHostCount : '0' }}회</span>
                         </span>
-                        <span :class="getUserById ? '' : 'opacity-30'">
+                        <span :class="getUserByUid ? '' : 'opacity-30'">
                             <img src="/static/images/assets/main_check.png" height="22" class="inline-block" style="vertical-align: top;margin-left:-4px;">
-                            <span class="chip chip-s text-center font-400 wedive-chip color-gray" style="position: initial;margin-left: -4px !important;">게스트 {{ getUserById ? getUserById.divingParticipantCount : '0' }}회</span>
+                            <span class="chip chip-s text-center font-400 wedive-chip color-gray" style="position: initial;margin-left: -4px !important;">게스트 {{ getUserByUid ? getUserByUid.divingParticipantCount : '0' }}회</span>
                         </span>
                         <br/>-->
-                        <span :class="(getUserById && getUserById.scubaLevelShow != '') ? '' : 'opacity-30'">
+                        <span :class="(getUserByUid && getUserByUid.scubaLevelShow != '') ? '' : 'opacity-30'">
                             <img src="https://d34l91104zg4p3.cloudfront.net/assets/award1.png" height="30" class="inline-block" style="vertical-align: top;margin-left:-4px;">
-                            <span class="chip chip-s text-center font-400 wedive-chip color-white" style="position: initial;background-color: #268cd3;margin-top: 4px !important;margin-left: -4px !important;margin-right:8px !important;">스쿠바 {{ getUserById ? getUserById.scubaLevelShow : '레벨 없음' }}</span>
+                            <span class="chip chip-s text-center font-400 wedive-chip color-white" style="position: initial;background-color: #268cd3;margin-top: 4px !important;margin-left: -4px !important;margin-right:8px !important;">스쿠바 {{ getUserByUid ? getUserByUid.scubaLevelShow : '레벨 없음' }}</span>
                         </span>
-                        <span :class="(getUserById && getUserById.freeLevelShow != '') ? '' : 'opacity-30'">
+                        <span :class="(getUserByUid && getUserByUid.freeLevelShow != '') ? '' : 'opacity-30'">
                             <img src="https://d34l91104zg4p3.cloudfront.net/assets/award2.png" height="30" class="inline-block" style="vertical-align: top;margin-left:-4px;">
-                            <span class="chip chip-s text-center font-400 wedive-chip color-white" style="position: initial;background-color: #be4544;margin-top: 4px !important;margin-left: -4px !important;">프리 {{ getUserById ? getUserById.freeLevelShow : '레벨 없음' }}</span>
+                            <span class="chip chip-s text-center font-400 wedive-chip color-white" style="position: initial;background-color: #be4544;margin-top: 4px !important;margin-left: -4px !important;">프리 {{ getUserByUid ? getUserByUid.freeLevelShow : '레벨 없음' }}</span>
                         </span>
                     </div>
                 </div>
@@ -201,7 +201,7 @@
     
     <div class="d-flex mb-4 pt-3">
         <img src="/static/images/assets/soulmate-hand.png" width="90" style="margin-left: 12px;margin-bottom:12px;"/>
-        <div class="font-noto font-18 font-600 ps-2 opacity-80" style="padding-top:6px;">{{ (getUserById && getUserById.nickName && getUserById.nickName != 'null') ? getUserById.nickName : '다이버' }}님을 위한 <br/>다이빙 추천</div>
+        <div class="font-noto font-18 font-600 ps-2 opacity-80" style="padding-top:6px;">{{ (getUserByUid && getUserByUid.nickName && getUserByUid.nickName != 'null') ? getUserByUid.nickName : '다이버' }}님을 위한 <br/>다이빙 추천</div>
     </div>
     <div v-if="getNearByDivings != null && getNearByDivings.length > 0" style="margin-top: -16px;">
         <div>
@@ -449,7 +449,7 @@
 
         <div class="d-flex mb-3 pt-3">
             <img src="/static/images/assets/map-location.png" width="90" style="margin-left: 12px;"/>
-            <div class="font-noto font-18 font-600 ps-2 opacity-80" style="padding-top:6px;">{{ (getUserById && getUserById.nickName && getUserById.nickName != 'null') ? getUserById.nickName : '다이버' }}님을 위한 <br/>다이빙 장소 추천</div>
+            <div class="font-noto font-18 font-600 ps-2 opacity-80" style="padding-top:6px;">{{ (getUserByUid && getUserByUid.nickName && getUserByUid.nickName != 'null') ? getUserByUid.nickName : '다이버' }}님을 위한 <br/>다이빙 장소 추천</div>
         </div>
         
         <div v-if="getNearByDiveCenters != null" style="margin-top: 16px;">
@@ -1304,10 +1304,10 @@ export default {
             
         }
     },
-    getUserById: {
+    getUserByUid: {
         query: gql`
-        query GetUserById($id: ID!) {
-            getUserById(_id: $id) {
+        query GetUserByUid($uid: ID!) {
+            getUserByUid(uid: $uid) {
                 _id
                 uid
                 divingHistoryLocations
@@ -1350,29 +1350,29 @@ export default {
         `,
         variables () {
             return {
-                id: localStorage.userId
+                uid: localStorage.uid
             }
         },
         skip() {
             return (localStorage.idToken == null || localStorage.nickName == null || localStorage.nickName == 'null');
         },
         async result () {
-            this.getUserById.levelShow = '초보';
+            this.getUserByUid.levelShow = '초보';
             var scuba_level = ["초보", "오픈워터", "어드", "레스큐", "마스터", "강사", "위다이브 컨시어지"];
             var free_level = ["초보", "레벨1", "레벨2", "레벨3", "레벨4", "강사"];
-            var s_lvl = parseInt(this.getUserById.scubaLicenseLevel);
-            var f_lvl = parseInt(this.getUserById.freeLicenseLevel);
-            this.getUserById.scubaLevelShow = (s_lvl>0) ? scuba_level[s_lvl] : "";
-            this.getUserById.freeLevelShow = (f_lvl>0) ? free_level[f_lvl] : "";
+            var s_lvl = parseInt(this.getUserByUid.scubaLicenseLevel);
+            var f_lvl = parseInt(this.getUserByUid.freeLicenseLevel);
+            this.getUserByUid.scubaLevelShow = (s_lvl>0) ? scuba_level[s_lvl] : "";
+            this.getUserByUid.freeLevelShow = (f_lvl>0) ? free_level[f_lvl] : "";
             if (s_lvl > f_lvl) {
-                this.getUserById.levelShow = (s_lvl>0) ? "스쿠바 " + scuba_level[s_lvl] : this.getUserById.levelShow;
+                this.getUserByUid.levelShow = (s_lvl>0) ? "스쿠바 " + scuba_level[s_lvl] : this.getUserByUid.levelShow;
             } else {
-                this.getUserById.levelShow = (f_lvl>0) ? "프리 " + free_level[f_lvl] : this.getUserById.levelShow;
+                this.getUserByUid.levelShow = (f_lvl>0) ? "프리 " + free_level[f_lvl] : this.getUserByUid.levelShow;
             }
-            this.getUserById.levelShow += " 다이버";
-            if(s_lvl>5) this.getUserById.levelShow = scuba_level[s_lvl];
+            this.getUserByUid.levelShow += " 다이버";
+            if(s_lvl>5) this.getUserByUid.levelShow = scuba_level[s_lvl];
 
-            if (this.getUserById.profileImages.length > 0) {
+            if (this.getUserByUid.profileImages.length > 0) {
                 var result_image = await axios({
                     url: 'https://api.wedives.com/graphql',
                     method: 'post',
@@ -1387,14 +1387,14 @@ export default {
                             }
                         `,
                         variables: {
-                            ids: [this.getUserById.profileImages[0]._id],
+                            ids: [this.getUserByUid.profileImages[0]._id],
                             widths: [720]
                         }
 
                     }
                 });
                 if (result_image.data.data.getImageUrlsByIds) {
-                    this.getUserById.profileImages[0].thumbnailUrl = result_image.data.data.getImageUrlsByIds[0]
+                    this.getUserByUid.profileImages[0].thumbnailUrl = result_image.data.data.getImageUrlsByIds[0]
                 }
             }
         }
