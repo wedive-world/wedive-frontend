@@ -1,5 +1,25 @@
 <template>
   <section id="main">
+    <b-modal
+      id="modal-collect"
+      cancel-variant="outline-secondary"
+      ok-title="확인"
+      cancel-title="닫기"
+      centered
+      title="곧 출시될 예정입니다. 출시를 안내해드릴께요."
+    >
+      <b-form>
+        <b-form-group>
+          <label for="phone">전화번호:</label>
+          <b-form-input
+            id="phone"
+            type="phone"
+            placeholder="010-1234-1234"
+          />
+        </b-form-group>
+      </b-form>
+    </b-modal>
+
     <video-background src="diving.mp4" style="height: 100vh;" overlay="linear-gradient(45deg,#2a4ae430,#30303063)"></video-background>
     <span class="brand-logo">
         <b-img
@@ -11,7 +31,21 @@
     <span class="font-noto font-title">세상에서 가장 빠른<br/>다이빙 버디찾기</span>
     <div class="button-title">
         <b-button
+            class="button-playstore mt-2"
             style="background-color: #00000088 !important;border: none !important;font-size:20px;"
+            v-b-modal.modal-collect
+            >
+            <b-img
+                src="https://static.toss.im/png-icons/timeline/applekorea.png"
+                width="40"
+            />
+            App Store
+        </b-button>
+        <b-button
+            class="button-playstore ml-2 mt-2"
+            style="background-color: #00000088 !important;border: none !important;font-size:20px;"
+            href="https://play.google.com/store/apps/details?id=com.wedive.android.app.wedive"
+            target="_blank"
             >
             <b-img
                 src="https://static.toss.im/png-icons/timeline/googleplay.png"
@@ -25,8 +59,8 @@
         xl="6"
         md="6"
       >
-        <h1 class="font-noto ml-5" style="color: #1d397c;padding-top: 150px;">홈 · 버디찾기</h1>
-        <div class="font-noto ml-5 mt-2" style="font-size: 50px;font-weight:500;color:black;">
+        <h1 class="font-noto main-subtitle">홈 · 버디찾기</h1>
+        <div class="font-noto mt-2 main-description">
             나에게 꼭 맞는<br/>다이빙 버디를<br/>추천 해드릴께요.
         </div>
       </b-col>
@@ -46,7 +80,7 @@
     </b-row>
 
 
-    <b-row class="match-height">
+    <b-row v-if="windowWidth > 760" class="match-height">
       <b-col
         xl="6"
         md="6"
@@ -64,10 +98,34 @@
         xl="6"
         md="6"
       >
-        <h1 class="font-noto ml-5" style="color: #1d397c;padding-top: 150px;">다이빙 장소 · 센터</h1>
-        <div class="font-noto ml-5 mt-2" style="font-size: 50px;font-weight:500;color:black;">
+        <h1 class="font-noto main-subtitle">다이빙 장소 · 센터</h1>
+        <div class="font-noto mt-2 main-description">
             전세계<br/>다이빙 포인트를<br/>한눈에 살펴보세요.
         </div>
+      </b-col>
+    </b-row>
+    <b-row v-else class="match-height">
+      <b-col
+        xl="6"
+        md="6"
+      >
+        <h1 class="font-noto main-subtitle">다이빙 장소 · 센터</h1>
+        <div class="font-noto mt-2 main-description">
+            전세계<br/>다이빙 포인트를<br/>한눈에 살펴보세요.
+        </div>
+      </b-col>
+      <b-col
+        xl="6"
+        md="6"
+      >
+        <b-img
+            src="img2.png"
+            class="img1"
+        />
+        <b-img
+            src="iphone.png"
+            class="iphone"
+        />
       </b-col>
     </b-row>
 
@@ -77,8 +135,8 @@
         xl="6"
         md="6"
       >
-        <h1 class="font-noto ml-5" style="color: #1d397c;padding-top: 150px;">센터 · 수영장 예약</h1>
-        <div class="font-noto ml-5 mt-2" style="font-size: 50px;font-weight:500;color:black;">
+        <h1 class="font-noto main-subtitle">센터 · 수영장 예약</h1>
+        <div class="font-noto mt-2 main-description">
             전국 다이빙 센터<br/>예약을<br/>한곳에서 해보세요.
         </div>
       </b-col>
@@ -97,17 +155,18 @@
       </b-col>
     </b-row>
 
-    <div class="font-noto ml-5" style="font-size: 60px;font-weight: 500;color:black;">
+    <div class="font-noto main-description" style="font-weight: 500;color:black;">
         위다이브로<br/>모든 다이빙 정보를
     </div>
     <div style="text-align: center;">
         <b-img
             src="beach.jpg"
             class="mt-5"
+            :style="(windowWidth > 640) ? '' : 'width: 100%;'"
         />
     </div>
-    <div style="text-align: center;padding:80px;">
-        <span class="font-noto ml-5" style="font-size: 40px;font-weight: 500;color:black;">
+    <div class="main-padding" style="text-align: center;">
+        <span class="font-noto main-font-size" style="font-weight: 500;color:black;">
             다이빙은, 위다이브
         </span>
     </div>
@@ -116,7 +175,7 @@
 </template>
 
 <script>
-import { BRow, BCol, BImg, BButton } from 'bootstrap-vue'
+import { BRow, BCol, BImg, BButton, BFormInput } from 'bootstrap-vue'
 import VideoBackground from 'vue-responsive-video-background-player'
 
 export default {
@@ -125,15 +184,25 @@ export default {
     BCol,
     BImg,
     BButton,
+    BFormInput,
     
     VideoBackground,
   },
   data() {
     return {
-      
+      windowWidth: window.innerWidth
     }
   },
+  mounted() {
+   this.$nextTick(() => {
+     window.addEventListener('resize', this.onResize);
+   });
+  },
+  beforeDestroy() { 
+    window.removeEventListener('resize', this.onResize); 
+  },
   created() {
+    this.detectOrientationChange();
     // data
     /*this.$http.get('/ecommerce/data')
       .then(response => {
@@ -145,13 +214,67 @@ export default {
         this.data.congratulations.name = userData.fullName.split(' ')[0] || userData.username
       })*/
   },
+  methods: {
+    onResize() {
+      this.windowWidth = window.innerWidth;
+    },
+  }
 }
 </script>
 
 <style lang="scss">
+
+.font-title {font-weight: 600;color: white;position: absolute;top: 26vh;text-align: center;width: 100%;}
+.button-title {position:absolute;text-align: center;width: 100%;}
+.main-description {font-weight:500;color:black;}
+.main-subtitle {color: #1d397c;}
+@media (min-width: 800px) {
+  .font-title {font-size: 80px;}
+  .button-title {top:60vh;}
+  .main-description {font-size: 47px;margin-left:56px;}
+  .main-subtitle {margin-left:56px;padding-top: 150px;}
+  .main-left{margin-left:56px;}
+  .main-font-size {font-size: 50px;}
+  .main-padding {padding:80px;}
+}
+@media (max-width: 800px) {
+  .font-title {font-size: 70px;}
+  .button-title {top:63vh;}
+  .main-description {font-size: 44px;margin-left:50px;}
+  .main-subtitle {margin-left:50px;padding-top: 150px;}
+  .main-left{margin-left:50px;}
+  .main-font-size {font-size: 46px;}
+  .main-padding {padding:70px;}
+}
+@media (max-width: 700px) {
+  .font-title {font-size: 60px;}
+  .button-title {top:66vh;}
+  .main-description {font-size: 41px;margin-left:46px;}
+  .main-subtitle {margin-left:46px;padding-top: 30px;}
+  .main-left{margin-left:46px;}
+  .main-font-size {font-size: 40px;}
+  .main-padding {padding:56px;}
+}
+@media (max-width: 600px) {
+  .font-title {font-size: 50px;}
+  .button-title {top:69vh;}
+  .main-description {font-size: 36px;margin-left:36px;}
+  .main-subtitle {margin-left:36px;padding-top: 30px;}
+  .main-left{margin-left:36px;}
+  .main-font-size {font-size: 36px;}
+  .main-padding {padding:42px;}
+}
+@media (max-width: 500px) {
+  .font-title {font-size: 40px;}
+  .button-title {top:72vh;}
+  .main-description {font-size: 30px;margin-left:24px;}
+  .main-subtitle {margin-left:24px;padding-top: 30px;}
+  .main-left{margin-left:24px;}
+  .main-font-size {font-size: 32px;}
+  .main-padding {padding:20px;}
+}
+
 .font-noto {font-family: 'Noto Sans Korean'}
-.font-title {font-size: 80px;font-weight: 600;color: white;position: absolute;top: 26vh;text-align: center;width: 100%;}
-.button-title {position:absolute;top:60vh;text-align: center;width: 100%;}
 .img1 {
     position: absolute;
     top: 50%;
