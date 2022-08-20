@@ -4,8 +4,10 @@ import VueRouter from 'vue-router'
 // Routes
 import { canNavigate } from '@/libs/acl/routeProtection'
 import { isUserLoggedIn, getUserData, getHomeRouteForLoggedInUser } from '@/auth/utils'
+import mainPage from './routes/mainPage'
 import dashboard from './routes/dashboard'
 import pages from './routes/pages'
+
 
 
 Vue.use(VueRouter)
@@ -17,7 +19,8 @@ const router = new VueRouter({
     return { x: 0, y: 0 }
   },
   routes: [
-    { path: '/', redirect: { name: 'dashboard-ecommerce' } },
+    { path: '/', redirect: { name: 'main-page' } },
+    ...mainPage,
     ...dashboard,
     ...pages,
     {
@@ -29,8 +32,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, _, next) => {
   const isLoggedIn = isUserLoggedIn()
-
-  if (!canNavigate(to)) {
+  if (!canNavigate(to) && to.path != '/') {
     // Redirect to login if not logged in
     if (!isLoggedIn) return next({ name: 'auth-login' })
 

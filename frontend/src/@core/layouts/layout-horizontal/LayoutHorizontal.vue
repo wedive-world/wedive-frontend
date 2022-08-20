@@ -7,7 +7,7 @@
   >
 
     <!-- NAVBAR -->
-    <b-navbar
+    <!--<b-navbar
       :style="{
         backgroundColor: navbarType === 'static' && scrolledTo && skin === 'light' ? 'white' : null,
         boxShadow: navbarType === 'static' && scrolledTo ? 'rgba(0, 0, 0, 0.05) 0px 4px 20px 0px' : null,
@@ -23,20 +23,20 @@
         <app-navbar-horizontal-layout-brand />
         <app-navbar-horizontal-layout :toggle-vertical-menu-active="toggleVerticalMenuActive" />
       </slot>
-    </b-navbar>
+    </b-navbar>-->
     <!--/ NAVBAR -->
 
-    <div class="horizontal-menu-wrapper">
+    <!--<div class="horizontal-menu-wrapper">
       <div
         v-if="!isNavMenuHidden"
         class="header-navbar navbar-expand-sm navbar navbar-horizontal navbar-light navbar-shadow menu-border d-none d-xl-block"
         :class="[navbarMenuTypeClass]"
       >
         <horizontal-nav-menu />
-      </div>
+      </div>-->
 
       <!-- Vertical Nav Menu -->
-      <vertical-nav-menu
+      <!--<vertical-nav-menu
         :is-vertical-menu-active="isVerticalMenuActive"
         :toggle-vertical-menu-active="toggleVerticalMenuActive"
         class="d-block d-xl-none"
@@ -47,9 +47,9 @@
             v-bind="slotProps"
           />
         </template>
-      </vertical-nav-menu>
+      </vertical-nav-menu>-->
     <!-- /Vertical Nav Menu -->
-    </div>
+    <!--</div>-->
 
     <!-- Vertical Nav Menu Overlay -->
     <div

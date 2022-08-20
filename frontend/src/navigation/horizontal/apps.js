@@ -4,26 +4,6 @@ export default [
     icon: 'PackageIcon',
     children: [
       {
-        title: 'Email',
-        route: 'apps-email',
-        icon: 'MailIcon',
-      },
-      {
-        title: 'Chat',
-        route: 'apps-chat',
-        icon: 'MessageSquareIcon',
-      },
-      {
-        title: 'Todo',
-        route: 'apps-todo',
-        icon: 'CheckSquareIcon',
-      },
-      {
-        title: 'Calendar',
-        route: 'apps-calendar',
-        icon: 'CalendarIcon',
-      },
-      {
         title: 'Invoice',
         icon: 'FileTextIcon',
         children: [

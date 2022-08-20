@@ -1,8 +1,8 @@
 <template>
-  <div class="navbar-container d-flex content align-items-center">
+  <!--<div class="navbar-container d-flex content align-items-center">-->
 
     <!-- Nav Menu Toggler -->
-    <ul class="nav navbar-nav d-xl-none">
+    <!--<ul class="nav navbar-nav d-xl-none">
       <li class="nav-item">
         <b-link
           class="nav-link"
@@ -14,13 +14,13 @@
           />
         </b-link>
       </li>
-    </ul>
+    </ul>-->
 
     <!-- Left Col -->
-    <div class="bookmark-wrapper align-items-center flex-grow-1 d-none d-lg-flex">
+    <!--<div class="bookmark-wrapper align-items-center flex-grow-1 d-none d-lg-flex">-->
 
       <!-- Bookmarks Container -->
-      <bookmarks />
+      <!--<bookmarks />
     </div>
 
     <b-navbar-nav class="nav align-items-center ml-auto">
@@ -31,7 +31,7 @@
       <notification-dropdown />
       <user-dropdown />
     </b-navbar-nav>
-  </div>
+  </div>-->
 </template>
 
 <script>
@@ -44,7 +44,7 @@ import SearchBar from './components/SearchBar.vue'
 import DarkToggler from './components/DarkToggler.vue'
 import CartDropdown from './components/CartDropdown.vue'
 import NotificationDropdown from './components/NotificationDropdown.vue'
-import UserDropdown from './components/UserDropdown.vue'
+//import UserDropdown from './components/UserDropdown.vue'
 
 export default {
   components: {
@@ -58,7 +58,7 @@ export default {
     DarkToggler,
     CartDropdown,
     NotificationDropdown,
-    UserDropdown,
+    //UserDropdown,
   },
   props: {
     toggleVerticalMenuActive: {
