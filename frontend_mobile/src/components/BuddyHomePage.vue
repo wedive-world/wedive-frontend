@@ -1354,7 +1354,7 @@ export default {
             }
         },
         skip() {
-            return (localStorage.idToken == null || localStorage.nickName == null || localStorage.nickName == 'null');
+            return !localStorage.idToken || !localStorage.uid;
         },
         async result () {
             this.getUserByUid.levelShow = '초보';
