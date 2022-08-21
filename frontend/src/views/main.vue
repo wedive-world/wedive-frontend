@@ -5,7 +5,8 @@
       cancel-variant="outline-secondary"
       ok-title="확인"
       cancel-title="닫기"
-      :ok-disabled="(phone_number == '' || agree_selected == false)"
+      :ok-disabled="(/^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/.test(phone_number) == false || agree_selected == false)"
+      @ok="sendPhoneNumber()"
       centered
       title="곧 출시될 예정입니다. 출시를 안내해드릴께요."
     >
@@ -15,7 +16,7 @@
           <b-form-input
             v-model="phone_number"
             id="phone"
-            type="phone"
+            type="number"
             placeholder="010-1234-1234"
           />
         </b-form-group>
@@ -192,8 +193,9 @@
 </template>
 
 <script>
-import { BRow, BCol, BImg, BButton, BFormInput, BFormCheckbox } from 'bootstrap-vue'
+import { BRow, BCol, BImg, BButton, BForm, BFormGroup, BFormInput, BFormCheckbox } from 'bootstrap-vue'
 import VideoBackground from 'vue-responsive-video-background-player'
+import axios from 'axios';
 
 export default {
   components: {
@@ -201,6 +203,8 @@ export default {
     BCol,
     BImg,
     BButton,
+    BForm,
+    BFormGroup,
     BFormInput,
     BFormCheckbox,
     
@@ -222,7 +226,6 @@ export default {
     window.removeEventListener('resize', this.onResize); 
   },
   created() {
-    this.detectOrientationChange();
     // data
     /*this.$http.get('/ecommerce/data')
       .then(response => {
@@ -238,6 +241,14 @@ export default {
     onResize() {
       this.windowWidth = window.innerWidth;
     },
+    sendPhoneNumber() {
+      axios.post( "https://marketing.wedives.com/phone", {phoneNumber: this.phone_number}, function(res) {console.log(res)}, 'text');
+      this.$bvToast.toast('등록이 되면 문자로 알려드릴께요.', {
+        title: `Variant ${'success'}`,
+        variant: 'success',
+        solid: false,
+      });
+    }
   }
 }
 </script>
