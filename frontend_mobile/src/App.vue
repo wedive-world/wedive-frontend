@@ -623,7 +623,7 @@ export default {
     getFirebaseToken() {
       const auth = getAuth();
       onIdTokenChanged(auth, async (user) => {
-        //console.log("onIdTokenChanged : ");
+        console.log(`onIdTokenChanged : ${JSON.stringify(user)}`);
         //console.log(user);
         if (user && localStorage.userEmail) {
           localStorage.uid = user.uid;
@@ -634,8 +634,7 @@ export default {
         }
       });
       onAuthStateChanged(auth, async (user) => {
-        //console.log("onAuthStateChanged : ");
-        //console.log(user);
+        console.log(`onAuthStateChanged : ${JSON.stringify(user)}`);
         if (user && localStorage.userEmail) {
           localStorage.uid = user.uid;
           localStorage.idToken = await user.getIdToken(false);
