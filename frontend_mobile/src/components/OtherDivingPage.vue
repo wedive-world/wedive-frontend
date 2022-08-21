@@ -8,13 +8,14 @@
 
     <div class="page-content transform-none" style="margin-top: 50px;padding:0;">
         <div class="card card-style ms-0 me-0 rounded-0 mb-0" style="min-height: calc(100vh - 50px)">
-            <div v-if="getDivingsRelatedWithCurrentUser.length == 0" class="text-center">
+            <div v-if="getDivings.length == 0" class="text-center">
                 <img src="https://d34l91104zg4p3.cloudfront.net/assets/empty_list2.jpg" width="60%" style="margin-top:25%;" />
                 <p class="color-gray-light-mid">아직 버디찾기를 한번도 해보지 않으셨네요!</p>
-                <a href="/buddy_create" class="btn btn-m mb-3 rounded-xl text-uppercase font-500 shadow-s bg-secondary font-noto"> 버디찾기 생성 </a>
+                <a href="/buddy/create" class="btn btn-m mb-3 rounded-xl text-uppercase font-500 shadow-s bg-secondary font-noto"> 버디찾기 생성 </a>
             </div>
             <div v-else class="content mt-1">
-                <div v-for="diving in getDivingsRelatedWithCurrentUser" v-on:scroll="handleScroll">
+                <pull-to :bottom-load-method="refresh" @bottom-state-change="stateChange" :bottom-config="TOP_DEFAULT_CONFIG">
+                <div v-for="diving in getDivings">
                     <div class="map-box">
                         <a :href="'/diving/' + diving._id">
                             <div :class="'pt-2 pb-2 bx position-relative' + ((diving.status == 'divingComplete') ? ' opacity-40':'')">
@@ -27,7 +28,7 @@
                                                 <use xlink:href="#shapeSquircle"/>
                                             </clipPath>
                                             </defs>
-                                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="diving.locationData.backgroundImages && diving.locationData.backgroundImages.length > 0 && diving.locationData.backgroundImages[0].thumbnailUrl ? diving.locationData.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'"/>
+                                            <image class="user-photo" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" clip-path="url(#clipSquircle)" :xlink:href="diving.locationData && diving.locationData.backgroundImages && diving.locationData.backgroundImages.length > 0 && diving.locationData.backgroundImages[0].thumbnailUrl ? diving.locationData.backgroundImages[0].thumbnailUrl : '/static/empty.jpg'"/>
                                         </svg>
                                     </div>
                                     
@@ -46,6 +47,7 @@
                     </div>
                     <!--<div class="divider mt-3 mb-3"></div>-->
                 </div>
+                </pull-to>
                 
                 
                 
@@ -60,10 +62,14 @@
 </template>
 <script>
 import gql from 'graphql-tag'
+import PullTo from 'vue-pull-to'
 const axios = require("axios")
 
 export default {
   name: 'HelloWorld',
+  components: {
+    PullTo,
+  },
   apollo: {
     getDivingsRelatedWithCurrentUser: {
         query: gql`
@@ -139,18 +145,18 @@ export default {
         `,
         variables () {
             return {
-                limit: 20,
+                limit: this.limit,
                 skip: this.skip,
                 uid: (localStorage.uid ? localStorage.uid : ''),
             }
         },
         result (data) {
-            //var now = new Date();
+            var now = new Date();
             this.getDivingsRelatedWithCurrentUser.forEach(diving => {
 
                 var startedAt = new Date(diving.startedAt);
                 var finishedAt = new Date(diving.finishedAt);
-                if (diving.startedAt == diving.finishedAt) {
+                if (startedAt.getMonth() == finishedAt.getMonth() && startedAt.getDate() == finishedAt.getDate()) {
                     diving.showAt = (startedAt.getMonth()+1) + "월 " + startedAt.getDate() + "일"
                 } else {
                     diving.showAt = (startedAt.getMonth()+1) + "/" + startedAt.getDate() + " ~ " + (finishedAt.getMonth()+1) + "/" + finishedAt.getDate() + ""
@@ -181,13 +187,17 @@ export default {
                     diving.location = diving.diveShops[0].name;
                 }
             });
+
+            this.getDivingsRelatedWithCurrentUser.forEach(x => this.getDivings.push(x));
+            if (this.getDivings.length != this.getDivingsRelatedWithCurrentUser.length) {
+                setTimeout(function() {
+                    $(".vue-pull-to-wrapper").css("padding-top", "50px");
+                },100);
+            }
             
             setTimeout(function() {
                 $("#div_content_loader").hide();
             },200);
-            
-            //console.log(data.getChatRoomInfo);
-            //data.getChatRoomInfo.reverse();
         },
         
         
@@ -206,37 +216,70 @@ export default {
   data () {
     return {
         getDivingsRelatedWithCurrentUser: [],
+        getDivings: [],
         userGender: localStorage.userGender,
         skip: 0,
+        limit: 10,
         prev_height: 0,
+        TOP_DEFAULT_CONFIG: {
+            pullText: '당겨서 새로고침', // The text is displayed when you pull down
+            triggerText: '업데이트', // The text that appears when the trigger distance is pulled down
+            loadingText: '로딩중...', // The text in the load
+            doneText: '새로고침 완료', // Load the finished text
+            failText: '실패', // Load failed text
+            loadedStayTime: 400, // Time to stay after loading ms
+            stayDistance: 50, // Trigger the distance after the refresh
+            triggerDistance: 70 // Pull down the trigger to trigger the distance
+        },
     }
   },
   methods: {
-      handleScroll(e) {
-        if (e.target.scrollTop == 0) {
-            this.skip += this.limit;
-            this.prev_height = $('#speech-content')[0].scrollHeight;
-            
-            this.$apollo.queries.getDivingsRelatedWithCurrentUser.fetchMore({
-                // New variables
-                variables: {
-                    skip: this.skip,
-                    limit: 20,
-                    uid: (localStorage.uid ? localStorage.uid : ''),
-                },
-                // Transform the previous result with new data
-                updateQuery: (previousResult, { fetchMoreResult }) => {
-                    //console.log(previousResult.getChatRoomInfo.chatMessages)
-                    //console.log(fetchMoreResult.getChatRoomInfo.chatMessages)
-                    return {
-                        getDivingsRelatedWithCurrentUser: [
-                            ...fetchMoreResult.getDivingsRelatedWithCurrentUser || [],
-                            ...previousResult.getDivingsRelatedWithCurrentUser || [],
-                        ],
-                    }
-                },
-            });
+      stateChange(state) {
+        if (state === 'pull' || state === 'trigger') {
+            this.iconLink = '#fa-arrow-down';
+        } else if (state === 'loading') {
+            this.iconLink = '#fa-spinner';
+        } else if (state === 'loaded-done') {
+            this.iconLink = '#fa-check';
         }
+      },
+      async refresh(loaded) {
+        this.skip += this.limit;
+
+        const _skip = this.skip;
+        const _limit = this.limit
+        
+        this.$apollo.queries.getDivingsRelatedWithCurrentUser.fetchMore({
+            // New variables
+            variables: {
+                skip: _skip,
+                limit: _limit,
+                uid: (localStorage.uid ? localStorage.uid : ''),
+            },
+            updateQuery: (previousResult, { fetchMoreResult }) => {
+                return {};
+            },
+            /*
+            // Transform the previous result with new data
+            updateQuery: (previousResult, { fetchMoreResult }) => {
+                console.log("aa")
+                console.log("aa")
+                console.log("aa")
+                console.log("aa")
+                console.log("aa")
+                console.log("aa")
+                console.log("aa")
+                if (!fetchMoreResult) return previousResult;
+                //console.log(previousResult)
+                //console.log(fetchMoreResult)
+                return {
+                    getDivingsRelatedWithCurrentUser: [
+                        ...previousResult,
+                        ...fetchMoreResult || [],
+                    ],
+                }
+            },*/
+        });
       },
       historyBack() {
           try {
@@ -361,5 +404,6 @@ export default {
       }
     }
   }
+  .vue-pull-to-wrapper {padding-top:50px;}
 }
 </style>

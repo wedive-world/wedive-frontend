@@ -959,7 +959,6 @@ export default {
                     "input": {
                         "status": "publicEnded",
                         "_id": _id,
-                        "hostUser": host_user
                     }
                 }
             }
@@ -981,6 +980,7 @@ export default {
                 if(window.location.href.split('/').pop() != 'modal'){
                     window.history.pushState({}, 'modal', window.location.pathname + '/modal');
                 }
+                window.location.reload();
               },500);
           } else {
               var toastData = 'snackbar-request-error';
