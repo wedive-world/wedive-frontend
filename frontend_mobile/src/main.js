@@ -49,7 +49,7 @@ if (location.pathname.substring(location.pathname.lastIndexOf('/')) == '/modal')
 
 
 // Android
-try {
+/*try {
   //console.log("check Android")
   if (window.navigator.userAgent.toLowerCase().indexOf('android') !== -1) {
     const userInformation = JSON.parse(Android.getUserInformation());
@@ -100,12 +100,12 @@ try {
   
   }
 } catch(e) {
-  /*var toastData = 'debug-error';
-  $("#" + toastData).text(e.toString().replace(/\\n/gi, '<br/>'));
-  var notificationToast = document.getElementById(toastData);
-  var notificationToast = new bootstrap.Toast(notificationToast);
-  notificationToast.show();*/
-}
+  //var toastData = 'debug-error';
+  //$("#" + toastData).text(e.toString().replace(/\\n/gi, '<br/>'));
+  //var notificationToast = document.getElementById(toastData);
+  //var notificationToast = new bootstrap.Toast(notificationToast);
+  //notificationToast.show();
+}*/
 
 
 
