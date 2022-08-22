@@ -109,7 +109,7 @@ export default {
             const userInformation = JSON.parse(Android.getUserInformation());
             //console.log(`android connected, ${JSON.stringify(userInformation)}`);
             localStorage.idToken = Android.getIdToken();
-            localStorage.setItem(userAuthKey, userInformation);
+            localStorage.setItem('userAuth', userInformation);
             if (userInformation.uid) localStorage.uid = userInformation.uid;
             //if (userInformation.idToken) localStorage.idToken = userInformation.idToken;
             if (userInformation.email) localStorage.userEmail = userInformation.email;

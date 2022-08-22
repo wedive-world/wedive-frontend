@@ -45,7 +45,7 @@
         </div>
         <div v-else class="card card-style ms-0 me-0 rounded-0 mb-0" style="min-height:calc(100vh - 101px)">
             <div class="content mt-0 mb-0" style="padding-bottom:80px;">
-                <a v-for="chat in getJoinedRoomList" :href="'/chat/'+chat._id" class="d-block border-bottom pt-2" style="position:relative;">
+                <a v-for="chat in getJoinedRoomList" v-on:click="removeUnread(chat)" :href="'/chat/'+chat._id" class="d-block border-bottom pt-2" style="position:relative;">
                     <div v-if="chat.chatUsers && chat.chatUsers.length == 0 && chat.owner" class="p-relative d-inline-block w-60 mb-2">
                         <div class="user-img">
                             <svg class="svg-profile" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet">
@@ -243,7 +243,7 @@ export default {
             const userInformation = JSON.parse(Android.getUserInformation());
             //console.log(`android connected, ${JSON.stringify(userInformation)}`);
             localStorage.idToken = Android.getIdToken();
-            localStorage.setItem(userAuthKey, userInformation);
+            localStorage.setItem('userAuth', userInformation);
             if (userInformation.uid) localStorage.uid = userInformation.uid;
             //if (userInformation.idToken) localStorage.idToken = userInformation.idToken;
             if (userInformation.email) localStorage.userEmail = userInformation.email;
@@ -281,6 +281,7 @@ export default {
             }
         } 
     } catch(e) {
+        console.log(e);
         var toastData = 'debug-error';
         $("#" + toastData).text(e.toString().replace(/\\n/gi, '<br/>'));
         var notificationToast = document.getElementById(toastData);
@@ -403,6 +404,9 @@ export default {
       }
   },
   methods: {
+    removeUnread(chat) {
+        chat.unread = 0;
+    },
     timeForToday(value) {
         const timeValue = new Date(value);
         const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
