@@ -239,6 +239,11 @@ export default {
   name: 'HelloWorld',
   async mounted() {
     try {
+        var toastData = 'debug-error';
+        $("#" + toastData).text("localStorage.uid = " + localStorage.uid);
+        var notificationToast = document.getElementById(toastData);
+        var notificationToast = new bootstrap.Toast(notificationToast);
+        notificationToast.show();
         if (window.navigator.userAgent.toLowerCase().indexOf('android') !== -1) {
             const userInformation = JSON.parse(Android.getUserInformation());
             //console.log(`android connected, ${JSON.stringify(userInformation)}`);
