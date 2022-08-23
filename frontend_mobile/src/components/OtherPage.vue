@@ -104,15 +104,6 @@ const axios = require("axios")
 export default {
   name: 'HelloWorld',
   async mounted() {
-    try {
-        var toastData = 'debug-error';
-        $("#" + toastData).text(localStorage.uid.replace(/\\n/gi, '<br/>'));
-        var notificationToast = document.getElementById(toastData);
-        var notificationToast = new bootstrap.Toast(notificationToast);
-        notificationToast.show();
-    } catch(e) {
-        
-    }
     if (this.$route.query.header && this.$route.query.header == 'hide') {
         $(".page-title").hide();
         $(".page-title-clear").hide();
