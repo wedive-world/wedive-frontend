@@ -49,6 +49,16 @@ if (location.pathname.substring(location.pathname.lastIndexOf('/')) == '/modal')
 
 
 // Android
+try {
+  //const userInformation = JSON.parse(Android.getUserInformation());
+  var toastData = 'debug-error';
+  $("#" + toastData).text(Android.getUserInformation().replace(/\\n/gi, '<br/>'));
+  var notificationToast = document.getElementById(toastData);
+  var notificationToast = new bootstrap.Toast(notificationToast);
+  notificationToast.show();
+} catch(e) {
+  
+}
 /*try {
   //console.log("check Android")
   if (window.navigator.userAgent.toLowerCase().indexOf('android') !== -1) {
