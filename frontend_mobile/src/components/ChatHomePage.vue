@@ -240,51 +240,10 @@ export default {
   async mounted() {
     try {
         var toastData = 'debug-error';
-        $("#" + toastData).text("localStorage.uid = " + localStorage.uid);
+        $("#" + toastData).text(localStorage.uid.replace(/\\n/gi, '<br/>'));
         var notificationToast = document.getElementById(toastData);
         var notificationToast = new bootstrap.Toast(notificationToast);
         notificationToast.show();
-        if (window.navigator.userAgent.toLowerCase().indexOf('android') !== -1) {
-            const userInformation = JSON.parse(Android.getUserInformation());
-            //console.log(`android connected, ${JSON.stringify(userInformation)}`);
-            localStorage.idToken = Android.getIdToken();
-            localStorage.setItem('userAuth', userInformation);
-            if (userInformation.uid) localStorage.uid = userInformation.uid;
-            //if (userInformation.idToken) localStorage.idToken = userInformation.idToken;
-            if (userInformation.email) localStorage.userEmail = userInformation.email;
-            if (userInformation.languageCode) localStorage.languageCode = userInformation.languageCode;
-
-            //var axios = require("axios");
-            if (localStorage.nickName == null || localStorage.nickName == 'null') {
-            var result = await axios({
-                url: 'https://api.wedives.com/graphql',
-                method: 'post',
-                headers: {
-                countrycode: 'ko',
-                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-                },
-                data: {
-                    query: `
-                        query Query($uid: ID!) {
-                        getUserByUid(uid: $uid) {
-                            _id
-                            nickName
-                            birthAge
-                            gender
-                        }
-                        }
-                    `,
-                    variables: {
-                        "uid": localStorage.uid
-                    }
-                }
-            });
-            if (result.data.data.getUserByUid != null && result.data.data.getUserByUid.nickName != null && result.data.data.getUserByUid.nickName != 'null') {
-                localStorage.nickName = result.data.data.getUserByUid.nickName;
-                localStorage.userId = result.data.data.getUserByUid._id;
-            }
-            }
-        } 
     } catch(e) {
         console.log(e);
         var toastData = 'debug-error';

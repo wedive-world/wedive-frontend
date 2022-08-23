@@ -51,11 +51,14 @@ if (location.pathname.substring(location.pathname.lastIndexOf('/')) == '/modal')
 // Android
 try {
   //const userInformation = JSON.parse(Android.getUserInformation());
-  var toastData = 'debug-error';
-  $("#" + toastData).text(Android.getUserInformation().replace(/\\n/gi, '<br/>'));
-  var notificationToast = document.getElementById(toastData);
-  var notificationToast = new bootstrap.Toast(notificationToast);
-  notificationToast.show();
+  if (window.navigator.userAgent.toLowerCase().indexOf('android') !== -1) {
+    var userInformation = JSON.parse(Android.getUserInformation());
+    if (userInformation.uid) localStorage.uid = userInformation.uid;
+    if (userInformation.email) localStorage.userEmail = userInformation.email;
+    if (userInformation.idToken) localStorage.idToken = userInformation.idToken;
+    if (userInformation.nickName) localStorage.nickName = userInformation.nickName;
+    if (userInformation.userId) localStorage.userId = userInformation._id;
+  }
 } catch(e) {
   
 }
