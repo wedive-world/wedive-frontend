@@ -1357,6 +1357,7 @@ export default {
             return !localStorage.idToken || !localStorage.uid;
         },
         async result () {
+            localStorage.nickName = this.getUserByUid.nickName;
             this.getUserByUid.levelShow = '초보';
             var scuba_level = ["초보", "오픈워터", "어드", "레스큐", "마스터", "강사", "위다이브 컨시어지"];
             var free_level = ["초보", "레벨1", "레벨2", "레벨3", "레벨4", "강사"];

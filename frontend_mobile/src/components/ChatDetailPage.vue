@@ -811,8 +811,8 @@ export default {
   },
   created() {
     console.log(this.$route)
-    if (this.$route.target != null && this.$route.target.hasOwnProperty('_id')) {
-        locationInfo = this.$route.target;
+    if (this.$route.params != null && this.$route.params.hasOwnProperty('_id')) {
+        locationInfo = this.$route.params;
     }
     window.addEventListener('native.showkeyboard', this.keyboardShowHandler);
   },

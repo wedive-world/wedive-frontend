@@ -1307,8 +1307,10 @@ export default {
             
       },
       async mapBoxClick(item) {
-          if (item == 'buddy')
-            this.$router.push({name: "BuddyCreateAllPage", target: markerItem})
+          if (item == 'buddy') {
+            //console.log(markerItem)
+            this.$router.push({name: "BuddyCreateAllPage", params: markerItem})
+          }
           else if (item == 'concierge') {
               if (localStorage.idToken) {
                 var result = await axios({
@@ -1359,17 +1361,23 @@ export default {
                 });
                 
                 var concierge_uid = "RuOiMt9YUTbRUJQTrXv4cWMEimr2";
+                console.log("1")
                 // 개설된 채팅이 있는지 확인한다.
                 var go_flag = false;
                 result.data.data.getJoinedRoomList.forEach(room => {
+                    console.log(room)
                     if (room.type == 'direct' && room.chatUsers.filter(u=>u.uid == concierge_uid).length > 0) {
+                        
                         go_flag = true;
                         //location.href = '/chat/' + room._id;
                         const room_id = room._id;
-                        this.$router.push({name: 'ChatDetailPage', params: { room_id }, target: markerItem})
+                        console.log(room_id)
+                        //this.$router.push({name: 'ChatDetailPage', params: { room_id }, target: markerItem})
+                        this.$router.push({path: '/chat/'+room_id, params: markerItem })
                     }
                 })
                 if (go_flag == false) {
+                    console.log("3")
                     // 없는경우, 더미로 하나 만든다.
                     //localStorage.chatType = 'direct';
                     //var chatUids = new Array();

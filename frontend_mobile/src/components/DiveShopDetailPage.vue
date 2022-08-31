@@ -1739,7 +1739,7 @@ export default {
         })
       },
       findBuddyClick() {
-          this.$router.push({name: "BuddyCreateAllPage", target: this.getDiveShopByUniqueName})
+          this.$router.push({name: "BuddyCreateAllPage", params: this.getDiveShopByUniqueName})
       },
       selectTicket(event, ticketItem) {
         if (event.currentTarget.classList.contains("ticket-select")) {

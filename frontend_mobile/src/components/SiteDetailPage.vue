@@ -1604,7 +1604,7 @@ export default {
         return d.toFixed(2) + ' km';
       },
       findBuddyClick() {
-          this.$router.push({name: "BuddyCreateAllPage", target: this.getDiveSiteByUniqueName})
+          this.$router.push({name: "BuddyCreateAllPage", params: this.getDiveSiteByUniqueName})
       },
       async moveDiving(item) {
         var dic_type1 = {"DiveSite": "diveSite", "DivePoint": "divePoint", "DiveCenter": "diveCenter", "Diving": "diving", "User": "user", "Review": "review", "Forum": "forum", "Recommendation": "recommendation"};

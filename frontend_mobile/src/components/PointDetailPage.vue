@@ -1590,7 +1590,7 @@ export default {
         })
       },
       findBuddyClick() {
-          this.$router.push({name: "BuddyCreateAllPage", target: this.getDivePointByUniqueName})
+          this.$router.push({name: "BuddyCreateAllPage", params: this.getDivePointByUniqueName})
       },
       async moveDiving(item) {
         var dic_type1 = {"DiveSite": "diveSite", "DivePoint": "divePoint", "DiveCenter": "diveCenter", "Diving": "diving", "User": "user", "Review": "review", "Forum": "forum", "Recommendation": "recommendation"};

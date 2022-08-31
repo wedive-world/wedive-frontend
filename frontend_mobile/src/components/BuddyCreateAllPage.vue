@@ -414,16 +414,13 @@ export default {
     //console.log('$("#footer-bar").hide();')
     $("#footer-bar").hide();
     console.log(this.$route.params);
-    if (this.$route.target != null && this.$route.target.hasOwnProperty('_id')) {
-        this.search_result.push({__typename: this.$route.target.__typename, location: this.$route.target.name, adminScore: this.$route.target.adminScore, description: this.$route.target.description, _id: this.$route.target._id});
-        const insname = this.ins_name;
-    } else if (this.$route.params != null && this.$route.params.hasOwnProperty('_id')) {
+    if (this.$route.params != null && this.$route.params.hasOwnProperty('_id') && this.$route.params.__typename == 'Diving') {
         this.createId = this.$route.params._id;
-        if (this.$route.params.startedAt.substring(0,10) == this.$route.params.finishedAt.substring(0,10)) {
+        if (this.$route.params.startedAt && this.$route.params.startedAt.substring(0,10) == this.$route.params.finishedAt.substring(0,10)) {
             this.scheduleFlag = false;
             this.selectedDay = new Date(this.$route.params.startedAt);
             this.day_show = (this.selectedDay.getMonth()+1) + "." + this.selectedDay.getDate() + " (" + weekday_ko[this.selectedDay.getDay()] + ")";
-        } else {
+        } else if (this.$route.params.startedAt && this.$route.params.finishedAt) {
             this.scheduleFlag = true;
             this.selectedRange.start = new Date(this.$route.params.startedAt);
             this.selectedRange.end = new Date(this.$route.params.finishedAt);
@@ -432,8 +429,8 @@ export default {
         }
 
         // 다이빙 타입
-        if (this.$route.params.type.includes('scubaDiving')) {this.label_scuba = true;setTimeout(function() {$('#label_scuba').removeClass('opacity-30');},100);}
-        if (this.$route.params.type.includes('freeDiving')) {this.label_free = true;setTimeout(function() {$('#label_free').removeClass('opacity-30');},100);}
+        if (this.$route.params.type && this.$route.params.type.includes('scubaDiving')) {this.label_scuba = true;setTimeout(function() {$('#label_scuba').removeClass('opacity-30');},100);}
+        if (this.$route.params.type && this.$route.params.type.includes('freeDiving')) {this.label_free = true;setTimeout(function() {$('#label_free').removeClass('opacity-30');},100);}
 
         // 다이빙 장소
         if (this.$route.params.diveSites) {
@@ -462,26 +459,35 @@ export default {
         this.diving_detail = this.$route.params.description;
 
         // 모집인원
-        const num_recruit = this.$route.params.maxPeopleNumber - this.$route.params.participants.length;
-        if (this.$route.params.maxPeopleNumber == 99) this.label_unlimited = true;
-        else {this.label_unlimited = false;setTimeout(function() {$("#num_recruit").val(num_recruit);}, 100);}
+        if (this.$route.params.maxPeopleNumber) {
+            const num_recruit = this.$route.params.maxPeopleNumber - this.$route.params.participants.length;
+            if (this.$route.params.maxPeopleNumber == 99) this.label_unlimited = true;
+            else {this.label_unlimited = false;setTimeout(function() {$("#num_recruit").val(num_recruit);}, 100);}
+        }
         
         // 참여남자 // 참여여자
-        const num_man = this.$route.params.participants.filter(x=>x.user == null && x.gender == 'm').length;
-        const num_woman = this.$route.params.participants.filter(x=>x.user == null && x.gender == 'f').length;
-        setTimeout(function() {$("#num_man").val(num_man);}, 100)
-        setTimeout(function() {$("#num_woman").val(num_woman);}, 100)
+        if (this.$route.params.participants) {
+            const num_man = this.$route.params.participants.filter(x=>x.user == null && x.gender == 'm').length;
+            const num_woman = this.$route.params.participants.filter(x=>x.user == null && x.gender == 'f').length;
+            setTimeout(function() {$("#num_man").val(num_man);}, 100)
+            setTimeout(function() {$("#num_woman").val(num_woman);}, 100)
+        }
         
         // 선호사항
-        this.$route.params.interests.forEach(x => {
-            if (x._id == "6174da5da60639819c3e6ac7") this.check_gender1 = true;
-            if (x._id == "6174da5ea60639819c3e6ac9") this.check_gender2 = true;
-            if (x._id == "6174da5fa60639819c3e6acb") this.check_gender3 = true;
-            if (x._id == "6174da60a60639819c3e6acd") this.check_gender4 = true;
-            if (x._id == "6174da70a60639819c3e6ad9") this.check_amity1 = true;
-            if (x._id == "61b45bb413f324035a6c86bc") this.check_amity2 = true;
-            if (x._id == "61b45bb913f324035a6c86bf") this.check_amity3 = true;
-        })
+        if (this.$route.params.interests) {
+            this.$route.params.interests.forEach(x => {
+                if (x._id == "6174da5da60639819c3e6ac7") this.check_gender1 = true;
+                if (x._id == "6174da5ea60639819c3e6ac9") this.check_gender2 = true;
+                if (x._id == "6174da5fa60639819c3e6acb") this.check_gender3 = true;
+                if (x._id == "6174da60a60639819c3e6acd") this.check_gender4 = true;
+                if (x._id == "6174da70a60639819c3e6ad9") this.check_amity1 = true;
+                if (x._id == "61b45bb413f324035a6c86bc") this.check_amity2 = true;
+                if (x._id == "61b45bb913f324035a6c86bf") this.check_amity3 = true;
+            });
+        }
+    } else if (this.$route.params != null && this.$route.params.hasOwnProperty('_id')) {
+        this.search_result.push({__typename: this.$route.params.__typename, location: this.$route.params.name, adminScore: this.$route.params.adminScore, description: this.$route.params.description, _id: this.$route.params._id});
+        const insname = this.ins_name;
     }
     
     const insname = this.ins_name;
@@ -773,11 +779,11 @@ export default {
             });
         }
 
-        
+        console.log(upsert_diving.data.upsertDiving)
         this.diving_id = upsert_diving.data.upsertDiving._id
       },
       finished() {
-          location.href='/diving/' + this.diving_id;
+          //location.href='/diving/' + this.diving_id;
       },
       go_next(id) {
           if (id == 0) {
