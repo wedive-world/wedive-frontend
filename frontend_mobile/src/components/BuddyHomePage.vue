@@ -868,6 +868,8 @@ const axios = require("axios");
 export default {
   name: 'HelloWorld',
   mounted() {
+    console.log("idToken : " + localStorage.idToken)
+    console.log("nickName : " + localStorage.nickName)
     init_template();
     var preloader = document.getElementById('preloader')
     if(preloader){preloader.classList.add('preloader-hide');}

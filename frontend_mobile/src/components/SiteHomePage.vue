@@ -1361,23 +1361,20 @@ export default {
                 });
                 
                 var concierge_uid = "RuOiMt9YUTbRUJQTrXv4cWMEimr2";
-                console.log("1")
                 // 개설된 채팅이 있는지 확인한다.
                 var go_flag = false;
-                result.data.data.getJoinedRoomList.forEach(room => {
-                    console.log(room)
+                result.data.data.getJoinedRoomList.every(room => {
                     if (room.type == 'direct' && room.chatUsers.filter(u=>u.uid == concierge_uid).length > 0) {
-                        
                         go_flag = true;
-                        //location.href = '/chat/' + room._id;
                         const room_id = room._id;
-                        console.log(room_id)
-                        //this.$router.push({name: 'ChatDetailPage', params: { room_id }, target: markerItem})
-                        this.$router.push({path: '/chat/'+room_id, params: markerItem })
+                        //this.$router.push({name: 'ChatDetailPage', params: {id: room_id, makeLocationChat: markerItem} })
+                        this.$router.push({name: 'ChatDetailPage', params: {id: room_id, makeLocationChat: markerItem} })
+                        return false;
                     }
+                    return true;
                 })
                 if (go_flag == false) {
-                    console.log("3")
+                    console.log("make dummy")
                     // 없는경우, 더미로 하나 만든다.
                     //localStorage.chatType = 'direct';
                     //var chatUids = new Array();
@@ -1386,7 +1383,7 @@ export default {
                     //localStorage.chatName = "WeDive";
                     //location.href = '/chat/create'
 
-                    this.$router.push({name: "ChatDummyPage", params: {is_concierge: true, roomName: "WeDive", chatType: "direct", chatUids: JSON.stringify([concierge_uid])}});
+                    this.$router.push({name: "ChatDummyPage", params: {makeLocationChat: markerItem, is_concierge: true, roomName: "WeDive", chatType: "direct", chatUids: JSON.stringify([concierge_uid])}});
                 }
             } else { // 로그인
                 this.login();

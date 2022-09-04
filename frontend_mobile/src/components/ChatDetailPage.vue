@@ -775,6 +775,7 @@ export default {
     },
   },
   mounted() {
+    console.log("mounted start")
     init_template();
     var preloader = document.getElementById('preloader')
     if(preloader){preloader.classList.add('preloader-hide');}
@@ -794,7 +795,7 @@ export default {
         //var element = document.getElementById("speech-content");
         //element.scrollTop = element.scrollHeight;
     },200);
-
+    console.log("mounted finish")
     //console.log(this.$apollo.queries.chats.observer.lastResult.data.getChatRoomInfo);
 
     /*$("#speech-content").scroll(function () {
@@ -812,11 +813,14 @@ export default {
     ContentLoader,
   },
   created() {
+    console.log("created start")
     console.log(this.$route)
-    if (this.$route.params != null && this.$route.params.hasOwnProperty('_id')) {
-        locationInfo = this.$route.params;
+    if (this.$route.params != null && this.$route.params.hasOwnProperty('makeLocationChat')) {
+        console.log(this.$route.params.makeLocationChat)
+        //locationInfo = this.$route.params;
     }
     window.addEventListener('native.showkeyboard', this.keyboardShowHandler);
+    console.log("created finished")
   },
   destroyed () {
     window.removeEventListener('native.showkeyboard', this.keyboardShowHandler);
@@ -831,7 +835,7 @@ export default {
         sendText: '',
         sendDisable: true,        
         getChatRoomInfo: [],
-        roomId: this.$route.params.id,
+        roomId: (this.$route.params && this.$route.params.id) ? null : this.$route.params.id,
         skip: 0,
         limit: 20,
         prev_height: 0,
