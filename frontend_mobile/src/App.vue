@@ -328,6 +328,7 @@ export default {
       }
     },
     goNoti() {
+      $("#wedive-noti").removeClass("has-notification");
       if(this.idToken != null && this.nickName != null && this.nickName != 'null')
         location.href = '/other/notification';
       else if (this.nickName == null || this.nickName == 'null')

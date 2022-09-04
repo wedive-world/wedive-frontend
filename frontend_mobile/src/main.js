@@ -58,9 +58,14 @@ try {
     if (userInformation.idToken) localStorage.idToken = userInformation.idToken;
     if (userInformation.nickName) localStorage.nickName = userInformation.nickName;
     if (userInformation.userId) localStorage.userId = userInformation._id;
+    console.log("[SET] localStorage.uid : " + localStorage.uid)
+    console.log("[SET] localStorage.nickName : " + localStorage.nickName)
+    console.log("[SET] localStorage.userId : " + localStorage.userId)
+
   }
 } catch(e) {
-  
+  console.log("Android.getUserInformation ERROR");
+  console.log(e);
 }
 /*try {
   //console.log("check Android")
