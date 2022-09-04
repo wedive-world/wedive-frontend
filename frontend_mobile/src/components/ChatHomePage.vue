@@ -354,9 +354,6 @@ export default {
           subscribeToMore: {
             document: gql`subscription Subscription {
                 subscribeUserJoinedRoomChanged {
-                    title
-                    _id
-                    type
                     lastChatMessage {
                     text
                     author {
@@ -365,29 +362,27 @@ export default {
                     createdAt
                     updatedAt
                     }
+                    title
                     unread
+                    type
                     usersCount
                     lastMessageAt
                 }
             }`,
             updateQuery: (previousResult, { subscriptionData }) => {
-                console.log(previousResult)
-                console.log(subscriptionData)
-                return subscriptionData;
-                /*if (previousResult.getChatRoomInfo.chatMessages.find(chat => chat._id === subscriptionData.data.subscribeRoomMessage._id)) {
-                    return previousResult
-                }
-                return {
-                    getChatRoomInfo: {
-                        roomId: previousResult.getChatRoomInfo.roomId,
-                        chatRoom: previousResult.getChatRoomInfo.chatRoom,
-                        __typename: previousResult.getChatRoomInfo.__typename,
-                        chatMessages: [
-                            ...previousResult.getChatRoomInfo.chatMessages || [],
-                            subscriptionData.data.subscribeRoomMessage || [],
-                        ]
-                    },
-                }*/
+                previousResult.getJoinedRoomList.forEach(room => {
+                    if(room.title == subscriptionData.data.subscribeUserJoinedRoomChanged.title &&
+                    room.type == subscriptionData.data.subscribeUserJoinedRoomChanged.type &&
+                    room.usersCount == subscriptionData.data.subscribeUserJoinedRoomChanged.usersCount) {
+                        console.log(subscriptionData.data.subscribeUserJoinedRoomChanged.lastChatMessage.createdAt.$date);
+                        console.log(typeof(subscriptionData.data.subscribeUserJoinedRoomChanged.lastChatMessage.createdAt.$date));
+                        room.lastChatMessage.createdAt = (new Date(subscriptionData.data.subscribeUserJoinedRoomChanged.lastChatMessage.createdAt.$date)).toISOString();
+                        room.lastChatMessage.text = subscriptionData.data.subscribeUserJoinedRoomChanged.lastChatMessage.text;
+                        room.unread = subscriptionData.data.subscribeUserJoinedRoomChanged.unread;
+                    }
+                })
+                console.log(previousResult);
+                return previousResult;
             },
         }
       }

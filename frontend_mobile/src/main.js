@@ -125,7 +125,7 @@ try {
 var _apolloClient = null;
 const GRAPHQL_URL = process.env.VUE_APP_API_PATH || 'https://chat.wedives.com/graphql'
 const GRAPHQL_API_URL = process.env.VUE_APP_API_PATH || 'https://api.wedives.com/graphql'
-if (window.location.pathname.indexOf('/chat/') == 0) {
+if (window.location.pathname.indexOf('/chat/') == 0 || window.location.pathname.indexOf('/chat_home') == 0) {
   const httpLink = new HttpLink({
     // You should use an absolute URL here
     uri: GRAPHQL_URL,
