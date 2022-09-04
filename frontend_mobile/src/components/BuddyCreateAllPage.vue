@@ -717,6 +717,13 @@ export default {
         if (diveShop.length == 0) diveShop = null;
         const __diveShop = diveShop;
 
+
+        var preloader = document.getElementById('preloader')
+        if(preloader){
+            preloader.classList.remove('preloader-hide');
+            preloader.classList.add('opacity-50');
+        }
+        
         var upsert_diving = null;
         if (this.createId) {
             upsert_diving = await this.$apollo.mutate({
@@ -778,12 +785,15 @@ export default {
                 },
             });
         }
-
-        console.log(upsert_diving.data.upsertDiving)
         this.diving_id = upsert_diving.data.upsertDiving._id
+        var preloader = document.getElementById('preloader')
+        if(preloader){
+            preloader.classList.add('preloader-hide');
+            preloader.classList.remove('opacity-50');
+        }
       },
       finished() {
-          //location.href='/diving/' + this.diving_id;
+          location.href='/diving/' + this.diving_id;
       },
       go_next(id) {
           if (id == 0) {

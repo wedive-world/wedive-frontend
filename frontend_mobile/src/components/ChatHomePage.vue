@@ -475,13 +475,19 @@ export default {
                 //localStorage.chatName = this.chatSelectedList[0].nickName;
                 //location.href = '/chat/create'
                 history.back();
-                console.log({is_concierge: false, roomName: this.chatSelectedList[0].nickName, chatType: "direct", chatUids: JSON.stringify([this.chatSelectedList[0].uid])});
-                this.$router.push({name: "ChatDummyPage", params: {is_concierge: false, roomName: this.chatSelectedList[0].nickName, chatType: "direct", chatUids: JSON.stringify([this.chatSelectedList[0].uid])}});
+                const send_param = {is_concierge: false, roomName: this.chatSelectedList[0].nickName, chatType: "direct", chatUids: JSON.stringify([this.chatSelectedList[0].uid])};
+                const m_router = this.$router;
+                setTimeout(function() {
+                    m_router.push({name: "ChatDummyPage", params: send_param});
+                }, 200);
             }
         } else {
             history.back();
-            console.log({is_concierge: false, roomName: this.chatSelectedList.map(x => x.nickName).join(), chatType: "channel", chatUids: JSON.stringify(this.chatSelectedList.map(x => x.uid))})
-            this.$router.push({name: "ChatDummyPage", params: {is_concierge: false, roomName: this.chatSelectedList.map(x => x.nickName).join(), chatType: "channel", chatUids: JSON.stringify(this.chatSelectedList.map(x => x.uid))}});
+            const send_param = {is_concierge: false, roomName: this.chatSelectedList.map(x => x.nickName).join(), chatType: "channel", chatUids: JSON.stringify(this.chatSelectedList.map(x => x.uid))};
+            const m_router = this.$router;
+            setTimeout(function() {
+                m_router.push({name: "ChatDummyPage", params: send_param});
+            }, 200);
         }
     },
     async lookupUser() {

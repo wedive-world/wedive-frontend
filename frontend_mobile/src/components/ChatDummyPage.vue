@@ -435,7 +435,7 @@ export default {
         try {
             $('#speech-content').scrollTop($('#speech-content')[0].scrollHeight);
         } catch (e) {
-            console.log(e);
+            //console.log(e);
         }
         
         //var element = document.getElementById("speech-content");
@@ -462,10 +462,12 @@ export default {
     console.log("create start");
     //this.$router.push({name: "ChatDummyPage", params: {is_concierge: true, roomName: "WeDive", chatType: "direct", chatUids: JSON.stringify([concierge_uid])}});
     this.route_params = this.$route.params;
-    this.is_concierge = (this.route_params && this.route_params.hasOwnProperty('is_concierge') ? this.route_params.is_concierge : null);
-    this.roomName = (this.route_params && this.route_params.hasOwnProperty('roomName') ? this.route_params.roomName : null);
-    this.chatType = (this.route_params && this.route_params.hasOwnProperty('chatType') ? this.route_params.chatType : 'direct');
-    this.chatUids = (this.route_params && this.route_params.hasOwnProperty('chatUids') ? JSON.parse(this.route_params.chatUids) : []);
+    if (this.route_params) {
+        this.is_concierge = (this.route_params.hasOwnProperty('is_concierge') ? this.route_params.is_concierge : null);
+        this.roomName = (this.route_params.hasOwnProperty('roomName') ? this.route_params.roomName : null);
+        this.chatType = (this.route_params.hasOwnProperty('chatType') ? this.route_params.chatType : 'direct');
+        this.chatUids = (this.route_params.hasOwnProperty('chatUids') ? JSON.parse(this.route_params.chatUids) : []);
+    }
     
     setTimeout(function() {
         init_template();
@@ -568,10 +570,15 @@ export default {
                 this.sendText = '';
                 var ret = (result.data && result.data.data && result.data.data.getJoinedRoomList) ? result.data.data.getJoinedRoomList : null
                 if (ret != null) {
+                    history.back();
+                    const chat_id = ret.chatRoom._id;
+                    setTimeout(function() {
+                        location.href = '/chat/' + chat_id;
+                    },100);
                     //delete localStorage.chatUids;
                     //delete localStorage.chatType;
                     //delete localStorage.chatName;
-                    location.href = '/chat/' + ret.chatRoom._id;
+                    
                 }
             }
             if(preloader){
@@ -740,7 +747,7 @@ export default {
         try {
             $('#speech-content').scrollTop($('#speech-content')[0].scrollHeight);
         } catch (e) {
-            console.log(e)
+            //console.log(e)
         }
     },
     async sendMessage() {
@@ -883,7 +890,11 @@ export default {
                 //delete localStorage.chatUids;
                 //delete localStorage.chatType;
                 //delete localStorage.chatName;
-                location.href = '/chat/' + ret.chatRoom._id;
+                history.back();
+                const chat_id = ret.chatRoom._id;
+                setTimeout(function() {
+                    location.href = '/chat/' + chat_id;
+                },100);
             }
         }
     },

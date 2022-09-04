@@ -183,11 +183,6 @@ export default {
       query: function(newVal, oldVal) {
         if(localStorage.suggestionFlag && localStorage.suggestionFlag == '1') {
             localStorage.suggestionFlag = '0';
-            //this.lookupPlace();
-            //this.lookupLocation();
-            //setTimeout(function() {
-                //$("#input_query > .input-group > input").focus();
-            //},200);
         } else {
             this.query_place = JSON.parse(JSON.stringify(this.query)) + "";
             /*this.openSuggestion();
@@ -236,8 +231,8 @@ export default {
             },
             data: {
             query: `
-                query SearchDivings($searchParams: SearchParams, $limit: Int) {
-                    searchDivings(searchParams: $searchParams, limit: $limit) {
+                query GetRecentDivings($skip: Int!, $limit: Int!) {
+                    getRecentDivings(skip: $skip, limit: $limit) {
                         diveSites {
                             name
                             uniqueName
@@ -282,15 +277,15 @@ export default {
                 `,
                 variables: {
                     "limit": 10,
-                    "searchParams": _searchParams
+                    "skip": 0
                 }
             }
         });
         //result.data.data.searchDiveCentersByName.forEach(x=>result.data.data.searchDiveCentersByName)
         var result_list = new Array();
-        if (result.data.data.searchDivings) {
+        if (result.data.data.getRecentDivings) {
             this.searchDivings = [];
-            result.data.data.searchDivings.forEach(x => {
+            result.data.data.getRecentDivings.forEach(x => {
                 x.diveLocation = [];
                 x.diveSites.forEach(y => {y.type = 'site';x.diveLocation.push(y)});
                 x.divePoints.forEach(y => {y.type = 'point';x.diveLocation.push(y)});
@@ -467,112 +462,6 @@ export default {
                 $("#suggestion_typeahead > .input-group > input").focus();
                 $("#suggestion_typeahead > .input-group > input").addClass("font-noto font-16");
             }, 300);
-      },
-      async lookupLocation() {
-        // progress bar
-        /*var preloader = document.getElementById('preloader')
-        if(preloader){
-            preloader.classList.remove('preloader-hide');
-            preloader.classList.add('opacity-50');
-        }
-        this.users = [];
-        var query = this.query;
-        var _searchParams = JSON.parse(JSON.stringify(searchParams));
-        if (_searchParams.adminScore) _searchParams.adminScore *= 20;
-        if (_searchParams.waterEnvironmentScore) _searchParams.waterEnvironmentScore *= 20;
-        if (_searchParams.eyeSightScore) _searchParams.eyeSightScore *= 20;
-        _searchParams.query = query;
-        
-        var result = await axios({
-            url: 'https://api.wedives.com/graphql',
-            method: 'post',
-            headers: {
-                countrycode: 'ko',
-                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-            },
-            data: {
-            query: `
-                query SearchPlaces($searchParams: SearchParams, $limit: Int) {
-                    searchPlaces(searchParams: $searchParams, limit: $limit) {
-                        __typename
-                        ... on DiveSite {
-                            _id
-                            uniqueName
-                            name
-                            description
-                            adminScore
-                            latitude
-                            longitude
-                            backgroundImages {
-                                thumbnailUrl
-                            }
-                            interests {
-                                title
-                                type
-                            }
-                        }
-                        ... on DivePoint {
-                            _id
-                            uniqueName
-                            name
-                            description
-                            adminScore
-                            latitude
-                            longitude
-                            backgroundImages {
-                                thumbnailUrl
-                            }
-                            interests {
-                                title
-                                type
-                            }
-                        }
-                        ... on DiveCenter {
-                            _id
-                            uniqueName
-                            name
-                            description
-                            divingType
-                            adminScore
-                            latitude
-                            longitude
-                            institutionTypes
-                            backgroundImages {
-                                thumbnailUrl
-                            }
-                            interests {
-                                title
-                                type
-                            }
-                        }
-                        address
-                        latitude
-                        longitude
-                        countryCode
-                    }
-                }
-                `,
-                variables: {
-                    "limit": 10,
-                    "searchParams": _searchParams
-                }
-            }
-        });
-        //result.data.data.searchDiveCentersByName.forEach(x=>result.data.data.searchDiveCentersByName)
-        var result_list = new Array();
-        if (result.data.data.searchPlaces) {
-            result.data.data.searchPlaces.filter(place => place.__typename == 'DiveSite').forEach(item => {item.type='site';result_list.push(item)});
-            result.data.data.searchPlaces.filter(place => place.__typename == 'DivePoint').forEach(item => {item.type='point';result_list.push(item)});
-            result.data.data.searchPlaces.filter(place => place.__typename == 'DiveCenter').forEach(item => {item.type='center';result_list.push(item)});
-        }
-        //if (result.data.data.searchDiveSitesByName) result.data.data.searchDiveSitesByName.forEach(x=>{x.type='site';result_list.push(x)});
-        //if (result.data.data.searchDivePointsByName) result.data.data.searchDivePointsByName.forEach(x=>{x.type='point';result_list.push(x)});
-        //if (result.data.data.searchDiveCentersByName) result.data.data.searchDiveCentersByName.forEach(x=>{x.type='center';result_list.push(x)});
-        this.users = result_list;
-        if(preloader){
-            preloader.classList.remove('opacity-50');
-            preloader.classList.add('preloader-hide');
-        }*/
       },
   },
   mounted() {

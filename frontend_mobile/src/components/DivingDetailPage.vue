@@ -180,7 +180,7 @@
                                     <p class="mb-0 font-13 color-gray ellipsis" style="max-width: calc(100vw - 220px);">{{ participant ? getDiverLevel(participant.freeLicenseLevel, participant.scubaLicenseLevel) : '' }}</p>
                                 </div>
                             </div>
-                            <span v-if="participant.user!=null && participant.user._id!='resigned'" v-on:click="chatUser(participant.user)" data-menu="menu-dm" class="chip chip-s bg-gray-light text-center font-400 wedive-chip">채팅</span>
+                            <span v-if="participant.user!=null && participant.user._id!='resigned'" v-on:click="chatUser(participant.user)" class="chip chip-s bg-gray-light text-center font-400 wedive-chip">채팅</span>
                             <span data-menu="menu-approval" v-on:click="setUser(participant)" class="chip chip-s bg-gray-light text-center font-400 wedive-chip2">승인</span>
                             <!--<p class="color-gray-dark mb-0 font-14">{{ (participant.user!=null&&participant.user.nickName!=null) ? participant.user.nickName : ((participant.name!=null) ? participant.name : '비공개') }}</p>-->
                         </div>
@@ -1142,11 +1142,12 @@ export default {
               }
 
               // 리스트에 추가
-              if (getDivingById.participants == null) {
-                  getDivingById.participants = [];
+              if (this.getDivingById.participants == null) {
+                  this.getDivingById.participants = [];
               }
-              this.getDivingById.participants.push({user: {_id:''}, nickName: localStorage.nickName, status: "applied"});
-
+              this.getDivingById.participants.push({user: {_id:localStorage.userId}, nickName: localStorage.nickName, status: "applied"});
+              
+              
               setTimeout(function() {
                 var menuData = 'menu-join-requested';
                 document.getElementById(menuData).classList.add('menu-active');
@@ -1355,11 +1356,12 @@ export default {
                     `
                 }
             });
-            
+            console.log(result.data.data.getJoinedRoomList);
+            console.log(user.uid);
             // 개설된 채팅이 있는지 확인한다.
             var go_flag = false;
             result.data.data.getJoinedRoomList.forEach(room => {
-                if (room.type == 'direct' && room.chatUsers.filter(u=>u._id == user.uid).length > 0) {
+                if (room.type == 'direct' && room.chatUsers.filter(u=>u.uid == user.uid).length > 0) {
                     go_flag = true;
                     location.href = '/chat/' + room._id;
                 }

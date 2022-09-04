@@ -214,7 +214,7 @@
                 <a href="#" v-on:click="showAppSettingActivity" class="btn font-400 rounded-s shadow-l bg-secondary color-white bd-w-0 font-13">권한 부여하기</a>
             </div>
         </div>
-        <div v-else-if="getNearByDivings.length == 1" class="" style="height:176px;">
+        <div v-else-if="getNearByDivings.length == 1" class="" style="height:176px;margin-right: 10px;">
             <div v-on:click="movePreview(getNearByDivings[0])" class="card card-style card-nearby" :style="'z-index:999;background: url('+((getNearByDivings[0].backgroundImages && getNearByDivings[0].backgroundImages.length > 0) ? getNearByDivings[0].backgroundImages[0].thumbnailUrl : '/static/empty.jpg')+');background-position: center;'" data-card-height="160">
                 <div class="card-bottom px-3 py-3">
                     <h4 class="color-white font-18 font-600">{{ getNearByDivings[0].name }} ({{getNearByDivings[0].startedAt.substring(5, 10).replace(/-/gi, '/')}})</h4>
@@ -1218,8 +1218,6 @@ export default {
             return (this.getNearByDivings == null || this.getNearByDivings.length > 0 ? true : false);
         },
         async result () {
-            
-            
             this.getNearByDivings.forEach(x => {
                 var itm = (x.diveCenters.length > 0 ? x.diveCenters[0] : (x.divePoints.length > 0 ? x.divePoints[0] : (x.diveShops.length > 0 ? x.diveShops[0] : (x.diveSites.length > 0 ? x.diveSites[0] : []))));
                 if (itm && itm.backgroundImages && itm.backgroundImages.length>0) {
