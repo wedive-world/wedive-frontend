@@ -350,7 +350,46 @@ export default {
                 var b_create_at = (b.lastChatMessage && b.lastChatMessage.createdAt) ? b.lastChatMessage.createdAt : b.createdAt;
                 return (a_create_at>b_create_at ? -1 : 1);
             });
-          },          
+          },
+          subscribeToMore: {
+            document: gql`subscription Subscription {
+                subscribeUserJoinedRoomChanged {
+                    title
+                    _id
+                    type
+                    lastChatMessage {
+                    text
+                    author {
+                        name
+                    }
+                    createdAt
+                    updatedAt
+                    }
+                    unread
+                    usersCount
+                    lastMessageAt
+                }
+            }`,
+            updateQuery: (previousResult, { subscriptionData }) => {
+                console.log(previousResult)
+                console.log(subscriptionData)
+                return subscriptionData;
+                /*if (previousResult.getChatRoomInfo.chatMessages.find(chat => chat._id === subscriptionData.data.subscribeRoomMessage._id)) {
+                    return previousResult
+                }
+                return {
+                    getChatRoomInfo: {
+                        roomId: previousResult.getChatRoomInfo.roomId,
+                        chatRoom: previousResult.getChatRoomInfo.chatRoom,
+                        __typename: previousResult.getChatRoomInfo.__typename,
+                        chatMessages: [
+                            ...previousResult.getChatRoomInfo.chatMessages || [],
+                            subscriptionData.data.subscribeRoomMessage || [],
+                        ]
+                    },
+                }*/
+            },
+        }
       }
   },
   methods: {

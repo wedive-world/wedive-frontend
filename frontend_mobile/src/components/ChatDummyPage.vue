@@ -453,11 +453,13 @@ export default {
             //this.skip += this.limit;
         }
     }); */
+    console.log("dummy mounted");
   },
   components: {
     VueTypeaheadBootstrap,
   },
   created() {
+    console.log("create start");
     //this.$router.push({name: "ChatDummyPage", params: {is_concierge: true, roomName: "WeDive", chatType: "direct", chatUids: JSON.stringify([concierge_uid])}});
     this.route_params = this.$route.params;
     this.is_concierge = (this.route_params && this.route_params.hasOwnProperty('is_concierge') ? this.route_params.is_concierge : null);
@@ -473,6 +475,7 @@ export default {
     }, 500);
     
     window.addEventListener('native.showkeyboard', this.keyboardShowHandler);
+    console.log("create complete");
   },
   destroyed () {
     window.removeEventListener('native.showkeyboard', this.keyboardShowHandler);

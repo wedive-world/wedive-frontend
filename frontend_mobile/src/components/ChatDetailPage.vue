@@ -12,7 +12,7 @@
             <img src="https://d34l91104zg4p3.cloudfront.net/assets/concierge.gif" style="height:74px;width:74px;position:absolute;right:14px;top:58px;-webkit-mask-image: -webkit-radial-gradient(center, white, black);border-radius: 16px;"/>
         </div>
 
-        <div v-if="divingInfo" v-on:click="moveDiving(divingInfo)" class="font-noto" style="margin-top: 50px;height:90px;border-bottom:1px solid lightgray;padding:14px;position:relative;">
+        <div v-if="divingInfo" v-on:click="moveDiving(divingInfo)" class="font-noto" style="margin-top: 50px;height:90px;border-bottom:1px solid lightgray;padding:14px;position:relative;background: white;">
             <p class="mb-0 font-16 font-600"><i class="fas fa-swimmer me-1"></i> {{ divingInfo.title }}</p>
             <p class="mb-0 font-14 opacity-80 ellipsis" style="line-height:1.3;max-width: calc(100vw - 118px) !important;">{{ divingInfo.description }}</p>
 
@@ -753,6 +753,8 @@ export default {
                 }
             },
             updateQuery: (previousResult, { subscriptionData }) => {
+                console.log(previousResult)
+                console.log(subscriptionData)
                 if (previousResult.getChatRoomInfo.chatMessages.find(chat => chat._id === subscriptionData.data.subscribeRoomMessage._id)) {
                     return previousResult
                 }

@@ -1141,6 +1141,12 @@ export default {
                 window.history.back(); 
               }
 
+              // 리스트에 추가
+              if (getDivingById.participants == null) {
+                  getDivingById.participants = [];
+              }
+              this.getDivingById.participants.push({user: {_id:''}, nickName: localStorage.nickName, status: "applied"});
+
               setTimeout(function() {
                 var menuData = 'menu-join-requested';
                 document.getElementById(menuData).classList.add('menu-active');

@@ -164,18 +164,6 @@ export default {
       this.getFirebaseToken()
     }
 
-    try {
-      const userInformation = JSON.parse(Android.getUserInformation());
-    
-      console.log(`android connected, ${JSON.stringify(userInformation)}`);
-      localStorage.setItem(userAuthKey, userInformation);
-      if (userInformation.uid) localStorage.uid = userInformation.uid;
-      if (userInformation.idToken) localStorage.idToken = userInformation.idToken;
-      if (userInformation.email) localStorage.userEmail = userInformation.email;
-      if (userInformation.languageCode) localStorage.languageCode = userInformation.languageCode;
-    }catch(e) {
-
-    }
     
     
     //$("#menu-main").attr("data-menu-width", $( window ).width());

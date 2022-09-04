@@ -540,7 +540,7 @@
             </div>
         </div>
 
-        <div class="card card-style">
+        <!--<div class="card card-style">
             <div class="content">
             <h4 class="text-start">이 지역의 활동강사 (2)</h4>
             <a class="color-highlight font-12 wedive-txt-all">모두보기</a>
@@ -585,7 +585,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
 
         <div class="card card-style">
             <div class="content">
