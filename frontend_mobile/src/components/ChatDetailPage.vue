@@ -835,7 +835,7 @@ export default {
         sendText: '',
         sendDisable: true,        
         getChatRoomInfo: [],
-        roomId: (this.$route.params && this.$route.params.id) ? null : this.$route.params.id,
+        roomId: (this.$route.params && this.$route.params.id) ? this.$route.params.id : null,
         skip: 0,
         limit: 20,
         prev_height: 0,
