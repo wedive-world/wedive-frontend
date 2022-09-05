@@ -1308,8 +1308,8 @@ export default {
       },
       async mapBoxClick(item) {
           if (item == 'buddy') {
-            //console.log(markerItem)
-            this.$router.push({name: "BuddyCreateAllPage", params: markerItem})
+            //this.$router.push({name: "BuddyCreateAllPage", params: markerItem})
+            location.href='/buddy/create?' + (markerItem.__typename=='DiveSite' ? 'site' : markerItem.__typename=='DivePoint' ? 'point' : markerItem.__typename=='DiveCenter' ? 'center' : 'shop') + '=' + markerItem.uniqueName;
           }
           else if (item == 'concierge') {
               if (localStorage.idToken) {
@@ -1368,7 +1368,7 @@ export default {
                         go_flag = true;
                         const room_id = room._id;
                         //this.$router.push({name: 'ChatDetailPage', params: {id: room_id, makeLocationChat: markerItem} })
-                        this.$router.push({name: 'ChatDetailPage', params: {id: room_id, makeLocationChat: markerItem} })
+                        location.href = '/chat/' + room_id + '?' + (markerItem.__typename=='DiveSite' ? 'site' : markerItem.__typename=='DivePoint' ? 'point' : markerItem.__typename=='DiveCenter' ? 'center' : 'shop') + '=' + markerItem.uniqueName;
                         return false;
                     }
                     return true;
@@ -1383,7 +1383,8 @@ export default {
                     //localStorage.chatName = "WeDive";
                     //location.href = '/chat/create'
 
-                    this.$router.push({name: "ChatDummyPage", params: {makeLocationChat: markerItem, is_concierge: true, roomName: "WeDive", chatType: "direct", chatUids: JSON.stringify([concierge_uid])}});
+                    //this.$router.push({name: "ChatDummyPage", params: {makeLocationChat: markerItem, is_concierge: true, roomName: "WeDive", chatType: "direct", chatUids: JSON.stringify([concierge_uid])}});
+                    location.href = '/chat/create?uid=['+concierge_uid+']'
                 }
             } else { // 로그인
                 this.login();
@@ -1812,7 +1813,8 @@ export default {
                 //localStorage.chatName = "WeDive";
                 //location.href = '/chat/create'
 
-                this.$router.push({name: "ChatDummyPage", params: {is_concierge: true, roomName: "WeDive", chatType: "direct", chatUids: JSON.stringify([concierge_uid])}});
+                //this.$router.push({name: "ChatDummyPage", params: {is_concierge: true, roomName: "WeDive", chatType: "direct", chatUids: JSON.stringify([concierge_uid])}});
+                location.href = '/chat/create?uid=['+concierge_uid+']'
             }
         } else { // 로그인
             this.login();

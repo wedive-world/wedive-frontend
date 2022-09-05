@@ -1994,7 +1994,8 @@ export default {
         })
       },
       findBuddyClick() {
-          this.$router.push({name: "BuddyCreateAllPage", params: this.getDiveCenterByUniqueName})
+          //this.$router.push({name: "BuddyCreateAllPage", params: this.getDiveCenterByUniqueName})
+          location.href = '/buddy/create?center=' + this.getDiveCenterByUniqueName.uniqueName;
       },
       async moveDiving(item) {
         var dic_type1 = {"DiveSite": "diveSite", "DivePoint": "divePoint", "DiveCenter": "diveCenter", "Diving": "diving", "User": "user", "Review": "review", "Forum": "forum", "Recommendation": "recommendation"};

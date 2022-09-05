@@ -1739,7 +1739,8 @@ export default {
         })
       },
       findBuddyClick() {
-          this.$router.push({name: "BuddyCreateAllPage", params: this.getDiveShopByUniqueName})
+          //this.$router.push({name: "BuddyCreateAllPage", params: this.getDiveShopByUniqueName})
+          location.href = '/buddy/create?shop=' + this.getDiveShopByUniqueName.uniqueName;
       },
       selectTicket(event, ticketItem) {
         if (event.currentTarget.classList.contains("ticket-select")) {

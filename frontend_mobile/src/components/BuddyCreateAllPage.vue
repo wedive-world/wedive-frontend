@@ -410,11 +410,258 @@ export default {
     SwiperSlide,
     draggable,
   },
-  created() {
+  async created() {
     //console.log('$("#footer-bar").hide();')
     $("#footer-bar").hide();
-    console.log(this.$route.params);
-    if (this.$route.params != null && this.$route.params.hasOwnProperty('_id') && this.$route.params.__typename == 'Diving') {
+    var diveType = ['site','point','center','shop'];
+    if (diveType.filter(x=>this.$route.query[x] !=null).length > 0) {
+        var m_type = diveType.filter(x=>this.$route.query[x] !=null)[0]
+        var m_type_upper = m_type && m_type[0].toUpperCase() + m_type.slice(1)
+        
+        var result = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                query getDive` + m_type_upper + `ByUniqueName($uniqueName: String!) {
+                    getDive` + m_type_upper + `ByUniqueName(uniqueName: $uniqueName) {
+                        _id
+                        name
+                        uniqueName
+                        description
+                        backgroundImages {
+                            _id
+                            reference
+                            description
+                            thumbnailUrl
+                        }
+                        publishStatus
+                        adminScore
+                    }
+                }
+                `,
+                variables: {
+                    uniqueName: this.$route.query[m_type]
+                }
+
+            }
+        });
+        if ((result.data && result.data.data && result.data.data['getDive'+ m_type_upper +'ByUniqueName'])) {
+            var json_itm = result.data.data['getDive'+ m_type_upper +'ByUniqueName'];
+            this.search_result.push({__typename: 'Dive'+m_type_upper, location: json_itm.name, adminScore: json_itm.adminScore, description: json_itm.description, _id: json_itm._id});
+        }
+    }
+    if (this.$route.query.hasOwnProperty('diving')) {
+        var result = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                query GetDivingById($id: ID!) {
+                    getDivingById(_id: $id) {
+                        _id
+                        title
+                        description
+                        status
+                        type
+                        chatRoomId
+                        hostUser {
+                            _id
+                            uid
+                            nickName
+                            scubaLicenseLevel
+                            freeLicenseLevel
+                            profileImages {
+                                thumbnailUrl
+                            }
+                            birthAge
+                            gender
+                        }
+                        diveSites {
+                            _id
+                            adminScore
+                            backgroundImages {
+                                _id
+                                reference
+                                thumbnailUrl
+                            }
+                            name
+                            uniqueName
+                            description
+                            latitude
+                            longitude
+                            interests {
+                                title
+                                type
+                            }
+                        }
+                        divePoints {
+                            _id
+                            adminScore
+                            backgroundImages {
+                                _id
+                                reference
+                                thumbnailUrl
+                            }
+                            name
+                            uniqueName
+                            description
+                            latitude
+                            longitude
+                            interests {
+                                title
+                                type
+                            }
+                        }
+                        diveCenters {
+                            _id
+                            adminScore
+                            backgroundImages {
+                                _id
+                                reference
+                                thumbnailUrl
+                            }
+                            name
+                            uniqueName
+                            description
+                            latitude
+                            longitude
+                            institutionTypes
+                            interests {
+                                title
+                                type
+                            }
+                        }
+                        participants {
+                            user {
+                                _id
+                                uid
+                                nickName
+                                profileImages {
+                                    thumbnailUrl
+                                }
+                                scubaLicenseLevel
+                                freeLicenseLevel
+                            }
+                            status
+                            name
+                            birth
+                            gender
+                        }
+                        interests {
+                            title
+                            type
+                            _id
+                        }
+                        maxPeopleNumber
+                        likes
+                        views
+                        startedAt
+                        finishedAt
+                        createdAt
+                        isUserSubscribe
+                        isUserLike
+                        isBlocked
+                    }
+                }
+                `,
+                variables: {
+                    id: this.$route.query.diving
+                }
+
+            }
+        });
+        if ((result.data && result.data.data && result.data.data.getDivingById)) {
+            var json_itm = result.data.data.getDivingById;
+            this.createId = json_itm._id;
+            if (json_itm.startedAt && json_itm.startedAt.substring(0,10) == json_itm.finishedAt.substring(0,10)) {
+                this.scheduleFlag = false;
+                this.selectedDay = new Date(json_itm.startedAt);
+                this.day_show = (this.selectedDay.getMonth()+1) + "." + this.selectedDay.getDate() + " (" + weekday_ko[this.selectedDay.getDay()] + ")";
+            } else if (json_itm.startedAt && json_itm.finishedAt) {
+                this.scheduleFlag = true;
+                this.selectedRange.start = new Date(json_itm.startedAt);
+                this.selectedRange.end = new Date(json_itm.finishedAt);
+                this.selectedDay = this.selectedRange;
+                this.day_show = (this.selectedRange.start.getMonth()+1) + "." + this.selectedRange.start.getDate() + " (" + weekday_ko[this.selectedRange.start.getDay()] + ") ~ " + (this.selectedRange.end.getMonth()+1) + "." + this.selectedRange.end.getDate() + " (" + weekday_ko[this.selectedRange.end.getDay()] + ")";
+            }
+
+            // 다이빙 타입
+            if (json_itm.type && json_itm.type.includes('scubaDiving')) {this.label_scuba = true;setTimeout(function() {$('#label_scuba').removeClass('opacity-30');},100);}
+            if (json_itm.type && json_itm.type.includes('freeDiving')) {this.label_free = true;setTimeout(function() {$('#label_free').removeClass('opacity-30');},100);}
+
+            // 다이빙 장소
+            if (json_itm.diveSites) {
+                json_itm.diveSites.forEach(x=>{
+                    this.search_result.push({__typename: 'DiveSite', location: x.name, adminScore: x.adminScore, description: x.description, _id: x._id});
+                });
+            }
+            if (json_itm.divePoints) {
+                json_itm.divePoints.forEach(x=>{
+                    this.search_result.push({__typename: 'DivePoint', location: x.name, adminScore: x.adminScore, description: x.description, _id: x._id});
+                });
+            }
+            if (json_itm.diveCenters) {
+                json_itm.diveCenters.forEach(x=>{
+                    this.search_result.push({__typename: 'DiveCenter', location: x.name, adminScore: x.adminScore, description: x.description, _id: x._id});
+                });
+            }
+            if (json_itm.diveShops) {
+                json_itm.diveShops.forEach(x=>{
+                    this.search_result.push({__typename: 'DiveShop', location: x.name, adminScore: x.adminScore, description: x.description, _id: x._id});
+                });
+            }
+
+            // 제목 // 상세내용
+            this.diving_title = json_itm.title;
+            this.diving_detail = json_itm.description;
+
+            // 모집인원
+            if (json_itm.maxPeopleNumber) {
+                const num_recruit = json_itm.maxPeopleNumber - json_itm.participants.length;
+                if (json_itm.maxPeopleNumber == 99) this.label_unlimited = true;
+                else {this.label_unlimited = false;setTimeout(function() {$("#num_recruit").val(num_recruit);}, 100);}
+            }
+            
+            // 참여남자 // 참여여자
+            if (json_itm.participants) {
+                const num_man = json_itm.participants.filter(x=>x.user == null && x.gender == 'm').length;
+                const num_woman = json_itm.participants.filter(x=>x.user == null && x.gender == 'f').length;
+                setTimeout(function() {$("#num_man").val(num_man);}, 100)
+                setTimeout(function() {$("#num_woman").val(num_woman);}, 100)
+            }
+            
+            // 선호사항
+            if (json_itm.interests) {
+                json_itm.interests.forEach(x => {
+                    if (x._id == "6174da5da60639819c3e6ac7") this.check_gender1 = true;
+                    if (x._id == "6174da5ea60639819c3e6ac9") this.check_gender2 = true;
+                    if (x._id == "6174da5fa60639819c3e6acb") this.check_gender3 = true;
+                    if (x._id == "6174da60a60639819c3e6acd") this.check_gender4 = true;
+                    if (x._id == "6174da70a60639819c3e6ad9") this.check_amity1 = true;
+                    if (x._id == "61b45bb413f324035a6c86bc") this.check_amity2 = true;
+                    if (x._id == "61b45bb913f324035a6c86bf") this.check_amity3 = true;
+                });
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+    /*if (this.$route.params != null && this.$route.params.hasOwnProperty('_id') && this.$route.params.__typename == 'Diving') {
         this.createId = this.$route.params._id;
         if (this.$route.params.startedAt && this.$route.params.startedAt.substring(0,10) == this.$route.params.finishedAt.substring(0,10)) {
             this.scheduleFlag = false;
@@ -488,9 +735,9 @@ export default {
     } else if (this.$route.params != null && this.$route.params.hasOwnProperty('_id')) {
         this.search_result.push({__typename: this.$route.params.__typename, location: this.$route.params.name, adminScore: this.$route.params.adminScore, description: this.$route.params.description, _id: this.$route.params._id});
         const insname = this.ins_name;
-    }
+    }*/
     
-    const insname = this.ins_name;
+    //const insname = this.ins_name;
     setTimeout(function() {
         init_template();
         var preloader = document.getElementById('preloader')

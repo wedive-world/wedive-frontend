@@ -591,7 +591,8 @@ export default {
                 //localStorage.chatName = "WeDive";
                 //location.href = '/chat/create'
 
-                this.$router.push({name: "ChatDummyPage", params: {is_concierge: true, roomName: "WeDive", chatType: "direct", chatUids: JSON.stringify([concierge_uid])}});
+                //this.$router.push({name: "ChatDummyPage", params: {is_concierge: true, roomName: "WeDive", chatType: "direct", chatUids: JSON.stringify([concierge_uid])}});
+                location.href = '/chat/create?uid=['+concierge_uid+']'
             }
         } else { // 로그인
             this.login();

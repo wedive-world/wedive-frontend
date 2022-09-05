@@ -553,69 +553,7 @@ function hideKeyboard() {
 
 export default {
   name: 'HelloWorld',
-  async beforeRouteEnter(to, from, next) {
-    if (to.params.id != null) {
-        var result = await axios({
-            url: 'https://api.wedives.com/graphql',
-            method: 'post',
-            headers: {
-                countrycode: 'ko',
-                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
-            },
-            data: {
-                query: `
-                query GetDivingByChatRoomId($chatRoomId: String!) {
-                    getDivingByChatRoomId(chatRoomId: $chatRoomId) {
-                        _id
-                        diveCenters {
-                            name
-                            uniqueName
-                            description
-                            adminScore
-                            backgroundImages {
-                                thumbnailUrl
-                            }
-                        }
-                        divePoints {
-                            name
-                            uniqueName
-                            description
-                            adminScore
-                            backgroundImages {
-                                thumbnailUrl
-                            }
-                        }
-                        diveSites {
-                            name
-                            uniqueName
-                            description
-                            adminScore
-                            backgroundImages {
-                                thumbnailUrl
-                            }
-                        }
-                        title
-                        description
-                        status
-                        type
-                        startedAt
-                        finishedAt
-                    }
-                }
-                `,
-                variables: {
-                    chatRoomId: to.params.id
-                }
-
-            }
-        });
-        var divingInfo = null;
-        if ((result.data && result.data.data && result.data.data.getDivingByChatRoomId)) {
-            divingInfo = result.data.data.getDivingByChatRoomId;
-        }
-        next(vm => {vm.setData(to.params.id, divingInfo)});
-    }
-  },
+  
   watch: {
       sendText: function(newVal, oldVal) {
         if (newVal.replace(/ /gi, "") == "") {
@@ -753,8 +691,8 @@ export default {
                 }
             },
             updateQuery: (previousResult, { subscriptionData }) => {
-                console.log(previousResult)
-                console.log(subscriptionData)
+                //console.log(previousResult)
+                //console.log(subscriptionData)
                 if (previousResult.getChatRoomInfo.chatMessages.find(chat => chat._id === subscriptionData.data.subscribeRoomMessage._id)) {
                     return previousResult
                 }
@@ -775,7 +713,7 @@ export default {
     },
   },
   mounted() {
-    console.log("mounted start")
+    //console.log("mounted start")
     init_template();
     var preloader = document.getElementById('preloader')
     if(preloader){preloader.classList.add('preloader-hide');}
@@ -795,7 +733,9 @@ export default {
         //var element = document.getElementById("speech-content");
         //element.scrollTop = element.scrollHeight;
     },200);
-    console.log("mounted finish")
+
+    this.markRead();
+    //console.log("mounted finish")
     //console.log(this.$apollo.queries.chats.observer.lastResult.data.getChatRoomInfo);
 
     /*$("#speech-content").scroll(function () {
@@ -812,15 +752,121 @@ export default {
     VueTypeaheadBootstrap,
     ContentLoader,
   },
-  created() {
-    console.log("created start")
-    console.log(this.$route)
-    if (this.$route.params != null && this.$route.params.hasOwnProperty('makeLocationChat')) {
-        console.log(this.$route.params.makeLocationChat)
-        //locationInfo = this.$route.params;
+  async created() {
+    //console.log("created start")
+    //console.log(this.$route)
+
+    if (this.$route.params.id != null) {
+        var result = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                query GetDivingByChatRoomId($chatRoomId: String!) {
+                    getDivingByChatRoomId(chatRoomId: $chatRoomId) {
+                        _id
+                        diveCenters {
+                            name
+                            uniqueName
+                            description
+                            adminScore
+                            backgroundImages {
+                                thumbnailUrl
+                            }
+                        }
+                        divePoints {
+                            name
+                            uniqueName
+                            description
+                            adminScore
+                            backgroundImages {
+                                thumbnailUrl
+                            }
+                        }
+                        diveSites {
+                            name
+                            uniqueName
+                            description
+                            adminScore
+                            backgroundImages {
+                                thumbnailUrl
+                            }
+                        }
+                        title
+                        description
+                        status
+                        type
+                        startedAt
+                        finishedAt
+                    }
+                }
+                `,
+                variables: {
+                    chatRoomId: this.$route.params.id
+                }
+
+            }
+        });
+        var divingInfo = null;
+        if ((result.data && result.data.data && result.data.data.getDivingByChatRoomId)) {
+            this.divingInfo = result.data.data.getDivingByChatRoomId;
+            if (this.divingInfo != null) {
+                this.divingInfo.diveLocation = [];
+                this.divingInfo.diveSites.forEach(y => {y.type = 'site';this.divingInfo.diveLocation.push(y)});
+                this.divingInfo.divePoints.forEach(y => {y.type = 'point';this.divingInfo.diveLocation.push(y)});
+                this.divingInfo.diveCenters.forEach(y => {y.type = 'center';this.divingInfo.diveLocation.push(y)});
+            }
+        }
     }
+    var diveType = ['site','point','center','shop'];
+    if (diveType.filter(x=>this.$route.query[x] !=null).length > 0) {
+        var m_type = diveType.filter(x=>this.$route.query[x] !=null)[0]
+        var m_type_upper = m_type && m_type[0].toUpperCase() + m_type.slice(1)
+        var result = await axios({
+            url: 'https://api.wedives.com/graphql',
+            method: 'post',
+            headers: {
+                countrycode: 'ko',
+                idtoken: (localStorage.idToken) ? localStorage.idToken : "",
+            },
+            data: {
+                query: `
+                query getDive` + m_type_upper + `ByUniqueName($uniqueName: String!) {
+                    getDive` + m_type_upper + `ByUniqueName(uniqueName: $uniqueName) {
+                        _id
+                        name
+                        uniqueName
+                        description
+                        backgroundImages {
+                            _id
+                            reference
+                            description
+                            thumbnailUrl
+                        }
+                        publishStatus
+                        adminScore
+                    }
+                }
+                `,
+                variables: {
+                    uniqueName: this.$route.query[m_type]
+                }
+
+            }
+        });
+        if ((result.data && result.data.data && result.data.data['getDive'+ m_type_upper +'ByUniqueName'])) {
+            var json_itm = JSON.parse(JSON.stringify(result.data.data['getDive'+ m_type_upper +'ByUniqueName']));
+            json_itm.type = m_type;
+            this.locationSelectedList.push(json_itm);
+            this.sendLocation();
+        }
+    }
+    
     window.addEventListener('native.showkeyboard', this.keyboardShowHandler);
-    console.log("created finished")
   },
   destroyed () {
     window.removeEventListener('native.showkeyboard', this.keyboardShowHandler);
@@ -866,16 +912,6 @@ export default {
           } catch (e) {
 
           }
-    },
-    setData(roomId, divingInfo) {
-        this.divingInfo = divingInfo;
-        if (this.divingInfo != null) {
-            this.divingInfo.diveLocation = [];
-            this.divingInfo.diveSites.forEach(y => {y.type = 'site';this.divingInfo.diveLocation.push(y)});
-            this.divingInfo.divePoints.forEach(y => {y.type = 'point';this.divingInfo.diveLocation.push(y)});
-            this.divingInfo.diveCenters.forEach(y => {y.type = 'center';this.divingInfo.diveLocation.push(y)});
-        }
-        this.markRead();
     },
     moveDiving(divingInfo) {
         location.href="/diving/" + divingInfo._id;
@@ -1014,6 +1050,9 @@ export default {
                 },
             }).then((data) => {
                 // Result
+                console.log(data);
+                window.history.back();
+                window.history.back();
                 //location.href="/chat_home"
                 //}
             }).catch((error) => {
@@ -1268,7 +1307,7 @@ export default {
         //$("#file-upload1-img").hide();
     },
     removeImage(idx) {
-        console.log(this.file_photo.length +"/" + idx);
+        //console.log(this.file_photo.length +"/" + idx);
         this.file_photo.splice(idx, 1);
         this.file_photo_url.splice(idx, 1);
         if (this.file_photo.length == 0) {

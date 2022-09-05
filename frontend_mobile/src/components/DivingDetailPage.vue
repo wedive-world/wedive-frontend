@@ -897,7 +897,8 @@ export default {
         })
       },
       modifyDiving() {
-          this.$router.push({name: "BuddyCreateAllPage", params: this.getDivingById});
+          //this.$router.push({name: "BuddyCreateAllPage", params: this.getDivingById});
+          location.href='/buddy/create?diving=' + this.getDivingById._id;
       },
       historyBack() {
           try {
@@ -1375,7 +1376,8 @@ export default {
                 //localStorage.chatName = user.nickName;
                 //location.href = '/chat/create'
 
-                this.$router.push({name: "ChatDummyPage", params: {is_concierge: false, roomName: user.nickName, chatType: "direct", chatUids: JSON.stringify([user.uid])}});
+                //this.$router.push({name: "ChatDummyPage", params: {is_concierge: false, roomName: user.nickName, chatType: "direct", chatUids: JSON.stringify([user.uid])}});
+                location.href = '/chat/create?uid=['+user.uid+']'
             }
       }
   }

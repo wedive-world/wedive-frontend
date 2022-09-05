@@ -1590,7 +1590,8 @@ export default {
         })
       },
       findBuddyClick() {
-          this.$router.push({name: "BuddyCreateAllPage", params: this.getDivePointByUniqueName})
+          //this.$router.push({name: "BuddyCreateAllPage", params: this.getDivePointByUniqueName})
+          location.href = '/buddy/create?point=' + this.getDivePointByUniqueName.uniqueName;
       },
       async moveDiving(item) {
         var dic_type1 = {"DiveSite": "diveSite", "DivePoint": "divePoint", "DiveCenter": "diveCenter", "Diving": "diving", "User": "user", "Review": "review", "Forum": "forum", "Recommendation": "recommendation"};

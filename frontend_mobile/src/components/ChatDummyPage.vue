@@ -453,22 +453,40 @@ export default {
             //this.skip += this.limit;
         }
     }); */
-    console.log("dummy mounted");
+    //console.log("dummy mounted");
   },
   components: {
     VueTypeaheadBootstrap,
   },
   created() {
-    console.log("create start");
+    //console.log("create start");
+    var concierge_uid = "RuOiMt9YUTbRUJQTrXv4cWMEimr2";
     //this.$router.push({name: "ChatDummyPage", params: {is_concierge: true, roomName: "WeDive", chatType: "direct", chatUids: JSON.stringify([concierge_uid])}});
-    this.route_params = this.$route.params;
+    if (this.$route.query.hasOwnProperty('uid')) {
+        var query_uid = decodeURI(this.$route.query.uid).replace('[', '["').replace(']', '"]').replace(',', '","');
+        //console.log(query_uid)
+        var uid = JSON.parse(query_uid);
+        if (uid.length == 1 && uid[0] == concierge_uid) {
+            this.is_concierge = true;
+            this.roomName = '컨시어지';
+        } else {
+            this.roomName = '채팅';
+        }
+        if (uid.length > 1) {
+            this.chatType = 'channel';
+        } else {
+            this.chatType = 'direct';
+        }
+        this.chatUids = uid;
+    }
+    
+    /*this.route_params = this.$route.params;
     if (this.route_params) {
         this.is_concierge = (this.route_params.hasOwnProperty('is_concierge') ? this.route_params.is_concierge : null);
         this.roomName = (this.route_params.hasOwnProperty('roomName') ? this.route_params.roomName : null);
         this.chatType = (this.route_params.hasOwnProperty('chatType') ? this.route_params.chatType : 'direct');
         this.chatUids = (this.route_params.hasOwnProperty('chatUids') ? JSON.parse(this.route_params.chatUids) : []);
-    }
-    
+    }*/
     setTimeout(function() {
         init_template();
         var preloader = document.getElementById('preloader')
@@ -477,7 +495,6 @@ export default {
     }, 500);
     
     window.addEventListener('native.showkeyboard', this.keyboardShowHandler);
-    console.log("create complete");
   },
   destroyed () {
     window.removeEventListener('native.showkeyboard', this.keyboardShowHandler);
@@ -890,8 +907,10 @@ export default {
                 //delete localStorage.chatUids;
                 //delete localStorage.chatType;
                 //delete localStorage.chatName;
+                console.log(ret)
                 history.back();
                 const chat_id = ret.chatRoom._id;
+                console.log("chat_id = " + chat_id)
                 setTimeout(function() {
                     location.href = '/chat/' + chat_id;
                 },100);
