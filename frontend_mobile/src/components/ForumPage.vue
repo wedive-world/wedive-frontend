@@ -663,6 +663,9 @@ export default {
           // jjangs close menu
           if(window.location.href.split('/').pop() == 'modal'){
             window.history.back(); 
+            setTimeout(function() {
+                location.reload();
+            }, 100)
           }
       },
       async createAgenda() {
