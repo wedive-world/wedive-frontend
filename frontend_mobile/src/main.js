@@ -53,6 +53,9 @@ try {
   //const userInformation = JSON.parse(Android.getUserInformation());
   if (window.navigator.userAgent.toLowerCase().indexOf('android') !== -1) {
     var userInformation = JSON.parse(Android.getUserInformation());
+    console.log("---------------------")
+    console.log(userInformation);
+    console.log("---------------------")
     if (userInformation.uid) localStorage.uid = userInformation.uid;
     if (userInformation.email) localStorage.userEmail = userInformation.email;
     if (userInformation.idToken) localStorage.idToken = userInformation.idToken;
