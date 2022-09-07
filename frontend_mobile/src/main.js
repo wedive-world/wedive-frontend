@@ -54,7 +54,7 @@ try {
   if (window.navigator.userAgent.toLowerCase().indexOf('android') !== -1) {
     var userInformation = JSON.parse(Android.getUserInformation());
     console.log("---------------------")
-    console.log(userInformation);
+    console.log(JSON.stringify(userInformation));
     console.log("---------------------")
     if (userInformation.uid) localStorage.uid = userInformation.uid;
     if (userInformation.email) localStorage.userEmail = userInformation.email;
