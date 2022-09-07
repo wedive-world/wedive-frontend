@@ -690,6 +690,7 @@ export default {
       },
       setData(userData) {
           this.userData = userData;
+          console.log(this.userData);
           this.age = ((new Date()).getFullYear()) - userData.birthAge + 1
           this.userData.interests.forEach(interest => {
               //console.log("interest" + (this.interest_id.indexOf(interest._id)+1) + ":true")
@@ -814,6 +815,7 @@ export default {
             localStorage.userThumbnail = result_img_user.uploadImage.thumbnailUrl
         }
         if (result_img_user) _userData.profileImages = [result_img_user.uploadImage._id];
+        if (_userData.divingLog) _userData.divingLog = parseInt(_userData.divingLog);
 
         // upsertUser //
         var result = await axios({
@@ -867,6 +869,12 @@ export default {
         var notificationToast = document.getElementById(toastData);
         var notificationToast = new bootstrap.Toast(notificationToast);
         notificationToast.show();
+
+        try {
+          Android.refresh()
+        } catch (e) {
+          //console.log(e)
+        }
       },
       show_scuba_label: function() {
           document.getElementById('scuba_label').classList.remove('hide')

@@ -576,7 +576,7 @@ export default {
         try {
           Android.signOut()
         } catch (e) {
-          console.log(e)
+          //console.log(e)
         }
         localStorage.clear();
         //console.log("sign-out success");

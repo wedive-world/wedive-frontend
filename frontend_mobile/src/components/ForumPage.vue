@@ -557,7 +557,9 @@ export default {
       },
       async createCommunity() {
           var is_private = $("#is_private").attr("aria-expanded");
-          if (is_private && (this.community_password == null || this.community_password == '')) {
+          console.log("is_private = " + is_private)
+          if (is_private == true && (this.community_password == null || this.community_password == '')) {
+              console.log("aa");
               var toastData = 'snackbar-new-community-error';
               var notificationToast = document.getElementById(toastData);
               var notificationToast = new bootstrap.Toast(notificationToast);
@@ -812,6 +814,9 @@ export default {
             // jjangs close menu
             if(window.location.href.split('/').pop() == 'modal'){
                 window.history.back(); 
+                setTimeout(function() {
+                    location.reload();
+                },100);
             }
       },
       async refresh(loaded) {

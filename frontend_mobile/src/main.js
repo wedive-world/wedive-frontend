@@ -53,22 +53,16 @@ try {
   //const userInformation = JSON.parse(Android.getUserInformation());
   if (window.navigator.userAgent.toLowerCase().indexOf('android') !== -1) {
     var userInformation = JSON.parse(Android.getUserInformation());
-    console.log("---------------------")
-    console.log(JSON.stringify(userInformation));
-    console.log("---------------------")
     if (userInformation.uid) localStorage.uid = userInformation.uid;
     if (userInformation.email) localStorage.userEmail = userInformation.email;
     if (userInformation.idToken) localStorage.idToken = userInformation.idToken;
     if (userInformation.nickName) localStorage.nickName = userInformation.nickName;
     if (userInformation._id) localStorage.userId = userInformation._id;
-    console.log("[SET] localStorage.uid : " + localStorage.uid)
-    console.log("[SET] localStorage.nickName : " + localStorage.nickName)
-    console.log("[SET] localStorage.userId : " + localStorage.userId)
 
   }
 } catch(e) {
-  console.log("Android.getUserInformation ERROR");
-  console.log(e);
+  //console.log("Android.getUserInformation ERROR");
+  //console.log(e);
 }
 /*try {
   //console.log("check Android")

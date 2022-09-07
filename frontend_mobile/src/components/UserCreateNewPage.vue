@@ -26,7 +26,7 @@
         <swiper-slide
             :key="0"
             :virtualIndex="0">
-                    <div id="slide1" class="card card-full pb-0 mb-0 border-bottom" style="height: calc( 100vh - 56px );">
+                    <div id="slide1" class="card card-full pb-0 mb-0 border-bottom" style="height: calc( 100vh - 56px );overflow-y: auto;">
                         <div class="content mt-1">
                             <div class="me-3 ms-3 mt-4 font-noto" style="position: relative;">
                                 <span class="font-18 font-500">프로필 등록</span>
@@ -100,7 +100,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row me-0 ms-0 mb-0" style="position: absolute;bottom: 0;width:100%;padding-left:20px;padding-right:20px;">
+                        <div class="row me-0 ms-0 mb-0" :style="'position: ' + (contentHeight < 720 ? 'static;' : 'absolute;') + 'bottom: 0;width:100%;padding-left:20px;padding-right:20px;'">
                             <!--<a v-on:click="$refs.contentSwiper.$swiper.slidePrev();progressBar -= 33.34;" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>-->
                             <a v-on:click="$refs.contentSwiper.$swiper.slideNext();progressBar += 33.34;go_next(0);" id="btn_next1" href="#" class="col-12 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3 gonext" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;" disabled="disabled">다음</a>
                         </div>
@@ -109,7 +109,7 @@
         <swiper-slide
             :key="1"
             :virtualIndex="1">
-                    <div id="slide2" class="card card-full pb-0 mb-0 border-bottom" style="height: calc( 100vh - 56px );">
+                    <div id="slide2" class="card card-full pb-0 mb-0 border-bottom" style="height: calc( 100vh - 56px );overflow-y: auto;">
                         <div class="content mt-1">
                             <div class="me-3 ms-3 mt-4 font-noto" style="position: relative;">
                                 <span class="font-18 font-500">(선택) 스쿠바 라이센스</span>
@@ -228,7 +228,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row me-0 ms-0 mb-0" style="position: absolute;bottom: 0;width:100%;padding-left:20px;padding-right:20px;">
+                        <div class="row me-0 ms-0 mb-0" :style="'position: ' + (contentHeight < 720 ? 'static;' : 'absolute;') + 'bottom: 0;width:100%;padding-left:20px;padding-right:20px;'">
                             <a v-on:click="$refs.contentSwiper.$swiper.slidePrev();progressBar -= 33.34;" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>
                             <a v-on:click="$refs.contentSwiper.$swiper.slideNext();progressBar += 33.34;go_next(1);" id="btn_next2" href="#" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3 gonext" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;">{{ next2_word }}</a>
                         </div>
@@ -237,7 +237,7 @@
         <swiper-slide
             :key="2"
             :virtualIndex="2">
-                    <div id="slide3" class="card card-full pb-0 mb-0 border-bottom" style="height: calc( 100vh - 56px );">
+                    <div id="slide3" class="card card-full pb-0 mb-0 border-bottom" style="height: calc( 100vh - 56px );overflow-y: auto;">
                         <div class="content mt-1">
                             <div class="me-3 ms-3 mt-4 font-noto" style="position: relative;">
                                 <span class="font-18 font-500">(선택) 프리 라이센스</span>
@@ -352,7 +352,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row me-0 ms-0 mb-0" style="position: absolute;bottom: 0;width:100%;padding-left:20px;padding-right:20px;">
+                        <div class="row me-0 ms-0 mb-0" :style="'position: ' + (contentHeight < 570 ? 'static;' : 'absolute;') + 'bottom: 0;width:100%;padding-left:20px;padding-right:20px;'">
                             <a v-on:click="$refs.contentSwiper.$swiper.slidePrev();progressBar -= 33.34;" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3" style="height: 46px;padding-top: 10px;margin-left:-4px;margin-right:4px;">이전</a>
                             <a v-on:click="$refs.contentSwiper.$swiper.slideNext();progressBar += 33.34;go_next(2);" id="btn_next3" href="#" class="col-6 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3 gonext" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;">완료</a>
                         </div>
@@ -361,7 +361,7 @@
         <swiper-slide
             :key="3"
             :virtualIndex="3">
-                    <div id="slide4" class="card card-full pb-0 mb-0 border-bottom" style="height: calc( 100vh - 56px );">
+                    <div id="slide4" class="card card-full pb-0 mb-0 border-bottom" style="height: calc( 100vh - 56px );overflow-y: auto;">
                         <div class="content mt-1">
                             <div class="text-center mt-2 mb-3">
                                 <img src="https://d34l91104zg4p3.cloudfront.net/assets/confetti.gif" width="50%"/>
@@ -369,7 +369,7 @@
                                 <p class="font-noto color-gray"><span class="span_timer">3</span>초 후 이전페이지로 이동할께요.</p>
                             </div>
                         </div>
-                        <div class="row me-0 ms-0 mb-0" style="position: absolute;bottom: 0;width:100%;padding-left:20px;padding-right:20px;">
+                        <div class="row me-0 ms-0 mb-0" :style="'position: ' + (contentHeight < 720 ? 'static;' : 'absolute;') + 'bottom: 0;width:100%;padding-left:20px;padding-right:20px;'">
                             <a v-on:click="go_finish();" id="btn_finish" href="#" class="col-12 btn btn-full font-400 rounded-s shadow-l gradient-highlight color-white bd-w-0 mb-3 gonext" style="height: 46px;padding-top: 10px;margin-right:-4px;margin-left:4px;">완료</a>
                         </div>
                     </div>
@@ -570,6 +570,7 @@ export default {
             allowTouchMove: false,
         },
         progressBar: 0,
+        contentHeight: window.innerHeight,
     }
   }, 
   watch: {
@@ -880,6 +881,11 @@ export default {
           console.log("go next : " + idx)
       },
       go_finish() {
+        try {
+          Android.refresh()
+        } catch (e) {
+          //console.log(e)
+        }
           window.location.href=(localStorage.loginUrl == null || localStorage.loginUrl == '') ? '/' : localStorage.loginUrl;
       },
       focusInput(event) {
