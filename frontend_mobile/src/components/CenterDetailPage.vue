@@ -438,8 +438,8 @@
             </div>
             <div class="content mb-3 mt-n3">
                 <div class="gallery gallery-filter">
-                    <a v-for="(image, index) in getDiveCenterByUniqueName.images" :href="image.thumbnailUrl" data-gallery="gallery-image" class="center_image filtr-item" :title="image.reference" :data-category="(imageCategory.findIndex(x=>x==image.description)+1)">
-                        <img :src="image.thumbnailUrl" :data-src="image.thumbnailUrl" :data-index="index" class="preload-img rounded-s shadow-m">
+                    <a v-for="(image, index) in getDiveCenterByUniqueName.images" :href="image.thumbnailUrl" data-gallery="gallery-image" class="center_image filtr-item" :title="image.reference == null ? '' : image.reference" :data-category="(imageCategory.findIndex(x=>x==image.description)+1)">
+                        <img :src="image.thumbnailUrl" :data-src="image.thumbnailUrl" :data-index="index" class="preload-img img-fluid rounded-s shadow-m">
                     </a>
                 </div>
             </div>
@@ -1647,6 +1647,10 @@ export default {
                 this.getDiveCenterByUniqueName.images.forEach(x => {
                     id_arr.push(x._id);
                     width_arr.push(720);
+
+                    if (x.description == null) {
+                        x.description = '센터'
+                    }
                 });
                 if (id_arr.length > 0) {
                     axios({
@@ -2736,4 +2740,5 @@ export default {
 }
 .wedive-chip {font-family: 'Noto Sans Korean';border-radius:6px !important;padding: 0 8px;margin:0 !important;position:absolute;right:0px;bottom:0px;}
 .wedive-chip i {width: auto;line-height: inherit;margin-right: 2px;}
+.gallery-filter a img {contain: content;}
 </style>

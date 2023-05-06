@@ -1,158 +1,101 @@
 <template>
     <div class="bg-white">
       <div class="page-content">
-          <div class="static_img" style="background-image: linear-gradient( rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1) ),url(https://d34l91104zg4p3.cloudfront.net/assets/beginner1_title.webp);">
+          <div class="static_img" style="background-image: linear-gradient( rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1) ),url(https://d34l91104zg4p3.cloudfront.net/assets/beginner3_title.webp);">
               <div class="inner_wrap">
                   <h1 class="template_title color-white">WEDIVE GUIDE</h1>
   
                   <h2 class="cover_title color-white" style="">
-                  다이빙을 배우면 무엇이 좋나요?
+                  스쿠바 강습비, 소요기간 및 장소
                   </h2>
               </div>
           </div>
   
           
-          <p class="p-4 mb-0">&nbsp;&nbsp;지구의 70%는 물입니다. 남들이 가보지 않는 <span class="highlight">숨겨진 장소를 탐험</span>해보고 싶지 않으신가요? <span class="highlight">수영보다 더 멋진 스포츠</span>를 경험해보고 싶지 않으세요?</p>
+          <p class="p-4 mb-0">&nbsp;&nbsp;스쿠바 강습은 국내보다 <span class="highlight">필리핀과 태국</span>을 추천하며, 비용은 레벨1 <span class="highlight">약 380달러</span>, 레벨2 약 450달러 입니다. 일반적으로 레벨별 <span class="highlight">2~3일</span>정도 소요됩니다.</p>
           
   
           <div class="p-4 mb-0">
-              <h5 class="wedive-static-title">육지에선 경험하지 못하는 신비함</h5>
-          </div>
-          <div class="row mb-0">
-              <div class="col-12 me-0 ms-0">
-                  <iframe src="https://www.youtube.com/embed/CKAUIPYDfAo" frameborder='0' allowfullscreen style="width: 100%;min-height: 200px;"></iframe>
-                  <p class="mb-0 color-gray font-12 me-2 mt-n2 text-end">말레이시아 사파단섬의 잭피쉬 떼</p>
-              </div>
+              <h5 class="wedive-static-title">국내 vs 해외</h5>
           </div>
           <div class="row mb-0 mt-4 gallery">
-              <a class="col-6 pe-1 ps-0 center_image filtr-item" href="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_01_01.jpg" data-gallery="gallery-image" data-category="image" title="USAT 리버티 난파선, 발리">
-                  <img class="preload-img" src="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_01_01.jpg" data-src="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_01_01.jpg" data-index="1"/>
-                  <p class="color-gray font-12 pe-2 text-end">USAT 리버티 난파선, 발리</p>
+              <a class="col-6 pe-1 ps-0 center_image filtr-item" href="https://d34l91104zg4p3.cloudfront.net/assets/beginner3_01_01.jpg" data-gallery="gallery-image" data-category="image" title="국내 다이빙, 제주도">
+                  <img class="preload-img" src="https://d34l91104zg4p3.cloudfront.net/assets/beginner3_01_01.jpg" data-src="https://d34l91104zg4p3.cloudfront.net/assets/beginner3_01_01.jpg" data-index="1"/>
+                  <p class="color-gray font-12 pe-2 text-end">국내 다이빙, 제주도</p>
               </a>
-              <a class="col-6 pe-1 ps-0 center_image filtr-item" href="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_01_02.jpg" data-gallery="gallery-image" data-category="image" title="신들의 바다정원, 팔라우">
-                  <img class="preload-img" src="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_01_02.jpg" data-src="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_01_02.jpg" data-index="2"/>
-                  <p class="color-gray font-12 pe-3 text-end">형형색색 산호초, 사파단</p>
-              </a>
-          </div>
-  
-          <div class="row mb-0 mt-4 gallery">
-              <a class="col-6 pe-1 ps-0 center_image filtr-item" href="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_01_03.jpg" data-gallery="gallery-image" data-category="image" title="수중 조형물, 사이판">
-                  <img class="preload-img" src="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_01_03.jpg" data-src="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_01_03.jpg" data-index="3"/>
-                  <p class="color-gray font-12 pe-2 text-end">수중 조형물, 사이판</p>
-              </a>
-              <a class="col-6 pe-1 ps-0 center_image filtr-item" href="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_01_04.jpg" data-gallery="gallery-image" data-category="image" title="케이브 다이빙, 코스타리카">
-                  <img class="preload-img" src="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_01_04.jpg" data-src="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_01_04.jpg" data-index="4"/>
-                  <p class="color-gray font-12 pe-3 text-end">케이브 다이빙, 코스타리카</p>
+              <a class="col-6 pe-1 ps-0 center_image filtr-item" href="https://d34l91104zg4p3.cloudfront.net/assets/beginner3_01_02.jpg" data-gallery="gallery-image" data-category="image" title="해외 다이빙, 필리핀">
+                  <img class="preload-img" src="https://d34l91104zg4p3.cloudfront.net/assets/beginner3_01_02.jpg" data-src="https://d34l91104zg4p3.cloudfront.net/assets/beginner3_01_02.jpg" data-index="2"/>
+                  <p class="color-gray font-12 pe-3 text-end">해외 다이빙, 필리핀</p>
               </a>
           </div>
           
           <div class="p-4 mb-0">
-              <p>&nbsp;&nbsp;수천마리의 물고기 떼와 함께 사진을 찍어보는건 어떨까요? 지상에서 만날 수 없는 산호초를 만나는건 어떤가요?<br/><br/>&nbsp;&nbsp;다이빙을 하게되면 육지에서는 경험할 수 없는 황활한 경험을 할 수 있게됩니다.</p>
+              <p>&nbsp;&nbsp;위다이브는 시간적 여유가 된다면 국내보다는 해외에서 스쿠바다이빙 강습하는것을 추천합니다. 스쿠바다이빙은 자격증을 어디서 취득하는지 관계없이 전세계에서 사용가능하기 때문입니다. (일부 국가 소규모 단체 제외)&nbsp;&nbsp;<br/><br/>국내는 <span class="highlight">탁한 시야와 좋지않은 수중환경</span>에서 강습을 받아야하며, 비용은 레벨별 약 35~70만원 정도 (강습비, 발급비, 대부분 수영장 강습)가 필요합니다.&nbsp;&nbsp;<br/><br/>해외는 <span class="highlight">훨신 좋은 시야와 수중환경</span>에서 강습이 가능하며, 약 300~400달러 내외 <span class="highlight">(숙박, 음식, 픽업, 강습비, 발급비)</span>가 필요합니다. 한인샵에 예약 시 한국인이 강습을 진행합니다.&nbsp;&nbsp;<br/><br/>처음 스쿠바다이빙을 입문하신다면 즐거움을 느낄 수 있는 필리핀 또는 태국에서 다이빙 강습을 받아보세요.</p>
           </div>
   
   
           <div class="p-4 mb-0">
-              <h5 class="wedive-static-title">신비로운 물고기를 만나보세요.</h5>
+              <h5 class="wedive-static-title">국내 강습</h5>
           </div>
           <div class="row mb-0 gallery">
-              <a class="col-12 pe-0 ps-0 center_image filtr-item" href="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_02_01.jpg" data-gallery="gallery-image" data-category="image" title="만타떼, 코르테즈 멕시코">
-                  <img class="preload-img" src="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_02_01.jpg" data-src="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_02_01.jpg" data-index="3"/>
+              <a class="col-12 pe-0 ps-0 center_image filtr-item" href="https://d34l91104zg4p3.cloudfront.net/assets/beginner3_02_01.jpg" data-gallery="gallery-image" data-category="image" title="만타떼, 코르테즈 멕시코">
+                  <img class="preload-img" src="https://d34l91104zg4p3.cloudfront.net/assets/beginner3_02_01.jpg" data-src="https://d34l91104zg4p3.cloudfront.net/assets/beginner3_02_01.jpg" data-index="3"/>
                   <p class="color-gray font-12 pe-3 text-end">만타떼, 코르테즈 멕시코</p>
               </a>
           </div>
           <div class="row mb-0 mt-2 gallery">
-              <a class="col-6 pe-1 ps-0 center_image filtr-item" href="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_02_02.png" data-gallery="gallery-image" data-category="image" title="개복치, 발리">
-                  <img class="preload-img" src="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_02_02.png" data-src="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_02_02.png" data-index="5"/>
+              <a class="col-6 pe-1 ps-0 center_image filtr-item" href="https://d34l91104zg4p3.cloudfront.net/assets/beginner3_02_02.png" data-gallery="gallery-image" data-category="image" title="개복치, 발리">
+                  <img class="preload-img" src="https://d34l91104zg4p3.cloudfront.net/assets/beginner3_02_02.png" data-src="https://d34l91104zg4p3.cloudfront.net/assets/beginner3_02_02.png" data-index="4"/>
                   <p class="color-gray font-12 pe-2 text-end">개복치, 발리</p>
               </a>
-              <a class="col-6 pe-1 ps-0 center_image filtr-item" href="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_02_03.jpg" data-gallery="gallery-image" data-category="image" title="혹등고래, 하와이">
-                  <img class="preload-img" src="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_02_03.jpg" data-src="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_02_03.jpg" data-index="6"/>
+              <a class="col-6 pe-1 ps-0 center_image filtr-item" href="https://d34l91104zg4p3.cloudfront.net/assets/beginner3_02_03.jpg" data-gallery="gallery-image" data-category="image" title="혹등고래, 하와이">
+                  <img class="preload-img" src="https://d34l91104zg4p3.cloudfront.net/assets/beginner3_02_03.jpg" data-src="https://d34l91104zg4p3.cloudfront.net/assets/beginner3_02_03.jpg" data-index="5"/>
                   <p class="color-gray font-12 pe-3 text-end">혹등고래, 하와이</p>
               </a>
           </div>
   
-          <div class="row mb-0 mt-2 gallery">
-              <a class="col-6 pe-1 ps-0 center_image filtr-item" href="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_02_04.jpg" data-gallery="gallery-image" data-category="image" title="망치상어, 갈라파고스">
-                  <img class="preload-img" src="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_02_04.jpg" data-src="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_02_04.jpg" data-index="7"/>
-                  <p class="color-gray font-12 pe-2 text-end">망치상어, 갈라파고스</p>
-              </a>
-              <a class="col-6 pe-1 ps-0 center_image filtr-item" href="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_02_05.jpg" data-gallery="gallery-image" data-category="image" title="거북이, 몰디브">
-                  <img class="preload-img" src="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_02_05.jpg" data-src="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_02_05.jpg" data-index="8"/>
-                  <p class="color-gray font-12 pe-3 text-end">거북이, 몰디브</p>
-              </a>
-          </div>
-  
           <div class="p-4 mb-0">
-              <p>&nbsp;&nbsp;지금껏 만나보지 못한 수많은 물속 친구들을 만나보세요. 가슴속 깊숙한 곳에서 부터 끓어오르는 가슴벅찬 감동을 느껴보세요.</p>
+              <p>&nbsp;&nbsp;대부분 수영장에서 강습이 진행되며, 4시간씩 2일 코스로 진행됩니다. 근처 수영장에서 강습가능한 강습을 네이버, 숨고, 크몽, 플립 등을 통해 찾아보세요.<br/><br/>바다에서 강습을 진행하고 싶다면 추천 장소인 강원도 고성과 제주도 문섬에서 진행해보세요. 지명+다이빙샵 이라고 검색해서 다이빙샵에 문의하여 강습을 진행하면 됩니다.</p>
           </div>
   
   
           <div class="p-4 mb-0">
-              <h5 class="wedive-static-title">수많은 친구들</h5>
+              <h5 class="wedive-static-title">필리핀 강습</h5>
           </div>
           <div class="row mb-0 mt-2 gallery">
-              <a class="col-6 pe-1 ps-0 center_image filtr-item" href="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_03_01.jpg" data-gallery="gallery-image" data-category="image" title="버디와 다이빙">
-                  <img class="preload-img" src="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_03_01.jpg" data-src="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_03_01.jpg" data-index="9"/>
-                  <p class="color-gray font-12 pe-2 text-end">버디와 다이빙</p>
+              <a class="col-6 pe-1 ps-0 center_image filtr-item" href="https://media-cdn.tripadvisor.com/media/photo-s/1a/36/74/cb/scubadiving-tour-green.jpg" data-gallery="gallery-image" data-category="image" title="다이빙 동호회">
+                  <img class="preload-img" src="https://media-cdn.tripadvisor.com/media/photo-s/1a/36/74/cb/scubadiving-tour-green.jpg" data-src="https://media-cdn.tripadvisor.com/media/photo-s/1a/36/74/cb/scubadiving-tour-green.jpg" data-index="6"/>
+                  <p class="color-gray font-12 pe-2 text-end">다이빙 동호회</p>
               </a>
-              <a class="col-6 pe-1 ps-0 center_image filtr-item" href="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_03_02.jpg" data-gallery="gallery-image" data-category="image" title="다이빙 동호회">
-                  <img class="preload-img" src="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_03_02.jpg" data-src="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_03_02.jpg" data-index="10"/>
-                  <p class="color-gray font-12 pe-3 text-end">다이빙 동호회</p>
-              </a>
-          </div>
-          <div class="row mb-0 mt-2 gallery">
-              <a class="col-6 pe-1 ps-0 center_image filtr-item" href="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_03_03.jpg" data-gallery="gallery-image" data-category="image" title="해외 투어">
-                  <img class="preload-img" src="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_03_03.jpg" data-src="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_03_03.jpg" data-index="11"/>
-                  <p class="color-gray font-12 pe-2 text-end">해외 투어</p>
-              </a>
-              <a class="col-6 pe-1 ps-0 center_image filtr-item" href="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_03_04.webp" data-gallery="gallery-image" data-category="image" title="다이빙 뒤풀이">
-                  <img class="preload-img" src="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_03_04.webp" data-src="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_03_04.webp" data-index="12"/>
-                  <p class="color-gray font-12 pe-3 text-end">다이빙 뒤풀이</p>
-              </a>
-          </div>
-          <div class="row mb-0 mt-2">
-              <div class="col-12 me-0 ms-0">
-                  <iframe src="https://www.youtube.com/embed/GybZ6b63zu4" frameborder='0' allowfullscreen style="width: 100%;min-height: 200px;"></iframe>
-                  <p class="mb-0 color-gray font-12 me-2 mt-n2 text-end">하늬와 발리 이야기, 이하늬</p>
-              </div>
-          </div>
-  
-  
-          <div class="p-4 mb-0">
-              <p>&nbsp;&nbsp;바다를 사랑하고, 운동을 좋아하는 친구를 사귀어보세요. 마음이 맞는 수많은 사람들을 만날 수 있습니다.</p>
-          </div>
-  
-  
-  
-  
-  
-          <div class="p-4 mb-0">
-              <h5 class="wedive-static-title">바디프로필</h5>
-          </div>
-          <div class="row mb-0 mt-2 gallery">
-              <a class="col-6 pe-1 ps-0 center_image filtr-item" href="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_04_01.jpg" data-gallery="gallery-image" data-category="image" title="물속 웨딩샷">
-                  <img class="preload-img" src="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_04_01.jpg" data-src="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_04_01.jpg" data-index="9"/>
-                  <p class="color-gray font-12 pe-2 text-end">물속 웨딩샷</p>
-              </a>
-              <a class="col-6 pe-1 ps-0 center_image filtr-item" href="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_04_02.jpg" data-gallery="gallery-image" data-category="image" title="수중촬영, K26">
-                  <img class="preload-img" src="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_04_02.jpg" data-src="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_04_02.jpg" data-index="10"/>
-                  <p class="color-gray font-12 pe-3 text-end">수중촬영, K26</p>
-              </a>
-          </div>
-          <div class="row mb-0 mt-2 gallery">
-              <a class="col-6 pe-1 ps-0 center_image filtr-item" href="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_04_03.jpg" data-gallery="gallery-image" data-category="image" title="다이빙 바디프로필">
-                  <img class="preload-img" src="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_04_03.jpg" data-src="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_04_03.jpg" data-index="11"/>
-                  <p class="color-gray font-12 pe-2 text-end">다이빙 바디프로필</p>
-              </a>
-              <a class="col-6 pe-1 ps-0 center_image filtr-item" href="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_04_04.jpg" data-gallery="gallery-image" data-category="image" title="다이빙 인생샷">
-                  <img class="preload-img" src="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_04_04.jpg" data-src="https://d34l91104zg4p3.cloudfront.net/assets/beginner1_04_04.jpg" data-index="12"/>
-                  <p class="color-gray font-12 pe-3 text-end">다이빙 인생샷</p>
+              <a class="col-6 pe-1 ps-0 center_image filtr-item" href="https://cdn.life-sports.kr/news/photo/202112/1358_1365_3142.jpg" data-gallery="gallery-image" data-category="image" title="동호회 단체">
+                  <img class="preload-img" src="https://cdn.life-sports.kr/news/photo/202112/1358_1365_3142.jpg" data-src="https://cdn.life-sports.kr/news/photo/202112/1358_1365_3142.jpg" data-index="7"/>
+                  <p class="color-gray font-12 pe-3 text-end">동호회 단체</p>
               </a>
           </div>
   
   
           <div class="p-4 mb-0">
-              <p>&nbsp;&nbsp;가장 아름다운 내모습을 수중에서 촬영해보세요.</p>
+              <p>&nbsp;&nbsp;한국사람들이 가장 선호하는 국가는 필리핀과 태국이며, 필리핀이 상대적으로 수중환경이 좋습니다. 필리핀은 대부분 보홀이라는 지역으로 강습을 떠납니다. 국내에서는 직항 비행편(?)이 있으며, 평균 XXX원, 편도 XX시간이 소요됩니다. 네이버나 구글에서 보홀 다이빙리조트 라고 검색 시 다양한 샵들이 나옵니다.<br/><br/>다이빙 리조트는 강습, 보트, 숙박, 식사를 모두 포함하는 다이빙샵을 의미합니다. 한인들이 운영하는 리조트를 가게되면 한국어로 강습 및 서비스를 받을 수 있습니다.<br/><br/>낮에는 다이빙 강습을, 오후 및 밤에는 여행을 즐겨보는건 어떨까요?</p>
+          </div>
+  
+  
+          <div class="p-4 mb-0">
+              <h5 class="wedive-static-title">태국 강습</h5>
+          </div>
+          <div class="row mb-0 mt-2 gallery">
+              <a class="col-6 pe-1 ps-0 center_image filtr-item" href="https://media-cdn.tripadvisor.com/media/photo-s/1a/36/74/cb/scubadiving-tour-green.jpg" data-gallery="gallery-image" data-category="image" title="다이빙 동호회">
+                  <img class="preload-img" src="https://media-cdn.tripadvisor.com/media/photo-s/1a/36/74/cb/scubadiving-tour-green.jpg" data-src="https://media-cdn.tripadvisor.com/media/photo-s/1a/36/74/cb/scubadiving-tour-green.jpg" data-index="8"/>
+                  <p class="color-gray font-12 pe-2 text-end">다이빙 동호회</p>
+              </a>
+              <a class="col-6 pe-1 ps-0 center_image filtr-item" href="https://cdn.life-sports.kr/news/photo/202112/1358_1365_3142.jpg" data-gallery="gallery-image" data-category="image" title="동호회 단체">
+                  <img class="preload-img" src="https://cdn.life-sports.kr/news/photo/202112/1358_1365_3142.jpg" data-src="https://cdn.life-sports.kr/news/photo/202112/1358_1365_3142.jpg" data-index="9"/>
+                  <p class="color-gray font-12 pe-3 text-end">동호회 단체</p>
+              </a>
+          </div>
+  
+  
+          <div class="p-4 mb-0">
+              <p>&nbsp;&nbsp;태국은 대부분 XX이라는 지역으로 강습을 떠납니다. 국내에서는 직항 비행편(?)이 있으며, 평균 XXX원, 편도 XX시간이 소요됩니다. 네이버나 구글에서 보홀 다이빙리조트 라고 검색 시 다양한 샵들이 나옵니다.<br/><br/>다이빙 리조트는 강습, 보트, 숙박, 식사를 모두 포함하는 다이빙샵을 의미합니다. 한인들이 운영하는 리조트를 가게되면 한국어로 강습 및 서비스를 받을 수 있습니다.</p>
           </div>
   
   
