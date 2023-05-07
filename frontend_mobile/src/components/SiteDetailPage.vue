@@ -1902,28 +1902,28 @@ export default {
 .ico_feature10 {width: 44px;height: 40px;background-position: -135px -38px;}
 .ico_feature11 {width: 44px;height: 40px;background-position: -180px -38px;}
 .ico_feature12 {width: 44px;height: 40px;background-position: -225px -38px;}
-.ico_feature13 {width: 44px;height: 40px;background-position: 0px -78px;}
-.ico_feature14 {width: 44px;height: 40px;background-position: -45px -79px;}
-.ico_feature15 {width: 44px;height: 40px;background-position: -90px -78px;}
-.ico_feature16 {width: 44px;height: 40px;background-position: -135px -78px;}
-.ico_feature17 {width: 44px;height: 40px;background-position: -180px -78px;}
-.ico_feature18 {width: 44px;height: 40px;background-position: -225px -78px;}
-.ico_feature19 {width: 44px;height: 40px;background-position: 0px -108px;}
-.ico_feature20 {width: 44px;height: 40px;background-position: -45px -108px;}
-.ico_feature21 {width: 44px;height: 40px;background-position: -90px -108px;}
-.ico_feature22 {width: 44px;height: 40px;background-position: -135px -108px;}
-.ico_feature23 {width: 44px;height: 40px;background-position: -180px -108px;}
-.ico_feature24 {width: 44px;height: 40px;background-position: -225px -108px;}
-.ico_feature25 {width: 44px;height: 40px;background-position: 0px -144px;}
-.ico_feature26 {width: 44px;height: 40px;background-position: -45px -144px;}
-.ico_feature27 {width: 44px;height: 40px;background-position: -90px -144px;}
-.ico_feature28 {width: 44px;height: 40px;background-position: -135px -144px;}
-.ico_feature29 {width: 44px;height: 40px;background-position: -180px -144px;}
-.ico_feature30 {width: 44px;height: 40px;background-position: -225px -144px;}
+.ico_feature13 {width: 44px;height: 40px;background-position: 0px -76px;}
+.ico_feature14 {width: 44px;height: 40px;background-position: -45px -76px;}
+.ico_feature15 {width: 44px;height: 40px;background-position: -90px -76px;}
+.ico_feature16 {width: 44px;height: 40px;background-position: -135px -76px;}
+.ico_feature17 {width: 44px;height: 40px;background-position: -180px -76px;}
+.ico_feature18 {width: 44px;height: 40px;background-position: -225px -76px;}
+.ico_feature19 {width: 44px;height: 40px;background-position: 0px -114px;}
+.ico_feature20 {width: 44px;height: 40px;background-position: -45px -114px;}
+.ico_feature21 {width: 44px;height: 40px;background-position: -90px -114px;}
+.ico_feature22 {width: 44px;height: 40px;background-position: -135px -114px;}
+.ico_feature23 {width: 44px;height: 40px;background-position: -180px -114px;}
+.ico_feature24 {width: 44px;height: 40px;background-position: -225px -114px;}
+.ico_feature25 {width: 44px;height: 40px;background-position: 0px -152px;}
+.ico_feature26 {width: 44px;height: 40px;background-position: -45px -152px;}
+.ico_feature27 {width: 44px;height: 40px;background-position: -90px -152px;}
+.ico_feature28 {width: 44px;height: 40px;background-position: -135px -152px;}
+.ico_feature29 {width: 44px;height: 40px;background-position: -180px -152px;}
+.ico_feature30 {width: 44px;height: 40px;background-position: -225px -152px;}
 
-.icon-point {overflow: hidden;display: block;margin-left: 11px;background-image: url(https://d34l91104zg4p3.cloudfront.net/assets/wedive_point.png);background-repeat: no-repeat;-webkit-background-size: 270px 200px;background-size: 270px 200px;}
-.icon-type {overflow: hidden;display: block;margin-left: 11px;background-image: url(https://d34l91104zg4p3.cloudfront.net/assets/wedive_type.png);background-repeat: no-repeat;-webkit-background-size: 270px 118px;background-size: 270px 118px;}
-.icon-award {overflow: hidden;display: block;margin-left: 11px;background-image: url(https://d34l91104zg4p3.cloudfront.net/assets/wedive_award.png);background-repeat: no-repeat;-webkit-background-size: 270px 200px;background-size: 270px 200px;}
+.icon-point {overflow: hidden;display: block;margin-left: 11px;background-image: url(https://d34l91104zg4p3.cloudfront.net/assets/wedive_point.png);background-repeat: no-repeat;-webkit-background-size: 270px 228px;background-size: 270px 228px;}
+.icon-type {overflow: hidden;display: block;margin-left: 11px;background-image: url(https://d34l91104zg4p3.cloudfront.net/assets/wedive_type.png);background-repeat: no-repeat;-webkit-background-size: 270px 228px;background-size: 270px 228px;}
+.icon-award {overflow: hidden;display: block;margin-left: 11px;background-image: url(https://d34l91104zg4p3.cloudfront.net/assets/wedive_award.png);background-repeat: no-repeat;-webkit-background-size: 270px 228px;background-size: 270px 228px;}
 
 .wedive-ul {width: 100%;list-style:none;display: inline-block;margin-bottom: 0;padding-left: 5px !important;padding-right: 5px !important;}
 .wedive-ul > li {float: left;width: 50%;}

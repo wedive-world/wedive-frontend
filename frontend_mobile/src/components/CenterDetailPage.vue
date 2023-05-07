@@ -337,7 +337,7 @@
                 <div data-bs-parent="#tab-group-2" class="collapse px-2" id="tab-eqpt">
                     <div class="mt-3 text-start row" v-if="getDiveCenterByUniqueName.rentals && getDiveCenterByUniqueName.rentals.length > 0">
                         <div class="ico_equipt col-3" v-for="rental in getDiveCenterByUniqueName.rentals">
-                            <i :class="'ico_equipt' + (rentalOptions.findIndex(x=>x==rental.name)+1) + ' icon-equiptment'"></i>
+                            <i :class="'ico_equipt' + (rentalOptions.findIndex(x=>rental.name.includes(x))+1) + ' icon-equiptment'"></i>
                             <p class="span_feature text-center mb-0" style="line-height: 1.05;margin-bottom:8px !important;">{{ rental.name }}</p>
                             <p v-if="rental.price==0" class="span_feature text-center mb-0 color-gray mt-n1" style="line-height: 1.05;">무료</p>
                             <p v-else-if="rental.unitName==''" class="span_feature text-center mb-0 color-gray mt-n1" style="line-height: 1.05;">{{ rental.price | makeComma }}</p>
