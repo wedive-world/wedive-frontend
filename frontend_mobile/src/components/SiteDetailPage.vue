@@ -932,13 +932,16 @@ export default {
                   }
                   cnt++;
               });
-
-              var single = new Splide( '#single-slider-nearby', {
+              try {
+                var single = new Splide( '#single-slider-nearby', {
                     type:'loop',
                     autoplay:true,
                     interval:4000,
                     perPage: 1,
                 }).mount();
+              } catch (e) {
+
+              }
           }
       },
       getDiveSiteByUniqueName: {
