@@ -855,13 +855,13 @@ export default {
     //document.getElementById("footer-bar").classList.add("hide");
     //document.getElementById("footer-bar").style.borderRadius = "30px 30px 0 0";
 
-    let script = document.createElement('script');
-    script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCWu8Fw-h-f1t8Sp3I7R3l_Ukr24HunXQM';
-    document.body.appendChild(script);
+    // let script = document.createElement('script');
+    // script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCWu8Fw-h-f1t8Sp3I7R3l_Ukr24HunXQM';
+    // document.body.appendChild(script);
     //let script2 = document.createElement('script');
     //script2.src = 'https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js';
     //document.body.appendChild(script2);
-    script.onload = () => {
+    // script.onload = () => {
         const night_style = [
             { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
             { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
@@ -1093,7 +1093,7 @@ export default {
             updateAll();
         },500)
         
-    };
+    // };
     //$(".page-title-wrapper").css("background-color", "#eff5fb");
     //$(".page-title-wrapper").css("height", "58px");
     //$(".page-title-wrapper").css("width", "100%");

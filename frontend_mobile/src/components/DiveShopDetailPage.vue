@@ -1533,10 +1533,10 @@ export default {
             
             ////////////////////////////////////////////////////////////////////////////////
 
-            let script = document.createElement('script');
-            script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCWu8Fw-h-f1t8Sp3I7R3l_Ukr24HunXQM';
-            document.body.appendChild(script);
-            script.onload = () => {
+            // let script = document.createElement('script');
+            // script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCWu8Fw-h-f1t8Sp3I7R3l_Ukr24HunXQM';
+            // document.body.appendChild(script);
+            // script.onload = () => {
                 const night_style = [
                     { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
                     { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
@@ -1688,7 +1688,7 @@ export default {
                         }
                     }
                 });
-            };
+            // };
             $("#footer-bar-shop").removeClass("hide");
             
             setTimeout(function() {

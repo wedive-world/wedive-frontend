@@ -756,10 +756,10 @@ export default {
   name: 'HelloWorld',
   mounted() {
     
-    let script = document.createElement('script');
-    script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCWu8Fw-h-f1t8Sp3I7R3l_Ukr24HunXQM';
-    document.body.appendChild(script);
-    script.onload = () => {
+    // let script = document.createElement('script');
+    // script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCWu8Fw-h-f1t8Sp3I7R3l_Ukr24HunXQM';
+    // document.body.appendChild(script);
+    // script.onload = () => {
         const night_style = [
             { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
             { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
@@ -920,7 +920,7 @@ export default {
             label: {text: '문섬 포인트', color: 'white', className: 'marker-position2'},
             icon: new google.maps.MarkerImage('/static/images/ico_pin2.png',null, null, null, new google.maps.Size(38,43)),
         });
-    };
+    // };
 
     if (this.$route.query.header && this.$route.query.header == 'hide') {
       $(".page-title").hide();
