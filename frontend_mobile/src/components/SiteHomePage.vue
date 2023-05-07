@@ -1350,8 +1350,8 @@ export default {
                                     usersCount
                                     owner {
                                     _id
-                                    uid
                                     name
+                                    uid
                                     avatarOrigin
                                     }
                                 }
